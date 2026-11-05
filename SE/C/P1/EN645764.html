@@ -1,0 +1,3005 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.764 — Software Systems Engineering · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P1/EN645764.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside style="background:#eaf6f4;padding:12px 25px;border-bottom:1px solid #c5e3df"><strong>Advanced textbook readings</strong> · <a href="../../K/G/chapters/03-software.html">Distributed software contracts, state and failure</a> · <a href="../../K/G/chapters/04-resilience.html">Software trustworthiness, observability and resilience</a></aside><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/05-software-contracts.html">State machines, contracts, and distributed failures</a></aside><main><div class="course-actions"><a href="../../K/B5/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en645764--software-systems-engineering">EN.645.764 — Software Systems Engineering</h1>
+<p><strong>Credits:</strong> 3<br/>
+<strong>Recommended self-study duration:</strong> 12 weeks<br/>
+<strong>Nominal effort:</strong> 9–12 hours per week<br/>
+<strong>Primary phase:</strong> Phase 1 — Modeling languages and software-intensive systems<br/>
+<strong>Primary program competencies:</strong> C1, C2, C3, C4, C5, C6, C8, C9, C10, C12</p>
+<h2 id="1-course-purpose-and-professional-context">1. Course purpose and professional context</h2>
+<p>Software-intensive systems fail for reasons that cannot be solved by programming skill alone. Requirements are allocated incorrectly, architecture decisions are made without quality evidence, interfaces are treated as local coding details, delivery automation is disconnected from assurance, operational failure modes are discovered late, and software changes invalidate assumptions elsewhere in the system. A software systems engineer works across those boundaries.</p>
+<p>This course develops the ability to connect system intent to software realization. It treats software as a governed system element with requirements, architecture, interfaces, quality attributes, implementation evidence, verification, deployment, operations, maintenance, and retirement concerns. The learner will use model-based systems artifacts, software architecture views, a small Python reference implementation, automated checks, and technical reviews to build and defend a coherent software-engineering baseline.</p>
+<p>The course is not a general programming class and is not a deep specialization in cloud computing, distributed algorithms, cybersecurity, or real-time scheduling. It provides the systems-level competence needed to ask the right questions, create reviewable artifacts, conduct bounded technical analyses, and recognize when specialist depth is required.</p>
+<h2 id="2-source-description-and-self-study-scope">2. Source description and self-study scope</h2>
+<p>The current Johns Hopkins course description covers software engineering processes and metrics; real-time, distributed, configurable, and object-oriented software; alignment of software systems with overall system design; software-specific planning, requirements, architecture analysis, design, implementation, testing, maintenance, performance, security, networking, and technology trends. The Summer and Fall 2026 abridged syllabi organize the course around MBSE and SysML, interpreting a system model, systems and software architecting, agile development, features/scenarios/stories, software architecture, cloud and service architectures, nonfunctional requirements, dependability, testing, and software management. They also identify Python and Cameo as practical tools and use an incremental individual project. <a href="https://ep.jhu.edu/courses/645764-software-systems-engineering/" title="JHU EP — Software Systems Engineering 645.764">JHU-764-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/summer-2026/645.764.82" title="JHU EP Summer 2026 Abridged Syllabus — 645.764">JHU-764-SYLLABUS</a></p>
+<p>This self-study course preserves that scope and sequence while making five adaptations:</p>
+<ol>
+<li>the commercial modeling environment is optional; a standards-capable model repository or text-based reproducible workflow is acceptable;</li>
+<li>the individual project continues the program's Autonomous Campus Shuttle case so artifacts accumulate across courses;</li>
+<li>discussion activities become structured red-team reviews, recorded defenses, and optional peer critique;</li>
+<li>small Python changes are retained as feasibility and evidence exercises rather than becoming a programming course;</li>
+<li>every architecture or process claim must be supported by traceability, executable evidence, analysis, or an explicit unresolved assumption.</li>
+</ol>
+<p>The primary textbook path follows Ian Sommerville's <em>Engineering Software Products</em>, the textbook named by the source syllabus. SWEBOK V4.0a, NASA-HDBK-2203, SEI architecture methods, NIST secure-development guidance, and selected official engineering resources supply the broader systems and assurance perspective. <a href="https://www.pearson.com/en-us/subject-catalog/p/P200000003243" title="Ian Sommerville — Engineering Software Products">ESP</a> <a href="https://www.computer.org/education/bodies-of-knowledge/software-engineering/v4" title="IEEE Computer Society — SWEBOK V4.0a">SWEBOK-V4</a> <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-2203" title="NASA-HDBK-2203 — NASA Software Engineering Handbook">NASA-SWE-HDBK</a></p>
+<h2 id="3-relationship-to-the-curriculum">3. Relationship to the curriculum</h2>
+<h3 id="imports-from-earlier-courses">Imports from earlier courses</h3>
+<p>The learner should reuse, rather than recreate without cause:</p>
+<ul>
+<li>the Phase 0 shuttle mission, stakeholders, operational scenarios, requirements, interfaces, risks, and project constraints;</li>
+<li>EN.645.631 model governance, context, requirements, logical/physical architecture, allocations, V&amp;V links, and change-impact evidence;</li>
+<li>EN.605.704 software boundary, use cases, domain model, state and interaction models, design responsibilities, OCL constraints, persistence design, and unresolved design issues;</li>
+<li>EN.645.667 planning, work-package, risk, configuration, review, and technical-performance concepts.</li>
+</ul>
+<h3 id="new-contribution-of-this-course">New contribution of this course</h3>
+<p>This course turns those inputs into a software-system engineering baseline that includes:</p>
+<ul>
+<li>system-to-software allocation and traceability;</li>
+<li>software product vision, lifecycle, and tailored process;</li>
+<li>software architecture views and decision records;</li>
+<li>quality-attribute scenarios, tactics, and tradeoff evidence;</li>
+<li>cloud, service, distributed, configurable, and real-time considerations;</li>
+<li>dependability, security, safety, and software-supply-chain controls;</li>
+<li>implementation and CI evidence;</li>
+<li>integrated software verification, validation, and release-readiness evidence;</li>
+<li>operations, observability, maintenance, evolution, and retirement planning.</li>
+</ul>
+<h3 id="prepares-for">Prepares for</h3>
+<ul>
+<li>EN.645.767 System Conceptual Design, where software feasibility and architecture consequences affect candidate concepts;</li>
+<li>EN.645.768 System Design &amp; Integration, where software interfaces, build-up strategy, readiness, and technical reviews become system-level concerns;</li>
+<li>EN.645.769 System Test &amp; Evaluation, where software evidence must integrate with system verification and validation;</li>
+<li>later Agile Systems Engineering, Digital Engineering, SoS, and enterprise courses.</li>
+</ul>
+<h2 id="4-prerequisites-and-readiness-assessment">4. Prerequisites and readiness assessment</h2>
+<h3 id="required-prior-competencies">Required prior competencies</h3>
+<p>Before Week 1, the learner should be able to:</p>
+<ul>
+<li>define a system boundary and distinguish stakeholder need, requirement, architecture, design, implementation, and verification evidence;</li>
+<li>read a basic SysML or equivalent system model and follow allocations and trace links;</li>
+<li>read UML class, sequence, activity, and state diagrams;</li>
+<li>explain interfaces, encapsulation, composition, persistence, and common object-oriented responsibilities;</li>
+<li>read and modify a short Python program with functions, classes, exceptions, tests, and configuration data;</li>
+<li>use Git or equivalent version control;</li>
+<li>write concise technical rationales and record assumptions.</li>
+</ul>
+<h3 id="recommended-preparation">Recommended preparation</h3>
+<p>Complete EN.645.662, EN.645.667, EN.645.631, and EN.605.704. A learner with equivalent professional experience may enter directly after passing the diagnostic.</p>
+<h3 id="readiness-diagnostic--90-minutes">Readiness diagnostic — 90 minutes</h3>
+<p><strong>Part A — concepts</strong></p>
+<p>Answer without references:</p>
+<ol>
+<li>What is the difference between a system requirement allocated to software and a software design decision?</li>
+<li>What makes a quality-attribute requirement testable?</li>
+<li>Why can a correct object model still support a poor software architecture?</li>
+<li>What does an interface contract need beyond a message name?</li>
+<li>Why is deployment frequency not automatically a useful performance metric?</li>
+<li>What failure can occur when two services retry the same non-idempotent operation?</li>
+<li>Distinguish verification evidence from operational validation evidence.</li>
+<li>What is the purpose of a software architecture decision record?</li>
+<li>Why should configuration be treated as controlled product data?</li>
+<li>Give one reason a CI pipeline can create false confidence.</li>
+</ol>
+<p><strong>Part B — model and code reading</strong></p>
+<p>Given a small shuttle-dispatch model and 50-line Python service:</p>
+<ul>
+<li>identify one missing trace from a system requirement to software behavior;</li>
+<li>identify one interface assumption absent from the model;</li>
+<li>find one defect that would emerge under duplicate message delivery;</li>
+<li>identify one quality claim unsupported by evidence;</li>
+<li>propose one automated check.</li>
+</ul>
+<p><strong>Part C — short engineering task</strong></p>
+<p>Write a quality-attribute scenario for dispatch availability and sketch the architecture elements and test evidence needed to support it.</p>
+<h3 id="passing-standard-and-recovery-path">Passing standard and recovery path</h3>
+<p>A passing result requires at least seven substantially correct concept answers, a defensible quality scenario, and identification of the major duplicate-message defect. Learners below the standard should complete a one-week bridge in Python testing, Git, architecture views, quality scenarios, interface contracts, and requirements traceability.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<p>By the end of the course, the learner will be able to:</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Measurable course learning outcome</th>
+<th>Program competency</th>
+<th style="text-align:center">Level</th>
+<th>Primary evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLO-1</td>
+<td>Explain and tailor the responsibilities, lifecycle, process, and evidence obligations of software systems engineering within a larger system program</td>
+<td>C1, C5, C10</td>
+<td style="text-align:center">D/A</td>
+<td>Process-tailoring and responsibility package</td>
+</tr>
+<tr>
+<td>CLO-2</td>
+<td>Interpret a system model and create defensible allocations and traceability from stakeholder and system intent to software features, requirements, architecture, and tests</td>
+<td>C2, C4, C5</td>
+<td style="text-align:center">D/A</td>
+<td>Allocation and digital-thread audit</td>
+</tr>
+<tr>
+<td>CLO-3</td>
+<td>Formulate software features, scenarios, stories, requirements, acceptance criteria, and interface contracts without losing system-level rationale</td>
+<td>C2, C5</td>
+<td style="text-align:center">D/A</td>
+<td>Software intent baseline</td>
+</tr>
+<tr>
+<td>CLO-4</td>
+<td>Construct and defend software architecture views, boundaries, responsibilities, interfaces, deployment choices, and decision records</td>
+<td>C3, C5, C12</td>
+<td style="text-align:center">A</td>
+<td>Architecture baseline and review</td>
+</tr>
+<tr>
+<td>CLO-5</td>
+<td>Elicit, prioritize, and analyze architecture-critical quality attributes using scenarios, tactics, budgets, and tradeoff evidence</td>
+<td>C3, C5, C8, C9</td>
+<td style="text-align:center">A</td>
+<td>Quality-attribute and ATAM-lite package</td>
+</tr>
+<tr>
+<td>CLO-6</td>
+<td>Analyze distributed, cloud, service, configurable, networking, and real-time concerns and identify failure, consistency, capacity, and integration consequences</td>
+<td>C3, C5, C8, C9</td>
+<td style="text-align:center">D/A</td>
+<td>Distributed and performance analysis</td>
+</tr>
+<tr>
+<td>CLO-7</td>
+<td>Develop dependability, security, safety, and software-supply-chain controls that are integrated with architecture and lifecycle evidence</td>
+<td>C5, C6, C9</td>
+<td style="text-align:center">D/A</td>
+<td>Dependability and secure-development package</td>
+</tr>
+<tr>
+<td>CLO-8</td>
+<td>Establish a reproducible implementation, configuration, CI, test, and release-evidence workflow using a small Python reference implementation</td>
+<td>C5, C6, C10</td>
+<td style="text-align:center">D</td>
+<td>Repository and automated evidence</td>
+</tr>
+<tr>
+<td>CLO-9</td>
+<td>Design a multi-level software verification and validation strategy and evaluate whether evidence is sufficient for release and system integration</td>
+<td>C5, C6, C12</td>
+<td style="text-align:center">A</td>
+<td>Software V&amp;V and readiness review</td>
+</tr>
+<tr>
+<td>CLO-10</td>
+<td>Plan software operations, observability, incident response, maintenance, technical-debt management, evolution, and retirement</td>
+<td>C5, C10</td>
+<td style="text-align:center">A</td>
+<td>Operations and evolution plan</td>
+</tr>
+<tr>
+<td>CLO-11</td>
+<td>Critique emerging software practices and technologies against mission, risk, evidence, lifecycle, and organizational constraints</td>
+<td>C1, C5, C9, C12</td>
+<td style="text-align:center">D/A</td>
+<td>Technology assessment and oral defense</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>Where does the system model end and the software engineering baseline begin?</li>
+<li>What evidence proves that software architecture supports mission and quality goals?</li>
+<li>Which requirements belong to software, and which must remain system-level responsibilities?</li>
+<li>How should agile product increments preserve system-level traceability and assurance?</li>
+<li>When do services, cloud platforms, events, or microservices reduce risk, and when do they create it?</li>
+<li>How do latency, availability, security, consistency, safety, and modifiability trade against one another?</li>
+<li>What is the minimum executable evidence needed to challenge an architecture assumption early?</li>
+<li>How should tests, pipelines, reviews, and operational telemetry form a continuous evidence chain?</li>
+<li>What software changes are safe to decentralize, and which require system-level control?</li>
+<li>How should a systems engineer judge a software trend without adopting it by fashion?</li>
+</ul>
+<h2 id="7-running-case-and-problem-environment">7. Running case and problem environment</h2>
+<h3 id="case--autonomous-campus-shuttle-software-product">Case — Autonomous Campus Shuttle Software Product</h3>
+<p>The course continues the Autonomous Campus Shuttle program. The software system of interest is the <strong>Shuttle Operations Platform</strong>, which coordinates passenger requests, eligibility, route and stop data, fleet state, dispatch, trip status, notifications, operator intervention, incidents, and reporting. Vehicle autonomy, payment/identity, mapping, emergency communications, and selected telemetry sources are external collaborating systems.</p>
+<p>The sponsor now requires a pilot product that:</p>
+<ul>
+<li>supports 2,000 registered users and 40 vehicles;</li>
+<li>processes peak demand of 20 trip requests per second;</li>
+<li>produces a dispatch decision within two seconds for 95% of valid requests;</li>
+<li>supports accessible-service rules and operator override;</li>
+<li>tolerates intermittent vehicle connectivity;</li>
+<li>preserves an auditable decision history;</li>
+<li>protects personal and location data;</li>
+<li>deploys incrementally without disrupting active trips;</li>
+<li>supports later expansion to partner campuses.</li>
+</ul>
+<h3 id="initial-architecture-tensions">Initial architecture tensions</h3>
+<ul>
+<li>monolith versus independently deployable services;</li>
+<li>synchronous command flow versus event-driven coordination;</li>
+<li>strong consistency versus availability during connectivity loss;</li>
+<li>centralized dispatch optimization versus local degraded operation;</li>
+<li>rapid feature delivery versus safety and audit controls;</li>
+<li>commercial cloud services versus portability and operational control;</li>
+<li>configuration flexibility versus baseline integrity.</li>
+</ul>
+<h3 id="provided-or-imported-artifacts">Provided or imported artifacts</h3>
+<ul>
+<li>system context, stakeholder needs, scenarios, requirements, and interfaces;</li>
+<li>MBSE logical/physical architecture and software allocations;</li>
+<li>OOAD use cases, domain/design model, states, interactions, OCL constraints, and persistence design;</li>
+<li>project constraints, risks, review gates, and configuration rules;</li>
+<li>a deliberately incomplete architecture description;</li>
+<li>a small Python dispatch reference implementation with seeded defects;</li>
+<li>a simulated Month 4 operational incident and late change request.</li>
+</ul>
+<h3 id="minimum-final-baseline">Minimum final baseline</h3>
+<p>The final package should contain at least:</p>
+<ul>
+<li>40–60 traced software requirements, constraints, or acceptance criteria;</li>
+<li>8–12 features and 18–30 stories or equivalent work items;</li>
+<li>system context, software context, container/component, dynamic, and deployment views;</li>
+<li>10–15 architecture decision records;</li>
+<li>12–18 quality-attribute scenarios;</li>
+<li>interface contracts for six critical interfaces;</li>
+<li>performance and capacity budgets;</li>
+<li>a failure and dependability analysis;</li>
+<li>a threat model and secure-development control mapping;</li>
+<li>a controlled Python reference implementation with automated tests and CI evidence;</li>
+<li>a multi-level software V&amp;V matrix;</li>
+<li>operational SLOs, telemetry, incident, maintenance, and evolution plans;</li>
+<li>three end-to-end digital-thread examples from system need to operational evidence.</li>
+</ul>
+<h2 id="8-resource-architecture">8. Resource architecture</h2>
+<h3 id="required-backbone">Required backbone</h3>
+<ol>
+<li><strong>JHU course description and 2026 abridged syllabus</strong> — source scope, course sequence, project, tools, and assessment intent. <a href="https://ep.jhu.edu/courses/645764-software-systems-engineering/" title="JHU EP — Software Systems Engineering 645.764">JHU-764-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/summer-2026/645.764.82" title="JHU EP Summer 2026 Abridged Syllabus — 645.764">JHU-764-SYLLABUS</a></li>
+<li><strong>Sommerville, <em>Engineering Software Products</em></strong> — named source-course text; read the chapter titles assigned each week. <a href="https://www.pearson.com/en-us/subject-catalog/p/P200000003243" title="Ian Sommerville — Engineering Software Products">ESP</a> <a href="https://iansommerville.com/engineering-software-products/" title="Engineering Software Products — Author resources">ESP-SUPPORT</a></li>
+<li><strong>SWEBOK Guide V4.0a</strong> — professional breadth, terminology, and knowledge-area cross-check. <a href="https://www.computer.org/education/bodies-of-knowledge/software-engineering/v4" title="IEEE Computer Society — SWEBOK V4.0a">SWEBOK-V4</a> <a href="https://www.computer.org/education/bodies-of-knowledge/software-engineering/topics" title="SWEBOK V4.0 topic map">SWEBOK-TOPICS</a></li>
+<li><strong>NASA Software Engineering Handbook, NASA-HDBK-2203</strong> — lifecycle, assurance, safety, reliability, configuration, and evidence guidance. <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-2203" title="NASA-HDBK-2203 — NASA Software Engineering Handbook">NASA-SWE-HDBK</a> <a href="https://swehb.nasa.gov/display/SWEHBVD/Book+A.+Introduction" title="NASA Software Engineering and Assurance Handbook">NASA-SWEHB</a></li>
+</ol>
+<h3 id="architecture-and-quality">Architecture and quality</h3>
+<ul>
+<li>C4 model official guidance for context, container, component, dynamic, and deployment views. <a href="https://c4model.com/diagrams" title="C4 Model — Official diagram guidance">C4</a></li>
+<li>SEI Quality Attribute Workshop, Attribute-Driven Design, and ATAM collections. <a href="https://www.sei.cmu.edu/library/quality-attribute-workshop-collection/" title="SEI Quality Attribute Workshop Collection">SEI-QAW</a> <a href="https://www.sei.cmu.edu/library/attribute-driven-design-method-collection/" title="SEI Attribute-Driven Design Method Collection">SEI-ADD</a> <a href="https://www.sei.cmu.edu/library/architecture-tradeoff-analysis-method-collection/" title="SEI Architecture Tradeoff Analysis Method Collection">SEI-ATAM</a></li>
+</ul>
+<h3 id="agile-and-product-development">Agile and product development</h3>
+<ul>
+<li>Agile Manifesto and Scrum Guide as primary statements of values, principles, accountabilities, and events. <a href="https://agilemanifesto.org/" title="Manifesto for Agile Software Development">AGILE</a> <a href="https://scrumguides.org/scrum-guide.html" title="The Scrum Guide">SCRUM</a></li>
+</ul>
+<h3 id="cloud-distributed-systems-and-operations">Cloud, distributed systems, and operations</h3>
+<ul>
+<li>NIST cloud definition and microservices guidance. <a href="https://csrc.nist.gov/pubs/sp/800/145/final" title="NIST SP 800-145 — The NIST Definition of Cloud Computing">NIST-CLOUD</a> <a href="https://csrc.nist.gov/pubs/sp/800/204/final" title="NIST SP 800-204 — Security Strategies for Microservices-based Application Systems">NIST-MICROSERVICES</a> <a href="https://csrc.nist.gov/pubs/sp/800/204/d/final" title="NIST SP 800-204D — Software Supply Chain Security in DevSecOps CI/CD Pipelines">NIST-DEVSECOPS</a></li>
+<li>MIT 6.5840 course materials for distributed-systems concepts. <a href="https://pdos.csail.mit.edu/6.824/" title="MIT 6.5840 Distributed Systems">MIT-6840</a></li>
+<li>Google SRE books for SLOs, error budgets, monitoring, incident response, and reliability testing. <a href="https://sre.google/books/" title="Google Site Reliability Engineering Books">GOOGLE-SRE</a></li>
+</ul>
+<h3 id="security-and-assurance">Security and assurance</h3>
+<ul>
+<li>NIST SSDF Version 1.1 as the current final baseline; use the draft Version 1.2 only as a comparison exercise until finalized. <a href="https://csrc.nist.gov/pubs/sp/800/218/final" title="NIST SP 800-218 — Secure Software Development Framework Version 1.1">NIST-SSDF</a> <a href="https://csrc.nist.gov/pubs/sp/800/218/r1/ipd" title="NIST SP 800-218 Rev. 1 Initial Public Draft — SSDF Version 1.2">NIST-SSDF-12-DRAFT</a></li>
+<li>OWASP ASVS and Web Security Testing Guide for application-security requirements and test categories. <a href="https://owasp.org/www-project-application-security-verification-standard/" title="OWASP Application Security Verification Standard">OWASP-ASVS</a> <a href="https://owasp.org/www-project-web-security-testing-guide/" title="OWASP Web Security Testing Guide">OWASP-WSTG</a></li>
+</ul>
+<h3 id="tool-and-automation-references">Tool and automation references</h3>
+<ul>
+<li>Python 3 documentation, pytest documentation, Git, and GitHub Actions. <a href="https://docs.python.org/3/" title="Python 3 documentation">PYTHON</a> <a href="https://docs.pytest.org/" title="pytest documentation">PYTEST</a> <a href="https://git-scm.com/doc" title="Git documentation">GIT</a> <a href="https://docs.github.com/actions" title="GitHub Actions documentation">GITHUB-ACTIONS</a></li>
+</ul>
+<h2 id="9-tool-stack-and-technical-setup">9. Tool stack and technical setup</h2>
+<h3 id="required">Required</h3>
+<ul>
+<li>Python 3.11 or newer;</li>
+<li>pytest or equivalent test framework;</li>
+<li>Git repository;</li>
+<li>Markdown and diagram source under version control;</li>
+<li>a model repository or reproducible diagram workflow;</li>
+<li>spreadsheet or notebook for budgets and evidence matrices;</li>
+<li>CI service or locally reproducible CI script.</li>
+</ul>
+<h3 id="recommended">Recommended</h3>
+<ul>
+<li>Cameo/Magic Systems of Systems Architect when access exists, or Papyrus/Capella/PlantUML/Structurizr as alternatives;</li>
+<li>Docker or another container tool for reproducible service experiments;</li>
+<li>API description tooling such as OpenAPI;</li>
+<li>dependency, static-analysis, and software-composition-analysis tools suitable for the selected language.</li>
+</ul>
+<h3 id="tool-neutral-policy">Tool-neutral policy</h3>
+<p>Learners are graded on semantic quality, traceability, reproducibility, analysis, and evidence. A commercial tool does not receive extra credit. Diagram screenshots without source or repository content are insufficient.</p>
+<h2 id="10-instructional-and-assessment-strategy">10. Instructional and assessment strategy</h2>
+<h3 id="weekly-learning-cycle">Weekly learning cycle</h3>
+<p>Each week uses:</p>
+<ol>
+<li>retrieval and readiness check;</li>
+<li>exact reading assignment;</li>
+<li>instructor-style lesson notes;</li>
+<li>worked example using the shuttle case;</li>
+<li>guided practice;</li>
+<li>independent foundation, application, analysis, synthesis, and stretch work;</li>
+<li>a controlled deliverable;</li>
+<li>knowledge check;</li>
+<li>feedback, revision, and mastery gate.</li>
+</ol>
+<h3 id="assessment-structure">Assessment structure</h3>
+<table>
+<thead>
+<tr>
+<th>Assessment category</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weekly knowledge checks and retrieval</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Technical assignments and executable exercises</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Model, architecture, and evidence reviews</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Incremental capstone baselines</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Final integrated software-system package</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Oral defense and change-response exercise</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="self-study-feedback-methods">Self-study feedback methods</h3>
+<ul>
+<li>answer guidance for bounded questions;</li>
+<li>seeded defects and expected defect categories;</li>
+<li>automated tests for code and calculations;</li>
+<li>traceability and coverage queries;</li>
+<li>architecture and readiness checklists;</li>
+<li>recorded five-to-ten-minute walkthroughs;</li>
+<li>optional peer or professional-community review;</li>
+<li>required revision after Weeks 3, 6, 9, and 11.</li>
+</ul>
+<h2 id="11-twelve-week-course-map">11. Twelve-week course map</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Week</th>
+<th>Topic</th>
+<th>Principal evidence</th>
+<th>Review or mastery event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Software systems engineering role, boundary, MBSE alignment, and repository setup</td>
+<td>Course charter, responsibility map, system-to-software boundary</td>
+<td>Entry baseline audit</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>SysML/software views, allocation, interfaces, and the digital thread</td>
+<td>Allocation and traceability package</td>
+<td>Coverage and orphan audit</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>Understanding and critiquing a system model for software realization</td>
+<td>Model interpretation and software-intent baseline</td>
+<td>Software Model Interpretation Review</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>Systems and software architecting</td>
+<td>Architecture viewpoints, boundaries, interfaces, ADRs</td>
+<td>Architecture framing gate</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>Agile software development; features, scenarios, and stories</td>
+<td>Product vision, release slices, backlog, acceptance chain</td>
+<td>Increment traceability review</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>Software architecture and quality-attribute design</td>
+<td>QAW, tactics, views, prototype evidence</td>
+<td>Software Architecture Baseline Review</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>Cloud, service, distributed, and configurable architectures</td>
+<td>Service/deployment architecture and failure analysis</td>
+<td>Distributed-design audit</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>Nonfunctional requirements: performance, networking, real-time, security, and privacy</td>
+<td>Budgets, timing/capacity analysis, threat model</td>
+<td>Constraint trade review</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Dependability, safety, resilience, and software supply chain</td>
+<td>Dependability case and secure-development controls</td>
+<td>Dependability and Assurance Review</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Testing, CI, and software V&amp;V</td>
+<td>Automated evidence, test architecture, V&amp;V matrix</td>
+<td>Test and evidence audit</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>Software management, operations, maintenance, evolution, and incident response</td>
+<td>Operations/evolution plan and crisis response</td>
+<td>Software Readiness Review</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>Technology assessment, integrated capstone, and oral defense</td>
+<td>Final baseline, trend assessment, defense</td>
+<td>Course-exit mastery gate</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-major-assignments-and-review-gates">12. Major assignments and review gates</h2>
+<h3 id="a1--software-model-interpretation-and-allocation-audit--10">A1 — Software-model interpretation and allocation audit — 10%</h3>
+<p>Due Week 3. Trace six critical mission threads into software intent, expose unsupported allocations, and recommend model corrections.</p>
+<h3 id="a2--software-architecture-and-quality-attribute-package--15">A2 — Software architecture and quality-attribute package — 15%</h3>
+<p>Due Week 6. Produce architecture views, ADRs, quality scenarios, tactics, prototype evidence, and an ATAM-lite risk analysis.</p>
+<h3 id="a3--distributed-and-dependability-analysis--15">A3 — Distributed and dependability analysis — 15%</h3>
+<p>Due Week 9. Analyze service boundaries, data consistency, failure modes, capacity, security, safety, and recovery.</p>
+<h3 id="a4--software-vv-and-release-evidence-package--10">A4 — Software V&amp;V and release-evidence package — 10%</h3>
+<p>Due Week 10. Demonstrate traceable automated and manual evidence across unit, component, interface, integration, system, security, performance, and operational validation levels.</p>
+<h3 id="reviews">Reviews</h3>
+<ul>
+<li>Week 3 Software Model Interpretation Review;</li>
+<li>Week 6 Software Architecture Baseline Review;</li>
+<li>Week 9 Dependability and Assurance Review;</li>
+<li>Week 11 Software Readiness Review;</li>
+<li>Week 12 final capstone and oral defense.</li>
+</ul>
+<h2 id="13-standard-course-rubric">13. Standard course rubric</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>System/software alignment and traceability</td>
+<td style="text-align:right">20%</td>
+<td>Software decisions remain connected to system intent, interfaces, and V&amp;V</td>
+</tr>
+<tr>
+<td>Architecture and design reasoning</td>
+<td style="text-align:right">20%</td>
+<td>Views, decisions, responsibilities, and boundaries are coherent and defended</td>
+</tr>
+<tr>
+<td>Quality, dependability, and constraint analysis</td>
+<td style="text-align:right">20%</td>
+<td>Scenarios, budgets, failures, threats, tactics, and tradeoffs are evidence based</td>
+</tr>
+<tr>
+<td>Executable and reviewable evidence</td>
+<td style="text-align:right">15%</td>
+<td>Repository, model, code, tests, queries, and CI results are reproducible</td>
+</tr>
+<tr>
+<td>Lifecycle, delivery, and operations integration</td>
+<td style="text-align:right">15%</td>
+<td>Process, configuration, release, operations, maintenance, and change control form a coherent system</td>
+</tr>
+<tr>
+<td>Technical communication and judgment</td>
+<td style="text-align:right">10%</td>
+<td>Assumptions, uncertainty, alternatives, decisions, and limitations are clear</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-critical-mastery-criteria">14. Critical mastery criteria</h2>
+<p>A learner cannot pass the course while any of the following remain:</p>
+<ul>
+<li>a critical system requirement is allocated to software without a software requirement, behavior, architecture owner, or verification path;</li>
+<li>the architecture is represented only by attractive diagrams with no decisions, interfaces, scenarios, or evidence;</li>
+<li>a critical interface lacks error behavior, timing, versioning, or ownership;</li>
+<li>an availability, security, safety, or performance claim is unsupported by analysis or test evidence;</li>
+<li>the implementation and CI evidence cannot be reproduced;</li>
+<li>critical tests are disconnected from requirements or acceptance criteria;</li>
+<li>configuration and deployment data are uncontrolled;</li>
+<li>release readiness ignores known high-consequence defects or unresolved hazards;</li>
+<li>the learner cannot explain the major architecture tradeoffs during oral defense.</li>
+</ul>
+<h2 id="15-capstone-specification">15. Capstone specification</h2>
+<h3 id="final-product">Final product</h3>
+<p>Create a controlled <strong>Software Systems Engineering Baseline and Release Readiness Package</strong> for the shuttle pilot.</p>
+<h3 id="required-contents">Required contents</h3>
+<ol>
+<li>executive summary and release recommendation;</li>
+<li>software system boundary and relationship to the system architecture;</li>
+<li>allocation, feature, requirement, story, architecture, and verification traceability;</li>
+<li>product vision and lifecycle/process tailoring;</li>
+<li>architecture views and 10–15 ADRs;</li>
+<li>quality-attribute scenarios, utility tree, tactics, budgets, and risks;</li>
+<li>cloud/service/distributed/configuration analysis;</li>
+<li>real-time, performance, networking, privacy, and security analyses;</li>
+<li>dependability, hazard contribution, resilience, and recovery evidence;</li>
+<li>secure-development and supply-chain control mapping;</li>
+<li>Python reference implementation and reproducible CI evidence;</li>
+<li>software V&amp;V matrix and test results;</li>
+<li>deployment, observability, incident, maintenance, evolution, and retirement plans;</li>
+<li>open issues, technical debt, waivers, and residual risk;</li>
+<li>configuration index and change history.</li>
+</ol>
+<h3 id="oral-defense">Oral defense</h3>
+<p>Record or conduct a 20–30 minute review answering at least eight questions, including:</p>
+<ul>
+<li>Which system responsibility should not have been allocated to software, and why?</li>
+<li>What architecture decision has the highest leverage over quality?</li>
+<li>Which quality scenario is least well supported?</li>
+<li>What happens when vehicle messages are delayed, duplicated, or reordered?</li>
+<li>Which security control most constrains delivery speed?</li>
+<li>What evidence supports the release recommendation?</li>
+<li>Which defect would force a no-go decision?</li>
+<li>How would the architecture change for ten partner campuses?</li>
+<li>What should be monitored in production that cannot be proven in pre-release test?</li>
+<li>Which emerging technology did you reject, and on what evidence?</li>
+</ul>
+<h3 id="mastery-standard">Mastery standard</h3>
+<p>The capstone passes when the overall score is at least 80%, every critical criterion is satisfied, and the learner can defend the architecture and release recommendation without relying on undocumented assumptions.</p>
+<h2 id="16-portfolio-and-course-exit-package">16. Portfolio and course-exit package</h2>
+<p>Retain:</p>
+<ul>
+<li>source model and architecture repository;</li>
+<li>code, tests, pipeline definitions, and build instructions;</li>
+<li>traceability, coverage, budget, risk, and V&amp;V exports;</li>
+<li>ADRs and technical decision log;</li>
+<li>review briefings, findings, responses, and closure evidence;</li>
+<li>final baseline and oral-defense recording;</li>
+<li>one-page retrospective identifying the three most transferable lessons.</li>
+</ul>
+<h2 id="17-course-maintenance-record">17. Course maintenance record</h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Change</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-08-05</td>
+<td>Rebuilt initial outline into a complete 12-week course</td>
+<td>Apply reusable curriculum template and align to 2026 JHU scope</td>
+</tr>
+<tr>
+<td>2026-08-05</td>
+<td>Updated backbone from older SWEBOK references to SWEBOK V4.0a</td>
+<td>Use current professional body of knowledge</td>
+</tr>
+<tr>
+<td>2026-08-05</td>
+<td>Treated NIST SSDF 1.1 as final and SSDF 1.2 as draft comparison</td>
+<td>Preserve standards-status accuracy as of course revision date</td>
+</tr>
+<tr>
+<td>2026-08-05</td>
+<td>Added model-to-code-to-test-to-operations evidence chain</td>
+<td>Strengthen systems/software alignment and reviewability</td>
+</tr>
+</tbody>
+</table>
+<h2 id="week-1--define-the-software-systems-engineering-role-and-establish-the-baseline">Week 1 — Define the software systems engineering role and establish the baseline</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B5/chapters/01-define-the-software-systems-engineering-role-.html">Read Book V, Chapter 1</a> → <a href="../../K/B5/labs/lab-01-define-the-software-systems-engineering-role-.html">complete Hypothetical Lab 1</a> → <a href="../../K/P1-text/lessons/645-764-w01.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Foundation, scope, and setup<br/>
+<strong>Program competencies:</strong> C1-D, C4-D, C5-A, C10-D, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-1, CLO-2, CLO-8<br/>
+<strong>Nominal effort:</strong> 9–10 hours<br/>
+<strong>Primary evidence produced:</strong> course charter, responsibility map, software boundary, repository baseline</p>
+<h3 id="1-why-this-week-matters">1. Why this week matters</h3>
+<p>Software engineering activity often begins with code repositories and backlogs before anyone defines which system responsibilities belong to software, who owns cross-boundary decisions, or what evidence must survive a review. This week establishes software systems engineering as the connective discipline between system intent and software realization. It also creates the controlled repository that will carry model, code, tests, decisions, and evidence through the course.</p>
+<h3 id="2-essential-question">2. Essential question</h3>
+<blockquote>
+<p>What must a software systems engineer control that neither a systems engineer nor a software developer can safely control alone?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve from prior work</strong></p>
+<ul>
+<li>Phase 0 system boundary, operational scenarios, system requirements, interfaces, risks, and project constraints</li>
+<li>EN.645.631 allocations, architecture, V&amp;V relationships, and model-governance rules</li>
+<li>EN.605.704 software boundary, use cases, object model, states, interfaces, and unresolved design issues</li>
+</ul>
+<p><strong>Readiness tasks</strong></p>
+<ol>
+<li>Classify ten supplied statements as system requirement, software requirement, architecture decision, implementation detail, test evidence, or operational evidence.</li>
+<li>Identify three decisions that require joint system/software ownership.</li>
+<li>Explain why a code repository cannot be the sole authoritative description of a software-intensive system.</li>
+</ol>
+<h3 id="4-detailed-weekly-learning-outcomes">4. Detailed weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ol>
+<li>define the scope and responsibilities of software systems engineering</li>
+<li>distinguish system, software, product, platform, service, and component boundaries</li>
+<li>establish artifact authority, ownership, review, and configuration rules</li>
+<li>create a reproducible model-code-evidence repository</li>
+<li>identify gaps in the inherited baseline before architecture work begins</li>
+</ol>
+<h3 id="5-key-concepts-and-distinctions">5. Key concepts and distinctions</h3>
+<ul>
+<li>software-intensive system and software item</li>
+<li>allocation versus implementation</li>
+<li>product authority and evidence authority</li>
+<li>digital thread and trace continuity</li>
+<li>technical debt versus unresolved engineering risk</li>
+<li>semantic baseline versus presentation artifact</li>
+</ul>
+<h3 id="6-required-readings-and-resources">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding question</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JHU 2026 syllabus <a href="https://apps.ep.jhu.edu/syllabus/summer-2026/645.764.82" title="JHU EP Summer 2026 Abridged Syllabus — 645.764">JHU-764-SYLLABUS</a></td>
+<td>Description, topics, goals, CLOs, required software, and coursework sections</td>
+<td>Recover the source course intent and tool expectations</td>
+<td>Which activities are explicitly systems-oriented rather than coding-oriented?</td>
+<td style="text-align:right">35 min</td>
+</tr>
+<tr>
+<td>SWEBOK V4.0a <a href="https://www.computer.org/education/bodies-of-knowledge/software-engineering/topics" title="SWEBOK V4.0 topic map">SWEBOK-TOPICS</a></td>
+<td>Review the 18 knowledge-area titles and the chapters on professional practice, process, requirements, and architecture</td>
+<td>Place the course within the broader discipline</td>
+<td>Which knowledge areas require cross-lifecycle integration?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td>NASA Software Engineering Handbook <a href="https://swehb.nasa.gov/display/SWEHBVD/Book+A.+Introduction" title="NASA Software Engineering and Assurance Handbook">NASA-SWEHB</a></td>
+<td>Book A introduction and guidance on software classification, planning, and lifecycle integration</td>
+<td>Understand evidence obligations in high-consequence software</td>
+<td>What changes when software contributes to safety or mission risk?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+<tr>
+<td>Sommerville, <em>Engineering Software Products</em> <a href="https://www.pearson.com/en-us/subject-catalog/p/P200000003243" title="Ian Sommerville — Engineering Software Products">ESP</a></td>
+<td>Chapter 1, Software Products; read the product vision and management sections</td>
+<td>Frame a software product without losing system context</td>
+<td>How does a product vision differ from a system mission?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes">7. Instructor-style lesson notes</h3>
+<p>Software systems engineering does not replace systems engineering or software engineering. It makes their assumptions explicit at the boundary. It asks what the system requires from software, what software requires from the rest of the system, how architecture and delivery decisions affect mission risk, and what evidence will support integration and release decisions.</p>
+<p>Create one controlled repository with folders for system inputs, software intent, architecture, interfaces, code, tests, operations, reviews, and configuration. Each artifact should identify owner, version, status, source, and dependent decisions.</p>
+<p>A useful responsibility map distinguishes decision authority, contribution, consultation, verification, and approval. For example, the system safety lead may own hazard acceptance, while the software architect owns software tactics and the test lead owns evidence execution.</p>
+<h3 id="8-worked-example">8. Worked example</h3>
+<p>The inherited shuttle model allocates “Provide safe passenger transport” to the Operations Platform. That allocation is too broad: software can validate requests, coordinate dispatch, detect inconsistent telemetry, and issue stop commands, but it cannot alone guarantee safe transport. The corrected baseline decomposes the responsibility into software functions, vehicle functions, operator actions, communications, procedures, and safety constraints. The software package records its contribution and verification evidence without claiming ownership of the complete safety outcome.</p>
+<h3 id="9-guided-practice">9. Guided practice</h3>
+<ol>
+<li>Create a one-page software product vision for the pilot.</li>
+<li>Build a RACI-like responsibility map for twelve cross-boundary decisions.</li>
+<li>Create the repository folder structure and artifact register.</li>
+<li>Import six critical mission threads and identify missing software allocations or owners.</li>
+<li>Tag the repository as <code>764-entry-baseline-v1.0</code>.</li>
+</ol>
+<p><strong>Checkpoint:</strong> Pause before independent work and verify that the current artifacts are traceable, internally consistent, and reproducible. Record unresolved assumptions rather than silently filling them.</p>
+<h3 id="10-independent-exercises">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Define 25 course terms in your own words.</li>
+<li>Identify five ways a software team can satisfy a local goal while harming the system.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Create a software context diagram and boundary statement.</li>
+<li>Produce an inherited-artifact acceptance/rejection table.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Find at least ten gaps, ambiguities, or unsupported claims in the inherited baseline.</li>
+<li>Prioritize the gaps by effect on architecture and release evidence.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Write a two-page Software Systems Engineering Charter with scope, roles, artifacts, review gates, tools, and mastery criteria.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Create a machine-readable artifact index and a script that checks required metadata.</li>
+</ul>
+<h3 id="11-deliverable-specification">11. Deliverable specification</h3>
+<p>Submit <code>764-W01-Baseline-v1.0</code> containing:</p>
+<ol>
+<li>software product vision and boundary</li>
+<li>responsibility and decision-authority map</li>
+<li>artifact-authority and configuration plan</li>
+<li>repository structure and rebuild instructions</li>
+<li>inherited-baseline gap audit</li>
+<li>assumptions, exclusions, and open questions</li>
+</ol>
+<h3 id="12-weekly-rubric">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boundary and responsibility discipline</td>
+<td style="text-align:right">25%</td>
+<td>System and software responsibilities are separated without losing shared ownership</td>
+</tr>
+<tr>
+<td>Baseline audit</td>
+<td style="text-align:right">25%</td>
+<td>Material gaps and unsupported claims are identified and prioritized</td>
+</tr>
+<tr>
+<td>Repository and configuration</td>
+<td style="text-align:right">20%</td>
+<td>Artifacts are reproducible, controlled, and indexed</td>
+</tr>
+<tr>
+<td>Systems/software rationale</td>
+<td style="text-align:right">20%</td>
+<td>The charter explains how evidence will support system decisions</td>
+</tr>
+<tr>
+<td>Communication</td>
+<td style="text-align:right">10%</td>
+<td>Scope, assumptions, and decisions are concise and clear</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> undefined software boundary; repository cannot be rebuilt; software is assigned whole-system outcomes without decomposition.</p>
+<h3 id="13-knowledge-check">13. Knowledge check</h3>
+<ol>
+<li>Why is allocation not the same as implementation?</li>
+<li>Name two artifacts that should remain system-authoritative.</li>
+<li>What makes an artifact suitable as baseline evidence?</li>
+<li>Why is “the code is the documentation” inadequate here?</li>
+<li>What is one cross-boundary decision requiring joint ownership?</li>
+</ol>
+<p><strong>Answer guidance:</strong> Allocation assigns responsibility and constraints; implementation selects mechanisms. System mission, stakeholder needs, hazards, and top-level requirements usually remain system authoritative. Baseline evidence must be controlled, reviewable, reproducible, and linked to decisions. Code omits intent, alternatives, external obligations, and operational evidence.</p>
+<h3 id="14-feedback-revision-and-mastery-gate">14. Feedback, revision, and mastery gate</h3>
+<p>Use the rubric, automated checks, and answer guidance to perform a self-review. Record a five-to-ten-minute walkthrough explaining the principal decision and weakest evidence. Revise all critical failures and any criterion below proficient. The week is complete only when the deliverable is baselined, the repository rebuilds, and unresolved high-consequence issues are explicitly owned and scheduled.</p>
+<h3 id="15-reflection-and-workload-record">15. Reflection and workload record</h3>
+<p>Record:</p>
+<ul>
+<li>the most important assumption challenged this week;</li>
+<li>one decision that changed because of evidence;</li>
+<li>the weakest remaining trace or claim;</li>
+<li>actual hours spent by reading, modeling, analysis, implementation, testing, and revision;</li>
+<li>one question to carry into the next week.</li>
+</ul>
+<hr/>
+<h2 id="week-2--model-software-allocations-interfaces-and-the-digital-thread">Week 2 — Model software allocations, interfaces, and the digital thread</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B5/chapters/02-model-software-allocations-interfaces-and-the.html">Read Book V, Chapter 2</a> → <a href="../../K/B5/labs/lab-02-model-software-allocations-interfaces-and-the.html">complete Hypothetical Lab 2</a> → <a href="../../K/P1-text/lessons/645-764-w02.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> MBSE-to-software translation<br/>
+<strong>Program competencies:</strong> C2-D, C3-D, C4-A, C5-A, C6-D<br/>
+<strong>Course outcomes:</strong> CLO-2, CLO-3<br/>
+<strong>Nominal effort:</strong> 10–11 hours<br/>
+<strong>Primary evidence produced:</strong> allocation model, software requirement baseline, interface inventory, coverage queries</p>
+<h3 id="1-why-this-week-matters-2">1. Why this week matters</h3>
+<p>A system model is useful to software engineering only when software responsibilities, interfaces, constraints, and verification relationships can be interpreted and challenged. Copying requirements into a software document creates duplication, not a digital thread. This week builds traceable transformations and exposes orphaned or overallocated system intent.</p>
+<h3 id="2-essential-question-2">2. Essential question</h3>
+<blockquote>
+<p>How can software engineers refine system intent without creating a disconnected second truth?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-2">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve from prior work</strong></p>
+<ul>
+<li>six critical system requirements and their stakeholder rationale</li>
+<li>logical functions and physical allocations from the MBSE repository</li>
+<li>OOAD use cases, operations, state constraints, and interface candidates</li>
+</ul>
+<p><strong>Readiness tasks</strong></p>
+<ol>
+<li>Follow one trace from stakeholder need to system requirement, function, architecture element, and verification case.</li>
+<li>Identify an allocation that is actually a design constraint.</li>
+<li>Explain how a derived software requirement should preserve rationale.</li>
+</ol>
+<h3 id="4-detailed-weekly-learning-outcomes-2">4. Detailed weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ol>
+<li>interpret SysML or equivalent requirements, behavior, structure, and allocation views</li>
+<li>derive software requirements and constraints with preserved rationale</li>
+<li>define critical software interfaces and ownership</li>
+<li>construct coverage, orphan, and inconsistency queries</li>
+<li>identify where model transformations require human engineering judgment</li>
+</ol>
+<h3 id="5-key-concepts-and-distinctions-2">5. Key concepts and distinctions</h3>
+<ul>
+<li>allocation, refinement, derivation, satisfaction, verification</li>
+<li>system/software interface and interface control</li>
+<li>mission thread and end-to-end trace</li>
+<li>orphan, dangling link, duplicate source of truth</li>
+<li>bidirectional change impact</li>
+<li>model query and coverage evidence</li>
+</ul>
+<h3 id="6-required-readings-and-resources-2">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding question</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JHU 2026 syllabus <a href="https://apps.ep.jhu.edu/syllabus/summer-2026/645.764.82" title="JHU EP Summer 2026 Abridged Syllabus — 645.764">JHU-764-SYLLABUS</a></td>
+<td>Course topics: Basics of MBSE, SysML Concepts, and Understanding a Systems Model</td>
+<td>Anchor the first course modules</td>
+<td>What model information must a software engineer be able to interpret?</td>
+<td style="text-align:right">25 min</td>
+</tr>
+<tr>
+<td>NASA Software Engineering Handbook <a href="https://swehb.nasa.gov/display/SWEHBVD/Book+A.+Introduction" title="NASA Software Engineering and Assurance Handbook">NASA-SWEHB</a></td>
+<td>Guidance on software requirements, bidirectional traceability, and interface requirements</td>
+<td>Establish disciplined transformation and traceability</td>
+<td>What evidence is expected between higher-level and software requirements?</td>
+<td style="text-align:right">75 min</td>
+</tr>
+<tr>
+<td>SWEBOK V4.0a <a href="https://www.computer.org/education/bodies-of-knowledge/software-engineering/topics" title="SWEBOK V4.0 topic map">SWEBOK-TOPICS</a></td>
+<td>Software Requirements and Software Architecture chapter outlines</td>
+<td>Connect requirements structure to architecture ownership</td>
+<td>Which requirements become architecture significant?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td>C4 model <a href="https://c4model.com/diagrams" title="C4 Model — Official diagram guidance">C4</a></td>
+<td>System context and dynamic diagram guidance</td>
+<td>Compare software views with the system model</td>
+<td>Which relationships need multiple viewpoints?</td>
+<td style="text-align:right">35 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-2">7. Instructor-style lesson notes</h3>
+<p>A software requirement should not merely restate a system requirement with the word “software.” It should specify the software contribution, interfaces, conditions, performance, failure behavior, and verification path while preserving the parent rationale.</p>
+<p>Traceability is an engineering model, not a compliance spreadsheet. Useful queries include: system requirements with no software contribution; software requirements without parent rationale; interfaces without owners; quality claims without scenarios; requirements without planned evidence; and architecture elements with no allocated behavior.</p>
+<p>Where the system requirement is emergent—such as safe transport or service availability—software contribution should be modeled alongside hardware, humans, procedures, and external services.</p>
+<h3 id="8-worked-example-2">8. Worked example</h3>
+<p>System requirement SR-AV-014 states that the shuttle service shall remain available during a 60-second vehicle-network interruption. A weak software requirement says “the software shall be available.” A better decomposition defines cached route data, message buffering limits, local vehicle behavior, operator visibility, reconciliation rules, duplicate handling, and recovery timing. The trace records that service availability also depends on vehicle autonomy, network design, and operating procedures.</p>
+<h3 id="9-guided-practice-2">9. Guided practice</h3>
+<ol>
+<li>Select six critical mission threads.</li>
+<li>For each, build a need → system requirement → function → software contribution → interface → evidence chain.</li>
+<li>Create or refine 20–30 software requirements and constraints.</li>
+<li>Define six critical interfaces with ownership, data, error, timing, versioning, and security fields.</li>
+<li>Run orphan and coverage queries and record corrections.</li>
+</ol>
+<p><strong>Checkpoint:</strong> Pause before independent work and verify that the current artifacts are traceable, internally consistent, and reproducible. Record unresolved assumptions rather than silently filling them.</p>
+<h3 id="10-independent-exercises-2">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Classify 25 relationships as derive, refine, allocate, satisfy, verify, or plain dependency.</li>
+<li>Rewrite five vague software requirements.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Create the software allocation package for dispatch, notifications, incident handling, and telemetry.</li>
+<li>Build an interface inventory.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Identify three whole-system properties that cannot be allocated exclusively to software.</li>
+<li>Perform a change-impact analysis for a new 5-second passenger-notification requirement.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Produce three end-to-end digital-thread examples with query evidence.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Automate trace coverage export from the selected model or source files.</li>
+</ul>
+<h3 id="11-deliverable-specification-2">11. Deliverable specification</h3>
+<p>Submit <code>764-W02-Baseline-v1.0</code> containing:</p>
+<ol>
+<li>software allocation and requirements baseline</li>
+<li>critical-interface inventory and three detailed contracts</li>
+<li>traceability views and query results</li>
+<li>coverage, orphan, and inconsistency findings</li>
+<li>change-impact example</li>
+<li>decision log for disputed allocations</li>
+</ol>
+<h3 id="12-weekly-rubric-2">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Allocation quality</td>
+<td style="text-align:right">25%</td>
+<td>Software contributions are bounded and preserve system rationale</td>
+</tr>
+<tr>
+<td>Requirement quality</td>
+<td style="text-align:right">20%</td>
+<td>Requirements are clear, feasible, measurable, and architecture aware</td>
+</tr>
+<tr>
+<td>Interface completeness</td>
+<td style="text-align:right">20%</td>
+<td>Critical contracts include nominal and failure behavior</td>
+</tr>
+<tr>
+<td>Traceability and queries</td>
+<td style="text-align:right">25%</td>
+<td>Coverage and defects are demonstrated from authoritative sources</td>
+</tr>
+<tr>
+<td>Change rationale</td>
+<td style="text-align:right">10%</td>
+<td>Corrections and unresolved issues are explained</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> critical system intent copied without rationale; interface error behavior omitted; no executable or repeatable coverage check.</p>
+<h3 id="13-knowledge-check-2">13. Knowledge check</h3>
+<ol>
+<li>Why is traceability more than a parent identifier?</li>
+<li>What is an emergent requirement?</li>
+<li>Name four fields beyond payload in an interface contract.</li>
+<li>What is an orphan software requirement?</li>
+<li>Why can refinement be many-to-many?</li>
+</ol>
+<p><strong>Answer guidance:</strong> Traceability must preserve rationale, transformation, ownership, and evidence. Emergent properties arise from interactions among multiple elements. Timing, error behavior, versioning, ownership, security, units, and quality constraints are common interface fields.</p>
+<h3 id="14-feedback-revision-and-mastery-gate-2">14. Feedback, revision, and mastery gate</h3>
+<p>Use the rubric, automated checks, and answer guidance to perform a self-review. Record a five-to-ten-minute walkthrough explaining the principal decision and weakest evidence. Revise all critical failures and any criterion below proficient. The week is complete only when the deliverable is baselined, the repository rebuilds, and unresolved high-consequence issues are explicitly owned and scheduled.</p>
+<h3 id="15-reflection-and-workload-record-2">15. Reflection and workload record</h3>
+<p>Record:</p>
+<ul>
+<li>the most important assumption challenged this week;</li>
+<li>one decision that changed because of evidence;</li>
+<li>the weakest remaining trace or claim;</li>
+<li>actual hours spent by reading, modeling, analysis, implementation, testing, and revision;</li>
+<li>one question to carry into the next week.</li>
+</ul>
+<hr/>
+<h2 id="week-3--interpret-and-critique-the-system-model-for-software-realization">Week 3 — Interpret and critique the system model for software realization</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B5/chapters/03-interpret-and-critique-the-system-model-for-s.html">Read Book V, Chapter 3</a> → <a href="../../K/B5/labs/lab-03-interpret-and-critique-the-system-model-for-s.html">complete Hypothetical Lab 3</a> → <a href="../../K/P1-text/lessons/645-764-w03.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Model interpretation and first review<br/>
+<strong>Program competencies:</strong> C2-A, C3-D, C4-A, C5-A, C12-A<br/>
+<strong>Course outcomes:</strong> CLO-2, CLO-3, CLO-11<br/>
+<strong>Nominal effort:</strong> 10–12 hours<br/>
+<strong>Primary evidence produced:</strong> model interpretation report, software-intent baseline, review findings and closures</p>
+<h3 id="1-why-this-week-matters-3">1. Why this week matters</h3>
+<p>Software teams are often handed a model that appears complete but contains unresolved semantics, hidden assumptions, inconsistent states, or allocations that cannot be implemented or tested. A software systems engineer must read the model critically, not simply consume it. This week converts model interpretation into review evidence and a controlled software-intent baseline.</p>
+<h3 id="2-essential-question-3">2. Essential question</h3>
+<blockquote>
+<p>What makes a system model actionable for software rather than merely descriptive?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-3">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve from prior work</strong></p>
+<ul>
+<li>Week 2 allocation, requirements, interface, and query results</li>
+<li>OOAD use cases, operation contracts, state machines, and OCL constraints</li>
+<li>project assumptions and risk register</li>
+</ul>
+<p><strong>Readiness tasks</strong></p>
+<ol>
+<li>Identify one inconsistency between a state model and an interface contract.</li>
+<li>Explain why a logical block is not automatically a deployable software service.</li>
+<li>Distinguish model completeness from model correctness.</li>
+</ol>
+<h3 id="4-detailed-weekly-learning-outcomes-3">4. Detailed weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ol>
+<li>evaluate model semantics across requirements, behavior, structure, state, and verification views</li>
+<li>identify contradictions, under-specification, infeasible allocations, and testability gaps</li>
+<li>translate system scenarios into software features and acceptance chains</li>
+<li>conduct and document a formal model interpretation review</li>
+<li>baseline software intent before architecture design</li>
+</ol>
+<h3 id="5-key-concepts-and-distinctions-3">5. Key concepts and distinctions</h3>
+<ul>
+<li>view consistency and semantic consistency</li>
+<li>logical element versus software component or service</li>
+<li>feature, scenario, story, requirement, and acceptance criterion</li>
+<li>state ownership and concurrency assumptions</li>
+<li>assumption debt</li>
+<li>review finding, disposition, waiver, and closure evidence</li>
+</ul>
+<h3 id="6-required-readings-and-resources-3">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding question</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NASA Software Engineering Handbook <a href="https://swehb.nasa.gov/display/SWEHBVD/Book+A.+Introduction" title="NASA Software Engineering and Assurance Handbook">NASA-SWEHB</a></td>
+<td>Software requirements analysis, software architecture/design, and review guidance</td>
+<td>Identify expected evidence before design</td>
+<td>Which defects should block architecture baselining?</td>
+<td style="text-align:right">75 min</td>
+</tr>
+<tr>
+<td>Sommerville <a href="https://www.pearson.com/en-us/subject-catalog/p/P200000003243" title="Ian Sommerville — Engineering Software Products">ESP</a></td>
+<td>Chapter 3, Features, Scenarios and Stories</td>
+<td>Structure software intent around stakeholder value</td>
+<td>How do scenarios and stories complement formal requirements?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+<tr>
+<td>C4 dynamic diagrams <a href="https://c4model.com/diagrams" title="C4 Model — Official diagram guidance">C4</a></td>
+<td>Dynamic diagram guidance and examples</td>
+<td>Connect static elements to runtime collaboration</td>
+<td>Which mission threads deserve a dynamic view?</td>
+<td style="text-align:right">30 min</td>
+</tr>
+<tr>
+<td>SWEBOK V4.0a <a href="https://www.computer.org/education/bodies-of-knowledge/software-engineering/topics" title="SWEBOK V4.0 topic map">SWEBOK-TOPICS</a></td>
+<td>Requirements validation and architecture fundamentals topics</td>
+<td>Create a review checklist</td>
+<td>What distinctions matter between validation and design readiness?</td>
+<td style="text-align:right">40 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-3">7. Instructor-style lesson notes</h3>
+<p>A system model becomes actionable when a software engineer can answer: what behavior is required, under which states and conditions, through which interfaces, under what quality constraints, with what error handling, and how success will be observed.</p>
+<p>Features and stories are planning views, not substitutes for requirements. Preserve the chain from mission rationale to feature, scenario, acceptance criterion, software requirement, architecture, and evidence.</p>
+<p>Review findings should be specific and closable. “Model unclear” is weak. “Vehicle connectivity-loss state lacks an exit condition and conflicts with interface retry behavior; owner must define reconciliation within 10 seconds” is actionable.</p>
+<h3 id="8-worked-example-3">8. Worked example</h3>
+<p>The model shows a <code>TripAssigned</code> event and a <code>VehicleAvailable</code> state but does not define whether two dispatch decisions can race for the same vehicle. The OOAD invariant says one active assignment per vehicle, while the system sequence allows concurrent requests. The review finding identifies missing concurrency ownership, atomicity, rejection behavior, and verification evidence. The resolved intent adds a dispatch reservation concept and idempotent assignment command.</p>
+<h3 id="9-guided-practice-3">9. Guided practice</h3>
+<ol>
+<li>Select four nominal and three off-nominal mission threads.</li>
+<li>Walk each thread through requirements, state, behavior, structure, interface, and verification views.</li>
+<li>Record defects using severity, evidence, impact, owner, due date, and closure criterion.</li>
+<li>Translate the threads into 8–12 features and acceptance chains.</li>
+<li>Conduct a 20-minute recorded Software Model Interpretation Review.</li>
+</ol>
+<p><strong>Checkpoint:</strong> Pause before independent work and verify that the current artifacts are traceable, internally consistent, and reproducible. Record unresolved assumptions rather than silently filling them.</p>
+<h3 id="10-independent-exercises-3">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Diagnose ten seeded model defects.</li>
+<li>Write acceptance criteria for five features.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Build a software-intent baseline linking features, scenarios, requirements, and interfaces.</li>
+<li>Correct at least five inherited model defects.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Identify one false completeness signal in each model viewpoint.</li>
+<li>Assess the impact of unresolved concurrency and degraded-mode assumptions.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Write a go/conditional-go/no-go recommendation for software architecture work.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Implement model lint rules for missing owner, rationale, or evidence links.</li>
+</ul>
+<h3 id="11-deliverable-specification-3">11. Deliverable specification</h3>
+<p>Submit <code>764-W03-Baseline-v1.0</code> containing:</p>
+<ol>
+<li>model interpretation report</li>
+<li>feature/scenario/story/requirement chain</li>
+<li>review briefing and recorded walkthrough</li>
+<li>finding log with dispositions and closure evidence</li>
+<li>updated model baseline and change log</li>
+<li>architecture-entry recommendation</li>
+</ol>
+<h3 id="12-weekly-rubric-3">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cross-view interpretation</td>
+<td style="text-align:right">25%</td>
+<td>Requirements, states, interactions, interfaces, and evidence are reconciled</td>
+</tr>
+<tr>
+<td>Defect quality</td>
+<td style="text-align:right">25%</td>
+<td>Findings are specific, prioritized, and closable</td>
+</tr>
+<tr>
+<td>Software intent chain</td>
+<td style="text-align:right">20%</td>
+<td>Features and acceptance criteria preserve system rationale</td>
+</tr>
+<tr>
+<td>Review judgment</td>
+<td style="text-align:right">20%</td>
+<td>Entry recommendation reflects risk and evidence</td>
+</tr>
+<tr>
+<td>Configuration discipline</td>
+<td style="text-align:right">10%</td>
+<td>Corrections and baselines are controlled</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> known contradiction hidden rather than resolved or waived; feature backlog replaces formal requirements; architecture proceeds with undefined critical state or interface behavior.</p>
+<h3 id="13-knowledge-check-3">13. Knowledge check</h3>
+<ol>
+<li>What makes a review finding closable?</li>
+<li>Why is a logical function not a service boundary?</li>
+<li>What is assumption debt?</li>
+<li>How do stories and requirements differ?</li>
+<li>When is a conditional-go appropriate?</li>
+</ol>
+<p><strong>Answer guidance:</strong> A finding needs evidence, impact, owner, action, and closure criterion. Logical decomposition organizes behavior; service boundaries require quality, data, deployment, ownership, and change reasoning. A conditional-go is appropriate when bounded issues have mitigations and cannot invalidate the near-term work.</p>
+<h3 id="14-feedback-revision-and-mastery-gate-3">14. Feedback, revision, and mastery gate</h3>
+<p>Use the rubric, automated checks, and answer guidance to perform a self-review. Record a five-to-ten-minute walkthrough explaining the principal decision and weakest evidence. Revise all critical failures and any criterion below proficient. The week is complete only when the deliverable is baselined, the repository rebuilds, and unresolved high-consequence issues are explicitly owned and scheduled.</p>
+<h3 id="15-reflection-and-workload-record-3">15. Reflection and workload record</h3>
+<p>Record:</p>
+<ul>
+<li>the most important assumption challenged this week;</li>
+<li>one decision that changed because of evidence;</li>
+<li>the weakest remaining trace or claim;</li>
+<li>actual hours spent by reading, modeling, analysis, implementation, testing, and revision;</li>
+<li>one question to carry into the next week.</li>
+</ul>
+<hr/>
+<h2 id="week-4--frame-the-software-architecture-within-the-system-architecture">Week 4 — Frame the software architecture within the system architecture</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B5/chapters/04-frame-the-software-architecture-within-the-sy.html">Read Book V, Chapter 4</a> → <a href="../../K/B5/labs/lab-04-frame-the-software-architecture-within-the-sy.html">complete Hypothetical Lab 4</a> → <a href="../../K/P1-text/lessons/645-764-w04.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Architecture viewpoints and decisions<br/>
+<strong>Program competencies:</strong> C3-A, C4-A, C5-A, C9-D, C12-A<br/>
+<strong>Course outcomes:</strong> CLO-4, CLO-5<br/>
+<strong>Nominal effort:</strong> 10–11 hours<br/>
+<strong>Primary evidence produced:</strong> architecture viewpoints, interface boundaries, ADR set, architecture-risk register</p>
+<h3 id="1-why-this-week-matters-4">1. Why this week matters</h3>
+<p>Architecture is the earliest software artifact that can expose whether quality and integration goals are plausible. Weak teams jump from features to frameworks; strong teams establish viewpoints, responsibilities, boundaries, interfaces, decisions, and evaluation questions. This week creates the architecture frame before selecting detailed tactics.</p>
+<h3 id="2-essential-question-4">2. Essential question</h3>
+<blockquote>
+<p>Which architecture decisions are system decisions, which are software decisions, and how should their consequences be reviewed?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-4">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve from prior work</strong></p>
+<ul>
+<li>software intent baseline and unresolved review findings</li>
+<li>MBSE logical and physical architecture</li>
+<li>OOAD responsibilities, packages, interactions, and persistence boundaries</li>
+</ul>
+<p><strong>Readiness tasks</strong></p>
+<ol>
+<li>Explain the difference between a logical function, C4 container, deployable process, and object-oriented class.</li>
+<li>Identify a decision that belongs in an ADR.</li>
+<li>Name one architecture view needed by operators but not developers.</li>
+</ol>
+<h3 id="4-detailed-weekly-learning-outcomes-4">4. Detailed weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ol>
+<li>select architecture viewpoints for stakeholder concerns</li>
+<li>define software responsibilities, boundaries, and interface ownership</li>
+<li>construct system context, container/component, dynamic, and deployment views</li>
+<li>write architecture decision records with alternatives and consequences</li>
+<li>identify architecture risks and evaluation questions</li>
+</ol>
+<h3 id="5-key-concepts-and-distinctions-4">5. Key concepts and distinctions</h3>
+<ul>
+<li>architecture versus detailed design</li>
+<li>viewpoint, view, concern, stakeholder</li>
+<li>module, component, container, service, process, node</li>
+<li>architecture decision record</li>
+<li>architecture significant requirement</li>
+<li>risk, sensitivity point, tradeoff point</li>
+</ul>
+<h3 id="6-required-readings-and-resources-4">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding question</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C4 model <a href="https://c4model.com/diagrams" title="C4 Model — Official diagram guidance">C4</a></td>
+<td>Introduction; system context, container, component, dynamic, and deployment diagrams</td>
+<td>Create audience-specific software architecture views</td>
+<td>Which views add decision value for this case?</td>
+<td style="text-align:right">70 min</td>
+</tr>
+<tr>
+<td>SEI architecture resources <a href="https://www.sei.cmu.edu/library/attribute-driven-design-method-collection/" title="SEI Attribute-Driven Design Method Collection">SEI-ADD</a></td>
+<td>ADD overview and required inputs</td>
+<td>Connect requirements and constraints to architecture decisions</td>
+<td>What drives decomposition?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td>SWEBOK V4.0a <a href="https://www.computer.org/education/bodies-of-knowledge/software-engineering/topics" title="SWEBOK V4.0 topic map">SWEBOK-TOPICS</a></td>
+<td>Software Architecture knowledge-area topics</td>
+<td>Cross-check architecture responsibilities and descriptions</td>
+<td>Which outputs are architectural rather than detailed design?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td>Sommerville <a href="https://www.pearson.com/en-us/subject-catalog/p/P200000003243" title="Ian Sommerville — Engineering Software Products">ESP</a></td>
+<td>Chapter 4, Software Architecture</td>
+<td>Use the source textbook architecture vocabulary</td>
+<td>How do architectural patterns affect product qualities?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-4">7. Instructor-style lesson notes</h3>
+<p>Architecture views should be selected because stakeholders need to answer questions. The system context view explains external dependencies; container and component views explain responsibilities and dependency direction; dynamic views expose runtime collaboration; deployment views expose infrastructure, zones, and operational dependencies.</p>
+<p>An ADR should state context, decision, status, alternatives, rationale, consequences, evidence, and triggers for reconsideration. It should not simply announce a technology choice.</p>
+<p>Cross-model mapping is necessary: SysML blocks or parts, C4 elements, UML packages/classes, processes, and deployment nodes represent different abstractions. Do not force one-to-one equivalence.</p>
+<h3 id="8-worked-example-4">8. Worked example</h3>
+<p>The team proposes separate Dispatch, Trip, Notification, and Reporting services. An ADR initially says “microservices improve scalability.” The corrected decision identifies independent scaling of optimization work, separate notification failure behavior, audit boundaries, team ownership, deployment complexity, cross-service transactions, latency, and observability costs. The decision remains provisional until Week 7 failure experiments.</p>
+<h3 id="9-guided-practice-4">9. Guided practice</h3>
+<ol>
+<li>List architecture stakeholders and concerns.</li>
+<li>Select a minimum useful viewpoint set.</li>
+<li>Produce system context, container, two component, two dynamic, and one deployment view.</li>
+<li>Write five ADRs, including at least one rejected alternative.</li>
+<li>Create an architecture-risk and evaluation-question register.</li>
+</ol>
+<p><strong>Checkpoint:</strong> Pause before independent work and verify that the current artifacts are traceable, internally consistent, and reproducible. Record unresolved assumptions rather than silently filling them.</p>
+<h3 id="10-independent-exercises-4">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Classify 20 elements by abstraction level.</li>
+<li>Rewrite three technology-choice ADRs as engineering decisions.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Map SysML software blocks to C4/UML/deployment views without claiming false equivalence.</li>
+<li>Define ownership for six critical interfaces.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Identify circular dependencies, shared-data coupling, and hidden infrastructure assumptions.</li>
+<li>Compare modular monolith and service-oriented candidates.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Prepare an architecture framing briefing that states what is decided, deferred, and testable.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Represent architecture as code and generate multiple views from one source.</li>
+</ul>
+<h3 id="11-deliverable-specification-4">11. Deliverable specification</h3>
+<p>Submit <code>764-W04-Baseline-v1.0</code> containing:</p>
+<ol>
+<li>architecture stakeholder/concern table</li>
+<li>selected viewpoint rationale</li>
+<li>architecture view set</li>
+<li>five-to-seven ADRs</li>
+<li>interface ownership matrix</li>
+<li>architecture-risk and evaluation register</li>
+<li>mapping between system model and software architecture</li>
+</ol>
+<h3 id="12-weekly-rubric-4">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Viewpoint fitness</td>
+<td style="text-align:right">20%</td>
+<td>Each view answers a stakeholder concern</td>
+</tr>
+<tr>
+<td>Boundary and responsibility quality</td>
+<td style="text-align:right">25%</td>
+<td>Responsibilities and dependency direction are coherent</td>
+</tr>
+<tr>
+<td>Decision rigor</td>
+<td style="text-align:right">25%</td>
+<td>ADRs include alternatives, consequences, and evidence needs</td>
+</tr>
+<tr>
+<td>System alignment</td>
+<td style="text-align:right">20%</td>
+<td>Architecture is mapped to system allocations and interfaces</td>
+</tr>
+<tr>
+<td>Reviewability</td>
+<td style="text-align:right">10%</td>
+<td>Sources are consistent, legible, and reproducible</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> framework-first architecture with no quality rationale; critical shared data has no owner; diagrams contradict one another without explanation.</p>
+<h3 id="13-knowledge-check-4">13. Knowledge check</h3>
+<ol>
+<li>What is the difference between a view and a viewpoint?</li>
+<li>Why is a database not automatically a C4 container boundary?</li>
+<li>What belongs in an ADR consequence section?</li>
+<li>What is a sensitivity point?</li>
+<li>Why avoid one-to-one SysML/C4/UML mappings?</li>
+</ol>
+<p><strong>Answer guidance:</strong> A viewpoint defines concerns and conventions; a view is an instance for a system. Boundaries are driven by responsibility, deployment, data, ownership, and quality—not the mere existence of a database. Abstractions overlap but serve different questions.</p>
+<h3 id="14-feedback-revision-and-mastery-gate-4">14. Feedback, revision, and mastery gate</h3>
+<p>Use the rubric, automated checks, and answer guidance to perform a self-review. Record a five-to-ten-minute walkthrough explaining the principal decision and weakest evidence. Revise all critical failures and any criterion below proficient. The week is complete only when the deliverable is baselined, the repository rebuilds, and unresolved high-consequence issues are explicitly owned and scheduled.</p>
+<h3 id="15-reflection-and-workload-record-4">15. Reflection and workload record</h3>
+<p>Record:</p>
+<ul>
+<li>the most important assumption challenged this week;</li>
+<li>one decision that changed because of evidence;</li>
+<li>the weakest remaining trace or claim;</li>
+<li>actual hours spent by reading, modeling, analysis, implementation, testing, and revision;</li>
+<li>one question to carry into the next week.</li>
+</ul>
+<hr/>
+<h2 id="week-5--integrate-agile-product-engineering-with-systems-evidence">Week 5 — Integrate agile product engineering with systems evidence</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B5/chapters/05-integrate-agile-product-engineering-with-syst.html">Read Book V, Chapter 5</a> → <a href="../../K/B5/labs/lab-05-integrate-agile-product-engineering-with-syst.html">complete Hypothetical Lab 5</a> → <a href="../../K/P1-text/lessons/645-764-w05.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Incremental planning and intent management<br/>
+<strong>Program competencies:</strong> C1-D, C2-A, C5-A, C10-A, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-1, CLO-3, CLO-8<br/>
+<strong>Nominal effort:</strong> 9–11 hours<br/>
+<strong>Primary evidence produced:</strong> product vision, feature model, backlog, release slices, definition of done, traceability audit</p>
+<h3 id="1-why-this-week-matters-5">1. Why this week matters</h3>
+<p>Agile methods can shorten learning cycles, but they can also fragment system intent when features and stories become the only requirements representation. This week develops an incremental planning model that preserves architecture, interface, assurance, and system-review obligations.</p>
+<h3 id="2-essential-question-5">2. Essential question</h3>
+<blockquote>
+<p>How can a software team learn and deliver incrementally without losing system-level coherence or evidence?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-5">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve from prior work</strong></p>
+<ul>
+<li>Week 3 software intent baseline</li>
+<li>Week 4 architecture risks and provisional decisions</li>
+<li>Phase 0 project constraints and review gates</li>
+</ul>
+<p><strong>Readiness tasks</strong></p>
+<ol>
+<li>Distinguish product vision, feature, scenario, story, task, requirement, and acceptance criterion.</li>
+<li>Identify one story that cannot be considered done without system evidence.</li>
+<li>Explain why velocity is not a product outcome.</li>
+</ol>
+<h3 id="4-detailed-weekly-learning-outcomes-5">4. Detailed weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ol>
+<li>tailor agile practices to a software-intensive system context</li>
+<li>decompose features into testable release slices without severing rationale</li>
+<li>create acceptance criteria and definitions of ready/done that include engineering evidence</li>
+<li>plan architecture runway and risk-reduction work</li>
+<li>select metrics that support decisions rather than gaming</li>
+</ol>
+<h3 id="5-key-concepts-and-distinctions-5">5. Key concepts and distinctions</h3>
+<ul>
+<li>product vision and outcome</li>
+<li>feature, scenario, story, task</li>
+<li>increment, release slice, architecture runway</li>
+<li>definition of ready and definition of done</li>
+<li>technical enabler and risk-reduction spike</li>
+<li>flow, outcome, quality, and reliability metrics</li>
+</ul>
+<h3 id="6-required-readings-and-resources-5">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding question</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agile Manifesto <a href="https://agilemanifesto.org/" title="Manifesto for Agile Software Development">AGILE</a></td>
+<td>Values and principles</td>
+<td>Interpret agility as adaptive delivery, not absence of discipline</td>
+<td>Which principles reinforce systems learning?</td>
+<td style="text-align:right">25 min</td>
+</tr>
+<tr>
+<td>Scrum Guide <a href="https://scrumguides.org/scrum-guide.html" title="The Scrum Guide">SCRUM</a></td>
+<td>Purpose, accountabilities, events, artifacts, and commitments</td>
+<td>Use a current primary definition of Scrum</td>
+<td>How do Product Goal and Definition of Done support coherence?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td>Sommerville <a href="https://www.pearson.com/en-us/subject-catalog/p/P200000003243" title="Ian Sommerville — Engineering Software Products">ESP</a></td>
+<td>Chapter 2, Agile Software Engineering; Chapter 3, Features, Scenarios and Stories</td>
+<td>Follow the source-course product-development sequence</td>
+<td>How should scenarios shape stories and acceptance?</td>
+<td style="text-align:right">90 min</td>
+</tr>
+<tr>
+<td>NASA Software Engineering Handbook <a href="https://swehb.nasa.gov/display/SWEHBVD/Book+A.+Introduction" title="NASA Software Engineering and Assurance Handbook">NASA-SWEHB</a></td>
+<td>Agile and software planning guidance where applicable</td>
+<td>Identify evidence that cannot be deferred indefinitely</td>
+<td>Which reviews and assurance activities must be integrated into increments?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-5">7. Instructor-style lesson notes</h3>
+<p>A story is a planning and conversation device. It is not sufficient evidence for regulatory, interface, quality, or system requirements. Maintain links from stories to features, scenarios, requirements, architecture decisions, and tests.</p>
+<p>The Definition of Done should include code, review, tests, trace updates, configuration, security checks, documentation, and operational evidence appropriate to the increment.</p>
+<p>Metrics should answer decisions. Cycle time can expose flow constraints; escaped defects can challenge quality; SLO burn can challenge release pace. Velocity should not be used to compare teams or imply business value.</p>
+<h3 id="8-worked-example-5">8. Worked example</h3>
+<p>“As a passenger, I want trip status notifications” is split into an early end-to-end slice: accepted request → status event → notification adapter → receipt audit. The story is not done until interface schema, retry/idempotency behavior, privacy rule, trace links, automated contract test, and degraded-mode behavior are included. A later slice adds channel preferences and localization.</p>
+<h3 id="9-guided-practice-5">9. Guided practice</h3>
+<ol>
+<li>Write a product goal and three measurable pilot outcomes.</li>
+<li>Create 8–12 features linked to mission scenarios.</li>
+<li>Build 18–30 stories or equivalent work items with acceptance criteria.</li>
+<li>Define ready/done criteria and architecture/assurance enablers.</li>
+<li>Create a three-increment release plan and risk-burn strategy.</li>
+</ol>
+<p><strong>Checkpoint:</strong> Pause before independent work and verify that the current artifacts are traceable, internally consistent, and reproducible. Record unresolved assumptions rather than silently filling them.</p>
+<h3 id="10-independent-exercises-5">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Repair ten weak stories or acceptance criteria.</li>
+<li>Classify metrics as output, flow, quality, reliability, or outcome.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Build the shuttle product backlog and trace it to system/software intent.</li>
+<li>Add architecture, security, test, and operations work explicitly.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Find stories that hide cross-team or external-system dependencies.</li>
+<li>Assess what evidence is deferred by each release slice.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Write an agile tailoring memo for the pilot and defend the review cadence.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Create automated checks that fail when committed stories lack requirement and test links.</li>
+</ul>
+<h3 id="11-deliverable-specification-5">11. Deliverable specification</h3>
+<p>Submit <code>764-W05-Baseline-v1.0</code> containing:</p>
+<ol>
+<li>product vision and outcome measures</li>
+<li>feature/scenario/story hierarchy</li>
+<li>three-increment roadmap</li>
+<li>ready/done criteria</li>
+<li>architecture and assurance runway</li>
+<li>metric decision table</li>
+<li>traceability and dependency audit</li>
+</ol>
+<h3 id="12-weekly-rubric-5">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intent preservation</td>
+<td style="text-align:right">25%</td>
+<td>Backlog items preserve mission, requirement, and scenario rationale</td>
+</tr>
+<tr>
+<td>Increment quality</td>
+<td style="text-align:right">20%</td>
+<td>Slices deliver testable end-to-end learning</td>
+</tr>
+<tr>
+<td>Engineering completeness</td>
+<td style="text-align:right">25%</td>
+<td>Architecture, interface, assurance, and operations work are visible</td>
+</tr>
+<tr>
+<td>Metric fitness</td>
+<td style="text-align:right">15%</td>
+<td>Metrics support explicit decisions and include anti-gaming notes</td>
+</tr>
+<tr>
+<td>Tailoring rationale</td>
+<td style="text-align:right">15%</td>
+<td>Process choices reflect risk and system context</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> stories replace formal critical requirements; definition of done excludes trace/test/configuration obligations; release slices cannot produce meaningful evidence.</p>
+<h3 id="13-knowledge-check-5">13. Knowledge check</h3>
+<ol>
+<li>Why is a story not a requirement specification?</li>
+<li>What is architecture runway?</li>
+<li>Name four evidence items that may belong in done.</li>
+<li>Why is velocity dangerous as a management target?</li>
+<li>What makes an increment valuable for systems learning?</li>
+</ol>
+<p><strong>Answer guidance:</strong> Stories support conversation and planning; critical obligations need durable, precise, traceable statements. Architecture runway is near-term enabling work. Good increments test end-to-end assumptions and produce evidence, not merely code volume.</p>
+<h3 id="14-feedback-revision-and-mastery-gate-5">14. Feedback, revision, and mastery gate</h3>
+<p>Use the rubric, automated checks, and answer guidance to perform a self-review. Record a five-to-ten-minute walkthrough explaining the principal decision and weakest evidence. Revise all critical failures and any criterion below proficient. The week is complete only when the deliverable is baselined, the repository rebuilds, and unresolved high-consequence issues are explicitly owned and scheduled.</p>
+<h3 id="15-reflection-and-workload-record-5">15. Reflection and workload record</h3>
+<p>Record:</p>
+<ul>
+<li>the most important assumption challenged this week;</li>
+<li>one decision that changed because of evidence;</li>
+<li>the weakest remaining trace or claim;</li>
+<li>actual hours spent by reading, modeling, analysis, implementation, testing, and revision;</li>
+<li>one question to carry into the next week.</li>
+</ul>
+<hr/>
+<h2 id="week-6--design-and-evaluate-architecture-with-quality-attributes">Week 6 — Design and evaluate architecture with quality attributes</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B5/chapters/06-design-and-evaluate-architecture-with-quality.html">Read Book V, Chapter 6</a> → <a href="../../K/B5/labs/lab-06-design-and-evaluate-architecture-with-quality.html">complete Hypothetical Lab 6</a> → <a href="../../K/P1-text/lessons/645-764-w06.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Architecture synthesis and midcourse review<br/>
+<strong>Program competencies:</strong> C3-A, C5-A, C8-A, C9-A, C12-A<br/>
+<strong>Course outcomes:</strong> CLO-4, CLO-5, CLO-8<br/>
+<strong>Nominal effort:</strong> 11–12 hours<br/>
+<strong>Primary evidence produced:</strong> quality utility tree, tactics, architecture baseline, prototype evidence, ATAM-lite findings</p>
+<h3 id="1-why-this-week-matters-6">1. Why this week matters</h3>
+<p>Functional behavior alone rarely determines architecture. Availability, performance, modifiability, security, interoperability, deployability, auditability, and safety shape boundaries and tactics. This week turns vague “nonfunctional requirements” into scenarios, budgets, architecture decisions, and early evidence.</p>
+<h3 id="2-essential-question-6">2. Essential question</h3>
+<blockquote>
+<p>What evidence is sufficient to claim that an architecture can meet its most important quality goals?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-6">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve from prior work</strong></p>
+<ul>
+<li>Week 4 architecture frame and ADRs</li>
+<li>Week 5 product outcomes, release slices, and acceptance criteria</li>
+<li>critical system qualities and risks</li>
+</ul>
+<p><strong>Readiness tasks</strong></p>
+<ol>
+<li>Write one complete quality-attribute scenario using source, stimulus, environment, artifact, response, and measure.</li>
+<li>Identify a tactic rather than a technology.</li>
+<li>Explain why quality attributes can conflict.</li>
+</ol>
+<h3 id="4-detailed-weekly-learning-outcomes-6">4. Detailed weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ol>
+<li>elicit and prioritize architecture-critical quality scenarios</li>
+<li>construct a quality utility tree</li>
+<li>select tactics and map them to architecture decisions</li>
+<li>create bounded prototypes or analyses for high-risk assumptions</li>
+<li>conduct an ATAM-lite review and disposition architecture risks</li>
+</ol>
+<h3 id="5-key-concepts-and-distinctions-6">5. Key concepts and distinctions</h3>
+<ul>
+<li>quality attribute scenario</li>
+<li>utility tree and prioritization</li>
+<li>architectural tactic, pattern, and mechanism</li>
+<li>sensitivity and tradeoff point</li>
+<li>risk theme and non-risk</li>
+<li>prototype, simulation, and analytic evidence</li>
+<li>architecture baseline and review criteria</li>
+</ul>
+<h3 id="6-required-readings-and-resources-6">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding question</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SEI Quality Attribute Workshop <a href="https://www.sei.cmu.edu/library/quality-attribute-workshop-collection/" title="SEI Quality Attribute Workshop Collection">SEI-QAW</a></td>
+<td>Overview, scenario generation, and prioritization</td>
+<td>Elicit architecture-critical quality goals</td>
+<td>Which stakeholders reveal hidden quality needs?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+<tr>
+<td>SEI Attribute-Driven Design <a href="https://www.sei.cmu.edu/library/attribute-driven-design-method-collection/" title="SEI Attribute-Driven Design Method Collection">SEI-ADD</a></td>
+<td>Inputs and iterative design approach</td>
+<td>Connect quality scenarios to decomposition and tactics</td>
+<td>How are drivers selected at each iteration?</td>
+<td style="text-align:right">55 min</td>
+</tr>
+<tr>
+<td>SEI ATAM <a href="https://www.sei.cmu.edu/library/architecture-tradeoff-analysis-method-collection/" title="SEI Architecture Tradeoff Analysis Method Collection">SEI-ATAM</a></td>
+<td>Purpose, outputs, and method overview</td>
+<td>Evaluate architecture tradeoffs and risks</td>
+<td>What is the difference between a risk, sensitivity point, and tradeoff point?</td>
+<td style="text-align:right">55 min</td>
+</tr>
+<tr>
+<td>Sommerville <a href="https://www.pearson.com/en-us/subject-catalog/p/P200000003243" title="Ian Sommerville — Engineering Software Products">ESP</a></td>
+<td>Chapter 4, Software Architecture</td>
+<td>Reconcile source-text architecture patterns with quality goals</td>
+<td>Which patterns support or harm the shuttle priorities?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-6">7. Instructor-style lesson notes</h3>
+<p>A quality scenario is testable when it specifies conditions and a measurable response. “The system shall be scalable” is not architecture guidance. “During registration peak, adding one application instance shall increase sustained request capacity by at least 70% without violating the 95th-percentile latency target” is analyzable.</p>
+<p>Tactics are design decisions such as detect fault, limit retries, authenticate actors, partition data, introduce concurrency, or defer binding. Technologies implement tactics but do not justify them.</p>
+<p>An ATAM-lite review should expose business drivers, architecture approaches, prioritized scenarios, risks, sensitivity points, tradeoffs, and risk themes. It is not a scorecard declaring the architecture good.</p>
+<h3 id="8-worked-example-6">8. Worked example</h3>
+<p>The highest-priority scenario requires dispatch decisions within two seconds for 95% of requests during peak demand. Candidate tactics include queue admission control, cached fleet state, bounded optimization time, asynchronous notification, and horizontal scaling. A Python load micro-test shows optimization time dominates. The architecture changes to separate decision calculation from notification and to degrade to a simpler heuristic when the time budget is threatened.</p>
+<h3 id="9-guided-practice-6">9. Guided practice</h3>
+<ol>
+<li>Run a solo or small-group QAW using at least five stakeholder roles.</li>
+<li>Create 12–18 quality scenarios and prioritize them.</li>
+<li>Build a utility tree and map scenarios to tactics and ADRs.</li>
+<li>Implement one Python or modeling experiment for a high-risk assumption.</li>
+<li>Conduct a recorded 30-minute ATAM-lite architecture review.</li>
+</ol>
+<p><strong>Checkpoint:</strong> Pause before independent work and verify that the current artifacts are traceable, internally consistent, and reproducible. Record unresolved assumptions rather than silently filling them.</p>
+<h3 id="10-independent-exercises-6">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Repair eight vague nonfunctional requirements.</li>
+<li>Match tactics to availability, performance, modifiability, security, and testability goals.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Update architecture views and ADRs for selected tactics.</li>
+<li>Create quality and performance budgets.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Identify at least five sensitivity points and three tradeoff points.</li>
+<li>Compare modular-monolith and service candidates against the utility tree.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Issue an architecture baseline recommendation with risk themes and required follow-up evidence.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Create an automated architecture fitness check for one dependency or latency rule.</li>
+</ul>
+<h3 id="11-deliverable-specification-6">11. Deliverable specification</h3>
+<p>Submit <code>764-W06-Baseline-v1.0</code> containing:</p>
+<ol>
+<li>quality stakeholder list and scenario catalog</li>
+<li>prioritized utility tree</li>
+<li>tactic and ADR mapping</li>
+<li>updated architecture views</li>
+<li>prototype/analysis plan, source, results, and limitations</li>
+<li>ATAM-lite briefing, findings, and disposition log</li>
+<li>baseline recommendation</li>
+</ol>
+<h3 id="12-weekly-rubric-6">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scenario quality</td>
+<td style="text-align:right">20%</td>
+<td>Scenarios are complete, measurable, and stakeholder grounded</td>
+</tr>
+<tr>
+<td>Architecture response</td>
+<td style="text-align:right">25%</td>
+<td>Tactics and decisions address the prioritized drivers</td>
+</tr>
+<tr>
+<td>Tradeoff analysis</td>
+<td style="text-align:right">20%</td>
+<td>Sensitivity, tradeoffs, and risk themes are explicit</td>
+</tr>
+<tr>
+<td>Evidence quality</td>
+<td style="text-align:right">20%</td>
+<td>Prototype or analysis is reproducible and interpreted conservatively</td>
+</tr>
+<tr>
+<td>Review judgment</td>
+<td style="text-align:right">15%</td>
+<td>Baseline recommendation reflects residual risk</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> quality claims remain adjectives; technology is presented as a tactic without rationale; prototype results are generalized beyond their limits; critical architecture risk is hidden.</p>
+<h3 id="13-knowledge-check-6">13. Knowledge check</h3>
+<ol>
+<li>Name the six parts of a quality scenario.</li>
+<li>How does a tactic differ from a pattern?</li>
+<li>What is a tradeoff point?</li>
+<li>Why is a prototype not proof of production performance?</li>
+<li>What output should an ATAM produce besides risks?</li>
+</ol>
+<p><strong>Answer guidance:</strong> A scenario includes source, stimulus, environment, artifact, response, and measure. A tactic is a focused design response; a pattern organizes multiple elements and tactics. Prototypes have bounded assumptions and environments. ATAM also identifies sensitivities, tradeoffs, non-risks, and risk themes.</p>
+<h3 id="14-feedback-revision-and-mastery-gate-6">14. Feedback, revision, and mastery gate</h3>
+<p>Use the rubric, automated checks, and answer guidance to perform a self-review. Record a five-to-ten-minute walkthrough explaining the principal decision and weakest evidence. Revise all critical failures and any criterion below proficient. The week is complete only when the deliverable is baselined, the repository rebuilds, and unresolved high-consequence issues are explicitly owned and scheduled.</p>
+<h3 id="15-reflection-and-workload-record-6">15. Reflection and workload record</h3>
+<p>Record:</p>
+<ul>
+<li>the most important assumption challenged this week;</li>
+<li>one decision that changed because of evidence;</li>
+<li>the weakest remaining trace or claim;</li>
+<li>actual hours spent by reading, modeling, analysis, implementation, testing, and revision;</li>
+<li>one question to carry into the next week.</li>
+</ul>
+<hr/>
+<h2 id="week-7--engineer-cloud-service-distributed-and-configurable-architectures">Week 7 — Engineer cloud, service, distributed, and configurable architectures</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B5/chapters/07-engineer-cloud-service-distributed-and-config.html">Read Book V, Chapter 7</a> → <a href="../../K/B5/labs/lab-07-engineer-cloud-service-distributed-and-config.html">complete Hypothetical Lab 7</a> → <a href="../../K/P1-text/lessons/645-764-w07.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Deployment and distributed-systems analysis<br/>
+<strong>Program competencies:</strong> C3-A, C5-A, C8-D, C9-A, C10-D<br/>
+<strong>Course outcomes:</strong> CLO-4, CLO-6, CLO-8<br/>
+<strong>Nominal effort:</strong> 11–12 hours<br/>
+<strong>Primary evidence produced:</strong> service/deployment architecture, interface contracts, consistency and failure analysis, configuration model</p>
+<h3 id="1-why-this-week-matters-7">1. Why this week matters</h3>
+<p>Cloud and services can enable independent scaling and delivery, but they introduce network failure, partial availability, consistency choices, identity propagation, operational complexity, and configuration risk. This week treats distribution as a systems decision rather than a fashionable architecture label.</p>
+<h3 id="2-essential-question-7">2. Essential question</h3>
+<blockquote>
+<p>Which responsibilities should be distributed, and what new failure and control obligations does distribution create?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-7">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve from prior work</strong></p>
+<ul>
+<li>architecture baseline and quality utility tree</li>
+<li>critical interfaces and data ownership</li>
+<li>OOAD transactions, identity, persistence, and concurrency concerns</li>
+</ul>
+<p><strong>Readiness tasks</strong></p>
+<ol>
+<li>Explain why a remote call is not equivalent to an in-process call.</li>
+<li>Define idempotency and give a shuttle example.</li>
+<li>Identify one configuration item that can alter safety-relevant behavior.</li>
+</ol>
+<h3 id="4-detailed-weekly-learning-outcomes-7">4. Detailed weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ol>
+<li>compare modular monolith, service-oriented, microservice, event-driven, and hybrid candidates</li>
+<li>define service boundaries using responsibility, data, quality, ownership, and change drivers</li>
+<li>analyze consistency, ordering, duplication, partition, retry, timeout, and recovery behavior</li>
+<li>design deployment and configuration control</li>
+<li>conduct bounded distributed failure experiments</li>
+</ol>
+<h3 id="5-key-concepts-and-distinctions-7">5. Key concepts and distinctions</h3>
+<ul>
+<li>cloud characteristics, service and deployment model</li>
+<li>service boundary and bounded context</li>
+<li>API, event, command, schema, and contract</li>
+<li>consistency, availability, partition, ordering, duplication</li>
+<li>idempotency, timeout, retry, circuit breaker, backpressure</li>
+<li>configuration as code and runtime policy</li>
+<li>observability and correlation</li>
+</ul>
+<h3 id="6-required-readings-and-resources-7">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding question</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NIST cloud definition <a href="https://csrc.nist.gov/pubs/sp/800/145/final" title="NIST SP 800-145 — The NIST Definition of Cloud Computing">NIST-CLOUD</a></td>
+<td>Five characteristics, service models, and deployment models</td>
+<td>Use precise cloud terminology</td>
+<td>Which characteristics matter to the pilot decision?</td>
+<td style="text-align:right">35 min</td>
+</tr>
+<tr>
+<td>Sommerville <a href="https://www.pearson.com/en-us/subject-catalog/p/P200000003243" title="Ian Sommerville — Engineering Software Products">ESP</a></td>
+<td>Chapter 5, Cloud-Based Software; Chapter 6, Microservices Architecture</td>
+<td>Follow the source-course cloud/service content</td>
+<td>What benefits depend on organizational and operational capability?</td>
+<td style="text-align:right">90 min</td>
+</tr>
+<tr>
+<td>NIST microservices guidance <a href="https://csrc.nist.gov/pubs/sp/800/204/final" title="NIST SP 800-204 — Security Strategies for Microservices-based Application Systems">NIST-MICROSERVICES</a></td>
+<td>Core features, threats, service discovery, API gateways, resiliency, and monitoring</td>
+<td>Identify infrastructure obligations created by microservices</td>
+<td>Which controls must be consistent across services?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+<tr>
+<td>MIT 6.5840 <a href="https://pdos.csail.mit.edu/6.824/" title="MIT 6.5840 Distributed Systems">MIT-6840</a></td>
+<td>Introductory material on fault tolerance, replication, and consistency</td>
+<td>Ground distributed reasoning</td>
+<td>What assumptions fail when messages and nodes fail independently?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-7">7. Instructor-style lesson notes</h3>
+<p>Distribution creates independent failure domains. Every remote interaction needs explicit timeouts, retry limits, idempotency behavior, error semantics, versioning, and observability.</p>
+<p>Service boundaries should align with stable responsibilities and data ownership. Splitting by technical layer often creates chatty dependencies and distributed transactions.</p>
+<p>Configuration includes feature flags, thresholds, route rules, retry policies, schemas, secrets references, and deployment manifests. Treat it as controlled, testable product data with rollback and provenance.</p>
+<h3 id="8-worked-example-7">8. Worked example</h3>
+<p>Notification delivery is separated from dispatch so channel failure cannot block trip assignment. The first design uses at-least-once events but duplicates passenger messages. The corrected contract assigns an event identifier, idempotency key, deduplication window, retry policy, dead-letter behavior, and audit record. A Python test injects duplicate and reordered events and verifies one visible notification per state transition.</p>
+<h3 id="9-guided-practice-7">9. Guided practice</h3>
+<ol>
+<li>Define candidate service boundaries and data owners.</li>
+<li>Create container, component, dynamic, and deployment views for normal and degraded operation.</li>
+<li>Write six interface contracts including retry, timeout, idempotency, version, and error behavior.</li>
+<li>Build a consistency and failure-mode table.</li>
+<li>Run a duplicate/delay/reorder/timeout experiment against the Python reference implementation.</li>
+<li>Create a configuration-item and rollback inventory.</li>
+</ol>
+<p><strong>Checkpoint:</strong> Pause before independent work and verify that the current artifacts are traceable, internally consistent, and reproducible. Record unresolved assumptions rather than silently filling them.</p>
+<h3 id="10-independent-exercises-7">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Classify interactions as command, query, event, or bulk transfer.</li>
+<li>Repair five unsafe retry designs.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Compare modular monolith and service candidates for the shuttle pilot.</li>
+<li>Define versioning and compatibility rules.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Trace one network partition through user, operator, data, and reconciliation consequences.</li>
+<li>Identify where strong consistency is necessary and where eventual consistency is acceptable.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Recommend a deployment architecture and state the organizational capabilities it assumes.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Containerize two components and execute a fault-injection test.</li>
+</ul>
+<h3 id="11-deliverable-specification-7">11. Deliverable specification</h3>
+<p>Submit <code>764-W07-Baseline-v1.0</code> containing:</p>
+<ol>
+<li>candidate architecture comparison</li>
+<li>service and data ownership map</li>
+<li>normal/degraded dynamic views</li>
+<li>deployment view</li>
+<li>six interface contracts</li>
+<li>consistency/failure analysis</li>
+<li>configuration and rollback plan</li>
+<li>experiment source, results, and limitations</li>
+</ol>
+<h3 id="12-weekly-rubric-7">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boundary rationale</td>
+<td style="text-align:right">20%</td>
+<td>Service boundaries reflect responsibility, data, quality, and ownership</td>
+</tr>
+<tr>
+<td>Failure semantics</td>
+<td style="text-align:right">25%</td>
+<td>Timeout, retry, duplication, ordering, and recovery are explicit</td>
+</tr>
+<tr>
+<td>Data and consistency</td>
+<td style="text-align:right">20%</td>
+<td>Consistency decisions are tied to business and safety consequences</td>
+</tr>
+<tr>
+<td>Deployment/configuration</td>
+<td style="text-align:right">20%</td>
+<td>Environments, controls, rollback, and provenance are defined</td>
+</tr>
+<tr>
+<td>Experiment evidence</td>
+<td style="text-align:right">15%</td>
+<td>Fault exercise is reproducible and interpreted correctly</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> remote calls treated as reliable; unsafe unbounded retries; shared data has no authority; configuration can change critical behavior without control or rollback.</p>
+<h3 id="13-knowledge-check-7">13. Knowledge check</h3>
+<ol>
+<li>Why is at-least-once delivery not the same as exactly-once effect?</li>
+<li>What makes a service boundary stable?</li>
+<li>What is backpressure?</li>
+<li>Why must configuration have provenance?</li>
+<li>When might a modular monolith be preferable?</li>
+</ol>
+<p><strong>Answer guidance:</strong> Delivery may repeat, while idempotent handling can produce one effect. Stable boundaries align with cohesive responsibility and data. Backpressure prevents producers from overwhelming consumers. A modular monolith may reduce distributed complexity while preserving internal modularity.</p>
+<h3 id="14-feedback-revision-and-mastery-gate-7">14. Feedback, revision, and mastery gate</h3>
+<p>Use the rubric, automated checks, and answer guidance to perform a self-review. Record a five-to-ten-minute walkthrough explaining the principal decision and weakest evidence. Revise all critical failures and any criterion below proficient. The week is complete only when the deliverable is baselined, the repository rebuilds, and unresolved high-consequence issues are explicitly owned and scheduled.</p>
+<h3 id="15-reflection-and-workload-record-7">15. Reflection and workload record</h3>
+<p>Record:</p>
+<ul>
+<li>the most important assumption challenged this week;</li>
+<li>one decision that changed because of evidence;</li>
+<li>the weakest remaining trace or claim;</li>
+<li>actual hours spent by reading, modeling, analysis, implementation, testing, and revision;</li>
+<li>one question to carry into the next week.</li>
+</ul>
+<hr/>
+<h2 id="week-8--specify-and-analyze-performance-networking-real-time-security-and-privacy-constraints">Week 8 — Specify and analyze performance, networking, real-time, security, and privacy constraints</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B5/chapters/08-specify-and-analyze-performance-networking-re.html">Read Book V, Chapter 8</a> → <a href="../../K/B5/labs/lab-08-specify-and-analyze-performance-networking-re.html">complete Hypothetical Lab 8</a> → <a href="../../K/P1-text/lessons/645-764-w08.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Quantitative nonfunctional analysis<br/>
+<strong>Program competencies:</strong> C2-A, C5-A, C8-A, C9-A, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-5, CLO-6, CLO-7<br/>
+<strong>Nominal effort:</strong> 11–12 hours<br/>
+<strong>Primary evidence produced:</strong> quality requirements, performance/timing budgets, capacity analysis, network and threat models, trade study</p>
+<h3 id="1-why-this-week-matters-8">1. Why this week matters</h3>
+<p>Nonfunctional requirements are often vague until late integration exposes impossible latency, capacity, security, or networking assumptions. This week turns constraints into measurable scenarios and budgets, then evaluates architecture tradeoffs quantitatively enough to guide decisions.</p>
+<h3 id="2-essential-question-8">2. Essential question</h3>
+<blockquote>
+<p>Which constraints dominate the architecture, and how can they be budgeted before full implementation exists?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-8">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve from prior work</strong></p>
+<ul>
+<li>quality utility tree and architecture tactics</li>
+<li>deployment and distributed interaction paths</li>
+<li>system performance measures, privacy concerns, and hazards</li>
+</ul>
+<p><strong>Readiness tasks</strong></p>
+<ol>
+<li>Decompose a two-second end-to-end latency target into component budgets.</li>
+<li>Distinguish hard, firm, and soft real-time consequences.</li>
+<li>Identify trust boundaries in the deployment view.</li>
+</ol>
+<h3 id="4-detailed-weekly-learning-outcomes-8">4. Detailed weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ol>
+<li>write measurable performance, timing, networking, security, privacy, and interoperability requirements</li>
+<li>construct end-to-end latency, throughput, resource, and availability budgets</li>
+<li>perform simple queueing, load, and capacity reasoning</li>
+<li>identify hard/firm/soft real-time elements and scheduling assumptions</li>
+<li>create a threat model and privacy data-flow inventory</li>
+<li>conduct a cross-attribute trade study</li>
+</ol>
+<h3 id="5-key-concepts-and-distinctions-8">5. Key concepts and distinctions</h3>
+<ul>
+<li>latency distribution and percentile</li>
+<li>throughput, utilization, saturation, queueing, headroom</li>
+<li>deadline, jitter, worst-case and average case</li>
+<li>bandwidth, loss, delay, partition, protocol overhead</li>
+<li>asset, threat actor, trust boundary, attack surface</li>
+<li>data minimization, retention, purpose, access</li>
+<li>budget allocation and margin</li>
+</ul>
+<h3 id="6-required-readings-and-resources-8">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding question</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SEI quality attributes <a href="https://www.sei.cmu.edu/library/quality-attribute-workshop-collection/" title="SEI Quality Attribute Workshop Collection">SEI-QAW</a></td>
+<td>Review performance, availability, security, and interoperability scenario examples</td>
+<td>Create measurable constraints</td>
+<td>Which stimuli and measures expose architecture behavior?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td>NASA Software Engineering Handbook <a href="https://swehb.nasa.gov/display/SWEHBVD/Book+A.+Introduction" title="NASA Software Engineering and Assurance Handbook">NASA-SWEHB</a></td>
+<td>Performance, safety, security, and software-assurance guidance</td>
+<td>Connect constraints to criticality and evidence</td>
+<td>Which analyses are expected before integration?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+<tr>
+<td>OWASP ASVS <a href="https://owasp.org/www-project-application-security-verification-standard/" title="OWASP Application Security Verification Standard">OWASP-ASVS</a></td>
+<td>Architecture, authentication, access control, validation, logging, and data-protection requirement areas</td>
+<td>Use testable application-security controls</td>
+<td>Which controls apply to the shuttle boundary?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+<tr>
+<td>Google SRE <a href="https://sre.google/books/" title="Google Site Reliability Engineering Books">GOOGLE-SRE</a></td>
+<td>Service-level objectives and monitoring concepts</td>
+<td>Connect performance/reliability targets to operations</td>
+<td>Why are averages inadequate?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-8">7. Instructor-style lesson notes</h3>
+<p>End-to-end budgets expose hidden assumptions. A two-second dispatch target may allocate time to request validation, state retrieval, optimization, persistence, and response, while preserving margin. Each allocation becomes an architecture and test obligation.</p>
+<p>Real-time classification depends on consequence, not speed alone. Missing a passenger-status deadline may be soft; missing a collision-avoidance deadline would be hard, but that responsibility is outside this software boundary.</p>
+<p>Threat modeling follows data and trust boundaries. Security controls affect latency, availability, deployability, and usability, so they belong in architecture tradeoffs rather than a separate checklist.</p>
+<h3 id="8-worked-example-8">8. Worked example</h3>
+<p>Peak demand is 20 requests/second with 95th-percentile dispatch under two seconds. A first capacity worksheet assumes average optimization time of 40 ms and ignores burstiness. Load testing reveals a long tail caused by route-cache misses. The revised design reserves 600 ms for optimization at p95, prewarms route data, limits concurrent expensive calculations, and degrades to a bounded heuristic. The security analysis adds token validation and audit cost to the budget rather than assuming it is free.</p>
+<h3 id="9-guided-practice-8">9. Guided practice</h3>
+<ol>
+<li>Write 12 measurable nonfunctional requirements.</li>
+<li>Create latency, throughput, storage, network, and availability budgets with margin.</li>
+<li>Classify timing constraints and identify external assumptions.</li>
+<li>Build a data-flow and trust-boundary diagram.</li>
+<li>Create a threat table and privacy inventory.</li>
+<li>Run a load or timing experiment and compare results to the budget.</li>
+<li>Perform a weighted trade study for three architecture options.</li>
+</ol>
+<p><strong>Checkpoint:</strong> Pause before independent work and verify that the current artifacts are traceable, internally consistent, and reproducible. Record unresolved assumptions rather than silently filling them.</p>
+<h3 id="10-independent-exercises-8">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Repair ten vague quality requirements.</li>
+<li>Calculate simple utilization and headroom examples.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Build the shuttle performance and network budget.</li>
+<li>Define privacy retention and access constraints.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Identify three percentile or burst effects hidden by averages.</li>
+<li>Assess security controls that create availability or latency tradeoffs.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Issue a constraint trade recommendation and update ADRs.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Create a repeatable load-test harness with percentile reporting.</li>
+</ul>
+<h3 id="11-deliverable-specification-8">11. Deliverable specification</h3>
+<p>Submit <code>764-W08-Baseline-v1.0</code> containing:</p>
+<ol>
+<li>measurable nonfunctional requirement set</li>
+<li>performance/timing/network/resource budgets</li>
+<li>capacity assumptions and analysis</li>
+<li>timing classification table</li>
+<li>data-flow, trust-boundary, threat, and privacy analysis</li>
+<li>load/timing experiment</li>
+<li>cross-attribute trade study and ADR updates</li>
+</ol>
+<h3 id="12-weekly-rubric-8">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Requirement measurability</td>
+<td style="text-align:right">20%</td>
+<td>Constraints include conditions and quantitative response measures</td>
+</tr>
+<tr>
+<td>Budget rigor</td>
+<td style="text-align:right">25%</td>
+<td>End-to-end budgets include assumptions, margins, and ownership</td>
+</tr>
+<tr>
+<td>Security/privacy integration</td>
+<td style="text-align:right">20%</td>
+<td>Threats and data obligations influence architecture decisions</td>
+</tr>
+<tr>
+<td>Analysis and experiment</td>
+<td style="text-align:right">20%</td>
+<td>Calculations and tests are reproducible and limitations stated</td>
+</tr>
+<tr>
+<td>Trade judgment</td>
+<td style="text-align:right">15%</td>
+<td>Recommendation reflects multiple competing attributes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> average-only performance claim; no end-to-end budget; critical trust boundary omitted; real-time classification asserted without consequence analysis.</p>
+<h3 id="13-knowledge-check-8">13. Knowledge check</h3>
+<ol>
+<li>Why use percentiles rather than averages?</li>
+<li>What is utilization headroom?</li>
+<li>What distinguishes hard from soft real time?</li>
+<li>Why include authentication in latency budgets?</li>
+<li>What is data minimization?</li>
+</ol>
+<p><strong>Answer guidance:</strong> Percentiles expose tail behavior users experience. Headroom preserves capacity for variation and failure. Real-time classes depend on deadline consequence. Security controls consume resources and can fail. Data minimization limits collection and retention to justified purposes.</p>
+<h3 id="14-feedback-revision-and-mastery-gate-8">14. Feedback, revision, and mastery gate</h3>
+<p>Use the rubric, automated checks, and answer guidance to perform a self-review. Record a five-to-ten-minute walkthrough explaining the principal decision and weakest evidence. Revise all critical failures and any criterion below proficient. The week is complete only when the deliverable is baselined, the repository rebuilds, and unresolved high-consequence issues are explicitly owned and scheduled.</p>
+<h3 id="15-reflection-and-workload-record-8">15. Reflection and workload record</h3>
+<p>Record:</p>
+<ul>
+<li>the most important assumption challenged this week;</li>
+<li>one decision that changed because of evidence;</li>
+<li>the weakest remaining trace or claim;</li>
+<li>actual hours spent by reading, modeling, analysis, implementation, testing, and revision;</li>
+<li>one question to carry into the next week.</li>
+</ul>
+<hr/>
+<h2 id="week-9--build-the-dependability-safety-resilience-and-supply-chain-case">Week 9 — Build the dependability, safety, resilience, and supply-chain case</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B5/chapters/09-build-the-dependability-safety-resilience-and.html">Read Book V, Chapter 9</a> → <a href="../../K/B5/labs/lab-09-build-the-dependability-safety-resilience-and.html">complete Hypothetical Lab 9</a> → <a href="../../K/P1-text/lessons/645-764-w09.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Assurance integration and formal review<br/>
+<strong>Program competencies:</strong> C5-A, C6-A, C9-A, C10-D, C12-A<br/>
+<strong>Course outcomes:</strong> CLO-7, CLO-9<br/>
+<strong>Nominal effort:</strong> 11–12 hours<br/>
+<strong>Primary evidence produced:</strong> dependability case, failure analysis, recovery design, SSDF mapping, supply-chain inventory, review findings</p>
+<h3 id="1-why-this-week-matters-9">1. Why this week matters</h3>
+<p>Dependability is not achieved by adding retries and backups. It requires defined failure assumptions, fault containment, detection, recovery, safe degradation, security controls, assurance evidence, and operational preparation. This week integrates those concerns and asks whether the architecture is trustworthy enough to proceed.</p>
+<h3 id="2-essential-question-9">2. Essential question</h3>
+<blockquote>
+<p>What evidence supports confidence that the software will fail within acceptable boundaries and recover predictably?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-9">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve from prior work</strong></p>
+<ul>
+<li>distributed failure analysis</li>
+<li>performance/security/privacy constraints</li>
+<li>system hazards, operational risks, and acceptance expectations</li>
+</ul>
+<p><strong>Readiness tasks</strong></p>
+<ol>
+<li>Distinguish fault, error, failure, hazard, vulnerability, and incident.</li>
+<li>Explain why redundancy can fail from common causes.</li>
+<li>Identify one software failure that could contribute to a system hazard.</li>
+</ol>
+<h3 id="4-detailed-weekly-learning-outcomes-9">4. Detailed weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ol>
+<li>construct a software failure-mode and effects analysis or equivalent</li>
+<li>define detection, containment, recovery, degradation, reconciliation, and restoration behavior</li>
+<li>connect software failure contributions to system hazards</li>
+<li>map secure-development practices to lifecycle artifacts and evidence</li>
+<li>create a software component and dependency inventory</li>
+<li>conduct a Dependability and Assurance Review</li>
+</ol>
+<h3 id="5-key-concepts-and-distinctions-9">5. Key concepts and distinctions</h3>
+<ul>
+<li>fault, error, failure, hazard, incident</li>
+<li>reliability, availability, safety, security, resilience</li>
+<li>fault containment and common cause</li>
+<li>safe state and degraded mode</li>
+<li>recovery time and recovery point</li>
+<li>assurance case claim, argument, evidence</li>
+<li>secure development and software supply chain</li>
+<li>SBOM, provenance, dependency risk</li>
+</ul>
+<h3 id="6-required-readings-and-resources-9">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding question</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sommerville <a href="https://www.pearson.com/en-us/subject-catalog/p/P200000003243" title="Ian Sommerville — Engineering Software Products">ESP</a></td>
+<td>Chapter 7, Security and Privacy; Chapter 8, Reliable Programming</td>
+<td>Follow the source-course dependability content</td>
+<td>How do fault avoidance and failure management complement architecture?</td>
+<td style="text-align:right">90 min</td>
+</tr>
+<tr>
+<td>NASA Software Engineering Handbook <a href="https://swehb.nasa.gov/display/SWEHBVD/Book+A.+Introduction" title="NASA Software Engineering and Assurance Handbook">NASA-SWEHB</a></td>
+<td>Software safety, assurance, reliability, problem reporting, and corrective action guidance</td>
+<td>Connect dependability claims to evidence and governance</td>
+<td>Which defects and hazards require independent attention?</td>
+<td style="text-align:right">75 min</td>
+</tr>
+<tr>
+<td>NIST SSDF 1.1 <a href="https://csrc.nist.gov/pubs/sp/800/218/final" title="NIST SP 800-218 — Secure Software Development Framework Version 1.1">NIST-SSDF</a></td>
+<td>Prepare the Organization, Protect the Software, Produce Well-Secured Software, and Respond to Vulnerabilities</td>
+<td>Map security practices across the lifecycle</td>
+<td>Which practices create evidence for this project?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+<tr>
+<td>NIST DevSecOps guidance <a href="https://csrc.nist.gov/pubs/sp/800/204/d/final" title="NIST SP 800-204D — Software Supply Chain Security in DevSecOps CI/CD Pipelines">NIST-DEVSECOPS</a></td>
+<td>Supply-chain and CI/CD security strategies</td>
+<td>Integrate dependencies and pipeline controls</td>
+<td>What must be verified before software enters the build?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-9">7. Instructor-style lesson notes</h3>
+<p>Dependability attributes overlap but are not interchangeable. Availability can be high while safety is poor; security controls can reduce some risks while creating denial-of-service paths; resilience assumes disturbance and focuses on adaptation and recovery.</p>
+<p>A useful failure analysis identifies cause, local effect, end effect, detection, containment, recovery, evidence, owner, and residual risk. Include common-cause and human/operational contributors.</p>
+<p>An assurance case can be lightweight: state a claim, the argument linking architecture and process controls, the evidence, assumptions, and known defeaters.</p>
+<h3 id="8-worked-example-9">8. Worked example</h3>
+<p>A stale vehicle-availability message causes double assignment. The failure analysis identifies causes including delayed telemetry, clock skew, cache invalidation, and message replay. Controls include freshness metadata, reservation tokens, atomic assignment, conflict detection, operator visibility, and reconciliation. The assurance claim is limited: the software prevents two active confirmed assignments under modeled communication faults; it does not guarantee physical vehicle availability.</p>
+<h3 id="9-guided-practice-9">9. Guided practice</h3>
+<ol>
+<li>Create a failure-mode table for at least 15 software failures.</li>
+<li>Link five failures to system hazards or mission consequences.</li>
+<li>Define detection, containment, degraded mode, recovery, and reconciliation for the top five.</li>
+<li>Create three assurance claims with arguments and evidence.</li>
+<li>Map NIST SSDF practices to project artifacts and gaps.</li>
+<li>Generate a dependency/SBOM inventory and review high-risk dependencies.</li>
+<li>Conduct the formal Dependability and Assurance Review.</li>
+</ol>
+<p><strong>Checkpoint:</strong> Pause before independent work and verify that the current artifacts are traceable, internally consistent, and reproducible. Record unresolved assumptions rather than silently filling them.</p>
+<h3 id="10-independent-exercises-9">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Classify 20 examples as fault, error, failure, hazard, vulnerability, or incident.</li>
+<li>Identify common-cause failures in three redundant designs.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Build the shuttle dependability case.</li>
+<li>Add safe-degradation and recovery dynamic views.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Challenge three assurance claims with counterexamples.</li>
+<li>Assess the effect of a compromised CI dependency.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Issue a proceed/conditional/no-go assurance recommendation.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Automate dependency inventory and policy checks in CI.</li>
+</ul>
+<h3 id="11-deliverable-specification-9">11. Deliverable specification</h3>
+<p>Submit <code>764-W09-Baseline-v1.0</code> containing:</p>
+<ol>
+<li>failure-mode and hazard-contribution analysis</li>
+<li>detection/containment/recovery design</li>
+<li>assurance claims and evidence map</li>
+<li>SSDF practice mapping and gap plan</li>
+<li>dependency and SBOM inventory</li>
+<li>review briefing, findings, responses, and recommendation</li>
+</ol>
+<h3 id="12-weekly-rubric-9">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Failure analysis</td>
+<td style="text-align:right">25%</td>
+<td>Failure paths and consequences are specific and prioritized</td>
+</tr>
+<tr>
+<td>Recovery and degradation</td>
+<td style="text-align:right">20%</td>
+<td>Behavior is bounded, observable, and testable</td>
+</tr>
+<tr>
+<td>Assurance reasoning</td>
+<td style="text-align:right">20%</td>
+<td>Claims are limited, challenged, and supported by evidence</td>
+</tr>
+<tr>
+<td>Secure development and supply chain</td>
+<td style="text-align:right">20%</td>
+<td>Practices and dependencies are controlled and auditable</td>
+</tr>
+<tr>
+<td>Review judgment</td>
+<td style="text-align:right">15%</td>
+<td>Recommendation reflects residual risk and evidence gaps</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> software claims whole-system safety; common-cause failure ignored; critical dependency unknown; assurance claim has no evidence or stated assumptions.</p>
+<h3 id="13-knowledge-check-9">13. Knowledge check</h3>
+<ol>
+<li>How does resilience differ from reliability?</li>
+<li>What is a common-cause failure?</li>
+<li>Why should assurance claims be bounded?</li>
+<li>Name the four SSDF practice groups.</li>
+<li>What does an SBOM not prove?</li>
+</ol>
+<p><strong>Answer guidance:</strong> Reliability focuses on failure-free behavior; resilience includes response and recovery under disturbance. Bounded claims avoid overstating evidence. An SBOM inventories components but does not prove they are secure, correctly configured, or trustworthy.</p>
+<h3 id="14-feedback-revision-and-mastery-gate-9">14. Feedback, revision, and mastery gate</h3>
+<p>Use the rubric, automated checks, and answer guidance to perform a self-review. Record a five-to-ten-minute walkthrough explaining the principal decision and weakest evidence. Revise all critical failures and any criterion below proficient. The week is complete only when the deliverable is baselined, the repository rebuilds, and unresolved high-consequence issues are explicitly owned and scheduled.</p>
+<h3 id="15-reflection-and-workload-record-9">15. Reflection and workload record</h3>
+<p>Record:</p>
+<ul>
+<li>the most important assumption challenged this week;</li>
+<li>one decision that changed because of evidence;</li>
+<li>the weakest remaining trace or claim;</li>
+<li>actual hours spent by reading, modeling, analysis, implementation, testing, and revision;</li>
+<li>one question to carry into the next week.</li>
+</ul>
+<hr/>
+<h2 id="week-10--design-testing-ci-and-an-integrated-software-vv-evidence-chain">Week 10 — Design testing, CI, and an integrated software V&amp;V evidence chain</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B5/chapters/10-design-testing-ci-and-an-integrated-software-.html">Read Book V, Chapter 10</a> → <a href="../../K/B5/labs/lab-10-design-testing-ci-and-an-integrated-software-.html">complete Hypothetical Lab 10</a> → <a href="../../K/P1-text/lessons/645-764-w10.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Verification, validation, and executable evidence<br/>
+<strong>Program competencies:</strong> C4-D, C5-A, C6-A, C10-A, C12-A<br/>
+<strong>Course outcomes:</strong> CLO-8, CLO-9<br/>
+<strong>Nominal effort:</strong> 11–12 hours<br/>
+<strong>Primary evidence produced:</strong> test architecture, automated pipeline, V&amp;V matrix, evidence audit, discrepancy records</p>
+<h3 id="1-why-this-week-matters-10">1. Why this week matters</h3>
+<p>A collection of unit tests is not a verification strategy. Software evidence must cover requirements, architecture risks, interfaces, quality attributes, failure behavior, security, deployment, and operational acceptance. This week designs the test architecture and makes the evidence reproducible.</p>
+<h3 id="2-essential-question-10">2. Essential question</h3>
+<blockquote>
+<p>What combination of tests, analyses, reviews, and operational evidence is sufficient for software release and system integration?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-10">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve from prior work</strong></p>
+<ul>
+<li>software requirements and acceptance criteria</li>
+<li>architecture risks, quality scenarios, failure modes, and assurance claims</li>
+<li>Python implementation and fault experiments</li>
+</ul>
+<p><strong>Readiness tasks</strong></p>
+<ol>
+<li>Select appropriate verification methods for five requirements.</li>
+<li>Distinguish unit, component, contract, integration, system, acceptance, security, performance, and resilience tests.</li>
+<li>Explain why a passing pipeline can still be inadequate.</li>
+</ol>
+<h3 id="4-detailed-weekly-learning-outcomes-10">4. Detailed weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ol>
+<li>design a multi-level software test and V&amp;V strategy</li>
+<li>trace critical intent and architecture risks to evidence</li>
+<li>implement automated unit, contract, integration, static, security, and performance checks</li>
+<li>define test environments, data, oracles, entry/exit criteria, and independence</li>
+<li>analyze discrepancies and evidence gaps</li>
+<li>assess release and integration readiness</li>
+</ol>
+<h3 id="5-key-concepts-and-distinctions-10">5. Key concepts and distinctions</h3>
+<ul>
+<li>verification versus validation</li>
+<li>test level, type, method, and environment</li>
+<li>oracle, fixture, stub, simulator, fault injection</li>
+<li>contract and compatibility testing</li>
+<li>static analysis and software composition analysis</li>
+<li>coverage and mutation as diagnostic measures</li>
+<li>test evidence provenance</li>
+<li>discrepancy, severity, root cause, corrective action</li>
+</ul>
+<h3 id="6-required-readings-and-resources-10">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding question</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sommerville <a href="https://www.pearson.com/en-us/subject-catalog/p/P200000003243" title="Ian Sommerville — Engineering Software Products">ESP</a></td>
+<td>Chapter 9, Testing; relevant Chapter 10 DevOps sections</td>
+<td>Follow the source-course testing sequence</td>
+<td>How do automation and code review complement each other?</td>
+<td style="text-align:right">90 min</td>
+</tr>
+<tr>
+<td>OWASP WSTG <a href="https://owasp.org/www-project-web-security-testing-guide/" title="OWASP Web Security Testing Guide">OWASP-WSTG</a></td>
+<td>Overview and testing categories</td>
+<td>Integrate security testing across the lifecycle</td>
+<td>Which categories apply to the platform and APIs?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td>NASA Software Engineering Handbook <a href="https://swehb.nasa.gov/display/SWEHBVD/Book+A.+Introduction" title="NASA Software Engineering and Assurance Handbook">NASA-SWEHB</a></td>
+<td>Software testing, verification, validation, acceptance, and problem-reporting guidance</td>
+<td>Establish evidence and discrepancy expectations</td>
+<td>What evidence supports readiness?</td>
+<td style="text-align:right">75 min</td>
+</tr>
+<tr>
+<td>GitHub Actions <a href="https://docs.github.com/actions" title="GitHub Actions documentation">GITHUB-ACTIONS</a></td>
+<td>Workflow, CI, artifacts, and security guidance</td>
+<td>Implement reproducible automated evidence</td>
+<td>How can results be retained and traced to a commit?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-10">7. Instructor-style lesson notes</h3>
+<p>Test architecture explains what is tested at each level, which risks it addresses, what environments and doubles are used, and how evidence accumulates. It should deliberately cover failure and degraded behavior, not only nominal functions.</p>
+<p>Trace coverage is necessary but insufficient. A requirement can link to a weak test. Evidence audits should challenge oracle quality, environment fidelity, independence, data, reproducibility, and whether the test actually exercises the claimed condition.</p>
+<p>CI should produce signed or attributable results tied to source, configuration, dependencies, environment, and test data. Flaky tests and ignored failures are assurance defects.</p>
+<h3 id="8-worked-example-10">8. Worked example</h3>
+<p>The requirement “duplicate trip events shall not create duplicate passenger notifications” is traced to a unit test that calls the handler twice in one process. The evidence audit finds that it does not cover restart, concurrent delivery, or persistence. The improved evidence includes unit logic, contract schema, concurrent integration test with durable deduplication, restart test, and operational duplicate-rate telemetry.</p>
+<h3 id="9-guided-practice-10">9. Guided practice</h3>
+<ol>
+<li>Create a V&amp;V cross-reference matrix for 30–40 critical items.</li>
+<li>Define a test architecture and environment diagram.</li>
+<li>Add at least 20 automated tests across multiple levels.</li>
+<li>Add lint/static, dependency, and basic security checks.</li>
+<li>Run a performance and a fault-injection test.</li>
+<li>Record three seeded discrepancies and corrective-action evidence.</li>
+<li>Conduct an evidence sufficiency audit.</li>
+</ol>
+<p><strong>Checkpoint:</strong> Pause before independent work and verify that the current artifacts are traceable, internally consistent, and reproducible. Record unresolved assumptions rather than silently filling them.</p>
+<h3 id="10-independent-exercises-10">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Match requirements to appropriate methods and levels.</li>
+<li>Critique ten weak test cases.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Build and execute the shuttle CI pipeline.</li>
+<li>Create test data and environment controls.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Find high trace coverage with low evidence quality.</li>
+<li>Assess environment realism and missing failure conditions.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Issue a software test-readiness and release-evidence recommendation.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Add mutation testing or architecture fitness tests and interpret the results.</li>
+</ul>
+<h3 id="11-deliverable-specification-10">11. Deliverable specification</h3>
+<p>Submit <code>764-W10-Baseline-v1.0</code> containing:</p>
+<ol>
+<li>software V&amp;V strategy and matrix</li>
+<li>test architecture and environment plan</li>
+<li>controlled test catalog and automated source</li>
+<li>CI workflow and retained results</li>
+<li>security/performance/fault evidence</li>
+<li>discrepancy and corrective-action records</li>
+<li>evidence gap and readiness assessment</li>
+</ol>
+<h3 id="12-weekly-rubric-10">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coverage and risk alignment</td>
+<td style="text-align:right">20%</td>
+<td>Critical requirements and architecture risks have appropriate evidence</td>
+</tr>
+<tr>
+<td>Test quality</td>
+<td style="text-align:right">25%</td>
+<td>Oracles, conditions, data, and failure behavior are strong</td>
+</tr>
+<tr>
+<td>Automation and reproducibility</td>
+<td style="text-align:right">20%</td>
+<td>Pipeline and results are tied to controlled source and environment</td>
+</tr>
+<tr>
+<td>Discrepancy discipline</td>
+<td style="text-align:right">15%</td>
+<td>Problems are analyzed and corrective actions verified</td>
+</tr>
+<tr>
+<td>Readiness judgment</td>
+<td style="text-align:right">20%</td>
+<td>Recommendation recognizes evidence limitations and residual risk</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> critical requirement has no evidence; tests cannot be reproduced; known pipeline failure ignored; operational validation is claimed from unit-test evidence.</p>
+<h3 id="13-knowledge-check-10">13. Knowledge check</h3>
+<ol>
+<li>Why is trace coverage insufficient?</li>
+<li>What is a test oracle?</li>
+<li>How does contract testing differ from end-to-end testing?</li>
+<li>What makes a test flaky?</li>
+<li>Why retain test provenance?</li>
+</ol>
+<p><strong>Answer guidance:</strong> Links do not prove test adequacy. An oracle determines expected results. Contract tests isolate interface compatibility; end-to-end tests exercise integrated paths. Flakiness means nondeterministic outcomes unrelated to intended behavior. Provenance connects evidence to source, configuration, environment, and data.</p>
+<h3 id="14-feedback-revision-and-mastery-gate-10">14. Feedback, revision, and mastery gate</h3>
+<p>Use the rubric, automated checks, and answer guidance to perform a self-review. Record a five-to-ten-minute walkthrough explaining the principal decision and weakest evidence. Revise all critical failures and any criterion below proficient. The week is complete only when the deliverable is baselined, the repository rebuilds, and unresolved high-consequence issues are explicitly owned and scheduled.</p>
+<h3 id="15-reflection-and-workload-record-10">15. Reflection and workload record</h3>
+<p>Record:</p>
+<ul>
+<li>the most important assumption challenged this week;</li>
+<li>one decision that changed because of evidence;</li>
+<li>the weakest remaining trace or claim;</li>
+<li>actual hours spent by reading, modeling, analysis, implementation, testing, and revision;</li>
+<li>one question to carry into the next week.</li>
+</ul>
+<hr/>
+<h2 id="week-11--manage-delivery-operations-maintenance-evolution-and-incidents">Week 11 — Manage delivery, operations, maintenance, evolution, and incidents</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B5/chapters/11-manage-delivery-operations-maintenance-evolut.html">Read Book V, Chapter 11</a> → <a href="../../K/B5/labs/lab-11-manage-delivery-operations-maintenance-evolut.html">complete Hypothetical Lab 11</a> → <a href="../../K/P1-text/lessons/645-764-w11.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Lifecycle integration and readiness<br/>
+<strong>Program competencies:</strong> C1-A, C5-A, C8-D, C10-A, C12-A<br/>
+<strong>Course outcomes:</strong> CLO-1, CLO-8, CLO-10<br/>
+<strong>Nominal effort:</strong> 11–12 hours<br/>
+<strong>Primary evidence produced:</strong> delivery/operations plan, SLOs, telemetry, debt and change controls, crisis response, readiness review</p>
+<h3 id="1-why-this-week-matters-11">1. Why this week matters</h3>
+<p>Software value and risk continue after deployment. Release automation, observability, incident response, maintenance, interface evolution, technical debt, and retirement must be designed. This week introduces a realistic operational crisis and evaluates whether the software system is ready to enter pilot operations.</p>
+<h3 id="2-essential-question-11">2. Essential question</h3>
+<blockquote>
+<p>What must be true operationally—not merely in the test environment—for the software to be ready?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-11">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve from prior work</strong></p>
+<ul>
+<li>release evidence and known discrepancies</li>
+<li>quality scenarios, dependability claims, and architecture risks</li>
+<li>project schedule, governance, and change-control process</li>
+</ul>
+<p><strong>Readiness tasks</strong></p>
+<ol>
+<li>Define one SLI, SLO, and error budget for dispatch.</li>
+<li>Explain why deployment success is not release success.</li>
+<li>Distinguish defect backlog, technical debt, risk, and waiver.</li>
+</ol>
+<h3 id="4-detailed-weekly-learning-outcomes-11">4. Detailed weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ol>
+<li>design deployment, rollback, release, and environment controls</li>
+<li>define SLIs, SLOs, alerts, dashboards, and diagnostic telemetry</li>
+<li>plan incident command, triage, communication, correction, and learning</li>
+<li>manage software changes, interface versions, technical debt, and maintenance releases</li>
+<li>evaluate operational crisis evidence</li>
+<li>conduct a Software Readiness Review</li>
+</ol>
+<h3 id="5-key-concepts-and-distinctions-11">5. Key concepts and distinctions</h3>
+<ul>
+<li>continuous integration, delivery, deployment, and release</li>
+<li>progressive delivery and rollback</li>
+<li>SLI, SLO, SLA, error budget</li>
+<li>monitoring, observability, logs, metrics, traces, events</li>
+<li>incident, problem, root cause, contributing factor</li>
+<li>technical debt, defect, risk, waiver, and backlog</li>
+<li>deprecation, compatibility, migration, and retirement</li>
+</ul>
+<h3 id="6-required-readings-and-resources-11">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding question</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sommerville <a href="https://www.pearson.com/en-us/subject-catalog/p/P200000003243" title="Ian Sommerville — Engineering Software Products">ESP</a></td>
+<td>Chapter 10, DevOps and Code Management</td>
+<td>Follow the source-course software-management topic</td>
+<td>Which automation and measures improve product control?</td>
+<td style="text-align:right">75 min</td>
+</tr>
+<tr>
+<td>Google SRE <a href="https://sre.google/books/" title="Google Site Reliability Engineering Books">GOOGLE-SRE</a></td>
+<td>Introduction, embracing risk, monitoring, incident response, and testing reliability selections</td>
+<td>Connect quality goals to operations</td>
+<td>How should error budgets affect release pace?</td>
+<td style="text-align:right">75 min</td>
+</tr>
+<tr>
+<td>NIST DevSecOps <a href="https://csrc.nist.gov/pubs/sp/800/204/d/final" title="NIST SP 800-204D — Software Supply Chain Security in DevSecOps CI/CD Pipelines">NIST-DEVSECOPS</a></td>
+<td>CI/CD supply-chain integration strategies</td>
+<td>Protect delivery and deployment evidence</td>
+<td>Which controls belong in the pipeline versus runtime?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td>NASA Software Engineering Handbook <a href="https://swehb.nasa.gov/display/SWEHBVD/Book+A.+Introduction" title="NASA Software Engineering and Assurance Handbook">NASA-SWEHB</a></td>
+<td>Configuration management, maintenance, operations, problem reporting, and retirement guidance</td>
+<td>Cover the complete lifecycle</td>
+<td>What information must survive transfer to operations?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-11">7. Instructor-style lesson notes</h3>
+<p>An SLI is a measured indicator; an SLO is a target over a window; an SLA is an external commitment. Use service-level objectives to connect architecture and operations, and use error budgets carefully as risk-management signals.</p>
+<p>Observability should support specific diagnostic questions. High-volume logs without correlation, time quality, ownership, retention, and runbooks do not create operational understanding.</p>
+<p>Technical debt should record the shortcut, affected qualities, interest mechanism, evidence, owner, decision trigger, and retirement plan. Not every imperfect design is debt, and not every defect is debt.</p>
+<h3 id="8-worked-example-11">8. Worked example</h3>
+<p>During Month 4, dispatch latency rises above the SLO after a configuration change increases optimization search depth. Autoscaling adds instances but does not help because the shared route-data cache is saturated. The crisis response rolls back configuration, limits expensive searches, and restores service. The corrective action adds configuration validation, performance canary checks, cache telemetry, and a capacity threshold. The post-incident review avoids blaming the operator and identifies system contributors.</p>
+<h3 id="9-guided-practice-11">9. Guided practice</h3>
+<ol>
+<li>Define six SLIs/SLOs and error-budget policies.</li>
+<li>Create deployment, progressive-release, rollback, and environment diagrams.</li>
+<li>Define telemetry and dashboards linked to quality scenarios and failure modes.</li>
+<li>Write incident roles, severity levels, communications, and runbooks.</li>
+<li>Execute the Month 4 crisis exercise and produce a timeline.</li>
+<li>Create technical-debt, defect, risk, and waiver registers.</li>
+<li>Conduct the formal Software Readiness Review.</li>
+</ol>
+<p><strong>Checkpoint:</strong> Pause before independent work and verify that the current artifacts are traceable, internally consistent, and reproducible. Record unresolved assumptions rather than silently filling them.</p>
+<h3 id="10-independent-exercises-11">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Classify 20 backlog items as defect, debt, risk, feature, or maintenance.</li>
+<li>Repair five noisy alert rules.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Build the shuttle operations and maintenance plan.</li>
+<li>Create interface deprecation and migration plans.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Diagnose the Month 4 incident from incomplete telemetry.</li>
+<li>Identify controls that would have prevented or reduced impact.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Issue a pilot release recommendation with entry conditions and rollback criteria.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Generate a local dashboard or report from simulated telemetry.</li>
+</ul>
+<h3 id="11-deliverable-specification-11">11. Deliverable specification</h3>
+<p>Submit <code>764-W11-Baseline-v1.0</code> containing:</p>
+<ol>
+<li>deployment/release/rollback plan</li>
+<li>SLI/SLO/error-budget table</li>
+<li>telemetry, dashboard, alert, and runbook design</li>
+<li>incident response and post-incident review</li>
+<li>maintenance/evolution/deprecation plan</li>
+<li>technical debt and residual-risk registers</li>
+<li>Software Readiness Review package and recommendation</li>
+</ol>
+<h3 id="12-weekly-rubric-11">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Operational objectives</td>
+<td style="text-align:right">20%</td>
+<td>SLIs and SLOs reflect user and mission consequences</td>
+</tr>
+<tr>
+<td>Delivery and rollback</td>
+<td style="text-align:right">20%</td>
+<td>Release controls are safe, reproducible, and reversible</td>
+</tr>
+<tr>
+<td>Observability and incident readiness</td>
+<td style="text-align:right">25%</td>
+<td>Telemetry supports detection, diagnosis, and response</td>
+</tr>
+<tr>
+<td>Evolution control</td>
+<td style="text-align:right">15%</td>
+<td>Debt, versions, migration, and retirement are governed</td>
+</tr>
+<tr>
+<td>Readiness judgment</td>
+<td style="text-align:right">20%</td>
+<td>Recommendation integrates test, operational, and residual-risk evidence</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> no rollback path; alerts are disconnected from SLOs or failure modes; known critical discrepancy omitted from readiness decision; incident analysis assigns blame without examining system contributors.</p>
+<h3 id="13-knowledge-check-11">13. Knowledge check</h3>
+<ol>
+<li>How does an SLO differ from an SLA?</li>
+<li>What makes an alert actionable?</li>
+<li>Why can autoscaling fail to reduce latency?</li>
+<li>What fields make technical debt manageable?</li>
+<li>What is progressive delivery?</li>
+</ol>
+<p><strong>Answer guidance:</strong> SLOs are internal reliability targets; SLAs are external commitments. Alerts need ownership, consequence, threshold rationale, and response. Bottlenecks may be shared, serialized, data-bound, or external. Progressive delivery limits exposure while evidence is gathered.</p>
+<h3 id="14-feedback-revision-and-mastery-gate-11">14. Feedback, revision, and mastery gate</h3>
+<p>Use the rubric, automated checks, and answer guidance to perform a self-review. Record a five-to-ten-minute walkthrough explaining the principal decision and weakest evidence. Revise all critical failures and any criterion below proficient. The week is complete only when the deliverable is baselined, the repository rebuilds, and unresolved high-consequence issues are explicitly owned and scheduled.</p>
+<h3 id="15-reflection-and-workload-record-11">15. Reflection and workload record</h3>
+<p>Record:</p>
+<ul>
+<li>the most important assumption challenged this week;</li>
+<li>one decision that changed because of evidence;</li>
+<li>the weakest remaining trace or claim;</li>
+<li>actual hours spent by reading, modeling, analysis, implementation, testing, and revision;</li>
+<li>one question to carry into the next week.</li>
+</ul>
+<hr/>
+<h2 id="week-12--assess-technology-trends-and-defend-the-integrated-software-baseline">Week 12 — Assess technology trends and defend the integrated software baseline</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B5/chapters/12-assess-technology-trends-and-defend-the-integ.html">Read Book V, Chapter 12</a> → <a href="../../K/B5/labs/lab-12-assess-technology-trends-and-defend-the-integ.html">complete Hypothetical Lab 12</a> → <a href="../../K/P1-text/lessons/645-764-w12.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Synthesis, controlled change, and course exit<br/>
+<strong>Program competencies:</strong> C1-A, C3-A, C4-A, C5-A, C6-A, C9-A, C10-A, C12-A<br/>
+<strong>Course outcomes:</strong> CLO-1 through CLO-11<br/>
+<strong>Nominal effort:</strong> 10–12 hours<br/>
+<strong>Primary evidence produced:</strong> final baseline, release recommendation, technology assessment, oral defense, retrospective</p>
+<h3 id="1-why-this-week-matters-12">1. Why this week matters</h3>
+<p>A software systems engineer must integrate the complete evidence chain and still respond to change. The final week baselines the software package, evaluates current technology trends against engineering criteria, introduces a late sponsor change, and requires an oral defense of architecture and release judgment.</p>
+<h3 id="2-essential-question-12">2. Essential question</h3>
+<blockquote>
+<p>Can the software baseline remain coherent, evidence based, and adaptable when challenged by a new technology or requirement?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-12">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve from prior work</strong></p>
+<ul>
+<li>all course baselines, review findings, evidence, residual risks, and waivers</li>
+<li>three end-to-end digital-thread examples</li>
+<li>course competency and capstone criteria</li>
+</ul>
+<p><strong>Readiness tasks</strong></p>
+<ol>
+<li>Identify the weakest evidence claim in the baseline.</li>
+<li>Name one architecture decision that should be revisited under ten-campus scale.</li>
+<li>Explain how technology maturity differs from suitability.</li>
+</ol>
+<h3 id="4-detailed-weekly-learning-outcomes-12">4. Detailed weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ol>
+<li>integrate model, architecture, code, test, operations, and management evidence</li>
+<li>perform rapid but controlled change-impact analysis</li>
+<li>evaluate emerging technologies against mission, quality, risk, evidence, lifecycle, and organizational criteria</li>
+<li>issue a defensible release and integration recommendation</li>
+<li>conduct an oral technical defense and respond to critique</li>
+<li>create a course-exit improvement plan</li>
+</ol>
+<h3 id="5-key-concepts-and-distinctions-12">5. Key concepts and distinctions</h3>
+<ul>
+<li>baseline completeness and coherence</li>
+<li>release recommendation and residual risk</li>
+<li>technology readiness, evidence, lock-in, reversibility, and adoption cost</li>
+<li>AI-assisted development, platform engineering, serverless, service mesh, and policy as code as examples—not prescriptions</li>
+<li>change impact and decision reopening</li>
+<li>oral defense and professional judgment</li>
+</ul>
+<h3 id="6-required-readings-and-resources-12">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding question</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SWEBOK V4.0a <a href="https://www.computer.org/education/bodies-of-knowledge/software-engineering/v4" title="IEEE Computer Society — SWEBOK V4.0a">SWEBOK-V4</a></td>
+<td>Revisit knowledge-area map and current additions</td>
+<td>Assess course coverage and continuing gaps</td>
+<td>Which areas require deeper follow-on study?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td>NIST SSDF draft 1.2 <a href="https://csrc.nist.gov/pubs/sp/800/218/r1/ipd" title="NIST SP 800-218 Rev. 1 Initial Public Draft — SSDF Version 1.2">NIST-SSDF-12-DRAFT</a></td>
+<td>Compare draft changes with final SSDF 1.1; do not treat draft as binding</td>
+<td>Practice standards-status judgment</td>
+<td>What changes would affect the project if finalized?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td>JHU course scope <a href="https://ep.jhu.edu/courses/645764-software-systems-engineering/" title="JHU EP — Software Systems Engineering 645.764">JHU-764-COURSE</a></td>
+<td>Re-read the catalog description and syllabus topics</td>
+<td>Self-assess against the source course</td>
+<td>Which catalog topics have strong versus introductory evidence?</td>
+<td style="text-align:right">25 min</td>
+</tr>
+<tr>
+<td>Selected primary source for one technology candidate</td>
+<td>Read an official specification, standard, or project documentation chosen by the learner</td>
+<td>Evaluate a trend from primary evidence</td>
+<td>What assumptions, maturity, and operational obligations accompany it?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-12">7. Instructor-style lesson notes</h3>
+<p>Technology assessment should define the problem, candidate capability, evidence, maturity, architecture fit, security and operations implications, migration path, lock-in, reversibility, organizational skills, and decision trigger. “Modern” is not an engineering criterion.</p>
+<p>The final digital thread should demonstrate more than links. It should show transformations, decisions, evidence, change impact, and current status from stakeholder concern to operational measure.</p>
+<p>A release recommendation may be go, conditional go, limited pilot, or no-go. The decision should explicitly state scope, conditions, waivers, monitoring, rollback, and residual risk ownership.</p>
+<h3 id="8-worked-example-12">8. Worked example</h3>
+<p>The sponsor proposes replacing dispatch optimization with a generative-AI service before pilot launch. The assessment finds no verified deterministic timing, weak explainability for audit decisions, privacy and supply-chain concerns, external-service dependence, and insufficient test evidence. The team rejects direct operational use for the pilot but approves a sandboxed analyst-support experiment with no control authority and defined evaluation criteria.</p>
+<h3 id="9-guided-practice-12">9. Guided practice</h3>
+<ol>
+<li>Run completeness, traceability, reference, and configuration checks.</li>
+<li>Select one late change: ten-campus scaling, third-party dispatch service, AI-assisted optimization, or new privacy retention rule.</li>
+<li>Perform impact analysis across requirements, architecture, interfaces, code, tests, deployment, operations, and project risk.</li>
+<li>Evaluate one technology candidate using a structured decision record.</li>
+<li>Prepare the final review briefing and release recommendation.</li>
+<li>Conduct a 20–30 minute oral defense and record responses to findings.</li>
+</ol>
+<p><strong>Checkpoint:</strong> Pause before independent work and verify that the current artifacts are traceable, internally consistent, and reproducible. Record unresolved assumptions rather than silently filling them.</p>
+<h3 id="10-independent-exercises-12">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Complete a 50-question cumulative knowledge check.</li>
+<li>Audit all open findings and waivers.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Produce the final controlled baseline and portfolio index.</li>
+<li>Demonstrate a clean rebuild and pipeline execution.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Identify the three strongest and three weakest evidence chains.</li>
+<li>Assess the late change and reopen affected ADRs.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Defend the release recommendation and technology decision.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Invite a practitioner to red-team the package and disposition the findings.</li>
+</ul>
+<h3 id="11-deliverable-specification-12">11. Deliverable specification</h3>
+<p>Submit <code>764-W12-Baseline-v1.0</code> containing:</p>
+<ol>
+<li>complete capstone package from Section 15</li>
+<li>three end-to-end digital-thread demonstrations</li>
+<li>late-change impact analysis</li>
+<li>technology assessment and ADR</li>
+<li>final review briefing and release recommendation</li>
+<li>oral-defense recording and response log</li>
+<li>course retrospective and follow-on learning plan</li>
+</ol>
+<h3 id="12-weekly-rubric-12">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Baseline coherence</td>
+<td style="text-align:right">25%</td>
+<td>Model, architecture, code, evidence, and operations agree</td>
+</tr>
+<tr>
+<td>Change response</td>
+<td style="text-align:right">20%</td>
+<td>Impact is traced and affected decisions are reopened appropriately</td>
+</tr>
+<tr>
+<td>Technology judgment</td>
+<td style="text-align:right">15%</td>
+<td>Recommendation uses primary evidence and lifecycle criteria</td>
+</tr>
+<tr>
+<td>Release recommendation</td>
+<td style="text-align:right">20%</td>
+<td>Scope, conditions, residual risk, monitoring, and rollback are explicit</td>
+</tr>
+<tr>
+<td>Oral defense</td>
+<td style="text-align:right">20%</td>
+<td>Learner explains tradeoffs and responds accurately to critique</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> final package cannot be rebuilt; known critical evidence gap concealed; technology adopted solely by popularity; release recommendation lacks scope, conditions, or residual-risk owner.</p>
+<h3 id="13-knowledge-check-12">13. Knowledge check</h3>
+<ol>
+<li>What is the difference between technology maturity and architecture fit?</li>
+<li>What should trigger reopening an ADR?</li>
+<li>What makes a digital thread more than hyperlinks?</li>
+<li>Name four possible release recommendations besides unconditional go.</li>
+<li>Why must a draft standard be labeled as draft?</li>
+</ol>
+<p><strong>Answer guidance:</strong> Maturity concerns evidence and operational history; fit concerns this mission and architecture. Changed assumptions, requirements, evidence, risks, or constraints can reopen a decision. A digital thread includes transformation, rationale, status, and evidence. Draft status prevents treating proposed guidance as final authority.</p>
+<h3 id="14-feedback-revision-and-mastery-gate-12">14. Feedback, revision, and mastery gate</h3>
+<p>Use the rubric, automated checks, and answer guidance to perform a self-review. Record a five-to-ten-minute walkthrough explaining the principal decision and weakest evidence. Revise all critical failures and any criterion below proficient. The week is complete only when the deliverable is baselined, the repository rebuilds, and unresolved high-consequence issues are explicitly owned and scheduled.</p>
+<h3 id="15-reflection-and-workload-record-12">15. Reflection and workload record</h3>
+<p>Record:</p>
+<ul>
+<li>the most important assumption challenged this week;</li>
+<li>one decision that changed because of evidence;</li>
+<li>the weakest remaining trace or claim;</li>
+<li>actual hours spent by reading, modeling, analysis, implementation, testing, and revision;</li>
+<li>one question to carry into the next week.</li>
+</ul>
+<hr/>
+<h2 id="reference-solution-and-instructor-material-package">Reference solution and instructor-material package</h2>
+<p>A complete implementation of this course should maintain a separate private or delayed-release package containing:</p>
+<ul>
+<li>readiness-diagnostic answer rationale and bridge exercises;</li>
+<li>seeded model, architecture, code, configuration, test, and operational defects;</li>
+<li>reference classifications and expected defect categories;</li>
+<li>sample allocation, interface, ADR, quality-scenario, utility-tree, budget, failure-analysis, threat-model, V&amp;V, and SLO artifacts;</li>
+<li>Python reference implementation branches before and after correction;</li>
+<li>automated tests and expected result ranges;</li>
+<li>review checklists and exemplar findings;</li>
+<li>bounded reference rationales for architecture and release decisions;</li>
+<li>oral-defense question bank and scoring guide.</li>
+</ul>
+<p>Open-ended architecture work should not be graded against one “correct” design. Reference materials should demonstrate defensible reasoning, explicit assumptions, traceability, evidence, and recognition of tradeoffs.</p>
+<hr/>
+<p><a href="OVERVIEW.html">Back to Phase 1 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+<h2 id="references">References</h2>
+</main></body></html>

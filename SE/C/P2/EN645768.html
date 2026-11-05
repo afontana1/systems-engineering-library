@@ -1,0 +1,1931 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.768 — System Design &amp; Integration · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P2/EN645768.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside style="background:#eaf6f4;padding:12px 25px;border-bottom:1px solid #c5e3df"><strong>Advanced textbook readings</strong> · <a href="../../K/G/chapters/01-safety.html">Safety as a system-level control problem</a> · <a href="../../K/G/chapters/02-human.html">Human-systems integration as architecture</a></aside><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/02-requirements.html">Requirements, traceability, and assurance arguments</a> · <a href="../../K/T/03-architecture.html">Architecture, interfaces, and design tradeoffs</a></aside><main><div class="course-actions"><a href="../../K/B7/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en645768--system-design--integration">EN.645.768 — System Design &amp; Integration</h1>
+<p><strong>Credits:</strong> 3<br/>
+<strong>Recommended self-study duration:</strong> 12 weeks<br/>
+<strong>Nominal effort:</strong> 10–13 hours per week<br/>
+<strong>Primary phase:</strong> Phase 2 — Core systems-development lifecycle<br/>
+<strong>Primary program competencies:</strong> C2, C3, C4, C5, C6, C9, C10, C11, C12</p>
+<h2 id="1-course-purpose-and-professional-context">1. Course purpose and professional context</h2>
+<p>A selected concept is not yet a realizable design. System Design &amp; Integration is the transition from a concept-level promise to a controlled engineering baseline that disciplines can build, integrate, verify, validate, operate, support, and eventually retire. The systems engineer must close specification gaps, allocate requirements, mature physical architecture, govern interfaces, manage technical budgets and risks, integrate hardware, software, humans, facilities, data, and support elements, and create evidence that the design is ready to proceed.</p>
+<p>This course develops that capability through a continuing program case. The learner receives the controlled concept baseline from EN.645.767, performs a formal receiving review, and matures it through component specifications, functional and physical allocation, performance budgets, prototypes, design decisions, software integration, reliability and maintainability engineering, human systems integration, resilience, supportability, producibility, disposability, integration planning, and verification and validation planning. The final product is a reviewable design and integration baseline suitable for handoff to EN.645.769 System Test &amp; Evaluation.</p>
+<p>The governing principle is that design maturity is demonstrated by coherent evidence, not by diagram count. A design is not mature when every box is labeled; it is mature when requirements, functions, components, interfaces, budgets, hazards, risks, enabling systems, integration sequences, and V&amp;V evidence agree under configuration control.</p>
+<h2 id="2-source-description-and-self-study-scope">2. Source description and self-study scope</h2>
+<p>The current Johns Hopkins course description places the learner in demonstration/validation and engineering/manufacturing development and emphasizes the relationship between system specification and design, systems engineering management plans, risk, development models, customer integration, and design disciplines. The Fall 2026 abridged syllabus organizes the course around MBSE, component specifications and functions, physical architecture and performance budgets, technology/prototyping/risk, design decisions and software integration, reliability and maintainability, usability and resilience, supportability/producibility/disposability, and integration/V&amp;V. <a href="https://ep.jhu.edu/courses/645768-system-design-integration/" title="JHU — System Design &amp; Integration">JHU-768-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.768.8VL" title="JHU Fall 2026 abridged syllabus — System Design &amp; Integration">JHU-768-SYLLABUS</a></p>
+<p>This self-study version preserves that scope while making five adaptations:</p>
+<ol>
+<li>the source team project becomes a controlled multi-role design project with optional peer participation and mandatory independent red-team passes;</li>
+<li>Cameo is optional; any toolset that preserves structured source, traceability, queries, versioning, and exportable evidence is acceptable;</li>
+<li>the 10 source modules become 12 weeks to provide explicit receiving, PDR-style, integration-readiness, CDR-style, and handoff reviews;</li>
+<li>specialty engineering is integrated into the design rather than treated as a collection of end-of-course checklists;</li>
+<li>every architecture and budget claim must be reproducible from controlled source data.</li>
+</ol>
+<p>The course is not a detailed manufacturing, coding, or formal qualification course. Learners may create prototypes and representative implementation fragments, but the principal objective is an engineering baseline and an executable integration/V&amp;V strategy.</p>
+<h2 id="3-relationship-to-the-curriculum">3. Relationship to the curriculum</h2>
+<h3 id="imports-from-en645767">Imports from EN.645.767</h3>
+<p>The course receives:</p>
+<ul>
+<li>the problem and opportunity statement;</li>
+<li>stakeholder needs, ConOps, scenarios, use cases, and mission threads;</li>
+<li>objectives, MOEs, MOPs, thresholds, and initial TPM candidates;</li>
+<li>the conceptual requirements baseline;</li>
+<li>the logical or functional architecture;</li>
+<li>the selected concept, retained alternative, trade evidence, uncertainty, and decision conditions;</li>
+<li>concept-level affordability, schedule, risk, and opportunity evidence;</li>
+<li>assumptions, unresolved questions, waivers, and the controlled handoff package.</li>
+</ul>
+<h3 id="new-contribution-of-this-course">New contribution of this course</h3>
+<p>The course produces:</p>
+<ul>
+<li>a receiving-review record and design-maturation plan;</li>
+<li>a corrected system specification and allocated component specifications;</li>
+<li>a physical architecture and design description tied to functions and requirements;</li>
+<li>controlled internal and external interface definitions;</li>
+<li>technical performance budgets with allocations, margins, owners, and update rules;</li>
+<li>a Systems Engineering Management Plan and specialty-engineering integration plan;</li>
+<li>prototype and technology-maturation evidence;</li>
+<li>design decision records and multidisciplinary trade analyses;</li>
+<li>reliability, availability, maintainability, safety, security, usability, resilience, supportability, producibility, sustainability, and disposal evidence;</li>
+<li>an integration strategy, enabling-system architecture, sequence, entry/exit criteria, and discrepancy workflow;</li>
+<li>a V&amp;V plan, verification cross-reference matrix, validation matrix, and test-resource definition;</li>
+<li>PDR-style, integration-readiness, and CDR-style review packages;</li>
+<li>a controlled design and integration baseline for EN.645.769.</li>
+</ul>
+<h3 id="prepares-for">Prepares for</h3>
+<p>EN.645.769 will treat this course's design baseline, interfaces, integration sequence, requirements, hazards, budgets, verification methods, validation scenarios, and test resources as authoritative inputs subject to a receiving review.</p>
+<h2 id="4-prerequisites-and-readiness-assessment">4. Prerequisites and readiness assessment</h2>
+<h3 id="required-prior-competencies">Required prior competencies</h3>
+<p>Before Week 1, the learner should be able to:</p>
+<ul>
+<li>explain the problem, selected concept, retained alternative, and decision conditions from conceptual design;</li>
+<li>inspect traceability from needs through requirements, functions, architecture, measures, risks, and verification intent;</li>
+<li>distinguish logical architecture, physical architecture, design description, and implementation;</li>
+<li>write clear system requirements and identify assumptions or solution bias;</li>
+<li>build simple performance, cost, schedule, and uncertainty models;</li>
+<li>maintain a model or repository under configuration control;</li>
+<li>facilitate a review, record actions and dissent, and revise a baseline;</li>
+<li>use spreadsheets and a scripting or modeling environment for reproducible calculations.</li>
+</ul>
+<h3 id="readiness-diagnostic--120-minutes">Readiness diagnostic — 120 minutes</h3>
+<p><strong>Part A — baseline audit</strong></p>
+<p>Using the EN.645.767 handoff, identify:</p>
+<ol>
+<li>three requirements that are too weak for component allocation;</li>
+<li>two functions whose owning physical element is uncertain;</li>
+<li>two external interfaces that require negotiated control;</li>
+<li>one technical budget that lacks a margin policy;</li>
+<li>one risk that should drive prototyping or integration order;</li>
+<li>one operational scenario that should drive validation planning;</li>
+<li>one retained alternative condition that should remain visible during design.</li>
+</ol>
+<p><strong>Part B — design reasoning</strong></p>
+<p>Answer ten short questions on specification versus design, requirement allocation, interfaces, margins, technical risk, prototypes, enabling systems, reliability, human allocation, and integration order.</p>
+<p><strong>Part C — quantitative task</strong></p>
+<p>Given component-level latency, energy, and availability estimates, calculate the system budget, identify margin consumption, and explain which design decision deserves escalation.</p>
+<h3 id="passing-standard-and-recovery-path">Passing standard and recovery path</h3>
+<p>Pass with at least 80% overall, no missed safety- or interface-critical issue, and a correct quantitative budget. Learners below the standard should complete a one-week bridge on requirements allocation, architecture traceability, interface control, technical budgets, risk-driven prototyping, and integration planning.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Measurable course learning outcome</th>
+<th>Program competency</th>
+<th style="text-align:center">Level</th>
+<th>Primary evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLO-1</td>
+<td>Conduct a receiving review and convert a concept baseline into a controlled design-maturation plan</td>
+<td>C3, C4, C10</td>
+<td style="text-align:center">A</td>
+<td>Receiving Review</td>
+</tr>
+<tr>
+<td>CLO-2</td>
+<td>Analyze stakeholder and system requirements, correct deficiencies, and produce a coherent system specification</td>
+<td>C2, C4</td>
+<td style="text-align:center">A</td>
+<td>System specification baseline</td>
+</tr>
+<tr>
+<td>CLO-3</td>
+<td>Allocate and decompose requirements into component specifications with traceability and verification intent</td>
+<td>C2, C3, C4</td>
+<td style="text-align:center">A</td>
+<td>Component specification set</td>
+</tr>
+<tr>
+<td>CLO-4</td>
+<td>Develop a physical architecture that maps to functions, requirements, states, information, humans, software, hardware, and enabling systems</td>
+<td>C3, C4, C5</td>
+<td style="text-align:center">A</td>
+<td>Physical architecture baseline</td>
+</tr>
+<tr>
+<td>CLO-5</td>
+<td>Define and control internal and external interfaces and use them to plan integration and V&amp;V</td>
+<td>C3, C4, C6</td>
+<td style="text-align:center">A</td>
+<td>Interface control package</td>
+</tr>
+<tr>
+<td>CLO-6</td>
+<td>Construct and maintain technical performance budgets with allocations, margins, uncertainty, owners, and escalation thresholds</td>
+<td>C7, C9, C10</td>
+<td style="text-align:center">A</td>
+<td>Budget dashboard and evidence</td>
+</tr>
+<tr>
+<td>CLO-7</td>
+<td>Use prototypes, analyses, experiments, and decision records to retire design and technology risk</td>
+<td>C7, C8, C9</td>
+<td style="text-align:center">A</td>
+<td>Technology/risk retirement package</td>
+</tr>
+<tr>
+<td>CLO-8</td>
+<td>Integrate reliability, maintainability, safety, security, usability, resilience, supportability, producibility, sustainability, and disposal into design decisions</td>
+<td>C3, C9, C11</td>
+<td style="text-align:center">A</td>
+<td>Specialty-engineering evidence</td>
+</tr>
+<tr>
+<td>CLO-9</td>
+<td>Plan the integration of system elements and enabling products using risk-driven sequencing and measurable entry/exit criteria</td>
+<td>C3, C4, C6, C10</td>
+<td style="text-align:center">A</td>
+<td>Integration plan and readiness review</td>
+</tr>
+<tr>
+<td>CLO-10</td>
+<td>Build a requirement-linked verification and stakeholder-linked validation plan suitable for detailed T&amp;E planning</td>
+<td>C2, C6</td>
+<td style="text-align:center">A</td>
+<td>V&amp;V plan and matrices</td>
+</tr>
+<tr>
+<td>CLO-11</td>
+<td>Apply MBSE and configuration management to maintain consistency, queries, impact analysis, and review evidence</td>
+<td>C4, C10</td>
+<td style="text-align:center">A</td>
+<td>Controlled design repository</td>
+</tr>
+<tr>
+<td>CLO-12</td>
+<td>Defend design maturity, residual risk, review actions, and the handoff to T&amp;E</td>
+<td>C10, C12</td>
+<td style="text-align:center">A</td>
+<td>Final Design &amp; Integration Review</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>What evidence shows that a concept is ready to become a design baseline?</li>
+<li>Which specification deficiencies must be resolved before allocation, and which can remain as controlled TBDs?</li>
+<li>How should requirements, functions, and physical elements be allocated without creating hidden gaps or duplicate ownership?</li>
+<li>What belongs in an interface definition, and who has authority to change it?</li>
+<li>How much margin is enough, who owns it, and when should consumption trigger redesign?</li>
+<li>Which risks deserve analysis, prototype, test, supplier action, architectural change, or acceptance?</li>
+<li>How should hardware, software, humans, data, facilities, training, maintenance, and operations be integrated as one system?</li>
+<li>How do reliability, maintainability, usability, resilience, supportability, producibility, and disposal change architecture rather than merely document it?</li>
+<li>What integration order finds consequential problems early without creating unrealistic test conditions?</li>
+<li>What evidence is required to claim design readiness and to hand the baseline to T&amp;E?</li>
+</ul>
+<h2 id="7-running-case-and-study-rules">7. Running case and study rules</h2>
+<h3 id="case--autonomous-campus-mobility-2030-design-maturation">Case — Autonomous Campus Mobility 2030: Design Maturation</h3>
+<p>The learner imports the concept selected in EN.645.767. Because different learners may select different concepts, all assignments are phrased around the imported baseline. Worked examples use a <strong>reference design</strong>: a mixed accessible electric fleet with bounded autonomous operation in approved zones, human-driven service elsewhere, mobility hubs, a common dispatch platform, and a staffed operations center. The reference design is illustrative and must not silently replace the learner's selected concept.</p>
+<h3 id="controlled-fictional-design-data">Controlled fictional design data</h3>
+<ul>
+<li>system-level passenger-request-to-confirmation threshold: 8 seconds at the 95th percentile;</li>
+<li>dispatch-platform availability threshold during service hours: 0.995;</li>
+<li>fleet mission availability threshold: 0.97;</li>
+<li>energy reserve at end of route: at least 20% under the defined worst credible operating profile;</li>
+<li>accessible boarding objective: 95% of qualified boarding events completed within 4 minutes;</li>
+<li>maximum single-point service interruption target: 15 minutes before degraded service is available;</li>
+<li>initial pilot fleet: 12 vehicles across autonomous and human-driven variants unless the imported concept dictates otherwise;</li>
+<li>operations center staffing ceiling: two dispatchers per shift absent approved change;</li>
+<li>design life: 10 years with replaceable digital and battery subsystems;</li>
+<li>all raw test and operations data must have an owner, retention rule, access control, and configuration identifier.</li>
+</ul>
+<h3 id="multi-role-review-protocol">Multi-role review protocol</h3>
+<p>Every formal review must include recorded passes from:</p>
+<ol>
+<li>chief engineer;</li>
+<li>operator/maintainer and human-factors representative;</li>
+<li>software/data/security lead;</li>
+<li>supplier/manufacturing/support lead;</li>
+<li>independent verification and validation/T&amp;E lead;</li>
+<li>sponsor or customer representative.</li>
+</ol>
+<p>A solo learner performs each pass at separate times and records conflicts and dispositions.</p>
+<h3 id="repository-structure">Repository structure</h3>
+<p>Maintain at minimum:</p>
+<ul>
+<li><code>/00-governance-and-receiving</code></li>
+<li><code>/01-system-specification</code></li>
+<li><code>/02-component-specifications</code></li>
+<li><code>/03-architecture-and-interfaces</code></li>
+<li><code>/04-budgets-and-analyses</code></li>
+<li><code>/05-prototypes-and-risk</code></li>
+<li><code>/06-specialty-engineering</code></li>
+<li><code>/07-integration</code></li>
+<li><code>/08-verification-validation</code></li>
+<li><code>/09-reviews-and-decisions</code></li>
+<li><code>/10-handoff</code></li>
+</ul>
+<h2 id="8-resource-architecture">8. Resource architecture</h2>
+<h3 id="required-open-access-backbone">Required open-access backbone</h3>
+<ul>
+<li>JHU course page and Fall 2026 abridged syllabus for source scope. <a href="https://ep.jhu.edu/courses/645768-system-design-integration/" title="JHU — System Design &amp; Integration">JHU-768-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.768.8VL" title="JHU Fall 2026 abridged syllabus — System Design &amp; Integration">JHU-768-SYLLABUS</a></li>
+<li>NASA Systems Engineering Handbook: System Design, Product Realization, and Crosscutting Technical Management sections. <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li>NASA Systems Modeling Handbook for structured model products and traceability. <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-1009" title="NASA Systems Modeling Handbook for Systems Engineering">NASA-MODELING</a></li>
+<li>NASA interface management, product integration, product verification, product validation, technical risk, configuration management, technical assessment, and decision analysis pages. <a href="https://www.nasa.gov/reference/6-3-interface-management/" title="NASA SE Handbook — Interface Management">NASA-INTERFACES</a> <a href="https://www.nasa.gov/reference/5-2-product-integration/" title="NASA SE Handbook — Product Integration">NASA-INTEGRATION</a> <a href="https://www.nasa.gov/reference/5-3-product-verification/" title="NASA SE Handbook — Product Verification">NASA-VERIFICATION</a> <a href="https://www.nasa.gov/reference/5-4-product-validation/" title="NASA SE Handbook — Product Validation">NASA-VALIDATION</a> <a href="https://www.nasa.gov/reference/6-4-technical-risk-management/" title="NASA SE Handbook — Technical Risk Management">NASA-RISK</a> <a href="https://www.nasa.gov/reference/6-5-configuration-management/" title="NASA SE Handbook — Configuration Management">NASA-CM</a> <a href="https://www.nasa.gov/reference/6-7-technical-assessment/" title="NASA SE Handbook — Technical Assessment">NASA-ASSESSMENT</a> <a href="https://www.nasa.gov/reference/6-8-decision-analysis/" title="NASA SE Handbook — Decision Analysis">NASA-DECISION</a></li>
+<li>NASA Human Systems Integration Handbook and HSI plan outline. <a href="https://ntrs.nasa.gov/citations/20210010952" title="NASA Human Systems Integration Handbook">NASA-HSI</a> <a href="https://www.nasa.gov/reference/appendix-r-hsi-plan-content-outline/" title="NASA SE Handbook — HSI Plan Content Outline">NASA-HSI-PLAN</a></li>
+<li>NASA Reliability and Maintainability resources. <a href="https://sma.nasa.gov/sma-disciplines/reliability-and-maintainability" title="NASA Reliability and Maintainability">NASA-RM</a></li>
+<li>NIST SP 800-160 Volume 1 and Volume 2 Revision 1 for trustworthy and cyber-resilient system design. <a href="https://csrc.nist.gov/pubs/sp/800/160/final" title="NIST SP 800-160 — Systems Security Engineering">NIST-SSE</a> <a href="https://csrc.nist.gov/pubs/sp/800/160/v2/r1/final" title="NIST SP 800-160 Vol. 2 Rev. 1 — Developing Cyber-Resilient Systems">NIST-RESILIENCE</a></li>
+</ul>
+<h3 id="recommended-texts">Recommended texts</h3>
+<p>The source course uses Wasson's <em>System Engineering Analysis, Design, and Development</em> and Kossiakoff et al.'s <em>Systems Engineering Principles and Practice</em>. Learners may use current editions where available. Chapter assignments should be mapped to the weekly topics rather than treated as a substitute for the open standards backbone.</p>
+<h3 id="resource-use-rule">Resource-use rule</h3>
+<p>For each major design claim, record whether the evidence is a requirement, model relationship, calculation, prototype result, test result, standard/guidance interpretation, supplier statement, or engineering judgment. Do not present guidance as a requirement unless the governing authority has adopted it.</p>
+<h2 id="9-tools-and-working-environment">9. Tools and working environment</h2>
+<p>Required capabilities:</p>
+<ul>
+<li>requirements and traceability repository;</li>
+<li>architecture and interface modeling;</li>
+<li>version control and baselining;</li>
+<li>spreadsheet or notebook calculations;</li>
+<li>diagram and table export;</li>
+<li>issue, action, risk, and decision tracking;</li>
+<li>basic statistical analysis and plotting;</li>
+<li>document production and presentation.</li>
+</ul>
+<p>Acceptable stacks include Cameo, Capella, Papyrus, SysML v2 pilot tooling, Enterprise Architect, Visual Paradigm, CORE, Jama/DOORS-style requirements tools, Git-based text models, Python/Jupyter, R, spreadsheets, and diagram-as-code tools. The tool is acceptable only if the learner can identify authoritative source, revision, owner, and trace links and can reproduce calculations.</p>
+<h2 id="10-assessment-and-grading-model">10. Assessment and grading model</h2>
+<table>
+<thead>
+<tr>
+<th>Assessment</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weekly retrieval checks and technical quizzes</td>
+<td style="text-align:right">8%</td>
+</tr>
+<tr>
+<td>Weekly engineering artifacts and analyses</td>
+<td style="text-align:right">28%</td>
+</tr>
+<tr>
+<td>System Requirements and Preliminary Design Review</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Specialty-engineering and integration-readiness package</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Final controlled design and integration baseline</td>
+<td style="text-align:right">24%</td>
+</tr>
+<tr>
+<td>Final oral defense and receiving-team handoff</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>A numerical average cannot compensate for a failed critical mastery criterion.</p>
+<h2 id="11-twelve-week-course-map">11. Twelve-week course map</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Week</th>
+<th>Focus</th>
+<th>Primary controlled output</th>
+<th>Review or decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Receiving review, lifecycle tailoring, SEMP, design plan</td>
+<td>Receiving and technical-management baseline</td>
+<td>Receiving Review</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>System specification closure</td>
+<td>Corrected system specification</td>
+<td>Specification closure decision</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>Component specifications and functional allocation</td>
+<td>Allocated specification set</td>
+<td>Allocation audit</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>Physical architecture, interfaces, and budgets</td>
+<td>Architecture/interface/budget baseline</td>
+<td>Architecture consistency review</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>Technology, prototypes, and technical risk</td>
+<td>Risk-retirement experiment package</td>
+<td>Prototype investment decision</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>Multidisciplinary design and software integration</td>
+<td>Preliminary design baseline</td>
+<td>PDR-style review</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>Reliability, availability, and maintainability</td>
+<td>RAM and failure-management package</td>
+<td>Reliability design decision</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>Human systems, safety, security, usability, and resilience</td>
+<td>HSI/resilience design package</td>
+<td>Degraded-mode review</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Supportability, producibility, supply, sustainability, disposal</td>
+<td>Life-cycle design package</td>
+<td>Life-cycle feasibility review</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Integration architecture, enabling systems, and build-up</td>
+<td>Integration plan and readiness evidence</td>
+<td>Integration Readiness Review</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>Verification, validation, customer evidence, and CDR readiness</td>
+<td>V&amp;V baseline and review package</td>
+<td>CDR-style preboard</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>Final Design &amp; Integration Review and T&amp;E handoff</td>
+<td>Controlled final baseline</td>
+<td>Proceed/conditional/rework decision</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-major-assignments-and-review-products">12. Major assignments and review products</h2>
+<h3 id="a-receiving-review">A. Receiving Review</h3>
+<p>Confirm the authority, completeness, maturity, assumptions, open items, and configuration status of the EN.645.767 handoff. Produce an acceptance matrix and design-maturation backlog.</p>
+<h3 id="b-system-requirements-and-preliminary-design-review">B. System Requirements and Preliminary Design Review</h3>
+<p>Demonstrate a coherent specification-to-design chain, controlled interfaces, adequate technical margins, acceptable preliminary risk, and a credible plan to complete detailed design and integration.</p>
+<h3 id="c-specialty-engineering-and-integration-readiness-review">C. Specialty-Engineering and Integration Readiness Review</h3>
+<p>Show that RAM, human systems, safety, security, resilience, supportability, production, disposal, enabling systems, facilities, data, procedures, and integration entry criteria have changed or constrained the design where appropriate.</p>
+<h3 id="d-final-design--integration-review">D. Final Design &amp; Integration Review</h3>
+<p>Defend the controlled architecture, component specifications, interfaces, budgets, analyses, prototypes, risk retirement, integration sequence, V&amp;V strategy, review actions, residual risk, and handoff conditions.</p>
+<h2 id="13-common-analytic-rubric">13. Common analytic rubric</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th style="text-align:right">Weight</th>
+<th>Graduate-level evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Technical correctness</td>
+<td style="text-align:right">20%</td>
+<td>Calculations, models, and interpretations are correct and limitations are explicit.</td>
+</tr>
+<tr>
+<td>Requirement/function/design coherence</td>
+<td style="text-align:right">20%</td>
+<td>Traceability is bidirectional; gaps, duplicates, and conflicts are resolved or controlled.</td>
+</tr>
+<tr>
+<td>Interface and integration quality</td>
+<td style="text-align:right">15%</td>
+<td>Interfaces are testable, owned, controlled, and reflected in the integration sequence.</td>
+</tr>
+<tr>
+<td>Specialty-engineering integration</td>
+<td style="text-align:right">15%</td>
+<td>RAM, HSI, safety, security, resilience, support, production, and end-of-life evidence changes design decisions.</td>
+</tr>
+<tr>
+<td>Evidence and decision quality</td>
+<td style="text-align:right">15%</td>
+<td>Decisions use appropriate analyses, prototypes, data, uncertainty, and risk.</td>
+</tr>
+<tr>
+<td>Configuration and reproducibility</td>
+<td style="text-align:right">10%</td>
+<td>Source, revision, assumptions, scripts, and generated outputs are controlled and reproducible.</td>
+</tr>
+<tr>
+<td>Communication and review response</td>
+<td style="text-align:right">5%</td>
+<td>Artifacts are usable by decision makers; actions and dissent are addressed.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-critical-mastery-criteria">14. Critical mastery criteria</h2>
+<p>The course cannot be passed if any of the following remains true at the final review:</p>
+<ul>
+<li>safety-, accessibility-, security-, or mission-critical requirements lack an allocated owner or verification method;</li>
+<li>a critical interface is undefined, uncontrolled, or absent from the integration plan;</li>
+<li>technical budgets are presented without source, allocation, margin, owner, or update rule;</li>
+<li>the design depends on an unacknowledged single point of failure or unsupported technology claim;</li>
+<li>specialty-engineering work is a checklist with no demonstrated design consequence;</li>
+<li>the integration plan lacks enabling products, entry/exit criteria, configuration identity, or discrepancy handling;</li>
+<li>verification and validation are conflated or disconnected from requirements and stakeholder scenarios;</li>
+<li>the final model and documents disagree on the authoritative architecture or baseline;</li>
+<li>a major review action is closed without evidence;</li>
+<li>the learner cannot defend residual risk and handoff conditions orally.</li>
+</ul>
+<h2 id="15-final-capstone-and-oral-defense">15. Final capstone and oral defense</h2>
+<p>The final capstone contains:</p>
+<ol>
+<li>receiving-review record and SEMP;</li>
+<li>system and component specification baselines;</li>
+<li>architecture, allocation, state, behavior, and interface products;</li>
+<li>technical performance budgets and analysis source;</li>
+<li>prototype and risk-retirement evidence;</li>
+<li>decision records and change-impact analyses;</li>
+<li>RAM, HSI, safety, security, resilience, supportability, producibility, sustainability, and disposal evidence;</li>
+<li>integration architecture, sequence, resources, procedures, entry/exit criteria, and discrepancy workflow;</li>
+<li>verification cross-reference matrix and validation matrix;</li>
+<li>PDR/CDR-style review records, actions, waivers, and dissent;</li>
+<li>residual risk and readiness recommendation;</li>
+<li>controlled handoff manifest for EN.645.769.</li>
+</ol>
+<p>The oral defense should last 25–35 minutes and include a live trace, one budget recalculation, one interface change-impact query, one failure/degraded-mode walkthrough, and one integration-sequence challenge.</p>
+<h2 id="16-portfolio-and-handoff-requirements">16. Portfolio and handoff requirements</h2>
+<p>The T&amp;E receiving team must be able to determine:</p>
+<ul>
+<li>which baseline and build are authoritative;</li>
+<li>which requirements and stakeholder expectations are to be verified or validated;</li>
+<li>which interfaces, modes, environments, hazards, and failure responses are critical;</li>
+<li>what test resources, simulators, stubs, facilities, data, and instrumentation are needed;</li>
+<li>which design margins and risks require measurement;</li>
+<li>which verification methods are planned and why;</li>
+<li>which validation scenarios represent intended use;</li>
+<li>which limitations, waivers, and open items remain.</li>
+</ul>
+<p>The handoff includes a machine-readable trace export where practical, a human-readable index, checksums or version identifiers, and a receiving-review checklist.</p>
+<h2 id="17-course-maintenance-record">17. Course maintenance record</h2>
+<p>Record annually:</p>
+<ul>
+<li>source syllabus and course-page date;</li>
+<li>NASA/NIST source versions;</li>
+<li>tool and format changes;</li>
+<li>broken or superseded references;</li>
+<li>case-data revisions;</li>
+<li>rubric or workload changes;</li>
+<li>recurring learner failure modes;</li>
+<li>changes required by the downstream T&amp;E course.</li>
+</ul>
+<hr/>
+<h2 id="week-1--receive-the-concept-baseline-and-plan-design-maturation">Week 1 — Receive the concept baseline and plan design maturation</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B7/chapters/01-receive-the-concept-baseline-and-plan-design-maturation.html">Read Book 7, Chapter 1</a> → <a href="../../K/B7/labs/lab-01-receive-the-concept-baseline-and-plan-design-maturation.html">complete Hypothetical Lab 1</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-768-w01.html">Read the Week 1 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C4, C10, C12</p>
+<h3 id="professional-context-and-essential-question">Professional context and essential question</h3>
+<p>The first design task is not drawing a more detailed architecture. It is deciding whether the inherited concept evidence is authoritative, conditional, stale, contradictory, or incomplete. <strong>Essential question:</strong> What must be accepted, corrected, or planned before detailed design begins?</p>
+<h3 id="weekly-learning-outcomes">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>classify imported artifacts by authority and maturity</li>
+<li>identify design-driving assumptions, conditions, risks, and unresolved decisions</li>
+<li>tailor the lifecycle, technical processes, reviews, roles, and data environment</li>
+<li>draft a concise SEMP and design-maturation backlog</li>
+<li>establish configuration identifiers and review action rules</li>
+</ul>
+<h3 id="retrieval-and-readiness-check">Retrieval and readiness check</h3>
+<ol>
+<li>State the selected concept and the condition under which the retained alternative should be reconsidered.</li>
+<li>Explain the difference between receiving an artifact and accepting it as a baseline.</li>
+<li>List five technical-management processes needed during design.</li>
+<li>Identify one analysis that could become invalid after a design change.</li>
+</ol>
+<h3 id="required-study">Required study</h3>
+<ul>
+<li>
+<p><strong>JHU Fall 2026 syllabus</strong> — description, topics, goals, CLOs, and workload. <strong>Purpose:</strong> Anchor the course to its source scope. <strong>Guiding questions:</strong> Which source topics are design products, and which are management practices?</p>
+</li>
+<li>
+<p><strong>NASA SE Handbook</strong> — Sections 2.2, 4.0, and 6.0. <strong>Purpose:</strong> Connect lifecycle recursion, design, realization, and technical management. <strong>Guiding questions:</strong> Where does top-down design hand off to bottom-up realization?</p>
+</li>
+<li>
+<p><strong>NASA technical planning</strong> — inputs, activities, outputs, and analysis configuration guidance. <strong>Purpose:</strong> Build the SEMP and controlled analysis environment. <strong>Guiding questions:</strong> What must be replanned when the design or environment changes?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes">Instructor-style lesson notes</h3>
+<p>A receiving review establishes the starting truth set. Imported content should be classified as baselined, conditional, reference, open, or rejected. The classification must cite authority, revision, owner, and rationale.</p>
+<p>A SEMP is an executable technical-management agreement, not a generic description of systems engineering. It should define tailoring, products, responsibilities, reviews, metrics, risk, configuration, interfaces, data, decision authority, and integration with project management.</p>
+<p>The design-maturation backlog should be organized by decision or evidence gap rather than by document. Each item needs an owner, planned method, due review, dependency, and closure evidence.</p>
+<p>Configuration begins now. Models, calculations, supplier data, assumptions, and generated reports must be versioned together so that a review result can be reproduced.</p>
+<h3 id="worked-example">Worked example</h3>
+<p>The reference concept package claims a 0.995 dispatch-platform availability but cites no operational-time definition. The receiving review classifies the value as conditional, creates an action to define service hours and allowed downtime, assigns the availability owner, and prevents the claim from being used as verified design margin until the definition and model are approved.</p>
+<h3 id="guided-practice">Guided practice</h3>
+<ol>
+<li>Create an artifact acceptance matrix for ten imported items.</li>
+<li>Convert five open conceptual assumptions into design-maturation actions.</li>
+<li>Draft the SEMP table of contents and assign a role to each section.</li>
+<li>Baseline the repository and produce a version manifest.</li>
+</ol>
+<h3 id="independent-exercises">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Classify 20 statements as baseline, condition, assumption, constraint, action, risk, or decision.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Perform the receiving review on the learner's EN.645.767 handoff.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze dependencies among the top 12 maturation actions and identify the critical evidence path.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Produce a four-week design-maturation plan with review criteria and technical metrics.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Implement a repository query that lists every open item affecting a critical requirement.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable">Weekly deliverable</h3>
+<p>Submit a receiving-review report, artifact acceptance matrix, initial SEMP, design-maturation backlog, repository manifest, and a two-page readiness recommendation.</p>
+<h3 id="analytic-rubric">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Authority and classification | 25% | Every imported item has source, revision, owner, status, and rationale. |</p>
+<p>| Gap and dependency analysis | 25% | Material gaps and evidence dependencies are identified. |</p>
+<p>| SEMP executability | 25% | Processes, roles, reviews, metrics, and control rules are actionable. |</p>
+<p>| Configuration and communication | 25% | The baseline is reproducible and the readiness recommendation is clear. |</p>
+<h3 id="critical-failures">Critical failures</h3>
+<ul>
+<li>Accepting the concept without examining decision conditions.</li>
+<li>No authoritative configuration identifier.</li>
+<li>Critical gap has no owner or closure evidence.</li>
+<li>Generic SEMP copied without tailoring.</li>
+</ul>
+<h3 id="knowledge-check">Knowledge check</h3>
+<ol>
+<li>What is the purpose of a receiving review?</li>
+<li>Why must analysis artifacts be configuration controlled?</li>
+<li>Distinguish an assumption from a risk.</li>
+<li>What makes a SEMP executable?</li>
+<li>When may a conditional artifact be used in a design decision?</li>
+</ol>
+<h3 id="revision-and-mastery-gate">Revision and mastery gate</h3>
+<p>Revise until every critical imported artifact has an authority classification and every critical gap has an owner, method, and review date. Record changes in the decision and configuration logs.</p>
+<h3 id="suggested-workload">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study and retrieval | 2.5 |</p>
+<p>| Artifact audit | 3.0 |</p>
+<p>| SEMP and plan | 3.5 |</p>
+<p>| Review and revision | 2.0 |</p>
+<hr/>
+<h2 id="week-2--close-the-system-specification">Week 2 — Close the system specification</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B7/chapters/02-close-the-system-specification.html">Read Book 7, Chapter 2</a> → <a href="../../K/B7/labs/lab-02-close-the-system-specification.html">complete Hypothetical Lab 2</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-768-w02.html">Read the Week 2 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C2, C4, C6</p>
+<h3 id="professional-context-and-essential-question-2">Professional context and essential question</h3>
+<p>Design cannot be allocated against ambiguous, contradictory, or unverifiable statements. <strong>Essential question:</strong> What must the system specification say so that disciplines can design and testers can plan evidence?</p>
+<h3 id="weekly-learning-outcomes-2">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>audit requirements for necessity, clarity, singularity, feasibility, and verifiability</li>
+<li>separate system requirements, constraints, interface requirements, and design decisions</li>
+<li>define modes, environments, external interfaces, thresholds, and verification intent</li>
+<li>resolve or control conflicts and TBD/TBR values</li>
+<li>baseline a system specification with bidirectional traceability</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-2">Retrieval and readiness check</h3>
+<ol>
+<li>Write one stakeholder need and one system requirement for accessible boarding.</li>
+<li>Identify the defect in: 'The system shall be safe and easy to use.'</li>
+<li>Name the four common verification methods.</li>
+<li>Explain why a requirement may be correct but allocated at the wrong level.</li>
+</ol>
+<h3 id="required-study-2">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA technical requirements definition</strong> — SE Handbook Section 4.2. <strong>Purpose:</strong> Refine expectations into usable technical requirements. <strong>Guiding questions:</strong> What analyses are needed before baselining requirements?</p>
+</li>
+<li>
+<p><strong>NASA requirements management</strong> — SE Handbook Section 6.2. <strong>Purpose:</strong> Control traceability and change. <strong>Guiding questions:</strong> What information must accompany a requirement change?</p>
+</li>
+<li>
+<p><strong>NASA Systems Modeling Handbook</strong> — requirements and V&amp;V product sections. <strong>Purpose:</strong> Represent requirements and relations in a model repository. <strong>Guiding questions:</strong> Which relations support coverage and change impact?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-2">Instructor-style lesson notes</h3>
+<p>A specification is a controlled agreement about required outcomes and constraints. It should not contain unjustified design choices, but it must be specific enough to bound design and evidence.</p>
+<p>Requirements should define conditions and units. Availability, latency, capacity, environmental, safety, security, accessibility, maintainability, and interoperability statements are unusable when the operating profile or measurement basis is absent.</p>
+<p>TBD is not automatically a defect if it is controlled. A valid TBD has an owner, closure method, due date, affected decisions, and interim design rule.</p>
+<p>Verification intent should be planned with the requirement, but the method should not be selected merely by habit. Analysis may be better than test for destructive or impractical conditions; demonstration is not a substitute for measurable acceptance criteria.</p>
+<h3 id="worked-example-2">Worked example</h3>
+<p>The concept requirement 'confirm trips quickly' is rewritten as: 'During defined service hours and under the nominal peak-load profile, the dispatch service shall return a confirmed vehicle assignment or a bounded rejection response within 8.0 seconds for at least 95% of valid requests measured at the rider interface.' The requirement is traced to the mobility-response need, load profile, software allocation candidate, and planned system test.</p>
+<h3 id="guided-practice-2">Guided practice</h3>
+<ol>
+<li>Audit ten inherited requirements using a quality checklist.</li>
+<li>Rewrite five defective requirements and preserve rationale.</li>
+<li>Create a mode/environment table and link requirements to it.</li>
+<li>Run orphan, duplicate, and unverifiable-requirement queries.</li>
+</ol>
+<h3 id="independent-exercises-2">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Correct a supplied set of 15 defective requirements.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Develop the system specification for the imported concept.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze conflicts among response time, accessibility, staffing, energy, privacy, and availability.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Define a closure plan for every remaining TBD/TBR and demonstrate impact visibility.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Generate a machine-readable requirements quality report.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-2">Weekly deliverable</h3>
+<p>Submit the baselined system specification, requirement quality report, traceability export, mode/environment definitions, TBD/TBR closure register, and specification-change log.</p>
+<h3 id="analytic-rubric-2">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Requirement quality | 30% | Statements are necessary, singular, bounded, measurable, and feasible. |</p>
+<p>| Completeness and consistency | 25% | Modes, environments, interfaces, constraints, and specialty concerns are covered without contradiction. |</p>
+<p>| Traceability and verification intent | 25% | Needs, rationale, architecture targets, and evidence plans are connected. |</p>
+<p>| Control and communication | 20% | TBD/TBRs and changes are governed and reviewable. |</p>
+<h3 id="critical-failures-2">Critical failures</h3>
+<ul>
+<li>Critical requirement has no measurable acceptance basis.</li>
+<li>Safety or accessibility requirement removed without approval.</li>
+<li>Design choice presented as requirement without rationale.</li>
+<li>TBD affects critical design but lacks closure plan.</li>
+</ul>
+<h3 id="knowledge-check-2">Knowledge check</h3>
+<ol>
+<li>What is the difference between requirement validation and product validation?</li>
+<li>When is a design constraint legitimate?</li>
+<li>Why define modes and environments before allocation?</li>
+<li>What makes a TBD controlled?</li>
+<li>Why can 'test' be an inappropriate verification method?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-2">Revision and mastery gate</h3>
+<p>Achieve at least 90% quality-check pass rate and no unresolved critical defect. Rebaseline after review and retain the prior version for comparison.</p>
+<h3 id="suggested-workload-2">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Reading and retrieval | 2.5 |</p>
+<p>| Specification audit | 3.0 |</p>
+<p>| Rewrite and modeling | 4.0 |</p>
+<p>| Review and revision | 2.0 |</p>
+<hr/>
+<h2 id="week-3--allocate-requirements-and-define-component-functions">Week 3 — Allocate requirements and define component functions</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B7/chapters/03-allocate-requirements-and-define-component-functions.html">Read Book 7, Chapter 3</a> → <a href="../../K/B7/labs/lab-03-allocate-requirements-and-define-component-functions.html">complete Hypothetical Lab 3</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-768-w03.html">Read the Week 3 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C2, C3, C4</p>
+<h3 id="professional-context-and-essential-question-3">Professional context and essential question</h3>
+<p>Allocation transforms system obligations into coordinated lower-level obligations. <strong>Essential question:</strong> How can component teams receive complete, nonoverlapping specifications without losing system intent?</p>
+<h3 id="weekly-learning-outcomes-3">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>decompose system requirements and preserve derived-rationale chains</li>
+<li>allocate functions and performance to hardware, software, humans, facilities, and procedures</li>
+<li>define component boundaries and responsibilities</li>
+<li>identify shared, cross-cutting, and emergent requirements</li>
+<li>audit coverage, conflicts, and overconstraint</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-3">Retrieval and readiness check</h3>
+<ol>
+<li>Distinguish decomposition, derivation, and allocation.</li>
+<li>Give an example of a function shared by human and software elements.</li>
+<li>Why does 100% allocation coverage not prove correctness?</li>
+<li>What is an emergent system property?</li>
+</ol>
+<h3 id="required-study-3">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA logical decomposition</strong> — SE Handbook Section 4.3. <strong>Purpose:</strong> Connect functions and requirements across product layers. <strong>Guiding questions:</strong> How are functions grouped and allocated?</p>
+</li>
+<li>
+<p><strong>NASA design solution definition</strong> — SE Handbook Section 4.4. <strong>Purpose:</strong> Translate logical products into candidate physical solutions. <strong>Guiding questions:</strong> What evidence supports allocation decisions?</p>
+</li>
+<li>
+<p><strong>NASA HSI</strong> — SE Handbook Section 2.6. <strong>Purpose:</strong> Treat human roles as designed system elements. <strong>Guiding questions:</strong> Which functions should not be allocated by technological enthusiasm alone?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-3">Instructor-style lesson notes</h3>
+<p>Allocation is a decision with consequences. It assigns responsibility for behavior, performance, data, control, safety, and evidence. A derived requirement should state why it exists and what higher-level obligation would fail without it.</p>
+<p>Cross-cutting properties such as availability, security, accessibility, and response time rarely belong to one component. Use contribution budgets and interface obligations rather than assigning the entire requirement to a single convenient owner.</p>
+<p>Human allocation must consider workload, training, authority, error recovery, situational awareness, and the consequence of automation surprise. 'Operator handles exceptions' is not a design.</p>
+<p>Component specifications should be mutually compatible. Local optimization can make the system impossible to integrate even when each component meets its own document.</p>
+<h3 id="worked-example-3">Worked example</h3>
+<p>An 8-second confirmation requirement is decomposed into rider-interface processing, network transit, dispatch computation, vehicle acknowledgment, and response rendering allocations. Each receives a budget and interface timing assumption. The operator is allocated authority to override the assignment, but the software must display rationale and predicted consequence within a separate response threshold.</p>
+<h3 id="guided-practice-3">Guided practice</h3>
+<ol>
+<li>Construct a function-to-element allocation for one mission thread.</li>
+<li>Derive component requirements for a system-level performance requirement.</li>
+<li>Identify shared requirements and define contribution measures.</li>
+<li>Run allocation coverage and conflicting-owner queries.</li>
+</ol>
+<h3 id="independent-exercises-3">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Classify 20 lower-level statements as allocated, derived, interface, constraint, or invalid.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Produce component specifications for at least five major elements.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze one human-automation allocation using workload and failure recovery.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Perform an allocation audit for gaps, duplicate authority, and impossible local constraints.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Create a query that reports every component obligation lacking upstream rationale or downstream verification intent.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-3">Weekly deliverable</h3>
+<p>Submit component specification set v1, allocation matrices, derived-requirement rationale, human/function allocation analysis, and allocation-audit report.</p>
+<h3 id="analytic-rubric-3">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Decomposition and derivation | 25% | Lower-level obligations preserve system intent and rationale. |</p>
+<p>| Allocation quality | 30% | Functions and properties are assigned coherently across humans, hardware, software, and enabling elements. |</p>
+<p>| Coverage and conflict analysis | 25% | Gaps, overlaps, shared properties, and emergent concerns are treated. |</p>
+<p>| Traceability and control | 20% | The allocation is queryable and configuration controlled. |</p>
+<h3 id="critical-failures-3">Critical failures</h3>
+<ul>
+<li>Critical system requirement has no lower-level realization path.</li>
+<li>Duplicate control authority is unresolved.</li>
+<li>Human role is defined only as a fallback without workload or information design.</li>
+<li>Derived requirement lacks rationale.</li>
+</ul>
+<h3 id="knowledge-check-3">Knowledge check</h3>
+<ol>
+<li>How does derivation differ from copying a system requirement?</li>
+<li>Why are cross-cutting requirements difficult to allocate?</li>
+<li>What is a contribution budget?</li>
+<li>When can duplicate allocation be correct?</li>
+<li>What evidence should accompany human-function allocation?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-3">Revision and mastery gate</h3>
+<p>No critical orphan or unresolved authority conflict may remain. Review at least one allocation with an operator and one with an integration/test perspective, then revise.</p>
+<h3 id="suggested-workload-3">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Allocation modeling | 4.0 |</p>
+<p>| Audit and analysis | 3.0 |</p>
+<p>| Revision | 2.0 |</p>
+<hr/>
+<h2 id="week-4--mature-the-physical-architecture-interfaces-and-performance-budgets">Week 4 — Mature the physical architecture, interfaces, and performance budgets</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B7/chapters/04-mature-the-physical-architecture-interfaces-and-perform.html">Read Book 7, Chapter 4</a> → <a href="../../K/B7/labs/lab-04-mature-the-physical-architecture-interfaces-and-perform.html">complete Hypothetical Lab 4</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-768-w04.html">Read the Week 4 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C4, C7</p>
+<h3 id="professional-context-and-essential-question-4">Professional context and essential question</h3>
+<p>Physical architecture makes the system buildable, but it also creates interfaces and consumes finite resources. <strong>Essential question:</strong> Does the architecture satisfy the allocated functions and requirements with controlled margins and testable interfaces?</p>
+<h3 id="weekly-learning-outcomes-4">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>develop system, subsystem, component, human, software, facility, and support views</li>
+<li>define interface boundaries, items, protocols, timing, units, ownership, and change authority</li>
+<li>construct performance and resource budgets</li>
+<li>calculate margins and uncertainty and define escalation thresholds</li>
+<li>use model queries to detect architectural inconsistency</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-4">Retrieval and readiness check</h3>
+<ol>
+<li>List six categories of interfaces.</li>
+<li>Explain allocated value, current best estimate, margin, and reserve.</li>
+<li>Why can two individually compliant components fail at their interface?</li>
+<li>What is the difference between an ICD and an interface agreement?</li>
+</ol>
+<h3 id="required-study-4">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA interface management</strong> — full section. <strong>Purpose:</strong> Define, negotiate, control, and verify interfaces. <strong>Guiding questions:</strong> What must be confirmed before physical connection?</p>
+</li>
+<li>
+<p><strong>NASA product integration</strong> — planning inputs and work products. <strong>Purpose:</strong> Connect architecture and interfaces to integration. <strong>Guiding questions:</strong> Which enabling products should be designed now?</p>
+</li>
+<li>
+<p><strong>NASA design solution definition</strong> — physical architecture and design description. <strong>Purpose:</strong> Maintain logical-to-physical coherence. <strong>Guiding questions:</strong> How are alternatives and specialty constraints reflected?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-4">Instructor-style lesson notes</h3>
+<p>An interface definition must describe more than a connector. It includes purpose, participants, direction, data or material, units, ranges, timing, protocol, error behavior, safety/security constraints, physical characteristics, ownership, configuration, and verification method.</p>
+<p>Technical budgets turn system-level limits into managed allocations. The budget should distinguish requirement, allocation, predicted value, uncertainty, margin, owner, model revision, and threshold for action.</p>
+<p>Margin is not free performance. Central reserves and local margins require governance so that one subsystem cannot consume system capability without cross-system review.</p>
+<p>Architecture views are projections of one authoritative design. Conflicting names, interfaces, cardinalities, or allocations across diagrams indicate a model problem, not a documentation preference.</p>
+<h3 id="worked-example-4">Worked example</h3>
+<p>The end-to-end confirmation budget allocates 0.5 s to the rider interface, 1.0 s network, 4.0 s dispatch, 1.5 s vehicle acknowledgment, and 1.0 s response rendering. Current estimates total 7.1 s with 0.9 s margin. A network change adds 0.6 s and uncertainty grows by 0.2 s; the threshold is crossed, triggering a design decision rather than quietly updating a slide.</p>
+<h3 id="guided-practice-4">Guided practice</h3>
+<ol>
+<li>Define one external and two internal interfaces with complete attributes.</li>
+<li>Build latency, energy, data, and staffing budgets.</li>
+<li>Trace one budget from system requirement to component allocations and interfaces.</li>
+<li>Run model checks for untyped flows, undefined units, and missing owners.</li>
+</ol>
+<h3 id="independent-exercises-4">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Correct a deliberately incomplete interface control sheet.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Produce architecture views and an interface register for the case.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze margin sensitivity to three uncertain component estimates.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Create an Interface Working Group agenda and resolve one disputed ownership issue.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Automate a budget dashboard from controlled source data.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-4">Weekly deliverable</h3>
+<p>Submit physical architecture baseline v1, interface register and three detailed interface specifications, four technical budgets, margin-policy note, and model-consistency report.</p>
+<h3 id="analytic-rubric-4">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Architecture coherence | 25% | Physical elements realize functions and requirements across all lifecycle elements. |</p>
+<p>| Interface quality | 25% | Interfaces are complete, testable, owned, and controlled. |</p>
+<p>| Budget rigor | 30% | Allocations, estimates, uncertainty, margins, and thresholds are correct and reproducible. |</p>
+<p>| Model quality | 20% | Views agree and automated checks expose defects. |</p>
+<h3 id="critical-failures-4">Critical failures</h3>
+<ul>
+<li>Critical interface lacks owner or error behavior.</li>
+<li>Budget values cannot be reproduced.</li>
+<li>Negative or consumed margin is hidden.</li>
+<li>Architecture omits a necessary human, facility, support, or data element.</li>
+</ul>
+<h3 id="knowledge-check-4">Knowledge check</h3>
+<ol>
+<li>What information belongs in an interface definition?</li>
+<li>How is margin different from uncertainty?</li>
+<li>Why should interface verification be planned during design?</li>
+<li>What is a central reserve?</li>
+<li>What does an untyped flow imply?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-4">Revision and mastery gate</h3>
+<p>All critical interfaces must have owner, configuration identity, and verification intent. All critical budgets must show nonnegative margin or an approved recovery action.</p>
+<h3 id="suggested-workload-4">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Architecture/interfaces | 4.0 |</p>
+<p>| Budget analysis | 3.5 |</p>
+<p>| Review | 2.0 |</p>
+<hr/>
+<h2 id="week-5--use-prototypes-and-experiments-to-retire-technology-and-design-risk">Week 5 — Use prototypes and experiments to retire technology and design risk</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B7/chapters/05-use-prototypes-and-experiments-to-retire-technology-and.html">Read Book 7, Chapter 5</a> → <a href="../../K/B7/labs/lab-05-use-prototypes-and-experiments-to-retire-technology-and.html">complete Hypothetical Lab 5</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-768-w05.html">Read the Week 5 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C7, C8, C9</p>
+<h3 id="professional-context-and-essential-question-5">Professional context and essential question</h3>
+<p>Analysis cannot resolve every unknown. A prototype is valuable only when it answers a decision-relevant question. <strong>Essential question:</strong> Which uncertainties justify a prototype or experiment, and what result would change the design?</p>
+<h3 id="weekly-learning-outcomes-5">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>distinguish technology readiness, integration readiness, manufacturing readiness, and evidence maturity</li>
+<li>select analysis, simulation, bench prototype, digital prototype, human-in-the-loop trial, or supplier evidence</li>
+<li>write falsifiable prototype objectives and acceptance criteria</li>
+<li>design bounded experiments and collect reproducible evidence</li>
+<li>update risk, architecture, budget, and decisions from results</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-5">Retrieval and readiness check</h3>
+<ol>
+<li>Distinguish a demonstration from an experiment.</li>
+<li>Name one risk that a software mock-up can retire and one it cannot.</li>
+<li>What makes an experiment decision-relevant?</li>
+<li>Why should instrumentation be designed with the prototype?</li>
+</ol>
+<h3 id="required-study-5">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA technical risk management</strong> — risk identification through handling and monitoring. <strong>Purpose:</strong> Tie prototypes to risk retirement. <strong>Guiding questions:</strong> When should risk handling change the architecture?</p>
+</li>
+<li>
+<p><strong>NASA SE Handbook appendix</strong> — engineering models, prototypes, test units, and technology assessment. <strong>Purpose:</strong> Choose representative evidence. <strong>Guiding questions:</strong> How representative must the article and environment be?</p>
+</li>
+<li>
+<p><strong>NIST DOE introduction</strong> — experimental objectives, factors, responses, and sequential learning. <strong>Purpose:</strong> Plan efficient experiments. <strong>Guiding questions:</strong> Why are several small experiments often superior to one large test?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-5">Instructor-style lesson notes</h3>
+<p>Prototype fidelity should match the question. A low-fidelity user-interface prototype may reveal workload and comprehension problems but cannot establish field reliability. A bench network may characterize latency but not total operational response.</p>
+<p>Write the decision first: what design choice or risk disposition depends on the result? Then define factors, responses, ranges, nuisance variables, instrumentation, sample size logic, acceptance boundary, and analysis method.</p>
+<p>Negative results are useful when the experiment is credible and traceable. Do not redefine success after seeing data.</p>
+<p>Prototype results must update the controlled baseline. A report that does not change risk exposure, assumptions, budgets, requirements, or design knowledge is not integrated engineering evidence.</p>
+<h3 id="worked-example-5">Worked example</h3>
+<p>A bench experiment tests vehicle-acknowledgment latency under network loss, load, and retry-policy settings. The decision is whether to use synchronous acknowledgment or provisional assignment. The experiment randomizes runs, records time stamps and packet loss, and sets a 1.5-second 95th-percentile threshold. Results show the synchronous design fails under credible loss; an ADR selects provisional assignment with later reconciliation and updates the safety and user-message design.</p>
+<h3 id="guided-practice-5">Guided practice</h3>
+<ol>
+<li>Convert three risks into candidate evidence questions.</li>
+<li>Choose the lowest-cost credible evidence method for each.</li>
+<li>Write one prototype test card with decision, factors, response, setup, and stop criteria.</li>
+<li>Simulate or execute a small experiment and update the risk register.</li>
+</ol>
+<h3 id="independent-exercises-5">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Match ten uncertainties to analysis, simulation, prototype, supplier evidence, or test.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Plan and execute one risk-retirement experiment.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze validity threats, representativeness, and uncertainty.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Make and document a design decision based on the result.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Create a reusable prototype evidence schema linked to requirements, risks, and decisions.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-5">Weekly deliverable</h3>
+<p>Submit technology/evidence maturity assessment, prioritized risk-retirement plan, prototype or experiment protocol, data and analysis, decision record, and baseline updates.</p>
+<h3 id="analytic-rubric-5">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Decision relevance | 25% | Each activity is tied to a named decision or risk. |</p>
+<p>| Experimental credibility | 30% | Factors, responses, setup, instrumentation, controls, and analysis are defensible. |</p>
+<p>| Evidence interpretation | 25% | Validity, uncertainty, and limitations are explicit. |</p>
+<p>| Baseline integration | 20% | Results update design, risk, budgets, and traceability. |</p>
+<h3 id="critical-failures-5">Critical failures</h3>
+<ul>
+<li>Prototype has no predeclared decision or acceptance boundary.</li>
+<li>Data or code is not retained.</li>
+<li>Result is generalized beyond article or environment validity.</li>
+<li>Critical adverse result is omitted from the baseline.</li>
+</ul>
+<h3 id="knowledge-check-5">Knowledge check</h3>
+<ol>
+<li>How should prototype fidelity be selected?</li>
+<li>What is a validity threat?</li>
+<li>Why predeclare acceptance criteria?</li>
+<li>How does a prototype retire risk?</li>
+<li>When is supplier evidence insufficient?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-5">Revision and mastery gate</h3>
+<p>The experiment must be reproducible and must produce a documented risk/design disposition. Inconclusive results require a revised evidence plan, not a forced conclusion.</p>
+<h3 id="suggested-workload-5">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study and design | 3.0 |</p>
+<p>| Build/simulate | 3.5 |</p>
+<p>| Analyze | 3.0 |</p>
+<p>| Update and review | 2.0 |</p>
+<hr/>
+<h2 id="week-6--integrate-multidisciplinary-design-and-conduct-the-pdr-style-review">Week 6 — Integrate multidisciplinary design and conduct the PDR-style review</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B7/chapters/06-integrate-multidisciplinary-design-and-conduct-the-pdr-.html">Read Book 7, Chapter 6</a> → <a href="../../K/B7/labs/lab-06-integrate-multidisciplinary-design-and-conduct-the-pdr-.html">complete Hypothetical Lab 6</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-768-w06.html">Read the Week 6 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C4, C5, C10</p>
+<h3 id="professional-context-and-essential-question-6">Professional context and essential question</h3>
+<p>Preliminary design must demonstrate that the system can satisfy requirements within acceptable risk, cost, schedule, and margin. <strong>Essential question:</strong> Is the design coherent enough to proceed to detailed realization?</p>
+<h3 id="weekly-learning-outcomes-6">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>integrate hardware, software, human, data, facility, operational, and support designs</li>
+<li>record architecture and design decisions with alternatives and consequences</li>
+<li>analyze software/hardware integration dependencies and incremental delivery</li>
+<li>assess preliminary design against review entrance and success criteria</li>
+<li>conduct and close a PDR-style review</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-6">Retrieval and readiness check</h3>
+<ol>
+<li>Name three products that should be mature at PDR but not necessarily complete.</li>
+<li>Why can software architecture invalidate a physical integration sequence?</li>
+<li>What belongs in an architecture decision record?</li>
+<li>Explain acceptable risk versus zero risk.</li>
+</ol>
+<h3 id="required-study-6">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA PDR criteria</strong> — NPR 7123.1 review criteria and SE Handbook review guidance. <strong>Purpose:</strong> Define evidence for preliminary design maturity. <strong>Guiding questions:</strong> Which criteria concern risk, margins, and specialty engineering?</p>
+</li>
+<li>
+<p><strong>NASA decision analysis</strong> — decision context, alternatives, criteria, uncertainty, and documentation. <strong>Purpose:</strong> Make design decisions transparent. <strong>Guiding questions:</strong> When should a decision be reopened?</p>
+</li>
+<li>
+<p><strong>NASA Software Engineering Handbook</strong> — detailed design and review entrance/exit guidance. <strong>Purpose:</strong> Integrate software maturity with system reviews. <strong>Guiding questions:</strong> What software evidence is required at PDR and CDR?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-6">Instructor-style lesson notes</h3>
+<p>Multidisciplinary design is not a meeting where each discipline presents its slide. Integration requires resolving incompatible assumptions, shared resources, interface timing, failure responses, and configuration dependencies.</p>
+<p>Architecture Decision Records should capture context, decision, alternatives, evidence, assumptions, consequences, owner, date, and reopen triggers. Decisions with safety, security, or lifecycle consequences require independent challenge.</p>
+<p>Software integration affects hardware-in-the-loop availability, interface simulators, data schemas, observability, update mechanisms, and rollback. Plan software increments around mission threads and integration evidence, not merely feature lists.</p>
+<p>A PDR-style decision may be proceed, proceed with mandatory actions, hold, or rework. Closure should be based on evidence and risk, not schedule pressure.</p>
+<h3 id="worked-example-6">Worked example</h3>
+<p>The reference design's vehicle gateway and dispatch platform use inconsistent state names for 'assigned,' 'accepted,' and 'en route.' The multidisciplinary review discovers that timing, operator displays, and test cases interpret the states differently. A controlled state/interface decision harmonizes semantics, updates APIs and human displays, and prevents false integration success.</p>
+<h3 id="guided-practice-6">Guided practice</h3>
+<ol>
+<li>Compare hardware, software, human, and operations assumptions for one mission thread.</li>
+<li>Write two ADRs, including one rejected alternative.</li>
+<li>Build a PDR evidence matrix against review criteria.</li>
+<li>Conduct a timed review and record actions, dissent, and decision.</li>
+</ol>
+<h3 id="independent-exercises-6">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Diagnose five multidisciplinary inconsistencies in a supplied package.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Integrate the learner's preliminary design baseline.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze software/hardware/human integration dependencies for two increments.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Run the PDR-style review and produce dispositions.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Automate a review dashboard showing criteria, evidence, status, owner, and action.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-6">Weekly deliverable</h3>
+<p>Submit preliminary design description, ADR set, integrated mission-thread walkthrough, PDR evidence matrix, review presentation, minutes, actions, dissent log, and revised baseline.</p>
+<h3 id="analytic-rubric-6">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Multidisciplinary coherence | 30% | Hardware, software, humans, data, operations, and support use consistent assumptions and interfaces. |</p>
+<p>| Decision quality | 20% | Alternatives, evidence, consequences, and reopen triggers are recorded. |</p>
+<p>| Review evidence | 30% | Criteria are addressed with authoritative evidence and honest gaps. |</p>
+<p>| Action closure | 20% | Actions and dissent are controlled and resolved by evidence. |</p>
+<h3 id="critical-failures-6">Critical failures</h3>
+<ul>
+<li>Critical cross-discipline inconsistency remains hidden.</li>
+<li>PDR criterion marked complete without evidence.</li>
+<li>Major action closed by assertion.</li>
+<li>Software integration is omitted from system sequencing.</li>
+</ul>
+<h3 id="knowledge-check-6">Knowledge check</h3>
+<ol>
+<li>What is the purpose of PDR?</li>
+<li>How does an ADR differ from meeting minutes?</li>
+<li>Why are shared state semantics an interface issue?</li>
+<li>What decisions may remain open after PDR?</li>
+<li>What does conditional proceed require?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-6">Revision and mastery gate</h3>
+<p>The learner may proceed only when no red critical criterion remains and all conditional actions have owners, dates, and impact controls. Rebaseline after review.</p>
+<h3 id="suggested-workload-6">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Integration and ADRs | 3.5 |</p>
+<p>| Review preparation | 3.0 |</p>
+<p>| Review and revision | 3.0 |</p>
+<hr/>
+<h2 id="week-7--design-for-reliability-availability-and-maintainability">Week 7 — Design for reliability, availability, and maintainability</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B7/chapters/07-design-for-reliability-availability-and-maintainability.html">Read Book 7, Chapter 7</a> → <a href="../../K/B7/labs/lab-07-design-for-reliability-availability-and-maintainability.html">complete Hypothetical Lab 7</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-768-w07.html">Read the Week 7 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C9, C11</p>
+<h3 id="professional-context-and-essential-question-7">Professional context and essential question</h3>
+<p>Reliability and maintainability emerge from architecture, component behavior, diagnostics, logistics, and operations. <strong>Essential question:</strong> How will the system continue delivering service, reveal failure, and recover within operational constraints?</p>
+<h3 id="weekly-learning-outcomes-7">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>translate mission reliability and availability needs into design objectives and allocations</li>
+<li>construct reliability block, failure-mode, and maintainability analyses</li>
+<li>identify single points, common causes, latent failures, and diagnostic gaps</li>
+<li>design fault detection, isolation, recovery, repair, and maintenance access</li>
+<li>update architecture, spares, testability, support, and risk</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-7">Retrieval and readiness check</h3>
+<ol>
+<li>Distinguish reliability, availability, maintainability, and durability.</li>
+<li>What is a common-cause failure?</li>
+<li>Why can adding redundancy reduce maintainability?</li>
+<li>What evidence supports a repair-time requirement?</li>
+</ol>
+<h3 id="required-study-7">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA Reliability and Maintainability</strong> — objectives-based R&amp;M guidance and learning resources. <strong>Purpose:</strong> Integrate R&amp;M across design. <strong>Guiding questions:</strong> Which R&amp;M analyses should influence architecture early?</p>
+</li>
+<li>
+<p><strong>NASA SE Handbook</strong> — reliability, maintainability, supportability, technical risk, and product realization references. <strong>Purpose:</strong> Connect R&amp;M to system processes. <strong>Guiding questions:</strong> How are R&amp;M claims verified?</p>
+</li>
+<li>
+<p><strong>NASA software reliability guidance</strong> — design and analysis considerations. <strong>Purpose:</strong> Include software failure contribution. <strong>Guiding questions:</strong> How do software and hardware failure models differ?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-7">Instructor-style lesson notes</h3>
+<p>Reliability is probability of successful performance over a defined time and condition. Availability includes downtime and support. Maintainability addresses restoration effort and time. Each measure needs an operational profile and boundary.</p>
+<p>FMEA should be used to change design, not merely populate rows. Identify failure mode, local effect, next-higher effect, mission effect, detection, controls, severity, occurrence evidence, and recommended action.</p>
+<p>Redundancy can create common-mode, voting, synchronization, maintenance, and hidden-failure problems. Analyze independence rather than assuming it.</p>
+<p>Maintainability is designed through access, modularity, diagnostics, test points, safe isolation, documentation, tools, spares, training, and restoration verification.</p>
+<h3 id="worked-example-7">Worked example</h3>
+<p>The dispatch platform has two servers but one shared identity service. A reliability block diagram reveals the shared service as a single point. FMEA shows that authentication failure prevents dispatch and maintenance access. The design adds degraded local credentials with strict time limits, independent health monitoring, and a tested restoration procedure; availability and security analyses are updated together.</p>
+<h3 id="guided-practice-7">Guided practice</h3>
+<ol>
+<li>Build a mission reliability block diagram.</li>
+<li>Complete FMEA entries for five critical functions.</li>
+<li>Estimate availability from failure and restoration assumptions.</li>
+<li>Perform a maintainability walkthrough for one replaceable item.</li>
+</ol>
+<h3 id="independent-exercises-7">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Calculate reliability/availability for three architecture variants.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Develop FMEA/FMECA for a critical mission thread.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze common-cause and latent failure exposure.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Propose and trade design changes for diagnostics, recovery, repair, and spares.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Implement a failure-to-requirement-to-test trace query.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-7">Weekly deliverable</h3>
+<p>Submit RAM objectives and allocations, reliability model, FMEA/FMECA excerpt, maintainability analysis, design-change record, verification approach, and residual-risk statement.</p>
+<h3 id="analytic-rubric-7">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Operational definitions | 20% | Measures use explicit mission, time, environment, and boundary. |</p>
+<p>| Failure analysis | 30% | Critical modes, causes, effects, detection, and common causes are credible. |</p>
+<p>| Design influence | 30% | Analysis produces justified architecture, diagnostics, maintenance, or support changes. |</p>
+<p>| Evidence and traceability | 20% | Claims and planned verification are controlled and linked. |</p>
+<h3 id="critical-failures-7">Critical failures</h3>
+<ul>
+<li>Availability calculated without an operational-time definition.</li>
+<li>Single point or common cause ignored.</li>
+<li>FMEA has no design consequence.</li>
+<li>Maintenance action cannot be performed safely or verified.</li>
+</ul>
+<h3 id="knowledge-check-7">Knowledge check</h3>
+<ol>
+<li>How does availability differ from reliability?</li>
+<li>What is latent failure?</li>
+<li>Why is redundancy not automatically reliable?</li>
+<li>What makes a component maintainable?</li>
+<li>How should software failure contribution be represented?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-7">Revision and mastery gate</h3>
+<p>Every catastrophic or mission-critical failure mode requires prevention, detection, tolerance, recovery, or explicit acceptance by authority. Update budgets, architecture, and integration tests.</p>
+<h3 id="suggested-workload-7">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Models and FMEA | 4.0 |</p>
+<p>| Design changes | 3.0 |</p>
+<p>| Review | 2.0 |</p>
+<hr/>
+<h2 id="week-8--design-for-human-performance-safety-security-usability-and-resilience">Week 8 — Design for human performance, safety, security, usability, and resilience</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B7/chapters/08-design-for-human-performance-safety-security-usability-.html">Read Book 7, Chapter 8</a> → <a href="../../K/B7/labs/lab-08-design-for-human-performance-safety-security-usability-.html">complete Hypothetical Lab 8</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-768-w08.html">Read the Week 8 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C9, C11</p>
+<h3 id="professional-context-and-essential-question-8">Professional context and essential question</h3>
+<p>A system may meet nominal technical performance and still fail because operators cannot understand, control, recover, or trust it. <strong>Essential question:</strong> How will the integrated human-technology system behave under normal, stressed, degraded, and adversarial conditions?</p>
+<h3 id="weekly-learning-outcomes-8">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>allocate functions and authority across humans and automation</li>
+<li>model workload, information, decisions, errors, and recovery</li>
+<li>integrate hazard controls, security requirements, and cyber-resilience objectives</li>
+<li>design degraded modes, safe states, recovery, and adaptation</li>
+<li>evaluate usability and accessibility through representative scenarios</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-8">Retrieval and readiness check</h3>
+<ol>
+<li>What is automation surprise?</li>
+<li>Distinguish fail-safe, fail-operational, and graceful degradation.</li>
+<li>Why can a cybersecurity control create a safety or usability hazard?</li>
+<li>What makes a usability test representative?</li>
+</ol>
+<h3 id="required-study-8">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA HSI Handbook</strong> — HSI domains, process, analysis, and design integration. <strong>Purpose:</strong> Treat humans as system elements. <strong>Guiding questions:</strong> How are human limitations converted into design evidence?</p>
+</li>
+<li>
+<p><strong>NASA HSI Plan outline</strong> — planning topics and lifecycle integration. <strong>Purpose:</strong> Govern HSI work. <strong>Guiding questions:</strong> Which products should be reviewed at design gates?</p>
+</li>
+<li>
+<p><strong>NIST SP 800-160 Vol. 1 and Vol. 2 Rev. 1</strong> — systems security and cyber-resilience concepts. <strong>Purpose:</strong> Integrate trustworthy and resilient design. <strong>Guiding questions:</strong> How should systems anticipate, withstand, recover, and adapt?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-8">Instructor-style lesson notes</h3>
+<p>Human allocation defines information, authority, timing, workload, training, and recovery—not merely which screen a person uses. Model the human decision loop and failure consequences.</p>
+<p>Safety, security, and usability interact. Authentication may delay emergency action; safety overrides may create cyber paths; aggressive automation may reduce workload while eroding situation awareness.</p>
+<p>Resilience includes preparation, absorption, recovery, and adaptation. Define degraded services and minimum mission capability rather than only component redundancy.</p>
+<p>Usability and accessibility evidence should use representative users, tasks, contexts, devices, environmental stressors, and measurable outcomes. Expert opinion alone is insufficient.</p>
+<h3 id="worked-example-8">Worked example</h3>
+<p>During a communication outage, the vehicle enters a safe stop, but the interface shows only 'service unavailable.' Operators cannot distinguish network failure from vehicle fault, riders receive no accessible instruction, and recovery requires a remote command that cannot arrive. The design adds local degraded routing, multimodal messages, bounded operator authority, and a recovery-state model; safety, security, and training evidence are updated.</p>
+<h3 id="guided-practice-8">Guided practice</h3>
+<ol>
+<li>Create a human-function and authority allocation for a degraded scenario.</li>
+<li>Map one hazard and one cyber threat to design controls and verification evidence.</li>
+<li>Construct a degraded-mode state model.</li>
+<li>Plan a small usability/accessibility evaluation.</li>
+</ol>
+<h3 id="independent-exercises-8">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Identify human-system defects in a supplied scenario.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Develop HSI, safety, security, and resilience requirements and design evidence.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze conflicts among controls using a trade or hazard analysis.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Run a tabletop degraded/adversarial scenario and update the design.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Build a cross-domain query from hazards/threats to controls, interfaces, and tests.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-8">Weekly deliverable</h3>
+<p>Submit HSI plan excerpt, human-function allocation, workload/information analysis, hazard-threat-control matrix, degraded-mode architecture, usability/accessibility protocol and results, and design updates.</p>
+<h3 id="analytic-rubric-8">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Human-system analysis | 25% | Roles, information, authority, workload, error, and recovery are explicit. |</p>
+<p>| Safety/security integration | 25% | Hazards and threats drive coordinated controls and evidence. |</p>
+<p>| Resilience design | 25% | Degraded capability, recovery, and adaptation are defined and tested conceptually. |</p>
+<p>| User evidence | 25% | Representative usability/accessibility evidence changes the design. |</p>
+<h3 id="critical-failures-8">Critical failures</h3>
+<ul>
+<li>Critical human action lacks information, authority, or time.</li>
+<li>Safety and security conflict is ignored.</li>
+<li>No defined degraded mode for a credible disruption.</li>
+<li>Accessibility is treated as a separate service rather than system capability.</li>
+</ul>
+<h3 id="knowledge-check-8">Knowledge check</h3>
+<ol>
+<li>What is HSI?</li>
+<li>How does graceful degradation differ from safe shutdown?</li>
+<li>Why can a security control affect safety?</li>
+<li>What makes a resilience objective measurable?</li>
+<li>What is representative usability evidence?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-8">Revision and mastery gate</h3>
+<p>No critical scenario may rely on an undefined human response or recovery path. Review all design changes for interface, training, test, and configuration consequences.</p>
+<h3 id="suggested-workload-8">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 3.0 |</p>
+<p>| HSI/hazard modeling | 3.5 |</p>
+<p>| Scenario evaluation | 3.0 |</p>
+<p>| Revision | 2.0 |</p>
+<hr/>
+<h2 id="week-9--design-for-supportability-producibility-supply-sustainability-and-disposal">Week 9 — Design for supportability, producibility, supply, sustainability, and disposal</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B7/chapters/09-design-for-supportability-producibility-supply-sustaina.html">Read Book 7, Chapter 9</a> → <a href="../../K/B7/labs/lab-09-design-for-supportability-producibility-supply-sustaina.html">complete Hypothetical Lab 9</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-768-w09.html">Read the Week 9 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C9, C10, C11</p>
+<h3 id="professional-context-and-essential-question-9">Professional context and essential question</h3>
+<p>A design that cannot be produced, supplied, maintained, updated, supported, or retired is not viable. <strong>Essential question:</strong> Can the system be realized and sustained across its entire life cycle without transferring unacceptable cost or risk downstream?</p>
+<h3 id="weekly-learning-outcomes-9">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>develop maintenance, logistics, training, technical-data, spares, and support concepts</li>
+<li>assess producibility, supplier, obsolescence, quality, and configuration risks</li>
+<li>design modularity, replaceability, testability, transport, storage, and update mechanisms</li>
+<li>evaluate environmental, sustainability, decommissioning, data-retention, and disposal obligations</li>
+<li>incorporate life-cycle evidence into architecture and affordability</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-9">Retrieval and readiness check</h3>
+<ol>
+<li>Distinguish supportability from maintainability.</li>
+<li>What is a long-lead or single-source risk?</li>
+<li>Why is disposal a design input?</li>
+<li>What technical data is needed to sustain a system?</li>
+</ol>
+<h3 id="required-study-9">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA SE Handbook</strong> — enabling products, supportability, production, transition, and disposal references. <strong>Purpose:</strong> Design the full lifecycle system. <strong>Guiding questions:</strong> Which enabling products must mature before realization?</p>
+</li>
+<li>
+<p><strong>NASA R&amp;M resources</strong> — maintainability and supportability integration. <strong>Purpose:</strong> Connect maintenance to logistics and availability. <strong>Guiding questions:</strong> What analyses inform spares and repair concepts?</p>
+</li>
+<li>
+<p><strong>NIST SP 800-160</strong> — lifecycle protection and disposal considerations. <strong>Purpose:</strong> Include data and security end-of-life. <strong>Guiding questions:</strong> How should media, credentials, and sensitive data be retired?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-9">Instructor-style lesson notes</h3>
+<p>Supportability includes people, facilities, tools, spares, supply, diagnostics, data, training, procedures, software updates, licenses, and vendor relationships. It is an architecture, not an appendix.</p>
+<p>Producibility considers process capability, tolerances, assembly, inspection, quality, repeatability, test access, supplier maturity, and configuration. Prototype assembly is not evidence of repeatable production.</p>
+<p>Obsolescence and supply risk should shape modularity, open interfaces, replaceable units, data rights, and alternatives. A low acquisition price may create high sustainment exposure.</p>
+<p>Disposal includes decommissioning, data migration/deletion, hazardous materials, battery handling, software/license termination, asset disposition, and continuity of retained records.</p>
+<h3 id="worked-example-9">Worked example</h3>
+<p>The reference vehicle controller uses a proprietary cellular module with a five-year vendor support horizon. The 10-year design life and security-update requirement expose an obsolescence risk. The design separates the communications module behind a controlled interface, defines replacement qualification, secures protocol/data rights, and adds a technology-refresh budget and test harness.</p>
+<h3 id="guided-practice-9">Guided practice</h3>
+<ol>
+<li>Map support resources to three maintenance tasks.</li>
+<li>Perform a make/buy and supplier-risk screen for one component.</li>
+<li>Create a life-cycle data and disposal flow.</li>
+<li>Estimate the availability and cost effect of two spares policies.</li>
+</ol>
+<h3 id="independent-exercises-9">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Diagnose support and production gaps in a supplied design.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Develop a supportability and producibility concept for the case.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze supplier, obsolescence, quality, and data-rights risks.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Design decommissioning and disposal requirements and evidence.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Create a lifecycle-cost and supportability dashboard linked to architecture.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-9">Weekly deliverable</h3>
+<p>Submit support concept, maintenance-task and spares analysis, producibility/supplier assessment, obsolescence plan, training/data/tool requirements, sustainability/disposal plan, and resulting design changes.</p>
+<h3 id="analytic-rubric-9">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Support-system completeness | 25% | People, facilities, tools, data, spares, training, and updates are integrated. |</p>
+<p>| Production and supply analysis | 25% | Process, quality, supplier, and obsolescence risks are credible. |</p>
+<p>| Lifecycle and disposal | 25% | Sustainment, transition, data, environmental, and end-of-life obligations are designed. |</p>
+<p>| Architecture/affordability influence | 25% | Evidence changes design and life-cycle estimates. |</p>
+<h3 id="critical-failures-9">Critical failures</h3>
+<ul>
+<li>Critical support resource is assumed but undefined.</li>
+<li>Single-source/obsolescence exposure ignored.</li>
+<li>Production evidence inferred from one prototype.</li>
+<li>Sensitive data or hazardous material has no retirement path.</li>
+</ul>
+<h3 id="knowledge-check-9">Knowledge check</h3>
+<ol>
+<li>How does supportability differ from maintainability?</li>
+<li>What makes a design producible?</li>
+<li>Why should data rights matter to architecture?</li>
+<li>What is an obsolescence strategy?</li>
+<li>Which end-of-life concerns should become requirements?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-9">Revision and mastery gate</h3>
+<p>All mission-critical support and production dependencies must have owners and evidence plans. Update the physical architecture to include enabling products and lifecycle interfaces.</p>
+<h3 id="suggested-workload-9">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Support/production analysis | 4.0 |</p>
+<p>| Lifecycle planning | 3.0 |</p>
+<p>| Review | 2.0 |</p>
+<hr/>
+<h2 id="week-10--plan-system-integration-and-conduct-the-integration-readiness-review">Week 10 — Plan system integration and conduct the Integration Readiness Review</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B7/chapters/10-plan-system-integration-and-conduct-the-integration-rea.html">Read Book 7, Chapter 10</a> → <a href="../../K/B7/labs/lab-10-plan-system-integration-and-conduct-the-integration-rea.html">complete Hypothetical Lab 10</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-768-w10.html">Read the Week 10 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C4, C6, C10</p>
+<h3 id="professional-context-and-essential-question-10">Professional context and essential question</h3>
+<p>Integration is the controlled creation of higher-level capability from verified lower-level products. <strong>Essential question:</strong> In what order, with what enabling systems and evidence, should elements be combined so that consequential problems are discovered early and safely?</p>
+<h3 id="weekly-learning-outcomes-10">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>select and justify an integration strategy and sequence</li>
+<li>define builds, mission threads, interfaces, facilities, simulators, stubs, drivers, data, and instrumentation</li>
+<li>write measurable entry/exit criteria and rollback rules</li>
+<li>integrate configuration, discrepancy, safety, security, and scheduling controls</li>
+<li>conduct an Integration Readiness Review</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-10">Retrieval and readiness check</h3>
+<ol>
+<li>Compare top-down, bottom-up, thread-based, incremental, and risk-first integration.</li>
+<li>What is an enabling product?</li>
+<li>Why is 'component test passed' insufficient entry evidence?</li>
+<li>What should happen when an integration step fails?</li>
+</ol>
+<h3 id="required-study-10">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA product integration</strong> — strategy, preparation, execution, evaluation, and work products. <strong>Purpose:</strong> Build the integration plan. <strong>Guiding questions:</strong> Which interface and enabling products are required?</p>
+</li>
+<li>
+<p><strong>NASA interface management</strong> — integration-phase interface activities. <strong>Purpose:</strong> Prevent and resolve interface discrepancies. <strong>Guiding questions:</strong> What prechecks should occur before connection?</p>
+</li>
+<li>
+<p><strong>NASA configuration management</strong> — baseline integrity across build, test, and operations. <strong>Purpose:</strong> Control articles and evidence. <strong>Guiding questions:</strong> How is as-built status established?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-10">Instructor-style lesson notes</h3>
+<p>Integration sequence should maximize learning and risk retirement while protecting articles, people, schedule, and evidence. Organize around executable mission threads and critical interfaces rather than organizational ownership.</p>
+<p>Each integration event needs identified inputs, article configuration, prerequisites, environment, procedures, instrumentation, expected behavior, success criteria, discrepancy handling, rollback, and output evidence.</p>
+<p>Simulators, stubs, drivers, SIL/HIL facilities, test data, operator stations, maintenance tools, and telemetry are enabling products with their own requirements and readiness evidence.</p>
+<p>A discrepancy may reveal a design defect, interface mismatch, procedure error, instrumentation error, environment issue, data problem, or requirement ambiguity. Do not default to blaming the component.</p>
+<h3 id="worked-example-10">Worked example</h3>
+<p>The initial plan integrates all 12 vehicles with the dispatch platform before testing one complete mission thread. A risk-first redesign uses a digital twin, one vehicle gateway, operator console, and representative rider interface to execute request-to-dropoff, degraded communications, and recovery. It discovers state and clock synchronization defects before fleet-scale integration.</p>
+<h3 id="guided-practice-10">Guided practice</h3>
+<ol>
+<li>Build an integration dependency graph.</li>
+<li>Define three builds and their entry/exit criteria.</li>
+<li>Specify enabling products and readiness evidence.</li>
+<li>Run a tabletop integration failure and disposition the discrepancy.</li>
+</ol>
+<h3 id="independent-exercises-10">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Compare three integration strategies for the case.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Develop a detailed integration flow and schedule.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze risk exposure, learning value, and rework for each build.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Conduct the Integration Readiness Review.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Create a configuration-aware execution log and discrepancy dashboard.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-10">Weekly deliverable</h3>
+<p>Submit integration strategy, dependency graph, build plan, facilities/enabling-product architecture, procedures outline, entry/exit and rollback criteria, risk analysis, IRR evidence matrix, and review record.</p>
+<h3 id="analytic-rubric-10">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Strategy and sequence | 30% | Order is justified by dependencies, mission threads, risk, and learning. |</p>
+<p>| Enabling-system readiness | 25% | Facilities, simulators, data, instrumentation, tools, and personnel are specified. |</p>
+<p>| Control and discrepancy process | 25% | Configuration, safety, security, rollback, and problem reporting are executable. |</p>
+<p>| Review evidence | 20% | IRR criteria and actions are supported by authoritative evidence. |</p>
+<h3 id="critical-failures-10">Critical failures</h3>
+<ul>
+<li>Integration begins without known article configuration.</li>
+<li>Critical interface precheck absent.</li>
+<li>Entry/exit criteria are subjective.</li>
+<li>No safe rollback or discrepancy workflow.</li>
+</ul>
+<h3 id="knowledge-check-10">Knowledge check</h3>
+<ol>
+<li>What distinguishes integration from assembly?</li>
+<li>Why use mission-thread integration?</li>
+<li>What is a test stub?</li>
+<li>How should an interface discrepancy be classified?</li>
+<li>What evidence is needed at IRR?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-10">Revision and mastery gate</h3>
+<p>Integration may proceed only when critical enabling products and interface prechecks are ready and safety/security controls are approved. Conditional items require explicit limits and contingency.</p>
+<h3 id="suggested-workload-10">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Integration planning | 4.0 |</p>
+<p>| Tabletop/review | 3.5 |</p>
+<p>| Revision | 2.0 |</p>
+<hr/>
+<h2 id="week-11--baseline-verification-validation-customer-evidence-and-cdr-readiness">Week 11 — Baseline verification, validation, customer evidence, and CDR readiness</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B7/chapters/11-baseline-verification-validation-customer-evidence-and-.html">Read Book 7, Chapter 11</a> → <a href="../../K/B7/labs/lab-11-baseline-verification-validation-customer-evidence-and-.html">complete Hypothetical Lab 11</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-768-w11.html">Read the Week 11 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C2, C6, C10, C12</p>
+<h3 id="professional-context-and-essential-question-11">Professional context and essential question</h3>
+<p>Detailed design must be accompanied by a credible plan to prove compliance and fitness for intended use. <strong>Essential question:</strong> Does every important claim have an appropriate, feasible, and decision-relevant evidence path?</p>
+<h3 id="weekly-learning-outcomes-11">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>distinguish verification, validation, qualification, acceptance, and certification</li>
+<li>select test, analysis, inspection, demonstration, or combined methods</li>
+<li>construct a verification cross-reference matrix and stakeholder validation matrix</li>
+<li>define test articles, environments, instrumentation, data, and success criteria</li>
+<li>assess design maturity against CDR-style criteria and customer concerns</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-11">Retrieval and readiness check</h3>
+<ol>
+<li>State verification and validation in one sentence each.</li>
+<li>Why is demonstration often weak evidence for quantitative performance?</li>
+<li>What is a qualification article?</li>
+<li>How does customer participation differ between verification and validation?</li>
+</ol>
+<h3 id="required-study-11">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA product verification</strong> — planning, execution, analysis, and reporting. <strong>Purpose:</strong> Create requirement compliance evidence. <strong>Guiding questions:</strong> How are methods and success criteria selected?</p>
+</li>
+<li>
+<p><strong>NASA product validation</strong> — intended use, representative environments, and stakeholder evidence. <strong>Purpose:</strong> Plan operational fitness evidence. <strong>Guiding questions:</strong> When can verification and validation share an event?</p>
+</li>
+<li>
+<p><strong>NASA V&amp;V Plan outline</strong> — full outline. <strong>Purpose:</strong> Structure the integrated V&amp;V baseline. <strong>Guiding questions:</strong> Which articles, environments, responsibilities, and reports are required?</p>
+</li>
+<li>
+<p><strong>NASA CDR criteria</strong> — design maturity and technical data package. <strong>Purpose:</strong> Prepare the final design review. <strong>Guiding questions:</strong> Which unresolved items prevent implementation/integration?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-11">Instructor-style lesson notes</h3>
+<p>Verification asks whether the realized product satisfies specified requirements. Validation asks whether it fulfills intended use in the intended environment. Both require predefined criteria, controlled articles, credible methods, and evaluated results.</p>
+<p>Method selection depends on the claim. Inspection suits physical or documentary attributes; analysis suits models and derived evidence; demonstration shows observable operation; test measures response under controlled conditions. Combined methods may be efficient but should not obscure which claim each supports.</p>
+<p>Validation scenarios should come from ConOps and stakeholder use, including degraded and off-nominal conditions, accessibility, maintenance, transition, and operator workload.</p>
+<p>The V&amp;V plan must be executable by EN.645.769. It should identify objective, requirement/need, method, level, article, configuration, environment, instrumentation, data, sample rationale, success criteria, owner, schedule, dependencies, and report.</p>
+<h3 id="worked-example-11">Worked example</h3>
+<p>The availability requirement cannot be fully demonstrated in a one-week pilot. The plan combines verified component recovery tests, fault-injection results, reliability analysis, operational-profile simulation, and a bounded field demonstration. The claim and uncertainty are separated; the acceptance authority receives the evidence limitations rather than a false pass/fail certainty.</p>
+<h3 id="guided-practice-11">Guided practice</h3>
+<ol>
+<li>Assign verification methods to ten requirements and justify each.</li>
+<li>Create validation scenarios for three stakeholder groups.</li>
+<li>Define article and environment fidelity for one critical test.</li>
+<li>Audit the design package against CDR-style criteria.</li>
+</ol>
+<h3 id="independent-exercises-11">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Correct a defective VCRM with weak methods and missing criteria.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Develop the integrated V&amp;V plan and matrices.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze feasibility, cost, schedule, and evidence sufficiency for critical claims.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Conduct a customer validation-planning session and document changes.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Build a query that reports requirements without executable evidence paths.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-11">Weekly deliverable</h3>
+<p>Submit V&amp;V plan, VCRM, validation matrix, article/environment/instrumentation definitions, evidence-feasibility analysis, CDR evidence matrix, customer feedback record, and preboard action list.</p>
+<h3 id="analytic-rubric-11">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Method and criteria quality | 30% | Evidence methods fit claims and have measurable success criteria. |</p>
+<p>| Traceability and coverage | 25% | Requirements and stakeholder expectations have complete evidence paths. |</p>
+<p>| Feasibility and fidelity | 25% | Articles, environments, resources, data, and schedules are credible. |</p>
+<p>| Review/customer integration | 20% | CDR gaps and customer concerns are controlled and resolved. |</p>
+<h3 id="critical-failures-11">Critical failures</h3>
+<ul>
+<li>Critical requirement has no executable evidence path.</li>
+<li>Verification and validation are treated as synonyms.</li>
+<li>Validation environment is not representative and limitation is hidden.</li>
+<li>CDR readiness is claimed with unresolved critical design data.</li>
+</ul>
+<h3 id="knowledge-check-11">Knowledge check</h3>
+<ol>
+<li>What distinguishes qualification from acceptance?</li>
+<li>When can analysis verify a requirement?</li>
+<li>Why define test article configuration?</li>
+<li>How is a validation scenario derived?</li>
+<li>What evidence belongs at CDR?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-11">Revision and mastery gate</h3>
+<p>No critical requirement or stakeholder expectation may be orphaned. The preboard must show no unmitigated red CDR criterion; otherwise the final decision is rework or conditional with explicit limits.</p>
+<h3 id="suggested-workload-11">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 3.0 |</p>
+<p>| V&amp;V matrices | 4.0 |</p>
+<p>| CDR audit | 3.0 |</p>
+<p>| Revision | 2.0 |</p>
+<hr/>
+<h2 id="week-12--conduct-the-final-design--integration-review-and-hand-off-to-te">Week 12 — Conduct the Final Design &amp; Integration Review and hand off to T&amp;E</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B7/chapters/12-conduct-the-final-design-integration-review-and-hand-of.html">Read Book 7, Chapter 12</a> → <a href="../../K/B7/labs/lab-12-conduct-the-final-design-integration-review-and-hand-of.html">complete Hypothetical Lab 12</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-768-w12.html">Read the Week 12 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C4, C6, C10, C12</p>
+<h3 id="professional-context-and-essential-question-12">Professional context and essential question</h3>
+<p>The final course decision is whether the design and integration baseline is mature enough for realization and formal T&amp;E planning. <strong>Essential question:</strong> What can the program responsibly claim, what remains conditional, and what must the T&amp;E team receive?</p>
+<h3 id="weekly-learning-outcomes-12">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>integrate all course evidence into one controlled baseline</li>
+<li>demonstrate live traceability, budget recalculation, interface impact, and failure response</li>
+<li>assess residual technical, lifecycle, integration, and evidence risk</li>
+<li>make a proceed, conditional-proceed, rework, or stop recommendation</li>
+<li>conduct a formal handoff and receiving review with the T&amp;E perspective</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-12">Retrieval and readiness check</h3>
+<ol>
+<li>Name the authoritative architecture revision.</li>
+<li>Identify the highest residual design risk and its planned T&amp;E evidence.</li>
+<li>State one condition that would reopen the selected concept.</li>
+<li>Explain the difference between design maturity and evidence completion.</li>
+</ol>
+<h3 id="required-study-12">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA SE Handbook</strong> — review, assessment, configuration, integration, verification, and validation sections. <strong>Purpose:</strong> Synthesize the final decision. <strong>Guiding questions:</strong> Which evidence supports readiness rather than mere completion?</p>
+</li>
+<li>
+<p><strong>Phase 2 README</strong> — baseline continuity, review spine, and handoff rules. <strong>Purpose:</strong> Preserve lifecycle continuity. <strong>Guiding questions:</strong> What must the receiving T&amp;E team be able to determine?</p>
+</li>
+<li>
+<p><strong>JHU source syllabus</strong> — goals and CLOs. <strong>Purpose:</strong> Check course-scope completeness. <strong>Guiding questions:</strong> Which source outcome is demonstrated by each capstone artifact?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-12">Instructor-style lesson notes</h3>
+<p>The final package should tell one consistent engineering story. Needs, requirements, functions, architecture, interfaces, budgets, risks, decisions, specialty analyses, integration, and V&amp;V must refer to the same baseline.</p>
+<p>Readiness is a decision under uncertainty. Residual risks, waivers, unavailable evidence, and assumptions should be visible, bounded, owned, and tied to conditions—not hidden to make the review appear cleaner.</p>
+<p>The oral defense tests whether the learner can navigate authoritative source, recompute a claim, explain a design consequence, and respond to an unexpected change without relying on prepared slides.</p>
+<p>The T&amp;E handoff is not a file transfer. The receiving team should challenge testability, article fidelity, instrumentation, critical parameters, environment availability, and discrepancy handling before accepting the baseline.</p>
+<h3 id="worked-example-12">Worked example</h3>
+<p>A last-minute supplier change reduces communications-module temperature range. The learner runs a change-impact query, identifies affected environmental requirements, interface power, enclosure thermal budget, reliability risk, qualification test, spares, and schedule. The review cannot simply accept the substitution; it issues a conditional action with prototype and environmental evidence before integration.</p>
+<h3 id="guided-practice-12">Guided practice</h3>
+<ol>
+<li>Run a cross-artifact consistency audit.</li>
+<li>Practice a live requirement-to-design-to-interface-to-test trace.</li>
+<li>Recalculate one technical budget after a supplied change.</li>
+<li>Conduct the T&amp;E receiving-team challenge and disposition findings.</li>
+</ol>
+<h3 id="independent-exercises-12">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Complete a closed-book terminology and reasoning check.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Assemble and baseline the final portfolio.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze residual risk and evidence sufficiency.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Conduct the final review and oral defense.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Export a machine-readable handoff manifest and automated coverage report.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-12">Weekly deliverable</h3>
+<p>Submit the final controlled design and integration baseline, executive readiness memo, review deck, oral-defense recording or notes, action/waiver/dissent log, and EN.645.769 handoff package.</p>
+<h3 id="analytic-rubric-12">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| End-to-end coherence | 30% | All authoritative artifacts agree and trace across the lifecycle. |</p>
+<p>| Design and integration maturity | 25% | Architecture, interfaces, budgets, specialty evidence, and integration are defensible. |</p>
+<p>| Evidence and residual risk | 20% | Claims, limitations, waivers, and planned T&amp;E are explicit. |</p>
+<p>| Defense and handoff | 25% | The learner answers live challenges and the receiving team can use the package. |</p>
+<h3 id="critical-failures-12">Critical failures</h3>
+<ul>
+<li>Authoritative baseline cannot be identified.</li>
+<li>Critical review action or risk is hidden.</li>
+<li>Live trace or budget cannot be reproduced.</li>
+<li>T&amp;E team cannot determine article, environment, method, or success criteria.</li>
+</ul>
+<h3 id="knowledge-check-12">Knowledge check</h3>
+<ol>
+<li>What does CDR-style readiness mean?</li>
+<li>Why is a handoff a review rather than a transfer?</li>
+<li>How should residual risk be communicated?</li>
+<li>What evidence may remain incomplete at design review?</li>
+<li>When should a design change reopen an earlier decision?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-12">Revision and mastery gate</h3>
+<p>Pass only with all critical mastery criteria satisfied, at least 80% overall, and a receiving-team acceptance of the handoff or a documented conditional acceptance with closure actions.</p>
+<h3 id="suggested-workload-12">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Final study and audit | 2.0 |</p>
+<p>| Portfolio integration | 4.0 |</p>
+<p>| Review and defense | 3.0 |</p>
+<p>| Handoff and revision | 2.5 |</p>
+<hr/>
+<h2 id="solution-and-instructor-material-package">Solution and instructor-material package</h2>
+<p>A separate private solution package should be maintained for self-assessment or mentoring. It should include:</p>
+<ul>
+<li>readiness-diagnostic answer guide;</li>
+<li>defective requirement and interface examples with annotated corrections;</li>
+<li>reference allocation, architecture, and budget models;</li>
+<li>prototype/experiment reference data and analysis;</li>
+<li>reference FMEA, human-function allocation, degraded-mode model, and support concept;</li>
+<li>sample integration dependency graph, procedures, and discrepancy records;</li>
+<li>reference VCRM and validation matrix;</li>
+<li>PDR, IRR, and final-review scoring notes;</li>
+<li>knowledge-check answers with rationales;</li>
+<li>oral-defense follow-up prompts;</li>
+<li>common failure patterns and recovery assignments.</li>
+</ul>
+<p>Do not place complete answers in the learner-facing course file when the exercise depends on independent diagnosis. Publish solution criteria, ranges, and reasoning after submission or keep them in a mentor-controlled directory.</p>
+<h2 id="references">References</h2>
+<p><a href="OVERVIEW.html">Back to Phase 2 README</a><br/>
+<a href="OVERVIEW.html">Back to program README</a></p>
+</main></body></html>

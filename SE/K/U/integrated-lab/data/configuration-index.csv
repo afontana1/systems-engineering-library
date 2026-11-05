@@ -1,0 +1,6 @@
+item_id,item_path,version,owner,status,change_control
+CI-01,data/config.json,v11.0,ModelLead,Baselined,Track sha256 in outputs/input-hashes.json
+CI-02,data/requests.csv,v11.0,TestLead,Baselined,Track sha256 in outputs/input-hashes.json
+CI-03,src/northstar.py,v11.0,SoftwareLead,Prototype,Review code and rerun all tests
+CI-04,data/requirements.csv,v11.0,SELead,Baselined,Review with trace and impacted test
+CI-05,data/hazards.csv,v11.0,SafetyLead,Educational,Reassess after any design change

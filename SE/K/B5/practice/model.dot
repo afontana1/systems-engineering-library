@@ -1,0 +1,1 @@
+digraph G {rankdir=LR;node[shape=box,style=rounded]; Client->API[label="stable key"];API->Dispatcher[label="bounded retries"]; Dispatcher->Store[label="atomic effect"];Dispatcher->Breaker[label="errors/timeout"];Breaker->Client[label="explicit failure"];}

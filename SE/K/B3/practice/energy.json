@@ -1,0 +1,4 @@
+{
+  "mild":{"length_km":12,"rate_kwh_per_km":0.19,"hvac_kwh_per_trip":0.65,"trips":6,"capacity_kwh":25,"reserve_fraction":0.2},
+  "cold":{"length_km":12,"rate_kwh_per_km":0.24,"hvac_kwh_per_trip":1.0,"trips":6,"capacity_kwh":25,"reserve_fraction":0.2}
+}

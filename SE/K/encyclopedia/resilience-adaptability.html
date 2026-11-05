@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Resilience, robustness, and graceful degradation · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/resilience-adaptability.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed reference</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Resilience, robustness, and graceful degradation</h1>
+<p><strong>Reference entry · Systems of systems, enterprises and complexity · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p><strong>Robustness</strong> is the ability to maintain acceptable performance under specified disturbances. <strong>Resilience</strong> emphasizes absorbing disruption, maintaining essential function, recovering, and learning. <strong>Adaptability</strong> concerns changing behavior or structure when conditions evolve beyond the original operating envelope. Redundancy can contribute to robustness but is not synonymous with resilience; duplicate components sharing the same failure cause may collapse together.</p>
+<h2>Theory: service loss, recovery, and correlated failure</h2>
+<p>Define mission service level <code>Q(t)</code> on a declared scale, and a minimum acceptable threshold <code>Q_min</code>. A simple disruption-loss measure over horizon <code>[t0,t1]</code> is <code>L = ∫(Q_ref(t) - Q(t))_+ dt</code>, where <code>(x)_+</code> denotes the positive part. Lower loss reflects less severe or shorter degradation, but must not replace explicit safety constraints or equity analysis. Recovery time, time to detect, fraction of users affected, and retained minimum capability provide complementary views.</p>
+<p>For two redundant independent components with failure probabilities <code>p1</code> and <code>p2</code> over a specified interval, probability both fail is <code>p1 p2</code>; this favorable result depends on independence. With a shared power supply or software defect, the joint failure probability may be much higher. Diversity, isolation, bounded retries, graceful degradation, manual fallback, and rehearsed restoration address different failure mechanisms. Recovery processes themselves need capacity and authority.</p>
+<h2>Worked example: choosing between redundancy and fallback</h2>
+<p>A dispatch system uses two servers with individual monthly failure probability 0.05. An independence assumption yields combined probability <code>0.05 × 0.05 = 0.0025</code>. If a common identity service fails with probability 0.03 and disables both servers, overall availability can be dominated by that shared dependency; the naive 0.25% figure is misleading. An independently operated radio dispatch fallback may maintain reduced service during identity outages, but must be exercised with realistic staffing and demand. The correct design choice depends on mission loss during each failure mode, not only server count.</p>
+<h2>Engineering use and evidence</h2>
+<p>Identify critical service thresholds, failure domains, correlated dependencies, repair logistics, recovery authority, and graceful-degradation modes. Run exercises spanning cyber incidents, supplier outages, severe demand, communications loss, and human overload. Measure time to detect, time to restore, unserved demand, and post-recovery data integrity. Include restoration and reconstitution in the architecture—not as an undocumented operational assumption.</p>
+<h2>Limitations and connections</h2>
+<p>A highly redundant system can still be brittle when all alternatives share information or governance. Mean downtime can hide rare catastrophic loss. Connect resilience to <strong>risk and dependence</strong>, <strong>mission engineering</strong>, <strong>interfaces</strong>, <strong>complexity</strong>, and <strong>enterprise capability planning</strong>.</p>
+<h2>Technical analysis: compare recoveries by lost service, not only outage duration</h2>
+<p>Resilience can be quantified against a specified service trajectory. Define normalized mission service <code>S(t)</code> with <code>0≤S(t)≤1</code>, and over a declared horizon <code>[0,T]</code> define total lost service <code>A_loss = ∫₀ᵀ[1−S(t)]dt</code> (units of equivalent full-service time). A total outage lasting four hours has <code>A_loss = 4 hours</code>. A disruption in which service falls to 50% for six hours has <code>A_loss = 3 equivalent hours</code>. On this measure, a longer <em>partial</em> disruption may be preferable to a shorter <em>complete</em> one; some critical functions may reverse that preference.</p>
+<p>If 20% of customers have no accessible fallback, a single aggregate service score can hide unacceptable inequity. Define service by mission-critical customer class and specify hard limits (for instance, maximum time with zero emergency access). Model dependencies among power, communications, personnel, and suppliers: two redundant assets on one shared power feed do not provide independent resilience. Recovery claims should be stress-tested against cascading failures, limited spare capacity, and human coordination delays.</p>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final">NIST · SP 800-160 Vol. 1 Rev. 1, Engineering Trustworthy Secure Systems (2022)</a> — System-level security and trustworthiness engineering.</li>
+<li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="risk-vs-issue.html">Risk, issue, uncertainty, and opportunity</a></li>
+<li><a href="probability-and-dependence.html">Probability, dependence, and technical uncertainty</a></li>
+<li><a href="mission-engineering.html">Mission threads and capability analysis</a></li>
+<li><a href="complexity-emergence.html">Complexity, emergence, and adaptation</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B18/chapters/09.html">Book 18, Chapter 09: Week 09 · System of Systems Engineering · Chapter 09 — Cascading risk, cyber resilience, safety, and mission assurance</a></li>
+<li><a href="../B7/chapters/07-design-for-reliability-availability-and-maintainability.html">Book 7, Chapter 07: Book 7 · Chapter 7: Reliability and maintainability</a></li>
+<li><a href="../B19/chapters/09.html">Book 19, Chapter 09: Week 09 · Enterprise Systems Engineering · Chapter 09 — External factors, strategic scenarios, risk, opportunity, and resilience</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=d02ceac07509e">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="resilience-adaptability.md">Editable Markdown</a></nav></main></body></html>

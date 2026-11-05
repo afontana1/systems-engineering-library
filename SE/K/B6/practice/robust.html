@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Robust Concepts, Regret, and Value of Information · Systems Engineering Learning Library</title><style>
+:root{--ink:#18374b;--teal:#08747a;--line:#d8e4e7;--muted:#617480}*{box-sizing:border-box}body{margin:0;background:#f3f6f7;color:var(--ink);font:16px/1.7 system-ui,Segoe UI,Arial,sans-serif}header{background:#173d51;color:white;padding:20px max(22px,calc((100vw - 1070px)/2))}header a{color:#ccedee}header h1{margin:6px 0;font-size:1.6rem;line-height:1.2}main{max-width:1100px;margin:24px auto;padding:34px 44px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 9px 30px #18374b0b}article h1{font-size:1.65rem}article h2{border-bottom:1px solid #e0e9eb;padding-top:14px;padding-bottom:6px;font-size:1.35rem}article h3{font-size:1.1rem}article p,article li{max-width:85ch}article table{border-collapse:collapse;width:100%;font-size:.94rem}article th,article td{border:1px solid var(--line);padding:9px;text-align:left}article th{background:#edf6f5}pre{overflow-x:auto;background:#142e40;color:#f0f5f7;padding:17px;border-radius:9px}pre code{color:inherit}code{font-size:.91em}p code,li code{background:#eaf1f2;padding:2px 4px}a{color:var(--teal)}a:hover{text-decoration-thickness:2px}details{background:#f1f7f6;border-left:3px solid #65a5a3;border-radius:7px;padding:8px 15px;margin:12px 0}summary{cursor:pointer;font-weight:650}.links{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.links a{display:inline-block;padding:7px 12px;border:1px solid #a6ceca;border-radius:8px;background:#e6f4f1;text-decoration:none;font-weight:600}.note{background:#edf7f6;padding:15px;border-left:4px solid #318a86;border-radius:8px}img,svg{max-width:100%}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}button,input{font:inherit}button{cursor:pointer} .workbench{background:#eef7f6;padding:20px;border-radius:12px;border:1px solid #c4e1dd}.ctrl{margin:15px 0}.ctrl label{display:block;font-weight:600}.ctrl input{width:100%}.output{font-size:1.4rem;font-weight:800;line-height:1.25} @media(max-width:650px){main{padding:19px;margin:10px}}
+</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B6/practice/robust.html" data-se-mode="standard"></script>
+</head><body><header><div>Systems Engineering · Advanced Book Practice</div><h1>Robust Concepts, Regret, and Value of Information</h1><a href="../OPEN-BOOK.html">Back to book</a> · <a href="INDEX.html">Advanced practice</a></header><main><article><h1>Advanced Workshop · Robust Concepts, Regret, and Value of Information</h1>
+<p><em>Book 6 · Week 9 · scenario uncertainty · expected loss · minimax regret · sensitivity analysis</em></p>
+<p><strong>Placement:</strong> After the relevant chapter, use this workshop to extend the reasoning, then try <a href="lab-robust.html">the corresponding hypothetical lab</a>. The assessed course obligations remain in <a href="../../../C/P2/EN645767.html">the curriculum</a>.</p>
+<h2>1. Choose a decision rule before looking for a winner</h2>
+<p>Systems engineers often compare alternatives under uncertain demand, weather, operating policy and costs. Those conditions are not interchangeable: <strong>aleatory variability</strong> describes genuinely varying conditions, while <strong>epistemic uncertainty</strong> describes missing knowledge. If a decision cannot be reversed cheaply, it may be rational to prefer a design that performs acceptably across plausible scenarios rather than optimizing for a single forecast. But robustness is not a synonym for conservatism; its definition depends on the sponsor's risk posture and on which scenarios have legitimate credibility.</p>
+<p>In the fictional Northstar concept study, three feasible design options A, B, and C face normal and stressed service conditions. The table reports a synthetic loss measure in consistent units where smaller is better. It can represent penalty points or a normalized cost, but must not be mislabeled dollars without calibration.</p>
+<table>
+<thead>
+<tr>
+  <th>Design</th>
+  <th style="text-align:right">Normal loss</th>
+  <th style="text-align:right">Stress loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>A</td>
+  <td style="text-align:right">25</td>
+  <td style="text-align:right">75</td>
+</tr>
+<tr>
+  <td>B</td>
+  <td style="text-align:right">38</td>
+  <td style="text-align:right">45</td>
+</tr>
+<tr>
+  <td>C</td>
+  <td style="text-align:right">40</td>
+  <td style="text-align:right">40</td>
+</tr>
+</tbody>
+</table>
+<p>A is best when normal operations dominate, C is best in the stress scenario, and B compromises. No single option dominates both scenarios. The trade is real rather than a failure of optimization.</p>
+<h2>2. Expected value depends on scenario probabilities</h2>
+<p>Let \(p\) be the probability of stress and assume mutually exclusive, exhaustive scenarios. The expected losses are</p>
+<p>\[
+L_A(p)=25+50p,\qquad L_B(p)=38+7p,\qquad L_C(p)=40.
+\]</p>
+<p>At \(p=0.25\), A has expected loss 37.5, B 39.75, and C 40; A is preferred by <strong>minimum expected loss</strong>. However, if the stress probability exceeds the A–B crossover \(p=13/43\approx0.3023\), B beats A. The design review should not claim “A is best” without naming this assumption. Decision weights or probabilities are part of the decision baseline and deserve version control like requirements.</p>
+<h2>3. Minimax regret answers a different question</h2>
+<p>Regret compares each alternative with the best alternative <em>for the scenario that actually occurs</em>. In normal operation the minimum loss is 25; in stress it is 40. Regrets are therefore A=(0,35), B=(13,5), C=(15,0). Maximum regrets are 35, 13, and 15. <strong>Minimax regret selects B</strong>, even though expected loss at p=0.25 selects A. Neither rule is inherently correct without stakeholder risk preferences. Regret is particularly useful when scenario probabilities are too weak to justify precise expected-value arithmetic, but the scenario set still matters enormously.</p>
+<p>A robust optimization study should reveal if a decision changes under reasonable changes in scenario definition, loss normalization and constraints. If “stress” bundles unlike events into one number, the analysis can hide distinct failure modes. Build transparent scenario families, not one giant worst-case label that makes any preferred design look bad.</p>
+<h2>4. Value of information is not free certainty</h2>
+<p>Suppose an experiment could reveal whether the stress scenario is likely, but it is noisy and costly. The expected value of perfect information (EVPI) is the minimum expected loss <em>without</em> information minus the expected loss obtained when one could choose the best alternative separately after learning the true scenario. For p=0.25, the best expected loss is 37.5, while the perfect-information expected loss is \(0.75(25)+0.25(40)=28.75\). Thus EVPI is <strong>8.75 loss units</strong>. No imperfect information source can have greater expected value than perfect information under the same model and utility scale.</p>
+<p>An experiment costing 12 loss units cannot be economically justified solely by the promised improvement in this decision model, even if perfect; an experiment costing two units might be worth exploring, but only if its expected information quality justifies it. A credible experiment design must estimate likelihoods of observed evidence under each scenario and update probabilities rather than assuming the test will produce omniscience.</p>
+<h2>5. A conditional decision memo</h2>
+<p>A sound review can report: “A minimizes expected loss at the stated stress probability, B minimizes maximum regret over the two considered scenarios, and the preference switches near p=.302. We recommend keeping both candidates open until an operations pilot improves the stress estimate or the sponsor explicitly selects a regret-based policy.” This is not indecision. It is a decision that remains scientifically honest about its dependence on values and uncertain evidence.</p>
+<h2>Worked problem set — attempt before revealing solutions</h2>
+<h3>Problem 1</h3>
+<p>At stress probability p=.25, compute expected losses for A, B, C.</p>
+<details><summary>Show solution 1</summary>
+
+<p>A=37.5, B=39.75, C=40. Minimum expected loss chooses A under these assumptions.</p>
+</details>
+
+<h3>Problem 2</h3>
+<p>Find the A–B crossover probability.</p>
+<details><summary>Show solution 2</summary>
+
+<p>Solve 25+50p = 38+7p, giving p = 13/43 ≈ 0.3023.</p>
+</details>
+
+<h3>Problem 3</h3>
+<p>Compute minimax regret over the two scenarios.</p>
+<details><summary>Show solution 3</summary>
+
+<p>Scenario minima are 25 and 40; maximum regrets A=35, B=13, C=15. Minimax regret selects B.</p>
+</details>
+
+<h3>Problem 4</h3>
+<p>Compute EVPI at stress probability .25 in loss units.</p>
+<details><summary>Show solution 4</summary>
+
+<p>Current optimal expected loss 37.5; perfect-information loss .75×25 + .25×40 = 28.75. EVPI = 8.75 loss units.</p>
+</details>
+
+<h2>Independent transfer to the Northstar case</h2>
+<p>Load <code>book6-concepts.csv</code> and add two scenario-loss columns. Compare expected loss and minimax regret using <code>book6.py</code>. Sweep stress probability from 0 to 1, mark changes in the preferred alternative, and make one graph. Then introduce an explicitly priced experiment and decide whether its upper bound (EVPI) is large enough to warrant further study. Record what probability, evidence, or stakeholder preference could reverse your recommendation.</p>
+<h2>Further reading and conventions</h2>
+<p>The worked numbers are synthetic instructional fixtures. Do not use them as empirical transportation predictions, certification evidence, or claims about a particular deployed product. Foundational references (external and optional):</p>
+<ul>
+<li><p><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></p>
+</li>
+<li><p><a href="https://sebokwiki.org/wiki/SEBoK_Introduction">SEBoK — Guide to Systems Engineering</a></p>
+</li>
+<li><p><a href="https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final">NIST SP 800-160 Vol. 1 Rev. 1</a></p>
+</li>
+</ul>
+<p><strong>Continue:</strong> <a href="lab-robust.html">Hypothetical application lab</a> · <a href="book6.py">Python source</a> · <a href="book6-concepts.csv">Experiment dataset</a> · <a href="WORKBENCH.html">Interactive workbench</a>.</p>
+</article></main></body></html>

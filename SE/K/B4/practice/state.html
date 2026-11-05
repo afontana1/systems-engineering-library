@@ -1,0 +1,67 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>State Machines, Invariants, and Idempotent Commands · Systems Engineering Learning Library</title><style>
+:root{--ink:#18374b;--teal:#08747a;--line:#d8e4e7;--muted:#617480}*{box-sizing:border-box}body{margin:0;background:#f3f6f7;color:var(--ink);font:16px/1.7 system-ui,Segoe UI,Arial,sans-serif}header{background:#173d51;color:white;padding:20px max(22px,calc((100vw - 1070px)/2))}header a{color:#ccedee}header h1{margin:6px 0;font-size:1.6rem;line-height:1.2}main{max-width:1100px;margin:24px auto;padding:34px 44px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 9px 30px #18374b0b}article h1{font-size:1.65rem}article h2{border-bottom:1px solid #e0e9eb;padding-top:14px;padding-bottom:6px;font-size:1.35rem}article h3{font-size:1.1rem}article p,article li{max-width:85ch}article table{border-collapse:collapse;width:100%;font-size:.94rem}article th,article td{border:1px solid var(--line);padding:9px;text-align:left}article th{background:#edf6f5}pre{overflow-x:auto;background:#142e40;color:#f0f5f7;padding:17px;border-radius:9px}pre code{color:inherit}code{font-size:.91em}p code,li code{background:#eaf1f2;padding:2px 4px}a{color:var(--teal)}a:hover{text-decoration-thickness:2px}details{background:#f1f7f6;border-left:3px solid #65a5a3;border-radius:7px;padding:8px 15px;margin:12px 0}summary{cursor:pointer;font-weight:650}.links{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.links a{display:inline-block;padding:7px 12px;border:1px solid #a6ceca;border-radius:8px;background:#e6f4f1;text-decoration:none;font-weight:600}.note{background:#edf7f6;padding:15px;border-left:4px solid #318a86;border-radius:8px}img,svg{max-width:100%}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}button,input{font:inherit}button{cursor:pointer} .workbench{background:#eef7f6;padding:20px;border-radius:12px;border:1px solid #c4e1dd}.ctrl{margin:15px 0}.ctrl label{display:block;font-weight:600}.ctrl input{width:100%}.output{font-size:1.4rem;font-weight:800;line-height:1.25} @media(max-width:650px){main{padding:19px;margin:10px}}
+</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B4/practice/state.html" data-se-mode="standard"></script>
+</head><body><header><div>Systems Engineering · Advanced Book Practice</div><h1>State Machines, Invariants, and Idempotent Commands</h1><a href="../OPEN-BOOK.html">Back to book</a> · <a href="INDEX.html">Advanced practice</a></header><main><article><h1>Advanced Workshop · State Machines, Invariants, and Idempotent Commands</h1>
+<p><em>Book 4 · Week 6 · state transitions · transaction boundaries · exactly-once effects · invariants</em></p>
+<p><strong>Placement:</strong> After the relevant chapter, use this workshop to extend the reasoning, then try <a href="lab-state.html">the corresponding hypothetical lab</a>. The assessed course obligations remain in <a href="../../../C/P1/EN605704.html">the curriculum</a>.</p>
+<h2>1. What a state diagram really promises</h2>
+<p>A UML state machine is more than a drawing of arrows. It defines which events the system may accept in a particular condition, what changes as a consequence, and which states must never occur. Consider a fictional Northstar reservation: <code>REQUESTED → HELD → CONFIRMED → BOARDED → COMPLETED</code>, with cancellation possible before boarding. If a lost network acknowledgement causes the client to submit the same booking request twice, a diagram with happy-path states alone does not prevent two capacity holds. The <em>implementation</em> must uphold the invariant that one logical request has at most one live reservation.</p>
+<p>An <strong>invariant</strong> is a predicate required to remain true across all reachable states. In this case: (i) confirmed holds never exceed physical capacity; (ii) each stable idempotency key maps to at most one logical booking outcome; (iii) a completed trip cannot be cancelled retroactively. The state machine describes a behavioral obligation; a transaction boundary determines whether concurrent execution can violate it. In UML terminology guards constrain transitions, entry/exit behaviors respond to events, and composite states can factor complex behaviors. In executable design we must also identify <em>who serializes competing events</em>.</p>
+<p>A useful design separates <strong>command acceptance</strong> from <strong>state transition</strong>. The customer-facing API may accept an HTTP request and return a response, while the domain object accepts an event only if the transition is valid. A timeout does not prove that a command failed. It may have committed before the acknowledgement was lost. That ambiguity is precisely why the caller needs a stable request identifier and why the service should preserve the committed outcome against a repeat submission.</p>
+<h2>2. A constrained transition relation</h2>
+<p>Let the reservation state space be \(S=\{R,H,C,B,D,X\}\), meaning requested, held, confirmed, boarded, done, and cancelled. Let \(T\subseteq S\times E\times S\) be the permitted event relation. For a state \(s\) and event \(e\), a transition is admissible only when both \((s,e,s&#x27;)\in T\) and its guard evaluates true. For example, <code>confirm</code> from <code>HELD</code> is allowed only if the hold has not expired. <code>cancel</code> from <code>BOARDED</code> is not allowed in this simplified design; actual operators might require a separate abort/emergency state.</p>
+<p>A state diagram cannot by itself solve races among multiple services. Suppose two workers each read <code>capacity_used=7</code> for a vehicle of capacity 8, then each write <code>capacity_used=8</code>. Both customers can believe they have a seat. The postcondition of each local method looks fine, while the global invariant is false. An appropriate database transaction can atomically condition the increment on <code>capacity_used &lt; capacity</code>, or a single sequencer can own the allocation operation. A version-number check prevents <em>lost updates</em>, but the specific storage consistency model must be documented.</p>
+<h2>3. Worked case: duplicate booking and lost acknowledgement</h2>
+<p>Northstar accepts key <code>req-17</code> when one place remains. The commit succeeds but its acknowledgement is lost. The client retries with the same key. A naïve procedure checks capacity again and either creates a duplicate or returns “full,” misleading the original customer. The guarded procedure first looks up the key and returns the original committed outcome; only unseen keys attempt a new allocation. The instructional <code>BookingLedger</code> model in the Python lab treats this as one atomic operation within a single process. For capacity one, <code>book('A'), book('A'), book('B')</code> yields <code>CONFIRMED, CONFIRMED, REJECTED</code> and one accepted allocation.</p>
+<p>This is <strong>idempotency of the externally visible effect</strong>, not an unconditional guarantee of exactly-once message delivery. Messages may arrive multiple times; the service keeps the side effect logically once. If request keys expire, or different keys are used for one logical intent, even a correct ledger can duplicate reservations. If the key registry and reservation database are stored separately without a transaction, a crash between writes can reintroduce inconsistency. State the time horizon, key namespace, and durability assumption as part of the interface contract.</p>
+<h2>4. When the implementation is not a state machine</h2>
+<p>Many class diagrams declare <code>Reservation.status: String</code> and assume the behavior is thereby modeled. But an unconstrained setter allows impossible transitions such as <code>REQUESTED → COMPLETED</code>. Prefer a small domain method that checks both the current state and the event, rejects illegal transitions, and records a result suitable for verification. The state model should include negative tests: retry after commit; cancel twice; receive completion before boarding; race between cancellation and boarding; stale writer version.</p>
+<p>An important design distinction is <strong>safety</strong> (“never double allocate”) versus <strong>liveness</strong> (“an accepted reservation eventually receives a terminal disposition”). A design that rejects every booking trivially satisfies the first property but fails the service mission. An effective review asks about both, including what occurs under partition, data recovery, and operator intervention.</p>
+<h2>5. Connecting analysis models to code</h2>
+<p>The course's use cases identify success guarantees and alternate flows. Sequence diagrams identify collaborators and message timing. The state machine identifies allowed transitions, while class responsibilities determine which component owns the invariant. Finally, tests link each invariant to an executable witness. Do not merge these representations into a single picture: they answer different questions, and disagreements among them are often the most valuable defects discovered during design.</p>
+<h2>Worked problem set — attempt before revealing solutions</h2>
+<h3>Problem 1</h3>
+<p>A vehicle has capacity 8 and 7 assigned seats. Two workers both read 7 then independently add 1. What failure occurs, and which atomic operation repairs it?</p>
+<details><summary>Show solution 1</summary>
+
+<p>Both may confirm the eighth seat, making the physical allocation 9 despite a stored count of 8. Use an atomic conditional allocation tied to the reservation commit (or an equivalent single-writer rule). A post-hoc count check is too late.</p>
+</details>
+
+<h3>Problem 2</h3>
+<p>A booking commits, the response is lost, and the client retries. What does a robust command return?</p>
+<details><summary>Show solution 2</summary>
+
+<p>It returns the durable outcome associated with the same idempotency key, not a new booking. This requires a stable key namespace and a storage operation that preserves key-to-outcome consistency.</p>
+</details>
+
+<h3>Problem 3</h3>
+<p>A process reads version 3 and attempts to cancel after another process has confirmed version 4. What should optimistic concurrency do?</p>
+<details><summary>Show solution 3</summary>
+
+<p>Reject the stale write as a conflict. The caller must re-read the current state and decide whether cancellation is still valid; retrying the same write blindly is unsafe.</p>
+</details>
+
+<h3>Problem 4</h3>
+<p>Why does a ban on double allocation not imply a good service?</p>
+<details><summary>Show solution 4</summary>
+
+<p>It is a safety property only. A service that refuses every request meets it while violating liveness and mission outcomes. Define successful-progress obligations separately.</p>
+</details>
+
+<h2>Independent transfer to the Northstar case</h2>
+<p>Start with capacity two and a request fixture containing retries and cancellations. Write a transition table, identify all forbidden arcs, then run duplicate keys against <code>book4.py</code>. Introduce two conceptual writers reading the same stale version and show why a version check prevents lost updates. Change the key-retention assumption and document which new failure becomes possible. Submit a UML statechart, an invariant table, five negative tests, and a short review disposition.</p>
+<h2>Further reading and conventions</h2>
+<p>The worked numbers are synthetic instructional fixtures. Do not use them as empirical transportation predictions, certification evidence, or claims about a particular deployed product. Foundational references (external and optional):</p>
+<ul>
+<li><p><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></p>
+</li>
+<li><p><a href="https://sebokwiki.org/wiki/SEBoK_Introduction">SEBoK — Guide to Systems Engineering</a></p>
+</li>
+<li><p><a href="https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final">NIST SP 800-160 Vol. 1 Rev. 1</a></p>
+</li>
+</ul>
+<p><strong>Continue:</strong> <a href="lab-state.html">Hypothetical application lab</a> · <a href="book4.py">Python source</a> · <a href="book4-requests.csv">Experiment dataset</a> · <a href="WORKBENCH.html">Interactive workbench</a>.</p>
+</article></main></body></html>

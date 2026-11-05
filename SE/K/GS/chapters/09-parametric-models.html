@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Parametric model semantics and sensitivity under correlated inputs · Systems Engineering Library</title><style>*{box-sizing:border-box}body{background:#f4f7f8;margin:0;color:#193847;font:16px/1.76 system-ui,"Segoe UI",Arial,sans-serif}header{background:linear-gradient(112deg,#1b3a50,#137477);padding:30px max(18px,calc((100vw - 1060px)/2));color:white}header a{color:#e0fbfa}header h1{font-size:clamp(1.65rem,3vw,2.5rem);line-height:1.15;margin:.3em 0}header p{color:#dbf0f0;max-width:85ch}main{max-width:1070px;background:#fff;border:1px solid #d6e4e5;border-radius:12px;margin:28px auto 60px;padding:clamp(20px,4vw,55px)}article{max-width:91ch;margin:auto}h2{font-size:1.43em;margin-top:2em;border-bottom:1px solid #dbe6e8;padding-bottom:6px}h3{font-size:1.13em;margin-top:1.6em}a{color:#08757a;text-underline-offset:3px}p,li{max-width:90ch}table{border-collapse:collapse;max-width:100%;width:100%}td,th{border:1px solid #d4e2e4;padding:10px;text-align:left}th{background:#eaf5f4}blockquote{border-left:4px solid #238887;margin-left:0;background:#edf7f6;padding:10px 18px}pre{background:#183449;color:#e8f3f4;padding:16px;overflow-x:auto}code{font-size:.92em}p code{padding:1px 4px;background:#e8f2f4}details{padding:13px 17px;margin:16px 0;background:#edf6f5;border-radius:8px;border:1px solid #cee2e1}summary{font-weight:700;cursor:pointer}.links{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.links a{padding:7px 13px;background:#e7f3f2;border-radius:6px;font-weight:700}.figure{margin:26px 0;text-align:center}.figure img{max-width:100%;max-height:340px}.math-block{margin:18px 0;overflow-x:auto}mjx-container[jax=SVG]{max-width:100%;overflow-x:auto;overflow-y:hidden}article hr{border:0;border-top:1px solid #dbe6e8;margin:36px 0}@media(max-width:750px){header{padding:25px 18px}main{margin:0;border:0;border-radius:0}}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:"local"},startup:{typeset:false},options:{skipHtmlTags:["script","style","noscript","textarea","pre","code"]}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/GS/chapters/09-parametric-models.html" data-se-mode="standard"></script>
+</head><body><header><small>Graduate textbook studies · Systems Engineering</small><h1>Parametric model semantics and sensitivity under correlated inputs</h1><p><a href="../INDEX.html">Graduate studies</a> · <a href="../../OPEN-BOOKS.html">All companion books</a></p></header><main><article><h1>Parametric model semantics and sensitivity under correlated inputs</h1>
+<p><em>Graduate study for Book 9 — Applied Analytics for MBSE. Companion to the existing course materials; the definitions, mathematics and decisions below are educational rather than operational approvals.</em></p>
+<h2>The governing question</h2>
+<blockquote>
+<p>What precisely must be true before a parametric calculation can support an architecture decision?</p>
+</blockquote>
+<h2>Theory and conceptual structure</h2>
+<p>A parametric model is a typed statement about relationships among quantities, not merely a spreadsheet of values. Each variable needs a definition, unit, valid range, source, uncertainty representation and configuration version. An equation can be algebraically correct and still apply to the wrong system configuration. For instance, a mobility service's daily energy demand must distinguish propulsion, idle power, heating, charging losses and reserve assumptions.</p>
+<p><strong>Dimension checking</strong> rejects expressions such as adding kilowatt-hours to kilowatts. It cannot catch all semantic errors: two energies may be in the same units but refer to different mission periods or system boundaries. Therefore model review should include a quantity dictionary, operational scenario, dependency graph and explicit assertion of intended use. A downstream decision should identify which model outputs are evidence versus which are planning assumptions.</p>
+<p>Parametric constraints form a feasible region. A design may have excellent weighted performance yet violate a minimum charging reserve. Feasibility is checked <em>before</em> preference aggregation. Local sensitivity (partial derivatives) quantifies response to a small parameter change. Global scenario analysis asks whether the preference persists across important nonlinearities, discrete choices and parameter correlations. Derivative-based ranking is not an adequate substitute for an uncertainty model when the system crosses thresholds.</p>
+<p>Correlated inputs matter. High passenger demand may coincide with severe weather, higher heating energy, and slower charging. Treating them as independent understates adverse combinations. Monte Carlo sampling should preserve a justified joint distribution, then report the estimated probability of violating each requirement and its sampling uncertainty. Such an estimated probability is conditional on the distribution, model structure and synthetic data—not an empirical certification of fleet safety.</p>
+<h2>Formal model and derivation</h2>
+<p><div class="math-block">\[E_{need}=d\,e_{km}+t\,P_{aux},\qquad E_{available}=B\,s\,\eta-r.\]</div>
+The energy margin is \(M=E_{available}-E_{need}\). For first-order uncertainty, \(\operatorname{Var}(M)\approx J\Sigma J^T\), where \(J\) is the row vector of derivatives and \(\Sigma\) the covariance matrix. Off-diagonal covariance terms cannot be dropped without justification.</p>
+<p>The formalism is useful only inside an explicit <strong>model contract</strong>: a defined system boundary, input ranges, configuration, assumptions, uncertainty sources, and an intended decision. Check both units and the semantics of the variables before executing the arithmetic. The result is a conditional engineering claim, not an unconditional guarantee.</p>
+<h2>Fully worked Northstar case</h2>
+<p>Assume distance d = 120 km, consumption e = 0.8 kWh/km, auxiliary load P = 2 kW for t = 10 h: E_need = 116 kWh. A 180 kWh battery with state-of-charge fraction 0.90 and conversion efficiency 0.90, minus a 20 kWh reserve, gives E_available = 125.8 kWh and margin = 9.8 kWh. An increase in consumption to 0.90 raises mission demand by 12 kWh, erasing the margin. The preferred vehicle is thus not robust to a plausible energy assumption despite positive nominal feasibility.</p>
+<p><img alt="Model of the linked reasoning steps" src="../figures/09-parametric-models.svg"/></p>
+<h2>Counterexample and critical review</h2>
+<p><strong>Counterexample:</strong> A model records 0.95 “availability” from vehicle-component uptime and uses it directly as end-to-end service availability. The number is dimensionless and passes type checks, but its semantics exclude routing, personnel and dispatch communications. Model consistency requires a defined event (“request served within target”) and a separate mapping from subsystem states to that event.</p>
+<p>An independent reviewer should be able to reproduce the favorable result and find at least one material scenario in which it changes. A sensitivity study that does not touch an important assumption can be technically reproducible but decision-irrelevant. Record the source of every number, identify the accountable acceptance authority, and state what the evidence cannot establish.</p>
+<h2>Graduate problem set</h2>
+<p>Attempt each problem before opening the worked solution. In a graded submission, supply units, formulas, assumptions, and a reasoned interpretation—not just the numerical result.</p>
+<h3>Problem 1</h3>
+<p>Recompute the margin when auxiliary power rises from 2 kW to 2.5 kW for ten hours.</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>Energy demand rises by 5 kWh; margin falls from 9.8 to 4.8 kWh. The system is still nominally feasible, but reserve sensitivity is higher.</p>
+</details>
+<h3>Problem 2</h3>
+<p>What is dM/de for the stated mission distance?</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>−d = −120 km; every additional 0.1 kWh/km reduces margin by 12 kWh, assuming the same operating route.</p>
+</details>
+<h3>Problem 3</h3>
+<p>Why can a large Monte Carlo sample not compensate for an invalid independence assumption?</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>It reduces numerical sampling error around the wrong distribution; structural bias remains. Reconstruct the joint input model or bound the output under dependence scenarios.</p>
+</details>
+<h2>Laboratory and research transfer</h2>
+<p>Complete <a href="../labs/09-parametric-models.html">the accompanying graduate laboratory</a>. Produce the artifact described there, compare your result to at least one alternative hypothesis, and record what additional evidence would change your recommendation.</p>
+<h2>Connections to the curriculum</h2>
+<ul>
+<li><a href="../../B9/OPEN-BOOK.html">Open Book 9 and its existing weekly lessons</a>.</li>
+<li><a href="../INDEX.html">Find supplementary calculations and datasets</a>.</li>
+<li>The canonical curriculum remains the source of assessed requirements; this study explains one demanding conceptual thread and does not replace its assignments.</li>
+</ul>
+<h2>Additional reference reading</h2><p>These external resources complement the fictional examples; they are not required for offline use.</p><ul><li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></li><li><a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook</a></li></ul></article></main></body></html>

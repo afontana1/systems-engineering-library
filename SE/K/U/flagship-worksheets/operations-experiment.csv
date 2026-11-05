@@ -1,0 +1,3 @@
+scenario,arrival_per_hour,service_per_hour,starting_backlog,hours,model,output,assumption_or_credibility_gap
+baseline,12,9,4,2,stock-flow,10,No cancellation; constant rates
+steady-state,12,15,,,M/M/1,16,Mean queue wait minutes; requires exponential/Poisson assumptions

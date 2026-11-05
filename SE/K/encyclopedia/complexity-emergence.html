@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Complexity, emergence, and adaptation · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/complexity-emergence.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Complexity, emergence, and adaptation</h1>
+<p><strong>Reference entry · Systems of systems, enterprises and complexity · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p>A <strong>complex system</strong> exhibits behavior that depends strongly on interactions, feedback, adaptation, and context, so its whole-system behavior cannot always be predicted from separately optimized parts. <strong>Emergence</strong> means a property arises from collective interactions rather than being assigned directly to an individual component. Complexity is not merely a large number of parts: a large independent inventory can be mathematically simple, while a small network with adaptive feedback can be difficult to control.</p>
+<h2>Theory: nonlinearity, adaptation, and observability</h2>
+<p>Nonlinear relationships can amplify small disturbances, create thresholds, or admit multiple equilibria. For example, epidemic or information-spread processes can switch behavior when effective reproduction crosses a threshold; queueing delay can rise sharply near capacity. Feedback delay can destabilize a well-intended controller. Adaptive agents change decisions after observing policy, so a model calibrated under one incentive structure may stop predicting after the rules are changed.</p>
+<p>Complexity requires method pluralism. Mechanistic equations help when causal structure is known; agent-based models explore heterogeneous local rules; system dynamics explains accumulation and feedback; qualitative inquiry reveals competing problem framings and power. Different methods answer different questions, and agreement among methods is valuable only when they are not copying the same hidden assumption.</p>
+<h2>Worked example: apparent robustness collapses at a threshold</h2>
+<p>A service has capacity of 100 cases/hour and receives 85 cases/hour. Utilization is 85%, and operations appear smooth. A policy reduces staffing capacity to 90 cases/hour, raising utilization to 94.4%. Under an illustrative <code>M/M/1</code> approximation, mean time in system changes from <code>1/(100-85) hour = 4 minutes</code> to <code>1/(90-85) hour = 12 minutes</code>. The policy removed 10% of capacity but tripled theoretical delay. If delayed customers retry requests, effective arrival rate may rise further, creating a reinforcing overload loop not represented in the simple queue model.</p>
+<h2>Engineering use and evidence</h2>
+<p>Ask which interactions can create positive feedback, phase transitions, common causes, and strategic adaptation. Analyze scenarios around thresholds, not just mean conditions. Use multiple perspectives, structural sensitivity, and safe-to-fail experiments. Monitor leading indicators such as delay growth, concentration of dependencies, turnover, and workload oscillation. Preserve the ability to withdraw an intervention when its assumptions fail.</p>
+<h2>Limitations and connections</h2>
+<p>Calling a problem “complex” must not excuse avoiding testable hypotheses. Sophisticated simulation can still produce spurious precision. Connect complexity to <strong>stocks and feedback</strong>, <strong>resilience</strong>, <strong>enterprise systems</strong>, <strong>policy learning</strong>, and <strong>systems-of-systems governance</strong>.</p>
+<h2>Technical analysis: distinguish interaction effects from mystical emergence</h2>
+<p>An emergent outcome is one produced by interactions among parts that cannot be inferred adequately by inspecting the parts in isolation. This is a <strong>modeling warning</strong>, not a license to treat failures as unknowable. Search for feedback, network topology, thresholds, delayed adaptation, and heterogeneous agents, and state the observation scale at which the property is called emergent.</p>
+<p>A simple contagion-style branching approximation illustrates the limit: if each failed constituent causes an average of <strong>0.8 additional failures</strong> in the next generation, expected total affected count from one initial failure is <code>1/(1−0.8) = 5</code> when offspring are independent and the process stays subcritical. At <strong>1.1</strong>, this geometric infinite-population expectation does not converge. <strong>This does not establish</strong> an actual engineering network's collapse probability: finite populations, protection, loops, shared power, and adaptive operators break the branching assumptions.</p>
+<p><strong>Evidence boundary.</strong> Use actual dependency graphs, fault propagation scenarios, and sensitivity experiments to find leverage points. Compare interventions against specified outcome populations and horizons. Do not infer causality from a complex-looking simulation, nor treat the average branching multiplier as a substitute for testing critical shared dependencies.</p>
+<h2>Claim-specific sources</h2>
+<p>The following <strong>selected methodological claims</strong> are tied to identifiable sections or abstracts, not merely generic reading lists. Source scope is stated for each link. Numerical scenarios and computations in this article are <strong>original illustrative examples</strong>, not data, calculations, or endorsements supplied by the linked publishers. Links require internet access; the explanation remains readable offline.</p>
+<ul>
+<li><strong>C1:</strong> Constituent independence and interoperability make systems-of-systems qualitatively different from centrally managed assemblies. <strong>Evidence:</strong> <a href="https://doi.org/10.1002/%28sici%291520-6858%281998%291%3A4%3C267%3A%3Aaid-sys3%3E3.0.co%3B2-d">Maier, M.W. — Architecting Principles for Systems-of-Systems, Systems Engineering 1(4), 267–284 (1998), Abstract; constituent independence, classification and architecting principles</a> · <em>academic framing</em>.</li>
+<li><strong>C2:</strong> Governance, resource systems and users must be considered together when explaining social-ecological outcomes; engineering analogy is interpretive. <strong>Evidence:</strong> <a href="https://pubmed.ncbi.nlm.nih.gov/19628857/">Ostrom, E. — A General Framework for Analyzing Sustainability of Social-Ecological Systems, Science 325, 419–422 (2009), Abstract; interacting governance, resource systems and users</a> · <em>cross-domain conceptual analogy</em>.</li>
+</ul>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)</a> — Community-maintained secondary guide; use its references for further research.</li>
+<li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="stocks-flows-feedback.html">Stocks, flows, and feedback loops</a></li>
+<li><a href="resilience-adaptability.html">Resilience, robustness, and graceful degradation</a></li>
+<li><a href="enterprise-as-system.html">The enterprise as a system</a></li>
+<li><a href="intervention-and-learning.html">Interventions, policy resistance, and learning loops</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B20/chapters/02.html">Book 20, Chapter 02: Week 02 · Management of Complex Systems · Chapter 02 — Complexity science, chaos, adaptation, scale, and irreducible uncertainty</a></li>
+<li><a href="../B20/chapters/05.html">Book 20, Chapter 05: Week 05 · Management of Complex Systems · Chapter 05 — Type C — structural complexity and system dynamics</a></li>
+<li><a href="../B20/chapters/09.html">Book 20, Chapter 09: Week 09 · Management of Complex Systems · Chapter 09 — Critical systems theory, critical systems thinking, and methodological critique</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=dc953257a5780">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="complexity-emergence.md">Editable Markdown</a></nav></main></body></html>

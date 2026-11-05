@@ -1,0 +1,3 @@
+id,type,title,revision,owner,status,source
+N-001,Need,Rider status is understandable,1,Service owner,draft,ConOps
+R-014,Requirement,Report status within approved limit,1,Systems engineer,draft,N-001

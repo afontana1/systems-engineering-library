@@ -1,0 +1,326 @@
+{
+  "html_pages": 1270,
+  "local_references_checked": 23197,
+  "missing_targets": [],
+  "missing_count": 0,
+  "fragment_links_checked": 2793,
+  "missing_fragments": [
+    [
+      "K/B1/OPEN-BOOK.html",
+      "../LAB-LIBRARY.html#B1/labs/lab-01-boundary-hearing.md"
+    ],
+    [
+      "K/B1/labs/lab-01-boundary-hearing.html",
+      "../../LAB-LIBRARY.html#B1/labs/lab-01-boundary-hearing.md"
+    ],
+    [
+      "K/B1/labs/lab-02-design-gate.html",
+      "../../LAB-LIBRARY.html#B1/labs/lab-02-design-gate.md"
+    ],
+    [
+      "K/B1/labs/lab-03-stakeholder-hearing.html",
+      "../../LAB-LIBRARY.html#B1/labs/lab-03-stakeholder-hearing.md"
+    ],
+    [
+      "K/B1/labs/lab-04-requirements-clinic.html",
+      "../../LAB-LIBRARY.html#B1/labs/lab-04-requirements-clinic.md"
+    ],
+    [
+      "K/B1/labs/lab-05-functional-architecture.html",
+      "../../LAB-LIBRARY.html#B1/labs/lab-05-functional-architecture.md"
+    ],
+    [
+      "K/B1/labs/lab-06-functional-review-board.html",
+      "../../LAB-LIBRARY.html#B1/labs/lab-06-functional-review-board.md"
+    ],
+    [
+      "K/B1/labs/lab-07-interface-contracts.html",
+      "../../LAB-LIBRARY.html#B1/labs/lab-07-interface-contracts.md"
+    ],
+    [
+      "K/B1/labs/lab-08-decision-hearing.html",
+      "../../LAB-LIBRARY.html#B1/labs/lab-08-decision-hearing.md"
+    ],
+    [
+      "K/B1/labs/lab-09-technical-management.html",
+      "../../LAB-LIBRARY.html#B1/labs/lab-09-technical-management.md"
+    ],
+    [
+      "K/B1/labs/lab-10-red-team.html",
+      "../../LAB-LIBRARY.html#B1/labs/lab-10-red-team.md"
+    ],
+    [
+      "K/B1/labs/lab-11-verification-board.html",
+      "../../LAB-LIBRARY.html#B1/labs/lab-11-verification-board.md"
+    ],
+    [
+      "K/B1/labs/lab-12-final-defense.html",
+      "../../LAB-LIBRARY.html#B1/labs/lab-12-final-defense.md"
+    ],
+    [
+      "K/B10/OPEN-BOOK.html",
+      "../LAB-LIBRARY.html#B10/labs/lab-01-define-the-lifecycle-technical-measurement-strategy-and-decision-cha.md"
+    ],
+    [
+      "K/B10/labs/lab-01-define-the-lifecycle-technical-measurement-strategy-and-decision-cha.html",
+      "../../LAB-LIBRARY.html#B10/labs/lab-01-define-the-lifecycle-technical-measurement-strategy-and-decision-cha.md"
+    ],
+    [
+      "K/B10/labs/lab-02-characterize-probability-distributions-tails-dependence-and-stochast.html",
+      "../../LAB-LIBRARY.html#B10/labs/lab-02-characterize-probability-distributions-tails-dependence-and-stochast.md"
+    ],
+    [
+      "K/B10/labs/lab-03-establish-data-provenance-sampling-validity-exploratory-analysis-and.html",
+      "../../LAB-LIBRARY.html#B10/labs/lab-03-establish-data-provenance-sampling-validity-exploratory-analysis-and.md"
+    ],
+    [
+      "K/B10/labs/lab-04-use-estimation-confidence-intervals-hypothesis-equivalence-and-engin.html",
+      "../../LAB-LIBRARY.html#B10/labs/lab-04-use-estimation-confidence-intervals-hypothesis-equivalence-and-engin.md"
+    ],
+    [
+      "K/B10/labs/lab-05-design-efficient-experiments-with-factors-responses-noise-power-rand.html",
+      "../../LAB-LIBRARY.html#B10/labs/lab-05-design-efficient-experiments-with-factors-responses-noise-power-rand.md"
+    ],
+    [
+      "K/B10/labs/lab-06-analyze-factorial-experiments-interactions-diagnostics-and-confirmat.html",
+      "../../LAB-LIBRARY.html#B10/labs/lab-06-analyze-factorial-experiments-interactions-diagnostics-and-confirmat.md"
+    ],
+    [
+      "K/B10/labs/lab-07-build-and-validate-performance-response-models-across-use-and-enviro.html",
+      "../../LAB-LIBRARY.html#B10/labs/lab-07-build-and-validate-performance-response-models-across-use-and-enviro.md"
+    ],
+    [
+      "K/B10/labs/lab-08-analyze-reliability-availability-maintainability-degradation-and-cen.html",
+      "../../LAB-LIBRARY.html#B10/labs/lab-08-analyze-reliability-availability-maintainability-degradation-and-cen.md"
+    ],
+    [
+      "K/B10/labs/lab-09-propagate-uncertainty-with-analytic-monte-carlo-simulation-and-sensi.html",
+      "../../LAB-LIBRARY.html#B10/labs/lab-09-propagate-uncertainty-with-analytic-monte-carlo-simulation-and-sensi.md"
+    ],
+    [
+      "K/B10/labs/lab-10-quantify-requirement-compliance-technical-margin-allocation-risk-and.html",
+      "../../LAB-LIBRARY.html#B10/labs/lab-10-quantify-requirement-compliance-technical-margin-allocation-risk-and.md"
+    ],
+    [
+      "K/B10/labs/lab-11-update-lifecycle-evidence-and-decide-among-upgrade-replacement-retir.html",
+      "../../LAB-LIBRARY.html#B10/labs/lab-11-update-lifecycle-evidence-and-decide-among-upgrade-replacement-retir.md"
+    ],
+    [
+      "K/B10/labs/lab-12-integrate-reproduce-challenge-and-defend-the-lifecycle-analytics-dec.html",
+      "../../LAB-LIBRARY.html#B10/labs/lab-12-integrate-reproduce-challenge-and-defend-the-lifecycle-analytics-dec.md"
+    ],
+    [
+      "K/B11/OPEN-BOOK.html",
+      "../LAB-LIBRARY.html#B11/labs/lab-01-frame-the-m-s-decision-intended-use-terminology-and-model-method-tra.md"
+    ],
+    [
+      "K/B11/labs/lab-01-frame-the-m-s-decision-intended-use-terminology-and-model-method-tra.html",
+      "../../LAB-LIBRARY.html#B11/labs/lab-01-frame-the-m-s-decision-intended-use-terminology-and-model-method-tra.md"
+    ],
+    [
+      "K/B11/labs/lab-02-develop-the-m-s-plan-and-conceptual-model-before-implementation.html",
+      "../../LAB-LIBRARY.html#B11/labs/lab-02-develop-the-m-s-plan-and-conceptual-model-before-implementation.md"
+    ],
+    [
+      "K/B11/labs/lab-03-characterize-data-quality-probability-dependence-and-stochastic-inpu.html",
+      "../../LAB-LIBRARY.html#B11/labs/lab-03-characterize-data-quality-probability-dependence-and-stochastic-inpu.md"
+    ],
+    [
+      "K/B11/labs/lab-04-use-m-s-for-needs-opportunity-current-state-and-baseline-analysis.html",
+      "../../LAB-LIBRARY.html#B11/labs/lab-04-use-m-s-for-needs-opportunity-current-state-and-baseline-analysis.md"
+    ],
+    [
+      "K/B11/labs/lab-05-implement-discrete-event-processes-resources-queues-priorities-and-s.html",
+      "../../LAB-LIBRARY.html#B11/labs/lab-05-implement-discrete-event-processes-resources-queues-priorities-and-s.md"
+    ],
+    [
+      "K/B11/labs/lab-06-model-detailed-operations-and-complete-computational-verification.html",
+      "../../LAB-LIBRARY.html#B11/labs/lab-06-model-detailed-operations-and-complete-computational-verification.md"
+    ],
+    [
+      "K/B11/labs/lab-07-use-simulation-for-concept-exploration-alternatives-and-scenario-ana.html",
+      "../../LAB-LIBRARY.html#B11/labs/lab-07-use-simulation-for-concept-exploration-alternatives-and-scenario-ana.md"
+    ],
+    [
+      "K/B11/labs/lab-08-analyze-transient-and-steady-state-output-with-defensible-run-contro.html",
+      "../../LAB-LIBRARY.html#B11/labs/lab-08-analyze-transient-and-steady-state-output-with-defensible-run-contro.md"
+    ],
+    [
+      "K/B11/labs/lab-09-apply-simulation-in-design-and-development-using-selection-ranking-a.html",
+      "../../LAB-LIBRARY.html#B11/labs/lab-09-apply-simulation-in-design-and-development-using-selection-ranking-a.md"
+    ],
+    [
+      "K/B11/labs/lab-10-use-m-s-to-support-integration-verification-validation-and-test-deci.html",
+      "../../LAB-LIBRARY.html#B11/labs/lab-10-use-m-s-to-support-integration-verification-validation-and-test-deci.md"
+    ],
+    [
+      "K/B11/labs/lab-11-plan-and-evaluate-verification-validation-credibility-and-accreditat.html",
+      "../../LAB-LIBRARY.html#B11/labs/lab-11-plan-and-evaluate-verification-validation-credibility-and-accreditat.md"
+    ],
+    [
+      "K/B11/labs/lab-12-apply-m-s-to-production-and-sustainment-survey-advanced-methods-and-.html",
+      "../../LAB-LIBRARY.html#B11/labs/lab-12-apply-m-s-to-production-and-sustainment-survey-advanced-methods-and-.md"
+    ],
+    [
+      "K/B12/OPEN-BOOK.html",
+      "../LAB-LIBRARY.html#B12/labs/lab-01-frame-the-advanced-m-s-decision-intended-use-architecture-and-credib.md"
+    ],
+    [
+      "K/B12/labs/lab-01-frame-the-advanced-m-s-decision-intended-use-architecture-and-credib.html",
+      "../../LAB-LIBRARY.html#B12/labs/lab-01-frame-the-advanced-m-s-decision-intended-use-architecture-and-credib.md"
+    ],
+    [
+      "K/B12/labs/lab-02-derive-dynamic-system-mathematics-standard-forms-block-diagrams-and-.html",
+      "../../LAB-LIBRARY.html#B12/labs/lab-02-derive-dynamic-system-mathematics-standard-forms-block-diagrams-and-.md"
+    ],
+    [
+      "K/B12/labs/lab-03-model-translational-and-rotational-mechanical-dynamics-with-realisti.html",
+      "../../LAB-LIBRARY.html#B12/labs/lab-03-model-translational-and-rotational-mechanical-dynamics-with-realisti.md"
+    ],
+    [
+      "K/B12/labs/lab-04-couple-electrical-electromechanical-thermal-and-fluid-domains.html",
+      "../../LAB-LIBRARY.html#B12/labs/lab-04-couple-electrical-electromechanical-thermal-and-fluid-domains.md"
+    ],
+    [
+      "K/B12/labs/lab-05-link-mbse-xml-metadata-collaborative-environments-and-reusable-m-s-a.html",
+      "../../LAB-LIBRARY.html#B12/labs/lab-05-link-mbse-xml-metadata-collaborative-environments-and-reusable-m-s-a.md"
+    ],
+    [
+      "K/B12/labs/lab-06-design-interoperable-hla-fmi-federations-lvc-interfaces-and-composab.html",
+      "../../LAB-LIBRARY.html#B12/labs/lab-06-design-interoperable-hla-fmi-federations-lvc-interfaces-and-composab.md"
+    ],
+    [
+      "K/B12/labs/lab-07-integrate-the-model-baseline-and-design-advanced-simulation-experime.html",
+      "../../LAB-LIBRARY.html#B12/labs/lab-07-integrate-the-model-baseline-and-design-advanced-simulation-experime.md"
+    ],
+    [
+      "K/B12/labs/lab-08-model-natural-and-man-made-environments-as-dynamic-correlated-scenar.html",
+      "../../LAB-LIBRARY.html#B12/labs/lab-08-model-natural-and-man-made-environments-as-dynamic-correlated-scenar.md"
+    ],
+    [
+      "K/B12/labs/lab-09-integrate-technical-performance-with-lifecycle-cost-resources-mainte.html",
+      "../../LAB-LIBRARY.html#B12/labs/lab-09-integrate-technical-performance-with-lifecycle-cost-resources-mainte.md"
+    ],
+    [
+      "K/B12/labs/lab-10-extend-the-model-to-population-or-biological-dynamics-and-communicat.html",
+      "../../LAB-LIBRARY.html#B12/labs/lab-10-extend-the-model-to-population-or-biological-dynamics-and-communicat.md"
+    ]
+  ],
+  "fragment_missing_count": 260,
+  "source_archive_count": 3176,
+  "unchanged_files": 3024,
+  "changed_files_count": 152,
+  "changed_nonhtml": [
+    "SE/K/README.md",
+    "SE/K/U/README.md",
+    "SE/K/encyclopedia/agile-tailoring.md",
+    "SE/K/encyclopedia/allocation-matrix.md",
+    "SE/K/encyclopedia/assurance-cases-and-evidence.md",
+    "SE/K/encyclopedia/authority-and-governance.md",
+    "SE/K/encyclopedia/bayesian-value-of-information.md",
+    "SE/K/encyclopedia/boundaries-and-interfaces.md",
+    "SE/K/encyclopedia/complexity-emergence.md",
+    "SE/K/encyclopedia/conceptual-m-and-s.md",
+    "SE/K/encyclopedia/configuration-assurance-and-change-control.md",
+    "SE/K/encyclopedia/conops-and-scenarios.md",
+    "SE/K/encyclopedia/design-of-experiments.md",
+    "SE/K/encyclopedia/digital-thread-and-twin.md",
+    "SE/K/encyclopedia/discrete-event-simulation.md",
+    "SE/K/encyclopedia/engineering-trades.md",
+    "SE/K/encyclopedia/enterprise-as-system.md",
+    "SE/K/encyclopedia/environmental-qualification-and-test-levels.md",
+    "SE/K/encyclopedia/flow-wip-and-queues.md",
+    "SE/K/encyclopedia/formal-verification-and-temporal-logic.md",
+    "SE/K/encyclopedia/functional-vs-physical.md",
+    "SE/K/encyclopedia/good-requirements.md",
+    "SE/K/encyclopedia/human-systems-integration.md",
+    "SE/K/encyclopedia/integration-strategy.md",
+    "SE/K/encyclopedia/interface-control.md",
+    "SE/K/encyclopedia/intervention-and-learning.md",
+    "SE/K/encyclopedia/lifecycle-sustainment-economics.md",
+    "SE/K/encyclopedia/measurement-traceability-and-calibration.md",
+    "SE/K/encyclopedia/metrics-hierarchy.md",
+    "SE/K/encyclopedia/mission-engineering.md",
+    "SE/K/encyclopedia/model-language-method-tool.md",
+    "SE/K/encyclopedia/model-vv-and-credibility.md",
+    "SE/K/encyclopedia/object-responsibilities.md",
+    "SE/K/encyclopedia/obsolescence-and-technology-refresh.md",
+    "SE/K/encyclopedia/pareto-and-value.md",
+    "SE/K/encyclopedia/probability-and-dependence.md",
+    "SE/K/encyclopedia/process-improvement.md",
+    "SE/K/encyclopedia/reliability-availability-maintainability.md",
+    "SE/K/encyclopedia/resilience-adaptability.md",
+    "SE/K/encyclopedia/risk-vs-issue.md",
+    "SE/K/encyclopedia/robust-optimization-and-margins.md",
+    "SE/K/encyclopedia/software-lifecycle-evidence.md",
+    "SE/K/encyclopedia/software-quality-attributes.md",
+    "SE/K/encyclopedia/sos-characteristics.md",
+    "SE/K/encyclopedia/stakeholders-and-needs.md",
+    "SE/K/encyclopedia/statistical-acceptance-and-confidence.md",
+    "SE/K/encyclopedia/stocks-flows-feedback.md",
+    "SE/K/encyclopedia/supply-chain-assurance-and-provenance.md",
+    "SE/K/encyclopedia/system-of-interest.md",
+    "SE/K/encyclopedia/system-safety-and-hazards.md",
+    "SE/K/encyclopedia/systems-security-engineering.md",
+    "SE/K/encyclopedia/technical-data-governance-and-lineage.md",
+    "SE/K/encyclopedia/test-fidelity-and-similarity.md",
+    "SE/K/encyclopedia/traceability-graph.md",
+    "SE/K/encyclopedia/v-and-v.md",
+    "SE/K/encyclopedia/verification-matrix.md",
+    "SE/K/encyclopedia/views-and-viewpoints.md",
+    "SE/K/encyclopedia/wbs-and-baselines.md"
+  ],
+  "new_files": [
+    "SE/K/OFFLINE-HELP.html",
+    "SE/K/OFFLINE-HELP.md"
+  ],
+  "removed_files": [],
+  "changed_examples": [
+    "SE/C/P0/EN645662.html",
+    "SE/C/P0/EN645667.html",
+    "SE/C/P1/EN605704.html",
+    "SE/C/P1/EN645631.html",
+    "SE/C/P1/EN645764.html",
+    "SE/C/P2/EN645767.html",
+    "SE/C/P2/EN645768.html",
+    "SE/C/P2/EN645769.html",
+    "SE/C/P3/EN645632.html",
+    "SE/C/P3/EN645756.html",
+    "SE/C/P3/EN645757.html",
+    "SE/C/P3/EN645758.html",
+    "SE/C/P3/EN645781.html",
+    "SE/C/P3/EN645784.html",
+    "SE/C/P4/EN645780.html",
+    "SE/C/P4/EN645782.html",
+    "SE/C/P4/EN645783.html",
+    "SE/C/P5/EN645742.html",
+    "SE/C/P5/EN645753.html",
+    "SE/C/P5/EN645771.html",
+    "SE/K/B1/OPEN-BOOK.html",
+    "SE/K/B1/README.html",
+    "SE/K/CONCEPT-ENCYCLOPEDIA.html",
+    "SE/K/LEARNER-JOURNEYS.html",
+    "SE/K/LEARNING-PATHWAYS.html",
+    "SE/K/OPEN-ATLAS.html",
+    "SE/K/OPEN-LIBRARY.html",
+    "SE/K/README.html",
+    "SE/K/README.md",
+    "SE/K/STUDY-DESK.html"
+  ],
+  "indexed_resources": 1076,
+  "resource_ids_unique": true,
+  "canonical_concepts": 56,
+  "all_concepts_have_docs": true,
+  "journey_page_links": 45,
+  "journey_titles": [
+    "From stakeholder need to testable requirements",
+    "From hazard to defensible assurance claim",
+    "From simulation results to credible decisions",
+    "From trade study to robust choice",
+    "From interface definition to integration evidence",
+    "From architecture views to allocation evidence"
+  ],
+  "visible_releasestyle_label_occurrences": [],
+  "visible_releasestyle_label_files": 0,
+  "max_internal_path_length": 91
+}

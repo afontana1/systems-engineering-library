@@ -1,0 +1,5 @@
+case,battery_kwh,distance_km,intensity_kwh_per_km,overhead_kwh,reserve_kwh
+nominal,24,24,0.62,1.8,4
+adverse,24,24,0.75,1.8,4
+capacity_reduced,21,24,0.62,1.8,4
+long_detour,24,30,0.70,1.8,4

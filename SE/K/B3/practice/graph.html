@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Typed model graph queries · Systems Engineering</title>
+<style>:root{--ink:#193849;--teal:#167575;--bg:#f4f7f8;--line:#d5e4e5}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.76 system-ui,-apple-system,Segoe UI,Arial,sans-serif}header{background:#193c50;color:white;padding:22px max(20px,calc((100vw - 1050px)/2))}header a{color:#d3f7f0;text-decoration:none;margin-right:20px}main{max-width:1050px;margin:25px auto 75px;background:white;border:1px solid var(--line);border-radius:13px;padding:clamp(20px,5vw,58px)}h1{font-size:clamp(1.8rem,3vw,2.35rem);line-height:1.2}h2{margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:7px}h3{margin-top:1.5em}a{color:var(--teal);text-underline-offset:3px}p,li{max-width:85ch}blockquote{margin:16px 0;padding:8px 17px;background:#ecf6f5;border-left:4px solid var(--teal)}table{display:block;max-width:100%;overflow:auto;border-collapse:collapse}td,th{border:1px solid var(--line);padding:10px;vertical-align:top}th{background:#eaf4f3}pre{background:#1a3644;color:#f3f8fa;padding:18px;border-radius:10px;overflow:auto}code{font-size:.88em}p code{background:#edf2f3;padding:2px 5px;border-radius:4px}details{border:1px solid var(--line);border-radius:10px;background:#f8fbfb;padding:14px 17px;margin:12px 0}summary{font-weight:750;cursor:pointer}.actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 28px}.actions a{background:#e4f3f1;border:1px solid #b7d9d7;border-radius:7px;padding:8px 13px;font-weight:650;text-decoration:none}.note{background:#eef7f6;border:1px solid #c9e3e0;padding:16px;border-radius:8px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style>
+<script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']] },svg:{fontCache:'local'},startup:{typeset:false}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B3/practice/graph.html" data-se-mode="standard"></script>
+</head><body><header><a href="../OPEN-BOOK.html">Book 3</a><a href="WORKBENCH.html">Interactive workbench</a><a href="../../LAB-LIBRARY.html">Lab resources</a></header><main>
+<div class="actions"><a href="graph.html">Concept workshop</a><a href="lab-graph.html">Applied lab</a><a download="" href="model.json">Download data</a><a download="" href="tools.py">Download Python</a><a download="" href="LAB-NOTEBOOK.ipynb">Download notebook</a><a download="" href="graph.md">Download this Markdown</a></div><h1>Workshop 3 · Typed relationships and trustworthy model queries</h1>
+<p><em>Companion to Book III, Chapter 4 · Requirements model semantics</em></p>
+<h2>When a line on a diagram is not enough</h2>
+<p>The Northstar model includes requirements, functional behaviors, components, and tests. An analyst adds four arrows and reports “the requirements have been traced.” But a line from a requirement to a component could mean <em>allocated to</em>, <em>derived from</em>, <em>implemented by</em>, or something the tool does not understand. Model-based systems engineering adds value only when relationships carry <strong>stable semantics</strong> that a reviewer or automated query can interpret.</p>
+<p>The running case contains four requirements. R1 requires dispatch acknowledgment; R2 protects against stale route authorization; R3 controls accessible boarding; R4 requires operational telemetry. Each requirement should have a relationship to a satisfying block and to a verifying test. A <code>satisfies</code> edge answers which design element claims to meet the obligation. A <code>verifies</code> edge connects a test case to a requirement; it does not mean the test passed. Actual test <em>results</em> must be associated with a revision, configuration, and test execution.</p>
+<h2>The typed graph</h2>
+<p>For this workshop, nodes have types <code>requirement</code>, <code>block</code>, and <code>test</code>. A legal <code>satisfies</code> edge runs <strong>from block to requirement</strong>, and a legal <code>verifies</code> edge runs <strong>from test to requirement</strong>. That direction is a modeling convention adopted for the dataset, not the only conceivable graph notation. The important condition is that every tool and analyst agrees on it.</p>
+<p>An integrity query can ask:</p>
+<ol>
+<li>Does each requirement have at least one satisfying block?</li>
+<li>Does it have a verifying test with a defined method?</li>
+<li>Has an execution yielded an acceptable result for the <strong>current revision and configuration</strong>?</li>
+<li>Are there prohibited relations—for example a <code>verifies</code> edge from a physical block rather than a test?</li>
+</ol>
+<p>The first two are <strong>structural consistency checks</strong>. The third is a claim about <strong>evidence sufficiency</strong>. A structurally sound model can still describe an unsafe or unverified design. Confusing those levels is the central modeling error in this workshop.</p>
+<h2>A worked query</h2>
+<p>The provided JSON model has R1 through R4. R1 has block B1, test T1 and a current, passing execution. R2 has block B2 and test T2, but its passing execution evaluates an older revision. R3 has test T3 but lacks a satisfying block. R4 is linked to block B4 and passing test T4, but has the wrong execution configuration. A basic link-count dashboard will imply that three or four requirements are well connected. The stronger query finds only <strong>one requirement ready for a verification claim</strong>. R2 is a re-verification concern; R3 is an architecture/allocation gap; R4 is a configuration applicability gap.</p>
+<p>Notice the logical form of the query: a requirement is <code>structurally_complete</code> if it has a correctly typed satisfaction edge and test edge. It is <code>supported</code> only if it is structurally complete <em>and</em> a result matches the current requirement revision, intended configuration, applicability conditions, and acceptance criterion. This can be expressed as</p>
+<p>\[
+\text{supported}(r)=\text{complete}(r)\land \exists e:\text{admissible}(e,r)\land\text{pass}(e).
+\]</p>
+<p>The existential statement matters: multiple tests may exist, but one passing test is not enough if the verification plan demands multiple environments or methods. This simplified lesson assumes one required method per requirement; an actual model should encode the acceptance rule explicitly.</p>
+<h2>Failure modes worth modeling</h2>
+<p><strong>Duplicate identifiers:</strong> Two requirements with the same ID but different meanings make graph traversal non-deterministic. <strong>Unowned derived requirements:</strong> The derived constraint exists but nobody can approve changes. <strong>Direction drift:</strong> Tools exchange relations with inconsistent source/target semantics. <strong>Stale evidence:</strong> Test T2 passes, but R2's predicate changed after execution. <strong>Unmodeled operating domain:</strong> The requirement is claimed verified in a lab environment that does not exercise the relevant interface. Each is a different failure class and requires a different remedy.</p>
+<h2>Worked problems</h2>
+<p><strong>Problem 1.</strong> R3 has test coverage but no block allocation. Is it a traceability defect or an evidence defect?</p>
+<details><summary>Worked solution 1</summary>
+<p>It is primarily an allocation/architecture traceability defect. A passing test might exist, but the model cannot identify which design element claims the responsibility. A reviewer should not infer a satisfying block from the presence of a test.</p>
+</details>
+<p><strong>Problem 2.</strong> R2 changes from revision 2 to revision 3. T2 passed at revision 2. What status does an automated review assign?</p>
+<details><summary>Worked solution 2</summary>
+<p><code>STALE_EVIDENCE</code> (or similar), not <code>PASS</code>. Reverification or a controlled change-impact equivalence argument is required before accepting the revision-3 claim.</p>
+</details>
+<p><strong>Problem 3.</strong> A diagram draws <code>B2 --verifies--&gt; R2</code>. What is wrong under this model's convention?</p>
+<details><summary>Worked solution 3</summary>
+<p><code>verifies</code> must originate at a test node, not a block. A block may satisfy a requirement, and its behavior may be investigated through a test. The wrong edge type misrepresents the engineering claim.</p>
+</details>
+<p><strong>Problem 4.</strong> Why is a high graph-completeness percentage insufficient evidence for system safety?</p>
+<details><summary>Worked solution 4</summary>
+<p>Graph completeness checks structure, not the truth of design assumptions, operational representativeness or test validity. An incorrect but perfectly connected model can still mislead; assurance needs independent validation and reviewed evidence.</p>
+</details>
+<h2>Transfer to engineering work</h2>
+<p>Run the JSON model validator and inspect all four requirements. Repair <em>one</em> defect by changing the model—not by changing the validator's interpretation—and explain why your edit is justified. Produce a typed relationship legend, a query definition, and a table separating structural completeness from evidence sufficiency. This builds directly on Book III's requirements modeling chapter and prepares the later model-quality query work.</p>
+</main></body></html>

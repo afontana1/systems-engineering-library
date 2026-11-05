@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Decision uncertainty and value of information · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/bayesian-value-of-information.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed reference</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Decision uncertainty and value of information</h1>
+<p><strong>Reference entry · Analytics, modeling, simulation and decisions · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p><strong>Bayesian decision analysis</strong> combines prior beliefs, evidence likelihoods, and consequences to choose actions under uncertainty. <strong>Value of information (VOI)</strong> measures how much better a decision could become after observing information, not how much information is scientifically interesting. A precise measurement of something unrelated to the decision can have almost no decision value; imperfect evidence about a pivotal uncertainty can be very valuable.</p>
+<h2>Theory: updating beliefs and evaluating decisions</h2>
+<p>For hypothesis <code>H</code> and evidence <code>E</code>, <code>P(H|E) = P(E|H)P(H) / P(E)</code> when the probabilities are well defined. Updating requires a likelihood model: how likely is the observation if the hypothesis is true versus false? With decision <code>d</code> and state <code>θ</code>, choose the action maximizing expected utility <code>E[U(d,θ)|E]</code>, subject to noncompensable constraints. The <strong>expected value of perfect information</strong> (EVPI) is the difference between expected utility with perfect state knowledge and the best expected utility without it. <strong>Expected value of sample information</strong> (EVSI) uses a realistic noisy test and cannot exceed EVPI under consistent assumptions, before costs.</p>
+<p>A test may be statistically informative but too late to influence architecture, or it may require substantial operational risk. Information value is conditional on available actions, time to act, test cost, and decision authority.</p>
+<h2>Worked example: whether to purchase a field test</h2>
+<p>A component has a 20% prior probability of a costly hidden fault. Shipping without redesign costs <code>$0</code> if sound and <code>$100k</code> if faulty, for an expected loss of <code>$20k</code>. Redesign costs <code>$15k</code> and eliminates that particular fault. Without further information, redesign is preferable. Perfect knowledge would permit redesign only in the faulty 20% of cases, for an expected <code>$3k</code> cost. Thus the <strong>EVPI is <code>$15k - $3k = $12k</code></strong>. A proposed test costing <code>$5k</code> is worth considering, but not automatically justified: its sensitivity, false-positive rate, delay, and resulting conditional actions determine EVSI.</p>
+<h2>Engineering use and evidence</h2>
+<p>Specify states, priors and their basis, available actions, test likelihoods, consequences, constraints, and timing. Build a decision tree or influence diagram showing information arriving before the action it can affect. Stress priors and utilities; compare expected results with minimax-regret or robust strategies where probability knowledge is weak. Explicitly calculate net VOI after test costs and schedule effects.</p>
+<h2>Limitations and connections</h2>
+<p>Bayes' theorem cannot rescue an untrustworthy likelihood or an incoherent loss model. Treat expert priors as revisable judgments, not measured frequencies. Connect VOI to <strong>trade studies</strong>, <strong>risk</strong>, <strong>experimental design</strong>, <strong>model credibility</strong>, and <strong>enterprise investment</strong>.</p>
+<h2>Technical analysis: calculate sample information, not just perfect information</h2>
+<p>The perfect-information calculation above is a useful <em>upper bound</em>, but a purchasing decision needs a measurement model. Suppose the proposed test has <strong>90% sensitivity</strong> for the hidden fault and <strong>95% specificity</strong> for a sound component. With prior fault probability 0.20, the probability of a positive result is <code>0.90(0.20) + 0.05(0.80) = 0.22</code>. The posterior fault probability following a positive is <code>0.18 / 0.22 ≈ 0.8182</code>; following a negative it is <code>0.02 / 0.78 ≈ 0.02564</code>.</p>
+<p>If a redesign costs <code>$15k</code> and eliminates only this fault, the optimal policy is <strong>redesign after positive</strong> (<code>$15k &lt; $81.82k</code> expected shipping loss) and <strong>ship after negative</strong> (<code>$2.564k &lt; $15k</code>). Expected loss <em>before paying for the test</em> is <code>P(+)(15k) + P(fault and negative)(100k) = 0.22(15k) + 0.02(100k) = $5.3k</code>. The no-test optimal loss was <code>$15k</code>, so <strong>EVSI = $9.7k</strong>. With a <code>$5k</code> test price and no schedule consequences, the expected net gain is <code>$4.7k</code>. As a consistency check, <code>0 ≤ EVSI ($9.7k) ≤ EVPI ($12k)</code>.</p>
+<p>The apparent precision here is mathematical, not empirical. A different prevalence, specificity, or cost of redesign changes the optimal policy and test value. Check the posterior after <em>each</em> observation and ensure that evidence arrives <strong>before</strong> the action it can change; testing after a binding production decision has no operational decision value even if the data are informative.</p>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods">NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)</a> — Statistical methods, experiments, reliability, and process assessment.</li>
+<li><a href="https://standards.nasa.gov/node/263">NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)</a> — Credibility practices for modeling and simulation used in decisions.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="probability-and-dependence.html">Probability, dependence, and technical uncertainty</a></li>
+<li><a href="risk-vs-issue.html">Risk, issue, uncertainty, and opportunity</a></li>
+<li><a href="engineering-trades.html">Engineering trade studies: making preferences and uncertainty inspectable</a></li>
+<li><a href="design-of-experiments.html">Design of experiments and sensitivity</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B14/chapters/03-model-decisions-uncertainties-evidence-constraints-and-alternatives.html">Book 14, Chapter 03: Book 14 · Chapter 03 — Model decisions, uncertainties, evidence, constraints, and alternatives</a></li>
+<li><a href="../B14/chapters/11-analyze-uncertainty-sensitivity-robustness-regret-and-value-of-infor.html">Book 14, Chapter 11: Book 14 · Chapter 11 — Analyze uncertainty, sensitivity, robustness, regret, and value of information</a></li>
+<li><a href="../B18/chapters/07.html">Book 18, Chapter 07: Week 07 · System of Systems Engineering · Chapter 07 — Bayesian networks, causality, and decision uncertainty</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=d635f2fc1dbf4">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="bayesian-value-of-information.md">Editable Markdown</a></nav></main></body></html>

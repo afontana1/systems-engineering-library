@@ -1,0 +1,1957 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.769 — System Test &amp; Evaluation · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P2/EN645769.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside style="background:#eaf6f4;padding:12px 25px;border-bottom:1px solid #c5e3df"><strong>Advanced textbook readings</strong> · <a href="../../K/G/chapters/01-safety.html">Safety as a system-level control problem</a> · <a href="../../K/G/chapters/04-resilience.html">Software trustworthiness, observability and resilience</a></aside><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/02-requirements.html">Requirements, traceability, and assurance arguments</a> · <a href="../../K/T/06-inference.html">Uncertainty, statistical evidence, and Bayesian decisions</a> · <a href="../../K/T/09-assurance.html">Reliability, hazard controls, and resilience</a></aside><main><div class="course-actions"><a href="../../K/B8/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en645769--system-test--evaluation">EN.645.769 — System Test &amp; Evaluation</h1>
+<p><strong>Credits:</strong> 3<br/>
+<strong>Recommended self-study duration:</strong> 12 weeks<br/>
+<strong>Nominal effort:</strong> 10–13 hours per week<br/>
+<strong>Primary phase:</strong> Phase 2 — Core systems-development lifecycle<br/>
+<strong>Primary program competencies:</strong> C2, C4, C6, C7, C8, C9, C10, C11, C12</p>
+<h2 id="1-course-purpose-and-professional-context">1. Course purpose and professional context</h2>
+<p>Test and evaluation is the disciplined production and interpretation of evidence for decisions. It is not the final activity performed after engineering is complete, and it is not equivalent to running test cases. A systems T&amp;E engineer connects stakeholder intent and requirements to test objectives, articles, configurations, environments, instrumentation, statistics, execution paths, discrepancy processes, analysis, limitations, and readiness recommendations.</p>
+<p>This course develops the ability to plan and evaluate evidence for system elements and the total system. The learner receives the controlled design and integration baseline from EN.645.768, audits its testability, creates an integrated T&amp;E strategy, defines critical test parameters and environments, constructs efficient integration and formal test paths, applies statistical methods, uses SIL/HIL and model-based evidence appropriately, executes representative test campaigns using physical, simulated, or supplied data, analyzes discrepancies and corrective actions, plans environmental and operational evaluation, and makes a defensible acceptance and operational-readiness recommendation.</p>
+<p>The governing principle is that a test event does not verify a requirement by itself. Verification or validation requires an authoritative claim, an appropriate method, a known article and configuration, a representative or explicitly bounded environment, trustworthy measurement, predefined success criteria, evaluated results, and a conclusion whose uncertainty and limitations are visible.</p>
+<h2 id="2-source-description-and-self-study-scope">2. Source description and self-study scope</h2>
+<p>The current Johns Hopkins course description emphasizes test requirements, critical test parameters, analysis of results, remedial action, verification and validation, hardware and software testing, tools and procedures, hardware-software integration, quality assurance, environmental testing, and operational T&amp;E. The Fall 2026 abridged syllabus adds requirements traceability, test objectives/concepts/environments, MBSE and architecture for T&amp;E, statistical techniques, SIL capabilities, informal and formal testing, operational evaluation, deployed systems and systems of systems, and AI and T&amp;E. <a href="https://ep.jhu.edu/courses/645769-system-test-evaluation/" title="JHU — System Test &amp; Evaluation">JHU-769-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.769.81" title="JHU Fall 2026 abridged syllabus — System Test &amp; Evaluation">JHU-769-SYLLABUS</a></p>
+<p>This self-study version preserves that scope while making six adaptations:</p>
+<ol>
+<li>the source group project becomes a controlled end-to-end T&amp;E program with optional peer teamwork and mandatory independent review roles;</li>
+<li>the five source modules become 12 weeks to support sequential planning, design, execution, analysis, and review;</li>
+<li>the learner must generate or analyze actual data through a small physical test, software test, simulation, or supplied reference dataset;</li>
+<li>statistical claims must include assumptions, uncertainty, sample rationale, and analysis source;</li>
+<li>AI/autonomy and system-of-systems topics are treated as extensions of sound T&amp;E fundamentals, not as substitutes for them;</li>
+<li>the final output is an evidence-based recommendation, not a binder of procedures.</li>
+</ol>
+<p>The course is domain-neutral. DoD T&amp;E guidance is used as a useful public reference for integrated developmental and operational evaluation, but learners should tailor terminology and authority to their own industry.</p>
+<h2 id="3-relationship-to-the-curriculum">3. Relationship to the curriculum</h2>
+<h3 id="imports-from-en645768">Imports from EN.645.768</h3>
+<p>The course receives:</p>
+<ul>
+<li>system and component specifications;</li>
+<li>stakeholder needs, ConOps, validation scenarios, and mission threads;</li>
+<li>physical architecture, functions, modes, states, and interface definitions;</li>
+<li>technical budgets, margins, uncertainty, and TPMs;</li>
+<li>prototype evidence and technology/risk decisions;</li>
+<li>RAM, HSI, safety, security, resilience, supportability, production, and disposal analyses;</li>
+<li>integration architecture, build sequence, enabling products, and discrepancy workflow;</li>
+<li>V&amp;V plan, verification cross-reference matrix, validation matrix, and planned methods;</li>
+<li>PDR/CDR-style actions, waivers, dissent, residual risks, and configuration manifest.</li>
+</ul>
+<h3 id="new-contribution-of-this-course">New contribution of this course</h3>
+<p>The course produces:</p>
+<ul>
+<li>a T&amp;E receiving-review and testability audit;</li>
+<li>an integrated T&amp;E strategy or lightweight TEMP;</li>
+<li>a requirement/need-to-objective-to-method-to-event trace model;</li>
+<li>critical test parameter definitions and measurement plans;</li>
+<li>a test architecture containing articles, SIL/HIL, simulations, facilities, instrumentation, data systems, personnel, and environments;</li>
+<li>statistically defensible experiment and sample plans;</li>
+<li>integration, informal, formal, qualification, environmental, reliability, maintainability, cybersecurity, and operational test products;</li>
+<li>test procedures, dry-run evidence, and Test Readiness Review records;</li>
+<li>executed or simulated test data with reproducible analysis;</li>
+<li>discrepancy, root-cause, corrective-action, retest, and closure evidence;</li>
+<li>verification and validation status with uncertainty and limitations;</li>
+<li>an operational effectiveness, suitability, survivability/resilience, and readiness recommendation;</li>
+<li>a final T&amp;E evidence baseline suitable for a professional portfolio.</li>
+</ul>
+<h2 id="4-prerequisites-and-readiness-assessment">4. Prerequisites and readiness assessment</h2>
+<h3 id="required-prior-competencies">Required prior competencies</h3>
+<p>Before Week 1, the learner should be able to:</p>
+<ul>
+<li>identify the authoritative system/design configuration and trace requirements to architecture and planned evidence;</li>
+<li>distinguish verification, validation, qualification, acceptance, certification, and operational evaluation;</li>
+<li>interpret system modes, interfaces, hazards, failure modes, technical budgets, and integration dependencies;</li>
+<li>use a spreadsheet and Python, R, MATLAB, or equivalent for descriptive statistics and plots;</li>
+<li>reason about distributions, confidence intervals, measurement error, randomization, and sample size at an introductory level;</li>
+<li>write controlled procedures and record objective observations;</li>
+<li>manage discrepancies, actions, risks, and configuration changes;</li>
+<li>communicate technical limitations without converting uncertainty into an unsupported pass/fail claim.</li>
+</ul>
+<h3 id="readiness-diagnostic--120-minutes">Readiness diagnostic — 120 minutes</h3>
+<p><strong>Part A — evidence audit</strong></p>
+<p>Using the EN.645.768 handoff:</p>
+<ol>
+<li>identify two requirements with weak or infeasible verification methods;</li>
+<li>identify two stakeholder expectations with nonrepresentative validation environments;</li>
+<li>identify one critical interface absent from the integration test sequence;</li>
+<li>identify one technical budget whose measurement method is undefined;</li>
+<li>identify one hazard control that requires off-nominal testing;</li>
+<li>identify one requirement for which analysis should supplement or replace test;</li>
+<li>identify the authoritative article/build and one configuration ambiguity.</li>
+</ol>
+<p><strong>Part B — statistical task</strong></p>
+<p>Using a supplied sample of response-time data:</p>
+<ul>
+<li>calculate summary statistics and a confidence interval or bootstrap interval;</li>
+<li>identify an outlier and assess whether it is error or valid behavior;</li>
+<li>compare the result with a percentile-based requirement;</li>
+<li>explain why the sample may or may not support a compliance claim.</li>
+</ul>
+<p><strong>Part C — procedure review</strong></p>
+<p>Audit a one-page test procedure for missing prerequisites, configuration, instrumentation, expected results, safety controls, data capture, and discrepancy handling.</p>
+<h3 id="passing-standard-and-recovery-path">Passing standard and recovery path</h3>
+<p>Pass with at least 80%, no missed safety-critical issue, and a statistically defensible interpretation. Learners below standard should complete a bridge on V&amp;V distinctions, testability, measurement systems, descriptive statistics, confidence, procedure writing, and configuration-controlled evidence.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Measurable course learning outcome</th>
+<th>Program competency</th>
+<th style="text-align:center">Level</th>
+<th>Primary evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLO-1</td>
+<td>Describe and tailor an integrated T&amp;E lifecycle that reduces technical and operational decision risk</td>
+<td>C6, C10</td>
+<td style="text-align:center">A</td>
+<td>T&amp;E strategy</td>
+</tr>
+<tr>
+<td>CLO-2</td>
+<td>Define test objectives, concepts, critical parameters, methods, and events traceable to requirements and stakeholder expectations</td>
+<td>C2, C6</td>
+<td style="text-align:center">A</td>
+<td>Trace and CTP package</td>
+</tr>
+<tr>
+<td>CLO-3</td>
+<td>Design a T&amp;E architecture containing articles, models, facilities, SIL/HIL, instrumentation, data, personnel, and environments</td>
+<td>C4, C6, C10</td>
+<td style="text-align:center">A</td>
+<td>T&amp;E architecture</td>
+</tr>
+<tr>
+<td>CLO-4</td>
+<td>Apply statistical and measurement principles to experiment design, sample rationale, uncertainty, and analysis</td>
+<td>C7, C8</td>
+<td style="text-align:center">A</td>
+<td>Statistical design package</td>
+</tr>
+<tr>
+<td>CLO-5</td>
+<td>Construct risk-efficient integration execution paths and informal/formal test cases</td>
+<td>C4, C6, C9</td>
+<td style="text-align:center">A</td>
+<td>Integration and test approach</td>
+</tr>
+<tr>
+<td>CLO-6</td>
+<td>Write and dry-run controlled test procedures with objective success, safety, security, and discrepancy criteria</td>
+<td>C6, C10</td>
+<td style="text-align:center">A</td>
+<td>TRR package</td>
+</tr>
+<tr>
+<td>CLO-7</td>
+<td>Plan and evaluate hardware, software, hardware-software, cybersecurity, environmental, quality, RAM, and maintainability testing</td>
+<td>C5, C6, C9, C11</td>
+<td style="text-align:center">A</td>
+<td>Specialty T&amp;E package</td>
+</tr>
+<tr>
+<td>CLO-8</td>
+<td>Execute or simulate tests and maintain trustworthy article, configuration, measurement, and data provenance</td>
+<td>C6, C7, C10</td>
+<td style="text-align:center">A</td>
+<td>Test execution record</td>
+</tr>
+<tr>
+<td>CLO-9</td>
+<td>Analyze results, discrepancies, root causes, corrective actions, retest, and evidence sufficiency</td>
+<td>C6, C7, C9</td>
+<td style="text-align:center">A</td>
+<td>Analysis and corrective-action report</td>
+</tr>
+<tr>
+<td>CLO-10</td>
+<td>Develop operational scenarios and evaluate effectiveness, suitability, resilience/survivability, and human-system performance</td>
+<td>C6, C9, C11</td>
+<td style="text-align:center">A</td>
+<td>Operational evaluation</td>
+</tr>
+<tr>
+<td>CLO-11</td>
+<td>Address T&amp;E challenges for deployed, evolving, system-of-systems, AI-enabled, and autonomous capabilities</td>
+<td>C6, C8, C11</td>
+<td style="text-align:center">D/A</td>
+<td>Advanced T&amp;E supplement</td>
+</tr>
+<tr>
+<td>CLO-12</td>
+<td>Make and defend an acceptance and operational-readiness recommendation with explicit residual risk and limitations</td>
+<td>C10, C12</td>
+<td style="text-align:center">A</td>
+<td>Final evidence review and oral defense</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>What decision is each test intended to inform?</li>
+<li>Which claims require test, analysis, inspection, demonstration, simulation, or combined evidence?</li>
+<li>What is a critical test parameter, and why is it critical?</li>
+<li>How representative must the article, software build, operator, environment, load, data, and threat be?</li>
+<li>How do measurement uncertainty, sampling, variability, dependence, and missing data affect conclusions?</li>
+<li>What makes a test path efficient without sacrificing coverage or realism?</li>
+<li>How should informal exploratory testing and formal qualification evidence interact?</li>
+<li>When is a discrepancy a product defect, procedure error, instrumentation issue, requirement ambiguity, or environment mismatch?</li>
+<li>How much evidence is enough to claim compliance or operational fitness?</li>
+<li>How should T&amp;E address evolving software, AI, autonomy, external systems, and operational learning?</li>
+<li>When should a readiness recommendation be conditional, and how should residual risk be communicated?</li>
+</ul>
+<h2 id="7-running-case-and-te-rules">7. Running case and T&amp;E rules</h2>
+<h3 id="case--autonomous-campus-mobility-2030-evidence-and-readiness">Case — Autonomous Campus Mobility 2030: Evidence and Readiness</h3>
+<p>The learner receives the design selected and matured in the prior courses. Worked examples use the reference mixed-fleet architecture, but the learner must test the actual imported design baseline.</p>
+<h3 id="reference-test-assets">Reference test assets</h3>
+<p>The course assumes access, physically or virtually, to some combination of:</p>
+<ul>
+<li>a system model and requirements repository;</li>
+<li>dispatch and rider-interface software or executable mock service;</li>
+<li>a vehicle/gateway emulator;</li>
+<li>an operations-console prototype;</li>
+<li>a SIL that can inject timing, network, sensor, state, and failure conditions;</li>
+<li>a small hardware or microcontroller test article, where available;</li>
+<li>environmental and reliability datasets supplied by the course;</li>
+<li>representative operator and rider scenarios;</li>
+<li>Python/R/spreadsheet tools for data generation and analysis.</li>
+</ul>
+<p>A learner without physical hardware may use simulation and supplied datasets, but must state which conclusions are limited by article or environment fidelity.</p>
+<h3 id="controlled-fictional-thresholds-and-data-rules">Controlled fictional thresholds and data rules</h3>
+<ul>
+<li>rider request-to-confirmation: no more than 8 seconds at the 95th percentile under the defined peak profile;</li>
+<li>dispatch service availability during service hours: at least 0.995;</li>
+<li>fleet mission availability: at least 0.97;</li>
+<li>accessible boarding: at least 95% of qualified events within 4 minutes;</li>
+<li>degraded mobility service available within 15 minutes of a single-point disruption;</li>
+<li>end-of-route energy reserve: at least 20% under the defined worst credible profile;</li>
+<li>safety- and accessibility-critical discrepancies are never closed solely because they are rare;</li>
+<li>all generated data must include source, seed where applicable, schema, units, time base, missing-data rule, and configuration identifier;</li>
+<li>the learner may not delete adverse runs without documented data-quality rationale.</li>
+</ul>
+<h3 id="independent-review-roles">Independent review roles</h3>
+<p>Major products require separate passes from:</p>
+<ol>
+<li>systems T&amp;E lead;</li>
+<li>design authority;</li>
+<li>operator/maintainer and human-factors representative;</li>
+<li>safety/security/quality representative;</li>
+<li>statistical or measurement reviewer;</li>
+<li>independent operational evaluator or customer authority.</li>
+</ol>
+<h3 id="repository-structure">Repository structure</h3>
+<p>Maintain at minimum:</p>
+<ul>
+<li><code>/00-receiving-and-strategy</code></li>
+<li><code>/01-trace-and-test-objectives</code></li>
+<li><code>/02-test-architecture-and-environments</code></li>
+<li><code>/03-statistics-and-measurement</code></li>
+<li><code>/04-integration-and-procedures</code></li>
+<li><code>/05-execution-and-data</code></li>
+<li><code>/06-discrepancies-and-corrective-action</code></li>
+<li><code>/07-operational-evaluation</code></li>
+<li><code>/08-evidence-and-reviews</code></li>
+<li><code>/09-final-recommendation</code></li>
+</ul>
+<h2 id="8-resource-architecture">8. Resource architecture</h2>
+<h3 id="required-open-access-backbone">Required open-access backbone</h3>
+<ul>
+<li>JHU course page and Fall 2026 abridged syllabus. <a href="https://ep.jhu.edu/courses/645769-system-test-evaluation/" title="JHU — System Test &amp; Evaluation">JHU-769-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.769.81" title="JHU Fall 2026 abridged syllabus — System Test &amp; Evaluation">JHU-769-SYLLABUS</a></li>
+<li>NASA Systems Engineering Handbook product integration, product verification, product validation, technical assessment, configuration, and review guidance. <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a> <a href="https://www.nasa.gov/reference/5-2-product-integration/" title="NASA SE Handbook — Product Integration">NASA-INTEGRATION</a> <a href="https://www.nasa.gov/reference/5-3-product-verification/" title="NASA SE Handbook — Product Verification">NASA-VERIFICATION</a> <a href="https://www.nasa.gov/reference/5-4-product-validation/" title="NASA SE Handbook — Product Validation">NASA-VALIDATION</a> <a href="https://www.nasa.gov/reference/6-7-technical-assessment/" title="NASA SE Handbook — Technical Assessment">NASA-ASSESSMENT</a> <a href="https://www.nasa.gov/reference/6-5-configuration-management/" title="NASA SE Handbook — Configuration Management">NASA-CM</a></li>
+<li>NASA V&amp;V Plan outline. <a href="https://www.nasa.gov/reference/appendix-i-verification-and-validation-plan-outline/" title="NASA SE Handbook — V&amp;V Plan Outline">NASA-VV-PLAN</a></li>
+<li>NIST/SEMATECH Engineering Statistics Handbook for measurement, exploratory analysis, experimental design, process characterization, reliability, and uncertainty. <a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook" title="NIST/SEMATECH Engineering Statistics Handbook">NIST-ESH</a></li>
+<li>DoD Systems Engineering Guidebook and public T&amp;E/TEMP resources for integrated developmental and operational planning. <a href="https://ac.cto.mil/wp-content/uploads/2022/08/Systems-Eng-Guidebook_Feb2022-Cleared.pdf" title="DoD Systems Engineering Guidebook">DOD-SE</a> <a href="https://aaf.dau.edu/aaf/mca/temp/" title="DAU — Test and Evaluation Master Plan">DAU-TEMP</a></li>
+<li>NASA Software Engineering and Assurance Handbook testing guidance. <a href="https://swehb.nasa.gov/spaces/SWEHBVD/pages/102695449/SWE-066+-+Perform+Testing" title="NASA Software Engineering and Assurance Handbook — Perform Testing">NASA-SWE-TEST</a></li>
+<li>DoD guidebooks for cyber DT&amp;E, AI-enabled systems, autonomy, and modeling/simulation in T&amp;E as advanced supplements. <a href="https://aaf.dau.edu/storage/2025/07/Cyber-DTE-Guidebook-V3-June2025Update_Final-OFF.pdf" title="DoD Cyber Developmental Test and Evaluation Guidebook, Version 3">DOD-CYBER-TE</a> <a href="https://www.cto.mil/wp-content/uploads/2025/02/TE_of_AIES_Guidebook_Final_26Feb25.pdf" title="DoD Developmental T&amp;E of AI-Enabled Systems Guidebook">DOD-AI-TE</a> <a href="https://www.cto.mil/wp-content/uploads/2025/10/DTE-of-AS-GB.pdf" title="DoD Developmental T&amp;E of Autonomous Systems Guidebook">DOD-AUTONOMY-TE</a> <a href="https://aaf.dau.edu/storage/2025/05/MS-TE-Guidebook-Final.pdf" title="DoD Modeling and Simulation for Test and Evaluation Guidebook">DOD-MS-TE</a></li>
+</ul>
+<h3 id="resource-use-rule">Resource-use rule</h3>
+<p>Public guidance supplies methods and examples, not automatic authority. Identify which organization owns acceptance, certification, operational, safety, or security decisions in the learner's domain.</p>
+<h2 id="9-tools-and-working-environment">9. Tools and working environment</h2>
+<p>Required capabilities:</p>
+<ul>
+<li>requirements and evidence traceability;</li>
+<li>procedure and test-case control;</li>
+<li>model/SIL or executable system behavior;</li>
+<li>data acquisition or generated test data;</li>
+<li>scripting or statistical analysis;</li>
+<li>plots, tables, and reproducible reports;</li>
+<li>issue/discrepancy/corrective-action tracking;</li>
+<li>article/build/configuration identification;</li>
+<li>presentation and oral-review capture.</li>
+</ul>
+<p>Recommended: Git, Python/Jupyter with pandas/scipy/statsmodels or R, spreadsheet software, a requirements/modeling tool, a test framework, and a lightweight issue tracker. Automated tests should preserve logs and machine-readable results rather than only screenshots.</p>
+<h2 id="10-assessment-and-grading-model">10. Assessment and grading model</h2>
+<table>
+<thead>
+<tr>
+<th>Assessment</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weekly retrieval checks and knowledge tests</td>
+<td style="text-align:right">8%</td>
+</tr>
+<tr>
+<td>Weekly T&amp;E products and quantitative exercises</td>
+<td style="text-align:right">27%</td>
+</tr>
+<tr>
+<td>T&amp;E Strategy and Statistical Design Review</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Test Readiness Review and procedure package</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Execution, analysis, discrepancy, and operational-evaluation evidence</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Final report, readiness recommendation, and oral defense</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Assignments below 82% should be revised. A revised score may demonstrate mastery even when a historical grade is retained separately.</p>
+<h2 id="11-twelve-week-course-map">11. Twelve-week course map</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Week</th>
+<th>Focus</th>
+<th>Primary controlled output</th>
+<th>Review or decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Receiving review and integrated T&amp;E strategy</td>
+<td>Testability audit and T&amp;E strategy</td>
+<td>T&amp;E Receiving Review</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>Requirements traceability and critical test parameters</td>
+<td>Objective/method/CTP trace model</td>
+<td>Coverage decision</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>Test concepts, environments, architecture, and M&amp;S</td>
+<td>T&amp;E architecture and environment matrix</td>
+<td>Architecture review</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>Measurement systems, statistics, DOE, and sample rationale</td>
+<td>Statistical design package</td>
+<td>Statistical Design Review</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>Integration approach, SIL/HIL, and informal testing</td>
+<td>Integration execution path and exploratory cases</td>
+<td>Integration-test decision</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>Formal qualification procedures and readiness</td>
+<td>Controlled procedure set</td>
+<td>Test Readiness Review</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>Hardware, software, cyber, automation, and tool evidence</td>
+<td>Integrated technical test package</td>
+<td>Method/tool qualification decision</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>Environmental, quality, reliability, maintainability, and safety testing</td>
+<td>Specialty T&amp;E package</td>
+<td>Qualification coverage review</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Test execution, data integrity, discrepancies, and corrective action</td>
+<td>Executed campaign and discrepancy baseline</td>
+<td>Continue/stop/retest decision</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Result analysis, evidence sufficiency, and remedial action</td>
+<td>Verification/validation evidence review</td>
+<td>Compliance/limitation decision</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>Operational, deployed, SoS, AI, and autonomy evaluation</td>
+<td>Operational evaluation and advanced supplement</td>
+<td>Operational suitability decision</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>Final evidence review and readiness recommendation</td>
+<td>Final T&amp;E baseline and oral defense</td>
+<td>Proceed/conditional/rework/stop</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-major-assignments-and-review-products">12. Major assignments and review products</h2>
+<h3 id="a-te-receiving-review-and-strategy">A. T&amp;E Receiving Review and Strategy</h3>
+<p>Audit testability, evidence feasibility, article and environment availability, configuration, risks, and decision authorities. Produce an integrated T&amp;E strategy or lightweight TEMP.</p>
+<h3 id="b-statistical-design-review">B. Statistical Design Review</h3>
+<p>Defend measures, instrumentation, uncertainty, data quality, sample rationale, experiment design, analysis method, and decision boundaries before formal procedure development.</p>
+<h3 id="c-test-readiness-review">C. Test Readiness Review</h3>
+<p>Demonstrate that articles, builds, interfaces, facilities, environments, instrumentation, data systems, personnel, procedures, safety/security controls, dry runs, and discrepancy processes are ready.</p>
+<h3 id="d-verificationvalidation-evidence-review">D. Verification/Validation Evidence Review</h3>
+<p>Evaluate whether executed and inherited evidence supports each claim, with uncertainty, anomalies, limitations, waivers, and retest needs.</p>
+<h3 id="e-final-operational-readiness-recommendation">E. Final Operational Readiness Recommendation</h3>
+<p>Integrate technical compliance, stakeholder validation, operational effectiveness, suitability, resilience, safety, security, support, residual risk, and evidence limitations into a decision recommendation.</p>
+<h2 id="13-common-analytic-rubric">13. Common analytic rubric</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th style="text-align:right">Weight</th>
+<th>Graduate-level evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claim-to-evidence traceability</td>
+<td style="text-align:right">20%</td>
+<td>Requirements and expectations map to objectives, methods, events, results, and conclusions.</td>
+</tr>
+<tr>
+<td>Test design and representativeness</td>
+<td style="text-align:right">20%</td>
+<td>Article, configuration, environment, operators, loads, and threats fit the claim or limitations are explicit.</td>
+</tr>
+<tr>
+<td>Statistical and measurement rigor</td>
+<td style="text-align:right">20%</td>
+<td>Measures, uncertainty, samples, assumptions, analysis, and decision rules are defensible.</td>
+</tr>
+<tr>
+<td>Execution and data integrity</td>
+<td style="text-align:right">15%</td>
+<td>Procedures, configuration, logs, provenance, anomalies, and deviations are controlled.</td>
+</tr>
+<tr>
+<td>Discrepancy and corrective-action quality</td>
+<td style="text-align:right">10%</td>
+<td>Root cause, impact, correction, regression, retest, and closure are evidence based.</td>
+</tr>
+<tr>
+<td>Evaluation and recommendation</td>
+<td style="text-align:right">10%</td>
+<td>Conclusions distinguish pass, fail, inconclusive, limitation, waiver, and residual risk.</td>
+</tr>
+<tr>
+<td>Communication and reproducibility</td>
+<td style="text-align:right">5%</td>
+<td>Another reviewer can reproduce the analysis and understand the decision.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-critical-mastery-criteria">14. Critical mastery criteria</h2>
+<p>The course cannot be passed if any of the following remains true:</p>
+<ul>
+<li>a safety-, accessibility-, security-, or mission-critical claim lacks an executable evidence path;</li>
+<li>the tested article/build/configuration cannot be identified;</li>
+<li>acceptance criteria are created or changed after results without controlled justification;</li>
+<li>measurement uncertainty or known data-quality defects are hidden;</li>
+<li>adverse or anomalous runs are deleted without traceable rationale;</li>
+<li>formal testing begins without approved readiness, safety, and discrepancy controls;</li>
+<li>a requirement is marked verified merely because a test was executed;</li>
+<li>validation uses a nonrepresentative environment without disclosing the limitation;</li>
+<li>a critical discrepancy is closed without root-cause and retest evidence or authorized risk acceptance;</li>
+<li>statistical conclusions exceed what the sample and design support;</li>
+<li>the final readiness recommendation hides residual risk, waiver, or inconclusive evidence;</li>
+<li>the learner cannot reproduce a key result during oral defense.</li>
+</ul>
+<h2 id="15-final-capstone-and-oral-defense">15. Final capstone and oral defense</h2>
+<p>The capstone contains:</p>
+<ol>
+<li>receiving-review and testability audit;</li>
+<li>T&amp;E strategy/TEMP and governance;</li>
+<li>traceability model and critical test parameters;</li>
+<li>article, environment, facility, SIL/HIL, instrumentation, and data architecture;</li>
+<li>statistical and measurement design;</li>
+<li>integration and formal procedure set;</li>
+<li>TRR evidence and actions;</li>
+<li>executed or simulated data, logs, code, and plots;</li>
+<li>discrepancies, corrective actions, regression and retest evidence;</li>
+<li>verification and validation status by claim;</li>
+<li>environmental, RAM, cybersecurity, human, and operational evaluation;</li>
+<li>deployed/SoS/AI/autonomy considerations where applicable;</li>
+<li>final report and readiness recommendation;</li>
+<li>limitations, waivers, residual risks, and follow-on test plan.</li>
+</ol>
+<p>The 25–35 minute oral defense includes a live trace, a data reanalysis, an anomaly challenge, a configuration question, and a request to revise the recommendation after a supplied new fact.</p>
+<h2 id="16-portfolio-and-completion-requirements">16. Portfolio and completion requirements</h2>
+<p>A professional portfolio should include redacted examples of:</p>
+<ul>
+<li>T&amp;E strategy and TEMP-style content;</li>
+<li>VCRM/evidence matrix and critical parameter definitions;</li>
+<li>statistical design and reproducible notebook;</li>
+<li>SIL/HIL or integration execution path;</li>
+<li>controlled formal procedure and TRR checklist;</li>
+<li>test log, dataset, analysis, discrepancy, and corrective-action record;</li>
+<li>operational scenario and suitability evaluation;</li>
+<li>final evidence report and readiness recommendation;</li>
+<li>oral-defense or review record.</li>
+</ul>
+<p>Phase 2 is complete when the learner can connect the original problem and concept decision through design, integration, executed evidence, and an honest readiness recommendation.</p>
+<h2 id="17-course-maintenance-record">17. Course maintenance record</h2>
+<p>Record annually:</p>
+<ul>
+<li>JHU source syllabus date and topic changes;</li>
+<li>NASA, NIST, DoD, and domain-specific guidance versions;</li>
+<li>statistical-library and test-tool versions;</li>
+<li>case data and simulation changes;</li>
+<li>reference-dataset provenance;</li>
+<li>recurring test-design and interpretation errors;</li>
+<li>changes in AI/autonomy/cyber T&amp;E guidance;</li>
+<li>downstream feedback from Phase 3 modeling and analytics work.</li>
+</ul>
+<hr/>
+<h2 id="week-1--receive-the-design-baseline-and-create-the-integrated-te-strategy">Week 1 — Receive the design baseline and create the integrated T&amp;E strategy</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B8/chapters/01-receive-the-design-baseline-and-create-the-integrated-t.html">Read Book 8, Chapter 1</a> → <a href="../../K/B8/labs/lab-01-receive-the-design-baseline-and-create-the-integrated-t.html">complete Hypothetical Lab 1</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-769-w01.html">Read the Week 1 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C4, C6, C10, C12</p>
+<h3 id="professional-context-and-essential-question">Professional context and essential question</h3>
+<p>T&amp;E begins by auditing claims, articles, environments, resources, and decision authorities—not by writing procedures. <strong>Essential question:</strong> Is the design baseline testable, and what integrated evidence strategy will reduce the most consequential decision risks?</p>
+<h3 id="weekly-learning-outcomes">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>classify imported V&amp;V plans and evidence by authority and maturity</li>
+<li>identify untestable requirements, missing environments, unavailable resources, and configuration ambiguity</li>
+<li>distinguish developmental, qualification, acceptance, operational, and continuous evaluation</li>
+<li>define T&amp;E governance, independence, risk priorities, events, and decision points</li>
+<li>baseline an integrated T&amp;E strategy or lightweight TEMP</li>
+</ul>
+<h3 id="retrieval-and-readiness-check">Retrieval and readiness check</h3>
+<ol>
+<li>Identify the authoritative design/build revision.</li>
+<li>Name one verification and one validation objective.</li>
+<li>Explain why T&amp;E should begin before implementation is complete.</li>
+<li>List four reasons a planned test may be infeasible.</li>
+</ol>
+<h3 id="required-study">Required study</h3>
+<ul>
+<li>
+<p><strong>JHU Fall 2026 syllabus</strong> — description, topics, CLOs, and coursework. <strong>Purpose:</strong> Anchor scope and expected outcomes. <strong>Guiding questions:</strong> Which topics extend beyond conventional verification testing?</p>
+</li>
+<li>
+<p><strong>NASA Product Realization</strong> — integration, verification, validation, transition. <strong>Purpose:</strong> Position T&amp;E in the lifecycle. <strong>Guiding questions:</strong> How do evidence products flow between processes?</p>
+</li>
+<li>
+<p><strong>DAU TEMP resource</strong> — purpose and major planning elements. <strong>Purpose:</strong> Structure integrated T&amp;E planning. <strong>Guiding questions:</strong> What decisions, events, resources, and responsibilities should the strategy connect?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes">Instructor-style lesson notes</h3>
+<p>A receiving review verifies that T&amp;E has a stable claim set, known articles, available environments, credible methods, and clear decision authority. It should challenge the design team's assumptions rather than merely accept its V&amp;V matrix.</p>
+<p>An integrated strategy sequences evidence from inexpensive and controlled to increasingly representative and operational. It should use analysis, simulation, inspection, demonstration, test, and operational observation where each provides decision value.</p>
+<p>Developmental testing informs design and technical risk. Qualification establishes that a design or item can meet defined conditions. Acceptance supports a customer or authority decision about a delivered item. Operational evaluation addresses effectiveness, suitability, and use in realistic contexts.</p>
+<p>T&amp;E independence is a matter of decision role and conflict of interest, not organizational labels alone. Define who designs, witnesses, analyzes, approves, and accepts evidence.</p>
+<h3 id="worked-example">Worked example</h3>
+<p>The design VCRM proposes a 30-day field trial to prove 0.995 annual availability, but no production-representative fleet or data-retention approval exists. The T&amp;E receiving review marks the method infeasible, creates a combined reliability model/fault-injection/limited field evidence strategy, and identifies the remaining confidence limitation for the acceptance authority.</p>
+<h3 id="guided-practice">Guided practice</h3>
+<ol>
+<li>Classify 15 inherited evidence items as planned, executable, executed, limited, obsolete, or rejected.</li>
+<li>Identify the top five T&amp;E decision risks.</li>
+<li>Draft an event sequence from component evidence through operational evaluation.</li>
+<li>Create a RACI for test design, execution, analysis, approval, and acceptance.</li>
+</ol>
+<h3 id="independent-exercises">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Classify common T&amp;E activities by purpose and decision authority.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Perform the receiving review on the EN.645.768 handoff.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze feasibility and dependency for every critical evidence path.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Create the integrated T&amp;E strategy and review calendar.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Build a query listing critical claims with no executable article/environment/method combination.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable">Weekly deliverable</h3>
+<p>Submit the T&amp;E receiving-review report, testability audit, evidence-feasibility register, integrated strategy/TEMP v1, event roadmap, governance/RACI, risk priorities, and controlled baseline manifest.</p>
+<h3 id="analytic-rubric">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Testability audit | 30% | Critical gaps in claims, articles, configurations, environments, and resources are found. |</p>
+<p>| Strategy integration | 30% | Events, methods, risks, decisions, and lifecycle stages form a coherent sequence. |</p>
+<p>| Governance and independence | 20% | Roles and authorities are unambiguous. |</p>
+<p>| Configuration and communication | 20% | The baseline and recommendation are controlled and usable. |</p>
+<h3 id="critical-failures">Critical failures</h3>
+<ul>
+<li>Critical article/build identity is ambiguous.</li>
+<li>Safety-critical evidence path is infeasible and unflagged.</li>
+<li>Strategy is a list of tests with no decision logic.</li>
+<li>Acceptance authority is undefined.</li>
+</ul>
+<h3 id="knowledge-check">Knowledge check</h3>
+<ol>
+<li>How does developmental test differ from operational evaluation?</li>
+<li>What makes an evidence path executable?</li>
+<li>Why perform a T&amp;E receiving review?</li>
+<li>What belongs in a TEMP-style strategy?</li>
+<li>When is independent evaluation necessary?</li>
+</ol>
+<h3 id="revision-and-mastery-gate">Revision and mastery gate</h3>
+<p>No critical claim may remain without an executable or explicitly deferred evidence strategy. Deferred claims require decision limits and authority approval.</p>
+<h3 id="suggested-workload">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Audit | 3.5 |</p>
+<p>| Strategy | 3.5 |</p>
+<p>| Review/revision | 2.0 |</p>
+<hr/>
+<h2 id="week-2--trace-requirements-and-stakeholder-expectations-to-objectives-methods-and-critical-test-parameters">Week 2 — Trace requirements and stakeholder expectations to objectives, methods, and critical test parameters</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B8/chapters/02-trace-requirements-and-stakeholder-expectations-to-obje.html">Read Book 8, Chapter 2</a> → <a href="../../K/B8/labs/lab-02-trace-requirements-and-stakeholder-expectations-to-obje.html">complete Hypothetical Lab 2</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-769-w02.html">Read the Week 2 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C2, C6</p>
+<h3 id="professional-context-and-essential-question-2">Professional context and essential question</h3>
+<p>Testing everything is impossible. Critical test parameters focus resources on the measures that drive mission, safety, suitability, and decision risk. <strong>Essential question:</strong> Which parameters and evidence chains are necessary to support each important claim?</p>
+<h3 id="weekly-learning-outcomes-2">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>validate requirement and stakeholder claim testability</li>
+<li>define test objectives, concepts, measures, thresholds, and decision rules</li>
+<li>identify critical test parameters and justify criticality</li>
+<li>map requirements and needs to methods, events, articles, environments, and reports</li>
+<li>detect coverage gaps, duplicate evidence, and weak proxies</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-2">Retrieval and readiness check</h3>
+<ol>
+<li>Distinguish a requirement, test objective, measure, and test case.</li>
+<li>What makes a parameter critical?</li>
+<li>Give an example of a weak proxy measure.</li>
+<li>Why can one event support multiple claims but still need separate criteria?</li>
+</ol>
+<h3 id="required-study-2">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA Product Verification</strong> — method selection and evidence planning. <strong>Purpose:</strong> Create requirement compliance paths. <strong>Guiding questions:</strong> What inputs and outputs are required for verification?</p>
+</li>
+<li>
+<p><strong>NASA Product Validation</strong> — stakeholder expectations and intended environment. <strong>Purpose:</strong> Create fitness-for-use paths. <strong>Guiding questions:</strong> How should operational scenarios shape validation?</p>
+</li>
+<li>
+<p><strong>NASA V&amp;V Plan Outline</strong> — objectives, methods, articles, environments, responsibilities, and reports. <strong>Purpose:</strong> Structure traceability. <strong>Guiding questions:</strong> Which plan elements make an objective executable?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-2">Instructor-style lesson notes</h3>
+<p>A test objective states the decision-relevant purpose, not the activity. 'Measure request latency under peak load to determine compliance with SYS-PERF-014' is better than 'perform a load test.'</p>
+<p>A CTP may represent performance, safety, reliability, interoperability, human performance, cybersecurity, or suitability. Criticality should be tied to mission consequence, threshold sensitivity, uncertainty, risk, or lack of alternative evidence.</p>
+<p>Every measure needs an operational definition: unit, time base, population, exclusions, aggregation, percentile or probability, data source, and uncertainty treatment.</p>
+<p>Coverage tools should distinguish planned evidence, available evidence, evaluated evidence, and accepted evidence. A linked test case does not prove that the requirement has passed.</p>
+<h3 id="worked-example-2">Worked example</h3>
+<p>For accessible boarding, the CTP is elapsed time from a qualified boarding attempt to safe securement and ready-to-move state. The plan defines eligible events, pauses, operator intervention, environmental strata, and a 4-minute threshold for 95% of events. A satisfaction survey is retained as validation evidence but rejected as a proxy for the timing requirement.</p>
+<h3 id="guided-practice-2">Guided practice</h3>
+<ol>
+<li>Rewrite five activity-style statements as test objectives.</li>
+<li>Define operational measures for latency, availability, boarding, and degraded recovery.</li>
+<li>Build a claim-to-objective-to-method trace for one mission thread.</li>
+<li>Run coverage and weak-proxy queries.</li>
+</ol>
+<h3 id="independent-exercises-2">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Classify 20 measures as direct, derived, proxy, leading, or invalid.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Develop the complete objectives and CTP register.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze whether thresholds and decision rules match the requirement semantics.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Prioritize test objectives under a 25% resource reduction.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Generate an automated coverage heat map by criticality and evidence status.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-2">Weekly deliverable</h3>
+<p>Submit requirement/expectation quality findings, test-objective register, CTP definitions, measures dictionary, evidence trace model, coverage report, and prioritization rationale.</p>
+<h3 id="analytic-rubric-2">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Objective and measure quality | 30% | Objectives are decision linked and measures are operationally defined. |</p>
+<p>| CTP justification | 25% | Criticality reflects mission, safety, uncertainty, and risk. |</p>
+<p>| Traceability and coverage | 30% | Claims connect to methods, events, and evaluated evidence without false completion. |</p>
+<p>| Prioritization | 15% | Resource choices preserve critical decision value. |</p>
+<h3 id="critical-failures-2">Critical failures</h3>
+<ul>
+<li>Critical claim uses an undefined measure.</li>
+<li>A proxy is treated as direct compliance evidence.</li>
+<li>Coverage status equates planned test with verified requirement.</li>
+<li>Safety-critical objective is deprioritized without authority.</li>
+</ul>
+<h3 id="knowledge-check-2">Knowledge check</h3>
+<ol>
+<li>What makes a test objective useful?</li>
+<li>How is a CTP selected?</li>
+<li>Why define the population for a percentile requirement?</li>
+<li>What is a proxy measure?</li>
+<li>How should evidence status be represented?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-2">Revision and mastery gate</h3>
+<p>Every critical requirement and expectation must have an objective, method, decision rule, owner, and planned event. Any exception requires explicit disposition.</p>
+<h3 id="suggested-workload-2">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Measure/CTP design | 3.5 |</p>
+<p>| Trace modeling | 3.5 |</p>
+<p>| Review | 2.0 |</p>
+<hr/>
+<h2 id="week-3--design-test-concepts-environments-architecture-and-model-based-evidence">Week 3 — Design test concepts, environments, architecture, and model-based evidence</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B8/chapters/03-design-test-concepts-environments-architecture-and-mode.html">Read Book 8, Chapter 3</a> → <a href="../../K/B8/labs/lab-03-design-test-concepts-environments-architecture-and-mode.html">complete Hypothetical Lab 3</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-769-w03.html">Read the Week 3 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C4, C6, C10</p>
+<h3 id="professional-context-and-essential-question-3">Professional context and essential question</h3>
+<p>Testability depends on an architecture of articles, models, facilities, instrumentation, data, people, and environments. <strong>Essential question:</strong> What combination of real and synthetic assets can produce credible evidence at acceptable risk and cost?</p>
+<h3 id="weekly-learning-outcomes-3">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>define test concepts for component, subsystem, system, and operational levels</li>
+<li>specify article, build, environment, operator, load, threat, and data fidelity</li>
+<li>design SIL, HIL, simulation, range, field, and laboratory roles</li>
+<li>identify instrumentation, synchronization, calibration, data, and observability requirements</li>
+<li>plan verification, validation, and accreditation of models used as evidence</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-3">Retrieval and readiness check</h3>
+<ol>
+<li>What is the difference between SIL and HIL?</li>
+<li>Name four fidelity dimensions.</li>
+<li>Why is instrumentation part of the test architecture?</li>
+<li>When can a simulation support verification?</li>
+</ol>
+<h3 id="required-study-3">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA Product Integration</strong> — enabling products, simulators, emulators, and integration preparation. <strong>Purpose:</strong> Connect test architecture to system build-up. <strong>Guiding questions:</strong> Which assets must be ready before integration?</p>
+</li>
+<li>
+<p><strong>NASA Systems Modeling Handbook</strong> — model support to requirements and V&amp;V. <strong>Purpose:</strong> Use MBSE as T&amp;E source and evidence map. <strong>Guiding questions:</strong> Which model elements should generate or constrain test cases?</p>
+</li>
+<li>
+<p><strong>DoD M&amp;S for T&amp;E Guidebook</strong> — model use, validation, accreditation, and test support. <strong>Purpose:</strong> Bound model-based evidence. <strong>Guiding questions:</strong> What must be known before a model informs a decision?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-3">Instructor-style lesson notes</h3>
+<p>A test concept describes the objective, article, environment, stimulus, response, measurement, method, and decision use at a useful level before detailed procedure writing.</p>
+<p>Fidelity is multidimensional: functional behavior, timing, interfaces, physical environment, workload, data distribution, threats, operators, and failure behavior. A high-fidelity vehicle model may have low-fidelity operator workload.</p>
+<p>Instrumentation can alter the system and create timing or resource effects. Define sensor range, rate, resolution, accuracy, uncertainty, synchronization, storage, health, and calibration.</p>
+<p>A model used for decision evidence needs a stated context of use, verification that it was implemented correctly, validation against relevant reality, uncertainty, limitations, and approval by the decision authority.</p>
+<h3 id="worked-example-3">Worked example</h3>
+<p>The SIL accurately emulates dispatch logic and packet delay but omits clock drift and operator workload. It is accepted for interface sequencing and load experiments, conditionally accepted for latency prediction with a correction factor, and rejected for human response and field reliability claims. The accreditation statement names these limits.</p>
+<h3 id="guided-practice-3">Guided practice</h3>
+<ol>
+<li>Map each CTP to required article and environment fidelity.</li>
+<li>Sketch the T&amp;E architecture and data flows.</li>
+<li>Define instrumentation for one timing and one human-performance measure.</li>
+<li>Write a context-of-use statement for a simulation.</li>
+</ol>
+<h3 id="independent-exercises-3">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Compare lab, SIL, HIL, closed-course, and field concepts for five claims.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Develop the T&amp;E architecture and environment matrix.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze observability and synchronization gaps.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Create a model VV&amp;A/accreditation plan for one decision use.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Generate test skeletons from model states, transitions, requirements, and interfaces.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-3">Weekly deliverable</h3>
+<p>Submit T&amp;E architecture, article/build matrix, environment/fidelity matrix, facility/SIL/HIL concept, instrumentation and data-flow design, model context-of-use and VV&amp;A plan, and resource/risk analysis.</p>
+<h3 id="analytic-rubric-3">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Architecture completeness | 25% | Articles, facilities, models, people, data, and environments are integrated. |</p>
+<p>| Fidelity and representativeness | 30% | Each claim has justified fidelity and explicit limitations. |</p>
+<p>| Measurement/observability | 25% | Instrumentation, synchronization, calibration, and data are credible. |</p>
+<p>| Model evidence governance | 20% | Context, VV&amp;A, uncertainty, and accreditation are controlled. |</p>
+<h3 id="critical-failures-3">Critical failures</h3>
+<ul>
+<li>Critical claim assigned to a nonrepresentative asset without limitation.</li>
+<li>Instrumentation range/rate cannot measure the acceptance boundary.</li>
+<li>Simulation result used without context of use or validation.</li>
+<li>Article configuration is not traceable.</li>
+</ul>
+<h3 id="knowledge-check-3">Knowledge check</h3>
+<ol>
+<li>What is test-concept architecture?</li>
+<li>How do SIL and HIL differ?</li>
+<li>What is context of use?</li>
+<li>Why is time synchronization important?</li>
+<li>Who accredits a model for a decision?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-3">Revision and mastery gate</h3>
+<p>No critical test objective may proceed without adequate article, environment, measurement, and data architecture or an approved combined-evidence alternative.</p>
+<h3 id="suggested-workload-3">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Architecture design | 4.0 |</p>
+<p>| Fidelity/VV&amp;A analysis | 3.0 |</p>
+<p>| Review | 2.0 |</p>
+<hr/>
+<h2 id="week-4--apply-measurement-science-statistics-doe-and-sample-rationale">Week 4 — Apply measurement science, statistics, DOE, and sample rationale</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B8/chapters/04-apply-measurement-science-statistics-doe-and-sample-rat.html">Read Book 8, Chapter 4</a> → <a href="../../K/B8/labs/lab-04-apply-measurement-science-statistics-doe-and-sample-rat.html">complete Hypothetical Lab 4</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-769-w04.html">Read the Week 4 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C7, C8</p>
+<h3 id="professional-context-and-essential-question-4">Professional context and essential question</h3>
+<p>Good procedures cannot rescue weak measurement or experimental design. <strong>Essential question:</strong> What data and analysis are required to distinguish compliance, failure, variability, and uncertainty?</p>
+<h3 id="weekly-learning-outcomes-4">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>characterize measurement range, resolution, bias, repeatability, reproducibility, and uncertainty</li>
+<li>select populations, samples, randomization, blocking, replication, and controls</li>
+<li>choose descriptive, interval, hypothesis, regression, DOE, reliability, or nonparametric methods</li>
+<li>develop sample-size or precision rationale</li>
+<li>predeclare data-quality, missing-data, outlier, stopping, and decision rules</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-4">Retrieval and readiness check</h3>
+<ol>
+<li>Distinguish accuracy and precision.</li>
+<li>Why randomize test order?</li>
+<li>What is statistical power?</li>
+<li>Why is a confidence interval not the probability that the true value lies in the observed interval?</li>
+</ol>
+<h3 id="required-study-4">Required study</h3>
+<ul>
+<li>
+<p><strong>NIST Engineering Statistics Handbook</strong> — measurement process characterization and uncertainty. <strong>Purpose:</strong> Assess whether the measurement can support the decision. <strong>Guiding questions:</strong> Which sources dominate uncertainty?</p>
+</li>
+<li>
+<p><strong>NIST DOE</strong> — experimental objectives, factors, responses, randomization, blocking, and sequential experimentation. <strong>Purpose:</strong> Design efficient tests. <strong>Guiding questions:</strong> What threats are controlled by randomization and blocking?</p>
+</li>
+<li>
+<p><strong>NIST Exploratory Data Analysis</strong> — graphical and assumption-checking methods. <strong>Purpose:</strong> Detect structure and anomalies before formal claims. <strong>Guiding questions:</strong> Which plots reveal distribution, drift, and outliers?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-4">Instructor-style lesson notes</h3>
+<p>Start with the estimand: the quantity the decision needs. Define population, conditions, aggregation, and acceptable precision before selecting a statistical test.</p>
+<p>Measurement-system analysis separates system variation from instrument, operator, calibration, and process variation. If measurement uncertainty is large relative to margin, improve measurement or change the decision rule.</p>
+<p>Sample size can be justified by desired interval width, detectable effect, reliability demonstration, percentile precision, or resource-constrained risk analysis. Avoid ritual numbers such as 30 without rationale.</p>
+<p>Preanalysis rules protect credibility. Define exclusions, outlier investigation, missing data, transformations, multiple comparisons, interim looks, and stop criteria before execution.</p>
+<h3 id="worked-example-4">Worked example</h3>
+<p>For the 95th-percentile latency threshold, 20 nominal runs are inadequate to characterize the tail. The learner uses pilot data and bootstrap simulation to compare sample sizes, blocks by network condition, randomizes load order, and sets a target interval around the percentile. A separate extreme-condition test addresses worst credible behavior rather than mixing it into the nominal population.</p>
+<h3 id="guided-practice-4">Guided practice</h3>
+<ol>
+<li>Audit the measurement capability for one CTP.</li>
+<li>Use pilot data to create EDA plots and identify drift or outliers.</li>
+<li>Design a small factorial or blocked experiment.</li>
+<li>Write a sample and analysis rationale.</li>
+</ol>
+<h3 id="independent-exercises-4">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Calculate measurement uncertainty for a supplied chain.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Develop the statistical design for three critical objectives.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Compare parametric, nonparametric, bootstrap, and simulation approaches.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Pre-register the analysis and decision rules.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Run a simulation study showing false-pass/false-fail risk under candidate sample plans.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-4">Weekly deliverable</h3>
+<p>Submit measurement-system assessment, data dictionary, statistical analysis plan, DOE/sample rationale, preanalysis rules, pilot-data EDA, code/notebook, and Statistical Design Review record.</p>
+<h3 id="analytic-rubric-4">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Measurement adequacy | 25% | Range, resolution, calibration, repeatability, bias, and uncertainty support the claim. |</p>
+<p>| Experimental design | 30% | Population, factors, randomization, blocking, replication, and controls are justified. |</p>
+<p>| Statistical method | 25% | Method and assumptions fit the estimand and data. |</p>
+<p>| Reproducibility/decision rules | 20% | Code, preanalysis, and error risks are explicit. |</p>
+<h3 id="critical-failures-4">Critical failures</h3>
+<ul>
+<li>Measurement uncertainty exceeds decision margin and is ignored.</li>
+<li>Sample size has no rationale.</li>
+<li>Outlier/exclusion rule invented after results.</li>
+<li>Dependent observations analyzed as independent.</li>
+</ul>
+<h3 id="knowledge-check-4">Knowledge check</h3>
+<ol>
+<li>What is an estimand?</li>
+<li>Why use blocking?</li>
+<li>How is measurement uncertainty different from system variability?</li>
+<li>What is a false pass?</li>
+<li>When is a nonparametric or bootstrap method useful?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-4">Revision and mastery gate</h3>
+<p>The statistical design must be approved before formal execution. Any post hoc change is recorded, justified, and analyzed for impact.</p>
+<h3 id="suggested-workload-4">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 3.0 |</p>
+<p>| Measurement/EDA | 3.0 |</p>
+<p>| DOE/sample design | 3.5 |</p>
+<p>| Review/revision | 2.0 |</p>
+<hr/>
+<h2 id="week-5--construct-the-integration-test-approach-silhil-paths-and-informal-tests">Week 5 — Construct the integration test approach, SIL/HIL paths, and informal tests</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B8/chapters/05-construct-the-integration-test-approach-sil-hil-paths-a.html">Read Book 8, Chapter 5</a> → <a href="../../K/B8/labs/lab-05-construct-the-integration-test-approach-sil-hil-paths-a.html">complete Hypothetical Lab 5</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-769-w05.html">Read the Week 5 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C4, C6, C9</p>
+<h3 id="professional-context-and-essential-question-5">Professional context and essential question</h3>
+<p>Informal and integration testing should expose defects early, cheaply, and diagnostically while preserving the path to formal evidence. <strong>Essential question:</strong> How should the system be built and exercised so that interface and behavior defects are localized before qualification?</p>
+<h3 id="weekly-learning-outcomes-5">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>construct integration execution paths from architecture and dependencies</li>
+<li>select risk-first, thread-based, incremental, bottom-up, or hybrid sequencing</li>
+<li>write interface, state, negative, boundary, fault-injection, and exploratory test cases</li>
+<li>use SIL/HIL, stubs, drivers, emulators, and observability to localize defects</li>
+<li>define promotion criteria from informal to formal evidence</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-5">Retrieval and readiness check</h3>
+<ol>
+<li>What is the purpose of informal testing?</li>
+<li>How does an integration test differ from a component test?</li>
+<li>What is a test oracle?</li>
+<li>Why preserve failed exploratory tests?</li>
+</ol>
+<h3 id="required-study-5">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA Product Integration</strong> — sequence, interface checks, enabling products, and outputs. <strong>Purpose:</strong> Construct the integration approach. <strong>Guiding questions:</strong> How are discrepancies reported and resolved?</p>
+</li>
+<li>
+<p><strong>NASA Software testing guidance</strong> — dynamic testing, simulated and actual hardware, safety functions, and coverage. <strong>Purpose:</strong> Integrate software and system evidence. <strong>Guiding questions:</strong> Which failures and recovery mechanisms should be prioritized?</p>
+</li>
+<li>
+<p><strong>JHU syllabus topics</strong> — SIL, informal/formal testing, and execution paths. <strong>Purpose:</strong> Maintain source alignment. <strong>Guiding questions:</strong> What changes when evidence becomes formal?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-5">Instructor-style lesson notes</h3>
+<p>Integration tests evaluate interactions, assumptions, timing, states, data semantics, error handling, and recovery. A component can be correct in isolation and wrong in system context.</p>
+<p>Exploratory testing is structured learning, not random clicking. Use charters tied to risks, record configurations and observations, and convert consequential discoveries into repeatable regression cases.</p>
+<p>A test oracle defines expected behavior. It may come from a requirement, reference model, invariant, independent implementation, manual calculation, or approved operational rule. An oracle that duplicates the same defect can create false confidence.</p>
+<p>Promotion to formal testing requires stable configuration, reviewed expected result, adequate instrumentation, controlled procedure, and resolved blockers. Informal success alone is not qualification evidence.</p>
+<h3 id="worked-example-5">Worked example</h3>
+<p>A state-transition explorer injects duplicate assignments, delayed vehicle acknowledgment, network partition, and operator override. It finds a race condition that creates two active assignments. The defect becomes a formal regression test, the interface/state model is corrected, and the build cannot advance until repeated evidence passes.</p>
+<h3 id="guided-practice-5">Guided practice</h3>
+<ol>
+<li>Build an integration dependency and execution graph.</li>
+<li>Write positive, negative, boundary, and fault-injection cases for one interface.</li>
+<li>Run a short exploratory charter in the SIL.</li>
+<li>Convert one finding into a controlled regression test.</li>
+</ol>
+<h3 id="independent-exercises-5">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Classify 20 tests by level, purpose, and evidence status.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Develop integration paths and informal test catalog.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze observability and fault-localization quality.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Define promotion and regression criteria.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Automate execution of one mission-thread suite with machine-readable logs.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-5">Weekly deliverable</h3>
+<p>Submit integration test approach, execution paths, SIL/HIL configuration, exploratory charters and logs, informal test cases, defect/regression evidence, promotion criteria, and updated risk/traceability.</p>
+<h3 id="analytic-rubric-5">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Integration logic | 30% | Paths follow dependencies, mission threads, and risk. |</p>
+<p>| Test-case quality | 25% | Cases cover normal, boundary, negative, interface, and recovery behavior. |</p>
+<p>| Diagnostic value | 25% | Oracles, observability, and fault localization are strong. |</p>
+<p>| Evidence promotion | 20% | Informal findings become controlled regression and formal readiness evidence. |</p>
+<h3 id="critical-failures-5">Critical failures</h3>
+<ul>
+<li>Critical interface absent from integration path.</li>
+<li>Expected result has no authoritative oracle.</li>
+<li>Exploratory failure is discarded.</li>
+<li>Informal result is labeled qualification evidence.</li>
+</ul>
+<h3 id="knowledge-check-5">Knowledge check</h3>
+<ol>
+<li>What is a test oracle?</li>
+<li>Why use negative testing?</li>
+<li>What is exploratory testing?</li>
+<li>When should a test be automated?</li>
+<li>What is required to promote evidence to formal status?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-5">Revision and mastery gate</h3>
+<p>All critical interface and state paths must have at least one controlled integration test and discrepancy route before formal qualification planning proceeds.</p>
+<h3 id="suggested-workload-5">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Path/case design | 3.5 |</p>
+<p>| Execution | 3.0 |</p>
+<p>| Regression/revision | 2.0 |</p>
+<hr/>
+<h2 id="week-6--write-formal-qualification-procedures-and-conduct-the-test-readiness-review">Week 6 — Write formal qualification procedures and conduct the Test Readiness Review</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B8/chapters/06-write-formal-qualification-procedures-and-conduct-the-t.html">Read Book 8, Chapter 6</a> → <a href="../../K/B8/labs/lab-06-write-formal-qualification-procedures-and-conduct-the-t.html">complete Hypothetical Lab 6</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-769-w06.html">Read the Week 6 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C6, C10, C12</p>
+<h3 id="professional-context-and-essential-question-6">Professional context and essential question</h3>
+<p>Formal tests require controlled articles, procedures, environments, measurements, safety, and decision rules. <strong>Essential question:</strong> Is the test system ready to produce trustworthy evidence without unacceptable risk?</p>
+<h3 id="weekly-learning-outcomes-6">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>write controlled procedures with prerequisites, steps, expected results, data, and stop criteria</li>
+<li>define test article/build, environment, instrumentation, calibration, personnel, and safety/security controls</li>
+<li>conduct dry runs and procedure validation</li>
+<li>prepare entrance/success criteria and evidence for TRR</li>
+<li>record actions, waivers, deviations, and readiness decisions</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-6">Retrieval and readiness check</h3>
+<ol>
+<li>What makes a procedure repeatable?</li>
+<li>Distinguish a test step from an acceptance criterion.</li>
+<li>Why perform a dry run?</li>
+<li>What conditions require stopping a test?</li>
+</ol>
+<h3 id="required-study-6">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA V&amp;V Plan Outline</strong> — procedure, environment, responsibility, data, and reporting content. <strong>Purpose:</strong> Translate plans into execution. <strong>Guiding questions:</strong> What must be controlled before a test?</p>
+</li>
+<li>
+<p><strong>NASA review guidance</strong> — TRR purpose and readiness evidence. <strong>Purpose:</strong> Prepare the review. <strong>Guiding questions:</strong> Which safety, configuration, and facility questions should the board ask?</p>
+</li>
+<li>
+<p><strong>NASA configuration management</strong> — article and evidence baseline integrity. <strong>Purpose:</strong> Prevent configuration ambiguity. <strong>Guiding questions:</strong> How are deviations and as-run status recorded?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-6">Instructor-style lesson notes</h3>
+<p>A formal procedure should identify objective, references, article/build, prerequisites, environment, equipment, calibration, safety/security, roles, setup, step/action, expected result, data capture, pass/fail logic, anomalies, stop/abort, restoration, and approvals.</p>
+<p>Procedure validation is a test of the test. Dry runs reveal ambiguity, unsafe sequencing, unavailable data, unrealistic timing, and operator interpretation before valuable articles or formal evidence are at risk.</p>
+<p>TRR does not certify that the system will pass. It decides whether the test is ready and worthwhile. The board may approve, conditionally approve with limits, defer, or reject.</p>
+<p>As-run records matter more than planned procedures when results are evaluated. Record deviations, timestamps, configurations, calibrations, personnel, environmental conditions, and anomalies.</p>
+<h3 id="worked-example-6">Worked example</h3>
+<p>A failover procedure initially commands a service shutdown before confirming that the backup has current state. The dry run exposes potential data loss. The procedure and design are revised to establish synchronization, verify readiness, transfer authority, and then isolate the primary. The TRR action remains open until the sequence passes three dry runs.</p>
+<h3 id="guided-practice-6">Guided practice</h3>
+<ol>
+<li>Annotate a defective procedure.</li>
+<li>Write one formal procedure and data sheet.</li>
+<li>Conduct a tabletop or executable dry run.</li>
+<li>Build and present the TRR evidence matrix.</li>
+</ol>
+<h3 id="independent-exercises-6">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Correct a supplied unsafe and ambiguous procedure.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Develop formal procedures for three critical objectives.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze human error and measurement risks in the procedures.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Conduct the TRR and disposition findings.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Generate an as-run record template from procedure source.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-6">Weekly deliverable</h3>
+<p>Submit controlled procedure set, data sheets, dry-run records, safety/security assessment, equipment/calibration status, personnel qualifications, TRR evidence matrix, review minutes/actions, and readiness decision.</p>
+<h3 id="analytic-rubric-6">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Procedure completeness | 30% | Steps, expected results, data, criteria, and controls are executable. |</p>
+<p>| Safety/configuration/readiness | 30% | Articles, environments, equipment, people, and hazards are controlled. |</p>
+<p>| Dry-run evidence | 20% | Procedure defects are found and corrected. |</p>
+<p>| Review quality | 20% | TRR decision and actions are evidence based. |</p>
+<h3 id="critical-failures-6">Critical failures</h3>
+<ul>
+<li>Formal test starts without approved article/configuration.</li>
+<li>Stop/abort criteria absent for hazardous test.</li>
+<li>Calibration or synchronization status unknown.</li>
+<li>TRR action closed without evidence.</li>
+</ul>
+<h3 id="knowledge-check-6">Knowledge check</h3>
+<ol>
+<li>What is the purpose of TRR?</li>
+<li>Why validate the procedure?</li>
+<li>What belongs in an as-run record?</li>
+<li>How should a test deviation be handled?</li>
+<li>When is conditional readiness appropriate?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-6">Revision and mastery gate</h3>
+<p>No formal execution may begin until all red TRR criteria are closed or an authorized conditional limit is documented. Procedures and configuration are baselined after review.</p>
+<h3 id="suggested-workload-6">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Procedure writing | 4.0 |</p>
+<p>| Dry run | 2.5 |</p>
+<p>| TRR/revision | 2.5 |</p>
+<hr/>
+<h2 id="week-7--integrate-hardware-software-cybersecurity-automation-and-test-tool-evidence">Week 7 — Integrate hardware, software, cybersecurity, automation, and test-tool evidence</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B8/chapters/07-integrate-hardware-software-cybersecurity-automation-an.html">Read Book 8, Chapter 7</a> → <a href="../../K/B8/labs/lab-07-integrate-hardware-software-cybersecurity-automation-an.html">complete Hypothetical Lab 7</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-769-w07.html">Read the Week 7 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C5, C6, C9, C11</p>
+<h3 id="professional-context-and-essential-question-7">Professional context and essential question</h3>
+<p>Different system elements fail and reveal defects differently, but their evidence must support one system claim. <strong>Essential question:</strong> How should hardware, software, cyber, and automated test methods combine without creating blind spots or false confidence?</p>
+<h3 id="weekly-learning-outcomes-7">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>distinguish hardware and software failure/test characteristics</li>
+<li>plan unit, component, interface, integration, system, regression, stress, and fault-injection evidence</li>
+<li>evaluate test automation, tool qualification, coverage, and oracle risk</li>
+<li>integrate cybersecurity test objectives with mission and resilience consequences</li>
+<li>combine evidence across hardware, software, humans, and operations</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-7">Retrieval and readiness check</h3>
+<ol>
+<li>Why does software not wear out like hardware?</li>
+<li>What is regression testing?</li>
+<li>What risk is introduced by test automation?</li>
+<li>How is a cyber test objective linked to mission impact?</li>
+</ol>
+<h3 id="required-study-7">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA Software Engineering and Assurance Handbook</strong> — testing, simulated/actual hardware, safety functions, and coverage. <strong>Purpose:</strong> Plan software and system tests. <strong>Guiding questions:</strong> Which tests address nominal and off-nominal behavior?</p>
+</li>
+<li>
+<p><strong>DoD Cyber DT&amp;E Guidebook</strong> — mission-based cyber test and evaluation. <strong>Purpose:</strong> Integrate cyber threats and system consequences. <strong>Guiding questions:</strong> How should cyber events influence technical and operational tests?</p>
+</li>
+<li>
+<p><strong>NASA Product Verification</strong> — combined methods and evidence evaluation. <strong>Purpose:</strong> Integrate evidence types. <strong>Guiding questions:</strong> When can one event support multiple verification methods?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-7">Instructor-style lesson notes</h3>
+<p>Hardware tests often characterize physical variability, stress, degradation, tolerances, and failure. Software tests explore enormous state/input spaces, logic, concurrency, interfaces, configuration, and change. System tests must address interactions and emergent behavior.</p>
+<p>Automation improves repeatability and coverage but can automate wrong expectations, conceal environment differences, create flaky results, and depend on unqualified tools. Validate the harness and preserve raw evidence.</p>
+<p>Coverage is evidence about exercised structure or behavior, not proof of correctness. Requirement, state, path, interface, hazard, and code coverage answer different questions.</p>
+<p>Cyber T&amp;E should connect threat actions to mission effects, detection, response, recovery, and residual risk. Vulnerability discovery alone does not evaluate operational resilience.</p>
+<h3 id="worked-example-7">Worked example</h3>
+<p>An automated suite reports 100% pass after an interface schema change because the test harness silently ignores unknown fields. A manual packet inspection reveals missing accessibility-status data. The harness is corrected to fail on schema drift, prior results are invalidated, and interface regression coverage is expanded.</p>
+<h3 id="guided-practice-7">Guided practice</h3>
+<ol>
+<li>Map hardware and software evidence for one system requirement.</li>
+<li>Audit an automated test oracle and harness.</li>
+<li>Create a cyber mission-thread test objective.</li>
+<li>Define regression selection after an interface change.</li>
+</ol>
+<h3 id="independent-exercises-7">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Classify tests by element, level, and failure mechanism.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Build an integrated technical test package for the case.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze tool/oracle qualification and flaky-test risk.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Conduct a cyber-resilience tabletop or controlled fault injection.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Create a coverage model linking requirements, states, hazards, interfaces, and automated tests.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-7">Weekly deliverable</h3>
+<p>Submit hardware/software test comparison, automated suite or detailed design, tool/oracle validation, coverage report, cyber mission-based test plan/results, regression strategy, and integrated evidence map.</p>
+<h3 id="analytic-rubric-7">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Cross-domain test design | 25% | Hardware, software, interfaces, humans, and mission behavior are coordinated. |</p>
+<p>| Automation/tool credibility | 25% | Harnesses, oracles, versions, and limitations are validated. |</p>
+<p>| Cyber mission relevance | 25% | Threats connect to mission effect, resilience, and evidence. |</p>
+<p>| Coverage and regression | 25% | Coverage is multidimensional and changes trigger appropriate retest. |</p>
+<h3 id="critical-failures-7">Critical failures</h3>
+<ul>
+<li>Automated results accepted without validating the harness.</li>
+<li>Cyber test has no mission consequence or recovery objective.</li>
+<li>Coverage metric is treated as proof of correctness.</li>
+<li>Configuration change receives no regression impact analysis.</li>
+</ul>
+<h3 id="knowledge-check-7">Knowledge check</h3>
+<ol>
+<li>How do hardware and software testing differ?</li>
+<li>What is an oracle problem?</li>
+<li>Why can automation create false confidence?</li>
+<li>What does coverage measure?</li>
+<li>How is cyber T&amp;E mission based?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-7">Revision and mastery gate</h3>
+<p>All critical automated evidence requires a validated oracle/harness and retained raw logs. Critical changes must trigger documented regression selection.</p>
+<h3 id="suggested-workload-7">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Test/tool design | 3.5 |</p>
+<p>| Execution/tabletop | 3.0 |</p>
+<p>| Analysis/revision | 2.0 |</p>
+<hr/>
+<h2 id="week-8--plan-environmental-quality-reliability-maintainability-safety-and-acceptance-testing">Week 8 — Plan environmental, quality, reliability, maintainability, safety, and acceptance testing</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B8/chapters/08-plan-environmental-quality-reliability-maintainability-.html">Read Book 8, Chapter 8</a> → <a href="../../K/B8/labs/lab-08-plan-environmental-quality-reliability-maintainability-.html">complete Hypothetical Lab 8</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-769-w08.html">Read the Week 8 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C6, C9, C11</p>
+<h3 id="professional-context-and-essential-question-8">Professional context and essential question</h3>
+<p>Qualification must show that the system can withstand and be supported in its intended conditions, not merely operate in a comfortable lab. <strong>Essential question:</strong> Which stresses, durations, sequences, maintenance tasks, and quality controls are necessary to support lifecycle confidence?</p>
+<h3 id="weekly-learning-outcomes-8">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>derive environmental and stress profiles from intended use and transportation/storage</li>
+<li>plan qualification, acceptance, screening, reliability growth/demonstration, and maintainability tests</li>
+<li>define safety and quality-assurance witnesses, controls, and records</li>
+<li>address combined environments, sequencing, cumulative damage, and representativeness</li>
+<li>integrate failures into FRACAS and design/test updates</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-8">Retrieval and readiness check</h3>
+<ol>
+<li>Distinguish qualification and acceptance testing.</li>
+<li>What is reliability growth?</li>
+<li>Why can combined environments matter?</li>
+<li>What makes a maintainability demonstration representative?</li>
+</ol>
+<h3 id="required-study-8">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA Reliability and Maintainability</strong> — R&amp;M planning, FMEA, maintainability, supportability, and demonstrations. <strong>Purpose:</strong> Plan RAM evidence. <strong>Guiding questions:</strong> How should failures drive corrective action and growth?</p>
+</li>
+<li>
+<p><strong>NASA SE Handbook</strong> — environmental, quality, supportability, and product realization references. <strong>Purpose:</strong> Connect lifecycle conditions to evidence. <strong>Guiding questions:</strong> Which enabling systems and controls are needed?</p>
+</li>
+<li>
+<p><strong>DoD Engineering of Defense Systems Guidebook</strong> — R&amp;M test, demonstration, FRACAS, and integrated planning sections. <strong>Purpose:</strong> Use a public lifecycle example. <strong>Guiding questions:</strong> How are R&amp;M tests coordinated with other evidence?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-8">Instructor-style lesson notes</h3>
+<p>Environmental requirements should derive from operational, storage, transport, maintenance, cleaning, weather, electromagnetic, network, and human-use profiles. Define levels, durations, rates, combinations, sequence, margins, and article representativeness.</p>
+<p>Qualification generally establishes that the design can withstand specified conditions; acceptance checks delivered items for workmanship or required characteristics. Screening and process control have different purposes and decision risks.</p>
+<p>Reliability evidence may combine growth testing, demonstration, field data, similarity, analysis, and fault injection. Maintainability tests use representative personnel, tools, procedures, access, faults, and restoration verification.</p>
+<p>FRACAS connects failures to analysis, corrective action, effectiveness verification, and recurrence prevention. Closing a ticket is not closing a failure mode.</p>
+<h3 id="worked-example-8">Worked example</h3>
+<p>A rain test passes water ingress but reveals that wet-glove interaction doubles operator recovery time. The result affects environmental, usability, and maintainability claims. The interface and procedure are revised, the environmental test is repeated with human tasks, and the combined evidence replaces the narrow pass statement.</p>
+<h3 id="guided-practice-8">Guided practice</h3>
+<ol>
+<li>Create an environment profile and test matrix.</li>
+<li>Plan one reliability and one maintainability demonstration.</li>
+<li>Define qualification versus acceptance criteria for one item.</li>
+<li>Trace a failure through FRACAS and retest.</li>
+</ol>
+<h3 id="independent-exercises-8">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Match stress/test types to lifecycle conditions.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Develop the specialty T&amp;E package for the case.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze sample, duration, combined-environment, and article choices.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Design quality witness and FRACAS processes.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Integrate environmental, RAM, human, and cyber events to reduce duplicate testing.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-8">Weekly deliverable</h3>
+<p>Submit environmental profile and test matrix, qualification/acceptance strategy, reliability and maintainability test plans, safety/quality controls, FRACAS workflow, integrated-event rationale, and residual evidence limits.</p>
+<h3 id="analytic-rubric-8">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Environment derivation | 25% | Profiles trace to intended use, storage, transport, and credible stress. |</p>
+<p>| RAM/maintainability rigor | 25% | Objectives, duration/sample, faults, people, tools, and recovery are credible. |</p>
+<p>| Qualification/quality control | 25% | Purpose, article, witness, and acceptance distinctions are correct. |</p>
+<p>| Integration and corrective action | 25% | Events share evidence appropriately and failures drive controlled correction/retest. |</p>
+<h3 id="critical-failures-8">Critical failures</h3>
+<ul>
+<li>Critical environment omitted.</li>
+<li>Qualification and acceptance purposes conflated.</li>
+<li>Reliability claim has no time/profile or sample rationale.</li>
+<li>Failure closed without corrective-action verification.</li>
+</ul>
+<h3 id="knowledge-check-8">Knowledge check</h3>
+<ol>
+<li>How do qualification and acceptance differ?</li>
+<li>What is FRACAS?</li>
+<li>Why test combined environments?</li>
+<li>What is reliability growth?</li>
+<li>What makes a maintenance test valid?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-8">Revision and mastery gate</h3>
+<p>All design-driving environments and critical maintenance/reliability claims require a planned evidence path. Known combined effects must be addressed or explicitly accepted as limitations.</p>
+<h3 id="suggested-workload-8">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Specialty plans | 4.0 |</p>
+<p>| Integration/FRACAS | 3.0 |</p>
+<p>| Review | 2.0 |</p>
+<hr/>
+<h2 id="week-9--execute-tests-and-control-data-deviations-discrepancies-and-corrective-action">Week 9 — Execute tests and control data, deviations, discrepancies, and corrective action</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B8/chapters/09-execute-tests-and-control-data-deviations-discrepancies.html">Read Book 8, Chapter 9</a> → <a href="../../K/B8/labs/lab-09-execute-tests-and-control-data-deviations-discrepancies.html">complete Hypothetical Lab 9</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-769-w09.html">Read the Week 9 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C6, C7, C9, C10</p>
+<h3 id="professional-context-and-essential-question-9">Professional context and essential question</h3>
+<p>Execution converts plans into evidence, but only if as-run conditions and anomalies are preserved. <strong>Essential question:</strong> How will the team know exactly what happened, whether the data are trustworthy, and what action is required?</p>
+<h3 id="weekly-learning-outcomes-9">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>execute controlled procedures or realistic simulations</li>
+<li>record article, build, environment, instrument, personnel, time, and deviations</li>
+<li>protect data provenance, integrity, retention, and access</li>
+<li>classify discrepancies and determine immediate continue/stop/retest action</li>
+<li>perform root-cause analysis and manage corrective action and regression</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-9">Retrieval and readiness check</h3>
+<ol>
+<li>What is the difference between an anomaly and a discrepancy?</li>
+<li>Why preserve raw data?</li>
+<li>When should a test stop?</li>
+<li>What information is needed to reproduce an as-run configuration?</li>
+</ol>
+<h3 id="required-study-9">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA Product Verification</strong> — execution, data collection, analysis, and reporting. <strong>Purpose:</strong> Control formal evidence. <strong>Guiding questions:</strong> How are deviations and results evaluated?</p>
+</li>
+<li>
+<p><strong>NASA Configuration Management</strong> — as-built/as-tested identity and change control. <strong>Purpose:</strong> Preserve test article integrity. <strong>Guiding questions:</strong> What records establish the tested configuration?</p>
+</li>
+<li>
+<p><strong>NIST Exploratory Data Analysis</strong> — plots and diagnostics. <strong>Purpose:</strong> Detect drift, outliers, and structure during execution. <strong>Guiding questions:</strong> Which plots should be reviewed before accepting a run?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-9">Instructor-style lesson notes</h3>
+<p>Execution discipline requires a contemporaneous record. Record planned step, actual action, actual result, timestamps, deviations, environmental conditions, configuration, operator, instrument health, and data identifiers.</p>
+<p>Data integrity includes provenance, immutable raw data, controlled transformations, schema, units, time base, calibration, missingness, access, retention, and reproducible analysis. Derived datasets should never replace raw source.</p>
+<p>Immediate discrepancy triage distinguishes safety stop, test-setup error, instrument failure, procedure defect, requirement ambiguity, product defect, environment mismatch, and expected variability. The initial classification may change after analysis.</p>
+<p>Corrective action requires containment, root cause, impact scope, correction, verification of correction, regression, and closure authority. A retest of the same step may be insufficient if the defect affected prior evidence.</p>
+<h3 id="worked-example-9">Worked example</h3>
+<p>During latency testing, three extreme values coincide with time-synchronization loss. Raw logs reveal that the system still responded quickly but the measurement clocks diverged. The runs are invalid for latency compliance, valid as evidence of instrumentation weakness, and trigger correction and a repeat. They are not deleted from the record.</p>
+<h3 id="guided-practice-9">Guided practice</h3>
+<ol>
+<li>Execute or simulate one formal procedure.</li>
+<li>Create the as-run log and data manifest.</li>
+<li>Triage three injected anomalies.</li>
+<li>Perform a root-cause and regression-impact analysis.</li>
+</ol>
+<h3 id="independent-exercises-9">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Practice continue/stop decisions on ten scenarios.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Execute at least three controlled test campaigns or supplied-data analyses.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze data integrity and configuration provenance.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Open, investigate, correct, retest, and close one discrepancy.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Automate a test-to-data-to-analysis-to-discrepancy provenance report.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-9">Weekly deliverable</h3>
+<p>Submit as-run procedures, configuration records, raw/derived data manifests, execution logs, EDA, anomaly/discrepancy records, root-cause and corrective-action evidence, regression/retest results, and updated trace status.</p>
+<h3 id="analytic-rubric-9">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Execution discipline | 25% | As-run conditions, deviations, and observations are complete. |</p>
+<p>| Data integrity | 25% | Raw and derived data are traceable, controlled, and reproducible. |</p>
+<p>| Discrepancy analysis | 25% | Classification, root cause, scope, and action are evidence based. |</p>
+<p>| Corrective action/retest | 25% | Correction and regression are verified before closure. |</p>
+<h3 id="critical-failures-9">Critical failures</h3>
+<ul>
+<li>Adverse run deleted or overwritten.</li>
+<li>Test article/configuration cannot be reconstructed.</li>
+<li>Safety stop criterion ignored.</li>
+<li>Critical discrepancy closed without root cause or retest.</li>
+</ul>
+<h3 id="knowledge-check-9">Knowledge check</h3>
+<ol>
+<li>What belongs in an as-run record?</li>
+<li>Why keep invalid runs?</li>
+<li>How does anomaly differ from discrepancy?</li>
+<li>What is containment?</li>
+<li>When must earlier evidence be invalidated?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-9">Revision and mastery gate</h3>
+<p>At least one executed campaign must be independently reproducible. Critical discrepancies remain open until closure evidence or authorized risk acceptance exists.</p>
+<h3 id="suggested-workload-9">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Execution | 3.5 |</p>
+<p>| Data/EDA | 3.0 |</p>
+<p>| Discrepancy/corrective action | 3.0 |</p>
+<p>| Review | 2.0 |</p>
+<hr/>
+<h2 id="week-10--analyze-results-determine-evidence-sufficiency-and-recommend-remedial-action">Week 10 — Analyze results, determine evidence sufficiency, and recommend remedial action</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B8/chapters/10-analyze-results-determine-evidence-sufficiency-and-reco.html">Read Book 8, Chapter 10</a> → <a href="../../K/B8/labs/lab-10-analyze-results-determine-evidence-sufficiency-and-reco.html">complete Hypothetical Lab 10</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-769-w10.html">Read the Week 10 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C6, C7, C9, C12</p>
+<h3 id="professional-context-and-essential-question-10">Professional context and essential question</h3>
+<p>A pass/fail table hides uncertainty, data quality, limitations, and interaction among evidence sources. <strong>Essential question:</strong> What conclusions are actually supported, and what action follows when evidence is adverse or inconclusive?</p>
+<h3 id="weekly-learning-outcomes-10">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>apply the predeclared analysis and assess assumptions</li>
+<li>estimate performance, uncertainty, confidence, and practical significance</li>
+<li>combine test, analysis, inspection, demonstration, simulation, and prior evidence</li>
+<li>distinguish pass, fail, inconclusive, limited, waived, and not tested</li>
+<li>recommend correction, redesign, requirement clarification, added evidence, or risk acceptance</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-10">Retrieval and readiness check</h3>
+<ol>
+<li>What is practical significance?</li>
+<li>Why can failing to reject a hypothesis not prove compliance?</li>
+<li>What is an inconclusive result?</li>
+<li>How should multiple evidence sources be combined?</li>
+</ol>
+<h3 id="required-study-10">Required study</h3>
+<ul>
+<li>
+<p><strong>NIST Engineering Statistics Handbook</strong> — EDA, intervals, regression, DOE analysis, reliability, and uncertainty. <strong>Purpose:</strong> Analyze data defensibly. <strong>Guiding questions:</strong> Which assumptions and diagnostics matter?</p>
+</li>
+<li>
+<p><strong>NASA Product Verification</strong> — result analysis and verification reports. <strong>Purpose:</strong> Convert evidence into compliance conclusions. <strong>Guiding questions:</strong> What should be included in the verification report?</p>
+</li>
+<li>
+<p><strong>NASA Product Validation</strong> — evaluation against intended use and stakeholder expectations. <strong>Purpose:</strong> Separate technical compliance from operational fitness. <strong>Guiding questions:</strong> How are limitations communicated?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-10">Instructor-style lesson notes</h3>
+<p>Analysis begins with data and configuration validity, then assumption checks, then estimation and comparison with decision boundaries. Avoid choosing the method after seeing the preferred outcome.</p>
+<p>Compliance may require demonstrating that a bound lies on the acceptable side of a threshold, not merely that the sample average passes. Tail and reliability requirements often need specialized methods or combined evidence.</p>
+<p>Evidence synthesis should identify independence, overlap, common assumptions, and credibility. Two analyses based on the same flawed model are not independent corroboration.</p>
+<p>A remedial action should match the cause: redesign for product deficiency, procedure change for test deficiency, calibration for measurement deficiency, requirement clarification for ambiguity, additional testing for insufficient precision, or authorized risk acceptance for known residual exposure.</p>
+<h3 id="worked-example-10">Worked example</h3>
+<p>Latency data have a sample 95th percentile of 7.7 s, below the 8.0 s threshold, but the bootstrap upper interval is 8.4 s and the worst network stratum is underrepresented. The result is classified inconclusive rather than pass. The plan adds targeted runs in the worst stratum and a network design mitigation; no requirement status is changed until evidence improves.</p>
+<h3 id="guided-practice-10">Guided practice</h3>
+<ol>
+<li>Reproduce one analysis from raw data.</li>
+<li>Check assumptions and compare alternative methods.</li>
+<li>Create a claim-evidence argument for one requirement and one stakeholder expectation.</li>
+<li>Recommend action for pass, fail, and inconclusive cases.</li>
+</ol>
+<h3 id="independent-exercises-10">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Interpret ten misleading result summaries.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Analyze all executed campaign data using predeclared methods.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Quantify uncertainty and false-pass/false-fail risk.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Conduct the Verification/Validation Evidence Review.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Generate an evidence dashboard that separates planned, executed, valid, evaluated, and accepted status.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-10">Weekly deliverable</h3>
+<p>Submit reproducible analysis notebooks, diagnostics, result tables/plots, evidence arguments, requirement and validation status, limitation/waiver register, remedial-action recommendations, and Evidence Review record.</p>
+<h3 id="analytic-rubric-10">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Analysis correctness | 30% | Methods, assumptions, uncertainty, and diagnostics are defensible. |</p>
+<p>| Evidence synthesis | 25% | Sources are combined without double counting or hidden dependence. |</p>
+<p>| Status classification | 25% | Pass/fail/inconclusive/limited/waived conclusions match evidence. |</p>
+<p>| Action and communication | 20% | Remedial actions and limitations are decision useful. |</p>
+<h3 id="critical-failures-10">Critical failures</h3>
+<ul>
+<li>Requirement marked pass from insufficient or invalid evidence.</li>
+<li>Known uncertainty omitted.</li>
+<li>Analysis method changed to obtain preferred result without disclosure.</li>
+<li>Inconclusive evidence presented as operational validation.</li>
+</ul>
+<h3 id="knowledge-check-10">Knowledge check</h3>
+<ol>
+<li>What is practical significance?</li>
+<li>When is a result inconclusive?</li>
+<li>Why use intervals rather than only point estimates?</li>
+<li>How can evidence be dependent?</li>
+<li>What remedial actions fit different root causes?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-10">Revision and mastery gate</h3>
+<p>Every critical conclusion must be reproducible and reviewed. Inconclusive critical claims require a follow-on plan or explicit decision restriction.</p>
+<h3 id="suggested-workload-10">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 2.5 |</p>
+<p>| Analysis | 4.0 |</p>
+<p>| Evidence synthesis | 3.0 |</p>
+<p>| Review/revision | 2.0 |</p>
+<hr/>
+<h2 id="week-11--evaluate-operational-use-deployed-systems-systems-of-systems-ai-and-autonomy">Week 11 — Evaluate operational use, deployed systems, systems of systems, AI, and autonomy</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B8/chapters/11-evaluate-operational-use-deployed-systems-systems-of-sy.html">Read Book 8, Chapter 11</a> → <a href="../../K/B8/labs/lab-11-evaluate-operational-use-deployed-systems-systems-of-sy.html">complete Hypothetical Lab 11</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-769-w11.html">Read the Week 11 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C6, C8, C9, C11</p>
+<h3 id="professional-context-and-essential-question-11">Professional context and essential question</h3>
+<p>Operational success depends on mission context, people, support, external systems, adaptation, and behavior that may change after deployment. <strong>Essential question:</strong> Will the capability be effective, suitable, resilient, and trustworthy in realistic operations and across evolving dependencies?</p>
+<h3 id="weekly-learning-outcomes-11">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>design operational scenarios, field trials, and acceptance criteria</li>
+<li>evaluate effectiveness, suitability, availability, supportability, usability, training, and resilience</li>
+<li>address external organizations, interoperability, data, and SoS dependencies</li>
+<li>plan continuous evaluation for evolving software and deployed updates</li>
+<li>identify AI/autonomy-specific data, model, behavior, human, uncertainty, and distribution-shift concerns</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-11">Retrieval and readiness check</h3>
+<ol>
+<li>Distinguish operational effectiveness and suitability.</li>
+<li>Why can a system pass qualification but fail operational evaluation?</li>
+<li>What is distribution shift?</li>
+<li>Why are SoS test boundaries difficult?</li>
+</ol>
+<h3 id="required-study-11">Required study</h3>
+<ul>
+<li>
+<p><strong>JHU syllabus</strong> — operational, deployed, SoS, and AI topics. <strong>Purpose:</strong> Preserve source breadth. <strong>Guiding questions:</strong> Which late-lifecycle concerns change test strategy?</p>
+</li>
+<li>
+<p><strong>DoD AI-enabled systems T&amp;E guidebook</strong> — datasets, models, system context, uncertainty, and iterative evaluation. <strong>Purpose:</strong> Address AI-specific challenges. <strong>Guiding questions:</strong> What should be tested beyond model accuracy?</p>
+</li>
+<li>
+<p><strong>DoD autonomy T&amp;E guidebook</strong> — end-to-end, mission-based, human-autonomy, M&amp;S, and continuous evidence concepts. <strong>Purpose:</strong> Address autonomous behavior. <strong>Guiding questions:</strong> How does autonomy change scenario and assurance design?</p>
+</li>
+<li>
+<p><strong>NIST SP 800-160 Vol. 2 Rev. 1</strong> — anticipate, withstand, recover, adapt. <strong>Purpose:</strong> Evaluate operational resilience. <strong>Guiding questions:</strong> Which measures show degraded mission capability and recovery?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-11">Instructor-style lesson notes</h3>
+<p>Operational effectiveness asks whether the system accomplishes the mission. Suitability asks whether it can be used and sustained by intended people and organizations, including reliability, availability, maintainability, support, training, interoperability, safety, and workload.</p>
+<p>Operational scenarios should include realistic routes, weather, demand, mixed traffic, accessibility, events, degraded communications, maintenance, staffing, cyber disruption, external transit dependencies, and public response.</p>
+<p>SoS evidence is difficult because constituent systems have independent owners, evolution, data rights, schedules, and objectives. Define boundary, participating configuration, assumptions, unavailable control, and monitoring.</p>
+<p>AI/autonomy T&amp;E must address dataset provenance and coverage, model and system performance, calibration, uncertainty, robustness, distribution shift, human-autonomy interaction, unsafe generalization, monitoring, fallback, update control, and post-deployment learning. Accuracy alone is insufficient.</p>
+<h3 id="worked-example-11">Worked example</h3>
+<p>The perception subsystem performs well on the development dataset but boarding assistance degrades in heavy rain and at temporary construction zones. Operational evaluation stratifies environments, measures confidence and human takeover, detects distribution shift, and triggers a bounded operating-domain restriction plus new data collection and retraining/reverification rules.</p>
+<h3 id="guided-practice-11">Guided practice</h3>
+<ol>
+<li>Define operational effectiveness and suitability measures.</li>
+<li>Create one SoS dependency and monitoring map.</li>
+<li>Audit an AI/autonomy claim for dataset and context gaps.</li>
+<li>Plan a field or synthetic operational scenario with stop rules.</li>
+</ol>
+<h3 id="independent-exercises-11">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Classify measures as effectiveness, suitability, survivability/resilience, or technical performance.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Develop the operational test and evaluation plan.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Analyze external-system and organizational dependencies.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Create an AI/autonomy/deployed-change supplement applicable to the learner's design.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Design continuous evidence monitoring with thresholds for rollback or reevaluation.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-11">Weekly deliverable</h3>
+<p>Submit operational scenarios and field-test plan, effectiveness/suitability measures, operator/maintainer/accessibility evaluation, SoS dependency map, resilience events, AI/autonomy or evolving-software supplement, continuous-monitoring plan, and operational limitations.</p>
+<h3 id="analytic-rubric-11">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Operational realism | 25% | Scenarios, users, environments, threats, and dependencies are representative. |</p>
+<p>| Effectiveness/suitability | 25% | Measures cover mission and sustainable use. |</p>
+<p>| SoS/deployed evolution | 20% | External authority, configuration, monitoring, and change are addressed. |</p>
+<p>| AI/autonomy rigor | 20% | Data, uncertainty, shift, human interaction, fallback, and updates are treated where applicable. |</p>
+<p>| Decision limits | 10% | Restrictions and continuous-evidence triggers are explicit. |</p>
+<h3 id="critical-failures-11">Critical failures</h3>
+<ul>
+<li>Operational evaluation repeats lab conditions without disclosure.</li>
+<li>Suitability and support are omitted.</li>
+<li>AI claim relies only on average accuracy.</li>
+<li>External-system configuration or authority is ignored.</li>
+</ul>
+<h3 id="knowledge-check-11">Knowledge check</h3>
+<ol>
+<li>How do effectiveness and suitability differ?</li>
+<li>What makes an operational environment representative?</li>
+<li>Why is SoS T&amp;E difficult?</li>
+<li>What is distribution shift?</li>
+<li>What evidence is needed after a deployed update?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-11">Revision and mastery gate</h3>
+<p>Operational conclusions must state population, environment, configuration, and limitations. AI/autonomy or evolving-software capability requires monitoring and change-triggered reevaluation.</p>
+<h3 id="suggested-workload-11">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Study | 3.0 |</p>
+<p>| Operational plan | 3.5 |</p>
+<p>| Advanced supplement | 3.0 |</p>
+<p>| Review | 2.0 |</p>
+<hr/>
+<h2 id="week-12--conduct-the-final-evidence-review-and-make-the-operational-readiness-recommendation">Week 12 — Conduct the final evidence review and make the operational-readiness recommendation</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B8/chapters/12-conduct-the-final-evidence-review-and-make-the-operatio.html">Read Book 8, Chapter 12</a> → <a href="../../K/B8/labs/lab-12-conduct-the-final-evidence-review-and-make-the-operatio.html">complete Hypothetical Lab 12</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-769-w12.html">Read the Week 12 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C6, C9, C10, C12</p>
+<h3 id="professional-context-and-essential-question-12">Professional context and essential question</h3>
+<p>The final obligation is not to declare success but to tell decision makers what the evidence supports, what it does not, and what risk remains. <strong>Essential question:</strong> Should the system proceed, proceed under conditions, return for rework, or stop?</p>
+<h3 id="weekly-learning-outcomes-12">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>integrate requirement verification, stakeholder validation, operational evaluation, discrepancies, and residual risk</li>
+<li>demonstrate live provenance from claim to article, data, analysis, and conclusion</li>
+<li>evaluate evidence sufficiency, limitations, waivers, and unresolved actions</li>
+<li>make a clear acceptance and readiness recommendation with conditions</li>
+<li>define follow-on, production, deployment, monitoring, and regression evidence</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-12">Retrieval and readiness check</h3>
+<ol>
+<li>State the highest-risk unresolved claim.</li>
+<li>Identify the authoritative test article/build.</li>
+<li>Name one verified requirement that is not yet operationally validated.</li>
+<li>State one condition that would reverse the recommendation.</li>
+</ol>
+<h3 id="required-study-12">Required study</h3>
+<ul>
+<li>
+<p><strong>NASA verification and validation</strong> — reporting and decision evidence. <strong>Purpose:</strong> Synthesize compliance and intended use. <strong>Guiding questions:</strong> What objective evidence and limitations belong in final reports?</p>
+</li>
+<li>
+<p><strong>Phase 2 README</strong> — continuous evidence chain and exit criteria. <strong>Purpose:</strong> Close the phase. <strong>Guiding questions:</strong> Can every major claim be traced upstream and downstream?</p>
+</li>
+<li>
+<p><strong>JHU source syllabus</strong> — CLOs and topic breadth. <strong>Purpose:</strong> Check source completeness. <strong>Guiding questions:</strong> Which capstone element demonstrates each CLO?</p>
+</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-12">Instructor-style lesson notes</h3>
+<p>A final evidence review should separate product compliance, stakeholder validation, operational effectiveness, suitability, safety/security, support, and readiness. These may produce different statuses.</p>
+<p>Use an evidence status vocabulary such as verified, failed, inconclusive, limited, waived, not tested, invalidated, or superseded. State authority and date for acceptance decisions.</p>
+<p>Conditional readiness requires enforceable conditions: operating-domain limits, monitoring, training, staffing, maintenance, update restrictions, corrective actions, deadlines, and stop/rollback triggers.</p>
+<p>The oral defense checks provenance and judgment. The learner should be able to re-run analysis, explain an anomaly, identify configuration, and update the recommendation after new evidence.</p>
+<h3 id="worked-example-12">Worked example</h3>
+<p>The system meets latency and accessibility thresholds in tested conditions but has inconclusive availability evidence and one open severe-weather autonomy discrepancy. The recommendation is a bounded human-driven and low-speed autonomous pilot under weather restrictions, enhanced monitoring, mandatory failover staffing, and a defined evidence campaign before expansion. The report does not label the entire system simply 'passed.'</p>
+<h3 id="guided-practice-12">Guided practice</h3>
+<ol>
+<li>Run a portfolio consistency and evidence-status audit.</li>
+<li>Practice a live claim-to-data-to-analysis trace.</li>
+<li>Reanalyze one dataset after a supplied exclusion or calibration change.</li>
+<li>Conduct the final board and receiving-authority challenge.</li>
+</ol>
+<h3 id="independent-exercises-12">Independent exercises</h3>
+<ul>
+<li>
+<p><strong>Foundation:</strong> Complete a closed-book T&amp;E reasoning assessment.</p>
+</li>
+<li>
+<p><strong>Application:</strong> Assemble and baseline the final T&amp;E portfolio.</p>
+</li>
+<li>
+<p><strong>Analysis:</strong> Develop the integrated readiness argument and conditions.</p>
+</li>
+<li>
+<p><strong>Synthesis:</strong> Conduct and record the final oral defense.</p>
+</li>
+<li>
+<p><strong>Stretch:</strong> Publish a machine-readable evidence manifest and monitoring/retest backlog.</p>
+</li>
+</ul>
+<h3 id="weekly-deliverable-12">Weekly deliverable</h3>
+<p>Submit final T&amp;E report, evidence matrix, verification/validation/operational status, discrepancy and waiver summary, residual-risk assessment, readiness recommendation, review deck, oral-defense record, and follow-on evidence plan.</p>
+<h3 id="analytic-rubric-12">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+</table>
+<p>| Evidence coherence | 30% | Claims, articles, data, analysis, discrepancies, and conclusions trace and agree. |</p>
+<p>| Technical/statistical judgment | 25% | Uncertainty, limits, and sufficiency are correctly interpreted. |</p>
+<p>| Readiness recommendation | 25% | Decision, conditions, residual risk, and follow-on work are clear and proportionate. |</p>
+<p>| Defense/reproducibility | 20% | Key evidence is reproduced and defended live. |</p>
+<h3 id="critical-failures-12">Critical failures</h3>
+<ul>
+<li>Final recommendation hides a critical limitation or waiver.</li>
+<li>Evidence provenance cannot be demonstrated.</li>
+<li>Inconclusive claim is reported as pass.</li>
+<li>Conditional recommendation lacks enforceable conditions or triggers.</li>
+</ul>
+<h3 id="knowledge-check-12">Knowledge check</h3>
+<ol>
+<li>What belongs in a final T&amp;E report?</li>
+<li>How does acceptance differ from operational readiness?</li>
+<li>What makes a condition enforceable?</li>
+<li>When should evidence be invalidated?</li>
+<li>What should trigger post-deployment reevaluation?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-12">Revision and mastery gate</h3>
+<p>Pass only when all critical mastery criteria are satisfied, the integrated evidence is reproducible, and the recommendation is accepted or conditionally accepted by the simulated authority with documented actions.</p>
+<h3 id="suggested-workload-12">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+</table>
+<p>| Audit and study | 2.0 |</p>
+<p>| Final analysis/report | 4.5 |</p>
+<p>| Board/defense | 3.0 |</p>
+<p>| Revision/monitoring plan | 2.0 |</p>
+<hr/>
+<h2 id="solution-and-instructor-material-package">Solution and instructor-material package</h2>
+<p>Maintain a separate solution and mentor package containing:</p>
+<ul>
+<li>readiness-diagnostic answer guide;</li>
+<li>defective VCRM, test concept, procedure, and analysis examples;</li>
+<li>reference T&amp;E architecture and critical parameter register;</li>
+<li>reference measurement uncertainty and DOE/sample calculations;</li>
+<li>supplied SIL, integration, latency, availability, boarding, environmental, and anomaly datasets;</li>
+<li>validated analysis notebooks and expected result ranges;</li>
+<li>reference discrepancy, root-cause, corrective-action, and retest records;</li>
+<li>TRR and evidence-review board scoring notes;</li>
+<li>operational/SoS/AI scenario prompts;</li>
+<li>knowledge-check answers and rationales;</li>
+<li>oral-defense injects and model responses;</li>
+<li>common errors, recovery work, and exemplar limitation statements.</li>
+</ul>
+<p>The learner-facing repository should include data and problem statements but should not expose complete diagnostic answers before work is submitted.</p>
+<h2 id="references">References</h2>
+<p><a href="OVERVIEW.html">Back to Phase 2 README</a><br/>
+<a href="OVERVIEW.html">Back to program README</a></p>
+</main></body></html>

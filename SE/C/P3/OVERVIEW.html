@@ -1,0 +1,239 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Phase 3 — Quantitative analysis and model-driven decision support · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P3/OVERVIEW.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="phase-3--quantitative-analysis-and-model-driven-decision-support">Phase 3 — Quantitative analysis and model-driven decision support</h1>
+<p>Phase 3 develops the quantitative evidence needed to support systems-engineering decisions under variability, uncertainty, incomplete information, and competing objectives. The phase moves from foundational modeling-and-simulation practice through decision analysis, systems dynamics, stochastic performance modeling, MBSE-connected analytics, and advanced multi-domain simulation.</p>
+<p>This is not a collection of disconnected mathematics courses. Every course must answer four questions:</p>
+<ol>
+<li><strong>What decision or claim does the analysis support?</strong></li>
+<li><strong>What model, data, assumptions, and uncertainty produce the result?</strong></li>
+<li><strong>How credible is the result for the intended use?</strong></li>
+<li><strong>What would cause the recommendation to change?</strong></li>
+</ol>
+<p><a href="OVERVIEW.html">Back to program README</a></p>
+<hr/>
+<h2 id="1-recommended-sequence">1. Recommended sequence</h2>
+<ol>
+<li><a href="EN645757.html"><strong>EN.645.757 — Foundations of Modeling and Simulation in Systems Engineering</strong></a></li>
+<li><a href="EN645784.html"><strong>EN.645.784 — Decision Science &amp; Analytics in Systems Engineering</strong></a></li>
+<li><a href="EN645781.html"><strong>EN.645.781 — Systems Thinking and Systems Dynamics</strong></a></li>
+<li><a href="EN645756.html"><strong>EN.645.756 — Metrics, Modeling, and Simulation for Systems Engineering</strong></a></li>
+<li><a href="EN645632.html"><strong>EN.645.632 — Applied Analytics for Model Based Systems Engineering</strong></a></li>
+<li><a href="EN645758.html"><strong>EN.645.758 — Advanced Systems Modeling and Simulation</strong></a></li>
+</ol>
+<p>After completing EN.645.757 and EN.645.784, EN.645.781 and EN.645.756 may be studied in either order. EN.645.632 may begin after EN.645.631, but it is more valuable after the learner has foundational simulation and decision-analysis experience. EN.645.758 remains last because it assumes stronger statistics, experimentation, multi-domain modeling, and model-credibility judgment.</p>
+<h2 id="2-phase-entry-gate">2. Phase entry gate</h2>
+<p>Before beginning Phase 3, the learner should be able to:</p>
+<ul>
+<li>define a decision, stakeholder, system boundary, lifecycle phase, and evidence need;</li>
+<li>write or evaluate a measurable requirement, MOE, MOP, and verification criterion;</li>
+<li>use a spreadsheet with formulas, charts, and scenario tables;</li>
+<li>write a small Python, R, MATLAB, Julia, or equivalent script;</li>
+<li>interpret mean, median, variance, standard deviation, percentile, probability, confidence interval, and correlation;</li>
+<li>distinguish verification, validation, and decision acceptance;</li>
+<li>maintain versioned source, data, assumptions, results, and decision records.</li>
+</ul>
+<p>A learner who cannot yet meet these outcomes should complete the quantitative/computational bridge in Phase 0 before continuing.</p>
+<h2 id="3-shared-phase-case">3. Shared phase case</h2>
+<h3 id="autonomous-campus-mobility-2030--analytic-evidence-program">Autonomous Campus Mobility 2030 — Analytic Evidence Program</h3>
+<p>Phase 3 uses the concept, design, integration, and T&amp;E artifacts from Phase 2 as a controlled input. The learner becomes the analytic lead for a campus mobility program that must decide how to improve service while controlling cost, safety risk, accessibility, congestion, energy use, and operational disruption.</p>
+<p>The program provides a common context, but each course asks a different class of question:</p>
+<table>
+<thead>
+<tr>
+<th>Course</th>
+<th>Primary analytic question</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EN.645.757</td>
+<td>Which model form and simulation process can credibly support a lifecycle decision?</td>
+</tr>
+<tr>
+<td>EN.645.784</td>
+<td>How should objectives, preferences, evidence, risk, and uncertainty be combined into a decision?</td>
+</tr>
+<tr>
+<td>EN.645.781</td>
+<td>What feedback structures and delays create observed long-term behavior?</td>
+</tr>
+<tr>
+<td>EN.645.756</td>
+<td>How do stochastic performance measures change with use, environment, and design?</td>
+</tr>
+<tr>
+<td>EN.645.632</td>
+<td>How can analytic models, queries, and results be connected to the authoritative MBSE baseline?</td>
+</tr>
+<tr>
+<td>EN.645.758</td>
+<td>How can multiple advanced models be composed, calibrated, experimented with, and assessed?</td>
+</tr>
+</tbody>
+</table>
+<p>The Phase 2 recommendation is not automatically accepted as correct. Analytic evidence may confirm it, constrain it, or reopen it.</p>
+<h2 id="4-phase-wide-model-and-data-rules">4. Phase-wide model and data rules</h2>
+<p>Every model must have:</p>
+<ul>
+<li>a named decision owner and intended use;</li>
+<li>a bounded system, environment, time horizon, and level of resolution;</li>
+<li>explicit assumptions, simplifications, exclusions, and known limitations;</li>
+<li>input-data provenance and quality assessment;</li>
+<li>versioned source and executable instructions;</li>
+<li>verification evidence that the implementation matches the conceptual and computational specification;</li>
+<li>validation evidence appropriate to the intended use;</li>
+<li>uncertainty and sensitivity treatment proportional to decision consequence;</li>
+<li>a result-to-decision trace and a statement of conditions under which the result should not be used.</li>
+</ul>
+<p>Screenshots, plots, and dashboards are communication products, not substitutes for source, data, logic, or provenance.</p>
+<h2 id="5-computational-reproducibility-policy">5. Computational reproducibility policy</h2>
+<p>Maintain a common repository structure:</p>
+<ul>
+<li><code>/00-governance-and-decisions</code></li>
+<li><code>/01-problem-and-conceptual-model</code></li>
+<li><code>/02-data-and-input-models</code></li>
+<li><code>/03-model-source</code></li>
+<li><code>/04-verification-and-tests</code></li>
+<li><code>/05-experiments</code></li>
+<li><code>/06-results-and-uncertainty</code></li>
+<li><code>/07-vva-and-credibility</code></li>
+<li><code>/08-reviews-and-handoffs</code></li>
+</ul>
+<p>Each executable result must record:</p>
+<ul>
+<li>software and package versions;</li>
+<li>random-number seed policy;</li>
+<li>input file identifiers and hashes where practical;</li>
+<li>configuration and parameter set;</li>
+<li>run length, warm-up, replications, and stopping conditions;</li>
+<li>analysis script version;</li>
+<li>output file and figure generation steps.</li>
+</ul>
+<h2 id="6-phase-review-gates">6. Phase review gates</h2>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Purpose</th>
+<th>Minimum evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modeling Purpose Review</td>
+<td>Confirm decision, intended use, model class, scope, and credibility needs</td>
+<td>Decision statement, conceptual model, candidate method comparison, data plan</td>
+</tr>
+<tr>
+<td>Model Readiness Review</td>
+<td>Confirm implementation, input models, verification, and experiment readiness</td>
+<td>Tests, traces, input analysis, run controls, unresolved defects</td>
+</tr>
+<tr>
+<td>Analysis and Decision Review</td>
+<td>Confirm output analysis, uncertainty, sensitivity, and interpretation</td>
+<td>Reproducible runs, intervals, diagnostics, scenario/sensitivity results</td>
+</tr>
+<tr>
+<td>Credibility/Use Review</td>
+<td>Decide whether the model is acceptable for the stated use</td>
+<td>V&amp;V evidence, limitations, risk, accreditation/use recommendation</td>
+</tr>
+<tr>
+<td>Phase Portfolio Review</td>
+<td>Demonstrate progression across model forms and decisions</td>
+<td>Controlled models, notebooks, reports, review records, oral defense</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-relationship-among-phase-3-courses">7. Relationship among Phase 3 courses</h2>
+<p>Repeated topics must become more advanced rather than merely repeated:</p>
+<ul>
+<li><strong>EN.645.757</strong> introduces intended use, conceptual modeling, discrete-event simulation, inputs, outputs, experiments, and credibility.</li>
+<li><strong>EN.645.784</strong> deepens decision framing, value models, influence diagrams, Bayesian reasoning, multiobjective selection, and robustness.</li>
+<li><strong>EN.645.781</strong> shifts from event/process behavior to feedback, accumulation, delays, nonlinear dynamics, policy resistance, and leverage.</li>
+<li><strong>EN.645.756</strong> deepens stochastic characterization, DOE, statistical inference, performance surfaces, uncertainty, and lifecycle metrics.</li>
+<li><strong>EN.645.632</strong> makes the analytics queryable and traceable inside an MBSE/digital-thread environment.</li>
+<li><strong>EN.645.758</strong> integrates continuous, discrete, physical, real-time, interoperable, and composable simulations with advanced experimentation.</li>
+</ul>
+<h2 id="8-workload-and-pacing">8. Workload and pacing</h2>
+<p>Fully expanded courses target approximately 10–12 hours per week. Quantitative work often takes longer when code, data, or models fail. Plan additional recovery time for:</p>
+<ul>
+<li>tool installation and environment management;</li>
+<li>debugging and verification;</li>
+<li>data cleaning and input-model analysis;</li>
+<li>long simulation runs;</li>
+<li>review and revision after credibility challenges.</li>
+</ul>
+<p>Do not proceed merely because a model runs. Progress requires the weekly mastery gate and a reviewable evidence package.</p>
+<h2 id="9-current-development-status">9. Current development status</h2>
+<table>
+<thead>
+<tr>
+<th>Course</th>
+<th>Status</th>
+<th>Next action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EN.645.757 Foundations of Modeling and Simulation</td>
+<td>Fully expanded</td>
+<td>Complete and pilot the course</td>
+</tr>
+<tr>
+<td>EN.645.784 Decision Science &amp; Analytics</td>
+<td>Fully expanded</td>
+<td>Complete and pilot the course</td>
+</tr>
+<tr>
+<td>EN.645.781 Systems Thinking and Systems Dynamics</td>
+<td>Fully expanded</td>
+<td>Complete and pilot the course</td>
+</tr>
+<tr>
+<td>EN.645.756 Metrics, Modeling, and Simulation</td>
+<td>Fully expanded</td>
+<td>Complete and pilot the course</td>
+</tr>
+<tr>
+<td>EN.645.632 Applied Analytics for MBSE</td>
+<td>Fully expanded</td>
+<td>Complete and pilot the course</td>
+</tr>
+<tr>
+<td>EN.645.758 Advanced Systems Modeling and Simulation</td>
+<td>Fully expanded</td>
+<td>Complete and pilot the course</td>
+</tr>
+</tbody>
+</table>
+<p>All six Phase 3 courses are fully expanded. The remaining work is controlled piloting, workload calibration, tool-path verification, and maintenance of external references.</p>
+<h2 id="10-phase-exit-criteria">10. Phase exit criteria</h2>
+<p>Phase 3 is complete when the learner can:</p>
+<ul>
+<li>select and defend a model form based on a decision and intended use;</li>
+<li>construct conceptual, computational, and executable models with traceability;</li>
+<li>characterize stochastic inputs and outputs without substituting averages for distributions;</li>
+<li>design and analyze simulation experiments;</li>
+<li>perform uncertainty, sensitivity, robustness, and error analyses;</li>
+<li>verify implementations and validate model behavior against appropriate referents;</li>
+<li>distinguish model correctness, model validity, credibility, and authorization for a specific use;</li>
+<li>connect analytic evidence to requirements, architecture, risk, and decisions;</li>
+<li>communicate what the model supports, what it does not support, and what would change the conclusion.</li>
+</ul>
+<hr/>
+<h2 id="course-files">Course files</h2>
+<ul>
+<li><a href="EN645757.html">EN.645.757 — Foundations of Modeling and Simulation in Systems Engineering</a></li>
+<li><a href="EN645784.html">EN.645.784 — Decision Science &amp; Analytics in Systems Engineering</a></li>
+<li><a href="EN645781.html">EN.645.781 — Systems Thinking and Systems Dynamics</a></li>
+<li><a href="EN645756.html">EN.645.756 — Metrics, Modeling, and Simulation for Systems Engineering</a></li>
+<li><a href="EN645632.html">EN.645.632 — Applied Analytics for Model Based Systems Engineering</a></li>
+<li><a href="EN645758.html">EN.645.758 — Advanced Systems Modeling and Simulation</a></li>
+</ul>
+<p><a href="OVERVIEW.html">Back to program README</a></p>
+</main></body></html>

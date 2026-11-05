@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Energy budget parametrics · Systems Engineering</title>
+<style>:root{--ink:#193849;--teal:#167575;--bg:#f4f7f8;--line:#d5e4e5}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.76 system-ui,-apple-system,Segoe UI,Arial,sans-serif}header{background:#193c50;color:white;padding:22px max(20px,calc((100vw - 1050px)/2))}header a{color:#d3f7f0;text-decoration:none;margin-right:20px}main{max-width:1050px;margin:25px auto 75px;background:white;border:1px solid var(--line);border-radius:13px;padding:clamp(20px,5vw,58px)}h1{font-size:clamp(1.8rem,3vw,2.35rem);line-height:1.2}h2{margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:7px}h3{margin-top:1.5em}a{color:var(--teal);text-underline-offset:3px}p,li{max-width:85ch}blockquote{margin:16px 0;padding:8px 17px;background:#ecf6f5;border-left:4px solid var(--teal)}table{display:block;max-width:100%;overflow:auto;border-collapse:collapse}td,th{border:1px solid var(--line);padding:10px;vertical-align:top}th{background:#eaf4f3}pre{background:#1a3644;color:#f3f8fa;padding:18px;border-radius:10px;overflow:auto}code{font-size:.88em}p code{background:#edf2f3;padding:2px 5px;border-radius:4px}details{border:1px solid var(--line);border-radius:10px;background:#f8fbfb;padding:14px 17px;margin:12px 0}summary{font-weight:750;cursor:pointer}.actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 28px}.actions a{background:#e4f3f1;border:1px solid #b7d9d7;border-radius:7px;padding:8px 13px;font-weight:650;text-decoration:none}.note{background:#eef7f6;border:1px solid #c9e3e0;padding:16px;border-radius:8px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style>
+<script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']] },svg:{fontCache:'local'},startup:{typeset:false}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B3/practice/energy.html" data-se-mode="standard"></script>
+</head><body><header><a href="../OPEN-BOOK.html">Book 3</a><a href="WORKBENCH.html">Interactive workbench</a><a href="../../LAB-LIBRARY.html">Lab resources</a></header><main>
+<div class="actions"><a href="energy.html">Concept workshop</a><a href="lab-energy.html">Applied lab</a><a download="" href="energy.json">Download data</a><a download="" href="tools.py">Download Python</a><a download="" href="LAB-NOTEBOOK.ipynb">Download notebook</a><a download="" href="energy.md">Download this Markdown</a></div><h1>Workshop 4 · Parametric modeling with units and operational margins</h1>
+<p><em>Companion to Book III, Chapter 8 · Values, units, measures, constraints and parametrics</em></p>
+<h2>How a valid diagram can describe an impossible service</h2>
+<p>A conceptual shuttle model includes six scheduled trips, a route length, an energy-use rate, HVAC loads, and a battery capacity. Every connector looks correct. But can the proposed vehicle operate for the required service window <strong>without violating its reserve policy</strong>? A parametric model turns the architecture into quantitative constraints whose units, assumptions and sensitivity can be examined before procurement.</p>
+<p>Let a trip require \(L\) kilometers of travel at \(r\) kWh/km, plus an HVAC and auxiliary energy load \(H\) kWh/trip. Let \(n\) be the scheduled number of trips, \(C\) the nominal usable capacity, and \(f\) the reserve fraction. These are not dimensionless decorations; their meaning and conditions must be controlled in the model dictionary.</p>
+<p>\[
+E_{\mathrm{trip}}=Lr+H,\quad E_{\mathrm{demand}}=n(Lr+H),\quad E_{\mathrm{allowable}}=C(1-f),\quad M=E_{\mathrm{allowable}}-E_{\mathrm{demand}}.
+\]</p>
+<p>A feasible <strong>energy budget</strong> requires \(M\ge0\). This is necessary but not sufficient for a feasible service: charging power, passenger weight, weather, driving duty cycle, battery aging, reserve policy and scheduling may impose additional constraints.</p>
+<h2>Worked baseline: mild operating conditions</h2>
+<p>Use \(L=12\) km, \(r=0.19\) kWh/km, \(H=0.65\) kWh, \(n=6\), \(C=25\) kWh and \(f=0.20\). Then each trip uses \(12(0.19)+0.65=2.93\) kWh; six trips need \(17.58\) kWh. The allowable energy is \(25(0.8)=20\) kWh, leaving margin \(M=2.42\) kWh. The normalized margin is \(2.42/20\approx12.1\%\) of allowable energy. Reporting “12% margin” without a specified denominator would be ambiguous.</p>
+<p>Now change the environment to a cold-weather scenario: \(r=0.24\) kWh/km and \(H=1.0\) kWh/trip. Each trip needs \(3.88\) kWh, and six trips need \(23.28\) kWh. The margin is \(-3.28\) kWh: the service window is infeasible under the stated assumptions. Both calculations can be arithmetically correct; the design review must determine which scenarios are part of the operational requirement.</p>
+<h2>Sensitivity and model semantics</h2>
+<p>For fixed trip count and length,</p>
+<p>\[
+\frac{\partial E}{\partial r}=nL=72\ \mathrm{km},\qquad
+\frac{\partial E}{\partial H}=n=6.
+\]</p>
+<p>Increasing the assumed energy intensity by 0.01 kWh/km increases service demand by \(72(0.01)=0.72\) kWh. Increasing auxiliary use by 0.1 kWh/trip adds 0.6 kWh. These derivatives show which assumptions deserve attention, but they do not provide probability distributions. To support a probabilistic claim about energy sufficiency, one needs a justified joint distribution of conditions, including correlations among temperature, terrain and auxiliary load.</p>
+<h2>Units are part of the architecture</h2>
+<p>A number <code>190</code> might mean Wh/km; <code>0.19</code> might mean kWh/km. They are equivalent if and only if the unit conversion is explicit. A tool that silently compares values across such units can produce a plausible-looking result that is wrong by a factor of 1,000. Model properties should include value, unit, source, measurement context, time validity and configuration. The constraint block then relates those properties, while a verification procedure measures the real energy budget.</p>
+<p>The <strong>model boundary</strong> excludes fleet-level energy sharing and mid-window recharging in this example. If a design assumes charging between trips, add time-dependent energy state and charging constraints; do not quietly add “available charge” to the total without scheduling the charger resource.</p>
+<h2>Worked problems</h2>
+<p><strong>Problem 1.</strong> Calculate the mild-weather margin in kWh and as a percentage of allowable energy.</p>
+<details><summary>Worked solution 1</summary>
+<p>Allowable 20 kWh; demand 17.58 kWh; margin 2.42 kWh. Ratio 2.42/20 = 0.121 = 12.1%. State the denominator.</p>
+</details>
+<p><strong>Problem 2.</strong> How much must nominal capacity grow to support the cold-weather case with the same 20% reserve?</p>
+<details><summary>Worked solution 2</summary>
+<p>Need \(C(0.8)\ge23.28\), hence \(C\ge29.10\) kWh. Relative to 25 kWh, that is at least 4.10 kWh additional nominal capacity under the chosen simplified capacity definition.</p>
+</details>
+<p><strong>Problem 3.</strong> The energy-intensity estimate increases by 0.02 kWh/km. What happens to demand for six 12-km trips?</p>
+<details><summary>Worked solution 3</summary>
+<p>Increase is \(6(12)(0.02)=1.44\) kWh. Re-evaluate margin and any affected charging assumptions.</p>
+</details>
+<p><strong>Problem 4.</strong> Why can't a positive energy margin establish the design is operationally feasible?</p>
+<details><summary>Worked solution 4</summary>
+<p>The budget omits charge rate, instantaneous power, usable capacity variation, charger availability, route timing, passenger loads and degraded modes. It establishes one necessary condition only.</p>
+</details>
+<h2>Transfer to engineering work</h2>
+<p>Use the JSON parameter scenarios and Python calculator. Make one change to operating assumptions, regenerate margins, and update the architecture claim. Create an explicit model property dictionary with units and sources, a constraint diagram or table, and a verification concept for measuring actual energy performance under the worst relevant environment. Compare your result with Book III Chapter 8's original parametric modeling exercise.</p>
+</main></body></html>

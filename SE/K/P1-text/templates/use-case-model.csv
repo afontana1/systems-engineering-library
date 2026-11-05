@@ -1,0 +1,2 @@
+uc_id,actor,goal,precondition,trigger,success_guarantee,minimum_guarantee,exception
+UC-01,Rider,Book accessible pickup,Rider eligible,Pickup request,Confirmed assignment,No duplicate booking,Vehicle unavailable

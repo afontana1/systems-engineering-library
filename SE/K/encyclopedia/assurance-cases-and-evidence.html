@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Assurance cases: what evidence supports which engineering claim? · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[["\(","\)"]],displayMath:[["\[","\]"]]},svg:{fontCache:"local"}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/assurance-cases-and-evidence.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>DETAILED REFERENCE</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Canonical reference</span><span>Concept article · Internal editorial review</span></div><article class="article-body"><h1>Assurance cases: what evidence supports which engineering claim?</h1>
+<p><strong>Canonical reference · Safety and assurance · Expanded reference · Internal editorial review; independent peer review not performed</strong></p>
+<h2>From evidence inventories to justified claims</h2>
+<p>An <strong>assurance case</strong> is a structured argument connecting a bounded engineering claim to the evidence and reasoning intended to justify it. It includes the <strong>context</strong> (system, operating conditions, standards or decision basis), <strong>strategy</strong> (why the evidence set addresses the claim), <strong>evidence</strong> (models, tests, analyses, inspection results and records), <strong>assumptions</strong>, <strong>defeaters</strong> (ways the argument could be wrong) and <strong>decision authority</strong>. A folder full of successful tests is not automatically an argument: the tests may address the wrong configuration, operating modes or failure mechanisms.</p>
+<p>For a shuttle release, the top-level statement “safe to operate” is too broad unless it names the configuration, mission envelope, relevant risks and acceptance authority. A useful hierarchy might include claims that controlled stopping works under named conditions; that human intervention remains feasible; that harmful commands cannot bypass authorization; and that degraded modes remain bounded. Each subclaim must identify what observation would undermine it.</p>
+<h2>Evidence has types and validity conditions</h2>
+<p>Testing provides observations about exercised systems and scenarios; formal proof establishes properties of a model under mathematical assumptions; analysis predicts behavior using a model; review checks documented consistency; field telemetry records outcomes in a particular population. These are not interchangeable. Multiple pieces of evidence improve assurance only if they close distinct gaps; three test reports using the same faulty harness may not be independent corroboration.</p>
+<p>Track a claim-to-evidence graph with nodes for claims, requirements, hazards, controls, model versions, tests, build identifiers, results and approvals. Edges should be typed: “verified by,” “assumes,” “refined into,” “challenges,” or “applies to configuration.” A link is not enough unless its semantics and validity window are specified. Evidence can expire when interfaces change, environmental conditions broaden, or the test article differs from the released build.</p>
+<h2>Worked reasoning: coverage is not confidence</h2>
+<p>Assume 12 release-relevant hazards have been identified, and nine have accepted, configuration-current control evidence. A simple closure ratio is <code>9/12 = 75%</code>. It is a <strong>workflow indicator</strong>, not a 75% probability that the system is safe. If one of the three unresolved hazards has catastrophic severity while the nine closed hazards have minor severity, the count conceals the decision's dominant risk. Even complete closure of the <em>identified</em> set cannot establish that no unrecognized hazards exist.</p>
+<p>Now suppose a timing proof guarantees an emergency-stop signal is issued within 100 milliseconds in a simplified controller model. The physical brake test measures stopping distance under dry conditions. The two reports address different subclaims. The assurance argument must still connect command time to actuator response, friction, operating load, degraded sensing and the range of acceptable stopping distances. A counterexample, uncovered assumption or inconsistent interface can invalidate the combined claim.</p>
+<h2>Defeaters, independence, and risk acceptance</h2>
+<p>Good assurance reviews actively search for reasons the proposed conclusion may not hold. Common defeaters include correlated test environments, incomplete fault injection, unvalidated model parameters, undocumented operator actions, stale software versions, and exposure outside the design basis. An independent reviewer can challenge whether the argument has omitted hazards or alternatives; that challenge is different from simply repeating the originating team's calculation.</p>
+<p>The release decision should include unresolved hazards, limitations of operation, compensating controls, residual-risk ownership and monitoring triggers. Evidence acceptance by a technical reviewer and risk acceptance by a designated organizational authority are different acts. A statement that a process was followed does not imply that the product meets its mission or protection needs.</p>
+<h2>Decision-ready argument outline</h2>
+<ol>
+<li><strong>Claim:</strong> explicit system configuration, target outcome and operating envelope.</li>
+<li><strong>Context:</strong> requirements, stakeholder risk tolerances, interfaces, and authoritative baselines.</li>
+<li><strong>Strategy:</strong> how subclaims cover the relevant causes and failure paths without gaps.</li>
+<li><strong>Evidence:</strong> cited model/test/review artifacts with reproducible versions and limitations.</li>
+<li><strong>Defeaters:</strong> unresolved contradictions, untested scenarios, common-mode and model uncertainty.</li>
+<li><strong>Disposition:</strong> reviewer judgment, qualified restrictions, acceptance authority and follow-up triggers.</li>
+</ol>
+<p>Treat the assurance case as a maintained engineering model that evolves with the system, not as a certification slide generated at project closeout.</p>
+<h2>Selected source-to-claim references</h2>
+<ul>
+<li><strong>A1 · Verification, validation and technical reviews form complementary evidence:</strong> <a href="https://www.nasa.gov/reference/2-0-fundamentals-of-systems-engineering/">NASA Systems Engineering Handbook, section 2.0 — distinction between product verification and validation</a>.</li>
+<li><strong>A2 · Lifecycle software assurance and IV&amp;V:</strong> <a href="https://standards.nasa.gov/standard/nasa/nasa-std-87398">NASA-STD-8739.8B — scope of software assurance and software safety</a>.</li>
+<li><strong>A3 · Trustworthiness requires evidence, including appropriate requirements:</strong> <a href="https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final">NIST SP 800-160 Volume 1 Revision 1 — engineering trustworthy secure systems</a>.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<ul>
+<li><strong>Prerequisites:</strong> <a href="traceability-graph.html">Traceability graph</a>, <a href="v-and-v.html">Verification and validation</a>.</li>
+<li><strong>Related concepts:</strong> <a href="system-safety-and-hazards.html">System safety and hazards</a>, <a href="statistical-acceptance-and-confidence.html">Statistical acceptance</a>, <a href="digital-thread-and-twin.html">Digital thread and provenance</a>.</li>
+<li><strong>Go deeper:</strong> <a href="../B1/chapters/11-realization-and-evidence.html">Book 1, Chapter 11 — Realization and evidence</a>; <a href="../B8/chapters/10-analyze-results-determine-evidence-sufficiency-and-reco.html">Book 8, Chapter 10 — Sufficiency of test evidence</a>.</li>
+</ul>
+</article></main></body></html>

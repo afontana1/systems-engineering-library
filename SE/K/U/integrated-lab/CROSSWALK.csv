@@ -1,0 +1,11 @@
+stage,chapter,phase,related_courses,flagship_links,exit_artifact
+L01,chapters/01-mission-boundary.md,0;5,EN.645.662;EN.645.771,F01;F09,Mission context and ConOps
+L02,chapters/02-requirements-traceability.md,0;2,EN.645.662;EN.645.769,F01,Requirements matrix and test oracles
+L03,chapters/03-architecture-interfaces.md,1;2,EN.645.631;EN.645.764;EN.645.768,F05,Architecture and ICD
+L04,chapters/04-trades-and-configuration.md,2;3,EN.645.767;EN.645.784,F02;F06,Feasible design trade study
+L05,chapters/05-software-prototype.md,1,EN.605.704;EN.645.764,F05,Prototyping and unit-test evidence
+L06,chapters/06-models-and-uncertainty.md,3,EN.645.756;EN.645.757;EN.645.758,F03;F08,Credibility and sensitivity report
+L07,chapters/07-verification-evidence.md,2,EN.645.769,F01;F03,Verification evidence package
+L08,chapters/08-human-factors-safety.md,2;5,EN.645.769;EN.645.742,F07,Hazard assessment and validation plan
+L09,chapters/09-change-and-digital-thread.md,4,EN.645.782;EN.645.783,F01;F09,Change impact and provenance
+L10,chapters/10-readiness-board.md,4;5,EN.645.780;EN.645.753;EN.645.771,F03;F09,Integrated review board disposition

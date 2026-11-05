@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 658" role="img" aria-label="Model-to-investment review">
+<rect width="100%" height="100%" fill="#f5faf9"/>
+<text x="45" y="52" fill="#163c4e" font-family="Arial" font-size="30" font-weight="700">Model-to-investment review</text>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#146e74"/></marker></defs>
+<rect x="110" y="87" width="760" height="93" rx="13" fill="#fff" stroke="#c6dedb" stroke-width="2"/>
+<text x="142" y="123" font-family="Arial" font-weight="700" font-size="24" fill="#175462">Model scope</text>
+<text x="142" y="154" font-family="Arial" font-size="18" fill="#486d74">Define tested configuration and purpose</text>
+<rect x="110" y="217" width="760" height="93" rx="13" fill="#fff" stroke="#c6dedb" stroke-width="2"/>
+<text x="142" y="253" font-family="Arial" font-weight="700" font-size="24" fill="#175462">Validity evidence</text>
+<text x="142" y="284" font-family="Arial" font-size="18" fill="#486d74">Verify implementation and compare observations</text>
+<rect x="110" y="347" width="760" height="93" rx="13" fill="#fff" stroke="#c6dedb" stroke-width="2"/>
+<text x="142" y="383" font-family="Arial" font-weight="700" font-size="24" fill="#175462">Robust choice</text>
+<text x="142" y="414" font-family="Arial" font-size="18" fill="#486d74">Reject infeasible and brittle alternatives</text>
+<rect x="110" y="477" width="760" height="93" rx="13" fill="#fff" stroke="#c6dedb" stroke-width="2"/>
+<text x="142" y="513" font-family="Arial" font-weight="700" font-size="24" fill="#175462">Lifecycle decision</text>
+<text x="142" y="544" font-family="Arial" font-size="18" fill="#486d74">Include operating costs, options, and owners</text>
+<path d="M490 180 V209" stroke="#146e74" stroke-width="3" marker-end="url(#a)"/>
+<path d="M490 310 V339" stroke="#146e74" stroke-width="3" marker-end="url(#a)"/>
+<path d="M490 440 V469" stroke="#146e74" stroke-width="3" marker-end="url(#a)"/>
+</svg>

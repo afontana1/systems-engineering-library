@@ -1,0 +1,5 @@
+digraph Decision {
+ rankdir=LR; bgcolor="transparent"; graph [fontname="DejaVu Sans",pad=.25]; node [shape=box,style="rounded,filled",fillcolor="#e6f3f3",color="#477c86",fontname="DejaVu Sans",fontsize=10];edge[color="#607b89"];
+ problem[label="Decision owner / alternatives"];constraints[label="Hard feasibility screen"];values[label="Value functions and weights"];uncertainty[label="State / model uncertainty"];scores[label="Scores and sensitivity"];evidence[label="Value of new information"];decision[label="Decision + trigger to revisit",fillcolor="#f7eedf"];
+ problem->constraints;constraints->values;values->scores; uncertainty->scores; scores->evidence; evidence->decision;decision->problem[style=dashed,label="new information"];
+}

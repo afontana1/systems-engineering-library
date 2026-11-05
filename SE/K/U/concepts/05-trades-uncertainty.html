@@ -1,0 +1,61 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>05 · Trade studies, multiobjective decisions, and information value · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/U/concepts/05-trades-uncertainty.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="05--trade-studies-multiobjective-decisions-and-information-value">05 · Trade studies, multiobjective decisions, and information value</h1>
+<p><strong>Concept dossier · conceptual design / optimization / decision analytics</strong></p>
+<h2 id="a-score-is-not-a-decision">A score is not a decision</h2>
+<p>A trade study chooses among feasible alternatives under multiple objectives, hard constraints, uncertain facts and stakeholder preferences. It must distinguish <strong>constraints</strong> (unacceptable to violate), <strong>objectives</strong> (desirable to improve) and <strong>assumptions</strong> (possible sources of changed results). A weighted score is only one possible decision aid. Without clear normalization and stakeholder-accepted weights, a score can disguise a preferred answer.</p>
+<h2 id="worked-deterministic-trade">Worked deterministic trade</h2>
+<p>Consider three illustrative shuttle concepts:</p>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th style="text-align:right">Annualized cost (k$)</th>
+<th style="text-align:right">95th-percentile wait (min)</th>
+<th style="text-align:right">Accessible-trip completion (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A: smaller fleet</td>
+<td style="text-align:right">420</td>
+<td style="text-align:right">18</td>
+<td style="text-align:right">94</td>
+</tr>
+<tr>
+<td>B: larger fleet</td>
+<td style="text-align:right">560</td>
+<td style="text-align:right">11</td>
+<td style="text-align:right">97</td>
+</tr>
+<tr>
+<td>C: dispatch redesign</td>
+<td style="text-align:right">470</td>
+<td style="text-align:right">13</td>
+<td style="text-align:right">98</td>
+</tr>
+</tbody>
+</table>
+<p>If the hard accessibility threshold is at least 97%, A is infeasible. B and C are both feasible. C is cheaper and achieves higher accessible completion than B, but B has lower wait time. Neither dominates the other because one improves one criterion while worsening another. They are <strong>Pareto-nondominated</strong> among feasible alternatives. The numbers are fictional assumptions, not evidence about real shuttle services.</p>
+<p>Suppose a stakeholder utility function normalizes cost and waiting time to a common 0–1 preference scale and applies elicited weights. Document the mapping, not just the final totals. A 1% accessibility change may not be legitimately interchangeable with one minute of waiting; critical minima should remain hard constraints.</p>
+<h2 id="sensitivity-is-part-of-the-conclusion">Sensitivity is part of the conclusion</h2>
+<p>A decision should be presented with a <strong>switching analysis</strong>: under which plausible changes in input values, weights or constraints does the preferred alternative change? For this example, if C's wait-time estimate worsens from 13 to 17 minutes under rainy-day conditions, the comparison could change sharply. Report distributions or scenarios rather than a single falsely precise “best” answer.</p>
+<p>If uncertain variables include common causes—e.g., bad weather affects both operating speed and boarding delay—model their dependence. Independently sampling correlated inputs can understate tail risk or yield physically impossible combinations.</p>
+<h2 id="learn-first-or-choose-now">Learn first, or choose now?</h2>
+<p>The <strong>expected value of perfect information</strong> (EVPI) is the difference between (i) the expected best action if the uncertain state were revealed before choosing and (ii) the best expected value under current information. Let payoff <code>U(a,s)</code> depend on action <code>a</code> and state <code>s</code> with probabilities <code>P(s)</code>:</p>
+<p><code>EVPI = Σ_s P(s) max_a U(a,s) - max_a Σ_s P(s) U(a,s)</code>.</p>
+<p>Example: dry and wet conditions are equally likely. Design A yields utilities (100,20); design B yields (65,65). Without further information, B yields 65 versus A's 60, so choose B. Perfect foreknowledge permits A in dry weather (100) and B in wet (65), yielding expected 82.5; EVPI is 17.5 utility units. This is an upper bound on what information is worth <em>in that payoff model</em>; actual sensors or pilot studies yield imperfect information and have costs.</p>
+<h2 id="decision-discipline">Decision discipline</h2>
+<p>Record alternative-generation rules, exclusions, stakeholder objectives, constraints, data provenance, scenario weights, dependence assumptions, method choice, switching thresholds and decision authority. A model is an aid to accountable reasoning, not a substitute for governance.</p>
+<h2 id="exercises-with-answers">Exercises with answers</h2>
+<p><strong>A.</strong> Why is a dominated alternative not always deleted immediately? <strong>Answer:</strong> dominance may disappear under uncertainty, missing objectives or changed constraints. Check whether the comparison used defensible data and all relevant criteria.</p>
+<p><strong>B.</strong> Can EVPI be negative? <strong>Answer:</strong> not for a correctly calculated perfect-information decision problem with the same actions and payoff model; you can always ignore the information. The value of a specific experiment net of its cost can be negative.</p>
+<p><strong>C.</strong> What should accompany a weighted score? <strong>Answer:</strong> scales, weights, evidence, threshold constraints, uncertainty ranges and sensitivity/switching conditions.</p>
+<p><strong>Transfer artifact:</strong> a Pareto table, scenario matrix, one EVPI calculation and a decision record that names a responsible owner.</p>
+<h2 id="connections">Connections</h2>
+<p><a href="01-outcomes-boundaries.html">Outcome definitions</a> · <a href="07-experimental-evidence.html">Experiments</a> · <a href="08-model-credibility.html">Model credibility</a> · <a href="13-sos-enterprise-governance.html">Enterprise governance</a>.<br/>
+<strong>Legacy primers:</strong> <a href="../../encyclopedia/engineering-trades.html">Engineering trades</a>, <a href="../../encyclopedia/bayesian-value-of-information.html">Bayesian value of information</a>.</p>
+</main></body></html>

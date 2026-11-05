@@ -1,0 +1,13 @@
+week,claim,counterexample,verification,decision
+1,Analysis discovers concepts; design assigns responsibilities,Premature implementation classes make the analysis model brittle; pure noun harvesting creates empty classes with no defensible responsibility.,,Unreviewed
+2,Software requirements need multiple kinds of precision,An apparently atomic user story can hide several independent obligations and contradictory edge conditions.,,Unreviewed
+3,Use cases describe externally valuable behavior,A use-case model without alternate flows gives designers no contract for recoverable failure.,,Unreviewed
+4,Class discovery turns language into relationships,Choosing composition merely because one object references another can prohibit legitimate independent lifetimes.,,Unreviewed
+5,Sequence models expose missing responsibility,"Diagrams that show only successful synchronous calls conceal timing, retry and partial-failure semantics.",,Unreviewed
+6,State machines are executable constraints on lifecycles,A “state” invented for every minor flag produces combinatorial explosion; too few states hide illegal behavior.,,Unreviewed
+7,Design is the distribution of responsibility,Too many tiny interfaces can obscure responsibility just as a single god object does.,,Unreviewed
+8,A design sequence should be realizable,Treating event publication as exactly-once without a precise end-to-end definition is a classic distributed design mistake.,,Unreviewed
+9,Patterns are named tradeoffs,"Creating a factory, strategy and observer for a single immutable method needlessly multiplies code paths and tests.",,Unreviewed
+10,Constraints turn informal rules into testable predicates,"Formal-looking syntax may conceal incorrect scope, missing null cases and time-dependent assumptions.",,Unreviewed
+11,Persistence design is about identity and failure recovery,Database schema diagram completeness is not evidence that concurrent operations preserve business rules.,,Unreviewed
+12,A defendable design is a consistent set of claims,Diagrams may be internally consistent but still solve the wrong problem; revisit actor goals and original constraints.,,Unreviewed

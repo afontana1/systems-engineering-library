@@ -1,0 +1,13 @@
+course,week,reading_status,chapter,lab,existing_weekly_primer
+645-662,1,expanded-book,chapters/01-what-is-the-system.md,labs/lab-01-boundary-hearing.md,../P0-text/lessons/645-662-w01.md
+645-662,2,expanded-book,chapters/02-lifecycle-evidence.md,labs/lab-02-design-gate.md,../P0-text/lessons/645-662-w02.md
+645-662,3,expanded-book,chapters/03-needs-and-conops.md,labs/lab-03-stakeholder-hearing.md,../P0-text/lessons/645-662-w03.md
+645-662,4,expanded-book,chapters/04-requirements.md,labs/lab-04-requirements-clinic.md,../P0-text/lessons/645-662-w04.md
+645-662,5,expanded-book,chapters/05-functions-and-behavior.md,labs/lab-05-functional-architecture.md,../P0-text/lessons/645-662-w05.md
+645-662,6,expanded-book,chapters/06-reviewing-the-functional-baseline.md,labs/lab-06-functional-review-board.md,../P0-text/lessons/645-662-w06.md
+645-662,7,expanded-book,chapters/07-allocating-architecture-and-interfaces.md,labs/lab-07-interface-contracts.md,../P0-text/lessons/645-662-w07.md
+645-662,8,expanded-book,chapters/08-trade-studies-and-sensitivity.md,labs/lab-08-decision-hearing.md,../P0-text/lessons/645-662-w08.md
+645-662,9,expanded-book,chapters/09-managing-the-technical-baseline.md,labs/lab-09-technical-management.md,../P0-text/lessons/645-662-w09.md
+645-662,10,expanded-book,chapters/10-failures-and-controls.md,labs/lab-10-red-team.md,../P0-text/lessons/645-662-w10.md
+645-662,11,expanded-book,chapters/11-realization-and-evidence.md,labs/lab-11-verification-board.md,../P0-text/lessons/645-662-w11.md
+645-662,12,expanded-book,chapters/12-synthesis-and-defense.md,labs/lab-12-final-defense.md,../P0-text/lessons/645-662-w12.md

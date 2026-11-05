@@ -1,0 +1,53 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hypothetical Lab 6 — The Functional Review Board · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B1/labs/lab-06-functional-review-board.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><div class="source-tools-panel">Editable lab instructions and supporting code: <a href="../../LAB-LIBRARY.html#B1/labs/lab-06-functional-review-board.md">Open lab downloads &amp; source viewer</a></div><h1 id="hypothetical-lab-6--the-functional-review-board">Hypothetical Lab 6 — The Functional Review Board</h1>
+<p><strong>Course:</strong> EN.645.662 Week 6 · <strong>Reading:</strong> <a href="../chapters/06-reviewing-the-functional-baseline.html">Chapter 6</a> · <strong>Time:</strong> 75–110 minutes · <strong>Nature:</strong> simulated technical board.</p>
+<h2 id="situation">Situation</h2>
+<p>A Northstar team wants authorization to proceed to physical-architecture concepts. Its controlled packet claims eight review criteria were met. Your simulated board discovers the following:</p>
+<table>
+<thead>
+<tr>
+<th>Finding seed</th>
+<th>Observed condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F-01</td>
+<td>Stale telemetry has no defined safe state transition</td>
+</tr>
+<tr>
+<td>F-02</td>
+<td>One noncritical flow record lacks an accountable recipient</td>
+</tr>
+<tr>
+<td>F-03</td>
+<td>Requirements matrix references model revision 2; current state diagram is revision 4</td>
+</tr>
+<tr>
+<td>F-04</td>
+<td>Three critical needs have source-to-function links but no described relationship rationale</td>
+</tr>
+</tbody>
+</table>
+<p>The team argues that the slides are clear and that 7/8 checklist items have green marks. The review charter requires no unaddressed major safety-relevant finding before concept allocation.</p>
+<h2 id="assignments">Assignments</h2>
+<ol>
+<li>Declare the board's decision and scope. Can the team develop exploratory architecture sketches while formal concept allocation is withheld? Separate permitted learning work from controlled commitments.</li>
+<li>Create an evidence index containing at least six items, each with identifier, revision, approval state, and criterion supported. Explicitly mark any missing source.</li>
+<li>Write formal findings for F-01 to F-04: condition, expectation, consequence, severity, owner, due date and closure evidence. Decide whether any seeds must be split into multiple findings.</li>
+<li>Prepare a two-minute technical briefing plus a one-page decision record. Do not treat the green-mark percentage as proof of readiness.</li>
+<li>Propose a change-impact path for F-01: revised function/state model, requirement and flow implications, scenario replay, and independent closure checking.</li>
+<li>Have another learner or a hypothetical reviewer challenge whether the evidence actually proves what the team claims. If working alone, write the objection yourself and then answer it.</li>
+</ol>
+<h2 id="deliverables">Deliverables</h2>
+<p><code>LAB06_ReviewCriteria.md</code>, <code>LAB06_EvidenceIndex.csv</code>, <code>LAB06_Findings.csv</code>, and <code>LAB06_BoardDecision.md</code>. Keep the final decision separate from a list of suggestions.</p>
+<p>&lt;details&gt;&lt;summary&gt;Reference board disposition&lt;/summary&gt;</p>
+<p>F-01 is a potential major finding because undefined failure response undermines the safety argument; it blocks formal approval under the given charter. F-03 is an applicability/configuration finding requiring reconciliation. F-02 may be moderate if the flow is truly noncritical; F-04 requires semantic trace review before the critical need claims can be trusted. The board should withhold unrestricted proceed authority. A well-defined action plan can permit bounded exploration while requiring a controlled state-model revision, scenario test evidence, closure owner, and explicit re-review. The raw count of green rows does not overrule the major gate.</p>
+<p>&lt;/details&gt;</p>
+<h2 id="transfer">Transfer</h2>
+<p>Carry this process into the full original Week 6 <code>662_W06_FBR_Package_v1.0</code>. Use its own criteria and mastery threshold rather than copying this fictional board vote.</p>
+</main></body></html>

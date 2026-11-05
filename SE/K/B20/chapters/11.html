@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Chapter 11 — Critical Systems Practice: Intervene; dynamic risk, resilience, and safe-to-learn action · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B20/chapters/11.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="chapter-11--critical-systems-practice-intervene-dynamic-risk-resilience-and-safe-to-learn-action">Chapter 11 — Critical Systems Practice: Intervene; dynamic risk, resilience, and safe-to-learn action</h1>
+<p><strong>Book 20 · Management of Complex Systems · Week 11</strong><br/>
+<strong>Course alignment:</strong> <a href="../../../C/P5/EN645742.html">Week 11 assessed guide</a> · <a href="../labs/11.html">Hypothetical Lab 11</a> · <a href="../README.html">Book contents</a></p>
+<blockquote>
+<p><strong>Reading contract:</strong> This chapter is instructional, not a substitute for the course guide or its required scholarly sources. Northstar Regional Emergency Access is a fictional case. Numbers are synthetic illustrations unless specifically identified otherwise.</p>
+</blockquote>
+<h2 id="the-problem-you-are-learning-to-solve">The problem you are learning to solve</h2>
+<p>Imagine the regional mobility council meets after an emergency drill. Agencies individually meet many of their own targets, yet some residents still cannot reach essential care. A sponsor wants a decisive engineering answer and a single performance number. You are responsible for making the inquiry sufficiently precise to support action without pretending away divided responsibility, incomplete evidence or affected people.</p>
+<p>This week's question is <strong>critical systems practice: intervene; dynamic risk, resilience, and safe-to-learn action</strong>. The key conceptual move is <em>intervene with bounded experiments and ethical stop rules</em>. The decision is not merely whether an artifact can be drawn: it is whether the claims made by that artifact survive a realistic change in authority, timing, evidence or public consequences. We therefore work from a real decision question toward an explicit representation, then test where the representation breaks.</p>
+<h2 id="the-central-concept-built-carefully">The central concept, built carefully</h2>
+<p>Adaptive management does not justify unconstrained experimentation on vulnerable people. Specify consent/authority, reversibility, monitoring, alternatives, escalation, and the right to halt an intervention.</p>
+<p>Run a voluntary two-week trial in two corridors with accessibility safeguards, a nonparticipant comparison, adverse-event monitoring and a precommitted exit criterion.</p>
+<p>The engineering reasoning should move in a disciplined order. First name the observed or desired outcome, the boundary, the actors who have the right to act, and the time horizon. Next identify the mechanism hypothesized to link an intervention to that outcome. Then choose a representation—network, causal loop, interface contract, process model, probability table, capability map or deliberative inquiry—whose assumptions match the phenomenon. Finally specify evidence able to disconfirm the model. That last step matters because a persuasive representation can still be false, incomplete, or legitimate for only a narrow class of decisions.</p>
+<h3 id="foundational-distinctions-from-the-course-guide">Foundational distinctions from the course guide</h3>
+<ul>
+<li>Safe-to-learn does not mean low stakes; it means bounded exposure, protected essentials, monitoring, and the ability to stop or adapt.</li>
+<li>Dynamic risks change as actors learn, dependencies shift, and interventions redistribute load.</li>
+<li>Resilience includes anticipation, absorption, adaptation, recovery, and institutional learning.</li>
+<li>Leading indicators should be tied to mechanisms, not selected because they are easy to count.</li>
+<li>Guardrails protect critical outcomes and vulnerable groups; stop conditions convert ethics into operational decisions.</li>
+<li>Flexible intervention requires configuration control so changes and outcomes remain interpretable.</li>
+</ul>
+<h3 id="follow-the-supplied-worked-case">Follow the supplied worked case</h3>
+<p>Pilot a protected emergency-access protocol in two districts rather than region-wide. The pilot includes minimum accessibility service, workforce load limits, offline dispatch fallback, public communication, independent monitoring, and stop criteria for inequitable denial rates, safety incidents, or unmanageable staff fatigue.</p>
+<p>Reconstruct the example in a diagram, table, memo, or model. Then state where the example is deliberately simplified and why the same conclusion might not transfer to the regional case.</p>
+<p>Rather than accepting the conclusion on first reading, write down which parts of the example are <em>observed</em>, which are <em>assumed</em>, which are <em>computed</em>, and which are <em>normative choices</em>. Change one assumption and describe whether the engineering recommendation changes. If you cannot state who is authorized to accept residual risk, the analysis is not yet a decision package.</p>
+
+<p>Evaluation must include consequences that standard performance metrics may omit. A policy could improve mean access while concentrating risk in a less powerful community. Feedback can alter behavior during the experiment, so an early positive trend may not persist. The relevant conclusion is often a learning decision rather than a permanent rollout decision: what mechanism appears plausible, what evidence contradicts it, what burdens were created, and what next action is proportionate to the remaining uncertainty.</p>
+<p>Where a system adapts and stakeholder values are contested, a large irreversible intervention may be unjustified even when a model predicts substantial benefit. A safe-to-learn experiment deliberately limits potential harm, includes affected participants, makes monitoring explicit, and provides conditions for stopping, modifying, or reversing the action. It is not the same as an uncontrolled pilot: its boundaries and ethical responsibilities are part of the design.</p>
+<h3>Safe-to-learn action is a response to irreducible uncertainty</h3><h2 id="v45-b20-c11-graduate-depth-safe-to-learn-action-is-bounded-experimentation-in-an-adaptive-system">Graduate depth: safe-to-learn action is bounded experimentation in an adaptive system</h2>
+<h3 id="v45-b20-c11-why-prediction-alone-is-insufficient">Why prediction alone is insufficient</h3>
+<p>Complex sociotechnical systems can adapt to interventions. A policy that diverts traffic may change where demand appears; a new service target may alter which requests operators accept; a cybersecurity restriction may redirect work to unofficial channels. A model built from yesterday's behavior may therefore become less reliable after the intervention changes incentives or interactions. Safe-to-learn action does not abandon analysis; it combines causal hypotheses, constrained pilots, rapid feedback, and explicit conditions for stopping or reversal.</p>
+<p>A probe should have a stated mechanism, an observable outcome, a plausible counterexample, an exposure boundary, and an accountable owner. A collection of unrelated small changes is not a learning portfolio unless the changes illuminate distinct hypotheses and their interactions are managed. If two policies are launched simultaneously across the same population, attribution may be impossible. Where feasible, staggered introduction, matched comparison sites, or pre-specified interrupted-time-series analysis can strengthen inference, while respecting practical and ethical limitations.</p>
+<h3 id="v45-b20-c11-define-safety-envelopes-before-the-probe">Define safety envelopes before the probe</h3>
+<p>For Northstar, a dispatch experiment might test whether a new prioritization rule reduces accessible pickup delays. A safety envelope could require that emergency responses never exceed a specified threshold and that no high-risk request be automatically deprioritized. The protocol should name who monitors the thresholds, how quickly data arrive, and who can suspend the trial. A stop rule that depends on a dashboard updated only once per week is unsuitable for an irreversible hazard emerging in minutes. Some risks cannot ethically be tested in the field; simulation, hardware-in-the-loop, and staged validation should reduce them first.</p>
+<p>Think of risk as a distribution of consequences across people and states, not only as one average probability-times-impact score. Low-frequency catastrophic outcomes, correlated network failures, and harm concentrated in a vulnerable population can be hidden by an attractive mean. Resilience may be measured through degradation depth, time to detect, time to recover, minimum service maintained, and the ability to reconfigure under stress. These metrics should be defined at the mission boundary, not only per constituent.</p>
+<h3 id="v45-b20-c11-adaptation-feedback-and-governing-the-learning-process">Adaptation, feedback, and governing the learning process</h3>
+<p>An adaptive experiment must version its rules and evidence. If the dispatch algorithm changes halfway through a pilot, pooling all observations may produce a result with no clear treatment meaning. Track configuration, demand conditions, operator training, exceptions, and concurrent interventions. Distinguish a temporary adaptation cost from lasting harm, but do not discount real user impacts as merely a learning curve without evidence.</p>
+<p>Suppose a limited pilot decreases average delay by 12% but increases missed service in two remote districts. A responsible decision is not automatically “scale” or “stop.” Examine whether the adverse effect arises from demand changes, map-data bias, resource allocation, or a process failure; then consider mitigation or a redesigned test under an approved safety envelope. Some outcomes require immediate suspension regardless of promising averages. Learning requires being willing to falsify the favored intervention.</p>
+<h3 id="v45-b20-c11-from-probes-to-sustained-capability">From probes to sustained capability</h3>
+<p>A successful pilot can still fail when scaled because network load, stakeholder behavior, governance, and resource constraints change. Scaling should therefore be a new hypothesis with staged gates, not an administrative continuation. Record which assumptions remain valid at the larger scale, what independent oversight is required, and what fallback protects mission continuity. The broader connection is between resilience engineering, experimental design, and critical systems practice: intervene with a defensible theory of change, observe broadly enough to detect displaced harm, and preserve the authority and technical ability to revise course.</p>
+
+<h2 id="a-reproducible-reasoning-exercise">A reproducible reasoning exercise</h2>
+<p>Treat the next numerical example or decision matrix as a controlled thought experiment. Draw a table with columns <strong>input</strong>, <strong>meaning and unit</strong>, <strong>source or fictional assumption</strong>, <strong>transformation</strong>, <strong>result</strong>, and <strong>plausible failure</strong>. Populate that table from this scenario:</p>
+<p>Run a voluntary two-week trial in two corridors with accessibility safeguards, a nonparticipant comparison, adverse-event monitoring and a precommitted exit criterion.</p>
+<p>Work the result twice. On the second pass, replace one favorable condition with the adverse circumstance in the next section. Compute the difference when a valid model exists; when the problem is political or ethical rather than computational, produce an explicit comparison of consequences, affected groups, evidence and objections instead of inventing an objective function. Remember that a mathematical result never establishes the validity of assumptions by itself.</p>
+<h3 id="where-this-method-stops-working">Where this method stops working</h3>
+<p>Small pilot success does not license scale when participation, resources and power relations change.</p>
+<p>A responsible engineer should separate <em>model correctness</em> (the math or logic follows from its premises), <em>model credibility</em> (the premises are supported for this use), and <em>decision legitimacy</em> (the process respects authority, rights and affected parties). Passing the first test does not guarantee the other two. In particular, neither a hypothetical exercise nor an attractive decision matrix certifies an operational regional service.</p>
+<h2 id="reading-the-broader-system">Reading the broader system</h2>
+<p>The three Phase 5 books offer complementary lenses. The systems-of-systems lens asks which independently managed constituents must cooperate and what technical evidence can travel between them. The enterprise lens asks how resources, incentives, governance and institutional history shape that cooperation. The critical-complexity lens asks whose interpretation dominates, which boundaries exclude harms and when no single technical objective deserves priority. Use all three when a proposed solution changes both technology and public obligations. Their explanations can disagree without one being automatically mistaken: they may be answering different questions.</p>
+<h2 id="guided-rehearsal-from-the-weekly-guide">Guided rehearsal from the weekly guide</h2>
+<ol>
+<li>Select one bounded intervention and state hypotheses about mechanisms and actor responses.</li>
+<li>Map cascading risk, common-cause conditions, burden transfer, and vulnerable populations.</li>
+<li>Define resilience functions and minimum acceptable service.</li>
+<li>Specify leading indicators, outcome measures, guardrails, stop/reversal criteria, and review cadence.</li>
+<li>Run tabletop stress tests for at least four compound disruptions and revise the pilot.</li>
+</ol>
+<p>Pause after each step. Compare the result with the decision purpose and record disagreement, ambiguity, and negative evidence instead of forcing convergence.</p>
+<h2 id="self-check-work-before-revealing-the-lab-response">Self-check: work before revealing the lab response</h2>
+<ol>
+<li><strong>Define the model.</strong> What is the unit of analysis and why does it match this week's decision? Name a plausible alternative boundary.</li>
+<li><strong>Trace the mechanism.</strong> Which chain of events, institutions or variables connects intervention to outcome? Name one missing link.</li>
+<li><strong>Check the evidence.</strong> Which premise is most fragile? What independent observation would falsify it?</li>
+<li><strong>Change the case.</strong> Suppose a pilot increases average access but worsens the lowest-served neighborhood. Apply the stop rule and redesign the proposal. Which claims and actors must be reconsidered?</li>
+<li><strong>Defend a bounded decision.</strong> What can be responsibly recommended today, to whom, with what review trigger and non-claims?</li>
+</ol>
+<h3 id="explanations-and-answer-criteria">Explanations and answer criteria</h3>
+<p>A proficient answer identifies a bounded outcome, a model whose assumptions are explicit, a provenance chain, a credible alternative explanation, and a named legitimate decision maker. For Question 4, a single undifferentiated average or a redraw of the same diagram is insufficient: explain which causal or normative premise changed and how that affects the recommendation. For Question 5, separate evidence-backed statements from conditional hypotheses and unresolved stakeholder disputes. If your answer cannot state a stop rule or the consequence of error, revise it before proceeding.</p>
+<p><strong>Specific red-team test:</strong> Small pilot success does not license scale when participation, resources and power relations change.</p>
+<h2 id="apply-it-in-the-fictional-lab-and-assessed-course">Apply it in the fictional lab and assessed course</h2>
+<p>Continue with <a href="../labs/11.html">Hypothetical Lab 11</a>. Its synthetic materials make assumptions inspectable and offer a reference critique. After attempting that rehearsal, return to the <a href="../../../C/P5/EN645742.html">Week 11 course guide</a> for the authoritative deliverable, rubric, readings and mastery gate.</p>
+<p><strong>Assessed deliverable summary (refer to guide for full instructions):</strong></p>
+<p><strong>Intervention, Dynamic Risk, and Resilience Package</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>intervention hypotheses and causal mechanisms</li>
+<li>scope, authority, participants, and protected essential outcomes</li>
+<li>dynamic risk and cascading-effect map</li>
+<li>resilience and degraded-operation strategy</li>
+<li>measures, leading indicators, guardrails, and stop conditions</li>
+<li>stress tests and revised pilot design</li>
+<li>learning, governance, configuration, and communication plan</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, approach used, assumptions, boundary judgments, evidence, affected groups, limitations, and changes made to prior baselines.</p>
+<h3 id="important-failure-warnings">Important failure warnings</h3>
+<ul>
+<li>Proposes a large irreversible rollout as the first learning step.</li>
+<li>Uses generic risk scores without propagation, indicators, or ownership.</li>
+<li>Defines success while omitting safety, accessibility, workforce, or equity guardrails.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h2 id="required-reading-and-further-study">Required reading and further study</h2>
+<p>The course guide’s assigned sources are the authoritative reading list; source numbers refer to its bibliography, not works reproduced here.</p>
+<ul>
+<li><strong>Jackson CSP Intervene material in the practitioner guide ([4], [15])</strong><br/>
+<strong>Purpose:</strong> Understand flexible action and return to earlier EPIC stages when learning requires it.<br/>
+<strong>Guiding questions:</strong> What does disciplined flexibility look like?</li>
+<li><strong>ISO 31000 and DoD RIO guide ([21], [22])</strong><br/>
+<strong>Purpose:</strong> Integrate continuous risk, issue, and opportunity management.<br/>
+<strong>Guiding questions:</strong> How do risk ownership, indicators, and review change in a dynamic system?</li>
+<li><strong>NIST cyber and community resilience resources ([23], [24])</strong><br/>
+<strong>Purpose:</strong> Design resilience across disruption, degradation, recovery, and adaptation.<br/>
+<strong>Guiding questions:</strong> Which essential functions and vulnerable populations require protected outcomes?</li>
+</ul>
+<p>Record concise notes answering every guiding question. For the required book, read the named section rather than relying on a summary. Identify at least one claim you accept, one you question, and one implication for the running case.</p>
+<p><a href="../README.html">Return to this book's contents</a> · <a href="../../../C/P5/EN645742.html">Open the weekly assessed guide</a></p>
+</main></body></html>

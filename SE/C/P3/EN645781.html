@@ -1,0 +1,2267 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.781 — Systems Thinking and Systems Dynamics · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P3/EN645781.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/08-dynamics.html">Stocks, feedback, controls, and numerical stability</a></aside><main><div class="course-actions"><a href="../../K/B13/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en645781--systems-thinking-and-systems-dynamics">EN.645.781 — Systems Thinking and Systems Dynamics</h1>
+<p><strong>Credits:</strong> 3<br/>
+<strong>Phase:</strong> 3 — Quantitative analysis and model-driven decision support<br/>
+<strong>Official prerequisite:</strong> EN.645.662 Introduction to Systems Engineering and EN.645.767 System Conceptual Design<br/>
+<strong>Recommended self-study preparation:</strong> EN.645.757 Foundations of Modeling and Simulation and EN.645.784 Decision Science &amp; Analytics, or equivalent modeling, statistics, and decision-analysis competence</p>
+<p><a href="OVERVIEW.html">Back to Phase 3 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+<hr/>
+<h2 id="1-course-purpose">1. Course purpose</h2>
+<p>This course develops the ability to explain persistent, counterintuitive behavior in complex systems and to design interventions that account for feedback, accumulation, delays, nonlinear relationships, adaptation, and unintended consequences. The learner will move from event-oriented stories to behavior-over-time evidence, causal hypotheses, stock-and-flow structures, executable system-dynamics models, and bounded policy recommendations.</p>
+<p>The course is not a diagramming survey and it is not a general-purpose forecasting course. A causal-loop diagram is treated as a testable theory of feedback structure; a stock-and-flow model is treated as an explicit set of accumulation equations and decision rules; and a simulation result is treated as conditional evidence whose usefulness depends on purpose, structure, data, dimensional consistency, behavior tests, sensitivity, and transparent limitations.</p>
+<p>By the end of the course, the learner should be able to recognize why locally rational actions can produce poor system-level outcomes, distinguish high-leverage structural changes from symptom relief, and use system dynamics to support learning and policy design without claiming that one model captures the whole social or technical reality.</p>
+<h2 id="2-source-scope-and-self-study-adaptation">2. Source scope and self-study adaptation</h2>
+<p>The current JHU course is organized into fourteen modules grouped into seven themes: motivations or <strong>purpose</strong>, systems-thinking <strong>definition</strong>, systems-thinking <strong>effects</strong>, dynamic <strong>means/tools</strong>, <strong>applications</strong>, system-dynamics <strong>simulation</strong>, and final <strong>evolution/takeaways</strong>. Its stated outcomes emphasize explaining motivations, applying systems-thinking and system-dynamics tools, constructing archetypes and models, and applying the approach to real-world challenges. The course requires <em>Thinking in Systems</em>, <em>The Fifth Discipline</em>, <em>Systems Thinking Tools</em>, and Vensim. <a href="https://ep.jhu.edu/courses/645781-systems-thinking-and-systems-dynamics/" title="Johns Hopkins Engineering for Professionals — Systems Thinking and Systems Dynamics">JHU-781-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.781.81" title="Johns Hopkins Engineering for Professionals — Fall 2026 syllabus for EN.645.781">JHU-781-SYLLABUS</a></p>
+<p>This self-study version preserves those themes but converts the fourteen-module structure into twelve integrated weeks. It also makes the modeling work explicit in every offering. The Summer 2026 abridged syllabus notes that Vensim modeling modules were omitted in the compressed summer course; this curriculum instead treats executable modeling as essential because the catalog description explicitly calls for analytical models, tools, simulations, stocks, flows, functions, and delays. <a href="https://apps.ep.jhu.edu/syllabus/summer-2026/645.781.81" title="Johns Hopkins Engineering for Professionals — Summer 2026 syllabus for EN.645.781">JHU-781-SUMMER</a></p>
+<p>The source course uses discussion, qualitative assignments, model summaries, revision, and a final integrated project. The self-study adaptation preserves those learning modes through written systems-thinking briefs, structured solo or peer red-team reviews, weekly model laboratories, a midcourse Qualitative Model Review, two applied transfer cases, a Policy Design Review, and a final oral defense. Revision after critique is required rather than optional.</p>
+<h2 id="3-relationship-to-adjacent-courses">3. Relationship to adjacent courses</h2>
+<h3 id="inputs-from-earlier-courses">Inputs from earlier courses</h3>
+<p>The learner should import:</p>
+<ul>
+<li>the Phase 2 stakeholder, operational, architecture, risk, test, and lifecycle baselines;</li>
+<li>the Phase 3 intended-use, conceptual-model, reproducibility, uncertainty, and decision-record practices from EN.645.757 and EN.645.784;</li>
+<li>the Autonomous Campus Mobility 2030 case data and unresolved questions;</li>
+<li>at least one prior decision that appears reasonable in a static analysis but may create delayed or system-level effects.</li>
+</ul>
+<h3 id="outputs-to-later-courses">Outputs to later courses</h3>
+<p>This course produces:</p>
+<ul>
+<li>a behavior-over-time and reference-mode baseline;</li>
+<li>a documented causal-loop model with link evidence and competing hypotheses;</li>
+<li>a dimensionally consistent stock-and-flow model in Vensim;</li>
+<li>structure and behavior test evidence;</li>
+<li>supply-management and healthcare transfer analyses;</li>
+<li>a policy portfolio with sensitivity, robustness, implementation, and unintended-consequence analysis;</li>
+<li>leverage-point, boundary, and limitation records for EN.645.756, EN.645.632, EN.645.758, and the large-scale systems courses in Phase 5.</li>
+</ul>
+<p>The course complements rather than replaces discrete-event simulation. Discrete-event models are often well suited to detailed process flow, queues, resources, and event timing; system dynamics is used here when feedback, accumulation, adaptation, delays, and long-horizon policy behavior are central to the decision.</p>
+<h2 id="4-prerequisites-and-readiness-diagnostic">4. Prerequisites and readiness diagnostic</h2>
+<p>Complete the following without outside help:</p>
+<ol>
+<li>Distinguish a system boundary, environment, stakeholder, requirement, objective, measure, and policy.</li>
+<li>Sketch a behavior-over-time graph for a quantity that grows, overshoots, oscillates, or settles toward a goal.</li>
+<li>Explain the difference between correlation, causation, feedback, and common cause.</li>
+<li>Identify one stock and its inflows and outflows in a familiar system.</li>
+<li>Check the units of a simple rate equation and explain why dimensional consistency matters.</li>
+<li>Use a spreadsheet or script to plot a time series and calculate a change rate.</li>
+<li>Explain why a good fit to historical data does not prove that a model has the correct causal structure.</li>
+<li>Identify one example of a policy that improved a local metric but worsened a system outcome.</li>
+<li>Write a falsifiable causal claim using the form: “If X changes, then Y changes over the stated time horizon, all else equal, because …”.</li>
+<li>Install Vensim PLE, open a sample model, change one parameter, run the model, and export a graph.</li>
+</ol>
+<p><strong>Passing standard:</strong> at least 8 of 10 items completed correctly, including items 4, 5, 7, and 10. A learner below the standard should complete a one-week bridge on systems terminology, time-series interpretation, rates and units, feedback basics, and Vensim navigation before Week 1.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Measurable course learning outcome</th>
+<th>Program competency</th>
+<th style="text-align:center">Level</th>
+<th>Primary evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLO-1</td>
+<td>Distinguish event, pattern, structure, mental-model, and policy explanations and formulate a dynamic problem statement</td>
+<td>C1, C7, C12</td>
+<td style="text-align:center">D</td>
+<td>Problem-framing and reference-mode package</td>
+</tr>
+<tr>
+<td>CLO-2</td>
+<td>Construct behavior-over-time graphs, time horizons, boundaries, and dynamic hypotheses that are relevant to a stated decision</td>
+<td>C7, C8, C9</td>
+<td style="text-align:center">D</td>
+<td>Reference-mode review</td>
+</tr>
+<tr>
+<td>CLO-3</td>
+<td>Build and critique causal-loop diagrams with unambiguous variables, link polarities, delays, loop polarities, and evidence</td>
+<td>C2, C7, C12</td>
+<td style="text-align:center">D</td>
+<td>Causal model baseline</td>
+</tr>
+<tr>
+<td>CLO-4</td>
+<td>Recognize, instantiate, and challenge common systems archetypes without forcing a case into a template</td>
+<td>C7, C11, C12</td>
+<td style="text-align:center">D</td>
+<td>Archetype and intervention analysis</td>
+</tr>
+<tr>
+<td>CLO-5</td>
+<td>Translate qualitative feedback hypotheses into stock-and-flow structures with explicit units, equations, initial conditions, and conservation logic</td>
+<td>C7, C8</td>
+<td style="text-align:center">D</td>
+<td>Stock-flow formulation review</td>
+</tr>
+<tr>
+<td>CLO-6</td>
+<td>Implement, document, and version a system-dynamics model in Vensim and reproduce baseline behavior</td>
+<td>C7, C8, C10</td>
+<td style="text-align:center">D</td>
+<td>Executable model baseline</td>
+</tr>
+<tr>
+<td>CLO-7</td>
+<td>Represent delays, nonlinearities, bounded rationality, decision rules, and information smoothing and explain their behavioral effects</td>
+<td>C7, C11</td>
+<td style="text-align:center">D/A</td>
+<td>Dynamic-structure experiment</td>
+</tr>
+<tr>
+<td>CLO-8</td>
+<td>Verify model equations and structure using dimensional, extreme-condition, integration-step, conservation, and boundary tests</td>
+<td>C7, C8, C10</td>
+<td style="text-align:center">A</td>
+<td>Model test package</td>
+</tr>
+<tr>
+<td>CLO-9</td>
+<td>Evaluate model behavior against reference modes, empirical evidence, expert knowledge, and competing structural explanations</td>
+<td>C7, C8, C12</td>
+<td style="text-align:center">A</td>
+<td>Behavior and structure evaluation</td>
+</tr>
+<tr>
+<td>CLO-10</td>
+<td>Apply system dynamics to supply-management and healthcare/service-delivery problems and transfer insights without overgeneralization</td>
+<td>C7, C11, C12</td>
+<td style="text-align:center">D</td>
+<td>Two application briefs</td>
+</tr>
+<tr>
+<td>CLO-11</td>
+<td>Design policy portfolios, conduct sensitivity and robustness analysis, identify leverage and policy resistance, and surface unintended consequences</td>
+<td>C8, C9, C11, C12</td>
+<td style="text-align:center">A</td>
+<td>Policy Design Review</td>
+</tr>
+<tr>
+<td>CLO-12</td>
+<td>Communicate a bounded systems explanation and policy recommendation, including equity, governance, implementation, and model limitations</td>
+<td>C9, C10, C11, C12</td>
+<td style="text-align:center">A</td>
+<td>Final model, report, and oral defense</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>Why do persistent problems survive repeated efforts by intelligent and well-intentioned people?</li>
+<li>What observed behavior must a dynamic explanation account for over what time horizon?</li>
+<li>Which feedback loops dominate at different times, and what causes the shift in dominance?</li>
+<li>What is accumulating, what changes the accumulation, and what information is delayed or distorted?</li>
+<li>When is a causal-loop diagram sufficient for learning, and when is an executable stock-and-flow model required?</li>
+<li>Which relationships are linear approximations and which contain thresholds, saturation, scarcity, or other nonlinearities?</li>
+<li>What model tests are necessary before a policy experiment deserves attention?</li>
+<li>Which intervention changes system structure, and which merely changes an input or treats a symptom?</li>
+<li>What new risks, inequities, adaptations, or compensating responses could the intervention create?</li>
+<li>What would falsify the model’s central dynamic hypothesis?</li>
+<li>Which insights transfer to another domain, and which depend on the original context?</li>
+<li>How should leaders use a model as a learning environment rather than as an oracle?</li>
+</ul>
+<h2 id="7-running-case-and-controlled-problem-environment">7. Running case and controlled problem environment</h2>
+<h3 id="case--campus-mobility-feedback-and-policy-laboratory">Case — Campus Mobility Feedback and Policy Laboratory</h3>
+<p>The university’s mobility program has completed concept, design, integration, test, simulation, and decision-analysis work. Yet several outcomes remain difficult to explain:</p>
+<ul>
+<li>ridership rises after service improvements but later plateaus or declines;</li>
+<li>attempts to reduce wait time can increase fleet utilization, deferred maintenance, failures, and later wait time;</li>
+<li>highly publicized failures reduce trust and adoption, which can lower revenue and constrain improvement funding;</li>
+<li>adding vehicles can temporarily improve service while increasing depot congestion, charging queues, staffing demand, and maintenance backlog;</li>
+<li>accessibility demand is underobserved when service is unreliable, creating a false impression that accessible capacity is excessive;</li>
+<li>short-term schedule pressure can reduce training and preventive work, increasing future operational disruption;</li>
+<li>regional travel patterns, parking policy, weather, class schedules, and housing growth change demand over time.</li>
+</ul>
+<p>The learner serves as the systems-thinking and system-dynamics lead. The capstone is not to forecast exact ridership. It is to build and test a transparent theory of the feedback structures that create service performance, trust, adoption, workload, maintenance, funding, and accessibility behavior and then evaluate policy portfolios.</p>
+<h3 id="required-reference-modes">Required reference modes</h3>
+<p>At minimum, the learner will construct and justify reference modes for:</p>
+<ul>
+<li>passenger demand or trip requests;</li>
+<li>completed trips and unmet demand;</li>
+<li>average and tail wait time;</li>
+<li>active fleet and out-of-service fleet;</li>
+<li>maintenance backlog and mean repair delay;</li>
+<li>operator/supervisor workload or staffing gap;</li>
+<li>public trust or willingness to use the service;</li>
+<li>accessible-trip fulfillment;</li>
+<li>operating cost and available improvement budget.</li>
+</ul>
+<h3 id="controlled-synthetic-starting-data">Controlled synthetic starting data</h3>
+<p>Use the following synthetic observations as a starting point. They are not real university data and may be revised only through a documented data-change record.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Quarter</th>
+<th style="text-align:right">Trip requests/day</th>
+<th style="text-align:right">Completed trips/day</th>
+<th style="text-align:right">90th-percentile wait, min</th>
+<th style="text-align:right">Active fleet</th>
+<th style="text-align:right">Maintenance backlog, vehicle-days</th>
+<th style="text-align:right">Trust index, 0–100</th>
+<th style="text-align:right">Accessible fulfillment</th>
+<th style="text-align:right">Improvement budget, $k/qtr</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">920</td>
+<td style="text-align:right">805</td>
+<td style="text-align:right">18.0</td>
+<td style="text-align:right">11.8</td>
+<td style="text-align:right">24</td>
+<td style="text-align:right">63</td>
+<td style="text-align:right">0.86</td>
+<td style="text-align:right">310</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1010</td>
+<td style="text-align:right">900</td>
+<td style="text-align:right">15.5</td>
+<td style="text-align:right">12.7</td>
+<td style="text-align:right">29</td>
+<td style="text-align:right">67</td>
+<td style="text-align:right">0.89</td>
+<td style="text-align:right">330</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">1160</td>
+<td style="text-align:right">1015</td>
+<td style="text-align:right">14.2</td>
+<td style="text-align:right">13.4</td>
+<td style="text-align:right">38</td>
+<td style="text-align:right">71</td>
+<td style="text-align:right">0.91</td>
+<td style="text-align:right">345</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:right">1290</td>
+<td style="text-align:right">1090</td>
+<td style="text-align:right">16.8</td>
+<td style="text-align:right">13.1</td>
+<td style="text-align:right">52</td>
+<td style="text-align:right">68</td>
+<td style="text-align:right">0.88</td>
+<td style="text-align:right">325</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td style="text-align:right">1370</td>
+<td style="text-align:right">1110</td>
+<td style="text-align:right">21.4</td>
+<td style="text-align:right">12.3</td>
+<td style="text-align:right">71</td>
+<td style="text-align:right">61</td>
+<td style="text-align:right">0.82</td>
+<td style="text-align:right">285</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td style="text-align:right">1310</td>
+<td style="text-align:right">1085</td>
+<td style="text-align:right">23.1</td>
+<td style="text-align:right">11.9</td>
+<td style="text-align:right">79</td>
+<td style="text-align:right">56</td>
+<td style="text-align:right">0.79</td>
+<td style="text-align:right">250</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td style="text-align:right">1240</td>
+<td style="text-align:right">1070</td>
+<td style="text-align:right">20.6</td>
+<td style="text-align:right">12.6</td>
+<td style="text-align:right">67</td>
+<td style="text-align:right">58</td>
+<td style="text-align:right">0.81</td>
+<td style="text-align:right">255</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td style="text-align:right">1285</td>
+<td style="text-align:right">1135</td>
+<td style="text-align:right">17.9</td>
+<td style="text-align:right">13.2</td>
+<td style="text-align:right">55</td>
+<td style="text-align:right">62</td>
+<td style="text-align:right">0.85</td>
+<td style="text-align:right">275</td>
+</tr>
+</tbody>
+</table>
+<p>Additional synthetic qualitative evidence includes operator interviews, rider complaints, maintenance logs, budget rules, press coverage, disability-access advisory comments, and governance constraints.</p>
+<h3 id="required-transfer-cases">Required transfer cases</h3>
+<ol>
+<li><strong>Supply-management case:</strong> a critical spare-parts or medical-supply system with demand amplification, ordering delay, backlog, expediting, and shortage behavior.</li>
+<li><strong>Healthcare/service-delivery case:</strong> emergency-department crowding, bed flow, discharge delay, workforce burnout, or another care-delivery problem in which feedback and accumulation are central.</li>
+</ol>
+<p>The learner may replace either transfer case with a professional domain, but must retain one supply-chain problem and one human-service problem somewhere in the portfolio.</p>
+<h3 id="multi-role-review-protocol">Multi-role review protocol</h3>
+<p>Formal reviews use four perspectives:</p>
+<ol>
+<li><strong>Problem owner:</strong> challenges whether the model addresses a real decision and meaningful behavior.</li>
+<li><strong>Structure reviewer:</strong> challenges variable definitions, causality, stocks, flows, equations, units, and omitted feedback.</li>
+<li><strong>Evidence reviewer:</strong> challenges data, reference modes, expert claims, tests, sensitivity, and validity.</li>
+<li><strong>Policy and ethics reviewer:</strong> challenges feasibility, governance, equity, adaptation, unintended consequences, and misuse.</li>
+</ol>
+<p>A solo learner should conduct each review on separate days and record the questions, answers, changes, and unresolved disagreements.</p>
+<h2 id="8-resource-architecture">8. Resource architecture</h2>
+<h3 id="required-backbone">Required backbone</h3>
+<ol>
+<li><strong>JHU course page and Fall 2026 syllabus</strong> — source scope, seven-theme structure, learning outcomes, workload, textbooks, and Vensim requirement. <a href="https://ep.jhu.edu/courses/645781-systems-thinking-and-systems-dynamics/" title="Johns Hopkins Engineering for Professionals — Systems Thinking and Systems Dynamics">JHU-781-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.781.81" title="Johns Hopkins Engineering for Professionals — Fall 2026 syllabus for EN.645.781">JHU-781-SYLLABUS</a></li>
+<li><strong>Donella Meadows, <em>Thinking in Systems: A Primer</em></strong> — stocks, flows, feedback, resilience, system traps, leverage, and responsible systems practice. <a href="https://www.chelseagreen.com/product/thinking-in-systems/" title="Chelsea Green Publishing — Thinking in Systems: A Primer">MEADOWS</a></li>
+<li><strong>Peter Senge, <em>The Fifth Discipline</em>, revised edition</strong> — systems-thinking laws, archetypes, learning, mental models, and organizational application. <a href="https://www.penguinrandomhouse.com/books/163984/the-fifth-discipline-by-peter-m-senge/" title="Penguin Random House — The Fifth Discipline">SENGE</a></li>
+<li><strong>Daniel H. Kim, <em>Systems Thinking Tools: A User’s Reference Guide</em>, Part II</strong> — behavior-over-time graphs, causal loops, archetypes, and practical facilitation tools. <a href="https://search.worldcat.org/title/Systems-thinking-tools-a-users-reference-guide/oclc/44648812" title="WorldCat — Systems Thinking Tools: A User's Reference Guide">KIM</a></li>
+<li><strong>MIT System Dynamics Self Study / Road Maps</strong> — open readings, exercises, model-building progression, graphical integration, delays, generic structures, sensitivity, and correctness checklists. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/" title="MIT OpenCourseWare — System Dynamics Self Study">MIT-SD-SELF-STUDY</a> <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT OpenCourseWare — System Dynamics Self Study readings and Road Maps">MIT-SD-READINGS</a></li>
+<li><strong>Vensim PLE and documentation</strong> — required modeling environment, dimensional checking, causal tracing, data, sensitivity, and Reality Checks. <a href="https://vensim.com/vensim-personal-learning-edition/" title="Ventana Systems — Vensim Personal Learning Edition">VENSIM-PLE</a> <a href="https://www.vensim.com/documentation/" title="Ventana Systems — Vensim documentation">VENSIM-DOCS</a></li>
+</ol>
+<h3 id="model-quality-and-application-resources">Model-quality and application resources</h3>
+<ul>
+<li>MIT’s 2020 <em>Systems Thinking and Modeling for a Complex World</em> for a concise modern introduction and lecture materials. <a href="https://ocw.mit.edu/courses/res-15-004-system-dynamics-systems-thinking-and-modeling-for-a-complex-world-january-iap-2020/" title="MIT OpenCourseWare — Systems Thinking and Modeling for a Complex World">MIT-SD-2020</a></li>
+<li>Barlas, “Formal Aspects of Model Validity and Validation in System Dynamics,” for structure and behavior validity concepts. <a href="https://proceedings.systemdynamics.org/1994/proceed/papers_vol_1/barla002.pdf" title="Yaman Barlas — Formal aspects of model validity and validation in system dynamics">BARLAS</a></li>
+<li>Sterman, “A Skeptic’s Guide to Computer Models,” for disciplined interpretation and communication. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="John Sterman — A Skeptic's Guide to Computer Models, available through MIT Road Maps">STERMAN-SKEPTIC</a></li>
+<li>Richardson, “Problems with Causal-Loop Diagrams,” for limits of qualitative diagrams. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="George Richardson — Problems with Causal-Loop Diagrams, listed in MIT Road Maps">RICHARDSON-CLD</a></li>
+<li>MIT Road Maps’ <em>System Dynamics Model Correctness Checklist</em> and sensitivity materials. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT Road Maps appendix — System Dynamics Model Correctness Checklist">MIT-CHECKLIST</a></li>
+<li>Vensim documentation on data, dimensional consistency, and Reality Checks. <a href="https://www.vensim.com/documentation/ref_data.html" title="Ventana Systems — Preparing, using, and exporting data">VENSIM-DATA</a> <a href="https://vensim.com/vensim-brochure/" title="Ventana Systems — Reality Check and model-quality features">VENSIM-REALITY</a></li>
+</ul>
+<h3 id="recommended-advanced-reading">Recommended advanced reading</h3>
+<ul>
+<li>John Sterman, <em>Business Dynamics</em>, selected chapters on dynamic problem formulation, feedback, stocks and flows, delays, model testing, and policy design;</li>
+<li>George Richardson and Alexander Pugh, <em>Introduction to System Dynamics Modeling with DYNAMO</em>;</li>
+<li>Andrew Ford, <em>Modeling the Environment</em>;</li>
+<li>selected peer-reviewed system-dynamics applications in transportation, healthcare, operations, sustainability, and public policy.</li>
+</ul>
+<h2 id="9-tools-and-working-environment">9. Tools and working environment</h2>
+<h3 id="required-tool--vensim-ple">Required tool — Vensim PLE</h3>
+<p>The source course requires Vensim. Vensim PLE is free for academic and personal learning and supports the core model-building work in this course. The current download page should be checked before installation because versions and platform support change. <a href="https://vensim.com/vensim-personal-learning-edition/" title="Ventana Systems — Vensim Personal Learning Edition">VENSIM-PLE</a> <a href="https://vensim.com/download/" title="Ventana Systems — Vensim download and current version">VENSIM-DOWNLOAD</a></p>
+<p>Minimum required capabilities:</p>
+<ul>
+<li>causal-loop and stock-and-flow diagram construction;</li>
+<li>equations, units, initial conditions, and lookup functions;</li>
+<li>simulation control and time-step selection;</li>
+<li>graph/table comparison across runs;</li>
+<li>dimensional analysis and model checking;</li>
+<li>sensitivity runs or a documented manual alternative when a PLE feature is limited;</li>
+<li>export of model source, equations, graphs, and run settings.</li>
+</ul>
+<h3 id="optional-reproducibility-track">Optional reproducibility track</h3>
+<p>A learner may additionally use PySD, Python, R, Julia, or another transparent environment to inspect equations, reproduce selected runs, automate sensitivity analysis, or create accessible figures. The Vensim model remains the authoritative executable baseline unless an approved migration record states otherwise.</p>
+<h3 id="repository-structure">Repository structure</h3>
+<p>Maintain the following under the Phase 3 repository:</p>
+<ul>
+<li><code>/00-purpose-governance-and-boundary</code></li>
+<li><code>/01-reference-modes-and-evidence</code></li>
+<li><code>/02-causal-models</code></li>
+<li><code>/03-stock-flow-model</code></li>
+<li><code>/04-equations-units-and-data</code></li>
+<li><code>/05-model-tests</code></li>
+<li><code>/06-application-cases</code></li>
+<li><code>/07-policy-experiments</code></li>
+<li><code>/08-reviews-and-final-handoff</code></li>
+</ul>
+<p>Each model run must record model version, parameter set, simulation horizon, time step, initialization, scenario/policy identifier, software version, and exported result location.</p>
+<h2 id="10-assessment-and-grading-model">10. Assessment and grading model</h2>
+<table>
+<thead>
+<tr>
+<th>Assessment component</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weekly retrieval checks and systems-thinking briefs</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Qualitative models, reference modes, and archetype analyses</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Vensim modeling laboratories and model-test evidence</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Supply and healthcare transfer applications</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Final policy-analysis capstone</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Final oral defense and live model challenge</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>A minimum overall score of 80% is required. Critical mastery failures cannot be offset by a high numerical average.</p>
+<h2 id="11-twelve-week-course-map">11. Twelve-week course map</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Week</th>
+<th>Focus</th>
+<th>Main product</th>
+<th>Review or decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Motivation, system behavior, event-pattern-structure thinking</td>
+<td>Systems challenge and learning charter</td>
+<td>Purpose and Boundary Review</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>Dynamic problem formulation and behavior-over-time reference modes</td>
+<td>Reference-mode and evidence package</td>
+<td>Dynamic Problem Review</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>Feedback, causality, delays, and causal-loop diagrams</td>
+<td>Causal-loop model v1</td>
+<td>Causal Structure Review</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>Archetypes, mental models, and intervention hypotheses</td>
+<td>Archetype and competing-hypothesis analysis</td>
+<td>Qualitative Model Review</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>Stocks, flows, accumulation, units, and graphical integration</td>
+<td>Stock-flow formulation baseline</td>
+<td>Formulation Readiness Review</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>Vensim implementation, equations, initialization, and simple feedback models</td>
+<td>Executable model v1</td>
+<td>Executable Baseline Review</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>Delays, nonlinearities, smoothing, oscillation, overshoot, and loop dominance</td>
+<td>Dynamic-structure experiment</td>
+<td>Behavioral Structure Review</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>Data, calibration logic, model testing, and validity evidence</td>
+<td>Model test and behavior-evaluation package</td>
+<td>Model Credibility Review</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Supply-management and inventory dynamics</td>
+<td>Supply application model and policy brief</td>
+<td>Transfer Application Review 1</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Healthcare or human-service delivery dynamics</td>
+<td>Healthcare application model and policy brief</td>
+<td>Transfer Application Review 2</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>Leverage, policy design, sensitivity, robustness, and unintended consequences</td>
+<td>Policy portfolio and implementation analysis</td>
+<td>Policy Design Review</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>Final integrated model, communication, reflection, and evolution</td>
+<td>Final report, model, portfolio, and oral defense</td>
+<td>Systems Insight and Use Review</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-major-assignments-and-review-products">12. Major assignments and review products</h2>
+<h3 id="a-dynamic-problem-and-reference-mode-package">A. Dynamic Problem and Reference-Mode Package</h3>
+<p>Define the problem owner, decision, concern, time horizon, boundary, stakeholders, historical behavior, target or feared behavior, and evidence. Include at least six behavior-over-time graphs and a concise dynamic-problem statement.</p>
+<h3 id="b-qualitative-feedback-model">B. Qualitative Feedback Model</h3>
+<p>Create a causal-loop diagram with a controlled variable dictionary, explicit link claims, reinforcing and balancing loops, delays, loop narratives, archetype comparison, evidence, competing hypotheses, and boundary critique.</p>
+<h3 id="c-executable-stock-and-flow-model">C. Executable Stock-and-Flow Model</h3>
+<p>Implement the core mobility feedback theory in Vensim. Include stocks, flows, auxiliaries, equations, units, initial conditions, lookup functions, documentation, run controls, and traceability from reference modes and causal hypotheses.</p>
+<h3 id="d-model-test-and-credibility-package">D. Model Test and Credibility Package</h3>
+<p>Provide equation review, dimensional checks, extreme-condition tests, conservation tests, integration-step tests, structure assessment, behavior reproduction, sensitivity, data comparison, and a defect/change record.</p>
+<h3 id="e-transfer-applications">E. Transfer Applications</h3>
+<p>Complete one supply-management and one healthcare/service-delivery application. Each must include a problem statement, reference mode, causal model, small executable model or justified qualitative stopping point, policy experiment, limitations, and transfer reflection.</p>
+<h3 id="f-final-policy-analysis-capstone">F. Final Policy-Analysis Capstone</h3>
+<p>Evaluate at least four policy portfolios for the campus mobility case. The final recommendation must identify expected behavior, implementation sequence, governance, equity, cost/resource implications, leading indicators, sensitivity, failure modes, unintended consequences, model limits, and conditions that would trigger revision.</p>
+<h2 id="13-common-analytic-rubric">13. Common analytic rubric</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th style="text-align:right">Weight</th>
+<th>Graduate-level evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dynamic problem formulation</td>
+<td style="text-align:right">15%</td>
+<td>Decision, behavior, horizon, boundary, stakeholders, reference modes, and evidence are explicit and coherent.</td>
+</tr>
+<tr>
+<td>Causal and feedback reasoning</td>
+<td style="text-align:right">20%</td>
+<td>Variables, link claims, loop polarity, delays, dominance, archetypes, and competing hypotheses are rigorous and reviewable.</td>
+</tr>
+<tr>
+<td>Stock-flow and equation quality</td>
+<td style="text-align:right">20%</td>
+<td>Accumulations, rates, units, equations, initial conditions, nonlinearities, and conservation logic are correct and documented.</td>
+</tr>
+<tr>
+<td>Model testing and credibility</td>
+<td style="text-align:right">20%</td>
+<td>Structural, dimensional, extreme-condition, numerical, behavioral, sensitivity, and evidence tests are performed and defects are resolved.</td>
+</tr>
+<tr>
+<td>Policy insight and responsibility</td>
+<td style="text-align:right">15%</td>
+<td>Interventions address structure; policy resistance, adaptation, equity, feasibility, and unintended consequences are analyzed.</td>
+</tr>
+<tr>
+<td>Reproducibility and communication</td>
+<td style="text-align:right">10%</td>
+<td>Model source, data, run settings, figures, claims, revisions, and limitations are controlled and understandable.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-critical-mastery-criteria">14. Critical mastery criteria</h2>
+<p>The course cannot be passed if any of the following remains true:</p>
+<ul>
+<li>the problem is framed only as an event or desired solution with no dynamic behavior or time horizon;</li>
+<li>causal variables are ambiguous, binary labels, or actions rather than quantities that can increase or decrease;</li>
+<li>link polarity or loop polarity is incorrect or unexplained;</li>
+<li>correlation, sequence, or stakeholder belief is presented as sufficient causal evidence;</li>
+<li>a causal-loop diagram is treated as an executable quantitative model;</li>
+<li>a stock has no valid inflow/outflow logic or violates conservation without explanation;</li>
+<li>equations are dimensionally inconsistent;</li>
+<li>initialization, simulation horizon, or time step is undocumented;</li>
+<li>the model is accepted because it produces plausible graphs without structural and extreme-condition tests;</li>
+<li>a policy is recommended from a single base run without sensitivity or boundary analysis;</li>
+<li>historical fit is presented as proof of causal validity;</li>
+<li>leverage-point language is used without showing the mechanism of change;</li>
+<li>stakeholder adaptation, burden shifting, equity, or unintended consequences are ignored;</li>
+<li>the learner cannot explain or modify the live model during the final defense.</li>
+</ul>
+<h2 id="15-final-capstone-and-oral-defense">15. Final capstone and oral defense</h2>
+<p>The final capstone contains:</p>
+<ol>
+<li>a one-page decision and dynamic-problem charter;</li>
+<li>reference modes and evidence table;</li>
+<li>variable dictionary and causal-loop model;</li>
+<li>stock-and-flow model and equation listing;</li>
+<li>units, initial conditions, data, and assumptions;</li>
+<li>model-test and defect-resolution matrix;</li>
+<li>baseline and historical behavior comparison;</li>
+<li>at least four policy portfolios and sensitivity runs;</li>
+<li>leverage, policy resistance, implementation, and governance analysis;</li>
+<li>accessibility, equity, safety, workforce, and sustainability considerations;</li>
+<li>limitations, excluded mechanisms, misuse warnings, and monitoring plan;</li>
+<li>final bounded recommendation and decision record;</li>
+<li>controlled Vensim source and reproducibility instructions;</li>
+<li>a 12–15 slide Systems Insight and Use Review deck.</li>
+</ol>
+<p>The oral defense should include at least these challenges:</p>
+<ol>
+<li>State the dynamic problem without naming your preferred solution.</li>
+<li>Which reference mode is most decision-relevant and why?</li>
+<li>What is the model’s central feedback hypothesis?</li>
+<li>Which loop dominates early, middle, and late behavior?</li>
+<li>Identify one link whose causal evidence is weak and explain the consequence.</li>
+<li>Why is each major state variable a stock rather than an auxiliary?</li>
+<li>Demonstrate one dimensional-consistency check.</li>
+<li>Change one parameter or policy live and predict the behavior before running it.</li>
+<li>Show an extreme-condition test that changed the model.</li>
+<li>What evidence supports structure validity, and what evidence remains missing?</li>
+<li>Which policy appears effective in the short term but fails later?</li>
+<li>Which stakeholder bears costs or risks that the main performance metric hides?</li>
+<li>What boundary expansion is most likely to reverse the conclusion?</li>
+<li>Under what conditions should the model not be used?</li>
+<li>What monitoring signal would trigger model or policy revision after implementation?</li>
+</ol>
+<h2 id="16-portfolio-and-completion-requirements">16. Portfolio and completion requirements</h2>
+<p>Retain:</p>
+<ul>
+<li>problem charter and reference modes;</li>
+<li>data and source-evidence register;</li>
+<li>causal-loop diagrams and change history;</li>
+<li>archetype and competing-hypothesis memo;</li>
+<li>Vensim model source, equation listing, and units report;</li>
+<li>model-test scripts/checklists and results;</li>
+<li>supply and healthcare application packages;</li>
+<li>policy experiments and sensitivity outputs;</li>
+<li>formal review records and disposition logs;</li>
+<li>final report, deck, oral-defense notes, and retrospective.</li>
+</ul>
+<p>A course completion record should identify the final model version, unresolved limitations, strongest and weakest evidence, policies rejected, conditions for reuse, and handoff questions for later Phase 3 courses.</p>
+<h2 id="17-course-maintenance-record">17. Course maintenance record</h2>
+<p>Review at least annually:</p>
+<ul>
+<li>current JHU course structure and required texts;</li>
+<li>Vensim PLE version, licensing, platform support, and feature limits;</li>
+<li>availability and accessibility of MIT Road Maps resources;</li>
+<li>links to model-testing papers and application cases;</li>
+<li>whether synthetic data still supports the required feedback mechanisms without predetermining them;</li>
+<li>whether later courses are reusing the model appropriately rather than treating it as validated for every purpose;</li>
+<li>whether capstone policy issues remain professionally relevant.</li>
+</ul>
+<p>Record changes to readings, tools, datasets, rubrics, model interfaces, and handoff expectations in the repository change log.</p>
+<hr/>
+<h2 id="week-1--establish-why-systems-thinking-is-needed-and-frame-a-learning-challenge">Week 1 — Establish why systems thinking is needed and frame a learning challenge</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 13):</strong> <a href="../../K/B13/chapters/01-establish-why-systems-thinking-is-needed-and-frame-a-learning-challe.html">Chapter 1 — Establish why systems thinking is needed and frame a learning challenge</a> · <a href="../../K/B13/labs/lab-01-establish-why-systems-thinking-is-needed-and-frame-a-learning-challe.html">Hypothetical Lab 1</a> · <a href="../../K/P3-text/lessons/645-781-w01.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="professional-context-and-essential-question">Professional context and essential question</h3>
+<p>Complex systems rarely fail because no one is working hard. They fail because decision makers respond to visible events while delayed feedback, local incentives, adaptation, and accumulation create different system-level behavior. <strong>Essential question:</strong> What makes the mobility challenge a dynamic systems problem rather than a collection of isolated operational incidents?</p>
+<h3 id="weekly-learning-outcomes">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>distinguish event, pattern, systemic structure, mental model, and policy levels of explanation;</li>
+<li>differentiate simple, complicated, complex, and dynamically complex problem features;</li>
+<li>identify endogenous and exogenous explanations and explain why endogenous hypotheses are central to system dynamics;</li>
+<li>define a problem owner, decision, boundary, time horizon, concern, and learning objective;</li>
+<li>identify likely feedback, accumulation, delay, nonlinearity, and adaptation mechanisms;</li>
+<li>formulate a solution-neutral systems-learning charter.</li>
+</ul>
+<h3 id="retrieval-and-readiness-check">Retrieval and readiness check</h3>
+<p>Without notes, write brief answers:</p>
+<ol>
+<li>Give one event statement and one pattern statement about wait time.</li>
+<li>Explain why “buy more vehicles” is a proposed intervention, not a problem definition.</li>
+<li>Define endogenous explanation in one sentence.</li>
+<li>List three signs that a problem is dynamically complex.</li>
+<li>Identify one prior-course decision that could produce delayed consequences.</li>
+</ol>
+<p>Correct any answer that confuses an outcome with a cause or a solution with a problem.</p>
+<h3 id="required-study">Required study</h3>
+<p><strong>Required</strong></p>
+<ul>
+<li>JHU syllabus sections <strong>Course Structure</strong>, <strong>Course Topics</strong>, <strong>Course Goals</strong>, and <strong>Course Learning Outcomes</strong>; identify the progression from purpose to evolution. <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.781.81" title="Johns Hopkins Engineering for Professionals — Fall 2026 syllabus for EN.645.781">JHU-781-SYLLABUS</a></li>
+<li>Meadows, <em>Thinking in Systems</em>, Introduction and <strong>The Basics</strong>; focus on system purpose, elements, interconnections, stocks, flows, and feedback. <a href="https://www.chelseagreen.com/product/thinking-in-systems/" title="Chelsea Green Publishing — Thinking in Systems: A Primer">MEADOWS</a></li>
+<li>Senge, <em>The Fifth Discipline</em>, Chapters 1 and 4–5; focus on the fifth discipline, laws of systems thinking, and shifts from linear to circular causality. <a href="https://www.penguinrandomhouse.com/books/163984/the-fifth-discipline-by-peter-m-senge/" title="Penguin Random House — The Fifth Discipline">SENGE</a></li>
+<li>MIT 2020 lecture material introducing the event–pattern–structure perspective. <a href="https://ocw.mit.edu/courses/res-15-004-system-dynamics-systems-thinking-and-modeling-for-a-complex-world-january-iap-2020/" title="MIT OpenCourseWare — Systems Thinking and Modeling for a Complex World">MIT-SD-2020</a></li>
+</ul>
+<p><strong>Guiding questions:</strong> Which problem statements invite learning? Which statements prematurely fix the boundary or solution? What behavior must exist for feedback thinking to add value?</p>
+<h3 id="instructor-style-lesson-notes">Instructor-style lesson notes</h3>
+<p>Systems thinking begins with disciplined dissatisfaction with event explanations. “A vehicle failed,” “ridership fell,” or “the budget was cut” may be true, but each statement explains little about recurrence. A dynamic problem asks how a quantity behaved over time, relative to a desired or feared trajectory, and what endogenous structure could generate that behavior.</p>
+<p>Use the iceberg carefully: events are visible; patterns summarize recurrence; structure includes physical stocks, information, rules, incentives, delays, and feedback; mental models shape those structures. The layers are not a hierarchy in which events are unimportant. Events matter operationally, but policy learning requires connecting them to recurring behavior.</p>
+<p>A useful system-dynamics problem has a reference mode, meaningful time horizon, plausible endogenous mechanism, and decision owner. The boundary is a modeling choice, not a fact. An initial boundary should include the mechanisms necessary to explain the behavior, while excluded mechanisms remain visible in a boundary register.</p>
+<p>Avoid labeling everything “complex.” Dynamic complexity exists when cause and effect are separated in time or space, feedback changes the environment of the decision, actors adapt, and locally reasonable choices aggregate into surprising behavior. A large component count alone is not sufficient.</p>
+<h3 id="worked-example">Worked example</h3>
+<p>A manager observes three quarters of rising wait time and attributes it to “unusually high demand.” The event explanation suggests temporary overtime. A pattern view shows demand increased first, service improved briefly, maintenance backlog accumulated, active fleet declined, and wait time rose later. A structural hypothesis links service quality to adoption, adoption to workload, workload to maintenance deferral, maintenance backlog to availability, and availability back to service quality. The worked example demonstrates how the same facts support a much richer learning question: <strong>Why do service improvements create growth that later overwhelms maintenance and reverses the gain?</strong></p>
+<h3 id="guided-practice">Guided practice</h3>
+<ol>
+<li>Select one mobility symptom and write an event statement, pattern statement, structural hypothesis, and mental-model hypothesis.</li>
+<li>Draw a preliminary boundary with internal variables, external drivers, excluded mechanisms, stakeholders, and decision authority.</li>
+<li>Identify one endogenous explanation and one legitimate exogenous driver.</li>
+<li>Write a “model purpose is / is not” statement.</li>
+<li>Conduct a ten-minute red team: assume your preferred solution is prohibited and restate the problem.</li>
+</ol>
+<h3 id="independent-exercises">Independent exercises</h3>
+<p><strong>Foundation:</strong> classify 20 statements as event, pattern, structure, mental model, policy, or proposed solution.</p>
+<p><strong>Application:</strong> produce a two-page systems-learning charter for the mobility case.</p>
+<p><strong>Analysis:</strong> compare a static root-cause tree with a feedback-oriented explanation; identify what each reveals and hides.</p>
+<p><strong>Synthesis:</strong> formulate three competing endogenous hypotheses for the same behavior.</p>
+<p><strong>Stretch:</strong> identify a historical policy in your professional domain that failed because its time horizon was too short.</p>
+<h3 id="weekly-deliverable">Weekly deliverable</h3>
+<p>Submit a <strong>Purpose and Boundary Package</strong> containing:</p>
+<ul>
+<li>one-page decision and learning charter;</li>
+<li>event–pattern–structure table;</li>
+<li>initial boundary diagram and boundary register;</li>
+<li>stakeholders, decision owner, time horizon, and use/non-use statement;</li>
+<li>three competing dynamic hypotheses;</li>
+<li>500-word reflection on why systems thinking is warranted.</li>
+</ul>
+<p>Target length: 5–7 pages plus diagrams.</p>
+<h3 id="analytic-rubric">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dynamic relevance and solution neutrality</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Decision owner, horizon, and boundary quality</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Endogenous hypotheses and competing explanations</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Evidence, terminology, and communication</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Repository and change-control setup</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures">Critical failures</h3>
+<ul>
+<li>the “problem” is only a preferred solution;</li>
+<li>no behavior over time is identified;</li>
+<li>the boundary is presented as objectively complete;</li>
+<li>all causes are external and no endogenous hypothesis is attempted;</li>
+<li>stakeholder or decision ownership is absent.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why is a recurring event not yet a dynamic problem?</strong> It lacks an explicit behavior pattern, time horizon, comparison state, and causal structure.</li>
+<li><strong>What makes an explanation endogenous?</strong> The principal behavior is generated by interactions inside the chosen model boundary.</li>
+<li><strong>Is an external shock forbidden?</strong> No. It may initiate behavior, but the model should explain how internal structure shapes the response.</li>
+<li><strong>Why avoid naming the solution in the problem statement?</strong> It narrows learning and biases boundary and evidence selection.</li>
+<li><strong>What is one sign of dynamic complexity?</strong> Cause and effect are delayed, feedback changes future conditions, or actors adapt to the intervention.</li>
+<li><strong>What is a model boundary?</strong> A purposeful choice about mechanisms represented for the stated learning use.</li>
+<li><strong>Why record excluded mechanisms?</strong> They may limit interpretation or become important under another scenario.</li>
+<li><strong>What should be challenged first in a review?</strong> Whether the behavior and decision justify a system-dynamics approach.</li>
+</ol>
+<h3 id="revision-and-mastery-gate">Revision and mastery gate</h3>
+<p>Pass when the package scores at least 80%, the problem is solution-neutral, and at least two plausible endogenous hypotheses remain. Revise any charter that treats “complexity” as a substitute for a specific dynamic behavior.</p>
+<h3 id="suggested-workload">Suggested workload</h3>
+<ul>
+<li>Reading and notes: 2.5 hours</li>
+<li>Retrieval and classification: 0.75 hour</li>
+<li>Boundary and hypothesis work: 3 hours</li>
+<li>Independent analysis: 2.5 hours</li>
+<li>Review and revision: 1.25 hours</li>
+<li><strong>Total:</strong> approximately 10 hours</li>
+</ul>
+<h3 id="configuration-and-portfolio-update">Configuration and portfolio update</h3>
+<p>Create the course repository, record the imported Phase 2/3 baselines, establish a variable-naming convention, and assign <code>STSD-PURPOSE-001</code> to the approved learning charter. Add the first boundary decision record.</p>
+<hr/>
+<h2 id="week-2--define-dynamic-behavior-with-reference-modes-evidence-and-time-horizons">Week 2 — Define dynamic behavior with reference modes, evidence, and time horizons</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 13):</strong> <a href="../../K/B13/chapters/02-define-dynamic-behavior-with-reference-modes-evidence-and-time-horiz.html">Chapter 2 — Define dynamic behavior with reference modes, evidence, and time horizons</a> · <a href="../../K/B13/labs/lab-02-define-dynamic-behavior-with-reference-modes-evidence-and-time-horiz.html">Hypothetical Lab 2</a> · <a href="../../K/P3-text/lessons/645-781-w02.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="professional-context-and-essential-question-2">Professional context and essential question</h3>
+<p>A system-dynamics model should explain a problem’s important behavior, not merely reproduce a convenient dataset. Reference modes make that obligation explicit. <strong>Essential question:</strong> What historical, desired, feared, and counterfactual behavior must the model explain?</p>
+<h3 id="weekly-learning-outcomes-2">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>construct behavior-over-time graphs with named variables, units, scales, horizons, and evidence status;</li>
+<li>distinguish historical data, estimated behavior, stakeholder perception, target behavior, and feared behavior;</li>
+<li>identify growth, decline, S-shaped growth, oscillation, overshoot, collapse, and goal-seeking patterns;</li>
+<li>define dynamic-problem statements using reference modes;</li>
+<li>identify leading, coincident, and lagging indicators;</li>
+<li>create an evidence and uncertainty register for each reference mode.</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-2">Retrieval and readiness check</h3>
+<ol>
+<li>Sketch exponential growth, goal seeking, oscillation, S-shaped growth, and overshoot-and-collapse from memory.</li>
+<li>For each pattern, name a generic feedback structure that could generate it.</li>
+<li>Explain why a smooth graph drawn from interviews is not measured data.</li>
+<li>Distinguish model horizon from data-availability horizon.</li>
+<li>Identify one quantity that may be hidden because the system suppresses demand.</li>
+</ol>
+<h3 id="required-study-2">Required study</h3>
+<p><strong>Required</strong></p>
+<ul>
+<li>Meadows, <strong>A Brief Visit to the Systems Zoo</strong> and the sections on feedback structures and common behaviors. <a href="https://www.chelseagreen.com/product/thinking-in-systems/" title="Chelsea Green Publishing — Thinking in Systems: A Primer">MEADOWS</a></li>
+<li>Kim, Part II sections on behavior-over-time graphs and dynamic thinking. <a href="https://search.worldcat.org/title/Systems-thinking-tools-a-users-reference-guide/oclc/44648812" title="WorldCat — Systems Thinking Tools: A User's Reference Guide">KIM</a></li>
+<li>MIT Road Maps readings on graphical integration and beginner modeling exercises. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT OpenCourseWare — System Dynamics Self Study readings and Road Maps">MIT-SD-READINGS</a></li>
+<li>Vensim documentation on importing and preparing time-series data. <a href="https://www.vensim.com/documentation/ref_data.html" title="Ventana Systems — Preparing, using, and exporting data">VENSIM-DATA</a></li>
+</ul>
+<p><strong>Guiding questions:</strong> What is observed versus inferred? What time horizon reveals the consequence of the policy? Which variable’s apparent stability may hide an accumulating problem?</p>
+<h3 id="instructor-style-lesson-notes-2">Instructor-style lesson notes</h3>
+<p>A reference mode is a qualitative or quantitative description of behavior over time that the model is expected to help explain. It is not necessarily a target for curve fitting. Several reference modes may be required because the system’s problem is the relationship among quantities—for example, completed trips improve while maintenance backlog accumulates and trust later falls.</p>
+<p>Every graph needs a variable definition, unit, time scale, historical interval, future horizon, data source, and uncertainty note. Start the vertical axis at zero when interpretation requires magnitude, but do not force zero when it hides meaningful variation; record the decision. Avoid dual-axis graphs that imply relationships through scale choice.</p>
+<p>Use multiple reference modes: historical behavior, a desired trajectory, a feared trajectory, and a counterfactual “without intervention” hypothesis. A target alone is not a reference mode because it says nothing about the current pattern or causal challenge.</p>
+<p>The time horizon must include the delays through which policies produce consequences. A three-month horizon may favor overtime; a three-year horizon may reveal burnout, attrition, and declining capacity. Boundary and horizon choices are linked.</p>
+<h3 id="worked-example-2">Worked example</h3>
+<p>The dataset shows wait time improves through Quarter 3, then worsens while demand remains high. A single wait-time graph suggests a service problem. Adding maintenance backlog, active fleet, trust, and budget reveals an overshoot pattern: performance improvements increase demand; workload and deferred maintenance accumulate; availability falls; trust and funding weaken. The example distinguishes measured quarterly data from estimated trust and marks both accordingly.</p>
+<h3 id="guided-practice-2">Guided practice</h3>
+<ol>
+<li>Build at least six reference modes from the controlled data.</li>
+<li>Add desired and feared trajectories for three variables.</li>
+<li>Annotate likely delays and possible structural breakpoints.</li>
+<li>Create an evidence table with source, quality, missingness, and uncertainty.</li>
+<li>Write one dynamic-problem statement in 100 words and one in 25 words.</li>
+<li>Ask an independent reviewer to identify which graph most strongly constrains the model.</li>
+</ol>
+<h3 id="independent-exercises-2">Independent exercises</h3>
+<p><strong>Foundation:</strong> match twelve behavior patterns to generic structures.</p>
+<p><strong>Application:</strong> generate the mobility reference-mode packet.</p>
+<p><strong>Analysis:</strong> identify at least three alternative explanations that fit the same graphs.</p>
+<p><strong>Synthesis:</strong> create a multivariable narrative explaining sequence and lag without claiming causality prematurely.</p>
+<p><strong>Stretch:</strong> use a small script to create reproducible reference-mode figures and data-quality flags.</p>
+<h3 id="weekly-deliverable-2">Weekly deliverable</h3>
+<p>Submit a <strong>Dynamic Problem and Reference-Mode Package</strong> containing:</p>
+<ul>
+<li>six to ten behavior-over-time graphs;</li>
+<li>variable dictionary, units, data status, and evidence provenance;</li>
+<li>desired, feared, and counterfactual behavior;</li>
+<li>leading/lagging indicator map;</li>
+<li>dynamic-problem statement and evaluation criteria;</li>
+<li>competing-explanation register;</li>
+<li>revised boundary and horizon rationale.</li>
+</ul>
+<p>Target length: 8–12 pages including figures.</p>
+<h3 id="analytic-rubric-2">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reference-mode clarity and completeness</td>
+<td style="text-align:right">30%</td>
+</tr>
+<tr>
+<td>Evidence status and uncertainty</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Dynamic problem and time horizon</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Competing explanations and boundary insight</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Reproducibility and figure quality</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-2">Critical failures</h3>
+<ul>
+<li>axes, units, or evidence status are missing;</li>
+<li>targets are substituted for historical behavior;</li>
+<li>a single graph is used to define a multivariable problem;</li>
+<li>causal conclusions are asserted from temporal sequence alone;</li>
+<li>the horizon excludes known implementation or maintenance delays.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-2">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a reference mode?</strong> A behavior-over-time pattern the model should help explain for its intended purpose.</li>
+<li><strong>Must it be quantitative?</strong> No, but qualitative graphs must be labeled as estimates or perceptions.</li>
+<li><strong>Why use several reference modes?</strong> Different structures can reproduce one curve; coupled behaviors constrain the hypothesis.</li>
+<li><strong>What is a feared trajectory?</strong> A plausible undesirable future used to test policy risk.</li>
+<li><strong>Why can stable output hide trouble?</strong> Backlog, debt, fatigue, or deferred work may accumulate while output is held constant.</li>
+<li><strong>What is a lagging indicator?</strong> A measure that changes after the underlying structural change.</li>
+<li><strong>Why distinguish data horizon from model horizon?</strong> Policy consequences may extend beyond available observations.</li>
+<li><strong>What is the main error in curve-first modeling?</strong> It can prioritize fit over causal explanation.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-2">Revision and mastery gate</h3>
+<p>Pass when every reference mode has a definition, unit, source/evidence status, horizon, and relevance statement, and when the dynamic problem is constrained by multiple behaviors. Revise any graph packet that visually implies causation without supporting structure.</p>
+<h3 id="suggested-workload-2">Suggested workload</h3>
+<ul>
+<li>Reading and graphical exercises: 2.5 hours</li>
+<li>Data preparation and plots: 2 hours</li>
+<li>Reference modes and evidence register: 3 hours</li>
+<li>Competing hypotheses and review: 1.5 hours</li>
+<li>Revision: 1 hour</li>
+<li><strong>Total:</strong> approximately 10 hours</li>
+</ul>
+<h3 id="configuration-and-portfolio-update-2">Configuration and portfolio update</h3>
+<p>Baseline the reference-mode source data and scripts under <code>STSD-RM-001</code>. Record every manually estimated curve separately from measured data. Update the boundary and issue log with evidence gaps.</p>
+<hr/>
+<h2 id="week-3--build-causal-loop-diagrams-as-testable-feedback-hypotheses">Week 3 — Build causal-loop diagrams as testable feedback hypotheses</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 13):</strong> <a href="../../K/B13/chapters/03-build-causal-loop-diagrams-as-testable-feedback-hypotheses.html">Chapter 3 — Build causal-loop diagrams as testable feedback hypotheses</a> · <a href="../../K/B13/labs/lab-03-build-causal-loop-diagrams-as-testable-feedback-hypotheses.html">Hypothetical Lab 3</a> · <a href="../../K/P3-text/lessons/645-781-w03.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="professional-context-and-essential-question-3">Professional context and essential question</h3>
+<p>Causal-loop diagrams can reveal feedback and support stakeholder learning, but vague variables and unsupported arrows create persuasive-looking fiction. <strong>Essential question:</strong> What causal structure could generate the reference modes, and how can each link be challenged?</p>
+<h3 id="weekly-learning-outcomes-3">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>define variables as quantities that can increase or decrease;</li>
+<li>assign and explain causal-link polarity using ceteris paribus reasoning;</li>
+<li>identify delays and distinguish material, information, and decision relationships;</li>
+<li>determine reinforcing and balancing loop polarity;</li>
+<li>write loop narratives tied to reference modes;</li>
+<li>assess link evidence, ambiguity, omitted causes, and competing causal directions;</li>
+<li>create a readable causal-loop model without hiding complexity in labels.</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-3">Retrieval and readiness check</h3>
+<ol>
+<li>Determine link polarity for five sample relationships.</li>
+<li>Explain why a positive link does not mean “good.”</li>
+<li>Explain why a balancing loop does not necessarily produce stability.</li>
+<li>Identify the loop polarity for a three-link loop with one negative link.</li>
+<li>Rewrite “improve service” as a measurable variable.</li>
+<li>Name one situation in which A and B are correlated but neither causes the other.</li>
+</ol>
+<h3 id="required-study-3">Required study</h3>
+<p><strong>Required</strong></p>
+<ul>
+<li>Kim, Part II sections on causal-loop diagrams, feedback, and link/loop notation. <a href="https://search.worldcat.org/title/Systems-thinking-tools-a-users-reference-guide/oclc/44648812" title="WorldCat — Systems Thinking Tools: A User's Reference Guide">KIM</a></li>
+<li>Senge, Chapters 5–8 on circular causality, templates, leverage, and seeing wholes. <a href="https://www.penguinrandomhouse.com/books/163984/the-fifth-discipline-by-peter-m-senge/" title="Penguin Random House — The Fifth Discipline">SENGE</a></li>
+<li>MIT Road Maps, <strong>An Introduction to Feedback</strong> and generic positive/negative feedback structures. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT OpenCourseWare — System Dynamics Self Study readings and Road Maps">MIT-SD-READINGS</a></li>
+<li>Richardson, “Problems with Causal-Loop Diagrams,” focusing on ambiguity and limits. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="George Richardson — Problems with Causal-Loop Diagrams, listed in MIT Road Maps">RICHARDSON-CLD</a></li>
+</ul>
+<p><strong>Guiding questions:</strong> Does each arrow represent a direct causal claim? What remains constant in the polarity statement? Which loops plausibly explain each phase of behavior?</p>
+<h3 id="instructor-style-lesson-notes-3">Instructor-style lesson notes</h3>
+<p>A CLD is a qualitative causal theory. Variables should be noun phrases representing quantities: “maintenance backlog,” not “maintenance problem”; “service frequency,” not “increase service.” Link polarity asks: if the cause increases above what it otherwise would have been, does the effect increase or decrease above what it otherwise would have been, all else equal?</p>
+<p>Loop polarity follows the number of negative links: zero or an even number produces reinforcing feedback; an odd number produces balancing feedback. This rule is necessary but not sufficient. The analyst must still explain the loop narrative, delay, and likely behavior.</p>
+<p>Do not draw arrows for sequence, association, flow, or “is related to.” Each link needs a causal statement and evidence grade. Record whether evidence is empirical, mechanistic, expert, analogical, or assumed. Add a delay mark only when the delay is meaningful relative to the behavior horizon.</p>
+<p>A useful CLD is selective. A giant “spaghetti map” can display engagement while reducing insight. Use sectors, loop labels, a variable dictionary, and views for different questions. Preserve omitted mechanisms in the boundary register.</p>
+<h3 id="worked-example-3">Worked example</h3>
+<p>Start with a service-growth loop: service quality → rider trust (+), rider trust → trip requests (+), trip requests → funding justification (+), funding justification → service investment (+), service investment → service quality (+). Add a capacity-stress balancing loop: trip requests → workload (+), workload → maintenance deferral (+), maintenance deferral → active fleet (−), active fleet → wait time (−), wait time → service quality (−). The example checks every polarity and shows that a “balancing” loop may create overshoot because the maintenance effect is delayed.</p>
+<h3 id="guided-practice-3">Guided practice</h3>
+<ol>
+<li>Create a variable dictionary before drawing.</li>
+<li>Draft a 15–25 variable CLD linked to at least four reference modes.</li>
+<li>Label at least two reinforcing loops, three balancing loops, and three delays.</li>
+<li>Write one paragraph per loop explaining causal mechanism and expected behavior.</li>
+<li>Grade every link by evidence and identify the five weakest links.</li>
+<li>Conduct a link-by-link red team using cause sufficiency, reverse causality, omitted common cause, and tautology checks.</li>
+</ol>
+<h3 id="independent-exercises-3">Independent exercises</h3>
+<p><strong>Foundation:</strong> correct a defective CLD with ambiguous variables and polarity errors.</p>
+<p><strong>Application:</strong> build mobility CLD v1.</p>
+<p><strong>Analysis:</strong> create a second CLD view for accessibility and equity, then compare what the first view hides.</p>
+<p><strong>Synthesis:</strong> map each reference-mode phase to plausible loop dominance.</p>
+<p><strong>Stretch:</strong> use interview statements or prior artifacts to construct an evidence-coded causal claim table.</p>
+<h3 id="weekly-deliverable-3">Weekly deliverable</h3>
+<p>Submit a <strong>Causal Structure Review Package</strong> containing:</p>
+<ul>
+<li>variable dictionary;</li>
+<li>full CLD and two focused views;</li>
+<li>link-evidence table;</li>
+<li>loop labels and narratives;</li>
+<li>reference-mode-to-loop mapping;</li>
+<li>competing causal-direction analysis;</li>
+<li>weak-link and boundary-expansion priorities;</li>
+<li>review findings and model changes.</li>
+</ul>
+<p>Target length: 10–15 pages plus diagrams.</p>
+<h3 id="analytic-rubric-3">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Variable and link precision</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Feedback-loop correctness and explanatory power</td>
+<td style="text-align:right">30%</td>
+</tr>
+<tr>
+<td>Evidence and alternative causality</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Reference-mode and boundary alignment</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Diagram readability and configuration control</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-3">Critical failures</h3>
+<ul>
+<li>polarity is wrong or unexplained;</li>
+<li>variables are actions, judgments, or binary events;</li>
+<li>arrows represent sequence or correlation rather than causality;</li>
+<li>loop narratives do not close the feedback;</li>
+<li>evidence and uncertainty are absent;</li>
+<li>the diagram is unreadable and has no focused views.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-3">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What does a positive causal link mean?</strong> Cause and effect move in the same direction relative to what they otherwise would have done.</li>
+<li><strong>Does positive mean beneficial?</strong> No.</li>
+<li><strong>What makes a loop reinforcing?</strong> It amplifies change; it contains zero or an even number of negative links.</li>
+<li><strong>Can balancing feedback oscillate?</strong> Yes, especially with delays or aggressive correction.</li>
+<li><strong>Why use quantities as variables?</strong> Polarity requires a meaningful increase/decrease interpretation.</li>
+<li><strong>What is a direct causal link?</strong> A mechanism in which changing the source changes the target, holding other modeled influences constant.</li>
+<li><strong>Why record weak links?</strong> Policy conclusions may depend on uncertain structure.</li>
+<li><strong>Why can a CLD not determine exact behavior?</strong> It lacks full stock, flow, equation, parameter, and initial-condition specification.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-3">Revision and mastery gate</h3>
+<p>Pass when every link can be defended verbally, loop polarity is correct, and the model explains at least three reference-mode features without claiming quantitative prediction. Revise the five weakest causal links before proceeding.</p>
+<h3 id="suggested-workload-3">Suggested workload</h3>
+<ul>
+<li>Reading and notation exercises: 2.5 hours</li>
+<li>Variable dictionary and CLD: 3 hours</li>
+<li>Evidence coding and red team: 2.5 hours</li>
+<li>Review and revision: 1.5 hours</li>
+<li><strong>Total:</strong> approximately 9.5 hours</li>
+</ul>
+<h3 id="configuration-and-portfolio-update-3">Configuration and portfolio update</h3>
+<p>Baseline CLD v1 as <code>STSD-CLD-001</code>. Preserve focused views as generated artifacts, not separate untraceable diagrams. Add link IDs and evidence references to the causal-claim register.</p>
+<hr/>
+<h2 id="week-4--use-archetypes-and-mental-models-to-generate-competing-intervention-hypotheses">Week 4 — Use archetypes and mental models to generate competing intervention hypotheses</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 13):</strong> <a href="../../K/B13/chapters/04-use-archetypes-and-mental-models-to-generate-competing-intervention-.html">Chapter 4 — Use archetypes and mental models to generate competing intervention hypotheses</a> · <a href="../../K/B13/labs/lab-04-use-archetypes-and-mental-models-to-generate-competing-intervention-.html">Hypothetical Lab 4</a> · <a href="../../K/P3-text/lessons/645-781-w04.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="professional-context-and-essential-question-4">Professional context and essential question</h3>
+<p>Systems archetypes can accelerate recognition of recurring structures, but they can also become labels that replace analysis. <strong>Essential question:</strong> Which generic feedback structures illuminate the case, and where do they oversimplify it?</p>
+<h3 id="weekly-learning-outcomes-4">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>recognize and diagram fixes that fail, shifting the burden, limits to growth, success to the successful, escalation, eroding goals, tragedy of the commons, and growth-and-underinvestment structures;</li>
+<li>distinguish an archetype from a case-specific model;</li>
+<li>identify symptom, fundamental solution, side effect, limiting condition, and delay;</li>
+<li>surface mental models, goals, incentives, and decision rules embedded in policy;</li>
+<li>formulate intervention hypotheses at different leverage levels;</li>
+<li>compare and falsify alternative archetype interpretations.</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-4">Retrieval and readiness check</h3>
+<ol>
+<li>From memory, describe the core feedback structure of fixes that fail and limits to growth.</li>
+<li>Explain the difference between shifting the burden and a legitimate short-term contingency.</li>
+<li>Identify one case in which success to the successful may be an efficient allocation rather than a harmful trap.</li>
+<li>Define eroding goals.</li>
+<li>Name one test that would distinguish two competing archetype hypotheses.</li>
+</ol>
+<h3 id="required-study-4">Required study</h3>
+<p><strong>Required</strong></p>
+<ul>
+<li>Senge, the systems-archetype chapters and appendices relevant to limits, shifting the burden, and growth/underinvestment. <a href="https://www.penguinrandomhouse.com/books/163984/the-fifth-discipline-by-peter-m-senge/" title="Penguin Random House — The Fifth Discipline">SENGE</a></li>
+<li>Kim, Part II archetype templates and intervention questions. <a href="https://search.worldcat.org/title/Systems-thinking-tools-a-users-reference-guide/oclc/44648812" title="WorldCat — Systems Thinking Tools: A User's Reference Guide">KIM</a></li>
+<li>Meadows, <strong>System Traps … and Opportunities</strong>. <a href="https://www.chelseagreen.com/product/thinking-in-systems/" title="Chelsea Green Publishing — Thinking in Systems: A Primer">MEADOWS</a></li>
+<li>MIT Road Maps generic structures for growth, balancing feedback, S-shaped growth, oscillation, and overshoot. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT OpenCourseWare — System Dynamics Self Study readings and Road Maps">MIT-SD-READINGS</a></li>
+</ul>
+<p><strong>Guiding questions:</strong> Which archetype predicts a different policy response? What evidence would reject the template? Which “solution” changes symptoms but weakens long-term capability?</p>
+<h3 id="instructor-style-lesson-notes-4">Instructor-style lesson notes</h3>
+<p>Archetypes are reusable structural hypotheses, not diagnoses. Apply them by mapping each role in the generic structure to a defined case variable, checking the causal mechanisms, and identifying the behavior the structure should generate. More than one archetype may operate simultaneously.</p>
+<p>The mobility case may contain growth and underinvestment: better service increases demand; demand approaches capacity; performance falls; pressure for capacity investment rises, but delayed budgets and underestimation of suppressed demand limit investment. It may also contain shifting the burden: overtime and emergency maintenance relieve immediate failures while reducing time for preventive maintenance and training.</p>
+<p>Mental models matter because decision rules are part of system structure. “Low reported accessible demand means capacity is sufficient” can create a self-sealing loop when unreliable service suppresses requests. The model should represent the operational consequence of the belief, not merely list it in a stakeholder table.</p>
+<p>Intervention hypotheses should span event response, parameter change, information flow, rule, goal, self-organization, and paradigm. Do not declare higher leverage automatically better; high-leverage changes can be politically difficult, slow, or unsafe.</p>
+<h3 id="worked-example-4">Worked example</h3>
+<p>Map the pattern “add overtime after missed trips” to shifting the burden. Symptomatic relief increases completed trips quickly; overtime increases fatigue and reduces training/preventive work; later errors and failures increase missed trips. The fundamental solution—workforce pipeline and preventive capacity—has a longer delay. The example then shows a legitimate role for overtime as a bounded contingency when paired with triggers, caps, and fundamental investment.</p>
+<h3 id="guided-practice-4">Guided practice</h3>
+<ol>
+<li>Map at least four archetypes to the mobility CLD.</li>
+<li>For each, identify fit, mismatch, predicted behavior, and disconfirming evidence.</li>
+<li>Select two competing archetypes for one reference mode.</li>
+<li>Extract at least six mental-model statements from source artifacts or constructed interviews.</li>
+<li>Translate each mental model into a decision rule or structural implication.</li>
+<li>Generate intervention hypotheses at four leverage levels.</li>
+<li>Conduct a Qualitative Model Review and revise the CLD.</li>
+</ol>
+<h3 id="independent-exercises-4">Independent exercises</h3>
+<p><strong>Foundation:</strong> complete archetype role-mapping worksheets.</p>
+<p><strong>Application:</strong> write a 2,000-word archetype analysis for the mobility case.</p>
+<p><strong>Analysis:</strong> compare two explanations for accessibility underutilization: low need versus suppressed demand.</p>
+<p><strong>Synthesis:</strong> create a policy hypothesis matrix linking structure, intervention, expected behavior, delay, risk, and evidence need.</p>
+<p><strong>Stretch:</strong> facilitate a 45-minute group or simulated multi-role session and compare the resulting mental models.</p>
+<h3 id="weekly-deliverable-4">Weekly deliverable</h3>
+<p>Submit a <strong>Qualitative Model Review Package</strong> containing:</p>
+<ul>
+<li>four archetype mappings;</li>
+<li>two competing archetype analyses;</li>
+<li>mental-model and decision-rule register;</li>
+<li>revised CLD v2;</li>
+<li>leverage-level intervention matrix;</li>
+<li>disconfirming-evidence plan;</li>
+<li>review minutes, actions, and dispositions.</li>
+</ul>
+<p>Target length: 12–18 pages plus diagrams.</p>
+<h3 id="analytic-rubric-4">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Archetype mapping and structural fit</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Competing hypotheses and falsifiability</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Mental models and decision rules</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Intervention hypotheses and leverage reasoning</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Review quality and revision</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-4">Critical failures</h3>
+<ul>
+<li>archetypes are used only as labels;</li>
+<li>case variables do not map to the generic structure;</li>
+<li>no disconfirming evidence is identified;</li>
+<li>mental models are discussed but not connected to decisions or structure;</li>
+<li>the learner claims one archetype proves the policy recommendation.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-4">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is an archetype?</strong> A recurring generic feedback structure that can guide hypothesis formation.</li>
+<li><strong>Why is it not a diagnosis?</strong> The case mechanisms and evidence must still be established.</li>
+<li><strong>What is the short-term/long-term tension in shifting the burden?</strong> Symptom relief reduces pressure or capability for the fundamental solution.</li>
+<li><strong>What limits growth?</strong> A balancing process that strengthens as growth approaches a constraint.</li>
+<li><strong>What is an eroding-goals structure?</strong> Performance gaps lead to lower goals rather than improved capability.</li>
+<li><strong>How can reported demand be endogenous?</strong> Service quality affects willingness or ability to request service.</li>
+<li><strong>What makes an intervention hypothesis falsifiable?</strong> It predicts behavior that would differ under a competing structure.</li>
+<li><strong>Are high-leverage policies always easy?</strong> No; they may face delay, governance, legitimacy, or transition risk.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-4">Revision and mastery gate</h3>
+<p>Pass when at least two archetype hypotheses are compared rather than merely named, and when the revised CLD includes explicit decision rules and evidence needs. The Qualitative Model Review must close critical polarity and boundary issues before Week 5.</p>
+<h3 id="suggested-workload-4">Suggested workload</h3>
+<ul>
+<li>Reading and archetype practice: 2.5 hours</li>
+<li>Mapping and mental-model analysis: 3 hours</li>
+<li>Intervention matrix: 2 hours</li>
+<li>Review and CLD revision: 2 hours</li>
+<li><strong>Total:</strong> approximately 9.5 hours</li>
+</ul>
+<h3 id="configuration-and-portfolio-update-4">Configuration and portfolio update</h3>
+<p>Baseline the reviewed qualitative model as <code>STSD-CLD-002</code>. Link archetype claims and mental-model statements to causal-link IDs. Record rejected archetype interpretations rather than deleting them.</p>
+<hr/>
+<h2 id="week-5--translate-feedback-hypotheses-into-stocks-flows-units-and-accumulation-equations">Week 5 — Translate feedback hypotheses into stocks, flows, units, and accumulation equations</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 13):</strong> <a href="../../K/B13/chapters/05-translate-feedback-hypotheses-into-stocks-flows-units-and-accumulati.html">Chapter 5 — Translate feedback hypotheses into stocks, flows, units, and accumulation equations</a> · <a href="../../K/B13/labs/lab-05-translate-feedback-hypotheses-into-stocks-flows-units-and-accumulati.html">Hypothetical Lab 5</a> · <a href="../../K/P3-text/lessons/645-781-w05.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="professional-context-and-essential-question-5">Professional context and essential question</h3>
+<p>The move from CLD to stock-and-flow model is where qualitative stories become mathematically explicit and many hidden inconsistencies emerge. <strong>Essential question:</strong> What accumulates, what changes it, and are the equations capable of producing the reference behavior?</p>
+<h3 id="weekly-learning-outcomes-5">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>identify physical, informational, and perceived stocks;</li>
+<li>distinguish stocks, flows, auxiliaries, parameters, and exogenous inputs;</li>
+<li>formulate stock equations and initial conditions;</li>
+<li>apply conservation and dimensional-consistency reasoning;</li>
+<li>perform graphical integration and infer flows from stock behavior;</li>
+<li>translate selected CLD mechanisms into stock-flow structure without mechanically converting every variable;</li>
+<li>define model sectors and equation documentation standards.</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-5">Retrieval and readiness check</h3>
+<ol>
+<li>Identify the stock, inflow, and outflow in five examples.</li>
+<li>State the generic stock equation.</li>
+<li>Explain why “average wait time” is usually not a physical stock.</li>
+<li>Determine the units of a flow that changes vehicles in maintenance.</li>
+<li>Sketch the stock behavior under constant positive net flow, declining inflow, and delayed outflow.</li>
+<li>Explain why every CLD variable should not automatically become a stock.</li>
+</ol>
+<h3 id="required-study-5">Required study</h3>
+<p><strong>Required</strong></p>
+<ul>
+<li>Meadows, sections on stocks, flows, delays, and system resilience. <a href="https://www.chelseagreen.com/product/thinking-in-systems/" title="Chelsea Green Publishing — Thinking in Systems: A Primer">MEADOWS</a></li>
+<li>MIT Road Maps graphical-integration exercises, stock/flow exercises, and correctness checklist. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT OpenCourseWare — System Dynamics Self Study readings and Road Maps">MIT-SD-READINGS</a> <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT Road Maps appendix — System Dynamics Model Correctness Checklist">MIT-CHECKLIST</a></li>
+<li>The Systems Thinker, <strong>Step-by-Step Stocks and Flows</strong>, for the distinction between CLDs and stock-flow diagrams. <a href="https://thesystemsthinker.com/step-by-step-stocks-and-flows-improving-the-rigor-of-your-thinking/" title="The Systems Thinker — Step-by-Step Stocks and Flows">STOCK-FLOW-GUIDE</a></li>
+<li>Vensim documentation on equations, units, and model structure. <a href="https://www.vensim.com/documentation/" title="Ventana Systems — Vensim documentation">VENSIM-DOCS</a></li>
+</ul>
+<p><strong>Guiding questions:</strong> Which quantity has memory? What physical or informational conservation rule applies? Can the proposed rate change instantaneously, or is another stock needed?</p>
+<h3 id="instructor-style-lesson-notes-5">Instructor-style lesson notes</h3>
+<p>Stocks are state variables. Their current value depends on prior inflows and outflows, not only current inputs. They create memory and often the delays that make policy difficult. Flows have units of stock per time. Auxiliaries calculate rates, perceptions, capacities, or decisions but do not accumulate directly.</p>
+<p>Use the bathtub test: if all flows stopped, would the quantity remain? If yes, it may be a stock. The test is helpful but not sufficient—averages and ratios can persist numerically without representing accumulation. Ask what process stores the quantity.</p>
+<p>The continuous stock equation is <code>Stock(t) = Stock(t0) + integral(inflows - outflows)</code>. Every equation must have units. Unit balance is a structural test, not formatting. A model with inconsistent units may run and still be meaningless.</p>
+<p>Translate mechanisms selectively. For example, maintenance backlog is a stock increased by maintenance work generated and decreased by work completed. Active fleet may be a stock changed by failure and repair-completion flows. Trust may be modeled as a smoothed perception stock when it changes gradually through experience and communication. Document why each stock exists.</p>
+<h3 id="worked-example-5">Worked example</h3>
+<p>From the CLD, construct a maintenance sector:</p>
+<ul>
+<li><strong>Maintenance backlog</strong> <code>[vehicle-days]</code></li>
+<li>inflow: <strong>maintenance work generated</strong> <code>[vehicle-days/day]</code></li>
+<li>outflow: <strong>maintenance work completed</strong> <code>[vehicle-days/day]</code></li>
+<li>completion rate = minimum(backlog / minimum processing time, maintenance capacity)</li>
+<li>maintenance capacity depends on technicians, productivity, parts availability, and overtime fatigue.</li>
+</ul>
+<p>The example checks units, initial conditions, limiting cases, and shows why “repair delay” is an emergent ratio rather than a stock.</p>
+<h3 id="guided-practice-5">Guided practice</h3>
+<ol>
+<li>Perform graphical integration on four flow patterns.</li>
+<li>Identify at least six candidate stocks in the mobility problem.</li>
+<li>Build sector diagrams for demand/adoption, fleet/maintenance, workforce/capability, funding/investment, and accessibility.</li>
+<li>Write equations, units, and initial-condition rationale for three stocks.</li>
+<li>Create a stock-flow trace matrix from CLD loops and reference modes.</li>
+<li>Run a paper-based extreme-condition review before opening Vensim.</li>
+</ol>
+<h3 id="independent-exercises-5">Independent exercises</h3>
+<p><strong>Foundation:</strong> classify 30 variables and correct dimensional errors.</p>
+<p><strong>Application:</strong> produce stock-flow formulation v1.</p>
+<p><strong>Analysis:</strong> compare two representations of trust: algebraic index versus perception stock.</p>
+<p><strong>Synthesis:</strong> explain which feedback loops survive, change, or disappear during translation.</p>
+<p><strong>Stretch:</strong> derive a simple first-order goal-seeking response analytically and compare its time constant to the graphical behavior.</p>
+<h3 id="weekly-deliverable-5">Weekly deliverable</h3>
+<p>Submit a <strong>Stock-Flow Formulation Baseline</strong> containing:</p>
+<ul>
+<li>sector map and stock-flow diagram;</li>
+<li>stock/flow/auxiliary classification table;</li>
+<li>equation and units sheet for all core variables;</li>
+<li>initial-condition rationale;</li>
+<li>graphical-integration exercises;</li>
+<li>CLD-to-stock-flow trace matrix;</li>
+<li>conservation and extreme-condition checklist;</li>
+<li>formulation issues for Week 6.</li>
+</ul>
+<p>Target length: 12–20 pages plus model sketches.</p>
+<h3 id="analytic-rubric-5">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stock and flow identification</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Equations, units, and conservation</td>
+<td style="text-align:right">30%</td>
+</tr>
+<tr>
+<td>Initial conditions and delays</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Traceability to causal hypotheses/reference modes</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Documentation and review quality</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-5">Critical failures</h3>
+<ul>
+<li>a stock changes without a flow;</li>
+<li>flow units do not equal stock units per time;</li>
+<li>a rate exceeds a physical bound without explanation;</li>
+<li>initial conditions are arbitrary and materially affect results;</li>
+<li>translation is a mechanical one-to-one conversion from the CLD;</li>
+<li>conservation is violated without a documented source or sink.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-5">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What defines a stock?</strong> It accumulates the net effect of inflows and outflows and carries system state through time.</li>
+<li><strong>What are flow units?</strong> Stock units per unit time.</li>
+<li><strong>Can an auxiliary create delay?</strong> Only algebraic or information-processing effects; true accumulation delay generally requires a stock or delay function.</li>
+<li><strong>Why perform graphical integration?</strong> To develop intuition linking rates to accumulated behavior.</li>
+<li><strong>What happens if inflow equals outflow?</strong> The stock is constant.</li>
+<li><strong>Why can a stock not usually become negative?</strong> Physical or logical constraints; equations need bounds or structure that prevents it.</li>
+<li><strong>What is an initial condition?</strong> The stock value at simulation start, with evidence and rationale.</li>
+<li><strong>Why does translation expose ambiguity?</strong> CLDs do not specify accumulation, units, equations, or initial state.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-5">Revision and mastery gate</h3>
+<p>Pass when the formulation is dimensionally coherent on paper, every major stock has valid rate logic, and reference modes trace to represented structure. Do not implement unresolved critical unit or conservation defects.</p>
+<h3 id="suggested-workload-5">Suggested workload</h3>
+<ul>
+<li>Reading and graphical integration: 2.5 hours</li>
+<li>Variable classification and sectors: 2.5 hours</li>
+<li>Equations, units, and traceability: 3 hours</li>
+<li>Review and revision: 1.5 hours</li>
+<li><strong>Total:</strong> approximately 9.5 hours</li>
+</ul>
+<h3 id="configuration-and-portfolio-update-5">Configuration and portfolio update</h3>
+<p>Baseline the approved formulation as <code>STSD-SF-001</code>. Store equations in a machine-readable or tabular equation dictionary. Assign IDs to stocks, flows, and tests before implementation.</p>
+<hr/>
+<h2 id="week-6--implement-and-verify-the-first-executable-vensim-model">Week 6 — Implement and verify the first executable Vensim model</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 13):</strong> <a href="../../K/B13/chapters/06-implement-and-verify-the-first-executable-vensim-model.html">Chapter 6 — Implement and verify the first executable Vensim model</a> · <a href="../../K/B13/labs/lab-06-implement-and-verify-the-first-executable-vensim-model.html">Hypothetical Lab 6</a> · <a href="../../K/P3-text/lessons/645-781-w06.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="professional-context-and-essential-question-6">Professional context and essential question</h3>
+<p>An executable model converts assumptions into behavior, but software execution is not evidence of correctness. <strong>Essential question:</strong> Does the implemented model faithfully represent the approved formulation and behave correctly in simple conditions?</p>
+<h3 id="weekly-learning-outcomes-6">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>configure Vensim model time bounds, time step, save interval, units, and equation documentation;</li>
+<li>implement stocks, flows, auxiliaries, lookup functions, delays, and parameters;</li>
+<li>use causal tracing and equation views to inspect dependency structure;</li>
+<li>perform equation-by-equation, unit, initialization, conservation, and simple extreme-condition tests;</li>
+<li>reproduce known first-order reinforcing and balancing behavior;</li>
+<li>compare implementation to the approved stock-flow formulation;</li>
+<li>prepare and pass an Executable Baseline Review.</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-6">Retrieval and readiness check</h3>
+<ol>
+<li>Open Vensim and identify model settings, equations, units, and graph tools.</li>
+<li>Explain the relationship among <code>INITIAL TIME</code>, <code>FINAL TIME</code>, <code>TIME STEP</code>, and <code>SAVEPER</code>.</li>
+<li>State one risk of a time step that is too large.</li>
+<li>Identify three model checks that should occur before historical comparison.</li>
+<li>Explain why a lookup table should have documented domain and rationale.</li>
+</ol>
+<h3 id="required-study-6">Required study</h3>
+<p><strong>Required</strong></p>
+<ul>
+<li>Vensim PLE getting-started and model-building documentation. <a href="https://vensim.com/vensim-personal-learning-edition/" title="Ventana Systems — Vensim Personal Learning Edition">VENSIM-PLE</a> <a href="https://www.vensim.com/documentation/" title="Ventana Systems — Vensim documentation">VENSIM-DOCS</a></li>
+<li>MIT Road Maps, <strong>Formulating Models of Simple Systems Using Vensim PLE</strong> and model correctness checklist. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT OpenCourseWare — System Dynamics Self Study readings and Road Maps">MIT-SD-READINGS</a> <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT Road Maps appendix — System Dynamics Model Correctness Checklist">MIT-CHECKLIST</a></li>
+<li>Vensim documentation on model checking, causal tracing, graphs, and tables. <a href="https://www.vensim.com/documentation/" title="Ventana Systems — Vensim documentation">VENSIM-DOCS</a></li>
+</ul>
+<p><strong>Guiding questions:</strong> Does each equation implement the approved causal claim? What numerical settings could create artificial behavior? Which tests should have exact expected results?</p>
+<h3 id="instructor-style-lesson-notes-6">Instructor-style lesson notes</h3>
+<p>Implement from the equation dictionary rather than drawing freely in the tool. Each variable should include units and a comment describing meaning, source, and allowed range. Use model sectors/views for navigation, but remember that equations—not diagram position—define the executable model.</p>
+<p>Start with small test models: one reinforcing loop, one balancing loop, one stock with constant flows, and one first-order perception delay. Compare behavior to analytical or graphical expectations. These “unit models” build confidence in interpretation and tool use.</p>
+<p>Numerical integration approximates continuous equations. The time step should be small relative to the fastest meaningful time constant. Run time-step sensitivity by halving the step and comparing policy-relevant outputs. A visually similar graph may still hide significant metric differences.</p>
+<p>Do not calibrate yet. First verify translation: equation review, unit check, initialization, conservation, bounds, and extreme conditions. Maintain a defect log with detection, consequence, correction, and regression test.</p>
+<h3 id="worked-example-6">Worked example</h3>
+<p>Implement the maintenance sector and test four cases:</p>
+<ol>
+<li>no work generated and zero backlog → backlog remains zero;</li>
+<li>constant work below capacity → backlog converges to a small processing amount;</li>
+<li>work above capacity → backlog grows approximately linearly;</li>
+<li>zero parts availability → completion falls to zero and backlog accumulates.</li>
+</ol>
+<p>The example predicts behavior before simulation, checks units, runs with <code>TIME STEP</code> 0.25 and 0.125 day, and records the difference.</p>
+<h3 id="guided-practice-6">Guided practice</h3>
+<ol>
+<li>Install or update Vensim PLE and record version.</li>
+<li>Build four unit models for reinforcing, balancing, accumulation, and delay behavior.</li>
+<li>Implement the mobility model’s core sectors.</li>
+<li>Run Vensim’s unit/model checks and resolve all critical errors.</li>
+<li>Execute at least eight exact or directional verification tests.</li>
+<li>Compare model equations to the Week 5 equation dictionary.</li>
+<li>Hold an Executable Baseline Review with live navigation and one parameter change.</li>
+</ol>
+<h3 id="independent-exercises-6">Independent exercises</h3>
+<p><strong>Foundation:</strong> complete the Vensim tutorial and export a documented model.</p>
+<p><strong>Application:</strong> implement model v1.</p>
+<p><strong>Analysis:</strong> perform time-step and initialization sensitivity.</p>
+<p><strong>Synthesis:</strong> create a verification cross-reference matrix from causal claim → equation → test → result.</p>
+<p><strong>Stretch:</strong> use a script or Vensim export to compare equations automatically against the controlled dictionary.</p>
+<h3 id="weekly-deliverable-6">Weekly deliverable</h3>
+<p>Submit an <strong>Executable Model v1 Package</strong> containing:</p>
+<ul>
+<li>Vensim <code>.mdl</code> source;</li>
+<li>model settings and software-version record;</li>
+<li>equation and units listing;</li>
+<li>four unit models;</li>
+<li>verification matrix and test results;</li>
+<li>time-step and initialization sensitivity;</li>
+<li>defect/change log;</li>
+<li>Executable Baseline Review deck and minutes.</li>
+</ul>
+<p>Target report length: 10–15 pages plus executable files.</p>
+<h3 id="analytic-rubric-6">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Implementation fidelity</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Units, initialization, and numerical controls</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Verification tests and expected results</td>
+<td style="text-align:right">30%</td>
+</tr>
+<tr>
+<td>Defect resolution and regression evidence</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Live review and reproducibility</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-6">Critical failures</h3>
+<ul>
+<li>model check or unit errors remain unresolved;</li>
+<li>implementation departs from the approved formulation without change control;</li>
+<li>time step is selected only by default;</li>
+<li>no tests have predetermined expected behavior;</li>
+<li>the learner cannot locate or explain an equation during live review;</li>
+<li>run settings or software version are missing.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-6">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Does a running model prove correctness?</strong> No.</li>
+<li><strong>What is implementation verification?</strong> Evidence that executable equations match the approved conceptual/computational formulation.</li>
+<li><strong>Why halve the time step?</strong> To assess numerical sensitivity and integration error.</li>
+<li><strong>What should happen in a zero-input extreme test?</strong> Behavior should follow the stated physical logic, often no accumulation.</li>
+<li><strong>What is causal tracing?</strong> Following upstream and downstream equation dependencies to understand behavior.</li>
+<li><strong>Why build unit models?</strong> They isolate feedback structures and establish known expected behavior.</li>
+<li><strong>What is a regression test?</strong> A repeated test confirming that a correction did not reintroduce or create defects.</li>
+<li><strong>When may a lookup be used?</strong> When a documented nonlinear relationship is justified and its domain, units, and extrapolation are controlled.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-6">Revision and mastery gate</h3>
+<p>Pass when the executable baseline has no critical unit/model errors, all core equations trace to approved structure, and verification tests behave as predicted. Correct all critical defects before adding advanced delays or nonlinearities.</p>
+<h3 id="suggested-workload-6">Suggested workload</h3>
+<ul>
+<li>Tool tutorial and unit models: 2 hours</li>
+<li>Core implementation: 4 hours</li>
+<li>Verification and time-step tests: 2.5 hours</li>
+<li>Review and revision: 1.5 hours</li>
+<li><strong>Total:</strong> approximately 10 hours</li>
+</ul>
+<h3 id="configuration-and-portfolio-update-6">Configuration and portfolio update</h3>
+<p>Tag the reviewed model <code>STSD-MDL-001</code>. Store exported equations, run settings, verification results, and defect log in controlled folders. Create a release note listing known simplifications and prohibited uses.</p>
+<hr/>
+<h2 id="week-7--explain-delays-nonlinearities-oscillation-overshoot-and-changing-loop-dominance">Week 7 — Explain delays, nonlinearities, oscillation, overshoot, and changing loop dominance</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 13):</strong> <a href="../../K/B13/chapters/07-explain-delays-nonlinearities-oscillation-overshoot-and-changing-loo.html">Chapter 7 — Explain delays, nonlinearities, oscillation, overshoot, and changing loop dominance</a> · <a href="../../K/B13/labs/lab-07-explain-delays-nonlinearities-oscillation-overshoot-and-changing-loo.html">Hypothetical Lab 7</a> · <a href="../../K/P3-text/lessons/645-781-w07.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="professional-context-and-essential-question-7">Professional context and essential question</h3>
+<p>Many policies fail because decision makers underestimate delay, saturation, and the way dominant feedback changes over time. <strong>Essential question:</strong> Which dynamic structures generate the observed transition from improvement to stress and recovery?</p>
+<h3 id="weekly-learning-outcomes-7">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>distinguish material, information, perception, decision, and implementation delays;</li>
+<li>implement first-order and higher-order delays and explain their behavioral implications;</li>
+<li>construct nonlinear lookup relationships with documented evidence and bounds;</li>
+<li>explain goal seeking, oscillation, S-shaped growth, overshoot, and collapse from feedback structure;</li>
+<li>perform loop-dominance reasoning across time;</li>
+<li>diagnose hidden time constants and aggressive-control instability;</li>
+<li>design structure experiments that isolate mechanisms.</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-7">Retrieval and readiness check</h3>
+<ol>
+<li>Predict behavior when a balancing loop has no delay, a short delay, and a long delay.</li>
+<li>Explain why a fixed delay and an exponential smoothing delay are not interchangeable.</li>
+<li>Sketch a saturation lookup function.</li>
+<li>Identify one mechanism that can create S-shaped adoption.</li>
+<li>Explain overshoot using a growing stock and delayed limiting feedback.</li>
+<li>Name one numerical artifact that can resemble oscillation.</li>
+</ol>
+<h3 id="required-study-7">Required study</h3>
+<p><strong>Required</strong></p>
+<ul>
+<li>Meadows, sections on delays, resilience, bounded systems, and leverage. <a href="https://www.chelseagreen.com/product/thinking-in-systems/" title="Chelsea Green Publishing — Thinking in Systems: A Primer">MEADOWS</a></li>
+<li>MIT Road Maps materials on delays, S-shaped growth, oscillating systems, overshoot/collapse, table functions, and hidden time constants. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT OpenCourseWare — System Dynamics Self Study readings and Road Maps">MIT-SD-READINGS</a></li>
+<li>Vensim documentation on delay and smoothing functions and lookup tables. <a href="https://www.vensim.com/documentation/" title="Ventana Systems — Vensim documentation">VENSIM-DOCS</a></li>
+</ul>
+<p><strong>Guiding questions:</strong> Is the delay physical or informational? What prevents unlimited growth? Which loop should dominate before and after the turning point?</p>
+<h3 id="instructor-style-lesson-notes-7">Instructor-style lesson notes</h3>
+<p>Delays have different meanings. A material delay represents entities moving through stages; an information delay represents gradual perception or reporting; a decision delay represents time to authorize action; an implementation delay represents time to create capacity. Choosing a delay function only for curve shape weakens causal validity.</p>
+<p>Nonlinearities are expected in real systems: capacity limits, thresholds, congestion, fatigue, learning curves, and response saturation. Use lookup functions when the relationship is bounded, documented, and hard to express analytically. Test endpoints and extrapolation.</p>
+<p>Oscillation typically requires balancing feedback with delay or inertia. Overshoot requires growth that continues after the system passes a sustainable level because limiting feedback is delayed. Collapse requires damage to carrying capacity or another reinforcing decline mechanism.</p>
+<p>Loop dominance is a qualitative explanation of which feedback contributes most to behavior in a period. Do not infer dominance solely from loop count or visual prominence. Use structure experiments: disable, weaken, or isolate loops and compare behavior while respecting model meaning.</p>
+<h3 id="worked-example-7">Worked example</h3>
+<p>Add a trust perception stock with a three-month adjustment time and a maintenance-capacity fatigue lookup. Demand grows through trust and service quality, while maintenance backlog reduces active fleet after a delay. The model initially shows growth, then overshoot and oscillatory recovery. A structure experiment removes the trust delay; oscillation decreases. Removing maintenance fatigue prevents collapse but not initial overshoot. The example demonstrates changing loop dominance rather than attributing behavior to one permanent loop.</p>
+<h3 id="guided-practice-7">Guided practice</h3>
+<ol>
+<li>Add at least two distinct delay types to the model.</li>
+<li>Add two evidence-backed nonlinear relationships.</li>
+<li>Reproduce goal-seeking, oscillatory, S-shaped, and overshoot behaviors in unit models.</li>
+<li>Design four structure experiments isolating major loops.</li>
+<li>Create a loop-dominance timeline tied to reference modes.</li>
+<li>Perform time-step sensitivity on the fastest delay.</li>
+<li>Document rejected delay/nonlinearity formulations.</li>
+</ol>
+<h3 id="independent-exercises-7">Independent exercises</h3>
+<p><strong>Foundation:</strong> complete delay and lookup exercises.</p>
+<p><strong>Application:</strong> implement model v2 with delays and nonlinearities.</p>
+<p><strong>Analysis:</strong> compare fixed, first-order, and third-order delay representations for one process.</p>
+<p><strong>Synthesis:</strong> explain the transition from service growth to maintenance stress and partial recovery using loop dominance.</p>
+<p><strong>Stretch:</strong> use sensitivity runs to identify parameter combinations that shift the system from stable goal seeking to oscillation.</p>
+<h3 id="weekly-deliverable-7">Weekly deliverable</h3>
+<p>Submit a <strong>Dynamic Structure Experiment Package</strong> containing:</p>
+<ul>
+<li>model v2 and change record;</li>
+<li>delay and lookup rationale;</li>
+<li>unit-model behavior comparisons;</li>
+<li>four structure experiments;</li>
+<li>loop-dominance timeline;</li>
+<li>numerical sensitivity results;</li>
+<li>reference-mode comparison and unresolved structural questions.</li>
+</ul>
+<p>Target length: 12–18 pages plus model files.</p>
+<h3 id="analytic-rubric-7">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Delay and nonlinearity causal validity</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Behavioral explanation and loop dominance</td>
+<td style="text-align:right">30%</td>
+</tr>
+<tr>
+<td>Structure experiments</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Numerical testing and robustness</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Documentation and rejected alternatives</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-7">Critical failures</h3>
+<ul>
+<li>delay type is selected only to improve fit;</li>
+<li>lookup endpoints or units are undocumented;</li>
+<li>oscillation is accepted without time-step testing;</li>
+<li>loop dominance is asserted without structure experiments;</li>
+<li>saturation or physical bounds can be violated;</li>
+<li>the model adds complexity without improving explanation.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-7">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What often creates oscillation?</strong> Balancing feedback operating through significant delay or inertia.</li>
+<li><strong>What is overshoot?</strong> A stock exceeds a sustainable or target level before limiting feedback acts.</li>
+<li><strong>Why does delay order matter?</strong> It changes how dispersed or sharp the response is.</li>
+<li><strong>What is loop dominance?</strong> The feedback structure most responsible for behavior during a period.</li>
+<li><strong>Can a reinforcing loop produce decline?</strong> Yes, if it reinforces a declining change.</li>
+<li><strong>Why test lookup endpoints?</strong> Extrapolation or extreme inputs may create impossible responses.</li>
+<li><strong>What is a structure experiment?</strong> A controlled modification that isolates a hypothesized mechanism.</li>
+<li><strong>Why keep the model parsimonious?</strong> Additional detail can reduce transparency and increase unsupported uncertainty.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-7">Revision and mastery gate</h3>
+<p>Pass when the learner can predict and explain each major behavior before running the model, and when delay/nonlinearity choices are tied to mechanisms and evidence. Remove any complexity that cannot be tested or justified.</p>
+<h3 id="suggested-workload-7">Suggested workload</h3>
+<ul>
+<li>Reading and unit models: 2.5 hours</li>
+<li>Delay/nonlinearity implementation: 3 hours</li>
+<li>Structure experiments: 2.5 hours</li>
+<li>Analysis and revision: 2 hours</li>
+<li><strong>Total:</strong> approximately 10 hours</li>
+</ul>
+<h3 id="configuration-and-portfolio-update-7">Configuration and portfolio update</h3>
+<p>Tag model v2 as <code>STSD-MDL-002</code>. Store each structure experiment as a named scenario rather than overwriting equations. Link loop-dominance claims to experiment output IDs.</p>
+<hr/>
+<h2 id="week-8--test-structure-and-behavior-use-data-responsibly-and-make-a-credibility-claim">Week 8 — Test structure and behavior, use data responsibly, and make a credibility claim</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 13):</strong> <a href="../../K/B13/chapters/08-test-structure-and-behavior-use-data-responsibly-and-make-a-credibil.html">Chapter 8 — Test structure and behavior, use data responsibly, and make a credibility claim</a> · <a href="../../K/B13/labs/lab-08-test-structure-and-behavior-use-data-responsibly-and-make-a-credibil.html">Hypothetical Lab 8</a> · <a href="../../K/P3-text/lessons/645-781-w08.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="professional-context-and-essential-question-8">Professional context and essential question</h3>
+<p>A system-dynamics model is credible for a purpose only when its structure, equations, behavior, and policy insights survive relevant tests. <strong>Essential question:</strong> What evidence is sufficient to use this model for policy learning, and what remains uncertain?</p>
+<h3 id="weekly-learning-outcomes-8">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>distinguish verification, structure validity, behavior validity, policy validity, credibility, and fitness for use;</li>
+<li>perform direct structure, parameter, dimensional, extreme-condition, boundary, integration-error, behavior-reproduction, and sensitivity tests;</li>
+<li>compare model behavior with data without reducing validity to goodness of fit;</li>
+<li>use residuals and qualitative feature comparison appropriately;</li>
+<li>identify calibration risk, equifinality, and overfitting;</li>
+<li>implement Reality Checks or equivalent automated model assertions;</li>
+<li>issue a bounded credibility and use recommendation.</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-8">Retrieval and readiness check</h3>
+<ol>
+<li>Classify ten tests as structure, behavior, numerical, or policy tests.</li>
+<li>Explain why historical fit is necessary in some uses but never sufficient.</li>
+<li>Define equifinality.</li>
+<li>Name one direct structure test and one extreme-condition test.</li>
+<li>Explain the difference between model validity and authorization for a specific use.</li>
+<li>Identify one result that would falsify the central dynamic hypothesis.</li>
+</ol>
+<h3 id="required-study-8">Required study</h3>
+<p><strong>Required</strong></p>
+<ul>
+<li>Barlas, model validity and validation paper, focusing on structure and behavior tests. <a href="https://proceedings.systemdynamics.org/1994/proceed/papers_vol_1/barla002.pdf" title="Yaman Barlas — Formal aspects of model validity and validation in system dynamics">BARLAS</a></li>
+<li>Sterman, “A Skeptic’s Guide to Computer Models.” <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="John Sterman — A Skeptic's Guide to Computer Models, available through MIT Road Maps">STERMAN-SKEPTIC</a></li>
+<li>MIT Road Maps materials on dynamic-model validity, sensitivity, and the correctness checklist. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT OpenCourseWare — System Dynamics Self Study readings and Road Maps">MIT-SD-READINGS</a> <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT Road Maps appendix — System Dynamics Model Correctness Checklist">MIT-CHECKLIST</a></li>
+<li>Vensim data and Reality Check documentation. <a href="https://www.vensim.com/documentation/ref_data.html" title="Ventana Systems — Preparing, using, and exporting data">VENSIM-DATA</a> <a href="https://vensim.com/vensim-brochure/" title="Ventana Systems — Reality Check and model-quality features">VENSIM-REALITY</a></li>
+</ul>
+<p><strong>Guiding questions:</strong> Which tests challenge equations directly? Which behavior features matter to the policy? What uncertainty can calibration conceal?</p>
+<h3 id="instructor-style-lesson-notes-8">Instructor-style lesson notes</h3>
+<p>Testing is iterative and begins during formulation. Direct structure tests compare equations and decision rules with knowledge of the real system. Structure-oriented behavior tests examine whether the model responds correctly under extreme conditions, boundary changes, and isolated mechanisms. Behavior tests compare patterns, timing, amplitudes, turning points, and cross-variable relationships.</p>
+<p>Fit statistics are evidence about behavior reproduction, not proof of causal correctness. Many structures can fit short, noisy data. Calibrate only parameters that have a defensible meaning and range; preserve a holdout period or behavioral feature when practical; report parameter correlations and nonidentifiability.</p>
+<p>Reality Checks convert important expectations into repeatable assertions—for example, “with zero demand, completed trips eventually fall to zero,” or “active fleet cannot exceed total fleet.” If PLE limitations prevent direct automation, implement an equivalent documented test protocol.</p>
+<p>Credibility is use-specific. A model may support qualitative policy learning but not point forecasting or safety certification. The use recommendation should name supported questions, unsupported uses, conditions, residual risk, and monitoring needs.</p>
+<h3 id="worked-example-8">Worked example</h3>
+<p>The model is tested against the eight-quarter synthetic data. A parameter search can fit wait time closely with both a maintenance-delay structure and an alternative trust-only structure. Cross-variable behavior reveals that the trust-only structure cannot reproduce maintenance backlog or active-fleet turning points. Extreme tests reveal negative backlog under one equation; the equation is corrected with a capacity and nonnegativity constraint. The credibility claim is limited to comparative policy learning over a five-year horizon.</p>
+<h3 id="guided-practice-8">Guided practice</h3>
+<ol>
+<li>Create a test plan before examining results.</li>
+<li>Perform at least 20 tests spanning all required categories.</li>
+<li>Implement five Reality Checks or equivalent assertions.</li>
+<li>Compare model and reference-mode features for all core variables.</li>
+<li>Conduct parameter sensitivity and identify nonidentifiable combinations.</li>
+<li>Test at least one alternative structure.</li>
+<li>Maintain a defect log and rerun regression tests.</li>
+<li>Hold a Model Credibility Review.</li>
+</ol>
+<h3 id="independent-exercises-8">Independent exercises</h3>
+<p><strong>Foundation:</strong> classify and design model tests.</p>
+<p><strong>Application:</strong> execute the complete test plan.</p>
+<p><strong>Analysis:</strong> compare two structures that fit one outcome and determine which better explains the multivariable behavior.</p>
+<p><strong>Synthesis:</strong> write a bounded fitness-for-use recommendation.</p>
+<p><strong>Stretch:</strong> automate test execution or result comparison with Vensim tools or a companion script.</p>
+<h3 id="weekly-deliverable-8">Weekly deliverable</h3>
+<p>Submit a <strong>Model Test and Credibility Package</strong> containing:</p>
+<ul>
+<li>test plan and traceability matrix;</li>
+<li>structure, units, extreme, boundary, numerical, behavior, and sensitivity results;</li>
+<li>Reality Checks or equivalent assertions;</li>
+<li>data/reference-mode comparison;</li>
+<li>alternative-structure analysis;</li>
+<li>calibration and identifiability notes;</li>
+<li>defect and regression log;</li>
+<li>credibility/use recommendation and review record.</li>
+</ul>
+<p>Target length: 18–25 pages plus executable evidence.</p>
+<h3 id="analytic-rubric-8">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Test coverage and traceability</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Structural and numerical rigor</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Behavior and data evaluation</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Alternative structures and uncertainty</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Fitness-for-use judgment and communication</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-8">Critical failures</h3>
+<ul>
+<li>validity is based only on visual fit or R-squared;</li>
+<li>no alternative structure is tested;</li>
+<li>extreme-condition or numerical tests are absent;</li>
+<li>defects are corrected without regression evidence;</li>
+<li>the credibility claim exceeds the evidence;</li>
+<li>unsupported prediction or certification uses are implied.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-8">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is structure validity?</strong> Evidence that modeled relationships and decision rules are acceptable representations for the purpose.</li>
+<li><strong>What is behavior validity?</strong> Evidence that the model reproduces relevant patterns and responses.</li>
+<li><strong>Why is fit insufficient?</strong> Different structures can fit the same data and still yield different policies.</li>
+<li><strong>What is equifinality?</strong> Multiple parameter/structure combinations produce similar output.</li>
+<li><strong>What is an extreme-condition test?</strong> A test of behavior under very high, low, zero, or limiting inputs.</li>
+<li><strong>What is a Reality Check?</strong> A repeatable assertion about acceptable model behavior under defined conditions.</li>
+<li><strong>What does calibration do?</strong> Estimates parameter values; it does not prove structure.</li>
+<li><strong>What is fitness for use?</strong> Whether evidence is sufficient for a particular decision and consequence level.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-8">Revision and mastery gate</h3>
+<p>Pass when all critical tests are complete, model defects are dispositioned, and the credibility claim is explicitly bounded. A model that fits the data but fails structure or extreme tests does not pass.</p>
+<h3 id="suggested-workload-8">Suggested workload</h3>
+<ul>
+<li>Reading and test planning: 2.5 hours</li>
+<li>Test execution and data comparison: 4 hours</li>
+<li>Alternative structure and sensitivity: 2.5 hours</li>
+<li>Review and revision: 1.5 hours</li>
+<li><strong>Total:</strong> approximately 10.5 hours</li>
+</ul>
+<h3 id="configuration-and-portfolio-update-8">Configuration and portfolio update</h3>
+<p>Tag the credibility-reviewed model <code>STSD-MDL-003</code>. Freeze the test suite and results under <code>STSD-TEST-001</code>. Record supported and prohibited uses in the model release note.</p>
+<hr/>
+<h2 id="week-9--apply-feedback-modeling-to-supply-management-and-inventory-dynamics">Week 9 — Apply feedback modeling to supply management and inventory dynamics</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 13):</strong> <a href="../../K/B13/chapters/09-apply-feedback-modeling-to-supply-management-and-inventory-dynamics.html">Chapter 9 — Apply feedback modeling to supply management and inventory dynamics</a> · <a href="../../K/B13/labs/lab-09-apply-feedback-modeling-to-supply-management-and-inventory-dynamics.html">Hypothetical Lab 9</a> · <a href="../../K/P3-text/lessons/645-781-w09.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="professional-context-and-essential-question-9">Professional context and essential question</h3>
+<p>Supply systems exhibit accumulation, ordering delays, information distortion, shortage gaming, expediting, and oscillation. <strong>Essential question:</strong> Why can reasonable local ordering and production rules amplify demand and destabilize the supply network?</p>
+<h3 id="weekly-learning-outcomes-9">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>formulate inventory, backlog, supply-line, ordering, production, shipment, and demand stocks/flows;</li>
+<li>explain the bullwhip effect using feedback, delay, forecasting, and decision rules;</li>
+<li>model target inventory, desired supply line, order adjustment, rationing, and expediting;</li>
+<li>distinguish service improvement from inventory growth and hidden backlog;</li>
+<li>evaluate policy portfolios such as information sharing, lead-time reduction, smoothing, capacity reserve, and allocation rules;</li>
+<li>transfer system-dynamics insights while preserving domain constraints.</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-9">Retrieval and readiness check</h3>
+<ol>
+<li>Identify stocks in a basic inventory system.</li>
+<li>Explain why orders are not the same as demand.</li>
+<li>Define the supply line.</li>
+<li>Predict what happens when managers react aggressively to a delayed inventory signal.</li>
+<li>Explain how shortage gaming can amplify orders.</li>
+<li>Name one policy that can reduce oscillation but increase responsiveness time.</li>
+</ol>
+<h3 id="required-study-9">Required study</h3>
+<p><strong>Required</strong></p>
+<ul>
+<li>MIT Road Maps materials on supply-and-demand dynamics, oscillating systems, delays, and generic structures. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT OpenCourseWare — System Dynamics Self Study readings and Road Maps">MIT-SD-READINGS</a></li>
+<li>Meadows, relevant traps involving escalation, common resources, and policy resistance. <a href="https://www.chelseagreen.com/product/thinking-in-systems/" title="Chelsea Green Publishing — Thinking in Systems: A Primer">MEADOWS</a></li>
+<li>Selected healthcare or critical-supply-chain system-dynamics application supplied in the repository. <a href="https://proceedings.systemdynamics.org/2003/proceed/PAPERS/122.pdf" title="System Dynamics Society proceedings — Health Care Supply Chain Dynamics">HEALTH-SUPPLY-CASE</a></li>
+<li>Vensim documentation for submodels, data, and sensitivity runs. <a href="https://www.vensim.com/documentation/" title="Ventana Systems — Vensim documentation">VENSIM-DOCS</a></li>
+</ul>
+<p><strong>Guiding questions:</strong> Which information is delayed? Which stock is invisible to the decision maker? How does the ordering rule create amplification?</p>
+<h3 id="instructor-style-lesson-notes-9">Instructor-style lesson notes</h3>
+<p>A canonical supply model contains inventory, backlog, and supply-line stocks. Demand depletes inventory or increases backlog. Orders initiate a delayed replenishment process. Managers often order based on expected demand plus correction for inventory and supply-line gaps. If correction is too aggressive relative to delay, orders oscillate.</p>
+<p>The bullwhip effect is not simply “bad forecasting.” It can emerge from rational local policies operating with delayed, partial information. Batching, promotions, rationing, and performance incentives can strengthen it.</p>
+<p>Policy analysis should compare portfolios: reducing physical lead time, sharing end-demand data, limiting order volatility, adjusting target coverage, reserving capacity, changing allocation rules, and improving visibility of the supply line. A single parameter change may shift cost or shortage burden to another tier.</p>
+<p>For critical supplies, evaluate resilience, expiration, substitution, equity, and emergency allocation—not only average inventory cost.</p>
+<h3 id="worked-example-9">Worked example</h3>
+<p>A hospital orders a critical component using recent consumption plus a four-week inventory-gap correction. Supplier lead time is six weeks. A shortage causes departments to inflate orders, increasing apparent demand. The model shows large order oscillations, temporary overstock, and expiration after supply recovers. A policy portfolio combining end-use visibility, anti-gaming allocation, and moderate correction outperforms a policy that merely increases target inventory.</p>
+<h3 id="guided-practice-9">Guided practice</h3>
+<ol>
+<li>Build an inventory/backlog/supply-line model.</li>
+<li>Reproduce amplification after a step increase in demand.</li>
+<li>Test aggressive versus gradual correction policies.</li>
+<li>Add one behavioral mechanism such as shortage gaming or panic ordering.</li>
+<li>Evaluate at least four policy portfolios.</li>
+<li>Track cost, service, backlog, expiration, and equity outcomes.</li>
+<li>Compare the supply model’s feedback patterns with the mobility maintenance-parts sector.</li>
+</ol>
+<h3 id="independent-exercises-9">Independent exercises</h3>
+<p><strong>Foundation:</strong> construct the canonical inventory model and verify units.</p>
+<p><strong>Application:</strong> complete the critical-supply case.</p>
+<p><strong>Analysis:</strong> separate physical lead-time effects from information and decision-rule effects.</p>
+<p><strong>Synthesis:</strong> write a policy brief for a supply-network decision authority.</p>
+<p><strong>Stretch:</strong> model two echelons and compare centralized versus local decision rules.</p>
+<h3 id="weekly-deliverable-9">Weekly deliverable</h3>
+<p>Submit a <strong>Supply Management Application Package</strong> containing:</p>
+<ul>
+<li>problem statement and reference modes;</li>
+<li>causal-loop and stock-flow models;</li>
+<li>equation and unit documentation;</li>
+<li>verification and behavior tests;</li>
+<li>at least four policy portfolios;</li>
+<li>sensitivity and unintended-consequence analysis;</li>
+<li>1,500-word executive policy brief;</li>
+<li>transfer reflection linking supply and mobility dynamics.</li>
+</ul>
+<p>Target length: 15–22 pages plus model files.</p>
+<h3 id="analytic-rubric-9">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Supply structure and decision rules</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Dynamic behavior and verification</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Policy portfolio analysis</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Multiobjective and equity consequences</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Transfer insight and communication</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-9">Critical failures</h3>
+<ul>
+<li>orders, demand, shipments, inventory, and backlog are conflated;</li>
+<li>the supply-line stock is omitted despite material delay;</li>
+<li>bullwhip is asserted without a mechanism;</li>
+<li>policy analysis tracks only average inventory;</li>
+<li>rationing, expiration, substitution, or critical-service impact is ignored where relevant.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-9">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why is the supply line a stock?</strong> Ordered material accumulates while in production/transit before receipt.</li>
+<li><strong>What creates bullwhip?</strong> Delays, correction rules, forecasting, batching, gaming, and local information can amplify demand changes.</li>
+<li><strong>Why can higher target inventory fail?</strong> It may increase orders, cost, expiration, and oscillation without reducing lead time.</li>
+<li><strong>What is backlog?</strong> Accumulated unfilled demand.</li>
+<li><strong>Why test step demand?</strong> It reveals transient response and policy stability.</li>
+<li><strong>What does smoothing trade off?</strong> Reduced volatility versus slower response.</li>
+<li><strong>Why examine allocation rules?</strong> They change incentives and shortage distribution.</li>
+<li><strong>What transfers to mobility?</strong> Backlog, delayed capacity, aggressive correction, and hidden pipeline dynamics; domain constraints still differ.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-9">Revision and mastery gate</h3>
+<p>Pass when the model reproduces and explains amplification, the policy recommendation addresses both physical and decision-rule structure, and multiple outcome burdens are visible. Revise any analysis that recommends inventory growth without supply-line and demand-behavior evidence.</p>
+<h3 id="suggested-workload-9">Suggested workload</h3>
+<ul>
+<li>Reading and canonical model: 2.5 hours</li>
+<li>Case implementation and verification: 3 hours</li>
+<li>Policy experiments: 2.5 hours</li>
+<li>Brief and transfer reflection: 2 hours</li>
+<li><strong>Total:</strong> approximately 10 hours</li>
+</ul>
+<h3 id="configuration-and-portfolio-update-9">Configuration and portfolio update</h3>
+<p>Store the supply model as <code>STSD-APP-SUP-001</code> with independent intended-use and limitation statements. Do not merge its calibrated parameters into the mobility model; link only reusable structural patterns and tested code fragments.</p>
+<hr/>
+<h2 id="week-10--apply-systems-thinking-to-healthcare-and-human-service-delivery">Week 10 — Apply systems thinking to healthcare and human-service delivery</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 13):</strong> <a href="../../K/B13/chapters/10-apply-systems-thinking-to-healthcare-and-human-service-delivery.html">Chapter 10 — Apply systems thinking to healthcare and human-service delivery</a> · <a href="../../K/B13/labs/lab-10-apply-systems-thinking-to-healthcare-and-human-service-delivery.html">Hypothetical Lab 10</a> · <a href="../../K/P3-text/lessons/645-781-w10.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="professional-context-and-essential-question-10">Professional context and essential question</h3>
+<p>Healthcare and other human-service systems combine physical flow, clinical or service need, workforce capacity, behavior, access, quality, and delayed outcomes. <strong>Essential question:</strong> How can policies that improve throughput locally worsen system demand, workforce capability, or patient outcomes over time?</p>
+<h3 id="weekly-learning-outcomes-10">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>formulate patient/service populations, queues/backlogs, workforce capacity, fatigue, skill, and delayed outcome mechanisms;</li>
+<li>distinguish throughput, access, quality, safety, equity, and demand outcomes;</li>
+<li>represent readmission, rework, demand suppression, burnout, and capacity adaptation feedback;</li>
+<li>identify ethical and boundary limits of aggregate models;</li>
+<li>evaluate capacity, flow, prevention, workforce, and coordination policy portfolios;</li>
+<li>compare system-dynamics and discrete-event perspectives for the same service problem.</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-10">Retrieval and readiness check</h3>
+<ol>
+<li>Identify a stock and a delay in an emergency-department crowding problem.</li>
+<li>Explain why faster discharge can create readmission risk.</li>
+<li>Identify one mechanism by which poor access suppresses observed demand.</li>
+<li>Explain how burnout can create reinforcing decline.</li>
+<li>Name one outcome that average length of stay hides.</li>
+<li>State when a discrete-event model may be needed alongside system dynamics.</li>
+</ol>
+<h3 id="required-study-10">Required study</h3>
+<p><strong>Required</strong></p>
+<ul>
+<li>Meadows, sections on resilience, policy resistance, and system traps. <a href="https://www.chelseagreen.com/product/thinking-in-systems/" title="Chelsea Green Publishing — Thinking in Systems: A Primer">MEADOWS</a></li>
+<li>Senge, learning, mental models, and organizational feedback selections. <a href="https://www.penguinrandomhouse.com/books/163984/the-fifth-discipline-by-peter-m-senge/" title="Penguin Random House — The Fifth Discipline">SENGE</a></li>
+<li>Selected open healthcare system-dynamics case or paper supplied in the repository. <a href="https://proceedings.systemdynamics.org/" title="System Dynamics Society proceedings archive — healthcare system dynamics cases">HEALTHCARE-CASE</a></li>
+<li>MIT and Vensim model-building/test resources as needed. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/" title="MIT OpenCourseWare — System Dynamics Self Study">MIT-SD-SELF-STUDY</a> <a href="https://www.vensim.com/documentation/" title="Ventana Systems — Vensim documentation">VENSIM-DOCS</a></li>
+</ul>
+<p><strong>Guiding questions:</strong> Which performance target causes local optimization? What demand is prevented, delayed, or hidden? Which workforce capability is accumulating or eroding?</p>
+<h3 id="instructor-style-lesson-notes-10">Instructor-style lesson notes</h3>
+<p>Aggregate healthcare models require special care. A stock may represent patients waiting for beds, patients in care, discharged patients at risk, trained staff, or staff fatigue. These aggregations support policy learning but can conceal heterogeneity, clinical pathways, and inequity.</p>
+<p>A common feedback structure links crowding to pressure for rapid discharge, rapid discharge to insufficient transition support, transition quality to readmission, and readmission back to crowding. Another links workload to burnout, burnout to absence/turnover, staffing to workload, and workload back to burnout.</p>
+<p>Policies should be portfolios: inpatient capacity, discharge coordination, community support, workforce development, prevention, scheduling, and information. A throughput-only policy may shift burden outside the modeled boundary.</p>
+<p>Compare model forms explicitly. System dynamics can explain long-horizon workforce and demand feedback; discrete-event simulation may be needed for detailed queues, resource schedules, and patient classes. Hybrid or linked evidence may be appropriate.</p>
+<h3 id="worked-example-10">Worked example</h3>
+<p>An emergency department expands rapid-discharge targets. Initially length of stay improves. Inadequate follow-up increases readmissions after a delay; workload rises; burnout and turnover reduce effective capacity; crowding returns worse than before. A portfolio combining discharge support, staffing pipeline, and upstream access improves outcomes more slowly but sustainably. The example also identifies subgroup inequity hidden by aggregate averages.</p>
+<h3 id="guided-practice-10">Guided practice</h3>
+<ol>
+<li>Choose emergency flow, bed management, workforce burnout, or another service-delivery case.</li>
+<li>Define at least five reference modes and stakeholder outcomes.</li>
+<li>Build a causal-loop model and a small stock-flow model.</li>
+<li>Include at least one quality/rework loop and one workforce-capability loop.</li>
+<li>Evaluate four policy portfolios.</li>
+<li>Segment or stress-test one vulnerable population or access condition.</li>
+<li>Compare system dynamics with a discrete-event or process model from earlier coursework.</li>
+<li>Conduct an ethics and boundary review.</li>
+</ol>
+<h3 id="independent-exercises-10">Independent exercises</h3>
+<p><strong>Foundation:</strong> map a patient-flow case into stocks and rates.</p>
+<p><strong>Application:</strong> complete the healthcare/service model.</p>
+<p><strong>Analysis:</strong> show how one local performance target can shift cost or harm outside the boundary.</p>
+<p><strong>Synthesis:</strong> prepare a policy brief balancing access, quality, workforce, equity, and cost.</p>
+<p><strong>Stretch:</strong> create a conceptual hybrid architecture connecting system dynamics to discrete-event simulation.</p>
+<h3 id="weekly-deliverable-10">Weekly deliverable</h3>
+<p>Submit a <strong>Healthcare or Human-Service Application Package</strong> containing:</p>
+<ul>
+<li>problem statement, reference modes, and stakeholder outcomes;</li>
+<li>causal-loop and stock-flow models;</li>
+<li>model-form comparison;</li>
+<li>quality, rework/readmission, workforce, and access mechanisms;</li>
+<li>tests and policy experiments;</li>
+<li>equity and ethical boundary analysis;</li>
+<li>1,500-word policy brief;</li>
+<li>transfer reflection for the mobility capstone.</li>
+</ul>
+<p>Target length: 16–24 pages plus model files.</p>
+<h3 id="analytic-rubric-10">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Service, quality, and workforce structure</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Model-form and boundary judgment</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Policy portfolio and delayed outcomes</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Equity, ethics, and subgroup analysis</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Transfer insight and communication</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-10">Critical failures</h3>
+<ul>
+<li>throughput is treated as the only objective;</li>
+<li>readmission/rework or workforce feedback is ignored;</li>
+<li>aggregate results are generalized to all populations without caveat;</li>
+<li>patient/service safety or ethical limits are omitted;</li>
+<li>policy benefits occur only by shifting burden outside the boundary;</li>
+<li>model form is not justified.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-10">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>How can rapid discharge increase crowding?</strong> Poor transition support can increase delayed readmission.</li>
+<li><strong>What creates a burnout loop?</strong> Workload increases fatigue/burnout, reducing effective capacity and further increasing workload.</li>
+<li><strong>Why can observed demand be low despite high need?</strong> Access barriers and poor trust suppress requests.</li>
+<li><strong>Why is average length of stay insufficient?</strong> It hides tails, subgroups, quality, readmission, and access outcomes.</li>
+<li><strong>When is DES complementary?</strong> When detailed queues, resources, schedules, and individual pathways matter.</li>
+<li><strong>What is burden shifting?</strong> Improving one part by moving cost or harm to another part or time.</li>
+<li><strong>Why include workforce as a stock?</strong> Skill and available capacity accumulate and erode over time.</li>
+<li><strong>What is an ethical boundary test?</strong> Asking who is excluded, who bears risk, and what effects occur outside the model.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-10">Revision and mastery gate</h3>
+<p>Pass when the model explains delayed quality/workforce consequences, compares model forms, and exposes equity and boundary effects. Revise any policy brief that claims system improvement from a local throughput metric alone.</p>
+<h3 id="suggested-workload-10">Suggested workload</h3>
+<ul>
+<li>Reading and case framing: 2.5 hours</li>
+<li>Model construction and testing: 3 hours</li>
+<li>Policy and equity analysis: 2.5 hours</li>
+<li>Brief and review: 2 hours</li>
+<li><strong>Total:</strong> approximately 10 hours</li>
+</ul>
+<h3 id="configuration-and-portfolio-update-10">Configuration and portfolio update</h3>
+<p>Store the application as <code>STSD-APP-HLTH-001</code>. Record any sensitive or real data restrictions. Link transferable mechanisms to the mobility model through a pattern library, not copied parameters.</p>
+<hr/>
+<h2 id="week-11--design-robust-policy-portfolios-and-identify-leverage-resistance-and-unintended-consequences">Week 11 — Design robust policy portfolios and identify leverage, resistance, and unintended consequences</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 13):</strong> <a href="../../K/B13/chapters/11-design-robust-policy-portfolios-and-identify-leverage-resistance-and.html">Chapter 11 — Design robust policy portfolios and identify leverage, resistance, and unintended consequences</a> · <a href="../../K/B13/labs/lab-11-design-robust-policy-portfolios-and-identify-leverage-resistance-and.html">Hypothetical Lab 11</a> · <a href="../../K/P3-text/lessons/645-781-w11.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="professional-context-and-essential-question-11">Professional context and essential question</h3>
+<p>The strongest policy is rarely the one that produces the largest improvement in one base-case run. <strong>Essential question:</strong> Which portfolio changes the underlying structure across plausible conditions without creating unacceptable transition or distributional harm?</p>
+<h3 id="weekly-learning-outcomes-11">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>distinguish parameter, information, rule, goal, capacity, structural, and paradigm interventions;</li>
+<li>design coherent policy portfolios rather than isolated changes;</li>
+<li>conduct one-at-a-time, multivariate, and scenario sensitivity analysis appropriate to tool capability;</li>
+<li>identify leverage points, policy resistance, rebound, adaptation, and side effects;</li>
+<li>evaluate timing, sequencing, transition burden, governance, feasibility, and monitoring;</li>
+<li>compare policies using dynamic and distributional outcomes;</li>
+<li>issue a robust, conditional recommendation.</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-11">Retrieval and readiness check</h3>
+<ol>
+<li>List three levels of intervention more structural than changing a parameter.</li>
+<li>Explain why a leverage point is not simply the most sensitive parameter.</li>
+<li>Define policy resistance and rebound.</li>
+<li>Distinguish uncertainty in parameter values from uncertainty in model structure.</li>
+<li>Explain why implementation sequence can change policy outcome.</li>
+<li>Name one indicator that could detect an unintended consequence early.</li>
+</ol>
+<h3 id="required-study-11">Required study</h3>
+<p><strong>Required</strong></p>
+<ul>
+<li>Meadows, <strong>Leverage Points: Places to Intervene in a System</strong> and final systems-practice chapter. <a href="https://www.chelseagreen.com/product/thinking-in-systems/" title="Chelsea Green Publishing — Thinking in Systems: A Primer">MEADOWS</a></li>
+<li>Senge, leverage, learning, and implementation selections. <a href="https://www.penguinrandomhouse.com/books/163984/the-fifth-discipline-by-peter-m-senge/" title="Penguin Random House — The Fifth Discipline">SENGE</a></li>
+<li>MIT Road Maps sensitivity-analysis materials. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="MIT OpenCourseWare — System Dynamics Self Study readings and Road Maps">MIT-SD-READINGS</a></li>
+<li>Vensim sensitivity and scenario documentation available for the installed edition; use a documented manual design if a feature is unavailable in PLE. <a href="https://www.vensim.com/documentation/" title="Ventana Systems — Vensim documentation">VENSIM-DOCS</a></li>
+</ul>
+<p><strong>Guiding questions:</strong> Does the policy change a feedback structure or merely push a variable? Which assumptions reverse the ranking? What monitoring closes the learning loop?</p>
+<h3 id="instructor-style-lesson-notes-11">Instructor-style lesson notes</h3>
+<p>Sensitivity is not leverage. A parameter may strongly affect output but be infeasible to change, while a modest rule or information intervention may restructure behavior. Leverage claims require a mechanism, feasible action, and policy experiment.</p>
+<p>Build portfolios around complementary mechanisms. For mobility, a policy could combine preventive-maintenance capacity, staged demand growth, transparent service reliability information, accessibility reservation protection, and a budget rule tied to lifecycle condition rather than only ridership.</p>
+<p>Test policies across demand growth, funding delay, workforce productivity, failure rate, trust response, and external shock scenarios. Examine transient burden, not only end-state averages. A policy that succeeds after five years may be unacceptable if it creates severe first-year access loss.</p>
+<p>Policy resistance arises when actors or feedback processes offset the intervention. Anticipate adaptation: riders change behavior, staff game metrics, departments shift costs, and political support responds to visible outcomes. Create monitoring and revision triggers as part of the policy.</p>
+<h3 id="worked-example-11">Worked example</h3>
+<p>Four mobility portfolios are compared:</p>
+<ol>
+<li><strong>Capacity push:</strong> add vehicles only.</li>
+<li><strong>Maintenance first:</strong> increase preventive capacity and parts visibility.</li>
+<li><strong>Demand shaping:</strong> staged service expansion plus reservation rules.</li>
+<li><strong>Integrated learning portfolio:</strong> maintenance, staged growth, accessibility protections, workforce pipeline, transparent reliability metrics, and adaptive budget triggers.</li>
+</ol>
+<p>The capacity push wins for first-year wait time but later increases depot congestion and backlog. The integrated portfolio improves more slowly, avoids overshoot across most scenarios, and has explicit trigger-based adaptation.</p>
+<h3 id="guided-practice-11">Guided practice</h3>
+<ol>
+<li>Define four policy portfolios with mechanisms and implementation steps.</li>
+<li>Establish evaluation measures and unacceptable thresholds.</li>
+<li>Run baseline, optimistic, pessimistic, and disruption scenarios.</li>
+<li>Conduct sensitivity on at least eight uncertain parameters and two structural assumptions.</li>
+<li>Identify ranking reversals and no-regret elements.</li>
+<li>Analyze transition burden, equity, governance, and resource feasibility.</li>
+<li>Create a monitoring dashboard and policy-revision triggers.</li>
+<li>Hold a Policy Design Review.</li>
+</ol>
+<h3 id="independent-exercises-11">Independent exercises</h3>
+<p><strong>Foundation:</strong> distinguish leverage from sensitivity in ten examples.</p>
+<p><strong>Application:</strong> execute the mobility policy experiment campaign.</p>
+<p><strong>Analysis:</strong> identify policy resistance and rebound mechanisms for each portfolio.</p>
+<p><strong>Synthesis:</strong> issue a robust recommendation with implementation sequence and adaptive triggers.</p>
+<p><strong>Stretch:</strong> conduct a small global sensitivity or scenario-discovery analysis using an optional scripting tool.</p>
+<h3 id="weekly-deliverable-11">Weekly deliverable</h3>
+<p>Submit a <strong>Policy Portfolio and Robustness Package</strong> containing:</p>
+<ul>
+<li>policy theory and structure-change matrix;</li>
+<li>experiment design and scenario set;</li>
+<li>dynamic results for all policy portfolios;</li>
+<li>sensitivity, ranking-reversal, and structural-uncertainty analysis;</li>
+<li>transition, equity, governance, and implementation assessment;</li>
+<li>monitoring indicators and revision triggers;</li>
+<li>bounded recommendation;</li>
+<li>Policy Design Review record.</li>
+</ul>
+<p>Target length: 18–28 pages plus model and result files.</p>
+<h3 id="analytic-rubric-11">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Policy mechanisms and structural leverage</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Experiment and sensitivity rigor</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Robustness and reversal analysis</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Implementation, equity, and policy resistance</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Monitoring and decision communication</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-11">Critical failures</h3>
+<ul>
+<li>leverage is inferred only from parameter sensitivity;</li>
+<li>policies are compared in one base scenario;</li>
+<li>transition harm or implementation delay is ignored;</li>
+<li>model structural uncertainty is omitted;</li>
+<li>no ranking-reversal or threshold analysis is performed;</li>
+<li>recommendation lacks monitoring and revision triggers.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-11">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Is the most sensitive parameter always the best leverage point?</strong> No; changeability, structure, feasibility, and side effects matter.</li>
+<li><strong>What is a policy portfolio?</strong> A coordinated set of interventions targeting complementary mechanisms.</li>
+<li><strong>What is policy resistance?</strong> Endogenous responses that offset or reverse an intervention.</li>
+<li><strong>What is rebound?</strong> Efficiency or improvement induces behavior that erodes expected gains.</li>
+<li><strong>What is a no-regret action?</strong> An action that performs acceptably across many plausible futures.</li>
+<li><strong>Why analyze transient behavior?</strong> Implementation burden and early harm may determine feasibility and legitimacy.</li>
+<li><strong>What is a ranking reversal?</strong> A different policy becomes preferred under plausible assumptions or objectives.</li>
+<li><strong>Why define triggers?</strong> They connect implementation evidence to adaptive revision.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-11">Revision and mastery gate</h3>
+<p>Pass when the recommendation remains defensible across a documented range of scenarios, reversal conditions are explicit, and transition/equity effects are dispositioned. A single-run “best policy” does not pass.</p>
+<h3 id="suggested-workload-11">Suggested workload</h3>
+<ul>
+<li>Reading and policy design: 2.5 hours</li>
+<li>Experiment campaign: 3.5 hours</li>
+<li>Sensitivity and robustness: 2.5 hours</li>
+<li>Review and revision: 2 hours</li>
+<li><strong>Total:</strong> approximately 10.5 hours</li>
+</ul>
+<h3 id="configuration-and-portfolio-update-11">Configuration and portfolio update</h3>
+<p>Baseline the experiment design as <code>STSD-POL-001</code>. Store each scenario and policy configuration separately. Freeze the approved monitoring and revision-trigger table for the final report.</p>
+<hr/>
+<h2 id="week-12--defend-the-integrated-systems-insight-model-use-and-learning-strategy">Week 12 — Defend the integrated systems insight, model use, and learning strategy</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 13):</strong> <a href="../../K/B13/chapters/12-defend-the-integrated-systems-insight-model-use-and-learning-strateg.html">Chapter 12 — Defend the integrated systems insight, model use, and learning strategy</a> · <a href="../../K/B13/labs/lab-12-defend-the-integrated-systems-insight-model-use-and-learning-strateg.html">Hypothetical Lab 12</a> · <a href="../../K/P3-text/lessons/645-781-w12.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="professional-context-and-essential-question-12">Professional context and essential question</h3>
+<p>The final professional product is not the model file; it is a transparent learning and decision package that others can challenge, use, monitor, and revise. <strong>Essential question:</strong> What has the model taught, what has it not established, and how should the organization continue learning after the course?</p>
+<h3 id="weekly-learning-outcomes-12">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>synthesize reference modes, causal structure, stock-flow equations, tests, applications, and policy evidence;</li>
+<li>distinguish model insight, hypothesis, empirical finding, judgment, and recommendation;</li>
+<li>communicate dynamic behavior to technical and nontechnical audiences;</li>
+<li>demonstrate live model understanding and controlled modification;</li>
+<li>define implementation monitoring and model-update governance;</li>
+<li>reflect on systems-thinking habits, limitations, and ethical use;</li>
+<li>produce a reusable portfolio and handoff for later courses.</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-12">Retrieval and readiness check</h3>
+<ol>
+<li>State the model’s central hypothesis in 50 words.</li>
+<li>List three supported uses and three prohibited uses.</li>
+<li>Identify the weakest structural assumption.</li>
+<li>Predict the effect of one live parameter change before running it.</li>
+<li>Name one policy insight that transfers to both supply and healthcare cases.</li>
+<li>Explain how the model should be updated after implementation evidence arrives.</li>
+</ol>
+<h3 id="required-study-12">Required study</h3>
+<p><strong>Required</strong></p>
+<ul>
+<li>Meadows, <strong>Living in a World of Systems</strong> and final reflections. <a href="https://www.chelseagreen.com/product/thinking-in-systems/" title="Chelsea Green Publishing — Thinking in Systems: A Primer">MEADOWS</a></li>
+<li>Senge, selections on learning organizations, team learning, mental models, and sustained practice. <a href="https://www.penguinrandomhouse.com/books/163984/the-fifth-discipline-by-peter-m-senge/" title="Penguin Random House — The Fifth Discipline">SENGE</a></li>
+<li>Sterman, “A Skeptic’s Guide to Computer Models,” revisited for communication and misuse. <a href="https://ocw.mit.edu/courses/15-988-system-dynamics-self-study-fall-1998-spring-1999/pages/readings/" title="John Sterman — A Skeptic's Guide to Computer Models, available through MIT Road Maps">STERMAN-SKEPTIC</a></li>
+<li>JHU syllabus theme <strong>Systems Thinking and Dynamics Take Aways (Evolve)</strong>. <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.781.81" title="Johns Hopkins Engineering for Professionals — Fall 2026 syllabus for EN.645.781">JHU-781-SYLLABUS</a></li>
+</ul>
+<p><strong>Guiding questions:</strong> Which claims are model-conditioned? What evidence would change the policy? How can the organization institutionalize feedback learning rather than freeze the model?</p>
+<h3 id="instructor-style-lesson-notes-12">Instructor-style lesson notes</h3>
+<p>A final model review should separate five statement types:</p>
+<ol>
+<li><strong>Observed evidence:</strong> what data or documented experience show.</li>
+<li><strong>Model structure:</strong> the causal assumptions represented.</li>
+<li><strong>Simulation finding:</strong> what the model produces under a configuration.</li>
+<li><strong>Interpretation:</strong> why the analyst believes the behavior occurs.</li>
+<li><strong>Recommendation:</strong> a judgment combining evidence, objectives, constraints, and responsibility.</li>
+</ol>
+<p>Communication should show behavior and mechanism before displaying dense diagrams. Use a small set of focused views, annotated reference-mode comparisons, and policy trajectories. State uncertainties and excluded mechanisms in the same presentation as the recommendation.</p>
+<p>The model should become part of an organizational learning process: monitored indicators, periodic model review, ownership of data and equations, triggers for recalibration or restructuring, and records of decisions made with the model. Avoid “model drift” in which the model is reused for new questions without review.</p>
+<p>Reflective practice includes humility. Systems thinking can broaden perspective but can also centralize the modeler’s worldview, overaggregate lived experience, and create an illusion of holistic authority. Stakeholder challenge and plural models remain important.</p>
+<h3 id="worked-example-12">Worked example</h3>
+<p>The final executive presentation opens with the behavior puzzle, not the stock-flow diagram. It shows three reference modes, two dominant loops, one tested stock-flow view, and policy trajectories. A separate technical appendix contains equations and tests. During the oral defense, the reviewer doubles demand growth. The learner predicts that the integrated portfolio will preserve stability longer but eventually breach accessibility thresholds, runs the model, and updates the recommendation trigger.</p>
+<h3 id="guided-practice-12">Guided practice</h3>
+<ol>
+<li>Reconcile all critical review actions.</li>
+<li>Reproduce the baseline and policy results from a clean environment.</li>
+<li>Prepare an executive narrative and technical appendix.</li>
+<li>Create three focused model views for different stakeholders.</li>
+<li>Complete the live model challenge and oral defense.</li>
+<li>Write a systems-thinking retrospective identifying changed beliefs and remaining blind spots.</li>
+<li>Produce a handoff and model-governance plan.</li>
+<li>Archive the final portfolio and verify every link.</li>
+</ol>
+<h3 id="independent-exercises-12">Independent exercises</h3>
+<p><strong>Foundation:</strong> complete a 30-question cumulative retrieval assessment.</p>
+<p><strong>Application:</strong> assemble the controlled final capstone.</p>
+<p><strong>Analysis:</strong> identify where the final recommendation depends on model structure, preferences, or external facts.</p>
+<p><strong>Synthesis:</strong> defend the model and revise one conclusion after a live challenge.</p>
+<p><strong>Stretch:</strong> present the work to a practitioner or peer group and disposition external feedback.</p>
+<h3 id="weekly-deliverable-12">Weekly deliverable</h3>
+<p>Submit the <strong>Systems Insight and Use Review Package</strong> specified in Section 15, including:</p>
+<ul>
+<li>final Vensim model and reproducibility instructions;</li>
+<li>final technical report;</li>
+<li>executive decision brief;</li>
+<li>12–15 slide review deck;</li>
+<li>oral-defense recording or notes;</li>
+<li>model-use and update-governance plan;</li>
+<li>course portfolio index;</li>
+<li>1,000-word reflective essay on systems-thinking practice.</li>
+</ul>
+<p>Target technical report length: 30–45 pages plus appendices and executable evidence.</p>
+<h3 id="analytic-rubric-12">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integrated dynamic explanation</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Model quality and evidence</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Policy judgment and responsible use</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Live defense and adaptability</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Communication, governance, and portfolio</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-12">Critical failures</h3>
+<ul>
+<li>critical review actions remain open;</li>
+<li>baseline results cannot be reproduced;</li>
+<li>executive claims exceed the technical evidence;</li>
+<li>model diagrams are presented without behavior and mechanism;</li>
+<li>the learner cannot predict or explain a live change;</li>
+<li>no monitoring, update, or prohibited-use plan exists;</li>
+<li>reflection treats systems thinking as universally superior or complete.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-12">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is the final product?</strong> A controlled learning and decision package, not merely a model file.</li>
+<li><strong>Why separate evidence, model finding, and recommendation?</strong> They have different epistemic status.</li>
+<li><strong>What is model drift?</strong> Reuse for new purposes or conditions without renewed review.</li>
+<li><strong>Why use focused views?</strong> Different audiences need different mechanisms without losing traceability.</li>
+<li><strong>What is a prohibited use?</strong> A decision or claim not supported by the model’s evidence and scope.</li>
+<li><strong>Why monitor after implementation?</strong> Real behavior tests assumptions and may trigger policy/model revision.</li>
+<li><strong>What demonstrates mastery in a live challenge?</strong> Predicting, running, explaining, and revising coherently.</li>
+<li><strong>What is a key ethical risk of systems models?</strong> They can overaggregate stakeholders or give one worldview unjustified authority.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-12">Revision and mastery gate</h3>
+<p>Pass when the final package scores at least 80%, all critical criteria are met, results reproduce, and the learner successfully completes the live model challenge. The final grade is not released until required revisions from the defense are incorporated.</p>
+<h3 id="suggested-workload-12">Suggested workload</h3>
+<ul>
+<li>Cumulative review and reconciliation: 2 hours</li>
+<li>Report and deck preparation: 3 hours</li>
+<li>Reproducibility and portfolio audit: 2 hours</li>
+<li>Oral defense and live challenge: 1.5 hours</li>
+<li>Revision and reflection: 2 hours</li>
+<li><strong>Total:</strong> approximately 10.5 hours</li>
+</ul>
+<h3 id="configuration-and-portfolio-update-12">Configuration and portfolio update</h3>
+<p>Tag the final model <code>STSD-MDL-004-FINAL</code> and the course release <code>STSD-COURSE-BASELINE-1.0</code>. Record supported/prohibited uses, unresolved limitations, monitoring owners, update triggers, and downstream handoff questions in the final release note.</p>
+<hr/>
+<h2 id="references">References</h2>
+</main></body></html>

@@ -1,0 +1,1 @@
+digraph States { rankdir=LR;graph[bgcolor="transparent",pad=.3];node[shape=ellipse,style="filled",fillcolor="#e9f5ef",color="#38816f",fontname="Arial"];NEW->ACCEPTED;NEW->REJECTED;ACCEPTED->ASSIGNED;ACCEPTED->REJECTED;ASSIGNED->COMPLETED;ASSIGNED->CANCELLED[label="policy-controlled"]; }

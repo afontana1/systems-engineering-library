@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hypothetical Laboratory 11 — Operational and autonomy evaluation · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B8/labs/lab-11-evaluate-operational-use-deployed-systems-systems-of-sy.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><div class="source-tools-panel">Editable lab instructions and supporting code: <a href="../../LAB-LIBRARY.html#B8/labs/lab-11-evaluate-operational-use-deployed-systems-systems-of-sy.md">Open lab downloads &amp; source viewer</a></div><h1 id="hypothetical-laboratory-11--operational-and-autonomy-evaluation">Hypothetical Laboratory 11 — Operational and autonomy evaluation</h1>
+<p><em>Book 8: System Test and Evaluation · Fictional Northstar case · Week 11</em></p>
+<h2 id="mission-brief">Mission brief</h2>
+<p>You are the independent review team for a proposed Northstar regional mobility service. Your job is <strong>not</strong> to optimize the supplied favorite; it is to decide which claim can be supported now and what should happen next. The supplied material is synthetic. No result here qualifies a real vehicle, a transportation service or a safety-critical system.</p>
+<p><strong>Case packet:</strong> Eight of ten nominal trips may succeed, but a night-event accessible-trip failure can defeat the intended mission even when aggregate completion looks respectable.</p>
+<p><strong>Technical focus:</strong> Operational effectiveness asks whether a mission is accomplished, while suitability includes sustainment, human operations, support, cyber resilience and life-cycle use. Autonomy adds distribution shift, human takeover, opaque decisions and monitoring challenges. A system of systems may change its environment or deny a promised dependency.</p>
+<h2 id="your-deliverable">Your deliverable</h2>
+<p>Design a scenario portfolio with ordinary, surge, degraded, accessibility and adversarial cases; name the evidence type for each.</p>
+<p>Create a small but reviewable package with these four files:</p>
+<ol>
+<li><code>W11-decision.md</code> — claim, decision alternatives, scenario, recommendation and residual uncertainty.</li>
+<li><code>W11-evidence.csv</code> — <code>claim_id,source_revision,configuration,assumption,method,observed_or_predicted_result,status,limitation</code>.</li>
+<li><code>W11-model.md</code> — your calculation, causal chain, interface contract or structural representation, with units and revisions.</li>
+<li><code>W11-review.md</code> — a red-team objection and your technical response.</li>
+</ol>
+<p><strong>Task sequence</strong></p>
+<ul>
+<li><strong>First pass, without calculation:</strong> Identify the objective, the stakeholder bearing a consequence, and at least two competing explanations or design alternatives.</li>
+<li><strong>Model:</strong> Construct the minimum useful representation. Keep the difference between a projected result and a measured result visible.</li>
+<li><strong>Stress:</strong> Vary one critical assumption, introduce a fault or change the mission scenario; determine whether the decision reverses or becomes conditional.</li>
+<li><strong>Evidence:</strong> Define an observable outcome, acceptance rule and test article or model version. Name what this exercise cannot establish.</li>
+<li><strong>Review:</strong> Write a recommendation of <strong>accept for next stage</strong>, <strong>accept conditionally</strong>, <strong>defer pending evidence</strong> or <strong>reject</strong>; support it with specific facts.</li>
+</ul>
+<h2 id="the-twist">The twist</h2>
+<p>Operational adequacy is not a single pooled percentage when mission-critical strata differ. A reviewer asks: <strong>What new evidence is required after changing the operational zone?</strong> Your package must answer this in a way that changes either a design decision, a test plan or an explicit uncertainty status. Do not give a generic “more testing needed” response.</p>
+<h2 id="self-check-before-opening-the-reference-guidance">Self-check before opening the reference guidance</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Points</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Problem and mission scope explicitly bounded</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td>Model is reconstructable, with units and revisions</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td>Critical counterexample is treated seriously</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td>Evidence request has objective acceptance logic</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td>Decision limits and action owners are clear</td>
+<td style="text-align:right">2</td>
+</tr>
+</tbody>
+</table>
+<p>&lt;details&gt;&lt;summary&gt;Reference reasoning and review hints&lt;/summary&gt;</p>
+<p>An appropriate response begins by classifying the packet: the supplied numbers are <strong>teaching assumptions or example observations</strong>, not automatically operational evidence. For this week's situation, the essential conceptual distinction is: Operational effectiveness asks whether a mission is accomplished, while suitability includes sustainment, human operations, support, cyber resilience and life-cycle use. Autonomy adds distribution shift, human takeover, opaque decisions and monitoring challenges. A system of systems may change its environment or deny a promised dependency.</p>
+<p>A credible submission explicitly handles the counterargument that operational adequacy is not a single pooled percentage when mission-critical strata differ. State whether a different plausible assumption could overturn your recommendation and what experiment would discriminate the possibilities. Strong work can conclude that the information is insufficient; unsupported unconditional approval should score poorly.</p>
+<p>The best answer is <em>not uniquely determined</em> by this case. Grade the traceability, calculation, falsifiability, and clarity of decision limits rather than whether the learner matches a preferred diagram or recommendation.</p>
+<p>&lt;/details&gt;</p>
+<h2 id="return-to-the-curriculum">Return to the curriculum</h2>
+<p>Read <a href="../chapters/11-evaluate-operational-use-deployed-systems-systems-of-sy.html">Chapter 11</a> as needed, then complete the independent assessment in <a href="../../../C/P2/EN645769.html">Course Week 11</a>. This hypothetical lab prepares technique; it is not the course's submitted solution.</p>
+</main></body></html>

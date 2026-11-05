@@ -1,0 +1,7 @@
+id,route,revision,issued_at,decision_time,signature_valid,issuer_active,expected_permit
+1,R1,19,10,12,true,true,true
+2,R1,18,10,12,true,true,false
+3,R2,19,10,12,true,true,false
+4,R1,19,5,12,true,true,false
+5,R1,19,10,12,false,true,false
+6,R1,19,10,12,true,false,false

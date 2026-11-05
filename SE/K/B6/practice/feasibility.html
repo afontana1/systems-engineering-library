@@ -1,0 +1,69 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Concept Feasibility Before Scoring Alternatives · Systems Engineering Learning Library</title><style>
+:root{--ink:#18374b;--teal:#08747a;--line:#d8e4e7;--muted:#617480}*{box-sizing:border-box}body{margin:0;background:#f3f6f7;color:var(--ink);font:16px/1.7 system-ui,Segoe UI,Arial,sans-serif}header{background:#173d51;color:white;padding:20px max(22px,calc((100vw - 1070px)/2))}header a{color:#ccedee}header h1{margin:6px 0;font-size:1.6rem;line-height:1.2}main{max-width:1100px;margin:24px auto;padding:34px 44px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 9px 30px #18374b0b}article h1{font-size:1.65rem}article h2{border-bottom:1px solid #e0e9eb;padding-top:14px;padding-bottom:6px;font-size:1.35rem}article h3{font-size:1.1rem}article p,article li{max-width:85ch}article table{border-collapse:collapse;width:100%;font-size:.94rem}article th,article td{border:1px solid var(--line);padding:9px;text-align:left}article th{background:#edf6f5}pre{overflow-x:auto;background:#142e40;color:#f0f5f7;padding:17px;border-radius:9px}pre code{color:inherit}code{font-size:.91em}p code,li code{background:#eaf1f2;padding:2px 4px}a{color:var(--teal)}a:hover{text-decoration-thickness:2px}details{background:#f1f7f6;border-left:3px solid #65a5a3;border-radius:7px;padding:8px 15px;margin:12px 0}summary{cursor:pointer;font-weight:650}.links{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.links a{display:inline-block;padding:7px 12px;border:1px solid #a6ceca;border-radius:8px;background:#e6f4f1;text-decoration:none;font-weight:600}.note{background:#edf7f6;padding:15px;border-left:4px solid #318a86;border-radius:8px}img,svg{max-width:100%}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}button,input{font:inherit}button{cursor:pointer} .workbench{background:#eef7f6;padding:20px;border-radius:12px;border:1px solid #c4e1dd}.ctrl{margin:15px 0}.ctrl label{display:block;font-weight:600}.ctrl input{width:100%}.output{font-size:1.4rem;font-weight:800;line-height:1.25} @media(max-width:650px){main{padding:19px;margin:10px}}
+</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B6/practice/feasibility.html" data-se-mode="standard"></script>
+</head><body><header><div>Systems Engineering · Advanced Book Practice</div><h1>Concept Feasibility Before Scoring Alternatives</h1><a href="../OPEN-BOOK.html">Back to book</a> · <a href="INDEX.html">Advanced practice</a></header><main><article><h1>Advanced Workshop · Concept Feasibility Before Scoring Alternatives</h1>
+<p><em>Book 6 · Week 6 · hard constraints · charging-energy balance · screening · decision traceability</em></p>
+<p><strong>Placement:</strong> After the relevant chapter, use this workshop to extend the reasoning, then try <a href="lab-feasibility.html">the corresponding hypothetical lab</a>. The assessed course obligations remain in <a href="../../../C/P2/EN645767.html">the curriculum</a>.</p>
+<h2>1. Preference is irrelevant when a concept cannot meet its obligations</h2>
+<p>A concept selection meeting can produce an attractive weighted score while overlooking an impossible operating schedule. Northstar's fictional shuttle options trade capital cost, accessibility, route coverage, charging capacity, and exposure to outages. The engineer should first ask which requirements are <strong>hard constraints</strong>—properties without which the design is inadmissible. Only the remaining feasible alternatives belong in the preference ranking.</p>
+<p>Distinguish a <strong>requirement</strong> from a modeling assumption. For example, “transport at least 100 eligible riders during the morning window” is a mission performance requirement if approved by the sponsor. “A vehicle will use 12 kWh per shift” is an energy estimate whose uncertainty should be modeled. Treating an estimate as a certain fact can produce unjustified confidence; treating a mandatory requirement as just another weighted criterion can produce an inadmissible winner.</p>
+<h2>2. Build a minimum physics budget</h2>
+<p>Energy cannot be created by an optimistic spreadsheet. In a simplified charging window, the delivered energy is</p>
+<p>\[
+E_{\mathrm{charge}}=N_c P_c t\eta,
+\]</p>
+<p>where \(N_c\) is the number of chargers, \(P_c\) is rated kW per charger, \(t\) is usable hours, and \(\eta\) is aggregate charging efficiency. A fleet using \(E_v\) kWh per vehicle requires \(E_{\mathrm{need}}=N_v E_v\) before reserve and distribution limitations. <strong>Feasibility requires</strong> \(E_{\mathrm{charge}} \ge E_{\mathrm{need}}\) in this toy budget. A credible design also checks whether chargers can physically reach the vehicles, whether charging occurs within allowable state-of-charge limits, charger downtime, peak-grid limits, and mobility demand during the window.</p>
+<h2>3. Worked screening case</h2>
+<p>Alternative A uses four vehicles consuming an estimated 12 kWh per shift each. It has two chargers rated at 7 kW and only three usable hours, with efficiency 85%. Demand is \(4(12)=48\) kWh; estimated supply is \(2(7)(3)(0.85)=35.7\) kWh. The <strong>margin is −12.3 kWh</strong> before operational reserve, making A infeasible under the stated charging plan. No weighted score can change that arithmetic.</p>
+<p>Alternative B uses three lighter vehicles at 10 kWh each. Its demand is 30 kWh, leaving 5.7 kWh margin in the same charging window. This does not prove B meets ridership, accessibility or route constraints; it proves only that the <em>specified simplified charging constraint</em> is satisfied. If A can add a charger or increase the available window, it becomes a modified concept that should be costed and screened again—not silently admitted as the original A.</p>
+<h2>4. Multi-stage concept decisions</h2>
+<p>A disciplined conceptual design compares alternatives in stages: (1) reject or explicitly repair hard-constraint failures, (2) calculate mission outcome measures, (3) normalize and rank feasible options under declared stakeholder preferences, (4) examine weight sensitivity and uncertainty, and (5) decide what evidence is needed before concept baseline approval. Preserve rejected candidates and their exclusion reasons so that a reviewer can revisit a decision if an assumption changes.</p>
+<p>Avoid false precision: a score of 0.783 instead of 0.779 may be meaningless when accessibility ratings are subjective and demand forecasts have broad uncertainty. Draw an uncertainty range or conduct scenario analysis. An architecture can be <em>conditionally preferred</em> while evidence gathering is incomplete, but do not mislabel that status as verified feasibility.</p>
+<h2>5. The right engineering question</h2>
+<p>The immediate choice is not “which shuttle is best?” It is “which alternative is feasible under explicit constraints and preferred for the sponsor's measurable mission, given what we currently know?” When the decision depends on charger utilization assumptions or actual demand, that uncertainty should become a targeted experiment in the next course phase.</p>
+<h2>Worked problem set — attempt before revealing solutions</h2>
+<h3>Problem 1</h3>
+<p>Calculate delivered energy from two 7-kW chargers for three hours at 85% efficiency.</p>
+<details><summary>Show solution 1</summary>
+
+<p>2×7×3×0.85 = 35.7 kWh delivered under the aggregate-efficiency assumption.</p>
+</details>
+
+<h3>Problem 2</h3>
+<p>Compute the margin for four vehicles needing 12 kWh each.</p>
+<details><summary>Show solution 2</summary>
+
+<p>35.7 − 48 = −12.3 kWh, so the concept fails this one necessary energy constraint.</p>
+</details>
+
+<h3>Problem 3</h3>
+<p>If the fleet uses three vehicles at 10 kWh each, what is its energy margin?</p>
+<details><summary>Show solution 3</summary>
+
+<p>35.7 − 30 = +5.7 kWh; it meets this simplified constraint only, not all system requirements.</p>
+</details>
+
+<h3>Problem 4</h3>
+<p>If a team simply boosts a feasibility-failing concept’s “sustainability score,” can it become admissible?</p>
+<details><summary>Show solution 4</summary>
+
+<p>No. Soft scores cannot compensate for failed mandatory requirements. Change the design or governing constraint through an authorized process, then rerun screening.</p>
+</details>
+
+<h2>Independent transfer to the Northstar case</h2>
+<p>Use the energy CSV and <code>book6.py</code> to screen three candidates. Vary charger efficiency from 0.70 to 0.95 and identify when each concept becomes feasible. Add an explicit accessibility constraint that cannot be traded away. Produce a feasibility register separating requirements, model estimates, evidence, and design repairs; finish with a conditional recommendation.</p>
+<h2>Further reading and conventions</h2>
+<p>The worked numbers are synthetic instructional fixtures. Do not use them as empirical transportation predictions, certification evidence, or claims about a particular deployed product. Foundational references (external and optional):</p>
+<ul>
+<li><p><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></p>
+</li>
+<li><p><a href="https://sebokwiki.org/wiki/SEBoK_Introduction">SEBoK — Guide to Systems Engineering</a></p>
+</li>
+<li><p><a href="https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final">NIST SP 800-160 Vol. 1 Rev. 1</a></p>
+</li>
+</ul>
+<p><strong>Continue:</strong> <a href="lab-feasibility.html">Hypothetical application lab</a> · <a href="book6.py">Python source</a> · <a href="book6-concepts.csv">Experiment dataset</a> · <a href="WORKBENCH.html">Interactive workbench</a>.</p>
+</article></main></body></html>

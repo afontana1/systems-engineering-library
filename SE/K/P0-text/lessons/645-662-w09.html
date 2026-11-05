@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SE management plans, metrics and configuration discipline · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/P0-text/lessons/645-662-w09.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="se-management-plans-metrics-and-configuration-discipline">SE management plans, metrics and configuration discipline</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 9 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../../C/P0/EN645662.html">Open the original Week 9 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="645-662-w04.html">Writing verifiable requirements and preserving rationale</a>, <a href="645-662-w07.html">Physical architecture, allocation and contract-level interfaces</a><br/>
+<strong>Core concepts:</strong> SEMP, configuration management, risk, technical metrics</p>
+<h2 id="how-to-use-this-chapter">How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2 id="conceptual-explanation">Conceptual explanation</h2>
+<h3 id="the-technical-plan-is-a-coordination-device">The technical plan is a coordination device</h3>
+<p>A Systems Engineering Management Plan (SEMP) tells a project how technical work is organized, integrated, checked and controlled. It identifies the lifecycle, work products, methods, roles, decision gates, interface management, V&amp;V strategy, metrics, information management and relationship to project controls. It should be short enough to use but precise enough that a new engineer can find the owner and approval route for a technical change.</p>
+<p>Three structures answer different questions: a Product Breakdown Structure (PBS) tells what elements form the delivered system; a Work Breakdown Structure (WBS) organizes product-oriented scope to be accomplished; the organization structure identifies who performs or owns that work. They are related by responsibility assignment, not interchangeable. A function is also not automatically a WBS element; functions describe required behavior whereas work packages describe authorized effort.</p>
+<h3 id="managing-technical-evidence">Managing technical evidence</h3>
+<p>A baseline is an approved reference configuration. Configuration items receive identifiers; documents and models receive versions; change requests receive impact assessment and approvals; verification evidence records which configuration was tested. Without this chain, 'the test passed' is ambiguous. A passing test on controller firmware 2.1 may not support delivery of firmware 2.3 with revised braking logic.</p>
+<p>A useful technical metric has an owner, collection method, target, trend, threshold and reaction rule. TPMs help make development drift visible before final acceptance. A requirement may limit stopping latency to 500 ms; interim design allocations can carry progressively tighter margin targets. Risk records should explain <strong>cause → event → consequence</strong>, with probability/consequence estimates, mitigation, owner, trigger and residual status. Simply labeling something 'high risk' does not make it actionable.</p>
+<h3 id="integration-as-a-management-act">Integration as a management act</h3>
+<p>Technical planning and project planning should share milestones, dependencies and change data. A technical team cannot declare an interface stable while the project schedule quietly assumes significant downstream rework. Every review should reconcile the approved baseline, current forecast, maturity of evidence and open technical issues.</p>
+<h2 id="worked-example-reason-through-the-case">Worked example: reason through the case</h2>
+<p><strong>Example:</strong> Controller firmware v1.5 passes stop-latency test T-08. A later fix v1.6 modifies message parsing. The configuration index must flag T-08 as potentially stale. The team assesses regression scope, reruns T-08 under the specified configuration, records the new result and updates the verification matrix. A green status based solely on the old run is not evidence for v1.6.</p>
+<h2 id="retrieval-and-transfer-practice">Retrieval and transfer practice</h2>
+<ol>
+<li>Write a risk in cause→event→consequence form about loss of campus connectivity.</li>
+<li>Distinguish PBS, WBS and organization structure for a shuttle charging station.</li>
+<li>Define a technical metric that gives early warning before battery endurance acceptance.</li>
+</ol>
+<p>&lt;details&gt;
+&lt;summary&gt;&lt;strong&gt;Reveal explained answers after attempting the problems&lt;/strong&gt;&lt;/summary&gt;</p>
+<ol>
+<li>
+<p>Because network redundancy is not yet demonstrated (cause), the dispatch link may be unavailable during peak service (event), causing canceled trips and unsafe ad hoc recovery (consequence). Add owner, trigger, mitigation and contingency.</p>
+</li>
+<li>
+<p>PBS: charger, electrical distribution, enclosure, monitoring software; WBS: engineering, procure/install/test each deliverable; organization: campus facilities, contractor, test lead and operations ownership.</p>
+</li>
+<li>
+<p>Energy per kilometer under defined route/load/weather, measured weekly on configured vehicles; trend to the endurance allocation, alert thresholds and decision to redesign or reserve more capacity.</p>
+</li>
+</ol>
+<p>&lt;/details&gt;</p>
+<h2 id="a-failure-mode-to-recognize">A failure mode to recognize</h2>
+<p>Mistake: using an uncontrolled slide deck as the authoritative source for requirements, test results and risk decisions.</p>
+<h2 id="put-it-into-practice">Put it into practice</h2>
+<p><strong>Produce:</strong> SEMP outline + configuration and metrics registry. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2 id="where-this-connects">Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="645-662-w10.html">Systemic failures, causal reasoning and red-team thinking</a></li>
+<li><strong>Builds toward:</strong> <a href="645-662-w11.html">Integration, verification, validation and transition</a></li>
+<li><strong>Builds toward:</strong> <a href="645-667-w01.html">Governance, decision rights and the PM–SE interface</a></li>
+</ul>
+<h2 id="authoritative-resources-for-a-deeper-second-pass">Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/ocfo/ppc-corner/project-planning-and-control-overview/">NASA Project Planning and Control overview</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</main></body></html>

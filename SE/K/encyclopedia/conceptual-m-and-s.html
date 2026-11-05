@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Conceptual modeling and intended use · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/conceptual-m-and-s.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Conceptual modeling and intended use</h1>
+<p><strong>Reference entry · Analytics, modeling, simulation and decisions · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p>A <strong>conceptual model</strong> specifies what a simulation or analytical representation will include, omit, and assume before software implementation begins. It connects an intended decision to state variables, processes, boundaries, inputs, outputs, data sources, and credibility requirements. It is distinct from executable code and from the real system. A detailed implementation can be faithful to its conceptual model while the conceptual model is unsuitable for the question.</p>
+<h2>Theory: abstraction is a decision-dependent choice</h2>
+<p>Let a system state be <code>x(t)</code>, inputs <code>u(t)</code>, uncertain parameters <code>θ</code>, and outputs <code>y(t) = h(x(t),u(t),θ)</code>. The conceptual model selects which components of <code>x</code>, <code>u</code>, and <code>θ</code> are represented and how transitions <code>dx/dt = f(x,u,θ)</code> or discrete events are approximated. The abstraction must retain the mechanisms that could reverse the comparison among candidate decisions. A model for mean fleet demand might aggregate requests by hour; a model for emergency response latency must retain subsecond events, queue priorities, and tail distributions.</p>
+<p>Model scope should be defended with <strong>conceptual validation</strong>: are boundaries, assumptions, and causal mechanisms adequate for intended use? Verification asks whether the implementation follows its equations and logic. Empirical validation asks whether predictions match relevant observations to a tolerable degree. These activities are related but not interchangeable. Inputs and calibration data must be separated from independent evidence when a strong predictive claim is needed.</p>
+<h2>Worked example: averages hide the deciding mechanism</h2>
+<p>A planning model assumes 120 arrivals per hour and a dispatch capacity of 140 per hour. An average-rate calculation suggests spare capacity of 20 per hour. But if arrivals occur in concentrated ten-minute bursts, queueing delays can be severe even with the same hourly mean. An aggregate fluid model may be useful for staffing cost, yet inadequate for the question “Will 99% of riders wait under ten minutes?” A discrete-event model with individual requests, service-time variability, and priority behavior is needed for that decision.</p>
+<h2>Engineering use and evidence</h2>
+<p>Write a conceptual-model specification stating intended use, operational scope, state variables, units, event logic, stochastic dependencies, interface assumptions, data provenance, validation data, and rejection criteria. Draw a boundary diagram and a causal/functional representation. Review the model with domain experts before coding. Perform sensitivity analysis to determine whether simplified mechanisms materially change the decision.</p>
+<h2>Limitations and connections</h2>
+<p>Adding detail can worsen credibility by multiplying unsupported parameters. A model calibrated to one operating regime may fail after policy or architecture changes. Connect conceptual modeling to <strong>simulation V&amp;V</strong>, <strong>probability and dependence</strong>, <strong>discrete-event simulation</strong>, <strong>stocks and flows</strong>, and <strong>design of experiments</strong>.</p>
+<h2>Technical analysis: conceptual models before executable code</h2>
+<p>A conceptual model should identify the question, entity classes, state variables, events, conservation relationships, decision outputs, exclusions, and assumptions <em>before</em> choosing software. It is a specification of what the simulation intends to represent; implementation correctness is a different claim from fidelity to reality.</p>
+<p>For a waiting-room model without abandonment, the number of requests currently inside the boundary obeys <code>N(t) = N(0) + A(t) − D(t)</code>, with cumulative arrivals <code>A</code> and completions <code>D</code>. If the model starts empty, accepts <strong>180 requests</strong>, and completes <strong>167</strong>, then <strong>13</strong> must remain in service or waiting. A simulator reporting <strong>11</strong> is internally inconsistent unless two requests were intentionally lost, transferred, or otherwise removed under explicitly modeled rules. This invariant is useful before statistical calibration, because a model that creates or destroys entities cannot support its intended throughput explanation.</p>
+<p><strong>Evidence boundary.</strong> Enumerate excluded phenomena and the domain of operation; sample uncertainty, parameter uncertainty, and structural uncertainty must be reported separately. A clean conservation check is <strong>verification of a declared invariant</strong>, not validation that the real waiting room obeys the assumed stochastic arrival or priority process.</p>
+<h2>Claim-specific sources</h2>
+<p>The following <strong>selected methodological claims</strong> are tied to identifiable sections or abstracts, not merely generic reading lists. Source scope is stated for each link. Numerical scenarios and computations in this article are <strong>original illustrative examples</strong>, not data, calculations, or endorsements supplied by the linked publishers. Links require internet access; the explanation remains readable offline.</p>
+<ul>
+<li><strong>C1:</strong> The acceptability and credibility of modeling and simulation evidence should be evaluated for its intended application and decision. <strong>Evidence:</strong> <a href="https://standards.nasa.gov/node/263">NASA — NASA-STD-7009B, Standard for Models and Simulations (2024), Document Scope; credibility in model/simulation life cycle</a> · <em>direct standard scope</em>.</li>
+<li><strong>C2:</strong> Models of system functions and their behavior should be explicitly defined and recorded as technical work products. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/4-0-system-design-processes/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §4.3 Logical Decomposition</a> · <em>direct guidance</em>.</li>
+</ul>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://standards.nasa.gov/node/263">NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)</a> — Credibility practices for modeling and simulation used in decisions.</li>
+<li><a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009">NASA · NASA-HDBK-7009B, Models and Simulations Implementation Guide (2026)</a> — Companion implementation guidance; not a substitute for project-specific requirements.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="discrete-event-simulation.html">Discrete-event simulation and queues</a></li>
+<li><a href="stocks-flows-feedback.html">Stocks, flows, and feedback loops</a></li>
+<li><a href="model-vv-and-credibility.html">Simulation verification, validation, and credibility</a></li>
+<li><a href="design-of-experiments.html">Design of experiments and sensitivity</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B11/chapters/02-develop-the-m-s-plan-and-conceptual-model-before-implementation.html">Book 11, Chapter 02: Book 11 · Chapter 02 — Develop the M&amp;S plan and conceptual model before implementation</a></li>
+<li><a href="../B11/chapters/11-plan-and-evaluate-verification-validation-credibility-and-accreditat.html">Book 11, Chapter 11: Book 11 · Chapter 11 — Plan and evaluate verification, validation, credibility, and accreditation for intended use</a></li>
+<li><a href="../B12/chapters/01-frame-the-advanced-m-s-decision-intended-use-architecture-and-credib.html">Book 12, Chapter 01: Book 12 · Chapter 01 — Frame the advanced M&amp;S decision, intended use, architecture, and credibility strategy</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=db8eae7a8e3ee">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="conceptual-m-and-s.md">Editable Markdown</a></nav></main></body></html>

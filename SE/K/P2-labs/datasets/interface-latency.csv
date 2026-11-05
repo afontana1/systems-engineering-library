@@ -1,0 +1,6 @@
+segment,owner,latency_s,deadline_s,configuration
+capture,UI,0.2,2,ICD-1
+eligibility,Policy,0.4,2,ICD-1
+planning,Dispatcher,0.7,2,ICD-1
+commit,Fleet,0.5,2,ICD-1
+notify,App,0.2,2,ICD-1

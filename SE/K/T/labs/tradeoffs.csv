@@ -1,0 +1,4 @@
+alternative,reliability_value,cost_value,feasible
+A,0.8,0.4,yes
+B,0.6,0.9,yes
+C,0.95,0.95,no

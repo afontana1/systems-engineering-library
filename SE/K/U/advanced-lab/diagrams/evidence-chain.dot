@@ -1,0 +1,13 @@
+digraph Trace {
+rankdir=LR; graph [bgcolor="transparent",fontname="Arial",pad="0.25"];
+node [shape=box,style="rounded,filled",fontname="Arial",color="#b8d2d6",fillcolor="#f2f9f9",fontcolor="#193e4b"];
+edge [color="#247681",fontname="Arial"];
+Need [label="Stakeholder need\n(synthetic)"];
+Requirement [label="V12-R04\nOutage interval rule"];
+Model [label="FleetModel\nmodel allocation"];
+Test [label="V12-T04\nInterval test"];
+Scenario [label="OUTAGE\ninput configuration"];
+Result [label="Output\nvehicle assignments"];
+Review [label="Board decision\n+ limitations"];
+Need -> Requirement -> Model -> Test -> Scenario -> Result -> Review;
+}

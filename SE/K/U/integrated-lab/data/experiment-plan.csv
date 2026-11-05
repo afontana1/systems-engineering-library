@@ -1,0 +1,4 @@
+experiment_id,question,factor,levels,response,design,limitation
+EXP-01,How does loss of one vehicle affect fixed-fixture results?,fleet_size,1;2;3,served_fraction;p90_wait,Deterministic comparison,No failure probability assigned
+EXP-02,How sensitive are outcomes to demand arrival pattern?,mean_interarrival_minutes,3;4;6,served_fraction;fraction_meeting_targets,Independent seeded Monte Carlo,Arrival law synthetic and unvalidated
+EXP-03,How sensitive is performance to service duration?,trip_minutes,10;12;15,p90_wait;served_fraction,Controlled model sweep,No geographic routing modeled

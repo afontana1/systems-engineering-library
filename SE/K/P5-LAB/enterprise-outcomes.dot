@@ -1,0 +1,1 @@
+digraph E {rankdir=LR; node[shape=box,style=rounded]; Governance -> Data; Budget -> Capacity; Workforce -> Capacity; Data -> Assignment; Capacity -> Assignment; Assignment -> Outcomes; Outcomes -> Governance [label="feedback"]; Outcomes -> Equity [label="distribution check"]; }

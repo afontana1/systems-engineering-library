@@ -1,0 +1,2 @@
+Interface ID,From,To,Item or signal,Units / schema,Timing,Error behavior,Owner,Version,Verification case
+ICD-01,Dispatch,Vehicle,Route command,Route ID; version; UTC timestamp,Valid for 30 s,Reject expired; safe fallback,Integration lead,0.1,IT-01

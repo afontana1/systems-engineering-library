@@ -1,0 +1,75 @@
+[
+  {
+    "chapter": "01-probability",
+    "title": "Probability & uncertainty",
+    "books": [
+      10,
+      11,
+      14
+    ]
+  },
+  {
+    "chapter": "02-estimation",
+    "title": "Estimation & evidence",
+    "books": [
+      8,
+      10,
+      9
+    ]
+  },
+  {
+    "chapter": "03-experiments",
+    "title": "Designed experiments",
+    "books": [
+      10,
+      14,
+      17
+    ]
+  },
+  {
+    "chapter": "04-discrete-event",
+    "title": "Discrete-event simulation",
+    "books": [
+      11,
+      12,
+      10
+    ]
+  },
+  {
+    "chapter": "05-continuous",
+    "title": "Continuous dynamics",
+    "books": [
+      12,
+      13,
+      11
+    ]
+  },
+  {
+    "chapter": "06-feedback",
+    "title": "Feedback & stability",
+    "books": [
+      13,
+      12,
+      14
+    ]
+  },
+  {
+    "chapter": "07-decisions",
+    "title": "Optimization & information",
+    "books": [
+      14,
+      9,
+      6
+    ]
+  },
+  {
+    "chapter": "08-credibility",
+    "title": "Model credibility",
+    "books": [
+      11,
+      12,
+      8,
+      16
+    ]
+  }
+]

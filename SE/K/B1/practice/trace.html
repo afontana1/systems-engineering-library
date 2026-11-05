@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Evidence applicability and requirements · Systems Engineering</title>
+<style>:root{--ink:#193849;--teal:#167575;--bg:#f4f7f8;--line:#d5e4e5}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.76 system-ui,-apple-system,Segoe UI,Arial,sans-serif}header{background:#193c50;color:white;padding:22px max(20px,calc((100vw - 1050px)/2))}header a{color:#d3f7f0;text-decoration:none;margin-right:20px}main{max-width:1050px;margin:25px auto 75px;background:white;border:1px solid var(--line);border-radius:13px;padding:clamp(20px,5vw,58px)}h1{font-size:clamp(1.8rem,3vw,2.35rem);line-height:1.2}h2{margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:7px}h3{margin-top:1.5em}a{color:var(--teal);text-underline-offset:3px}p,li{max-width:85ch}blockquote{margin:16px 0;padding:8px 17px;background:#ecf6f5;border-left:4px solid var(--teal)}table{display:block;max-width:100%;overflow:auto;border-collapse:collapse}td,th{border:1px solid var(--line);padding:10px;vertical-align:top}th{background:#eaf4f3}pre{background:#1a3644;color:#f3f8fa;padding:18px;border-radius:10px;overflow:auto}code{font-size:.88em}p code{background:#edf2f3;padding:2px 5px;border-radius:4px}details{border:1px solid var(--line);border-radius:10px;background:#f8fbfb;padding:14px 17px;margin:12px 0}summary{font-weight:750;cursor:pointer}.actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 28px}.actions a{background:#e4f3f1;border:1px solid #b7d9d7;border-radius:7px;padding:8px 13px;font-weight:650;text-decoration:none}.note{background:#eef7f6;border:1px solid #c9e3e0;padding:16px;border-radius:8px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style>
+<script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']] },svg:{fontCache:'local'},startup:{typeset:false}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B1/practice/trace.html" data-se-mode="standard"></script>
+</head><body><header><a href="../OPEN-BOOK.html">Book 1</a><a href="WORKBENCH.html">Interactive workbench</a><a href="../../LAB-LIBRARY.html">Lab resources</a></header><main>
+<div class="actions"><a href="trace.html">Concept workshop</a><a href="lab-trace.html">Applied lab</a><a download="" href="trace.csv">Download data</a><a download="" href="tools.py">Download Python</a><a download="" href="LAB-NOTEBOOK.ipynb">Download notebook</a><a download="" href="trace.md">Download this Markdown</a></div><h1>Workshop 1 · When does a requirement actually have evidence?</h1>
+<p><em>Companion to Book I, Chapter 4 · Requirements engineering and verification planning</em></p>
+<h2>A claim is not the same thing as an evidence link</h2>
+<p>Northstar's engineering team maintains six requirements for a fictional autonomous campus shuttle. A dashboard shows six verification records and three green checkmarks. Its sponsor asks a seemingly simple question: “Are we ready to accept the requirements baseline?” A dashboard can answer how many records are labeled <code>PASS</code>; it cannot by itself answer whether those results apply to the <strong>version of the system being accepted</strong>. A test can pass for an obsolete requirement, a different vehicle configuration, or a scenario outside the operating domain.</p>
+<p>Traceability is the controlled relationship among need, requirement, allocation, verification method, configuration, result, and acceptance claim. The chain is only as strong as its least defensible transition. If a test result is for revision 3 but the requirement is now revision 4, the result is historical evidence, not proof that revision 4 has been verified. Nor should a requirement be called satisfied because a test was executed: an executed and failed test gives <em>valid adverse evidence</em>.</p>
+<h2>Build a claim–evidence ledger</h2>
+<p>For every requirement, record its identifier and approved revision; its verification method and test identifier; the <strong>requirement revision evaluated</strong>; the tested configuration; outcome; and any deviations. The phrase “requirement covered” must be decomposed into at least three different questions: (1) is a test assigned? (2) was an admissible test conducted? and (3) does the admissible test support the acceptance claim? These numbers need not agree.</p>
+<p>An evidence record is <strong>admissible for a particular claim</strong> only when its revision and configuration match the claim, the result is applicable to the intended environment, and its provenance can be inspected. Admissibility does <strong>not</strong> imply that the requirement passed. Use this distinction in the laboratory dataset.</p>
+<h3>Worked example: six candidate claims</h3>
+<p>The ledger contains R-01 through R-06. R-01 and R-02 have successful tests for their current revisions and accepted configuration <code>A</code>. R-03 has a successful result for revision 3, but revision 4 is current. R-04 has a correctly matched, <em>failed</em> test. R-05 passed on configuration <code>B</code> rather than the proposed release <code>A</code>. R-06 has no test result. A simplistic report might say “four tests passed”; a stronger review finds <strong>three admissible records</strong>, <strong>two verified passes</strong>, <strong>one valid failure</strong>, and <strong>three unresolved or inapplicable claims</strong>. The acceptance pass rate is therefore 2/6, not 4/6. A valid failure is evidence against release, not a paperwork gap to be hidden.</p>
+<p>The metrics serve different purposes:</p>
+<p>\[
+\text{Admissible evidence fraction}=\frac{3}{6}=0.50,\qquad
+\text{Supported-claim fraction}=\frac{2}{6}\approx0.333.
+\]</p>
+<p>Neither metric should be casually described as system reliability. They are fractions of requirements in a particular register. A safety-critical requirement may prevent acceptance even when every other requirement passes; aggregation cannot substitute for gate criteria.</p>
+<h2>Configuration changes break apparently complete chains</h2>
+<p>Suppose software revision <code>SW-4</code> modifies the logic for stale route permissions. Even if an earlier test <code>T-03</code> demonstrated correct behavior for <code>SW-3</code>, the new release needs a change-impact argument: is the test still applicable without rerun, can analysis justify equivalence, or must the behavior be reverified? The answer depends on changed interfaces, dependencies and hazard controls—not on how expensive a rerun would be.</p>
+<p>A practical traceability system therefore stores <strong>directed, typed relationships</strong> (satisfies, verifies, derived-from, depends-on) and revision-specific evidence. “There is a link” is much weaker than “this current configured item was verified by the stated method under the required conditions.”</p>
+<h2>Review checklist</h2>
+<ul>
+<li>Have you distinguished assigned tests, executed tests, admissible results, and supported claims?</li>
+<li>Are verification failures retained as negative evidence instead of disappearing from counts?</li>
+<li>Does every test record name the exact requirement revision and product configuration?</li>
+<li>Do requirements have an acceptance authority, not merely an engineering owner?</li>
+<li>Are unresolved safety constraints highlighted individually rather than averaged away?</li>
+</ul>
+<h2>Worked problems</h2>
+<p><strong>Problem 1.</strong> An auditor sees four successful executions, three current-revision records, and two successful admissible outcomes among six requirements. Which count belongs in a readiness recommendation?</p>
+<details><summary>Worked solution 1</summary>
+<p>Report all three quantities with their meanings. Four executions passed in some historical configuration, three records are admissible to the present claim, and two requirements have affirmative current evidence. Readiness must use the <strong>two supported claims</strong> plus the status of each remaining requirement—not the headline number four.</p>
+</details>
+<p><strong>Problem 2.</strong> R-04 has a <code>FAIL</code> with matching configuration, revision, and environment. Should it be classified as “missing evidence”?</p>
+<details><summary>Worked solution 2</summary>
+<p>No. It has valid <strong>negative evidence</strong>. Classifying it as missing would hide an observed nonconformance. Open a discrepancy, assess operational impact, implement and verify a corrective change, and maintain a link to the original failure.</p>
+</details>
+<p><strong>Problem 3.</strong> R-05 has a successful result on configuration B. The release candidate is configuration A. What additional argument could make the result usable?</p>
+<details><summary>Worked solution 3</summary>
+<p>A configuration-equivalence argument may be possible if the difference cannot affect the requirement and that claim is supported by a reviewed change-impact analysis. Without that analysis, the result is not admissible for A. A green status from a different build is not sufficient.</p>
+</details>
+<p><strong>Problem 4.</strong> A team reports “95% verification coverage” but has 20 high-consequence requirements, one with no valid evidence. Can the sponsor infer readiness?</p>
+<details><summary>Worked solution 4</summary>
+<p>No. The fraction describes a register and hides consequence and criticality. Apply requirement-specific acceptance gates. A single unverified hazard control may preclude authorization, whereas a noncritical documentation issue may be treated differently by the authority.</p>
+</details>
+<h2>Transfer to engineering work</h2>
+<p>Run the supplied ledger checker, inspect every status and author a one-page requirement acceptance memorandum. Identify which failures are defects, which are evidence gaps, and which are configuration mismatches. Preserve your assumptions and a before/after traceability ledger. Then return to the original Chapter 4 requirements clinic and revise its verification plan with the distinction between “planned,” “observed,” and “accepted.”</p>
+</main></body></html>

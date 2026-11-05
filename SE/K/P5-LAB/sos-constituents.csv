@@ -1,0 +1,5 @@
+constituent,owner,independent_mission,mission_role,assurance_gap
+Rail,Transit authority,scheduled regional transit,evacuation transfers,activation authority
+Paratransit,Accessibility provider,accessible point-to-point travel,wheelchair-capable journeys,transfer timing
+EMS,County dispatch,medical emergency response,clinical triage and escort,priority messaging
+Hospital intake,Health provider,care intake,receiving capacity,state freshness

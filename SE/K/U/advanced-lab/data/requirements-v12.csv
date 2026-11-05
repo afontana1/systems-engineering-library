@@ -1,0 +1,7 @@
+id,statement,allocation,acceptance,source
+V12-R01,Exact duplicate delivery shall not create second request record,Intake,One duplicate ignored and conflict refused,NEED-01
+V12-R02,Completed assignments shall not overlap on the same modeled resource,Dispatcher,Nonoverlap true for each scenario,NEED-02
+V12-R03,Injected lost messages shall not be counted as completed,FaultInjector,Every injected loss recorded in truth ledger,NEED-03
+V12-R04,Completed assignments shall not occupy an outage interval,FleetModel,No assignment/outage interval intersections,NEED-04
+V12-R05,All simulation evidence shall include source-input and code digests,EvidenceRecorder,Manifest hashes exist for files named in run,NEED-05
+V12-R06,Every requirement shall map to verification and every scenario referenced must exist,AssuranceReviewer,Zero unknown references in trace audit,NEED-06

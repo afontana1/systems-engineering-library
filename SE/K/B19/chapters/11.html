@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Chapter 11 — Transition architecture, experiments, adoption, evaluation, and sustainment · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B19/chapters/11.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="chapter-11--transition-architecture-experiments-adoption-evaluation-and-sustainment">Chapter 11 — Transition architecture, experiments, adoption, evaluation, and sustainment</h1>
+<p><strong>Book 19 · Enterprise Systems Engineering · Week 11</strong><br/>
+<strong>Course alignment:</strong> <a href="../../../C/P5/EN645753.html">Week 11 assessed guide</a> · <a href="../labs/11.html">Hypothetical Lab 11</a> · <a href="../README.html">Book contents</a></p>
+<blockquote>
+<p><strong>Reading contract:</strong> This chapter is instructional, not a substitute for the course guide or its required scholarly sources. Northstar Regional Emergency Access is a fictional case. Numbers are synthetic illustrations unless specifically identified otherwise.</p>
+</blockquote>
+<h2 id="the-problem-you-are-learning-to-solve">The problem you are learning to solve</h2>
+<p>Imagine the regional mobility council meets after an emergency drill. Agencies individually meet many of their own targets, yet some residents still cannot reach essential care. A sponsor wants a decisive engineering answer and a single performance number. You are responsible for making the inquiry sufficiently precise to support action without pretending away divided responsibility, incomplete evidence or affected people.</p>
+<p>This week's question is <strong>transition architecture, experiments, adoption, evaluation, and sustainment</strong>. The key conceptual move is <em>transformation is an experiment with adoption mechanisms</em>. The decision is not merely whether an artifact can be drawn: it is whether the claims made by that artifact survive a realistic change in authority, timing, evidence or public consequences. We therefore work from a real decision question toward an explicit representation, then test where the representation breaks.</p>
+<h2 id="the-central-concept-built-carefully">The central concept, built carefully</h2>
+<p>Treat a pilot as a theory of change: intervention, targeted process, expected intermediate effect, outcome, comparison group, leading indicators and harms to monitor. Plan how people will learn and whether the change can be undone.</p>
+<p>An illustrative before/after average falls from 35 to 28 minutes, but seasonal demand falls too. Introduce a comparison corridor before claiming a causal effect.</p>
+<p>The engineering reasoning should move in a disciplined order. First name the observed or desired outcome, the boundary, the actors who have the right to act, and the time horizon. Next identify the mechanism hypothesized to link an intervention to that outcome. Then choose a representation—network, causal loop, interface contract, process model, probability table, capability map or deliberative inquiry—whose assumptions match the phenomenon. Finally specify evidence able to disconfirm the model. That last step matters because a persuasive representation can still be false, incomplete, or legitimate for only a narrow class of decisions.</p>
+<h3 id="foundational-distinctions-from-the-course-guide">Foundational distinctions from the course guide</h3>
+<ul>
+<li>Transition architectures are real operating states with their own risks, controls, service levels, and authority—not arrows between current and target diagrams.</li>
+<li>Pilots should answer decision questions; activity completion is not evidence of value.</li>
+<li>Adoption depends on workflow fit, incentives, competence, trust, workload, leadership, and local adaptation.</li>
+<li>Benefit realization often occurs after delivery and therefore needs owners, measures, baselines, and continuation decisions.</li>
+<li>Sustainment includes governance, funding, workforce, data quality, model maintenance, audits, and retirement of obsolete processes or systems.</li>
+</ul>
+<h3 id="follow-the-supplied-worked-case">Follow the supplied worked case</h3>
+<p>The preferred federated model begins with two operators and one hospital. The transition architecture includes parallel eligibility verification, a limited data trust, manual fallback, temporary funding, training, and an independent accessibility monitor. The pilot has explicit hypotheses, subgroup measures, stop conditions, and a decision to scale, adapt, or terminate. This is more credible than a region-wide launch milestone.</p>
+<p>Reproduce the example in a small table, model, or notebook before applying the method to the running case. Record where the example is intentionally simplified.</p>
+<p>Rather than accepting the conclusion on first reading, write down which parts of the example are <em>observed</em>, which are <em>assumed</em>, which are <em>computed</em>, and which are <em>normative choices</em>. Change one assumption and describe whether the engineering recommendation changes. If you cannot state who is authorized to accept residual risk, the analysis is not yet a decision package.</p>
+
+<p>The institutional consequences also matter. An aggregate regional measure may improve while one community experiences longer delays or reduced choice. The decision maker should examine distributional results, adoption burdens, and unintended incentives. A credible transformation review distinguishes technical implementation, observed outcome, causal interpretation, and ethical or governance judgment. These are different questions requiring different evidence. Sustainment then asks whether the structures that produced improvement will persist after special project support disappears.</p>
+<p>An enterprise transformation can appear successful because performance improves after its launch, but improvement after an intervention is not necessarily improvement caused by it. Demand, funding, staffing, regulation, and learning may have changed simultaneously. Comparative evaluation can reduce ambiguity, but methods such as difference-in-differences require assumptions about comparable trends and absence of important spillovers.</p>
+<h3>Transformation evidence requires causal and institutional interpretation</h3><h2>Deeper theory: enterprise transformation is a migration of interacting capabilities</h2>
+<p>A target operating model describes how an enterprise is intended to work, but the enterprise cannot usually be switched from current to target state in one step. It must continue serving stakeholders while processes, software, suppliers, authority structures, and workforce practices change. Transformation is therefore a <strong>migration problem with transient risks</strong>. A target architecture that is attractive in its final state may be impossible or dangerous to reach through the proposed sequence.</p>
+<h3>Transition states are real architectures</h3>
+<p>Suppose a regional mobility coalition plans to unify its dispatch interface. During migration, some agencies may operate the new interface and others an older one. The temporary mixed configuration has its own failure modes: inconsistent identifiers, duplicated bookings, translation errors, and ambiguous authority during incidents. Those are not implementation details that can be ignored until the final architecture is complete. Each transition state is an operational architecture requiring bounded interfaces and assurance.</p>
+<p>A transition architecture specifies which old and new capabilities coexist, where translation occurs, who can initiate actions, and how rollback would work. A “big bang” change concentrates dependency and failure risk at one moment. A phased rollout distributes risk but lengthens the period in which mixed configurations must be supported. Neither is universally superior; the choice depends on compatibility, recovery cost, data migration, and the consequences of interruption.</p>
+<h3>Adoption is part of system performance</h3>
+<p>Technology alone does not produce capability. Staff must understand their responsibilities, trust the new information, and be able to carry out changed workflows. A system that offers a technically excellent dashboard may worsen decisions if operators cannot tell which agency owns the displayed status or if they continue relying on an unofficial spreadsheet. Enterprise transformation thus involves habits, incentives, training, professional identity, and informal coordination alongside formal processes.</p>
+<p>A useful conceptual model separates technical availability, operational adoption, and realized mission value. Deploying a tool may make it technically available to all agencies, yet only a subset use it correctly. Even high adoption may fail to deliver intended outcomes if the decision process remains bottlenecked by approval authority. Tracking software-login percentages alone can therefore overstate transformation success.</p>
+<h3>Learning without producing an ungoverned experiment</h3>
+<p>A pilot can test a proposed operating model before expansion, but the pilot environment may be privileged. Staff may receive extra technical support; managers may waive routine approvals; partner agencies may cooperate unusually closely. Those conditions can create a false impression of scalability. Evidence must distinguish what worked because of the intervention from what worked because of exceptional pilot support.</p>
+<p>A sound implementation theory identifies which mechanisms must persist at scale—such as shared data meanings, distributed decision rights, and rapid resolution of interface exceptions. It also identifies constraints that may emerge only when many agencies participate, such as support queues, supplier capacity, and conflicting service priorities. Evaluation should examine leading operational mechanisms and lagging outcomes, rather than declare success after the first positive dashboard report.</p>
+<h3>Backward compatibility is a social as well as technical property</h3>
+<p>A protocol can be wire-compatible while the enterprise becomes operationally incompatible. Suppose a legacy agency is permitted to send a “request canceled” event, but the new network interprets that event as an immediate release of reserved capacity. If the legacy agency previously used it to mean “pending manual review,” a technical translation changes business obligations. A responsible migration maintains a semantic contract and documents any change of authority or process meaning.</p>
+<p>Transformation should also include an exit and recovery strategy. If a pilot exposes unacceptable safety or equity effects, what can be reversed, and what has already become irreversible? Data conversion, vendor contracts, workforce attrition, and decommissioning decisions may make rollback costly. Contingency options should therefore be considered before commitments eliminate them.</p>
+<p>Enterprise engineering succeeds when the <strong>path</strong> to the target creates manageable risk and real learning, not merely when the final architecture diagram appears coherent. A credible transformation argument describes the transition states, their temporary controls, the adoption mechanism, what evidence would trigger revision, and how mission performance will be protected throughout change.</p>
+
+<h2 id="a-reproducible-reasoning-exercise">A reproducible reasoning exercise</h2>
+<p>Treat the next numerical example or decision matrix as a controlled thought experiment. Draw a table with columns <strong>input</strong>, <strong>meaning and unit</strong>, <strong>source or fictional assumption</strong>, <strong>transformation</strong>, <strong>result</strong>, and <strong>plausible failure</strong>. Populate that table from this scenario:</p>
+<p>An illustrative before/after average falls from 35 to 28 minutes, but seasonal demand falls too. Introduce a comparison corridor before claiming a causal effect.</p>
+<p>Work the result twice. On the second pass, replace one favorable condition with the adverse circumstance in the next section. Compute the difference when a valid model exists; when the problem is political or ethical rather than computational, produce an explicit comparison of consequences, affected groups, evidence and objections instead of inventing an objective function. Remember that a mathematical result never establishes the validity of assumptions by itself.</p>
+<h3 id="where-this-method-stops-working">Where this method stops working</h3>
+<p>A statistically significant metric shift may still be irrelevant if a high-risk group deteriorates or the process cannot be sustained.</p>
+<p>A responsible engineer should separate <em>model correctness</em> (the math or logic follows from its premises), <em>model credibility</em> (the premises are supported for this use), and <em>decision legitimacy</em> (the process respects authority, rights and affected parties). Passing the first test does not guarantee the other two. In particular, neither a hypothetical exercise nor an attractive decision matrix certifies an operational regional service.</p>
+<h2 id="reading-the-broader-system">Reading the broader system</h2>
+<p>The three Phase 5 books offer complementary lenses. The systems-of-systems lens asks which independently managed constituents must cooperate and what technical evidence can travel between them. The enterprise lens asks how resources, incentives, governance and institutional history shape that cooperation. The critical-complexity lens asks whose interpretation dominates, which boundaries exclude harms and when no single technical objective deserves priority. Use all three when a proposed solution changes both technology and public obligations. Their explanations can disagree without one being automatically mistaken: they may be answering different questions.</p>
+<h2 id="guided-rehearsal-from-the-weekly-guide">Guided rehearsal from the weekly guide</h2>
+<ol>
+<li>Decompose the preferred alternative into transition architectures and irreversible decisions.</li>
+<li>Define dependencies, owners, funding, workforce, contracts, policy, data, and continuity controls.</li>
+<li>Select two high-uncertainty assumptions and design bounded experiments.</li>
+<li>Define baselines, comparison logic, measures, guardrails, stop conditions, and evidence thresholds.</li>
+<li>Create governance, adoption, benefit-realization, configuration, audit, and sustainment plans.</li>
+</ol>
+<p>Pause after each step and compare the result with the stated decision purpose. Record discrepancies rather than forcing the artifact to match the expected story.</p>
+<h2 id="self-check-work-before-revealing-the-lab-response">Self-check: work before revealing the lab response</h2>
+<ol>
+<li><strong>Define the model.</strong> What is the unit of analysis and why does it match this week's decision? Name a plausible alternative boundary.</li>
+<li><strong>Trace the mechanism.</strong> Which chain of events, institutions or variables connects intervention to outcome? Name one missing link.</li>
+<li><strong>Check the evidence.</strong> Which premise is most fragile? What independent observation would falsify it?</li>
+<li><strong>Change the case.</strong> Suppose a pilot succeeds for volunteers only. Explain selection bias and design a more credible expansion test. Which claims and actors must be reconsidered?</li>
+<li><strong>Defend a bounded decision.</strong> What can be responsibly recommended today, to whom, with what review trigger and non-claims?</li>
+</ol>
+<h3 id="explanations-and-answer-criteria">Explanations and answer criteria</h3>
+<p>A proficient answer identifies a bounded outcome, a model whose assumptions are explicit, a provenance chain, a credible alternative explanation, and a named legitimate decision maker. For Question 4, a single undifferentiated average or a redraw of the same diagram is insufficient: explain which causal or normative premise changed and how that affects the recommendation. For Question 5, separate evidence-backed statements from conditional hypotheses and unresolved stakeholder disputes. If your answer cannot state a stop rule or the consequence of error, revise it before proceeding.</p>
+<p><strong>Specific red-team test:</strong> A statistically significant metric shift may still be irrelevant if a high-risk group deteriorates or the process cannot be sustained.</p>
+<h2 id="apply-it-in-the-fictional-lab-and-assessed-course">Apply it in the fictional lab and assessed course</h2>
+<p>Continue with <a href="../labs/11.html">Hypothetical Lab 11</a>. Its synthetic materials make assumptions inspectable and offer a reference critique. After attempting that rehearsal, return to the <a href="../../../C/P5/EN645753.html">Week 11 course guide</a> for the authoritative deliverable, rubric, readings and mastery gate.</p>
+<p><strong>Assessed deliverable summary (refer to guide for full instructions):</strong></p>
+<p><strong>Enterprise Transformation Readiness Package</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>Transition architectures and five-year roadmap.</li>
+<li>Dependency, authority, funding, workforce, procurement, data, policy, and continuity plan.</li>
+<li>At least two transformation experiments with hypotheses and decision rules.</li>
+<li>Adoption, communications, learning, configuration, and sustainment plan.</li>
+<li>Evaluation/benefit-realization system and review dispositions.</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, evidence used, assumptions, limitations, unresolved conflicts, and changes made to prior baselines.</p>
+<h3 id="important-failure-warnings">Important failure warnings</h3>
+<ul>
+<li>Uses target-state completion as proof of outcome realization.</li>
+<li>Runs a pilot with no comparison, guardrails, stop conditions, or decision use.</li>
+<li>Ignores transition workload, service continuity, workforce, contract, or data-migration risk.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h2 id="required-reading-and-further-study">Required reading and further study</h2>
+<p>The course guide’s assigned sources are the authoritative reading list; source numbers refer to its bibliography, not works reproduced here.</p>
+<ul>
+<li><strong>SEBoK ESE Process Activities and Transforming the Enterprise ([6], [24])</strong><br/>
+<strong>Purpose:</strong> Review strategic technical planning, evaluation, adaptation, and enterprise change.<br/>
+<strong>Guiding questions:</strong> What evidence should govern sequencing and adaptation?</li>
+<li><strong>NIST Baldrige systems perspective and core values ([18], [19])</strong><br/>
+<strong>Purpose:</strong> Review organizational learning, workforce, agility/resilience, management by fact, ethics/transparency, and results.<br/>
+<strong>Guiding questions:</strong> What adoption and learning conditions are necessary for sustained change?</li>
+<li><strong>ISO 31000:2018 overview ([17])</strong><br/>
+<strong>Purpose:</strong> Review integration with governance, strategy, culture, communication, monitoring, and continual improvement.<br/>
+<strong>Guiding questions:</strong> How will transformation risk and opportunity be reviewed as evidence changes?</li>
+</ul>
+<p>Record concise notes answering every guiding question and identify at least one disagreement, limitation, or applicability concern for the regional case.</p>
+<p><a href="../README.html">Return to this book's contents</a> · <a href="../../../C/P5/EN645753.html">Open the weekly assessed guide</a></p>
+</main></body></html>

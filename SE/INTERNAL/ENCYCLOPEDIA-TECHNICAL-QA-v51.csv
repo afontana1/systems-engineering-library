@@ -1,0 +1,26 @@
+slug,words_before,words_after,words_added,focused_review,traced_method_claims,scope,independent_peer_review
+agile-tailoring,658,1009,351,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+allocation-matrix,648,984,336,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+authority-and-governance,657,967,310,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+boundaries-and-interfaces,906,1232,326,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+complexity-emergence,646,978,332,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+conceptual-m-and-s,662,985,323,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+conops-and-scenarios,754,1061,307,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+enterprise-as-system,630,968,338,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+functional-vs-physical,808,1097,289,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+integration-strategy,643,962,319,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+interface-control,644,953,309,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+intervention-and-learning,660,968,308,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+metrics-hierarchy,618,920,302,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+mission-engineering,690,976,286,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+model-language-method-tool,645,953,308,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+object-responsibilities,638,960,322,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+risk-vs-issue,655,964,309,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+software-lifecycle-evidence,669,1002,333,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+software-quality-attributes,638,941,303,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+sos-characteristics,861,1190,329,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+stakeholders-and-needs,916,1214,298,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+system-of-interest,1032,1343,311,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+traceability-graph,796,1105,309,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+views-and-viewpoints,661,963,302,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted
+wbs-and-baselines,675,971,296,yes,2,"technical reasoning, source claim selection, illustrative calculation",not conducted

@@ -1,0 +1,17 @@
+request_id,period,eligible,completed,timely
+R01,evening,1,1,1
+R02,evening,1,1,1
+R03,evening,1,1,1
+R04,evening,1,1,1
+R05,evening,1,0,0
+R06,evening,1,0,0
+R07,evening,1,0,0
+R08,evening,1,0,0
+R09,day,1,1,1
+R10,day,1,1,1
+R11,day,1,1,1
+R12,day,1,1,0
+R13,day,1,1,0
+R14,day,1,1,1
+R15,day,1,1,1
+R16,day,1,1,1

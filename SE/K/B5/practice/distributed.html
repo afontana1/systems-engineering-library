@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Distributed Failures, Retry Storms, and Idempotent APIs · Systems Engineering Learning Library</title><style>
+:root{--ink:#18374b;--teal:#08747a;--line:#d8e4e7;--muted:#617480}*{box-sizing:border-box}body{margin:0;background:#f3f6f7;color:var(--ink);font:16px/1.7 system-ui,Segoe UI,Arial,sans-serif}header{background:#173d51;color:white;padding:20px max(22px,calc((100vw - 1070px)/2))}header a{color:#ccedee}header h1{margin:6px 0;font-size:1.6rem;line-height:1.2}main{max-width:1100px;margin:24px auto;padding:34px 44px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 9px 30px #18374b0b}article h1{font-size:1.65rem}article h2{border-bottom:1px solid #e0e9eb;padding-top:14px;padding-bottom:6px;font-size:1.35rem}article h3{font-size:1.1rem}article p,article li{max-width:85ch}article table{border-collapse:collapse;width:100%;font-size:.94rem}article th,article td{border:1px solid var(--line);padding:9px;text-align:left}article th{background:#edf6f5}pre{overflow-x:auto;background:#142e40;color:#f0f5f7;padding:17px;border-radius:9px}pre code{color:inherit}code{font-size:.91em}p code,li code{background:#eaf1f2;padding:2px 4px}a{color:var(--teal)}a:hover{text-decoration-thickness:2px}details{background:#f1f7f6;border-left:3px solid #65a5a3;border-radius:7px;padding:8px 15px;margin:12px 0}summary{cursor:pointer;font-weight:650}.links{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.links a{display:inline-block;padding:7px 12px;border:1px solid #a6ceca;border-radius:8px;background:#e6f4f1;text-decoration:none;font-weight:600}.note{background:#edf7f6;padding:15px;border-left:4px solid #318a86;border-radius:8px}img,svg{max-width:100%}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}button,input{font:inherit}button{cursor:pointer} .workbench{background:#eef7f6;padding:20px;border-radius:12px;border:1px solid #c4e1dd}.ctrl{margin:15px 0}.ctrl label{display:block;font-weight:600}.ctrl input{width:100%}.output{font-size:1.4rem;font-weight:800;line-height:1.25} @media(max-width:650px){main{padding:19px;margin:10px}}
+</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B5/practice/distributed.html" data-se-mode="standard"></script>
+</head><body><header><div>Systems Engineering · Advanced Book Practice</div><h1>Distributed Failures, Retry Storms, and Idempotent APIs</h1><a href="../OPEN-BOOK.html">Back to book</a> · <a href="INDEX.html">Advanced practice</a></header><main><article><h1>Advanced Workshop · Distributed Failures, Retry Storms, and Idempotent APIs</h1>
+<p><em>Book 5 · Week 7 · partial failure · replay · bounded retries · backpressure · interface assurance</em></p>
+<p><strong>Placement:</strong> After the relevant chapter, use this workshop to extend the reasoning, then try <a href="lab-distributed.html">the corresponding hypothetical lab</a>. The assessed course obligations remain in <a href="../../../C/P1/EN645764.html">the curriculum</a>.</p>
+<h2>1. Failure is ambiguous across a network</h2>
+<p>A call from the booking service to the fleet dispatcher can fail in at least three different ways: the request is lost before execution, the dispatcher executes the request but the response is lost, or the dispatcher is slow and the client times out while execution is still in progress. A caller who sees <code>timeout</code> cannot infer which occurred. If it retries indiscriminately, duplicated side effects are possible. If it does not retry, transient loss may unnecessarily reduce mission success. Distributed engineering therefore begins by separating transport evidence from business outcomes.</p>
+<p>The typical requirement is not <em>exactly one message</em>. Networks reorder, duplicate, or delay messages. A more defensible contract is <strong>at-least-once attempt with at-most-once business effect per stable idempotency key</strong> for a documented retention period. The server needs a durable deduplication rule; the client must preserve the key across retries. If the client generates a fresh key per attempt, the design defeats itself.</p>
+<h2>2. The hidden mathematics of retries</h2>
+<p>Assume each attempt independently fails with probability \(p\), and the client makes at most \(n\) attempts. Then the probability that all attempts fail is \(p^n\), so the chance of at least one successful attempt is</p>
+<p>\[
+P(\mathrm{success\ by\ }n)=1-p^n.
+\]</p>
+<p>With \(p=0.15\) and \(n=3\), the result is \(1-0.15^3=0.996625\), roughly 99.66%. This looks excellent. But the assumptions are unusually strong: failures must be independent, attempts must have the same probability, request deadlines must permit retries, and a success must correspond to a valid business outcome. During a shared network outage or overloaded service, failures can be highly correlated; the repeated attempt may have nearly the same fate.</p>
+<p>Retries also <strong>create load</strong>. The expected number of attempts per original request is \(1+p+p^2+\cdots+p^{n-1}\). Under the same example this is \(1.1725\), so 100 initial requests per second generate an expected 117.25 downstream attempts per second. This calculation is not a traffic forecast under outage correlation; it is a teaching estimate under independent identical attempts.</p>
+<h2>3. Engineering the retry budget</h2>
+<p>A retry policy must specify (i) which errors are retryable; (ii) maximum attempts; (iii) exponential backoff and random jitter; (iv) a total request deadline; (v) an idempotency token; and (vi) what happens after exhaustion. Retrying an authorization refusal, invalid request, or permanent capacity rejection adds load without creating success. Client timeouts should be chosen with an understanding of downstream service-time distributions and the remaining user deadline.</p>
+<p>A circuit breaker can stop traffic to a failing dependency for a period, while <strong>bulkheads</strong> limit the blast radius between mission functions. Load shedding can protect a service from collapse, but creates rejected demand that must be visible in system-level service metrics. A queue that accepts every request without a bounded capacity merely stores overload until latency becomes unacceptable.</p>
+<h2>4. Worked failure injection</h2>
+<p>Suppose Northstar receives 100 booking requests per second and an external dependency can reliably process 110 attempts per second. With \(p=0.15\) and up to three attempts, the expected attempted load becomes 117.25/s—above the nominal downstream service capacity. The independent-attempt success formula would predict 99.66% success <strong>if the system could serve all those attempts under the stated probabilities</strong>. The load result undermines that assumption. Under a simple queue approximation, the implied utilization exceeds one, so waiting time would grow without bound until demand or service changes.</p>
+<p>This is an engineering contradiction, not an arithmetic error: the reliability gain from retries can destroy the capacity assumption used to justify the gain. Try capped retries with jitter, an overload rejection policy, or a different fleet-service interface. Record both completed requests and rejected/timed-out requests; a dashboard showing only the latency of successful bookings is systematically misleading when overload causes failures to be excluded.</p>
+<h2>5. Connect software tests to system assurance</h2>
+<p>A unit test can demonstrate that a handler reuses the original idempotency key. It cannot demonstrate recovery from real partitions. A component integration test can inject a lost acknowledgement. A load test must measure retry amplification across the relevant dependency graph. A fault-injection experiment should preserve a known baseline, control the disturbance, and track safety-relevant effects such as stale route commands. The test oracle needs to check invariants, not merely a 200 status code.</p>
+<h2>Worked problem set — attempt before revealing solutions</h2>
+<h3>Problem 1</h3>
+<p>Compute the independent three-attempt success probability for p=0.15.</p>
+<details><summary>Show solution 1</summary>
+
+<p>1 − 0.15³ = 0.996625, conditional on independent identical attempt failures and enough time/capacity for all attempts.</p>
+</details>
+
+<h3>Problem 2</h3>
+<p>At 100 requests/s with p=.15 and three attempts, compute expected attempts/s.</p>
+<details><summary>Show solution 2</summary>
+
+<p>100(1 + .15 + .15²) = 117.25 attempts/s. That exceeds a 110/s dependency and invalidates a stable-capacity assumption.</p>
+</details>
+
+<h3>Problem 3</h3>
+<p>What changes if all attempts share a single network outage event?</p>
+<details><summary>Show solution 3</summary>
+
+<p>The outcomes are correlated. The formula 1 − p³ is inappropriate, and repeating a request may not improve success at all during the outage.</p>
+</details>
+
+<h3>Problem 4</h3>
+<p>Why should a fault-injection experiment count rejected bookings?</p>
+<details><summary>Show solution 4</summary>
+
+<p>Latency measured only for completed bookings is subject to selection bias. Rejections and timeouts are mission outcomes and must remain in the denominator.</p>
+</details>
+
+<h2>Independent transfer to the Northstar case</h2>
+<p>Use <code>book5.py</code> to sweep failure probability, retry count, and incoming request rate. Identify configurations where retry amplification overloads a 110 attempts/s dependency. Construct a table distinguishing transient transport failure, durable business rejection, and lost acknowledgement. Propose circuit-breaker and idempotency contracts, and write an integration test for each failure class.</p>
+<h2>Further reading and conventions</h2>
+<p>The worked numbers are synthetic instructional fixtures. Do not use them as empirical transportation predictions, certification evidence, or claims about a particular deployed product. Foundational references (external and optional):</p>
+<ul>
+<li><p><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></p>
+</li>
+<li><p><a href="https://sebokwiki.org/wiki/SEBoK_Introduction">SEBoK — Guide to Systems Engineering</a></p>
+</li>
+<li><p><a href="https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final">NIST SP 800-160 Vol. 1 Rev. 1</a></p>
+</li>
+</ul>
+<p><strong>Continue:</strong> <a href="lab-distributed.html">Hypothetical application lab</a> · <a href="book5.py">Python source</a> · <a href="book5-failures.csv">Experiment dataset</a> · <a href="WORKBENCH.html">Interactive workbench</a>.</p>
+</article></main></body></html>

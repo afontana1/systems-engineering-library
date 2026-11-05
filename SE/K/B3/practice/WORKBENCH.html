@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Interactive engineering workbench · Book 3</title><style>*{box-sizing:border-box}body{font:16px/1.6 system-ui,Segoe UI,sans-serif;margin:0;background:#f2f6f7;color:#19394b}header{padding:30px max(18px,calc((100vw - 1050px)/2));background:#193d50;color:white}header a{color:#c8f2ec}main{max-width:1050px;margin:26px auto;padding:0 18px 70px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:15px}.card{background:white;border:1px solid #d6e4e6;padding:22px;border-radius:12px;min-width:0}h1{line-height:1.22}h2{margin-top:0;font-size:1.3rem}label{display:block;margin:12px 0;font-weight:600}input,select{display:block;padding:8px;border:1px solid #aac9cc;border-radius:6px;margin-top:4px;max-width:100%}input[type=range]{width:100%}output{margin-left:12px}p[id]{padding:12px;background:#eaf5f4;color:#135f63;border-radius:8px;font-weight:750}small{color:#57747b}.downloads{display:flex;gap:10px;flex-wrap:wrap}.downloads a{background:#e6f3f0;padding:6px 10px;border-radius:7px}pre{background:#19323f;color:#dff6f2;white-space:pre;overflow:auto;padding:15px;border-radius:8px}button{background:#176e70;color:white;border:0;border-radius:6px;padding:9px 12px;cursor:pointer}</style><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B3/practice/WORKBENCH.html" data-se-mode="standard"></script>
+</head><body><header><a href="../OPEN-BOOK.html">Book 3</a><h1>Model consistency and energy constraints</h1><p>Experiment with assumptions and review the accompanying Python calculations.</p></header><main><div class="grid"><section class="card"><h2>Shuttle energy budget</h2><label>Energy intensity (kWh/km) <input id="rate" max="0.30" min="0.16" step="0.005" type="range" value="0.19"/><output id="rateout"></output></label><label>Auxiliary load (kWh/trip) <input id="hvac" max="1.4" min="0.3" step="0.05" type="range" value="0.65"/><output id="hvacout"></output></label><p aria-live="polite" id="margin"></p><small>6 trips of 12 km; capacity 25 kWh and 20% reserve. Real missions require more constraints.</small></section><section class="card"><h2>Evidence type check</h2><p>The model includes four requirements. Only R1 is initially supported; structural and revision-specific checks are not equivalent.</p><p>Download <a download="" href="model.json">model.json</a> and <a download="" href="tools.py">the validator</a> to try a change and see its consequence.</p></section></div><section class="card" style="margin-top:18px"><h2>Download practice sources</h2><div class="downloads"><a download="" href="LAB-NOTEBOOK.ipynb">LAB-NOTEBOOK.ipynb</a><a download="" href="energy.json">energy.json</a><a download="" href="model.json">model.json</a><a download="" href="tools.py">tools.py</a><a download="" href="energy.md">Energy (Markdown)</a><a download="" href="graph.md">Graph (Markdown)</a><a download="" href="lab-energy.md">Lab Energy (Markdown)</a><a download="" href="lab-graph.md">Lab Graph (Markdown)</a></div><p>Python is displayed for inspection; execution requires your own Python environment.</p><button id="copy" type="button">Copy source</button><span id="copystatus" role="status"></span><details><summary>View the Python source</summary><pre><code id="pycode">"""Northstar teaching tools: typed model validation and energy constraints."""
+from pathlib import Path
+import json
+HERE=Path(__file__).parent
+
+def model_status(model):
+    edges=model['edges']; runs={r['test']:r for r in model['executions']}
+    out={}
+    for req in model['requirements']:
+        rid=req['id']
+        b=[e['source'] for e in edges if e['kind']=='satisfies' and e['target']==rid and e['source'].startswith('B')]
+        t=[e['source'] for e in edges if e['kind']=='verifies' and e['target']==rid and e['source'].startswith('T')]
+        if not b:out[rid]='MISSING_SATISFACTION';continue
+        if not t:out[rid]='MISSING_TEST';continue
+        found=[runs[x] for x in t if x in runs]
+        if not found:out[rid]='NO_EXECUTION';continue
+        versioned=[r for r in found if r['req_rev']==req['rev']]
+        if not versioned:out[rid]='STALE_EXECUTION';continue
+        match=[r for r in versioned if r['config']==model['release_config']]
+        if not match:out[rid]='WRONG_CONFIGURATION';continue
+        out[rid]='SUPPORTED' if any(r['result']=='PASS' for r in match) else 'FAILED'
+    return out
+
+def budget(s):
+    for k in ['length_km','rate_kwh_per_km','hvac_kwh_per_trip','trips','capacity_kwh','reserve_fraction']:
+        if s[k]&lt;0:raise ValueError('negative parameter: '+k)
+    if s['reserve_fraction']&gt;=1:raise ValueError('reserve fraction must be &lt;1')
+    demand=s['trips']*(s['length_km']*s['rate_kwh_per_km']+s['hvac_kwh_per_trip'])
+    allowed=s['capacity_kwh']*(1-s['reserve_fraction'])
+    return {'demand_kwh':demand,'allowable_kwh':allowed,'margin_kwh':allowed-demand,'feasible':allowed&gt;=demand}
+
+if __name__=='__main__':
+    model=json.loads((HERE/'model.json').read_text())
+    scenarios=json.loads((HERE/'energy.json').read_text())
+    print(json.dumps({'model':model_status(model),'energy':{k:budget(v) for k,v in scenarios.items()}},indent=2))
+</code></pre></details></section></main><script>function calculate(){let r=+document.getElementById('rate').value,h=+document.getElementById('hvac').value;document.getElementById('rateout').textContent=r.toFixed(3);document.getElementById('hvacout').textContent=h.toFixed(2);let need=6*(12*r+h),m=20-need;document.getElementById('margin').textContent=`Demand ${need.toFixed(2)} kWh · Margin ${m.toFixed(2)} kWh · ${m>=0?'Within simple budget':'Beyond budget'}`;}for(const id of ["rate", "hvac"])document.getElementById(id).addEventListener('input',calculate);document.getElementById('copy').onclick=()=>{const source=document.getElementById('pycode').textContent;navigator.clipboard?.writeText(source).then(()=>document.getElementById('copystatus').textContent='Copied').catch(()=>document.getElementById('copystatus').textContent='Select the code to copy');};calculate();</script></body></html>

@@ -1,0 +1,2 @@
+id,stimulus,observer,response,environment,deadline_hours,constraints,evidence_id,authority,status
+AR-01,gateway security advisory,SOC,approved mitigated state,operating fleet,72,safety & configuration,EV-01,chief engineer,exercise

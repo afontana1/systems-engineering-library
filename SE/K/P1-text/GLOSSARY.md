@@ -1,0 +1,70 @@
+# Phase 1 concept glossary
+
+These short entries are navigation aids, not substitutes for the lessons or authoritative standards.
+
+- **Actor:** An external role that initiates or participates in a use case, not necessarily a single person.
+- **Allocation:** Assignment of a function, behavior or obligation to a design element with accountable responsibility.
+- **Architecture decision record (ADR):** Versioned record of context, alternatives, rationale, consequences and reconsideration conditions.
+- **Architecture viewpoint:** Specification of what concerns, stakeholders and modeling conventions a particular architecture view addresses.
+- **Association:** Semantically meaningful relationship between classifiers or domain concepts.
+- **Assurance case:** Structured claims, arguments, assumptions and evidence about an engineered property.
+- **Availability:** Proportion of defined eligible time or requests for which a specified service outcome is delivered.
+- **Baseline:** Approved configuration of artifacts and decisions used as a controlled reference.
+- **Behavior:** An action, interaction, state evolution or function a system performs.
+- **Boundary:** Declared inclusion/exclusion decision relative to the system or software responsibility.
+- **C4 model:** Software architecture view approach using context, container, component and optional code views.
+- **Class:** Classifier in UML; in design often a software type, but in domain modeling represents a concept.
+- **Component:** Design element with assigned responsibilities and interfaces; abstraction depends on viewpoint.
+- **ConOps:** Concept of Operations describing how a system is intended to work in an operational context.
+- **Consistency:** Agreement among representations or replicas according to declared semantics and time constraints.
+- **Contract:** Agreement covering input, output, timing, failures, ownership and behavioral expectations.
+- **Counterexample:** Instance or scenario that shows a proposed rule or interpretation does not always hold.
+- **Criticality:** Significance of failure consequences and associated assurance expectations.
+- **Derived requirement:** Requirement introduced through engineering reasoning from a source need or higher-level obligation.
+- **Digital thread:** Governed network of links and provenance across lifecycle artifacts and evidence.
+- **Domain entity:** Concept with persistent identity across relevant changes in attributes or state.
+- **Event:** Occurrence relevant to a system or object, often triggering a transition or audit record.
+- **Eventual consistency:** Convergence of distributed views over time without guaranteeing immediate equality.
+- **FMEA:** Failure Modes and Effects Analysis: structured enumeration of failures and consequences.
+- **Functional requirement:** Observable behavior or capability the system or software must deliver.
+- **Guard:** Boolean condition controlling whether a state transition may occur.
+- **Idempotency:** Repeated application of a request has the same externally intended effect as one application.
+- **Interface:** Boundary contract for information, service, energy, control or material exchange.
+- **Invariant:** Condition required to hold across defined valid states of an object/system.
+- **KerML:** Kernel Modeling Language underlying the SysML v2 language semantics.
+- **Little’s Law:** Steady-state relation L = λW among average work in system, arrival rate and time in system.
+- **Logical architecture:** Organization of functional or behavioral responsibilities without committing fully to physical realization.
+- **Model:** Purposeful representation with identified elements, attributes and meaningful relationships.
+- **Model element:** Typed, identifiable information object within a controlled model repository.
+- **Model view:** Purpose-specific rendering or projection of a model for stakeholder questions.
+- **Multiplicity:** Allowed count of related instances in a relationship.
+- **OCL:** Object Constraint Language used with UML to state invariants and operation contracts.
+- **OOAD:** Object-Oriented Analysis and Design: transition from domain concepts and behaviors to software responsibilities.
+- **Operational scenario:** Narrative or formal sequence describing mission behavior under defined context and conditions.
+- **Outbox pattern:** Persist business change and pending outbound event together, then publish asynchronously.
+- **Parametric constraint:** Quantitative relationship among modeled properties, variables or quantities.
+- **Percentile latency:** Response-time threshold at or below which a specified fraction of observations fall.
+- **Port:** Typed interaction feature at a modeled element boundary, subject to language/tool semantics.
+- **Postcondition:** Condition expected to hold after a successful operation, given its contract.
+- **Precondition:** Condition under which an operation contract is applicable.
+- **Provenance:** Origin, version and transformation history of data or evidence.
+- **Quality attribute:** Nonfunctional characteristic such as latency, reliability, security or modifiability.
+- **Requirement:** Defined, testable obligation placed on a system or element.
+- **Resilience:** Capacity to continue, degrade predictably or recover following disruptions.
+- **Risk:** Uncertainty with possible consequences for objectives, including likelihood and impact considerations.
+- **Scenario extension:** Alternative flow or failure handling that branches from a primary use-case step.
+- **Service-level objective (SLO):** Explicitly measured service reliability or performance target over a defined population/window.
+- **State machine:** Model of legal states, events, guards, effects and transitions.
+- **Strategy pattern:** Encapsulates interchangeable algorithms or policies behind a common interface.
+- **SysML:** OMG Systems Modeling Language used for systems modeling; distinguish language versions.
+- **Test oracle:** Rule or source establishing expected result against which a test observes behavior.
+- **Threat model:** Structured analysis of assets, trust boundaries and plausible adversarial actions.
+- **Traceability:** Ability to follow justified relationships between claims, design and evidence.
+- **Transaction:** Unit of state change subject to declared atomicity/consistency guarantees.
+- **UML:** OMG Unified Modeling Language, a family of structural and behavioral modeling concepts.
+- **Use case:** Actor-centered goal and system response contract with success and alternative outcomes.
+- **Validation:** Evidence that the system is suitable for stakeholder needs and intended use.
+- **Value object:** Domain value defined by its properties rather than persistent identity.
+- **Verification:** Evidence that a system or implementation conforms to specified requirements.
+- **Versioning:** Controlled record of changes to model, contract, code, schema or test configurations.
+- **Viewpoint:** Rules and concerns specifying what a view should communicate.

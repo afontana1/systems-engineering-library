@@ -1,0 +1,13 @@
+case_id,risk,lead_time_days,rework_cycles,missing_evidence,cohort
+C-001,low,8,0,0,baseline
+C-002,high,42,2,0,baseline
+C-003,low,13,1,0,baseline
+C-004,medium,21,1,0,baseline
+C-005,high,66,2,1,baseline
+C-006,medium,26,1,0,baseline
+C-007,low,9,0,0,pilot
+C-008,high,38,1,0,pilot
+C-009,low,10,0,0,pilot
+C-010,medium,15,0,0,pilot
+C-011,high,54,1,0,pilot
+C-012,medium,20,1,0,pilot

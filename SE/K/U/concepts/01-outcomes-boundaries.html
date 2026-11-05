@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>01 · Outcomes, system boundaries, and operational scenarios · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/U/concepts/01-outcomes-boundaries.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="01--outcomes-system-boundaries-and-operational-scenarios">01 · Outcomes, system boundaries, and operational scenarios</h1>
+<p><strong>Concept dossier · Foundations / conceptual design / enterprise engineering</strong><br/>
+<strong>Prerequisites:</strong> stakeholders, systems thinking, basic causal reasoning<br/>
+<strong>When to use:</strong> before writing requirements, buying a solution, declaring a capability gap, or choosing a metric.</p>
+<h2 id="the-key-distinction">The key distinction</h2>
+<p>An <strong>outcome</strong> describes a change in the world that matters to stakeholders. A <strong>system</strong> is an arrangement of interacting elements that can contribute to that outcome. A <strong>system boundary</strong> identifies which elements, decisions, and behaviors are treated as inside the system of interest for a particular analysis. Boundaries are analytical choices, not facts of nature: a shuttle controller is a system when evaluating braking software, while a regional evacuation service includes operators, agreements, roads, dispatchers, and public trust.</p>
+<p>A useful first question is not <em>Which system shall we build?</em> but <em>Which people need what outcome, under what conditions, with what tradeoffs?</em> A solution selected too early suppresses alternatives. The distinction between a need and a proposed solution is the foundation of defensible conceptual design.</p>
+<h2 id="three-nested-boundaries">Three nested boundaries</h2>
+<p>Consider a fictional campus shuttle that serves people who cannot safely walk across a large site. We might examine three boundaries:</p>
+<ol>
+<li><strong>Vehicle:</strong> propulsion, perception, brakes, doors and onboard controller. Question: does the vehicle stop within a specified envelope?</li>
+<li><strong>Service:</strong> vehicles, dispatch, charging, curb infrastructure, incident response and people. Question: does a passenger complete an accessible journey?</li>
+<li><strong>Enterprise ecosystem:</strong> campus administrators, contractors, regulators, emergency services and nearby transit. Question: is the mobility service dependable, equitable and sustainable?</li>
+</ol>
+<p>A performance improvement at one boundary can be a system-level regression at another. Faster dispatch might reduce average wait while increasing inaccessible pickup events. Every metric therefore needs a defined population and boundary.</p>
+<h2 id="a-reproducible-scenario-to-measure-chain">A reproducible scenario-to-measure chain</h2>
+<p>Construct an operational scenario as a tuple:</p>
+<p><code>scenario = (actor, goal, trigger, context, sequence, exception, outcome)</code></p>
+<p>Example: A wheelchair user requests a pickup during a storm; the curb is temporarily blocked, wireless connectivity is intermittent, and the shuttle must offer an alternate accessible boarding point. The scenario exposes three different concerns: <strong>availability</strong> (is service offered?), <strong>accessibility</strong> (can the user actually board?), and <strong>resilience</strong> (can the service adapt during disruption?).</p>
+<p>A plausible service outcome metric is the fraction of eligible trip requests that result in completed accessible journeys within 20 minutes. Let <code>N_completed</code> count eligible requests meeting that definition and <code>N_eligible</code> count all eligible requests in the reporting window. Then <code>service_success = N_completed / N_eligible</code>. If 176 of 200 requests qualify, the observed fraction is 0.88. This is a descriptive estimate, not yet a general claim about future storms. A valid report also documents exclusions, missing records, subgroup performance, scenario mix and time window.</p>
+<p>Do not turn “20 minutes” or “0.88” into a requirement without stakeholder negotiation, feasibility analysis and risk assessment. In a real service, stakeholders would need to agree on how requests cancelled by users, inaccessible locations and emergency interruptions count.</p>
+<h2 id="four-questions-for-a-boundary-review">Four questions for a boundary review</h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>What to record</th>
+<th>A failure it prevents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What belongs inside?</td>
+<td>Elements, operators, decisions, controllable actions</td>
+<td>Silent responsibility gaps</td>
+</tr>
+<tr>
+<td>What crosses it?</td>
+<td>People, material, energy, information, authority</td>
+<td>Unmanaged interfaces</td>
+</tr>
+<tr>
+<td>What is outside but influential?</td>
+<td>Weather, regulations, incentives, other providers</td>
+<td>Unrealistic independence assumptions</td>
+</tr>
+<tr>
+<td>Who experiences consequences?</td>
+<td>Users, maintainers, neighbors, excluded groups</td>
+<td>Optimization for the easiest-to-measure stakeholder</td>
+</tr>
+</tbody>
+</table>
+<h2 id="worked-decision">Worked decision</h2>
+<p>Two proposed concepts compete: <strong>A</strong>, add another shuttle; <strong>B</strong>, introduce coordinated curb management and dispatch exception handling. Vehicle utilization data alone might favor A. Under the blocked-curb scenario, however, B may remove the actual bottleneck. A functional analysis should separate <em>transport capacity</em> from <em>accessible boarding coordination</em> before spending capital. A concept study should test both under multiple scenarios, record dependencies and maintain a no-action baseline.</p>
+<h2 id="misconceptions-and-failure-modes">Misconceptions and failure modes</h2>
+<ul>
+<li>“The boundary is the organizational chart.” Organizations may not own every critical dependency or consequence.</li>
+<li>“A metric tells us whether users benefit.” It tells us only what its operational definition measures.</li>
+<li>“A ConOps is a marketing story.” It is a structured statement of actors, operations, modes, off-nominal behavior, responsibilities and constraints.</li>
+<li>“One scenario proves the concept.” Scenarios sample a much larger space; they cannot by themselves establish completeness.</li>
+</ul>
+<h2 id="try-it">Try it</h2>
+<p><strong>Exercise A.</strong> Write a boundary statement for a medication delivery drone and name three interfaces that cross it. <strong>Suggested answer:</strong> “This assessment includes the dispatch service, drone, landing process and recipient confirmation, but not the hospital's prescribing system.” Interfaces include order authorization, airspace coordination and recipient handoff. Other defensible boundaries are possible if made explicit.</p>
+<p><strong>Exercise B.</strong> A team claims 98% “delivery success” after excluding weather cancellations. What would you ask? <strong>Answer:</strong> whether cancellations are part of the intended service population; how nonresponses and unsafe delivery attempts were counted; and whether the result generalizes across conditions and users.</p>
+<p><strong>Transfer artifact:</strong> one context diagram, one scenario set (nominal/degraded/emergency), a stakeholder-outcome table and a metric dictionary with units, exclusions and owner.</p>
+<h2 id="connections">Connections</h2>
+<p><strong>Build next:</strong> <a href="02-requirements-evidence.html">Requirements, evidence and traceability</a> → <a href="03-architecture-states.html">Architecture and interfaces</a>.<br/>
+<strong>Revisit in:</strong> <a href="13-sos-enterprise-governance.html">Enterprise capability and governance</a> and <a href="14-causal-interventions.html">Causal interventions and fairness</a>.<br/>
+<strong>Legacy primer:</strong> <a href="../../encyclopedia/system-of-interest.html">System of interest</a>, <a href="../../encyclopedia/conops-and-scenarios.html">ConOps and scenarios</a>.</p>
+</main></body></html>

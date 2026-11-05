@@ -1,0 +1,2 @@
+id,type,cause,event_or_condition,impact,owner,trigger,action,authority,status
+CR-01,change,supplier proposal,timeout 200ms to 500ms,safety contract possible conflict,,,,,open

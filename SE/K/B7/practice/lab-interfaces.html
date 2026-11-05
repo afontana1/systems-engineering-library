@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lab · Interface Contracts and End-to-End Timing Budgets · Systems Engineering Learning Library</title><style>
+:root{--ink:#18374b;--teal:#08747a;--line:#d8e4e7;--muted:#617480}*{box-sizing:border-box}body{margin:0;background:#f3f6f7;color:var(--ink);font:16px/1.7 system-ui,Segoe UI,Arial,sans-serif}header{background:#173d51;color:white;padding:20px max(22px,calc((100vw - 1070px)/2))}header a{color:#ccedee}header h1{margin:6px 0;font-size:1.6rem;line-height:1.2}main{max-width:1100px;margin:24px auto;padding:34px 44px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 9px 30px #18374b0b}article h1{font-size:1.65rem}article h2{border-bottom:1px solid #e0e9eb;padding-top:14px;padding-bottom:6px;font-size:1.35rem}article h3{font-size:1.1rem}article p,article li{max-width:85ch}article table{border-collapse:collapse;width:100%;font-size:.94rem}article th,article td{border:1px solid var(--line);padding:9px;text-align:left}article th{background:#edf6f5}pre{overflow-x:auto;background:#142e40;color:#f0f5f7;padding:17px;border-radius:9px}pre code{color:inherit}code{font-size:.91em}p code,li code{background:#eaf1f2;padding:2px 4px}a{color:var(--teal)}a:hover{text-decoration-thickness:2px}details{background:#f1f7f6;border-left:3px solid #65a5a3;border-radius:7px;padding:8px 15px;margin:12px 0}summary{cursor:pointer;font-weight:650}.links{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.links a{display:inline-block;padding:7px 12px;border:1px solid #a6ceca;border-radius:8px;background:#e6f4f1;text-decoration:none;font-weight:600}.note{background:#edf7f6;padding:15px;border-left:4px solid #318a86;border-radius:8px}img,svg{max-width:100%}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}button,input{font:inherit}button{cursor:pointer} .workbench{background:#eef7f6;padding:20px;border-radius:12px;border:1px solid #c4e1dd}.ctrl{margin:15px 0}.ctrl label{display:block;font-weight:600}.ctrl input{width:100%}.output{font-size:1.4rem;font-weight:800;line-height:1.25} @media(max-width:650px){main{padding:19px;margin:10px}}
+</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B7/practice/lab-interfaces.html" data-se-mode="standard"></script>
+</head><body><header><div>Systems Engineering · Advanced Book Practice</div><h1>Lab · Interface Contracts and End-to-End Timing Budgets</h1><a href="../OPEN-BOOK.html">Back to book</a> · <a href="INDEX.html">Advanced practice</a></header><main><article><h1>Hypothetical Laboratory · Interface Contracts and End-to-End Timing Budgets</h1>
+<p><em>Book 7 · Week 6 · 90–120 minutes · Independent practice, not the assessed course submission.</em></p>
+<h2>Engineering brief</h2>
+<p>Northstar's review board needs a defensible answer about <strong>interface ownership · units · critical paths · synchronized failure</strong>. The program is fictional. Your obligation is to create an auditable model and identify at least one reason the result may not transfer to a real deployed service.</p>
+<p><strong>Assigned reading:</strong> <a href="interfaces.html">Advanced workshop</a> (remove spaces in a copied Markdown reference if necessary). Use the original course's Week 6 deliverable as a separate assessment, not as a place to paste these sample answers.</p>
+<h2>Reference fixture and code</h2>
+<ul>
+<li><a href="book7.py">Python program</a> — runnable with Python 3 and no third-party dependencies.</li>
+<li><a href="book7-interfaces.csv">CSV input fixture</a> — synthetic and intentionally small.</li>
+<li><a href="book7.ipynb">Jupyter notebook</a> — structured worksheet and reproducible calculations.</li>
+<li><a href="WORKBENCH.html">Interactive workbench</a> — change values in the offline website, then verify the same result in Python.</li>
+</ul>
+<h2>Procedure</h2>
+<ol>
+<li><strong>Identify the claim.</strong> State the decision to be supported, the owner, the operating boundary, the configuration and the acceptance criterion. Do this before running code.</li>
+<li><strong>Reproduce the reference outcome.</strong> Run <code>python book7.py</code> or the notebook. Record your Python version, the source revision and the supplied assumptions.</li>
+<li><strong>Perturb one assumption.</strong> Create an interface contract for the booking–dispatch–vehicle path with explicit units, deadlines and owner responsibilities. Compare serial and parallel timing using <code>book7.py</code>, then add a retry and a stale-permission rejection. Draw a critical-path diagram, write a negative-test matrix, and propose which timing and security claims need real measurements rather than deterministic budget estimates.</li>
+<li><strong>Inject a counterexample.</strong> Choose an edge case such as a duplicate command, correlated failure, a feasibility breach, stale information, or a requirement change. Predict the outcome before running it.</li>
+<li><strong>Write a decision memo.</strong> Separate verified results from model assumptions and unresolved evidence requests. Do not infer real-world readiness from this synthetic case.</li>
+</ol>
+<h2>Submission checklist</h2>
+<ul>
+<li>One page of clearly defined system boundary, assumptions and requirements.</li>
+<li>One reproduction log with commands or notebook output and environment.</li>
+<li>One model diagram, trade table, state diagram or interface budget as appropriate.</li>
+<li>At least three distinct test cases, including a negative or invalid case.</li>
+<li>One table of results, including at least one sensitivity or uncertainty check.</li>
+<li>One conclusion with limits, technical owner and proposed next evidence.</li>
+</ul>
+<details><summary>Reference review guidance — read after attempting</summary>
+
+<p>A strong answer reproduces the supplied calculation and then <strong>names the assumption on which it depends</strong>. The strongest answer also detects that the preferred decision can change under a different scenario or configuration. In the final memo, distinguish what is required, what is predicted, what is observed in the model, and what still needs independent verification.</p>
+</details>
+
+</article></main></body></html>

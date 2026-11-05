@@ -1,0 +1,27 @@
+"""Small, reproducible checks of illustrative v53 arithmetic, not validation of assumptions."""
+import math
+checks=[]
+def ck(label,value,expected,tol=1e-6):
+    assert abs(value-expected)<tol,(label,value,expected)
+    checks.append(label)
+factor=sum(1/1.05**i for i in range(1,4))
+ck('PV annuity factor',factor,2.7232480293704784)
+ck('PV design A',800+150*factor,1208.487204405572)
+ck('PV design B',970+100*factor,1242.3248029370478)
+ck('design PV gap',(970+100*factor)-(800+150*factor),33.8375985314758)
+ck('extra annual A service loss',20*factor,54.46496058740957)
+ck('configuration combinations',2**3,8)
+ck('supplier alternate expected cost',20+.15*180+5,52)
+ck('supplier verified expected cost',44+5,49)
+ck('telemetry success selective',570/582,0.979381443298969)
+ck('telemetry mission success',570/600,.95)
+ck('environment PSD integral RMS',math.sqrt(.04*100),2)
+ck('operational mixture',.8*.99+.2*.9,.972)
+ck('last-time buy cost',50*250+2000,14500)
+ck('refresh difference',25000-14500,10500)
+ck('expected usable spares',50*(1-.2),40)
+ck('combined std uncertainty',math.hypot(.2,.3),math.sqrt(.13))
+ck('expanded uncertainty',2*math.hypot(.2,.3),0.7211102550927979)
+ck('guard-band upper value',9.6+2*math.hypot(.2,.3),10.321110255092798)
+assert all(x>0 for x in [factor,len(checks)])
+print('PASS',len(checks),'illustrative checks; assumptions and real-world applicability not verified.')

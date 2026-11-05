@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Architecture views, viewpoints, and consistency · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/views-and-viewpoints.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Architecture views, viewpoints, and consistency</h1>
+<p><strong>Reference entry · MBSE and software-intensive systems · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p>A <strong>viewpoint</strong> specifies the stakeholder concerns, modeling conventions, allowable evidence, and questions that a view must address. A <strong>view</strong> is the actual representation constructed under that viewpoint. A safety engineer's hazard propagation view, an operator's interaction view, and a maintenance planner's replaceable-unit view can show the same architecture without being redundant. Their overlap is a consistency obligation, not a reason to force every concern into one diagram.</p>
+<h2>Theory: views are constrained projections</h2>
+<p>Treat a system model as a set of typed facts <code>M</code>. A viewpoint defines a projection <code>V_i(M)</code> and constraints <code>C_i</code> on the displayed relationships. Consistency across two views requires that shared facts be equal or related by an explicit transformation. For example, if a functional view assigns emergency stop to a controller, the interface view must show how the stop demand reaches actuation, and the safety view must represent plausible loss or corruption of that signal.</p>
+<p>Not all concerns are reducible to structure. Behavioral views need modes, temporal ordering, concurrency, and failure transitions. Quantitative views need equations, units, assumptions, parameter ranges, and uncertainty. A view that omits an interface may intentionally abstract it away, but this omission must not be mistaken for proof that the dependency is absent.</p>
+<h2>Worked example: one latency, three views</h2>
+<p>A dispatch service has a requirement to acknowledge a safety override within 200 ms. The sequence view shows a 30 ms acquisition step, 40 ms message transfer, 90 ms processing, and 25 ms actuation: a nominal sum of 185 ms. The deployment view reveals a shared gateway that adds up to 35 ms at peak load, making the worst-case estimate 220 ms. The safety view identifies late acknowledgement as a hazardous condition. Each view is locally coherent; only their integration exposes the design conflict. The appropriate response is to revise the architecture or requirement evidence, not hide the gateway from the sequence view.</p>
+<h2>Engineering use and evidence</h2>
+<p>For every viewpoint, document concern owners, questions, required element types, authoritative sources, permitted abstractions, and validation rules. Create a cross-view consistency matrix linking shared identifiers, assumptions, and units. Review disagreements as potentially substantive findings. Keep a decision log recording which view informed the decision, which facts were versioned, and what was not modeled.</p>
+<h2>Limitations and connections</h2>
+<p>A model can be internally consistent yet represent the wrong world. Viewpoint selection can suppress marginalized users or mission conditions if only sponsoring stakeholders are consulted. Connect this entry to <strong>model methods</strong>, <strong>interface contracts</strong>, <strong>functional architecture</strong>, <strong>requirements</strong>, and <strong>stakeholder needs</strong>.</p>
+<h2>Technical analysis: consistency across viewpoints</h2>
+<p>A viewpoint defines concerns, modeling conventions, stakeholders, and the questions a view must answer. Different views should be <strong>selective</strong>, not contradictory. The same component may appear in a functional view, deployment view, failure-dependency view, and operational view with different abstractions; their shared identifiers and interface semantics must still reconcile.</p>
+<p>Suppose the interface view specifies a telemetry sampling period of <strong>50 ms</strong>, while the timing view assumes <strong>10 samples/s</strong>. A 50-ms period implies <code>1/0.050 = 20 samples/s</code>, so the views disagree by a factor of <strong>2</strong>. That inconsistency can double expected message traffic or invalidate bandwidth and buffer analyses. Whether the model is UML, SysML, tables, or prose, a cross-view rule can compare <code>period</code>, <code>rate</code>, unit, and version for each shared interface.</p>
+<p><strong>Evidence boundary.</strong> Maintain a canonical identity and semantic mapping for repeated concepts; record when a view intentionally abstracts detail. A syntactically conformant diagram is not proof that architecture views are mutually realizable or that their behavior matches deployed systems. Review viewpoints against stakeholder concerns and decisions rather than creating diagrams only to satisfy documentation counts.</p>
+<h2>Claim-specific sources</h2>
+<p>The following <strong>selected methodological claims</strong> are tied to identifiable sections or abstracts, not merely generic reading lists. Source scope is stated for each link. Numerical scenarios and computations in this article are <strong>original illustrative examples</strong>, not data, calculations, or endorsements supplied by the linked publishers. Links require internet access; the explanation remains readable offline.</p>
+<ul>
+<li><strong>C1:</strong> Logical decomposition models describe multiple relationships of functions, behavior and architecture elements. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/4-0-system-design-processes/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §4.3 Logical Decomposition</a> · <em>direct guidance</em>.</li>
+<li><strong>C2:</strong> Interface management identifies and governs shared parameters across disciplines and organizational boundaries. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/6-3-interface-management/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §6.3 Interface Management</a> · <em>direct guidance</em>.</li>
+</ul>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="model-language-method-tool.html">Model, method, language, tool, and repository</a></li>
+<li><a href="functional-vs-physical.html">Functional, logical, and physical architecture: preserving intent across realization</a></li>
+<li><a href="interface-control.html">Interface control and integration contracts</a></li>
+<li><a href="stakeholders-and-needs.html">Stakeholders, needs, and value: translating plural interests into engineering decisions</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B3/chapters/03-stakeholders-concerns-needs-context-conops-an.html">Book 3, Chapter 03: Book III · Chapter 3: Stakeholder concern becomes a model view</a></li>
+<li><a href="../B3/chapters/05-behavior-modeling-use-cases-activities-action.html">Book 3, Chapter 05: Book III · Chapter 5: Behavior is a family of complementary projections</a></li>
+<li><a href="../B9/chapters/02-analyze-stakeholders-mission-scenarios-outcomes-and-measures-in-the-.html">Book 9, Chapter 02: Book 9 · Chapter 02 — Analyze stakeholders, mission, scenarios, outcomes, and measures in the authoritative model</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=d198f85683243">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="views-and-viewpoints.md">Editable Markdown</a></nav></main></body></html>

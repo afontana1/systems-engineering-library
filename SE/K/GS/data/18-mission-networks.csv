@@ -1,0 +1,5 @@
+parameter,value,source_type
+pa,0.95,synthetic teaching assumption
+pb,0.95,synthetic teaching assumption
+pc,0.8,synthetic teaching assumption
+common,0.03,synthetic teaching assumption

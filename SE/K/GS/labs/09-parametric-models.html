@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Laboratory · Parametric model semantics and sensitivity under correlated inputs · Systems Engineering Library</title><style>*{box-sizing:border-box}body{background:#f4f7f8;margin:0;color:#193847;font:16px/1.76 system-ui,"Segoe UI",Arial,sans-serif}header{background:linear-gradient(112deg,#1b3a50,#137477);padding:30px max(18px,calc((100vw - 1060px)/2));color:white}header a{color:#e0fbfa}header h1{font-size:clamp(1.65rem,3vw,2.5rem);line-height:1.15;margin:.3em 0}header p{color:#dbf0f0;max-width:85ch}main{max-width:1070px;background:#fff;border:1px solid #d6e4e5;border-radius:12px;margin:28px auto 60px;padding:clamp(20px,4vw,55px)}article{max-width:91ch;margin:auto}h2{font-size:1.43em;margin-top:2em;border-bottom:1px solid #dbe6e8;padding-bottom:6px}h3{font-size:1.13em;margin-top:1.6em}a{color:#08757a;text-underline-offset:3px}p,li{max-width:90ch}table{border-collapse:collapse;max-width:100%;width:100%}td,th{border:1px solid #d4e2e4;padding:10px;text-align:left}th{background:#eaf5f4}blockquote{border-left:4px solid #238887;margin-left:0;background:#edf7f6;padding:10px 18px}pre{background:#183449;color:#e8f3f4;padding:16px;overflow-x:auto}code{font-size:.92em}p code{padding:1px 4px;background:#e8f2f4}details{padding:13px 17px;margin:16px 0;background:#edf6f5;border-radius:8px;border:1px solid #cee2e1}summary{font-weight:700;cursor:pointer}.links{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.links a{padding:7px 13px;background:#e7f3f2;border-radius:6px;font-weight:700}.figure{margin:26px 0;text-align:center}.figure img{max-width:100%;max-height:340px}.math-block{margin:18px 0;overflow-x:auto}mjx-container[jax=SVG]{max-width:100%;overflow-x:auto;overflow-y:hidden}article hr{border:0;border-top:1px solid #dbe6e8;margin:36px 0}@media(max-width:750px){header{padding:25px 18px}main{margin:0;border:0;border-radius:0}}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:"local"},startup:{typeset:false},options:{skipHtmlTags:["script","style","noscript","textarea","pre","code"]}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/GS/labs/09-parametric-models.html" data-se-mode="standard"></script>
+</head><body><header><small>Graduate textbook studies · Systems Engineering</small><h1>Laboratory · Parametric model semantics and sensitivity under correlated inputs</h1><p><a href="../INDEX.html">Graduate studies</a> · <a href="../../OPEN-BOOKS.html">All companion books</a></p></header><main><article><h1>Applied lab: Parametric model semantics and sensitivity under correlated inputs</h1>
+<p><em>Advanced practice associated with Book 9 — Applied Analytics for MBSE. Synthetic Northstar exercise.</em></p>
+<h2>Problem brief</h2>
+<p>Develop a typed quantity dictionary and energy-budget model for three Northstar configurations. Include unit checks, one correlated cold-weather/demand scenario, a local derivative, and a feasibility-first decision record. Submit the model contract and a reproducible parameter file.</p>
+<h2>Required evidence package</h2>
+<ol>
+<li><strong>Model contract:</strong> define the decision, quantity units, system boundary, valid operating range, configuration and explicit assumptions.</li>
+<li><strong>Reproducible calculation:</strong> execute the <a href="../tools/worked_models.py">worked Python model</a>, inspect the <a href="../notebooks/09-parametric-models.ipynb">notebook</a>, then independently reproduce the example without copying its printed output.</li>
+<li><strong>Adverse scenario:</strong> change at least one assumption in a way that threatens the initial recommendation. Record the altered input, affected output and causal explanation.</li>
+<li><strong>Engineering artifact:</strong> construct a decision table, dependency graph, assurance argument, experiment plan or causal analysis suited to this study. Link every main claim to specific evidence.</li>
+<li><strong>Review memo:</strong> give a recommendation, bounded scope, remaining uncertainty, rejected alternatives and the observation that would trigger reconsideration.</li>
+</ol>
+<h2>Starter inputs</h2>
+<p>Download <a href="../data/09-parametric-models.csv">the example scenario CSV</a> and identify which values are facts, assumptions or invented teaching parameters. No external operational data is used.</p>
+<h2>Assessment criteria</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>What constitutes strong evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conceptual and model validity</td>
+<td style="text-align:right">30%</td>
+<td>Explicit boundary, units, dependencies and assumptions; no category errors</td>
+</tr>
+<tr>
+<td>Reproducibility</td>
+<td style="text-align:right">20%</td>
+<td>Another reviewer can rerun the calculation and obtain the stated values</td>
+</tr>
+<tr>
+<td>Counterexample and sensitivity</td>
+<td style="text-align:right">25%</td>
+<td>A meaningful adverse scenario changes or challenges the original argument</td>
+</tr>
+<tr>
+<td>Decision and communication</td>
+<td style="text-align:right">25%</td>
+<td>A justified recommendation with limits, accountable owner and revision trigger</td>
+</tr>
+</tbody>
+</table>
+<h2>Reflection questions</h2>
+<ul>
+<li>Which assumption is most capable of reversing the preferred decision? Why?</li>
+<li>What observable result would falsify your model's central causal or structural claim?</li>
+<li>Who could be harmed by an apparently successful optimization, and how would they discover it?</li>
+</ul>
+<p>Return to <a href="../chapters/09-parametric-models.html">the graduate chapter</a> after evaluating the lab. The reference answers in the chapter are <em>examples</em>, not permission to omit independent analysis.</p>
+</article></main></body></html>

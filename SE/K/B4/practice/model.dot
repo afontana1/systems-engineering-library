@@ -1,0 +1,1 @@
+digraph G {rankdir=LR; graph [bgcolor="transparent"]; node [shape=box,style="rounded,filled",fillcolor="#e8f5f2",color="#397f80"]; REQUESTED->HELD->CONFIRMED->BOARDED->COMPLETED; HELD->CANCELLED;CONFIRMED->CANCELLED;}

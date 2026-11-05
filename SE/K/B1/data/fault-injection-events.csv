@@ -1,0 +1,5 @@
+event_id,measurement_time_s,broker_receipt_s,message_type,assumed_age_limit_s,scenario
+E-01,0,1,VehicleReadiness,5,fresh
+E-02,0,9,VehicleReadiness,5,delayed/relabelled
+E-03,2,6,VehicleReadiness,5,fresh
+E-04,5,11,VehicleReadiness,5,stale

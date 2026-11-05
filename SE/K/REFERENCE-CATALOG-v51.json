@@ -1,0 +1,1932 @@
+[
+  {
+    "id": "d8e1de722acc0",
+    "slug": "system-of-interest",
+    "title": "System of interest: purpose, boundary, and evidence",
+    "subject": "Foundations and management",
+    "summary": "How a mission-driven system boundary changes the claims, interfaces, and evidence that matter.",
+    "status": "reconstructed",
+    "prerequisites": [],
+    "related": [
+      "boundaries-and-interfaces",
+      "stakeholders-and-needs",
+      "conops-and-scenarios",
+      "sos-characteristics"
+    ],
+    "books": [
+      {
+        "id": "book13-chapter-1",
+        "title": "Chapter 1 — What, exactly, is the system?",
+        "book": 1,
+        "chapter": 1
+      },
+      {
+        "id": "v17-645-767-b-01",
+        "title": "Book 6 · Chapter 1: Framing before solutions",
+        "book": 6,
+        "chapter": 1
+      },
+      {
+        "id": "p5v20742chapter01",
+        "title": "Week 01 · Management of Complex Systems · Chapter 01 — Complex problem situations, systems theory, and receiving review",
+        "book": 20,
+        "chapter": 1
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "d36281bb71396",
+    "slug": "boundaries-and-interfaces",
+    "title": "Boundaries and interfaces: where local correctness meets system risk",
+    "subject": "Foundations and management",
+    "summary": "Typed interface contracts, assume–guarantee reasoning, latency, and shared failure modes.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "system-of-interest"
+    ],
+    "related": [
+      "system-of-interest",
+      "interface-control",
+      "functional-vs-physical",
+      "sos-characteristics"
+    ],
+    "books": [
+      {
+        "id": "book14-chapter-10",
+        "title": "Chapter 10 — Failures Travel Through Interfaces and Organizations",
+        "book": 1,
+        "chapter": 10
+      },
+      {
+        "id": "v17-645-768-b-04",
+        "title": "Book 7 · Chapter 4: Physical architecture and contracts",
+        "book": 7,
+        "chapter": 4
+      },
+      {
+        "id": "p5v20771chapter05",
+        "title": "Week 05 · System of Systems Engineering · Chapter 05 — Information architecture and multidimensional interoperability",
+        "book": 18,
+        "chapter": 5
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "da9595994eeb3",
+    "slug": "stakeholders-and-needs",
+    "title": "Stakeholders, needs, and value: translating plural interests into engineering decisions",
+    "subject": "Foundations and management",
+    "summary": "From contested stakeholder outcomes to defensible measures, constraints, and preferences.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "system-of-interest"
+    ],
+    "related": [
+      "conops-and-scenarios",
+      "good-requirements",
+      "metrics-hierarchy",
+      "pareto-and-value"
+    ],
+    "books": [
+      {
+        "id": "book13-chapter-3",
+        "title": "Chapter 3 — Turn conflicting human needs into an operational concept",
+        "book": 1,
+        "chapter": 3
+      },
+      {
+        "id": "v17-645-767-b-02",
+        "title": "Book 6 · Chapter 2: Evidence-based stakeholder needs",
+        "book": 6,
+        "chapter": 2
+      },
+      {
+        "id": "v18-645-784-02-chapter",
+        "title": "Book 14 · Chapter 02 — Translate stakeholder values into objectives, measures, and value structure",
+        "book": 14,
+        "chapter": 2
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "d1eef86622ca8",
+    "slug": "conops-and-scenarios",
+    "title": "Concept of operations and scenarios",
+    "subject": "Foundations and management",
+    "summary": "Operational stories that describe actors, conditions, modes, mission events, and evidence needs.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "stakeholders-and-needs",
+      "boundaries-and-interfaces"
+    ],
+    "related": [
+      "system-of-interest",
+      "stakeholders-and-needs",
+      "good-requirements",
+      "metrics-hierarchy"
+    ],
+    "books": [
+      {
+        "id": "book13-chapter-3",
+        "title": "Chapter 3 — Turn conflicting human needs into an operational concept",
+        "book": 1,
+        "chapter": 3
+      },
+      {
+        "id": "v17-645-767-b-03",
+        "title": "Book 6 · Chapter 3: ConOps and mission measures",
+        "book": 6,
+        "chapter": 3
+      },
+      {
+        "id": "p4v19782chapter10",
+        "title": "Week 10 · Foundations of Digital and Mission Engineering · Book chapter: Mission engineering foundations and mission architecture",
+        "book": 16,
+        "chapter": 10
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "df65cee2094b9",
+    "slug": "good-requirements",
+    "title": "Requirements: precise obligations, not persuasive sentences",
+    "subject": "Foundations and management",
+    "summary": "Formulating testable obligations with modes, quantified conditions, and consistent acceptance rules.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "stakeholders-and-needs",
+      "conops-and-scenarios"
+    ],
+    "related": [
+      "stakeholders-and-needs",
+      "verification-matrix",
+      "v-and-v",
+      "traceability-graph"
+    ],
+    "books": [
+      {
+        "id": "book13-chapter-4",
+        "title": "Chapter 4 — Requirements are promises that must survive a test",
+        "book": 1,
+        "chapter": 4
+      },
+      {
+        "id": "v17-645-768-b-02",
+        "title": "Book 7 · Chapter 2: Closing the system specification",
+        "book": 7,
+        "chapter": 2
+      },
+      {
+        "id": "v18-645-632-07-chapter",
+        "title": "Book 9 · Chapter 07 — Elicit, derive, validate, and query system requirements from the integrated analysis",
+        "book": 9,
+        "chapter": 7
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "d12fd26a27d60",
+    "slug": "v-and-v",
+    "title": "Verification, validation, and acceptance: the three different decisions",
+    "subject": "Foundations and management",
+    "summary": "Why verification, validation, and authorization are distinct—and what credible evidence needs.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "good-requirements"
+    ],
+    "related": [
+      "good-requirements",
+      "verification-matrix",
+      "model-vv-and-credibility",
+      "integration-strategy"
+    ],
+    "books": [
+      {
+        "id": "book14-chapter-11",
+        "title": "Chapter 11 — From a Plausible Concept to Reviewable Evidence",
+        "book": 1,
+        "chapter": 11
+      },
+      {
+        "id": "v17-645-769-b-01",
+        "title": "Book 8 · Chapter 1: T&E strategy and acceptance authority",
+        "book": 8,
+        "chapter": 1
+      },
+      {
+        "id": "v17-645-769-b-10",
+        "title": "Book 8 · Chapter 10: Evidence sufficiency and decision statistics",
+        "book": 8,
+        "chapter": 10
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "dd64acb13d632",
+    "slug": "wbs-and-baselines",
+    "title": "Work breakdown structures and technical baselines",
+    "subject": "Foundations and management",
+    "summary": "Product-oriented planning, controlled technical commitments, and change impacts.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "good-requirements"
+    ],
+    "related": [
+      "risk-vs-issue",
+      "traceability-graph",
+      "good-requirements",
+      "integration-strategy"
+    ],
+    "books": [
+      {
+        "id": "book15-chapter-3",
+        "title": "Chapter 3 · Scope Becomes Controllable Through Products",
+        "book": 2,
+        "chapter": 3
+      },
+      {
+        "id": "book15-chapter-6",
+        "title": "Chapter 6 · A Baseline Is a Defensible Agreement",
+        "book": 2,
+        "chapter": 6
+      },
+      {
+        "id": "v17-645-768-b-12",
+        "title": "Book 7 · Chapter 12: Design baseline handoff",
+        "book": 7,
+        "chapter": 12
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "dc8ccd9ae2866",
+    "slug": "risk-vs-issue",
+    "title": "Risk, issue, uncertainty, and opportunity",
+    "subject": "Foundations and management",
+    "summary": "Separating uncertain future threats and opportunities from present problems and decisions.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "system-of-interest"
+    ],
+    "related": [
+      "probability-and-dependence",
+      "bayesian-value-of-information",
+      "wbs-and-baselines",
+      "resilience-adaptability"
+    ],
+    "books": [
+      {
+        "id": "book15-chapter-8",
+        "title": "Chapter 8 · Risk, Change, and Configuration Are Coupled",
+        "book": 2,
+        "chapter": 8
+      },
+      {
+        "id": "v18-645-756-09-chapter",
+        "title": "Book 10 · Chapter 09 — Propagate uncertainty with analytic Monte Carlo simulation and sensitivity analysis",
+        "book": 10,
+        "chapter": 9
+      },
+      {
+        "id": "v17-645-768-b-08",
+        "title": "Book 7 · Chapter 8: Humans, safety and security",
+        "book": 7,
+        "chapter": 8
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "db3032ecc2404",
+    "slug": "model-language-method-tool",
+    "title": "Model, method, language, tool, and repository",
+    "subject": "MBSE and software-intensive systems",
+    "summary": "Distinguishing engineering purpose, modeling notation, method, tools, and model governance.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "views-and-viewpoints"
+    ],
+    "related": [
+      "views-and-viewpoints",
+      "traceability-graph",
+      "digital-thread-and-twin",
+      "model-vv-and-credibility"
+    ],
+    "books": [
+      {
+        "id": "v16-645-631-b-01",
+        "title": "Book III · Chapter 1: A model has to earn its existence",
+        "book": 3,
+        "chapter": 1
+      },
+      {
+        "id": "v16-645-631-b-02",
+        "title": "Book III · Chapter 2: Choosing a language is not choosing a method",
+        "book": 3,
+        "chapter": 2
+      },
+      {
+        "id": "v18-645-632-11-chapter",
+        "title": "Book 9 · Chapter 11 — Extend the modeling language and automate queries, validation rules, matrices, and generated products",
+        "book": 9,
+        "chapter": 11
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "d198f85683243",
+    "slug": "views-and-viewpoints",
+    "title": "Architecture views, viewpoints, and consistency",
+    "subject": "MBSE and software-intensive systems",
+    "summary": "Choosing stakeholder-centered architecture projections and checking consistency across them.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "functional-vs-physical"
+    ],
+    "related": [
+      "model-language-method-tool",
+      "functional-vs-physical",
+      "interface-control",
+      "stakeholders-and-needs"
+    ],
+    "books": [
+      {
+        "id": "v16-645-631-b-03",
+        "title": "Book III · Chapter 3: Stakeholder concern becomes a model view",
+        "book": 3,
+        "chapter": 3
+      },
+      {
+        "id": "v16-645-631-b-05",
+        "title": "Book III · Chapter 5: Behavior is a family of complementary projections",
+        "book": 3,
+        "chapter": 5
+      },
+      {
+        "id": "v18-645-632-02-chapter",
+        "title": "Book 9 · Chapter 02 — Analyze stakeholders, mission, scenarios, outcomes, and measures in the authoritative model",
+        "book": 9,
+        "chapter": 2
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "d7c6c77e3a16d",
+    "slug": "traceability-graph",
+    "title": "Requirements traceability: a typed graph of engineering claims",
+    "subject": "MBSE and software-intensive systems",
+    "summary": "Typed, versioned relationships that support impact analysis without confusing links with proof.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "allocation-matrix",
+      "verification-matrix"
+    ],
+    "related": [
+      "good-requirements",
+      "v-and-v",
+      "digital-thread-and-twin",
+      "views-and-viewpoints"
+    ],
+    "books": [
+      {
+        "id": "v16-645-764-b-02",
+        "title": "Book V · Chapter 2: Traceability connects implementation to justified choices",
+        "book": 5,
+        "chapter": 2
+      },
+      {
+        "id": "v18-645-632-07-chapter",
+        "title": "Book 9 · Chapter 07 — Elicit, derive, validate, and query system requirements from the integrated analysis",
+        "book": 9,
+        "chapter": 7
+      },
+      {
+        "id": "p4v19782chapter09",
+        "title": "Week 09 · Foundations of Digital and Mission Engineering · Book chapter: Digital twins, synchronization, fidelity, and credibility",
+        "book": 16,
+        "chapter": 9
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "da9d23405bde5",
+    "slug": "object-responsibilities",
+    "title": "Object-oriented domain models and responsibilities",
+    "subject": "MBSE and software-intensive systems",
+    "summary": "Representing domain concepts, invariants, collaborating roles, and behavior allocation.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "functional-vs-physical"
+    ],
+    "related": [
+      "software-quality-attributes",
+      "interface-control",
+      "functional-vs-physical",
+      "verification-matrix"
+    ],
+    "books": [
+      {
+        "id": "v16-605-704-b-04",
+        "title": "Book IV · Chapter 4: Class discovery turns language into relationships",
+        "book": 4,
+        "chapter": 4
+      },
+      {
+        "id": "v16-605-704-b-07",
+        "title": "Book IV · Chapter 7: Design is the distribution of responsibility",
+        "book": 4,
+        "chapter": 7
+      },
+      {
+        "id": "v16-605-704-b-10",
+        "title": "Book IV · Chapter 10: Constraints turn informal rules into testable predicates",
+        "book": 4,
+        "chapter": 10
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "d7cc8470ea7e3",
+    "slug": "software-quality-attributes",
+    "title": "Software quality attributes and architectural tactics",
+    "subject": "MBSE and software-intensive systems",
+    "summary": "Evaluating performance, security, availability, and modifiability through specific scenarios.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "good-requirements",
+      "interface-control"
+    ],
+    "related": [
+      "flow-wip-and-queues",
+      "object-responsibilities",
+      "software-lifecycle-evidence",
+      "resilience-adaptability"
+    ],
+    "books": [
+      {
+        "id": "v16-645-764-b-06",
+        "title": "Book V · Chapter 6: Quality attributes must be formulated as scenarios",
+        "book": 5,
+        "chapter": 6
+      },
+      {
+        "id": "v16-645-764-b-08",
+        "title": "Book V · Chapter 8: Performance and security share resource budgets",
+        "book": 5,
+        "chapter": 8
+      },
+      {
+        "id": "v16-645-764-b-09",
+        "title": "Book V · Chapter 9: Dependability is a claim supported by argument and evidence",
+        "book": 5,
+        "chapter": 9
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "d3147552408de",
+    "slug": "software-lifecycle-evidence",
+    "title": "CI/CD, configuration, and software assurance",
+    "subject": "MBSE and software-intensive systems",
+    "summary": "Connecting build identity, test evidence, configuration, deployment, and ongoing assurance.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "software-quality-attributes",
+      "verification-matrix"
+    ],
+    "related": [
+      "traceability-graph",
+      "v-and-v",
+      "software-quality-attributes",
+      "digital-thread-and-twin"
+    ],
+    "books": [
+      {
+        "id": "v16-645-764-b-05",
+        "title": "Book V · Chapter 5: Iteration must still produce system evidence",
+        "book": 5,
+        "chapter": 5
+      },
+      {
+        "id": "v16-645-764-b-10",
+        "title": "Book V · Chapter 10: The verification chain includes build identity",
+        "book": 5,
+        "chapter": 10
+      },
+      {
+        "id": "p4v19780chapter10",
+        "title": "Week 10 · Agile Systems Engineering · Book chapter: Create a cyber-physical DevSecOps and continual-integration system, then red-team a failed increment",
+        "book": 15,
+        "chapter": 10
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "dee267fa765c4",
+    "slug": "functional-vs-physical",
+    "title": "Functional, logical, and physical architecture: preserving intent across realization",
+    "subject": "Concept, design, integration and test",
+    "summary": "Function-to-realization allocation, capacity budgets, redundancy, and hidden dependencies.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "conops-and-scenarios"
+    ],
+    "related": [
+      "allocation-matrix",
+      "interface-control",
+      "good-requirements",
+      "engineering-trades"
+    ],
+    "books": [
+      {
+        "id": "book14-chapter-5",
+        "title": "Chapter 5 — Before the Boxes: Functional Architecture and System Behavior",
+        "book": 1,
+        "chapter": 5
+      },
+      {
+        "id": "v16-645-631-b-07",
+        "title": "Book III · Chapter 7: Function allocation is a hypothesis",
+        "book": 3,
+        "chapter": 7
+      },
+      {
+        "id": "v17-645-768-b-03",
+        "title": "Book 7 · Chapter 3: Allocation and derived requirements",
+        "book": 7,
+        "chapter": 3
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "d0de57e6c87c0",
+    "slug": "allocation-matrix",
+    "title": "Allocation, coverage, and design responsibility",
+    "subject": "Concept, design, integration and test",
+    "summary": "Linking required functions and responsibilities to candidate elements and derived requirements.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "good-requirements",
+      "functional-vs-physical"
+    ],
+    "related": [
+      "functional-vs-physical",
+      "good-requirements",
+      "interface-control",
+      "traceability-graph"
+    ],
+    "books": [
+      {
+        "id": "v16-645-631-b-07",
+        "title": "Book III · Chapter 7: Function allocation is a hypothesis",
+        "book": 3,
+        "chapter": 7
+      },
+      {
+        "id": "v17-645-768-b-03",
+        "title": "Book 7 · Chapter 3: Allocation and derived requirements",
+        "book": 7,
+        "chapter": 3
+      },
+      {
+        "id": "v18-645-632-06-chapter",
+        "title": "Book 9 · Chapter 06 — Specify interfaces, exchanges, allocations, ownership, and model-based change exposure",
+        "book": 9,
+        "chapter": 6
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "dda682f83cc9d",
+    "slug": "interface-control",
+    "title": "Interface control and integration contracts",
+    "subject": "Concept, design, integration and test",
+    "summary": "Versioned agreements for data, power, timing, state, ownership, and exception behavior.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "boundaries-and-interfaces",
+      "functional-vs-physical"
+    ],
+    "related": [
+      "boundaries-and-interfaces",
+      "allocation-matrix",
+      "integration-strategy",
+      "sos-characteristics"
+    ],
+    "books": [
+      {
+        "id": "v17-645-768-b-04",
+        "title": "Book 7 · Chapter 4: Physical architecture and contracts",
+        "book": 7,
+        "chapter": 4
+      },
+      {
+        "id": "v18-645-632-06-chapter",
+        "title": "Book 9 · Chapter 06 — Specify interfaces, exchanges, allocations, ownership, and model-based change exposure",
+        "book": 9,
+        "chapter": 6
+      },
+      {
+        "id": "p5v20771chapter05",
+        "title": "Week 05 · System of Systems Engineering · Chapter 05 — Information architecture and multidimensional interoperability",
+        "book": 18,
+        "chapter": 5
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "d68f6fd97ca2c",
+    "slug": "integration-strategy",
+    "title": "Integration build-up and readiness evidence",
+    "subject": "Concept, design, integration and test",
+    "summary": "Sequencing subsystem assembly to retire interface risk and establish readiness evidence.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "interface-control",
+      "v-and-v"
+    ],
+    "related": [
+      "interface-control",
+      "verification-matrix",
+      "v-and-v",
+      "wbs-and-baselines"
+    ],
+    "books": [
+      {
+        "id": "v17-645-768-b-10",
+        "title": "Book 7 · Chapter 10: Integration readiness and sequencing",
+        "book": 7,
+        "chapter": 10
+      },
+      {
+        "id": "v17-645-769-b-05",
+        "title": "Book 8 · Chapter 5: Integration and SIL/HIL paths",
+        "book": 8,
+        "chapter": 5
+      },
+      {
+        "id": "p5v20771chapter10",
+        "title": "Week 10 · System of Systems Engineering · Chapter 10 — Distributed integration, verification, validation, and operational T&E",
+        "book": 18,
+        "chapter": 10
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "da6331f16f926",
+    "slug": "verification-matrix",
+    "title": "Verification cross-reference matrices and test design",
+    "subject": "Concept, design, integration and test",
+    "summary": "Tracing test methods and results to requirement claims and representative configurations.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "good-requirements",
+      "v-and-v"
+    ],
+    "related": [
+      "good-requirements",
+      "v-and-v",
+      "traceability-graph",
+      "metrics-hierarchy"
+    ],
+    "books": [
+      {
+        "id": "v17-645-769-b-02",
+        "title": "Book 8 · Chapter 2: Requirements to critical test parameters",
+        "book": 8,
+        "chapter": 2
+      },
+      {
+        "id": "v17-645-769-b-10",
+        "title": "Book 8 · Chapter 10: Evidence sufficiency and decision statistics",
+        "book": 8,
+        "chapter": 10
+      },
+      {
+        "id": "v18-645-632-12-chapter",
+        "title": "Book 9 · Chapter 12 — Verify and validate the model, assess the design, respond to change, and defend the final baseline",
+        "book": 9,
+        "chapter": 12
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "d39ba99b7db20",
+    "slug": "engineering-trades",
+    "title": "Engineering trade studies: making preferences and uncertainty inspectable",
+    "subject": "Concept, design, integration and test",
+    "summary": "Feasible options, Pareto efficiency, preference functions, uncertainty, and sensitivity.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "stakeholders-and-needs",
+      "metrics-hierarchy"
+    ],
+    "related": [
+      "pareto-and-value",
+      "bayesian-value-of-information",
+      "probability-and-dependence",
+      "functional-vs-physical"
+    ],
+    "books": [
+      {
+        "id": "book14-chapter-8",
+        "title": "Chapter 8 — A Trade Study Makes Judgment Inspectable",
+        "book": 1,
+        "chapter": 8
+      },
+      {
+        "id": "v17-645-767-b-09",
+        "title": "Book 6 · Chapter 9: Value functions and double counting",
+        "book": 6,
+        "chapter": 9
+      },
+      {
+        "id": "v18-645-784-04-chapter",
+        "title": "Book 14 · Chapter 04 — Apply constraints, dominance, and Pareto analysis to the selection problem",
+        "book": 14,
+        "chapter": 4
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "d9de188b663ec",
+    "slug": "metrics-hierarchy",
+    "title": "Measures of effectiveness and performance",
+    "subject": "Analytics, modeling, simulation and decisions",
+    "summary": "Separating mission effectiveness from technical performance and supporting measures.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "stakeholders-and-needs"
+    ],
+    "related": [
+      "stakeholders-and-needs",
+      "conops-and-scenarios",
+      "pareto-and-value",
+      "process-improvement"
+    ],
+    "books": [
+      {
+        "id": "v18-645-756-01-chapter",
+        "title": "Book 10 · Chapter 01 — Define the lifecycle technical-measurement strategy and decision chain",
+        "book": 10,
+        "chapter": 1
+      },
+      {
+        "id": "v17-645-767-b-03",
+        "title": "Book 6 · Chapter 3: ConOps and mission measures",
+        "book": 6,
+        "chapter": 3
+      },
+      {
+        "id": "v18-645-784-02-chapter",
+        "title": "Book 14 · Chapter 02 — Translate stakeholder values into objectives, measures, and value structure",
+        "book": 14,
+        "chapter": 2
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "d6a6da2e45a6d",
+    "slug": "probability-and-dependence",
+    "title": "Probability, dependence, and technical uncertainty",
+    "subject": "Analytics, modeling, simulation and decisions",
+    "summary": "Common causes, conditional probability, extreme outcomes, and credible risk estimates.",
+    "status": "reconstructed",
+    "prerequisites": [],
+    "related": [
+      "design-of-experiments",
+      "model-vv-and-credibility",
+      "resilience-adaptability",
+      "engineering-trades"
+    ],
+    "books": [
+      {
+        "id": "v18-645-756-02-chapter",
+        "title": "Book 10 · Chapter 02 — Characterize probability distributions, tails, dependence, and stochastic performance",
+        "book": 10,
+        "chapter": 2
+      },
+      {
+        "id": "v18-645-756-09-chapter",
+        "title": "Book 10 · Chapter 09 — Propagate uncertainty with analytic Monte Carlo simulation and sensitivity analysis",
+        "book": 10,
+        "chapter": 9
+      },
+      {
+        "id": "p5v20771chapter09",
+        "title": "Week 09 · System of Systems Engineering · Chapter 09 — Cascading risk, cyber resilience, safety, and mission assurance",
+        "book": 18,
+        "chapter": 9
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "db8eae7a8e3ee",
+    "slug": "conceptual-m-and-s",
+    "title": "Conceptual modeling and intended use",
+    "subject": "Analytics, modeling, simulation and decisions",
+    "summary": "Defining model purpose, abstraction, environment, assumptions, and credibility requirements.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "system-of-interest",
+      "metrics-hierarchy"
+    ],
+    "related": [
+      "discrete-event-simulation",
+      "stocks-flows-feedback",
+      "model-vv-and-credibility",
+      "design-of-experiments"
+    ],
+    "books": [
+      {
+        "id": "v18-645-757-02-chapter",
+        "title": "Book 11 · Chapter 02 — Develop the M&S plan and conceptual model before implementation",
+        "book": 11,
+        "chapter": 2
+      },
+      {
+        "id": "v18-645-757-11-chapter",
+        "title": "Book 11 · Chapter 11 — Plan and evaluate verification, validation, credibility, and accreditation for intended use",
+        "book": 11,
+        "chapter": 11
+      },
+      {
+        "id": "v18-645-758-01-chapter",
+        "title": "Book 12 · Chapter 01 — Frame the advanced M&S decision, intended use, architecture, and credibility strategy",
+        "book": 12,
+        "chapter": 1
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "dd7017b3d99bd",
+    "slug": "discrete-event-simulation",
+    "title": "Discrete-event simulation and queues",
+    "subject": "Analytics, modeling, simulation and decisions",
+    "summary": "Modeling queues, event timing, resource contention, and stochastic operational flows.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "conceptual-m-and-s",
+      "flow-wip-and-queues"
+    ],
+    "related": [
+      "flow-wip-and-queues",
+      "conceptual-m-and-s",
+      "model-vv-and-credibility",
+      "design-of-experiments"
+    ],
+    "books": [
+      {
+        "id": "v18-645-757-05-chapter",
+        "title": "Book 11 · Chapter 05 — Implement discrete-event processes, resources, queues, priorities, and statistics",
+        "book": 11,
+        "chapter": 5
+      },
+      {
+        "id": "v18-645-757-08-chapter",
+        "title": "Book 11 · Chapter 08 — Analyze transient and steady-state output with defensible run controls",
+        "book": 11,
+        "chapter": 8
+      },
+      {
+        "id": "p4v19783chapter07",
+        "title": "Week 07 · Systems Engineering Process Improvement · Book chapter: Process modeling and simulation for improvement decisions",
+        "book": 17,
+        "chapter": 7
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "dc3490970b069",
+    "slug": "stocks-flows-feedback",
+    "title": "Stocks, flows, and feedback loops",
+    "subject": "Analytics, modeling, simulation and decisions",
+    "summary": "Using accumulation, conservation, feedback, and delays to explain dynamic system behavior.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "conceptual-m-and-s"
+    ],
+    "related": [
+      "complexity-emergence",
+      "flow-wip-and-queues",
+      "intervention-and-learning",
+      "enterprise-as-system"
+    ],
+    "books": [
+      {
+        "id": "v18-645-781-05-chapter",
+        "title": "Book 13 · Chapter 05 — Translate feedback hypotheses into stocks, flows, units, and accumulation equations",
+        "book": 13,
+        "chapter": 5
+      },
+      {
+        "id": "v18-645-781-07-chapter",
+        "title": "Book 13 · Chapter 07 — Explain delays, nonlinearities, oscillation, overshoot, and changing loop dominance",
+        "book": 13,
+        "chapter": 7
+      },
+      {
+        "id": "p5v20753chapter05",
+        "title": "Week 05 · Enterprise Systems Engineering · Chapter 05 — Enterprise dynamics, feedback, delays, and current-state assessment",
+        "book": 19,
+        "chapter": 5
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "d4b5e67dcb0f2",
+    "slug": "model-vv-and-credibility",
+    "title": "Simulation verification, validation, and credibility",
+    "subject": "Analytics, modeling, simulation and decisions",
+    "summary": "Verifying implementation, validating intended use, and qualifying uncertainty for a decision.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "conceptual-m-and-s",
+      "v-and-v"
+    ],
+    "related": [
+      "conceptual-m-and-s",
+      "design-of-experiments",
+      "probability-and-dependence",
+      "v-and-v"
+    ],
+    "books": [
+      {
+        "id": "v18-645-757-09-chapter",
+        "title": "Book 11 · Chapter 09 — Apply simulation in design and development using selection, ranking, and design of experiments",
+        "book": 11,
+        "chapter": 9
+      },
+      {
+        "id": "v18-645-758-12-chapter",
+        "title": "Book 12 · Chapter 12 — Reproduce, challenge, present, and defend the final complex-system simulation study",
+        "book": 12,
+        "chapter": 12
+      },
+      {
+        "id": "p4v19782chapter03",
+        "title": "Week 03 · Foundations of Digital and Mission Engineering · Book chapter: M&S foundations, lifecycle uses, and credibility",
+        "book": 16,
+        "chapter": 3
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "d10646083bdfe",
+    "slug": "design-of-experiments",
+    "title": "Design of experiments and sensitivity",
+    "subject": "Analytics, modeling, simulation and decisions",
+    "summary": "Selecting informative factor combinations, quantifying interactions, and checking model adequacy.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "probability-and-dependence",
+      "metrics-hierarchy"
+    ],
+    "related": [
+      "probability-and-dependence",
+      "model-vv-and-credibility",
+      "process-improvement",
+      "bayesian-value-of-information"
+    ],
+    "books": [
+      {
+        "id": "v18-645-756-05-chapter",
+        "title": "Book 10 · Chapter 05 — Design efficient experiments with factors, responses, noise, power, randomization, and blocking",
+        "book": 10,
+        "chapter": 5
+      },
+      {
+        "id": "v18-645-756-06-chapter",
+        "title": "Book 10 · Chapter 06 — Analyze factorial experiments, interactions, diagnostics, and confirmation evidence",
+        "book": 10,
+        "chapter": 6
+      },
+      {
+        "id": "v18-645-784-09-chapter",
+        "title": "Book 14 · Chapter 09 — Design computational experiments to learn efficiently from the design space",
+        "book": 14,
+        "chapter": 9
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "d60c78a649c6e",
+    "slug": "pareto-and-value",
+    "title": "Pareto frontiers and multiobjective decisions",
+    "subject": "Analytics, modeling, simulation and decisions",
+    "summary": "Identifying efficient alternatives and making preference tradeoffs explicit.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "engineering-trades"
+    ],
+    "related": [
+      "engineering-trades",
+      "stakeholders-and-needs",
+      "metrics-hierarchy",
+      "bayesian-value-of-information"
+    ],
+    "books": [
+      {
+        "id": "v18-645-784-04-chapter",
+        "title": "Book 14 · Chapter 04 — Apply constraints, dominance, and Pareto analysis to the selection problem",
+        "book": 14,
+        "chapter": 4
+      },
+      {
+        "id": "v18-645-784-05-chapter",
+        "title": "Book 14 · Chapter 05 — Converge on a preferred selection using transparent value and decision methods",
+        "book": 14,
+        "chapter": 5
+      },
+      {
+        "id": "v17-645-767-b-09",
+        "title": "Book 6 · Chapter 9: Value functions and double counting",
+        "book": 6,
+        "chapter": 9
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "d635f2fc1dbf4",
+    "slug": "bayesian-value-of-information",
+    "title": "Decision uncertainty and value of information",
+    "subject": "Analytics, modeling, simulation and decisions",
+    "summary": "Updating beliefs and assessing whether additional evidence could change a decision.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "probability-and-dependence",
+      "engineering-trades"
+    ],
+    "related": [
+      "probability-and-dependence",
+      "risk-vs-issue",
+      "engineering-trades",
+      "design-of-experiments"
+    ],
+    "books": [
+      {
+        "id": "v18-645-784-03-chapter",
+        "title": "Book 14 · Chapter 03 — Model decisions, uncertainties, evidence, constraints, and alternatives",
+        "book": 14,
+        "chapter": 3
+      },
+      {
+        "id": "v18-645-784-11-chapter",
+        "title": "Book 14 · Chapter 11 — Analyze uncertainty, sensitivity, robustness, regret, and value of information",
+        "book": 14,
+        "chapter": 11
+      },
+      {
+        "id": "p5v20771chapter07",
+        "title": "Week 07 · System of Systems Engineering · Chapter 07 — Bayesian networks, causality, and decision uncertainty",
+        "book": 18,
+        "chapter": 7
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "ddcc95030144a",
+    "slug": "agile-tailoring",
+    "title": "Agile systems engineering and lifecycle tailoring",
+    "subject": "Agile, digital and process engineering",
+    "summary": "Adapting iterative development to architecture dependencies and continuous engineering evidence.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "wbs-and-baselines",
+      "software-lifecycle-evidence"
+    ],
+    "related": [
+      "flow-wip-and-queues",
+      "software-lifecycle-evidence",
+      "wbs-and-baselines",
+      "process-improvement"
+    ],
+    "books": [
+      {
+        "id": "p4v19780chapter02",
+        "title": "Week 02 · Agile Systems Engineering · Book chapter: Assess project characteristics and tailor the lifecycle, cadence, and controls",
+        "book": 15,
+        "chapter": 2
+      },
+      {
+        "id": "p4v19780chapter09",
+        "title": "Week 09 · Agile Systems Engineering · Book chapter: Build quality, safety, security, and verification into every increment",
+        "book": 15,
+        "chapter": 9
+      },
+      {
+        "id": "p4v19780chapter10",
+        "title": "Week 10 · Agile Systems Engineering · Book chapter: Create a cyber-physical DevSecOps and continual-integration system, then red-team a failed increment",
+        "book": 15,
+        "chapter": 10
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "dc025d6c19792",
+    "slug": "flow-wip-and-queues",
+    "title": "Flow, work in process, and bottlenecks",
+    "subject": "Agile, digital and process engineering",
+    "summary": "Understanding throughput, work in process, waiting time, bottlenecks, and delivery predictability.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "metrics-hierarchy"
+    ],
+    "related": [
+      "discrete-event-simulation",
+      "agile-tailoring",
+      "software-quality-attributes",
+      "process-improvement"
+    ],
+    "books": [
+      {
+        "id": "p4v19780chapter03",
+        "title": "Week 03 · Agile Systems Engineering · Book chapter: Use Lean flow, queues, WIP, batch size, and value-stream evidence to shorten learning",
+        "book": 15,
+        "chapter": 3
+      },
+      {
+        "id": "p4v19783chapter04",
+        "title": "Week 04 · Systems Engineering Process Improvement · Book chapter: Current-state process mapping, event logs, and conformance",
+        "book": 17,
+        "chapter": 4
+      },
+      {
+        "id": "v16-645-764-b-08",
+        "title": "Book V · Chapter 8: Performance and security share resource budgets",
+        "book": 5,
+        "chapter": 8
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "d00bcad869472",
+    "slug": "digital-thread-and-twin",
+    "title": "Digital thread and digital twin: preserving engineering meaning across time",
+    "subject": "Agile, digital and process engineering",
+    "summary": "Versioned engineering meaning, operational state estimates, and trustworthy lifecycle evidence.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "traceability-graph",
+      "model-vv-and-credibility"
+    ],
+    "related": [
+      "traceability-graph",
+      "model-vv-and-credibility",
+      "software-lifecycle-evidence",
+      "mission-engineering"
+    ],
+    "books": [
+      {
+        "id": "p4v19782chapter08",
+        "title": "Week 08 · Foundations of Digital and Mission Engineering · Book chapter: Digital thread architecture and executable traceability",
+        "book": 16,
+        "chapter": 8
+      },
+      {
+        "id": "p4v19782chapter09",
+        "title": "Week 09 · Foundations of Digital and Mission Engineering · Book chapter: Digital twins, synchronization, fidelity, and credibility",
+        "book": 16,
+        "chapter": 9
+      },
+      {
+        "id": "v16-645-764-b-10",
+        "title": "Book V · Chapter 10: The verification chain includes build identity",
+        "book": 5,
+        "chapter": 10
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "d503b0bb09013",
+    "slug": "mission-engineering",
+    "title": "Mission threads and capability analysis",
+    "subject": "Agile, digital and process engineering",
+    "summary": "Tracing mission outcomes through operational threads, capabilities, and dependencies.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "conops-and-scenarios",
+      "sos-characteristics"
+    ],
+    "related": [
+      "sos-characteristics",
+      "conops-and-scenarios",
+      "resilience-adaptability",
+      "digital-thread-and-twin"
+    ],
+    "books": [
+      {
+        "id": "p4v19782chapter10",
+        "title": "Week 10 · Foundations of Digital and Mission Engineering · Book chapter: Mission engineering foundations and mission architecture",
+        "book": 16,
+        "chapter": 10
+      },
+      {
+        "id": "p4v19782chapter11",
+        "title": "Week 11 · Foundations of Digital and Mission Engineering · Book chapter: Mission analysis, alternatives, gaps, and interventions",
+        "book": 16,
+        "chapter": 11
+      },
+      {
+        "id": "p5v20771chapter03",
+        "title": "Week 03 · System of Systems Engineering · Chapter 03 — Mission outcomes, capability dependencies, and logical SoS architecture",
+        "book": 18,
+        "chapter": 3
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "d621627ca17ed",
+    "slug": "process-improvement",
+    "title": "Process capability and continuous improvement",
+    "subject": "Agile, digital and process engineering",
+    "summary": "Separating process capability, variation, causal change, and sustainable improvement.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "metrics-hierarchy",
+      "design-of-experiments"
+    ],
+    "related": [
+      "metrics-hierarchy",
+      "design-of-experiments",
+      "flow-wip-and-queues",
+      "intervention-and-learning"
+    ],
+    "books": [
+      {
+        "id": "p4v19783chapter05",
+        "title": "Week 05 · Systems Engineering Process Improvement · Book chapter: Measurement system, variation, and baseline performance",
+        "book": 17,
+        "chapter": 5
+      },
+      {
+        "id": "p4v19783chapter06",
+        "title": "Week 06 · Systems Engineering Process Improvement · Book chapter: Process capability assessment, root causes, and midcourse exam",
+        "book": 17,
+        "chapter": 6
+      },
+      {
+        "id": "p4v19783chapter09",
+        "title": "Week 09 · Systems Engineering Process Improvement · Book chapter: Pilot experiments, implementation, and adoption",
+        "book": 17,
+        "chapter": 9
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "d3d513937a8c8",
+    "slug": "sos-characteristics",
+    "title": "Systems of systems: constituent autonomy and emergent mission performance",
+    "subject": "Systems of systems, enterprises and complexity",
+    "summary": "Federated authority, constituent independence, emergent mission behavior, and resilience.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "boundaries-and-interfaces"
+    ],
+    "related": [
+      "boundaries-and-interfaces",
+      "mission-engineering",
+      "resilience-adaptability",
+      "authority-and-governance"
+    ],
+    "books": [
+      {
+        "id": "p5v20771chapter01",
+        "title": "Week 01 · System of Systems Engineering · Chapter 01 — SoS definition, attributes, behavior, and receiving review",
+        "book": 18,
+        "chapter": 1
+      },
+      {
+        "id": "p5v20771chapter04",
+        "title": "Week 04 · System of Systems Engineering · Chapter 04 — Physical architecture, constituent allocations, interfaces, COTS, and legacy",
+        "book": 18,
+        "chapter": 4
+      },
+      {
+        "id": "p5v20771chapter09",
+        "title": "Week 09 · System of Systems Engineering · Chapter 09 — Cascading risk, cyber resilience, safety, and mission assurance",
+        "book": 18,
+        "chapter": 9
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "d94c56f333f1a",
+    "slug": "enterprise-as-system",
+    "title": "The enterprise as a system",
+    "subject": "Systems of systems, enterprises and complexity",
+    "summary": "Viewing an organization as a network of value, incentives, processes, and authority.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "sos-characteristics",
+      "stocks-flows-feedback"
+    ],
+    "related": [
+      "authority-and-governance",
+      "stocks-flows-feedback",
+      "process-improvement",
+      "mission-engineering"
+    ],
+    "books": [
+      {
+        "id": "p5v20753chapter01",
+        "title": "Week 01 · Enterprise Systems Engineering · Chapter 01 — Enterprise definition, boundary, purpose, and receiving review",
+        "book": 19,
+        "chapter": 1
+      },
+      {
+        "id": "p5v20753chapter04",
+        "title": "Week 04 · Enterprise Systems Engineering · Chapter 04 — Enterprise processes, value streams, information, and work",
+        "book": 19,
+        "chapter": 4
+      },
+      {
+        "id": "p5v20753chapter07",
+        "title": "Week 07 · Enterprise Systems Engineering · Chapter 07 — Portfolio, investment, affordability, and resource allocation",
+        "book": 19,
+        "chapter": 7
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "dc953257a5780",
+    "slug": "complexity-emergence",
+    "title": "Complexity, emergence, and adaptation",
+    "subject": "Systems of systems, enterprises and complexity",
+    "summary": "Recognizing nonlinear interaction, adaptation, emergence, and limits of reductionist control.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "stocks-flows-feedback",
+      "sos-characteristics"
+    ],
+    "related": [
+      "stocks-flows-feedback",
+      "resilience-adaptability",
+      "enterprise-as-system",
+      "intervention-and-learning"
+    ],
+    "books": [
+      {
+        "id": "p5v20742chapter02",
+        "title": "Week 02 · Management of Complex Systems · Chapter 02 — Complexity science, chaos, adaptation, scale, and irreducible uncertainty",
+        "book": 20,
+        "chapter": 2
+      },
+      {
+        "id": "p5v20742chapter05",
+        "title": "Week 05 · Management of Complex Systems · Chapter 05 — Type C — structural complexity and system dynamics",
+        "book": 20,
+        "chapter": 5
+      },
+      {
+        "id": "p5v20742chapter09",
+        "title": "Week 09 · Management of Complex Systems · Chapter 09 — Critical systems theory, critical systems thinking, and methodological critique",
+        "book": 20,
+        "chapter": 9
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "d47658a4711e5",
+    "slug": "authority-and-governance",
+    "title": "Authority, governance, and coordination",
+    "subject": "Systems of systems, enterprises and complexity",
+    "summary": "Clarifying who can set constraints, commit resources, arbitrate conflicts, and accept risk.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "stakeholders-and-needs",
+      "sos-characteristics"
+    ],
+    "related": [
+      "sos-characteristics",
+      "enterprise-as-system",
+      "risk-vs-issue",
+      "stakeholders-and-needs"
+    ],
+    "books": [
+      {
+        "id": "p5v20771chapter02",
+        "title": "Week 02 · System of Systems Engineering · Chapter 02 — Managing SoS development, governance, acquisition, fielding, and evolution",
+        "book": 18,
+        "chapter": 2
+      },
+      {
+        "id": "p5v20753chapter02",
+        "title": "Week 02 · Enterprise Systems Engineering · Chapter 02 — Actors, authority, objectives, legitimacy, and governance",
+        "book": 19,
+        "chapter": 2
+      },
+      {
+        "id": "p5v20742chapter08",
+        "title": "Week 08 · Management of Complex Systems · Chapter 08 — Type F — coercive complexity: Team Syntegrity and Critical Systems Heuristics",
+        "book": 20,
+        "chapter": 8
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  },
+  {
+    "id": "d02ceac07509e",
+    "slug": "resilience-adaptability",
+    "title": "Resilience, robustness, and graceful degradation",
+    "subject": "Systems of systems, enterprises and complexity",
+    "summary": "Designing for disruption, recovery, graceful degradation, and adaptation to novel conditions.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "risk-vs-issue",
+      "probability-and-dependence"
+    ],
+    "related": [
+      "risk-vs-issue",
+      "probability-and-dependence",
+      "mission-engineering",
+      "complexity-emergence"
+    ],
+    "books": [
+      {
+        "id": "p5v20771chapter09",
+        "title": "Week 09 · System of Systems Engineering · Chapter 09 — Cascading risk, cyber resilience, safety, and mission assurance",
+        "book": 18,
+        "chapter": 9
+      },
+      {
+        "id": "v17-645-768-b-07",
+        "title": "Book 7 · Chapter 7: Reliability and maintainability",
+        "book": 7,
+        "chapter": 7
+      },
+      {
+        "id": "p5v20753chapter09",
+        "title": "Week 09 · Enterprise Systems Engineering · Chapter 09 — External factors, strategic scenarios, risk, opportunity, and resilience",
+        "book": 19,
+        "chapter": 9
+      }
+    ],
+    "revision": "v50",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "focused verification",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    }
+  },
+  {
+    "id": "d601071637e3d",
+    "slug": "intervention-and-learning",
+    "title": "Interventions, policy resistance, and learning loops",
+    "subject": "Systems of systems, enterprises and complexity",
+    "summary": "Testing interventions where feedback, incentives, and policy resistance affect outcomes.",
+    "status": "reconstructed",
+    "prerequisites": [
+      "process-improvement",
+      "complexity-emergence"
+    ],
+    "related": [
+      "process-improvement",
+      "stocks-flows-feedback",
+      "complexity-emergence",
+      "authority-and-governance"
+    ],
+    "books": [
+      {
+        "id": "p5v20742chapter10",
+        "title": "Week 10 · Management of Complex Systems · Chapter 10 — Critical Systems Practice: Explore and Produce",
+        "book": 20,
+        "chapter": 10
+      },
+      {
+        "id": "p5v20742chapter11",
+        "title": "Week 11 · Management of Complex Systems · Chapter 11 — Critical Systems Practice: Intervene; dynamic risk, resilience, and safe-to-learn action",
+        "book": 20,
+        "chapter": 11
+      },
+      {
+        "id": "p4v19783chapter12",
+        "title": "Week 12 · Systems Engineering Process Improvement · Book chapter: Final process improvement release and oral defense",
+        "book": 17,
+        "chapter": 12
+      }
+    ],
+    "revision": "v51",
+    "qa50": {
+      "structural_review": "pass",
+      "numerical_review": "not independently verified",
+      "source_links": "publisher page confirmed",
+      "publication_review": "v50"
+    },
+    "qa51": {
+      "technical_review": "focused internal technical/assumption check",
+      "source_trace": "2 selected claims mapped to publisher sections or abstracts",
+      "numerical_status": "illustrative calculations subject to reproducible checks where numerical",
+      "peer_review": "not performed"
+    }
+  }
+]

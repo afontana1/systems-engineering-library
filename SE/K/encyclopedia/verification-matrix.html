@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Verification cross-reference matrices and test design · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/verification-matrix.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed reference</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Verification cross-reference matrices and test design</h1>
+<p><strong>Reference entry · Concept, design, integration and test · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p>A <strong>verification cross-reference matrix (VCRM)</strong> links each requirement or allocated technical obligation to a specific method, procedure, configuration, result, and disposition. It is an index to evidence, not evidence itself. A green status cell can hide an invalid procedure, an obsolete design version, or an acceptance rule that never measured the requirement.</p>
+<h2>Theory: claims, configurations, and evidence sufficiency</h2>
+<p>Model a verification record as <code>V = (requirement version, test item, method, procedure, scenario, acceptance criterion, observation, uncertainty, disposition)</code>. Permissible methods include analysis, inspection, demonstration, and test, each with different limitations. Passing a component test does not automatically close a system-level requirement unless there is a justified composition argument. The relevant denominator is the number of <em>applicable, version-current obligations</em>, not whichever subset happens to have a completed record.</p>
+<p>Statistical criteria must match the claim. For a pass/fail reliability test with zero failures in <code>n</code> independent Bernoulli trials, a one-sided 95% upper confidence bound on failure probability is <code>1 - 0.05^(1/n)</code>. At <code>n = 30</code>, this is approximately 9.5%: thirty clean tests do <strong>not</strong> demonstrate a failure probability below 1%. Stronger claims need a more extensive or differently structured evidence plan, and independence may be implausible under common-cause failure.</p>
+<h2>Worked example: a test passes but cannot close the requirement</h2>
+<p>Requirement R42 states that emergency acknowledgement must occur within 200 ms for at least 99.9% of valid commands in a specified peak-load environment. The lab procedure sends 20 commands at idle load; all respond in 180 ms or less. The matrix marks R42 “Pass.” That is unjustified: the workload differs, the sample is too small for the percentile claim, and timestamp measurement uncertainty is undocumented. The correct status is <strong>evidence incomplete</strong>, with an approved plan for representative peak loading, clock synchronization, and statistical acceptance.</p>
+<h2>Engineering use and evidence</h2>
+<p>Track each requirement's source, current version, priority, verification level, method, objective criterion, procedure, configuration hash, raw result, reviewer, and open exceptions. Flag missing links, duplicate closing evidence, stale tests, and waiver decisions. Distinguish verified requirement, validated operational need, and readiness authorization. Independent challenge should sample passing rows and attempt to reconstruct the claim from raw evidence.</p>
+<h2>Limitations and connections</h2>
+<p>Coverage percentage is a bookkeeping measure and cannot by itself quantify system assurance. A matrix can be complete while the selected requirements are wrong. Connect verification planning to <strong>requirements</strong>, <strong>test design</strong>, <strong>traceability</strong>, <strong>measurement uncertainty</strong>, and <strong>model credibility</strong>.</p>
+<h2>Technical analysis: a closed row needs a defensible claim boundary</h2>
+<p>A verification matrix row should identify a single versioned claim, its verification method, planned acceptance rule, data source, test configuration, result, discrepancy status, and reviewer authority. Suppose the requirement is “battery temperature shall stay below 60°C at continuous 2 kW output for 30 minutes in a 40°C ambient.” A test performed at 25°C ambient that records 55°C <strong>does not close</strong> that requirement, regardless of a green “pass” field. The result may support a partial argument, but the tested environment does not cover the stated environment.</p>
+<p>For a measurement of <code>59.5°C</code> with expanded uncertainty <code>±1.2°C</code> at a specified coverage, an acceptance rule that requires the <em>upper uncertainty limit</em> below <code>60°C</code> does not pass; <code>59.5+1.2=60.7°C</code>. Some projects may use other contractually approved decision rules, but they must be stated <strong>before</strong> observing results. Record whether test uncertainty, manufacturing variation, and configuration equivalence have actually been considered. A matrix counts evidence relationships; it cannot automatically judge whether they are sufficient.</p>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA · Systems Engineering Handbook appendix (requirements and verification matrices)</a> — Requirements review criteria and verification planning context.</li>
+<li><a href="https://www.nasa.gov/reference/2-4-distinctions-between-product-verification-and-product-validation/">NASA · Distinctions between product verification and validation</a> — Separate conformity to specifications from fitness for intended use.</li>
+<li><a href="https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-7-reporting-uncertainty">NIST · Technical Note 1297, Reporting Measurement Uncertainty (1993)</a> — Standard and expanded uncertainty, coverage factors, and reporting conditions.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="good-requirements.html">Requirements: precise obligations, not persuasive sentences</a></li>
+<li><a href="v-and-v.html">Verification, validation, and acceptance: the three different decisions</a></li>
+<li><a href="traceability-graph.html">Requirements traceability: a typed graph of engineering claims</a></li>
+<li><a href="metrics-hierarchy.html">Measures of effectiveness and performance</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B8/chapters/02-trace-requirements-and-stakeholder-expectations-to-obje.html">Book 8, Chapter 02: Book 8 · Chapter 2: Requirements to critical test parameters</a></li>
+<li><a href="../B8/chapters/10-analyze-results-determine-evidence-sufficiency-and-reco.html">Book 8, Chapter 10: Book 8 · Chapter 10: Evidence sufficiency and decision statistics</a></li>
+<li><a href="../B9/chapters/12-verify-and-validate-the-model-assess-the-design-respond-to-change-an.html">Book 9, Chapter 12: Book 9 · Chapter 12 — Verify and validate the model, assess the design, respond to change, and defend the final baseline</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=da6331f16f926">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="verification-matrix.md">Editable Markdown</a></nav></main></body></html>

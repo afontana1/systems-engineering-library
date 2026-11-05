@@ -1,0 +1,14 @@
+hour,regime,mean_arrivals_per_hour,notes
+07:00,ordinary,7,illustrative only; not observed
+08:00,class-change,19,illustrative only; not observed
+09:00,class-change,19,illustrative only; not observed
+10:00,ordinary,7,illustrative only; not observed
+11:00,ordinary,7,illustrative only; not observed
+12:00,class-change,19,illustrative only; not observed
+13:00,class-change,19,illustrative only; not observed
+14:00,ordinary,7,illustrative only; not observed
+15:00,ordinary,7,illustrative only; not observed
+16:00,class-change,19,illustrative only; not observed
+17:00,class-change,19,illustrative only; not observed
+18:00,ordinary,7,illustrative only; not observed
+19:00,ordinary,7,illustrative only; not observed

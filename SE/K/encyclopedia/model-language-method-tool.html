@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Model, method, language, tool, and repository · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/model-language-method-tool.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Model, method, language, tool, and repository</h1>
+<p><strong>Reference entry · MBSE and software-intensive systems · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p>A <strong>model</strong> is a purposeful representation of selected properties of a system; a <strong>language</strong> defines allowed constructs and their semantics; a <strong>method</strong> prescribes how engineers create, check, and use representations; a <strong>tool</strong> implements editing and analysis capabilities; a <strong>repository</strong> manages identity, versions, access, and relationships. Choosing SysML or another notation does not by itself provide a modeling method, and purchasing a repository does not establish an authoritative digital thread.</p>
+<h2>Theory: semantics determine the inferences a model supports</h2>
+<p>A diagram is a projection of an underlying information model. A block-connection arrow may mean physical connectivity, information exchange, dependency, or merely commentary—unless the relationship type is defined. Typed relations constrain inference: <code>allocatedTo(function, component)</code> is not interchangeable with <code>satisfies(component, requirement)</code> or <code>verifiedBy(requirement, test)</code>. A consistent metamodel supports queries such as “find requirements with no verification evidence” without guessing from line placement.</p>
+<p>Distinguish <strong>syntax validity</strong>, <strong>semantic consistency</strong>, and <strong>fitness for intended use</strong>. A model may parse, satisfy all repository constraints, and still omit the environmental dynamics that determine mission success. Conversely, a small spreadsheet with documented units, equations, data, and assumptions may be more credible for a particular decision than a vast visually polished system model. Model fidelity should follow the decision consequence and needed discrimination among alternatives.</p>
+<h2>Worked example: a misleading architecture report</h2>
+<p>A shuttle model contains a <code>Dispatcher</code> element, <code>Vehicle</code> elements, and “serves” arrows. One analyst interprets “serves” as dispatch assignment; another interprets it as successful passenger pickup. A query counts ten served requests, but only eight pickups occurred. Separating <code>assigns(vehicle, request)</code> from <code>completes(vehicle, trip)</code> and adding timestamps reveals the difference. A typed constraint that every completion refers to an assigned request can then detect orphan records—without claiming that the resulting model validates the real service.</p>
+<h2>Engineering use and evidence</h2>
+<p>Publish a modeling charter: intended decisions, modeling questions, viewpoints, element and relation definitions, naming and units conventions, configuration rules, validation queries, ownership, and review gates. Treat tool-generated diagrams as views of versioned model facts. Run automated checks for missing types, unresolved references, multiplicity violations, requirement coverage, and contradictory parameter units. Independently test important computations with known examples and boundary cases.</p>
+<h2>Limitations and connections</h2>
+<p>Tools can enforce syntactic discipline but cannot determine which operational assumptions are true. Tool migration can preserve graphical appearance while corrupting semantics. Connect this topic to <strong>views and viewpoints</strong>, <strong>traceability</strong>, <strong>functional allocation</strong>, <strong>digital-thread provenance</strong>, and <strong>model credibility</strong>.</p>
+<h2>Technical analysis: semantics, method, and implementation are distinct</h2>
+<p>A model language defines permitted structures and meanings; a method prescribes how teams use model artifacts to make decisions; a tool stores and manipulates them. Conformance to a modeling syntax alone does not establish that a model is complete, logically consistent, or relevant to the engineering decision. Maintain explicit constraints on identity, quantity units, state transitions, and relationship types.</p>
+<p>Consider a logical model in which <code>remaining_energy</code> is measured in <strong>kWh</strong> but the code subtracts power in <strong>kW</strong> without multiplying by elapsed <strong>hours</strong>. With a <strong>2 kW</strong> load over <strong>30 minutes</strong>, energy consumption is <code>2 × 0.5 = 1 kWh</code>; subtracting <code>2</code> incorrectly removes <strong>2 kWh</strong>. Both quantities may be represented as floating-point values, so a syntactically valid diagram or generated program can still encode a dimensional error. Typed quantities and invariant checks catch a class of mistakes that diagram review alone does not.</p>
+<p><strong>Evidence boundary.</strong> Record metamodel/version, transformation rules, validation constraints, and generated-artifact provenance. A tool certification claim cannot stand in for validation of a particular model's assumptions, boundary conditions, or decision relevance.</p>
+<h2>Claim-specific sources</h2>
+<p>The following <strong>selected methodological claims</strong> are tied to identifiable sections or abstracts, not merely generic reading lists. Source scope is stated for each link. Numerical scenarios and computations in this article are <strong>original illustrative examples</strong>, not data, calculations, or endorsements supplied by the linked publishers. Links require internet access; the explanation remains readable offline.</p>
+<ul>
+<li><strong>C1:</strong> Logical decomposition models and work products must make functional and behavioral relationships explicit. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/4-0-system-design-processes/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §4.3 Logical Decomposition</a> · <em>direct guidance</em>.</li>
+<li><strong>C2:</strong> The credibility of a particular model or simulation remains application- and evidence-dependent. <strong>Evidence:</strong> <a href="https://standards.nasa.gov/node/263">NASA — NASA-STD-7009B, Standard for Models and Simulations (2024), Document Scope; credibility in model/simulation life cycle</a> · <em>direct standard scope</em>.</li>
+</ul>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
+<li><a href="https://standards.nasa.gov/node/263">NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)</a> — Credibility practices for modeling and simulation used in decisions.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="views-and-viewpoints.html">Architecture views, viewpoints, and consistency</a></li>
+<li><a href="traceability-graph.html">Requirements traceability: a typed graph of engineering claims</a></li>
+<li><a href="digital-thread-and-twin.html">Digital thread and digital twin: preserving engineering meaning across time</a></li>
+<li><a href="model-vv-and-credibility.html">Simulation verification, validation, and credibility</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B3/chapters/01-mbse-value-model-purpose-and-the-document-to-.html">Book 3, Chapter 01: Book III · Chapter 1: A model has to earn its existence</a></li>
+<li><a href="../B3/chapters/02-modeling-plan-methodology-language-tool-and-r.html">Book 3, Chapter 02: Book III · Chapter 2: Choosing a language is not choosing a method</a></li>
+<li><a href="../B9/chapters/11-extend-the-modeling-language-and-automate-queries-validation-rules-m.html">Book 9, Chapter 11: Book 9 · Chapter 11 — Extend the modeling language and automate queries, validation rules, matrices, and generated products</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=db3032ecc2404">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="model-language-method-tool.md">Editable Markdown</a></nav></main></body></html>

@@ -1,0 +1,5 @@
+operation,serial_or_parallel,delay_ms,unit,owner
+authentication,serial,120,ms,Identity
+route_evaluation,parallel,200,ms,Dispatch
+capacity_validation,parallel,150,ms,Fleet
+commit,serial,80,ms,Booking

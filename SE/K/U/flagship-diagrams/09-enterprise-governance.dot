@@ -1,0 +1,16 @@
+digraph G {
+ graph [rankdir=LR, bgcolor="transparent", label="SoS constituents and governance", labelloc=t, fontname="DejaVu Sans", fontsize=17];
+ node [shape=box, style="rounded,filled", fillcolor="#e7f0f1", color="#356b73", fontname="DejaVu Sans", margin="0.16,0.12"]; edge[color="#527d83", penwidth=1.6];
+ n0 [label="Regional authority"];
+ n1 [label="City transit"];
+ n2 [label="Hospital network"];
+ n3 [label="Mobility operator"];
+ n4 [label="Community representatives"];
+ n5 [label="Independent review"];
+ n0 -> n1;
+ n0 -> n2;
+ n0 -> n3;
+ n4 -> n0;
+ n3 -> n5;
+ n5 -> n0;
+}

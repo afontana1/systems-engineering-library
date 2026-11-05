@@ -1,0 +1,11 @@
+digraph evidence {
+ graph [rankdir=LR, bgcolor="transparent", pad="0.3"];
+ node [shape=box,style="rounded,filled",color="#aac7c9",fontname="DejaVu Sans",fillcolor="#f4f8f8",fontcolor="#183c4e"];
+ edge [color="#527e88",fontname="DejaVu Sans",fontsize=10];
+ need [label="Need\nN-07"];
+ scenario [label="Scenario\nloss of status"];
+ req [label="Requirement\nSYS-OPS-014"];
+ test [label="Verification\nT-014"];
+ result [label="Result\nE-014"];
+ need -> scenario -> req -> test -> result;
+}

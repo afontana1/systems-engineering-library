@@ -1,0 +1,2 @@
+interface_id,provider,consumer,trigger,payload_schema,units,deadline_ms,ack_timeout_ms,failure_policy,owner,test_id
+IF-01,Dispatch,Onboard controller,Route assignment,RouteCommand-v1,ms,2000,500,Reject stale command,Systems architect,IT-01

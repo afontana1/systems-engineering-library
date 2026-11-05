@@ -1,0 +1,174 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>F02 · Architecture decisions under competing objectives and uncertainty · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/U/flagships/F02-decisions-and-architecture.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="f02--architecture-decisions-under-competing-objectives-and-uncertainty">F02 · Architecture decisions under competing objectives and uncertainty</h1>
+<p><em>Flagship textbook chapter · conceptual design, decision science, project governance · approximate study time: 7–10 hours.</em></p>
+<p><strong>Learning outcome.</strong> Formulate a technically defensible trade study, identify when scores are misleading, derive a preference-reversal threshold, and calculate the expected value of imperfect information before committing to costly evidence gathering.</p>
+<p><strong>Prerequisites:</strong> <a href="../../encyclopedia/views-and-viewpoints.html">system architecture</a>, <a href="../../encyclopedia/engineering-trades.html">trade studies</a> and <a href="../../encyclopedia/bayesian-value-of-information.html">decision uncertainty</a>. Related: <a href="../derivations/02-weighted-trades-and-reversal.html">D02 trade reversals</a>, <a href="../derivations/03-bayesian-test-and-information.html">D03 Bayesian value of information</a>.</p>
+<p><img alt="Architecture trade decision process" src="../flagship-diagrams/02-decision-process.svg"/></p>
+<h2 id="1-define-a-decision-before-calculating-anything">1. Define a decision before calculating anything</h2>
+<p>A typical architecture meeting begins with proposals: “centralize dispatch,” “use a broker,” “add another vehicle class.” This is not yet a decision problem. A well-posed decision identifies the <strong>decision owner</strong>, alternatives, decision date, constraints, consequences, preferences, uncertain states and information available at that date. All alternatives should be evaluated against a common mission scenario and baseline.</p>
+<p>For fictional Northstar mobility operations, suppose the architecture board must choose among three dispatch architectures:</p>
+<ul>
+<li><strong>A — centralized control</strong> with a single managed region-wide scheduling service.</li>
+<li><strong>B — federated coordination</strong> with local dispatchers and a shared policy/control plane.</li>
+<li><strong>C — hybrid fallback</strong> with central optimization and local degraded-mode dispatch.</li>
+</ul>
+<p>The alternatives must describe actual architectures, not slogans. For each, draw major components, interfaces, failure domains, operational staffing, deployment constraints and graceful degradation. An attractive score for “resilience” is meaningless if the scenario used to assign it has no documented connection to actual failure behavior.</p>
+<h2 id="2-separate-hard-constraints-from-preferences">2. Separate hard constraints from preferences</h2>
+<p>Imagine a regulatory or safety commitment that emergency dispatch shall not be capable of remotely disabling vehicle emergency stop. Such a safety invariant is a <strong>constraint</strong>, not merely a low-scoring criterion to be compensated for by attractive cost. The decision pipeline should first reject infeasible alternatives; then compare viable ones using preferences.</p>
+<p>Let $F$ be the feasible alternative set, where each alternative satisfies $g_j(a)\le 0$ for all hard constraints $j$. A weighted multiattribute score may then be written as</p>
+<p>$$S(a)=\sum_{i=1}^k w_i v_i(x_i(a)),\qquad w_i\ge0,\quad\sum_i w_i=1,$$</p>
+<p>where $v_i$ is a <strong>value function</strong>, not an arbitrary normalization. A linear value function assumes a constant marginal preference over its range. That may be inappropriate for life-safety outcomes, threshold service levels or cost overruns.</p>
+<p>Before choosing weights, make the direction of improvement explicit; state the worst/best anchors; document whether a 0.1 change in one scale is genuinely comparable to a 0.1 change in another. Avoid counting the same outcome twice, such as putting latency, travel time and perceived responsiveness into three heavily weighted criteria without recognizing their dependence.</p>
+<h2 id="3-worked-weighted-score-and-preference-reversal">3. Worked weighted score and preference reversal</h2>
+<p>Suppose stakeholder elicitation yields these hypothetical <strong>value scores</strong>, each in $[0,1]$. They are teaching inputs, not measured attributes of real technologies.</p>
+<table>
+<thead>
+<tr>
+<th>Architecture</th>
+<th style="text-align:right">Response value</th>
+<th style="text-align:right">Safety-case value</th>
+<th style="text-align:right">Affordability value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A · centralized</td>
+<td style="text-align:right">0.85</td>
+<td style="text-align:right">0.75</td>
+<td style="text-align:right">0.95</td>
+</tr>
+<tr>
+<td>B · federated</td>
+<td style="text-align:right">0.75</td>
+<td style="text-align:right">0.95</td>
+<td style="text-align:right">0.70</td>
+</tr>
+<tr>
+<td>C · hybrid</td>
+<td style="text-align:right">0.65</td>
+<td style="text-align:right">0.88</td>
+<td style="text-align:right">0.90</td>
+</tr>
+</tbody>
+</table>
+<p>With weights $(w_R,w_S,w_A)=(0.35,0.45,0.20)$:</p>
+<ul>
+<li>$S(A)=0.35(0.85)+0.45(0.75)+0.20(0.95)=0.8250$.</li>
+<li>$S(B)=0.35(0.75)+0.45(0.95)+0.20(0.70)=0.8300$.</li>
+<li>$S(C)=0.35(0.65)+0.45(0.88)+0.20(0.90)=0.8035$.</li>
+</ul>
+<p>B wins, but by <strong>0.005</strong>, a margin small relative to plausible model or elicitation uncertainty. A presentation that lists only B as the winner hides decision fragility.</p>
+<p>Now keep response weight at 0.35, let safety weight be $s$, and let affordability weight be $0.65-s$. Then</p>
+<p>$$S(A)=0.915-0.20s,\qquad S(B)=0.7175+0.25s.$$</p>
+<p>Set them equal: $0.915-0.20s=0.7175+0.25s$. Thus</p>
+<p>$$s^*=0.1975/0.45=0.438\overline{8}.$$</p>
+<p>If stakeholders' true safety weight is below 0.4389, A outranks B (with response weight fixed). Above that value, B outranks A. A 0.45 stated preference is close to the crossover. The appropriate next step is <strong>preference validation</strong> and <strong>uncertainty analysis</strong>, not false precision.</p>
+<h3 id="what-sensitivity-analysis-can-and-cannot-tell-us">What sensitivity analysis can and cannot tell us</h3>
+<p>Changing one weight while forcing the others to sum to one is a specified preference path; other paths can produce different thresholds. Ranking sensitivity does not by itself show whether either design satisfies hard safety requirements. Uncertain performance estimates and uncertain preferences are different variables and should be analyzed separately.</p>
+<h2 id="4-pareto-dominance-before-preference-weighting">4. Pareto dominance before preference weighting</h2>
+<p>An alternative is <strong>Pareto dominated</strong> if another is at least as good on every relevant criterion and strictly better on at least one, with consistent preference directions. Dominated choices ordinarily need no further weighted ranking unless they possess an omitted strategic advantage. The nondominated set is a starting point for eliciting tradeoffs, not a single optimal answer.</p>
+<p>For example, if a fourth architecture D has response 0.70, safety 0.80 and affordability 0.60, B beats D on response (0.75&gt;0.70), safety (0.95&gt;0.80) and affordability (0.70&gt;0.60). D is dominated by B. The three alternatives A, B and C above are not obviously dominated by one another. A board should inspect <strong>why</strong> a dominated choice was proposed: perhaps a missing maintainability or workforce-integration criterion matters.</p>
+<h2 id="5-quantitative-uncertainty-is-more-than-a-range-on-a-slide">5. Quantitative uncertainty is more than a range on a slide</h2>
+<p>Separate three classes:</p>
+<ol>
+<li><strong>Aleatory variability:</strong> real operational variation such as passenger arrival times, weather and traffic.</li>
+<li><strong>Epistemic uncertainty:</strong> limited knowledge about a model parameter, architecture maturity or supplier performance.</li>
+<li><strong>Preference ambiguity:</strong> stakeholders disagree about the desirability of outcomes.</li>
+</ol>
+<p>These distinctions drive different actions. More data may reduce epistemic uncertainty, but it cannot eliminate traffic variability. Stakeholder engagement can clarify weights but cannot eliminate random events. A Monte Carlo distribution does not make an incorrect model correct; it only propagates assumed inputs through it.</p>
+<p>When multiple attributes depend on the same latent factor—for example, traffic congestion drives both pickup delay and energy use—independent random sampling of those attributes can make architecture risk look too small. Record plausible joint distributions or dependence assumptions; test alternate scenarios when data are sparse.</p>
+<h2 id="6-expected-value-of-perfect-information">6. Expected value of perfect information</h2>
+<p>Let uncertain state $\theta$ influence loss $L(a,\theta)$. Without further information, choose $a^*=\arg\min_a E[L(a,\theta)]$. With perfect knowledge of $\theta$, choose the optimal action separately in each state. The expected value of perfect information (EVPI) for minimizing loss is</p>
+<p>$$EVPI=\min_a E[L(a,\theta)]-E[\min_a L(a,\theta)].$$</p>
+<p>EVPI is an upper bound on what it is rational to pay for <strong>information alone</strong> under this loss model, without additional implementation benefits. It must be nonnegative; if a calculation is negative, revisit the decision logic.</p>
+<p>Consider two actions, ship a dispatcher release or fix a potential defect. Let prior defect probability be 0.12; shipping produces loss 100 if defective and 0 otherwise; fixing costs 14 and eliminates this modeled defect. Without testing, expected shipping loss is $0.12\times100=12$, versus fix cost 14. Ship is preferred under the stated simplified model.</p>
+<p>With perfect defect knowledge, fix only when defective. Expected loss is $0.12\times14=1.68$, hence $EVPI=12-1.68=10.32$.</p>
+<h2 id="7-bayesian-update-with-an-imperfect-test">7. Bayesian update with an imperfect test</h2>
+<p>A proposed diagnostic test has <strong>sensitivity</strong> $P(+\mid D)=0.80$ and <strong>false-positive rate</strong> $P(+\mid\neg D)=0.10$. Prior $P(D)=0.12$.</p>
+<p>Compute the probability of a positive result:</p>
+<p>$$P(+)=0.80(0.12)+0.10(0.88)=0.184.$$</p>
+<p>Bayes' rule gives</p>
+<p>$$P(D\mid +)=0.096/0.184\approx0.52174.$$</p>
+<p>For a negative result, $P(-)=0.816$, and</p>
+<p>$$P(D\mid -)=0.20(0.12)/0.816\approx0.02941.$$</p>
+<p>After a positive result, shipping has expected loss about 52.17, so fix at cost 14. After a negative result, shipping has expected loss about 2.94, so ship. The expected loss <strong>before paying the test price</strong> is</p>
+<p>$$0.184(14)+0.816(100\cdot0.0294118)=2.576+2.400=4.976.$$</p>
+<p>Therefore $EVSI=12-4.976=7.024$. If the test itself costs 2 (in the same monetary units), the net expected benefit relative to not testing is $7.024-2=5.024$; testing is favored. Verify $EVSI\le EVPI$; here $7.024\le10.32$.</p>
+<p>This is not a universal go/no-go rule. It depends on a credible test calibration, the prior defect probability, assumed loss consequences, and the action following each observation. If the test changes the system by inducing damage, or fixing does not eliminate the defect, the model must change.</p>
+<h2 id="8-robust-decisions-and-regret">8. Robust decisions and regret</h2>
+<p>A weighted score ranks alternatives under a point set of weights and performance estimates. A robust design asks how much the decision degrades over a plausible uncertainty set. One useful diagnostic is <strong>regret</strong>:</p>
+<p>$$R(a,\theta)=L(a,\theta)-\min_{a'}L(a',\theta).$$</p>
+<p>Minimax regret chooses the action whose worst regret across scenarios is smallest. This is <em>not</em> identical to minimizing worst absolute loss. Different decision attitudes—expected value, constrained optimization, CVaR, minimax regret—represent different governance preferences; do not quietly swap them while presenting the same answer as “optimal.”</p>
+<p>For public-facing systems, also examine subgroup and tail outcomes. Two dispatch architectures can have the same mean pickup time but materially different 95th-percentile wait times or accessibility disparities. If fairness and distributional consequences matter, include appropriate constraints and separate distributional reporting; average utility can mask them.</p>
+<h2 id="9-evidence-to-decision-architecture-review-package">9. Evidence to decision: architecture review package</h2>
+<p>A useful architecture decision record contains: decision ID and scope; alternatives considered; non-negotiable constraints; baseline assumptions; measures and value scales; source and provenance of data; elicited preferences; trade scoring; sensitivity and risk; unresolved questions; rejected alternative rationale; expected change triggers; and decision owner/date. It should be readable by reviewers who did not participate in the meeting.</p>
+<p>Apply <a href="F01-requirements-to-assurance.html">F01</a>: each performance claim used in scoring should connect to a measured result or a calibrated model. If a score depends on an unvalidated simulation, the uncertainty belongs in the record. Apply <a href="F03-statistical-assurance.html">F03</a> to distinguish estimate precision from model applicability.</p>
+<h2 id="10-common-traps">10. Common traps</h2>
+<ul>
+<li><strong>Arbitrary normalization:</strong> a linear rescaling of dollars into 0–1 points silently imposes willingness-to-pay assumptions.</li>
+<li><strong>Weight laundering:</strong> numbers from an unstructured vote are presented as a validated stakeholder preference model.</li>
+<li><strong>Double counting:</strong> highly correlated response time, throughput and customer satisfaction dominate other criteria.</li>
+<li><strong>Unquantified downside:</strong> 0.90 average safety score hides a rare catastrophic failure mode that should be an explicit constraint.</li>
+<li><strong>False independence:</strong> multiple failure modes share software, power or communications dependencies.</li>
+<li><strong>Information without a decision:</strong> collecting more measurements is not valuable if no credible observation can change an action.</li>
+</ul>
+<h2 id="11-worked-exercises-with-solutions">11. Worked exercises with solutions</h2>
+<h3 id="exercise-1--score-all-three-alternatives">Exercise 1 · Score all three alternatives</h3>
+<p>Recalculate A, B and C using weights 0.35/0.45/0.20; report margin of winner over runner-up.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>$A=0.8250$, $B=0.8300$, $C=0.8035$. Winner B exceeds A by 0.0050. Report the margin and recommend preference/performance sensitivity analysis.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-2--derive-the-crossover">Exercise 2 · Derive the crossover</h3>
+<p>With response weight fixed at 0.35 and affordability $0.65-s$, find safety weight $s$ that makes A and B tie.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>$S_A=0.915-0.20s$ and $S_B=0.7175+0.25s$. Equality gives $0.45s=0.1975$, so $s=0.438888\ldots$. For $s&gt;0.4389$ B wins; for $s&lt;0.4389$ A wins.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-3--detect-dominance">Exercise 3 · Detect dominance</h3>
+<p>D scores (0.70,0.80,0.60). Identify a dominating architecture, if any.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>B scores (0.75,0.95,0.70), better on all three desirability-oriented attributes, so B dominates D. Before discarding D, make sure no omitted criterion changes feasibility or preferences.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-4--perfect-information">Exercise 4 · Perfect information</h3>
+<p>For prior defect probability 0.12, ship loss 100 if defective, and fix cost 14, calculate the optimal action without a test and EVPI.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>Ship has expected loss 12, fixing costs 14, so ship. With perfect information, fix only for the 12% defective state; expected loss 1.68. EVPI $=12-1.68=10.32$.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-5--posterior-positive-probability">Exercise 5 · Posterior positive probability</h3>
+<p>Use sensitivity 80%, false-positive rate 10%, prior defect probability 12%.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>$P(+)=0.80(0.12)+0.10(0.88)=0.184$. $P(D\mid+)=0.096/0.184=0.521739\ldots$. A positive result is far from proof of a defect; it materially increases the posterior probability.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-6--value-of-imperfect-information">Exercise 6 · Value of imperfect information</h3>
+<p>Use the optimal “fix positive / ship negative” policy. Calculate expected loss with test and the largest acceptable test price, holding all assumptions fixed.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>Pre-test loss under policy: positive contribution $0.184\times14=2.576$; negative defective-and-shipped contribution $0.12\times0.20\times100=2.4$. Total 4.976. Gross EVSI $12-4.976=7.024$; a test priced below 7.024 has positive modeled expected value, before additional operational and implementation consequences.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-7--sensitivity-of-a-decision">Exercise 7 · Sensitivity of a decision</h3>
+<p>A board's safety weight may be between 0.43 and 0.47, with response fixed at 0.35. Is the preferred architecture stable?</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>No. The crossover 0.4389 lies inside the plausible interval. A can win at 0.43 while B wins at 0.47. Record the preference ambiguity and test whether a credible discussion or evidence could resolve it.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-8--value-of-information-under-a-no-go-constraint">Exercise 8 · Value of information under a no-go constraint</h3>
+<p>A critical invariant has failed for B but passed for A. The prior weighted ranking favored B. What is the immediate decision step?</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>Remove B from the feasible set or hold it pending an accepted corrective action and renewed verification. Do not offset the critical failure against cost or performance points. Reassess whether A meets all constraints and examine alternatives if it does not.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-9--correlated-metrics">Exercise 9 · Correlated metrics</h3>
+<p>Response-time and throughput metrics are strongly driven by the same utilization parameter. Why might including both overstate evidence for one architecture?</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>The two criteria may double count the same underlying operational effect and create a misleading impression of independent benefits. Revisit the objective hierarchy, use an appropriately structured multiattribute model, and model correlated performance uncertainty jointly.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-10--governance-translation">Exercise 10 · Governance translation</h3>
+<p>Describe a decision trigger after architecture selection that would justify reopening the decision.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>Example: the federated option's measured tail network latency rises above its acceptance envelope, violating the bounded fallback claim. Record the measured condition, affected assumptions and requirement IDs, then reopen the architecture review with corrected performance data and feasible mitigation alternatives.</p>
+<p>&lt;/details&gt;</p>
+<h2 id="12-lab-worksheet-and-reading-path">12. Lab, worksheet and reading path</h2>
+<p>Use <a href="../flagship-notebooks/02-trade-decisions.ipynb">Lab 2: architecture decision</a> or the pure-Python module <code>flagship-labs/decision_analysis.py</code>. Reproduce the ranking, reversal threshold, posterior calculations and EVSI. Change one numerical assumption and explain why the preferred decision changes. Use <a href="../flagship-worksheets/architecture-trade.csv">architecture trade worksheet</a> as the record of alternatives and rationale.</p>
+<p><strong>Deliverable:</strong> an architecture decision record with a feasibility screen, transparent value functions, elicitation rationale, numerical trade results, at least two sensitivity paths, an information-value calculation, and a stated re-review trigger.</p>
+<p><strong>Continuations:</strong> <a href="F03-statistical-assurance.html">F03: statistical assurance</a> · <a href="F04-dynamics-and-resilience.html">F04: dynamics and resilience</a>. <strong>Further reading:</strong> <a href="https://sebokwiki.org/">SEBoK</a> and <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a>.</p>
+</main></body></html>

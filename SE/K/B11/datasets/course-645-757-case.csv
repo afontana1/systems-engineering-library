@@ -1,0 +1,13 @@
+week,course,scenario,baseline_value,challenge_value,units,status,teaching_note
+1,645-757,Northstar synthetic evaluation,16.4,19.68,illustrative index,synthetic—not field data,"Frame the M&S decision, intended use, terminology, and model-method trade space"
+2,645-757,Northstar synthetic evaluation,23.4,30.42,illustrative index,synthetic—not field data,Develop the M&S plan and conceptual model before implementation
+3,645-757,Northstar synthetic evaluation,11.4,15.96,illustrative index,synthetic—not field data,"Characterize data quality, probability, dependence, and stochastic input models"
+4,645-757,Northstar synthetic evaluation,18.4,20.24,illustrative index,synthetic—not field data,"Use M&S for needs, opportunity, current-state, and baseline analysis"
+5,645-757,Northstar synthetic evaluation,25.4,30.48,illustrative index,synthetic—not field data,"Implement discrete-event processes, resources, queues, priorities, and statistics"
+6,645-757,Northstar synthetic evaluation,13.4,17.42,illustrative index,synthetic—not field data,Model detailed operations and complete computational verification
+7,645-757,Northstar synthetic evaluation,20.4,28.56,illustrative index,synthetic—not field data,"Use simulation for concept exploration, alternatives, and scenario analysis"
+8,645-757,Northstar synthetic evaluation,27.4,30.14,illustrative index,synthetic—not field data,Analyze transient and steady-state output with defensible run controls
+9,645-757,Northstar synthetic evaluation,15.4,18.48,illustrative index,synthetic—not field data,"Apply simulation in design and development using selection, ranking, and design of experiments"
+10,645-757,Northstar synthetic evaluation,22.4,29.12,illustrative index,synthetic—not field data,"Use M&S to support integration, verification, validation, and test decisions"
+11,645-757,Northstar synthetic evaluation,10.4,14.56,illustrative index,synthetic—not field data,"Plan and evaluate verification, validation, credibility, and accreditation for intended use"
+12,645-757,Northstar synthetic evaluation,17.4,19.14,illustrative index,synthetic—not field data,"Apply M&S to production and sustainment, survey advanced methods, and defend the final baseline"

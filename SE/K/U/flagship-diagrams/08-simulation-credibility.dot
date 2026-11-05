@@ -1,0 +1,16 @@
+digraph G {
+ graph [rankdir=LR, bgcolor="transparent", label="Model credibility loop", labelloc=t, fontname="DejaVu Sans", fontsize=17];
+ node [shape=box, style="rounded,filled", fillcolor="#e7f0f1", color="#356b73", fontname="DejaVu Sans", margin="0.16,0.12"]; edge[color="#527d83", penwidth=1.6];
+ n0 [label="Decision question"];
+ n1 [label="Conceptual model"];
+ n2 [label="Implemented simulator"];
+ n3 [label="Verification"];
+ n4 [label="Experimental evidence"];
+ n5 [label="Decision limits"];
+ n0 -> n1;
+ n1 -> n2;
+ n2 -> n3;
+ n3 -> n4;
+ n4 -> n5;
+ n5 -> n0;
+}

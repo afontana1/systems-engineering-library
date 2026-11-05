@@ -1,0 +1,36 @@
+import unittest
+from phase4 import *
+class Phase4Tests(unittest.TestCase):
+    def test_flow(self):self.assertEqual(flow_time(12,3),4)
+    def test_flow_zero(self):self.assertEqual(flow_time(0,2),0)
+    def test_flow_error(self):
+        with self.assertRaises(ValueError):flow_time(2,0)
+    def test_queue(self):self.assertAlmostEqual(mm1_time(8,10),0.5)
+    def test_queue_unstable(self):
+        with self.assertRaises(ValueError):mm1_time(10,10)
+    def test_queue_negative(self):
+        with self.assertRaises(ValueError):mm1_time(-1,4)
+    def test_modularity(self):self.assertEqual(option_net(80,25,6),70)
+    def test_modularity_negative(self):self.assertEqual(option_net(80,25,2),-30)
+    def test_energy(self):self.assertEqual(energy_range(24,.32),75)
+    def test_energy_adverse(self):self.assertEqual(energy_range(24,.40),60)
+    def test_energy_invalid(self):
+        with self.assertRaises(ValueError):energy_range(2,0)
+    def test_fresh(self):self.assertTrue(fresh(120,120))
+    def test_stale(self):self.assertFalse(fresh(420,120))
+    def test_age_invalid(self):
+        with self.assertRaises(ValueError):fresh(-1,120)
+    def test_audit(self):self.assertEqual(audit_links([('R1','C')],[{'req':'R1','rev':'B','status':'passed'}]),[('R1','C')])
+    def test_audit_good(self):self.assertEqual(audit_links([('R1','C')],[{'req':'R1','rev':'C','status':'passed'}]),[])
+    def test_median(self):self.assertEqual(lead_summary([4,5,7,9,65])['median'],7)
+    def test_mean(self):self.assertEqual(lead_summary([4,5,7,9,65])['mean'],18)
+    def test_p90(self):self.assertAlmostEqual(lead_summary([4,5,7,9,65])['p90'],42.6)
+    def test_leads_empty(self):
+        with self.assertRaises(ValueError):lead_summary([])
+    def test_paired(self):self.assertAlmostEqual(paired_difference([4,5,6],[3,4,5])[0],-1)
+    def test_paired_wrong(self):
+        with self.assertRaises(ValueError):paired_difference([1],[2])
+    def test_mission(self):self.assertAlmostEqual(scaled_mission_success([.99,.98],.95),.92169)
+    def test_mission_invalid(self):
+        with self.assertRaises(ValueError):scaled_mission_success([1.2],.8)
+if __name__=='__main__':unittest.main()

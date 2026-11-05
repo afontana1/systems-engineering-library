@@ -1,0 +1,2 @@
+WBS ID,Deliverable,Scope included,Scope excluded,Owner,Acceptance evidence,Budget,Schedule link,Dependencies
+1.4,Integration demonstration,Contract testing and observed system integration,Campus backbone upgrades,Test lead,Signed integration report,TBD,D,ICD-01; equipment delivery

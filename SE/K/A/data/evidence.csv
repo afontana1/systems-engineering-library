@@ -1,0 +1,5 @@
+requirement,test_id,evidence_id,revision,status,scenario
+REQ-1,TEST-1,EV-1,v1,PASS,baseline
+REQ-2,TEST-2,EV-2,v1,PASS,clear-road
+REQ-3,TEST-3,EV-3,v2,FAIL,telemetry-loss
+REQ-4,TEST-4,,v2,PASS,accessibility

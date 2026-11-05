@@ -1,0 +1,1908 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.780 — Agile Systems Engineering · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P4/EN645780.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/07-queues.html">Queueing, congestion, and discrete-event simulation</a></aside><main><div class="course-actions"><a href="../../K/B15/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en645780--agile-systems-engineering">EN.645.780 — Agile Systems Engineering</h1>
+<p><strong>Credits:</strong> 3<br/>
+<strong>Prerequisite:</strong> EN.645.662 Introduction to Systems Engineering<br/>
+<strong>Recommended self-study preparation:</strong> completion of Phases 0–3, especially MBSE, Software Systems Engineering, System Design &amp; Integration, System Test &amp; Evaluation, and model-based analytics</p>
+<h2 id="1-course-purpose">1. Course purpose</h2>
+<p>This course prepares a systems engineer to lead complex, software-intensive, cyber-physical development and evolution when knowledge is uncertain, operational environments change, and meaningful feedback must arrive sooner than a traditional document-and-gate cycle permits. It does not treat Agile as a software ceremony package. It treats agility as an engineered capability of the <strong>product, engineering process, operational system, and workforce</strong>.</p>
+<p>The learner will design deliberate learning intervals; tailor lifecycle patterns and controls; improve end-to-end flow; define common-mission, self-managing teams; architect products and engineering environments for affordable change; integrate models and digital evidence; build quality, safety, security, and verification into increments; design a cyber-physical DevSecOps and continual-integration system; and create evidence-based governance that can scale across teams, suppliers, and long-lead dependencies.</p>
+<p>The final product is a set of systems-engineering-specific recommendations to the CEO of a fictional company, preserving the source JHU course goal. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.780.81" title="Fall 2026 Abridged Syllabus - EN.645.780 Agile Systems Engineering">2</a>)</p>
+<h2 id="2-source-scope-and-self-study-adaptation">2. Source scope and self-study adaptation</h2>
+<p>The Fall 2026 JHU syllabus organizes the source course around:</p>
+<ul>
+<li>Agile and Lean fundamentals;</li>
+<li>Agile’s capacity to engage complexity;</li>
+<li>project characteristics that govern method fit;</li>
+<li>Lean flow and Agile in government;</li>
+<li>self-organizing and self-managing teams;</li>
+<li>quality and the evolving role of technical leadership;</li>
+<li>planning to discover;</li>
+<li>designing for value;</li>
+<li>integrated agile systems engineering; and</li>
+<li>Agile at scale.</li>
+</ul>
+<p>The source course uses a primary Highsmith textbook, quizzes, individual essays, five team action assignments, and two team presentations in a semester-long simulation. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.780.81" title="Fall 2026 Abridged Syllabus - EN.645.780 Agile Systems Engineering">2</a>, <a href="https://www.informit.com/store/agile-project-management-creating-innovative-products-9780321770431" title="Jim Highsmith - Agile Project Management: Creating Innovative Products">3</a>)</p>
+<p>This self-study version retains that intellectual and assessment structure while adapting team work through:</p>
+<ul>
+<li>explicit role rotation among CEO, chief engineer, product/mission lead, safety/security authority, supplier, operator, and review-board perspectives;</li>
+<li>recorded briefings and self-critique;</li>
+<li>structured red-team scripts and finding disposition;</li>
+<li>optional peer/cohort review when available;</li>
+<li>a controlled case repository that accumulates evidence rather than disconnected essays.</li>
+</ul>
+<p>The course uses 12 intensive weeks rather than the source module calendar. It does not claim to reproduce private Canvas lectures, readings, assignments, or grading rubrics that are not public.</p>
+<h2 id="3-relationship-to-adjacent-courses">3. Relationship to adjacent courses</h2>
+<h3 id="inputs-from-earlier-courses">Inputs from earlier courses</h3>
+<p>The learner receives:</p>
+<ul>
+<li>stakeholder, requirements, architecture, interface, V&amp;V, risk, and decision baselines from Phases 1–2;</li>
+<li>software architecture, CI/CD, test, observability, and maintenance evidence from EN.645.764;</li>
+<li>integration and test-evidence practices from EN.645.768 and EN.645.769;</li>
+<li>models, experiments, uncertainty, sensitivity, and model-credibility evidence from Phase 3;</li>
+<li>a controlled Autonomous Campus Mobility case and portfolio repository.</li>
+</ul>
+<h3 id="outputs-to-later-courses">Outputs to later courses</h3>
+<p>The course produces:</p>
+<ul>
+<li>digital-thread use cases, authority questions, model/data gaps, and pipeline/evidence needs for EN.645.782;</li>
+<li>current-state delivery/process evidence, flow measures, team/governance structures, and transformation experiments for EN.645.783;</li>
+<li>an advanced C10 portfolio artifact: an executable agile technical-management operating model with governance, measures, evidence, and sustainment controls.</li>
+</ul>
+<h2 id="4-prerequisites-and-readiness-diagnostic">4. Prerequisites and readiness diagnostic</h2>
+<p>Before Week 1, complete a 60–90 minute diagnostic. The learner should be able to:</p>
+<ol>
+<li>Explain iterative, incremental, spiral, sequential, and continuous-flow development without using the terms interchangeably.</li>
+<li>Trace one stakeholder need to architecture, implementation, verification evidence, operational measure, and decision.</li>
+<li>Describe the controlled baseline and change process for a safety- or mission-critical interface.</li>
+<li>Interpret lead time, throughput, WIP, defect escape, confidence interval, and residual risk.</li>
+<li>Use version control and reproduce one prior analytic or test result.</li>
+<li>Identify which prior-system decisions are reversible, expensive to reverse, or effectively irreversible.</li>
+<li>Explain why software can be integrated more frequently than physical hardware and how surrogates reduce feedback latency.</li>
+<li>Conduct a short technical review and disposition findings.</li>
+</ol>
+<p><strong>Diagnostic standard:</strong> at least 80%, with no failure on traceability, evidence, configuration, or safety/security reasoning. Complete targeted remediation before continuing.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<p>By the end of the course, the learner will be able to:</p>
+<ol>
+<li><strong>Explain</strong> Agile and Lean foundations and distinguish agility from framework compliance. <em>(C1, C10)</em></li>
+<li><strong>Assess and tailor</strong> agile, Lean, incremental, sequential, and hybrid patterns to project characteristics and consequence. <em>(C1, C9, C10)</em></li>
+<li><strong>Design</strong> deliberate learning intervals that connect uncertainty, hypotheses, increments, integration, evidence, decisions, and baseline change. <em>(C2, C8, C9, C10)</em></li>
+<li><strong>Analyze and improve</strong> engineering flow using value streams, queues, WIP, batch size, feedback age, rework, and guardrail measures. <em>(C8, C10)</em></li>
+<li><strong>Define</strong> common-mission teams, bounded decision rights, technical leadership, assurance independence, and cross-boundary coordination. <em>(C3, C10, C12)</em></li>
+<li><strong>Develop</strong> value structures and controlled system backlogs that include capability, learning, architecture, assurance, defect, and debt work. <em>(C2, C9, C10)</em></li>
+<li><strong>Evaluate and evolve</strong> product and process architectures for modularity, option value, testability, integration, and affordable change. <em>(C3, C4, C9)</em></li>
+<li><strong>Connect</strong> models, data, configuration, tests, operational observations, and decisions through shared-knowledge and digital-thread practices. <em>(C4, C8, C10)</em></li>
+<li><strong>Integrate</strong> quality, safety, cybersecurity, verification, validation, and supply-chain evidence continuously. <em>(C5, C6, C10)</em></li>
+<li><strong>Design</strong> a cyber-physical DevSecOps and continual-integration system with reproducible provenance and recovery. <em>(C4, C5, C6, C10)</em></li>
+<li><strong>Scale</strong> agile systems engineering across teams, suppliers, long-lead items, contracts, governance, and portfolio decisions. <em>(C10, C11, C12)</em></li>
+<li><strong>Recommend and defend</strong> a staged organizational and technical operating model to executive leadership. <em>(C10, C12)</em></li>
+</ol>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>What must be responsive, to which changes, and within what time/cost envelope?</li>
+<li>Which project characteristics govern the form and degree of agility?</li>
+<li>What is the next most valuable uncertainty to reduce?</li>
+<li>What constitutes sufficient evidence for the next commitment or release?</li>
+<li>How do product architecture, process architecture, team architecture, and tool architecture constrain one another?</li>
+<li>Where does work and evidence wait, and why?</li>
+<li>How can self-management coexist with system coherence and independent assurance?</li>
+<li>How can digital threads, models, and pipelines shorten learning without creating false authority?</li>
+<li>Which metrics reveal outcome, flow, quality, and responsiveness, and which can be gamed?</li>
+<li>What should be standardized, decentralized, automated, reviewed, or kept deliberately manual?</li>
+</ul>
+<h2 id="7-running-case-and-controlled-evidence">7. Running case and controlled evidence</h2>
+<h3 id="northstar-mobility-systems-transformation-simulation">Northstar Mobility Systems transformation simulation</h3>
+<p>The learner is appointed <strong>Lead Systems Engineering Transformation Advisor</strong> to the CEO of Northstar Mobility Systems. NMS must mature and scale the Autonomous Campus Mobility 2030 capability under the Phase 4 transformation brief in the <a href="OVERVIEW.html">Phase 4 README</a>.</p>
+<p>Required case evidence includes:</p>
+<ul>
+<li>prior requirements, architecture, interface, integration, V&amp;V, risk, and decision records;</li>
+<li>Phase 3 performance distributions, sensitivity results, and model limitations;</li>
+<li>synthetic flow, defect, review, integration-lab, supplier, and release records;</li>
+<li>organization chart, role descriptions, governance thresholds, and supplier constraints;</li>
+<li>a disconnected-tool and evidence map;</li>
+<li>controlled transformation events introduced during Weeks 2, 6, 10, and 12.</li>
+</ul>
+<p>The learner may substitute a real project only when proprietary or sensitive information is removed and equivalent evidence is available.</p>
+<h2 id="8-resource-architecture">8. Resource architecture</h2>
+<h3 id="required-anchors">Required anchors</h3>
+<ul>
+<li>JHU course page and Fall 2026 abridged syllabus for source scope, topics, goals, CLOs, workload, and assessment intent. (<a href="https://ep.jhu.edu/courses/645780-agile-systems-engineering/" title="Agile Systems Engineering - EN.645.780 - Johns Hopkins Engineering for Professionals">1</a>, <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.780.81" title="Fall 2026 Abridged Syllabus - EN.645.780 Agile Systems Engineering">2</a>)</li>
+<li>Jim Highsmith, <em>Agile Project Management: Creating Innovative Products</em>, the source syllabus’s primary textbook. Use a legally obtained edition and record chapter titles because pagination differs. (<a href="https://www.informit.com/store/agile-project-management-creating-innovative-products-9780321770431" title="Jim Highsmith - Agile Project Management: Creating Innovative Products">3</a>)</li>
+<li>INCOSE Agile Systems &amp; Systems Engineering Working Group and the primer on eight core aspects. (<a href="https://www.incose.org/group/agile-systems-systems-engineering-working-group/" title="INCOSE Agile Systems &amp; Systems Engineering Working Group">4</a>, <a href="https://www.incose.org/docs/default-source/enchantment/230510enchchap-sysengagilityaspects.pdf" title="Agile Systems Engineering - A Primer on Eight Core Aspects">5</a>)</li>
+<li>GAO <em>Agile Assessment Guide</em> for adoption, execution, controls, teams, requirements, CI/testing, metrics, governance, acquisition, and scale. (<a href="https://www.gao.gov/products/gao-24-105506" title="GAO Agile Assessment Guide: Best Practices for Adoption and Implementation">6</a>)</li>
+<li>Agile Manifesto, Scrum Guide, Kanban Guide, and Lean Enterprise Institute value-stream resources as concise primary definitions—not as mandatory one-size-fits-all frameworks. (<a href="https://agilemanifesto.org/" title="Manifesto for Agile Software Development">7</a>, <a href="https://scrumguides.org/scrum-guide.html" title="The Scrum Guide">8</a>, <a href="https://kanbanguides.org/the-kanban-guide/" title="The Kanban Guide - May 2025">9</a>, <a href="https://www.lean.org/lexicon-terms/value-stream-mapping/" title="Lean Enterprise Institute - Value-Stream Mapping">10</a>)</li>
+<li>NASA and DoD primary guidance for incremental engineering, digital engineering, systems engineering, secure software, and DevSecOps. (<a href="https://ntrs.nasa.gov/citations/20240011417" title="NASA Agile Technical Interchange Meeting - 2024">11</a>–<a href="https://standards.nasa.gov/system/files/tmp/2025-03-12-NASA-HDBK-1009A.pdf" title="NASA Systems Modeling Handbook for Systems Engineering, NASA-HDBK-1009A">20</a>)</li>
+</ul>
+<h3 id="reading-policy">Reading policy</h3>
+<p>Every weekly reading has a decision purpose and guiding question. Standards and government guides are used selectively; the learner is not expected to read every page in one week. Highsmith chapter numbering varies by edition, so the weekly assignments name concepts or chapter titles and require the learner to record the edition and exact chapters used.</p>
+<h2 id="9-tools-and-working-environment">9. Tools and working environment</h2>
+<table>
+<thead>
+<tr>
+<th>Tool or environment</th>
+<th>Purpose</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Git or equivalent version control</td>
+<td>Controlled artifacts, decisions, data, and review baselines</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Issue/backlog tool or Markdown/CSV equivalent</td>
+<td>Work, evidence, risk, findings, and experiment control</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Spreadsheet plus Python/R/Julia/MATLAB optional</td>
+<td>Flow analysis, prioritization, sensitivity, and metrics</td>
+<td>Spreadsheet required; code recommended</td>
+</tr>
+<tr>
+<td>MBSE/modeling repository</td>
+<td>Architecture, traceability, change impact, and generated views</td>
+<td>Reuse prior tool; required at a basic level</td>
+</tr>
+<tr>
+<td>Diagramming/modeling tool</td>
+<td>Value streams, team topology, pipeline, information model</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>CI environment such as GitHub Actions/GitLab CI/Jenkins or a documented mock pipeline</td>
+<td>Executable validation and evidence generation</td>
+<td>Small implementation or credible prototype required</td>
+</tr>
+<tr>
+<td>Recording tool</td>
+<td>Briefings, review role-play, and oral defense</td>
+<td>Required</td>
+</tr>
+</tbody>
+</table>
+<p>Tool choice does not earn credit. Controlled source, repeatability, decision relevance, and evidence quality do.</p>
+<h2 id="10-assessment-and-grading-model">10. Assessment and grading model</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weekly knowledge checks and retrieval practice</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Five Agile Engineering Action Assignments</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Four executive analysis essays</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Week 6 Learning and Flow Review</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Week 10 failed-increment red team and recovery</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Final CEO recommendation and operating-model package</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Final briefing, live change, and oral defense</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>100%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The weighting adapts the source course’s quizzes, individual essays, team action assignments, and presentations while emphasizing controlled engineering evidence.</p>
+<h2 id="11-twelve-week-course-map">11. Twelve-week course map</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Week</th>
+<th>Topic</th>
+<th>Principal evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Agile/Lean foundations and transformation framing</td>
+<td>Agility map, uncertainty register, response requirements</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>Project characteristics and lifecycle tailoring</td>
+<td>Suitability and tailoring review</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>Lean flow, queues, WIP, and value streams</td>
+<td>Flow diagnosis and experiment</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>Self-managing teams and technical leadership</td>
+<td>Team topology, charters, decision rights</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>Planning to discover</td>
+<td>Learning-interval and evidence roadmap</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>Designing for value and midcourse review</td>
+<td>Value/backlog model and Learning and Flow Review</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>Architecture for agility</td>
+<td>Change scenarios, runway, options, interfaces</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>Shared knowledge and digital thread</td>
+<td>Authority model, queries, generated evidence</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Built-in quality and assurance</td>
+<td>Evidence backlog and continuous assurance plan</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Cyber-physical DevSecOps and failed-increment red team</td>
+<td>Pipeline, incident analysis, corrective action</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>Agile at scale</td>
+<td>Multi-team, supplier, governance, and CEO draft</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>Final synthesis and defense</td>
+<td>CEO recommendation, live change, oral defense</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-major-assignments-and-review-products">12. Major assignments and review products</h2>
+<h3 id="a-agile-suitability-and-tailoring-review--week-2">A. Agile Suitability and Tailoring Review — Week 2</h3>
+<p>Decide where agile/Lean strategies fit, which lifecycle patterns apply, which controls remain, and why.</p>
+<h3 id="b-engineering-flow-and-team-operating-model--weeks-34">B. Engineering Flow and Team Operating Model — Weeks 3–4</h3>
+<p>Diagnose end-to-end flow and define teams, decision rights, leadership, and assurance boundaries.</p>
+<h3 id="c-learning-and-flow-review--week-6">C. Learning and Flow Review — Week 6</h3>
+<p>Integrate context, tailoring, flow, team, learning intervals, value, backlog, evidence, and corrective actions.</p>
+<h3 id="d-architecture-and-digital-evidence-package--weeks-78">D. Architecture and Digital Evidence Package — Weeks 7–8</h3>
+<p>Show how product/process architecture and shared digital evidence enable affordable change and faster decisions.</p>
+<h3 id="e-continuous-assurance-and-failed-increment-recovery--weeks-910">E. Continuous Assurance and Failed-Increment Recovery — Weeks 9–10</h3>
+<p>Design built-in quality and the pipeline, then investigate and correct a controlled integrated failure.</p>
+<h3 id="f-final-ceo-recommendation-and-agile-engineering-operating-model--weeks-1112">F. Final CEO Recommendation and Agile Engineering Operating Model — Weeks 11–12</h3>
+<p>Recommend a staged, measurable, risk-aware transformation and defend it under executive and technical challenge.</p>
+<h2 id="13-common-analytic-rubric">13. Common analytic rubric</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Exemplary</th>
+<th>Proficient</th>
+<th>Developing</th>
+<th>Insufficient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Context and tailoring</td>
+<td>Practices are derived from project characteristics, response needs, and constraints</td>
+<td>Main practices fit the context with minor gaps</td>
+<td>Some context is considered but framework copying remains</td>
+<td>Practices are prescribed without context</td>
+</tr>
+<tr>
+<td>Learning and decision logic</td>
+<td>Hypotheses, evidence, decisions, and baseline updates form a complete chain</td>
+<td>Most learning items connect to decisions</td>
+<td>Learning is partly activity-based or evidence is weak</td>
+<td>Iterations have no decision/evidence logic</td>
+</tr>
+<tr>
+<td>Architecture and flow</td>
+<td>Product/process architecture and end-to-end flow are analyzed quantitatively</td>
+<td>Key architecture and flow constraints are addressed</td>
+<td>Analysis is local or largely qualitative</td>
+<td>Architecture and flow constraints are ignored</td>
+</tr>
+<tr>
+<td>Quality and assurance</td>
+<td>Safety, security, quality, V&amp;V, provenance, and configuration are continuous and risk based</td>
+<td>Main obligations are integrated</td>
+<td>Important evidence is deferred or weakly governed</td>
+<td>Rigor is traded away for speed</td>
+</tr>
+<tr>
+<td>Teams and governance</td>
+<td>Bounded authority, leadership, assurance, suppliers, and scale are coherent</td>
+<td>Roles and decisions are substantially clear</td>
+<td>Decision rights or cross-team coordination have gaps</td>
+<td>Self-management is confused with no governance</td>
+</tr>
+<tr>
+<td>Evidence and measures</td>
+<td>Baselines, queries, calculations, experiments, and guardrails support claims</td>
+<td>Evidence generally supports recommendations</td>
+<td>Measures are incomplete or gameable</td>
+<td>Claims are unsupported or based on vanity metrics</td>
+</tr>
+<tr>
+<td>Communication and judgment</td>
+<td>Executive and technical rationale are clear, candid, and adaptable under challenge</td>
+<td>Recommendation is defensible with minor weaknesses</td>
+<td>Significant ambiguity or hidden assumptions remain</td>
+<td>The learner cannot defend the work</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-critical-mastery-criteria">14. Critical mastery criteria</h2>
+<p>The course cannot be passed through point accumulation when any of these remain:</p>
+<ul>
+<li>agility is treated as ceremony compliance or speed alone;</li>
+<li>safety, security, quality, configuration, or independent evidence is silently waived;</li>
+<li>critical backlog, architecture, interface, test, or decision items lack traceability;</li>
+<li>long-lead hardware, suppliers, physical integration, or operational authorization are ignored;</li>
+<li>increments are labeled “done” without an intended-use evidence definition;</li>
+<li>metrics rely on velocity, utilization, test count, or output without outcome/quality/flow guardrails;</li>
+<li>a recommendation lacks a baseline, causal mechanism, measure, experiment, risk, and reversal condition;</li>
+<li>critical review findings are hidden or closed without evidence.</li>
+</ul>
+<p><strong>Completion standard:</strong> at least 80% overall; at least 70% in each major category; Proficient or better on every critical capstone dimension; all critical criteria satisfied; successful oral defense.</p>
+<h2 id="15-final-capstone-and-oral-defense">15. Final capstone and oral defense</h2>
+<p>The capstone is a <strong>15–20 page CEO recommendation</strong>, appendices, 15-slide executive/technical briefing, controlled repository, and 20-minute oral defense.</p>
+<p>Required contents:</p>
+<ol>
+<li>executive decision and requested authorization;</li>
+<li>current-state evidence and response problem;</li>
+<li>agile/Lean principles and rejected misconceptions;</li>
+<li>suitability, tailoring, and lifecycle/cadence design;</li>
+<li>value, learning intervals, backlog, and prioritization;</li>
+<li>end-to-end flow and constraints;</li>
+<li>team topology, decision rights, leadership, and assurance;</li>
+<li>architecture for change and option strategy;</li>
+<li>shared knowledge, digital-thread use cases, and model/data authority;</li>
+<li>continuous quality, security, V&amp;V, and evidence backlog;</li>
+<li>cyber-physical DevSecOps/continual-integration system;</li>
+<li>scale, suppliers, contracts, long-lead, and governance;</li>
+<li>30/60/90-day experiments and 12-month transition;</li>
+<li>baselines, targets, guardrails, investment, risks, and reversal conditions;</li>
+<li>pre-mortem, limitations, review findings, and residual risk.</li>
+</ol>
+<h3 id="oral-defense-question-bank">Oral-defense question bank</h3>
+<ol>
+<li>Which NMS characteristic most limits the use of a standard software-agile framework?</li>
+<li>What is the difference between an iteration, increment, release, experiment, and learning interval in your plan?</li>
+<li>Show one recommendation that changed because of evidence.</li>
+<li>Which decision remains centralized, and why?</li>
+<li>Which decision was delegated, with what boundary?</li>
+<li>Demonstrate one flow calculation and explain its data limits.</li>
+<li>Show how an architecture choice changes the cost or time of change.</li>
+<li>What evidence is required before a pilot increment is considered done?</li>
+<li>How does your pipeline bind evidence to configuration?</li>
+<li>Which transformation measure is easiest to game, and what is the guardrail?</li>
+<li>What would cause you to stop or reverse the first experiment?</li>
+<li>How does the recommendation change if independent regulatory approval is required for each autonomy update?</li>
+<li>Which supplier contract or data-rights term is essential to your operating model?</li>
+<li>What work is intentionally not made more agile?</li>
+<li>Which elements should be studied next in EN.645.782 and EN.645.783?</li>
+</ol>
+<h2 id="16-portfolio-and-completion-requirements">16. Portfolio and completion requirements</h2>
+<p>Retain:</p>
+<ul>
+<li>receiving/framing and suitability reviews;</li>
+<li>value-stream data and experiment evidence;</li>
+<li>team charters and decision-rights model;</li>
+<li>learning-interval roadmap and evidence plans;</li>
+<li>value/backlog/prioritization model;</li>
+<li>architecture change scenarios and decisions;</li>
+<li>digital-thread information model, authority matrix, and queries;</li>
+<li>continuous-assurance plan and evidence backlog;</li>
+<li>pipeline architecture, incident analysis, and corrective action;</li>
+<li>scale/governance/supplier strategy;</li>
+<li>CEO recommendation, briefing, defense recording, findings, and dispositions;</li>
+<li>handoff manifests for EN.645.782 and EN.645.783.</li>
+</ul>
+<h2 id="17-course-maintenance-record">17. Course maintenance record</h2>
+<p>Review annually or when the source syllabus changes. Confirm:</p>
+<ul>
+<li>JHU course topics, CLOs, textbook, and public syllabus status;</li>
+<li>INCOSE Agile Systems Engineering guidance and primer updates;</li>
+<li>GAO Agile Assessment Guide revisions;</li>
+<li>Scrum and Kanban guide revisions;</li>
+<li>NASA/DoD systems, digital-engineering, DevSecOps, and software guidance;</li>
+<li>NIST SSDF status;</li>
+<li>tool and pipeline examples;</li>
+<li>whether exercises measure agility outcomes rather than framework compliance.</li>
+</ul>
+<hr/>
+<h2 id="week-1--distinguish-agile-systems-engineering-from-software-rituals-and-frame-the-transformation-problem">Week 1 — Distinguish agile systems engineering from software rituals and frame the transformation problem</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B15/chapters/01.html">Chapter 01</a> → <a href="../../K/B15/labs/01.html">Hypothetical Lab 01</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-780-w01.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment">Competency alignment</h3>
+<p>C1 (D), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question">Professional context and essential question</h3>
+<p>The first leadership error in an agile transformation is selecting ceremonies before defining the uncertainty, response need, mission, constraints, and evidence problem. The essential question is: <strong>What must become more responsive, to which changes, within what response time, and without sacrificing which obligations?</strong></p>
+<h3 id="weekly-learning-outcomes">Weekly learning outcomes</h3>
+<ul>
+<li>Distinguish agility, Agile values, Lean thinking, iterative development, incremental delivery, Scrum, Kanban, DevOps, and agile systems engineering.</li>
+<li>Identify the system, engineering process, enterprise, and operational environment that may each need a different kind of agility.</li>
+<li>Characterize uncertainty, environmental dynamism, consequence, coupling, and response-time needs for the NMS case.</li>
+<li>Construct a transformation problem statement that names outcomes and constraints rather than prescribing ceremonies.</li>
+<li>Explain why “doing Agile” is not sufficient evidence that a system or engineering organization is agile.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the Phase 2 lifecycle and Phase 3 evidence chain from memory.</li>
+<li>Name three decisions that require a controlled baseline even when work is iterative.</li>
+<li>Distinguish an iteration, an increment, a release, a deployment, an experiment, and an operational change.</li>
+<li>Identify one prior-program delay caused by late feedback and one caused by technical coupling.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning the independent assignment.</p>
+<h3 id="required-study">Required study</h3>
+<ul>
+<li>JHU abridged syllabus: Description, Course Topics, Course Goals, and CLOs. Extract the source course’s definition of the systems engineer’s role and the semester-long CEO-advice objective. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.780.81" title="Fall 2026 Abridged Syllabus - EN.645.780 Agile Systems Engineering">2</a>)</li>
+<li>INCOSE Agile Systems Engineering primer, pp. 3–14. Study the eight strategic aspects and the distinction between a “what” and a context-specific “how.” (<a href="https://www.incose.org/docs/default-source/enchantment/230510enchchap-sysengagilityaspects.pdf" title="Agile Systems Engineering - A Primer on Eight Core Aspects">5</a>)</li>
+<li>Agile Manifesto and principles. Mark which statements transfer directly to multi-domain systems and which require tailoring. (<a href="https://agilemanifesto.org/" title="Manifesto for Agile Software Development">7</a>)</li>
+<li>Highsmith, <em>Agile Project Management</em>, introduction and the discussion of creating innovative products under uncertainty. Record edition and chapter titles used. (<a href="https://www.informit.com/store/agile-project-management-creating-innovative-products-9780321770431" title="Jim Highsmith - Agile Project Management: Creating Innovative Products">3</a>)</li>
+</ul>
+<p>For every source, record one claim, one limitation, one implication for NMS, and one question that remains unresolved.</p>
+<h3 id="instructor-style-lesson-notes">Instructor-style lesson notes</h3>
+<ul>
+<li>Agility is the sustainable ability to sense relevant change, decide, and respond effectively within an acceptable time and cost. It is not synonymous with speed.</li>
+<li>Systems engineering agility can apply to the engineered product, the engineering process, the operational system, and the workforce. These are related but not identical.</li>
+<li>Complexity does not automatically justify less planning. It changes planning from prediction-only to hypothesis, feedback, option preservation, and rolling commitment.</li>
+<li>Agile values do not eliminate technical baselines. They change when and how commitment is made and how evidence updates the baseline.</li>
+<li>An agile transformation should begin with response requirements: stimulus, affected entity, environment, expected response, response time, cost, and effectiveness.</li>
+<li>The NMS case contains both reversible decisions and high-consequence commitments. The course will deliberately treat them differently.</li>
+</ul>
+<h3 id="worked-example">Worked example</h3>
+<p>NMS initially states, “Adopt Scrum across the program.” The revised problem statement is: “Reduce the elapsed time from discovery of an operational, safety, or stakeholder issue to a verified and authorized system response from a median of 120 days to 45 days, while maintaining safety-case integrity, cybersecurity controls, and configuration traceability.” The example then separates software configuration changes, hardware interface changes, supplier changes, and operational-policy changes because each has a different feasible response envelope.</p>
+<p>Reproduce the example with the supplied case data, then change one assumption and explain the effect on the conclusion.</p>
+<h3 id="guided-practice">Guided practice</h3>
+<ul>
+<li>Classify 15 case statements as value, uncertainty, constraint, risk, method, symptom, or outcome.</li>
+<li>Create a four-layer agility map covering product, process, operations, and workforce.</li>
+<li>Write response requirements for three stimuli: cybersecurity disclosure, accessibility change, and supplier delay.</li>
+<li>Challenge each response requirement for feasibility and unintended incentive.</li>
+</ul>
+<p>Checkpoint: compare the guided result with the reference rationale before beginning independent synthesis. Record discrepancies and corrections.</p>
+<h3 id="independent-exercises">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Create a two-page glossary that distinguishes the major agile/Lean terms used in the course.</li>
+<li><strong>Application:</strong> Build an NMS uncertainty and dynamism register with at least 15 entries, including source, affected decisions, time horizon, consequence, and learnability.</li>
+<li><strong>Analysis:</strong> Compare a ceremony-first transformation proposal with an outcome-first proposal and identify at least eight failure modes.</li>
+<li><strong>Synthesis:</strong> Write a 1,200-word executive essay advising the CEO what agile systems engineering is and is not for this program.</li>
+<li><strong>Stretch:</strong> Define quantitative response measures for three classes of change and explain where faster response would be unsafe or uneconomic.</li>
+</ul>
+<h3 id="weekly-deliverable">Weekly deliverable</h3>
+<p><strong>Agile SE Receiving and Framing Package</strong> containing the transformation problem statement, four-layer agility map, uncertainty register, response requirements, constraints, initial assumptions, and executive essay. Audience: NMS CEO and chief engineer. Length: 8–12 pages plus tables.</p>
+<p>Submit controlled source files, data/calculations, generated views, a change log, and a one-page self-review against the rubric. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Context and term precision</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Uncertainty and response analysis</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Systems/lifecycle reasoning</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Constraints and evidence obligations</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Executive communication</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures">Critical failures</h3>
+<ul>
+<li>Equating agility with ceremony adoption or speed alone.</li>
+<li>Omitting safety, security, configuration, supplier, or regulatory constraints.</li>
+<li>Prescribing a solution before defining the response problem.</li>
+<li>Presenting unsupported claims about current performance.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why is agility not the same as velocity?</strong><br/>
+<strong>Answer guidance:</strong> Velocity is a local output measure; agility concerns effective sensing and response to relevant change under mission, cost, time, and assurance constraints.</li>
+<li><strong>What are the four agility layers used in this course?</strong><br/>
+<strong>Answer guidance:</strong> Engineered product, engineering process, operational system, and workforce/organization.</li>
+<li><strong>Why can a sequential activity still exist in an agile lifecycle?</strong><br/>
+<strong>Answer guidance:</strong> Some physical, regulatory, or evidence dependencies are inherently ordered; agility concerns how the whole system learns and responds, not eliminating all sequence.</li>
+<li><strong>What makes a response requirement reviewable?</strong><br/>
+<strong>Answer guidance:</strong> A stimulus, affected entity, environment, response, response measure, time/cost expectation, and constraints.</li>
+<li><strong>What is the principal Week 1 management error?</strong><br/>
+<strong>Answer guidance:</strong> Choosing a framework before defining the actual uncertainty, response, and evidence problem.</li>
+</ol>
+<h3 id="revision-and-mastery-gate">Revision and mastery gate</h3>
+<p>Revise until the transformation problem is method-neutral, every critical constraint is represented, and at least three response requirements have measurable acceptance conditions. Score at least 80% and answer four of five knowledge-check questions correctly.</p>
+<h3 id="suggested-workload">Suggested workload</h3>
+<p>Target: <strong>10–12 hours</strong>. Record actual time by reading, analysis, modeling, collaboration/role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update">Configuration and portfolio update</h3>
+<p>Create the Phase 4 repository, issue <code>ASE-0001</code>, assumptions log, decision log, and baseline tag <code>ASE-W01-FRAMING</code>.</p>
+<hr/>
+<h2 id="week-2--assess-project-characteristics-and-tailor-the-lifecycle-cadence-and-controls">Week 2 — Assess project characteristics and tailor the lifecycle, cadence, and controls</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B15/chapters/02.html">Chapter 02</a> → <a href="../../K/B15/labs/02.html">Hypothetical Lab 02</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-780-w02.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-2">Competency alignment</h3>
+<p>C1 (D), C9 (D), C10 (A), C12 (D)</p>
+<h3 id="professional-context-and-essential-question-2">Professional context and essential question</h3>
+<p>Agile methods are not equally suitable for every work item, subsystem, contract, or lifecycle commitment. The essential question is: <strong>Which characteristics govern the degree and form of agility, and what must be tailored rather than copied?</strong></p>
+<h3 id="weekly-learning-outcomes-2">Weekly learning outcomes</h3>
+<ul>
+<li>Assess uncertainty, novelty, modularity, integration frequency, criticality, compliance, supplier structure, and hardware lead time.</li>
+<li>Differentiate reversible from hard-to-reverse decisions and align commitment timing accordingly.</li>
+<li>Compare sequential, iterative, incremental, spiral, flow-based, and hybrid patterns for portions of one program.</li>
+<li>Create a tailoring matrix that preserves required controls while shortening feedback.</li>
+<li>Defend where agile methods are unsuitable, premature, or limited.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-2">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Restate the Week 1 response requirements without consulting the document.</li>
+<li>Classify five Phase 2 decisions as reversible, expensive to reverse, or effectively irreversible.</li>
+<li>Identify which system interfaces were responsible for the most integration risk.</li>
+<li>Recall the difference between uncertainty that can be reduced through learning and variability that must be managed operationally.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning the independent assignment.</p>
+<h3 id="required-study-2">Required study</h3>
+<ul>
+<li>GAO <em>Agile Assessment Guide</em>, Executive Summary and chapters on Agile adoption, team/program context, and execution controls. Extract suitability and governance practices rather than treating the guide as a compliance checklist. (<a href="https://www.gao.gov/products/gao-24-105506" title="GAO Agile Assessment Guide: Best Practices for Adoption and Implementation">6</a>)</li>
+<li>NASA, “Agile Software Engineering in NASA’s Waterfall World.” Focus on incremental knowledge growth, systems-engineering interfaces, and integration with governing lifecycle expectations. (<a href="https://ntrs.nasa.gov/citations/20240002144" title="Agile Software Engineering in NASA's Waterfall World">12</a>)</li>
+<li>INCOSE primer, pp. 14–19, on context dependence, long-lead dependencies, technical oversight, stakeholder engagement, and continual integration. (<a href="https://www.incose.org/docs/default-source/enchantment/230510enchchap-sysengagilityaspects.pdf" title="Agile Systems Engineering - A Primer on Eight Core Aspects">5</a>)</li>
+<li>DoD Systems Engineering Guidebook sections on lifecycle tailoring, technical planning, risk, and reviews. (<a href="https://www.cto.mil/wp-content/uploads/2023/06/SE-Guidebook-2022.pdf" title="DoD Systems Engineering Guidebook">18</a>)</li>
+</ul>
+<p>For every source, record one claim, one limitation, one implication for NMS, and one question that remains unresolved.</p>
+<h3 id="instructor-style-lesson-notes-2">Instructor-style lesson notes</h3>
+<ul>
+<li>Project characteristics govern the viable operating model. Important variables include consequence of error, rate of external change, ability to modularize, feedback latency, asset cost, and regulatory evidence.</li>
+<li>Tailoring is a documented engineering decision. It identifies what is retained, modified, automated, combined, moved earlier, made event-driven, or removed, and why.</li>
+<li>High-consequence work benefits from short evidence loops but may require stronger independence, configuration control, and authorization—not weaker rigor.</li>
+<li>Hardware and suppliers do not prevent agility. They change the feasible increment, simulation strategy, interface discipline, option strategy, and commitment horizon.</li>
+<li>A single program may use flow for defects, timeboxed learning for uncertain design, sequential qualification for a physical item, and staged operational deployment.</li>
+<li>The result should be a portfolio of lifecycle patterns tied to work characteristics, not one framework imposed everywhere.</li>
+</ul>
+<h3 id="worked-example-2">Worked example</h3>
+<p>The autonomy perception algorithm can be updated in two-week learning loops using recorded data and simulation, while a battery enclosure tooling decision requires staged commitment because tooling is expensive and the supplier lead time is 24 weeks. An interface emulator and mass/thermal surrogate allow early integration evidence before hardware arrival. The lifecycle therefore mixes frequent software increments, monthly integrated demonstrations, and controlled hardware decision gates.</p>
+<p>Reproduce the example with the supplied case data, then change one assumption and explain the effect on the conclusion.</p>
+<h3 id="guided-practice-2">Guided practice</h3>
+<ul>
+<li>Score six NMS workstreams against uncertainty, feedback cost, criticality, coupling, lead time, and evidence burden.</li>
+<li>Plot each workstream on a reversibility-versus-consequence matrix.</li>
+<li>Select a lifecycle/cadence pattern for each workstream.</li>
+<li>Write tailoring decisions for one safety-critical workstream and one low-consequence internal tool.</li>
+</ul>
+<p>Checkpoint: compare the guided result with the reference rationale before beginning independent synthesis. Record discrepancies and corrections.</p>
+<h3 id="independent-exercises-2">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Compare six lifecycle and flow patterns in a decision table.</li>
+<li><strong>Application:</strong> Produce a project-characteristics profile for at least eight NMS workstreams.</li>
+<li><strong>Analysis:</strong> Identify where the source organization’s current plan has either overcontrolled low-risk learning or undercontrolled high-consequence change.</li>
+<li><strong>Synthesis:</strong> Create a tailored integrated lifecycle with event-driven reviews, learning cadences, release cadences, and authorization gates.</li>
+<li><strong>Stretch:</strong> Perform a sensitivity analysis showing how the lifecycle changes if modularity, supplier lead time, or regulatory independence improves.</li>
+</ul>
+<h3 id="weekly-deliverable-2">Weekly deliverable</h3>
+<p><strong>Agile Suitability and Tailoring Review Package</strong> with characteristics matrix, reversibility analysis, lifecycle pattern map, tailored controls, rejected alternatives, and a 12-slide review briefing.</p>
+<p>Submit controlled source files, data/calculations, generated views, a change log, and a one-page self-review against the rubric. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-2">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Project-characteristic analysis</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Lifecycle/cadence fit</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Control tailoring and rationale</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Risk and reversibility reasoning</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Review quality</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-2">Critical failures</h3>
+<ul>
+<li>Applying one cadence or framework to all work.</li>
+<li>Removing a required assurance or configuration control without replacement evidence.</li>
+<li>Ignoring long-lead hardware, suppliers, or integration dependencies.</li>
+<li>Claiming a practice is agile solely because it is iterative.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-2">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What does project-characteristics-govern mean?</strong><br/>
+<strong>Answer guidance:</strong> The context determines which agile/Lean strategies and controls are appropriate; method selection follows the engineering characteristics.</li>
+<li><strong>Why separate release cadence from iteration cadence?</strong><br/>
+<strong>Answer guidance:</strong> Learning and build cycles can occur more frequently than authorized release or operational deployment.</li>
+<li><strong>What is tailoring?</strong><br/>
+<strong>Answer guidance:</strong> A documented, risk-aware adaptation of lifecycle processes and controls to context, with rationale and evidence responsibilities.</li>
+<li><strong>Why is reversibility important?</strong><br/>
+<strong>Answer guidance:</strong> It informs how long options can remain open and how much evidence is needed before commitment.</li>
+<li><strong>Does long-lead hardware make agile SE impossible?</strong><br/>
+<strong>Answer guidance:</strong> No; it requires architecture, surrogates, early interfaces, staged commitments, and cadences appropriate to the dependency.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-2">Revision and mastery gate</h3>
+<p>Every workstream must have a defensible cadence and control pattern, with no critical evidence obligation deleted. Resolve all review findings rated major before proceeding.</p>
+<h3 id="suggested-workload-2">Suggested workload</h3>
+<p>Target: <strong>11–13 hours</strong>. Record actual time by reading, analysis, modeling, collaboration/role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-2">Configuration and portfolio update</h3>
+<p>Baseline the tailoring decision record as <code>ADR-ASE-001</code>; tag <code>ASE-W02-TAILORING</code> and carry unresolved lifecycle assumptions into the risk register.</p>
+<hr/>
+<h2 id="week-3--use-lean-flow-queues-wip-batch-size-and-value-stream-evidence-to-shorten-learning">Week 3 — Use Lean flow, queues, WIP, batch size, and value-stream evidence to shorten learning</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B15/chapters/03.html">Chapter 03</a> → <a href="../../K/B15/labs/03.html">Hypothetical Lab 03</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-780-w03.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-3">Competency alignment</h3>
+<p>C8 (D), C9 (D), C10 (A), C12 (D)</p>
+<h3 id="professional-context-and-essential-question-3">Professional context and essential question</h3>
+<p>Busy teams can still deliver slowly when work waits in queues, crosses many handoffs, or is integrated in large batches. The essential question is: <strong>Where does engineering work actually wait, why, and which flow intervention improves end-to-end learning rather than local utilization?</strong></p>
+<h3 id="weekly-learning-outcomes-3">Weekly learning outcomes</h3>
+<ul>
+<li>Construct current- and future-state engineering value-stream maps.</li>
+<li>Measure lead time, touch time, queue time, WIP, throughput, blocked time, rework, and feedback age.</li>
+<li>Explain Little’s Law and the effects of WIP and batch size without treating them as universal optimization formulas.</li>
+<li>Identify policy, approval, information, tool, supplier, and integration constraints that create queues.</li>
+<li>Design a bounded flow experiment with expected outcomes and guardrails.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-3">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>List the tailored cadences established in Week 2.</li>
+<li>Identify two workstreams where local utilization currently conflicts with system flow.</li>
+<li>Recall one Phase 2 defect that aged while waiting for cross-disciplinary review.</li>
+<li>Define a customer for an internal engineering value stream.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning the independent assignment.</p>
+<h3 id="required-study-3">Required study</h3>
+<ul>
+<li>Lean Enterprise Institute value-stream mapping overview and guidance. Identify material, information, decision, and evidence flows. (<a href="https://www.lean.org/lexicon-terms/value-stream-mapping/" title="Lean Enterprise Institute - Value-Stream Mapping">10</a>)</li>
+<li>The Kanban Guide (May 2025), complete short guide. Focus on definition of workflow, control of WIP, service-level expectation, and flow metrics. (<a href="https://kanbanguides.org/the-kanban-guide/" title="The Kanban Guide - May 2025">9</a>)</li>
+<li>GAO Agile Assessment Guide sections on work visibility, program monitoring, metrics, and continuous integration. (<a href="https://www.gao.gov/products/gao-24-105506" title="GAO Agile Assessment Guide: Best Practices for Adoption and Implementation">6</a>)</li>
+<li>Highsmith sections addressing adaptive flow, short feedback, and delivery of value. (<a href="https://www.informit.com/store/agile-project-management-creating-innovative-products-9780321770431" title="Jim Highsmith - Agile Project Management: Creating Innovative Products">3</a>)</li>
+</ul>
+<p>For every source, record one claim, one limitation, one implication for NMS, and one question that remains unresolved.</p>
+<h3 id="instructor-style-lesson-notes-3">Instructor-style lesson notes</h3>
+<ul>
+<li>A value stream begins with a need or question and ends when usable value or evidence reaches the decision-maker or operator. Departmental process maps often stop too early.</li>
+<li>Lead time includes waiting. Touch time measures active work. Improving utilization at one specialty can increase queues and total lead time.</li>
+<li>Little’s Law relates average WIP, throughput, and cycle time under stable assumptions. It is a diagnostic relationship, not permission to ignore variability or priority classes.</li>
+<li>Large batches hide defects, delay integration, and increase the cost of changed assumptions. Very small batches can create excessive transaction cost; the optimum is contextual.</li>
+<li>WIP limits expose constraints. They do not solve them automatically.</li>
+<li>Measures must include value/evidence age and quality, not just item count.</li>
+</ul>
+<h3 id="worked-example-3">Worked example</h3>
+<p>The current NMS interface-change stream takes 42 calendar days: 6 hours of engineering touch time, 12 days waiting for architecture review, 10 days waiting for supplier response, 14 days waiting for integration-lab availability, and 6 days of rework. A future-state experiment creates a weekly cross-domain interface clinic, a supplier response service-level expectation, and a standing emulator slot. The target is 18 days lead time with no increase in escaped interface defects.</p>
+<p>Reproduce the example with the supplied case data, then change one assumption and explain the effect on the conclusion.</p>
+<h3 id="guided-practice-3">Guided practice</h3>
+<ul>
+<li>Map the interface-change request from stimulus to verified baseline update.</li>
+<li>Calculate flow efficiency, average WIP implications, and defect feedback age from provided synthetic records.</li>
+<li>Identify the dominant queues and their policies.</li>
+<li>Design one WIP, batch-size, or cadence experiment with guardrail measures.</li>
+</ul>
+<p>Checkpoint: compare the guided result with the reference rationale before beginning independent synthesis. Record discrepancies and corrections.</p>
+<h3 id="independent-exercises-3">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Calculate lead time, cycle time, throughput, WIP, flow efficiency, and blocked-time percentage for a supplied dataset.</li>
+<li><strong>Application:</strong> Build current-state maps for one technical-value stream and one decision/evidence stream.</li>
+<li><strong>Analysis:</strong> Diagnose at least six wastes, including one caused by overproduction of documents and one caused by missing evidence.</li>
+<li><strong>Synthesis:</strong> Design a future-state flow and a four-week experiment with baseline, target, leading indicators, guardrails, and stop conditions.</li>
+<li><strong>Stretch:</strong> Build a simple queue or discrete-event model to test WIP and lab-capacity policies.</li>
+</ul>
+<h3 id="weekly-deliverable-3">Weekly deliverable</h3>
+<p><strong>Engineering Flow Diagnosis and Experiment Plan</strong> containing maps, metrics, dataset, calculations, constraint analysis, future state, experiment charter, and a 1,200-word executive essay on why “everyone being busy” is not a flow strategy.</p>
+<p>Submit controlled source files, data/calculations, generated views, a change log, and a one-page self-review against the rubric. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-3">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value-stream boundary and data</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Flow calculations and interpretation</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Constraint/root-cause analysis</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Experiment quality and guardrails</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Communication and reproducibility</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-3">Critical failures</h3>
+<ul>
+<li>Using velocity or utilization as the sole success measure.</li>
+<li>Omitting waiting, rework, or blocked time.</li>
+<li>Proposing WIP reduction without addressing safety-critical expedite classes or resource constraints.</li>
+<li>Claiming causation from an unrun experiment.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-3">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is flow efficiency?</strong><br/>
+<strong>Answer guidance:</strong> Touch time divided by total lead time, interpreted carefully for the service and data boundary.</li>
+<li><strong>Why can 100% resource utilization be harmful?</strong><br/>
+<strong>Answer guidance:</strong> It removes capacity to absorb variability, creates queues, and lengthens feedback and delivery time.</li>
+<li><strong>What does a WIP limit do first?</strong><br/>
+<strong>Answer guidance:</strong> Makes excess work and constraints visible and forces prioritization; it does not itself remove the constraint.</li>
+<li><strong>What is a value-stream customer?</strong><br/>
+<strong>Answer guidance:</strong> The person or system that can use the resulting value or evidence to achieve an outcome or make a decision.</li>
+<li><strong>What is a guardrail measure?</strong><br/>
+<strong>Answer guidance:</strong> A measure that detects harmful side effects while pursuing the primary improvement target.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-3">Revision and mastery gate</h3>
+<p>Maps must be based on traceable observations or supplied data, not invented percentages. The experiment must include a baseline, falsifiable prediction, guardrails, and stop/reversal conditions.</p>
+<h3 id="suggested-workload-3">Suggested workload</h3>
+<p>Target: <strong>10–13 hours</strong>. Record actual time by reading, analysis, modeling, collaboration/role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-3">Configuration and portfolio update</h3>
+<p>Commit raw flow data, analysis workbook/notebook, and maps; tag <code>ASE-W03-FLOW</code> and create experiment record <code>EXP-ASE-001</code>.</p>
+<hr/>
+<h2 id="week-4--design-common-mission-self-managing-teams-with-explicit-technical-leadership-and-decision-rights">Week 4 — Design common-mission, self-managing teams with explicit technical leadership and decision rights</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B15/chapters/04.html">Chapter 04</a> → <a href="../../K/B15/labs/04.html">Hypothetical Lab 04</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-780-w04.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-4">Competency alignment</h3>
+<p>C3 (D), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-4">Professional context and essential question</h3>
+<p>Self-management without a common mission, team boundaries, interfaces, and decision authority becomes ambiguity. The essential question is: <strong>How can multidisciplinary teams decide quickly while maintaining system coherence and accountable technical leadership?</strong></p>
+<h3 id="weekly-learning-outcomes-4">Weekly learning outcomes</h3>
+<ul>
+<li>Distinguish self-organizing, self-managing, cross-functional, component, platform, enabling, and integration teams.</li>
+<li>Design team boundaries that align with architecture, value streams, and cognitive load.</li>
+<li>Define decision rights, consultation, escalation, and independent assurance responsibilities.</li>
+<li>Create technical-leadership cadences that guide without becoming approval queues.</li>
+<li>Analyze supplier, regulator, operator, and specialty-engineering participation in common-mission teaming.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-4">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Identify the two longest queues from Week 3 and the organizational boundaries involved.</li>
+<li>Reconstruct the current NMS architecture ownership map.</li>
+<li>Name three decisions that can be delegated and three that require broader system authority.</li>
+<li>Distinguish a team’s product boundary from its organizational reporting line.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning the independent assignment.</p>
+<h3 id="required-study-4">Required study</h3>
+<ul>
+<li>INCOSE primer, pp. 9–11, Common-Mission Teaming and Shared-Knowledge Management. (<a href="https://www.incose.org/docs/default-source/enchantment/230510enchchap-sysengagilityaspects.pdf" title="Agile Systems Engineering - A Primer on Eight Core Aspects">5</a>)</li>
+<li>Scrum Guide sections on Scrum Team, accountabilities, commitment, focus, openness, respect, and courage. Use the concepts critically rather than copying software terminology. (<a href="https://scrumguides.org/scrum-guide.html" title="The Scrum Guide">8</a>)</li>
+<li>GAO Agile Assessment Guide sections on team dynamics, roles, training, stakeholder involvement, and organizational environment. (<a href="https://www.gao.gov/products/gao-24-105506" title="GAO Agile Assessment Guide: Best Practices for Adoption and Implementation">6</a>)</li>
+<li>JHU syllabus topics: Self-Organizing and Self-Managing Teams; Quality in the Agile Space and the Evolving Role of Technical Leadership. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.780.81" title="Fall 2026 Abridged Syllabus - EN.645.780 Agile Systems Engineering">2</a>)</li>
+</ul>
+<p>For every source, record one claim, one limitation, one implication for NMS, and one question that remains unresolved.</p>
+<h3 id="instructor-style-lesson-notes-4">Instructor-style lesson notes</h3>
+<ul>
+<li>Self-managing means the team decides how to accomplish bounded work. It does not mean the team defines its own mission, ignores interfaces, or self-approves independent evidence.</li>
+<li>Team topology and system architecture influence one another. Persistent cross-team dependencies are architecture and ownership signals.</li>
+<li>Technical leadership maintains intent, interfaces, integrity, capability strategy, evidence expectations, and escalation—not task assignment for every item.</li>
+<li>Decision rights should state decision type, bounded authority, required evidence, required consultation, notification, appeal, and time limit.</li>
+<li>Specialty engineers should be integrated early enough to shape work, not used as late compliance gates.</li>
+<li>Psychological safety supports surfacing uncertainty and defects, but it does not remove accountability for evidence and decisions.</li>
+</ul>
+<h3 id="worked-example-4">Worked example</h3>
+<p>NMS has separate software, vehicle hardware, safety, cybersecurity, and test departments. Every interface change requires five sequential approvals. The redesigned operating model creates a mobility-capability team with embedded software, hardware, test, operations, and safety participation; a platform team owns shared simulation and CI assets; a technical council handles only cross-capability or threshold decisions. A decision-rights table allows the capability team to approve changes inside an interface and risk envelope, while changes to safety assumptions require independent review.</p>
+<p>Reproduce the example with the supplied case data, then change one assumption and explain the effect on the conclusion.</p>
+<h3 id="guided-practice-4">Guided practice</h3>
+<ul>
+<li>Create a dependency matrix among existing NMS groups and architecture elements.</li>
+<li>Propose team boundaries and identify retained shared services.</li>
+<li>Write decision cards for a low-risk software change, an interface change, and a safety-assumption change.</li>
+<li>Run a role-play in which the team, chief engineer, supplier, and safety authority disagree about an increment.</li>
+</ul>
+<p>Checkpoint: compare the guided result with the reference rationale before beginning independent synthesis. Record discrepancies and corrections.</p>
+<h3 id="independent-exercises-4">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify 20 responsibilities as team, product/mission leadership, platform/enabling, assurance, or enterprise governance.</li>
+<li><strong>Application:</strong> Design an NMS team topology, stakeholder engagement model, and technical-leadership cadence.</li>
+<li><strong>Analysis:</strong> Identify handoffs, overloaded roles, missing competencies, and conflicts of interest in the current organization.</li>
+<li><strong>Synthesis:</strong> Produce a team charter and decision-rights matrix covering at least 12 recurring decision types.</li>
+<li><strong>Stretch:</strong> Analyze how the team topology would change for a second campus, a regulated medical-device variant, or an outsourced autonomy subsystem.</li>
+</ul>
+<h3 id="weekly-deliverable-4">Weekly deliverable</h3>
+<p><strong>Common-Mission Team Operating Model</strong> with team topology, architecture/value-stream alignment, charters, decision rights, assurance independence, supplier/stakeholder participation, cadences, escalation paths, and recorded 12-minute team briefing.</p>
+<p>Submit controlled source files, data/calculations, generated views, a change log, and a one-page self-review against the rubric. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-4">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Team/system alignment</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Decision rights and governance</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Technical leadership and assurance</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Stakeholder/supplier integration</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Briefing and role clarity</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-4">Critical failures</h3>
+<ul>
+<li>Treating self-management as absence of accountability.</li>
+<li>Giving a delivery team authority to waive independent safety/security evidence.</li>
+<li>Creating team boundaries that ignore dominant technical dependencies.</li>
+<li>Leaving cross-team interface ownership undefined.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-4">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is bounded authority?</strong><br/>
+<strong>Answer guidance:</strong> Explicit authority within defined mission, architecture, risk, cost, and evidence limits.</li>
+<li><strong>Why align teams and architecture?</strong><br/>
+<strong>Answer guidance:</strong> Frequent dependencies and handoffs increase coordination cost; clearer modular ownership can improve flow and integrity.</li>
+<li><strong>What remains a technical-leadership responsibility?</strong><br/>
+<strong>Answer guidance:</strong> System intent, architecture integrity, cross-team interfaces, evidence strategy, threshold decisions, and escalation.</li>
+<li><strong>Can assurance be embedded and independent?</strong><br/>
+<strong>Answer guidance:</strong> Yes; specialists can participate continuously while specified approval or assessment decisions retain independence.</li>
+<li><strong>What is common-mission teaming?</strong><br/>
+<strong>Answer guidance:</strong> Coherent collaboration and cooperation among relevant stakeholders toward a shared outcome, not merely colocated work.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-4">Revision and mastery gate</h3>
+<p>Every critical interface and decision class must have an owner and escalation path. Independent assurance responsibilities must remain explicit. Resolve role conflicts and missing competencies before Week 5.</p>
+<h3 id="suggested-workload-4">Suggested workload</h3>
+<p>Target: <strong>11–13 hours</strong>. Record actual time by reading, analysis, modeling, collaboration/role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-4">Configuration and portfolio update</h3>
+<p>Baseline team charter set and decision-rights matrix as <code>ASE-W04-TEAM</code>; add organization risks and decisions to the controlled logs.</p>
+<hr/>
+<h2 id="week-5--plan-to-discover-through-learning-intervals-hypotheses-options-and-rolling-commitment">Week 5 — Plan to discover through learning intervals, hypotheses, options, and rolling commitment</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B15/chapters/05.html">Chapter 05</a> → <a href="../../K/B15/labs/05.html">Hypothetical Lab 05</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-780-w05.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-5">Competency alignment</h3>
+<p>C2 (D), C8 (D), C9 (A), C10 (A)</p>
+<h3 id="professional-context-and-essential-question-5">Professional context and essential question</h3>
+<p>Traditional plans often disguise uncertain assumptions as fixed tasks. Agile planning makes learning explicit while still controlling commitments. The essential question is: <strong>What must be learned next, what evidence is sufficient, and which commitment should that learning enable or prevent?</strong></p>
+<h3 id="weekly-learning-outcomes-5">Weekly learning outcomes</h3>
+<ul>
+<li>Decompose program uncertainty into decision-relevant learning questions.</li>
+<li>Write falsifiable technical, operational, stakeholder, and process hypotheses.</li>
+<li>Design learning intervals that include build, integrate, evaluate, decide, and baseline update.</li>
+<li>Distinguish minimum viable product, minimum viable capability, minimum viable experiment, and minimum viable evidence.</li>
+<li>Create rolling-wave plans that preserve options while exposing schedule, cost, and long-lead commitments.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-5">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Restate the team decision rights and Week 2 lifecycle patterns.</li>
+<li>Identify which Week 1 uncertainties are now reduced, unchanged, or newly exposed.</li>
+<li>Name the next three irreversible or long-lead commitments.</li>
+<li>Explain why an activity completion is not necessarily a learning outcome.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning the independent assignment.</p>
+<h3 id="required-study-5">Required study</h3>
+<ul>
+<li>Highsmith sections organized around Envision, Speculate, Explore, Adapt, and Close. Record chapter titles used and map each phase to systems-engineering evidence. (<a href="https://www.informit.com/store/agile-project-management-creating-innovative-products-9780321770431" title="Jim Highsmith - Agile Project Management: Creating Innovative Products">3</a>)</li>
+<li>INCOSE primer, pp. 6–9, Iterative Incremental Development, Attentive Situational Awareness, and Attentive Decision Making. (<a href="https://www.incose.org/docs/default-source/enchantment/230510enchchap-sysengagilityaspects.pdf" title="Agile Systems Engineering - A Primer on Eight Core Aspects">5</a>)</li>
+<li>NASA Agile TIM manuscript overview and examples of hypothesis-driven, incremental engineering and model-based/embedded-system learning. (<a href="https://ntrs.nasa.gov/citations/20240011417" title="NASA Agile Technical Interchange Meeting - 2024">11</a>)</li>
+<li>GAO Agile Assessment Guide sections on roadmaps, release planning, requirements prioritization, and monitoring. (<a href="https://www.gao.gov/products/gao-24-105506" title="GAO Agile Assessment Guide: Best Practices for Adoption and Implementation">6</a>)</li>
+</ul>
+<p>For every source, record one claim, one limitation, one implication for NMS, and one question that remains unresolved.</p>
+<h3 id="instructor-style-lesson-notes-5">Instructor-style lesson notes</h3>
+<ul>
+<li>A learning interval is a bounded cycle from question to evidence to decision, not simply a sprint label.</li>
+<li>Hypotheses should predict observable behavior and define what result would change the plan.</li>
+<li>Minimum viable evidence is the least credible evidence needed for a specific decision—not the least work the team can demonstrate.</li>
+<li>Options have value when uncertainty is high and commitment is expensive, but maintaining every option creates cost and integration complexity.</li>
+<li>Rolling-wave plans increase detail as uncertainty falls. They do not excuse invisible dependencies or unbudgeted long-lead work.</li>
+<li>Each interval needs entry conditions, question, planned increment/experiment, integration target, evidence, decision owner, exit criteria, and baseline disposition.</li>
+</ul>
+<h3 id="worked-example-5">Worked example</h3>
+<p>Before committing to a new boarding mechanism, NMS needs to learn whether the proposed design meets accessibility and dwell-time outcomes across users and weather. A six-week interval uses a physical mock-up, human-in-the-loop trials, and a boarding simulation. The decision is not “finish prototype”; it is whether to retain concept A, switch to B, or defer tooling. Minimum viable evidence includes representative participants, defined measures, uncertainty bounds, safety observations, and trace to the decision criteria.</p>
+<p>Reproduce the example with the supplied case data, then change one assumption and explain the effect on the conclusion.</p>
+<h3 id="guided-practice-5">Guided practice</h3>
+<ul>
+<li>Convert eight uncertain statements into learning questions and hypotheses.</li>
+<li>Create an evidence ladder from analysis to simulation, bench test, integrated demonstration, and operational observation.</li>
+<li>Build one learning-interval charter and challenge whether its evidence is sufficient for the intended commitment.</li>
+<li>Construct an option-expiration timeline for battery, boarding, autonomy, and campus-integration decisions.</li>
+</ul>
+<p>Checkpoint: compare the guided result with the reference rationale before beginning independent synthesis. Record discrepancies and corrections.</p>
+<h3 id="independent-exercises-5">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Rewrite activity-based backlog items as outcome/evidence-oriented learning items.</li>
+<li><strong>Application:</strong> Create a 12-month learning roadmap with 6–8 intervals and at least three integration demonstrations.</li>
+<li><strong>Analysis:</strong> Identify false certainty, hidden decision points, and option costs in the current master schedule.</li>
+<li><strong>Synthesis:</strong> Produce detailed charters for the next three intervals, including hypotheses, experiment designs, evidence, decision rules, owners, dependencies, and rollback.</li>
+<li><strong>Stretch:</strong> Quantify option value or expected value of information for one major learning interval.</li>
+</ul>
+<h3 id="weekly-deliverable-5">Weekly deliverable</h3>
+<p><strong>Learning-Interval Roadmap and Evidence Plan</strong> with uncertainty map, decision calendar, option-expiration view, interval charters, integrated demonstration cadence, and revised schedule/risks.</p>
+<p>Submit controlled source files, data/calculations, generated views, a change log, and a one-page self-review against the rubric. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-5">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Learning-question and hypothesis quality</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Evidence-to-decision fit</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Option/commitment strategy</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Roadmap feasibility and dependencies</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Traceability and communication</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-5">Critical failures</h3>
+<ul>
+<li>Defining intervals only by task completion.</li>
+<li>Calling a demo evidence without measures or decision criteria.</li>
+<li>Ignoring long-lead option expiration.</li>
+<li>Using “MVP” to bypass safety, accessibility, or security obligations.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-5">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a learning interval?</strong><br/>
+<strong>Answer guidance:</strong> A bounded question-build-integrate-evaluate-decide-update cycle with explicit evidence and exit criteria.</li>
+<li><strong>What is minimum viable evidence?</strong><br/>
+<strong>Answer guidance:</strong> The least credible evidence sufficient for a named decision and consequence, not the smallest demonstration.</li>
+<li><strong>Why preserve options?</strong><br/>
+<strong>Answer guidance:</strong> To avoid premature costly commitment while uncertainty is decision-relevant.</li>
+<li><strong>What makes a hypothesis falsifiable?</strong><br/>
+<strong>Answer guidance:</strong> It predicts an observable result and states what evidence would count against it.</li>
+<li><strong>What is rolling-wave planning?</strong><br/>
+<strong>Answer guidance:</strong> Planning near-term work in detail and later work at an appropriate level, updating as evidence reduces uncertainty.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-5">Revision and mastery gate</h3>
+<p>At least six intervals must connect a learning question to evidence and a real decision. No critical commitment may occur before its required evidence without explicit risk acceptance.</p>
+<h3 id="suggested-workload-5">Suggested workload</h3>
+<p>Target: <strong>11–13 hours</strong>. Record actual time by reading, analysis, modeling, collaboration/role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-5">Configuration and portfolio update</h3>
+<p>Create interval records <code>LI-001</code> onward, evidence IDs, and baseline <code>ASE-W05-LEARNING</code>; link interval decisions to schedule, risk, and architecture records.</p>
+<hr/>
+<h2 id="week-6--design-for-stakeholder-value-and-conduct-the-midcourse-learning-and-flow-review">Week 6 — Design for stakeholder value and conduct the midcourse Learning and Flow Review</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B15/chapters/06.html">Chapter 06</a> → <a href="../../K/B15/labs/06.html">Hypothetical Lab 06</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-780-w06.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-6">Competency alignment</h3>
+<p>C2 (A), C8 (D), C9 (A), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-6">Professional context and essential question</h3>
+<p>A backlog can become a list of requested outputs disconnected from mission outcomes and evidence. The essential question is: <strong>How should NMS prioritize value, risk reduction, architectural enablement, and assurance while preserving traceability and system coherence?</strong></p>
+<h3 id="weekly-learning-outcomes-6">Weekly learning outcomes</h3>
+<ul>
+<li>Build a value model connecting mission outcomes, stakeholder outcomes, capabilities, features, enablers, and evidence.</li>
+<li>Write backlog items at appropriate levels with acceptance and learning criteria.</li>
+<li>Prioritize using value, time criticality, risk reduction, option value, cost of delay, and dependency—not stakeholder volume alone.</li>
+<li>Identify and manage architectural, safety, security, test, and data work that enables future value.</li>
+<li>Conduct a formal midcourse review and create corrective actions.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-6">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the next three learning intervals and their decision owners.</li>
+<li>Identify the top five mission measures from earlier phases.</li>
+<li>Name three backlog items that are outputs rather than outcomes.</li>
+<li>Explain the difference between acceptance criteria and evidence sufficient for a system decision.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning the independent assignment.</p>
+<h3 id="required-study-6">Required study</h3>
+<ul>
+<li>JHU syllabus topic “Designing for Value” and course goal. Relate the source CEO recommendation to system-level value rather than product-owner preference alone. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.780.81" title="Fall 2026 Abridged Syllabus - EN.645.780 Agile Systems Engineering">2</a>)</li>
+<li>GAO Agile Assessment Guide sections on requirements elicitation, prioritization, roadmaps, traceability, and stakeholder engagement. (<a href="https://www.gao.gov/products/gao-24-105506" title="GAO Agile Assessment Guide: Best Practices for Adoption and Implementation">6</a>)</li>
+<li>NASA stakeholder expectations and technical requirements processes in the Systems Engineering Handbook. (<a href="https://www.nasa.gov/wp-content/uploads/2018/09/nasa_systems_engineering_handbook_0.pdf" title="NASA Systems Engineering Handbook, Rev. 2">19</a>)</li>
+<li>Highsmith sections on product vision, value, customer collaboration, and adaptive planning. (<a href="https://www.informit.com/store/agile-project-management-creating-innovative-products-9780321770431" title="Jim Highsmith - Agile Project Management: Creating Innovative Products">3</a>)</li>
+</ul>
+<p>For every source, record one claim, one limitation, one implication for NMS, and one question that remains unresolved.</p>
+<h3 id="instructor-style-lesson-notes-6">Instructor-style lesson notes</h3>
+<ul>
+<li>Value is an improvement in stakeholder or mission outcome under constraints, not the number of features delivered.</li>
+<li>System backlogs may contain capabilities, features, defects, experiments, architecture enablers, interface work, assurance evidence, technical debt, and process improvements. They should not all be estimated or prioritized identically.</li>
+<li>Acceptance criteria specify conditions for an item. System-level evidence may also require integration, scenario, uncertainty, and independent assessment.</li>
+<li>Prioritization is a decision model. Its criteria, weights, dependencies, thresholds, and sensitivity should be visible.</li>
+<li>Value slicing should preserve a coherent operational thread. Splitting by discipline often delays usable evidence.</li>
+<li>The midcourse review asks whether the operating model can now turn uncertainty into evidence and decisions with improved flow.</li>
+</ul>
+<h3 id="worked-example-6">Worked example</h3>
+<p>A request for “mobile app enhancement” is reframed as the outcome “reduce failed accessible-trip requests from 9% to below 3% without increasing operator intervention.” The slice includes app behavior, vehicle interface, dispatch logic, accessibility validation, telemetry, and an operational trial. Architecture and test-environment work are visible enablers rather than hidden tasks.</p>
+<p>Reproduce the example with the supplied case data, then change one assumption and explain the effect on the conclusion.</p>
+<h3 id="guided-practice-6">Guided practice</h3>
+<ul>
+<li>Construct a mission-to-backlog trace for one accessible-trip outcome.</li>
+<li>Slice a large capability into vertical learning/value increments.</li>
+<li>Prioritize ten items under two stakeholder preference and risk scenarios.</li>
+<li>Prepare a review board challenge: what would cause the first three priorities to change?</li>
+</ul>
+<p>Checkpoint: compare the guided result with the reference rationale before beginning independent synthesis. Record discrepancies and corrections.</p>
+<h3 id="independent-exercises-6">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Diagnose 20 backlog statements for level, outcome, acceptance, traceability, and evidence defects.</li>
+<li><strong>Application:</strong> Build a controlled backlog of at least 35 items across value, learning, architecture, assurance, defect, and debt categories.</li>
+<li><strong>Analysis:</strong> Perform prioritization and sensitivity analysis, including dependencies and one hard threshold.</li>
+<li><strong>Synthesis:</strong> Assemble and conduct the Learning and Flow Review using Weeks 1–6 evidence.</li>
+<li><strong>Stretch:</strong> Compare cost-of-delay, weighted-shortest-job-first, value-function, and threshold-based prioritization for this case.</li>
+</ul>
+<h3 id="weekly-deliverable-6">Weekly deliverable</h3>
+<p><strong>Midcourse Learning and Flow Review Package</strong>: value hierarchy, outcome/capability/backlog model, prioritization analysis, trace queries, interval roadmap, flow experiment status, team operating model, briefing, review findings, and corrective-action plan.</p>
+<p>Submit controlled source files, data/calculations, generated views, a change log, and a one-page self-review against the rubric. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-6">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value/outcome structure</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Backlog and evidence traceability</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Prioritization and sensitivity</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Cross-week operating-model integration</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Review and corrective action</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-6">Critical failures</h3>
+<ul>
+<li>Prioritizing solely by stakeholder rank, points, or velocity.</li>
+<li>Hiding architecture or assurance work outside the controlled backlog.</li>
+<li>Breaking a critical operational thread into discipline outputs with no integrated evidence.</li>
+<li>Closing review findings without disposition evidence.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-6">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is value in this course?</strong><br/>
+<strong>Answer guidance:</strong> A measurable improvement in stakeholder or mission outcome under constraints and lifecycle considerations.</li>
+<li><strong>Why include enablers in the backlog?</strong><br/>
+<strong>Answer guidance:</strong> Architecture, test, data, security, and infrastructure work create the ability to deliver and verify future value.</li>
+<li><strong>What is vertical slicing?</strong><br/>
+<strong>Answer guidance:</strong> Creating an increment that crosses necessary disciplines to produce usable outcome or evidence.</li>
+<li><strong>Why perform prioritization sensitivity?</strong><br/>
+<strong>Answer guidance:</strong> To reveal whether the order is robust or depends heavily on uncertain preferences, estimates, or assumptions.</li>
+<li><strong>What is the Week 6 review decision?</strong><br/>
+<strong>Answer guidance:</strong> Whether the proposed learning-and-delivery operating model is coherent enough to proceed, subject to corrective actions.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-6">Revision and mastery gate</h3>
+<p>Pass the review with no open critical findings and an approved corrective-action plan for major findings. Backlog traces must cover every top-priority item and every critical assurance obligation.</p>
+<h3 id="suggested-workload-6">Suggested workload</h3>
+<p>Target: <strong>12–14 hours</strong>. Record actual time by reading, analysis, modeling, collaboration/role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-6">Configuration and portfolio update</h3>
+<p>Baseline <code>ASE-W06-MIDCOURSE</code>; record review minutes, findings, owners, due dates, and dispositions. Do not overwrite the pre-review baseline.</p>
+<hr/>
+<h2 id="week-7--architect-products-and-engineering-processes-for-affordable-change-options-and-continuous-integration">Week 7 — Architect products and engineering processes for affordable change, options, and continuous integration</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B15/chapters/07.html">Chapter 07</a> → <a href="../../K/B15/labs/07.html">Hypothetical Lab 07</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-780-w07.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-7">Competency alignment</h3>
+<p>C3 (A), C4 (D), C9 (D), C10 (A)</p>
+<h3 id="professional-context-and-essential-question-7">Professional context and essential question</h3>
+<p>Agility is enabled and constrained by architecture. The essential question is: <strong>Which product and process architecture choices reduce the time, cost, and risk of meaningful change without creating uncontrolled variability?</strong></p>
+<h3 id="weekly-learning-outcomes-7">Weekly learning outcomes</h3>
+<ul>
+<li>Evaluate modularity, cohesion, coupling, interface stability, substitutability, testability, deployability, and commonality as agility properties.</li>
+<li>Distinguish modular architecture from a large number of components or services.</li>
+<li>Design architecture runway and technical options tied to forecast learning and variability.</li>
+<li>Analyze product-line and platform opportunities without hiding variant complexity.</li>
+<li>Quantify change propagation and identify architecture debt that constrains learning.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-7">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Identify the top five backlog items whose delivery is constrained by architecture.</li>
+<li>Restate the critical interfaces and owners from Phase 2 and Week 4.</li>
+<li>Recall one Phase 3 sensitivity result that should influence modularity or option design.</li>
+<li>Define architecture runway without using the phrase “work done ahead.”</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning the independent assignment.</p>
+<h3 id="required-study-7">Required study</h3>
+<ul>
+<li>INCOSE primer, pp. 5–6, Product Line Architectures and Iterative Incremental Development. (<a href="https://www.incose.org/docs/default-source/enchantment/230510enchchap-sysengagilityaspects.pdf" title="Agile Systems Engineering - A Primer on Eight Core Aspects">5</a>)</li>
+<li>NASA Systems Engineering Handbook sections on logical decomposition, design solution, interfaces, and product integration. (<a href="https://www.nasa.gov/wp-content/uploads/2018/09/nasa_systems_engineering_handbook_0.pdf" title="NASA Systems Engineering Handbook, Rev. 2">19</a>)</li>
+<li>DoD Systems Engineering Guidebook sections on modular open systems, architecture, interfaces, and technical management. (<a href="https://www.cto.mil/wp-content/uploads/2023/06/SE-Guidebook-2022.pdf" title="DoD Systems Engineering Guidebook">18</a>)</li>
+<li>INCOSE Agile Systems &amp; Systems Engineering Working Group overview. Focus on architecture as enabler and constraint of agility. (<a href="https://www.incose.org/group/agile-systems-systems-engineering-working-group/" title="INCOSE Agile Systems &amp; Systems Engineering Working Group">4</a>)</li>
+</ul>
+<p>For every source, record one claim, one limitation, one implication for NMS, and one question that remains unresolved.</p>
+<h3 id="instructor-style-lesson-notes-7">Instructor-style lesson notes</h3>
+<ul>
+<li>Modularity is a set of change and interaction properties, not a diagram style. A module should have coherent responsibility and controlled interactions.</li>
+<li>Interface stability can enable independent change, but freezing an immature interface too early can institutionalize wrong assumptions.</li>
+<li>Architecture runway is the minimum enabling architecture needed for forecast increments and experiments, created with explicit option and evidence logic.</li>
+<li>Product-line architecture can speed variation through reusable assets and defined variation points, while increasing configuration and verification burden.</li>
+<li>Process architecture matters too: reusable test environments, interface contracts, model patterns, and automated evidence reduce transaction cost.</li>
+<li>Architecture debt is measured by change cost, dependency, integration delay, defect escape, and option loss—not by aesthetic dislike.</li>
+</ul>
+<h3 id="worked-example-7">Worked example</h3>
+<p>NMS finds that changing passenger-assistance behavior requires coordinated edits in the app, dispatch service, vehicle controller, operator console, and test scripts. The team introduces a versioned assistance-service contract, common event schema, simulator adapter, and conformance tests. Change-propagation paths fall from nine manual touchpoints to four controlled interfaces, but the variation point creates a new configuration matrix that must be governed.</p>
+<p>Reproduce the example with the supplied case data, then change one assumption and explain the effect on the conclusion.</p>
+<h3 id="guided-practice-7">Guided practice</h3>
+<ul>
+<li>Build a change-propagation graph for three high-priority changes.</li>
+<li>Score architecture elements on coupling, substitutability, testability, and deployment independence.</li>
+<li>Design one variation point and its configuration/evidence controls.</li>
+<li>Write an architecture decision record comparing refactor, adapter, duplication, or defer options.</li>
+</ul>
+<p>Checkpoint: compare the guided result with the reference rationale before beginning independent synthesis. Record discrepancies and corrections.</p>
+<h3 id="independent-exercises-7">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Diagnose examples of false modularity, interface leakage, shared-database coupling, and excessive variation.</li>
+<li><strong>Application:</strong> Create an agility-focused architecture assessment of the NMS product and engineering environment.</li>
+<li><strong>Analysis:</strong> Quantify change effort and propagation for the top five learning/value items before and after candidate changes.</li>
+<li><strong>Synthesis:</strong> Develop an architecture runway and option roadmap linked to the learning intervals and backlog.</li>
+<li><strong>Stretch:</strong> Model the economic trade between reusable platform investment and one-off implementation under three demand scenarios.</li>
+</ul>
+<h3 id="weekly-deliverable-7">Weekly deliverable</h3>
+<p><strong>Architecture for Agility Package</strong> with change scenarios, propagation graphs, modularity assessment, interface/variation decisions, architecture runway, option economics, testability strategy, and a 1,200-word executive essay on architecture-enabled agility.</p>
+<p>Submit controlled source files, data/calculations, generated views, a change log, and a one-page self-review against the rubric. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-7">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Change-scenario evidence</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Architecture property analysis</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Interface/option decisions</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Runway/economic alignment</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Traceability and communication</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-7">Critical failures</h3>
+<ul>
+<li>Claiming microservices, APIs, or more components automatically create agility.</li>
+<li>Creating a variation point without configuration and verification controls.</li>
+<li>Refactoring without a linked learning/value need.</li>
+<li>Ignoring physical, safety, or data coupling.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-7">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is architecture-enabled agility?</strong><br/>
+<strong>Answer guidance:</strong> The ability of product and process structures to support timely, affordable, controlled change and integration.</li>
+<li><strong>What is false modularity?</strong><br/>
+<strong>Answer guidance:</strong> A component decomposition that still requires pervasive coordinated changes because responsibilities or interfaces are not truly independent.</li>
+<li><strong>What is architecture runway?</strong><br/>
+<strong>Answer guidance:</strong> Evidence-justified enabling architecture needed for near-future increments and learning, not unlimited speculative infrastructure.</li>
+<li><strong>What new burden can product-line variation create?</strong><br/>
+<strong>Answer guidance:</strong> Configuration, interaction, compatibility, test, and evidence-combination complexity.</li>
+<li><strong>How should architecture debt be evidenced?</strong><br/>
+<strong>Answer guidance:</strong> Through change propagation, delay, defect, integration, testability, option, and lifecycle-cost effects.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-7">Revision and mastery gate</h3>
+<p>The package must show at least three quantified change scenarios and one rejected architecture option. No critical interface may be made “flexible” by removing its contract or verification.</p>
+<h3 id="suggested-workload-7">Suggested workload</h3>
+<p>Target: <strong>11–13 hours</strong>. Record actual time by reading, analysis, modeling, collaboration/role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-7">Configuration and portfolio update</h3>
+<p>Baseline architecture decisions and change-propagation evidence under <code>ASE-W07-ARCH</code>; update interface and configuration records.</p>
+<hr/>
+<h2 id="week-8--integrate-descriptive-and-analytic-models-shared-knowledge-and-a-decision-focused-digital-thread">Week 8 — Integrate descriptive and analytic models, shared knowledge, and a decision-focused digital thread</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B15/chapters/08.html">Chapter 08</a> → <a href="../../K/B15/labs/08.html">Hypothetical Lab 08</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-780-w08.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-8">Competency alignment</h3>
+<p>C4 (A), C8 (D), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-8">Professional context and essential question</h3>
+<p>Short learning intervals fail when evidence is scattered, manually reconciled, or detached from the baseline. The essential question is: <strong>What connected model and data evidence must be available, authoritative, and queryable at each learning decision?</strong></p>
+<h3 id="weekly-learning-outcomes-8">Weekly learning outcomes</h3>
+<ul>
+<li>Distinguish shared knowledge, authoritative source, digital thread, model federation, report, and digital twin.</li>
+<li>Design a minimum viable digital thread for learning intervals without duplicating every artifact.</li>
+<li>Connect needs, backlog, architecture, interfaces, models, code/configuration, tests, operations, and decisions.</li>
+<li>Define authority, provenance, identity, synchronization, access, and quality rules.</li>
+<li>Use trace and change-impact queries to reduce decision latency.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-8">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct one Week 7 change scenario and all evidence it required.</li>
+<li>Identify the current manual handoffs that add the most evidence age.</li>
+<li>Name the authoritative artifact for five data types and state whether it truly is authoritative.</li>
+<li>Distinguish model correctness from authority and from fitness for a decision.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning the independent assignment.</p>
+<h3 id="required-study-8">Required study</h3>
+<ul>
+<li>INCOSE primer, pp. 10–12, Shared-Knowledge Management and Continual Integration and Test. (<a href="https://www.incose.org/docs/default-source/enchantment/230510enchchap-sysengagilityaspects.pdf" title="Agile Systems Engineering - A Primer on Eight Core Aspects">5</a>)</li>
+<li>DoDI 5000.97 sections defining digital engineering, authoritative sources of truth, digital models, and the digital-engineering ecosystem. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500097p.PDF" title="DoDI 5000.97 - Digital Engineering">15</a>)</li>
+<li>NASA Systems Modeling Handbook sections on modeling plans, model organization, traceability, analyses, and generated products. (<a href="https://standards.nasa.gov/system/files/tmp/2025-03-12-NASA-HDBK-1009A.pdf" title="NASA Systems Modeling Handbook for Systems Engineering, NASA-HDBK-1009A">20</a>)</li>
+<li>NIST digital-twin overview, limited to definitions, intended uses, lifecycle integration, and trust questions that prepare for EN.645.782. (<a href="https://www.nist.gov/digital-twins" title="NIST Digital Twins Program">16</a>)</li>
+</ul>
+<p>For every source, record one claim, one limitation, one implication for NMS, and one question that remains unresolved.</p>
+<h3 id="instructor-style-lesson-notes-8">Instructor-style lesson notes</h3>
+<ul>
+<li>Shared knowledge includes short-horizon operational awareness and curated reusable knowledge. Both require ownership and quality controls.</li>
+<li>An authoritative source is designated and governed for a data class; “single source of truth” should not be interpreted as one monolithic tool.</li>
+<li>A digital thread is a governed set of relationships and exchanges that supports questions across lifecycle artifacts.</li>
+<li>The minimum viable thread is selected from decisions and queries. Connecting everything without use cases creates expensive integration with little value.</li>
+<li>Derived views should be reproducible from controlled sources. Manual copies should be identified as latency and inconsistency risks.</li>
+<li>Digital twins will be treated more deeply in EN.645.782; here the concern is whether model/operational evidence shortens learning responsibly.</li>
+</ul>
+<h3 id="worked-example-8">Worked example</h3>
+<p>For the accessibility boarding interval, the decision board needs the current need and measure, selected design variant, interface version, participant/trial configuration, simulation version, test results, observed dwell-time distribution, findings, and decision. The thread is implemented with stable identifiers and a query/export, not by copying screenshots into a slide deck. A stale interface record is detected because its version does not match the test configuration.</p>
+<p>Reproduce the example with the supplied case data, then change one assumption and explain the effect on the conclusion.</p>
+<h3 id="guided-practice-8">Guided practice</h3>
+<ul>
+<li>Define five decision queries for the next learning interval.</li>
+<li>Map the artifacts and systems needed to answer each query.</li>
+<li>Design identity, version, authority, and synchronization rules.</li>
+<li>Run or mock a change-impact query from stakeholder need to affected architecture, tests, data, risks, and decisions.</li>
+</ul>
+<p>Checkpoint: compare the guided result with the reference rationale before beginning independent synthesis. Record discrepancies and corrections.</p>
+<h3 id="independent-exercises-8">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify 25 artifacts as authoritative, derived, working, evidence, or communication products.</li>
+<li><strong>Application:</strong> Build a digital-thread information model and connection map for three learning intervals.</li>
+<li><strong>Analysis:</strong> Identify thread breaks, duplicate authorities, stale transformations, inaccessible evidence, and security/privacy concerns.</li>
+<li><strong>Synthesis:</strong> Implement or prototype at least four repeatable queries and a generated decision evidence pack.</li>
+<li><strong>Stretch:</strong> Compare point-to-point integration, hub/repository, linked-data, and event-based patterns for this program.</li>
+</ul>
+<h3 id="weekly-deliverable-8">Weekly deliverable</h3>
+<p><strong>Shared-Knowledge and Minimum Viable Digital Thread Package</strong> with use cases, information model, authority matrix, identifiers, connections, queries, generated evidence pack, data/security controls, and transition backlog.</p>
+<p>Submit controlled source files, data/calculations, generated views, a change log, and a one-page self-review against the rubric. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-8">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decision/use-case focus</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Authority/provenance/governance</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Trace/query implementation</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Data quality and risk</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Reproducibility and communication</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-8">Critical failures</h3>
+<ul>
+<li>Calling a presentation or file share a digital thread.</li>
+<li>Claiming a source is authoritative without owner and control.</li>
+<li>Manually recreating evidence presented as generated.</li>
+<li>Ignoring access, privacy, cybersecurity, or data-quality constraints.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-8">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is an authoritative source?</strong><br/>
+<strong>Answer guidance:</strong> A designated, governed source for a defined data class and lifecycle context, with ownership and control.</li>
+<li><strong>What is a digital-thread use case?</strong><br/>
+<strong>Answer guidance:</strong> A decision or engineering question that requires connected lifecycle information and defines the needed relationships and quality.</li>
+<li><strong>Why is one monolithic tool not required?</strong><br/>
+<strong>Answer guidance:</strong> Authority can be federated by data class if identities, semantics, synchronization, access, and governance are controlled.</li>
+<li><strong>What makes a derived view trustworthy?</strong><br/>
+<strong>Answer guidance:</strong> Reproducible transformation from controlled sources with known version, logic, and quality.</li>
+<li><strong>What is the Week 8 scope limit?</strong><br/>
+<strong>Answer guidance:</strong> Use connected models/data to support agile learning; full digital/mission engineering and twin strategy is deferred to EN.645.782.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-8">Revision and mastery gate</h3>
+<p>Demonstrate four repeatable decision queries or credible prototypes. Every returned item must expose source and version. Resolve duplicate authority for critical data before proceeding.</p>
+<h3 id="suggested-workload-8">Suggested workload</h3>
+<p>Target: <strong>11–14 hours</strong>. Record actual time by reading, analysis, modeling, collaboration/role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-8">Configuration and portfolio update</h3>
+<p>Store thread schema, query definitions, exports, and data dictionary under <code>ASE-W08-THREAD</code>; create data-quality and access-risk records.</p>
+<hr/>
+<h2 id="week-9--build-quality-safety-security-and-verification-into-every-increment">Week 9 — Build quality, safety, security, and verification into every increment</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B15/chapters/09.html">Chapter 09</a> → <a href="../../K/B15/labs/09.html">Hypothetical Lab 09</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-780-w09.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-9">Competency alignment</h3>
+<p>C5 (D), C6 (A), C8 (D), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-9">Professional context and essential question</h3>
+<p>Faster delivery without continuous assurance only discovers critical defects faster. The essential question is: <strong>What evidence must be created continuously so that an increment is not merely complete, but trustworthy for its next intended use?</strong></p>
+<h3 id="weekly-learning-outcomes-9">Weekly learning outcomes</h3>
+<ul>
+<li>Define built-in quality for cyber-physical systems beyond automated unit testing.</li>
+<li>Create an evidence backlog and definition-of-done tiers for model, software, hardware, integrated, and operational increments.</li>
+<li>Integrate safety, security, reliability, human factors, privacy, and regulatory evidence into learning intervals.</li>
+<li>Design risk-based independent review and release/authorization policies.</li>
+<li>Use defect, evidence-age, coverage, and escape metrics without creating perverse incentives.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-9">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Identify the critical evidence for the next two learning intervals.</li>
+<li>Reconstruct the Phase 2 VCRM and discrepancy workflow.</li>
+<li>Name three ways an increment can pass component tests but fail system intent.</li>
+<li>Identify which Week 8 queries are needed to prove evidence completeness.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning the independent assignment.</p>
+<h3 id="required-study-9">Required study</h3>
+<ul>
+<li>NIST SP 800-218 SSDF v1.1: read the four practice groups and select tasks relevant to the NMS development lifecycle. (<a href="https://csrc.nist.gov/pubs/sp/800/218/final" title="NIST SP 800-218 - Secure Software Development Framework Version 1.1">13</a>)</li>
+<li>NASA Software Engineering Handbook sections on requirements, testing, assurance, configuration, and incremental/agile development. (<a href="https://swehb.nasa.gov/" title="NASA Software Engineering Handbook">17</a>)</li>
+<li>INCOSE primer, pp. 11–12, Continual Integration and Test. (<a href="https://www.incose.org/docs/default-source/enchantment/230510enchchap-sysengagilityaspects.pdf" title="Agile Systems Engineering - A Primer on Eight Core Aspects">5</a>)</li>
+<li>GAO Agile Assessment Guide sections on continuous integration, automated testing, quality, technical debt, and definition of done. (<a href="https://www.gao.gov/products/gao-24-105506" title="GAO Agile Assessment Guide: Best Practices for Adoption and Implementation">6</a>)</li>
+</ul>
+<p>For every source, record one claim, one limitation, one implication for NMS, and one question that remains unresolved.</p>
+<h3 id="instructor-style-lesson-notes-9">Instructor-style lesson notes</h3>
+<ul>
+<li>Built-in quality means quality and assurance criteria shape the work and evidence from the beginning; it does not mean every check is automated.</li>
+<li>Definition of done is use-context dependent. “Ready for simulation,” “ready for integrated lab,” “ready for pilot,” and “ready for unrestricted operation” require different evidence.</li>
+<li>An evidence backlog makes missing analyses, tests, reviews, and data explicit and prioritized with the associated capability.</li>
+<li>Shift-left reduces expensive late discovery; shift-right operational observation detects behavior that predeployment evidence cannot fully establish.</li>
+<li>Independent assessment can be continuous and risk based. Independence should be preserved where required without creating a late surprise gate.</li>
+<li>Metrics should expose defect age, evidence latency, coverage gaps, rework, escapes, and residual risk—not reward superficial test count.</li>
+</ul>
+<h3 id="worked-example-9">Worked example</h3>
+<p>A software change passes unit and service tests but alters braking-command timing under degraded network conditions. The increment’s integrated definition of done therefore requires interface conformance, timing analysis, simulation scenarios, HIL evidence, safety-impact disposition, cybersecurity scan, trace update, and configuration capture before pilot authorization. Lower-tier evidence can still support earlier learning without mislabeling it operationally ready.</p>
+<p>Reproduce the example with the supplied case data, then change one assumption and explain the effect on the conclusion.</p>
+<h3 id="guided-practice-9">Guided practice</h3>
+<ul>
+<li>Create readiness tiers and definitions of done for four intended-use contexts.</li>
+<li>Map safety/security/quality evidence into one learning interval.</li>
+<li>Build an evidence coverage query and identify gaps.</li>
+<li>Review a synthetic increment with conflicting test, security, and schedule evidence and make a release recommendation.</li>
+</ul>
+<p>Checkpoint: compare the guided result with the reference rationale before beginning independent synthesis. Record discrepancies and corrections.</p>
+<h3 id="independent-exercises-9">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify checks by verification level, intended use, automation feasibility, and required independence.</li>
+<li><strong>Application:</strong> Build an evidence backlog tied to the top 20 work items and critical requirements.</li>
+<li><strong>Analysis:</strong> Perform a risk-based gap analysis of the current Definition of Done and release policy.</li>
+<li><strong>Synthesis:</strong> Create a Continuous Assurance Plan with evidence tiers, responsibilities, pipelines, reviews, discrepancy handling, and authorization conditions.</li>
+<li><strong>Stretch:</strong> Develop a lightweight assurance case or claim-argument-evidence structure for one pilot capability.</li>
+</ul>
+<h3 id="weekly-deliverable-9">Weekly deliverable</h3>
+<p><strong>Continuous Quality and Assurance Package</strong> with readiness tiers, definitions of done, evidence backlog, SSDF mapping, safety/security integration, assurance responsibilities, metrics, gap analysis, and a 1,200-word executive essay on speed versus rigor as a false trade.</p>
+<p>Submit controlled source files, data/calculations, generated views, a change log, and a one-page self-review against the rubric. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-9">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intended-use evidence tiers</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Assurance integration and completeness</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Risk/independence decisions</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Metrics and evidence queries</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Communication and judgment</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-9">Critical failures</h3>
+<ul>
+<li>Calling an increment done without naming its intended use.</li>
+<li>Deferring safety or security to a final hardening phase.</li>
+<li>Counting tests without evaluating coverage and evidence quality.</li>
+<li>Allowing schedule pressure to silently waive critical evidence.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-9">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is built-in quality?</strong><br/>
+<strong>Answer guidance:</strong> Designing work, architecture, criteria, and evidence so quality and assurance are created continuously rather than inspected in at the end.</li>
+<li><strong>Why use readiness tiers?</strong><br/>
+<strong>Answer guidance:</strong> Evidence sufficiency depends on the next intended use; learning, lab integration, pilot, and unrestricted operation differ.</li>
+<li><strong>What is an evidence backlog?</strong><br/>
+<strong>Answer guidance:</strong> Controlled missing or planned evidence linked to decisions, work, requirements, risk, and intended use.</li>
+<li><strong>What is shift-right?</strong><br/>
+<strong>Answer guidance:</strong> Use of operational or production observation to detect and learn from behavior after controlled deployment, with safeguards.</li>
+<li><strong>Why can independent assurance coexist with agile delivery?</strong><br/>
+<strong>Answer guidance:</strong> Independence concerns judgment and authority, not necessarily late timing; reviewers can engage continuously.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-9">Revision and mastery gate</h3>
+<p>Every critical work item must have a defined evidence path and readiness tier. No safety- or security-critical evidence gap may be hidden in a generic technical-debt category.</p>
+<h3 id="suggested-workload-9">Suggested workload</h3>
+<p>Target: <strong>11–14 hours</strong>. Record actual time by reading, analysis, modeling, collaboration/role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-9">Configuration and portfolio update</h3>
+<p>Baseline assurance plan and evidence backlog as <code>ASE-W09-ASSURANCE</code>; link gaps to risks, work items, and release criteria.</p>
+<hr/>
+<h2 id="week-10--create-a-cyber-physical-devsecops-and-continual-integration-system-then-red-team-a-failed-increment">Week 10 — Create a cyber-physical DevSecOps and continual-integration system, then red-team a failed increment</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B15/chapters/10.html">Chapter 10</a> → <a href="../../K/B15/labs/10.html">Hypothetical Lab 10</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-780-w10.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-10">Competency alignment</h3>
+<p>C4 (D), C5 (A), C6 (A), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-10">Professional context and essential question</h3>
+<p>Cyber-physical systems cannot continuously manufacture new hardware, but they can continuously integrate models, interfaces, software, firmware, emulators, test assets, evidence, and selected hardware. The essential question is: <strong>How should the delivery pipeline expose integration and assurance problems early across mixed disciplines?</strong></p>
+<h3 id="weekly-learning-outcomes-10">Weekly learning outcomes</h3>
+<ul>
+<li>Design a pipeline spanning model, software, firmware, interface, simulation, SIL, HIL, physical, security, and evidence stages.</li>
+<li>Define triggers, environments, configurations, entry/exit criteria, artifact provenance, and failure handling.</li>
+<li>Apply SSDF and software-supply-chain practices without reducing DevSecOps to scanners.</li>
+<li>Select flow, quality, reliability, recovery, security, and evidence metrics.</li>
+<li>Investigate and recover from a failed integrated increment using blameless but accountable analysis.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-10">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Restate the evidence tiers and critical gaps from Week 9.</li>
+<li>Identify which architecture elements can be emulated or simulated before hardware arrival.</li>
+<li>Name all configuration items required to reproduce one Phase 2 integrated test.</li>
+<li>Distinguish continuous integration from continuous deployment.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning the independent assignment.</p>
+<h3 id="required-study-10">Required study</h3>
+<ul>
+<li>DoD Enterprise DevSecOps Strategy Guide sections on culture, ecosystem, software factory, pipeline, metrics, security, and continuous authorization concepts. (<a href="https://dodcio.defense.gov/Portals/0/Documents/Library/DoDEnterpriseDevSecOpsStrategyGuide.pdf" title="DoD Enterprise DevSecOps Strategy Guide">14</a>)</li>
+<li>NIST SP 800-218 SSDF practices selected in Week 9, now mapped to pipeline controls and evidence. (<a href="https://csrc.nist.gov/pubs/sp/800/218/final" title="NIST SP 800-218 - Secure Software Development Framework Version 1.1">13</a>)</li>
+<li>GAO Agile Assessment Guide sections on CI, automated testing, technical environments, deployment, monitoring, and metrics. (<a href="https://www.gao.gov/products/gao-24-105506" title="GAO Agile Assessment Guide: Best Practices for Adoption and Implementation">6</a>)</li>
+<li>DoDI 5000.97 sections connecting digital models and data to development, T&amp;E, production, and sustainment. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500097p.PDF" title="DoDI 5000.97 - Digital Engineering">15</a>)</li>
+</ul>
+<p>For every source, record one claim, one limitation, one implication for NMS, and one question that remains unresolved.</p>
+<h3 id="instructor-style-lesson-notes-10">Instructor-style lesson notes</h3>
+<ul>
+<li>Continuous integration means frequently combining and evaluating work against a controlled baseline. It can include models, interface definitions, test assets, and physical surrogates.</li>
+<li>Pipeline stages should produce evidence and provenance, not only pass/fail status.</li>
+<li>Higher-fidelity environments are scarce and should be scheduled based on risk and evidence gaps, while lower-cost environments run more frequently.</li>
+<li>Security includes development environment, dependencies, artifacts, identities, secrets, build integrity, provenance, deployment, and operations.</li>
+<li>Pipeline metrics should support decisions: lead time, change-failure rate, recovery, defect/evidence age, environment availability, coverage, flakiness, and security finding age.</li>
+<li>A failed increment is a system learning event. Blameless analysis rejects personal blame but still identifies causal mechanisms, violated controls, and accountable corrective action.</li>
+</ul>
+<h3 id="worked-example-10">Worked example</h3>
+<p>A candidate release passes software CI but fails HIL because the emulator used an obsolete interface schema and the build pipeline did not bind test evidence to the interface version. The post-incident analysis identifies missing provenance and promotion criteria, not “tester error.” Corrective actions add schema conformance, signed artifact manifests, environment version checks, and an evidence query before promotion.</p>
+<p>Reproduce the example with the supplied case data, then change one assumption and explain the effect on the conclusion.</p>
+<h3 id="guided-practice-10">Guided practice</h3>
+<ul>
+<li>Draw the end-to-end pipeline and place all evidence/readiness gates.</li>
+<li>Define artifact promotion rules and provenance fields.</li>
+<li>Analyze the failed-increment event timeline and causal factors.</li>
+<li>Run a release decision meeting using conflicting schedule, quality, and risk signals.</li>
+</ul>
+<p>Checkpoint: compare the guided result with the reference rationale before beginning independent synthesis. Record discrepancies and corrections.</p>
+<h3 id="independent-exercises-10">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify 30 pipeline activities by continuous, scheduled, event-driven, manual, automated, or independent-review characteristics.</li>
+<li><strong>Application:</strong> Build a tool-neutral pipeline architecture with environments from model checks through pilot telemetry.</li>
+<li><strong>Analysis:</strong> Perform threat, failure-mode, bottleneck, and flaky-evidence analyses.</li>
+<li><strong>Synthesis:</strong> Conduct the Week 10 red team, issue discrepancies, define containment/corrective action, and revise the pipeline.</li>
+<li><strong>Stretch:</strong> Implement a small reference pipeline that validates a model/schema, runs tests, produces provenance, and packages evidence.</li>
+</ul>
+<h3 id="weekly-deliverable-10">Weekly deliverable</h3>
+<p><strong>DevSecOps/Continual Integration Architecture and Failed-Increment Recovery Package</strong> with pipeline, environment/configuration model, controls, SSDF trace, metrics, incident timeline, causal analysis, corrective actions, revised evidence, and release recommendation.</p>
+<p>Submit controlled source files, data/calculations, generated views, a change log, and a one-page self-review against the rubric. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-10">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pipeline/evidence architecture</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Security and provenance controls</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Integration/configuration rigor</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Incident analysis and corrective action</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Decision communication</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-10">Critical failures</h3>
+<ul>
+<li>Equating DevSecOps with adding security scans.</li>
+<li>Promoting artifacts without configuration/provenance binding.</li>
+<li>Automating an unsafe decision without human authority or exception handling.</li>
+<li>Blaming an individual instead of analyzing system causes and controls.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-10">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What can be continuously integrated in a hardware-intensive program?</strong><br/>
+<strong>Answer guidance:</strong> Models, requirements, interfaces, software, firmware, test assets, emulators, evidence, and available physical components.</li>
+<li><strong>What is artifact promotion?</strong><br/>
+<strong>Answer guidance:</strong> Controlled movement of a versioned artifact/evidence set to a higher-trust stage after entry/exit criteria are met.</li>
+<li><strong>Why bind evidence to configuration?</strong><br/>
+<strong>Answer guidance:</strong> A test result supports only the tested configuration, environment, inputs, and procedure.</li>
+<li><strong>What does blameless mean?</strong><br/>
+<strong>Answer guidance:</strong> Focus on system conditions and learning rather than personal blame, while retaining accountable corrective action.</li>
+<li><strong>What is a pipeline anti-pattern?</strong><br/>
+<strong>Answer guidance:</strong> A behavior such as green status from stale tests, manual hidden steps, unverifiable artifacts, or metrics that reward bypassing controls.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-10">Revision and mastery gate</h3>
+<p>Reproduce the failed event, demonstrate the revised control or credible prototype, and close all critical corrective actions. The release recommendation must state configuration and residual risk.</p>
+<h3 id="suggested-workload-10">Suggested workload</h3>
+<p>Target: <strong>12–15 hours</strong>. Record actual time by reading, analysis, modeling, collaboration/role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-10">Configuration and portfolio update</h3>
+<p>Store pipeline-as-code or diagrams, incident record, discrepancy/corrective-action records, and evidence under <code>ASE-W10-PIPELINE</code>; create post-review baseline.</p>
+<hr/>
+<h2 id="week-11--scale-agile-systems-engineering-across-teams-suppliers-governance-and-long-lead-dependencies">Week 11 — Scale agile systems engineering across teams, suppliers, governance, and long-lead dependencies</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B15/chapters/11.html">Chapter 11</a> → <a href="../../K/B15/labs/11.html">Hypothetical Lab 11</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-780-w11.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-11">Competency alignment</h3>
+<p>C1 (D), C9 (D), C10 (A), C11 (D), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-11">Professional context and essential question</h3>
+<p>Practices that work for one team can fail when authority, funding, contracts, suppliers, platforms, and mission dependencies span an enterprise. The essential question is: <strong>How should NMS scale coherence and learning without recreating a centralized approval bureaucracy?</strong></p>
+<h3 id="weekly-learning-outcomes-11">Weekly learning outcomes</h3>
+<ul>
+<li>Distinguish scaling value flow from scaling ceremonies.</li>
+<li>Design coordination among capability, component, platform, integration, assurance, supplier, and enterprise teams.</li>
+<li>Align portfolio decisions, funding, contracts, suppliers, long-lead items, and technical roadmaps with learning.</li>
+<li>Define interactive technical oversight and evidence-based governance.</li>
+<li>Create transformation measures, anti-gaming controls, rollout stages, and a CEO recommendation draft.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-11">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Identify which Week 10 pipeline controls require enterprise or supplier participation.</li>
+<li>Restate the top long-lead dependencies and option-expiration dates.</li>
+<li>Name three decisions that should remain decentralized and three that require portfolio coordination.</li>
+<li>Identify current measures likely to drive dysfunctional local behavior.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning the independent assignment.</p>
+<h3 id="required-study-11">Required study</h3>
+<ul>
+<li>JHU syllabus topics: Bringing Everything Together for Agile Systems Engineering and Agile at Scale. Revisit the course goal of recommendations to a fictitious CEO. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.780.81" title="Fall 2026 Abridged Syllabus - EN.645.780 Agile Systems Engineering">2</a>)</li>
+<li>INCOSE primer, pp. 18–19, roadmap concepts including technical oversight, stakeholder engagement, organizational boundaries, long-lead components, continual integration, and harmonizing risk. (<a href="https://www.incose.org/docs/default-source/enchantment/230510enchchap-sysengagilityaspects.pdf" title="Agile Systems Engineering - A Primer on Eight Core Aspects">5</a>)</li>
+<li>GAO Agile Assessment Guide sections on organization environment, governance, acquisition/contracts, program monitoring, and scaling. (<a href="https://www.gao.gov/products/gao-24-105506" title="GAO Agile Assessment Guide: Best Practices for Adoption and Implementation">6</a>)</li>
+<li>DoD Systems Engineering Guidebook sections on technical reviews, decision analysis, risk, configuration, and supplier/contract technical management. (<a href="https://www.cto.mil/wp-content/uploads/2023/06/SE-Guidebook-2022.pdf" title="DoD Systems Engineering Guidebook">18</a>)</li>
+</ul>
+<p>For every source, record one claim, one limitation, one implication for NMS, and one question that remains unresolved.</p>
+<h3 id="instructor-style-lesson-notes-11">Instructor-style lesson notes</h3>
+<ul>
+<li>Scaling means maintaining mission coherence, architecture integrity, evidence flow, and decision speed across boundaries. More synchronized meetings can increase delay without improving coherence.</li>
+<li>Portfolio governance should set outcomes, constraints, investment, risk appetite, and threshold decisions while teams decide within bounded authority.</li>
+<li>Interactive technical oversight uses current evidence, queries, demonstrations, and dialogue instead of episodic document transfer.</li>
+<li>Contracts and supplier interfaces should align deliverables, data rights, integration assets, acceptance evidence, and change mechanisms with learning intervals.</li>
+<li>Long-lead work needs options, emulators, interface contracts, early evidence, and explicit commitment decisions.</li>
+<li>Transformation measures must combine response, flow, quality, outcome, workforce, architecture, and economic indicators. Velocity comparison across teams is prohibited.</li>
+</ul>
+<h3 id="worked-example-11">Worked example</h3>
+<p>NMS plans to scale from one campus team to three sites. A single centralized architecture board would become a queue, while independent site teams would fragment interfaces. The proposed model uses a common platform and interface council with published constraints and automated conformance, site capability teams with bounded variant authority, a quarterly portfolio outcome review, and event-driven escalation for threshold risks. Supplier contracts include interface simulators, data/provenance, incremental evidence, and change-response expectations.</p>
+<p>Reproduce the example with the supplied case data, then change one assumption and explain the effect on the conclusion.</p>
+<h3 id="guided-practice-11">Guided practice</h3>
+<ul>
+<li>Map teams, suppliers, authorities, platforms, and mission dependencies for three sites.</li>
+<li>Design coordination and escalation for a cross-site interface change.</li>
+<li>Create an evidence-based oversight dashboard and identify gaming risks.</li>
+<li>Red-team a scaled operating model for bureaucracy, local optimization, architecture drift, and assurance gaps.</li>
+</ul>
+<p>Checkpoint: compare the guided result with the reference rationale before beginning independent synthesis. Record discrepancies and corrections.</p>
+<h3 id="independent-exercises-11">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Diagnose 15 scale anti-patterns, including synchronized overload, central approval queues, fragmented backlogs, and supplier black boxes.</li>
+<li><strong>Application:</strong> Create a multi-team operating model and portfolio/technical governance structure.</li>
+<li><strong>Analysis:</strong> Evaluate supplier, contract, funding, data-rights, and long-lead barriers with proposed mitigations.</li>
+<li><strong>Synthesis:</strong> Draft the CEO Agile Systems Engineering recommendation, transition roadmap, measures, investment, risks, and first 90-day experiments.</li>
+<li><strong>Stretch:</strong> Compare the proposed operating model with a named scaling framework and explain which elements are adopted, rejected, or tailored.</li>
+</ul>
+<h3 id="weekly-deliverable-11">Weekly deliverable</h3>
+<p><strong>Agile-at-Scale and CEO Draft Package</strong> with organization/value-stream map, governance and coordination model, supplier/contract strategy, portfolio measures, transformation backlog, 30/60/90-day plan, 12-month roadmap, and draft CEO briefing.</p>
+<p>Submit controlled source files, data/calculations, generated views, a change log, and a one-page self-review against the rubric. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-11">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scale/coherence architecture</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Governance and decision speed</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Supplier/long-lead integration</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Measures and transformation plan</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Executive recommendation quality</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-11">Critical failures</h3>
+<ul>
+<li>Scaling ceremonies without addressing mission/architecture/evidence flow.</li>
+<li>Comparing teams by velocity.</li>
+<li>Ignoring supplier data, integration assets, or evidence rights.</li>
+<li>Centralizing routine decisions that fall within team authority.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-11">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What should scale?</strong><br/>
+<strong>Answer guidance:</strong> Mission coherence, value/evidence flow, architecture constraints, shared assets, learning, and appropriate governance—not ceremony count.</li>
+<li><strong>What is interactive technical oversight?</strong><br/>
+<strong>Answer guidance:</strong> Frequent evidence-based engagement and decision support rather than late document approval.</li>
+<li><strong>How can contracts support learning?</strong><br/>
+<strong>Answer guidance:</strong> Through incremental deliverables/evidence, interface assets, data rights, change mechanisms, and acceptance aligned to learning intervals.</li>
+<li><strong>Why not compare velocity across teams?</strong><br/>
+<strong>Answer guidance:</strong> Points are locally defined and easily gamed; comparison distorts behavior and says little about outcomes or quality.</li>
+<li><strong>What is a threshold decision?</strong><br/>
+<strong>Answer guidance:</strong> A decision whose consequence, risk, cost, architecture scope, or authority exceeds the team’s bounded decision envelope.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-11">Revision and mastery gate</h3>
+<p>The draft must show how routine decisions remain decentralized while cross-system integrity is governed. Include at least five measures with anti-gaming notes and three staged transformation experiments.</p>
+<h3 id="suggested-workload-11">Suggested workload</h3>
+<p>Target: <strong>11–14 hours</strong>. Record actual time by reading, analysis, modeling, collaboration/role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-11">Configuration and portfolio update</h3>
+<p>Baseline <code>ASE-W11-SCALE-DRAFT</code>; issue formal red-team findings and create a disposition matrix for Week 12.</p>
+<hr/>
+<h2 id="week-12--present-challenge-revise-and-defend-the-agile-systems-engineering-operating-model">Week 12 — Present, challenge, revise, and defend the Agile Systems Engineering operating model</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B15/chapters/12.html">Chapter 12</a> → <a href="../../K/B15/labs/12.html">Hypothetical Lab 12</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-780-w12.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-12">Competency alignment</h3>
+<p>C1 (D), C3 (D), C4 (D), C5 (D), C6 (D), C8 (D), C9 (D), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-12">Professional context and essential question</h3>
+<p>A transformation plan is only credible if it connects context, learning, architecture, flow, teams, assurance, digital evidence, and governance—and can survive challenge. The essential question is: <strong>Why should the CEO believe this operating model will improve mission responsiveness, and how will NMS know when it is wrong?</strong></p>
+<h3 id="weekly-learning-outcomes-12">Weekly learning outcomes</h3>
+<ul>
+<li>Integrate all course artifacts into one coherent operating model and implementation recommendation.</li>
+<li>Demonstrate traceability from response need through practices, investments, measures, risks, and expected outcomes.</li>
+<li>Defend tailoring decisions and rejected alternatives under live challenge.</li>
+<li>Revise the recommendation based on review evidence without hiding unresolved risk.</li>
+<li>Create a portfolio handoff that prepares EN.645.782 and EN.645.783.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-12">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the eight INCOSE agile aspects and identify where each appears in the proposed operating model.</li>
+<li>Name the top five assumptions that could invalidate the recommendation.</li>
+<li>Reproduce one flow calculation, one change-propagation analysis, and one prioritization result without copying.</li>
+<li>Identify which recommendations require Phase 4 digital-engineering or process-improvement follow-on.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning the independent assignment.</p>
+<h3 id="required-study-12">Required study</h3>
+<ul>
+<li>Review the JHU CLOs and course topics; construct a compliance matrix showing where the capstone demonstrates each outcome. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.780.81" title="Fall 2026 Abridged Syllabus - EN.645.780 Agile Systems Engineering">2</a>)</li>
+<li>Review INCOSE primer pp. 3–19 and the GAO Agile Assessment Guide executive summary. (<a href="https://www.incose.org/docs/default-source/enchantment/230510enchchap-sysengagilityaspects.pdf" title="Agile Systems Engineering - A Primer on Eight Core Aspects">5</a>, <a href="https://www.gao.gov/products/gao-24-105506" title="GAO Agile Assessment Guide: Best Practices for Adoption and Implementation">6</a>)</li>
+<li>Review all NMS decision records, review findings, experiments, and unresolved risks. No new framework reading is assigned.</li>
+<li>Optional: reread Highsmith’s concluding material on adaptive leadership and product innovation. (<a href="https://www.informit.com/store/agile-project-management-creating-innovative-products-9780321770431" title="Jim Highsmith - Agile Project Management: Creating Innovative Products">3</a>)</li>
+</ul>
+<p>For every source, record one claim, one limitation, one implication for NMS, and one question that remains unresolved.</p>
+<h3 id="instructor-style-lesson-notes-12">Instructor-style lesson notes</h3>
+<ul>
+<li>The final product is a recommendation to leadership, not a generic agile handbook.</li>
+<li>Every proposed practice should connect to a case-specific problem, mechanism, expected measure, risk, and learning/reversal plan.</li>
+<li>A credible transformation uses staged experiments and does not promise enterprise-wide benefits before evidence.</li>
+<li>Benefits should include response, outcome, flow, quality, integration, workforce, and economic dimensions with baselines and uncertainty.</li>
+<li>The oral defense tests personal understanding. A polished deck cannot compensate for inability to explain calculations, decisions, or limitations.</li>
+<li>The final retrospective separates course-method lessons, case conclusions, unresolved uncertainties, and repository improvements.</li>
+</ul>
+<h3 id="worked-example-12">Worked example</h3>
+<p>The final recommendation does not state “implement Scrum and DevSecOps.” It proposes three 90-day experiments: (1) accessibility capability team with bounded interface authority, (2) weekly interface/integration evidence flow using the simulator and digital-thread queries, and (3) risk-tiered continuous assurance in the pipeline. Each experiment has baseline lead time/defect/evidence measures, guardrails, decision owners, investment, risks, and expand/modify/stop criteria.</p>
+<p>Reproduce the example with the supplied case data, then change one assumption and explain the effect on the conclusion.</p>
+<h3 id="guided-practice-12">Guided practice</h3>
+<ul>
+<li>Run a trace audit from each top recommendation to problem evidence and expected outcome.</li>
+<li>Conduct a hostile-but-fair board review covering safety, cost, suppliers, workforce, evidence, and scalability.</li>
+<li>Perform a live change: the regulator requires independent approval of autonomy updates. Revise the operating model and explain the effect.</li>
+<li>Complete a review-finding disposition and final configuration audit.</li>
+</ul>
+<p>Checkpoint: compare the guided result with the reference rationale before beginning independent synthesis. Record discrepancies and corrections.</p>
+<h3 id="independent-exercises-12">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Complete the CLO and competency evidence matrix.</li>
+<li><strong>Application:</strong> Finalize every artifact, decision, risk, measure, experiment, and trace.</li>
+<li><strong>Analysis:</strong> Perform a pre-mortem and identify at least 12 transformation failure modes and detection signals.</li>
+<li><strong>Synthesis:</strong> Deliver the CEO briefing, 15–20 page recommendation, oral defense, and controlled handoff.</li>
+<li><strong>Stretch:</strong> Record a second 10-minute briefing tailored to a skeptical chief safety officer or supplier executive.</li>
+</ul>
+<h3 id="weekly-deliverable-12">Weekly deliverable</h3>
+<p><strong>Final Agile Systems Engineering CEO Recommendation and Operating Model</strong> containing executive decision brief, context/suitability, principles and tailoring, value/learning roadmap, team/governance model, flow design, architecture strategy, digital/evidence thread, continuous assurance and pipeline, scale/transition plan, measures, investment, risks, pre-mortem, review dispositions, appendices, and 20-minute oral defense.</p>
+<p>Submit controlled source files, data/calculations, generated views, a change log, and a one-page self-review against the rubric. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-12">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Case-specific strategy and coherence</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Evidence, traceability, and reproducibility</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Architecture/flow/assurance integration</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Implementation, measures, and risk</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Executive briefing and oral defense</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-12">Critical failures</h3>
+<ul>
+<li>Submitting a framework summary instead of a case recommendation.</li>
+<li>Promising benefits without baseline, mechanism, measure, and experiment.</li>
+<li>Leaving critical review findings or risks hidden.</li>
+<li>Failing the live-change or oral-defense demonstration of personal understanding.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-12">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is the core final claim?</strong><br/>
+<strong>Answer guidance:</strong> The proposed operating model can improve specified NMS response and mission outcomes under named constraints, with staged evidence and reversal conditions.</li>
+<li><strong>What should every recommendation trace to?</strong><br/>
+<strong>Answer guidance:</strong> Observed problem/evidence, mechanism, expected outcome, measure, owner, risk, and implementation/learning step.</li>
+<li><strong>Why use staged transformation experiments?</strong><br/>
+<strong>Answer guidance:</strong> To test organizational and technical hypotheses, limit disruption, and revise before scaling.</li>
+<li><strong>What does the live change assess?</strong><br/>
+<strong>Answer guidance:</strong> Whether the learner understands the operating model well enough to adapt it while preserving coherence and evidence.</li>
+<li><strong>What is handed to EN.645.782 and EN.645.783?</strong><br/>
+<strong>Answer guidance:</strong> Digital-thread/data use cases and gaps for 782; current operating/process baseline, measures, and experiments for 783.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-12">Revision and mastery gate</h3>
+<p>Achieve at least 80% overall and Proficient or better on every critical capstone dimension. Pass the oral defense, resolve all critical findings, and explicitly accept or plan every residual major risk.</p>
+<h3 id="suggested-workload-12">Suggested workload</h3>
+<p>Target: <strong>13–16 hours</strong>. Record actual time by reading, analysis, modeling, collaboration/role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-12">Configuration and portfolio update</h3>
+<p>Create final tag <code>ASE-COURSE-COMPLETE-v1.0</code>, export the evidence index, preserve pre/post-review baselines, and write handoff manifests for EN.645.782 and EN.645.783.</p>
+<hr/>
+<h2 id="references">References</h2>
+<p><a href="OVERVIEW.html">Back to Phase 4 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+</main></body></html>

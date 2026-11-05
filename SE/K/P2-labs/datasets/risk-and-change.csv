@@ -1,0 +1,3 @@
+risk_id,source,trigger,likelihood_assumption,consequence,mitigation,closure_evidence
+R-01,position-feed,stale > 15 s,unknown,unsafe dispatch,stale-data interlock,integration test
+R-02,accessibility,event surge,unknown,unserved accessible trip,capacity reserve,scenario experiment

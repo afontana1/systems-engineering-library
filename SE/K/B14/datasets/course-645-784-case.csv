@@ -1,0 +1,13 @@
+week,course,scenario,baseline_value,challenge_value,units,status,teaching_note
+1,645-784,Northstar synthetic evaluation,18.5,22.2,illustrative index,synthetic—not field data,"Frame the decision, distinguish problem types, and expose decision-process risk"
+2,645-784,Northstar synthetic evaluation,25.5,33.15,illustrative index,synthetic—not field data,"Translate stakeholder values into objectives, measures, and value structure"
+3,645-784,Northstar synthetic evaluation,13.5,18.9,illustrative index,synthetic—not field data,"Model decisions, uncertainties, evidence, constraints, and alternatives"
+4,645-784,Northstar synthetic evaluation,20.5,22.55,illustrative index,synthetic—not field data,"Apply constraints, dominance, and Pareto analysis to the selection problem"
+5,645-784,Northstar synthetic evaluation,27.5,33.0,illustrative index,synthetic—not field data,Converge on a preferred selection using transparent value and decision methods
+6,645-784,Northstar synthetic evaluation,15.5,20.15,illustrative index,synthetic—not field data,"Visualize, communicate, and defend the pilot selection decision"
+7,645-784,Northstar synthetic evaluation,22.5,31.5,illustrative index,synthetic—not field data,Reframe the engineering design problem and generate alternatives through morphology
+8,645-784,Northstar synthetic evaluation,29.5,32.45,illustrative index,synthetic—not field data,Formulate parametric design and conduct multiobjective search
+9,645-784,Northstar synthetic evaluation,17.5,21.0,illustrative index,synthetic—not field data,Design computational experiments to learn efficiently from the design space
+10,645-784,Northstar synthetic evaluation,24.5,31.85,illustrative index,synthetic—not field data,"Build, validate, and use surrogate models without hiding approximation error"
+11,645-784,Northstar synthetic evaluation,12.5,17.5,illustrative index,synthetic—not field data,"Analyze uncertainty, sensitivity, robustness, regret, and value of information"
+12,645-784,Northstar synthetic evaluation,19.5,21.45,illustrative index,synthetic—not field data,"Integrate, communicate, and defend the engineering design decision"

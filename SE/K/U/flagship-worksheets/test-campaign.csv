@@ -1,0 +1,2 @@
+claim,event,population,domain,sampling_plan,trials,failures,confidence,configuration,uncertainty_or_limit
+Per-mission failure probability,Failed pickup mission,Accepted missions,Dry daylight pilot,Independence must be checked,300,0,0.95,build-4.2,Excludes untested weather and failures

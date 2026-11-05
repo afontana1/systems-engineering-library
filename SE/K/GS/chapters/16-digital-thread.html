@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Versioned digital-thread evidence and configuration-specific assurance · Systems Engineering Library</title><style>*{box-sizing:border-box}body{background:#f4f7f8;margin:0;color:#193847;font:16px/1.76 system-ui,"Segoe UI",Arial,sans-serif}header{background:linear-gradient(112deg,#1b3a50,#137477);padding:30px max(18px,calc((100vw - 1060px)/2));color:white}header a{color:#e0fbfa}header h1{font-size:clamp(1.65rem,3vw,2.5rem);line-height:1.15;margin:.3em 0}header p{color:#dbf0f0;max-width:85ch}main{max-width:1070px;background:#fff;border:1px solid #d6e4e5;border-radius:12px;margin:28px auto 60px;padding:clamp(20px,4vw,55px)}article{max-width:91ch;margin:auto}h2{font-size:1.43em;margin-top:2em;border-bottom:1px solid #dbe6e8;padding-bottom:6px}h3{font-size:1.13em;margin-top:1.6em}a{color:#08757a;text-underline-offset:3px}p,li{max-width:90ch}table{border-collapse:collapse;max-width:100%;width:100%}td,th{border:1px solid #d4e2e4;padding:10px;text-align:left}th{background:#eaf5f4}blockquote{border-left:4px solid #238887;margin-left:0;background:#edf7f6;padding:10px 18px}pre{background:#183449;color:#e8f3f4;padding:16px;overflow-x:auto}code{font-size:.92em}p code{padding:1px 4px;background:#e8f2f4}details{padding:13px 17px;margin:16px 0;background:#edf6f5;border-radius:8px;border:1px solid #cee2e1}summary{font-weight:700;cursor:pointer}.links{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.links a{padding:7px 13px;background:#e7f3f2;border-radius:6px;font-weight:700}.figure{margin:26px 0;text-align:center}.figure img{max-width:100%;max-height:340px}.math-block{margin:18px 0;overflow-x:auto}mjx-container[jax=SVG]{max-width:100%;overflow-x:auto;overflow-y:hidden}article hr{border:0;border-top:1px solid #dbe6e8;margin:36px 0}@media(max-width:750px){header{padding:25px 18px}main{margin:0;border:0;border-radius:0}}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:"local"},startup:{typeset:false},options:{skipHtmlTags:["script","style","noscript","textarea","pre","code"]}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/GS/chapters/16-digital-thread.html" data-se-mode="standard"></script>
+</head><body><header><small>Graduate textbook studies · Systems Engineering</small><h1>Versioned digital-thread evidence and configuration-specific assurance</h1><p><a href="../INDEX.html">Graduate studies</a> · <a href="../../OPEN-BOOKS.html">All companion books</a></p></header><main><article><h1>Versioned digital-thread evidence and configuration-specific assurance</h1>
+<p><em>Graduate study for Book 16 — Digital and Mission Engineering. Companion to the existing course materials; the definitions, mathematics and decisions below are educational rather than operational approvals.</em></p>
+<h2>The governing question</h2>
+<blockquote>
+<p>Can a perfectly linked digital thread still support a false engineering claim?</p>
+</blockquote>
+<h2>Theory and conceptual structure</h2>
+<p>A digital thread is an information architecture for connecting authoritative design, implementation, test and operational artifacts through controlled identities and relationships. Link completeness does not guarantee correctness. A green traceability dashboard can conceal stale test evidence, wrong environment configuration, incompatible units or an obsolete requirement revision. Assurance needs <strong>meaningful provenance</strong>, not merely graph reachability.</p>
+<p>Represent artifacts as typed, versioned nodes: requirement, architecture decision, interface definition, executable model, test procedure, test result and acceptance claim. Relationships have semantics, such as <code>satisfies</code>, <code>verified_by</code>, <code>derived_from</code>, or <code>uses_configuration</code>. A <code>verified_by</code> link is legitimate only if the procedure actually tests the relevant predicate under the documented preconditions. The link must also state which revision was exercised.</p>
+<p>Configuration baselines create the context for claims. If a software scheduler changes from revision 3 to 4, evidence collected for revision 3 does not automatically verify revision 4. Impact analysis walks the dependency graph to identify potentially invalidated evidence, but the result remains a conservative candidate set that engineers must review. False positives cost retesting; false negatives may hide an unsafe release.</p>
+<p>A digital twin adds another requirement: synchronization with a physical asset and an explicit intended use. A dashboard that displays a delayed fleet state is not an acceptable real-time control sensor merely because it is called a twin. Specify freshness thresholds, latency, uncertainty and degradation behavior. Semantic interoperability and governance must be considered when different suppliers own constituent data.</p>
+<h2>Formal model and derivation</h2>
+<p><div class="math-block">\[\text{current}(e,r,c)=[e.\text{requirement}=r]\land[e.\text{configuration}=c]\land[e.\text{status}=\text{pass}].\]</div>
+An assurance claim is accepted only when every required predicate is supported by configuration-matched evidence. Reachability of a graph path is necessary in many workflows but not sufficient.</p>
+<p>The formalism is useful only inside an explicit <strong>model contract</strong>: a defined system boundary, input ranges, configuration, assumptions, uncertainty sources, and an intended decision. Check both units and the semantics of the variables before executing the arithmetic. The result is a conditional engineering claim, not an unconditional guarantee.</p>
+<h2>Fully worked Northstar case</h2>
+<p>Requirement R-17 revision 4 limits emergency-stop response to 180 ms. Test T-9 records 142 ms, but it was performed against software revision 3 and R-17 revision 3's 220 ms threshold. The old test passes a stricter number by coincidence, yet it may lack the new actuator or communication path. The correct evidence state is “not current,” pending delta analysis and a revision-specific test. A requirement-to-test count of 100% would conceal this distinction.</p>
+<p><img alt="Model of the linked reasoning steps" src="../figures/16-digital-thread.svg"/></p>
+<h2>Counterexample and critical review</h2>
+<p><strong>Counterexample:</strong> An artifact graph has no missing edges, but a unit conversion changes a distance threshold from 100 m to 100 ft. Every link resolves; the operating behavior is wrong. Model contracts need semantic unit validation and responsible review.</p>
+<p>An independent reviewer should be able to reproduce the favorable result and find at least one material scenario in which it changes. A sensitivity study that does not touch an important assumption can be technically reproducible but decision-irrelevant. Record the source of every number, identify the accountable acceptance authority, and state what the evidence cannot establish.</p>
+<h2>Graduate problem set</h2>
+<p>Attempt each problem before opening the worked solution. In a graded submission, supply units, formulas, assumptions, and a reasoned interpretation—not just the numerical result.</p>
+<h3>Problem 1</h3>
+<p>What is the evidence status for a passing test against obsolete requirement and software revisions?</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>Historical pass, not current verification. Preserve the historical record and open an impact decision for the new baseline.</p>
+</details>
+<h3>Problem 2</h3>
+<p>Give an example where a <code>verified_by</code> relationship is semantically wrong.</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>A test measuring average dispatch throughput cannot prove a worst-case emergency-stop latency requirement, even if the IDs and configurations match.</p>
+</details>
+<h3>Problem 3</h3>
+<p>A twin receives telemetry at t=100 s and is used at t=108 s; the maximum freshness is 5 s. What must happen?</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>Age is 8 s, exceeding the freshness contract. Mark state stale and invoke the defined degraded/manual mode; do not silently continue a normal decision.</p>
+</details>
+<h2>Laboratory and research transfer</h2>
+<p>Complete <a href="../labs/16-digital-thread.html">the accompanying graduate laboratory</a>. Produce the artifact described there, compare your result to at least one alternative hypothesis, and record what additional evidence would change your recommendation.</p>
+<h2>Connections to the curriculum</h2>
+<ul>
+<li><a href="../../B16/OPEN-BOOK.html">Open Book 16 and its existing weekly lessons</a>.</li>
+<li><a href="../INDEX.html">Find supplementary calculations and datasets</a>.</li>
+<li>The canonical curriculum remains the source of assessed requirements; this study explains one demanding conceptual thread and does not replace its assignments.</li>
+</ul>
+<h2>Additional reference reading</h2><p>These external resources complement the fictional examples; they are not required for offline use.</p><ul><li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></li><li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a></li></ul></article></main></body></html>

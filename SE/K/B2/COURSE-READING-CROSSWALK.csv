@@ -1,0 +1,13 @@
+course,week,reading_status,chapter,lab,short_weekly_primer
+645-667,1,expanded-book,chapters/01-governance-and-technical-authority.md,labs/lab-01-governance-and-technical-authority.md,../P0-text/lessons/645-667-w01.md
+645-667,2,expanded-book,chapters/02-rfp-and-proposal-strategy.md,labs/lab-02-rfp-and-proposal-strategy.md,../P0-text/lessons/645-667-w02.md
+645-667,3,expanded-book,chapters/03-wbs-and-work-authorization.md,labs/lab-03-wbs-and-work-authorization.md,../P0-text/lessons/645-667-w03.md
+645-667,4,expanded-book,chapters/04-estimating-and-reserves.md,labs/lab-04-estimating-and-reserves.md,../P0-text/lessons/645-667-w04.md
+645-667,5,expanded-book,chapters/05-schedule-networks-and-float.md,labs/lab-05-schedule-networks-and-float.md,../P0-text/lessons/645-667-w05.md
+645-667,6,expanded-book,chapters/06-integrated-baseline-review.md,labs/lab-06-integrated-baseline-review.md,../P0-text/lessons/645-667-w06.md
+645-667,7,expanded-book,chapters/07-earned-value-and-forecasting.md,labs/lab-07-earned-value-and-forecasting.md,../P0-text/lessons/645-667-w07.md
+645-667,8,expanded-book,chapters/08-risk-change-and-quality.md,labs/lab-08-risk-change-and-quality.md,../P0-text/lessons/645-667-w08.md
+645-667,9,expanded-book,chapters/09-leadership-and-communications.md,labs/lab-09-leadership-and-communications.md,../P0-text/lessons/645-667-w09.md
+645-667,10,expanded-book,chapters/10-integrated-recovery-control.md,labs/lab-10-integrated-recovery-control.md,../P0-text/lessons/645-667-w10.md
+645-667,11,expanded-book,chapters/11-proposal-red-team.md,labs/lab-11-proposal-red-team.md,../P0-text/lessons/645-667-w11.md
+645-667,12,expanded-book,chapters/12-baseline-defense-and-retrospective.md,labs/lab-12-baseline-defense-and-retrospective.md,../P0-text/lessons/645-667-w12.md

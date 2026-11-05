@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Process capability and continuous improvement · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/process-improvement.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed reference</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Process capability and continuous improvement</h1>
+<p><strong>Reference entry · Agile, digital and process engineering · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p><strong>Process improvement</strong> changes how work is performed to improve outcomes such as quality, lead time, safety, affordability, or learning. It is not synonymous with stricter procedure compliance or higher maturity ratings. A process can be highly standardized and still generate the wrong service. Credible improvement requires a causal hypothesis, a measurement system, a comparison strategy, and monitoring for adverse consequences.</p>
+<h2>Theory: variation, causality, and capability</h2>
+<p>A measured process outcome <code>Y</code> varies due to operating conditions, inputs, people, equipment, sampling, and measurement error. Statistical process control distinguishes signals of possible process change from expected within-process variation; control limits characterize observed stability and should not be confused with customer specification limits. Traditional capability ratios such as <code>Cpk = min[(USL-μ)/(3σ), (μ-LSL)/(3σ)]</code> presume a meaningfully stable process and an appropriate distributional model. A nonstationary or heavily censored process makes naive capability numbers untrustworthy.</p>
+<p>Before-and-after improvement claims are vulnerable to demand shifts, regression to the mean, and simultaneous initiatives. Randomized pilot assignment, phased rollout, matched comparison groups, or interrupted time-series analysis may provide stronger evidence depending on what is feasible. The chosen approach must account for spillovers: improving one group's handoffs can alter the control group's workload.</p>
+<h2>Worked example: an apparent improvement driven by easier cases</h2>
+<p>A verification group reduces average closure time from 12 days to 8 days after introducing automated templates. However, the pre-change month contained 60% complex safety cases, while the post-change month contained only 20%. Stratified analysis shows safety cases still take 18 days and routine cases fall from 7 to 6. The unadjusted four-day gain overstates what the intervention achieved. A credible report presents case-mix-adjusted results, quality of closed evidence, escaped defects, and impact on downstream reviewers.</p>
+<h2>Engineering use and evidence</h2>
+<p>Define the process boundary and stakeholder-valued outcome, map current flow, validate measurement, distinguish common and special causes, and identify the proposed mechanism of change. Pilot the intervention with acceptance and stop criteria. Record workload composition, implementation fidelity, resource cost, employee burden, and service outcomes. Institutionalize improvements only after observing sustained effects and a credible process-control response to future drift.</p>
+<h2>Limitations and connections</h2>
+<p>Metric improvements may simply move delay or defects across an organizational boundary. A process with high conformance can be ineffective when the mission changes. Connect process improvement to <strong>flow and queues</strong>, <strong>DOE</strong>, <strong>measurement hierarchies</strong>, <strong>intervention learning</strong>, and <strong>enterprise systems</strong>.</p>
+<h2>Technical analysis: separate improved work from easier work</h2>
+<p>Suppose an inspection process reports a pass rate rising from 80% to 90%. Initially it handles 80 easy cases (95% pass) and 20 hard cases (20% pass), yielding <code>0.8(0.95)+0.2(0.20)=0.80</code>. After a change, it handles 95 easy cases and 5 hard cases, with <em>unchanged conditional success rates</em>: the apparent pass rate becomes <code>0.95(0.95)+0.05(0.20)=0.9125</code> (91.25%). Overall improvement is therefore compatible with <strong>zero improvement in the within-class processes</strong>. This is case-mix confounding, not proof of a beneficial change.</p>
+<p>Before endorsing the intervention, stratify by relevant workload, operator, environment, and severity; predefine the process boundary and outcome; and examine variation over time rather than comparing only two averages. For a difference-in-differences analysis, untreated and treated groups must have plausible parallel trends in the absence of intervention—an assumption requiring argument and diagnostic evidence. Control charts can distinguish stable from special-cause variation, but they cannot by themselves establish causality or show that the measured outcome is valuable to stakeholders.</p>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods">NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)</a> — Statistical methods, experiments, reliability, and process assessment.</li>
+<li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="metrics-hierarchy.html">Measures of effectiveness and performance</a></li>
+<li><a href="design-of-experiments.html">Design of experiments and sensitivity</a></li>
+<li><a href="flow-wip-and-queues.html">Flow, work in process, and bottlenecks</a></li>
+<li><a href="intervention-and-learning.html">Interventions, policy resistance, and learning loops</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B17/chapters/05.html">Book 17, Chapter 05: Week 05 · Systems Engineering Process Improvement · Book chapter: Measurement system, variation, and baseline performance</a></li>
+<li><a href="../B17/chapters/06.html">Book 17, Chapter 06: Week 06 · Systems Engineering Process Improvement · Book chapter: Process capability assessment, root causes, and midcourse exam</a></li>
+<li><a href="../B17/chapters/09.html">Book 17, Chapter 09: Week 09 · Systems Engineering Process Improvement · Book chapter: Pilot experiments, implementation, and adoption</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=d621627ca17ed">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="process-improvement.md">Editable Markdown</a></nav></main></body></html>

@@ -1,0 +1,41 @@
+slug,title,reconstruction,technical_review_version,selected_source_traced_claims,external_peer_review
+system-of-interest,"System of interest: purpose, boundary, and evidence",reconstructed,v51,2,not performed
+boundaries-and-interfaces,Boundaries and interfaces: where local correctness meets system risk,reconstructed,v51,2,not performed
+stakeholders-and-needs,"Stakeholders, needs, and value: translating plural interests into engineering decisions",reconstructed,v51,2,not performed
+conops-and-scenarios,Concept of operations and scenarios,reconstructed,v51,2,not performed
+good-requirements,"Requirements: precise obligations, not persuasive sentences",reconstructed,v50,0,not performed
+v-and-v,"Verification, validation, and acceptance: the three different decisions",reconstructed,v50,0,not performed
+wbs-and-baselines,Work breakdown structures and technical baselines,reconstructed,v51,2,not performed
+risk-vs-issue,"Risk, issue, uncertainty, and opportunity",reconstructed,v51,2,not performed
+model-language-method-tool,"Model, method, language, tool, and repository",reconstructed,v51,2,not performed
+views-and-viewpoints,"Architecture views, viewpoints, and consistency",reconstructed,v51,2,not performed
+traceability-graph,Requirements traceability: a typed graph of engineering claims,reconstructed,v51,2,not performed
+object-responsibilities,Object-oriented domain models and responsibilities,reconstructed,v51,2,not performed
+software-quality-attributes,Software quality attributes and architectural tactics,reconstructed,v51,2,not performed
+software-lifecycle-evidence,"CI/CD, configuration, and software assurance",reconstructed,v51,2,not performed
+functional-vs-physical,"Functional, logical, and physical architecture: preserving intent across realization",reconstructed,v51,2,not performed
+allocation-matrix,"Allocation, coverage, and design responsibility",reconstructed,v51,2,not performed
+interface-control,Interface control and integration contracts,reconstructed,v51,2,not performed
+integration-strategy,Integration build-up and readiness evidence,reconstructed,v51,2,not performed
+verification-matrix,Verification cross-reference matrices and test design,reconstructed,v50,0,not performed
+engineering-trades,Engineering trade studies: making preferences and uncertainty inspectable,reconstructed,v50,0,not performed
+metrics-hierarchy,Measures of effectiveness and performance,reconstructed,v51,2,not performed
+probability-and-dependence,"Probability, dependence, and technical uncertainty",reconstructed,v50,0,not performed
+conceptual-m-and-s,Conceptual modeling and intended use,reconstructed,v51,2,not performed
+discrete-event-simulation,Discrete-event simulation and queues,reconstructed,v50,0,not performed
+stocks-flows-feedback,"Stocks, flows, and feedback loops",reconstructed,v50,0,not performed
+model-vv-and-credibility,"Simulation verification, validation, and credibility",reconstructed,v50,0,not performed
+design-of-experiments,Design of experiments and sensitivity,reconstructed,v50,0,not performed
+pareto-and-value,Pareto frontiers and multiobjective decisions,reconstructed,v50,0,not performed
+bayesian-value-of-information,Decision uncertainty and value of information,reconstructed,v50,0,not performed
+agile-tailoring,Agile systems engineering and lifecycle tailoring,reconstructed,v51,2,not performed
+flow-wip-and-queues,"Flow, work in process, and bottlenecks",reconstructed,v50,0,not performed
+digital-thread-and-twin,Digital thread and digital twin: preserving engineering meaning across time,reconstructed,v50,0,not performed
+mission-engineering,Mission threads and capability analysis,reconstructed,v51,2,not performed
+process-improvement,Process capability and continuous improvement,reconstructed,v50,0,not performed
+sos-characteristics,Systems of systems: constituent autonomy and emergent mission performance,reconstructed,v51,2,not performed
+enterprise-as-system,The enterprise as a system,reconstructed,v51,2,not performed
+complexity-emergence,"Complexity, emergence, and adaptation",reconstructed,v51,2,not performed
+authority-and-governance,"Authority, governance, and coordination",reconstructed,v51,2,not performed
+resilience-adaptability,"Resilience, robustness, and graceful degradation",reconstructed,v50,0,not performed
+intervention-and-learning,"Interventions, policy resistance, and learning loops",reconstructed,v51,2,not performed

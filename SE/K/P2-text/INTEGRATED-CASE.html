@@ -1,0 +1,174 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The campus-shuttle case: a controlled chain from mission concept to evidence · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../_assets/mathjax-svg.js"></script><script defer src="../_assets/prism.js"></script><script defer src="../_assets/prism-python.js"></script><script defer src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/P2-text/INTEGRATED-CASE.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="the-campus-shuttle-case-a-controlled-chain-from-mission-concept-to-evidence">The campus-shuttle case: a controlled chain from mission concept to evidence</h1>
+<blockquote>
+<p>Every system, person, datum and result in this document is fictional. It is a teaching exercise about systems engineering, not a real transit deployment, physical safety case or authorization to operate autonomous vehicles.</p>
+</blockquote>
+<h2 id="background-and-engineering-boundaries">Background and engineering boundaries</h2>
+<p>A university wants accessible, predictable rides across a large campus. The program may use staffed vehicles and a software dispatch platform. Safety-critical driving and braking are outside the demonstrator software's authority and require independent physical-system engineering and professional assurance. The campus has existing transport arrangements, unknown peak demand and a tentative acquisition budget.</p>
+<p>The program's first challenge is not to choose a vehicle. It is to define the mission and collect defensible evidence for what current users experience. The original study guides demand progressively stronger packages; this companion case illustrates how the same IDs flow across courses.</p>
+<h2 id="stage-a--concept-development-baseline--con-04">Stage A — concept-development baseline (<code>CON-04</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Claim or artifact</th>
+<th>Status</th>
+<th>Important limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NEED-04</code></td>
+<td>Riders need actionable availability information</td>
+<td>Stakeholder need</td>
+<td>Not yet a testable response-time requirement</td>
+</tr>
+<tr>
+<td><code>SC-05</code></td>
+<td>Accessible request during service window</td>
+<td>Operational scenario</td>
+<td>Must include unavailable and offline branches</td>
+</tr>
+<tr>
+<td><code>MOE-02</code></td>
+<td>Eligible requests fulfilled to agreed time</td>
+<td>Mission effectiveness</td>
+<td>Requires denominator and time window</td>
+</tr>
+<tr>
+<td><code>REQ-14/C</code></td>
+<td>Issue status event within 900 ms for p99 under <code>WL-01</code></td>
+<td>Hypothetical approved requirement</td>
+<td>Applies only to defined dispatch mode/workload</td>
+</tr>
+<tr>
+<td><code>ASM-22</code></td>
+<td>Average accessible boarding below 90 s</td>
+<td>Provisional assumption</td>
+<td>Needs representative observation</td>
+</tr>
+<tr>
+<td><code>CON-04</code></td>
+<td>Select demand-responsive concept</td>
+<td>Concept decision</td>
+<td>Limited by current staffing and curb evidence</td>
+</tr>
+</tbody>
+</table>
+<p>Capacity illustration: two vehicles × 480 minutes × 0.85 availability ÷ 24-minute cycle = 34 nominal cycles. With three boardings/cycle this suggests 102 boardings/day, not a distribution, lower service guarantee or accessibility proof.</p>
+<p>Concept alternatives must be filtered against hard constraints before weighted preference evaluation. A recommendation includes an approved trade model, sensitivity bands, cost/schedule range and explicit conditions to continue design.</p>
+<h2 id="stage-b--design-and-integration-baseline--des-13">Stage B — design and integration baseline (<code>DES-1.3</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Design element</th>
+<th>Testability requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>F-01</code></td>
+<td>Receive eligible rider request</td>
+<td>Trace timestamp at boundary</td>
+</tr>
+<tr>
+<td><code>IF-03/B</code></td>
+<td>Dispatch event contract</td>
+<td>Schema and revision, origin clock, replay/timeout behavior</td>
+</tr>
+<tr>
+<td><code>BUD-08</code></td>
+<td>Serial timing allocation totaling 650 ms nominal</td>
+<td>Validate stage estimates and system p99 separately</td>
+</tr>
+<tr>
+<td><code>ADR-11</code></td>
+<td>Asynchronous event delivery</td>
+<td>Document resilience and consistency tradeoffs</td>
+</tr>
+<tr>
+<td><code>INT-06</code></td>
+<td>Stepwise integration from stubs to closed lab</td>
+<td>Preserve rollback and configuration</td>
+</tr>
+<tr>
+<td><code>HZ-08</code></td>
+<td>Stale availability can cause incorrect assignment</td>
+<td>Mitigate with freshness, revision, human handling</td>
+</tr>
+</tbody>
+</table>
+<p>The gateway's 80 ms, queue's 150 ms, decision's 120 ms, storage's 100 ms and network's 200 ms sum to 650 ms. The 250 ms nominal margin to the 900 ms requirement is not an observed statistical percentile.</p>
+<p>Components carry derived constraints and their interface owners. The integration plan tests duplicate/reordered events, network partition, crash/restart and escalation. Every test run records a manifest of versions and environmental assumptions. No dispatch-only lab result demonstrates braking safety.</p>
+<h2 id="stage-c--test-and-evidence-baseline--evd-02">Stage C — test and evidence baseline (<code>EVD-02</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Evidence claim</th>
+<th>Work product</th>
+<th>Status in this fictional scenario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>VT-14</code></td>
+<td>Verify <code>REQ-14/C</code> in <code>WL-01</code></td>
+<td>Approved timing plan, instrument review, raw logs</td>
+<td>Planned / not field-proven</td>
+</tr>
+<tr>
+<td><code>TST-27</code></td>
+<td>No duplicate active assignment after replay</td>
+<td>Scripted integration fault test</td>
+<td>Laboratory-only example</td>
+</tr>
+<tr>
+<td><code>VAL-06</code></td>
+<td>Rider understands service status</td>
+<td>Moderated representative scenario</td>
+<td>Partial stakeholder coverage</td>
+</tr>
+<tr>
+<td><code>RUN-38</code></td>
+<td>One controlled execution on <code>D-21</code></td>
+<td>Logs and manifest</td>
+<td>Illustrative, not independent actual test</td>
+</tr>
+<tr>
+<td><code>ACT-09</code></td>
+<td>Improve partition handling</td>
+<td>Rework with explicit retest</td>
+<td>Open</td>
+</tr>
+</tbody>
+</table>
+<p>The T&amp;E evidence argument distinguishes <em>test planned</em>, <em>test executed</em>, <em>criterion met</em>, and <em>outcome validated</em>. In a toy statistical calculation, no failures in 100 independent representative Bernoulli trials provides a one-sided 95% upper failure-probability bound of about 2.95%, not evidence of 0% risk. Those trial assumptions must themselves be supported.</p>
+<h2 id="change-impact-walk-through">Change-impact walk-through</h2>
+<p>At a later concept review, a stakeholder asks for response time reduced from 900 ms to 600 ms:</p>
+<ol>
+<li>Reassess mission relevance and obtain approval of the revised threshold.</li>
+<li>Change <code>REQ-14/C</code> to a new controlled revision, retaining the older version.</li>
+<li>Recalculate <code>BUD-08</code>: 650 ms nominal already exceeds 600 ms before variance. Investigate alternative allocations or architecture changes.</li>
+<li>Revisit <code>IF-03/B</code>, <code>ADR-11</code>, test instrumentation and workload definitions.</li>
+<li>Update the qualification criterion and decide whether previous evidence remains relevant to any limited claim.</li>
+<li>Reassess design, cost/schedule and operational effects; record decision authority.</li>
+</ol>
+<h2 id="three-capstone-challenges">Three capstone challenges</h2>
+<p><strong>Challenge 1 — concept selection:</strong> Build a three-concept morphological matrix, feasibility gates and a weighted value model. Show a weight shift that changes the winner and propose an experiment that could resolve the most decision-sensitive uncertainty.</p>
+<p><strong>Challenge 2 — integration:</strong> Draw the component dependency sequence and define six laboratory integration increments with fault injection, rollback and traceable versions. Explicitly declare unrepresented physical safety mechanisms.</p>
+<p><strong>Challenge 3 — evidence:</strong> Write the strongest defensible final disposition if the dispatch software passes laboratory tests but has never undergone representative campus network-partition testing or inclusive usability validation. Do not state field- or autonomous-operation approval. Provide conditions and authorities for any future evaluation.</p>
+<h2 id="where-to-continue">Where to continue</h2>
+<ul>
+<li><a href="KNOWLEDGE-THREADS.html">Cross-course pathways</a></li>
+<li><a href="README.html">The 36 weekly lessons</a></li>
+<li><a href="templates/INDEX.html">Editable worksheets</a></li>
+<li><a href="tools/README.html">Standard-library calculation labs</a></li>
+<li><a href="../../C/P2/OVERVIEW.html">Original three-course Phase 2 guide</a></li>
+</ul>
+</main></body></html>

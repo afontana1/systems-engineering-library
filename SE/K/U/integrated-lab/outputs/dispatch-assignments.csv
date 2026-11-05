@@ -1,0 +1,13 @@
+request_id,origin,destination,vehicle,arrival_min,start_min,finish_min,wait_min,status
+R01,A,B,V01,0.0,0.0,12.0,0.0,completed
+R02,B,C,V02,4.0,4.0,16.0,0.0,completed
+R03,C,A,V01,8.0,12.0,24.0,4.0,completed
+R04,A,C,V02,12.0,16.0,28.0,4.0,completed
+R05,C,B,V01,16.0,24.0,36.0,8.0,completed
+R06,B,A,V02,20.0,28.0,40.0,8.0,completed
+R07,A,B,V01,24.0,36.0,48.0,12.0,completed
+R08,C,A,V02,28.0,40.0,52.0,12.0,completed
+R09,B,C,V01,32.0,48.0,60.0,16.0,completed
+R10,A,C,V02,36.0,52.0,64.0,16.0,completed
+R11,C,A,V01,40.0,60.0,72.0,20.0,completed
+R12,B,A,V02,44.0,64.0,76.0,20.0,completed

@@ -1,0 +1,18 @@
+digraph Northstar {
+ graph [rankdir=LR, bgcolor="white", fontname="Arial", label="Northstar teaching sandbox: boundary and evidence", labelloc=t, fontsize=17, pad=.23];
+ node [shape=box, style="rounded,filled", color="#a6c7cb", fillcolor="#ecf6f6", fontname="Arial", fontsize=11];
+ Rider [label="Synthetic request events\n(not real riders)"];
+ subgraph cluster_soi { label="System of interest — software-only sandbox"; color="#3b9195"; style="rounded";
+ Ledger [label="Input parser +\nidempotency ledger"];
+ Scheduler [label="Earliest-free\nscheduler"];
+ Scenarios [label="Scenario model\nfixed + stochastic"];
+ Evidence [label="Audit + trace\nevidence report"];
+ Ledger -> Scheduler -> Evidence;
+ Scenarios -> Scheduler;
+ }
+ Rider -> Ledger [label="IF-01"];
+ Reviewer [label="Independent reviewer\n(interpretation required)"];
+ Evidence -> Reviewer [label="Evidence package"];
+ World [label="Real vehicles / human operators\nEXCLUDED", color="#d1b6ad", fillcolor="#fff2ef"];
+ World -> Reviewer [style=dashed, label="requires external validation"];
+}

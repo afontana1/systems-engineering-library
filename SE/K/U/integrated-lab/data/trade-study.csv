@@ -1,0 +1,4 @@
+option,vehicles,trip_min,operating_cost_units,baseline_served_fraction,baseline_p90_wait,decision_notes
+A,1,12,100,,,Lower cost but cannot serve fixed demand
+B,2,12,185,,,Reference design subject to scenario testing
+C,3,12,260,,,Higher capacity with cost and utilization penalty

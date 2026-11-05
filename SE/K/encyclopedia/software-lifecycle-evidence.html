@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>CI/CD, configuration, and software assurance · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/software-lifecycle-evidence.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>CI/CD, configuration, and software assurance</h1>
+<p><strong>Reference entry · MBSE and software-intensive systems · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p>A <strong>software lifecycle evidence chain</strong> connects intended behavior to requirements, architecture, source changes, executable builds, verification results, deployment configurations, and observed operation. Continuous integration and delivery automate transitions within that chain; they do not eliminate the need for controlled technical baselines. “All pipeline jobs passed” is an assertion about a particular workflow and build, not proof that a system is safe or suitable for its mission.</p>
+<h2>Theory: evidence attaches to configuration identity</h2>
+<p>Represent a release as <code>R = (source revision, dependency lock, compiler/toolchain, build parameters, configuration, environment, evidence set)</code>. An artifact digest identifies bytes; provenance explains how those bytes were created and what tests were applied. An assurance claim should be traceable through a typed relation such as <code>testedBuild(test, digest)</code> and <code>deployedBuild(environment, digest)</code>. Passing tests against one executable and deploying another breaks the reasoning even if filenames match.</p>
+<p>Continuous assurance combines static checks, unit and integration tests, architecture conformance, vulnerability assessment, scenario-level tests, and controlled exceptions. Tests provide coverage of chosen properties under chosen conditions. They cannot establish the absence of all defects. For safety-critical functions, review authority and hazard-based qualification may need to be independent from the sprint team. Faster iteration is valuable only when the evidence production process keeps pace with change.</p>
+<h2>Worked example: a green pipeline with the wrong binary</h2>
+<p>A team tests source revision <code>a14</code> with dependency library 3.2 and produces artifact digest <code>H1</code>. The deployment rebuilds the same source but resolves library 3.3, producing digest <code>H2</code>. Unit results from <code>H1</code> do not automatically cover <code>H2</code>; new concurrency behavior may have entered through the dependency. The corrective control is to promote the <strong>tested artifact</strong> immutably, or rebuild under a reproducible environment and prove equivalence before approval. A rollback plan must identify compatible data schemas and operator procedures, not merely an older binary.</p>
+<h2>Engineering use and evidence</h2>
+<p>Require stable identity for commits, dependencies, containers, test equipment, simulators, generated code, configuration, and deployed instances. Maintain bidirectional change links to risks and affected requirements. Put hazard-relevant tests in the release gate and retain exception approvals with expiration conditions. Use fault injection and operational telemetry to test claims that are inaccessible in isolated unit tests. After deployment, monitor leading indicators of failure and maintain a path for safe recovery.</p>
+<h2>Limitations and connections</h2>
+<p>Automation can rapidly repeat a flawed test and make false confidence more reproducible. A reproducible build does not guarantee a correct specification. Connect software lifecycle evidence to <strong>traceability</strong>, <strong>software quality attributes</strong>, <strong>verification matrices</strong>, <strong>digital-thread provenance</strong>, and <strong>risk acceptance</strong>.</p>
+<h2>Technical analysis: a passing pipeline is a versioned evidence claim</h2>
+<p>Continuous integration is an evidence-production system only if test outputs are linked to the exact source, dependencies, build environment, test configuration, and release artifact. A green status for a branch is not proof that a differently built binary has passed the same checks. Configuration management and software assurance must cover changing compilers, libraries, deployment policies, and controlled exceptions.</p>
+<p>For example, a regression suite reports <strong>480 passed tests</strong> on build <code>B17</code>, but the deployed release <code>B18</code> contains a dependency update. The fraction <code>480/480 = 100%</code> is a result about the executed suite and B17, not a success probability or verification result for B18. An auditable release record should include immutable build identity, requirements-to-test coverage, security scan versions, outstanding anomalies, reviewer approval, and a rollback configuration; any transfer of evidence from B17 to B18 requires an explicit equivalence rationale.</p>
+<p><strong>Evidence boundary.</strong> Report tests <strong>not run</strong>, flaky outcomes, operational profiles, and defect escape rates; count only tests that bear on declared claims. A very high test count can coexist with weak requirements coverage or undocumented production configuration changes. NASA software assurance guidance is a procedural reference, not an endorsement of a particular tool or a guarantee of safety.</p>
+<h2>Claim-specific sources</h2>
+<p>The following <strong>selected methodological claims</strong> are tied to identifiable sections or abstracts, not merely generic reading lists. Source scope is stated for each link. Numerical scenarios and computations in this article are <strong>original illustrative examples</strong>, not data, calculations, or endorsements supplied by the linked publishers. Links require internet access; the explanation remains readable offline.</p>
+<ul>
+<li><strong>C1:</strong> NASA software engineering and assurance guidance connects implementation, verification, lifecycle and configuration responsibilities. <strong>Evidence:</strong> <a href="https://swehb.nasa.gov/">NASA — NASA-HDBK-2203 Software Engineering and Assurance Handbook, Software planning, configuration, assurance and product evidence (see software lifecycle topics)</a> · <em>direct guidance</em>.</li>
+<li><strong>C2:</strong> Configuration management maintains product identity and approved change status over time. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/6-5-configuration-management/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §6.5 Configuration Management</a> · <em>direct guidance</em>.</li>
+</ul>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final">NIST · SP 800-160 Vol. 1 Rev. 1, Engineering Trustworthy Secure Systems (2022)</a> — System-level security and trustworthiness engineering.</li>
+<li><a href="https://www.nasa.gov/reference/2-4-distinctions-between-product-verification-and-product-validation/">NASA · Distinctions between product verification and validation</a> — Separate conformity to specifications from fitness for intended use.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="traceability-graph.html">Requirements traceability: a typed graph of engineering claims</a></li>
+<li><a href="v-and-v.html">Verification, validation, and acceptance: the three different decisions</a></li>
+<li><a href="software-quality-attributes.html">Software quality attributes and architectural tactics</a></li>
+<li><a href="digital-thread-and-twin.html">Digital thread and digital twin: preserving engineering meaning across time</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B5/chapters/05-integrate-agile-product-engineering-with-syst.html">Book 5, Chapter 05: Book V · Chapter 5: Iteration must still produce system evidence</a></li>
+<li><a href="../B5/chapters/10-design-testing-ci-and-an-integrated-software-.html">Book 5, Chapter 10: Book V · Chapter 10: The verification chain includes build identity</a></li>
+<li><a href="../B15/chapters/10.html">Book 15, Chapter 10: Week 10 · Agile Systems Engineering · Book chapter: Create a cyber-physical DevSecOps and continual-integration system, then red-team a failed increment</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=d3147552408de">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="software-lifecycle-evidence.md">Editable Markdown</a></nav></main></body></html>

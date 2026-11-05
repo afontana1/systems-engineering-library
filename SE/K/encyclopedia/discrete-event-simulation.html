@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Discrete-event simulation and queues · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/discrete-event-simulation.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed reference</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Discrete-event simulation and queues</h1>
+<p><strong>Reference entry · Analytics, modeling, simulation and decisions · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p><strong>Discrete-event simulation (DES)</strong> represents a system whose state changes at specific event times: an arrival, resource seizure, task completion, failure, repair, or timeout. Between events the modeled discrete state is ordinarily unchanged. DES is especially useful when contention, sequencing, and stochastic variability affect a decision. It differs from a static spreadsheet because time, queues, and competing entities can change outcomes even if average demand and capacity remain the same.</p>
+<h2>Theory: state, event calendar, and statistical output</h2>
+<p>A DES state might include queue contents, available vehicles, active assignments, and a timestamped event calendar. Processing the next event advances simulated time, changes state, and schedules future events. Essential invariants include nonnegative inventory, no simultaneous exclusive ownership, and conservation of entities except for declared entry and exit events. Random inputs should describe empirically justified distributions and dependencies; assuming independent exponential times solely for convenience can distort tail delays.</p>
+<p>For an idealized stable <code>M/M/1</code> queue with Poisson arrivals at rate <code>λ</code>, exponential service rate <code>μ</code>, and <code>λ &lt; μ</code>, mean time in the system is <code>W = 1/(μ - λ)</code>. This closed-form result is a <strong>benchmark</strong>, not a general law for dispatch networks with priority, batching, shift changes, and nonstationary demand. A simulation should reproduce known analytic cases before claiming credibility for harder ones. Warm-up deletion, replication length, random seed policy, and confidence intervals influence any reported result.</p>
+<h2>Worked example: utilization drives nonlinear delay</h2>
+<p>At <code>λ = 9</code> jobs/hour and <code>μ = 12</code> jobs/hour, the idealized mean system time is <code>1/(12 - 9) = 1/3 hour</code>, or 20 minutes. Raising arrivals to 11/hour increases the theoretical mean to 60 minutes, even though the service rate remains unchanged. Utilization rises from 75% to 91.7%; delay rises threefold. A discrete-event model can then test nonexponential service, priority rules, shift schedules, and failed servers, but its output uncertainty must be estimated over independent replications or defensible batch means.</p>
+<h2>Engineering use and evidence</h2>
+<p>Define entities, events, resources, priorities, preemption rules, arrivals, routing logic, timeouts, observation windows, and collected metrics before implementation. Verify event ordering with traces for small cases; enforce invariants programmatically. Validate at least baseline throughput, occupancy, and delay distributions against operational data, with separate scenarios for peak and degraded conditions. Compare alternatives using common random numbers when the experimental design supports paired analysis.</p>
+<h2>Limitations and connections</h2>
+<p>A queue simulation can be mechanically correct yet omit human adaptation, upstream abandonment, or feedback that changes arrival behavior. Rare events require deliberate sampling and uncertainty analysis. Connect DES to <strong>conceptual modeling</strong>, <strong>flow/WIP/queues</strong>, <strong>design of experiments</strong>, <strong>model credibility</strong>, and <strong>operational metrics</strong>.</p>
+<h2>Technical analysis: a simulation event list is an executable model, not reality</h2>
+<p>A discrete-event simulation (DES) advances simulated time from event to event. A minimal single-server queue has state <code>(t, queue_length, server_busy, event_calendar)</code>. For each arrival, generate an arrival event; if the server is idle, schedule completion at <code>t + service_time</code>, otherwise enqueue the request. On completion, either start the next queued request or mark the server idle. <strong>Conservation check:</strong> at every simulation instant, <code>arrivals_so_far − departures_so_far = waiting + in_service</code>, assuming no abandonment or losses. This invariant catches lost and duplicated entities before any performance claims are considered.</p>
+<p>For a checkable benchmark, let arrivals be Poisson at <code>9/hour</code> and service times exponential at <code>12/hour</code>. Under the stationary M/M/1 model, <code>ρ = 0.75</code>, mean number waiting is <code>Lq = ρ²/(1−ρ) = 2.25</code>, and mean queue wait is <code>Wq = Lq/λ = 0.25 hour = 15 minutes</code>. The predicted mean total time is <code>W = 1/(12−9) hour = 20 minutes</code>. A correctly implemented long-run simulator should approach these theoretical values within statistical sampling error—not match them exactly in one finite run.</p>
+<p>Estimate uncertainty from <strong>independent replications</strong> or justified batch-means procedures; sequential observations from one queue are autocorrelated. Remove or diagnose initialization bias, define the warm-up and stopping rules, and check rare-event counts separately. These results do not transfer to finite shifts, appointment arrivals, correlated storms, or priority dispatch without revising the model and validation evidence.</p>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://standards.nasa.gov/node/263">NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)</a> — Credibility practices for modeling and simulation used in decisions.</li>
+<li><a href="https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods">NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)</a> — Statistical methods, experiments, reliability, and process assessment.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="flow-wip-and-queues.html">Flow, work in process, and bottlenecks</a></li>
+<li><a href="conceptual-m-and-s.html">Conceptual modeling and intended use</a></li>
+<li><a href="model-vv-and-credibility.html">Simulation verification, validation, and credibility</a></li>
+<li><a href="design-of-experiments.html">Design of experiments and sensitivity</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B11/chapters/05-implement-discrete-event-processes-resources-queues-priorities-and-s.html">Book 11, Chapter 05: Book 11 · Chapter 05 — Implement discrete-event processes, resources, queues, priorities, and statistics</a></li>
+<li><a href="../B11/chapters/08-analyze-transient-and-steady-state-output-with-defensible-run-contro.html">Book 11, Chapter 08: Book 11 · Chapter 08 — Analyze transient and steady-state output with defensible run controls</a></li>
+<li><a href="../B17/chapters/07.html">Book 17, Chapter 07: Week 07 · Systems Engineering Process Improvement · Book chapter: Process modeling and simulation for improvement decisions</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=dd7017b3d99bd">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="discrete-event-simulation.md">Editable Markdown</a></nav></main></body></html>

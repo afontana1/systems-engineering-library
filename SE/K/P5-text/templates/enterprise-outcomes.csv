@@ -1,0 +1,2 @@
+outcome,beneficiary,metric,numerator,denominator,window,disaggregation,burden_transfer,guardrail
+on_time,conventional,arrival_by_target,855,900,synthetic_month,conventional,,check_disaggregation

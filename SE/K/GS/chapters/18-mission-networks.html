@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>System-of-systems mission dependencies and distributed assurance · Systems Engineering Library</title><style>*{box-sizing:border-box}body{background:#f4f7f8;margin:0;color:#193847;font:16px/1.76 system-ui,"Segoe UI",Arial,sans-serif}header{background:linear-gradient(112deg,#1b3a50,#137477);padding:30px max(18px,calc((100vw - 1060px)/2));color:white}header a{color:#e0fbfa}header h1{font-size:clamp(1.65rem,3vw,2.5rem);line-height:1.15;margin:.3em 0}header p{color:#dbf0f0;max-width:85ch}main{max-width:1070px;background:#fff;border:1px solid #d6e4e5;border-radius:12px;margin:28px auto 60px;padding:clamp(20px,4vw,55px)}article{max-width:91ch;margin:auto}h2{font-size:1.43em;margin-top:2em;border-bottom:1px solid #dbe6e8;padding-bottom:6px}h3{font-size:1.13em;margin-top:1.6em}a{color:#08757a;text-underline-offset:3px}p,li{max-width:90ch}table{border-collapse:collapse;max-width:100%;width:100%}td,th{border:1px solid #d4e2e4;padding:10px;text-align:left}th{background:#eaf5f4}blockquote{border-left:4px solid #238887;margin-left:0;background:#edf7f6;padding:10px 18px}pre{background:#183449;color:#e8f3f4;padding:16px;overflow-x:auto}code{font-size:.92em}p code{padding:1px 4px;background:#e8f2f4}details{padding:13px 17px;margin:16px 0;background:#edf6f5;border-radius:8px;border:1px solid #cee2e1}summary{font-weight:700;cursor:pointer}.links{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.links a{padding:7px 13px;background:#e7f3f2;border-radius:6px;font-weight:700}.figure{margin:26px 0;text-align:center}.figure img{max-width:100%;max-height:340px}.math-block{margin:18px 0;overflow-x:auto}mjx-container[jax=SVG]{max-width:100%;overflow-x:auto;overflow-y:hidden}article hr{border:0;border-top:1px solid #dbe6e8;margin:36px 0}@media(max-width:750px){header{padding:25px 18px}main{margin:0;border:0;border-radius:0}}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:"local"},startup:{typeset:false},options:{skipHtmlTags:["script","style","noscript","textarea","pre","code"]}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/GS/chapters/18-mission-networks.html" data-se-mode="standard"></script>
+</head><body><header><small>Graduate textbook studies · Systems Engineering</small><h1>System-of-systems mission dependencies and distributed assurance</h1><p><a href="../INDEX.html">Graduate studies</a> · <a href="../../OPEN-BOOKS.html">All companion books</a></p></header><main><article><h1>System-of-systems mission dependencies and distributed assurance</h1>
+<p><em>Graduate study for Book 18 — System of Systems Engineering. Companion to the existing course materials; the definitions, mathematics and decisions below are educational rather than operational approvals.</em></p>
+<h2>The governing question</h2>
+<blockquote>
+<p>How can every constituent system meet its local target while the joint mission fails?</p>
+</blockquote>
+<h2>Theory and conceptual structure</h2>
+<p>A system of systems (SoS) comprises independently managed constituent systems whose coordination produces mission capabilities that no single participant supplies alone. Interoperability is not merely a data-format problem. It requires shared operational semantics, timing assumptions, responsibility for failure recovery, authority for changes and a mechanism for resolving conflicting objectives.</p>
+<p>Represent a mission as a dependency network with paths, gates and minimal cut sets. A minimal cut set is a smallest set of failures sufficient to disable a mission claim. It tells decision makers where redundancy, monitoring or governance agreements may be valuable. The representation must distinguish <strong>logical dependency</strong> from probabilistic independence. Constituent systems may share facilities, providers, time synchronization or a cyber identity system; naive multiplication of local availabilities overstates mission reliability.</p>
+<p>Assurance must be distributed. A central integrator may have a mission-level requirement but cannot unilaterally redesign a hospital, emergency agency or transit operator. Verification evidence therefore includes constituent promises, interface contracts, test windows, change notifications and consequences when an external participant withdraws service. The confidence placed in an external assurance claim should be conditional on provenance and independent challenge.</p>
+<p>SoS behavior is evolutionary. New participants change network topology, demand and incentives. An optimized interface arrangement can become brittle when governance changes. Scenarios should include late data, conflicting jurisdictional rules, service rationing and authority disputes—not just component outages.</p>
+<h2>Formal model and derivation</h2>
+<p><div class="math-block">\[M=(A\land B)\lor C.\]</div>
+If path \(A\land B\) and backup \(C\) are independent, \(P(M)=1-(1-p_Ap_B)(1-p_C)\). If paths share a provider, independence is false; analyze shared-cause scenarios separately. Minimal cut sets for this structure include \(\{A,C\}\) and \(\{B,C\}\).</p>
+<p>The formalism is useful only inside an explicit <strong>model contract</strong>: a defined system boundary, input ranges, configuration, assumptions, uncertainty sources, and an intended decision. Check both units and the semantics of the variables before executing the arithmetic. The result is a conditional engineering claim, not an unconditional guarantee.</p>
+<h2>Fully worked Northstar case</h2>
+<p>Suppose two jointly required constituents A and B each have availability 0.95, and an independent backup C has 0.80. The mission succeeds if both A and B work or C works. Under independence, P(M) = 1 − (1 − 0.9025)×(1 − 0.80) = 0.9805. Now suppose all three rely on one identity provider with a 3% shared outage probability, otherwise behaving independently. Total availability becomes approximately 0.97×0.9805 = 0.9511. The original 98.05% claim hid a shared dependency that no local participant owned as a mission risk.</p>
+<p><img alt="Model of the linked reasoning steps" src="../figures/18-mission-networks.svg"/></p>
+<h2>Counterexample and critical review</h2>
+<p><strong>Counterexample:</strong> Two agencies agree to use the same JSON message field <code>priority</code>, but one interprets 1 as urgent and the other interprets 1 as routine. Syntactic interoperability holds, operational semantics fail. Contract testing requires controlled examples and end-to-end mission observation.</p>
+<p>An independent reviewer should be able to reproduce the favorable result and find at least one material scenario in which it changes. A sensitivity study that does not touch an important assumption can be technically reproducible but decision-irrelevant. Record the source of every number, identify the accountable acceptance authority, and state what the evidence cannot establish.</p>
+<h2>Graduate problem set</h2>
+<p>Attempt each problem before opening the worked solution. In a graded submission, supply units, formulas, assumptions, and a reasoned interpretation—not just the numerical result.</p>
+<h3>Problem 1</h3>
+<p>Identify minimal cut sets of M=(A and B) or C.</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>{A,C} and {B,C}. Failure of either set disables both the main path and backup.</p>
+</details>
+<h3>Problem 2</h3>
+<p>Calculate the independent-path mission availability with A=B=.95, C=.80.</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>1−(1−.95²)(1−.80)=.9805, conditional on independence and correct mission logic.</p>
+</details>
+<h3>Problem 3</h3>
+<p>Describe a shared-cause failure that invalidates the independence model.</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>A common identity provider, network operator, geographic flood zone or authority revocation that can disable both principal and backup paths.</p>
+</details>
+<h2>Laboratory and research transfer</h2>
+<p>Complete <a href="../labs/18-mission-networks.html">the accompanying graduate laboratory</a>. Produce the artifact described there, compare your result to at least one alternative hypothesis, and record what additional evidence would change your recommendation.</p>
+<h2>Connections to the curriculum</h2>
+<ul>
+<li><a href="../../B18/OPEN-BOOK.html">Open Book 18 and its existing weekly lessons</a>.</li>
+<li><a href="../INDEX.html">Find supplementary calculations and datasets</a>.</li>
+<li>The canonical curriculum remains the source of assessed requirements; this study explains one demanding conceptual thread and does not replace its assignments.</li>
+</ul>
+<h2>Additional reference reading</h2><p>These external resources complement the fictional examples; they are not required for offline use.</p><ul><li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a></li><li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></li></ul></article></main></body></html>

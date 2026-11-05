@@ -1,0 +1,5 @@
+run,arrivals,completed,rejected,pending,claimed_mean_wait
+R01,100,80,15,5,14.0
+R02,100,80,15,10,14.2
+R03,60,35,20,5,18.9
+R04,100,112,0,0,11.0

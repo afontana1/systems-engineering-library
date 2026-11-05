@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Concept of operations and scenarios · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/conops-and-scenarios.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Concept of operations and scenarios</h1>
+<p><strong>Reference entry · Foundations and management · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p>A <strong>concept of operations (ConOps)</strong> describes how people, equipment, software, supporting organizations, and external services jointly achieve a mission under specified conditions. It is not a feature list and it is not a design specification. A scenario makes a particular operational thread inspectable: the triggering situation, actors, environmental state, sequence of decisions, exceptional branches, and observable outcome. A use case may isolate a software interaction; a ConOps must also account for the physical operation and institutional responsibilities that make the interaction meaningful.</p>
+<h2>Theory: operational threads expose hidden requirements</h2>
+<p>Describe a scenario as <strong>(initial state, trigger, actors, environment, actions, exceptions, terminal state, measures)</strong>. The initial state includes prior commitments and resource availability; the terminal state includes not only success but degraded, aborted, and recovery conditions. A mission measure needs a defined population and denominator. For a demand-response transit system, define the probability of timely service as <code>P(wait &lt;= 8 minutes | eligible request during peak)</code>. If requests are discarded by a failing app before logging, the measured denominator is biased: apparent service improves exactly when access deteriorates.</p>
+<p>A scenario set is a <strong>coverage argument</strong>, not an enumeration of every possible story. Cross important dimensions—demand, degraded infrastructure, accessibility needs, operator workload, weather, and cyber conditions—then select combinations informed by hazard and mission consequence. Pairwise coverage can reveal common interactions but cannot guarantee rare three-way failures. Transition tables distinguish commanded modes (normal, restricted, emergency) from transient states within a mode. Decision authority must be attached to each transition; otherwise the story relies on an imaginary all-knowing operator.</p>
+<h2>Worked example: demand becomes a design obligation</h2>
+<p>A campus shuttle ConOps defines a weekday peak with 180 eligible requests, a severe-weather restriction mode, and a manual-dispatch fallback. In a pilot, 158 requests are served within eight minutes, 16 later, and 6 are never served. The timely-service estimate is <code>158 / 180 = 87.8%</code>; using only completed trips would incorrectly report <code>158 / 174 = 90.8%</code>. If the mission target is at least 95%, the design fails under this scenario. The scenario points toward explicit availability requirements for request intake, fallback dispatch, and accessible-vehicle allocation, rather than merely a faster routing algorithm.</p>
+<h2>Engineering use and evidence</h2>
+<p>Write a normal thread, at least one credible off-nominal thread, and a recovery thread for each critical mission. Annotate who observes each condition, what information can be stale, and which decisions are automated. Link scenario steps to functions, interface exchanges, human tasks, hazards, requirements, and test cases. Validate the narratives with actual operators and affected users; a technically coherent storyboard can still misrepresent real work. Evidence includes walkthrough records, scenario coverage rationale, demand data, and a change log showing which architectural decisions were driven by which scenario.</p>
+<h2>Limitations and connections</h2>
+<p>A ConOps is a hypothesis about use, not proof of utility. It can overrepresent articulate stakeholders and ideal operations. Stress it against nonusers, maintenance staff, emergency responders, and people excluded from normal instrumentation. Connect it to <strong>system boundaries</strong>, <strong>stakeholder needs</strong>, <strong>metrics</strong>, <strong>requirements</strong>, and <strong>verification design</strong>; each downstream claim should retain the operational conditions that gave it meaning.</p>
+<h2>Technical analysis: scenarios as testable operational hypotheses</h2>
+<p>ConOps scenarios should be selected to expose distinct mission decisions and failure modes. A normal scenario, a degraded scenario, and a recovery scenario generally require different actors, data quality, authority, and success criteria. Specify the <strong>population at risk</strong> for each metric, including attempts that fail before the system creates an internal request record.</p>
+<p>Consider <strong>180 eligible</strong> dispatch requests during a storm. <strong>150</strong> meet the service target, <strong>20</strong> arrive late, and <strong>10</strong> never enter the dispatch queue because the app is unavailable. A system that counts only its <strong>170 accepted</strong> requests reports <code>150/170 = 88.24%</code> timely service. The mission-level figure is <code>150/180 = 83.33%</code>. The <strong>4.90 percentage-point</strong> gap reflects boundary choice, not a discrepancy to average away. Even this larger denominator is not sufficient if eligible users who cannot access the app are not observed.</p>
+<p><strong>Evidence boundary.</strong> Require operational actors to review exceptional paths and human handovers. Trace each scenario to measures, functions, interfaces, hazards, and acceptance evidence. A scenario is a structured hypothesis about use; it must not silently become a requirements source without stakeholder validation.</p>
+<h2>Claim-specific sources</h2>
+<p>The following <strong>selected methodological claims</strong> are tied to identifiable sections or abstracts, not merely generic reading lists. Source scope is stated for each link. Numerical scenarios and computations in this article are <strong>original illustrative examples</strong>, not data, calculations, or endorsements supplied by the linked publishers. Links require internet access; the explanation remains readable offline.</p>
+<ul>
+<li><strong>C1:</strong> Stakeholder expectations and ConOps are developed using mission scenarios, including off-nominal and human interactions. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/4-1-stakeholder-expectations-definition/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §4.1 Stakeholder Expectations Definition</a> · <em>direct guidance</em>.</li>
+<li><strong>C2:</strong> Baselined concepts of operation and enabling support strategies inform technical requirements. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/4-2-technical-requirements-definition/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §4.2 Technical Requirements Definition</a> · <em>direct guidance</em>.</li>
+</ul>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
+<li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA · Systems Engineering Handbook appendix (requirements and verification matrices)</a> — Requirements review criteria and verification planning context.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="system-of-interest.html">System of interest: purpose, boundary, and evidence</a></li>
+<li><a href="stakeholders-and-needs.html">Stakeholders, needs, and value: translating plural interests into engineering decisions</a></li>
+<li><a href="good-requirements.html">Requirements: precise obligations, not persuasive sentences</a></li>
+<li><a href="metrics-hierarchy.html">Measures of effectiveness and performance</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B1/chapters/03-needs-and-conops.html">Book 1, Chapter 03: Chapter 3 — Turn conflicting human needs into an operational concept</a></li>
+<li><a href="../B6/chapters/03-desired-end-state-conops-scenarios-and-mission-calculat.html">Book 6, Chapter 03: Book 6 · Chapter 3: ConOps and mission measures</a></li>
+<li><a href="../B16/chapters/10.html">Book 16, Chapter 10: Week 10 · Foundations of Digital and Mission Engineering · Book chapter: Mission engineering foundations and mission architecture</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=d1eef86622ca8">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="conops-and-scenarios.md">Editable Markdown</a></nav></main></body></html>

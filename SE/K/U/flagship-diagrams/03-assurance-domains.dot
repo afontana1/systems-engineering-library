@@ -1,0 +1,5 @@
+digraph Test {
+ rankdir=LR; bgcolor="transparent"; graph[fontname="DejaVu Sans",pad=.25];node[shape=box,style="rounded,filled",fillcolor="#e6f3f3",color="#477c86",fontname="DejaVu Sans",fontsize=10];edge[color="#607b89"];
+ claim[label="Specific probability / failure event"];domain[label="Operating domain and exposure"];sample[label="Sampling + independence model"];obs[label="Observed failures + uncertainty"];bound[label="Statistical bound",fillcolor="#f7eedf"];valid[label="Applicability and model credibility",fillcolor="#f7eedf"];
+ claim->domain;domain->sample;sample->obs;obs->bound;domain->valid;bound->valid;
+}

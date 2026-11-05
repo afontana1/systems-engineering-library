@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Modeling plan, methodology, language, tool, and repository architecture · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/P1-text/lessons/645-631-w02.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="modeling-plan-methodology-language-tool-and-repository-architecture">Modeling plan, methodology, language, tool, and repository architecture</h1>
+<p><strong>Companion chapter:</strong> EN.645.631, Week 02 · Phase 1 edition 1.0 (2026-10-30)<br/>
+<strong>Original course:</strong> <a href="../../../C/P1/EN645631.html">Introduction to Model Based Systems Engineering</a> — find <strong>Week 2</strong> for assignment, assessment criteria and complete reading plan.<br/>
+<strong>Concepts:</strong> method-language-tool, modeling plan, repository schema, configuration governance<br/>
+<strong>Use of case:</strong> Synthetic Autonomous Campus Shuttle case; all values and designs are educational, not field safety guidance.</p>
+<h2 id="the-question-to-answer">The question to answer</h2>
+<blockquote>
+<p>What must be decided before creating hundreds of model elements?</p>
+</blockquote>
+<h2 id="conceptual-tutorial">Conceptual tutorial</h2>
+<h3 id="separate-method-from-syntax">Separate method from syntax</h3>
+<p>A <strong>method</strong> states how a team reasons and reviews—for example, start from operational scenarios, derive functions, allocate them, and verify the resulting architecture. A <strong>language</strong> defines permitted constructs and their meaning. A <strong>tool</strong> stores, renders, queries and controls those constructs. A strong tool does not supply a sound engineering method, and a familiar diagram language does not decide who approves a change. A useful plan specifies all three independently.</p>
+<h3 id="define-your-repository-contract">Define your repository contract</h3>
+<p>Set an element naming convention, globally unique identifiers, package boundaries, owner, version, lifecycle status and required attributes before importing requirements. A simple repository can contain <code>Need</code>, <code>Requirement</code>, <code>Behavior</code>, <code>Component</code>, <code>Interface</code>, <code>Constraint</code>, <code>TestCase</code> and <code>Evidence</code> types, connected with typed relations such as <code>derivesFrom</code>, <code>allocatedTo</code>, <code>satisfies</code> and <code>verifies</code>. The information schema is the core value; a particular diagram style is a view.</p>
+<p>Choose acceptance rules: each baselined requirement has a source and verification plan, each external interface has an owner and counterpart, and each architectural alternative is separated from the selected baseline. Require every query result to show the model revision it came from. When two people edit the same requirement concurrently, configuration controls should prevent silent overwriting.</p>
+<h3 id="version-aware-sysml">Version-aware SysML</h3>
+<p>SysML v1 and SysML v2 differ materially in modeling concepts, syntax, tooling and interoperability. Treat the v1/v2 mapping as a conceptual translation exercise, not a guaranteed one-to-one conversion of every stereotype and diagram. Check a specific tool's support and the current official language specification.</p>
+<h2 id="worked-application-follow-the-reasoning">Worked application: follow the reasoning</h2>
+<p><strong>Repository example.</strong> A team stores <code>REQ-37</code> as a single controlled element with source <code>NEED-04</code>, design relation to <code>Gateway</code>, and verification link to <code>T-09</code>. Two requirement diagrams reference <code>REQ-37</code> without duplicating its meaning. An unreviewed change to its latency attribute marks both the downstream allocation and test case as suspect.</p>
+<h2 id="practice-before-viewing-solutions">Practice before viewing solutions</h2>
+<ol>
+<li>Explain why choosing a SysML editor is not choosing an MBSE methodology.</li>
+<li>Name four properties required for a controlled requirement.</li>
+<li>How should a repository represent unselected architecture alternatives?</li>
+</ol>
+<p>&lt;details&gt;
+&lt;summary&gt;&lt;strong&gt;Show worked answers&lt;/strong&gt;&lt;/summary&gt;</p>
+<ol>
+<li><strong>Explain why choosing a SysML editor is not choosing an MBSE methodology.</strong> The editor supplies modeling operations; the method specifies analyses, decision order, review gates and acceptable evidence.</li>
+<li><strong>Name four properties required for a controlled requirement.</strong> ID, source, owner, version/status, rationale, verification method and controlled relationships are all defensible; any four with governance are useful.</li>
+<li><strong>How should a repository represent unselected architecture alternatives?</strong> Use separate configurations or explicit candidate status, with provenance and trade outcomes, to avoid presenting competing designs as one architecture.</li>
+</ol>
+<p>&lt;/details&gt;</p>
+<h2 id="the-misconception-to-avoid">The misconception to avoid</h2>
+<p><strong>Watch for:</strong> Using tool default project structure as the engineering information architecture causes brittle models.</p>
+<h2 id="applied-exercise-and-portfolio-handoff">Applied exercise and portfolio handoff</h2>
+<p><strong>Do:</strong> Create a modeling plan with ownership, element types, relation semantics, validation checks, and baseline procedure. Treat this as preparation for the fuller deliverables and rubric in the original <strong>Week 2</strong> guide; the companion is not a substitute for those graded artifacts.</p>
+<h2 id="concept-connections">Concept connections</h2>
+<ul>
+<li><a href="../deep-dives/model-meaning.html">Further conceptual deep dive: From diagrams to a semantically controlled model</a></li>
+<li><a href="../deep-dives/sysml-versions.html">Further conceptual deep dive: SysML v1 and v2: conceptual continuity, not cosmetic conversion</a></li>
+</ul>
+<h2 id="read-more-in-authoritative-references">Read more in authoritative references</h2>
+<ul>
+<li><a href="https://www.omg.org/spec/SysML/2.0">Object Management Group (OMG), SysML 2.0 — formal specification</a></li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></li>
+<li><a href="https://sebokwiki.org/wiki/Guide_to_the_Systems_Engineering_Body_of_Knowledge_(SEBoK)">Guide to the Systems Engineering Body of Knowledge</a></li>
+</ul>
+<hr/>
+<p><a href="645-631-w01.html">Previous chapter</a> · <a href="645-631-w03.html">Next chapter</a></p>
+</main></body></html>

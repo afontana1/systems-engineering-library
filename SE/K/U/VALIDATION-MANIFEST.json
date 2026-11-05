@@ -1,0 +1,17 @@
+{
+  "edition": "v8.0",
+  "generated_date": "2026-10-31",
+  "original_course_guides_preserved": 20,
+  "weekly_lessons_preserved": 240,
+  "concept_primers_expanded": 40,
+  "derivation_chapters_added": 12,
+  "prerequisite_edges_editor_curated": 62,
+  "related_edges_nonprerequisite": 12,
+  "new_instructional_svg_diagrams": 6,
+  "new_notebooks": 4,
+  "new_calculation_tests_passed": 14,
+  "local_links_checked_in_new_and_edited_docs": 204,
+  "broken_local_links_found": 0,
+  "editorial_limitations": "Prerequisite links reviewed for logic and acyclic structure but not externally peer-reviewed; chapter content first-pass and not validated for real system decisions.",
+  "reference_edition": "NASA SE Handbook Rev 2; NIST SP 800-160v1r1; SEBoK v2.14 (site release notice 2026-05-18)"
+}

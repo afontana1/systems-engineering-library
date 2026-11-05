@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Robust optimization: feasibility before preference · Systems Engineering</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f7f8;color:#183b4b;font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:#116f76;text-underline-offset:3px}a:hover{color:#064e5c}header{background:linear-gradient(120deg,#16384b,#16736e);color:#fff;padding:25px max(20px,calc((100vw - 1100px)/2))}header a{color:#d5fafa}header .eyebrow{font-size:.8rem;letter-spacing:.11em;text-transform:uppercase}header h1{font-size:clamp(1.7rem,3vw,2.7rem);line-height:1.17;margin:.3em 0}.paper{max-width:1010px;margin:25px auto 80px;background:white;border:1px solid #dae6e7;border-radius:15px;padding:clamp(20px,4vw,54px)}h1,h2,h3{line-height:1.3}h2{margin-top:2em;border-bottom:1px solid #e2ebee;padding-bottom:.35em}h3{margin-top:1.5em}p,li{max-width:88ch}blockquote{border-left:4px solid #26a19a;padding:8px 17px;background:#eff8f7;margin-left:0}pre{background:#102e3b;color:#e9f7f4;padding:20px;border-radius:10px;overflow:auto}pre code{color:inherit}code{overflow-wrap:anywhere}p code,li code{background:#eef4f4;padding:2px 4px;border-radius:4px}table{border-collapse:collapse;display:block;overflow:auto}td,th{border:1px solid #d6e6e6;padding:9px}th{background:#eaf4f3}details{border:1px solid #d6e5e4;border-radius:10px;padding:14px 18px;margin:20px 0;background:#f8fcfb}summary{cursor:pointer;font-weight:700}.chaptertools{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.chaptertools a,.chaptertools button{border:1px solid #c4dedd;border-radius:7px;background:#eff9f8;padding:8px 14px;font:inherit}.related{border-top:1px solid #d5e4e4;margin-top:30px;padding-top:15px;display:flex;gap:12px;flex-wrap:wrap}.related a{padding:5px 12px;border:1px solid #cadcdc;border-radius:7px}mjx-container[jax=SVG]{max-width:100%;overflow-x:auto}svg{max-width:100%}@media(max-width:600px){.paper{margin:0;border-radius:0}}.activity{background:#edf8f7;border:1px solid #b8d7d3;border-radius:12px;padding:20px;margin:28px 0}.activity label{display:inline-flex;flex-direction:column;gap:4px;margin-right:14px;margin-bottom:12px;font-weight:650}.activity input{font:inherit;max-width:180px;border:1px solid #9bb4b8;border-radius:6px;padding:8px}.activity output{display:block;font-weight:700;color:#095d65;background:white;border-radius:7px;padding:13px;margin-top:8px}.equation{margin:22px 0;overflow-x:auto}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../_assets/mathjax-svg.js"></script><script defer src="../_assets/prism.js"></script><script defer src="../_assets/prism-python.js"></script><script defer src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/T/18-robust-optimization.html" data-se-mode="standard"></script>
+</head><body><header><div class="eyebrow">Systems engineering · Core Concepts</div><h1>Robust optimization: feasibility before preference</h1><p>Compare alternatives across constraints, uncertainty sets, Pareto fronts, and regret.</p><nav><a href="INDEX.html">← Browse concepts</a> · <a href="../../START-HERE.html" >Curricula</a></nav></header><main class="paper"><h1>Robust optimization: feasibility before preference</h1>
+<p><em>Core Concepts · Quantitative methods · T18</em></p>
+<blockquote>
+<p>Compare alternatives across constraints, uncertainty sets, Pareto fronts, and regret.</p>
+</blockquote>
+<p><strong>Recommended preparation:</strong> <a href="10-decisions.html">10 Decisions</a>, <a href="08-dynamics.html">08 Dynamics</a></p>
+<p><strong>Related companion books:</strong> <a href="../B6/OPEN-BOOK.html">Book 6</a>, <a href="../B12/OPEN-BOOK.html">Book 12</a>, <a href="../B14/OPEN-BOOK.html">Book 14</a></p>
+<figure><img src="figures/experimental-reasoning.svg" alt="Conceptual teaching diagram" style="width:100%;max-width:930px"><figcaption style="font-size:.85rem;color:#54717b">A conceptual workflow, not a certified engineering process.</figcaption></figure><h2>1. Separate feasible solutions from attractive ones</h2>
+<p>Weighted scoring is useful only after rejecting choices that violate hard constraints. A shuttle that has the highest nominal mobility score but cannot meet its minimum charging reserve is not an acceptable solution simply because its low cost compensates for the failure. Formulate engineering choices as</p>
+<div class="equation">\[
+\max_{x\in X} f(x)\quad \text{subject to }g_j(x)\leq0,\ j=1,\ldots,m.
+\]</div>
+<p>The feasible set $X$ and constraints express what is allowed. The objective expresses what is preferred <em>among allowed choices</em>. Stakeholders should approve both. Changing the preference weights must not quietly change minimum safety or legal requirements.</p>
+<h2>2. Make units and relationships explicit</h2>
+<p>Suppose a route policy selects the number of active vehicles $x$, with $x\in{1,2,3}$. Nominal service capacity is $6x$ requests per hour. Energy use is $12x$ kWh per hour, and the charging contract limits continuous energy consumption to 30 kWh per hour. Under those exact assumptions, $x=3$ violates the 30-kWh cap even though it serves the greatest nominal demand; $x=2$ is the largest feasible choice.</p>
+<p>A model should label whether the energy limit is an instantaneous power cap, an hourly energy budget, or a battery inventory constraint. Mixing kWh and kW without specifying time is a dimensional error, not a policy disagreement.</p>
+<h2>3. Add uncertainty without hiding it</h2>
+<p>Demand, journey time, and available energy fluctuate. An expected-value calculation may treat average demand as representative even when the system must provide service during a severe demand surge. <strong>Robust optimization</strong> requires constraints to hold for all scenarios in a specified uncertainty set; a <strong>chance constraint</strong> permits a bounded probability of violation under an explicitly modeled distribution.</p>
+<p>A robust constraint might be $6x\geq d$ for every $d\in[8,12]$, requiring at least two vehicles. A chance constraint might require $P(6x\geq D)\geq0.95$. The answers depend heavily on the chosen uncertainty distribution, which must be supported by data or clearly labeled an assumption. A broader uncertainty set produces a more conservative design, but may also be expensive or infeasible.</p>
+<h2>4. Trade Pareto efficiency against stakeholder value</h2>
+<p>When cost, emissions, service completion, and resilience conflict, there is often no single design that dominates every other. A design is <strong>Pareto dominated</strong> if another is at least as good in every criterion and strictly better in at least one. Eliminate dominated designs before discussing subjective weights. Even then, a Pareto-efficient design may be socially unacceptable if it fails a minimum access requirement for a vulnerable population.</p>
+<p>A normalized weighted sum can conceal extreme disadvantages; normalization choices change rankings. Use sensitivity analysis to identify weight regions where the recommended alternative switches. Ask stakeholders to review those switch thresholds instead of showing one convenient ranking.</p>
+<h2>5. Minimax regret as an alternative decision lens</h2>
+<p>When credible futures are very different and probabilities are unreliable, compare regret. For each scenario, define the best feasible outcome, then compute how much is lost by each alternative relative to that scenario's best decision. Minimax regret chooses the alternative whose worst regret is smallest. It does not assert that the worst case is most likely; it protects against severe relative underperformance when future conditions cannot be trusted probabilistically.</p>
+<p>For example, compare two fleet investments over calm and emergency weeks. A fixed high-capacity fleet may be costly in calm weeks but resilient in surges; an on-demand contract may do the reverse. A robust decision report should show the scenario outcomes, constraints, cost of protection, and what new information would change the choice.</p>
+<h2>6. Worked example: why ranking is not enough</h2>
+<p>Take three alternatives with nominal service (requests/hour), energy requirement (kWh/hour), and cost index:</p>
+<table>
+<thead>
+<tr>
+  <th>Alternative</th>
+  <th style="text-align:right">Service</th>
+  <th style="text-align:right">Energy</th>
+  <th style="text-align:right">Cost index</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>A</td>
+  <td style="text-align:right">6</td>
+  <td style="text-align:right">12</td>
+  <td style="text-align:right">2</td>
+</tr>
+<tr>
+  <td>B</td>
+  <td style="text-align:right">12</td>
+  <td style="text-align:right">24</td>
+  <td style="text-align:right">4</td>
+</tr>
+<tr>
+  <td>C</td>
+  <td style="text-align:right">18</td>
+  <td style="text-align:right">36</td>
+  <td style="text-align:right">5</td>
+</tr>
+</tbody>
+</table>
+<p>The hard requirements are service at least 10 and energy no more than 30. Only B is feasible. No amount of normalized scoring should select C until the energy constraint changes or a justified alternative energy arrangement is designed. Now add uncertainty: if one vehicle can serve anywhere from 4 to 6 requests/hour, B could serve only 8 in the stressed case and fails the robust service threshold. The honest result is <strong>no currently feasible choice</strong> under the stated conditions; engineers must redesign, relax a requirement with authority, or procure additional capacity.</p>
+<h2>7. From optimization result to design authorization</h2>
+<p>Record configuration assumptions, constraint owners, demand characterization, the solver or enumeration method, sensitivity cases, and how infeasibility is handled. A solver returning an optimum does not certify the model is correct. A valid optimization workflow includes a unit audit, boundary cases, an independent enumeration on small examples, and a decision review with stakeholders who own the constraints.</p>
+<h2>Practice questions</h2>
+<p><strong>A.</strong> Identify the feasible options in the table. <strong>B.</strong> Explain how an uncertainty set can make every option infeasible. <strong>C.</strong> Compare the meaning of robust satisfaction versus a 95% chance constraint.</p>
+<details><summary>Answer check</summary>
+
+<p>B alone satisfies both nominal hard constraints. Under stressed service of 4 per vehicle, B supplies only 8; C supplies 12 but violates energy. Thus no option meets both requirements. Robust feasibility covers every declared scenario; chance constraints rely on a probability model and tolerate a specified violation probability.</p>
+</details>
+
+<h2>Further connections</h2>
+<p><a href="10-decisions.html">Decision tradeoffs</a>, <a href="19-simulation-credibility.html">simulation credibility</a>, and <a href="02-requirements.html">requirements</a> help distinguish stakeholder value from nonnegotiable engineering constraints.</p>
+<h2>Guided laboratory</h2>
+<p><a href="labs/18-robust-optimization-workshop.html">Open the corresponding case-based lab</a></p>
+<div class="activity"><h3>Hard-constraint feasibility explorer</h3><label>Minimum service / hour <input id="c18a" type="number" value="10" min="0"></label><label>Energy limit kWh/hour <input id="c18b" type="number" value="30" min="0"></label><label>Capacity multiplier <input id="c18c" type="number" value="1" min="0" max="2" step=".1"></label><output id="o18"></output></div><script>function calc18(){const s=+document.getElementById('c18a').value,e=+document.getElementById('c18b').value,m=+document.getElementById('c18c').value;let a=[['A',6,12],['B',12,24],['C',18,36]].filter(x=>x[1]*m>=s&&x[2]<=e).map(x=>x[0]);document.getElementById('o18').textContent='Feasible choices: '+(a.join(', ')||'none—redesign is required');}['c18a','c18b','c18c'].forEach(id=>document.getElementById(id).addEventListener('input',calc18));calc18();</script><div class="related"><a href="INDEX.html">Back to concept hub</a><a href="../LAB-LIBRARY.html">Lab resource browser</a></div></main></body></html>

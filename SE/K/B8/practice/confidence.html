@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Zero-failure confidence and test design · Systems Engineering</title>
+<style>:root{--ink:#193849;--teal:#167575;--bg:#f4f7f8;--line:#d5e4e5}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.76 system-ui,-apple-system,Segoe UI,Arial,sans-serif}header{background:#193c50;color:white;padding:22px max(20px,calc((100vw - 1050px)/2))}header a{color:#d3f7f0;text-decoration:none;margin-right:20px}main{max-width:1050px;margin:25px auto 75px;background:white;border:1px solid var(--line);border-radius:13px;padding:clamp(20px,5vw,58px)}h1{font-size:clamp(1.8rem,3vw,2.35rem);line-height:1.2}h2{margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:7px}h3{margin-top:1.5em}a{color:var(--teal);text-underline-offset:3px}p,li{max-width:85ch}blockquote{margin:16px 0;padding:8px 17px;background:#ecf6f5;border-left:4px solid var(--teal)}table{display:block;max-width:100%;overflow:auto;border-collapse:collapse}td,th{border:1px solid var(--line);padding:10px;vertical-align:top}th{background:#eaf4f3}pre{background:#1a3644;color:#f3f8fa;padding:18px;border-radius:10px;overflow:auto}code{font-size:.88em}p code{background:#edf2f3;padding:2px 5px;border-radius:4px}details{border:1px solid var(--line);border-radius:10px;background:#f8fbfb;padding:14px 17px;margin:12px 0}summary{font-weight:750;cursor:pointer}.actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 28px}.actions a{background:#e4f3f1;border:1px solid #b7d9d7;border-radius:7px;padding:8px 13px;font-weight:650;text-decoration:none}.note{background:#eef7f6;border:1px solid #c9e3e0;padding:16px;border-radius:8px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style>
+<script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']] },svg:{fontCache:'local'},startup:{typeset:false}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B8/practice/confidence.html" data-se-mode="standard"></script>
+</head><body><header><a href="../OPEN-BOOK.html">Book 8</a><a href="WORKBENCH.html">Interactive workbench</a><a href="../../LAB-LIBRARY.html">Lab resources</a></header><main>
+<div class="actions"><a href="confidence.html">Concept workshop</a><a href="lab-confidence.html">Applied lab</a><a download="" href="requests.csv">Download data</a><a download="" href="tools.py">Download Python</a><a download="" href="LAB-NOTEBOOK.ipynb">Download notebook</a><a download="" href="confidence.md">Download this Markdown</a></div><h1>Workshop 5 · What does zero observed failure prove?</h1>
+<p><em>Companion to Book VIII, Chapter 4 · Statistical confidence and sample rationale</em></p>
+<h2>The seduction of a flawless demonstration</h2>
+<p>Northstar's test team reports 30 successful emergency-stop trials and no observed failures. The briefing slide calls the system “100% reliable.” That conclusion does not follow. The experiment observed 0 failures in a finite sample. Inference about an <em>unknown underlying failure probability</em> requires a statistical model and an explicit confidence procedure; inference about operational safety also requires conditions that represent the real mission.</p>
+<p>Assume each trial is an independent Bernoulli opportunity with the same unknown failure probability \(p\). The probability of observing no failures in \(n\) trials is \((1-p)^n\). To form a one-sided \(100(1-\alpha)\%\) upper confidence bound after zero failures, solve \((1-p_U)^n=\alpha\). Thus</p>
+<p>\[
+p_U=1-\alpha^{1/n}.
+\]</p>
+<p>This is an <strong>exact frequentist upper bound conditional on the Bernoulli assumptions</strong>, not a probability that the true \(p\) is below the bound given these observations. It also does not prove performance beyond the tested conditions.</p>
+<h2>Worked example: 30 trials</h2>
+<p>For \(\alpha=0.05\), \(n=30\),</p>
+<p>\[
+p_U=1-0.05^{1/30}\approx0.0950.
+\]</p>
+<p>Even with no failures, failure rates as high as approximately <strong>9.5% per independent trial</strong> are not excluded by this 95% confidence procedure. If the acceptance claim is \(p\le0.01\), 30 trials are insufficient to support it with the same procedure. The minimum sample size to achieve a zero-failure upper bound of 1% satisfies</p>
+<p>\[
+n\ge\frac{\log(0.05)}{\log(1-0.01)}\approx298.1,
+\]</p>
+<p>so <strong>299 failure-free trials</strong> are required under the assumptions. That is a sample-size calculation, not a recommendation to ignore consequence, dependence, test coverage, or design evidence.</p>
+<h2>Why the assumptions matter</h2>
+<p><strong>Independent trials:</strong> Repeating the same physical setup may reproduce the same hidden defect or common-cause failure. <strong>Constant failure probability:</strong> Different routes, temperatures, load states and maintenance conditions can have different risks. <strong>Representative opportunities:</strong> A failure opportunity must be defined before computing a per-trial probability. <strong>No hidden censoring:</strong> Trials that were aborted or declared “not evaluable” require accounting. <strong>Stable configuration:</strong> A software change during the campaign means earlier executions may not apply to the final release. Ignoring these conditions creates false precision.</p>
+<p>When several failure modes are assessed together, the experiment's result may not support each mode independently. For safety-critical decisions, combine test evidence with hazard analyses, analysis of coverage, fault injection, review of controls and justified operational limitations. Statistical confidence is one component of an assurance argument.</p>
+<h2>Worked problems</h2>
+<p><strong>Problem 1.</strong> For 10 failure-free independent trials, compute the one-sided 95% upper bound.</p>
+<details><summary>Worked solution 1</summary>
+<p>\(1-0.05^{1/10}\approx0.2589\), or 25.9%. A small zero-failure sample is weak evidence for very low failure probability.</p>
+</details>
+<p><strong>Problem 2.</strong> What minimum number of failure-free trials is needed for a one-sided 95% upper bound of 5%?</p>
+<details><summary>Worked solution 2</summary>
+<p>\(n\ge\log(0.05)/\log(0.95)\approx58.4\), so 59 independent failure-free trials.</p>
+</details>
+<p><strong>Problem 3.</strong> Is a 95% upper confidence bound the same as saying “there is a 95% probability that \(p\) is below the bound”?</p>
+<details><summary>Worked solution 3</summary>
+<p>Not in frequentist inference. The 95% describes the long-run coverage of the procedure across repeated datasets. A probability statement about \(p\) given the data requires an explicitly chosen Bayesian prior and posterior model.</p>
+</details>
+<p><strong>Problem 4.</strong> An engineering team reruns the same simulator seed 299 times. Can it use the formula to claim 1% reliability?</p>
+<details><summary>Worked solution 4</summary>
+<p>No. Replaying an identical deterministic realization does not produce independent failure opportunities. Even genuinely different simulated seeds require a credibility argument that the simulator represents the relevant failure mechanism.</p>
+</details>
+<h2>Transfer to engineering work</h2>
+<p>Use the supplied Python evidence tool to calculate confidence bounds and sample sizes. Then design a test matrix with operational domains, environmental factors and configuration control. Write two sentences your sponsor could safely publish: one describing observed outcomes, the other describing the <strong>limited inference</strong> supported by the model. Critique an alternative plan that merely increases sample size without improving test representativeness.</p>
+</main></body></html>

@@ -1,0 +1,70 @@
+{
+  "studies": [
+    {
+      "book": 2,
+      "course": "645.667",
+      "chapter": "K/GS/chapters/02-earned-value.md",
+      "lab": "K/GS/labs/02-earned-value.md"
+    },
+    {
+      "book": 9,
+      "course": "645.632",
+      "chapter": "K/GS/chapters/09-parametric-models.md",
+      "lab": "K/GS/labs/09-parametric-models.md"
+    },
+    {
+      "book": 12,
+      "course": "645.758",
+      "chapter": "K/GS/chapters/12-hybrid-simulation.md",
+      "lab": "K/GS/labs/12-hybrid-simulation.md"
+    },
+    {
+      "book": 13,
+      "course": "645.781",
+      "chapter": "K/GS/chapters/13-feedback-dynamics.md",
+      "lab": "K/GS/labs/13-feedback-dynamics.md"
+    },
+    {
+      "book": 14,
+      "course": "645.784",
+      "chapter": "K/GS/chapters/14-decision-science.md",
+      "lab": "K/GS/labs/14-decision-science.md"
+    },
+    {
+      "book": 15,
+      "course": "645.780",
+      "chapter": "K/GS/chapters/15-agile-flow.md",
+      "lab": "K/GS/labs/15-agile-flow.md"
+    },
+    {
+      "book": 16,
+      "course": "645.782",
+      "chapter": "K/GS/chapters/16-digital-thread.md",
+      "lab": "K/GS/labs/16-digital-thread.md"
+    },
+    {
+      "book": 17,
+      "course": "645.783",
+      "chapter": "K/GS/chapters/17-process-causality.md",
+      "lab": "K/GS/labs/17-process-causality.md"
+    },
+    {
+      "book": 18,
+      "course": "645.771",
+      "chapter": "K/GS/chapters/18-mission-networks.md",
+      "lab": "K/GS/labs/18-mission-networks.md"
+    },
+    {
+      "book": 19,
+      "course": "645.753",
+      "chapter": "K/GS/chapters/19-enterprise-portfolios.md",
+      "lab": "K/GS/labs/19-enterprise-portfolios.md"
+    },
+    {
+      "book": 20,
+      "course": "645.742",
+      "chapter": "K/GS/chapters/20-critical-interventions.md",
+      "lab": "K/GS/labs/20-critical-interventions.md"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Engineering economics: lifecycle costs, options, and organizational value · Systems Engineering</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f7f8;color:#183b4b;font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:#116f76;text-underline-offset:3px}a:hover{color:#064e5c}header{background:linear-gradient(120deg,#16384b,#16736e);color:#fff;padding:25px max(20px,calc((100vw - 1100px)/2))}header a{color:#d5fafa}header .eyebrow{font-size:.8rem;letter-spacing:.11em;text-transform:uppercase}header h1{font-size:clamp(1.7rem,3vw,2.7rem);line-height:1.17;margin:.3em 0}.paper{max-width:1010px;margin:25px auto 80px;background:white;border:1px solid #dae6e7;border-radius:15px;padding:clamp(20px,4vw,54px)}h1,h2,h3{line-height:1.3}h2{margin-top:2em;border-bottom:1px solid #e2ebee;padding-bottom:.35em}h3{margin-top:1.5em}p,li{max-width:88ch}blockquote{border-left:4px solid #26a19a;padding:8px 17px;background:#eff8f7;margin-left:0}pre{background:#102e3b;color:#e9f7f4;padding:20px;border-radius:10px;overflow:auto}pre code{color:inherit}code{overflow-wrap:anywhere}p code,li code{background:#eef4f4;padding:2px 4px;border-radius:4px}table{border-collapse:collapse;display:block;overflow:auto}td,th{border:1px solid #d6e6e6;padding:9px}th{background:#eaf4f3}details{border:1px solid #d6e5e4;border-radius:10px;padding:14px 18px;margin:20px 0;background:#f8fcfb}summary{cursor:pointer;font-weight:700}.chaptertools{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.chaptertools a,.chaptertools button{border:1px solid #c4dedd;border-radius:7px;background:#eff9f8;padding:8px 14px;font:inherit}.related{border-top:1px solid #d5e4e4;margin-top:30px;padding-top:15px;display:flex;gap:12px;flex-wrap:wrap}.related a{padding:5px 12px;border:1px solid #cadcdc;border-radius:7px}mjx-container[jax=SVG]{max-width:100%;overflow-x:auto}svg{max-width:100%}@media(max-width:600px){.paper{margin:0;border-radius:0}}.activity{background:#edf8f7;border:1px solid #b8d7d3;border-radius:12px;padding:20px;margin:28px 0}.activity label{display:inline-flex;flex-direction:column;gap:4px;margin-right:14px;margin-bottom:12px;font-weight:650}.activity input{font:inherit;max-width:180px;border:1px solid #9bb4b8;border-radius:6px;padding:8px}.activity output{display:block;font-weight:700;color:#095d65;background:white;border-radius:7px;padding:13px;margin-top:8px}.equation{margin:22px 0;overflow-x:auto}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../_assets/mathjax-svg.js"></script><script defer src="../_assets/prism.js"></script><script defer src="../_assets/prism-python.js"></script><script defer src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/T/20-lifecycle-economics.html" data-se-mode="standard"></script>
+</head><body><header><div class="eyebrow">Systems engineering · Core Concepts</div><h1>Engineering economics: lifecycle costs, options, and organizational value</h1><p>Turn architecture choices into transparent cost, discounting, and option-value arguments.</p><nav><a href="INDEX.html">← Browse concepts</a> · <a href="../../START-HERE.html" >Curricula</a></nav></header><main class="paper"><h1>Engineering economics: lifecycle costs, options, and organizational value</h1>
+<p><em>Core Concepts · Enterprise &amp; complexity · T20</em></p>
+<blockquote>
+<p>Turn architecture choices into transparent cost, discounting, and option-value arguments.</p>
+</blockquote>
+<p><strong>Recommended preparation:</strong> <a href="10-decisions.html">10 Decisions</a>, <a href="12-enterprises.html">12 Enterprises</a></p>
+<p><strong>Related companion books:</strong> <a href="../B2/OPEN-BOOK.html">Book 2</a>, <a href="../B6/OPEN-BOOK.html">Book 6</a>, <a href="../B19/OPEN-BOOK.html">Book 19</a></p>
+<figure><img src="figures/credibility-economics.svg" alt="Conceptual teaching diagram" style="width:100%;max-width:930px"><figcaption style="font-size:.85rem;color:#54717b">A conceptual workflow, not a certified engineering process.</figcaption></figure><h2>1. The cheapest proposal is not always the least costly system</h2>
+<p>Systems engineering choices create costs beyond acquisition: integration, training, operation, maintenance, software updates, disposal, transition, and failure response. A comparison that considers only supplier purchase price may select a system that is expensive to own or cannot be sustained. Define the analysis period and the operating concept before calculating a lifecycle cost.</p>
+<p>For Northstar, a low-cost fleet may require expensive charging infrastructure, specialized technicians, and more frequent battery replacement. A software-intensive alternative may reduce hardware cost but create ongoing cloud services and cybersecurity assurance obligations. Costs should be attributed to the <em>system alternative</em>, not hidden in another agency's budget.</p>
+<h2>2. Use time value of money with explicit conventions</h2>
+<p>If a future cost $C_t$ occurs at time $t$ and the real discount rate is $r$, its present value is</p>
+<div class="equation">\[
+PV(C_t)=\frac{C_t}{(1+r)^t}.
+\]</div>
+<p>For an acquisition cost of $1{,}000$ now and annual operating cost of $200$ at each of the next three year-ends, the present cost at a 5% annual real rate is</p>
+<div class="equation">\[
+LCC=1000+\frac{200}{1.05}+\frac{200}{1.05^2}+\frac{200}{1.05^3}\approx 1544.65.
+\]</div>
+<p>Real versus nominal discounting must match how the cash flows are expressed. Don't use a real rate with nominal costs that already include inflation. A project justification also needs an agreed perspective: municipal budget cost, social cost, or supplier cost can lead to different rankings.</p>
+<h2>3. Compare alternatives over a common service basis</h2>
+<p>Option A costs less initially but covers 70% of eligible requests; B costs more but covers 95%. Dividing acquisition price by one vehicle is not an equitable service comparison. Normalize per relevant mission outcome—such as cost per completed eligible trip—while retaining the failure and equity criteria as hard requirements. The ratio can become misleading if it encourages minimizing service to difficult users, so pair it with minimum coverage rules.</p>
+<p>Use a common horizon and treatment of residual value. Include uncertainty in energy cost, utilization, staff needs, and obsolescence. If future demand grows, a design's expansion flexibility may be an engineering option worth analyzing rather than an unpriced marketing claim.</p>
+<h2>4. Understand value of information and flexibility</h2>
+<p>Suppose the authority can commit now to a large fleet or pay for a limited pilot before deciding. The pilot incurs cost and delays scale-up, but it may reveal actual demand and avoid an expensive wrong commitment. This is an option: pay a smaller amount to preserve the ability to choose after learning. The maximum rational price for information is bounded by how much it can improve the decision under the modeled probabilities and utilities.</p>
+<p>A pilot has <strong>no decision value</strong> if its possible observations will not change the selected investment. It may still be useful for safety or regulatory evidence, but that is a different justification. If a pilot could cross a decision threshold, compare expected value of acting with and without it, subtracting pilot cost and consequences of delay.</p>
+<h2>5. Worked illustration: operating cost changes the ranking</h2>
+<p>Assume two candidates for three years at 5% real discount rate:</p>
+<table>
+<thead>
+<tr>
+  <th>Candidate</th>
+  <th style="text-align:right">Acquisition</th>
+  <th style="text-align:right">Annual operating cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>A</td>
+  <td style="text-align:right">1,000</td>
+  <td style="text-align:right">200</td>
+</tr>
+<tr>
+  <td>B</td>
+  <td style="text-align:right">1,200</td>
+  <td style="text-align:right">110</td>
+</tr>
+</tbody>
+</table>
+<p>The three-year annuity factor is $[1-(1.05)^{-3}]/0.05\approx2.72325$. Thus A costs about $1,544.65$ present-value units, while B costs about $1,499.56$. B is cheaper on the stated lifecycle measure despite being more expensive to acquire. That ranking may reverse if B requires unexpected equipment renewal or if its annual service performance is worse. This is why every cost result needs sensitivity analysis and a service definition.</p>
+<h2>6. Treat uncertainty and distribution honestly</h2>
+<p>A public system distributes benefits and burdens across groups. One agency's savings can shift costs to another, and an average net benefit can hide severe consequences for particular communities. Create separate budget, operational, environmental, and distributional ledgers rather than collapsing everything into a single unsupported monetary score.</p>
+<p>Estimate ranges and decision thresholds. At what annual operating cost would B cease to have a cost advantage? At 5% for three years, the difference in acquisition is 200 units; B can bear at most about $200/2.72325\approx73.44$ units less per year than A before lifecycle costs tie. Here B saves 90 units/year, so it remains cheaper under the baseline assumptions. If that saving falls below 73.44, the ranking reverses.</p>
+<h2>7. From calculation to accountable enterprise choice</h2>
+<p>A cost estimate is a model of organizational commitments. An economic review should record sources, quantities, unit costs, rate conventions, forecast dates, discount rate, exclusions, scenario assumptions, and sensitivity boundaries. The board must also decide which nonfinancial criteria are constraints: safety obligations, service accessibility, privacy, and continuity of essential operations.</p>
+<p>Avoid treating the number of significant digits as evidence of certainty. A spreadsheet that reports $1,499.56 may be less informative than a defensible interval from $1,350 to $1,900 together with an explicit threshold that would reverse the investment.</p>
+<h2>Problems</h2>
+<p><strong>A.</strong> Derive the three-year present values for A and B. <strong>B.</strong> Calculate the annual operating-cost saving required for B to break even. <strong>C.</strong> Give an example where the cheapest lifecycle option is still unacceptable.</p>
+<details><summary>Answer guidance</summary>
+
+<p>A costs approximately $1,544.65; B approximately $1,499.56 at the declared real rate and year-end timing. The break-even operating saving is about $73.44 per year. A candidate can have the lowest cost and still fail safety, access, service-coverage, or other hard requirements.</p>
+</details>
+
+<h2>Further connections</h2>
+<p><a href="10-decisions.html">Decision methods</a>, <a href="12-enterprises.html">enterprise governance</a>, and <a href="18-robust-optimization.html">robust optimization</a> explain why economic ranking must remain linked to mission outcomes and constraints.</p>
+<h2>Guided laboratory</h2>
+<p><a href="labs/20-lifecycle-economics-workshop.html">Open the corresponding case-based lab</a></p>
+<div class="activity"><h3>Lifecycle cost comparison</h3><label>Real discount rate (%) <input id="c20" type="number" value="5" min="0" max="99" step="1"></label><output id="o20"></output></div><script>function calc20(){const r=(+document.getElementById('c20').value)/100,fac=[1,2,3].reduce((s,t)=>s+1/Math.pow(1+r,t),0),a=1000+200*fac,b=1200+110*fac;document.getElementById('o20').textContent='PV A: '+a.toFixed(2)+' · PV B: '+b.toFixed(2)+' · lower-cost: '+(a<b?'A':'B');}document.getElementById('c20').addEventListener('input',calc20);calc20();</script><div class="related"><a href="INDEX.html">Back to concept hub</a><a href="../LAB-LIBRARY.html">Lab resource browser</a></div></main></body></html>

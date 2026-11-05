@@ -1,0 +1,54 @@
+# Curated prerequisite map · v8
+
+**Interpretation.** A solid prerequisite link `A → B` means the conceptual foundation in A is useful to understand B *before beginning B*. It does not certify a formal university prerequisite. These 40 concept-level relations were curated manually and checked for missing nodes, direction and cycles; **no independent subject-matter expert has validated them**. Helpful non-prerequisite connections are kept separately.
+
+- **40** canonical concept entries; **62** prerequisite links and **12** useful non-prerequisite connections.
+- The prerequisite graph is **acyclic**, permitting staged study orders. It does not imply that the entire graduate course sequence must be linear.
+- Visual version: [prerequisite network](diagrams/prerequisite-network.svg); data version: [editable relationship table](PREREQUISITE-RELATIONSHIPS.csv).
+
+## A valid introductory study order
+
+1. [Probability, distributions, and dependence](../encyclopedia/probability-and-dependence.md) — **First learn:** none — entry point.
+2. [System of interest and purpose](../encyclopedia/system-of-interest.md) — **First learn:** none — entry point.
+3. [Boundaries, environment, and interfaces](../encyclopedia/boundaries-and-interfaces.md) — **First learn:** [System of interest and purpose](../encyclopedia/system-of-interest.md).
+4. [Risk, issue, uncertainty, and opportunity](../encyclopedia/risk-vs-issue.md) — **First learn:** [System of interest and purpose](../encyclopedia/system-of-interest.md).
+5. [Stakeholders, needs, and value](../encyclopedia/stakeholders-and-needs.md) — **First learn:** [System of interest and purpose](../encyclopedia/system-of-interest.md).
+6. [Measures of effectiveness and performance](../encyclopedia/metrics-hierarchy.md) — **First learn:** [Stakeholders, needs, and value](../encyclopedia/stakeholders-and-needs.md).
+7. [System of systems and constituent independence](../encyclopedia/sos-characteristics.md) — **First learn:** [Boundaries, environment, and interfaces](../encyclopedia/boundaries-and-interfaces.md).
+8. [Conceptual modeling and intended use](../encyclopedia/conceptual-m-and-s.md) — **First learn:** [System of interest and purpose](../encyclopedia/system-of-interest.md), [Measures of effectiveness and performance](../encyclopedia/metrics-hierarchy.md).
+9. [Concept of operations and scenarios](../encyclopedia/conops-and-scenarios.md) — **First learn:** [Stakeholders, needs, and value](../encyclopedia/stakeholders-and-needs.md), [Boundaries, environment, and interfaces](../encyclopedia/boundaries-and-interfaces.md).
+10. [Trade studies, constraints, and sensitivity](../encyclopedia/engineering-trades.md) — **First learn:** [Stakeholders, needs, and value](../encyclopedia/stakeholders-and-needs.md), [Measures of effectiveness and performance](../encyclopedia/metrics-hierarchy.md).
+11. [Flow, work in process, and bottlenecks](../encyclopedia/flow-wip-and-queues.md) — **First learn:** [Measures of effectiveness and performance](../encyclopedia/metrics-hierarchy.md).
+12. [Resilience, robustness, and graceful degradation](../encyclopedia/resilience-adaptability.md) — **First learn:** [Risk, issue, uncertainty, and opportunity](../encyclopedia/risk-vs-issue.md), [Probability, distributions, and dependence](../encyclopedia/probability-and-dependence.md).
+13. [Authority, governance, and coordination](../encyclopedia/authority-and-governance.md) — **First learn:** [Stakeholders, needs, and value](../encyclopedia/stakeholders-and-needs.md), [System of systems and constituent independence](../encyclopedia/sos-characteristics.md).
+14. [Design of experiments and sensitivity](../encyclopedia/design-of-experiments.md) — **First learn:** [Probability, distributions, and dependence](../encyclopedia/probability-and-dependence.md), [Measures of effectiveness and performance](../encyclopedia/metrics-hierarchy.md).
+15. [Functional, logical, and physical architectures](../encyclopedia/functional-vs-physical.md) — **First learn:** [Concept of operations and scenarios](../encyclopedia/conops-and-scenarios.md).
+16. [Requirements and acceptance criteria](../encyclopedia/good-requirements.md) — **First learn:** [Stakeholders, needs, and value](../encyclopedia/stakeholders-and-needs.md), [Concept of operations and scenarios](../encyclopedia/conops-and-scenarios.md).
+17. [Pareto frontiers and multiobjective decisions](../encyclopedia/pareto-and-value.md) — **First learn:** [Trade studies, constraints, and sensitivity](../encyclopedia/engineering-trades.md).
+18. [Stocks, flows, and feedback loops](../encyclopedia/stocks-flows-feedback.md) — **First learn:** [Conceptual modeling and intended use](../encyclopedia/conceptual-m-and-s.md).
+19. [Decision uncertainty and value of information](../encyclopedia/bayesian-value-of-information.md) — **First learn:** [Probability, distributions, and dependence](../encyclopedia/probability-and-dependence.md), [Trade studies, constraints, and sensitivity](../encyclopedia/engineering-trades.md).
+20. [Discrete-event simulation and queues](../encyclopedia/discrete-event-simulation.md) — **First learn:** [Conceptual modeling and intended use](../encyclopedia/conceptual-m-and-s.md), [Flow, work in process, and bottlenecks](../encyclopedia/flow-wip-and-queues.md).
+21. [Interface control and integration contracts](../encyclopedia/interface-control.md) — **First learn:** [Boundaries, environment, and interfaces](../encyclopedia/boundaries-and-interfaces.md), [Functional, logical, and physical architectures](../encyclopedia/functional-vs-physical.md).
+22. [Mission threads and capability analysis](../encyclopedia/mission-engineering.md) — **First learn:** [Concept of operations and scenarios](../encyclopedia/conops-and-scenarios.md), [System of systems and constituent independence](../encyclopedia/sos-characteristics.md).
+23. [Object-oriented domain models and responsibilities](../encyclopedia/object-responsibilities.md) — **First learn:** [Functional, logical, and physical architectures](../encyclopedia/functional-vs-physical.md).
+24. [Process capability and continuous improvement](../encyclopedia/process-improvement.md) — **First learn:** [Measures of effectiveness and performance](../encyclopedia/metrics-hierarchy.md), [Design of experiments and sensitivity](../encyclopedia/design-of-experiments.md).
+25. [Verification, validation, and acceptance](../encyclopedia/v-and-v.md) — **First learn:** [Requirements and acceptance criteria](../encyclopedia/good-requirements.md).
+26. [Architecture views, viewpoints, and consistency](../encyclopedia/views-and-viewpoints.md) — **First learn:** [Functional, logical, and physical architectures](../encyclopedia/functional-vs-physical.md).
+27. [Work breakdown structures and technical baselines](../encyclopedia/wbs-and-baselines.md) — **First learn:** [Requirements and acceptance criteria](../encyclopedia/good-requirements.md).
+28. [Allocation, coverage, and design responsibility](../encyclopedia/allocation-matrix.md) — **First learn:** [Requirements and acceptance criteria](../encyclopedia/good-requirements.md), [Functional, logical, and physical architectures](../encyclopedia/functional-vs-physical.md).
+29. [Model, method, language, tool, and repository](../encyclopedia/model-language-method-tool.md) — **First learn:** [Architecture views, viewpoints, and consistency](../encyclopedia/views-and-viewpoints.md).
+30. [Verification cross-reference matrices and test design](../encyclopedia/verification-matrix.md) — **First learn:** [Requirements and acceptance criteria](../encyclopedia/good-requirements.md), [Verification, validation, and acceptance](../encyclopedia/v-and-v.md).
+31. [Complexity, emergence, and adaptation](../encyclopedia/complexity-emergence.md) — **First learn:** [Stocks, flows, and feedback loops](../encyclopedia/stocks-flows-feedback.md), [System of systems and constituent independence](../encyclopedia/sos-characteristics.md).
+32. [The enterprise as a system](../encyclopedia/enterprise-as-system.md) — **First learn:** [System of systems and constituent independence](../encyclopedia/sos-characteristics.md), [Stocks, flows, and feedback loops](../encyclopedia/stocks-flows-feedback.md).
+33. [Software quality attributes and architectural tactics](../encyclopedia/software-quality-attributes.md) — **First learn:** [Requirements and acceptance criteria](../encyclopedia/good-requirements.md), [Interface control and integration contracts](../encyclopedia/interface-control.md).
+34. [Integration build-up and readiness evidence](../encyclopedia/integration-strategy.md) — **First learn:** [Interface control and integration contracts](../encyclopedia/interface-control.md), [Verification, validation, and acceptance](../encyclopedia/v-and-v.md).
+35. [Simulation verification, validation, and credibility](../encyclopedia/model-vv-and-credibility.md) — **First learn:** [Conceptual modeling and intended use](../encyclopedia/conceptual-m-and-s.md), [Verification, validation, and acceptance](../encyclopedia/v-and-v.md).
+36. [Requirements traceability and impact analysis](../encyclopedia/traceability-graph.md) — **First learn:** [Allocation, coverage, and design responsibility](../encyclopedia/allocation-matrix.md), [Verification cross-reference matrices and test design](../encyclopedia/verification-matrix.md).
+37. [CI/CD, configuration, and software assurance](../encyclopedia/software-lifecycle-evidence.md) — **First learn:** [Software quality attributes and architectural tactics](../encyclopedia/software-quality-attributes.md), [Verification cross-reference matrices and test design](../encyclopedia/verification-matrix.md).
+38. [Interventions, policy resistance, and learning loops](../encyclopedia/intervention-and-learning.md) — **First learn:** [Process capability and continuous improvement](../encyclopedia/process-improvement.md), [Complexity, emergence, and adaptation](../encyclopedia/complexity-emergence.md).
+39. [Agile systems engineering and lifecycle tailoring](../encyclopedia/agile-tailoring.md) — **First learn:** [Work breakdown structures and technical baselines](../encyclopedia/wbs-and-baselines.md), [CI/CD, configuration, and software assurance](../encyclopedia/software-lifecycle-evidence.md).
+40. [Digital thread and digital twin](../encyclopedia/digital-thread-and-twin.md) — **First learn:** [Requirements traceability and impact analysis](../encyclopedia/traceability-graph.md), [Simulation verification, validation, and credibility](../encyclopedia/model-vv-and-credibility.md).
+
+## Correct usage
+
+When choosing a topic, read its *immediate* prerequisites first. Follow transitive prerequisites only when a specific concept feels unfamiliar; you need not reread the entire upstream tree. Each article remains a self-contained entry point. The graph is editorial learning guidance, not a causal map of engineered system behavior.

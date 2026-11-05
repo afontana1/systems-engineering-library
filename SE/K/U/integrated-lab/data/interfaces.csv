@@ -1,0 +1,5 @@
+interface_id,producer,consumer,payload,unit_or_schema,contract,handling
+IF-01,SyntheticDemand,RequestLedger,request_id arrival_min origin destination passengers delivery_key,CSV schema v1,One passenger supported; unique immutable IDs,Reject invalid payload
+IF-02,RequestLedger,Dispatcher,validated Request collection,Python dataclass Request,Exact duplicate events produce one request,Reject conflicting duplicate
+IF-03,Dispatcher,AuditLogger,assignments and status,JSON output v1,Only one assignment per vehicle at a time,Record all statuses
+IF-04,ExperimentRunner,AssuranceReviewer,scenario metrics and evidence paths,JSON report v1,Every result tied to a fixture and config hash,Do not treat as deployment approval

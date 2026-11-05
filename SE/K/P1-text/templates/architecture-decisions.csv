@@ -1,0 +1,2 @@
+adr_id,status,context,decision,alternative,tradeoff,evidence,next_review
+ADR-01,proposed,Network intermittency,Buffer update events locally,Central publish only,Replay complexity vs resilience,TEST-OUTAGE,Next review

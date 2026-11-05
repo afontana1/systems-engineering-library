@@ -1,0 +1,9 @@
+parameter,value,source_type
+d,120,synthetic teaching assumption
+e,0.8,synthetic teaching assumption
+hours,10,synthetic teaching assumption
+aux,2,synthetic teaching assumption
+battery,180,synthetic teaching assumption
+soc,0.9,synthetic teaching assumption
+eta,0.9,synthetic teaching assumption
+reserve,20,synthetic teaching assumption

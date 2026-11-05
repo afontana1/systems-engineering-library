@@ -1,0 +1,2 @@
+Record ID,Type risk/issue/change,Cause,Event or request,Impact,Owner,Trigger,Response,Decision authority,Baseline links,Status
+RK-01,risk,Unproven API interoperability,Integration tests may fail,Schedule and rework,Integration lead,Supplier contract test fails,Early emulator and contingency,PM / SE / board,"ICD-01, WBS-1.4, Activity D",Open

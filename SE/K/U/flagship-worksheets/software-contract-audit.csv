@@ -1,0 +1,2 @@
+requirement_id,service,state_invariant,failure_scenario,test_case,evidence_status
+REQ-BOOK-07,booking,max_one_active_assignment,late_assign_event,T-ST-07,not_run

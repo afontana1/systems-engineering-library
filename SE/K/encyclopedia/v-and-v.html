@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Verification, validation, and acceptance: the three different decisions · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/v-and-v.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed reference</span><span>Concept article · Graduate-level explanation</span></div><article class="article-body"><h1>Verification, validation, and acceptance: the three different decisions</h1>
+<p><strong>Reference entry · Assurance and test · Expanded reference</strong></p>
+<h2>Core distinctions</h2>
+<p><strong>Verification</strong> asks whether a defined artifact, subsystem, or system satisfies specified requirements. <strong>Validation</strong> asks whether the right solution has been created for the intended operational use and stakeholder need. <strong>Acceptance</strong> is an authorized decision to take delivery or assume responsibility under specified contractual, regulatory, safety, and operational conditions. A verified system may not be valid; a technically valid system may still be unacceptable because essential evidence, obligations, or authority is missing.</p>
+<p>These terms apply throughout a lifecycle, not only at its end. Model verification, requirement validation, design verification, integrated test, operational demonstration, and service acceptance involve different claim boundaries and evidence. They must not be merged into a single green status.</p>
+<h2>The claim–argument–evidence structure</h2>
+<p>A defensible assurance case begins with a <strong>claim</strong> (“the dispatch service meets its response-time requirement under specified load”), an <strong>argument</strong> explaining why evidence supports it, and <strong>evidence</strong> with provenance and applicability. Evidence is conditional on product version, configuration, environment, test population, instrumentation, assumptions, and the acceptance rule.</p>
+<p>A verification cross-reference matrix maps requirements to methods—inspection, analysis, demonstration, or test—and to their resulting records. Coverage is necessary but insufficient: a row labeled “passed” does not reveal whether the measurement system was calibrated, the test environment was relevant, a fault was masked, or the tested build is the delivered build.</p>
+<p>Independence matters especially for consequential claims. If development, test data generation, scoring, and acceptance all reuse the same unexamined assumption, apparent agreement is not independent corroboration.</p>
+<h2>Worked example: evidence for a rare failure rate</h2>
+<p>Suppose a system requirement limits an independent per-demand failure probability to 1%. Zero failures in 30 independent representative demands is <strong>not</strong> persuasive evidence that the rate is below 1%. Under the Bernoulli model, the probability of seeing zero failures when the true failure rate is 1% equals <strong>(0.99)³⁰ ≈ 0.740</strong>; the outcome would be common even at the disallowed boundary.</p>
+<p>For a one-sided 95% upper confidence limit after <strong>n</strong> independent demands with zero failures, solve <strong>(1 − p)ⁿ = 0.05</strong>, giving <strong>p_upper = 1 − 0.05^(1/n)</strong>. To make this upper bound at most 0.01 requires approximately <strong>299 zero-failure demands</strong>. Even then the inference depends on independence, representativeness, failure detection, and stable configuration; clustered common-cause failures may destroy the Bernoulli assumption. A production readiness decision may require additional operational evidence rather than only this test statistic.</p>
+<h2>Evidence design</h2>
+<ol>
+<li>Identify each claim's subject and intended operating envelope.</li>
+<li>Choose verification methods according to what can actually demonstrate the property.</li>
+<li>Design representative and adverse scenarios, including failures and degraded modes.</li>
+<li>Define measurement uncertainty, calibration, sample design, and decision thresholds in advance.</li>
+<li>Preserve test procedure, build identity, configuration, raw results, anomalies, and adjudication.</li>
+<li>Evaluate validity against real mission outcomes and affected stakeholder populations.</li>
+<li>Separate the technical assessment from the <strong>acceptance authority's</strong> decision and recorded residual risk.</li>
+</ol>
+<h2>Failure modes and limitations</h2>
+<p>A passed unit test is not equivalent to system verification; formal proof under abstract assumptions is not proof that the physical environment meets those assumptions. Testing the happy path can miss rare-event and interface failures. A simulator can support test planning but does not automatically replace the missing physical evidence. Statistical confidence pertains to a model of the sampling process, not a universal guarantee.</p>
+<h2>Connections</h2>
+<p>This topic depends on requirements quality, operational scenarios, traceability, instrumentation, model credibility, and human decision authority. The same principle applies to agile continuous assurance: evidence must remain attached to the exact versions and intended uses it supports.</p>
+<h2>Reference shelf retained from the earlier primer</h2>
+<p>These links are supplied for deeper reading. Confirm current publication versions before relying on them for compliance.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — Reference chapters for lifecycle, needs, requirements, design, technical management, integration and V&amp;V.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Breadth-first conceptual encyclopedia and pointers to further references.</li>
+</ul>
+<p><strong>Expanded tutorial:</strong> <a href="../deep-dives/02-requirements-to-verification.html">From stakeholder need to verification evidence</a></p>
+<h2>Technical analysis: prove exactly which statistical claim is warranted</h2>
+<p>The zero-failure calculation above can be independently checked: <code>n ≥ ln(0.05)/ln(0.99) ≈ 298.07</code>, so the minimum integer is <strong>299</strong> independent representative demands. The bound is <em>one-sided frequentist confidence</em>, not “a 95% chance that this fixed rate is below 1%.” The confidence statement concerns the coverage of the procedure across hypothetical repeated studies. It assumes a fixed Bernoulli failure probability, complete failure detection, identical configuration, and representative independent trials.</p>
+<p>At <code>n=299</code>, <code>p_upper = 1−0.05^(1/299) ≈ 0.00997</code>. If the demands share a battery defect or operator training effect, their failures may be correlated; 299 nominal requests are no longer equivalent to 299 independent trials. If some outcomes were unobservable, zero <em>recorded</em> failures is not zero true failures. A reliability qualification should therefore name the demand population, stress envelope, censoring criteria, configuration lineage, and admissible statistical procedure <strong>before</strong> execution.</p>
+<p>Also distinguish <strong>product verification</strong> (against specified requirements) from <strong>model verification</strong> (implementation against a conceptual or mathematical specification) and from <strong>operational validation</strong> (fitness for intended use). These are different claims that can use overlapping evidence without becoming interchangeable. Acceptance authority may conditionally accept residual risk; acceptance does not change whether a technical requirement was actually demonstrated.</p>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/2-4-distinctions-between-product-verification-and-product-validation/">NASA · Distinctions between product verification and validation</a> — Separate conformity to specifications from fitness for intended use.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
+<li><a href="https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods">NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)</a> — Statistical methods, experiments, reliability, and process assessment.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="good-requirements.html">Requirements and acceptance criteria</a></li>
+<li><a href="verification-matrix.html">Verification cross-reference matrices and test design</a></li>
+<li><a href="model-vv-and-credibility.html">Simulation verification, validation, and credibility</a></li>
+<li><a href="integration-strategy.html">Integration build-up and readiness evidence</a></li>
+</ul>
+<p><strong>Explore in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B1/chapters/11-realization-and-evidence.html">Book 1, Chapter 11: Chapter 11 — From a Plausible Concept to Reviewable Evidence</a></li>
+<li><a href="../B8/chapters/01-receive-the-design-baseline-and-create-the-integrated-t.html">Book 8, Chapter 1: Book 8 · Chapter 1: T&amp;E strategy and acceptance authority</a></li>
+<li><a href="../B8/chapters/10-analyze-results-determine-evidence-sufficiency-and-reco.html">Book 8, Chapter 10: Book 8 · Chapter 10: Evidence sufficiency and decision statistics</a></li>
+</ul>
+<p><strong>Use this reference responsibly:</strong> examples use hypothetical engineering data; the mathematical results rely on the assumptions stated in each passage. Recheck those assumptions for any real project.</p>
+</article><footer class="standalone-foot"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=d12fd26a27d60">Open in the full encyclopedia</a><a href="v-and-v.md">Editable Markdown source</a></footer></main></body></html>

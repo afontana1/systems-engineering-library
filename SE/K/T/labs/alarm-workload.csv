@@ -1,0 +1,6 @@
+alarm_id,category,severity,actionable,age_seconds
+A01,exclusion_status,critical,yes,7
+A02,battery_low,warning,yes,20
+A03,refresh_complete,info,no,1
+A04,dispatch_pending,warning,yes,32
+A05,emergency_stop_unconfirmed,critical,yes,5

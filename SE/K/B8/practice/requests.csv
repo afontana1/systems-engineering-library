@@ -1,0 +1,13 @@
+id,status,wait_min
+Q01,served,5
+Q02,served,7
+Q03,served,10
+Q04,served,12
+Q05,served,13
+Q06,served,14
+Q07,served,15
+Q08,served,16
+Q09,served,18
+Q10,served,20
+Q11,dropped,
+Q12,dropped,

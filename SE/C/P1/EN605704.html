@@ -1,0 +1,3439 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.605.704 — Object-Oriented Analysis and Design · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P1/EN605704.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/05-software-contracts.html">State machines, contracts, and distributed failures</a></aside><main><div class="course-actions"><a href="../../K/B4/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en605704--object-oriented-analysis-and-design">EN.605.704 — Object-Oriented Analysis and Design</h1>
+<p><strong>Credits or equivalent effort:</strong> 3 credits / approximately 125–145 hours<br/>
+<strong>Nominal duration:</strong> 12 weeks<br/>
+<strong>Recommended weekly effort:</strong> 9–12 hours<br/>
+<strong>Curriculum phase:</strong> Phase 1 — Modeling languages and software-intensive systems<br/>
+<strong>Course type:</strong> Core software analysis and design course<br/>
+<strong>Primary program case:</strong> Autonomous Campus Shuttle Operations Platform<br/>
+<strong>Primary prerequisites:</strong> EN.645.662 — Introduction to Systems Engineering; working familiarity with an object-oriented programming language</p>
+<h2 id="1-course-purpose-and-professional-context">1. Course purpose and professional context</h2>
+<p>Object-oriented analysis and design (OOAD) is the disciplined transformation of stakeholder intent into a coherent software design. It is not synonymous with drawing class diagrams, and it is not a substitute for implementation. The analyst must discover the right problem concepts and behavioral responsibilities; the designer must then make explicit decisions about software structure, collaborations, state, interfaces, reuse, persistence, and precise constraints.</p>
+<p>The source JHU course covers requirements elicitation, use cases and scenarios, candidate-class discovery, static and dynamic analysis, static and dynamic design, state modeling, design patterns, the Object Constraint Language (OCL), and persistence. Its stated outcomes require learners to create and refine use cases, transform them into object-oriented software realizations, document the models in UML, and apply state machines, patterns, persistence, and OCL. The official course is organized around quizzes and a semester-long team project. <a href="https://ep.jhu.edu/courses/605704-object-oriented-analysis-and-design/" title="Object-Oriented Analysis and Design - 605.704">JHU-704-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/605.704.81" title="Fall 2026 Syllabus for 605.704.81">JHU-704-SYLLABUS</a></p>
+<p>This self-study course preserves that progression and project emphasis. It adds explicit traceability, structured critique, revision gates, repository discipline, oral defense, and reference-rationale materials so that an independent learner can judge whether a model is merely plausible-looking or actually defensible. It also separates three things that are often blurred:</p>
+<ul>
+<li><strong>requirements</strong> describe externally observable needs, obligations, qualities, and constraints;</li>
+<li><strong>analysis models</strong> describe the problem-domain concepts and responsibilities needed to realize those requirements without prematurely committing to implementation mechanisms;</li>
+<li><strong>design models</strong> make solution decisions about software classes, interfaces, collaborations, state, patterns, packages, and persistence.</li>
+</ul>
+<p>The running case is the <strong>Autonomous Campus Shuttle Operations Platform</strong>, a software-intensive subsystem that supports passenger trip requests, dispatch, vehicle assignment, route/service updates, incident handling, operator intervention, notifications, and service records. It continues the broader shuttle program used in Phase 0 and EN.645.631 but narrows the system boundary to a software platform suitable for OO analysis and design.</p>
+<p>Completion of this self-study course does not confer JHU credit or access to proprietary course materials.</p>
+<h2 id="2-source-description-and-self-study-scope">2. Source description and self-study scope</h2>
+<h3 id="source-course-scope--paraphrased">Source-course scope — paraphrased</h3>
+<p>The source course addresses fundamental object-oriented modeling, software requirements, UML static and dynamic analysis, object-oriented design, reuse and maintainability, design patterns, implementation concerns, state models, persistence, and OCL. Familiarity with an object-oriented language such as Java or C++ is expected, although the source course does not require programming assignments. <a href="https://ep.jhu.edu/courses/605704-object-oriented-analysis-and-design/" title="Object-Oriented Analysis and Design - 605.704">JHU-704-COURSE</a></p>
+<p>The Fall 2026 abridged syllabus identifies the following topic sequence: introduction to OOAD; requirements elicitation; functional requirements using use cases; use-case scenarios and documentation; candidate classes; static and dynamic analysis modeling; static and dynamic design modeling; state modeling; design patterns; OCL; and persistence. <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/605.704.81" title="Fall 2026 Syllabus for 605.704.81">JHU-704-SYLLABUS</a></p>
+<h3 id="included-in-this-self-study-course">Included in this self-study course</h3>
+<ul>
+<li>analysis-versus-design distinctions and model purpose;</li>
+<li>stakeholder and software requirements elicitation;</li>
+<li>system boundary, actors, goals, use cases, scenarios, extensions, and use-case quality;</li>
+<li>candidate-class discovery, domain vocabulary, conceptual classes, attributes, associations, and multiplicities;</li>
+<li>static analysis modeling and semantic review;</li>
+<li>dynamic analysis using system sequence diagrams, interaction models, and activity models;</li>
+<li>object lifecycle and state-machine modeling;</li>
+<li>responsibility assignment, cohesion, coupling, information ownership, and collaboration design;</li>
+<li>design classes, interfaces, operations, packages, layers, and dependency direction;</li>
+<li>dynamic design modeling with detailed sequence diagrams and operation contracts;</li>
+<li>selective use of design patterns with explicit problem, forces, consequences, and alternatives;</li>
+<li>OCL invariants, preconditions, postconditions, derived values, and model queries;</li>
+<li>persistence boundaries, identity, transactions, repositories, mapping decisions, and object-relational mismatch;</li>
+<li>design review, defect classification, traceability, change-impact analysis, and refactoring rationale;</li>
+<li>controlled final OOAD baseline and oral defense.</li>
+</ul>
+<h3 id="intentionally-deferred">Intentionally deferred</h3>
+<p>This course does not teach full software architecture, distributed systems, real-time scheduling, DevSecOps, secure coding, production database tuning, implementation frameworks, or comprehensive testing. Those concerns are developed in EN.645.764 — Software Systems Engineering. Small code sketches may be used to test design feasibility, but implementation volume is not graded.</p>
+<h2 id="3-relationship-to-the-curriculum">3. Relationship to the curriculum</h2>
+<h3 id="builds-on">Builds on</h3>
+<ul>
+<li>EN.645.662 stakeholder needs, system boundary, requirements quality, traceability, functions, interfaces, and V&amp;V concepts;</li>
+<li>EN.645.631 model governance, semantic consistency, repository discipline, and change-impact thinking;</li>
+<li>the Phase 0 Autonomous Campus Shuttle baseline, especially operational scenarios and system requirements;</li>
+<li>prior object-oriented programming experience sufficient to read classes, interfaces, inheritance, composition, exceptions, and collections.</li>
+</ul>
+<h3 id="prepares-for">Prepares for</h3>
+<ul>
+<li>EN.645.764 software requirements, architecture, quality attributes, implementation planning, testing, maintenance, and technical debt;</li>
+<li>EN.645.767 conceptual design when software-intensive candidate concepts must be represented credibly;</li>
+<li>later agile, digital-engineering, and system-of-systems work that depends on modularity, interfaces, and evolvability.</li>
+</ul>
+<h3 id="artifact-continuity">Artifact continuity</h3>
+<p>The learner imports selected shuttle needs, scenarios, requirements, actors, interfaces, and vocabulary from Phase 0 or EN.645.631. During this course, those inputs are refined into a software-focused requirements and OOAD baseline. EN.645.764 will reuse:</p>
+<ul>
+<li>the software context and scope;</li>
+<li>prioritized quality concerns;</li>
+<li>use-case model and scenarios;</li>
+<li>domain glossary and conceptual model;</li>
+<li>analysis and design class models;</li>
+<li>state and interaction models;</li>
+<li>pattern decisions;</li>
+<li>persistence design;</li>
+<li>OCL constraints;</li>
+<li>design defects, unresolved issues, and decision log.</li>
+</ul>
+<h2 id="4-prerequisites-and-readiness-assessment">4. Prerequisites and readiness assessment</h2>
+<h3 id="required-prior-competencies">Required prior competencies</h3>
+<p>The learner should be able to:</p>
+<ul>
+<li>distinguish stakeholder need, requirement, design decision, and verification method;</li>
+<li>read basic UML-like class and sequence diagrams;</li>
+<li>explain encapsulation, abstraction, inheritance, polymorphism, interfaces, and composition;</li>
+<li>read short Java, C++, C#, Kotlin, Python, or TypeScript class examples;</li>
+<li>use Git or an equivalent version-control system for text and model artifacts;</li>
+<li>write a concise technical rationale.</li>
+</ul>
+<h3 id="recommended-preparation">Recommended preparation</h3>
+<ul>
+<li>complete EN.645.662 and at least begin EN.645.631;</li>
+<li>review one object-oriented language's syntax for classes, interfaces, exceptions, collections, and unit tests;</li>
+<li>install a UML-capable modeling tool or a text-to-diagram tool;</li>
+<li>review the program competency definitions for C2, C3, C4, C5, and C12.</li>
+</ul>
+<h3 id="required-tools-and-access">Required tools and access</h3>
+<ul>
+<li>Git repository or equivalent controlled folder;</li>
+<li>a UML modeling environment or PlantUML-compatible workflow;</li>
+<li>Markdown editor;</li>
+<li>spreadsheet or table editor for traceability and review logs;</li>
+<li>optional Eclipse OCL environment for executable constraint checks;</li>
+<li>optional object-oriented language environment for feasibility micro-tests.</li>
+</ul>
+<h3 id="readiness-diagnostic--60-to-90-minutes">Readiness diagnostic — 60 to 90 minutes</h3>
+<h4 id="part-a--concept-check">Part A — concept check</h4>
+<p>Answer without references:</p>
+<ol>
+<li>What is the difference between a domain concept and a software class?</li>
+<li>When is composition more appropriate than inheritance?</li>
+<li>What does multiplicity <code>0..*</code> communicate?</li>
+<li>Why can a use case be correct even when it says nothing about classes or databases?</li>
+<li>What is the difference between an object state and the value of one attribute?</li>
+<li>What problem can an interface solve that a concrete class dependency cannot?</li>
+<li>Give one example of a business invariant.</li>
+<li>Explain why a design pattern is not automatically a best practice.</li>
+</ol>
+<h4 id="part-b--model-reading-task">Part B — model-reading task</h4>
+<p>Given a small class diagram containing <code>Passenger</code>, <code>TripRequest</code>, <code>Vehicle</code>, and <code>DispatchService</code>, identify:</p>
+<ul>
+<li>one likely domain concept incorrectly modeled as a service;</li>
+<li>one missing multiplicity;</li>
+<li>one inappropriate inheritance relationship;</li>
+<li>one responsibility that appears to be placed on the wrong class;</li>
+<li>one business rule that cannot be expressed by the diagram alone.</li>
+</ul>
+<h4 id="part-c--micro-design-task">Part C — micro-design task</h4>
+<p>Write a short scenario for "Passenger requests an accessible shuttle trip" and sketch a four-to-six-object interaction that realizes it. Label which elements are domain objects, application services, interfaces, and external actors.</p>
+<h3 id="passing-standard-and-bridge-work">Passing standard and bridge work</h3>
+<p>A passing readiness result requires at least six of eight concept answers substantially correct and a defensible micro-design. Learners who do not meet the standard should complete a one-week bridge covering classes, objects, interfaces, collections, inheritance versus composition, exceptions, and reading class/sequence diagrams before beginning Week 1.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<p>By the end of the course, the learner will be able to:</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Measurable course learning outcome</th>
+<th>Program competency</th>
+<th style="text-align:center">Level</th>
+<th>Primary assessment evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLO-1</td>
+<td>Elicit, formulate, critique, and refine software requirements and use cases for a bounded software system</td>
+<td>C2</td>
+<td style="text-align:center">D</td>
+<td>Requirements and use-case baseline</td>
+</tr>
+<tr>
+<td>CLO-2</td>
+<td>Construct a domain model that distinguishes problem concepts from solution mechanisms and uses defensible associations, multiplicities, and terminology</td>
+<td>C2, C5</td>
+<td style="text-align:center">D/I</td>
+<td>Domain model and glossary</td>
+</tr>
+<tr>
+<td>CLO-3</td>
+<td>Analyze use-case behavior through system interactions, activities, object collaborations, and operation contracts</td>
+<td>C3, C5</td>
+<td style="text-align:center">D/I</td>
+<td>Dynamic analysis package</td>
+</tr>
+<tr>
+<td>CLO-4</td>
+<td>Model significant object lifecycles using UML state machines and reconcile state behavior with requirements and class responsibilities</td>
+<td>C3, C5</td>
+<td style="text-align:center">D/I</td>
+<td>State-model package</td>
+</tr>
+<tr>
+<td>CLO-5</td>
+<td>Transform analysis models into a coherent object-oriented design with explicit responsibilities, interfaces, packages, and dependency direction</td>
+<td>C3, C5</td>
+<td style="text-align:center">D/I</td>
+<td>Static and dynamic design baseline</td>
+</tr>
+<tr>
+<td>CLO-6</td>
+<td>Select and apply design patterns only when their problem, forces, consequences, and alternatives justify their use</td>
+<td>C5, C12</td>
+<td style="text-align:center">I/D</td>
+<td>Pattern decision records and revised design</td>
+</tr>
+<tr>
+<td>CLO-7</td>
+<td>Express and evaluate precise model constraints using OCL invariants, preconditions, postconditions, and queries</td>
+<td>C4, C5</td>
+<td style="text-align:center">I</td>
+<td>OCL constraint suite and evaluation record</td>
+</tr>
+<tr>
+<td>CLO-8</td>
+<td>Design a persistence boundary that addresses identity, transactions, mapping, and domain-model independence</td>
+<td>C5</td>
+<td style="text-align:center">I</td>
+<td>Persistence design package</td>
+</tr>
+<tr>
+<td>CLO-9</td>
+<td>Audit, refactor, and defend an OOAD baseline using traceability, consistency, quality, and change-impact evidence</td>
+<td>C3, C5, C12</td>
+<td style="text-align:center">D</td>
+<td>Design review, change exercise, oral defense</td>
+</tr>
+<tr>
+<td>CLO-10</td>
+<td>Communicate OOAD decisions through reviewable UML models, concise technical writing, configuration records, and oral explanation</td>
+<td>C12</td>
+<td style="text-align:center">D</td>
+<td>Repository, review briefings, and capstone defense</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>What belongs in the problem model, and what belongs only in the solution design?</li>
+<li>How can use cases reveal responsibilities without dictating implementation?</li>
+<li>Which object should know, create, coordinate, or protect each piece of information and behavior?</li>
+<li>When does inheritance clarify a true substitutable type relationship, and when does it create harmful coupling?</li>
+<li>What evidence shows that static and dynamic models describe the same system?</li>
+<li>When does a pattern reduce design risk, and when does it merely add indirection?</li>
+<li>Which business rules require formal constraints rather than prose or diagram notation?</li>
+<li>How should object identity, persistence, and transaction boundaries influence—but not dominate—the domain model?</li>
+<li>What change would most seriously challenge the current design, and how would the design absorb it?</li>
+</ul>
+<h2 id="7-running-case-and-problem-environment">7. Running case and problem environment</h2>
+<h3 id="case-brief--autonomous-campus-shuttle-operations-platform">Case brief — Autonomous Campus Shuttle Operations Platform</h3>
+<p>The university is developing a platform that coordinates a mixed fleet of autonomous and human-supervised shuttles. The software boundary includes:</p>
+<ul>
+<li>passenger trip requests and cancellations;</li>
+<li>eligibility and accessibility needs;</li>
+<li>stop, route, and service-area information;</li>
+<li>dispatch and vehicle assignment;</li>
+<li>trip-status updates and notifications;</li>
+<li>operator intervention and incident handling;</li>
+<li>service records, audit history, and reporting;</li>
+<li>interfaces to vehicle telemetry, identity services, mapping, payments or entitlement, and emergency systems.</li>
+</ul>
+<p>The course does <strong>not</strong> design low-level autonomous-driving software. Vehicle autonomy is represented as an external collaborating system. The primary OOAD target is the operations platform.</p>
+<h3 id="initial-stakeholder-concerns">Initial stakeholder concerns</h3>
+<ul>
+<li>passengers need predictable, accessible service;</li>
+<li>dispatchers need accurate fleet state and override capability;</li>
+<li>safety staff need incident traceability and controlled escalation;</li>
+<li>maintainers need vehicle availability information;</li>
+<li>privacy staff need appropriate retention and access controls;</li>
+<li>university leadership needs service-performance reporting;</li>
+<li>future developers need modularity and clear responsibility boundaries.</li>
+</ul>
+<h3 id="provided-starting-artifacts">Provided starting artifacts</h3>
+<p>The learner creates or imports:</p>
+<ul>
+<li>a context diagram and system boundary;</li>
+<li>12–20 stakeholder needs;</li>
+<li>20–30 candidate software requirements;</li>
+<li>four nominal scenarios and three off-nominal scenarios;</li>
+<li>an initial domain vocabulary list;</li>
+<li>a deliberately defective use case;</li>
+<li>a deliberately defective class model;</li>
+<li>a change request introduced in Week 10;</li>
+<li>a persistence-policy memo introduced in Week 11.</li>
+</ul>
+<h3 id="minimum-final-model-content">Minimum final model content</h3>
+<p>The final baseline should contain at least:</p>
+<ul>
+<li>8–12 actors or external systems;</li>
+<li>10–14 use cases, of which at least six are fully dressed;</li>
+<li>35–50 traced software requirements or business rules;</li>
+<li>20–30 domain concepts;</li>
+<li>15–25 analysis classes or roles;</li>
+<li>18–30 design classes/interfaces/value objects/services;</li>
+<li>5 system sequence or high-level interaction diagrams;</li>
+<li>5 detailed design sequence diagrams;</li>
+<li>3 activity models;</li>
+<li>3 state machines;</li>
+<li>3 pattern decision records, with at least two adopted and one rejected;</li>
+<li>12–18 OCL constraints or executable-equivalent checks;</li>
+<li>a persistence mapping for 8–12 important objects;</li>
+<li>3 formal change-impact analyses;</li>
+<li>traceability from six critical use cases to requirements, analysis, design, and constraints.</li>
+</ul>
+<p>These numbers are scope floors, not quality indicators.</p>
+<h3 id="configuration-rules">Configuration rules</h3>
+<p>Use this minimum repository structure:</p>
+<pre><code class="language-text">704-ooad/
+├── 00-charter-and-scope/
+├── 01-requirements-and-use-cases/
+├── 02-analysis-model/
+├── 03-design-model/
+├── 04-state-and-constraints/
+├── 05-persistence/
+├── 06-reviews-and-decisions/
+├── exports/
+├── source/
+└── README.md
+</code></pre>
+<p>Every substantial artifact must contain:</p>
+<ul>
+<li>artifact identifier and title;</li>
+<li>baseline or revision number;</li>
+<li>author/reviewer role;</li>
+<li>source inputs;</li>
+<li>assumptions;</li>
+<li>unresolved issues;</li>
+<li>change history;</li>
+<li>links to related artifacts.</li>
+</ul>
+<h3 id="solo-and-team-policy">Solo and team policy</h3>
+<p>The source course uses teams and encourages peer review. A self-study learner should simulate this by rotating reviewer roles:</p>
+<ul>
+<li>requirements reviewer;</li>
+<li>domain expert;</li>
+<li>software designer;</li>
+<li>maintainer;</li>
+<li>test analyst;</li>
+<li>privacy or safety reviewer.</li>
+</ul>
+<p>When a peer cohort is available, exchange selected Week 3, Week 6, Week 9, and Week 11 artifacts. When working alone, record a separate red-team review before revising the baseline.</p>
+<h2 id="8-resource-architecture">8. Resource architecture</h2>
+<h3 id="required-authoritative-resources">Required authoritative resources</h3>
+<ol>
+<li><strong>JHU course page and Fall 2026 abridged syllabus</strong> — official scope, topics, learning outcomes, workload, and team-project framing. <a href="https://ep.jhu.edu/courses/605704-object-oriented-analysis-and-design/" title="Object-Oriented Analysis and Design - 605.704">JHU-704-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/605.704.81" title="Fall 2026 Syllabus for 605.704.81">JHU-704-SYLLABUS</a></li>
+<li><strong>OMG UML 2.5.1 specification</strong> — normative reference for UML concepts and notation. OMG lists UML 2.5.1 as the current formal version. <a href="https://www.omg.org/spec/UML/" title="Unified Modeling Language 2.5.1">OMG-UML</a></li>
+<li><strong>OMG OCL 2.4 specification</strong> — normative reference for OCL syntax and semantics. OMG lists OCL 2.4 as the current formal version. <a href="https://www.omg.org/spec/OCL/2.4/About-OCL" title="Object Constraint Language 2.4">OMG-OCL</a></li>
+<li><strong>PlantUML official documentation</strong> — reproducible text-based diagram practice for use-case, class, sequence, activity, and state models. <a href="https://plantuml.com/" title="PlantUML">PLANTUML</a> <a href="https://plantuml.com/class-diagram" title="PlantUML Class Diagram">PLANTUML-CLASS</a> <a href="https://plantuml.com/sequence-diagram" title="PlantUML Sequence Diagram">PLANTUML-SEQUENCE</a> <a href="https://plantuml.com/state-diagram" title="PlantUML State Diagram">PLANTUML-STATE</a></li>
+<li><strong>Eclipse OCL project documentation</strong> — optional executable OCL environment and implementation reference. <a href="https://eclipse.dev/modeling/group.html?group=tools" title="Eclipse OCL">ECLIPSE-OCL</a></li>
+</ol>
+<h3 id="recommended-coherent-texts">Recommended coherent texts</h3>
+<p>Choose one primary OOAD text rather than reading all of them cover to cover:</p>
+<ul>
+<li>Craig Larman, <em>Applying UML and Patterns</em>, especially the chapters on use cases, domain models, system sequence diagrams, contracts, responsibility assignment, and design modeling. <a href="https://www.pearson.com/en-us/subject-catalog/p/applying-uml-and-patterns-an-introduction-to-object-oriented-analysis-and-design-and-iterative-development/P200000000422/9780131489066" title="Applying UML and Patterns">LARMAN</a></li>
+<li>Martin Fowler, <em>UML Distilled</em>, for concise diagram and modeling guidance. <a href="https://martinfowler.com/books/uml.html" title="UML Distilled">UML-DISTILLED</a></li>
+<li>Alistair Cockburn, <em>Writing Effective Use Cases</em>, for scenario structure and use-case quality. <a href="https://www.pearson.com/en-us/subject-catalog/p/writing-effective-use-cases/P200000009217/9780321605801" title="Writing Effective Use Cases">COCKBURN</a></li>
+<li>Gamma, Helm, Johnson, and Vlissides, <em>Design Patterns</em>, for pattern intent, applicability, structure, and consequences. <a href="https://www.pearson.com/en-us/subject-catalog/p/Gamma-Design-Patterns-Elements-of-Reusable-Object-Oriented-Software/P200000009480/9780321700698" title="Design Patterns: Elements of Reusable Object-Oriented Software">GOF</a></li>
+</ul>
+<h3 id="supporting-design-and-persistence-resources">Supporting design and persistence resources</h3>
+<ul>
+<li>Martin Fowler, <em>Refactoring</em>, for behavior-preserving design improvement. <a href="https://martinfowler.com/books/refactoring.html" title="Refactoring">FOWLER-REFACTORING</a></li>
+<li>Fowler's <em>Patterns of Enterprise Application Architecture</em> catalog, especially Domain Model, Repository, Data Mapper, Identity Map, and Unit of Work. <a href="https://martinfowler.com/eaaCatalog/" title="Catalog of Patterns of Enterprise Application Architecture">FOWLER-EAA</a> <a href="https://martinfowler.com/eaaCatalog/repository.html" title="Repository">FOWLER-REPOSITORY</a> <a href="https://martinfowler.com/eaaCatalog/unitOfWork.html" title="Unit of Work">FOWLER-UOW</a></li>
+</ul>
+<h3 id="reading-policy">Reading policy</h3>
+<p>The UML and OCL specifications are reference standards, not textbooks. Weekly assignments name the relevant metaclass or topic and pair it with a practical text or worked example. The learner is expected to confirm semantics, not memorize the metamodel.</p>
+<h2 id="9-tool-stack-and-technical-setup">9. Tool stack and technical setup</h2>
+<table>
+<thead>
+<tr>
+<th>Tool or environment</th>
+<th>Purpose</th>
+<th style="text-align:center">Required or optional</th>
+<th>Setup evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Git</td>
+<td>Version history, baselines, branching, and review records</td>
+<td style="text-align:center">Required</td>
+<td>Repository with initial tag <code>704-start</code></td>
+</tr>
+<tr>
+<td>PlantUML or UML modeling tool</td>
+<td>Reproducible UML models</td>
+<td style="text-align:center">Required</td>
+<td>Rendered class, sequence, and state test diagrams</td>
+</tr>
+<tr>
+<td>Markdown editor</td>
+<td>Use cases, decisions, reviews, and memos</td>
+<td style="text-align:center">Required</td>
+<td>Repository README and artifact template</td>
+</tr>
+<tr>
+<td>Spreadsheet/table tool</td>
+<td>Traceability and review logs</td>
+<td style="text-align:center">Required</td>
+<td>Sample trace row and defect record</td>
+</tr>
+<tr>
+<td>Eclipse OCL or equivalent</td>
+<td>Parse/evaluate OCL constraints</td>
+<td style="text-align:center">Recommended</td>
+<td>One evaluated invariant</td>
+</tr>
+<tr>
+<td>Java/C++/C#/Kotlin/Python/TypeScript environment</td>
+<td>Optional design-feasibility micro-tests</td>
+<td style="text-align:center">Optional</td>
+<td>One small interface/composition example</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tool-neutral-grading-policy">Tool-neutral grading policy</h3>
+<p>The learner is graded on model meaning, consistency, traceability, and rationale—not vendor-specific notation or diagram styling. Tool output must be reproducible and exportable to an open review format such as PNG, SVG, PDF, Markdown, or text.</p>
+<h2 id="10-instructional-and-assessment-strategy">10. Instructional and assessment strategy</h2>
+<p>The course repeats this cycle:</p>
+<ol>
+<li>retrieve prior requirements and modeling concepts;</li>
+<li>study a focused method;</li>
+<li>inspect a worked example and a defective example;</li>
+<li>complete guided practice;</li>
+<li>apply the method to the shuttle case;</li>
+<li>obtain peer, rubric, or tool feedback;</li>
+<li>revise the artifact;</li>
+<li>update traceability and configuration records.</li>
+</ol>
+<h3 id="assessment-weights">Assessment weights</h3>
+<table>
+<thead>
+<tr>
+<th>Assessment category</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weekly retrieval checks and quizzes</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Guided modeling laboratories</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Weekly case-study increments</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Week 6 Analysis Model Review</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Week 10 Constraint and Change Red-Team Exercise</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Week 11 Design Readiness Review</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Week 12 capstone baseline and oral defense</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="feedback-methods">Feedback methods</h3>
+<ul>
+<li>reference-quality and defective examples;</li>
+<li>UML semantic and consistency checklists;</li>
+<li>traceability and orphan queries;</li>
+<li>optional executable OCL checks;</li>
+<li>recorded model walkthroughs;</li>
+<li>peer or role-based red-team review;</li>
+<li>mandatory revision after Weeks 3, 6, 10, and 11;</li>
+<li>oral defense using live model navigation.</li>
+</ul>
+<h2 id="11-twelve-week-course-map">11. Twelve-week course map</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Week</th>
+<th>Professional task</th>
+<th>Principal artifact</th>
+<th>Review evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Establish OOAD scope, process, repository, and case boundary</td>
+<td>Course charter, boundary, vocabulary, analysis/design distinction memo</td>
+<td>Setup and model-reading diagnostic</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>Elicit and structure software requirements</td>
+<td>Stakeholder questions, requirements set, actor-goal inventory</td>
+<td>Requirements-quality audit</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>Write and refine use cases and scenarios</td>
+<td>Use-case model and six fully dressed use cases</td>
+<td>Use-case peer/red-team review</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>Discover domain concepts and build static analysis model</td>
+<td>Domain glossary and conceptual class model</td>
+<td>Static-model semantic audit</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>Analyze dynamic behavior and collaborations</td>
+<td>System sequences, activities, interaction responsibilities</td>
+<td>Dynamic-analysis consistency review</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>Model state-dependent behavior and integrate analysis</td>
+<td>State machines and integrated analysis baseline</td>
+<td><strong>Analysis Model Review</strong></td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>Assign responsibilities and create static design model</td>
+<td>Design classes, interfaces, packages, and responsibility records</td>
+<td>Static Design Review</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>Realize use cases through dynamic design</td>
+<td>Detailed sequences, operation contracts, and method responsibilities</td>
+<td>Dynamic Design Review</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Apply and critique design patterns</td>
+<td>Pattern decision records and revised design</td>
+<td>Pattern justification review</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Formalize constraints and execute change impact</td>
+<td>OCL suite, defect findings, and revised model</td>
+<td><strong>Constraint and Change Red-Team Exercise</strong></td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>Design persistence and audit maintainability</td>
+<td>Persistence model, quality findings, and capstone draft</td>
+<td><strong>Design Readiness Review</strong></td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>Baseline and defend the integrated OOAD package</td>
+<td>Final repository, executive design memo, oral defense</td>
+<td><strong>Capstone OOAD Review</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-major-assignments-and-review-gates">12. Major assignments and review gates</h2>
+<table>
+<thead>
+<tr>
+<th>Assignment or review</th>
+<th style="text-align:right">Due</th>
+<th>Outcomes assessed</th>
+<th>Required outputs</th>
+<th>Revision requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Requirements and use-case baseline</td>
+<td style="text-align:right">Week 3</td>
+<td>CLO-1, CLO-10</td>
+<td>Actor-goal list, requirements, diagrams, six fully dressed use cases, audit</td>
+<td>Revise all major findings</td>
+</tr>
+<tr>
+<td>Analysis Model Review</td>
+<td style="text-align:right">Week 6</td>
+<td>CLO-2, CLO-3, CLO-4, CLO-9, CLO-10</td>
+<td>Domain, interaction, activity, state, traceability, review briefing</td>
+<td>Correct all critical defects</td>
+</tr>
+<tr>
+<td>Static and dynamic design baseline</td>
+<td style="text-align:right">Week 8</td>
+<td>CLO-5, CLO-9</td>
+<td>Design class model, interfaces, packages, sequences, contracts</td>
+<td>Incorporate review comments</td>
+</tr>
+<tr>
+<td>Pattern decision package</td>
+<td style="text-align:right">Week 9</td>
+<td>CLO-5, CLO-6</td>
+<td>Three pattern decision records, before/after design, one rejected pattern</td>
+<td>Revise unsupported applications</td>
+</tr>
+<tr>
+<td>Constraint and change red-team exercise</td>
+<td style="text-align:right">Week 10</td>
+<td>CLO-7, CLO-9</td>
+<td>OCL suite, supplied change analysis, defect report, corrected model</td>
+<td>Required correction cycle</td>
+</tr>
+<tr>
+<td>Design Readiness Review</td>
+<td style="text-align:right">Week 11</td>
+<td>CLO-5, CLO-8, CLO-9, CLO-10</td>
+<td>Persistence design, maintainability audit, capstone draft, findings</td>
+<td>Disposition findings before final</td>
+</tr>
+<tr>
+<td>Capstone OOAD baseline and defense</td>
+<td style="text-align:right">Week 12</td>
+<td>All CLOs</td>
+<td>Controlled final package, briefing, executive memo, oral defense</td>
+<td>Final evaluation</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-standard-course-rubric">13. Standard course rubric</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient performance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Requirements and use-case quality</td>
+<td style="text-align:right">15%</td>
+<td>Scope, actors, goals, scenarios, extensions, and requirements are clear, testable, and consistent</td>
+</tr>
+<tr>
+<td>Analysis-model semantic quality</td>
+<td style="text-align:right">20%</td>
+<td>Domain concepts, associations, behavior, and state reflect the problem without premature implementation bias</td>
+</tr>
+<tr>
+<td>Design coherence and responsibility assignment</td>
+<td style="text-align:right">25%</td>
+<td>Classes, interfaces, collaborations, packages, and dependencies form a maintainable realization</td>
+</tr>
+<tr>
+<td>Traceability and cross-view consistency</td>
+<td style="text-align:right">15%</td>
+<td>Critical use cases trace through requirements, analysis, design, state, constraints, and persistence</td>
+</tr>
+<tr>
+<td>Precision, constraints, and evidence</td>
+<td style="text-align:right">10%</td>
+<td>OCL and other rules express important semantics and are evaluated or carefully reviewed</td>
+</tr>
+<tr>
+<td>Maintainability and change accommodation</td>
+<td style="text-align:right">10%</td>
+<td>Patterns, persistence, and refactoring choices address explicit change drivers and tradeoffs</td>
+</tr>
+<tr>
+<td>Communication and configuration</td>
+<td style="text-align:right">5%</td>
+<td>Repository, diagrams, rationale, and review performance are clear and reproducible</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-critical-mastery-criteria">14. Critical mastery criteria</h2>
+<p>The course cannot be passed unless all of the following are true:</p>
+<ul>
+<li>at least six critical use cases are complete, internally consistent, and traceable;</li>
+<li>the domain model does not knowingly encode major user-interface, database, or framework choices as problem concepts;</li>
+<li>critical multiplicities, identities, and ownership relationships are explicit;</li>
+<li>at least three important object lifecycles are modeled and reconciled with use cases;</li>
+<li>every critical design collaboration has a responsible object or interface;</li>
+<li>no adopted pattern lacks a stated problem, forces, consequences, and rejected alternative;</li>
+<li>critical business invariants are represented precisely in OCL or an equivalent executable specification;</li>
+<li>persistence decisions distinguish domain identity from database keys and define transaction boundaries;</li>
+<li>the final model contains no unresolved critical contradiction across requirements, static models, dynamic models, state models, and constraints;</li>
+<li>the learner can navigate and defend the submitted model without relying on generated prose.</li>
+</ul>
+<h3 id="recommended-completion-standard">Recommended completion standard</h3>
+<ul>
+<li>at least <strong>80% overall</strong>;</li>
+<li>at least <strong>70% in each major assessment category</strong>;</li>
+<li>all critical mastery criteria satisfied;</li>
+<li>capstone rated at least <strong>Proficient</strong> on every critical rubric dimension;</li>
+<li>successful oral defense.</li>
+</ul>
+<h2 id="15-capstone-specification">15. Capstone specification</h2>
+<h3 id="capstone-problem">Capstone problem</h3>
+<p>The university must approve the software design baseline for the Autonomous Campus Shuttle Operations Platform before detailed implementation planning begins. The learner acts as lead analyst/designer and must demonstrate that stakeholder goals have been transformed into a coherent, maintainable, and reviewable OO design.</p>
+<h3 id="required-final-outputs">Required final outputs</h3>
+<ol>
+<li>software scope, context, assumptions, and glossary;</li>
+<li>stakeholder and software requirements baseline;</li>
+<li>actor-goal list and use-case diagram;</li>
+<li>six to eight fully dressed use cases;</li>
+<li>domain model and domain definitions;</li>
+<li>static analysis class model;</li>
+<li>system sequence and activity models;</li>
+<li>state machines for three significant objects;</li>
+<li>static design model with packages and interfaces;</li>
+<li>detailed design sequences and operation contracts;</li>
+<li>pattern decision records;</li>
+<li>OCL constraint suite and evaluation record;</li>
+<li>persistence design and mapping rationale;</li>
+<li>traceability and consistency report;</li>
+<li>change-impact report;</li>
+<li>design-quality and maintainability review;</li>
+<li>executive design memo;</li>
+<li>final briefing and oral defense.</li>
+</ol>
+<h3 id="required-consistency-checks">Required consistency checks</h3>
+<ul>
+<li>each critical use case traces to at least one requirement and one design realization;</li>
+<li>every message on a critical design sequence maps to an operation or explicit responsibility;</li>
+<li>state transitions are triggered by events represented in use cases or collaborations;</li>
+<li>multiplicities and OCL invariants do not contradict one another;</li>
+<li>persistence mappings preserve domain identity and required relationships;</li>
+<li>adopted patterns do not create dependency cycles or duplicate responsibilities;</li>
+<li>supplied change requests have complete impact paths and disposition records.</li>
+</ul>
+<h3 id="oral-defense-prompts">Oral defense prompts</h3>
+<ol>
+<li>Which element of the final model is most likely to be wrong, and why?</li>
+<li>Show one complete trace from stakeholder goal to design collaboration.</li>
+<li>Which domain concept was hardest to distinguish from a software mechanism?</li>
+<li>Why is the selected controller or coordinator the right responsibility owner?</li>
+<li>Demonstrate one place where composition is preferable to inheritance.</li>
+<li>Which state transition carries the greatest operational risk?</li>
+<li>Which design pattern did you reject, and what made it unsuitable?</li>
+<li>Show one business rule that the diagrams alone could not express precisely.</li>
+<li>How does the persistence design preserve object identity across transactions?</li>
+<li>What change would force the largest redesign?</li>
+<li>Which dependency would you remove first to improve maintainability?</li>
+<li>What evidence would you require before implementation begins?</li>
+</ol>
+<h2 id="16-portfolio-and-course-exit-package">16. Portfolio and course-exit package</h2>
+<p>Retain:</p>
+<ul>
+<li>the controlled final OOAD repository;</li>
+<li>major intermediate baselines from Weeks 3, 6, 8, 10, and 11;</li>
+<li>requirements and traceability tables;</li>
+<li>review findings and dispositions;</li>
+<li>pattern and persistence decision records;</li>
+<li>OCL source and results;</li>
+<li>change-impact analyses;</li>
+<li>executive design memo and review slides;</li>
+<li>oral-defense recording or transcript;</li>
+<li>one-page retrospective and EN.645.764 handoff memo.</li>
+</ul>
+<h2 id="17-course-maintenance-record">17. Course maintenance record</h2>
+<table>
+<thead>
+<tr>
+<th>Revision date</th>
+<th>Change</th>
+<th>Reason</th>
+<th>Source or evidence</th>
+<th>Effect on outcomes or assessments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-08-05</td>
+<td>Replaced sparse outline with a complete 12-week self-study course</td>
+<td>Program-wide curriculum expansion</td>
+<td>JHU Fall 2026 course page and abridged syllabus; OMG UML and OCL specifications</td>
+<td>Added full outcomes, readings, exercises, reviews, rubrics, mastery gates, and capstone</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h1 id="detailed-weekly-instructional-units">Detailed weekly instructional units</h1>
+<h2 id="week-1--establish-the-ooad-problem-scope-and-modeling-discipline">Week 1 — Establish the OOAD problem, scope, and modeling discipline</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B4/chapters/01-establish-the-ooad-problem-scope-and-modeling.html">Read Book IV, Chapter 1</a> → <a href="../../K/B4/labs/lab-01-establish-the-ooad-problem-scope-and-modeling.html">complete Hypothetical Lab 1</a> → <a href="../../K/P1-text/lessons/605-704-w01.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Foundation and setup<br/>
+<strong>Program competencies:</strong> C2-D, C3-D, C5-I, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-1, CLO-2, CLO-10<br/>
+<strong>Nominal effort:</strong> 9–10 hours<br/>
+<strong>Case-study baseline used:</strong> Phase 0 shuttle concept and EN.645.631 system context, if available<br/>
+<strong>Primary evidence produced:</strong> OOAD charter, software boundary, terminology baseline, and analysis-versus-design critique</p>
+<h3 id="1-why-this-week-matters">1. Why this week matters</h3>
+<p>Many weak software designs begin before anyone agrees on the system boundary, the problem vocabulary, or the distinction between analysis and design. Teams then encode early assumptions as classes, confuse actors with objects, treat database tables as domain concepts, and use UML as decoration. This week establishes a controlled modeling purpose and a disciplined separation between externally observable intent, problem-domain analysis, and software design.</p>
+<h3 id="2-essential-question">2. Essential question</h3>
+<blockquote>
+<p>What decisions are we trying to make with the OOAD model, and which details would be premature at this point?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve from prior work</strong></p>
+<ul>
+<li>shuttle mission, stakeholders, operational scenarios, and requirements;</li>
+<li>system boundary and external interfaces;</li>
+<li>basic object-oriented vocabulary.</li>
+</ul>
+<p><strong>Readiness questions</strong></p>
+<ol>
+<li>Is a passenger an actor, a domain concept, a software object, or potentially all three in different views?</li>
+<li>Why is <code>PostgreSQLTripRecord</code> a suspicious analysis-class name?</li>
+<li>What makes a requirement externally observable?</li>
+<li>What information belongs in a glossary rather than a class diagram?</li>
+<li>Why can two valid designs realize the same analysis model?</li>
+</ol>
+<p><strong>Small task</strong></p>
+<p>Classify each item as primarily <strong>requirement</strong>, <strong>analysis concept</strong>, <strong>design decision</strong>, or <strong>implementation detail</strong>:</p>
+<ul>
+<li>a passenger can cancel a trip before dispatch lock;</li>
+<li>trip request;</li>
+<li>notification gateway interface;</li>
+<li>Kafka topic name;</li>
+<li>accessible boarding requirement;</li>
+<li>vehicle assignment strategy;</li>
+<li>relational index on <code>trip_id</code>.</li>
+</ul>
+<p><strong>Answer guide</strong></p>
+<p>The first and fifth are requirements; <code>TripRequest</code> is an analysis concept; the gateway interface and assignment strategy are design decisions; Kafka topic and relational index are implementation details. Context can move an item between categories, but the rationale must be explicit.</p>
+<h3 id="4-detailed-weekly-learning-outcomes">4. Detailed weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ol>
+<li>distinguish requirements, analysis, design, and implementation artifacts;</li>
+<li>define the software system boundary and identify external actors and systems;</li>
+<li>establish model purpose, audience, authority, and success criteria;</li>
+<li>build a controlled domain vocabulary without premature class design;</li>
+<li>inspect a small UML model for category errors and hidden design assumptions;</li>
+<li>configure a reproducible OOAD repository.</li>
+</ol>
+<h3 id="5-key-concepts-and-distinctions">5. Key concepts and distinctions</h3>
+<ul>
+<li>object versus class versus role;</li>
+<li>actor versus domain concept;</li>
+<li>analysis class versus design class;</li>
+<li>conceptual model versus code model;</li>
+<li>system boundary and design scope;</li>
+<li>authoritative artifact and traceability source;</li>
+<li>model view versus underlying model content;</li>
+<li>semantic correctness versus visual polish;</li>
+<li>accidental complexity introduced by tools or frameworks.</li>
+</ul>
+<h3 id="6-required-readings-and-resources">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding questions</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JHU Fall 2026 abridged syllabus <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/605.704.81" title="Fall 2026 Syllabus for 605.704.81">JHU-704-SYLLABUS</a></td>
+<td>Description, topics, goals, CLOs, and coursework sections</td>
+<td>Understand source-course intent and project emphasis</td>
+<td>What outputs does the source course expect? Which topics transform analysis into design?</td>
+<td style="text-align:right">30 min</td>
+</tr>
+<tr>
+<td>OMG UML 2.5.1 <a href="https://www.omg.org/spec/UML/" title="Unified Modeling Language 2.5.1">OMG-UML</a></td>
+<td>Read the specification introduction and overview material; inspect the definitions of Class, Object, Actor, and UseCase as needed</td>
+<td>Establish UML as a semantic language rather than a picture library</td>
+<td>Which UML elements represent classifiers, instances, roles, and behavior?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td><em>UML Distilled</em> <a href="https://martinfowler.com/books/uml.html" title="UML Distilled">UML-DISTILLED</a></td>
+<td>Introduction and the author's guidance on using UML selectively</td>
+<td>Develop an economical modeling mindset</td>
+<td>Which diagrams answer a real question, and which would merely decorate the project?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td>PlantUML official site <a href="https://plantuml.com/" title="PlantUML">PLANTUML</a></td>
+<td>Install or test the chosen rendering workflow</td>
+<td>Establish reproducible text-based diagrams if no repository tool is used</td>
+<td>Can the source and rendered output be recreated on another machine?</td>
+<td style="text-align:right">30 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes">7. Instructor-style lesson notes</h3>
+<p>A domain concept is not automatically a class, and an analysis class is not automatically a production class. OO analysis asks what stable concepts, responsibilities, rules, and collaborations exist in the problem. OO design asks how software elements will realize those responsibilities under quality and implementation constraints.</p>
+<p>Use UML selectively. A diagram should answer a question such as:</p>
+<ul>
+<li>What is inside the software boundary?</li>
+<li>Which actors pursue which goals?</li>
+<li>Which concepts and relationships must the software understand?</li>
+<li>Which objects collaborate to realize a use case?</li>
+<li>Which states constrain legal behavior?</li>
+<li>Which dependencies would make change expensive?</li>
+</ul>
+<p>The model repository should preserve decisions and relationships. A screenshot alone is weak evidence because it cannot be queried, diffed reliably, or traced.</p>
+<h3 id="8-worked-example">8. Worked example</h3>
+<p><strong>Problem:</strong> A team models <code>MobileAppScreen</code>, <code>TripRequestTable</code>, and <code>RESTEndpoint</code> as the central analysis concepts for passenger booking.</p>
+<p><strong>Diagnosis:</strong></p>
+<ul>
+<li><code>MobileAppScreen</code> embeds a user-interface mechanism;</li>
+<li><code>TripRequestTable</code> embeds a persistence mechanism;</li>
+<li><code>RESTEndpoint</code> embeds an integration mechanism;</li>
+<li>the model lacks the stable concepts <code>Passenger</code>, <code>TripRequest</code>, <code>Stop</code>, <code>ServiceWindow</code>, and <code>AccessibilityNeed</code>;</li>
+<li>the model cannot explain the business rule governing request eligibility.</li>
+</ul>
+<p><strong>Reframed analysis model:</strong></p>
+<ul>
+<li><code>Passenger</code> submits a <code>TripRequest</code>;</li>
+<li>a <code>TripRequest</code> identifies origin, destination, requested time, party size, and accessibility needs;</li>
+<li>a <code>ServicePolicy</code> determines eligibility;</li>
+<li>an <code>Assignment</code> links an accepted request to a vehicle and service plan.</li>
+</ul>
+<p><strong>Design alternatives preserved:</strong> mobile/web UI, relational/document persistence, REST/events, or other mechanisms can be selected later.</p>
+<h3 id="9-guided-practice">9. Guided practice</h3>
+<ol>
+<li>Import or summarize the shuttle operational context.</li>
+<li>Draw a software-context view containing the platform, human actors, and external systems.</li>
+<li>Create a four-column classification table: requirement, analysis concept, design candidate, implementation detail.</li>
+<li>Classify 30 supplied or self-generated terms.</li>
+<li>Review each disputed classification and write a one-sentence rationale.</li>
+<li>Create repository folders, naming rules, and an initial baseline tag.</li>
+</ol>
+<p><strong>Checkpoint:</strong> At least 80% of terms should be defensibly classified. Items may appear in more than one view only when their role is explained.</p>
+<h3 id="10-independent-exercises">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Define 20 OOAD terms in your own words.</li>
+<li>Identify five common ways UML models become misleading.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Produce the shuttle software context and boundary.</li>
+<li>Create a domain vocabulary of 25–40 terms.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Review the defective model provided in the case and identify at least ten category or semantic defects.</li>
+<li>Explain which defects would cause downstream design rework.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Write a two-page OOAD charter defining purpose, audiences, authoritative artifacts, expected decisions, exclusions, and success criteria.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Represent the same small model in both a graphical UML tool and PlantUML; document semantic or interoperability differences.</li>
+</ul>
+<h3 id="11-deliverable-specification">11. Deliverable specification</h3>
+<p>Submit <code>704-W01-OOAD-Charter-v1.0</code> containing:</p>
+<ol>
+<li>case and software-boundary statement;</li>
+<li>context diagram;</li>
+<li>actor and external-system inventory;</li>
+<li>model-purpose and audience table;</li>
+<li>analysis/design/implementation distinction memo;</li>
+<li>domain vocabulary;</li>
+<li>defective-model findings;</li>
+<li>repository and naming convention;</li>
+<li>assumptions and unresolved questions;</li>
+<li>screenshot or log showing the repository can be rebuilt.</li>
+</ol>
+<h3 id="12-weekly-rubric">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scope and boundary</td>
+<td style="text-align:right">25%</td>
+<td>Software boundary and external actors/systems are clear and defensible</td>
+</tr>
+<tr>
+<td>Conceptual discipline</td>
+<td style="text-align:right">25%</td>
+<td>Requirements, analysis, design, and implementation are distinguished with sound rationale</td>
+</tr>
+<tr>
+<td>Vocabulary quality</td>
+<td style="text-align:right">20%</td>
+<td>Terms are defined, nonduplicative, and aligned with stakeholder language</td>
+</tr>
+<tr>
+<td>Defect analysis</td>
+<td style="text-align:right">15%</td>
+<td>Important category and semantic errors are identified and prioritized</td>
+</tr>
+<tr>
+<td>Repository reproducibility</td>
+<td style="text-align:right">15%</td>
+<td>Source, structure, naming, and baseline evidence are complete</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> undefined system boundary; central model organized around UI/database/framework artifacts; unreproducible diagram-only submission.</p>
+<h3 id="13-knowledge-check">13. Knowledge check</h3>
+<ol>
+<li>Why is an analysis model intentionally incomplete as a software design?</li>
+<li>Can an actor be a software system?</li>
+<li>What is wrong with treating every noun in a requirements document as a class?</li>
+<li>Why should a modeling tool not determine the method?</li>
+<li>Give one example of a stable domain concept and three possible implementation mechanisms for it.</li>
+</ol>
+<p><strong>Answer guidance:</strong> Analysis preserves problem meaning while deferring solution choices; actors may be people or external systems; nouns include noise, attributes, roles, and mechanisms; tool features do not establish semantic purpose; stable concepts can be implemented by many architectures.</p>
+<h3 id="14-feedback-revision-and-mastery-gate">14. Feedback, revision, and mastery gate</h3>
+<p>Compare the classification table with the answer rationale and conduct a five-minute recorded walkthrough. Revise any term whose classification cannot be defended. Week 1 is complete when the repository is restorable and no critical boundary or category defect remains.</p>
+<h3 id="15-reflection-and-workload-record">15. Reflection and workload record</h3>
+<p>Record:</p>
+<ul>
+<li>the most tempting premature design decision;</li>
+<li>one term whose meaning changed during review;</li>
+<li>one modeling view that is unnecessary at this stage;</li>
+<li>actual hours spent and the activity that consumed the most time.</li>
+</ul>
+<hr/>
+<h2 id="week-2--elicit-and-structure-software-requirements">Week 2 — Elicit and structure software requirements</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B4/chapters/02-elicit-and-structure-software-requirements.html">Read Book IV, Chapter 2</a> → <a href="../../K/B4/labs/lab-02-elicit-and-structure-software-requirements.html">complete Hypothetical Lab 2</a> → <a href="../../K/P1-text/lessons/605-704-w02.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Requirements method development<br/>
+<strong>Program competencies:</strong> C2-D, C5-I, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-1, CLO-10<br/>
+<strong>Nominal effort:</strong> 9–11 hours<br/>
+<strong>Case-study baseline used:</strong> Week 1 boundary and vocabulary<br/>
+<strong>Primary evidence produced:</strong> Stakeholder-question plan, actor-goal inventory, software requirements baseline, and quality audit</p>
+<h3 id="1-why-this-week-matters-2">1. Why this week matters</h3>
+<p>OOAD cannot repair ambiguous or missing intent. Requirements elicitation must expose stakeholder goals, operating conditions, exceptions, policies, data obligations, and quality concerns before designers assign responsibilities. The most useful requirements for OO analysis describe externally observable behavior and rules without prescribing classes or frameworks.</p>
+<h3 id="2-essential-question-2">2. Essential question</h3>
+<blockquote>
+<p>What must the software accomplish and constrain before we decide how objects will realize it?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-2">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve</strong></p>
+<ul>
+<li>stakeholder roles and operational scenarios;</li>
+<li>software boundary and external-system inventory;</li>
+<li>requirements-quality criteria from EN.645.662.</li>
+</ul>
+<p><strong>Readiness check</strong></p>
+<p>Classify five statements as need, functional requirement, quality requirement, business rule, or design constraint. Rewrite two compound statements into singular requirements. Identify one hidden actor and one missing off-nominal condition.</p>
+<p><strong>Passing guide:</strong> Four of five classifications correct, and rewritten requirements are clear, singular, feasible, and verifiable.</p>
+<h3 id="4-detailed-weekly-learning-outcomes-2">4. Detailed weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ol>
+<li>plan stakeholder elicitation around goals, decisions, exceptions, and information needs;</li>
+<li>derive an actor-goal inventory from operational scenarios;</li>
+<li>write functional, quality, interface, data, and policy requirements;</li>
+<li>distinguish a business rule from a use-case step and from a design decision;</li>
+<li>audit requirements for ambiguity, compound structure, unverifiable language, and hidden solution bias;</li>
+<li>prioritize requirements for analysis-model coverage.</li>
+</ol>
+<h3 id="5-key-concepts">5. Key concepts</h3>
+<ul>
+<li>elicitation versus transcription;</li>
+<li>stakeholder goal and user goal;</li>
+<li>trigger, precondition, postcondition, and guarantee;</li>
+<li>functional versus quality requirement;</li>
+<li>business rule and policy;</li>
+<li>external interface obligation;</li>
+<li>data ownership, retention, and audit requirement;</li>
+<li>requirement source, rationale, priority, and verification note;</li>
+<li>solution bias and pseudo-requirement.</li>
+</ul>
+<h3 id="6-required-readings-and-resources-2">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding questions</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JHU syllabus <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/605.704.81" title="Fall 2026 Syllabus for 605.704.81">JHU-704-SYLLABUS</a></td>
+<td>Revisit Requirements Elicitation and use-case topics</td>
+<td>Anchor the course sequence</td>
+<td>Why does elicitation precede candidate-class discovery?</td>
+<td style="text-align:right">15 min</td>
+</tr>
+<tr>
+<td>Cockburn, <em>Writing Effective Use Cases</em> <a href="https://www.pearson.com/en-us/subject-catalog/p/writing-effective-use-cases/P200000009217/9780321605801" title="Writing Effective Use Cases">COCKBURN</a></td>
+<td>Chapters/sections on stakeholders, actors, goals, scope, and preconditions</td>
+<td>Frame requirements around actor goals</td>
+<td>Which stakeholder interests may not appear in the primary actor's happy path?</td>
+<td style="text-align:right">90 min</td>
+</tr>
+<tr>
+<td>OMG UML <a href="https://www.omg.org/spec/UML/" title="Unified Modeling Language 2.5.1">OMG-UML</a></td>
+<td>UseCase and Actor reference sections</td>
+<td>Confirm formal meanings</td>
+<td>What does the use-case model say about behavior and subject boundary?</td>
+<td style="text-align:right">30 min</td>
+</tr>
+<tr>
+<td>Prior EN.645.662 requirements guidance</td>
+<td>Review the requirements-quality checklist and traceability method</td>
+<td>Reuse program standards</td>
+<td>Which requirements are good inputs to use cases, and which need repair first?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-2">7. Instructor-style lesson notes</h3>
+<p>Elicitation should ask not only "What should the system do?" but also:</p>
+<ul>
+<li>What event starts the interaction?</li>
+<li>What outcome does the actor value?</li>
+<li>What can go wrong?</li>
+<li>What information must be retained or disclosed?</li>
+<li>Which policies govern eligibility or priority?</li>
+<li>What timing, availability, security, accessibility, or audit qualities matter?</li>
+<li>Which external system can fail, delay, or disagree?</li>
+</ul>
+<p>Avoid embedding objects in requirements. "The <code>TripManager</code> shall instantiate an <code>Assignment</code>" is a design statement. "The platform shall record the assignment of an accepted trip request to a vehicle" is externally meaningful and permits design alternatives.</p>
+<h3 id="8-worked-example-2">8. Worked example</h3>
+<p><strong>Weak statement:</strong> "The app shall quickly use AI to choose the best shuttle and notify the passenger."</p>
+<p><strong>Defects:</strong> ambiguous actor and boundary; subjective "quickly" and "best"; prescribed AI; multiple behaviors; missing failure conditions and verification criteria.</p>
+<p><strong>Refined set:</strong></p>
+<ol>
+<li>The platform shall evaluate each accepted trip request against available vehicle capacity, accessibility capability, service area, and estimated arrival time.</li>
+<li>The platform shall record the selected vehicle assignment and the decision time.</li>
+<li>The platform shall issue an assignment notification to the passenger within 10 seconds after assignment confirmation under nominal network conditions.</li>
+<li>If no eligible vehicle is available, the platform shall notify the dispatcher and passenger of the unassigned status and reason category.</li>
+</ol>
+<p><strong>Open question:</strong> the selection objective and tie-breaking policy remain a business-rule decision.</p>
+<h3 id="9-guided-practice-2">9. Guided practice</h3>
+<p>Using the scenario "Passenger requests an accessible trip":</p>
+<ol>
+<li>list all stakeholders and interests;</li>
+<li>identify the primary actor and supporting actors;</li>
+<li>identify trigger and desired outcome;</li>
+<li>write five functional requirements;</li>
+<li>write two quality requirements;</li>
+<li>write three business rules;</li>
+<li>write one external-interface requirement;</li>
+<li>identify verification approaches;</li>
+<li>remove design-biased language.</li>
+</ol>
+<h3 id="10-independent-exercises-2">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Correct 12 defective software requirements.</li>
+<li>Create a glossary of modal verbs and prohibited vague terms.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Prepare 20 stakeholder interview questions.</li>
+<li>Create an actor-goal inventory with at least 12 goals.</li>
+<li>Draft 35–50 software requirements or business rules.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Identify contradictions, duplicates, gaps, and hidden design assumptions.</li>
+<li>Rank the top ten requirements by analysis risk.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Produce a requirements baseline with source, rationale, priority, type, quality finding, and expected use-case linkage.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Conduct one real interview with a dispatcher, mobility-service user, or analogous operator and compare findings with your assumed stakeholder model.</li>
+</ul>
+<h3 id="11-deliverable-specification-2">11. Deliverable specification</h3>
+<p>Submit <code>704-W02-Software-Requirements-v1.0</code>:</p>
+<ul>
+<li>elicitation plan and stakeholder questions;</li>
+<li>actor-goal inventory;</li>
+<li>35–50 requirements/rules;</li>
+<li>requirements-quality audit;</li>
+<li>contradiction and gap log;</li>
+<li>top-ten analysis-risk list;</li>
+<li>preliminary requirement-to-goal traceability;</li>
+<li>revision history.</li>
+</ul>
+<h3 id="12-weekly-rubric-2">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Elicitation coverage</td>
+<td style="text-align:right">20%</td>
+<td>Questions address goals, exceptions, data, qualities, policies, and external systems</td>
+</tr>
+<tr>
+<td>Requirement quality</td>
+<td style="text-align:right">30%</td>
+<td>Statements are clear, singular, testable, and minimally solution-biased</td>
+</tr>
+<tr>
+<td>Actor-goal structure</td>
+<td style="text-align:right">20%</td>
+<td>Goals are actor-valued and support use-case discovery</td>
+</tr>
+<tr>
+<td>Risk and gap analysis</td>
+<td style="text-align:right">20%</td>
+<td>Contradictions and uncertain assumptions are explicit and prioritized</td>
+</tr>
+<tr>
+<td>Traceability/configuration</td>
+<td style="text-align:right">10%</td>
+<td>Sources, rationale, IDs, and version history are controlled</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> no off-nominal requirements; central requirements prescribe unexamined implementations; critical stakeholder omitted.</p>
+<h3 id="13-knowledge-check-2">13. Knowledge check</h3>
+<ol>
+<li>What distinguishes a stakeholder interest from a primary-actor goal?</li>
+<li>Why is a business rule not always a system requirement?</li>
+<li>What makes a quality requirement useful to OO design?</li>
+<li>Identify two forms of solution bias.</li>
+<li>Why should requirements have stable identifiers before modeling?</li>
+</ol>
+<h3 id="14-feedback-and-mastery-gate">14. Feedback and mastery gate</h3>
+<p>Use the requirements checklist and a separate reviewer role. Correct all compound, vague, and unverifiable critical requirements. Week 2 is complete when every top-priority actor goal has at least one supporting requirement and every critical requirement has a source and rationale.</p>
+<h3 id="15-reflection">15. Reflection</h3>
+<p>Which stakeholder interest was easiest to overlook? Which requirement most strongly constrains later design? Which elicitation assumption needs external validation?</p>
+<hr/>
+<h2 id="week-3--capture-functional-requirements-with-use-cases-and-scenarios">Week 3 — Capture functional requirements with use cases and scenarios</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B4/chapters/03-capture-functional-requirements-with-use-case.html">Read Book IV, Chapter 3</a> → <a href="../../K/B4/labs/lab-03-capture-functional-requirements-with-use-case.html">complete Hypothetical Lab 3</a> → <a href="../../K/P1-text/lessons/605-704-w03.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Requirements synthesis and first major review<br/>
+<strong>Program competencies:</strong> C2-D, C3-D, C5-I, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-1, CLO-3, CLO-9, CLO-10<br/>
+<strong>Nominal effort:</strong> 10–12 hours<br/>
+<strong>Case-study baseline used:</strong> Week 2 requirements and actor-goal inventory<br/>
+<strong>Primary evidence produced:</strong> Use-case model, six fully dressed use cases, and requirements/use-case review</p>
+<h3 id="1-why-this-week-matters-3">1. Why this week matters</h3>
+<p>Use cases connect stakeholder goals to observable system behavior. Poor use cases either restate requirements too vaguely or bury the reader in user-interface clicks and internal design. Good use cases reveal scenarios, responsibilities, information, exceptions, and lifecycle rules that later analysis models must explain.</p>
+<h3 id="2-essential-question-3">2. Essential question</h3>
+<blockquote>
+<p>Does each use case describe a complete actor-valued outcome without dictating the internal software design?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-3">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve</strong></p>
+<ul>
+<li>actor-goal inventory;</li>
+<li>requirement types and quality findings;</li>
+<li>software boundary.</li>
+</ul>
+<p><strong>Readiness task</strong></p>
+<p>Given a scenario containing 15 steps, identify:</p>
+<ul>
+<li>the primary actor;</li>
+<li>the system under design;</li>
+<li>the actor's goal level;</li>
+<li>three implementation details to remove;</li>
+<li>two alternate flows to add;</li>
+<li>the success guarantee.</li>
+</ul>
+<h3 id="4-detailed-weekly-learning-outcomes-3">4. Detailed weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ol>
+<li>identify user-goal use cases from actor-goal analysis;</li>
+<li>define scope, level, primary actor, stakeholders, trigger, preconditions, guarantees, and main success scenario;</li>
+<li>write clear action steps that alternate actor intent and system responsibility;</li>
+<li>model extensions and failure recovery without duplicating entire scenarios;</li>
+<li>use include, extend, and generalization sparingly and semantically;</li>
+<li>audit use cases for completeness, design leakage, inconsistent terminology, and traceability.</li>
+</ol>
+<h3 id="5-key-concepts-2">5. Key concepts</h3>
+<ul>
+<li>business versus system use case;</li>
+<li>summary, user-goal, and subfunction level;</li>
+<li>main success scenario and extension;</li>
+<li>minimal guarantee and success guarantee;</li>
+<li>trigger and precondition;</li>
+<li>stakeholder interests;</li>
+<li>essential versus concrete use case;</li>
+<li>include, extend, and generalization;</li>
+<li>use-case diagram as index, not behavioral specification.</li>
+</ul>
+<h3 id="6-required-readings-and-resources-3">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding questions</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cockburn <a href="https://www.pearson.com/en-us/subject-catalog/p/writing-effective-use-cases/P200000009217/9780321605801" title="Writing Effective Use Cases">COCKBURN</a></td>
+<td>Sections on scope, goal level, fully dressed template, action steps, extensions, and guarantees</td>
+<td>Develop scenario-writing discipline</td>
+<td>Is each step observable and at the right abstraction level?</td>
+<td style="text-align:right">2 hr</td>
+</tr>
+<tr>
+<td>OMG UML <a href="https://www.omg.org/spec/UML/" title="Unified Modeling Language 2.5.1">OMG-UML</a></td>
+<td>UseCase relationships and subject/actor semantics</td>
+<td>Verify notation</td>
+<td>When are include and extend relationships semantically justified?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td>PlantUML use-case documentation <a href="https://plantuml.com/use-case-diagram" title="PlantUML Use Case Diagram">PLANTUML-USECASE</a></td>
+<td>Create reproducible actor/use-case view</td>
+<td>Practice notation without overvaluing it</td>
+<td>Does the diagram add information beyond the use-case table?</td>
+<td style="text-align:right">30 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-3">7. Instructor-style lesson notes</h3>
+<p>A fully dressed use case should let a reviewer answer:</p>
+<ul>
+<li>who wants the outcome;</li>
+<li>why the interaction begins;</li>
+<li>what must already be true;</li>
+<li>what the system guarantees even on failure;</li>
+<li>what happens in the nominal path;</li>
+<li>where alternatives and exceptions occur;</li>
+<li>which rules apply;</li>
+<li>which information crosses the boundary.</li>
+</ul>
+<p>Write steps in user-intent language. "Passenger enters origin into textbox" is concrete UI design. "Passenger identifies the pickup location" preserves implementation freedom. Internal statements such as "System calls <code>TripRepository.save()</code>" belong in design interactions, not use cases.</p>
+<h3 id="8-worked-example-3">8. Worked example</h3>
+<p><strong>Use case:</strong> Request Accessible Trip</p>
+<p><em>Primary actor:</em> Passenger<br/>
+<em>Trigger:</em> Passenger requests transportation<br/>
+<em>Preconditions:</em> Passenger is authenticated or approved for guest access; service is operating<br/>
+<em>Success guarantee:</em> A valid request is recorded with accessibility needs and current status<br/>
+<em>Minimal guarantee:</em> No duplicate request is created; attempted request is auditable</p>
+<p><strong>Main success scenario</strong></p>
+<ol>
+<li>Passenger identifies pickup, destination, desired time, party size, and accessibility needs.</li>
+<li>Platform validates service-area and request-policy constraints.</li>
+<li>Platform presents the interpreted trip details and applicable service conditions.</li>
+<li>Passenger confirms the request.</li>
+<li>Platform records the trip request and assigns a unique request identifier.</li>
+<li>Platform acknowledges acceptance and provides current status.</li>
+</ol>
+<p><strong>Extensions</strong></p>
+<ul>
+<li>2a. Pickup is outside the service area: platform explains the boundary and does not create a request.</li>
+<li>2b. Requested accessibility capability is unavailable: platform records the unmet need, offers supported alternatives when permitted, and notifies operations.</li>
+<li>4a. Passenger modifies details: resume at Step 2.</li>
+<li>5a. Duplicate active request detected: platform presents the existing request and prevents duplicate creation.</li>
+</ul>
+<p><strong>Rules surfaced:</strong> service-area rule, duplication rule, accessibility-policy rule, retention/audit rule.</p>
+<h3 id="9-guided-practice-3">9. Guided practice</h3>
+<p>Write the use case "Dispatcher overrides a vehicle assignment":</p>
+<ol>
+<li>identify stakeholder interests, including passenger and safety staff;</li>
+<li>write the trigger, preconditions, minimal guarantee, and success guarantee;</li>
+<li>write 6–10 main steps;</li>
+<li>add at least four extensions;</li>
+<li>link requirements and business rules;</li>
+<li>remove UI and implementation language;</li>
+<li>peer-review using a checklist.</li>
+</ol>
+<h3 id="10-independent-exercises-3">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Correct three defective use-case scenarios.</li>
+<li>Explain three common misuses of include/extend.</li>
+</ul>
+<p><strong>Application</strong></p>
+<p>Create 10–14 use cases and fully dress at least six:</p>
+<ul>
+<li>request trip;</li>
+<li>cancel trip;</li>
+<li>assign vehicle;</li>
+<li>monitor active trip;</li>
+<li>override assignment;</li>
+<li>handle service incident;</li>
+<li>update service availability;</li>
+<li>reconcile failed notification;</li>
+<li>produce service report;</li>
+<li>maintain route/stop data.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Build a coverage matrix from actor goals and requirements to use cases.</li>
+<li>Identify unmodeled exceptions and shared business rules.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Conduct a 30-minute recorded Use-Case Review using a separate reviewer role.</li>
+<li>Revise the baseline and disposition findings.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Write one misuse/abuse case and explain whether it belongs in this course baseline or later security analysis.</li>
+</ul>
+<h3 id="11-deliverable-specification-3">11. Deliverable specification</h3>
+<p>Submit <code>704-W03-Use-Case-Baseline-v1.0</code>:</p>
+<ol>
+<li>actor-goal list;</li>
+<li>use-case diagram;</li>
+<li>use-case catalog;</li>
+<li>six fully dressed use cases;</li>
+<li>extension and business-rule index;</li>
+<li>requirements/use-case coverage matrix;</li>
+<li>reviewer checklist and findings;</li>
+<li>revised use cases and disposition log;</li>
+<li>five-minute walkthrough recording or transcript.</li>
+</ol>
+<h3 id="12-weekly-rubric-3">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Goal and scope correctness</td>
+<td style="text-align:right">20%</td>
+<td>Use cases represent complete actor-valued goals within the software boundary</td>
+</tr>
+<tr>
+<td>Scenario quality</td>
+<td style="text-align:right">30%</td>
+<td>Main and alternate flows are clear, essential, complete, and internally consistent</td>
+</tr>
+<tr>
+<td>Exception and guarantee coverage</td>
+<td style="text-align:right">20%</td>
+<td>Important failures, recovery, and stakeholder protections are addressed</td>
+</tr>
+<tr>
+<td>Traceability</td>
+<td style="text-align:right">15%</td>
+<td>Actor goals and requirements map to use cases without critical gaps</td>
+</tr>
+<tr>
+<td>Review and revision</td>
+<td style="text-align:right">15%</td>
+<td>Findings are substantive, dispositioned, and reflected in the baseline</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> use cases are UI scripts; no off-nominal behavior; critical goals lack use cases; use cases contain contradictory guarantees.</p>
+<h3 id="13-knowledge-check-3">13. Knowledge check</h3>
+<ol>
+<li>Why is a use-case diagram insufficient by itself?</li>
+<li>What is the difference between a precondition and the first step?</li>
+<li>What is a minimal guarantee?</li>
+<li>When should a shared behavior become an included use case?</li>
+<li>Why should internal object names not appear in essential use cases?</li>
+</ol>
+<h3 id="14-feedback-revision-and-mastery-gate-2">14. Feedback, revision, and mastery gate</h3>
+<p>A Week 3 baseline passes when six use cases are fully dressed, all critical actor goals have coverage, and no critical review finding remains open. Save both pre-review and revised versions.</p>
+<h3 id="15-reflection-2">15. Reflection</h3>
+<p>Which extension revealed the most important hidden requirement? Which use case remains too broad or too narrow? What domain concepts are beginning to emerge?</p>
+<hr/>
+<h2 id="week-4--discover-candidate-classes-and-build-the-static-analysis-model">Week 4 — Discover candidate classes and build the static analysis model</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B4/chapters/04-discover-candidate-classes-and-build-the-stat.html">Read Book IV, Chapter 4</a> → <a href="../../K/B4/labs/lab-04-discover-candidate-classes-and-build-the-stat.html">complete Hypothetical Lab 4</a> → <a href="../../K/P1-text/lessons/605-704-w04.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Core analysis method<br/>
+<strong>Program competencies:</strong> C2-D, C3-D, C5-I, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-2, CLO-9, CLO-10<br/>
+<strong>Nominal effort:</strong> 10–12 hours<br/>
+<strong>Case-study baseline used:</strong> Week 3 use cases and vocabulary<br/>
+<strong>Primary evidence produced:</strong> Domain glossary, candidate-class rationale, conceptual class model, and semantic audit</p>
+<h3 id="1-why-this-week-matters-4">1. Why this week matters</h3>
+<p>Candidate-class discovery is not a mechanical noun-extraction exercise. The analyst must identify stable concepts, events, roles, descriptions, policies, and records that the software must understand. The static analysis model should capture meaning and relationships while avoiding software services, controllers, database structures, and framework artifacts.</p>
+<h3 id="2-essential-question-4">2. Essential question</h3>
+<blockquote>
+<p>Which concepts must exist in the problem model for the use cases and business rules to make sense?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-4">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve</strong></p>
+<ul>
+<li>use-case nouns, verbs, information objects, rules, and lifecycle events;</li>
+<li>Week 1 category distinctions;</li>
+<li>UML class, association, multiplicity, attribute, and generalization basics.</li>
+</ul>
+<p><strong>Readiness task</strong></p>
+<p>From a short trip-request scenario, propose ten candidate concepts. Eliminate or reclassify candidates that are:</p>
+<ul>
+<li>attributes rather than classes;</li>
+<li>synonyms;</li>
+<li>roles rather than stable concepts;</li>
+<li>external actors;</li>
+<li>UI/database mechanisms;</li>
+<li>vague managers or processors.</li>
+</ul>
+<h3 id="4-detailed-weekly-learning-outcomes-4">4. Detailed weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ol>
+<li>discover candidate domain concepts from scenarios, rules, events, and stakeholder language;</li>
+<li>maintain a domain glossary with synonyms, definitions, and examples;</li>
+<li>model associations with meaningful names, roles, direction only when useful, and correct multiplicities;</li>
+<li>distinguish attributes, value objects, entities, roles, events, descriptions, and policies;</li>
+<li>use generalization only when substitutability and shared semantics are credible;</li>
+<li>audit a conceptual model for implementation leakage, redundancy, missing concepts, and impossible cardinalities.</li>
+</ol>
+<h3 id="5-key-concepts-3">5. Key concepts</h3>
+<ul>
+<li>entity, value object, event, role, description, policy, and service concept;</li>
+<li>conceptual class versus attribute;</li>
+<li>association and association class;</li>
+<li>multiplicity and optionality;</li>
+<li>aggregation/composition caution;</li>
+<li>generalization and substitutability;</li>
+<li>identity and lifecycle significance;</li>
+<li>derived attribute;</li>
+<li>domain glossary and ubiquitous language;</li>
+<li>model saturation and diminishing returns.</li>
+</ul>
+<h3 id="6-required-readings-and-resources-4">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding questions</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Larman <a href="https://www.pearson.com/en-us/subject-catalog/p/applying-uml-and-patterns-an-introduction-to-object-oriented-analysis-and-design-and-iterative-development/P200000000422/9780131489066" title="Applying UML and Patterns">LARMAN</a></td>
+<td>Domain-modeling and conceptual-class discovery chapters</td>
+<td>Learn practical discovery strategies</td>
+<td>Which concepts are stable enough to deserve identity?</td>
+<td style="text-align:right">2 hr</td>
+</tr>
+<tr>
+<td>OMG UML <a href="https://www.omg.org/spec/UML/" title="Unified Modeling Language 2.5.1">OMG-UML</a></td>
+<td>Classifier, Class, Property, Association, Generalization, and MultiplicityElement reference sections</td>
+<td>Verify semantics</td>
+<td>What exactly does multiplicity constrain?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+<tr>
+<td>PlantUML class-diagram documentation <a href="https://plantuml.com/class-diagram" title="PlantUML Class Diagram">PLANTUML-CLASS</a></td>
+<td>Classes, associations, multiplicities, notes, packages</td>
+<td>Create reproducible static views</td>
+<td>Does the notation reflect the intended semantics?</td>
+<td style="text-align:right">30 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-4">7. Instructor-style lesson notes</h3>
+<p>Use multiple discovery sources:</p>
+<ul>
+<li>noun phrases in use cases;</li>
+<li>events that must be remembered;</li>
+<li>transactions and records;</li>
+<li>physical or organizational things;</li>
+<li>roles played over time;</li>
+<li>catalogs or descriptions;</li>
+<li>policies and rules;</li>
+<li>values with units or validation behavior;</li>
+<li>relationships whose history matters.</li>
+</ul>
+<p>Do not create a class merely because a noun appears. <code>System</code>, <code>information</code>, <code>screen</code>, <code>data</code>, and <code>manager</code> are often weak candidates. Conversely, verbs can reveal concepts: "assign" may reveal an <code>Assignment</code>; "cancel" may require a <code>Cancellation</code> event with reason and time.</p>
+<p>Multiplicity is a claim about the domain. <code>TripRequest 1 — 1 Vehicle</code> is wrong before assignment and may erase unassigned states. A better model may show <code>TripRequest 0..1 — 1 VehicleAssignment — 1 Vehicle</code>, with assignment history modeled separately if reassignments matter.</p>
+<h3 id="8-worked-example-4">8. Worked example</h3>
+<p><strong>Candidate list from Request Accessible Trip:</strong> passenger, pickup, destination, time, party, accessibility need, request, service area, condition, confirmation, identifier, status, duplicate.</p>
+<p><strong>Refinement:</strong></p>
+<ul>
+<li><code>Passenger</code> — entity with identity;</li>
+<li><code>TripRequest</code> — entity/transaction with lifecycle;</li>
+<li><code>Stop</code> or <code>Location</code> — value/entity depending management needs;</li>
+<li><code>TimeWindow</code> — value object;</li>
+<li><code>PartySize</code> — attribute or validated value object;</li>
+<li><code>AccessibilityNeed</code> — value/description, possibly a set of capability requirements;</li>
+<li><code>ServiceArea</code> — policy/geographic description;</li>
+<li><code>RequestStatus</code> — state enumeration, not necessarily a class;</li>
+<li><code>DuplicateDetectionPolicy</code> — policy concept if rules vary;</li>
+<li>confirmation and identifier — output/attribute, not concepts by themselves.</li>
+</ul>
+<p><strong>Association examples:</strong></p>
+<ul>
+<li>Passenger <code>1</code> submits TripRequest <code>0..*</code>;</li>
+<li>TripRequest <code>1</code> specifies Origin <code>1</code> and Destination <code>1</code> through named roles;</li>
+<li>TripRequest <code>0..*</code> requires AccessibilityCapability <code>0..*</code>;</li>
+<li>ServiceArea <code>1..*</code> contains or defines eligible Stops <code>1..*</code>, depending the domain rule.</li>
+</ul>
+<h3 id="9-guided-practice-4">9. Guided practice</h3>
+<ol>
+<li>Extract 40 candidate terms from two use cases.</li>
+<li>Normalize synonyms and define each term.</li>
+<li>Classify candidates as entity, value, event, role, policy, description, attribute, actor, or mechanism.</li>
+<li>Select 15–20 conceptual classes.</li>
+<li>Add associations and multiplicities.</li>
+<li>Test the model against three scenario instances.</li>
+<li>Identify what the model cannot yet express.</li>
+</ol>
+<h3 id="10-independent-exercises-4">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Correct 15 multiplicity and generalization errors in a defective model.</li>
+<li>Explain why aggregation diamonds are often unnecessary.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Build a domain glossary of 30–45 terms.</li>
+<li>Construct a conceptual class model with 20–30 concepts.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Instantiate the model for a normal trip, a cancelled trip, and a reassigned vehicle.</li>
+<li>Identify missing history, role, or event concepts.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Write a rationale for ten controversial modeling choices.</li>
+<li>Produce an orphan report showing which use-case information is not represented in the domain model.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Compare an entity-heavy model with an event-oriented alternative and explain the tradeoff.</li>
+</ul>
+<h3 id="11-deliverable-specification-4">11. Deliverable specification</h3>
+<p>Submit <code>704-W04-Static-Analysis-v1.0</code>:</p>
+<ul>
+<li>candidate-class table with accept/reject rationale;</li>
+<li>domain glossary;</li>
+<li>conceptual class model;</li>
+<li>association and multiplicity rationale;</li>
+<li>scenario instance checks;</li>
+<li>use-case-to-concept coverage table;</li>
+<li>semantic defect log;</li>
+<li>corrected model baseline.</li>
+</ul>
+<h3 id="12-weekly-rubric-4">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Concept discovery</td>
+<td style="text-align:right">25%</td>
+<td>Model contains stable, relevant concepts and excludes obvious mechanisms/noise</td>
+</tr>
+<tr>
+<td>Association semantics</td>
+<td style="text-align:right">25%</td>
+<td>Roles, multiplicities, and relationship meanings are defensible</td>
+</tr>
+<tr>
+<td>Domain language</td>
+<td style="text-align:right">20%</td>
+<td>Definitions are precise, consistent, and used across artifacts</td>
+</tr>
+<tr>
+<td>Scenario validation</td>
+<td style="text-align:right">15%</td>
+<td>Model can represent nominal and off-nominal examples without contradiction</td>
+</tr>
+<tr>
+<td>Rationale and audit</td>
+<td style="text-align:right">15%</td>
+<td>Controversial decisions and remaining gaps are explicit</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> database/UI classes dominate the analysis model; impossible critical multiplicities; synonyms create duplicate authoritative concepts; essential use-case information is absent without acknowledgment.</p>
+<h3 id="13-knowledge-check-4">13. Knowledge check</h3>
+<ol>
+<li>When should a value become a value object rather than an attribute?</li>
+<li>Why is <code>VehicleAssignment</code> often better than a direct TripRequest–Vehicle association?</li>
+<li>What does generalization claim beyond shared attributes?</li>
+<li>How can scenario instances test a class model?</li>
+<li>Why might cancellation be modeled as both a state transition and an event record?</li>
+</ol>
+<h3 id="14-feedback-and-mastery-gate-2">14. Feedback and mastery gate</h3>
+<p>Run a static-model audit using a separate domain-expert role. Correct all critical multiplicity, identity, and implementation-leakage defects. Week 4 is complete when the model can represent at least three distinct scenarios and all critical use-case information has a modeled home or an explicit reason for exclusion.</p>
+<h3 id="15-reflection-3">15. Reflection</h3>
+<p>Which class was hardest to justify? Which direct association became an event or association class? Which part of the domain remains least understood?</p>
+<hr/>
+<h2 id="week-5--analyze-dynamic-behavior-and-discover-collaborations">Week 5 — Analyze dynamic behavior and discover collaborations</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B4/chapters/05-analyze-dynamic-behavior-and-discover-collabo.html">Read Book IV, Chapter 5</a> → <a href="../../K/B4/labs/lab-05-analyze-dynamic-behavior-and-discover-collabo.html">complete Hypothetical Lab 5</a> → <a href="../../K/P1-text/lessons/605-704-w05.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Dynamic analysis method development<br/>
+<strong>Program competencies:</strong> C3-D, C5-I, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-3, CLO-9, CLO-10<br/>
+<strong>Nominal effort:</strong> 10–12 hours<br/>
+<strong>Case-study baseline used:</strong> Week 3 use cases and Week 4 conceptual model<br/>
+<strong>Primary evidence produced:</strong> System sequence diagrams, activity models, responsibility candidates, and cross-view consistency findings</p>
+<h3 id="1-why-this-week-matters-5">1. Why this week matters</h3>
+<p>Static models show what concepts and relationships exist; they do not explain what happens over time. Dynamic analysis exposes system events, information flows, decisions, concurrency, and emerging responsibilities. It is where vague use-case prose becomes testable behavioral structure and where the analyst discovers whether the conceptual model can actually support the required scenarios.</p>
+<h3 id="2-essential-question-5">2. Essential question</h3>
+<blockquote>
+<p>What sequence of externally visible events and internal problem responsibilities must occur for each critical use case to succeed or recover?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-5">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve</strong></p>
+<ul>
+<li>six fully dressed use cases;</li>
+<li>domain concepts and multiplicities;</li>
+<li>actor/system boundary;</li>
+<li>basic sequence and activity notation.</li>
+</ul>
+<p><strong>Readiness questions</strong></p>
+<ol>
+<li>What is the difference between a system sequence diagram and a design sequence diagram?</li>
+<li>Why should a system event be named by actor intent rather than a UI widget action?</li>
+<li>What information should accompany a system event?</li>
+<li>When is an activity model more useful than a sequence diagram?</li>
+<li>What inconsistency is revealed when a sequence message has no receiving responsibility?</li>
+</ol>
+<p><strong>Small task</strong></p>
+<p>Convert three UI-oriented steps into actor-intent system events and identify their input/output data.</p>
+<h3 id="4-detailed-weekly-learning-outcomes-5">4. Detailed weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ol>
+<li>construct system sequence diagrams from use-case scenarios;</li>
+<li>identify system events, responses, data, and error outcomes;</li>
+<li>build activity models for workflows, decisions, concurrency, and responsibility partitions;</li>
+<li>derive candidate operations and responsibilities without prematurely assigning design classes;</li>
+<li>reconcile dynamic behavior with the domain model, business rules, and requirements;</li>
+<li>identify missing concepts, invalid multiplicities, and incomplete scenarios through behavioral analysis.</li>
+</ol>
+<h3 id="5-key-concepts-4">5. Key concepts</h3>
+<ul>
+<li>system event and system response;</li>
+<li>lifeline, message, guard, alternative, loop, and exception;</li>
+<li>actor-system black box versus internal collaboration;</li>
+<li>activity, action, control flow, object flow, decision, merge, fork, join, and partition;</li>
+<li>operation contract;</li>
+<li>responsibility discovery;</li>
+<li>behavioral trace and scenario coverage;</li>
+<li>synchronization and eventual outcomes.</li>
+</ul>
+<h3 id="6-required-readings-and-resources-5">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding questions</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Larman <a href="https://www.pearson.com/en-us/subject-catalog/p/applying-uml-and-patterns-an-introduction-to-object-oriented-analysis-and-design-and-iterative-development/P200000000422/9780131489066" title="Applying UML and Patterns">LARMAN</a></td>
+<td>System sequence diagram and operation-contract chapters</td>
+<td>Connect use cases to system operations</td>
+<td>Which events cross the software boundary and change domain state?</td>
+<td style="text-align:right">90 min</td>
+</tr>
+<tr>
+<td>OMG UML <a href="https://www.omg.org/spec/UML/" title="Unified Modeling Language 2.5.1">OMG-UML</a></td>
+<td>Interaction, Message, Lifeline, CombinedFragment, Activity, and ActivityPartition reference sections</td>
+<td>Verify dynamic-model semantics</td>
+<td>Which notation communicates alternatives, loops, and concurrent work?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+<tr>
+<td>PlantUML sequence documentation <a href="https://plantuml.com/sequence-diagram" title="PlantUML Sequence Diagram">PLANTUML-SEQUENCE</a></td>
+<td>Messages, participants, alternatives, loops, activation, and notes</td>
+<td>Produce reproducible sequences</td>
+<td>Are the interactions at analysis or design level?</td>
+<td style="text-align:right">30 min</td>
+</tr>
+<tr>
+<td>PlantUML activity documentation <a href="https://plantuml.com/activity-diagram-beta" title="PlantUML Activity Diagram">PLANTUML-ACTIVITY</a></td>
+<td>Decisions, partitions, loops, forks, and joins</td>
+<td>Model workflow and concurrency</td>
+<td>What information flows between responsibilities?</td>
+<td style="text-align:right">30 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-5">7. Instructor-style lesson notes</h3>
+<p>A <strong>system sequence diagram (SSD)</strong> treats the software platform as a black box. It identifies actor-generated system events and system responses. It should not show controllers, repositories, or database calls.</p>
+<p>A <strong>detailed interaction model</strong> may later open the box and assign responsibilities to design objects. Mixing the two levels hides missing analysis and makes the design appear inevitable.</p>
+<p>Activity models are useful when the behavior depends on:</p>
+<ul>
+<li>multiple decision paths;</li>
+<li>parallel actions;</li>
+<li>human and automated responsibilities;</li>
+<li>repeated evaluation;</li>
+<li>information/object flow;</li>
+<li>recovery and escalation.</li>
+</ul>
+<p>Dynamic analysis should feed back into static analysis. If a scenario requires reassignment history, but the static model only supports one current vehicle reference, the models disagree.</p>
+<h3 id="8-worked-example-5">8. Worked example</h3>
+<p><strong>Use case:</strong> Assign Vehicle</p>
+<p><strong>System sequence</strong></p>
+<ol>
+<li>Dispatcher or scheduling trigger sends <code>requestAssignment(tripRequestId)</code>.</li>
+<li>Platform returns <code>assignmentProposed(vehicleId, ETA, constraintsSatisfied)</code> or <code>noEligibleVehicle(reason)</code>.</li>
+<li>Dispatcher sends <code>confirmAssignment(...)</code> or <code>rejectProposal(reason)</code> when manual review is required.</li>
+<li>Platform returns <code>assignmentConfirmed(assignmentId, status)</code> and initiates notifications.</li>
+</ol>
+<p><strong>Operation-contract sketch for <code>confirmAssignment</code>:</strong></p>
+<p><em>Preconditions:</em> trip request is accepted and unassigned; proposed vehicle is available and satisfies required capabilities.</p>
+<p><em>Postconditions:</em> an <code>Assignment</code> exists; it links the trip request and vehicle; assignment status is confirmed; the trip request is no longer unassigned; an audit event exists; notification work is requested.</p>
+<p><strong>Static feedback:</strong> direct TripRequest–Vehicle association is insufficient because assignment has status, decision time, source, and history.</p>
+<h3 id="9-guided-practice-5">9. Guided practice</h3>
+<p>For "Cancel Trip":</p>
+<ol>
+<li>write an SSD from the use case;</li>
+<li>identify request data and responses;</li>
+<li>add alternate fragments for too-late cancellation and duplicate cancellation;</li>
+<li>write a high-level activity model across Passenger, Platform, Dispatch, and Notification responsibilities;</li>
+<li>write preconditions and postconditions for <code>cancelTrip</code>;</li>
+<li>identify changes required in the domain model.</li>
+</ol>
+<h3 id="10-independent-exercises-5">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Correct ten analysis/design-level errors in a defective sequence diagram.</li>
+<li>Convert a narrative workflow into an activity model.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Create five SSDs for critical use cases.</li>
+<li>Create three activity models, including one with concurrency or escalation.</li>
+<li>Draft operation contracts for eight system operations.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Trace every message to requirements, use-case steps, input/output concepts, and state changes.</li>
+<li>Identify at least five static-model revisions discovered through dynamic analysis.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Create a responsibility-candidate table without assigning final design classes.</li>
+<li>Produce a behavioral consistency report.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Model one asynchronous notification flow and compare synchronous versus asynchronous assumptions without choosing a technology.</li>
+</ul>
+<h3 id="11-deliverable-specification-5">11. Deliverable specification</h3>
+<p>Submit <code>704-W05-Dynamic-Analysis-v1.0</code>:</p>
+<ul>
+<li>five SSDs;</li>
+<li>three activity models;</li>
+<li>eight operation contracts;</li>
+<li>responsibility-candidate table;</li>
+<li>dynamic-to-static consistency matrix;</li>
+<li>revised domain model;</li>
+<li>discrepancy log and dispositions.</li>
+</ul>
+<h3 id="12-weekly-rubric-5">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scenario fidelity</td>
+<td style="text-align:right">25%</td>
+<td>Dynamic models accurately represent nominal and alternate use-case behavior</td>
+</tr>
+<tr>
+<td>Abstraction-level discipline</td>
+<td style="text-align:right">20%</td>
+<td>SSDs remain black-box; solution mechanisms are deferred appropriately</td>
+</tr>
+<tr>
+<td>Responsibility discovery</td>
+<td style="text-align:right">20%</td>
+<td>Operations and postconditions reveal necessary behavior and state change</td>
+</tr>
+<tr>
+<td>Cross-view consistency</td>
+<td style="text-align:right">25%</td>
+<td>Behavior, domain model, requirements, and rules are reconciled</td>
+</tr>
+<tr>
+<td>Communication/configuration</td>
+<td style="text-align:right">10%</td>
+<td>Diagrams and contracts are readable, reproducible, and controlled</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> internal design objects shown as if they were system actors; critical scenario steps absent; messages cannot be traced to behavior or state change; contradictory postconditions.</p>
+<h3 id="13-knowledge-check-5">13. Knowledge check</h3>
+<ol>
+<li>Why are return messages often optional but responses still important?</li>
+<li>What belongs in an operation postcondition?</li>
+<li>What is the danger of assigning every system event to one <code>SystemController</code> during analysis?</li>
+<li>When should an activity fork be used?</li>
+<li>How can a dynamic model invalidate a multiplicity?</li>
+</ol>
+<h3 id="14-feedback-and-mastery-gate-3">14. Feedback and mastery gate</h3>
+<p>Use the cross-view consistency matrix and replay each scenario against the static model. Correct all critical discrepancies. Week 5 passes when five critical use cases have complete event sequences and every state-changing system operation has explicit postconditions.</p>
+<h3 id="15-reflection-4">15. Reflection</h3>
+<p>Which scenario caused the largest static-model revision? Which operation still has unclear responsibility? Which behavior may be asynchronous in later design?</p>
+<hr/>
+<h2 id="week-6--model-state-dependent-behavior-and-conduct-the-analysis-model-review">Week 6 — Model state-dependent behavior and conduct the Analysis Model Review</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B4/chapters/06-model-state-dependent-behavior-and-conduct-th.html">Read Book IV, Chapter 6</a> → <a href="../../K/B4/labs/lab-06-model-state-dependent-behavior-and-conduct-th.html">complete Hypothetical Lab 6</a> → <a href="../../K/P1-text/lessons/605-704-w06.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Midcourse integration and diagnostic review<br/>
+<strong>Program competencies:</strong> C2-D, C3-D, C5-I, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-2, CLO-3, CLO-4, CLO-9, CLO-10<br/>
+<strong>Nominal effort:</strong> 11–13 hours<br/>
+<strong>Case-study baseline used:</strong> Weeks 1–5 analysis artifacts<br/>
+<strong>Primary evidence produced:</strong> Three state machines, integrated analysis baseline, formal review package, and corrective-action plan</p>
+<h3 id="1-why-this-week-matters-6">1. Why this week matters</h3>
+<p>Objects with meaningful lifecycles cannot be designed safely from a list of attributes and operations alone. State machines make legal states, transitions, events, guards, and prohibited behavior explicit. The midcourse review then tests whether requirements, use cases, static analysis, dynamic analysis, and state behavior form one coherent problem model before the learner commits to design classes.</p>
+<h3 id="2-essential-question-6">2. Essential question</h3>
+<blockquote>
+<p>Can the analysis baseline explain every legal and illegal lifecycle transition for the system's most important objects?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-6">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve</strong></p>
+<ul>
+<li>domain entities with identity and lifecycle;</li>
+<li>system events and operation contracts;</li>
+<li>status attributes and business rules.</li>
+</ul>
+<p><strong>Readiness task</strong></p>
+<p>For <code>TripRequest</code>, list possible states and classify ten events as legal, illegal, ignored, deferred, or guarded. Explain why a single <code>status</code> enumeration may be insufficient documentation.</p>
+<h3 id="4-detailed-weekly-learning-outcomes-6">4. Detailed weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ol>
+<li>determine when a class warrants an explicit state machine;</li>
+<li>define stable states based on behavior and legal operations rather than screen labels;</li>
+<li>model transitions, triggers, guards, effects, entry/exit behavior, and terminal states;</li>
+<li>reconcile state machines with use cases, operation contracts, and business rules;</li>
+<li>identify unreachable, ambiguous, conflicting, and missing transitions;</li>
+<li>plan and conduct an integrated Analysis Model Review.</li>
+</ol>
+<h3 id="5-key-concepts-5">5. Key concepts</h3>
+<ul>
+<li>state versus condition versus attribute value;</li>
+<li>event, trigger, guard, effect, and action;</li>
+<li>initial, final, composite, orthogonal, and history states;</li>
+<li>transition conflict and completeness;</li>
+<li>illegal event handling;</li>
+<li>state invariant;</li>
+<li>lifecycle ownership;</li>
+<li>model review entry/exit criteria;</li>
+<li>finding severity and corrective action.</li>
+</ul>
+<h3 id="6-required-readings-and-resources-6">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding questions</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OMG UML <a href="https://www.omg.org/spec/UML/" title="Unified Modeling Language 2.5.1">OMG-UML</a></td>
+<td>StateMachine, State, Transition, Trigger, Constraint, Region, and Pseudostate reference sections</td>
+<td>Confirm semantics</td>
+<td>What determines whether a transition is enabled?</td>
+<td style="text-align:right">75 min</td>
+</tr>
+<tr>
+<td>PlantUML state documentation <a href="https://plantuml.com/state-diagram" title="PlantUML State Diagram">PLANTUML-STATE</a></td>
+<td>Basic states, composite states, concurrent states, notes, and transitions</td>
+<td>Create reproducible state models</td>
+<td>Can a reviewer identify legal and illegal paths?</td>
+<td style="text-align:right">30 min</td>
+</tr>
+<tr>
+<td>Larman or <em>UML Distilled</em> <a href="https://www.pearson.com/en-us/subject-catalog/p/applying-uml-and-patterns-an-introduction-to-object-oriented-analysis-and-design-and-iterative-development/P200000000422/9780131489066" title="Applying UML and Patterns">LARMAN</a> <a href="https://martinfowler.com/books/uml.html" title="UML Distilled">UML-DISTILLED</a></td>
+<td>State-machine/state-diagram chapters</td>
+<td>Apply state modeling selectively</td>
+<td>Which classes have behavior that materially changes by state?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-6">7. Instructor-style lesson notes</h3>
+<p>A state is useful when it changes which events are accepted, which operations are legal, what behavior occurs, or which obligations apply. Avoid creating a state for every database flag. <code>PassengerNotified</code> may be an event or orthogonal concern rather than a primary TripRequest state.</p>
+<p>State machines should reconcile with:</p>
+<ul>
+<li>use-case preconditions and extensions;</li>
+<li>operation-contract preconditions/postconditions;</li>
+<li>class attributes and associations;</li>
+<li>business rules and invariants;</li>
+<li>events on sequence diagrams.</li>
+</ul>
+<p>The Analysis Model Review is a gate. Design should not begin while the team still disagrees about the problem's core concepts and lifecycles.</p>
+<h3 id="8-worked-example-6">8. Worked example</h3>
+<p><strong>TripRequest lifecycle:</strong></p>
+<p><code>Draft → Submitted → Accepted → Assigned → InService → Completed</code></p>
+<p>Alternate transitions:</p>
+<ul>
+<li>Submitted → Rejected;</li>
+<li>Accepted → Cancelled;</li>
+<li>Assigned → ReassignmentPending → Assigned;</li>
+<li>Assigned → Cancelled only if dispatch-lock guard is false;</li>
+<li>InService → Interrupted → InService or Terminated;</li>
+<li>any nonterminal operational state → Archived only after retention conditions.</li>
+</ul>
+<p><strong>Defect exposed:</strong> original use case allowed passenger cancellation after boarding, but policy permits only operator termination once <code>InService</code>. The use case and requirement must be corrected or policy changed.</p>
+<h3 id="9-guided-practice-6">9. Guided practice</h3>
+<ol>
+<li>Build a state/event table for <code>TripRequest</code>.</li>
+<li>Convert it into a state machine.</li>
+<li>Add guards for cancellation and reassignment.</li>
+<li>Trace each transition to an event and requirement/rule.</li>
+<li>Create an illegal-event table.</li>
+<li>Repeat a smaller exercise for <code>VehicleAvailability</code>.</li>
+<li>Reconcile findings with use cases and operation contracts.</li>
+</ol>
+<h3 id="10-independent-exercises-6">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Diagnose eight defects in a state machine, including missing initial state, unlabeled triggers, contradictory guards, and unreachable states.</li>
+</ul>
+<p><strong>Application</strong></p>
+<p>Create state machines for:</p>
+<ul>
+<li><code>TripRequest</code>;</li>
+<li><code>VehicleAssignment</code> or <code>VehicleAvailability</code>;</li>
+<li><code>ServiceIncident</code> or <code>NotificationDelivery</code>.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Build transition coverage matrices.</li>
+<li>Identify conflicts between state, use cases, requirements, and static multiplicities.</li>
+</ul>
+<p><strong>Synthesis — Analysis Model Review</strong></p>
+<p>Prepare a 12–15 slide review covering:</p>
+<ol>
+<li>scope and major assumptions;</li>
+<li>critical requirements and use cases;</li>
+<li>domain model and glossary;</li>
+<li>SSD/activity behavior;</li>
+<li>state models;</li>
+<li>cross-view traceability;</li>
+<li>unresolved risks and questions;</li>
+<li>readiness recommendation for design.</li>
+</ol>
+<p>Run a 30-minute review, record findings, and create a corrective-action plan.</p>
+<h3 id="11-deliverable-specification-6">11. Deliverable specification</h3>
+<p>Submit <code>704-W06-Analysis-Baseline-v1.0</code>:</p>
+<ul>
+<li>three state machines;</li>
+<li>state/event and transition-coverage tables;</li>
+<li>integrated requirements/use-case/domain/dynamic/state baseline;</li>
+<li>consistency dashboard;</li>
+<li>review briefing;</li>
+<li>review minutes and finding log;</li>
+<li>corrective-action plan;</li>
+<li>revised baseline tagged <code>704-analysis-baseline</code>.</li>
+</ul>
+<h3 id="12-weekly-rubric-6">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>State semantics</td>
+<td style="text-align:right">25%</td>
+<td>States and transitions reflect meaningful legal behavior and lifecycle rules</td>
+</tr>
+<tr>
+<td>Cross-view consistency</td>
+<td style="text-align:right">30%</td>
+<td>Events, guards, use cases, requirements, contracts, and static model agree</td>
+</tr>
+<tr>
+<td>Analysis completeness</td>
+<td style="text-align:right">20%</td>
+<td>Critical concepts and scenarios are represented with acknowledged limitations</td>
+</tr>
+<tr>
+<td>Review quality</td>
+<td style="text-align:right">15%</td>
+<td>Review uses entry criteria, severity, evidence, and actionable findings</td>
+</tr>
+<tr>
+<td>Corrective action/configuration</td>
+<td style="text-align:right">10%</td>
+<td>Critical findings are corrected and the baseline is controlled</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> critical state behavior missing; use case and state machine contradict; review recommends proceeding despite unresolved critical defects; model baseline cannot be reproduced.</p>
+<h3 id="13-knowledge-check-6">13. Knowledge check</h3>
+<ol>
+<li>What makes a state behaviorally significant?</li>
+<li>What is the difference between a guard and a precondition?</li>
+<li>Why can two orthogonal state regions be dangerous?</li>
+<li>How should an illegal event be handled in analysis?</li>
+<li>What evidence supports an Analysis Model Review exit decision?</li>
+</ol>
+<h3 id="14-feedback-and-mastery-gate-4">14. Feedback and mastery gate</h3>
+<p>All critical and high-severity findings must be corrected or explicitly accepted with rationale and risk. The learner may proceed to Week 7 only when the analysis baseline is internally coherent and the review recommendation is "proceed with minor actions" or stronger.</p>
+<h3 id="15-reflection-5">15. Reflection</h3>
+<p>Which lifecycle rule was previously implicit? Which analysis artifact was least consistent? What design temptation should remain deferred?</p>
+<hr/>
+<h2 id="week-7--assign-responsibilities-and-build-the-static-design-model">Week 7 — Assign responsibilities and build the static design model</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B4/chapters/07-assign-responsibilities-and-build-the-static-.html">Read Book IV, Chapter 7</a> → <a href="../../K/B4/labs/lab-07-assign-responsibilities-and-build-the-static-.html">complete Hypothetical Lab 7</a> → <a href="../../K/P1-text/lessons/605-704-w07.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Transition from analysis to design<br/>
+<strong>Program competencies:</strong> C3-D, C5-I, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-5, CLO-9, CLO-10<br/>
+<strong>Nominal effort:</strong> 10–12 hours<br/>
+<strong>Case-study baseline used:</strong> Approved Week 6 analysis baseline<br/>
+<strong>Primary evidence produced:</strong> Responsibility-assignment records, design class model, interfaces, packages, and dependency analysis</p>
+<h3 id="1-why-this-week-matters-7">1. Why this week matters</h3>
+<p>The transition from analysis to design is where responsibilities become software commitments. Poor designs concentrate behavior in coordinators, expose data through passive entities, create circular dependencies, and use inheritance to share code rather than express substitutability. This week creates a static software design based on explicit responsibility and dependency decisions.</p>
+<h3 id="2-essential-question-7">2. Essential question</h3>
+<blockquote>
+<p>Which software element should know, create, coordinate, or protect each responsibility so that the design remains cohesive and changeable?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-7">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve</strong></p>
+<ul>
+<li>system operations and operation contracts;</li>
+<li>domain concepts and state machines;</li>
+<li>quality concerns and likely change drivers;</li>
+<li>interface and dependency concepts.</li>
+</ul>
+<p><strong>Readiness task</strong></p>
+<p>Given a <code>TripManager</code> with 25 operations, classify each responsibility as domain behavior, application coordination, infrastructure, policy, notification, or query. Propose at least five better responsibility owners.</p>
+<h3 id="4-detailed-weekly-learning-outcomes-7">4. Detailed weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ol>
+<li>assign responsibilities using information ownership, cohesion, coupling, creation, and indirection reasoning;</li>
+<li>distinguish entity, value object, application service, domain service, gateway, repository interface, controller, and policy roles;</li>
+<li>create design classes and interfaces from analysis responsibilities without one-to-one mechanical transformation;</li>
+<li>use composition, delegation, and interfaces to control dependencies;</li>
+<li>organize classes into packages or layers with explicit dependency direction;</li>
+<li>detect god classes, anemic models, cyclic dependencies, inappropriate inheritance, and unstable abstractions.</li>
+</ol>
+<h3 id="5-key-concepts-6">5. Key concepts</h3>
+<ul>
+<li>responsibility and collaboration;</li>
+<li>information expert and creator reasoning;</li>
+<li>controller/coordinator;</li>
+<li>high cohesion and low coupling;</li>
+<li>protected variation and indirection;</li>
+<li>entity, value object, service, policy, repository, gateway, and adapter roles;</li>
+<li>interface segregation and dependency inversion at a conceptual level;</li>
+<li>package cohesion and acyclic dependencies;</li>
+<li>inheritance versus composition;</li>
+<li>public contract and encapsulation.</li>
+</ul>
+<h3 id="6-required-readings-and-resources-7">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding questions</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Larman <a href="https://www.pearson.com/en-us/subject-catalog/p/applying-uml-and-patterns-an-introduction-to-object-oriented-analysis-and-design-and-iterative-development/P200000000422/9780131489066" title="Applying UML and Patterns">LARMAN</a></td>
+<td>Responsibility-assignment and design-class-diagram chapters</td>
+<td>Apply systematic design reasoning</td>
+<td>Who has the information and who should coordinate the use case?</td>
+<td style="text-align:right">2 hr</td>
+</tr>
+<tr>
+<td>OMG UML <a href="https://www.omg.org/spec/UML/" title="Unified Modeling Language 2.5.1">OMG-UML</a></td>
+<td>Interface, Operation, Dependency, Realization, Package, Component, and Class reference sections</td>
+<td>Verify static design semantics</td>
+<td>Which dependencies should point inward versus outward?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+<tr>
+<td><em>UML Distilled</em> <a href="https://martinfowler.com/books/uml.html" title="UML Distilled">UML-DISTILLED</a></td>
+<td>Class, package, and component guidance</td>
+<td>Keep design views focused</td>
+<td>What information must a design class diagram communicate?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-7">7. Instructor-style lesson notes</h3>
+<p>Do not turn every domain concept into a mutable entity with getters and setters. Some concepts are value objects with validation and equality semantics. Some behaviors belong to policies or domain services because no single entity naturally owns all required information.</p>
+<p>Application services coordinate a use case; they should not absorb all business rules. Gateways and repository interfaces isolate external mechanisms. Interfaces are useful when they protect a real variation point or define a stable contract—not when added to every class reflexively.</p>
+<p>A design class model should show the important types, interfaces, operations, relationships, and packages needed to understand realization. It need not reproduce every field or accessor.</p>
+<h3 id="8-worked-example-7">8. Worked example</h3>
+<p><strong>System operation:</strong> <code>confirmAssignment(tripRequestId, vehicleId, dispatcherId)</code></p>
+<p><strong>Poor design:</strong> <code>DispatchController</code> loads all data, checks every rule, updates status, writes audit, sends notifications, and persists objects.</p>
+<p><strong>Responsibility-oriented design:</strong></p>
+<ul>
+<li><code>AssignmentApplicationService</code> coordinates the transaction;</li>
+<li><code>TripRequest</code> determines whether assignment is legal in its current state;</li>
+<li><code>VehicleAvailabilityPolicy</code> evaluates availability/capability constraints;</li>
+<li><code>Assignment</code> represents the decision and history;</li>
+<li><code>TripRequestRepository</code> and <code>VehicleRepository</code> are interfaces used to obtain aggregates;</li>
+<li><code>EventPublisher</code> or <code>NotificationPort</code> abstracts external notification work;</li>
+<li><code>AuditRecorder</code> captures required audit evidence;</li>
+<li>transaction boundary is coordinated by the application service or unit-of-work mechanism.</li>
+</ul>
+<p><strong>Tradeoff:</strong> more collaborators increase indirection, but responsibilities and variation points become explicit.</p>
+<h3 id="9-guided-practice-7">9. Guided practice</h3>
+<p>For <code>cancelTrip</code>:</p>
+<ol>
+<li>list all responsibilities from the operation contract;</li>
+<li>identify information owners;</li>
+<li>select an application coordinator;</li>
+<li>place the cancellation legality rule;</li>
+<li>define repository/gateway interfaces;</li>
+<li>sketch packages and dependency direction;</li>
+<li>evaluate cohesion and coupling;</li>
+<li>revise after a god-class challenge.</li>
+</ol>
+<h3 id="10-independent-exercises-7">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Diagnose 12 responsibility-assignment defects.</li>
+<li>Compare inheritance and composition for two candidate designs.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Create responsibility cards or records for 15–20 design roles.</li>
+<li>Build a static design model with 18–30 classes/interfaces/value objects/services.</li>
+<li>Create package/layer views.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Generate a dependency table and identify cycles.</li>
+<li>Score five classes for cohesion and reasons for change.</li>
+<li>Identify passive data holders that should own behavior and services that are overloaded.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Write ten design decision records covering responsibility placement, interfaces, composition/inheritance, and package boundaries.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Create an alternative domain-model style—anemic versus behavior-rich—and compare testability, coupling, and change impact.</li>
+</ul>
+<h3 id="11-deliverable-specification-7">11. Deliverable specification</h3>
+<p>Submit <code>704-W07-Static-Design-v1.0</code>:</p>
+<ul>
+<li>responsibility-assignment table;</li>
+<li>design role taxonomy;</li>
+<li>static design class model;</li>
+<li>package/layer diagram;</li>
+<li>interface and dependency inventory;</li>
+<li>dependency-cycle report;</li>
+<li>ten decision records;</li>
+<li>quality findings and revised baseline.</li>
+</ul>
+<h3 id="12-weekly-rubric-7">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Responsibility assignment</td>
+<td style="text-align:right">30%</td>
+<td>Responsibilities are placed using explicit cohesion, information, and coupling rationale</td>
+</tr>
+<tr>
+<td>Static design semantics</td>
+<td style="text-align:right">25%</td>
+<td>Classes, interfaces, operations, and relationships are correct and meaningful</td>
+</tr>
+<tr>
+<td>Dependency structure</td>
+<td style="text-align:right">20%</td>
+<td>Packages and dependencies support change and avoid critical cycles</td>
+</tr>
+<tr>
+<td>Analysis-to-design traceability</td>
+<td style="text-align:right">15%</td>
+<td>Design roles realize analysis behavior without mechanical one-to-one mapping</td>
+</tr>
+<tr>
+<td>Rationale/configuration</td>
+<td style="text-align:right">10%</td>
+<td>Decisions and revisions are controlled and reviewable</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> one god class owns critical behavior; central domain rules live only in UI/infrastructure classes; inheritance violates substitutability; critical dependency cycle unresolved.</p>
+<h3 id="13-knowledge-check-7">13. Knowledge check</h3>
+<ol>
+<li>What is the difference between an application service and a domain service?</li>
+<li>Why can high cohesion be more useful than minimizing class count?</li>
+<li>When does an interface add value?</li>
+<li>What is wrong with inheriting solely to reuse code?</li>
+<li>How does package dependency direction affect maintainability?</li>
+</ol>
+<h3 id="14-feedback-and-mastery-gate-5">14. Feedback and mastery gate</h3>
+<p>Conduct a Static Design Review using a maintainer role. Correct critical god-class, cycle, responsibility, and inheritance defects. Week 7 passes when every critical system operation has a plausible coordinator and domain responsibility owners.</p>
+<h3 id="15-reflection-6">15. Reflection</h3>
+<p>Which responsibility was hardest to place? Which interface protects a real variation point? Which class has too many reasons to change?</p>
+<hr/>
+<h2 id="week-8--realize-use-cases-with-dynamic-design-models">Week 8 — Realize use cases with dynamic design models</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B4/chapters/08-realize-use-cases-with-dynamic-design-models.html">Read Book IV, Chapter 8</a> → <a href="../../K/B4/labs/lab-08-realize-use-cases-with-dynamic-design-models.html">complete Hypothetical Lab 8</a> → <a href="../../K/P1-text/lessons/605-704-w08.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Detailed design collaboration<br/>
+<strong>Program competencies:</strong> C3-D, C5-I, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-3, CLO-5, CLO-9, CLO-10<br/>
+<strong>Nominal effort:</strong> 10–12 hours<br/>
+<strong>Case-study baseline used:</strong> Week 7 static design model and Week 5 operation contracts<br/>
+<strong>Primary evidence produced:</strong> Detailed sequence diagrams, operation/interface contracts, message-to-operation consistency report, and integrated design baseline</p>
+<h3 id="1-why-this-week-matters-8">1. Why this week matters</h3>
+<p>Static design models can hide whether collaborations actually work. Detailed sequence diagrams test object responsibilities, interface contracts, ordering, exception paths, transaction boundaries, and dependency direction. They often reveal missing operations, excessive chatter, leaky abstractions, and services that know too much.</p>
+<h3 id="2-essential-question-8">2. Essential question</h3>
+<blockquote>
+<p>Can the proposed design objects collaborate to realize the critical use cases without violating responsibility, state, or dependency decisions?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-8">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve</strong></p>
+<ul>
+<li>system sequence diagrams and operation contracts;</li>
+<li>design classes/interfaces and packages;</li>
+<li>state machines;</li>
+<li>synchronous and asynchronous message concepts.</li>
+</ul>
+<p><strong>Readiness task</strong></p>
+<p>Given a detailed sequence diagram, identify:</p>
+<ul>
+<li>one message with no receiving operation;</li>
+<li>one object created by the wrong collaborator;</li>
+<li>one layer violation;</li>
+<li>one missing exception path;</li>
+<li>one state rule violated by message ordering.</li>
+</ul>
+<h3 id="4-detailed-weekly-learning-outcomes-8">4. Detailed weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ol>
+<li>transform system operations into detailed object collaborations;</li>
+<li>model synchronous calls, asynchronous messages, creation, return information, alternatives, loops, and exceptions;</li>
+<li>map messages to class/interface operations and operation contracts;</li>
+<li>reconcile interaction ordering with state machines and transaction boundaries;</li>
+<li>evaluate collaboration quality using coupling, cohesion, data exposure, and message-chain reasoning;</li>
+<li>revise static and dynamic design models together.</li>
+</ol>
+<h3 id="5-key-concepts-7">5. Key concepts</h3>
+<ul>
+<li>realization of a use case;</li>
+<li>detailed sequence and communication responsibility;</li>
+<li>boundary, control, entity, service, gateway, and repository roles;</li>
+<li>message signature and contract;</li>
+<li>command versus query;</li>
+<li>synchronous versus asynchronous collaboration;</li>
+<li>transaction boundary and consistency point;</li>
+<li>exception propagation and compensation;</li>
+<li>Law of Demeter/message-chain smell;</li>
+<li>interaction-to-class consistency.</li>
+</ul>
+<h3 id="6-required-readings-and-resources-8">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding questions</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Larman <a href="https://www.pearson.com/en-us/subject-catalog/p/applying-uml-and-patterns-an-introduction-to-object-oriented-analysis-and-design-and-iterative-development/P200000000422/9780131489066" title="Applying UML and Patterns">LARMAN</a></td>
+<td>Interaction design and use-case realization chapters</td>
+<td>Design collaborations systematically</td>
+<td>Which object should receive the first system event, and where should domain decisions occur?</td>
+<td style="text-align:right">2 hr</td>
+</tr>
+<tr>
+<td>OMG UML <a href="https://www.omg.org/spec/UML/" title="Unified Modeling Language 2.5.1">OMG-UML</a></td>
+<td>Interactions, messages, combined fragments, gates, and interaction use reference sections</td>
+<td>Verify sequence semantics</td>
+<td>How are alternative, loop, break, and reference fragments represented?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+<tr>
+<td>PlantUML sequence documentation <a href="https://plantuml.com/sequence-diagram" title="PlantUML Sequence Diagram">PLANTUML-SEQUENCE</a></td>
+<td><code>alt</code>, <code>opt</code>, <code>loop</code>, <code>par</code>, creation, destruction, notes, references</td>
+<td>Produce detailed interactions</td>
+<td>Are exceptions and asynchronous boundaries visible?</td>
+<td style="text-align:right">30 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-8">7. Instructor-style lesson notes</h3>
+<p>A detailed design sequence should not become a line-by-line implementation trace. Show interactions that communicate responsibility, ordering, and interfaces. Omit trivial accessors unless they reveal a design smell.</p>
+<p>Every message should answer:</p>
+<ul>
+<li>why this receiver is responsible;</li>
+<li>what contract the operation provides;</li>
+<li>what state or information changes;</li>
+<li>what failure can occur;</li>
+<li>whether the caller should know this collaborator directly.</li>
+</ul>
+<p>Keep static and dynamic models synchronized. If a sequence invents an operation or dependency, the class/package model must change. If the class model exposes an operation never used or justified, challenge it.</p>
+<h3 id="8-worked-example-8">8. Worked example</h3>
+<p><strong>Use case realization:</strong> Request Accessible Trip</p>
+<ol>
+<li><code>PassengerAPI</code> receives <code>submitTripRequest(command)</code>.</li>
+<li><code>TripRequestApplicationService</code> validates command form and obtains policy/context data through interfaces.</li>
+<li><code>TripRequestFactory</code> or domain constructor creates validated value objects and <code>TripRequest</code>.</li>
+<li><code>TripRequest</code> evaluates domain invariants and records submission.</li>
+<li><code>TripRequestRepository.add(tripRequest)</code> registers persistence work.</li>
+<li><code>DomainEventPublisher.publish(TripRequestSubmitted)</code> initiates downstream assignment/notification work.</li>
+<li>Application service returns <code>TripRequestReceipt</code>.</li>
+</ol>
+<p><strong>Exception alternatives:</strong> invalid service area, unsupported accessibility need, duplicate active request, persistence failure.</p>
+<p><strong>Review findings:</strong> a direct API-to-repository path bypasses domain validation; notification should not block transaction completion; duplicate detection requires a policy/query interface.</p>
+<h3 id="9-guided-practice-8">9. Guided practice</h3>
+<p>Realize <code>confirmAssignment</code>:</p>
+<ol>
+<li>identify the application boundary object;</li>
+<li>assign collaborators and operations;</li>
+<li>add availability-policy and state checks;</li>
+<li>show repository and event interfaces;</li>
+<li>model rejection and concurrent-update paths;</li>
+<li>define operation contracts;</li>
+<li>update the static model;</li>
+<li>perform a message-to-operation audit.</li>
+</ol>
+<h3 id="10-independent-exercises-8">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Repair a detailed sequence containing 12 design defects.</li>
+<li>Convert one SSD into a detailed sequence while preserving abstraction boundaries.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Create five detailed design sequence diagrams.</li>
+<li>Define contracts for 12–18 public operations.</li>
+<li>Update the static design model and package dependencies.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Run a message-to-operation matrix.</li>
+<li>Identify chatty interactions, feature envy, excessive parameter passing, and layer violations.</li>
+<li>Reconcile sequence ordering with state transitions.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Conduct a Dynamic Design Review and produce a revised integrated design baseline.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Model both synchronous and event-driven realization for one notification or assignment workflow and compare failure handling and coupling.</li>
+</ul>
+<h3 id="11-deliverable-specification-8">11. Deliverable specification</h3>
+<p>Submit <code>704-W08-Dynamic-Design-v1.0</code>:</p>
+<ul>
+<li>five detailed sequence diagrams;</li>
+<li>public-operation/interface contracts;</li>
+<li>updated static design model;</li>
+<li>message-to-operation matrix;</li>
+<li>state/interaction consistency report;</li>
+<li>transaction and exception notes;</li>
+<li>review findings and dispositions;</li>
+<li>baseline tag <code>704-design-baseline-v1</code>.</li>
+</ul>
+<h3 id="12-weekly-rubric-8">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collaboration correctness</td>
+<td style="text-align:right">30%</td>
+<td>Sequences realize use cases with defensible responsibility and ordering</td>
+</tr>
+<tr>
+<td>Static/dynamic consistency</td>
+<td style="text-align:right">25%</td>
+<td>Messages, operations, dependencies, and state behavior agree</td>
+</tr>
+<tr>
+<td>Boundary and dependency discipline</td>
+<td style="text-align:right">20%</td>
+<td>Domain, application, and infrastructure roles remain appropriately separated</td>
+</tr>
+<tr>
+<td>Failure and transaction handling</td>
+<td style="text-align:right">15%</td>
+<td>Important exceptions, concurrency, and consistency points are explicit</td>
+</tr>
+<tr>
+<td>Review/configuration</td>
+<td style="text-align:right">10%</td>
+<td>Findings are dispositioned and the integrated baseline is reproducible</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> critical sequence bypasses domain rules; messages have no operations or receivers; state transitions and sequence ordering conflict; transaction/failure behavior ignored for a critical use case.</p>
+<h3 id="13-knowledge-check-8">13. Knowledge check</h3>
+<ol>
+<li>Why should a detailed sequence omit many trivial getters?</li>
+<li>What indicates a layer violation?</li>
+<li>When is asynchronous messaging useful, and what new obligations does it create?</li>
+<li>What is the difference between a command and a query?</li>
+<li>How does an interaction model expose feature envy?</li>
+</ol>
+<h3 id="14-feedback-and-mastery-gate-6">14. Feedback and mastery gate</h3>
+<p>Review each critical sequence against use cases, operation contracts, state machines, and package dependencies. Week 8 passes when all critical messages map to defined responsibilities and no critical cross-view contradiction remains.</p>
+<h3 id="15-reflection-7">15. Reflection</h3>
+<p>Which collaboration created the most coupling? Which operation contract remains weak? Which asynchronous assumption must be addressed in EN.645.764?</p>
+<hr/>
+<h2 id="week-9--apply-design-patterns-with-restraint">Week 9 — Apply design patterns with restraint</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B4/chapters/09-apply-design-patterns-with-restraint.html">Read Book IV, Chapter 9</a> → <a href="../../K/B4/labs/lab-09-apply-design-patterns-with-restraint.html">complete Hypothetical Lab 9</a> → <a href="../../K/P1-text/lessons/605-704-w09.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Reuse and maintainability design<br/>
+<strong>Program competencies:</strong> C5-D, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-5, CLO-6, CLO-9, CLO-10<br/>
+<strong>Nominal effort:</strong> 10–12 hours<br/>
+<strong>Case-study baseline used:</strong> Week 8 integrated design baseline<br/>
+<strong>Primary evidence produced:</strong> Pattern forces analysis, three pattern decision records, revised design, and overengineering critique</p>
+<h3 id="1-why-this-week-matters-9">1. Why this week matters</h3>
+<p>Patterns are named, reusable design knowledge—not decorations or mandatory ingredients. Applying a pattern without a concrete problem and relevant forces often adds indirection, obscures responsibility, and makes a small system harder to understand. This week treats patterns as decisions that must be justified against simpler alternatives.</p>
+<h3 id="2-essential-question-9">2. Essential question</h3>
+<blockquote>
+<p>Which recurring design problem is present, what forces make it difficult, and does a named pattern solve it better than a simpler design?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-9">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve</strong></p>
+<ul>
+<li>current responsibility and dependency structure;</li>
+<li>known change drivers and variation points;</li>
+<li>inheritance-versus-composition reasoning;</li>
+<li>design decision records.</li>
+</ul>
+<p><strong>Readiness task</strong></p>
+<p>For each candidate application—Strategy for assignment policy, Observer for notifications, State for trip lifecycle, Factory Method for requests, Adapter for mapping service—state:</p>
+<ul>
+<li>the concrete problem;</li>
+<li>the variation or coupling pressure;</li>
+<li>the simpler alternative;</li>
+<li>one likely negative consequence.</li>
+</ul>
+<h3 id="4-detailed-weekly-learning-outcomes-9">4. Detailed weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ol>
+<li>describe a pattern using intent, context, problem, forces, structure, consequences, and implementation notes;</li>
+<li>identify recurring design pressures in the shuttle case;</li>
+<li>compare a pattern with a simpler direct design and at least one alternative pattern;</li>
+<li>apply selected creational, structural, and behavioral patterns coherently;</li>
+<li>detect pattern cargo culting, speculative generality, and unnecessary abstraction;</li>
+<li>revise class and interaction models to reflect pattern consequences.</li>
+</ol>
+<h3 id="5-key-concepts-8">5. Key concepts</h3>
+<ul>
+<li>pattern intent and forces;</li>
+<li>participants and collaborations;</li>
+<li>consequence and tradeoff;</li>
+<li>Strategy, State, Observer, Adapter, Factory Method, Command, Template Method, Facade, and Repository;</li>
+<li>composition over inheritance;</li>
+<li>stable versus speculative variation;</li>
+<li>dependency inversion and indirection;</li>
+<li>pattern language and pattern interaction;</li>
+<li>anti-pattern and accidental complexity.</li>
+</ul>
+<h3 id="6-required-readings-and-resources-9">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding questions</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GoF <em>Design Patterns</em> <a href="https://www.pearson.com/en-us/subject-catalog/p/Gamma-Design-Patterns-Elements-of-Reusable-Object-Oriented-Software/P200000009480/9780321700698" title="Design Patterns: Elements of Reusable Object-Oriented Software">GOF</a></td>
+<td>Introduction plus Strategy, State, Observer, Adapter, and Factory Method entries</td>
+<td>Learn the canonical pattern format and consequences</td>
+<td>What forces justify each pattern? What new objects and dependencies appear?</td>
+<td style="text-align:right">2.5 hr</td>
+</tr>
+<tr>
+<td>Fowler, <em>Refactoring</em> overview <a href="https://martinfowler.com/books/refactoring.html" title="Refactoring">FOWLER-REFACTORING</a></td>
+<td>Introductory explanation of behavior-preserving design improvement</td>
+<td>Separate pattern application from wholesale redesign</td>
+<td>Can the design move toward a pattern incrementally?</td>
+<td style="text-align:right">30 min</td>
+</tr>
+<tr>
+<td>Current design decision records</td>
+<td>Review variation points and maintenance risks</td>
+<td>Ground pattern selection in actual problems</td>
+<td>Which variation is already present rather than merely imagined?</td>
+<td style="text-align:right">30 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-9">7. Instructor-style lesson notes</h3>
+<p>Pattern selection should follow this order:</p>
+<ol>
+<li>identify a design problem in evidence;</li>
+<li>state the forces and likely changes;</li>
+<li>describe the simplest acceptable design;</li>
+<li>evaluate candidate patterns and their consequences;</li>
+<li>apply only the minimum structure needed;</li>
+<li>test the revised collaboration;</li>
+<li>record why the pattern is adopted or rejected.</li>
+</ol>
+<p>Examples in the shuttle case:</p>
+<ul>
+<li><strong>Strategy</strong> may isolate vehicle-assignment policies that truly vary by service mode or priority;</li>
+<li><strong>State</strong> may move lifecycle-specific behavior out of condition-heavy code, but it may duplicate an already adequate state machine if overused;</li>
+<li><strong>Observer</strong> may decouple event producers from notification subscribers, but delivery reliability and ordering remain separate concerns;</li>
+<li><strong>Adapter</strong> may isolate an external map provider;</li>
+<li><strong>Factory Method</strong> may be unnecessary when one constructor or factory function is sufficient.</li>
+</ul>
+<h3 id="8-worked-example-9">8. Worked example</h3>
+<p><strong>Problem:</strong> Assignment policy changes between normal service, accessible-priority service, emergency evacuation, and low-capacity night service.</p>
+<p><strong>Direct design:</strong> <code>AssignmentService</code> contains a large conditional selecting scoring rules.</p>
+<p><strong>Pattern candidate:</strong> Strategy.</p>
+<p><strong>Participants:</strong></p>
+<ul>
+<li><code>AssignmentPolicy</code> interface;</li>
+<li><code>NormalAssignmentPolicy</code>;</li>
+<li><code>AccessiblePriorityPolicy</code>;</li>
+<li><code>EmergencyPolicy</code>;</li>
+<li><code>AssignmentApplicationService</code> as context;</li>
+<li>policy selection/configuration mechanism.</li>
+</ul>
+<p><strong>Benefits:</strong> rules can vary independently; policies can be tested separately; conditional complexity is reduced.</p>
+<p><strong>Costs:</strong> more objects; policy selection must be controlled; shared constraints may be duplicated; runtime configurability may exceed actual need.</p>
+<p><strong>Decision:</strong> adopt Strategy only if at least two materially different policies are required in the baseline. Reject speculative plug-in architecture beyond those known variants.</p>
+<h3 id="9-guided-practice-9">9. Guided practice</h3>
+<p>Apply Adapter to the mapping interface:</p>
+<ol>
+<li>identify the domain/application contract required;</li>
+<li>identify vendor-specific types and failures;</li>
+<li>design an adapter and stable port;</li>
+<li>update the class and sequence models;</li>
+<li>evaluate testing and error-translation consequences;</li>
+<li>compare with direct vendor dependency.</li>
+</ol>
+<h3 id="10-independent-exercises-9">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Match ten pattern descriptions to their intent, and identify misleading pattern labels.</li>
+<li>Explain why Singleton is not a general solution to shared access.</li>
+</ul>
+<p><strong>Application</strong></p>
+<p>Prepare decision records for at least three candidates:</p>
+<ul>
+<li>Strategy for assignment policy;</li>
+<li>Adapter for map/identity/notification provider;</li>
+<li>Observer or domain events for notifications;</li>
+<li>State for lifecycle behavior;</li>
+<li>Command for operator actions;</li>
+<li>Factory Method for object creation.</li>
+</ul>
+<p>Adopt at least two and reject at least one.</p>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Compare before/after dependency graphs.</li>
+<li>Identify added classes, interfaces, test seams, and failure modes.</li>
+<li>Check that the pattern does not duplicate an existing responsibility.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Revise two critical sequence diagrams and the static design model.</li>
+<li>Write an overengineering critique identifying three abstractions intentionally not introduced.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Refactor a small code sketch toward one selected pattern and verify behavior remains unchanged.</li>
+</ul>
+<h3 id="11-deliverable-specification-9">11. Deliverable specification</h3>
+<p>Submit <code>704-W09-Pattern-Decisions-v1.0</code>:</p>
+<ul>
+<li>pattern forces matrix;</li>
+<li>three complete decision records;</li>
+<li>before/after static and dynamic views;</li>
+<li>adopted and rejected alternatives;</li>
+<li>dependency and maintainability analysis;</li>
+<li>overengineering critique;</li>
+<li>revised design baseline.</li>
+</ul>
+<h3 id="12-weekly-rubric-9">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Problem/forces analysis</td>
+<td style="text-align:right">25%</td>
+<td>Each pattern addresses an evidenced design pressure</td>
+</tr>
+<tr>
+<td>Pattern semantic correctness</td>
+<td style="text-align:right">25%</td>
+<td>Participants and collaborations reflect pattern intent</td>
+</tr>
+<tr>
+<td>Alternatives and restraint</td>
+<td style="text-align:right">20%</td>
+<td>Simpler designs and rejected alternatives are considered honestly</td>
+</tr>
+<tr>
+<td>Consequence analysis</td>
+<td style="text-align:right">20%</td>
+<td>Added complexity, coupling, testability, and failure effects are explicit</td>
+</tr>
+<tr>
+<td>Model revision</td>
+<td style="text-align:right">10%</td>
+<td>Static and dynamic models consistently reflect adopted decisions</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> pattern chosen by name only; no concrete problem; adopted pattern worsens a critical dependency without acknowledgment; diagrams and decision record disagree.</p>
+<h3 id="13-knowledge-check-9">13. Knowledge check</h3>
+<ol>
+<li>What distinguishes a pattern from a library or algorithm?</li>
+<li>When is Strategy preferable to subclassing the context?</li>
+<li>What problem does Adapter solve?</li>
+<li>Why does Observer not guarantee reliable delivery?</li>
+<li>What is speculative generality?</li>
+</ol>
+<h3 id="14-feedback-and-mastery-gate-7">14. Feedback and mastery gate</h3>
+<p>Conduct a pattern-justification review from the maintainer perspective. Remove any pattern whose benefit cannot be demonstrated. Week 9 passes when at least two adopted patterns are correctly realized and at least one plausible pattern is rejected with a defensible rationale.</p>
+<h3 id="15-reflection-8">15. Reflection</h3>
+<p>Which pattern initially seemed attractive but was unnecessary? Which adopted pattern creates the most new obligations? What simpler design remains acceptable?</p>
+<hr/>
+<h2 id="week-10--express-precise-constraints-with-ocl-and-execute-a-change-red-team">Week 10 — Express precise constraints with OCL and execute a change red-team</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B4/chapters/10-express-precise-constraints-with-ocl-and-exec.html">Read Book IV, Chapter 10</a> → <a href="../../K/B4/labs/lab-10-express-precise-constraints-with-ocl-and-exec.html">complete Hypothetical Lab 10</a> → <a href="../../K/P1-text/lessons/605-704-w10.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Formal precision, complex defect analysis, and change response<br/>
+<strong>Program competencies:</strong> C3-D, C4-I, C5-D, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-7, CLO-9, CLO-10<br/>
+<strong>Nominal effort:</strong> 11–13 hours<br/>
+<strong>Case-study baseline used:</strong> Week 9 pattern-refined design<br/>
+<strong>Primary evidence produced:</strong> OCL constraint suite, evaluation results, red-team findings, change-impact analysis, and corrected baseline</p>
+<h3 id="1-why-this-week-matters-10">1. Why this week matters</h3>
+<p>Diagrams communicate structure and behavior, but many rules remain ambiguous without a constraint language. OCL can state invariants, operation preconditions, postconditions, derived values, and model queries precisely without prescribing procedural implementation. This week also introduces a significant change request to test whether the model supports controlled impact analysis rather than local diagram editing.</p>
+<h3 id="2-essential-question-10">2. Essential question</h3>
+<blockquote>
+<p>Which rules are too important or too subtle to leave in prose, and can the model reveal every element affected by a new requirement?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-10">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve</strong></p>
+<ul>
+<li>class properties, multiplicities, operations, and state rules;</li>
+<li>operation contracts;</li>
+<li>business-rule inventory;</li>
+<li>selected pattern structure.</li>
+</ul>
+<p><strong>Readiness task</strong></p>
+<p>Translate these rules into structured logic before using OCL:</p>
+<ol>
+<li>an active trip request has at most one current confirmed assignment;</li>
+<li>an assignment vehicle must satisfy all accessibility capabilities required by the trip;</li>
+<li>a completed trip has actual pickup and drop-off times in chronological order;</li>
+<li>cancellation after dispatch lock requires operator authority;</li>
+<li>passenger identifiers are unique within the platform.</li>
+</ol>
+<h3 id="4-detailed-weekly-learning-outcomes-10">4. Detailed weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ol>
+<li>identify rules suited to invariants, preconditions, postconditions, derived expressions, and queries;</li>
+<li>navigate UML models using OCL property and collection expressions;</li>
+<li>use Boolean logic, collection operations, quantifiers, uniqueness, selection, and aggregation;</li>
+<li>evaluate constraints against example instances or carefully reasoned test cases;</li>
+<li>diagnose conflicts among OCL, multiplicities, state machines, use cases, and requirements;</li>
+<li>perform model-based change-impact analysis and disposition resulting defects.</li>
+</ol>
+<h3 id="5-key-concepts-9">5. Key concepts</h3>
+<ul>
+<li>side-effect-free constraint;</li>
+<li>context and <code>self</code>;</li>
+<li>invariant, precondition, postcondition, and derived value;</li>
+<li>collection types and operations;</li>
+<li><code>forAll</code>, <code>exists</code>, <code>select</code>, <code>collect</code>, <code>isUnique</code>, <code>size</code>, and <code>includes</code>;</li>
+<li>navigation, null/invalid handling, and three/four-valued semantic cautions;</li>
+<li>model instance and constraint evaluation;</li>
+<li>redundancy versus defense in depth;</li>
+<li>impact path and change propagation.</li>
+</ul>
+<h3 id="6-required-readings-and-resources-10">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding questions</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OMG OCL 2.4 <a href="https://www.omg.org/spec/OCL/2.4/About-OCL" title="Object Constraint Language 2.4">OMG-OCL</a></td>
+<td>Introduction; language overview; types and collections; constraints in UML models; invariants and operation contracts</td>
+<td>Establish normative OCL meaning</td>
+<td>Which expressions are queries, and how are collection operations typed?</td>
+<td style="text-align:right">2 hr</td>
+</tr>
+<tr>
+<td>Eclipse OCL documentation <a href="https://eclipse.dev/modeling/group.html?group=tools" title="Eclipse OCL">ECLIPSE-OCL</a></td>
+<td>Install/use the console or inspect examples if executable tooling is available</td>
+<td>Evaluate constraints rather than only writing syntax</td>
+<td>What model instance is required to make a constraint meaningful?</td>
+<td style="text-align:right">60 min</td>
+</tr>
+<tr>
+<td>Current business-rule and state inventory</td>
+<td>Select rules not expressed precisely elsewhere</td>
+<td>Connect formal constraints to real design risk</td>
+<td>Which ambiguity could permit an illegal object graph or operation?</td>
+<td style="text-align:right">30 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-10">7. Instructor-style lesson notes</h3>
+<p>Use OCL where it improves precision, not to restate every multiplicity. Good candidates include:</p>
+<ul>
+<li>constraints involving several objects or associations;</li>
+<li>uniqueness across a collection;</li>
+<li>conditional rules;</li>
+<li>state-dependent legality;</li>
+<li>pre/post relationships between prior and resulting state;</li>
+<li>derived quantities;</li>
+<li>coverage and quality queries.</li>
+</ul>
+<p>Example style:</p>
+<pre><code class="language-ocl">context TripRequest
+inv AtMostOneCurrentAssignment:
+    self.assignments-&gt;select(a | a.status = AssignmentStatus::confirmed)-&gt;size() &lt;= 1
+</code></pre>
+<p>The exact enumeration and property syntax depends on the model. A constraint that does not type-check against the model is not evidence.</p>
+<h3 id="8-worked-example-10">8. Worked example</h3>
+<p><strong>Rule:</strong> Every confirmed assignment must use a vehicle that supports all required accessibility capabilities.</p>
+<pre><code class="language-ocl">context Assignment
+inv ConfirmedVehicleSupportsRequiredCapabilities:
+    self.status = AssignmentStatus::confirmed implies
+    self.vehicle.capabilities-&gt;includesAll(
+        self.tripRequest.requiredCapabilities
+    )
+</code></pre>
+<p><strong>Test instances:</strong></p>
+<ol>
+<li>no required capability, standard vehicle — passes;</li>
+<li>wheelchair lift required, lift-capable vehicle — passes;</li>
+<li>wheelchair lift required, standard vehicle — fails;</li>
+<li>proposed but not confirmed assignment with mismatch — result depends on intended rule and must be clarified.</li>
+</ol>
+<p><strong>Model issue found:</strong> <code>Vehicle.capabilities</code> describes current configured capabilities, while availability may temporarily remove a capability. The rule may need <code>availableCapabilitiesAt(time)</code> or a capability-status concept.</p>
+<h3 id="9-change-red-team-scenario">9. Change red-team scenario</h3>
+<p>The university introduces <strong>group journey chaining</strong>:</p>
+<ul>
+<li>one passenger may create a journey containing multiple trip legs;</li>
+<li>a leg may be served by different vehicles;</li>
+<li>accessibility constraints apply to each leg;</li>
+<li>cancellation may affect one leg or the remaining journey;</li>
+<li>transfer timing must meet a configurable minimum;</li>
+<li>passenger notifications summarize journey-level status.</li>
+</ul>
+<p>The learner must identify impacts to:</p>
+<ul>
+<li>requirements and use cases;</li>
+<li>domain concepts and multiplicities;</li>
+<li>state machines;</li>
+<li>application operations;</li>
+<li>design classes and patterns;</li>
+<li>OCL constraints;</li>
+<li>persistence identity and transaction assumptions;</li>
+<li>traceability and test implications.</li>
+</ul>
+<h3 id="10-guided-practice">10. Guided practice</h3>
+<ol>
+<li>Write five OCL invariants from existing business rules.</li>
+<li>Write two preconditions and two postconditions.</li>
+<li>Evaluate each against positive, boundary, and negative examples.</li>
+<li>Apply the journey-change request to one use case and one class model segment.</li>
+<li>run an impact walk from requirement to use case, classes, sequences, state, OCL, and persistence.</li>
+<li>classify defects as omission, contradiction, ambiguity, overconstraint, or design rigidity.</li>
+</ol>
+<h3 id="11-independent-exercises">11. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Correct ten OCL syntax, typing, or semantic defects.</li>
+<li>Distinguish invariant, precondition, postcondition, and query examples.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Create 12–18 OCL constraints or executable-equivalent rules.</li>
+<li>Evaluate at least ten constraints against example model instances.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Compare OCL with class multiplicities and state guards; identify redundant and conflicting rules.</li>
+<li>Identify three rules that should remain prose because formalization adds little value.</li>
+</ul>
+<p><strong>Synthesis — Red-Team Exercise</strong></p>
+<ul>
+<li>Perform the journey-change impact analysis.</li>
+<li>Revise affected artifacts.</li>
+<li>Produce a before/after trace and defect disposition report.</li>
+</ul>
+<p><strong>Stretch</strong></p>
+<ul>
+<li>Automate OCL evaluation or model-quality queries in Eclipse OCL, Epsilon, or an equivalent tool.</li>
+</ul>
+<h3 id="12-deliverable-specification">12. Deliverable specification</h3>
+<p>Submit <code>704-W10-OCL-and-Change-v1.0</code>:</p>
+<ol>
+<li>constraint catalog with source rule and context;</li>
+<li>12–18 OCL expressions;</li>
+<li>parse/type/evaluation results or structured manual test evidence;</li>
+<li>positive, boundary, and negative test instances;</li>
+<li>conflict/redundancy analysis;</li>
+<li>journey-change impact map;</li>
+<li>red-team defect report;</li>
+<li>revised model baseline and disposition log.</li>
+</ol>
+<h3 id="13-weekly-rubric">13. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Constraint selection</td>
+<td style="text-align:right">20%</td>
+<td>OCL is used for important, nontrivial rules with clear source rationale</td>
+</tr>
+<tr>
+<td>Syntax and semantics</td>
+<td style="text-align:right">25%</td>
+<td>Expressions are well-typed and correctly use navigation and collections</td>
+</tr>
+<tr>
+<td>Evaluation evidence</td>
+<td style="text-align:right">20%</td>
+<td>Positive, boundary, and negative cases demonstrate intended behavior</td>
+</tr>
+<tr>
+<td>Change-impact completeness</td>
+<td style="text-align:right">25%</td>
+<td>Impact paths cover requirements through design, constraints, and persistence assumptions</td>
+</tr>
+<tr>
+<td>Correction/configuration</td>
+<td style="text-align:right">10%</td>
+<td>Defects are dispositioned and the model remains controlled</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> critical OCL expression does not match the model; constraints contradict state/use cases without resolution; change analysis edits only one diagram; critical impacts omitted.</p>
+<h3 id="14-knowledge-check">14. Knowledge check</h3>
+<ol>
+<li>Why is OCL side-effect free?</li>
+<li>What is the difference between <code>select</code> and <code>collect</code>?</li>
+<li>When is <code>forAll</code> appropriate?</li>
+<li>Why can a valid-looking OCL expression still be wrong?</li>
+<li>What makes a change-impact analysis complete enough for review?</li>
+</ol>
+<h3 id="15-feedback-and-mastery-gate">15. Feedback and mastery gate</h3>
+<p>Use executable evaluation when available and a separate constraint reviewer. Correct every critical typing, contradiction, and impact-coverage defect. Week 10 passes when at least ten important constraints have credible evaluation evidence and the journey change is traced through all affected model layers.</p>
+<h3 id="16-reflection">16. Reflection</h3>
+<p>Which rule was hardest to formalize? Which model weakness was exposed by the change request? Which constraint would be most valuable as an automated quality check?</p>
+<hr/>
+<h2 id="week-11--design-persistence-and-conduct-the-design-readiness-review">Week 11 — Design persistence and conduct the Design Readiness Review</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B4/chapters/11-design-persistence-and-conduct-the-design-rea.html">Read Book IV, Chapter 11</a> → <a href="../../K/B4/labs/lab-11-design-persistence-and-conduct-the-design-rea.html">complete Hypothetical Lab 11</a> → <a href="../../K/P1-text/lessons/605-704-w11.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Implementation-boundary design and capstone review<br/>
+<strong>Program competencies:</strong> C3-D, C5-D, C12-D<br/>
+<strong>Course outcomes:</strong> CLO-5, CLO-8, CLO-9, CLO-10<br/>
+<strong>Nominal effort:</strong> 11–13 hours<br/>
+<strong>Case-study baseline used:</strong> Week 10 corrected design and constraints<br/>
+<strong>Primary evidence produced:</strong> Persistence boundary, object-relational mapping rationale, maintainability audit, capstone draft, and formal review findings</p>
+<h3 id="1-why-this-week-matters-11">1. Why this week matters</h3>
+<p>Persistent storage creates pressure on object models: identity becomes confused with database keys, associations become foreign keys, transactions leak into domain behavior, and lazy loading or serialization constraints shape class design. A strong OO design acknowledges persistence without allowing a storage technology to become the domain model. The Design Readiness Review tests the complete design before final baselining.</p>
+<h3 id="2-essential-question-11">2. Essential question</h3>
+<blockquote>
+<p>How can the design preserve domain meaning and behavior while reliably storing, retrieving, and updating long-lived object graphs?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-11">3. Prerequisite retrieval and readiness check</h3>
+<p><strong>Retrieve</strong></p>
+<ul>
+<li>entity and value-object distinctions;</li>
+<li>aggregate or transaction consistency boundaries, if used;</li>
+<li>repository interfaces and patterns;</li>
+<li>identity, multiplicity, lifecycle, and OCL constraints.</li>
+</ul>
+<p><strong>Readiness task</strong></p>
+<p>For <code>TripRequest</code>, <code>Assignment</code>, <code>Vehicle</code>, <code>Passenger</code>, and <code>ServiceIncident</code>, identify:</p>
+<ul>
+<li>domain identity;</li>
+<li>likely persistence identifier;</li>
+<li>creation and deletion policy;</li>
+<li>transaction boundary;</li>
+<li>relationships requiring history;</li>
+<li>data that should be derived rather than stored.</li>
+</ul>
+<h3 id="4-detailed-weekly-learning-outcomes-11">4. Detailed weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ol>
+<li>distinguish domain identity, object identity, and persistence keys;</li>
+<li>define persistence boundaries and repository contracts;</li>
+<li>evaluate mapping options for entities, value objects, inheritance, collections, and association history;</li>
+<li>identify transaction, concurrency, consistency, and failure obligations;</li>
+<li>separate domain behavior from persistence mechanisms while acknowledging practical constraints;</li>
+<li>audit the complete OOAD baseline for maintainability, traceability, and implementation readiness.</li>
+</ol>
+<h3 id="5-key-concepts-10">5. Key concepts</h3>
+<ul>
+<li>persistent identity and natural/surrogate key;</li>
+<li>entity and value-object mapping;</li>
+<li>Repository, Data Mapper, Identity Map, and Unit of Work;</li>
+<li>object-relational impedance mismatch;</li>
+<li>inheritance mapping strategies;</li>
+<li>aggregate/transaction boundary;</li>
+<li>optimistic concurrency and versioning;</li>
+<li>lazy/eager loading and aggregate loading;</li>
+<li>audit history, retention, and deletion;</li>
+<li>derived data and cache;</li>
+<li>migration and schema evolution;</li>
+<li>readiness review and residual design risk.</li>
+</ul>
+<h3 id="6-required-readings-and-resources-11">6. Required readings and resources</h3>
+<table>
+<thead>
+<tr>
+<th>Resource</th>
+<th>Assignment</th>
+<th>Purpose</th>
+<th>Guiding questions</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fowler enterprise application architecture catalog <a href="https://martinfowler.com/eaaCatalog/" title="Catalog of Patterns of Enterprise Application Architecture">FOWLER-EAA</a></td>
+<td>Domain Model, Data Mapper, Identity Map, Repository, and Unit of Work</td>
+<td>Understand persistence patterns and tradeoffs</td>
+<td>Which responsibilities belong in the domain and which at the persistence boundary?</td>
+<td style="text-align:right">2 hr</td>
+</tr>
+<tr>
+<td>Fowler Repository <a href="https://martinfowler.com/eaaCatalog/repository.html" title="Repository">FOWLER-REPOSITORY</a> and Unit of Work <a href="https://martinfowler.com/eaaCatalog/unitOfWork.html" title="Unit of Work">FOWLER-UOW</a></td>
+<td>Read full pattern summaries</td>
+<td>Define repository and transaction behavior</td>
+<td>What collection-like illusion does Repository provide, and what consistency work does Unit of Work coordinate?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+<tr>
+<td>Current design and OCL suite</td>
+<td>Review identity, lifecycle, multiplicity, and history requirements</td>
+<td>Drive persistence from domain semantics</td>
+<td>Which relationships cannot be safely flattened or overwritten?</td>
+<td style="text-align:right">45 min</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-instructor-style-lesson-notes-11">7. Instructor-style lesson notes</h3>
+<p>Do not equate a class with a table. Some value objects may be embedded; some entities may span tables; some relationships require association records; some events require append-only history. The goal is not a complete database schema but a defensible mapping and boundary design.</p>
+<p>Persistence decisions should answer:</p>
+<ul>
+<li>What identifies this domain entity over time?</li>
+<li>Which objects must change atomically?</li>
+<li>What history must be preserved?</li>
+<li>How are concurrent updates detected?</li>
+<li>Which objects can be reconstructed from values?</li>
+<li>Which queries require specialized read models?</li>
+<li>What happens when persistence fails after external work begins?</li>
+</ul>
+<h3 id="8-worked-example-11">8. Worked example</h3>
+<p><strong>Domain identity:</strong> <code>TripRequestId</code> is assigned when a request is accepted. It is not the same concept as an auto-increment database row key.</p>
+<p><strong>Mapping decision:</strong></p>
+<ul>
+<li><code>TripRequest</code> stored as an entity root;</li>
+<li><code>TimeWindow</code>, <code>LocationReference</code>, and <code>PartySize</code> embedded as value objects;</li>
+<li><code>AccessibilityRequirement</code> stored as a child collection or normalized relation depending query needs;</li>
+<li><code>Assignment</code> stored separately because it has identity, status, history, and reassignment semantics;</li>
+<li><code>TripRequest</code> maintains current assignment reference plus history query through repository;</li>
+<li>optimistic version field detects concurrent dispatcher/passenger updates;</li>
+<li>domain events recorded transactionally for reliable publication.</li>
+</ul>
+<p><strong>Risk:</strong> a bidirectional object graph can cause excessive loading and accidental persistence cascades. Repository contracts should return task-focused aggregates or views.</p>
+<h3 id="9-guided-practice-10">9. Guided practice</h3>
+<ol>
+<li>Create an identity table for eight domain objects.</li>
+<li>Select four value objects and explain equality/immutability.</li>
+<li>define repository interfaces and query responsibilities.</li>
+<li>map one one-to-many and one many-to-many relationship.</li>
+<li>define transaction boundaries for request submission, assignment confirmation, and cancellation.</li>
+<li>add optimistic concurrency behavior to one sequence diagram.</li>
+<li>identify retention and audit requirements.</li>
+</ol>
+<h3 id="10-independent-exercises-10">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<ul>
+<li>Diagnose ten persistence-model smells: table-shaped domain objects, exposed ORM annotations in analysis, missing identity, cascade deletion risk, and transaction leakage.</li>
+</ul>
+<p><strong>Application</strong></p>
+<ul>
+<li>Create persistence mapping for 8–12 important domain/design objects.</li>
+<li>Define repositories, units of work/transaction boundaries, and concurrency strategy.</li>
+<li>Produce a package view separating domain, application, persistence adapters, and external gateways.</li>
+</ul>
+<p><strong>Analysis</strong></p>
+<ul>
+<li>Evaluate inheritance mapping, association history, large collections, and reporting queries.</li>
+<li>Identify stored, derived, cached, and append-only information.</li>
+</ul>
+<p><strong>Synthesis — Design Readiness Review</strong></p>
+<p>Prepare a review package covering:</p>
+<ol>
+<li>scope and critical requirements/use cases;</li>
+<li>analysis and state baseline;</li>
+<li>static/dynamic design;</li>
+<li>pattern decisions;</li>
+<li>OCL constraints;</li>
+<li>persistence and transaction design;</li>
+<li>traceability and consistency metrics;</li>
+<li>maintainability findings;</li>
+<li>open risks and implementation assumptions;</li>
+<li>readiness recommendation.</li>
+</ol>
+<p>Conduct the review, log findings, and revise the capstone draft.</p>
+<h3 id="11-deliverable-specification-10">11. Deliverable specification</h3>
+<p>Submit <code>704-W11-Design-Readiness-v1.0</code>:</p>
+<ul>
+<li>identity and lifecycle table;</li>
+<li>persistence mapping model;</li>
+<li>repository and transaction contracts;</li>
+<li>concurrency and failure notes;</li>
+<li>storage/derived/cache/history classification;</li>
+<li>revised package and sequence views;</li>
+<li>maintainability and dependency audit;</li>
+<li>Design Readiness Review briefing;</li>
+<li>findings, dispositions, and final corrective-action list.</li>
+</ul>
+<h3 id="12-weekly-rubric-10">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identity and mapping reasoning</td>
+<td style="text-align:right">25%</td>
+<td>Domain identity and persistence mapping are explicit and coherent</td>
+</tr>
+<tr>
+<td>Transaction/concurrency design</td>
+<td style="text-align:right">20%</td>
+<td>Atomicity, conflicts, failures, and history are addressed</td>
+</tr>
+<tr>
+<td>Domain/persistence separation</td>
+<td style="text-align:right">20%</td>
+<td>Persistence mechanisms do not dominate domain responsibilities</td>
+</tr>
+<tr>
+<td>Integrated readiness evidence</td>
+<td style="text-align:right">25%</td>
+<td>Requirements, design, state, patterns, constraints, and persistence are consistent</td>
+</tr>
+<tr>
+<td>Review/configuration</td>
+<td style="text-align:right">10%</td>
+<td>Findings are prioritized and dispositioned in a controlled draft</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> domain identity undefined; critical history overwritten; transaction/concurrency risks ignored; persistence design contradicts multiplicity/OCL/state; review leaves critical findings open without acceptance.</p>
+<h3 id="13-knowledge-check-10">13. Knowledge check</h3>
+<ol>
+<li>What is the difference between domain identity and a database primary key?</li>
+<li>Why can a Repository hide persistence details without eliminating query design?</li>
+<li>What does Unit of Work coordinate?</li>
+<li>When is a value object a good embedded mapping candidate?</li>
+<li>Why can bidirectional associations create persistence problems?</li>
+</ol>
+<h3 id="14-feedback-and-mastery-gate-8">14. Feedback and mastery gate</h3>
+<p>Correct all critical identity, transaction, mapping, and cross-view defects. The final capstone may proceed only when the Design Readiness Review recommends approval with minor actions or conditional approval with explicitly bounded residual risks.</p>
+<h3 id="15-reflection-9">15. Reflection</h3>
+<p>Which persistence concern most altered the design? Which domain class is most vulnerable to becoming table-shaped? Which risk must EN.645.764 address?</p>
+<hr/>
+<h2 id="week-12--baseline-and-defend-the-integrated-ooad-design">Week 12 — Baseline and defend the integrated OOAD design</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B4/chapters/12-baseline-and-defend-the-integrated-ooad-desig.html">Read Book IV, Chapter 12</a> → <a href="../../K/B4/labs/lab-12-baseline-and-defend-the-integrated-ooad-desig.html">complete Hypothetical Lab 12</a> → <a href="../../K/P1-text/lessons/605-704-w12.html">optional short primer</a>. Read the book chapter and practice the fictional lab <strong>before</strong> completing this week's independent graded coursework. The original rubric and mastery gate remain authoritative.</p>
+</blockquote>
+<p><strong>Weekly role in the course:</strong> Final synthesis, review, defense, and retrospective<br/>
+<strong>Program competencies:</strong> C2-D, C3-D, C4-I, C5-D, C12-D<br/>
+<strong>Course outcomes:</strong> All CLOs<br/>
+<strong>Nominal effort:</strong> 12–15 hours<br/>
+<strong>Case-study baseline used:</strong> Week 11 conditionally approved capstone draft<br/>
+<strong>Primary evidence produced:</strong> Final controlled OOAD baseline, executive design memo, review briefing, oral defense, and EN.645.764 handoff</p>
+<h3 id="1-why-this-week-matters-12">1. Why this week matters</h3>
+<p>The final product is not a pile of diagrams. It is an integrated argument that stakeholder goals and requirements have been analyzed into coherent concepts and behavior, then transformed into a maintainable software design with explicit state, constraints, patterns, persistence boundaries, and change evidence. The defense tests whether the learner can explain and navigate that argument independently.</p>
+<h3 id="2-essential-question-12">2. Essential question</h3>
+<blockquote>
+<p>Is the design baseline coherent and mature enough to guide software architecture and implementation planning, and what evidence supports that judgment?</p>
+</blockquote>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-12">3. Prerequisite retrieval and readiness check</h3>
+<p>Before the final review, verify:</p>
+<ul>
+<li>all Week 11 critical findings are closed or formally accepted;</li>
+<li>all model sources render/open successfully;</li>
+<li>six critical trace chains are complete;</li>
+<li>OCL and multiplicity/state rules agree;</li>
+<li>final use cases match design realizations;</li>
+<li>repository links and reference definitions resolve;</li>
+<li>oral-defense prompts can be answered through live navigation.</li>
+</ul>
+<h3 id="4-detailed-weekly-learning-outcomes-12">4. Detailed weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ol>
+<li>assemble a controlled, reproducible OOAD baseline;</li>
+<li>demonstrate end-to-end traceability from stakeholder goal to software design;</li>
+<li>evaluate the design against correctness, cohesion, coupling, maintainability, precision, and change readiness;</li>
+<li>communicate major design decisions, alternatives, assumptions, limitations, and residual risks;</li>
+<li>respond to reviewer challenges through live model evidence;</li>
+<li>identify the specific architecture, implementation, test, and operations questions handed to EN.645.764.</li>
+</ol>
+<h3 id="5-final-synthesis-activities">5. Final synthesis activities</h3>
+<ol>
+<li>freeze the final artifact list and baseline identifier;</li>
+<li>run all traceability and consistency checks;</li>
+<li>render/export every required view;</li>
+<li>disposition final review actions;</li>
+<li>write the executive design memo;</li>
+<li>prepare a 15–20 slide review briefing;</li>
+<li>conduct a 30–45 minute recorded oral defense;</li>
+<li>complete a rubric-based self-assessment;</li>
+<li>write the course retrospective and handoff memo.</li>
+</ol>
+<h3 id="6-final-review-package">6. Final review package</h3>
+<p>The review package must include:</p>
+<ul>
+<li>software context, scope, stakeholders, and assumptions;</li>
+<li>requirements and actor-goal summary;</li>
+<li>use-case catalog and six critical scenarios;</li>
+<li>domain and static analysis model;</li>
+<li>system interactions, activities, and state machines;</li>
+<li>static and dynamic design baseline;</li>
+<li>pattern decisions;</li>
+<li>OCL constraints and evaluation evidence;</li>
+<li>persistence, transaction, and concurrency design;</li>
+<li>traceability/coverage and consistency results;</li>
+<li>change-impact example;</li>
+<li>quality findings, residual risks, and implementation recommendations.</li>
+</ul>
+<h3 id="7-executive-design-memo">7. Executive design memo</h3>
+<p>Write 5–8 pages addressing:</p>
+<ol>
+<li>problem and software boundary;</li>
+<li>major requirements and quality concerns;</li>
+<li>analysis findings that materially shaped the design;</li>
+<li>design structure and responsibility rationale;</li>
+<li>state, pattern, constraint, and persistence decisions;</li>
+<li>evidence of consistency and change accommodation;</li>
+<li>unresolved risks and assumptions;</li>
+<li>recommendation for the next lifecycle step.</li>
+</ol>
+<h3 id="8-oral-defense-procedure">8. Oral defense procedure</h3>
+<p>The defense should include:</p>
+<ul>
+<li>a 10-minute prepared overview;</li>
+<li>15–25 minutes of questions drawn from the capstone prompt list;</li>
+<li>live navigation to model evidence;</li>
+<li>one unannounced change question;</li>
+<li>a final readiness recommendation.</li>
+</ul>
+<p>When no external reviewer is available, randomize the questions, record the defense, wait at least one hour, and score the recording using the oral-defense rubric.</p>
+<h3 id="9-independent-challenge-scenarios">9. Independent challenge scenarios</h3>
+<p>Answer at least two:</p>
+<ol>
+<li>The university adds third-party mobility providers that may accept delegated trip legs.</li>
+<li>Passenger identity becomes optional for certain public-service routes, but audit obligations remain.</li>
+<li>Vehicle capability changes can occur during an active assignment.</li>
+<li>Service incidents must support legal hold and immutable evidence.</li>
+<li>The assignment policy becomes a remotely configured rules service.</li>
+</ol>
+<p>For each, identify likely requirement, use-case, domain, state, design, OCL, pattern, and persistence impacts.</p>
+<h3 id="10-deliverable-specification">10. Deliverable specification</h3>
+<p>Submit <code>704-FINAL-OOAD-Baseline-v1.0</code> containing all capstone outputs listed in Section 15 plus:</p>
+<ul>
+<li>final artifact index;</li>
+<li>baseline tag or immutable archive;</li>
+<li>link/reference validation report;</li>
+<li>self-assessment rubric;</li>
+<li>oral-defense recording/transcript;</li>
+<li>challenge-scenario responses;</li>
+<li>retrospective;</li>
+<li>EN.645.764 handoff memo.</li>
+</ul>
+<h3 id="11-final-rubric">11. Final rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Exemplary</th>
+<th>Proficient</th>
+<th>Developing</th>
+<th>Insufficient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Requirements/use cases</td>
+<td style="text-align:right">15%</td>
+<td>Complete, concise, exception-aware, and strongly traced</td>
+<td>Critical goals and scenarios are correct with minor gaps</td>
+<td>Multiple ambiguities or gaps weaken design input</td>
+<td>Critical goals or behavior missing/contradictory</td>
+</tr>
+<tr>
+<td>Analysis model</td>
+<td style="text-align:right">15%</td>
+<td>Domain, dynamic, and state models reveal deep problem understanding</td>
+<td>Models are semantically correct and substantially complete</td>
+<td>Several weak concepts or inconsistencies remain</td>
+<td>Problem model is implementation-shaped or incorrect</td>
+</tr>
+<tr>
+<td>Design realization</td>
+<td style="text-align:right">25%</td>
+<td>Responsibilities and collaborations are cohesive, low-coupled, and adaptable</td>
+<td>Critical use cases have coherent static/dynamic realization</td>
+<td>God classes, leaky boundaries, or weak contracts remain</td>
+<td>Critical behavior cannot be realized coherently</td>
+</tr>
+<tr>
+<td>Patterns, constraints, persistence</td>
+<td style="text-align:right">15%</td>
+<td>Decisions are precise, restrained, tested, and mutually consistent</td>
+<td>Required techniques are correct and justified</td>
+<td>Techniques are partly mechanical or weakly evidenced</td>
+<td>Pattern/OCL/persistence work is incorrect or missing</td>
+</tr>
+<tr>
+<td>Traceability/change evidence</td>
+<td style="text-align:right">15%</td>
+<td>End-to-end traces and change impacts are complete and insightful</td>
+<td>Critical chains and impacts are substantially complete</td>
+<td>Orphans and missed impacts reduce confidence</td>
+<td>No credible integrated evidence</td>
+</tr>
+<tr>
+<td>Communication/configuration/defense</td>
+<td style="text-align:right">15%</td>
+<td>Baseline is highly reviewable; defense is fluent and evidence-based</td>
+<td>Package is reproducible and learner defends key decisions</td>
+<td>Presentation or navigation is inconsistent</td>
+<td>Baseline cannot be reviewed or learner cannot defend it</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-final-mastery-gate">12. Final mastery gate</h3>
+<p>Completion requires:</p>
+<ul>
+<li>at least 80% overall and all critical mastery criteria satisfied;</li>
+<li>no open critical review finding;</li>
+<li>all required model sources and exports present;</li>
+<li>at least six complete requirement/use-case/design/constraint trace chains;</li>
+<li>successful oral defense;</li>
+<li>a clear handoff identifying what EN.645.764 must architecture, implement, test, secure, deploy, or operate.</li>
+</ul>
+<h3 id="13-retrospective-prompts">13. Retrospective prompts</h3>
+<ul>
+<li>Which artifact created the most design value?</li>
+<li>Which model became too detailed or insufficiently detailed?</li>
+<li>Which assumption carries the most implementation risk?</li>
+<li>Which pattern or abstraction would you remove after further simplification?</li>
+<li>Which part of the design is most resistant to change?</li>
+<li>What evidence is still missing for production implementation?</li>
+<li>How did your understanding of analysis versus design change?</li>
+</ul>
+<hr/>
+<h2 id="reference-solution-and-instructor-material-package">Reference solution and instructor-material package</h2>
+<p>A complete self-study deployment should maintain a separate, controlled solution package containing:</p>
+<ul>
+<li>readiness-diagnostic answers;</li>
+<li>requirement and use-case defect examples;</li>
+<li>a reference actor-goal list and two fully dressed use cases;</li>
+<li>candidate-class accept/reject rationale;</li>
+<li>reference domain-model fragments;</li>
+<li>corrected SSD, activity, sequence, and state examples;</li>
+<li>responsibility-assignment rationale;</li>
+<li>pattern adopt/reject examples;</li>
+<li>OCL syntax and semantic solution notes;</li>
+<li>persistence mapping examples;</li>
+<li>weekly quiz answers and rationales;</li>
+<li>analytic rubric scoring examples;</li>
+<li>a reference capstone rationale, not a single mandatory design.</li>
+</ul>
+<p>The solution package should remain separate from the learner baseline and be opened only after an honest first attempt.</p>
+<hr/>
+<p><a href="OVERVIEW.html">Back to Phase 1 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+<h2 id="references">References</h2>
+</main></body></html>

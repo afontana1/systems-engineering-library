@@ -1,0 +1,1 @@
+digraph G {rankdir=LR;node[shape=box,style="rounded,filled",fillcolor="#edf7f5"]; alternatives->screen[label="mandatory constraints"]; screen->scenarios[label="feasible only"];scenarios->regret[label="decision rule"];regret->evidence[label="uncertainty"];}

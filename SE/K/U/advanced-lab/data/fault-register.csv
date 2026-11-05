@@ -1,0 +1,6 @@
+fault_id,scenario,injected_condition,observable_effect,assumed_detection,unmodeled_reality
+F01,OUTAGE,Vehicle V01 unavailable minute 0 through 70,Reduced capacity and longer waits,Perfect availability knowledge,Actual vehicle health and repair latency
+F02,LOSS,Forty percent Bernoulli request loss,Unobserved requests in experimental truth ledger,Omniscient simulator sees dropped requests,Real operator cannot infer invisible messages without acknowledgements
+F03,DELAY,All communications delayed twelve minutes,Increased wait and deadline risk,Timestamp difference,Variable network latency and clock drift
+F04,TELEMETRY,Central dispatch blocked minutes 0 through 45,Deferred assignments and reduced completion,Perfect knowledge of telemetry recovery,Partial stale data and unsafe reliance
+F05,LOW-CAPACITY,Fleet reduced to one resource,Lower service fraction,Deterministic configuration comparison,Accessibility and dispatch policy choices

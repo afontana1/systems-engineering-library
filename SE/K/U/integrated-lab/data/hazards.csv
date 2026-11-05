@@ -1,0 +1,5 @@
+hazard_id,hazard,causal_scenario,consequence,initial_severity,control,verification_test_ids,residual_uncertainty
+H-01,Double assignment,Concurrent scheduling violates vehicle availability,Conflicting service commitments,High,Nonoverlap invariant,T-02,Concurrency not modeled
+H-02,Duplicate service record,Retransmitted message processed twice,Overcounted demand and confused operator,Medium,Idempotent ingest,T-01,Only exact duplicates modeled
+H-03,Unserved vulnerable rider,Capacity degradation creates long queue or refusal,Access need unmet,High,Degradation detection and human escalation in real deployment,T-06,No real human or accessibility factors simulated
+H-04,Unsafe input assumption,Multi-party request exceeds toy capacity model,Incorrect scheduling,High,Reject unsupported passenger count,T-07,Real capacity and boarding time not modeled

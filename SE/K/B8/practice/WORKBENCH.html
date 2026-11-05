@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Interactive engineering workbench · Book 8</title><style>*{box-sizing:border-box}body{font:16px/1.6 system-ui,Segoe UI,sans-serif;margin:0;background:#f2f6f7;color:#19394b}header{padding:30px max(18px,calc((100vw - 1050px)/2));background:#193d50;color:white}header a{color:#c8f2ec}main{max-width:1050px;margin:26px auto;padding:0 18px 70px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:15px}.card{background:white;border:1px solid #d6e4e6;padding:22px;border-radius:12px;min-width:0}h1{line-height:1.22}h2{margin-top:0;font-size:1.3rem}label{display:block;margin:12px 0;font-weight:600}input,select{display:block;padding:8px;border:1px solid #aac9cc;border-radius:6px;margin-top:4px;max-width:100%}input[type=range]{width:100%}output{margin-left:12px}p[id]{padding:12px;background:#eaf5f4;color:#135f63;border-radius:8px;font-weight:750}small{color:#57747b}.downloads{display:flex;gap:10px;flex-wrap:wrap}.downloads a{background:#e6f3f0;padding:6px 10px;border-radius:7px}pre{background:#19323f;color:#dff6f2;white-space:pre;overflow:auto;padding:15px;border-radius:8px}button{background:#176e70;color:white;border:0;border-radius:6px;padding:9px 12px;cursor:pointer}</style><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B8/practice/WORKBENCH.html" data-se-mode="standard"></script>
+</head><body><header><a href="../OPEN-BOOK.html">Book 8</a><h1>Test confidence and readiness gates</h1><p>Experiment with assumptions and review the accompanying Python calculations.</p></header><main><div class="grid"><section class="card"><h2>Zero-failure upper bound</h2><label>Failure-free independent trials <input id="n" max="5000" min="1" type="number" value="30"/></label><label>Confidence <select id="cl"><option value="0.90">90%</option><option selected="" value="0.95">95%</option><option value="0.99">99%</option></select></label><p aria-live="polite" id="pbound"></p></section><section class="card"><h2>Service completeness</h2><label>Unserved among 12 eligible requests <input id="drops" max="12" min="0" type="number" value="2"/></label><p aria-live="polite" id="complete"></p><small>This tool does not recalculate p90 after service changes; do that with the full request dataset and Python tool.</small></section></div><section class="card" style="margin-top:18px"><h2>Download practice sources</h2><div class="downloads"><a download="" href="LAB-NOTEBOOK.ipynb">LAB-NOTEBOOK.ipynb</a><a download="" href="requests.csv">requests.csv</a><a download="" href="tools.py">tools.py</a><a download="" href="confidence.md">Confidence (Markdown)</a><a download="" href="lab-confidence.md">Lab Confidence (Markdown)</a><a download="" href="lab-readiness.md">Lab Readiness (Markdown)</a><a download="" href="readiness.md">Readiness (Markdown)</a></div><p>Python is displayed for inspection; execution requires your own Python environment.</p><button id="copy" type="button">Copy source</button><span id="copystatus" role="status"></span><details><summary>View the Python source</summary><pre><code id="pycode">"""Northstar teaching tools: zero-failure bounds and completeness-aware T&amp;E."""
+from pathlib import Path
+import csv, math, json
+HERE=Path(__file__).parent
+
+def zero_failure_bound(n,confidence=.95):
+    if not isinstance(n,int) or n&lt;=0 or not 0&lt;confidence&lt;1:raise ValueError('Invalid n or confidence')
+    return 1-(1-confidence)**(1/n)
+
+def n_for_bound(target,confidence=.95):
+    if not 0&lt;target&lt;1 or not 0&lt;confidence&lt;1:raise ValueError('Invalid target or confidence')
+    return math.ceil(math.log(1-confidence)/math.log(1-target))
+
+def nearest_rank(vals,prob):
+    if not vals or not 0&lt;prob&lt;=1:raise ValueError('Invalid sample or probability')
+    return sorted(vals)[math.ceil(prob*len(vals))-1]
+
+def evaluate(records):
+    all_n=len(records)
+    served=[float(r['wait_min']) for r in records if r['status']=='served']
+    return {'requests':all_n,'served':len(served),'completion':len(served)/all_n,
+            'served_p90_nearest_rank':nearest_rank(served,.9),'completion_gate':len(served)/all_n&gt;=.95,
+            'latency_gate':nearest_rank(served,.9)&lt;=18}
+
+if __name__=='__main__':
+    with (HERE/'requests.csv').open(newline='') as f:rs=list(csv.DictReader(f))
+    print(json.dumps({'p_u_30':zero_failure_bound(30),'n_target_1pct':n_for_bound(.01),
+            'service':evaluate(rs)},indent=2))
+</code></pre></details></section></main><script>function calculate(){let n=Math.max(1,+document.getElementById('n').value),c=+document.getElementById('cl').value,p=1-Math.pow(1-c,1/n);document.getElementById('pbound').textContent=`One-sided ${(100*c).toFixed(0)}% upper bound: ${(100*p).toFixed(2)}% per independent opportunity`;let d=Math.max(0,Math.min(12,+document.getElementById('drops').value)),f=(12-d)/12;document.getElementById('complete').textContent=`Completion ${(100*f).toFixed(1)}% · 95% gate ${f>=.95?'passes':'fails'}`;}for(const id of ["n", "cl", "drops"])document.getElementById(id).addEventListener('input',calculate);document.getElementById('copy').onclick=()=>{const source=document.getElementById('pycode').textContent;navigator.clipboard?.writeText(source).then(()=>document.getElementById('copystatus').textContent='Copied').catch(()=>document.getElementById('copystatus').textContent='Select the code to copy');};calculate();</script></body></html>

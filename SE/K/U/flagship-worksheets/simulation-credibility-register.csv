@@ -1,0 +1,2 @@
+model_version,purpose,input_source,epistemic_uncertainty,verification_check,decision_limit
+0.1,synthetic_pickup_wait,random_generator,arrival_parameters,conservation,not_calibrated

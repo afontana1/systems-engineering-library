@@ -1,0 +1,2236 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.757 — Foundations of Modeling and Simulation in Systems Engineering · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P3/EN645757.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/07-queues.html">Queueing, congestion, and discrete-event simulation</a></aside><main><div class="course-actions"><a href="../../K/B11/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en645757--foundations-of-modeling-and-simulation-in-systems-engineering">EN.645.757 — Foundations of Modeling and Simulation in Systems Engineering</h1>
+<p><strong>Credits:</strong> 3<br/>
+<strong>Phase:</strong> 3 — Quantitative analysis and model-driven decision support<br/>
+<strong>Prerequisite:</strong> EN.645.662 Introduction to Systems Engineering or equivalent systems-engineering foundation<br/>
+<strong>Recommended preparation:</strong> basic probability and statistics, spreadsheets, and introductory scripting</p>
+<p><a href="OVERVIEW.html">Back to Phase 3 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+<hr/>
+<h2 id="1-course-purpose">1. Course purpose</h2>
+<p>This course develops the judgment and practical capability required to use models and simulations as systems-engineering evidence. The learner will frame an intended use, select a model form, construct a conceptual and executable model, characterize stochastic inputs, design simulation runs, analyze output, evaluate credibility, and communicate a bounded decision recommendation.</p>
+<p>The course is not primarily about learning one simulation product. Arena remains a valid path because the source course uses it, but the open track uses Python and SimPy. Both tracks must produce equivalent evidence: conceptual model, source, data, tests, run controls, analyses, credibility argument, and decision record.</p>
+<h2 id="2-source-scope-and-self-study-adaptation">2. Source scope and self-study adaptation</h2>
+<p>The JHU source course covers M&amp;S terminology, modeling languages, probability and statistics, the M&amp;S development process, needs/opportunity analysis, detailed operations modeling, input data, concept exploration, output analysis, design and development, selection and ranking, design of experiments, integration and T&amp;E, VV&amp;A, production and sustainment, and selected advanced methods. <a href="https://ep.jhu.edu/courses/645757-foundations-of-modeling-and-simulation-in-systems-engineering/" title="Foundations of Modeling and Simulation in Systems Engineering — Johns Hopkins Engineering for Professionals">JHU-757-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/spring-2025/645.757.81" title="Spring 2025 syllabus for EN.645.757">JHU-757-SYLLABUS</a></p>
+<p>The 14 source modules are reorganized into 12 self-study weeks. Discussion boards become written analytic critiques; the team project becomes a multi-role review protocol; the midterm and final exams become cumulative retrieval checks, model reviews, and an oral defense. No major source topic is removed.</p>
+<h2 id="3-relationship-to-adjacent-courses">3. Relationship to adjacent courses</h2>
+<h3 id="inputs-from-earlier-phases">Inputs from earlier phases</h3>
+<p>The learner should import:</p>
+<ul>
+<li>the controlled system boundary, mission threads, requirements, architecture, and decisions from Phases 1–2;</li>
+<li>the Phase 2 T&amp;E evidence package and known data limitations;</li>
+<li>existing MOEs, MOPs, risks, assumptions, and unresolved decision questions.</li>
+</ul>
+<h3 id="outputs-to-later-phase-3-courses">Outputs to later Phase 3 courses</h3>
+<p>This course produces:</p>
+<ul>
+<li>a reusable M&amp;S project plan and conceptual-model package;</li>
+<li>a verified discrete-event simulation baseline;</li>
+<li>an input-model and output-analysis notebook;</li>
+<li>an experiment and uncertainty package;</li>
+<li>a V&amp;V/credibility record and use recommendation;</li>
+<li>a controlled handoff identifying analyses that belong in decision science, systems dynamics, advanced statistics, MBSE analytics, or advanced simulation.</li>
+</ul>
+<h2 id="4-prerequisites-and-readiness-diagnostic">4. Prerequisites and readiness diagnostic</h2>
+<p>Complete the following without outside help:</p>
+<ol>
+<li>Define a system boundary, stakeholder decision, and lifecycle phase.</li>
+<li>Explain the difference among a requirement, measure, model output, and decision criterion.</li>
+<li>Calculate mean, sample standard deviation, an empirical percentile, and a simple confidence interval from a small dataset.</li>
+<li>Explain why two systems with the same average service time can have different queue behavior.</li>
+<li>Write a small script or spreadsheet that samples a distribution and summarizes 100 observations.</li>
+<li>Distinguish verification, validation, and acceptance for use.</li>
+<li>Identify three threats to model credibility.</li>
+<li>Explain why a random seed should be controlled but not treated as a physical input.</li>
+</ol>
+<p>A learner below the standard should complete a one-week bridge on descriptive statistics, probability distributions, confidence intervals, spreadsheet/Python basics, and systems-engineering evidence terminology.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Measurable course learning outcome</th>
+<th>Program competency</th>
+<th style="text-align:center">Level</th>
+<th>Primary evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLO-1</td>
+<td>Frame an M&amp;S problem around a decision, intended use, lifecycle phase, and bounded claim</td>
+<td>C1, C7, C9, C12</td>
+<td style="text-align:center">D</td>
+<td>Modeling Purpose Review</td>
+</tr>
+<tr>
+<td>CLO-2</td>
+<td>Define and distinguish model, simulation, referent, conceptual model, computational model, scenario, experiment, verification, validation, credibility, and accreditation</td>
+<td>C7, C12</td>
+<td style="text-align:center">I/D</td>
+<td>Terminology and lifecycle map</td>
+</tr>
+<tr>
+<td>CLO-3</td>
+<td>Select and defend an appropriate modeling paradigm and level of resolution</td>
+<td>C7, C9</td>
+<td style="text-align:center">D</td>
+<td>Model-method trade study</td>
+</tr>
+<tr>
+<td>CLO-4</td>
+<td>Develop a traceable conceptual model with entities, states, events, resources, processes, assumptions, measures, and exclusions</td>
+<td>C1, C7</td>
+<td style="text-align:center">D</td>
+<td>Conceptual Model Review</td>
+</tr>
+<tr>
+<td>CLO-5</td>
+<td>Characterize stochastic input data, select distributions or empirical representations, and assess data quality and dependence</td>
+<td>C8</td>
+<td style="text-align:center">D</td>
+<td>Input-model package</td>
+</tr>
+<tr>
+<td>CLO-6</td>
+<td>Implement and verify a reproducible discrete-event simulation in Arena, SimPy, or an equivalent tool</td>
+<td>C6, C7</td>
+<td style="text-align:center">D</td>
+<td>Executable model and tests</td>
+</tr>
+<tr>
+<td>CLO-7</td>
+<td>Design simulation experiments using warm-up, run length, replications, scenarios, factors, and controlled random-number practices</td>
+<td>C7, C8</td>
+<td style="text-align:center">D</td>
+<td>Experiment plan</td>
+</tr>
+<tr>
+<td>CLO-8</td>
+<td>Analyze simulation output using intervals, comparisons, diagnostics, sensitivity, and uncertainty reasoning</td>
+<td>C8, C9</td>
+<td style="text-align:center">D</td>
+<td>Output-analysis notebook</td>
+</tr>
+<tr>
+<td>CLO-9</td>
+<td>Apply M&amp;S across needs, concept, design, integration/T&amp;E, production, and sustainment decisions</td>
+<td>C1, C6, C7, C9</td>
+<td style="text-align:center">D</td>
+<td>Lifecycle application portfolio</td>
+</tr>
+<tr>
+<td>CLO-10</td>
+<td>Plan and evaluate verification, validation, credibility, and accreditation/use evidence proportional to decision consequence</td>
+<td>C6, C7, C12</td>
+<td style="text-align:center">D</td>
+<td>VV&amp;A/credibility package</td>
+</tr>
+<tr>
+<td>CLO-11</td>
+<td>Identify model limitations, misuse risks, ethical concerns, and conditions that invalidate conclusions</td>
+<td>C7, C9, C12</td>
+<td style="text-align:center">D</td>
+<td>Limitation and use statement</td>
+</tr>
+<tr>
+<td>CLO-12</td>
+<td>Defend a decision recommendation while distinguishing model evidence, real-world evidence, judgment, and unresolved uncertainty</td>
+<td>C7, C8, C9, C12</td>
+<td style="text-align:center">D</td>
+<td>Final review and oral defense</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>When is a model or simulation worth building?</li>
+<li>What is the simplest model capable of supporting the decision?</li>
+<li>How does intended use determine fidelity, data, verification, validation, and uncertainty needs?</li>
+<li>What information belongs in a conceptual model before software is written?</li>
+<li>How should randomness, dependence, nonstationarity, and sparse data be represented?</li>
+<li>How can a learner know whether an executable simulation implements the intended logic?</li>
+<li>How many runs are enough, and what does a confidence interval actually support?</li>
+<li>When do attractive visualizations conceal weak evidence?</li>
+<li>What does it mean for a model to be credible but not valid for a particular use?</li>
+<li>Who has authority to accept a model for a decision, and what limitations must be carried with that acceptance?</li>
+</ul>
+<h2 id="7-running-case-and-synthetic-data">7. Running case and synthetic data</h2>
+<h3 id="case--campus-mobility-operations-and-fleet-decision-model">Case — Campus Mobility Operations and Fleet Decision Model</h3>
+<p>The sponsor must decide whether the Phase 2 mobility concept can meet peak and degraded service goals with an affordable fleet and staffing model. The learner will build a discrete-event simulation of trip requests, dispatch, passenger boarding, travel, charging, disruptions, and recovery.</p>
+<h3 id="required-decision-questions">Required decision questions</h3>
+<p>The model must support at least four questions:</p>
+<ol>
+<li>What fleet and staffing combinations meet wait-time and accessibility targets?</li>
+<li>Where do queues and resource contention emerge during peak and event conditions?</li>
+<li>How sensitive are results to demand, boarding-time variability, charging, and disruptions?</li>
+<li>What evidence is sufficient to support a pilot sizing recommendation, and what remains uncertain?</li>
+</ol>
+<h3 id="synthetic-baseline-data">Synthetic baseline data</h3>
+<p>These values are fictional course data:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Baseline representation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weekday requests, 06:00–09:00</td>
+<td>Nonhomogeneous arrivals: 18, 32, and 48 requests/hour by hour</td>
+</tr>
+<tr>
+<td>Weekday requests, 09:00–15:00</td>
+<td>22 requests/hour</td>
+</tr>
+<tr>
+<td>Weekday requests, 15:00–18:00</td>
+<td>42, 50, and 30 requests/hour by hour</td>
+</tr>
+<tr>
+<td>Accessible-trip share</td>
+<td>0.14 baseline; scenario range 0.10–0.22</td>
+</tr>
+<tr>
+<td>Standard boarding</td>
+<td>Triangular(0.6, 1.0, 2.2) minutes</td>
+</tr>
+<tr>
+<td>Accessible boarding</td>
+<td>Lognormal with median 2.6 minutes and 90th percentile 5.0 minutes</td>
+</tr>
+<tr>
+<td>Trip time</td>
+<td>Route- and traffic-dependent empirical samples supplied or synthesized</td>
+</tr>
+<tr>
+<td>Vehicle capacity</td>
+<td>8 passengers; 2 mobility-device positions</td>
+</tr>
+<tr>
+<td>Initial fleet candidates</td>
+<td>8, 10, 12, and 14 vehicles</td>
+</tr>
+<tr>
+<td>Battery trigger</td>
+<td>Route to charge below 22% state of charge</td>
+</tr>
+<tr>
+<td>Charging resources</td>
+<td>4 baseline chargers; scenarios 3–6</td>
+</tr>
+<tr>
+<td>Charge duration</td>
+<td>Triangular(24, 32, 50) minutes</td>
+</tr>
+<tr>
+<td>Disruption process</td>
+<td>Weather/event/construction scenarios; not assumed independent of demand</td>
+</tr>
+<tr>
+<td>Peak wait-time target</td>
+<td>90th percentile no greater than 12 minutes</td>
+</tr>
+<tr>
+<td>Accessible wait target</td>
+<td>90th percentile no greater than 15 minutes</td>
+</tr>
+<tr>
+<td>Unserved-trip target</td>
+<td>Less than 1% in the defined operating day</td>
+</tr>
+</tbody>
+</table>
+<p>The learner may refine these values, but every change requires source, rationale, version, and sensitivity treatment.</p>
+<h3 id="multi-role-review-protocol">Multi-role review protocol</h3>
+<p>For each formal review, perform four recorded passes:</p>
+<ol>
+<li><strong>Decision owner:</strong> challenges relevance, affordability, and actionability.</li>
+<li><strong>Model developer:</strong> demonstrates implementation and test evidence.</li>
+<li><strong>V&amp;V reviewer:</strong> challenges conceptual, data, computational, and result credibility.</li>
+<li><strong>Independent user/red team:</strong> identifies misuse, hidden assumptions, and decision overreach.</li>
+</ol>
+<h2 id="8-resource-architecture">8. Resource architecture</h2>
+<h3 id="required-backbone">Required backbone</h3>
+<ol>
+<li><strong>JHU course description and Spring 2025 syllabus</strong> — source scope, outcomes, topic order, Arena use, and project expectations. <a href="https://ep.jhu.edu/courses/645757-foundations-of-modeling-and-simulation-in-systems-engineering/" title="Foundations of Modeling and Simulation in Systems Engineering — Johns Hopkins Engineering for Professionals">JHU-757-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/spring-2025/645.757.81" title="Spring 2025 syllabus for EN.645.757">JHU-757-SYLLABUS</a></li>
+<li><strong>NASA Systems Engineering Handbook</strong> — lifecycle decisions, technical processes, models, analyses, verification, validation, and decision management. <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li><strong>NASA-STD-7009B and NASA-HDBK-7009B</strong> — current NASA requirements and implementation guidance for M&amp;S lifecycle practice and credibility. <a href="https://standards.nasa.gov/standard/NASA/NASA-STD-7009" title="NASA-STD-7009B Standard for Models and Simulations">NASA-STD-7009B</a> <a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009" title="NASA-HDBK-7009B Implementation Guide for NASA-STD-7009B">NASA-HDBK-7009B</a></li>
+<li><strong>DoD VV&amp;A Recommended Practices Guide and use cases</strong> — role-based and intended-use-centered VV&amp;A planning. <a href="https://www.cto.mil/sea/vva_rpg/" title="DoD Modeling and Simulation VV&amp;A Recommended Practices Guide">DOD-VVA-RPG</a> <a href="https://www.cto.mil/sea/vva-rpg-uco/" title="DoD VV&amp;A RPG Use Case Overview">DOD-VVA-USECASES</a></li>
+<li><strong>MIL-STD-3022</strong> — active common templates for accreditation and V&amp;V plans/reports. <a href="https://quicksearch.dla.mil/qsDocDetails.aspx?ident_number=275961" title="MIL-STD-3022 Documentation of VV&amp;A for Models and Simulations">MIL-STD-3022</a></li>
+</ol>
+<h3 id="statistical-and-tool-resources">Statistical and tool resources</h3>
+<ul>
+<li><strong>NIST/SEMATECH Engineering Statistics Handbook</strong> — exploratory analysis, distributions, uncertainty, experimental design, and statistical reasoning. <a href="https://www.itl.nist.gov/div898/handbook/" title="NIST/SEMATECH e-Handbook of Statistical Methods">NIST-EHANDBOOK</a></li>
+<li><strong>Arena academic/download documentation</strong> — source-tool path and educational limits. <a href="https://www.rockwellautomation.com/en-us/products/software/arena-simulation/buying-options/download.html" title="Download Arena Simulation Software">ARENA-DOWNLOAD</a> <a href="https://www.rockwellautomation.com/en-us/products/software/arena-simulation/academic.html" title="Arena Simulation Academic Offerings">ARENA-ACADEMIC</a></li>
+<li><strong>SimPy documentation</strong> — open-source process-based discrete-event simulation alternative. <a href="https://simpy.readthedocs.io/en/stable/" title="SimPy discrete-event simulation documentation">SIMPY</a></li>
+<li><strong>SciPy statistics documentation</strong> — distribution fitting, goodness-of-fit, and statistical functions for the open track. <a href="https://docs.scipy.org/doc/scipy/reference/stats.html" title="SciPy statistical functions documentation">SCIPY-STATS</a></li>
+</ul>
+<h3 id="recommended-text">Recommended text</h3>
+<p>Kelton, Sadowski, and Zupick, <em>Simulation with Arena</em>, preferably the edition available to the learner. The source syllabus uses the sixth edition and notes compatibility with neighboring editions. The curriculum does not reproduce copyrighted textbook content; reading assignments refer to topics rather than copying text.</p>
+<h2 id="9-tools-and-working-environment">9. Tools and working environment</h2>
+<h3 id="track-a--arena">Track A — Arena</h3>
+<p>Use Arena for process, queue, resource, schedule, and experiment modeling. Retain <code>.doe</code>/model source, exported data, model documentation, and separate analysis scripts or workbooks.</p>
+<h3 id="track-b--open-reproducible-track">Track B — Open reproducible track</h3>
+<p>Use Python 3, SimPy, NumPy, pandas, SciPy, and matplotlib, or an equivalent open environment. Include an environment file, deterministic unit tests, seed controls, command-line or notebook execution instructions, and machine-readable outputs.</p>
+<h3 id="common-requirements">Common requirements</h3>
+<p>Both tracks must support:</p>
+<ul>
+<li>discrete-event processes and shared resources;</li>
+<li>random variate generation;</li>
+<li>replication control;</li>
+<li>event or state tracing for verification;</li>
+<li>batch experiments;</li>
+<li>exportable output data;</li>
+<li>reproducible analysis and plots;</li>
+<li>version control.</li>
+</ul>
+<h2 id="10-assessment-and-grading-model">10. Assessment and grading model</h2>
+<table>
+<thead>
+<tr>
+<th>Assessment component</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weekly retrieval and knowledge checks</td>
+<td style="text-align:right">8%</td>
+</tr>
+<tr>
+<td>Modeling-purpose, method-selection, and conceptual-model work</td>
+<td style="text-align:right">14%</td>
+</tr>
+<tr>
+<td>Input-data and stochastic-model package</td>
+<td style="text-align:right">14%</td>
+</tr>
+<tr>
+<td>Executable simulation and verification evidence</td>
+<td style="text-align:right">18%</td>
+</tr>
+<tr>
+<td>Experiment design and output analysis</td>
+<td style="text-align:right">18%</td>
+</tr>
+<tr>
+<td>VV&amp;A, credibility, and use recommendation</td>
+<td style="text-align:right">14%</td>
+</tr>
+<tr>
+<td>Final capstone review and oral defense</td>
+<td style="text-align:right">14%</td>
+</tr>
+</tbody>
+</table>
+<p>A minimum overall score of 80% is required. Critical mastery failures cannot be offset by a high numerical average.</p>
+<h2 id="11-twelve-week-course-map">11. Twelve-week course map</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Week</th>
+<th>Focus</th>
+<th>Main product</th>
+<th>Review or decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>M&amp;S purpose, terminology, lifecycle, and model families</td>
+<td>Modeling-purpose and method-screening package</td>
+<td>Modeling Purpose Review</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>M&amp;S development process and conceptual modeling</td>
+<td>Conceptual model and M&amp;S development plan</td>
+<td>Conceptual Model Review</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>Probability, data quality, dependence, and input modeling</td>
+<td>Input-data and distribution package</td>
+<td>Input Model Review</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>M&amp;S in needs and opportunities analysis</td>
+<td>Current-state/baseline simulation and evidence memo</td>
+<td>Opportunity decision</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>Discrete-event implementation fundamentals</td>
+<td>Executable model increment 1</td>
+<td>Logic walkthrough</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>Detailed operations, debugging, and verification</td>
+<td>Executable model increment 2 and verification report</td>
+<td>Midcourse Model Readiness Review</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>Concept exploration and alternative evaluation</td>
+<td>Scenario and alternative experiment package</td>
+<td>Concept evidence decision</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>Output analysis, warm-up, run length, and replications</td>
+<td>Reproducible output-analysis notebook</td>
+<td>Statistical adequacy decision</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Design/development, selection/ranking, and DOE</td>
+<td>Factorial/structured experiment and design recommendation</td>
+<td>Analysis and Decision Review</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>M&amp;S in integration and T&amp;E</td>
+<td>Model-supported integration/T&amp;E evidence plan</td>
+<td>Test-support decision</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>Verification, validation, credibility, and accreditation</td>
+<td>VV&amp;A plan/report and use recommendation</td>
+<td>Credibility/Use Review</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>Production, sustainment, advanced methods, and final defense</td>
+<td>Final M&amp;S baseline and oral defense</td>
+<td>Capstone decision</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-major-assignments-and-review-products">12. Major assignments and review products</h2>
+<h3 id="a-modeling-purpose-and-method-selection-review">A. Modeling Purpose and Method Selection Review</h3>
+<p>Define the decision, intended use, stakeholders, claims, model boundary, alternatives to simulation, candidate paradigms, risks, data needs, and credibility objectives.</p>
+<h3 id="b-conceptual-and-input-model-baseline">B. Conceptual and Input Model Baseline</h3>
+<p>Document entities, states, events, resources, queues, rules, measures, assumptions, exclusions, data provenance, stochastic inputs, dependence, and scenario logic.</p>
+<h3 id="c-executable-model-and-verification-review">C. Executable Model and Verification Review</h3>
+<p>Provide source, environment, tests, event traces, deterministic cases, conservation checks, extreme-condition tests, defect log, and reproducible execution instructions.</p>
+<h3 id="d-experiment-and-output-analysis-review">D. Experiment and Output Analysis Review</h3>
+<p>Defend warm-up, run length, replications, random-number policy, factors, scenarios, measures, intervals, comparisons, sensitivity, and decision interpretation.</p>
+<h3 id="e-vva-and-final-use-recommendation">E. VV&amp;A and Final Use Recommendation</h3>
+<p>Integrate conceptual-model validation, data credibility, computational verification, result validation, uncertainty, limitations, user risks, and accreditation/use authority into a bounded recommendation.</p>
+<h2 id="13-common-analytic-rubric">13. Common analytic rubric</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th style="text-align:right">Weight</th>
+<th>Graduate-level evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decision and intended-use alignment</td>
+<td style="text-align:right">15%</td>
+<td>Model scope, fidelity, measures, and evidence directly support a named decision and bounded claim.</td>
+</tr>
+<tr>
+<td>Conceptual and computational correctness</td>
+<td style="text-align:right">20%</td>
+<td>Structure, logic, state, events, resources, units, and implementation are coherent and tested.</td>
+</tr>
+<tr>
+<td>Data and stochastic reasoning</td>
+<td style="text-align:right">15%</td>
+<td>Inputs have provenance, quality assessment, distribution/dependence rationale, and uncertainty treatment.</td>
+</tr>
+<tr>
+<td>Experimental and statistical rigor</td>
+<td style="text-align:right">20%</td>
+<td>Run controls, replications, comparisons, intervals, sensitivity, and diagnostics support the conclusion.</td>
+</tr>
+<tr>
+<td>Credibility and limitations</td>
+<td style="text-align:right">20%</td>
+<td>V&amp;V evidence, referents, discrepancies, limitations, misuse risks, and use conditions are explicit.</td>
+</tr>
+<tr>
+<td>Reproducibility and communication</td>
+<td style="text-align:right">10%</td>
+<td>Source, data, configuration, outputs, review material, and decision records are reproducible and clear.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-critical-mastery-criteria">14. Critical mastery criteria</h2>
+<p>The course cannot be passed if any of the following remains true:</p>
+<ul>
+<li>the model has no named intended use or decision owner;</li>
+<li>the conceptual model and executable model cannot be traced to one another;</li>
+<li>random inputs are chosen solely because they produce convenient results;</li>
+<li>averages replace required distributional or tail behavior without justification;</li>
+<li>the model cannot reproduce a deterministic hand calculation or controlled test case;</li>
+<li>run length, warm-up, or replication choices are absent or arbitrary;</li>
+<li>adverse runs or anomalies are removed without traceable rationale;</li>
+<li>output is interpreted as real-world truth rather than model-conditioned evidence;</li>
+<li>validation uses the same implementation logic as the model with no independent referent or rationale;</li>
+<li>known data, model-form, parameter, or scenario uncertainty is hidden;</li>
+<li>accreditation/use is claimed without identifying the accepting authority and bounded use;</li>
+<li>the final decision recommendation exceeds what the evidence supports;</li>
+<li>a key result cannot be reproduced during oral defense.</li>
+</ul>
+<h2 id="15-final-capstone-and-oral-defense">15. Final capstone and oral defense</h2>
+<p>The capstone contains:</p>
+<ol>
+<li>decision and intended-use statement;</li>
+<li>modeling method trade study;</li>
+<li>conceptual model and traceability;</li>
+<li>data inventory, provenance, quality, and input models;</li>
+<li>executable source and environment;</li>
+<li>verification tests, traces, and defect closure;</li>
+<li>experiment plan and run controls;</li>
+<li>raw and processed outputs;</li>
+<li>statistical, sensitivity, and uncertainty analyses;</li>
+<li>lifecycle application and decision recommendation;</li>
+<li>V&amp;V and credibility evidence;</li>
+<li>accreditation/use statement, limitations, and misuse warnings;</li>
+<li>review records, change log, and final baseline manifest.</li>
+</ol>
+<p>The 25–35 minute oral defense includes a live run, a seed/replication challenge, an input-model challenge, a verification trace, a reanalysis request, and a changed-assumption scenario that may require revising the recommendation.</p>
+<h2 id="16-portfolio-and-completion-requirements">16. Portfolio and completion requirements</h2>
+<p>Retain redacted examples of:</p>
+<ul>
+<li>intended-use and model-selection memo;</li>
+<li>conceptual-model package;</li>
+<li>input-data analysis notebook;</li>
+<li>verified executable simulation;</li>
+<li>experiment design and output-analysis notebook;</li>
+<li>lifecycle decision memos;</li>
+<li>VV&amp;A and accreditation/use products;</li>
+<li>final briefing and oral-defense record.</li>
+</ul>
+<h2 id="17-course-maintenance-record">17. Course maintenance record</h2>
+<p>Review annually:</p>
+<ul>
+<li>JHU course page and sample syllabus;</li>
+<li>NASA-STD-7009 and NASA-HDBK-7009 revisions;</li>
+<li>MIL-STD-3022 and DoD VV&amp;A guidance status;</li>
+<li>Arena availability and educational licensing;</li>
+<li>SimPy, Python, SciPy, and notebook versions;</li>
+<li>synthetic case data and known defects;</li>
+<li>recurring statistical, verification, and credibility errors;</li>
+<li>downstream feedback from EN.645.784, EN.645.756, EN.645.632, and EN.645.758.</li>
+</ul>
+<hr/>
+<h2 id="week-1--frame-the-ms-decision-intended-use-terminology-and-model-method-trade-space">Week 1 — Frame the M&amp;S decision, intended use, terminology, and model-method trade space</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 11):</strong> <a href="../../K/B11/chapters/01-frame-the-m-s-decision-intended-use-terminology-and-model-method-tra.html">Chapter 1 — Frame the M&amp;S decision, intended use, terminology, and model-method trade space</a> · <a href="../../K/B11/labs/lab-01-frame-the-m-s-decision-intended-use-terminology-and-model-method-tra.html">Hypothetical Lab 1</a> · <a href="../../K/P3-text/lessons/645-757-w01.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C1, C7, C9, C12</p>
+<h3 id="professional-context-and-essential-question">Professional context and essential question</h3>
+<p>A simulation begins with a decision and an intended use, not a tool. <strong>Essential question:</strong> What evidence is needed, and is a model or simulation the most appropriate way to obtain it?</p>
+<h3 id="weekly-learning-outcomes">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>distinguish system, model, simulation, scenario, experiment, referent, analysis, and visualization</li>
+<li>write an intended-use statement with decision owner, claim, lifecycle phase, and consequence</li>
+<li>compare analytical, discrete-event, continuous, agent-based, Monte Carlo, emulation, and physical-model approaches</li>
+<li>define model boundary, resolution, outputs, assumptions, and credibility needs</li>
+<li>recommend whether to model, measure, test, prototype, or combine methods</li>
+</ul>
+<h3 id="retrieval-and-readiness-check">Retrieval and readiness check</h3>
+<ol>
+<li>State the Phase 2 decision that still requires evidence.</li>
+<li>Give one example of a model and one of a simulation.</li>
+<li>Why is a high-fidelity model not automatically better?</li>
+<li>Name three consequences of using a model outside its intended use.</li>
+</ol>
+<h3 id="required-study">Required study</h3>
+<ul>
+<li><strong>JHU course description and Spring 2025 syllabus</strong> — description, topics, CLOs, and project/tool expectations. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Which source topics determine the semester project?</li>
+<li><strong>NASA Systems Engineering Handbook</strong> — modeling, analysis, lifecycle decision, and technical-management passages. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Where do models support rather than replace engineering judgment?</li>
+<li><strong>NASA-STD-7009B</strong> — scope, M&amp;S lifecycle, acceptance criteria, and credibility-product overview. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> How does intended use shape required practice?</li>
+</ul>
+<h3 id="instructor-style-lesson-notes">Instructor-style lesson notes</h3>
+<p>Modeling is purposeful abstraction. Every model omits reality; quality depends on whether the omissions are acceptable for a stated use.</p>
+<p>A simulation is an execution of a model through time, events, scenarios, or sampled uncertainty. A spreadsheet equation may be a model without being a simulation; an event-driven queue model is both.</p>
+<p>Model selection should consider decision timescale, interactions, stochastic behavior, feedback, spatial detail, data burden, explainability, cost, and verification/validation feasibility.</p>
+<p>Fidelity is multidimensional. More detail can increase cost, defects, calibration burden, and false confidence while adding little decision value.</p>
+<p>The intended-use statement is a configuration-controlled requirement for the M&amp;S activity. Changing the use may require changing data, resolution, validation evidence, and acceptance authority.</p>
+<h3 id="worked-example">Worked example</h3>
+<p>The sponsor asks whether ten vehicles are enough. A static capacity ratio suggests yes, but it cannot represent request peaks, accessible boarding, charging contention, or disruptions. A discrete-event model is selected for fleet/resource interactions, while a spreadsheet remains the independent sanity-check model.</p>
+<h3 id="guided-practice">Guided practice</h3>
+<ol>
+<li>Write three alternative formulations of the sponsor decision and select the most actionable.</li>
+<li>Screen six model families against the decision and data constraints.</li>
+<li>Define a minimum credible model and one deliberately excessive model.</li>
+<li>Identify the accepting authority and the consequence of a wrong recommendation.</li>
+</ol>
+<h3 id="independent-exercises">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify 25 artifacts as model, simulation, experiment, referent, data, result, or decision record.</li>
+<li><strong>Application:</strong> Create the intended-use statement and model-purpose diagram for the running case.</li>
+<li><strong>Analysis:</strong> Perform a model-method trade study with at least six criteria and two non-simulation alternatives.</li>
+<li><strong>Synthesis:</strong> Prepare the Modeling Purpose Review package and a proceed/do-not-proceed recommendation.</li>
+<li><strong>Stretch:</strong> Create a decision-to-model query or matrix showing which claims require simulation and which can use analysis or test.</li>
+</ul>
+<h3 id="weekly-deliverable">Weekly deliverable</h3>
+<p>Submit the intended-use statement, decision and claim hierarchy, method trade study, minimum credible model definition, preliminary credibility-risk register, stakeholder/authority map, and Modeling Purpose Review record.</p>
+<h3 id="analytic-rubric">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decision framing</td>
+<td style="text-align:right">30%</td>
+<td>Decision, use, claim, owner, timing, and consequence are precise.</td>
+</tr>
+<tr>
+<td>Method selection</td>
+<td style="text-align:right">30%</td>
+<td>Alternatives are compared against decision-relevant criteria without tool bias.</td>
+</tr>
+<tr>
+<td>Scope and credibility</td>
+<td style="text-align:right">25%</td>
+<td>Boundary, resolution, assumptions, and evidence needs are proportional.</td>
+</tr>
+<tr>
+<td>Communication</td>
+<td style="text-align:right">15%</td>
+<td>The package supports an explicit proceed or stop decision.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures">Critical failures</h3>
+<ul>
+<li>No named decision owner or intended use.</li>
+<li>Tool is selected before comparing model families or non-model alternatives.</li>
+<li>The model is expected to answer claims outside its boundary.</li>
+<li>Credibility work is deferred without rationale.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is intended use?</strong><br/>
+<em>Answer guidance:</em> The bounded decision purpose, user, claim, conditions, and consequence for which the model is evaluated.</li>
+<li><strong>How does a model differ from a simulation?</strong><br/>
+<em>Answer guidance:</em> A model is a representation; a simulation executes a model to produce behavior or sampled outcomes.</li>
+<li><strong>Why can more fidelity reduce usefulness?</strong><br/>
+<em>Answer guidance:</em> It can increase data, cost, defects, opacity, and validation burden without improving the decision.</li>
+<li><strong>What is a referent?</strong><br/>
+<em>Answer guidance:</em> Independent information or evidence used to evaluate whether model behavior represents the relevant real-world phenomenon.</li>
+<li><strong>When should simulation not be used?</strong><br/>
+<em>Answer guidance:</em> When simpler analysis, direct measurement, test, or existing evidence answers the decision more credibly and efficiently.</li>
+</ol>
+<h3 id="revision-and-mastery-gate">Revision and mastery gate</h3>
+<p>The review must approve a bounded intended use and method choice. Any unresolved method-selection concern becomes a tracked risk with a decision date.</p>
+<h3 id="suggested-workload">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and retrieval</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Method trade study</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Purpose package</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review and revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>10.5</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update">Configuration and portfolio update</h3>
+<p>Commit source, data, configuration, results, decision records, review comments, and revisions. Update the assumption register, credibility-risk register, traceability, baseline manifest, and personal reflection log before beginning the next week.</p>
+<hr/>
+<h2 id="week-2--develop-the-ms-plan-and-conceptual-model-before-implementation">Week 2 — Develop the M&amp;S plan and conceptual model before implementation</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 11):</strong> <a href="../../K/B11/chapters/02-develop-the-m-s-plan-and-conceptual-model-before-implementation.html">Chapter 2 — Develop the M&amp;S plan and conceptual model before implementation</a> · <a href="../../K/B11/labs/lab-02-develop-the-m-s-plan-and-conceptual-model-before-implementation.html">Hypothetical Lab 2</a> · <a href="../../K/P3-text/lessons/645-757-w02.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C1, C7, C10, C12</p>
+<h3 id="professional-context-and-essential-question-2">Professional context and essential question</h3>
+<p>Most expensive simulation defects begin as unexamined conceptual assumptions. <strong>Essential question:</strong> What must be represented, at what resolution, and with what traceability before code or tool logic is built?</p>
+<h3 id="weekly-learning-outcomes-2">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>construct a conceptual model from decisions, scenarios, measures, and system behavior</li>
+<li>define entities, attributes, states, events, resources, queues, processes, controls, and termination logic</li>
+<li>trace conceptual elements to requirements, mission threads, data, and outputs</li>
+<li>plan development, configuration, verification, validation, experiments, reviews, and accreditation</li>
+<li>identify conceptual-model ambiguities and resolve or baseline them</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-2">Retrieval and readiness check</h3>
+<ol>
+<li>List four elements of a discrete-event conceptual model.</li>
+<li>What is the difference between an assumption and a simplification?</li>
+<li>Why should output measures be defined before implementation?</li>
+<li>Name one conceptual error that code review may not reveal.</li>
+</ol>
+<h3 id="required-study-2">Required study</h3>
+<ul>
+<li><strong>JHU syllabus</strong> — M&amp;S development process and needs/opportunities modules. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Which source topics must precede Arena/tool work?</li>
+<li><strong>DoD VV&amp;A RPG</strong> — conceptual model development and validation; new-simulation roles. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Who reviews the conceptual model and against what referents?</li>
+<li><strong>NASA-HDBK-7009B</strong> — planning, conceptual model, credibility, and lifecycle guidance. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Which products should be created before executable-model development?</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-2">Instructor-style lesson notes</h3>
+<p>The conceptual model is the human-readable specification of what the executable model means. It should be reviewable by domain experts who do not know the implementation language.</p>
+<p>Process flow alone is insufficient. Include state, timing, resource rules, priorities, preemption, failures, dependencies, initialization, boundary conditions, and measures.</p>
+<p>Traceability links decisions to measures, measures to model elements and data, and model elements to implementation modules and tests.</p>
+<p>Assumptions assert something accepted for analysis; simplifications deliberately remove detail; abstractions represent detail at a chosen level. All three require ownership and consequence analysis.</p>
+<p>The M&amp;S plan defines roles, baselines, development increments, data, reviews, V&amp;V, experiment design, uncertainty treatment, acceptance criteria, and transition/retirement.</p>
+<h3 id="worked-example-2">Worked example</h3>
+<p>A process diagram shows requests entering a dispatch queue and vehicles serving them. Review reveals missing mobility-device capacity, charging priority, shift-change behavior, abandoned requests, and disruption recovery. These omissions would bias fleet sizing even if the code exactly implemented the diagram.</p>
+<h3 id="guided-practice-2">Guided practice</h3>
+<ol>
+<li>Create the decision-to-measure-to-concept trace for peak wait time.</li>
+<li>Develop state machines for request and vehicle lifecycles.</li>
+<li>Write ten model assumptions with impact and validation method.</li>
+<li>Conduct a conceptual-model walkthrough from one nominal and one degraded mission thread.</li>
+</ol>
+<h3 id="independent-exercises-2">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Translate narrative rules into entities, events, states, resources, and measures.</li>
+<li><strong>Application:</strong> Build the complete conceptual model and M&amp;S development plan.</li>
+<li><strong>Analysis:</strong> Red-team the model for missing state, priority, capacity, dependence, and termination behavior.</li>
+<li><strong>Synthesis:</strong> Conduct the Conceptual Model Review and disposition every finding.</li>
+<li><strong>Stretch:</strong> Create a machine-readable conceptual-model table that can generate implementation stubs or trace queries.</li>
+</ul>
+<h3 id="weekly-deliverable-2">Weekly deliverable</h3>
+<p>Submit the M&amp;S development plan, conceptual model description, process/state/resource views, measure dictionary, assumption and simplification register, traceability matrix, review checklist, and approved Conceptual Model Review record.</p>
+<h3 id="analytic-rubric-2">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conceptual completeness</td>
+<td style="text-align:right">30%</td>
+<td>Behavior, state, resources, timing, measures, and boundaries are complete enough to implement.</td>
+</tr>
+<tr>
+<td>Traceability</td>
+<td style="text-align:right">25%</td>
+<td>Decision, scenarios, data, concepts, implementation, and tests have planned links.</td>
+</tr>
+<tr>
+<td>Assumption discipline</td>
+<td style="text-align:right">25%</td>
+<td>Assumptions and simplifications have rationale, consequence, owner, and validation path.</td>
+</tr>
+<tr>
+<td>Development planning</td>
+<td style="text-align:right">20%</td>
+<td>Roles, increments, baselines, V&amp;V, experiments, and reviews are executable.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-2">Critical failures</h3>
+<ul>
+<li>Implementation begins with no approved conceptual model.</li>
+<li>A critical behavior exists only in prose or code.</li>
+<li>Outputs lack operational definitions.</li>
+<li>Assumptions with decision impact have no owner or validation plan.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-2">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a conceptual model?</strong><br/>
+<em>Answer guidance:</em> A reviewable specification of the relevant real-world concepts, relationships, rules, assumptions, and measures represented by the executable model.</li>
+<li><strong>Why trace a measure to model elements?</strong><br/>
+<em>Answer guidance:</em> To show how the model produces evidence and to support change-impact and verification.</li>
+<li><strong>What is termination logic?</strong><br/>
+<em>Answer guidance:</em> The rule defining when a run or entity process ends and how final state is treated.</li>
+<li><strong>Who should validate the conceptual model?</strong><br/>
+<em>Answer guidance:</em> Users, domain experts, decision owners, and independent reviewers appropriate to the intended use.</li>
+<li><strong>Why separate model assumptions from scenario settings?</strong><br/>
+<em>Answer guidance:</em> Assumptions define accepted structure or knowledge; scenarios are controlled experiment conditions.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-2">Revision and mastery gate</h3>
+<p>No critical scenario, measure, state, or resource rule may remain unspecified. Review findings must be closed, accepted as risk, or assigned before implementation.</p>
+<h3 id="suggested-workload-2">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Conceptual modeling</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Planning and traceability</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Review/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-2">Configuration and portfolio update</h3>
+<p>Commit source, data, configuration, results, decision records, review comments, and revisions. Update the assumption register, credibility-risk register, traceability, baseline manifest, and personal reflection log before beginning the next week.</p>
+<hr/>
+<h2 id="week-3--characterize-data-quality-probability-dependence-and-stochastic-input-models">Week 3 — Characterize data quality, probability, dependence, and stochastic input models</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 11):</strong> <a href="../../K/B11/chapters/03-characterize-data-quality-probability-dependence-and-stochastic-inpu.html">Chapter 3 — Characterize data quality, probability, dependence, and stochastic input models</a> · <a href="../../K/B11/labs/lab-03-characterize-data-quality-probability-dependence-and-stochastic-inpu.html">Hypothetical Lab 3</a> · <a href="../../K/P3-text/lessons/645-757-w03.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C7, C8, C12</p>
+<h3 id="professional-context-and-essential-question-3">Professional context and essential question</h3>
+<p>A simulation can be perfectly coded and still be misleading because its inputs are wrong. <strong>Essential question:</strong> How should observed variability and data limitations be represented without inventing confidence?</p>
+<h3 id="weekly-learning-outcomes-3">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>audit data provenance, definitions, missingness, censoring, bias, stationarity, and representativeness</li>
+<li>distinguish aleatory variability from epistemic uncertainty</li>
+<li>select empirical, parametric, deterministic, or scenario-based input representations</li>
+<li>fit and evaluate distributions using graphical, statistical, and engineering evidence</li>
+<li>represent dependence, time variation, mixtures, and sparse-data uncertainty</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-3">Retrieval and readiness check</h3>
+<ol>
+<li>Why is fitting a distribution to pooled data sometimes wrong?</li>
+<li>What is the difference between variability and uncertainty?</li>
+<li>Name two reasons a goodness-of-fit p-value is insufficient.</li>
+<li>Why can independent marginal distributions produce impossible joint behavior?</li>
+</ol>
+<h3 id="required-study-3">Required study</h3>
+<ul>
+<li><strong>NIST/SEMATECH e-Handbook</strong> — exploratory data analysis, distributional modeling, uncertainty, and DOE overview. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Which diagnostics reveal structure before fitting?</li>
+<li><strong>NASA-STD-7009B and NASA-HDBK-7009B</strong> — data pedigree, uncertainty characterization, and credibility guidance. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> What evidence is needed to justify data use?</li>
+<li><strong>SciPy statistics or Arena Input Analyzer documentation</strong> — distribution fitting and goodness-of-fit functions. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> How will fitted parameters and diagnostics be reproduced?</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-3">Instructor-style lesson notes</h3>
+<p>Data quality is fitness for an intended model use, not an intrinsic label. A dataset may be adequate for average demand but inadequate for tail waits or disruption behavior.</p>
+<p>Explore before fitting. Plot time order, histograms, ECDFs, quantiles, groups, censoring, missingness, and relationships. Operational changes may create mixtures or nonstationarity.</p>
+<p>Goodness-of-fit combines visual diagnostics, statistical measures, physical support, tail behavior, and consequences. A high p-value does not prove truth; a low p-value may reflect large sample size or minor harmless differences.</p>
+<p>Dependence matters. Arrival volume, weather, trip duration, boarding, charging, and disruption may share causes. Model correlation or conditional structure where it changes decisions.</p>
+<p>Sparse inputs should be represented with ranges, scenarios, expert elicitation, or parameter uncertainty—not hidden behind a precise point estimate.</p>
+<h3 id="worked-example-3">Worked example</h3>
+<p>Accessible boarding times are pooled across vehicle designs. A lognormal fit looks acceptable, but the newer ramp design has a different median and variability. The model stratifies by vehicle type and carries parameter uncertainty for the smaller sample instead of using one pooled distribution.</p>
+<h3 id="guided-practice-3">Guided practice</h3>
+<ol>
+<li>Audit the supplied synthetic data dictionary and identify definition mismatches.</li>
+<li>Create EDA plots for arrivals, boarding, trip times, and charge duration.</li>
+<li>Compare empirical, triangular, gamma/lognormal, and deterministic representations.</li>
+<li>Build one dependence or conditional-input model and show its decision impact.</li>
+</ol>
+<h3 id="independent-exercises-3">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Calculate descriptive statistics and identify censoring, outliers, and nonstationarity in small datasets.</li>
+<li><strong>Application:</strong> Produce input models for at least five stochastic processes.</li>
+<li><strong>Analysis:</strong> Compare candidate fits using visual, statistical, support, and tail criteria.</li>
+<li><strong>Synthesis:</strong> Create the Input Model Review package and recommend collection priorities.</li>
+<li><strong>Stretch:</strong> Use bootstrap or Bayesian parameter sampling to propagate input-parameter uncertainty.</li>
+</ul>
+<h3 id="weekly-deliverable-3">Weekly deliverable</h3>
+<p>Submit the data inventory, provenance and quality assessment, EDA notebook, fitted/empirical input models, dependence analysis, parameter-uncertainty treatment, data gaps, collection plan, and Input Model Review record.</p>
+<h3 id="analytic-rubric-3">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data quality and provenance</td>
+<td style="text-align:right">25%</td>
+<td>Definitions, sources, transformations, missingness, bias, and representativeness are explicit.</td>
+</tr>
+<tr>
+<td>Input-model reasoning</td>
+<td style="text-align:right">30%</td>
+<td>Representation choices fit support, mechanism, tails, and intended use.</td>
+</tr>
+<tr>
+<td>Dependence and uncertainty</td>
+<td style="text-align:right">25%</td>
+<td>Relevant conditional structure and parameter uncertainty are addressed.</td>
+</tr>
+<tr>
+<td>Reproducibility</td>
+<td style="text-align:right">20%</td>
+<td>Data, code, diagnostics, and selected parameters can be regenerated.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-3">Critical failures</h3>
+<ul>
+<li>Pooled or transformed data are used without documenting the operation.</li>
+<li>A fitted distribution has impossible support or hidden truncation.</li>
+<li>Critical dependence is assumed away without sensitivity analysis.</li>
+<li>Sparse data are presented as precise knowledge.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-3">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is aleatory variability?</strong><br/>
+<em>Answer guidance:</em> Inherent or treated-as-random variation in the modeled process.</li>
+<li><strong>What is epistemic uncertainty?</strong><br/>
+<em>Answer guidance:</em> Lack of knowledge about model form, parameters, data, or conditions that could be reduced or bounded.</li>
+<li><strong>Why use an empirical distribution?</strong><br/>
+<em>Answer guidance:</em> When data support is adequate and imposing a parametric family adds unjustified structure.</li>
+<li><strong>What is nonstationarity?</strong><br/>
+<em>Answer guidance:</em> A process whose distribution or parameters change over time or condition.</li>
+<li><strong>Why preserve data lineage?</strong><br/>
+<em>Answer guidance:</em> To reproduce, audit, update, and assess whether transformed data remain fit for use.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-3">Revision and mastery gate</h3>
+<p>Every stochastic input must have an operational definition, source, representation, parameter/empirical artifact, quality rating, and uncertainty or sensitivity disposition.</p>
+<h3 id="suggested-workload-3">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>EDA and fitting</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Input package</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Review/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.5</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-3">Configuration and portfolio update</h3>
+<p>Commit source, data, configuration, results, decision records, review comments, and revisions. Update the assumption register, credibility-risk register, traceability, baseline manifest, and personal reflection log before beginning the next week.</p>
+<hr/>
+<h2 id="week-4--use-ms-for-needs-opportunity-current-state-and-baseline-analysis">Week 4 — Use M&amp;S for needs, opportunity, current-state, and baseline analysis</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 11):</strong> <a href="../../K/B11/chapters/04-use-m-s-for-needs-opportunity-current-state-and-baseline-analysis.html">Chapter 4 — Use M&amp;S for needs, opportunity, current-state, and baseline analysis</a> · <a href="../../K/B11/labs/lab-04-use-m-s-for-needs-opportunity-current-state-and-baseline-analysis.html">Hypothetical Lab 4</a> · <a href="../../K/P3-text/lessons/645-757-w04.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C1, C7, C8, C9</p>
+<h3 id="professional-context-and-essential-question-4">Professional context and essential question</h3>
+<p>Early models should illuminate the problem before they justify a favored solution. <strong>Essential question:</strong> What does a current-state model reveal about demand, constraints, bottlenecks, and opportunity?</p>
+<h3 id="weekly-learning-outcomes-4">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>construct a baseline/current-state model without embedding the proposed solution</li>
+<li>define and evaluate measures tied to stakeholder outcomes</li>
+<li>calibrate baseline behavior to observed or synthetic referents</li>
+<li>identify bottlenecks, capacity limits, demand patterns, and operational failure modes</li>
+<li>distinguish descriptive insight from causal or predictive claims</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-4">Retrieval and readiness check</h3>
+<ol>
+<li>What is the danger of calibrating only to averages?</li>
+<li>How can a baseline model support needs analysis?</li>
+<li>What is a bottleneck in a stochastic process?</li>
+<li>Why should the proposed solution be excluded from a current-state model?</li>
+</ol>
+<h3 id="required-study-4">Required study</h3>
+<ul>
+<li><strong>JHU syllabus</strong> — M&amp;S in system needs and opportunities analysis. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> What decisions should precede concept selection?</li>
+<li><strong>NASA Systems Engineering Handbook</strong> — stakeholder expectations, ConOps, system analysis, and decision analysis. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> How do operational scenarios and measures frame early models?</li>
+<li><strong>NASA-HDBK-7009B</strong> — model use, referents, calibration/validation, and limitations. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> What credibility is required for descriptive baseline use?</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-4">Instructor-style lesson notes</h3>
+<p>A baseline model represents the current or counterfactual condition against which alternatives will be judged. It should not quietly include benefits of the preferred concept.</p>
+<p>Calibration changes parameters to align selected outputs with referents; validation evaluates whether behavior is acceptable for intended use. Calibration is not proof of validity.</p>
+<p>Use multiple measures: averages, tails, service failures, subgroup outcomes, resource utilization, time-of-day behavior, and degraded conditions.</p>
+<p>Bottlenecks can shift with demand and policy. High utilization is not always the root cause; variability, batching, priorities, synchronization, and blocking may dominate.</p>
+<p>Early simulation supports problem understanding, hypothesis generation, and data priorities. Avoid causal claims unless the design and evidence justify them.</p>
+<h3 id="worked-example-4">Worked example</h3>
+<p>The current shuttle service appears underutilized on average, but the baseline model shows peak directional imbalance, long accessible boarding, and deadhead travel causing 90th-percentile waits. The opportunity is not simply “more vehicles”; dispatch and staging policies may provide comparable benefit.</p>
+<h3 id="guided-practice-4">Guided practice</h3>
+<ol>
+<li>Define baseline and desired-state measures without specifying a solution.</li>
+<li>Calibrate time-of-day request and service behavior to the synthetic referent.</li>
+<li>Run bottleneck and resource-utilization diagnostics.</li>
+<li>Write three opportunity hypotheses and the evidence needed to test them.</li>
+</ol>
+<h3 id="independent-exercises-4">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Identify whether ten statements are needs, causes, symptoms, solutions, or measures.</li>
+<li><strong>Application:</strong> Build and run the current-state mobility model.</li>
+<li><strong>Analysis:</strong> Compare average, tail, subgroup, and degraded-condition performance.</li>
+<li><strong>Synthesis:</strong> Prepare an opportunity-analysis memo with bounded claims and data priorities.</li>
+<li><strong>Stretch:</strong> Implement a counterfactual policy-only change to test whether hardware expansion is necessary.</li>
+</ul>
+<h3 id="weekly-deliverable-4">Weekly deliverable</h3>
+<p>Submit the baseline conceptual/executable model increment, calibration record, measure dashboard, bottleneck analysis, opportunity hypotheses, data-priority recommendation, limitations, and opportunity decision memo.</p>
+<h3 id="analytic-rubric-4">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Baseline integrity</td>
+<td style="text-align:right">25%</td>
+<td>The model represents current/counterfactual conditions without solution leakage.</td>
+</tr>
+<tr>
+<td>Measure and calibration quality</td>
+<td style="text-align:right">30%</td>
+<td>Outputs match intended outcomes and multiple referents/behaviors are assessed.</td>
+</tr>
+<tr>
+<td>Insight and limits</td>
+<td style="text-align:right">25%</td>
+<td>Bottlenecks and opportunities are evidence-based and claims remain bounded.</td>
+</tr>
+<tr>
+<td>Decision usefulness</td>
+<td style="text-align:right">20%</td>
+<td>The memo identifies actionable next experiments or data collection.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-4">Critical failures</h3>
+<ul>
+<li>Preferred-solution benefits are embedded in the baseline.</li>
+<li>Calibration uses only one aggregate mean.</li>
+<li>A correlation or model response is described as proven real-world causation.</li>
+<li>Subgroup or degraded outcomes relevant to accessibility/safety are omitted.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-4">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is calibration?</strong><br/>
+<em>Answer guidance:</em> Adjustment of model parameters or structure to improve agreement with selected referent data.</li>
+<li><strong>Why use tail measures?</strong><br/>
+<em>Answer guidance:</em> Stakeholder harm and capacity failures often occur in distribution tails, not at the mean.</li>
+<li><strong>What is a counterfactual baseline?</strong><br/>
+<em>Answer guidance:</em> An explicitly defined no-change or alternative reference condition used for comparison.</li>
+<li><strong>Why can bottlenecks move?</strong><br/>
+<em>Answer guidance:</em> Different demand, policies, priorities, and failures change which resource or rule constrains flow.</li>
+<li><strong>What is solution leakage?</strong><br/>
+<em>Answer guidance:</em> Including features or benefits of a candidate solution in the model meant to describe the problem or baseline.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-4">Revision and mastery gate</h3>
+<p>The baseline must reproduce defined referent behaviors within stated tolerances or clearly disclose mismatch. Opportunity claims must be labeled descriptive, predictive, or hypothesis-generating.</p>
+<h3 id="suggested-workload-4">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>Baseline modeling</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Calibration/analysis</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Memo/review</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-4">Configuration and portfolio update</h3>
+<p>Commit source, data, configuration, results, decision records, review comments, and revisions. Update the assumption register, credibility-risk register, traceability, baseline manifest, and personal reflection log before beginning the next week.</p>
+<hr/>
+<h2 id="week-5--implement-discrete-event-processes-resources-queues-priorities-and-statistics">Week 5 — Implement discrete-event processes, resources, queues, priorities, and statistics</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 11):</strong> <a href="../../K/B11/chapters/05-implement-discrete-event-processes-resources-queues-priorities-and-s.html">Chapter 5 — Implement discrete-event processes, resources, queues, priorities, and statistics</a> · <a href="../../K/B11/labs/lab-05-implement-discrete-event-processes-resources-queues-priorities-and-s.html">Hypothetical Lab 5</a> · <a href="../../K/P3-text/lessons/645-757-w05.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C6, C7, C8</p>
+<h3 id="professional-context-and-essential-question-5">Professional context and essential question</h3>
+<p>Tool fluency matters only when it faithfully implements the approved conceptual model. <strong>Essential question:</strong> Can the learner translate state and event logic into a transparent, testable executable model?</p>
+<h3 id="weekly-learning-outcomes-5">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>implement event scheduling, processes, entities, resources, queues, attributes, and statistics</li>
+<li>control initialization, termination, random streams, and configuration</li>
+<li>instrument the model with traces and assertions</li>
+<li>reproduce simple queue and resource cases analytically or by hand</li>
+<li>separate model logic from experiment configuration and reporting</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-5">Retrieval and readiness check</h3>
+<ol>
+<li>What causes simulation time to advance?</li>
+<li>How does a resource differ from an entity?</li>
+<li>Why separate parameters from logic?</li>
+<li>What is one invariant suitable for an assertion?</li>
+</ol>
+<h3 id="required-study-5">Required study</h3>
+<ul>
+<li><strong>Arena or SimPy official documentation</strong> — basic process, event, resource, environment, queue, and data concepts. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> How are process suspension and resource contention represented?</li>
+<li><strong>Simulation with Arena topic reading</strong> — basic process modeling, entities, resources, queues, and statistics. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Which tool elements implement each conceptual-model element?</li>
+<li><strong>NASA-HDBK-7009B</strong> — implementation controls, configuration, and verification planning. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> What records make the executable model reviewable?</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-5">Instructor-style lesson notes</h3>
+<p>Discrete-event simulation advances from event to event rather than through every clock tick. State changes at events; future events are scheduled by logic and sampled durations.</p>
+<p>Use explicit units. Time, energy, distance, capacity, and probabilities should be named and checked; hidden unit conversions are common model defects.</p>
+<p>Random streams should be controlled by purpose. Separate streams or generators can support paired comparisons and diagnose unintended coupling.</p>
+<p>Instrumentation is part of design. Event traces, counters, state snapshots, queue histories, and assertions support verification and later analysis.</p>
+<p>Keep experiment configuration external where practical so scenarios can be compared without modifying implementation logic.</p>
+<h3 id="worked-example-5">Worked example</h3>
+<p>A one-vehicle model is run with deterministic arrivals and service times. Hand calculation predicts completion times and maximum queue length. The executable trace matches until a request at the same timestamp as service completion exposes an event-priority rule; the conceptual model is updated and the rule is tested.</p>
+<h3 id="guided-practice-5">Guided practice</h3>
+<ol>
+<li>Implement a deterministic single-resource queue and compare it with a hand trace.</li>
+<li>Add stochastic arrivals and service while preserving reproducible seeds.</li>
+<li>Add priority for accessible requests and inspect starvation risk.</li>
+<li>Externalize fleet size, chargers, demand profile, and run controls into configuration.</li>
+</ol>
+<h3 id="independent-exercises-5">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Build three small models: a single server, parallel resources, and a finite-capacity queue.</li>
+<li><strong>Application:</strong> Implement request, vehicle, dispatch, trip, and charging processes for the running case.</li>
+<li><strong>Analysis:</strong> Use traces to diagnose one intentionally inserted logic defect.</li>
+<li><strong>Synthesis:</strong> Demonstrate executable increment 1 in a logic walkthrough.</li>
+<li><strong>Stretch:</strong> Add automated schema validation and event-log property checks.</li>
+</ul>
+<h3 id="weekly-deliverable-5">Weekly deliverable</h3>
+<p>Submit executable model increment 1, source/environment files, configuration schema, deterministic hand case, event traces, assertions, unit and property tests, known-defect log, and logic-walkthrough record.</p>
+<h3 id="analytic-rubric-5">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Implementation fidelity</td>
+<td style="text-align:right">30%</td>
+<td>Conceptual entities, events, states, rules, and measures are correctly represented.</td>
+</tr>
+<tr>
+<td>Verification instrumentation</td>
+<td style="text-align:right">30%</td>
+<td>Traces, assertions, tests, and hand checks reveal implementation behavior.</td>
+</tr>
+<tr>
+<td>Configuration and reproducibility</td>
+<td style="text-align:right">25%</td>
+<td>Parameters, seeds, versions, and execution steps are controlled.</td>
+</tr>
+<tr>
+<td>Code/model clarity</td>
+<td style="text-align:right">15%</td>
+<td>Structure and naming support review and change.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-5">Critical failures</h3>
+<ul>
+<li>The model runs but has no deterministic verification case.</li>
+<li>Time or capacity units are implicit or inconsistent.</li>
+<li>Scenario changes require editing core logic without control.</li>
+<li>Random-number state cannot be reproduced.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-5">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What advances time in a discrete-event simulation?</strong><br/>
+<em>Answer guidance:</em> The simulation clock jumps to the next scheduled event time.</li>
+<li><strong>Why use deterministic cases?</strong><br/>
+<em>Answer guidance:</em> They create predictable results for logic verification independent of stochastic noise.</li>
+<li><strong>What is an invariant?</strong><br/>
+<em>Answer guidance:</em> A property that must remain true throughout execution, such as nonnegative queue length or capacity limits.</li>
+<li><strong>Why separate random streams?</strong><br/>
+<em>Answer guidance:</em> To control stochastic sources, support paired comparisons, and avoid accidental dependence.</li>
+<li><strong>What is event priority?</strong><br/>
+<em>Answer guidance:</em> A rule for ordering events that occur at the same simulation time.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-5">Revision and mastery gate</h3>
+<p>The learner must reproduce the model from a clean environment and demonstrate at least five automated or hand-verified behaviors, including one simultaneous-event case.</p>
+<h3 id="suggested-workload-5">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tool study</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td style="text-align:right">5.0</td>
+</tr>
+<tr>
+<td>Verification</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Walkthrough/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>12.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-5">Configuration and portfolio update</h3>
+<p>Commit source, data, configuration, results, decision records, review comments, and revisions. Update the assumption register, credibility-risk register, traceability, baseline manifest, and personal reflection log before beginning the next week.</p>
+<hr/>
+<h2 id="week-6--model-detailed-operations-and-complete-computational-verification">Week 6 — Model detailed operations and complete computational verification</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 11):</strong> <a href="../../K/B11/chapters/06-model-detailed-operations-and-complete-computational-verification.html">Chapter 6 — Model detailed operations and complete computational verification</a> · <a href="../../K/B11/labs/lab-06-model-detailed-operations-and-complete-computational-verification.html">Hypothetical Lab 6</a> · <a href="../../K/P3-text/lessons/645-757-w06.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C6, C7, C8, C12</p>
+<h3 id="professional-context-and-essential-question-6">Professional context and essential question</h3>
+<p>Complex models often fail at interactions, edge cases, and bookkeeping rather than basic flow. <strong>Essential question:</strong> Does the executable model implement the approved rules across nominal, boundary, extreme, and failure conditions?</p>
+<h3 id="weekly-learning-outcomes-6">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>implement routing, batching, priorities, preemption, failures, repair, schedules, and finite capacity</li>
+<li>verify conservation, state transitions, resource release, event ordering, and statistics</li>
+<li>use extreme-condition, degenerate, and metamorphic tests</li>
+<li>perform code/model review and defect triage</li>
+<li>baseline a model ready for formal experiments</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-6">Retrieval and readiness check</h3>
+<ol>
+<li>What is an extreme-condition test?</li>
+<li>How can a resource leak occur in a simulation?</li>
+<li>What does conservation mean in a process model?</li>
+<li>Why is matching one observed output insufficient verification?</li>
+</ol>
+<h3 id="required-study-6">Required study</h3>
+<ul>
+<li><strong>JHU syllabus</strong> — detailed operations modeling and input-data modules. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Which operational constructs are expected before output analysis?</li>
+<li><strong>DoD VV&amp;A RPG</strong> — developer and V&amp;V roles; V&amp;V techniques. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Which verification techniques fit new simulations?</li>
+<li><strong>NASA-STD-7009B/NASA-HDBK-7009B</strong> — computational-model verification and evidence. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> How should defects and credibility impact be recorded?</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-6">Instructor-style lesson notes</h3>
+<p>Computational verification asks whether the executable model correctly implements its specification and numerical logic. It is different from asking whether the specification adequately represents reality.</p>
+<p>Use layered tests: unit/module tests, deterministic integration cases, event-trace review, conservation checks, extreme conditions, statistical checks, regression tests, and independent review.</p>
+<p>Extreme and degenerate tests intentionally simplify or stress the model: zero arrivals, infinite resources, no failures, all failures, deterministic inputs, one entity, or overwhelming demand.</p>
+<p>Metamorphic testing checks expected relationships when an exact answer is unavailable—for example, adding identical capacity should not worsen throughput absent a modeled interference mechanism.</p>
+<p>A defect log records symptom, reproduction, root cause, affected outputs, fix, regression evidence, and credibility impact.</p>
+<h3 id="worked-example-6">Worked example</h3>
+<p>Vehicle utilization exceeds 100%. Trace review shows charging time is counted as both busy service and unavailable charging state. A state-partition invariant detects the overlap; the statistic logic is corrected and all prior experiment results are invalidated and rerun.</p>
+<h3 id="guided-practice-6">Guided practice</h3>
+<ol>
+<li>Add disruption, charging, accessibility capacity, and shift/schedule logic.</li>
+<li>Create conservation and state-partition assertions.</li>
+<li>Run zero-demand, unlimited-fleet, charger-outage, and overload cases.</li>
+<li>Review output statistics for double counting, censoring, and end-of-run bias.</li>
+</ol>
+<h3 id="independent-exercises-6">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Design verification cases for five common discrete-event defects.</li>
+<li><strong>Application:</strong> Complete executable model increment 2 with detailed operations.</li>
+<li><strong>Analysis:</strong> Perform mutation testing by inserting and detecting three defects.</li>
+<li><strong>Synthesis:</strong> Conduct the Midcourse Model Readiness Review and disposition findings.</li>
+<li><strong>Stretch:</strong> Create automated regression baselines and property-based tests across random configurations.</li>
+</ul>
+<h3 id="weekly-deliverable-6">Weekly deliverable</h3>
+<p>Submit the complete executable baseline, computational-model specification, verification matrix, tests and traces, extreme-condition results, defect log, regression suite, configuration baseline, and Model Readiness Review record.</p>
+<h3 id="analytic-rubric-6">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Verification coverage</td>
+<td style="text-align:right">30%</td>
+<td>Critical logic, state, resources, measures, and edge cases have independent checks.</td>
+</tr>
+<tr>
+<td>Detailed operations fidelity</td>
+<td style="text-align:right">25%</td>
+<td>Routing, priorities, failures, schedules, and capacity match the conceptual model.</td>
+</tr>
+<tr>
+<td>Defect discipline</td>
+<td style="text-align:right">25%</td>
+<td>Defects are reproducible, assessed, corrected, and regression tested.</td>
+</tr>
+<tr>
+<td>Readiness judgment</td>
+<td style="text-align:right">20%</td>
+<td>The review honestly identifies what is and is not ready for experiment use.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-6">Critical failures</h3>
+<ul>
+<li>Known computational defects affect critical outputs and are ignored.</li>
+<li>State/resource statistics violate conservation or partition rules.</li>
+<li>Changes invalidate prior results but reruns are not performed.</li>
+<li>Formal experiments begin without a controlled model version.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-6">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is computational verification?</strong><br/>
+<em>Answer guidance:</em> Evidence that the executable model correctly implements the specified model and computations.</li>
+<li><strong>What is metamorphic testing?</strong><br/>
+<em>Answer guidance:</em> Testing expected relationships between transformed inputs and outputs when exact results are unavailable.</li>
+<li><strong>Why test zero demand?</strong><br/>
+<em>Answer guidance:</em> It exposes initialization, spontaneous events, resource leaks, and improper statistics.</li>
+<li><strong>What is a regression test?</strong><br/>
+<em>Answer guidance:</em> A repeatable test used to detect unintended behavior changes after modifications.</li>
+<li><strong>Why assess defect impact?</strong><br/>
+<em>Answer guidance:</em> To determine which results, decisions, or credibility claims must be invalidated or repeated.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-6">Revision and mastery gate</h3>
+<p>All critical verification cases must pass or have approved limitations. The model, configuration, tests, and environment must be tagged as the experiment baseline.</p>
+<h3 id="suggested-workload-6">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>Detailed implementation</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Verification/testing</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Review/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>12.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-6">Configuration and portfolio update</h3>
+<p>Commit source, data, configuration, results, decision records, review comments, and revisions. Update the assumption register, credibility-risk register, traceability, baseline manifest, and personal reflection log before beginning the next week.</p>
+<hr/>
+<h2 id="week-7--use-simulation-for-concept-exploration-alternatives-and-scenario-analysis">Week 7 — Use simulation for concept exploration, alternatives, and scenario analysis</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 11):</strong> <a href="../../K/B11/chapters/07-use-simulation-for-concept-exploration-alternatives-and-scenario-ana.html">Chapter 7 — Use simulation for concept exploration, alternatives, and scenario analysis</a> · <a href="../../K/B11/labs/lab-07-use-simulation-for-concept-exploration-alternatives-and-scenario-ana.html">Hypothetical Lab 7</a> · <a href="../../K/P3-text/lessons/645-757-w07.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C7, C8, C9, C12</p>
+<h3 id="professional-context-and-essential-question-7">Professional context and essential question</h3>
+<p>Simulation can compare alternatives, but only if the alternatives, scenarios, measures, and uncertainty are treated fairly. <strong>Essential question:</strong> What experiment set can distinguish concepts without embedding a preferred answer?</p>
+<h3 id="weekly-learning-outcomes-7">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>translate concept alternatives into controlled model configurations</li>
+<li>define common scenarios, measures, constraints, and comparison rules</li>
+<li>use common random numbers or other variance-reduction logic appropriately</li>
+<li>analyze performance, risk, and failure across nominal and stressed conditions</li>
+<li>identify dominance, tradeoffs, and conditions that reverse rankings</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-7">Retrieval and readiness check</h3>
+<ol>
+<li>Why must alternatives share common scenarios?</li>
+<li>What is common random numbers intended to accomplish?</li>
+<li>What is a ranking reversal?</li>
+<li>Why should infeasible alternatives be screened before detailed simulation?</li>
+</ol>
+<h3 id="required-study-7">Required study</h3>
+<ul>
+<li><strong>JHU syllabus</strong> — M&amp;S in concept exploration and evaluation. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> How does the source course connect simulation to concept decisions?</li>
+<li><strong>NASA decision-analysis guidance</strong> — alternatives, criteria, uncertainty, sensitivity, and recommendation. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> How should simulation outputs enter—not replace—a trade study?</li>
+<li><strong>NIST/SEMATECH e-Handbook</strong> — comparison, uncertainty, and experiment-design concepts. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> What statistical structure is needed for fair comparison?</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-7">Instructor-style lesson notes</h3>
+<p>An alternative is a controlled configuration with architecture, policy, resources, and assumptions—not an undocumented set of code edits.</p>
+<p>Use common scenario definitions and measure calculations. Different alternatives may require different implementation detail, but comparison semantics must remain stable.</p>
+<p>Common random numbers can improve paired comparisons when outputs respond similarly to shared stochastic streams; verify that stream alignment is meaningful.</p>
+<p>Present distributions and constraint violations, not only weighted scores. Simulation output should feed decision analysis with uncertainty and scenario context.</p>
+<p>Robust alternatives perform acceptably across plausible conditions. A nominal winner that fails under small assumption changes may not be decision-preferred.</p>
+<h3 id="worked-example-7">Worked example</h3>
+<p>A 10-vehicle concept with aggressive dispatch beats a 12-vehicle concept on mean wait time in one seed. Across paired replications and event-demand scenarios, the 12-vehicle concept has lower tail waits but higher cost, while the policy-focused concept is more sensitive to charger outage. The result becomes a tradeoff, not a single winner.</p>
+<h3 id="guided-practice-7">Guided practice</h3>
+<ol>
+<li>Define four alternatives and three common operational scenarios.</li>
+<li>Build a configuration manifest and ensure measures have identical definitions.</li>
+<li>Run a pilot paired comparison and inspect variance and stream alignment.</li>
+<li>Create a performance-risk trade plot with uncertainty intervals.</li>
+</ol>
+<h3 id="independent-exercises-7">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Identify unfair comparison practices in five short examples.</li>
+<li><strong>Application:</strong> Run concept experiments across baseline, event surge, weather, and charger-outage scenarios.</li>
+<li><strong>Analysis:</strong> Find at least one condition that changes the alternative ranking.</li>
+<li><strong>Synthesis:</strong> Prepare the concept evidence memo for the decision-analysis course handoff.</li>
+<li><strong>Stretch:</strong> Implement a screening metamodel or sequential elimination strategy to reduce run burden.</li>
+</ul>
+<h3 id="weekly-deliverable-7">Weekly deliverable</h3>
+<p>Submit the alternative/configuration definitions, common scenario set, run matrix, random-number plan, comparative results, constraint and tail analysis, ranking-reversal conditions, concept evidence memo, and decision limitations.</p>
+<h3 id="analytic-rubric-7">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fair experimental comparison</td>
+<td style="text-align:right">30%</td>
+<td>Alternatives share controlled scenarios, measures, run logic, and transparent differences.</td>
+</tr>
+<tr>
+<td>Statistical comparison</td>
+<td style="text-align:right">25%</td>
+<td>Paired/unpaired structure, intervals, and stochastic variation are handled correctly.</td>
+</tr>
+<tr>
+<td>Tradeoff and robustness insight</td>
+<td style="text-align:right">30%</td>
+<td>Results expose constraints, tails, sensitivity, and ranking changes.</td>
+</tr>
+<tr>
+<td>Decision communication</td>
+<td style="text-align:right">15%</td>
+<td>The memo separates model evidence from value judgments and cost/risk decisions.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-7">Critical failures</h3>
+<ul>
+<li>Alternatives are compared using different demand or measure definitions without disclosure.</li>
+<li>One seed or one run determines the ranking.</li>
+<li>Simulation output is converted directly to a final decision with no value/risk context.</li>
+<li>A favored alternative receives more favorable assumptions.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-7">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why use common scenarios?</strong><br/>
+<em>Answer guidance:</em> To ensure differences arise from alternatives rather than inconsistent environmental conditions.</li>
+<li><strong>What can common random numbers reduce?</strong><br/>
+<em>Answer guidance:</em> Variance in estimated differences when paired stochastic inputs are meaningfully aligned.</li>
+<li><strong>What is robustness?</strong><br/>
+<em>Answer guidance:</em> Acceptable performance across plausible assumptions, scenarios, and uncertainty.</li>
+<li><strong>What is dominance?</strong><br/>
+<em>Answer guidance:</em> One alternative is no worse on all relevant objectives and better on at least one, under the stated conditions.</li>
+<li><strong>Why document ranking reversals?</strong><br/>
+<em>Answer guidance:</em> They reveal decision sensitivity and conditions under which a recommendation changes.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-7">Revision and mastery gate</h3>
+<p>Every reported alternative comparison must be reproducible from configuration manifests and enough replications to support the claimed difference or declare it inconclusive.</p>
+<h3 id="suggested-workload-7">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study/design</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Experiment setup</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Runs/analysis</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Memo/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.5</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-7">Configuration and portfolio update</h3>
+<p>Commit source, data, configuration, results, decision records, review comments, and revisions. Update the assumption register, credibility-risk register, traceability, baseline manifest, and personal reflection log before beginning the next week.</p>
+<hr/>
+<h2 id="week-8--analyze-transient-and-steady-state-output-with-defensible-run-controls">Week 8 — Analyze transient and steady-state output with defensible run controls</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 11):</strong> <a href="../../K/B11/chapters/08-analyze-transient-and-steady-state-output-with-defensible-run-contro.html">Chapter 8 — Analyze transient and steady-state output with defensible run controls</a> · <a href="../../K/B11/labs/lab-08-analyze-transient-and-steady-state-output-with-defensible-run-contro.html">Hypothetical Lab 8</a> · <a href="../../K/P3-text/lessons/645-757-w08.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C7, C8, C9</p>
+<h3 id="professional-context-and-essential-question-8">Professional context and essential question</h3>
+<p>Simulation produces observations, not answers. <strong>Essential question:</strong> How should warm-up, run length, replications, dependence, intervals, and stopping rules be chosen for the decision claim?</p>
+<h3 id="weekly-learning-outcomes-8">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>distinguish terminating and steady-state simulations</li>
+<li>select warm-up, run length, replication count, and initialization logic</li>
+<li>compute and interpret confidence intervals for means, proportions, quantiles, and differences</li>
+<li>diagnose autocorrelation, censoring, rare events, and nonnormal output</li>
+<li>separate statistical precision from model credibility and decision significance</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-8">Retrieval and readiness check</h3>
+<ol>
+<li>What is initialization bias?</li>
+<li>How does a terminating simulation differ from steady state?</li>
+<li>Why are within-run observations often dependent?</li>
+<li>What is the difference between statistical and practical significance?</li>
+</ol>
+<h3 id="required-study-8">Required study</h3>
+<ul>
+<li><strong>JHU syllabus</strong> — midterm/output-analysis module. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Which output-analysis skills are required before design experiments?</li>
+<li><strong>Simulation with Arena topic reading</strong> — warm-up, replications, confidence intervals, and output analysis. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> What assumptions support replication-based intervals?</li>
+<li><strong>NIST/SEMATECH e-Handbook</strong> — confidence intervals, exploratory diagnostics, and uncertainty. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> How should assumptions and outliers be checked?</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-8">Instructor-style lesson notes</h3>
+<p>A terminating simulation has a natural start and end, such as one operating day. A steady-state study estimates long-run behavior after initialization effects decay.</p>
+<p>Warm-up removes initial transient observations but also discards data. Choose it from system behavior, plots, multiple runs, and sensitivity—not a convenient fraction.</p>
+<p>Independent replications are often the clearest analysis unit. Observations within a run are usually dependent and should not be treated as independent samples.</p>
+<p>Quantiles and rare-event measures may require more runs, bootstrapping, specialized estimators, or scenario-based bounds. A narrow mean interval does not validate tail claims.</p>
+<p>Precision conditional on the model does not address input, model-form, or scenario uncertainty. Report these separately.</p>
+<h3 id="worked-example-8">Worked example</h3>
+<p>Ten replications produce a tight interval for mean wait but an unstable 90th percentile. Increasing run length does not solve the problem because each day has few tail observations. The analysis uses more independent day replications and bootstrap intervals, and labels rare disruption claims as low confidence.</p>
+<h3 id="guided-practice-8">Guided practice</h3>
+<ol>
+<li>Classify course scenarios as terminating or steady state.</li>
+<li>Plot cumulative and moving-average diagnostics for initialization behavior.</li>
+<li>Estimate replication needs for a mean and a proportion.</li>
+<li>Compare intervals for mean, 90th percentile, and alternative differences.</li>
+</ol>
+<h3 id="independent-exercises-8">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Calculate intervals and diagnose common output-analysis errors from provided run summaries.</li>
+<li><strong>Application:</strong> Create the full run-control and output-analysis notebook.</li>
+<li><strong>Analysis:</strong> Test sensitivity to warm-up, run length, seed set, and replication count.</li>
+<li><strong>Synthesis:</strong> Issue a statistical adequacy decision for each critical measure.</li>
+<li><strong>Stretch:</strong> Implement sequential precision stopping with safeguards against repeated-look bias.</li>
+</ul>
+<h3 id="weekly-deliverable-8">Weekly deliverable</h3>
+<p>Submit the run-control plan, transient/steady-state rationale, warm-up and run-length diagnostics, replication analysis, output notebook, confidence/uncertainty intervals, precision status by measure, and statistical adequacy decision.</p>
+<h3 id="analytic-rubric-8">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run-control rationale</td>
+<td style="text-align:right">25%</td>
+<td>Initialization, horizon, termination, and replications fit the modeled decision.</td>
+</tr>
+<tr>
+<td>Statistical analysis</td>
+<td style="text-align:right">30%</td>
+<td>Intervals, comparisons, and diagnostics match output structure and claim.</td>
+</tr>
+<tr>
+<td>Tail and rare-event treatment</td>
+<td style="text-align:right">25%</td>
+<td>Quantile/proportion limits and low-frequency evidence are honest and appropriate.</td>
+</tr>
+<tr>
+<td>Interpretation</td>
+<td style="text-align:right">20%</td>
+<td>Precision, practical significance, and broader model uncertainty are distinguished.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-8">Critical failures</h3>
+<ul>
+<li>Within-run observations are treated as independent replications.</li>
+<li>Warm-up or replication counts are arbitrary.</li>
+<li>A narrow interval is presented as proof the model is valid.</li>
+<li>Tail requirements are evaluated using only mean performance.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-8">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is initialization bias?</strong><br/>
+<em>Answer guidance:</em> Distortion caused by starting the simulation in an artificial state that differs from the process of interest.</li>
+<li><strong>Why use independent replications?</strong><br/>
+<em>Answer guidance:</em> They provide independent run-level observations suitable for many interval and comparison methods.</li>
+<li><strong>What does a confidence interval quantify?</strong><br/>
+<em>Answer guidance:</em> Uncertainty in an estimator under the model, sampling, and analysis assumptions—not all real-world uncertainty.</li>
+<li><strong>Why can quantiles need more data?</strong><br/>
+<em>Answer guidance:</em> They depend on fewer observations in distribution tails and can be unstable, especially for rare events.</li>
+<li><strong>What is practical significance?</strong><br/>
+<em>Answer guidance:</em> Whether an estimated difference is large enough to affect the engineering decision.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-8">Revision and mastery gate</h3>
+<p>Every critical output must have a declared analysis unit, run control, interval or uncertainty representation, and adequacy status: adequate, limited, or inconclusive.</p>
+<h3 id="suggested-workload-8">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Run diagnostics</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Output analysis</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Decision/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>12.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-8">Configuration and portfolio update</h3>
+<p>Commit source, data, configuration, results, decision records, review comments, and revisions. Update the assumption register, credibility-risk register, traceability, baseline manifest, and personal reflection log before beginning the next week.</p>
+<hr/>
+<h2 id="week-9--apply-simulation-in-design-and-development-using-selection-ranking-and-design-of-experiments">Week 9 — Apply simulation in design and development using selection, ranking, and design of experiments</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 11):</strong> <a href="../../K/B11/chapters/09-apply-simulation-in-design-and-development-using-selection-ranking-a.html">Chapter 9 — Apply simulation in design and development using selection, ranking, and design of experiments</a> · <a href="../../K/B11/labs/lab-09-apply-simulation-in-design-and-development-using-selection-ranking-a.html">Hypothetical Lab 9</a> · <a href="../../K/P3-text/lessons/645-757-w09.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C7, C8, C9, C12</p>
+<h3 id="professional-context-and-essential-question-9">Professional context and essential question</h3>
+<p>One-factor-at-a-time tuning misses interactions and wastes runs. <strong>Essential question:</strong> Which structured experiment reveals the design factors and interactions that matter to performance, risk, and robustness?</p>
+<h3 id="weekly-learning-outcomes-9">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>define factors, levels, responses, constraints, blocks, and nuisance variables</li>
+<li>design screening, factorial, fractional, response-surface, or sequential experiments appropriate to the question</li>
+<li>analyze main effects, interactions, residuals, and practical significance</li>
+<li>separate design optimization from model calibration</li>
+<li>recommend a design region rather than an unjustifiably precise point optimum</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-9">Retrieval and readiness check</h3>
+<ol>
+<li>Why is one-factor-at-a-time weak for interactions?</li>
+<li>What is an experimental factor?</li>
+<li>What is confounding?</li>
+<li>How does optimization differ from calibration?</li>
+</ol>
+<h3 id="required-study-9">Required study</h3>
+<ul>
+<li><strong>JHU syllabus</strong> — design/development, selection and ranking, and DOE modules. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Which analytic methods support design decisions?</li>
+<li><strong>NIST/SEMATECH e-Handbook</strong> — experimental design, factorial designs, response surfaces, and diagnostics. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> How should factors and interactions be selected and interpreted?</li>
+<li><strong>NASA decision-analysis and M&amp;S credibility guidance</strong> — decision, sensitivity, uncertainty, and model-use limits. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> How should a design recommendation carry model limitations?</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-9">Instructor-style lesson notes</h3>
+<p>DOE organizes simulation runs so factor effects and interactions can be estimated efficiently. Simulation experiments still require randomization/seed control, replication, and residual diagnostics.</p>
+<p>Screening designs identify influential factors; factorial designs estimate interactions; response-surface methods explore curvature near a promising region; sequential designs allocate runs based on learning.</p>
+<p>Nuisance factors and scenarios should be blocked, stratified, or included rather than silently averaged away.</p>
+<p>Optimization searches model space. It can exploit model defects and uncertain assumptions, so verify candidate optima with independent runs and robustness checks.</p>
+<p>A design region or policy rule is often more defensible than a point optimum when parameters, demand, and costs are uncertain.</p>
+<h3 id="worked-example-9">Worked example</h3>
+<p>A factorial experiment varies fleet size, charger count, dispatch threshold, and accessible boarding support. Fleet and dispatch have a strong interaction: the aggressive policy helps small fleets but adds little once capacity increases. A robust region of 11–12 vehicles and 4–5 chargers is recommended instead of the model’s nominal optimum of 11.3 vehicles.</p>
+<h3 id="guided-practice-9">Guided practice</h3>
+<ol>
+<li>Define factors, ranges, constraints, and responses from the design baseline.</li>
+<li>Create a screening/factorial design and map seeds/replications to cells.</li>
+<li>Plot main effects, interactions, and residuals.</li>
+<li>Confirm a candidate design with independent runs and stressed scenarios.</li>
+</ol>
+<h3 id="independent-exercises-9">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Identify factors, responses, interactions, blocks, and confounding in short designs.</li>
+<li><strong>Application:</strong> Execute a structured simulation DOE with at least four factors.</li>
+<li><strong>Analysis:</strong> Interpret interaction and residual diagnostics and identify model exploitation risks.</li>
+<li><strong>Synthesis:</strong> Prepare the Analysis and Decision Review recommendation.</li>
+<li><strong>Stretch:</strong> Build a response surface or robust multiresponse desirability analysis with holdout confirmation.</li>
+</ul>
+<h3 id="weekly-deliverable-9">Weekly deliverable</h3>
+<p>Submit the experiment objective, factor/response definitions, design matrix, run manifest, analysis notebook, effects/interactions, diagnostics, confirmation runs, robustness results, design recommendation, and Analysis and Decision Review record.</p>
+<h3 id="analytic-rubric-9">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experiment design</td>
+<td style="text-align:right">30%</td>
+<td>Design efficiently estimates decision-relevant effects and interactions.</td>
+</tr>
+<tr>
+<td>Analysis and diagnostics</td>
+<td style="text-align:right">30%</td>
+<td>Effects, residuals, uncertainty, and practical significance are correctly interpreted.</td>
+</tr>
+<tr>
+<td>Confirmation and robustness</td>
+<td style="text-align:right">25%</td>
+<td>Candidate designs are independently confirmed across plausible scenarios.</td>
+</tr>
+<tr>
+<td>Recommendation</td>
+<td style="text-align:right">15%</td>
+<td>The recommendation is bounded, actionable, and does not exceed model evidence.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-9">Critical failures</h3>
+<ul>
+<li>Factor ranges include infeasible designs without controlled handling.</li>
+<li>A point optimum is accepted without independent confirmation.</li>
+<li>Interactions are ignored while making combined-factor recommendations.</li>
+<li>Optimization changes calibration parameters to improve performance.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-9">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is an interaction?</strong><br/>
+<em>Answer guidance:</em> The effect of one factor changes depending on the level of another factor.</li>
+<li><strong>Why randomize or control run order/seeds?</strong><br/>
+<em>Answer guidance:</em> To avoid confounding factor effects with temporal or stochastic artifacts.</li>
+<li><strong>What is a response surface?</strong><br/>
+<em>Answer guidance:</em> An empirical approximation of the relationship between factors and response near a region of interest.</li>
+<li><strong>Why confirm an optimum?</strong><br/>
+<em>Answer guidance:</em> Search and noise can exploit estimation error or model defects; independent runs test reproducibility.</li>
+<li><strong>What is a robust design region?</strong><br/>
+<em>Answer guidance:</em> A range of design choices that performs acceptably across uncertainty and scenarios.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-9">Revision and mastery gate</h3>
+<p>The learner must demonstrate at least one meaningful interaction or justify its absence, perform confirmation runs, and state a defensible design region with uncertainty.</p>
+<h3 id="suggested-workload-9">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study/design</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Experiment runs</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Analysis</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>12.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-9">Configuration and portfolio update</h3>
+<p>Commit source, data, configuration, results, decision records, review comments, and revisions. Update the assumption register, credibility-risk register, traceability, baseline manifest, and personal reflection log before beginning the next week.</p>
+<hr/>
+<h2 id="week-10--use-ms-to-support-integration-verification-validation-and-test-decisions">Week 10 — Use M&amp;S to support integration, verification, validation, and test decisions</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 11):</strong> <a href="../../K/B11/chapters/10-use-m-s-to-support-integration-verification-validation-and-test-deci.html">Chapter 10 — Use M&amp;S to support integration, verification, validation, and test decisions</a> · <a href="../../K/B11/labs/lab-10-use-m-s-to-support-integration-verification-validation-and-test-deci.html">Hypothetical Lab 10</a> · <a href="../../K/P3-text/lessons/645-757-w10.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C4, C6, C7, C8</p>
+<h3 id="professional-context-and-essential-question-10">Professional context and essential question</h3>
+<p>Models can reduce test burden and expose integration risk, but model evidence must not silently substitute for required real-world evidence. <strong>Essential question:</strong> Which T&amp;E claims can the model support, and what physical, operational, or independent evidence remains necessary?</p>
+<h3 id="weekly-learning-outcomes-10">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>map requirements and test objectives to model-supported evidence roles</li>
+<li>design virtual integration, fault-injection, test-planning, and test-augmentation uses</li>
+<li>compare model, SIL/HIL, laboratory, field, and operational evidence</li>
+<li>quantify representativeness and model-to-test discrepancies</li>
+<li>define conditions for model-supported verification or validation claims</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-10">Retrieval and readiness check</h3>
+<ol>
+<li>How can simulation support a Test Readiness Review?</li>
+<li>What is a model-to-test discrepancy?</li>
+<li>Why is model evidence not automatically verification evidence?</li>
+<li>Give one use of simulation in integration risk reduction.</li>
+</ol>
+<h3 id="required-study-10">Required study</h3>
+<ul>
+<li><strong>JHU syllabus</strong> — M&amp;S in integration and test &amp; evaluation. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Which lifecycle applications are expected?</li>
+<li><strong>NASA Product Integration, Verification, and Validation guidance</strong> — integration and V&amp;V evidence roles. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Where can analysis or simulation be used, and what acceptance criteria apply?</li>
+<li><strong>DoD VV&amp;A RPG</strong> — T&amp;E/V&amp;V integration and checklist materials. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> How should model credibility align with T&amp;E decisions?</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-10">Instructor-style lesson notes</h3>
+<p>M&amp;S can rehearse procedures, design test matrices, predict observability, inject faults, generate synthetic loads, explore unsafe corners, and interpret sparse physical tests.</p>
+<p>Model-supported verification requires that the method is authorized for the requirement and that model credibility, configuration, and uncertainty support the acceptance criterion.</p>
+<p>Use physical or operational test data to update, challenge, or bound models. Discrepancies are evidence, not nuisances to be tuned away automatically.</p>
+<p>Configuration traceability must identify the system article, model version, parameter set, environment, and requirement revision.</p>
+<p>A hybrid evidence argument states which claim portion comes from test, analysis, simulation, inspection, demonstration, or expert judgment.</p>
+<h3 id="worked-example-10">Worked example</h3>
+<p>A physical pilot tests eight weather scenarios, while the simulation evaluates thousands of demand/weather combinations. The model is calibrated only on independent parameters, validated on held-out scenarios, and used to estimate coverage gaps. It supports risk characterization but does not replace the required emergency-stop field test.</p>
+<h3 id="guided-practice-10">Guided practice</h3>
+<ol>
+<li>Map five requirements to model, SIL/HIL, lab, field, and operational evidence.</li>
+<li>Design a fault-injection experiment for dispatch, charging, or communication failure.</li>
+<li>Compare simulated and supplied test observations with discrepancy plots.</li>
+<li>Write one hybrid claim-to-evidence argument with limitations.</li>
+</ol>
+<h3 id="independent-exercises-10">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify 20 proposed uses as verification, validation, test design, training, prediction, or unacceptable substitution.</li>
+<li><strong>Application:</strong> Create the model-supported T&amp;E plan and evidence matrix.</li>
+<li><strong>Analysis:</strong> Investigate discrepancies and determine whether to change model, system, data, or claim.</li>
+<li><strong>Synthesis:</strong> Conduct a test-support decision review for one critical requirement.</li>
+<li><strong>Stretch:</strong> Build a Bayesian or likelihood-based model-discrepancy update, clearly separating parameter calibration from validation.</li>
+</ul>
+<h3 id="weekly-deliverable-10">Weekly deliverable</h3>
+<p>Submit the model-supported T&amp;E strategy, claim/evidence matrix, virtual test and fault-injection plan, configuration trace, model-to-test discrepancy analysis, evidence limitations, and test-support decision record.</p>
+<h3 id="analytic-rubric-10">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claim/evidence architecture</td>
+<td style="text-align:right">30%</td>
+<td>Model and physical evidence roles are explicit and authorized.</td>
+</tr>
+<tr>
+<td>Configuration and representativeness</td>
+<td style="text-align:right">25%</td>
+<td>System/model versions, scenarios, and environment correspondence are controlled.</td>
+</tr>
+<tr>
+<td>Discrepancy analysis</td>
+<td style="text-align:right">25%</td>
+<td>Differences are investigated without automatic tuning or dismissal.</td>
+</tr>
+<tr>
+<td>Decision boundaries</td>
+<td style="text-align:right">20%</td>
+<td>The recommendation states what model evidence can and cannot support.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-10">Critical failures</h3>
+<ul>
+<li>Simulation silently replaces mandatory physical/operational evidence.</li>
+<li>Model and tested-system configurations cannot be matched.</li>
+<li>Validation data are reused as calibration data without disclosure.</li>
+<li>Discrepancies are removed by tuning with no independent confirmation.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-10">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is model-supported T&amp;E?</strong><br/>
+<em>Answer guidance:</em> Use of models to design, augment, interpret, or—in authorized cases—provide evidence for test and evaluation decisions.</li>
+<li><strong>What is held-out validation?</strong><br/>
+<em>Answer guidance:</em> Evaluation against data not used to calibrate or select the model.</li>
+<li><strong>Why track configuration?</strong><br/>
+<em>Answer guidance:</em> Evidence is valid only for the system, model, parameters, environment, and requirement versions represented.</li>
+<li><strong>What is a hybrid evidence argument?</strong><br/>
+<em>Answer guidance:</em> A claim supported by a transparent combination of test, analysis, simulation, inspection, and judgment.</li>
+<li><strong>When should a discrepancy remain unresolved?</strong><br/>
+<em>Answer guidance:</em> When evidence is insufficient to attribute it; the uncertainty must then limit the claim or trigger more work.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-10">Revision and mastery gate</h3>
+<p>No critical requirement may be marked satisfied by simulation unless the method, model credibility, configuration, and acceptance authority are explicit. Otherwise the result remains supporting or risk-reduction evidence.</p>
+<h3 id="suggested-workload-10">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Evidence planning</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Discrepancy analysis</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>Review/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-10">Configuration and portfolio update</h3>
+<p>Commit source, data, configuration, results, decision records, review comments, and revisions. Update the assumption register, credibility-risk register, traceability, baseline manifest, and personal reflection log before beginning the next week.</p>
+<hr/>
+<h2 id="week-11--plan-and-evaluate-verification-validation-credibility-and-accreditation-for-intended-use">Week 11 — Plan and evaluate verification, validation, credibility, and accreditation for intended use</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 11):</strong> <a href="../../K/B11/chapters/11-plan-and-evaluate-verification-validation-credibility-and-accreditat.html">Chapter 11 — Plan and evaluate verification, validation, credibility, and accreditation for intended use</a> · <a href="../../K/B11/labs/lab-11-plan-and-evaluate-verification-validation-credibility-and-accreditat.html">Hypothetical Lab 11</a> · <a href="../../K/P3-text/lessons/645-757-w11.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C6, C7, C8, C12</p>
+<h3 id="professional-context-and-essential-question-11">Professional context and essential question</h3>
+<p>A model may be correctly implemented yet invalid for the decision, or credible for one use but not another. <strong>Essential question:</strong> What evidence is sufficient for an identified authority to accept this model for this specific use?</p>
+<h3 id="weekly-learning-outcomes-11">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>distinguish conceptual-model validation, data V&amp;V, computational verification, result validation, credibility assessment, and accreditation</li>
+<li>tailor V&amp;V methods and evidence to intended use, consequence, novelty, and uncertainty</li>
+<li>develop V&amp;V and accreditation/use plans and reports</li>
+<li>assess evidence sufficiency, independence, discrepancies, and residual credibility risk</li>
+<li>issue accept, accept-with-limitations, reject, or defer recommendations</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-11">Retrieval and readiness check</h3>
+<ol>
+<li>Can a verified model be invalid? Explain.</li>
+<li>Who accredits a model?</li>
+<li>What does V&amp;V independence mean?</li>
+<li>Why is validation not a binary property of a model?</li>
+</ol>
+<h3 id="required-study-11">Required study</h3>
+<ul>
+<li><strong>NASA-STD-7009B and NASA-HDBK-7009B</strong> — M&amp;S lifecycle, credibility products, assessment, uncertainty, and acceptance. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> What products and evidence support use decisions?</li>
+<li><strong>DoD VV&amp;A RPG and use cases</strong> — user, developer, V&amp;V agent, accreditation agent, tailoring, risk, and referents. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> How should roles and effort scale with consequence?</li>
+<li><strong>MIL-STD-3022</strong> — Accreditation Plan, V&amp;V Plan, V&amp;V Report, and Accreditation Report templates. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> What common information should flow among products?</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-11">Instructor-style lesson notes</h3>
+<p>Verification evaluates implementation against specifications; validation evaluates representation against real-world knowledge for intended use; accreditation is an authority decision that the model is acceptable for a specified use.</p>
+<p>Credibility is supported by evidence across conceptual model, data, implementation, results, uncertainty, history, user qualifications, configuration, and review. It is not a single score unless a governance framework defines one.</p>
+<p>Independence is risk-based. The same person may perform multiple tasks in a low-consequence classroom model, but must still separate developer claims from reviewer evidence and record conflicts.</p>
+<p>Validation uses multiple referents: data, theory, expert judgment, comparative models, experiments, trend and boundary behavior, and operational experience.</p>
+<p>Accreditation should carry scope, configuration, conditions, limitations, expiration/review triggers, and prohibited uses.</p>
+<h3 id="worked-example-11">Worked example</h3>
+<p>The mobility model is verified and matches weekday operations, but no evidence supports emergency-event crowd behavior. The authority accepts it for weekday fleet sizing with limitations and rejects its use for emergency evacuation planning. A separate data and model-development plan is required for that use.</p>
+<h3 id="guided-practice-11">Guided practice</h3>
+<ol>
+<li>Create a V&amp;V technique matrix by credibility risk.</li>
+<li>Evaluate the evidence accumulated in Weeks 1–10 against planned criteria.</li>
+<li>Write acceptability findings for conceptual model, data, computation, results, and uncertainty.</li>
+<li>Draft an accreditation/use statement with conditions and prohibited uses.</li>
+</ol>
+<h3 id="independent-exercises-11">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify 30 evidence items by V&amp;V/credibility role.</li>
+<li><strong>Application:</strong> Complete a tailored V&amp;V Plan and V&amp;V Report.</li>
+<li><strong>Analysis:</strong> Perform an independent credibility-gap assessment and residual-risk review.</li>
+<li><strong>Synthesis:</strong> Conduct the Credibility/Use Review and issue a recommendation.</li>
+<li><strong>Stretch:</strong> Map the course evidence into MIL-STD-3022-style product structures and automate evidence-status reporting.</li>
+</ul>
+<h3 id="weekly-deliverable-11">Weekly deliverable</h3>
+<p>Submit the tailored V&amp;V plan, evidence matrix, V&amp;V report, discrepancy and limitation register, credibility assessment, accreditation/use plan and recommendation, review minutes, and residual-risk acceptance record.</p>
+<h3 id="analytic-rubric-11">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V&amp;V tailoring</td>
+<td style="text-align:right">25%</td>
+<td>Methods and independence match intended use, consequence, uncertainty, and novelty.</td>
+</tr>
+<tr>
+<td>Evidence sufficiency</td>
+<td style="text-align:right">30%</td>
+<td>Conceptual, data, computational, result, and uncertainty evidence are evaluated honestly.</td>
+</tr>
+<tr>
+<td>Accreditation/use statement</td>
+<td style="text-align:right">25%</td>
+<td>Scope, authority, configuration, conditions, limitations, and prohibited uses are precise.</td>
+</tr>
+<tr>
+<td>Residual risk and communication</td>
+<td style="text-align:right">20%</td>
+<td>Gaps, discrepancies, triggers, and user responsibilities are visible.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-11">Critical failures</h3>
+<ul>
+<li>Verification is presented as validation.</li>
+<li>The accreditation authority or intended use is unspecified.</li>
+<li>Known discrepancies or limitations are omitted from the use statement.</li>
+<li>The same data are used for fitting and claimed as independent validation without disclosure.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-11">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Can a model be valid in general?</strong><br/>
+<em>Answer guidance:</em> Validation is always relative to intended use, conditions, resolution, and acceptance criteria.</li>
+<li><strong>What is accreditation?</strong><br/>
+<em>Answer guidance:</em> An authority decision that an M&amp;S and its evidence are acceptable for a specified use.</li>
+<li><strong>What is conceptual-model validation?</strong><br/>
+<em>Answer guidance:</em> Evaluation that the conceptual representation, assumptions, and rules are adequate for intended use.</li>
+<li><strong>Why tailor V&amp;V?</strong><br/>
+<em>Answer guidance:</em> Effort and independence should match decision consequence, uncertainty, novelty, and available evidence.</li>
+<li><strong>What should trigger reaccreditation?</strong><br/>
+<em>Answer guidance:</em> Material changes to use, model, data, system, environment, requirements, evidence, or identified risk.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-11">Revision and mastery gate</h3>
+<p>The final use recommendation must be one of accept, accept with limitations, reject, or defer, and must identify authority, model/configuration, use, conditions, and review triggers.</p>
+<h3 id="suggested-workload-11">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standards study</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Evidence assessment</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>Plans/reports</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>Review/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>12.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-11">Configuration and portfolio update</h3>
+<p>Commit source, data, configuration, results, decision records, review comments, and revisions. Update the assumption register, credibility-risk register, traceability, baseline manifest, and personal reflection log before beginning the next week.</p>
+<hr/>
+<h2 id="week-12--apply-ms-to-production-and-sustainment-survey-advanced-methods-and-defend-the-final-baseline">Week 12 — Apply M&amp;S to production and sustainment, survey advanced methods, and defend the final baseline</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 11):</strong> <a href="../../K/B11/chapters/12-apply-m-s-to-production-and-sustainment-survey-advanced-methods-and-.html">Chapter 12 — Apply M&amp;S to production and sustainment, survey advanced methods, and defend the final baseline</a> · <a href="../../K/B11/labs/lab-12-apply-m-s-to-production-and-sustainment-survey-advanced-methods-and-.html">Hypothetical Lab 12</a> · <a href="../../K/P3-text/lessons/645-757-w12.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C1, C7, C8, C9, C12</p>
+<h3 id="professional-context-and-essential-question-12">Professional context and essential question</h3>
+<p>Models continue to change after a development decision. <strong>Essential question:</strong> How should the model be governed, updated, reused, and retired while preserving credibility and preventing use beyond evidence?</p>
+<h3 id="weekly-learning-outcomes-12">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>apply M&amp;S to production capacity, maintenance, reliability, logistics, training, and sustainment decisions</li>
+<li>define model configuration, update, monitoring, revalidation, reaccreditation, and retirement triggers</li>
+<li>identify when systems dynamics, agent-based, continuous/physical, surrogate, real-time, or federated simulation is needed</li>
+<li>integrate all evidence into a bounded final decision recommendation</li>
+<li>defend and revise the recommendation under new information</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-12">Retrieval and readiness check</h3>
+<ol>
+<li>What can invalidate a previously accredited model?</li>
+<li>How can simulation support sustainment?</li>
+<li>When would systems dynamics be preferable to discrete-event simulation?</li>
+<li>Why retire a model instead of keeping it indefinitely?</li>
+</ol>
+<h3 id="required-study-12">Required study</h3>
+<ul>
+<li><strong>JHU syllabus</strong> — production/sustainment, project presentations, and advanced M&amp;S overview. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Which lifecycle and advanced topics close the source course?</li>
+<li><strong>NASA Systems Engineering Handbook and NASA-HDBK-7009B</strong> — operations, technical assessment, configuration, lifecycle use, and model maintenance. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> What controls preserve credibility after baseline?</li>
+<li><strong>Phase 3 README and downstream course descriptions</strong> — decision science, systems dynamics, metrics/M&amp;S, MBSE analytics, and advanced simulation. <strong>Purpose:</strong> Use the source to support this week's artifact. <strong>Guiding question:</strong> Which unresolved question belongs in which next course?</li>
+</ul>
+<h3 id="instructor-style-lesson-notes-12">Instructor-style lesson notes</h3>
+<p>Production and sustainment simulations address capacity, spares, repair, staffing, reliability growth, availability, supply chains, upgrade timing, and operational policy.</p>
+<p>Model monitoring compares predictions with new observations and identifies drift. Updates require configuration control, regression verification, revalidation, and possibly reaccreditation.</p>
+<p>Use the right next method: feedback and long-term policy for systems dynamics; heterogeneous autonomous actors for agent-based models; physical trajectories and controls for continuous models; fast approximation for surrogates; coupled environments for federations.</p>
+<p>A final recommendation should include decision, evidence, uncertainty, sensitivity, limitations, residual risk, and explicit conditions for change.</p>
+<p>Model retirement is a controlled lifecycle decision when the use ends, evidence becomes obsolete, maintenance cost exceeds value, or a successor replaces it. Archive provenance and results needed for audit.</p>
+<h3 id="worked-example-12">Worked example</h3>
+<p>The pilot fleet is approved at 12 vehicles with four chargers for weekday service, conditional on event-day staffing and additional disruption data. Three months of operations trigger model update because charging duration drifts in winter. The update passes regression verification, requires partial revalidation, and changes the event-service recommendation but not weekday fleet size.</p>
+<h3 id="guided-practice-12">Guided practice</h3>
+<ol>
+<li>Create a sustainment decision backlog and identify required model extensions.</li>
+<li>Define monitoring indicators, update thresholds, and reaccreditation triggers.</li>
+<li>Map unresolved questions to later Phase 3 courses and methods.</li>
+<li>Rehearse the oral defense with a new demand or disruption fact.</li>
+</ol>
+<h3 id="independent-exercises-12">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Match 20 engineering questions to discrete-event, systems dynamics, agent-based, continuous, Monte Carlo, surrogate, or federated methods.</li>
+<li><strong>Application:</strong> Complete the final model package, lifecycle plan, and decision recommendation.</li>
+<li><strong>Analysis:</strong> Perform a final sensitivity and limitation audit and identify the weakest evidence link.</li>
+<li><strong>Synthesis:</strong> Conduct the final M&amp;S Review and oral defense.</li>
+<li><strong>Stretch:</strong> Create a minimal operational data pipeline that compares observed and predicted measures and raises model-drift alerts.</li>
+</ul>
+<h3 id="weekly-deliverable-12">Weekly deliverable</h3>
+<p>Submit the final controlled M&amp;S baseline, production/sustainment application, model lifecycle and retirement plan, update/revalidation triggers, advanced-method handoff, final decision report and briefing, oral-defense record, and complete portfolio manifest.</p>
+<h3 id="analytic-rubric-12">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lifecycle application</td>
+<td style="text-align:right">20%</td>
+<td>Production/sustainment uses and governance are credible and bounded.</td>
+</tr>
+<tr>
+<td>Integrated evidence</td>
+<td style="text-align:right">30%</td>
+<td>Purpose, model, data, verification, experiments, analysis, and V&amp;V form one traceable argument.</td>
+</tr>
+<tr>
+<td>Decision and limitations</td>
+<td style="text-align:right">30%</td>
+<td>Recommendation, uncertainty, sensitivity, conditions, and residual risks are explicit.</td>
+</tr>
+<tr>
+<td>Defense and adaptability</td>
+<td style="text-align:right">20%</td>
+<td>The learner reproduces results and revises judgment appropriately under challenge.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-12">Critical failures</h3>
+<ul>
+<li>The final package cannot reproduce a key result.</li>
+<li>The model is recommended for a prohibited or unsupported use.</li>
+<li>Update and reaccreditation triggers are absent.</li>
+<li>New evidence is ignored to preserve the original recommendation.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-12">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is model drift?</strong><br/>
+<em>Answer guidance:</em> Growing mismatch between model assumptions/parameters and the changing system or environment.</li>
+<li><strong>When is reaccreditation needed?</strong><br/>
+<em>Answer guidance:</em> When changes materially affect the intended use, evidence, risk, configuration, or acceptance conditions.</li>
+<li><strong>Why use a surrogate model?</strong><br/>
+<em>Answer guidance:</em> To approximate expensive model behavior for rapid exploration, while carrying approximation error and scope.</li>
+<li><strong>What should a retirement package preserve?</strong><br/>
+<em>Answer guidance:</em> Versions, provenance, use decisions, limitations, key results, and audit records.</li>
+<li><strong>What is the final responsibility of the analyst?</strong><br/>
+<em>Answer guidance:</em> Communicate what the evidence supports, does not support, and what would change the decision.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-12">Revision and mastery gate</h3>
+<p>The learner must pass the oral defense, reproduce a critical result from source, respond to a changed assumption, and issue a final recommendation with explicit use boundaries and lifecycle controls.</p>
+<h3 id="suggested-workload-12">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and method survey</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>Final integration</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Lifecycle/decision package</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Defense/revision</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>12.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-12">Configuration and portfolio update</h3>
+<p>Commit source, data, configuration, results, decision records, review comments, and revisions. Update the assumption register, credibility-risk register, traceability, baseline manifest, and personal reflection log before beginning the next week.</p>
+<hr/>
+<h2 id="references">References</h2>
+<p><a href="OVERVIEW.html">Back to Phase 3 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+</main></body></html>

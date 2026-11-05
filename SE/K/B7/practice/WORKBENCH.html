@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Interactive engineering workbench · Book 7 · Systems Engineering Learning Library</title><style>
+:root{--ink:#18374b;--teal:#08747a;--line:#d8e4e7;--muted:#617480}*{box-sizing:border-box}body{margin:0;background:#f3f6f7;color:var(--ink);font:16px/1.7 system-ui,Segoe UI,Arial,sans-serif}header{background:#173d51;color:white;padding:20px max(22px,calc((100vw - 1070px)/2))}header a{color:#ccedee}header h1{margin:6px 0;font-size:1.6rem;line-height:1.2}main{max-width:1100px;margin:24px auto;padding:34px 44px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 9px 30px #18374b0b}article h1{font-size:1.65rem}article h2{border-bottom:1px solid #e0e9eb;padding-top:14px;padding-bottom:6px;font-size:1.35rem}article h3{font-size:1.1rem}article p,article li{max-width:85ch}article table{border-collapse:collapse;width:100%;font-size:.94rem}article th,article td{border:1px solid var(--line);padding:9px;text-align:left}article th{background:#edf6f5}pre{overflow-x:auto;background:#142e40;color:#f0f5f7;padding:17px;border-radius:9px}pre code{color:inherit}code{font-size:.91em}p code,li code{background:#eaf1f2;padding:2px 4px}a{color:var(--teal)}a:hover{text-decoration-thickness:2px}details{background:#f1f7f6;border-left:3px solid #65a5a3;border-radius:7px;padding:8px 15px;margin:12px 0}summary{cursor:pointer;font-weight:650}.links{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.links a{display:inline-block;padding:7px 12px;border:1px solid #a6ceca;border-radius:8px;background:#e6f4f1;text-decoration:none;font-weight:600}.note{background:#edf7f6;padding:15px;border-left:4px solid #318a86;border-radius:8px}img,svg{max-width:100%}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}button,input{font:inherit}button{cursor:pointer} .workbench{background:#eef7f6;padding:20px;border-radius:12px;border:1px solid #c4e1dd}.ctrl{margin:15px 0}.ctrl label{display:block;font-weight:600}.ctrl input{width:100%}.output{font-size:1.4rem;font-weight:800;line-height:1.25} @media(max-width:650px){main{padding:19px;margin:10px}}
+</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B7/practice/WORKBENCH.html" data-se-mode="standard"></script>
+</head><body><header><div>Systems Engineering · Advanced Book Practice</div><h1>Interactive engineering workbench · Book 7</h1><a href="../OPEN-BOOK.html">Back to book</a> · <a href="INDEX.html">Advanced practice</a></header><main><article><div class="workbench"><p>Critical-path times are deterministic examples. Shared outage is a simplified independent gate, not an observed field probability.</p><div class="ctrl"><label for="route_delay_ms">Route Delay Ms: <output id="o_route_delay_ms">200</output></label><input aria-label="route delay ms" id="route_delay_ms" type="range" min="80" max="350" step="10" value="200"></div><div class="ctrl"><label for="shared_outage_probability">Shared Outage Probability: <output id="o_shared_outage_probability">0.01</output></label><input aria-label="shared outage probability" id="shared_outage_probability" type="range" min="0" max="0.1" step="0.005" value="0.01"></div><p id="result" class="output" aria-live="polite"></p></div><h2>Runnable Python source</h2><div class="links"><a href="book7.py" download>Download Python</a><a href="book7.ipynb" download>Download Jupyter notebook</a><a href="book7-interfaces.csv" download>Download CSV</a></div><pre><code class="language-python">&quot;&quot;&quot;Independent teaching model — synthetic inputs and simplified assumptions.&quot;&quot;&quot;
+from math import exp, log
+
+def latency_path(serial, parallel, end, retry=0):
+    if min(*serial, *parallel, end, retry) &lt; 0:
+        raise ValueError(&#x27;domain&#x27;)
+    return sum(serial) + max(parallel) + end + retry
+
+def series_availability(values):
+    out = 1
+    for v in values:
+        if v &lt; 0 or v &gt; 1:
+            raise ValueError(&#x27;domain&#x27;)
+        out *= v
+    return out
+
+def parallel_availability(a, common_cause=0):
+    if not 0 &lt;= a &lt;= 1 or not 0 &lt;= common_cause &lt;= 1:
+        raise ValueError(&#x27;domain&#x27;)
+    return (1 - common_cause) * (1 - (1 - a) ** 2)
+
+if __name__ == &#x27;__main__&#x27;:
+    print(&#x27;latency (ms)&#x27;,latency_path([120],[200,150],80)); print(&#x27;series&#x27;,series_availability([.99,.98,.995])); print(&#x27;parallel common cause&#x27;,parallel_availability(.98,.01))
+</code></pre><script>function v(id){return document.getElementById(id).value}function show(x){document.getElementById("result").textContent=x}function update(){document.querySelectorAll(".ctrl input").forEach(x=>document.getElementById("o_"+x.id).textContent=x.value);let d=+v('route_delay_ms'),c=+v('shared_outage_probability');let latency=120+Math.max(d,150)+80;let avail=(1-c)*(1-Math.pow(1-.98,2));show('End-to-end scenario: '+latency+' ms · Redundant-function availability under common cause: '+(100*avail).toFixed(3)+'%');}document.querySelectorAll(".ctrl input").forEach(x=>x.addEventListener("input",update));update();</script></article></main></body></html>

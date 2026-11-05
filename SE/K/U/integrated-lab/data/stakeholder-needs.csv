@@ -1,0 +1,4 @@
+need_id,stakeholder,need_statement,context,measure_of_effectiveness,limitation
+NEED-01,Passenger representative,Access to a scheduled synthetic mobility service,Three fictional stops,Served fraction and p90 waiting time,Not a measure of real accessibility
+NEED-02,Dispatcher,Assignments should not conflict and degraded service should be visible,Teaching operations day,Conflict count and scenario comparison,No radio or fleet interfaces
+NEED-03,Assurance reviewer,Every central claim should be traceable to evidence,Preliminary prototype review,Trace graph coverage and evidence provenance,Link presence is not evidence sufficiency

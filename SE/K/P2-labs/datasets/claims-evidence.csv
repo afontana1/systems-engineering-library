@@ -1,0 +1,3 @@
+claim_id,requirement,decision_threshold,model_or_article_rev,test_id,status,limitation
+C-01,REQ-LAT-01,p95 <= 2s,BUILD-2,T-001,insufficient,one normal fixture
+C-02,REQ-ACC-04,p95 <= 15min,BUILD-2,T-003,open,one event case

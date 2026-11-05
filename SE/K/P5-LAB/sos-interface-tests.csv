@@ -1,0 +1,4 @@
+interface,producer,consumer,timeliness_seconds,meaning,result,revision
+priority-request,EMS,Rail,20,clinical-priority-v1,unverified,r1
+accessible-space,Paratransit,Dispatch,60,available-wheelchair-spaces,pass,r2
+intake-open,Hospital intake,Dispatch,30,intake-status-v2,stale,r1

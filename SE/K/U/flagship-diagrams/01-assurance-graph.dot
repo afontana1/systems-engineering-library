@@ -1,0 +1,7 @@
+digraph Assurance {
+ rankdir=LR; bgcolor="transparent"; graph [fontname="DejaVu Sans" pad=.25, nodesep=.35, ranksep=.55];
+ node [shape=box,style="rounded,filled", fillcolor="#e6f3f3",color="#477c86",fontname="DejaVu Sans",fontsize=10];
+ edge [color="#607b89",fontname="DejaVu Sans",fontsize=9];
+ need [label="Mission / stakeholder need"]; domain [label="Operating domain"]; req [label="Measurable requirement"]; arch [label="Architecture allocation"]; test [label="Planned verification"]; evidence [label="Configuration-specific result"]; claim [label="Bounded assurance claim",fillcolor="#f7eedf"];
+ need->req; domain->req [label="constrains"]; req->arch; req->test; arch->test [label="implemented by"]; test->evidence; evidence->claim; domain->claim;
+}

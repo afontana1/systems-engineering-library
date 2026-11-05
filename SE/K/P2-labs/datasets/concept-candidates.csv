@@ -1,0 +1,5 @@
+candidate,fleet_mode,dispatch,stop_model,accessible,feasible,source_revision
+A,automated,cloud,door-to-door,yes,conditional,C1
+B,staffed,edge,fixed-hubs,yes,yes,C1
+C,mixed,hybrid,door-to-door,yes,conditional,C1
+D,automated,cloud,fixed-hubs,no,no,C1

@@ -1,0 +1,2578 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.767 — System Conceptual Design · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P2/EN645767.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/01-boundaries.html">System boundaries, outcomes, and emergence</a> · <a href="../../K/T/03-architecture.html">Architecture, interfaces, and design tradeoffs</a> · <a href="../../K/T/08-dynamics.html">Stocks, feedback, controls, and numerical stability</a> · <a href="../../K/T/10-decisions.html">Multiobjective decisions, Pareto tradeoffs, and information value</a></aside><main><div class="course-actions"><a href="../../K/B6/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en645767--system-conceptual-design">EN.645.767 — System Conceptual Design</h1>
+<p><strong>Credits:</strong> 3<br/>
+<strong>Recommended self-study duration:</strong> 12 weeks<br/>
+<strong>Nominal effort:</strong> 10–13 hours per week<br/>
+<strong>Primary phase:</strong> Phase 2 — Core systems-development lifecycle<br/>
+<strong>Primary program competencies:</strong> C1, C2, C3, C4, C7, C8, C9, C10, C12</p>
+<h2 id="1-course-purpose-and-professional-context">1. Course purpose and professional context</h2>
+<p>Conceptual design is the point at which a program decides what problem it is actually solving, what outcomes matter, which alternatives deserve serious investment, and what evidence is strong enough to justify commitment. Weak conceptual work creates downstream requirements churn, fragile architectures, unaffordable designs, and verification problems that no amount of detailed engineering can fully repair.</p>
+<p>This course develops the systems engineer's ability to move from an ambiguous problem situation to a defensible concept baseline. The learner will investigate stakeholders and the current operational system, define a desired end state, construct operational scenarios and a logical architecture, generate genuinely different concept families, model performance and resource constraints, compare alternatives under uncertainty, manage conceptual risk, formulate an initial requirements baseline, and defend a recommended concept in a formal review.</p>
+<p>The course emphasizes disciplined divergence before convergence. Earlier program work on the Autonomous Campus Shuttle is treated as evidence about an incumbent concept, not as the answer. The learner must reopen the problem, identify hidden solution assumptions, consider non-autonomous and low-technology alternatives, and demonstrate that the recommended concept remains attractive when costs, schedules, values, and uncertain assumptions change.</p>
+<h2 id="2-source-description-and-self-study-scope">2. Source description and self-study scope</h2>
+<p>The current Johns Hopkins course description places the systems engineer in the conceptual phases of development and follows a progression from needs and objectives through alternatives and concept selection. The 2026 abridged syllabus includes stakeholder analysis, current and future behavior and structure, needs prioritization, operational scenarios, requirements, use cases, gap analysis, design of experiments, functional and physical allocation, interface analysis, AHP/ROC/MAUT-style decision methods, resource and cost analysis, linear programming, risk, and a continuing project. <a href="https://ep.jhu.edu/courses/645767-system-conceptual-design/" title="JHU Engineering for Professionals — System Conceptual Design">JHU-767-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.767.83" title="JHU Fall 2026 abridged syllabus — EN.645.767 System Conceptual Design">JHU-767-SYLLABUS</a></p>
+<p>This self-study version preserves that breadth while making six adaptations:</p>
+<ol>
+<li>the team project becomes a controlled multi-role exercise with optional peer review and mandatory solo red-team passes;</li>
+<li>commercial modeling software is optional; SysML, UML, spreadsheets, notebooks, and reproducible text-based models are all acceptable;</li>
+<li>the earlier shuttle baseline is deliberately challenged rather than accepted as a fixed solution;</li>
+<li>every decision model must expose data sources, normalization, weights, uncertainty, and sensitivity;</li>
+<li>rough models are used to learn and screen, not to manufacture false precision;</li>
+<li>the final concept package must be suitable for handoff to EN.645.768 System Design &amp; Integration.</li>
+</ol>
+<p>The course is not a detailed-design course. Component sizing, production drawings, detailed software design, formal qualification planning, and full test execution belong later. The expected output is a credible conceptual baseline with enough operational, functional, physical, performance, affordability, schedule, risk, and traceability evidence to support a responsible decision to proceed.</p>
+<h2 id="3-relationship-to-the-curriculum">3. Relationship to the curriculum</h2>
+<h3 id="imports-from-earlier-courses">Imports from earlier courses</h3>
+<p>The learner should reuse and critically inspect:</p>
+<ul>
+<li>the Phase 0 mission framing, stakeholder map, ConOps, requirements, risks, plans, and configuration practices;</li>
+<li>the EN.645.631 model repository, viewpoints, requirements, logical and physical architecture, allocations, queries, and change-impact evidence;</li>
+<li>the EN.605.704 software-domain and design artifacts where they illuminate behavior, state, information, and responsibility;</li>
+<li>the EN.645.764 software feasibility, architecture, quality, dependability, interface, and operations evidence;</li>
+<li>the EN.645.667 cost, schedule, risk, review, governance, and baseline-control practices.</li>
+</ul>
+<p>Imported artifacts are evidence, not authority. Any artifact that embeds a specific shuttle solution must be tagged as an <strong>incumbent assumption</strong> until revalidated.</p>
+<h3 id="new-contribution-of-this-course">New contribution of this course</h3>
+<p>This course produces:</p>
+<ul>
+<li>a neutral problem and opportunity statement;</li>
+<li>a structured stakeholder-interview and needs-evidence package;</li>
+<li>current-state and desired-end-state operational models;</li>
+<li>a concept-level ConOps and scenario set;</li>
+<li>an objectives hierarchy with MOEs, MOPs, TPM candidates, value functions, and thresholds;</li>
+<li>a logical or functional architecture with timing and interface analysis;</li>
+<li>four or more distinct physical concept families;</li>
+<li>resource, affordability, schedule, feasibility, and risk models;</li>
+<li>a transparent multiobjective decision model with uncertainty and sensitivity analysis;</li>
+<li>an initial conceptual requirements baseline;</li>
+<li>a recommended concept and retained alternatives;</li>
+<li>a controlled handoff package for detailed design and integration.</li>
+</ul>
+<h3 id="prepares-for">Prepares for</h3>
+<ul>
+<li>EN.645.768 System Design &amp; Integration, which will mature the selected concept into a design baseline, controlled interfaces, integration strategy, and technical-review evidence;</li>
+<li>EN.645.769 System Test &amp; Evaluation, which will turn conceptual success criteria and verification logic into a rigorous T&amp;E program;</li>
+<li>Phase 3 quantitative courses, which will deepen the models, statistics, simulation, and decision methods introduced here.</li>
+</ul>
+<h2 id="4-prerequisites-and-readiness-assessment">4. Prerequisites and readiness assessment</h2>
+<h3 id="required-prior-competencies">Required prior competencies</h3>
+<p>Before Week 1, the learner should be able to:</p>
+<ul>
+<li>define a system boundary, lifecycle, mission, stakeholders, and operational context;</li>
+<li>distinguish stakeholder needs, system requirements, functions, logical elements, physical elements, interfaces, risks, and verification evidence;</li>
+<li>build and query a basic model repository or equivalent structured artifact set;</li>
+<li>formulate testable requirements and trace them to scenarios, architecture, and verification methods;</li>
+<li>create a basic schedule, rough cost estimate, risk register, and technical decision record;</li>
+<li>use spreadsheets and either Python or another quantitative tool for calculations and plots;</li>
+<li>read basic probability distributions, summary statistics, and sensitivity plots;</li>
+<li>conduct a structured technical review and revise a baseline under configuration control.</li>
+</ul>
+<h3 id="recommended-preparation">Recommended preparation</h3>
+<p>Complete EN.645.662, EN.645.667, EN.645.631, EN.605.704, and EN.645.764. Learners with equivalent professional experience may enter after passing the diagnostic.</p>
+<h3 id="readiness-diagnostic--120-minutes">Readiness diagnostic — 120 minutes</h3>
+<p><strong>Part A — conceptual reasoning</strong></p>
+<p>Answer without references:</p>
+<ol>
+<li>Why is “build an autonomous shuttle” not a neutral problem statement?</li>
+<li>Distinguish a stakeholder need, an objective, a measure of effectiveness, and a system requirement.</li>
+<li>Why should a functional architecture be developed before selecting physical components?</li>
+<li>What evidence would show that two concepts are genuinely different rather than cosmetic variants?</li>
+<li>Why can a weighted score be mathematically correct but decision-theoretically misleading?</li>
+<li>What is the difference between uncertainty, variability, assumption risk, and implementation risk?</li>
+<li>How can an interface or operational timeline expose missing functions?</li>
+<li>Why should affordability include operations and support rather than acquisition cost alone?</li>
+<li>What does it mean for a requirement to be concept-dependent?</li>
+<li>When should a concept be retained as a hedge even if it is not currently preferred?</li>
+</ol>
+<p><strong>Part B — artifact audit</strong></p>
+<p>Given a short incumbent shuttle concept package:</p>
+<ul>
+<li>identify five embedded solution assumptions;</li>
+<li>find two stakeholder groups whose evidence is missing;</li>
+<li>identify one need expressed as a design;</li>
+<li>find one objective with no meaningful measure;</li>
+<li>identify one trade-study criterion that double-counts another;</li>
+<li>identify one requirement that cannot be verified as written.</li>
+</ul>
+<p><strong>Part C — quantitative task</strong></p>
+<p>Using a supplied table of three concepts and four criteria:</p>
+<ul>
+<li>normalize the values;</li>
+<li>compute a weighted result;</li>
+<li>vary the two largest weights;</li>
+<li>identify the decision boundary at which the preferred concept changes;</li>
+<li>explain why the result is or is not robust.</li>
+</ul>
+<h3 id="passing-standard-and-recovery-path">Passing standard and recovery path</h3>
+<p>A passing result requires at least seven substantially correct conceptual answers, identification of at least four material incumbent assumptions, and a sensitivity analysis that correctly identifies a decision boundary. Learners below the standard should complete a one-week bridge covering neutral problem framing, requirements and functions, spreadsheet modeling, normalization, weighted value models, sensitivity analysis, and risk terminology.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<p>By the end of the course, the learner will be able to:</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Measurable course learning outcome</th>
+<th>Program competency</th>
+<th style="text-align:center">Level</th>
+<th>Primary evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLO-1</td>
+<td>Frame a solution-neutral problem, current state, desired end state, mission boundary, and conceptual-design study plan</td>
+<td>C1, C2, C10</td>
+<td style="text-align:center">D/A</td>
+<td>Problem-definition package</td>
+</tr>
+<tr>
+<td>CLO-2</td>
+<td>Plan, conduct, and analyze stakeholder interviews and other evidence to derive, prioritize, and reconcile needs</td>
+<td>C1, C2, C12</td>
+<td style="text-align:center">D/A</td>
+<td>Interview and needs-evidence package</td>
+</tr>
+<tr>
+<td>CLO-3</td>
+<td>Construct a ConOps, context, use cases, mission threads, and nominal/degraded/emergency scenarios that expose operational success and failure</td>
+<td>C1, C2, C3</td>
+<td style="text-align:center">A</td>
+<td>Operational baseline</td>
+</tr>
+<tr>
+<td>CLO-4</td>
+<td>Formulate a conceptual requirements baseline with traceability, quality checks, assumptions, and planned verification logic</td>
+<td>C2, C4, C6</td>
+<td style="text-align:center">D/A</td>
+<td>Concept requirements baseline</td>
+</tr>
+<tr>
+<td>CLO-5</td>
+<td>Construct and evaluate a logical or functional architecture, including functions, flows, states, timing, allocations, interfaces, and contribution to mission outcomes</td>
+<td>C2, C3, C4</td>
+<td style="text-align:center">A</td>
+<td>Functional Architecture Review</td>
+</tr>
+<tr>
+<td>CLO-6</td>
+<td>Generate diverse physical concept families using morphological and set-based methods without premature convergence</td>
+<td>C3, C8, C9</td>
+<td style="text-align:center">A</td>
+<td>Concept-family portfolio</td>
+</tr>
+<tr>
+<td>CLO-7</td>
+<td>Develop an objectives hierarchy and defensible MOEs, MOPs, TPM candidates, thresholds, value functions, and mission calculations</td>
+<td>C2, C7, C9</td>
+<td style="text-align:center">A</td>
+<td>Evaluation framework</td>
+</tr>
+<tr>
+<td>CLO-8</td>
+<td>Build bounded models of performance, resources, cost, schedule, and feasibility and explain their assumptions and limitations</td>
+<td>C7, C8, C9</td>
+<td style="text-align:center">D/A</td>
+<td>Analytic model package</td>
+</tr>
+<tr>
+<td>CLO-9</td>
+<td>Compare alternatives using screening, AHP/ROC/MAUT-style methods, Pareto reasoning, uncertainty, sensitivity, and scenario analysis</td>
+<td>C7, C8, C9, C12</td>
+<td style="text-align:center">A</td>
+<td>Decision-analysis package</td>
+</tr>
+<tr>
+<td>CLO-10</td>
+<td>Identify, assess, mitigate, and communicate technical, operational, cost, schedule, integration, regulatory, and adoption risks at concept level</td>
+<td>C9, C10</td>
+<td style="text-align:center">A</td>
+<td>Concept risk and opportunity package</td>
+</tr>
+<tr>
+<td>CLO-11</td>
+<td>Integrate operational, functional, physical, quantitative, affordability, schedule, risk, and traceability evidence into a concept-validation argument</td>
+<td>C1–C4, C7–C10</td>
+<td style="text-align:center">A</td>
+<td>Concept Validation Review</td>
+</tr>
+<tr>
+<td>CLO-12</td>
+<td>Baseline and defend a recommended concept, retained alternatives, unresolved assumptions, and a disciplined handoff to detailed design</td>
+<td>C3, C4, C10, C12</td>
+<td style="text-align:center">A</td>
+<td>Final concept baseline and oral defense</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>What problem exists independent of the solution currently favored?</li>
+<li>What evidence distinguishes a need from a preference, complaint, or proposed design?</li>
+<li>How should desired operational outcomes be translated into functions without embedding implementation?</li>
+<li>Which measures actually represent mission success, and which merely measure convenient subsystem behavior?</li>
+<li>How much concept diversity is enough before down-select?</li>
+<li>When is a simple model decision-useful, and when is it misleading?</li>
+<li>How should affordability, schedule, risk, resilience, accessibility, privacy, and environmental consequences enter a concept decision?</li>
+<li>How robust must a preferred concept be to changes in assumptions and stakeholder values?</li>
+<li>What should remain unresolved at conceptual design, and what must be resolved before commitment?</li>
+<li>What evidence is sufficient to hand a concept to detailed design without pretending that uncertainty has disappeared?</li>
+</ul>
+<h2 id="7-running-case-and-study-rules">7. Running case and study rules</h2>
+<h3 id="case--autonomous-campus-mobility-2030-concept-recompetition">Case — Autonomous Campus Mobility 2030: Concept Recompetition</h3>
+<p>The sponsor has reopened the campus mobility problem after concerns that the incumbent autonomous-shuttle concept may be too expensive, too infrastructure-dependent, and insufficiently responsive to accessibility and construction-disruption needs. The learner must conduct a fresh conceptual-design study.</p>
+<h3 id="fictional-study-constraints">Fictional study constraints</h3>
+<p>The following are course data, not external facts:</p>
+<ul>
+<li>desired pilot launch is within 30 months;</li>
+<li>development and initial deployment affordability target is no more than $18 million;</li>
+<li>steady-state operating target is no more than $4 million per year;</li>
+<li>service is expected from 06:00 to 22:00;</li>
+<li>available charging capacity is 1.2 MW unless the concept includes an infrastructure upgrade;</li>
+<li>all public service must be accessible; a separate reservation-only accessibility service is unacceptable;</li>
+<li>no concept may assume a fully dedicated right-of-way across the entire campus;</li>
+<li>peak staffing should not exceed two dispatchers per shift without explicit sponsor approval;</li>
+<li>operations must address rain, heat, low visibility, construction detours, mixed traffic, and major events;</li>
+<li>raw personally identifiable trip data may be retained only as long as operationally and legally necessary;</li>
+<li>expansion to a partner campus should be considered, but is not a mandatory first-pilot capability.</li>
+</ul>
+<h3 id="required-concept-diversity">Required concept diversity</h3>
+<p>The final study must retain at least four concept families through initial screening. At least one must be low-automation or non-autonomous. Candidate families may include:</p>
+<ul>
+<li>demand-responsive autonomous shuttles;</li>
+<li>human-driven accessible microtransit with advanced dispatch;</li>
+<li>fixed-route electric circulators with mobility hubs;</li>
+<li>mixed fleet with autonomous operation only in bounded zones;</li>
+<li>partnership with existing transit plus first/last-mile services;</li>
+<li>a phased hybrid that changes architecture over time.</li>
+</ul>
+<p>Concepts that differ only in vendor, vehicle brand, or minor component selection do not count as separate families.</p>
+<h3 id="multi-role-self-study-protocol">Multi-role self-study protocol</h3>
+<p>For major reviews, the learner must perform four passes:</p>
+<ol>
+<li><strong>Sponsor/mission owner:</strong> asks whether outcomes and affordability are credible.</li>
+<li><strong>Operator and maintainer:</strong> challenges staffing, degraded operations, support, and workload.</li>
+<li><strong>Chief engineer:</strong> checks architecture, interfaces, evidence, and technical risk.</li>
+<li><strong>Independent red team:</strong> looks for framing bias, double counting, hidden assumptions, and false precision.</li>
+</ol>
+<p>Optional peer review is encouraged, but each role pass must be recorded even when working in a group.</p>
+<h3 id="baseline-and-repository-conventions">Baseline and repository conventions</h3>
+<p>Maintain:</p>
+<ul>
+<li><code>/00-governance</code></li>
+<li><code>/01-problem-and-evidence</code></li>
+<li><code>/02-operations-and-needs</code></li>
+<li><code>/03-requirements</code></li>
+<li><code>/04-functional-architecture</code></li>
+<li><code>/05-concepts</code></li>
+<li><code>/06-analysis</code></li>
+<li><code>/07-decisions-and-risk</code></li>
+<li><code>/08-reviews</code></li>
+<li><code>/09-handoff</code></li>
+</ul>
+<p>Every major artifact should include an identifier, version, date, owner/role, assumptions, source or rationale, status, and change note. Models and calculations must have reproducible source files, not screenshots alone.</p>
+<h2 id="8-resource-architecture">8. Resource architecture</h2>
+<h3 id="required-backbone">Required backbone</h3>
+<ol>
+<li><strong>JHU course description and 2026 syllabus</strong> — source scope, topic sequence, tool expectations, and project emphasis. <a href="https://ep.jhu.edu/courses/645767-system-conceptual-design/" title="JHU Engineering for Professionals — System Conceptual Design">JHU-767-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.767.83" title="JHU Fall 2026 abridged syllabus — EN.645.767 System Conceptual Design">JHU-767-SYLLABUS</a></li>
+<li><strong>NASA Systems Engineering Handbook and online process pages</strong> — stakeholder expectations, requirements, logical decomposition, design solution, decision analysis, risk, assessment, and ConOps. <a href="https://www.nasa.gov/wp-content/uploads/2018/09/nasa_systems_engineering_handbook_0.pdf" title="NASA Systems Engineering Handbook">NASA-SEH</a> <a href="https://www.nasa.gov/reference/4-0-system-design-processes/" title="NASA — System Design Processes">NASA-SYSTEM-DESIGN</a> <a href="https://www.nasa.gov/reference/4-2-technical-requirements-definition/" title="NASA — Technical Requirements Definition">NASA-REQ</a> <a href="https://www.nasa.gov/reference/4-3-logical-decomposition/" title="NASA — Logical Decomposition">NASA-LOGICAL</a> <a href="https://www.nasa.gov/reference/4-4-design-solution-definition/" title="NASA — Design Solution Definition">NASA-DESIGN-SOLUTION</a> <a href="https://www.nasa.gov/reference/6-8-decision-analysis/" title="NASA — Decision Analysis">NASA-DECISION</a> <a href="https://www.nasa.gov/reference/6-4-technical-risk-management/" title="NASA — Technical Risk Management">NASA-RISK</a> <a href="https://www.nasa.gov/reference/6-7-technical-assessment/" title="NASA — Technical Assessment">NASA-ASSESS</a> <a href="https://www.nasa.gov/reference/appendix-s-concept-of-operations-annotated-outline/" title="NASA — Concept of Operations Annotated Outline">NASA-CONOPS</a></li>
+<li><strong>MIT OCW 16.842 Fundamentals of Systems Engineering</strong> — stakeholder analysis, requirements, architecture, concept generation, trade-space exploration, and concept selection. <a href="https://ocw.mit.edu/courses/16-842-fundamentals-of-systems-engineering-fall-2015/pages/lecture-notes/" title="MIT OCW 16.842 Fundamentals of Systems Engineering — Lecture Notes">MIT-16842</a></li>
+<li><strong>Buede and Miller companion material</strong> — source-course conceptual-design methods and exercises. <a href="https://bcs.wiley.com/he-bcs/Books?action=contents&amp;bcsId=10076&amp;itemId=111902790X" title="Wiley companion site — The Engineering Design of Systems">BUEDE-COMPANION</a></li>
+</ol>
+<h3 id="quantitative-and-decision-support">Quantitative and decision support</h3>
+<ul>
+<li>NIST/SEMATECH Engineering Statistics Handbook material on experimental design and process modeling. <a href="https://www.itl.nist.gov/div898/handbook/pri/pri.htm" title="NIST/SEMATECH Engineering Statistics Handbook — Process Improvement and Experimental Design">NIST-DOE</a></li>
+<li>GAO Cost Estimating and Assessment Guide for characteristics of credible estimates and uncertainty-aware cost work. <a href="https://www.gao.gov/products/gao-20-195g" title="GAO Cost Estimating and Assessment Guide">GAO-COST</a></li>
+<li>SEBoK System Analysis and Analysis and Selection between Alternative Solutions. <a href="https://sebokwiki.org/wiki/System_Analysis" title="SEBoK — System Analysis">SEBOK-SYSTEM-ANALYSIS</a> <a href="https://sebokwiki.org/wiki/Analysis_and_Selection_between_Alternative_Solutions" title="SEBoK — Analysis and Selection between Alternative Solutions">SEBOK-ALTERNATIVES</a></li>
+</ul>
+<h3 id="requirements-and-professional-practice">Requirements and professional practice</h3>
+<ul>
+<li>INCOSE Guide for Writing Requirements and related requirements resources. <a href="https://www.incose.org/communities/working-groups-initiatives/requirements" title="INCOSE Requirements Working Group and requirements resources">INCOSE-REQUIREMENTS</a></li>
+<li>NASA Appendix S annotated ConOps outline for organizing operational content. <a href="https://www.nasa.gov/reference/appendix-s-concept-of-operations-annotated-outline/" title="NASA — Concept of Operations Annotated Outline">NASA-CONOPS</a></li>
+</ul>
+<h3 id="resource-use-rule">Resource-use rule</h3>
+<p>Every required reading assignment below identifies its purpose. Do not read an entire handbook indiscriminately. Extract definitions, process logic, inputs, outputs, common errors, and evidence expectations needed for the week's work.</p>
+<h2 id="9-tools-and-working-environment">9. Tools and working environment</h2>
+<h3 id="required-capabilities">Required capabilities</h3>
+<ul>
+<li>spreadsheet with formulas, charts, scenario tables, and solver or optimization capability;</li>
+<li>Python, R, Julia, MATLAB, or equivalent for reproducible calculations and plots;</li>
+<li>diagram/model tool for context, activity, state, block, sequence, timeline, and interface views;</li>
+<li>version control;</li>
+<li>Markdown or document tool for reports and reviews;</li>
+<li>slide tool for review packages.</li>
+</ul>
+<h3 id="optional-tools">Optional tools</h3>
+<ul>
+<li>SysML v2 pilot or SysML v1.x modeling environment;</li>
+<li>CATIA Magic/Cameo if available, matching the source syllabus;</li>
+<li>notebook environment;</li>
+<li>requirements or decision-management tool;</li>
+<li>Monte Carlo or optimization package.</li>
+</ul>
+<h3 id="tool-neutral-evidence-rule">Tool-neutral evidence rule</h3>
+<p>A result is acceptable only if another learner can inspect the inputs, method, assumptions, and output. A proprietary screenshot without editable source, calculation logic, or exported data is not sufficient evidence.</p>
+<h2 id="10-assessment-and-grading-model">10. Assessment and grading model</h2>
+<table>
+<thead>
+<tr>
+<th>Assessment component</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weekly knowledge checks and retrieval work</td>
+<td style="text-align:right">8%</td>
+</tr>
+<tr>
+<td>Stakeholder, operations, and needs baseline</td>
+<td style="text-align:right">12%</td>
+</tr>
+<tr>
+<td>Conceptual requirements and traceability</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Functional architecture and interface analysis</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Concept-family generation and screening</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Quantitative models: performance, resources, cost, and schedule</td>
+<td style="text-align:right">12%</td>
+</tr>
+<tr>
+<td>Multiobjective decision analysis, uncertainty, and sensitivity</td>
+<td style="text-align:right">13%</td>
+</tr>
+<tr>
+<td>Risk, opportunity, and concept-validation package</td>
+<td style="text-align:right">8%</td>
+</tr>
+<tr>
+<td>Final concept baseline, review, and oral defense</td>
+<td style="text-align:right">12%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="review-gates">Review gates</h3>
+<ul>
+<li><strong>Week 3 — Problem Definition Review (PDefR):</strong> approves the study frame, evidence plan, desired end state, and initial success measures.</li>
+<li><strong>Week 6 — Functional Architecture Review (FAR):</strong> determines whether scenarios, functions, flows, timing, interfaces, and traceability are sufficient to generate concepts.</li>
+<li><strong>Week 10 — Down-select Review (DSR):</strong> challenges screening, values, models, uncertainty, and sensitivity before a preferred concept is named.</li>
+<li><strong>Week 11 — Concept Validation Review (CVR):</strong> asks whether the preferred concept is operationally credible, affordable, timely, risk-informed, and supported by traceable evidence.</li>
+<li><strong>Week 12 — Concept Baseline Review and oral defense:</strong> authorizes handoff, conditional handoff, or rework.</li>
+</ul>
+<p>A review is not passed because slides were delivered. Exit criteria, open actions, waivers, dissent, and baseline changes must be recorded.</p>
+<h2 id="11-twelve-week-course-map">11. Twelve-week course map</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Week</th>
+<th>Focus</th>
+<th>Primary output</th>
+<th>Review or mastery event</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Reopen the problem and audit the incumbent baseline</td>
+<td>Neutral study charter and assumption audit</td>
+<td>Framing mastery gate</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>Stakeholder evidence and current-state analysis</td>
+<td>Interview/evidence package and current-state model</td>
+<td>Evidence-quality check</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>Desired end state, needs, ConOps, scenarios, and mission calculator v0.1</td>
+<td>Operational baseline</td>
+<td>Problem Definition Review</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>Conceptual requirements, use cases, gaps, and experiment plan</td>
+<td>Requirements and analytic-question baseline</td>
+<td>Requirements audit</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>Functional architecture and mission-to-function traceability</td>
+<td>Functional baseline v0.8</td>
+<td>Coverage query</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>Timing, N2/interfaces, allocations, and contribution analysis</td>
+<td>Functional baseline v1.0</td>
+<td>Functional Architecture Review</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>Physical concept families and set-based generation</td>
+<td>Four-or-more concept families</td>
+<td>Diversity gate</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>Resource, cost, schedule, feasibility, and optimization models</td>
+<td>Feasibility model package</td>
+<td>Model-quality audit</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Objectives, value functions, AHP/ROC/MAUT-style evaluation</td>
+<td>Decision model v1.0</td>
+<td>Value-model red team</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>DOE, parametric analysis, uncertainty, sensitivity, and Pareto reasoning</td>
+<td>Robust down-select package</td>
+<td>Down-select Review</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>Risk, opportunity, affordability, schedule, and concept validation</td>
+<td>Preferred concept baseline candidate</td>
+<td>Concept Validation Review</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>Final baseline, oral defense, and handoff</td>
+<td>Controlled conceptual-design baseline</td>
+<td>Final review and handoff</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-major-assignments-and-review-products">12. Major assignments and review products</h2>
+<h3 id="a-problem-and-evidence-package">A. Problem and evidence package</h3>
+<p>Must include:</p>
+<ul>
+<li>neutral problem statement and opportunity statement;</li>
+<li>incumbent-assumption register;</li>
+<li>study boundary, exclusions, decision authority, and decision date;</li>
+<li>stakeholder map and evidence plan;</li>
+<li>current-state operational model;</li>
+<li>desired-end-state hypotheses;</li>
+<li>source-quality and disagreement log.</li>
+</ul>
+<h3 id="b-operational-and-needs-baseline">B. Operational and needs baseline</h3>
+<p>Must include:</p>
+<ul>
+<li>interview protocols and anonymized evidence summaries;</li>
+<li>stakeholder needs with source, priority, conflict, and confidence;</li>
+<li>context and external-system model;</li>
+<li>ConOps;</li>
+<li>nominal, degraded, emergency, maintenance, and transition scenarios;</li>
+<li>mission success and failure statements;</li>
+<li>initial objectives hierarchy and mission calculator.</li>
+</ul>
+<h3 id="c-functional-architecture-review-package">C. Functional Architecture Review package</h3>
+<p>Must include:</p>
+<ul>
+<li>function taxonomy and decomposition;</li>
+<li>activity or functional-flow models;</li>
+<li>states, triggers, inputs, outputs, controls, and enabling functions;</li>
+<li>scenario-to-function and need-to-function traceability;</li>
+<li>timeline and concurrency analysis;</li>
+<li>N2 or equivalent interface matrix;</li>
+<li>function contribution to objectives;</li>
+<li>unresolved functional and interface questions.</li>
+</ul>
+<h3 id="d-concept-and-feasibility-portfolio">D. Concept and feasibility portfolio</h3>
+<p>Must include:</p>
+<ul>
+<li>morphological matrix or equivalent design-space structure;</li>
+<li>four or more genuinely distinct concept families;</li>
+<li>physical architecture and operational narrative for each;</li>
+<li>function-to-physical allocations;</li>
+<li>key interfaces and enabling systems;</li>
+<li>resource, staffing, energy, data, infrastructure, and support implications;</li>
+<li>rough cost and schedule ranges;</li>
+<li>feasibility screens and reasons for eliminating any concept.</li>
+</ul>
+<h3 id="e-decision-analysis-package">E. Decision-analysis package</h3>
+<p>Must include:</p>
+<ul>
+<li>objectives hierarchy and independence review;</li>
+<li>MOEs, MOPs, TPM candidates, thresholds, and value functions;</li>
+<li>raw and normalized data;</li>
+<li>weighting rationale using at least two methods or stakeholder sets;</li>
+<li>screening and multiattribute evaluation;</li>
+<li>uncertainty ranges and scenario assumptions;</li>
+<li>sensitivity, decision-boundary, and Pareto analysis;</li>
+<li>retained alternatives, dissent, and recommendation logic.</li>
+</ul>
+<h3 id="f-final-concept-baseline">F. Final concept baseline</h3>
+<p>Must include:</p>
+<ul>
+<li>executive decision brief;</li>
+<li>approved problem and operational baseline;</li>
+<li>conceptual requirements;</li>
+<li>functional architecture;</li>
+<li>selected physical concept and retained hedge;</li>
+<li>interface and enabling-system summary;</li>
+<li>mission, resource, affordability, schedule, and risk evidence;</li>
+<li>verification and validation logic;</li>
+<li>assumptions, open decisions, and technology maturation needs;</li>
+<li>configuration index and handoff memorandum to EN.645.768.</li>
+</ul>
+<h2 id="13-common-analytic-rubric">13. Common analytic rubric</h2>
+<p>Unless a weekly rubric replaces it, use these dimensions:</p>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Exemplary</th>
+<th>Acceptable</th>
+<th>Needs revision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Problem and evidence quality</td>
+<td>Neutral frame; multiple credible sources; conflicts and uncertainty explicit</td>
+<td>Frame generally neutral; evidence adequate; minor gaps</td>
+<td>Solution embedded; sources weak; disagreement hidden</td>
+</tr>
+<tr>
+<td>Operational and stakeholder coherence</td>
+<td>Needs, scenarios, context, outcomes, and constraints mutually consistent</td>
+<td>Main chain coherent with limited gaps</td>
+<td>Artifacts conflict or key actors/scenarios absent</td>
+</tr>
+<tr>
+<td>Architecture quality</td>
+<td>Functions and concepts are complete enough for the decision; interfaces and allocations explicit</td>
+<td>Major functions and interfaces represented</td>
+<td>Premature physical detail, missing functions, or unowned interfaces</td>
+</tr>
+<tr>
+<td>Quantitative credibility</td>
+<td>Inputs, units, assumptions, ranges, limitations, and reproducible calculations clear</td>
+<td>Calculations mostly correct and reviewable</td>
+<td>False precision, hidden normalization, unit errors, or irreproducible results</td>
+</tr>
+<tr>
+<td>Decision integrity</td>
+<td>Objectives distinct; values and uncertainty explicit; recommendation robust and traceable</td>
+<td>Method defensible with modest sensitivity gaps</td>
+<td>Double counting, arbitrary weights, deterministic certainty, or outcome-driven method</td>
+</tr>
+<tr>
+<td>Risk and lifecycle realism</td>
+<td>Technical, operational, adoption, affordability, schedule, support, and transition risks integrated</td>
+<td>Major risks and mitigations addressed</td>
+<td>Risk register detached from the decision or lifecycle ignored</td>
+</tr>
+<tr>
+<td>Traceability and configuration</td>
+<td>End-to-end links, baseline status, change history, and unresolved items controlled</td>
+<td>Core links and versions present</td>
+<td>Orphans, broken links, screenshots-only evidence, or uncontrolled baseline</td>
+</tr>
+<tr>
+<td>Communication and defense</td>
+<td>Clear decision story; limitations and dissent addressed directly</td>
+<td>Understandable and supportable</td>
+<td>Promotional language, unsupported claims, or inability to answer review questions</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-critical-mastery-criteria">14. Critical mastery criteria</h2>
+<p>The course cannot be passed if any of the following remain:</p>
+<ul>
+<li>the problem statement prescribes the favored physical solution;</li>
+<li>fewer than four genuinely distinct concept families are considered;</li>
+<li>no low-automation or non-autonomous alternative receives a fair evaluation;</li>
+<li>stakeholder evidence is invented or conclusions are presented as interview findings without actual evidence;</li>
+<li>critical needs or scenarios have no functional representation;</li>
+<li>the preferred concept depends on a hidden or untested assumption that could reverse the decision;</li>
+<li>cost, schedule, performance, or value calculations cannot be reproduced;</li>
+<li>weights, normalization, or value functions are changed to force a preferred outcome;</li>
+<li>uncertainty and sensitivity are omitted from a close decision;</li>
+<li>major accessibility, safety, privacy, operational, or support obligations are excluded without approval;</li>
+<li>the final concept has no traceable requirements and verification logic;</li>
+<li>the learner cannot explain limitations, retained risks, and reasons for rejecting the strongest alternative.</li>
+</ul>
+<p>A final score of at least 80% is required, and all critical criteria must be satisfied.</p>
+<h2 id="15-final-capstone-and-oral-defense">15. Final capstone and oral defense</h2>
+<h3 id="capstone-question">Capstone question</h3>
+<p><strong>Which campus mobility concept should the sponsor authorize for detailed design, under what assumptions and conditions, and why is that commitment more responsible than the strongest alternatives?</strong></p>
+<h3 id="final-products">Final products</h3>
+<ol>
+<li><strong>Concept study report</strong> — approximately 25–40 pages excluding appendices.</li>
+<li><strong>Controlled model and analysis repository</strong> — editable source, datasets, calculations, diagrams, queries, and change history.</li>
+<li><strong>Decision brief</strong> — 12–18 slides for a 25-minute review.</li>
+<li><strong>Concept baseline index</strong> — approved, conditional, deferred, and unresolved artifacts.</li>
+<li><strong>Handoff memorandum</strong> — what EN.645.768 may treat as baseline, what remains provisional, and which decisions require early closure.</li>
+<li><strong>Recorded oral defense</strong> — 20–30 minutes, followed by written responses to unresolved questions.</li>
+</ol>
+<h3 id="oral-defense-question-bank">Oral-defense question bank</h3>
+<p>The reviewer should select at least eight:</p>
+<ol>
+<li>What evidence would most likely cause you to reopen the problem framing?</li>
+<li>Which stakeholder need was most difficult to translate without embedding a solution?</li>
+<li>What is the strongest alternative to your recommendation?</li>
+<li>At what weight or assumption boundary does the preferred concept change?</li>
+<li>Which model is most decision-critical, and how was it checked?</li>
+<li>Which cost or schedule element has the largest uncertainty?</li>
+<li>What function or interface is most likely to be missing?</li>
+<li>Which risk is being accepted rather than mitigated?</li>
+<li>How does the concept behave during communications loss, severe weather, construction disruption, or major events?</li>
+<li>How is accessible service integrated into the concept rather than added as an exception?</li>
+<li>Which requirement is most likely to change during detailed design?</li>
+<li>What evidence distinguishes operational validation from requirements verification in your package?</li>
+<li>What decision should the next course make first?</li>
+<li>Why should the sponsor not choose the lowest-cost concept?</li>
+<li>Which result may reflect false precision?</li>
+<li>What retained alternative provides the best hedge, and what trigger would activate it?</li>
+</ol>
+<h2 id="16-portfolio-and-handoff-requirements">16. Portfolio and handoff requirements</h2>
+<p>Archive:</p>
+<ul>
+<li>course charter and readiness result;</li>
+<li>stakeholder evidence and anonymization notes;</li>
+<li>current-state and desired-end-state models;</li>
+<li>needs, ConOps, scenarios, objectives, and measures;</li>
+<li>conceptual requirements and trace reports;</li>
+<li>functional architecture, timelines, and N2/interface analysis;</li>
+<li>morphological matrix and concept-family records;</li>
+<li>all quantitative models and source data;</li>
+<li>cost, schedule, resource, and feasibility ranges;</li>
+<li>decision model, sensitivity results, Pareto views, and dissent;</li>
+<li>risk/opportunity register;</li>
+<li>review packages, minutes, actions, and dispositions;</li>
+<li>final baseline, configuration index, and oral defense;</li>
+<li>handoff memorandum to EN.645.768.</li>
+</ul>
+<p>The handoff must clearly distinguish:</p>
+<ul>
+<li><strong>baselined:</strong> approved for use unless changed through control;</li>
+<li><strong>conditional:</strong> usable only under named assumptions or closure actions;</li>
+<li><strong>reference:</strong> informative but not authoritative;</li>
+<li><strong>retained alternative:</strong> preserved as a hedge;</li>
+<li><strong>open:</strong> unresolved and assigned for early detailed-design action.</li>
+</ul>
+<h2 id="17-course-maintenance-record">17. Course maintenance record</h2>
+<p>Review annually:</p>
+<ul>
+<li>JHU description, syllabus, and prerequisite changes;</li>
+<li>NASA handbook and online process-page revisions;</li>
+<li>standards and tool changes affecting SysML or decision evidence;</li>
+<li>cost, schedule, and quantitative guidance;</li>
+<li>accessibility, privacy, safety, and operational assumptions in the fictional case;</li>
+<li>broken links and inaccessible readings;</li>
+<li>whether weekly workload remains within 10–13 hours;</li>
+<li>whether the concept set or seeded data inadvertently favors one solution.</li>
+</ul>
+<h3 id="current-maintenance-status">Current maintenance status</h3>
+<ul>
+<li><strong>Course specification:</strong> fully rebuilt</li>
+<li><strong>Weekly units:</strong> fully expanded</li>
+<li><strong>Running case:</strong> integrated with Phase 0 and Phase 1, but reopened as a concept competition</li>
+<li><strong>Primary source review:</strong> 2026-08-05</li>
+<li><strong>Next downstream dependency:</strong> EN.645.768 System Design &amp; Integration</li>
+</ul>
+<h2 id="week-1--reopen-the-problem-and-audit-the-incumbent-baseline">Week 1 — Reopen the problem and audit the incumbent baseline</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B6/chapters/01-reopen-the-problem-and-audit-the-incumbent-baseline.html">Read Book 6, Chapter 1</a> → <a href="../../K/B6/labs/lab-01-reopen-the-problem-and-audit-the-incumbent-baseline.html">complete Hypothetical Lab 1</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-767-w01.html">Read the Week 1 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competencies:</strong> C1, C2, C9, C10, C12<br/>
+<strong>Course outcomes:</strong> CLO-1, CLO-2<br/>
+<strong>Primary artifact:</strong> Concept Study Charter and Incumbent Assumption Audit</p>
+<h3 id="1-why-this-week-matters">1. Why this week matters</h3>
+<p>Conceptual design often fails before formal analysis begins because a preferred solution is embedded in the problem statement. “Design an autonomous shuttle system” closes alternatives that might satisfy the actual mobility need better. This week separates the sponsor's problem from the incumbent program history and establishes decision governance before models or trade studies are allowed to influence commitment.</p>
+<h3 id="2-essential-question">2. Essential question</h3>
+<p><strong>What must remain true about the problem after every proposed solution is removed from the sentence?</strong></p>
+<h3 id="3-prerequisite-retrieval-and-readiness-check">3. Prerequisite retrieval and readiness check</h3>
+<p>Without opening earlier course files:</p>
+<ol>
+<li>Write the current shuttle mission in one sentence.</li>
+<li>List five stakeholders and one potentially conflicting objective for each.</li>
+<li>Name three operational scenarios that should influence a mobility concept.</li>
+<li>Identify two requirements likely to have been derived from an incumbent architecture.</li>
+<li>Explain the difference between an assumption, constraint, decision, and risk.</li>
+</ol>
+<p>Then inspect the imported baseline and mark each statement as <strong>evidence</strong>, <strong>interpretation</strong>, <strong>constraint</strong>, <strong>assumption</strong>, <strong>decision</strong>, or <strong>solution commitment</strong>. A passing readiness result identifies at least five questionable solution commitments.</p>
+<h3 id="4-weekly-learning-outcomes">4. Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>formulate a neutral problem and opportunity statement;</li>
+<li>distinguish current evidence from inherited design commitment;</li>
+<li>define the study boundary, decision authority, decision date, and exclusions;</li>
+<li>create an assumption register with validation and retirement plans;</li>
+<li>plan a concept study that protects divergence and records dissent.</li>
+</ul>
+<h3 id="5-key-concepts-and-vocabulary">5. Key concepts and vocabulary</h3>
+<p>Problem situation; opportunity; incumbent concept; solution bias; study boundary; decision frame; decision authority; constraint; assumption; hypothesis; evidence pedigree; sunk-cost bias; framing effect; baseline; dissent; decision record.</p>
+<h3 id="6-required-readings-and-study-prompts">6. Required readings and study prompts</h3>
+<ol>
+<li><strong>JHU 2026 syllabus — course objectives and opening topics.</strong> Identify where stakeholder analysis, existing behavior/structure, future end state, and needs prioritization appear before physical concept selection. <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.767.83" title="JHU Fall 2026 abridged syllabus — EN.645.767 System Conceptual Design">JHU-767-SYLLABUS</a></li>
+<li><strong>NASA System Design Processes overview.</strong> Focus on iteration among stakeholder expectations, requirements, logical decomposition, and design solution. Why is this not a one-way waterfall? <a href="https://www.nasa.gov/reference/4-0-system-design-processes/" title="NASA — System Design Processes">NASA-SYSTEM-DESIGN</a></li>
+<li><strong>MIT 16.842 stakeholder-analysis and system-framing materials.</strong> Note how stakeholder views and problem framing shape later technical work. <a href="https://ocw.mit.edu/courses/16-842-fundamentals-of-systems-engineering-fall-2015/pages/lecture-notes/" title="MIT OCW 16.842 Fundamentals of Systems Engineering — Lecture Notes">MIT-16842</a></li>
+</ol>
+<p><strong>Estimated reading time:</strong> 2.0 hours.</p>
+<h3 id="7-lesson-notes">7. Lesson notes</h3>
+<p>A useful problem statement describes an unsatisfactory or unrealized outcome, affected stakeholders, operational context, evidence of magnitude, and decision horizon. It should not name a vehicle type, autonomy level, software architecture, vendor, or infrastructure design unless that feature is a true external constraint.</p>
+<p>Treat earlier artifacts as a historical baseline. The correct question is not “Were they well made?” but “Which claims remain valid under a reopened decision?” Add provenance and confidence to inherited claims. If a statement cannot be tied to evidence, label it as an assumption rather than quietly treating it as fact.</p>
+<p>The charter should state who owns the decision, what alternatives are in scope, what criteria may legitimately eliminate a concept, what evidence deadline applies, and what level of uncertainty is acceptable. It should also define how dissent is recorded. A concept study that lacks governance can be manipulated by changing criteria or assumptions after results are visible.</p>
+<h3 id="8-worked-example--removing-the-solution-from-the-problem">8. Worked example — removing the solution from the problem</h3>
+<p><strong>Biased statement:</strong> “The university needs a fleet of autonomous electric shuttles to reduce walking time.”</p>
+<p><strong>Audit</strong></p>
+<ul>
+<li>“fleet” assumes multiple vehicles;</li>
+<li>“autonomous” assumes a technology and labor model;</li>
+<li>“electric” assumes a propulsion and infrastructure choice;</li>
+<li>“shuttles” assumes a service form;</li>
+<li>“reduce walking time” may ignore accessibility, reliability, safety, cost, and campus experience.</li>
+</ul>
+<p><strong>Neutral version</strong></p>
+<blockquote>
+<p>During operating hours, students, staff, visitors, and mobility-limited users cannot consistently reach priority campus destinations within acceptable time, effort, predictability, accessibility, safety, and cost bounds under normal and disrupted conditions.</p>
+</blockquote>
+<p><strong>Opportunity version</strong></p>
+<blockquote>
+<p>The university can improve equitable campus access and operational resilience by selecting a mobility-service concept that meets defined mission outcomes within affordability, schedule, infrastructure, workforce, privacy, and safety constraints.</p>
+</blockquote>
+<p>The neutral version leaves room for fixed-route service, demand-responsive microtransit, mobility hubs, partnership models, phased automation, or nonvehicle interventions.</p>
+<h3 id="9-guided-practice">9. Guided practice</h3>
+<p>Use the supplied incumbent concept excerpt.</p>
+<ol>
+<li>Underline every noun or adjective that names a physical or organizational solution.</li>
+<li>Rewrite each solution statement as an outcome, constraint, or hypothesis.</li>
+<li>Create an assumption register with columns: ID, statement, category, source, confidence, decision impact, validation method, owner, due date, and status.</li>
+<li>Identify the three assumptions most likely to reverse the concept decision.</li>
+<li>Conduct the four role passes and record disagreements.</li>
+</ol>
+<p><strong>Checkpoint:</strong> Before continuing, the neutral problem statement must be understandable without any reference to autonomous vehicles.</p>
+<h3 id="10-independent-exercises">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<p>Classify 25 seeded statements as need, objective, constraint, assumption, decision, risk, or design feature.</p>
+<p><strong>Application</strong></p>
+<p>Audit the Phase 0 and Phase 1 shuttle artifacts. Create at least 20 incumbent assumptions and identify which downstream artifacts each assumption affects.</p>
+<p><strong>Analysis</strong></p>
+<p>Construct a causal chain showing how one framing choice could bias stakeholder selection, measures, concept generation, and final scoring.</p>
+<p><strong>Synthesis</strong></p>
+<p>Write the Concept Study Charter, including decision authority, scope, exclusions, schedule, roles, evidence rules, concept-diversity requirement, review gates, and change-control process.</p>
+<p><strong>Stretch</strong></p>
+<p>Create a lightweight script or query that searches imported artifacts for solution-loaded terms such as “autonomous,” “fleet,” “vehicle,” “cloud,” or named subsystem terms, then classify the results.</p>
+<h3 id="11-deliverable-specification">11. Deliverable specification</h3>
+<p>Submit:</p>
+<ul>
+<li>two-page problem and opportunity brief;</li>
+<li>Concept Study Charter;</li>
+<li>incumbent-assumption register with at least 20 entries;</li>
+<li>source and confidence ledger;</li>
+<li>framing-bias causal chain;</li>
+<li>one-page red-team memo;</li>
+<li>repository baseline <code>SCD-W01-v1.0</code>.</li>
+</ul>
+<h3 id="12-weekly-rubric">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neutrality and clarity of problem frame</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Depth of incumbent assumption audit</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Governance and study-plan completeness</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Evidence pedigree and confidence handling</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Red-team quality and configuration control</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> favored solution remains in the problem statement; fewer than four concept families permitted; assumption and fact are not distinguished; decision authority or scope is undefined.</p>
+<h3 id="13-knowledge-check">13. Knowledge check</h3>
+<ol>
+<li>Why is a solution-neutral statement not the same as an infinitely broad statement?</li>
+<li>What is the difference between a constraint and an assumption?</li>
+<li>Give two ways framing bias can enter a trade study before weights are assigned.</li>
+<li>Why should dissent be preserved?</li>
+<li>What makes an inherited requirement suspect during concept reopening?</li>
+</ol>
+<p><strong>Answer guidance</strong></p>
+<ol>
+<li>It still defines affected stakeholders, outcomes, context, boundaries, and decision horizon.</li>
+<li>A constraint is externally imposed or approved; an assumption is temporarily accepted pending evidence.</li>
+<li>Stakeholder omission, solution-loaded objectives, narrow concept families, or concept-dependent measures.</li>
+<li>It exposes unresolved value or evidence disputes and prevents false consensus.</li>
+<li>It may encode the previous physical architecture rather than a stable mission need.</li>
+</ol>
+<h3 id="14-feedback-revision-and-mastery-gate">14. Feedback, revision, and mastery gate</h3>
+<p>Conduct a red-team pass after a 24-hour break. A Week 1 pass requires:</p>
+<ul>
+<li>no physical solution in the approved problem statement;</li>
+<li>at least 20 assumptions, including five high-impact items;</li>
+<li>a valid decision authority and decision date;</li>
+<li>explicit concept-diversity and low-automation requirements;</li>
+<li>all review comments dispositioned.</li>
+</ul>
+<h3 id="15-reflection-and-workload">15. Reflection and workload</h3>
+<p>Record:</p>
+<ul>
+<li>Which imported artifact exerted the strongest anchoring effect?</li>
+<li>What assumption did you previously treat as a fact?</li>
+<li>What evidence would most improve the study frame?</li>
+</ul>
+<p><strong>Estimated workload:</strong> 10–12 hours.</p>
+<h2 id="week-2--stakeholder-evidence-and-current-state-analysis">Week 2 — Stakeholder evidence and current-state analysis</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B6/chapters/02-stakeholder-evidence-and-current-state-analysis.html">Read Book 6, Chapter 2</a> → <a href="../../K/B6/labs/lab-02-stakeholder-evidence-and-current-state-analysis.html">complete Hypothetical Lab 2</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-767-w02.html">Read the Week 2 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competencies:</strong> C1, C2, C12<br/>
+<strong>Course outcomes:</strong> CLO-1, CLO-2<br/>
+<strong>Primary artifact:</strong> Stakeholder Evidence Package and Current-State Operational Model</p>
+<h3 id="1-why-this-week-matters-2">1. Why this week matters</h3>
+<p>Needs analysis is not a brainstorming exercise. It is an evidence activity. Concept teams often collect opinions from convenient stakeholders, merge contradictory views into vague statements, and silently elevate sponsor preferences above operator or user realities. This week establishes a defensible evidence chain from stakeholder interaction and existing data to needs, conflicts, confidence, and current-state behavior.</p>
+<h3 id="2-essential-question-2">2. Essential question</h3>
+<p><strong>What do we know about the problem, who knows it, and how strong is the evidence?</strong></p>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-2">3. Prerequisite retrieval and readiness check</h3>
+<p>From Week 1, reproduce:</p>
+<ul>
+<li>the decision authority and study boundary;</li>
+<li>the five highest-impact assumptions;</li>
+<li>the required concept diversity;</li>
+<li>the distinction between evidence and interpretation.</li>
+</ul>
+<p>Create a stakeholder coverage matrix before designing interviews. It must include users, nonusers, accessibility advocates, operators, maintainers, campus safety, facilities, IT/security/privacy, finance, regulators, nearby transit providers, and affected neighbors.</p>
+<h3 id="4-weekly-learning-outcomes-2">4. Weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ul>
+<li>plan ethical and decision-relevant stakeholder interviews;</li>
+<li>separate observations, quotes, interpretations, needs, and proposed solutions;</li>
+<li>model the current operational system, pain points, workarounds, and external influences;</li>
+<li>reconcile conflicting stakeholder evidence without erasing disagreement;</li>
+<li>prioritize needs using importance, evidence strength, mission relevance, and equity.</li>
+</ul>
+<h3 id="5-key-concepts-and-vocabulary-2">5. Key concepts and vocabulary</h3>
+<p>Stakeholder salience; evidence triangulation; interview protocol; open versus leading question; observation; latent need; stated preference; revealed behavior; current-state model; workaround; pain point; evidence confidence; saturation; conflict; equity; anonymization.</p>
+<h3 id="6-required-readings-and-study-prompts-2">6. Required readings and study prompts</h3>
+<ol>
+<li><strong>JHU syllabus topics on stakeholders, existing behavior/structure, future state, and needs prioritization.</strong> Identify the difference between describing the current system and designing the future one. <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.767.83" title="JHU Fall 2026 abridged syllabus — EN.645.767 System Conceptual Design">JHU-767-SYLLABUS</a></li>
+<li><strong>NASA Stakeholder Expectations content within the System Design Processes.</strong> Extract inputs, outputs, and the role of ConOps and stakeholder involvement. <a href="https://www.nasa.gov/reference/4-0-system-design-processes/" title="NASA — System Design Processes">NASA-SYSTEM-DESIGN</a></li>
+<li><strong>MIT 16.842 stakeholder-analysis notes.</strong> Identify methods for mapping influence and needs. <a href="https://ocw.mit.edu/courses/16-842-fundamentals-of-systems-engineering-fall-2015/pages/lecture-notes/" title="MIT OCW 16.842 Fundamentals of Systems Engineering — Lecture Notes">MIT-16842</a></li>
+</ol>
+<p><strong>Estimated reading time:</strong> 2.0 hours.</p>
+<h3 id="7-lesson-notes-2">7. Lesson notes</h3>
+<p>Interview questions should elicit episodes, constraints, decisions, workarounds, and consequences. “Would you use an autonomous shuttle?” is leading and concept-specific. “Tell me about the last time you could not reach a campus destination as planned” is more useful.</p>
+<p>Every evidence record should distinguish:</p>
+<ul>
+<li>what the person observed;</li>
+<li>what the person believes caused it;</li>
+<li>what outcome they value;</li>
+<li>what solution they proposed;</li>
+<li>what the analyst inferred.</li>
+</ul>
+<p>Conflicts are data. A sponsor may value visible innovation, while operators value recoverability and users value predictability. Do not average these into “the system should be innovative and reliable.” Record the conflict and later model how concepts perform against distinct objectives.</p>
+<p>Current-state analysis should include existing transit, walking, cycling, paratransit, parking, event operations, construction detours, weather procedures, communications, staffing, and data systems. It should also identify who bears the cost or burden of current failures.</p>
+<h3 id="8-worked-example--converting-interview-evidence-into-needs">8. Worked example — converting interview evidence into needs</h3>
+<p><strong>Raw statement:</strong> “We need more shuttles because my wheelchair pickup was 25 minutes late during a football game.”</p>
+<p><strong>Evidence decomposition</strong></p>
+<ul>
+<li>observed event: pickup was 25 minutes late;</li>
+<li>context: major event demand;</li>
+<li>affected stakeholder: wheelchair user;</li>
+<li>consequence: missed or delayed trip;</li>
+<li>proposed solution: more shuttles;</li>
+<li>underlying need: accessible trips should remain predictable during demand surges;</li>
+<li>uncertainty: one episode; need corroborating data.</li>
+</ul>
+<p><strong>Need statement</strong></p>
+<blockquote>
+<p>Mobility-limited users need predictable accessible trip service during planned demand surges.</p>
+</blockquote>
+<p><strong>Candidate evidence plan</strong></p>
+<ul>
+<li>interview accessibility office;</li>
+<li>inspect event-day dispatch logs;</li>
+<li>compare accessible and general-service wait distributions;</li>
+<li>observe event ingress/egress operations.</li>
+</ul>
+<h3 id="9-guided-practice-2">9. Guided practice</h3>
+<ol>
+<li>Draft ten open interview questions tied to the decision.</li>
+<li>Conduct at least two real or simulated interviews using separate roles.</li>
+<li>Code each response into observation, need, constraint, preference, solution idea, and uncertainty.</li>
+<li>Build a current-state swimlane or activity view.</li>
+<li>Add pain points and workarounds to the model.</li>
+<li>Create a need-conflict matrix.</li>
+</ol>
+<p><strong>Checkpoint:</strong> No need may cite only the analyst's intuition when a stakeholder or operational-data source should exist.</p>
+<h3 id="10-independent-exercises-2">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<p>Rewrite ten leading questions as neutral, episode-based questions.</p>
+<p><strong>Application</strong></p>
+<p>Complete six stakeholder evidence sessions. When real access is unavailable, use clearly labeled simulated role packets; never present simulated evidence as actual interview data.</p>
+<p><strong>Analysis</strong></p>
+<p>Triangulate three important needs using at least two source types each. Explain contradictions and confidence.</p>
+<p><strong>Synthesis</strong></p>
+<p>Produce the current-state operational model and a prioritized needs baseline containing 25–40 needs.</p>
+<p><strong>Stretch</strong></p>
+<p>Use qualitative coding software or a reproducible spreadsheet/notebook to calculate stakeholder coverage, evidence density, conflict frequency, and confidence.</p>
+<h3 id="11-deliverable-specification-2">11. Deliverable specification</h3>
+<p>Submit:</p>
+<ul>
+<li>stakeholder map and coverage matrix;</li>
+<li>interview/evidence plan and consent/anonymization note;</li>
+<li>evidence records;</li>
+<li>current-state context and operational models;</li>
+<li>pain-point and workaround register;</li>
+<li>25–40 needs with source, priority, confidence, conflict, and rationale;</li>
+<li>evidence-gap plan;</li>
+<li>baseline <code>SCD-W02-v1.0</code>.</li>
+</ul>
+<h3 id="12-weekly-rubric-2">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stakeholder coverage and interview quality</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Separation of evidence, interpretation, and solution</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Current-state operational completeness</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Need quality, conflict handling, and prioritization</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Ethics, anonymization, and configuration</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> fabricated interviews presented as real; accessibility or operator stakeholders omitted; proposed solutions copied directly as needs; disagreement erased.</p>
+<h3 id="13-knowledge-check-2">13. Knowledge check</h3>
+<ol>
+<li>Why are revealed behaviors sometimes more useful than stated preferences?</li>
+<li>What is triangulation?</li>
+<li>How should simulated stakeholder evidence be labeled?</li>
+<li>Why can a high-priority need still have low confidence?</li>
+<li>What is lost when conflicting needs are merged prematurely?</li>
+</ol>
+<p><strong>Answer guidance</strong></p>
+<ol>
+<li>Behavior shows what people actually do under constraints, while preferences may be aspirational or biased.</li>
+<li>Using multiple independent sources or methods to support or challenge a claim.</li>
+<li>Explicitly as a scenario or role-play input, never as actual field evidence.</li>
+<li>Mission importance and evidence strength are different dimensions.</li>
+<li>The decision loses information about values, tradeoffs, and affected groups.</li>
+</ol>
+<h3 id="14-feedback-revision-and-mastery-gate-2">14. Feedback, revision, and mastery gate</h3>
+<p>A pass requires:</p>
+<ul>
+<li>coverage of all critical stakeholder classes;</li>
+<li>at least 25 needs and an evidence source for each;</li>
+<li>explicit conflicts and confidence;</li>
+<li>a current-state model that includes disruptions and workarounds;</li>
+<li>no ethical or provenance ambiguity.</li>
+</ul>
+<h3 id="15-reflection-and-workload-2">15. Reflection and workload</h3>
+<p>Record which stakeholder changed the study most and which group remains underrepresented.</p>
+<p><strong>Estimated workload:</strong> 11–13 hours.</p>
+<h2 id="week-3--desired-end-state-conops-scenarios-and-mission-calculator-v01">Week 3 — Desired end state, ConOps, scenarios, and mission calculator v0.1</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B6/chapters/03-desired-end-state-conops-scenarios-and-mission-calculat.html">Read Book 6, Chapter 3</a> → <a href="../../K/B6/labs/lab-03-desired-end-state-conops-scenarios-and-mission-calculat.html">complete Hypothetical Lab 3</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-767-w03.html">Read the Week 3 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competencies:</strong> C1, C2, C7, C9, C12<br/>
+<strong>Course outcomes:</strong> CLO-1, CLO-2, CLO-3, CLO-7<br/>
+<strong>Primary artifact:</strong> Operational Baseline and Problem Definition Review</p>
+<h3 id="1-why-this-week-matters-3">1. Why this week matters</h3>
+<p>A desired end state is not a picture of the preferred architecture. It describes the future operational outcomes and relationships that should exist if the intervention succeeds. ConOps and scenarios then make those outcomes concrete enough to derive functions, measures, and requirements. This is the first formal review gate.</p>
+<h3 id="2-essential-question-3">2. Essential question</h3>
+<p><strong>What must future campus mobility accomplish across normal, disrupted, transition, and support conditions?</strong></p>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-3">3. Prerequisite retrieval and readiness check</h3>
+<p>From memory, list:</p>
+<ul>
+<li>the top ten needs;</li>
+<li>three important conflicts;</li>
+<li>two weak-evidence claims;</li>
+<li>the major current-state workarounds.</li>
+</ul>
+<p>Write one desired-end-state statement without naming any vehicle, autonomy level, or software architecture.</p>
+<h3 id="4-weekly-learning-outcomes-3">4. Weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ul>
+<li>formulate desired-end-state outcomes and boundaries;</li>
+<li>create a concept-level ConOps using an annotated structure;</li>
+<li>develop nominal, surge, degraded, emergency, maintenance, and transition scenarios;</li>
+<li>define initial mission success and failure measures;</li>
+<li>build a transparent mission calculator v0.1;</li>
+<li>conduct and close a Problem Definition Review.</li>
+</ul>
+<h3 id="5-key-concepts-and-vocabulary-3">5. Key concepts and vocabulary</h3>
+<p>Desired end state; ConOps; operational concept; scenario; mission thread; use case; trigger; precondition; postcondition; degraded mode; emergency mode; transition state; measure of effectiveness; threshold; objective; value; mission calculator; review exit criterion.</p>
+<h3 id="6-required-readings-and-study-prompts-3">6. Required readings and study prompts</h3>
+<ol>
+<li><strong>NASA Appendix S ConOps annotated outline.</strong> Identify which sections are useful at concept level and which can remain provisional. <a href="https://www.nasa.gov/reference/appendix-s-concept-of-operations-annotated-outline/" title="NASA — Concept of Operations Annotated Outline">NASA-CONOPS</a></li>
+<li><strong>NASA System Design Processes and Technical Requirements Definition.</strong> Trace how stakeholder expectations and operations inform requirements. <a href="https://www.nasa.gov/reference/4-0-system-design-processes/" title="NASA — System Design Processes">NASA-SYSTEM-DESIGN</a> <a href="https://www.nasa.gov/reference/4-2-technical-requirements-definition/" title="NASA — Technical Requirements Definition">NASA-REQ</a></li>
+<li><strong>MIT 16.842 requirements and architecture material.</strong> Note the use of scenarios to expose missing functions and criteria. <a href="https://ocw.mit.edu/courses/16-842-fundamentals-of-systems-engineering-fall-2015/pages/lecture-notes/" title="MIT OCW 16.842 Fundamentals of Systems Engineering — Lecture Notes">MIT-16842</a></li>
+</ol>
+<p><strong>Estimated reading time:</strong> 2.5 hours.</p>
+<h3 id="7-lesson-notes-3">7. Lesson notes</h3>
+<p>The ConOps should describe users, operators, external systems, environments, modes, support, transitions, and success from an operational perspective. It should avoid detailed internal components. A strong scenario includes trigger, actors, preconditions, sequence, information and material flows, decision points, timing, degraded behavior, outcome, and measurable success.</p>
+<p>Build a scenario portfolio rather than only a happy path. The shuttle study must include:</p>
+<ul>
+<li>ordinary weekday demand;</li>
+<li>accessibility-critical trip;</li>
+<li>peak event demand;</li>
+<li>severe weather;</li>
+<li>construction detour;</li>
+<li>communications loss;</li>
+<li>vehicle or service failure;</li>
+<li>security/privacy incident;</li>
+<li>maintenance and charging;</li>
+<li>transition from current operations to the pilot.</li>
+</ul>
+<p>The mission calculator v0.1 is a transparent relationship among demand, service capacity, wait/travel time, coverage, accessibility, staffing, and cost. It may be simple. Its purpose is to expose what must be measured and which assumptions dominate.</p>
+<h3 id="8-worked-example--scenario-and-mission-measure">8. Worked example — scenario and mission measure</h3>
+<p><strong>Scenario:</strong> Event-day accessible trip.</p>
+<ul>
+<li>trigger: user requests trip 25 minutes before required arrival;</li>
+<li>precondition: event demand at 160% of normal; one route segment closed;</li>
+<li>actors: passenger, dispatcher, service operator, campus safety, external traffic system;</li>
+<li>success: passenger arrives within the committed service window without unsafe transfer;</li>
+<li>degraded behavior: system offers an accessible alternate pickup and preserves priority;</li>
+<li>failure: request is accepted but no accessible capacity is reserved.</li>
+</ul>
+<p><strong>Candidate MOE</strong></p>
+<blockquote>
+<p>Percentage of accessibility-critical trips completed within the committed arrival window during planned demand surges.</p>
+</blockquote>
+<p>This measure reflects an outcome. “Number of autonomous vehicles available” does not.</p>
+<h3 id="9-guided-practice-3">9. Guided practice</h3>
+<ol>
+<li>Draft the desired-end-state narrative.</li>
+<li>Build a system context with actors and external systems.</li>
+<li>Write six scenario skeletons.</li>
+<li>Expand two to full detail, one nominal and one disrupted.</li>
+<li>Define five candidate MOEs and identify data needed.</li>
+<li>Build mission calculator v0.1 with clearly labeled fictional inputs.</li>
+<li>Run the four role passes.</li>
+</ol>
+<h3 id="10-independent-exercises-3">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<p>Classify 20 candidate measures as MOE, MOP, TPM candidate, resource, constraint, or vanity metric.</p>
+<p><strong>Application</strong></p>
+<p>Complete ten scenarios spanning all required modes and lifecycle situations.</p>
+<p><strong>Analysis</strong></p>
+<p>Trace each top-priority need to at least one scenario and identify orphan needs.</p>
+<p><strong>Synthesis</strong></p>
+<p>Assemble and conduct the Problem Definition Review.</p>
+<p><strong>Stretch</strong></p>
+<p>Use discrete-event approximations or a queueing sandbox to explore how demand, fleet/service capacity, and variability affect wait time. State why the model is not yet predictive.</p>
+<h3 id="11-deliverable-specification-3">11. Deliverable specification</h3>
+<p>Submit:</p>
+<ul>
+<li>desired-end-state narrative;</li>
+<li>context model;</li>
+<li>ConOps v1.0;</li>
+<li>scenario portfolio;</li>
+<li>need-to-scenario coverage report;</li>
+<li>initial objectives hierarchy;</li>
+<li>five to eight MOEs with definitions and data plans;</li>
+<li>mission calculator v0.1;</li>
+<li>PDefR deck, minutes, actions, and disposition log.</li>
+</ul>
+<h3 id="12-weekly-rubric-3">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Desired-end-state neutrality and completeness</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>ConOps and scenario coverage</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Need-to-scenario traceability</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Quality of initial measures and calculator</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Review rigor and action closure</td>
+<td style="text-align:right">20%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> only nominal scenarios; accessibility or transition absent; measures are architecture outputs rather than mission outcomes; review actions ignored.</p>
+<h3 id="13-knowledge-check-3">13. Knowledge check</h3>
+<ol>
+<li>How does a ConOps differ from a design description?</li>
+<li>Why must transition and maintenance scenarios appear in conceptual design?</li>
+<li>What distinguishes an MOE from a MOP?</li>
+<li>What is the purpose of a mission calculator at this stage?</li>
+<li>Why should an emergency scenario not merely say “system fails safely”?</li>
+</ol>
+<p><strong>Answer guidance</strong></p>
+<ol>
+<li>It describes operational use, actors, environments, and outcomes rather than internal implementation.</li>
+<li>They expose lifecycle, support, staffing, and feasibility obligations.</li>
+<li>MOE measures mission success; MOP measures system performance that contributes to it.</li>
+<li>To expose relationships, data needs, assumptions, and decision sensitivity.</li>
+<li>Safe behavior must be operationally defined and measurable.</li>
+</ol>
+<h3 id="14-feedback-revision-and-mastery-gate-3">14. Feedback, revision, and mastery gate</h3>
+<p>The PDefR passes only when:</p>
+<ul>
+<li>the decision frame is still neutral;</li>
+<li>critical stakeholders and operating modes are represented;</li>
+<li>top needs have scenario coverage;</li>
+<li>mission measures are operationally meaningful;</li>
+<li>high-impact evidence gaps have closure plans.</li>
+</ul>
+<h3 id="15-reflection-and-workload-3">15. Reflection and workload</h3>
+<p>Record which scenario most changed the problem definition and which measure remains hardest to operationalize.</p>
+<p><strong>Estimated workload:</strong> 12–13 hours.</p>
+<h2 id="week-4--conceptual-requirements-use-cases-gaps-and-experiment-planning">Week 4 — Conceptual requirements, use cases, gaps, and experiment planning</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B6/chapters/04-conceptual-requirements-use-cases-gaps-and-experiment-p.html">Read Book 6, Chapter 4</a> → <a href="../../K/B6/labs/lab-04-conceptual-requirements-use-cases-gaps-and-experiment-p.html">complete Hypothetical Lab 4</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-767-w04.html">Read the Week 4 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competencies:</strong> C2, C4, C7, C8, C9<br/>
+<strong>Course outcomes:</strong> CLO-3, CLO-4, CLO-8<br/>
+<strong>Primary artifact:</strong> Conceptual Requirements and Analytic-Question Baseline</p>
+<h3 id="1-why-this-week-matters-4">1. Why this week matters</h3>
+<p>Conceptual requirements establish what candidate concepts must achieve without dictating how. They also identify which claims require analysis, modeling, prototypes, observation, or experiments. Poorly written requirements either exclude legitimate alternatives or allow every concept to claim compliance.</p>
+<h3 id="2-essential-question-4">2. Essential question</h3>
+<p><strong>What must every viable concept demonstrate, and what evidence will distinguish promise from feasibility?</strong></p>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-4">3. Prerequisite retrieval and readiness check</h3>
+<p>Select five top needs and write one outcome-oriented requirement for each. Flag any requirement containing a component, vendor, algorithm, autonomy level, or design-specific interface.</p>
+<h3 id="4-weekly-learning-outcomes-4">4. Weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ul>
+<li>derive conceptual requirements from needs and scenarios;</li>
+<li>distinguish performance, interface, environmental, support, transition, safety, privacy, and affordability requirements;</li>
+<li>identify concept-dependent requirements and defer them appropriately;</li>
+<li>perform gap analysis between current and desired operations;</li>
+<li>formulate analytic questions and a preliminary design-of-experiments plan;</li>
+<li>establish traceability and verification logic.</li>
+</ul>
+<h3 id="5-key-concepts-and-vocabulary-4">5. Key concepts and vocabulary</h3>
+<p>Conceptual requirement; threshold; objective; constraint; derived requirement; concept-dependent requirement; use case; verification method; validation evidence; gap analysis; analytic question; factor; response; experimental region; confounding; feasibility evidence.</p>
+<h3 id="6-required-readings-and-study-prompts-4">6. Required readings and study prompts</h3>
+<ol>
+<li><strong>NASA Technical Requirements Definition.</strong> Extract the characteristics and traceability expectations for requirements. <a href="https://www.nasa.gov/reference/4-2-technical-requirements-definition/" title="NASA — Technical Requirements Definition">NASA-REQ</a></li>
+<li><strong>INCOSE requirements resources.</strong> Review singularity, necessity, feasibility, clarity, and verifiability. <a href="https://www.incose.org/communities/working-groups-initiatives/requirements" title="INCOSE Requirements Working Group and requirements resources">INCOSE-REQUIREMENTS</a></li>
+<li><strong>NIST DOE introduction.</strong> Focus on factors, responses, experimental objectives, and why one-factor-at-a-time reasoning is weak. <a href="https://www.itl.nist.gov/div898/handbook/pri/pri.htm" title="NIST/SEMATECH Engineering Statistics Handbook — Process Improvement and Experimental Design">NIST-DOE</a></li>
+</ol>
+<p><strong>Estimated reading time:</strong> 2.5 hours.</p>
+<h3 id="7-lesson-notes-4">7. Lesson notes</h3>
+<p>At concept level, requirements should be stable enough to compare alternatives but not so detailed that they encode one architecture. Use thresholds for minimum acceptability and objectives for desired performance. Record rationale and source. For close or uncertain requirements, include a range or decision date rather than false certainty.</p>
+<p>Gap analysis links the current state to the desired end state. Each gap should identify affected stakeholders, operational consequence, needed capability, evidence, and whether the gap must be closed by the system, an enabling system, policy, process, or transition activity.</p>
+<p>The analytic-question register is as important as the requirement list. Questions such as “How does event demand variability affect accessible wait time under each service concept?” should specify response measures, controllable factors, noise factors, data needs, model fidelity, and decision use.</p>
+<h3 id="8-worked-example--requirement-and-experiment-question">8. Worked example — requirement and experiment question</h3>
+<p><strong>Need:</strong> Accessible trips remain predictable during event surges.</p>
+<p><strong>Weak requirement:</strong> “The system shall include two wheelchair-capable autonomous shuttles.”</p>
+<p><strong>Concept-neutral requirement</strong></p>
+<blockquote>
+<p>The mobility service shall complete at least 95% of accessibility-critical trips within the committed arrival window during defined event-demand conditions.</p>
+</blockquote>
+<p><strong>Verification logic:</strong> analysis using demand scenarios, capacity model, and later pilot test.</p>
+<p><strong>Analytic question:</strong> How do accessible-capacity allocation, total demand, trip length, detour rate, and service concept affect the completion percentage?</p>
+<p>This keeps vehicle count and autonomy open to concept analysis.</p>
+<h3 id="9-guided-practice-4">9. Guided practice</h3>
+<ol>
+<li>Derive 15 requirements from the top needs and scenarios.</li>
+<li>Tag source, type, threshold/objective, rationale, and verification method.</li>
+<li>Run a solution-bias query.</li>
+<li>Create a current-to-future gap matrix.</li>
+<li>Write five analytic questions.</li>
+<li>For one question, define factors, ranges, responses, and experiment/model plan.</li>
+</ol>
+<h3 id="10-independent-exercises-4">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<p>Repair 15 defective conceptual requirements.</p>
+<p><strong>Application</strong></p>
+<p>Develop a 35–50 item conceptual requirements baseline.</p>
+<p><strong>Analysis</strong></p>
+<p>Identify conflicts, duplicates, unattainable combinations, and concept-dependent statements. Create a coverage and orphan report.</p>
+<p><strong>Synthesis</strong></p>
+<p>Produce the analytic-question register and a DOE/modeling plan for Weeks 8–10.</p>
+<p><strong>Stretch</strong></p>
+<p>Create a machine-readable requirement table and automated checks for missing source, verification method, units, or threshold.</p>
+<h3 id="11-deliverable-specification-4">11. Deliverable specification</h3>
+<p>Submit:</p>
+<ul>
+<li>35–50 conceptual requirements;</li>
+<li>traceability from need and scenario to requirement;</li>
+<li>quality audit and solution-bias report;</li>
+<li>gap matrix;</li>
+<li>use-case summary;</li>
+<li>verification-method plan;</li>
+<li>analytic-question register;</li>
+<li>DOE/model plan with factors, ranges, responses, and decision use.</li>
+</ul>
+<h3 id="12-weekly-rubric-4">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Requirement quality and neutrality</td>
+<td style="text-align:right">30%</td>
+</tr>
+<tr>
+<td>Need/scenario traceability and coverage</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Gap-analysis quality</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Verification and validation logic</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Analytic-question and experiment plan</td>
+<td style="text-align:right">20%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> key requirement encodes the favored concept; critical need lacks requirement coverage; verification is “TBD” without closure plan; experiment has no decision use.</p>
+<h3 id="13-knowledge-check-4">13. Knowledge check</h3>
+<ol>
+<li>Why are threshold and objective values both useful?</li>
+<li>What makes a requirement concept-dependent?</li>
+<li>How does a gap differ from a requirement?</li>
+<li>What is a response variable?</li>
+<li>Why is one-factor-at-a-time analysis limited?</li>
+</ol>
+<p><strong>Answer guidance</strong></p>
+<ol>
+<li>Threshold defines acceptability; objective supports value and trade-space reasoning.</li>
+<li>It names or assumes a specific implementation that is not externally required.</li>
+<li>A gap describes the difference between current and desired states; requirements constrain the solution response.</li>
+<li>The measured output used to evaluate factor effects.</li>
+<li>It misses interactions and is often inefficient.</li>
+</ol>
+<h3 id="14-feedback-revision-and-mastery-gate-4">14. Feedback, revision, and mastery gate</h3>
+<p>A pass requires:</p>
+<ul>
+<li>at least 90% of critical needs and scenarios traced;</li>
+<li>no unapproved design-specific critical requirement;</li>
+<li>all critical requirements have units, conditions, and evidence methods;</li>
+<li>at least five decision-relevant analytic questions;</li>
+<li>DOE/model plan reviewed for plausible ranges and interactions.</li>
+</ul>
+<h3 id="15-reflection-and-workload-4">15. Reflection and workload</h3>
+<p>Record which requirement was most difficult to keep concept-neutral and which analytic question could most alter the down-select.</p>
+<p><strong>Estimated workload:</strong> 11–13 hours.</p>
+<h2 id="week-5--functional-architecture-and-mission-to-function-traceability">Week 5 — Functional architecture and mission-to-function traceability</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B6/chapters/05-functional-architecture-and-mission-to-function-traceab.html">Read Book 6, Chapter 5</a> → <a href="../../K/B6/labs/lab-05-functional-architecture-and-mission-to-function-traceab.html">complete Hypothetical Lab 5</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-767-w05.html">Read the Week 5 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competencies:</strong> C2, C3, C4<br/>
+<strong>Course outcomes:</strong> CLO-3, CLO-5<br/>
+<strong>Primary artifact:</strong> Functional Architecture Baseline v0.8</p>
+<h3 id="1-why-this-week-matters-5">1. Why this week matters</h3>
+<p>A concept cannot be generated or compared responsibly until the team understands what the future system must do. Functional architecture preserves solution freedom while exposing operational logic, enabling functions, information and material flows, and dependencies that later concepts must satisfy.</p>
+<h3 id="2-essential-question-5">2. Essential question</h3>
+<p><strong>What functions and flows are necessary to produce the desired operational outcomes, independent of physical implementation?</strong></p>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-5">3. Prerequisite retrieval and readiness check</h3>
+<p>Choose one scenario and list the functions required before, during, and after the visible user interaction. Include at least one support, governance, maintenance, and transition function.</p>
+<h3 id="4-weekly-learning-outcomes-5">4. Weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ul>
+<li>construct a function taxonomy and multi-level decomposition;</li>
+<li>model functional flows across mission scenarios;</li>
+<li>identify inputs, outputs, controls, resources, states, and enabling functions;</li>
+<li>trace needs, scenarios, requirements, and measures to functions;</li>
+<li>identify orphan, duplicate, overloaded, and missing functions;</li>
+<li>preserve abstraction without losing operational completeness.</li>
+</ul>
+<h3 id="5-key-concepts-and-vocabulary-5">5. Key concepts and vocabulary</h3>
+<p>Function; capability; behavior; functional decomposition; functional flow; control; input; output; resource; enabling function; support function; lifecycle function; functional allocation; cohesion; coupling; orphan; contribution link; functional baseline.</p>
+<h3 id="6-required-readings-and-study-prompts-5">6. Required readings and study prompts</h3>
+<ol>
+<li><strong>NASA Logical Decomposition.</strong> Focus on transforming requirements and operations into logical representations and candidate allocations. <a href="https://www.nasa.gov/reference/4-3-logical-decomposition/" title="NASA — Logical Decomposition">NASA-LOGICAL</a></li>
+<li><strong>NASA System Design Processes.</strong> Review iteration between operations, requirements, logical decomposition, and design solution. <a href="https://www.nasa.gov/reference/4-0-system-design-processes/" title="NASA — System Design Processes">NASA-SYSTEM-DESIGN</a></li>
+<li><strong>MIT 16.842 architecture and concept-generation material.</strong> Identify how functional views support concept generation. <a href="https://ocw.mit.edu/courses/16-842-fundamentals-of-systems-engineering-fall-2015/pages/lecture-notes/" title="MIT OCW 16.842 Fundamentals of Systems Engineering — Lecture Notes">MIT-16842</a></li>
+</ol>
+<p><strong>Estimated reading time:</strong> 2.0 hours.</p>
+<h3 id="7-lesson-notes-5">7. Lesson notes</h3>
+<p>Functions should be expressed with verb–object phrasing and defined by outcomes, not components. “Authenticate traveler eligibility” is functional; “query the cloud identity microservice” is physical and software-specific.</p>
+<p>Use multiple views because a function tree alone does not show timing or interactions. At minimum, construct:</p>
+<ul>
+<li>a top-level functional decomposition;</li>
+<li>scenario-based activity or functional-flow views;</li>
+<li>a function dictionary;</li>
+<li>input/output/control/resource definitions;</li>
+<li>a scenario-to-function trace;</li>
+<li>a requirement-to-function trace;</li>
+<li>an objective/MOE contribution map.</li>
+</ul>
+<p>Include functions for governance, support, transition, learning, monitoring, incident response, privacy, maintenance, charging or fueling, workforce, and end-of-life. These are routinely omitted when the concept team focuses only on the visible passenger service.</p>
+<h3 id="8-worked-example--separating-function-from-component">8. Worked example — separating function from component</h3>
+<p><strong>Physical statement:</strong> “The autonomous vehicle sends GPS data to the cloud dispatcher.”</p>
+<p><strong>Functional rewrite</strong></p>
+<ol>
+<li>determine mobile asset position;</li>
+<li>assess position confidence;</li>
+<li>communicate position state;</li>
+<li>maintain shared operational picture;</li>
+<li>detect stale or inconsistent position data;</li>
+<li>select degraded dispatch behavior.</li>
+</ol>
+<p>The rewrite exposes functions that must exist in a human-driven, fixed-route, partnership, or autonomous concept, even though physical allocation will differ.</p>
+<h3 id="9-guided-practice-5">9. Guided practice</h3>
+<ol>
+<li>Select the event-day accessible-trip scenario.</li>
+<li>Identify all functions, including preparation and recovery.</li>
+<li>Arrange them in a functional flow.</li>
+<li>Define inputs, outputs, controls, and resources.</li>
+<li>Trace each step to needs and requirements.</li>
+<li>Identify functions that contribute to the accessible-trip MOE.</li>
+<li>Repeat for communications loss and maintenance.</li>
+</ol>
+<h3 id="10-independent-exercises-5">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<p>Repair 20 badly named or physically embedded functions.</p>
+<p><strong>Application</strong></p>
+<p>Develop a three-level functional decomposition and dictionary containing 45–70 functions.</p>
+<p><strong>Analysis</strong></p>
+<p>Run coverage checks for every scenario and critical requirement. Identify functions with no source and requirements with no functional realization.</p>
+<p><strong>Synthesis</strong></p>
+<p>Create integrated functional-flow views for at least six scenarios and a mission-to-function contribution matrix.</p>
+<p><strong>Stretch</strong></p>
+<p>Use a graph representation to calculate highly connected functions, single points of functional dependency, and potential decomposition problems.</p>
+<h3 id="11-deliverable-specification-5">11. Deliverable specification</h3>
+<p>Submit:</p>
+<ul>
+<li>functional taxonomy and decomposition;</li>
+<li>function dictionary;</li>
+<li>six integrated flow/activity views;</li>
+<li>input/output/control/resource definitions;</li>
+<li>need-, scenario-, requirement-, and objective-to-function trace reports;</li>
+<li>orphan and duplication analysis;</li>
+<li>baseline <code>SCD-W05-v0.8</code>.</li>
+</ul>
+<h3 id="12-weekly-rubric-5">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Functional completeness and abstraction</td>
+<td style="text-align:right">30%</td>
+</tr>
+<tr>
+<td>Scenario-flow coherence</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Traceability and coverage</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Support/lifecycle function inclusion</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Model governance and reproducibility</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> physical architecture embedded as functions; critical scenario has missing steps; support or degraded functions absent; critical requirement has no functional realization.</p>
+<h3 id="13-knowledge-check-5">13. Knowledge check</h3>
+<ol>
+<li>Why is a function tree insufficient by itself?</li>
+<li>How does a function differ from a capability?</li>
+<li>What makes a function “orphaned”?</li>
+<li>Why trace functions to objectives as well as requirements?</li>
+<li>Give one example of a lifecycle function.</li>
+</ol>
+<p><strong>Answer guidance</strong></p>
+<ol>
+<li>It does not show flow, timing, states, interactions, or scenario context.</li>
+<li>A function is an action; a capability is the ability to achieve an outcome under conditions.</li>
+<li>It has no traceable need, scenario, requirement, or rationale.</li>
+<li>To show how behavior contributes to mission value, not just compliance.</li>
+<li>Train operators, maintain service assets, migrate data, retire infrastructure, or manage configuration.</li>
+</ol>
+<h3 id="14-feedback-revision-and-mastery-gate-5">14. Feedback, revision, and mastery gate</h3>
+<p>Pass when:</p>
+<ul>
+<li>critical scenarios have complete functional flows;</li>
+<li>at least 90% of critical requirements trace to functions;</li>
+<li>no critical function is physicalized;</li>
+<li>lifecycle and degraded functions are present;</li>
+<li>unresolved questions are explicit.</li>
+</ul>
+<h3 id="15-reflection-and-workload-5">15. Reflection and workload</h3>
+<p>Record which omitted support function would have created the greatest downstream surprise.</p>
+<p><strong>Estimated workload:</strong> 11–12 hours.</p>
+<h2 id="week-6--timing-interfaces-allocations-and-functional-architecture-review">Week 6 — Timing, interfaces, allocations, and Functional Architecture Review</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B6/chapters/06-timing-interfaces-allocations-and-functional-architectu.html">Read Book 6, Chapter 6</a> → <a href="../../K/B6/labs/lab-06-timing-interfaces-allocations-and-functional-architectu.html">complete Hypothetical Lab 6</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-767-w06.html">Read the Week 6 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competencies:</strong> C2, C3, C4, C12<br/>
+<strong>Course outcomes:</strong> CLO-5, CLO-11<br/>
+<strong>Primary artifact:</strong> Functional Architecture Baseline v1.0 and FAR Package</p>
+<h3 id="1-why-this-week-matters-6">1. Why this week matters</h3>
+<p>Many concept failures are caused not by missing boxes but by timing, concurrency, handoffs, or information dependencies. This week turns the functional architecture into a reviewable behavioral baseline and tests whether it is mature enough to support physical concept generation.</p>
+<h3 id="2-essential-question-6">2. Essential question</h3>
+<p><strong>Do the functions work together in time, across modes and boundaries, well enough to generate credible physical concepts?</strong></p>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-6">3. Prerequisite retrieval and readiness check</h3>
+<p>For the communications-loss scenario:</p>
+<ul>
+<li>identify the function that detects loss;</li>
+<li>identify who or what owns degraded-mode selection;</li>
+<li>state the maximum allowable delay before operational impact;</li>
+<li>name the data that may become stale;</li>
+<li>identify the function that restores or reconciles state.</li>
+</ul>
+<h3 id="4-weekly-learning-outcomes-6">4. Weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ul>
+<li>construct operational and functional timelines;</li>
+<li>identify sequential, concurrent, periodic, event-driven, and continuous behavior;</li>
+<li>build an N2 or equivalent interface matrix;</li>
+<li>define functional interfaces and ownership;</li>
+<li>evaluate function contribution, bottlenecks, and single points of dependency;</li>
+<li>conduct a criteria-based Functional Architecture Review.</li>
+</ul>
+<h3 id="5-key-concepts-and-vocabulary-6">5. Key concepts and vocabulary</h3>
+<p>Timeline; latency budget; concurrency; synchronization; handoff; functional interface; N2 matrix; flow item; interface owner; bottleneck; deadlock; stale state; mode transition; contribution analysis; review entry/exit criterion.</p>
+<h3 id="6-required-readings-and-study-prompts-6">6. Required readings and study prompts</h3>
+<ol>
+<li><strong>NASA Logical Decomposition and Design Solution Definition.</strong> Focus on interfaces, allocations, and iteration. <a href="https://www.nasa.gov/reference/4-3-logical-decomposition/" title="NASA — Logical Decomposition">NASA-LOGICAL</a> <a href="https://www.nasa.gov/reference/4-4-design-solution-definition/" title="NASA — Design Solution Definition">NASA-DESIGN-SOLUTION</a></li>
+<li><strong>JHU syllabus topics on timelines, N2 analysis, functional allocation, traceability, and physical allocation.</strong> Identify why they precede concept commitment. <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.767.83" title="JHU Fall 2026 abridged syllabus — EN.645.767 System Conceptual Design">JHU-767-SYLLABUS</a></li>
+<li><strong>MIT 16.842 interface-management material.</strong> Note interface-definition and ownership concerns. <a href="https://ocw.mit.edu/courses/16-842-fundamentals-of-systems-engineering-fall-2015/pages/lecture-notes/" title="MIT OCW 16.842 Fundamentals of Systems Engineering — Lecture Notes">MIT-16842</a></li>
+</ol>
+<p><strong>Estimated reading time:</strong> 2.0 hours.</p>
+<h3 id="7-lesson-notes-6">7. Lesson notes</h3>
+<p>Create a timeline for each critical scenario. Include user events, system decisions, physical movements, information updates, operator intervention, and recovery. Allocate the mission-level time budget to functions without pretending the allocation is final.</p>
+<p>An N2 matrix or equivalent interface view should identify what crosses between functions, direction, timing, units, format, quality, and ownership. Empty off-diagonal cells may indicate independence or missing analysis. Dense rows and columns may reveal coordinating functions or architectural risk.</p>
+<p>Contribution analysis asks how each function affects mission outcomes. A function may be mandatory for compliance but contribute little to differentiation; another may dominate wait time or resilience. This insight later guides physical allocation, investment, and risk reduction.</p>
+<p>The FAR is a decision event: Is the logical baseline sufficiently complete and stable to generate physical concepts? It should not approve a physical solution.</p>
+<h3 id="8-worked-example--timing-exposes-a-missing-function">8. Worked example — timing exposes a missing function</h3>
+<p>A nominal request scenario allocates:</p>
+<ul>
+<li>request capture: 0.2 s;</li>
+<li>eligibility check: 0.4 s;</li>
+<li>option generation: 0.7 s;</li>
+<li>dispatch commitment: 0.5 s;</li>
+<li>notification: 0.2 s.</li>
+</ul>
+<p>The total meets the 2.0-second target. Under intermittent connectivity, however, eligibility data may be stale. The original model lacks “assess data freshness” and “apply degraded eligibility policy.” Adding them changes timing, control, audit, and interface requirements. The architecture was incomplete despite having all visible user steps.</p>
+<h3 id="9-guided-practice-6">9. Guided practice</h3>
+<ol>
+<li>Build a timeline for event-day demand.</li>
+<li>Create a latency or duration budget.</li>
+<li>Add degraded-mode behavior.</li>
+<li>Build the function N2 matrix.</li>
+<li>Define ten critical functional interfaces.</li>
+<li>Rank functions by mission contribution and dependency centrality.</li>
+<li>Draft FAR entry and exit criteria.</li>
+</ol>
+<h3 id="10-independent-exercises-6">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<p>Diagnose ten seeded timing and interface defects.</p>
+<p><strong>Application</strong></p>
+<p>Create timelines for at least five critical scenarios and an N2 matrix for the top-level functions.</p>
+<p><strong>Analysis</strong></p>
+<p>Identify bottlenecks, high-coupling functions, ambiguous ownership, and synchronization risks.</p>
+<p><strong>Synthesis</strong></p>
+<p>Prepare and conduct the FAR using the four role passes.</p>
+<p><strong>Stretch</strong></p>
+<p>Create an automated consistency check between function dictionary, interface matrix, timeline elements, and trace tables.</p>
+<h3 id="11-deliverable-specification-6">11. Deliverable specification</h3>
+<p>Submit:</p>
+<ul>
+<li>critical-scenario timelines;</li>
+<li>functional duration/latency budgets;</li>
+<li>N2 or equivalent interface matrix;</li>
+<li>interface dictionary;</li>
+<li>function contribution and dependency analysis;</li>
+<li>traceability and consistency report;</li>
+<li>FAR deck, criteria, minutes, actions, and dispositions;</li>
+<li>baseline <code>SCD-FAR-v1.0</code>.</li>
+</ul>
+<h3 id="12-weekly-rubric-6">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Timing and mode analysis</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Interface completeness and ownership</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Functional contribution/dependency insight</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Traceability and consistency</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>FAR rigor and closure</td>
+<td style="text-align:right">20%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> no degraded-mode timing; critical interface lacks owner or content; review approves a physical concept; unresolved critical functional gap is hidden.</p>
+<h3 id="13-knowledge-check-6">13. Knowledge check</h3>
+<ol>
+<li>What does an N2 matrix reveal that a hierarchy does not?</li>
+<li>Why is a mission timeline useful before detailed design?</li>
+<li>What is stale state?</li>
+<li>Why can a highly connected function be risky?</li>
+<li>What decision should the FAR make?</li>
+</ol>
+<p><strong>Answer guidance</strong></p>
+<ol>
+<li>Interactions, direction, density, and potential missing interfaces.</li>
+<li>It exposes sequencing, concurrency, timing allocation, and operational feasibility.</li>
+<li>Information that no longer represents the current real-world or system condition.</li>
+<li>Failure or change can propagate broadly; it may also become a bottleneck.</li>
+<li>Whether the functional baseline is sufficient for physical concept generation.</li>
+</ol>
+<h3 id="14-feedback-revision-and-mastery-gate-6">14. Feedback, revision, and mastery gate</h3>
+<p>The FAR passes only when critical scenarios, functions, interfaces, timing, and traceability are adequate and all critical actions have owners and closure dates.</p>
+<h3 id="15-reflection-and-workload-6">15. Reflection and workload</h3>
+<p>Record which timing or interface issue most changed your understanding of the future system.</p>
+<p><strong>Estimated workload:</strong> 12–13 hours.</p>
+<h2 id="week-7--generate-physical-concept-families-with-morphological-and-set-based-methods">Week 7 — Generate physical concept families with morphological and set-based methods</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B6/chapters/07-generate-physical-concept-families-with-morphological-a.html">Read Book 6, Chapter 7</a> → <a href="../../K/B6/labs/lab-07-generate-physical-concept-families-with-morphological-a.html">complete Hypothetical Lab 7</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-767-w07.html">Read the Week 7 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competencies:</strong> C3, C8, C9, C12<br/>
+<strong>Course outcomes:</strong> CLO-6<br/>
+<strong>Primary artifact:</strong> Concept-Family Portfolio</p>
+<h3 id="1-why-this-week-matters-7">1. Why this week matters</h3>
+<p>Concept generation must create meaningful alternatives, not decorate the incumbent design. Morphological and set-based methods make design choices explicit, allow combinations to be explored, and delay commitment until evidence eliminates regions of the design space.</p>
+<h3 id="2-essential-question-7">2. Essential question</h3>
+<p><strong>What distinct ways could the functional architecture be realized, and what combinations should remain open?</strong></p>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-7">3. Prerequisite retrieval and readiness check</h3>
+<p>List the top ten functions and identify at least three different physical owners for each. For “provide accessible trip,” consider service process, human role, vehicle, infrastructure, policy, and information-system allocations.</p>
+<h3 id="4-weekly-learning-outcomes-7">4. Weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ul>
+<li>identify physical design dimensions from the functional architecture;</li>
+<li>create a morphological matrix and compatibility constraints;</li>
+<li>generate at least four genuinely distinct concept families;</li>
+<li>allocate functions to physical, human, organizational, and enabling elements;</li>
+<li>preserve set-based options and record elimination rationale;</li>
+<li>construct concept narratives, architecture views, and interface summaries.</li>
+</ul>
+<h3 id="5-key-concepts-and-vocabulary-7">5. Key concepts and vocabulary</h3>
+<p>Morphological analysis; design variable; option; compatibility; infeasible combination; concept family; set-based design; physical allocation; enabling system; human-system allocation; platform; modularity; phased concept; hedge; elimination criterion.</p>
+<h3 id="6-required-readings-and-study-prompts-7">6. Required readings and study prompts</h3>
+<ol>
+<li><strong>NASA Design Solution Definition.</strong> Focus on generating, analyzing, and selecting alternatives and identifying enabling products. <a href="https://www.nasa.gov/reference/4-4-design-solution-definition/" title="NASA — Design Solution Definition">NASA-DESIGN-SOLUTION</a></li>
+<li><strong>MIT 16.842 concept generation and tradespace exploration.</strong> Identify techniques for maintaining diversity. <a href="https://ocw.mit.edu/courses/16-842-fundamentals-of-systems-engineering-fall-2015/pages/lecture-notes/" title="MIT OCW 16.842 Fundamentals of Systems Engineering — Lecture Notes">MIT-16842</a></li>
+<li><strong>JHU syllabus topics on physical allocation, set-based design, resources, and conceptual architectures.</strong> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.767.83" title="JHU Fall 2026 abridged syllabus — EN.645.767 System Conceptual Design">JHU-767-SYLLABUS</a></li>
+</ol>
+<p><strong>Estimated reading time:</strong> 2.0 hours.</p>
+<h3 id="7-lesson-notes-7">7. Lesson notes</h3>
+<p>Derive morphological dimensions from decisions such as service pattern, vehicle/control model, dispatch ownership, accessibility provision, infrastructure dependence, energy strategy, staffing, information architecture, and deployment phasing. Do not let vendor catalogs define the design space.</p>
+<p>Compatibility constraints should be explicit. A fully centralized dispatch concept may be incompatible with a requirement for continued local service during communications loss unless a degraded local capability exists. A concept may combine options differently over phases.</p>
+<p>A concept family needs:</p>
+<ul>
+<li>operational narrative;</li>
+<li>physical architecture;</li>
+<li>functional allocations;</li>
+<li>external interfaces;</li>
+<li>enabling systems;</li>
+<li>staffing and support concept;</li>
+<li>transition path;</li>
+<li>likely strengths, weaknesses, assumptions, and technology risks.</li>
+</ul>
+<p>Retain sets where evidence is insufficient. Set-based design is not indecision; it is controlled postponement of commitment with planned elimination evidence.</p>
+<h3 id="8-worked-example--concept-families">8. Worked example — concept families</h3>
+<p><strong>Family A:</strong> demand-responsive autonomous shuttles across most campus roads.</p>
+<p><strong>Family B:</strong> human-driven accessible microtransit with algorithmic dispatch and phased driver-assist.</p>
+<p><strong>Family C:</strong> fixed-route electric circulators connecting mobility hubs, with on-demand accessible feeder service.</p>
+<p><strong>Family D:</strong> mixed fleet with autonomy restricted to low-complexity zones and human service elsewhere.</p>
+<p><strong>Family E:</strong> partnership with regional transit plus coordinated first/last-mile and event operations.</p>
+<p>These families differ in operational model, workforce, infrastructure, technology risk, interfaces, and transition—not merely vendor.</p>
+<h3 id="9-guided-practice-7">9. Guided practice</h3>
+<ol>
+<li>Create 8–12 morphological dimensions.</li>
+<li>Generate at least 30 raw combinations.</li>
+<li>Apply only hard compatibility and constraint screens.</li>
+<li>Cluster viable combinations into concept families.</li>
+<li>Build a one-page concept card for each.</li>
+<li>Perform a diversity audit against functions, operations, resources, and risk.</li>
+</ol>
+<h3 id="10-independent-exercises-7">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<p>Identify whether 12 pairs of concepts are distinct families or variants.</p>
+<p><strong>Application</strong></p>
+<p>Build a morphological matrix and retain at least four families.</p>
+<p><strong>Analysis</strong></p>
+<p>Map each function to physical/human/organizational owners under each family. Identify enabling-system differences.</p>
+<p><strong>Synthesis</strong></p>
+<p>Create concept architecture views, narratives, interfaces, transition paths, and elimination records.</p>
+<p><strong>Stretch</strong></p>
+<p>Use a script to enumerate combinations, apply compatibility rules, and visualize the surviving design space.</p>
+<h3 id="11-deliverable-specification-7">11. Deliverable specification</h3>
+<p>Submit:</p>
+<ul>
+<li>morphological matrix and option definitions;</li>
+<li>compatibility-rule set;</li>
+<li>raw combination log;</li>
+<li>four-or-more concept-family cards;</li>
+<li>physical architecture and allocation views;</li>
+<li>enabling-system and interface summary;</li>
+<li>transition sketch;</li>
+<li>diversity audit;</li>
+<li>elimination and retained-set log.</li>
+</ul>
+<h3 id="12-weekly-rubric-7">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Design-space structure and completeness</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Genuine concept diversity</td>
+<td style="text-align:right">30%</td>
+</tr>
+<tr>
+<td>Functional/physical allocations</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Enabling systems, interfaces, and transition</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Set-based rationale and elimination integrity</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> fewer than four families; low-automation alternative dismissed without evidence; families differ only by vendor; hard and preference screens are mixed.</p>
+<h3 id="13-knowledge-check-7">13. Knowledge check</h3>
+<ol>
+<li>What is a morphological dimension?</li>
+<li>How does a concept family differ from a variant?</li>
+<li>What is set-based design?</li>
+<li>Why include organizational and human allocations?</li>
+<li>When is elimination legitimate?</li>
+</ol>
+<p><strong>Answer guidance</strong></p>
+<ol>
+<li>A design decision axis with alternative realization options.</li>
+<li>A family differs in major operational or architectural principles; a variant changes details within one family.</li>
+<li>Maintaining feasible sets until evidence justifies narrowing.</li>
+<li>Systems perform through people, processes, organizations, and enabling products as well as hardware/software.</li>
+<li>When a documented constraint, incompatibility, or robust dominance is demonstrated.</li>
+</ol>
+<h3 id="14-feedback-revision-and-mastery-gate-7">14. Feedback, revision, and mastery gate</h3>
+<p>Pass when:</p>
+<ul>
+<li>at least four distinct families remain;</li>
+<li>concept diversity spans operations, architecture, and lifecycle;</li>
+<li>all critical functions are allocated;</li>
+<li>hard screens are traceable;</li>
+<li>eliminated concepts have reviewable rationale.</li>
+</ul>
+<h3 id="15-reflection-and-workload-7">15. Reflection and workload</h3>
+<p>Record which concept felt uncomfortable because it challenged prior investments, and whether that discomfort influenced your evaluation.</p>
+<p><strong>Estimated workload:</strong> 11–13 hours.</p>
+<h2 id="week-8--resource-affordability-schedule-feasibility-and-optimization-models">Week 8 — Resource, affordability, schedule, feasibility, and optimization models</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B6/chapters/08-resource-affordability-schedule-feasibility-and-optimiz.html">Read Book 6, Chapter 8</a> → <a href="../../K/B6/labs/lab-08-resource-affordability-schedule-feasibility-and-optimiz.html">complete Hypothetical Lab 8</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-767-w08.html">Read the Week 8 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competencies:</strong> C7, C8, C9, C10<br/>
+<strong>Course outcomes:</strong> CLO-8<br/>
+<strong>Primary artifact:</strong> Concept Feasibility Model Package</p>
+<h3 id="1-why-this-week-matters-8">1. Why this week matters</h3>
+<p>Concepts are not viable because they look coherent in an architecture diagram. They must operate within demand, capacity, energy, staffing, infrastructure, cost, schedule, technology, and support limits. Early models should be simple enough to review and strong enough to reject impossible or dominated concepts.</p>
+<h3 id="2-essential-question-8">2. Essential question</h3>
+<p><strong>Which concept claims survive bounded quantitative analysis, and which fail before detailed design?</strong></p>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-8">3. Prerequisite retrieval and readiness check</h3>
+<p>For each concept family, estimate:</p>
+<ul>
+<li>service units or capacity;</li>
+<li>peak staffing;</li>
+<li>energy or fuel demand;</li>
+<li>major infrastructure;</li>
+<li>development and transition duration;</li>
+<li>acquisition and annual operations cost;</li>
+<li>highest-uncertainty input.</li>
+</ul>
+<p>All values must be labeled as data, analogy, estimate, or assumption.</p>
+<h3 id="4-weekly-learning-outcomes-8">4. Weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ul>
+<li>construct resource and capacity budgets;</li>
+<li>develop rough-order cost and schedule ranges;</li>
+<li>create simple feasibility and optimization models;</li>
+<li>distinguish estimate accuracy from estimate precision;</li>
+<li>identify infeasible concepts and binding constraints;</li>
+<li>document uncertainty, calibration, and limitations.</li>
+</ul>
+<h3 id="5-key-concepts-and-vocabulary-8">5. Key concepts and vocabulary</h3>
+<p>Resource budget; capacity; utilization; bottleneck; reserve margin; rough order of magnitude; cost-estimating relationship; analogy; parametric estimate; schedule driver; long-lead item; critical technology; linear programming; constraint; objective function; feasible region; binding constraint; model validation.</p>
+<h3 id="6-required-readings-and-study-prompts-8">6. Required readings and study prompts</h3>
+<ol>
+<li><strong>GAO Cost Estimating and Assessment Guide.</strong> Focus on scope, ground rules, data, methodology, sensitivity, risk/uncertainty, and documentation. <a href="https://www.gao.gov/products/gao-20-195g" title="GAO Cost Estimating and Assessment Guide">GAO-COST</a></li>
+<li><strong>NASA Technical Assessment and Design Solution Definition.</strong> Identify how technical measures and analyses support decisions. <a href="https://www.nasa.gov/reference/6-7-technical-assessment/" title="NASA — Technical Assessment">NASA-ASSESS</a> <a href="https://www.nasa.gov/reference/4-4-design-solution-definition/" title="NASA — Design Solution Definition">NASA-DESIGN-SOLUTION</a></li>
+<li><strong>JHU syllabus topics on resources, cost, linear programming, and risk.</strong> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.767.83" title="JHU Fall 2026 abridged syllabus — EN.645.767 System Conceptual Design">JHU-767-SYLLABUS</a></li>
+</ol>
+<p><strong>Estimated reading time:</strong> 2.5 hours.</p>
+<h3 id="7-lesson-notes-8">7. Lesson notes</h3>
+<p>Build one integrated workbook or notebook with shared assumptions and concept-specific parameters. Use ranges where information is weak. Cost categories should include development, acquisition/deployment, infrastructure, transition, training, operations, maintenance, licenses/services, staffing, energy, spares, and retirement.</p>
+<p>Schedule models should identify major phases, dependencies, regulatory or procurement lead times, infrastructure work, technology maturation, pilot preparation, training, and acceptance. Do not use a single optimistic duration.</p>
+<p>Resource models may include fleet/service capacity, accessible capacity, charging demand, dispatch workload, maintenance bays, data bandwidth, operator staffing, and emergency reserve. A small linear model can test whether demand, coverage, charging, staffing, and budget constraints can be satisfied simultaneously.</p>
+<h3 id="8-worked-example--charging-feasibility">8. Worked example — charging feasibility</h3>
+<p>A concept assumes 32 vehicles, each requiring an average 60 kWh recharge during the overnight window. Total energy is 1,920 kWh. With a 1.2 MW connection, energy alone appears feasible in 1.6 hours. But charger efficiency, simultaneous loads, charge-rate limits, reserve operations, and daytime top-up needs may change the result. The correct conclusion is not “charging is solved,” but “energy quantity is feasible under these assumptions; power-distribution, charger count, and operational scheduling require further analysis.”</p>
+<h3 id="9-guided-practice-8">9. Guided practice</h3>
+<ol>
+<li>Build a common assumption table.</li>
+<li>Create one capacity and resource budget per concept.</li>
+<li>Build cost ranges by work/lifecycle category.</li>
+<li>Build a 30-month schedule feasibility model.</li>
+<li>Create a simple optimization or constraint model.</li>
+<li>Identify binding constraints and infeasible conditions.</li>
+<li>Perform unit and reasonableness checks.</li>
+</ol>
+<h3 id="10-independent-exercises-8">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<p>Correct ten unit, range, or false-precision errors in a seeded estimate.</p>
+<p><strong>Application</strong></p>
+<p>Develop resource, cost, and schedule models for all retained concepts.</p>
+<p><strong>Analysis</strong></p>
+<p>Identify the top five drivers and the conditions under which each concept becomes infeasible.</p>
+<p><strong>Synthesis</strong></p>
+<p>Prepare a feasibility screen that distinguishes eliminate, retain, and retain-conditionally decisions.</p>
+<p><strong>Stretch</strong></p>
+<p>Implement a linear or mixed-integer model for service capacity, charging, staffing, and budget allocation. Explain simplifications.</p>
+<h3 id="11-deliverable-specification-8">11. Deliverable specification</h3>
+<p>Submit:</p>
+<ul>
+<li>integrated assumptions and units table;</li>
+<li>concept resource budgets;</li>
+<li>cost-estimate ranges and basis;</li>
+<li>schedule ranges and drivers;</li>
+<li>feasibility/optimization model;</li>
+<li>binding-constraint analysis;</li>
+<li>reasonableness and model-check record;</li>
+<li>concept screen with rationale;</li>
+<li>reproducible source files.</li>
+</ul>
+<h3 id="12-weekly-rubric-8">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model structure and traceable assumptions</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Resource and capacity credibility</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Cost and schedule realism</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Feasibility/optimization insight</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Uncertainty, checking, and documentation</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> mixed units; unsupported point estimates presented as precise; lifecycle costs omitted; concept eliminated using an assumption applied inconsistently; calculations not reproducible.</p>
+<h3 id="13-knowledge-check-8">13. Knowledge check</h3>
+<ol>
+<li>What is a binding constraint?</li>
+<li>Why is a narrow estimate range not automatically better?</li>
+<li>What belongs in affordability beyond acquisition?</li>
+<li>How does feasibility analysis differ from value analysis?</li>
+<li>What is a cost-estimating basis?</li>
+</ol>
+<p><strong>Answer guidance</strong></p>
+<ol>
+<li>A constraint that limits the optimal or feasible solution at the result.</li>
+<li>It may simply hide uncertainty.</li>
+<li>Development, infrastructure, transition, operations, support, maintenance, staffing, energy, and retirement.</li>
+<li>Feasibility asks whether constraints can be met; value asks which feasible outcome is preferred.</li>
+<li>The sources, assumptions, methods, analogies, quantities, rates, and rationale supporting the estimate.</li>
+</ol>
+<h3 id="14-feedback-revision-and-mastery-gate-8">14. Feedback, revision, and mastery gate</h3>
+<p>Pass when all concept models are reviewable, units are consistent, ranges and sources are explicit, major constraints are tested, and elimination decisions are not driven by hidden asymmetry.</p>
+<h3 id="15-reflection-and-workload-8">15. Reflection and workload</h3>
+<p>Record which concept became less attractive after feasibility analysis and whether the change arose from evidence or model structure.</p>
+<p><strong>Estimated workload:</strong> 12–14 hours.</p>
+<h2 id="week-9--objectives-value-functions-and-multiattribute-evaluation">Week 9 — Objectives, value functions, and multiattribute evaluation</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B6/chapters/09-objectives-value-functions-and-multiattribute-evaluatio.html">Read Book 6, Chapter 9</a> → <a href="../../K/B6/labs/lab-09-objectives-value-functions-and-multiattribute-evaluatio.html">complete Hypothetical Lab 9</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-767-w09.html">Read the Week 9 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competencies:</strong> C7, C8, C9, C12<br/>
+<strong>Course outcomes:</strong> CLO-7, CLO-9<br/>
+<strong>Primary artifact:</strong> Decision Model v1.0</p>
+<h3 id="1-why-this-week-matters-9">1. Why this week matters</h3>
+<p>Concept selection is not the act of putting subjective numbers into a spreadsheet. A defensible value model distinguishes fundamental objectives from means, avoids double counting, handles thresholds and nonlinear preferences, and shows how stakeholder values affect the ranking.</p>
+<h3 id="2-essential-question-9">2. Essential question</h3>
+<p><strong>How should mission value be represented without hiding judgments inside arithmetic?</strong></p>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-9">3. Prerequisite retrieval and readiness check</h3>
+<p>From the ConOps and needs baseline, write:</p>
+<ul>
+<li>five fundamental objectives;</li>
+<li>five means objectives;</li>
+<li>one unacceptable threshold;</li>
+<li>one objective where stakeholder value is nonlinear;</li>
+<li>one pair of criteria at risk of double counting.</li>
+</ul>
+<h3 id="4-weekly-learning-outcomes-9">4. Weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ul>
+<li>construct an objectives hierarchy;</li>
+<li>distinguish fundamental, means, constraint, and proxy measures;</li>
+<li>define MOEs, MOPs, TPM candidates, thresholds, and value functions;</li>
+<li>elicit or estimate weights using transparent methods;</li>
+<li>perform AHP-, ROC-, or MAUT-style evaluation appropriately;</li>
+<li>audit double counting, scaling, compensability, and stakeholder disagreement.</li>
+</ul>
+<h3 id="5-key-concepts-and-vocabulary-9">5. Key concepts and vocabulary</h3>
+<p>Fundamental objective; means objective; attribute; criterion; proxy; threshold; utility; value function; normalization; swing weight; rank-order centroid; pairwise comparison; consistency; compensability; veto; double counting; stakeholder value set.</p>
+<h3 id="6-required-readings-and-study-prompts-9">6. Required readings and study prompts</h3>
+<ol>
+<li><strong>NASA Decision Analysis.</strong> Focus on objectives, criteria, alternatives, methods, uncertainty, and documentation. <a href="https://www.nasa.gov/reference/6-8-decision-analysis/" title="NASA — Decision Analysis">NASA-DECISION</a></li>
+<li><strong>SEBoK System Analysis and alternative selection.</strong> Identify the role of effectiveness, cost, risk, and sensitivity. <a href="https://sebokwiki.org/wiki/System_Analysis" title="SEBoK — System Analysis">SEBOK-SYSTEM-ANALYSIS</a> <a href="https://sebokwiki.org/wiki/Analysis_and_Selection_between_Alternative_Solutions" title="SEBoK — Analysis and Selection between Alternative Solutions">SEBOK-ALTERNATIVES</a></li>
+<li><strong>JHU syllabus topics on AHP, ROC, MAUT, mission calculator, and traceability.</strong> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.767.83" title="JHU Fall 2026 abridged syllabus — EN.645.767 System Conceptual Design">JHU-767-SYLLABUS</a></li>
+</ol>
+<p><strong>Estimated reading time:</strong> 2.5 hours.</p>
+<h3 id="7-lesson-notes-9">7. Lesson notes</h3>
+<p>Start with fundamental objectives such as equitable access, trip effectiveness, safety, resilience, affordability, time to field, environmental impact, privacy, and adaptability. Means such as “number of vehicles” or “automation level” should not receive independent value unless stakeholders truly care about them as ends.</p>
+<p>Define each attribute with direction, units, threshold, objective, data source, model, and uncertainty. Value functions may be linear, stepwise, concave, convex, or piecewise. A five-minute improvement in wait time may be valuable near an accessibility threshold and negligible elsewhere.</p>
+<p>Use at least two value sets or elicitation methods. Rank-order centroid weights can provide a simple baseline; pairwise methods can explore judgments but should not create artificial precision. Record inconsistency and disagreement rather than forcing consensus.</p>
+<h3 id="8-worked-example--double-counting-and-nonlinear-value">8. Worked example — double counting and nonlinear value</h3>
+<p>Suppose the model includes:</p>
+<ul>
+<li>average wait time;</li>
+<li>95th-percentile wait time;</li>
+<li>on-time arrival rate;</li>
+<li>passenger satisfaction.</li>
+</ul>
+<p>All may reflect the same service-quality mechanism. Treating them as independent can triple-count one advantage. A better hierarchy might use “trip predictability” as a fundamental objective with selected nonredundant attributes.</p>
+<p>For accessibility-critical trips, value may be near zero below 90% on-time completion, rise steeply from 90% to 97%, and flatten above 99%. Linear normalization would misrepresent this preference.</p>
+<h3 id="9-guided-practice-9">9. Guided practice</h3>
+<ol>
+<li>Build an objectives hierarchy.</li>
+<li>Conduct an independence and double-counting audit.</li>
+<li>Define measures and value functions.</li>
+<li>Create a stakeholder weight-elicitation worksheet.</li>
+<li>Evaluate concepts under two value sets.</li>
+<li>Compare results and identify rank reversals.</li>
+<li>Add noncompensable thresholds where appropriate.</li>
+</ol>
+<h3 id="10-independent-exercises-9">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<p>Classify 25 candidate objectives and measures.</p>
+<p><strong>Application</strong></p>
+<p>Create a complete evaluation framework with 6–10 fundamental objectives and 10–18 attributes.</p>
+<p><strong>Analysis</strong></p>
+<p>Compare equal, ROC, and pairwise-derived weights. Diagnose consistency and double counting.</p>
+<p><strong>Synthesis</strong></p>
+<p>Build Decision Model v1.0 with raw data, normalized values, weights, value functions, thresholds, and traceability.</p>
+<p><strong>Stretch</strong></p>
+<p>Implement uncertainty distributions for selected attributes and produce preliminary probability-of-preference results.</p>
+<h3 id="11-deliverable-specification-9">11. Deliverable specification</h3>
+<p>Submit:</p>
+<ul>
+<li>objectives hierarchy;</li>
+<li>measure dictionary;</li>
+<li>independence/double-counting audit;</li>
+<li>value functions and thresholds;</li>
+<li>at least two stakeholder value sets;</li>
+<li>raw-data and normalized-value tables;</li>
+<li>decision model v1.0;</li>
+<li>trace from objectives to needs/scenarios and from performance data to models;</li>
+<li>red-team memo.</li>
+</ul>
+<h3 id="12-weekly-rubric-9">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Objectives hierarchy and independence</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Measure and value-function quality</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Weighting transparency and stakeholder treatment</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Model correctness and traceability</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Red-team and limitation analysis</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> means treated as fundamental without rationale; double counting materially affects ranking; hidden weights or normalization; unacceptable threshold compensated by unrelated strengths.</p>
+<h3 id="13-knowledge-check-9">13. Knowledge check</h3>
+<ol>
+<li>What is a fundamental objective?</li>
+<li>Why can normalization change a ranking?</li>
+<li>What is a swing weight?</li>
+<li>What does compensability mean?</li>
+<li>Why use multiple stakeholder value sets?</li>
+</ol>
+<p><strong>Answer guidance</strong></p>
+<ol>
+<li>An outcome valued for its own sake in the decision context.</li>
+<li>Different scales and endpoints change relative value contributions.</li>
+<li>The importance of moving an attribute from its worst to best relevant level.</li>
+<li>Poor performance on one criterion can be offset by strength on another.</li>
+<li>To expose value disagreement and test whether the preferred concept is broadly robust.</li>
+</ol>
+<h3 id="14-feedback-revision-and-mastery-gate-9">14. Feedback, revision, and mastery gate</h3>
+<p>Pass when:</p>
+<ul>
+<li>objectives are traceable and substantially independent;</li>
+<li>thresholds and nonlinear values are represented;</li>
+<li>at least two value sets are evaluated;</li>
+<li>all computations are reproducible;</li>
+<li>the learner can explain every weight and value function.</li>
+</ul>
+<h3 id="15-reflection-and-workload-9">15. Reflection and workload</h3>
+<p>Record which judgment in the model is most normative and which is most empirical.</p>
+<p><strong>Estimated workload:</strong> 12–14 hours.</p>
+<h2 id="week-10--doe-parametric-analysis-uncertainty-sensitivity-and-down-select-review">Week 10 — DOE, parametric analysis, uncertainty, sensitivity, and Down-select Review</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B6/chapters/10-doe-parametric-analysis-uncertainty-sensitivity-and-dow.html">Read Book 6, Chapter 10</a> → <a href="../../K/B6/labs/lab-10-doe-parametric-analysis-uncertainty-sensitivity-and-dow.html">complete Hypothetical Lab 10</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-767-w10.html">Read the Week 10 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competencies:</strong> C7, C8, C9, C12<br/>
+<strong>Course outcomes:</strong> CLO-8, CLO-9, CLO-11<br/>
+<strong>Primary artifact:</strong> Robust Down-select Package</p>
+<h3 id="1-why-this-week-matters-10">1. Why this week matters</h3>
+<p>A point-score winner is not yet a preferred concept. The team must understand interactions, uncertain inputs, scenario dependence, weight boundaries, Pareto tradeoffs, and the probability that another concept becomes preferable. This week challenges the decision before commitment.</p>
+<h3 id="2-essential-question-10">2. Essential question</h3>
+<p><strong>Does the preferred concept remain preferred when uncertain facts and legitimate stakeholder values change?</strong></p>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-10">3. Prerequisite retrieval and readiness check</h3>
+<p>Identify:</p>
+<ul>
+<li>the five inputs with largest uncertainty;</li>
+<li>the three largest value weights;</li>
+<li>two likely factor interactions;</li>
+<li>one criterion where concepts are close;</li>
+<li>one concept that might dominate under a different future scenario.</li>
+</ul>
+<h3 id="4-weekly-learning-outcomes-10">4. Weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ul>
+<li>design a bounded experiment or parametric study;</li>
+<li>estimate main effects and selected interactions;</li>
+<li>propagate uncertainty through performance and value models;</li>
+<li>construct one- and two-way sensitivity and decision-boundary analyses;</li>
+<li>identify Pareto-efficient concepts and scenario-dependent preferences;</li>
+<li>conduct a rigorous Down-select Review.</li>
+</ul>
+<h3 id="5-key-concepts-and-vocabulary-10">5. Key concepts and vocabulary</h3>
+<p>Factor; level; response; interaction; design matrix; surrogate model; scenario; uncertainty propagation; Monte Carlo; tornado chart; decision boundary; robustness; rank reversal; stochastic dominance; Pareto frontier; dominated alternative; regret; information value.</p>
+<h3 id="6-required-readings-and-study-prompts-10">6. Required readings and study prompts</h3>
+<ol>
+<li><strong>NIST DOE material.</strong> Focus on planning, factorial ideas, interactions, response modeling, and interpretation. <a href="https://www.itl.nist.gov/div898/handbook/pri/pri.htm" title="NIST/SEMATECH Engineering Statistics Handbook — Process Improvement and Experimental Design">NIST-DOE</a></li>
+<li><strong>NASA Decision Analysis.</strong> Review sensitivity, uncertainty, and documentation. <a href="https://www.nasa.gov/reference/6-8-decision-analysis/" title="NASA — Decision Analysis">NASA-DECISION</a></li>
+<li><strong>SEBoK alternative selection.</strong> Identify why robustness and assumptions matter. <a href="https://sebokwiki.org/wiki/Analysis_and_Selection_between_Alternative_Solutions" title="SEBoK — Analysis and Selection between Alternative Solutions">SEBOK-ALTERNATIVES</a></li>
+</ol>
+<p><strong>Estimated reading time:</strong> 2.5 hours.</p>
+<h3 id="7-lesson-notes-10">7. Lesson notes</h3>
+<p>Use DOE when several factors may interact. A small factorial or space-filling design can be more informative than changing one assumption at a time. The model need not be high fidelity, but the experimental region must be plausible and the response linked to the decision.</p>
+<p>Uncertainty analysis should distinguish:</p>
+<ul>
+<li>scenario uncertainty: which future operating condition occurs;</li>
+<li>parameter uncertainty: unknown input values;</li>
+<li>model-form uncertainty: simplifications and omitted mechanisms;</li>
+<li>value uncertainty: stakeholder preferences and weights;</li>
+<li>implementation uncertainty: whether the concept achieves modeled performance.</li>
+</ul>
+<p>Sensitivity should identify boundaries, not merely display bars. State, for example, “Concept D remains preferred unless annual operating cost exceeds $4.6M or the accessibility weight falls below 0.12 while time-to-field weight exceeds 0.25.”</p>
+<p>Pareto analysis reveals nondominated alternatives without aggregating all value judgments. A concept that is not the weighted winner may remain important as a low-cost or low-risk hedge.</p>
+<h3 id="8-worked-example--apparent-winner-becomes-fragile">8. Worked example — apparent winner becomes fragile</h3>
+<p>Decision Model v1.0 gives:</p>
+<ul>
+<li>Concept A: 0.73</li>
+<li>Concept B: 0.70</li>
+<li>Concept C: 0.64</li>
+<li>Concept D: 0.72</li>
+</ul>
+<p>A sensitivity study shows A's score depends on a projected 97% autonomous-service availability with wide uncertainty. At 93%, A falls to 0.66. D remains between 0.69 and 0.73 across the range. A has the highest point estimate, but D is more robust. The review may prefer D, retain A as a maturation option, or commission additional evidence.</p>
+<h3 id="9-guided-practice-10">9. Guided practice</h3>
+<ol>
+<li>Select 4–6 uncertain factors.</li>
+<li>Define ranges and distributions.</li>
+<li>Design a small experiment or parametric run set.</li>
+<li>estimate main effects and at least two interactions;</li>
+<li>propagate uncertainty through the value model;</li>
+<li>create tornado, decision-boundary, scenario, and Pareto views;</li>
+<li>calculate simple regret or probability-of-preference measures;</li>
+<li>prepare red-team questions for the DSR.</li>
+</ol>
+<h3 id="10-independent-exercises-10">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<p>Interpret seeded sensitivity and Pareto plots.</p>
+<p><strong>Application</strong></p>
+<p>Run the planned DOE or parametric study and update performance estimates.</p>
+<p><strong>Analysis</strong></p>
+<p>Conduct weight, parameter, scenario, and model-form sensitivity. Identify decision boundaries and rank reversals.</p>
+<p><strong>Synthesis</strong></p>
+<p>Prepare and conduct the Down-select Review. Recommend preferred, retained, eliminated, and evidence-needed concepts.</p>
+<p><strong>Stretch</strong></p>
+<p>Estimate the expected value of obtaining better information for one critical assumption.</p>
+<h3 id="11-deliverable-specification-10">11. Deliverable specification</h3>
+<p>Submit:</p>
+<ul>
+<li>experiment/parametric design and run log;</li>
+<li>model diagnostics and interaction findings;</li>
+<li>uncertainty distributions and rationale;</li>
+<li>propagated outcome and value results;</li>
+<li>tornado, decision-boundary, scenario, and Pareto analyses;</li>
+<li>robustness and regret summary;</li>
+<li>updated concept status;</li>
+<li>DSR deck, minutes, dissent, actions, and dispositions.</li>
+</ul>
+<h3 id="12-weekly-rubric-10">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Experimental/parametric design</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Uncertainty modeling and propagation</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Sensitivity and decision-boundary insight</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Pareto/scenario/robustness reasoning</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Down-select Review rigor</td>
+<td style="text-align:right">20%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> only point estimates; uncertain variables selected after seeing desired outcome; no sensitivity to weights; dominated concept preferred without rationale; dissent omitted.</p>
+<h3 id="13-knowledge-check-10">13. Knowledge check</h3>
+<ol>
+<li>What is an interaction?</li>
+<li>What is a Pareto-dominated concept?</li>
+<li>How does robustness differ from point performance?</li>
+<li>What is a decision boundary?</li>
+<li>When is additional information valuable?</li>
+</ol>
+<p><strong>Answer guidance</strong></p>
+<ol>
+<li>The effect of one factor depends on the level of another.</li>
+<li>Another concept is at least as good on all considered objectives and better on at least one.</li>
+<li>Robustness concerns performance or preference across plausible changes.</li>
+<li>The combination of assumptions or values where the preferred alternative changes.</li>
+<li>When it could change the decision enough to justify the cost and time of learning.</li>
+</ol>
+<h3 id="14-feedback-revision-and-mastery-gate-10">14. Feedback, revision, and mastery gate</h3>
+<p>The DSR passes only if:</p>
+<ul>
+<li>uncertain and value-sensitive drivers are explicit;</li>
+<li>at least one interaction or rationale for its absence is addressed;</li>
+<li>decision boundaries and Pareto alternatives are shown;</li>
+<li>eliminated concepts have defensible rationale;</li>
+<li>the preferred concept is not named until review criteria are met.</li>
+</ul>
+<h3 id="15-reflection-and-workload-10">15. Reflection and workload</h3>
+<p>Record whether the point-estimate winner remained preferred and which uncertainty deserves further investment.</p>
+<p><strong>Estimated workload:</strong> 13–15 hours.</p>
+<h2 id="week-11--risk-opportunity-affordability-schedule-and-concept-validation-review">Week 11 — Risk, opportunity, affordability, schedule, and Concept Validation Review</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B6/chapters/11-risk-opportunity-affordability-schedule-and-concept-val.html">Read Book 6, Chapter 11</a> → <a href="../../K/B6/labs/lab-11-risk-opportunity-affordability-schedule-and-concept-val.html">complete Hypothetical Lab 11</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-767-w11.html">Read the Week 11 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competencies:</strong> C1, C3, C9, C10, C12<br/>
+<strong>Course outcomes:</strong> CLO-10, CLO-11, CLO-12<br/>
+<strong>Primary artifact:</strong> Preferred Concept Baseline Candidate and CVR Package</p>
+<h3 id="1-why-this-week-matters-11">1. Why this week matters</h3>
+<p>The down-select establishes comparative preference, but a preferred concept can still be irresponsible to authorize. Concept validation asks whether the operational concept is credible in its intended environment, whether major risks and enabling products are understood, and whether the program can plausibly deliver and sustain it within affordability and schedule bounds.</p>
+<h3 id="2-essential-question-11">2. Essential question</h3>
+<p><strong>Is the preferred concept credible enough to commit to detailed design, and under what conditions?</strong></p>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-11">3. Prerequisite retrieval and readiness check</h3>
+<p>Without the risk register, identify:</p>
+<ul>
+<li>the top technical uncertainty;</li>
+<li>the top operational/adoption risk;</li>
+<li>the top affordability driver;</li>
+<li>the top schedule driver;</li>
+<li>the strongest risk-based argument for the retained alternative.</li>
+</ul>
+<h3 id="4-weekly-learning-outcomes-11">4. Weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ul>
+<li>develop concept-level risks and opportunities with cause–event–consequence logic;</li>
+<li>integrate risks with assumptions, models, schedules, costs, requirements, and decisions;</li>
+<li>define mitigation, maturation, demonstration, and fallback strategies;</li>
+<li>validate the concept against operational scenarios and stakeholder outcomes;</li>
+<li>assess affordability and schedule confidence;</li>
+<li>determine approve, conditional approve, defer, or reopen outcomes.</li>
+</ul>
+<h3 id="5-key-concepts-and-vocabulary-11">5. Key concepts and vocabulary</h3>
+<p>Risk; opportunity; uncertainty; issue; cause–event–consequence; exposure; trigger; mitigation; contingency; retirement criterion; technology maturation; enabling product; operational validation; affordability cap; schedule confidence; conditional baseline; fallback; off-ramp.</p>
+<h3 id="6-required-readings-and-study-prompts-11">6. Required readings and study prompts</h3>
+<ol>
+<li><strong>NASA Technical Risk Management.</strong> Focus on planning, identification, analysis, handling, tracking, and communication. <a href="https://www.nasa.gov/reference/6-4-technical-risk-management/" title="NASA — Technical Risk Management">NASA-RISK</a></li>
+<li><strong>NASA Design Solution Definition and Technical Assessment.</strong> Review enabling products, validation, technical measures, and readiness. <a href="https://www.nasa.gov/reference/4-4-design-solution-definition/" title="NASA — Design Solution Definition">NASA-DESIGN-SOLUTION</a> <a href="https://www.nasa.gov/reference/6-7-technical-assessment/" title="NASA — Technical Assessment">NASA-ASSESS</a></li>
+<li><strong>GAO Cost Guide.</strong> Revisit risk and uncertainty, documentation, and credibility. <a href="https://www.gao.gov/products/gao-20-195g" title="GAO Cost Estimating and Assessment Guide">GAO-COST</a></li>
+</ol>
+<p><strong>Estimated reading time:</strong> 2.5 hours.</p>
+<h3 id="7-lesson-notes-11">7. Lesson notes</h3>
+<p>Risk statements should identify cause, uncertain event, and consequence. “Autonomy risk” is not actionable. A stronger statement is: “Because mixed-traffic perception performance under heavy rain is not demonstrated in the campus environment, the bounded-zone autonomous service may fail to maintain required availability, causing service interruption or schedule delay.”</p>
+<p>Connect each high risk to:</p>
+<ul>
+<li>affected requirement, objective, or scenario;</li>
+<li>model assumption;</li>
+<li>schedule and cost impact;</li>
+<li>mitigation or learning action;</li>
+<li>trigger;</li>
+<li>owner;</li>
+<li>fallback or retained alternative;</li>
+<li>retirement evidence.</li>
+</ul>
+<p>Concept validation uses scenario walkthroughs, models, stakeholder review, prototypes, analogies, and demonstrations to ask whether the right operational solution is being proposed. It does not prove every requirement. The CVR should make conditions explicit: approval may depend on a technology demonstration, infrastructure survey, labor agreement, privacy impact assessment, or cost reconciliation.</p>
+<h3 id="8-worked-example--conditional-concept-approval">8. Worked example — conditional concept approval</h3>
+<p>Concept D is preferred but depends on reliable low-speed autonomy in two bounded zones. The program can conditionally approve D if:</p>
+<ul>
+<li>a six-month perception and remote-assist demonstration meets defined availability and intervention thresholds;</li>
+<li>the cost estimate remains below the affordability cap at 70% confidence;</li>
+<li>accessible-service staffing is validated with operators;</li>
+<li>the human-driven fallback remains architecturally viable.</li>
+</ul>
+<p>This is stronger than either unqualified approval or rejecting the concept solely because uncertainty remains.</p>
+<h3 id="9-guided-practice-11">9. Guided practice</h3>
+<ol>
+<li>Rewrite the risk register using cause–event–consequence.</li>
+<li>Link top risks to assumptions and model variables.</li>
+<li>Build mitigation and evidence roadmaps.</li>
+<li>Re-run affordability and schedule ranges with risk effects.</li>
+<li>Walk the preferred concept through ten operational scenarios.</li>
+<li>Identify validation gaps and conditions.</li>
+<li>prepare CVR entry/exit criteria.</li>
+</ol>
+<h3 id="10-independent-exercises-11">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<p>Repair 15 vague or issue-like risk statements.</p>
+<p><strong>Application</strong></p>
+<p>Develop 20–30 risks and opportunities spanning technical, operational, integration, cost, schedule, workforce, regulatory, privacy, safety, transition, and support.</p>
+<p><strong>Analysis</strong></p>
+<p>Quantify or bound the top risks, update cost/schedule confidence, and identify correlated risks.</p>
+<p><strong>Synthesis</strong></p>
+<p>Conduct the Concept Validation Review and issue an approval recommendation with conditions, fallback, and retained alternative.</p>
+<p><strong>Stretch</strong></p>
+<p>Build a small risk network or Monte Carlo schedule/cost model to explore correlation and compound exposure.</p>
+<h3 id="11-deliverable-specification-11">11. Deliverable specification</h3>
+<p>Submit:</p>
+<ul>
+<li>risk/opportunity register;</li>
+<li>risk-to-assumption/model/requirement trace;</li>
+<li>mitigation, maturation, and demonstration roadmap;</li>
+<li>updated affordability and schedule analysis;</li>
+<li>scenario-based concept-validation matrix;</li>
+<li>conditions, off-ramps, and fallback strategy;</li>
+<li>CVR deck, minutes, dissent, actions, and decision;</li>
+<li>preferred concept baseline candidate.</li>
+</ul>
+<h3 id="12-weekly-rubric-11">12. Weekly rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Risk statement and coverage quality</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Integration with models and decisions</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Mitigation/maturation/fallback quality</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Affordability and schedule realism</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Operational validation and CVR rigor</td>
+<td style="text-align:right">25%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> risk register detached from decision; no fallback for a decision-critical uncertainty; accessibility/safety/privacy risks excluded; unconditional approval despite unmet critical evidence.</p>
+<h3 id="13-knowledge-check-11">13. Knowledge check</h3>
+<ol>
+<li>How does a risk differ from an issue?</li>
+<li>What is a risk trigger?</li>
+<li>How does concept validation differ from verification?</li>
+<li>What is a conditional baseline?</li>
+<li>Why retain an alternative after down-select?</li>
+</ol>
+<p><strong>Answer guidance</strong></p>
+<ol>
+<li>A risk is uncertain; an issue has occurred.</li>
+<li>An observable condition that activates response or indicates changing exposure.</li>
+<li>Validation asks whether the concept satisfies intended operational needs; verification asks whether specified requirements are met.</li>
+<li>A baseline authorized only under named assumptions, actions, or evidence conditions.</li>
+<li>It provides a hedge, fallback, or response to changing evidence.</li>
+</ol>
+<h3 id="14-feedback-revision-and-mastery-gate-11">14. Feedback, revision, and mastery gate</h3>
+<p>The CVR passes only when:</p>
+<ul>
+<li>the concept is operationally coherent across all critical scenarios;</li>
+<li>top risks have credible learning, mitigation, and fallback plans;</li>
+<li>affordability and schedule ranges are decision-useful;</li>
+<li>conditions and unresolved evidence are explicit;</li>
+<li>review dissent is dispositioned or preserved.</li>
+</ul>
+<h3 id="15-reflection-and-workload-11">15. Reflection and workload</h3>
+<p>Record which condition most limits authorization and whether the retained alternative is genuinely executable.</p>
+<p><strong>Estimated workload:</strong> 12–14 hours.</p>
+<h2 id="week-12--final-concept-baseline-oral-defense-and-handoff">Week 12 — Final concept baseline, oral defense, and handoff</h2>
+<blockquote>
+<p><strong>Required book companion :</strong> <a href="../../K/B6/chapters/12-final-concept-baseline-oral-defense-and-handoff.html">Read Book 6, Chapter 12</a> → <a href="../../K/B6/labs/lab-12-final-concept-baseline-oral-defense-and-handoff.html">complete Hypothetical Lab 12</a>. Read both before attempting the independent course deliverable below. The course’s rubric and mastery criteria remain authoritative.</p>
+</blockquote>
+<blockquote>
+<p><strong>Companion teaching resource (added in Library):</strong> <a href="../../K/P2-text/lessons/645-767-w12.html">Read the Week 12 instructional primer</a>. This primer offers additional explanation and short exercises; it is not a substitute for this guide's graded work.</p>
+</blockquote>
+<p><strong>Primary competencies:</strong> C1–C4, C7–C10, C12<br/>
+<strong>Course outcomes:</strong> CLO-1 through CLO-12<br/>
+<strong>Primary artifact:</strong> Controlled Conceptual Design Baseline</p>
+<h3 id="1-why-this-week-matters-12">1. Why this week matters</h3>
+<p>The final week is not a packaging exercise. It tests whether the full chain from problem evidence to concept commitment is coherent, reproducible, transparent, and ready for another engineering team to use. The learner must defend both the recommendation and the limits of the evidence.</p>
+<h3 id="2-essential-question-12">2. Essential question</h3>
+<p><strong>What exactly is being authorized for detailed design, what remains uncertain, and what must the next team do first?</strong></p>
+<h3 id="3-prerequisite-retrieval-and-readiness-check-12">3. Prerequisite retrieval and readiness check</h3>
+<p>Create a one-page concept decision map from memory:</p>
+<blockquote>
+<p>problem → stakeholders → needs → scenarios → objectives/measures → requirements → functions → concepts → models → decision → risks/conditions → handoff.</p>
+</blockquote>
+<p>Then compare it with the repository and correct missing links.</p>
+<h3 id="4-weekly-learning-outcomes-12">4. Weekly learning outcomes</h3>
+<p>The learner will be able to:</p>
+<ul>
+<li>assemble and quality-check the conceptual baseline;</li>
+<li>produce end-to-end traceability and change-impact evidence;</li>
+<li>distinguish approved, conditional, reference, retained, and open artifacts;</li>
+<li>communicate the decision to technical and executive audiences;</li>
+<li>defend methods, assumptions, limitations, uncertainty, and dissent;</li>
+<li>create an actionable handoff to System Design &amp; Integration.</li>
+</ul>
+<h3 id="5-key-concepts-and-vocabulary-12">5. Key concepts and vocabulary</h3>
+<p>Concept baseline; configuration index; decision package; end-to-end trace; evidence chain; technical debt; open item; condition; waiver; retained alternative; handoff; receiving-team acceptance; oral defense; lessons learned.</p>
+<h3 id="6-required-readings-and-study-prompts-12">6. Required readings and study prompts</h3>
+<ol>
+<li><strong>NASA Design Solution Definition.</strong> Review expected outputs, enabling products, baselining, and downstream use. <a href="https://www.nasa.gov/reference/4-4-design-solution-definition/" title="NASA — Design Solution Definition">NASA-DESIGN-SOLUTION</a></li>
+<li><strong>NASA Decision Analysis and Technical Assessment.</strong> Revisit decision records, measures, and evidence. <a href="https://www.nasa.gov/reference/6-8-decision-analysis/" title="NASA — Decision Analysis">NASA-DECISION</a> <a href="https://www.nasa.gov/reference/6-7-technical-assessment/" title="NASA — Technical Assessment">NASA-ASSESS</a></li>
+<li><strong>Course review:</strong> revisit the JHU source outcomes and topic sequence; map each to final portfolio evidence. <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.767.83" title="JHU Fall 2026 abridged syllabus — EN.645.767 System Conceptual Design">JHU-767-SYLLABUS</a></li>
+</ol>
+<p><strong>Estimated reading time:</strong> 1.5 hours.</p>
+<h3 id="7-lesson-notes-12">7. Lesson notes</h3>
+<p>The final baseline should tell a coherent story without hiding uncertainty:</p>
+<ol>
+<li>why the problem matters;</li>
+<li>whose evidence shaped the frame;</li>
+<li>what future operations must accomplish;</li>
+<li>what functions and interfaces are required;</li>
+<li>what concept families were considered;</li>
+<li>what models and values differentiated them;</li>
+<li>how uncertainty and risk affected the decision;</li>
+<li>what concept is authorized and under what conditions;</li>
+<li>what the detailed-design team may change and what requires formal approval.</li>
+</ol>
+<p>Run consistency queries:</p>
+<ul>
+<li>needs with no scenarios;</li>
+<li>scenarios with no requirements;</li>
+<li>requirements with no functions;</li>
+<li>functions with no physical allocation;</li>
+<li>objectives with no measures;</li>
+<li>measures with no data/model;</li>
+<li>decisions with no rationale;</li>
+<li>risks with no owner;</li>
+<li>conditions with no closure action;</li>
+<li>references to eliminated concepts that remain in the selected baseline.</li>
+</ul>
+<h3 id="8-worked-example--handoff-classification">8. Worked example — handoff classification</h3>
+<p><strong>Baselined:</strong> mixed-fleet concept, service zones, accessibility outcome thresholds, core functional architecture, approved external interfaces.</p>
+<p><strong>Conditional:</strong> bounded-zone autonomy, pending demonstration results.</p>
+<p><strong>Reference:</strong> preliminary cloud deployment sketch from EN.645.764.</p>
+<p><strong>Retained alternative:</strong> human-driven microtransit, preserved as a fallback.</p>
+<p><strong>Open:</strong> detailed vehicle count, charger locations, supplier, software partition, final staffing schedule.</p>
+<p>The classification prevents conceptual decisions from being mistaken for detailed design.</p>
+<h3 id="9-guided-practice-12">9. Guided practice</h3>
+<ol>
+<li>Run all traceability and consistency checks.</li>
+<li>Create the configuration index.</li>
+<li>Resolve or classify every open action.</li>
+<li>Build the executive decision brief.</li>
+<li>Rehearse oral defense with the four roles.</li>
+<li>Conduct a receiving-team review from the perspective of EN.645.768.</li>
+<li>Revise the handoff memorandum.</li>
+</ol>
+<h3 id="10-independent-exercises-12">10. Independent exercises</h3>
+<p><strong>Foundation</strong></p>
+<p>Diagnose a seeded concept package with broken traces, stale assumptions, and conflicting values.</p>
+<p><strong>Application</strong></p>
+<p>Complete the final report, repository, review deck, and baseline index.</p>
+<p><strong>Analysis</strong></p>
+<p>Perform three change-impact cases:</p>
+<ul>
+<li>affordability cap reduced by 15%;</li>
+<li>autonomy demonstration fails;</li>
+<li>accessibility demand is 25% higher than estimated.</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<p>Conduct the final Concept Baseline Review and oral defense.</p>
+<p><strong>Stretch</strong></p>
+<p>Create an automated baseline dashboard showing coverage, open items, assumption status, concept status, risk exposure, and review actions.</p>
+<h3 id="11-deliverable-specification-12">11. Deliverable specification</h3>
+<p>Submit:</p>
+<ul>
+<li>final concept-study report;</li>
+<li>editable model/analysis repository;</li>
+<li>executive decision brief;</li>
+<li>end-to-end traceability report;</li>
+<li>change-impact analyses;</li>
+<li>baseline/configuration index;</li>
+<li>review record and action dispositions;</li>
+<li>handoff memorandum;</li>
+<li>oral-defense recording and written follow-up;</li>
+<li>lessons-learned memo;</li>
+<li>baseline <code>SCD-FINAL-v1.0</code>.</li>
+</ul>
+<h3 id="12-final-rubric">12. Final rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Problem, operations, and stakeholder evidence</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Requirements and functional architecture</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Concept diversity and physical coherence</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Quantitative, affordability, and schedule evidence</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Decision, uncertainty, sensitivity, and risk integrity</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Traceability, configuration, and handoff quality</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Review communication and oral defense</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical failures:</strong> broken decision chain; unreproducible model; hidden critical assumption; favored concept changed without updated analysis; receiving team cannot distinguish baseline from open design.</p>
+<h3 id="13-final-knowledge-and-oral-check">13. Final knowledge and oral check</h3>
+<p>Answer without slides:</p>
+<ol>
+<li>State the problem in one sentence.</li>
+<li>Name the strongest alternative and why it lost.</li>
+<li>State the most important decision boundary.</li>
+<li>Identify the most uncertain model assumption.</li>
+<li>Name one requirement that detailed design may legitimately refine.</li>
+<li>Explain the difference between the selected concept and its retained fallback.</li>
+<li>State the first three actions for EN.645.768.</li>
+<li>Identify one lesson that should change how you conduct the next concept study.</li>
+</ol>
+<h3 id="14-completion-and-recovery">14. Completion and recovery</h3>
+<p>The course is complete when:</p>
+<ul>
+<li>the final score is at least 80%;</li>
+<li>all critical mastery criteria are satisfied;</li>
+<li>review actions are closed or transferred with owners;</li>
+<li>the oral defense is adequate;</li>
+<li>the receiving-team checklist is passed.</li>
+</ul>
+<p>If the baseline is conditionally accepted, the learner must complete the named recovery actions before treating EN.645.767 as a prerequisite.</p>
+<h3 id="15-reflection-and-workload-12">15. Reflection and workload</h3>
+<p>Write a 1,000–1,500 word retrospective covering framing bias, evidence quality, model limits, value judgments, concept diversity, risk, and what you would do differently.</p>
+<p><strong>Estimated workload:</strong> 13–16 hours.</p>
+<h2 id="solution-and-instructor-material-package">Solution and instructor-material package</h2>
+<p>Keep the following outside the learner-facing weekly prompts when using the curriculum for formal self-assessment or a study group:</p>
+<ul>
+<li>readiness-diagnostic answer guide;</li>
+<li>incumbent-baseline defect list;</li>
+<li>fictional stakeholder role packets and clearly marked simulated interview data;</li>
+<li>current-state data tables;</li>
+<li>example ConOps and scenario fragments;</li>
+<li>defective and corrected conceptual requirements;</li>
+<li>worked functional-flow and N2 examples;</li>
+<li>morphological-matrix starter and compatibility rules;</li>
+<li>resource, cost, schedule, and optimization starter files;</li>
+<li>seeded decision model with deliberate double counting and normalization defects;</li>
+<li>DOE/parametric run data;</li>
+<li>uncertainty and sensitivity reference plots;</li>
+<li>risk statement examples;</li>
+<li>review checklists and sample findings;</li>
+<li>annotated excerpts from an acceptable final baseline;</li>
+<li>oral-defense scoring guide.</li>
+</ul>
+<p>For open-ended work, provide a reference rationale rather than a single “correct” concept. A human-driven, hybrid, fixed-route, partnership, or autonomy-heavy concept may all be defensible when evidence, assumptions, and values support the decision.</p>
+<hr/>
+<p><a href="OVERVIEW.html">Back to Phase 2 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+<h2 id="references">References</h2>
+</main></body></html>

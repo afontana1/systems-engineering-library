@@ -1,0 +1,7 @@
+scenario_id,unique_requests,completed,lost_messages,unserved_capacity,completion_fraction,p90_wait_min,vehicle_nonoverlap
+BASE,12,12,0,0,1.0,20.0,True
+OUTAGE,12,6,0,6,0.5,40.0,True
+LOSS,12,8,4,0,0.666667,8.0,True
+DELAY,12,10,0,2,0.833333,28.0,True
+TELEMETRY,12,4,0,8,0.333333,49.0,True
+LOW-CAPACITY,12,6,0,6,0.5,40.0,True

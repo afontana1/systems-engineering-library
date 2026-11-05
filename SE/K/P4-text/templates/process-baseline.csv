@@ -1,0 +1,2 @@
+case_id,risk_class,intake_iso,review_iso,released_iso,rework_cycles,evidence_escapes
+C-001,low,2026-10-01T10:00:00,2026-10-03T12:00:00,2026-10-08T10:00:00,1,0

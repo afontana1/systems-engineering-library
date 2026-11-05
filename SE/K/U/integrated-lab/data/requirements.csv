@@ -1,0 +1,9 @@
+req_id,statement,source,priority,allocation,verification_method,acceptance_criterion
+REQ-01,Exact repeated request messages shall not create duplicate service records,NEED-01,Must,RequestLedger,Test,1 duplicate ignored with 12 unique requests
+REQ-02,A vehicle shall not receive overlapping assignments,NEED-02,Must,Dispatcher,Test,No overlapping intervals in audit output
+REQ-03,The demonstration scheduler shall complete at least 95 percent of synthetic fixed-fixture requests,NEED-01,Should,Dispatcher,Test,Served fraction at least 0.95 on fixed fixture
+REQ-04,The demonstration scheduler shall achieve p90 wait at most 20 minutes on the fixed fixture,NEED-01,Should,Dispatcher,Test,Nearest rank p90 no more than 20 minutes
+REQ-05,Every requirement and hazard shall have at least one linked verification test,NEED-03,Must,AssuranceGraph,Inspection,No missing or dangling local test links
+REQ-06,One-vehicle degradation shall be evaluated and reported as a separate scenario,NEED-02,Must,ExperimentRunner,Test,One vehicle fixture exposes failure of served target
+REQ-07,Invalid passenger count shall be rejected rather than silently accommodated,NEED-02,Must,RequestParser,Test,Two passenger fixture raises ValueError
+REQ-08,An ID reused for conflicting payload shall be rejected,NEED-03,Must,RequestLedger,Test,Conflicting payload fixture raises ValueError

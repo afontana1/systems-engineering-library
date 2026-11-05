@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Project performance as an integrated technical claim · Systems Engineering Library</title><style>*{box-sizing:border-box}body{background:#f4f7f8;margin:0;color:#193847;font:16px/1.76 system-ui,"Segoe UI",Arial,sans-serif}header{background:linear-gradient(112deg,#1b3a50,#137477);padding:30px max(18px,calc((100vw - 1060px)/2));color:white}header a{color:#e0fbfa}header h1{font-size:clamp(1.65rem,3vw,2.5rem);line-height:1.15;margin:.3em 0}header p{color:#dbf0f0;max-width:85ch}main{max-width:1070px;background:#fff;border:1px solid #d6e4e5;border-radius:12px;margin:28px auto 60px;padding:clamp(20px,4vw,55px)}article{max-width:91ch;margin:auto}h2{font-size:1.43em;margin-top:2em;border-bottom:1px solid #dbe6e8;padding-bottom:6px}h3{font-size:1.13em;margin-top:1.6em}a{color:#08757a;text-underline-offset:3px}p,li{max-width:90ch}table{border-collapse:collapse;max-width:100%;width:100%}td,th{border:1px solid #d4e2e4;padding:10px;text-align:left}th{background:#eaf5f4}blockquote{border-left:4px solid #238887;margin-left:0;background:#edf7f6;padding:10px 18px}pre{background:#183449;color:#e8f3f4;padding:16px;overflow-x:auto}code{font-size:.92em}p code{padding:1px 4px;background:#e8f2f4}details{padding:13px 17px;margin:16px 0;background:#edf6f5;border-radius:8px;border:1px solid #cee2e1}summary{font-weight:700;cursor:pointer}.links{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.links a{padding:7px 13px;background:#e7f3f2;border-radius:6px;font-weight:700}.figure{margin:26px 0;text-align:center}.figure img{max-width:100%;max-height:340px}.math-block{margin:18px 0;overflow-x:auto}mjx-container[jax=SVG]{max-width:100%;overflow-x:auto;overflow-y:hidden}article hr{border:0;border-top:1px solid #dbe6e8;margin:36px 0}@media(max-width:750px){header{padding:25px 18px}main{margin:0;border:0;border-radius:0}}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:"local"},startup:{typeset:false},options:{skipHtmlTags:["script","style","noscript","textarea","pre","code"]}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/GS/chapters/02-earned-value.html" data-se-mode="standard"></script>
+</head><body><header><small>Graduate textbook studies · Systems Engineering</small><h1>Project performance as an integrated technical claim</h1><p><a href="../INDEX.html">Graduate studies</a> · <a href="../../OPEN-BOOKS.html">All companion books</a></p></header><main><article><h1>Project performance as an integrated technical claim</h1>
+<p><em>Graduate study for Book 2 — Management of Systems Projects. Companion to the existing course materials; the definitions, mathematics and decisions below are educational rather than operational approvals.</em></p>
+<h2>The governing question</h2>
+<blockquote>
+<p>When a project reports that it is 60% complete, exactly what evidence has been used to earn that completion?</p>
+</blockquote>
+<h2>Theory and conceptual structure</h2>
+<p>A schedule, cost baseline and engineering product baseline are different representations of one intended accomplishment. Earned value management (EVM) is useful only if the work package has an objectively measurable definition of done. A design package does not earn its full budget because its drawings exist; they must satisfy specified maturity and review criteria. If a team changes the definition of done after reporting progress, a mathematically consistent index may still describe an invalid measurement system.</p>
+<p>A credible performance measurement baseline assigns responsibility for each control account, specifies scope, calendar position and time-phased budget, and retains configuration history. <strong>Planned value (PV)</strong> is budget authorized for work scheduled by the status date. <strong>Earned value (EV)</strong> is the budgeted value of objectively completed work. <strong>Actual cost (AC)</strong> is expenditure attributable to that work. These values are measured in budget currency, not in hours or counts of tasks. A project may have high EV for documentation while lacking test evidence for mission-critical requirements.</p>
+<p>The work breakdown structure should be product-oriented enough to trace work to accountable technical outcomes. Schedule dependencies also need physical meaning. A predecessor link can represent a configuration handoff, delivered component, accepted test, or mere managerial preference. A baseline review must test each dependency and the availability of people, facilities and long-lead components. A critical path computed without resource constraints cannot by itself justify a delivery promise.</p>
+<p>Forecasts are conditional hypotheses. Forecasting final cost from today's CPI assumes future efficiency resembles past efficiency; this can be badly wrong when remaining work is qualitatively different. A stronger forecast decomposes <strong>estimate to complete (ETC)</strong> by work package, models uncertainty and explicitly reserves effort for integration and verification. A management reserve is not a substitute for a technically feasible schedule.</p>
+<h2>Formal model and derivation</h2>
+<p><div class="math-block">\[CPI=\frac{EV}{AC},\quad SPI=\frac{EV}{PV},\quad CV=EV-AC,\quad SV=EV-PV.\]</div>
+With budget at completion \(BAC\), the simple efficiency extrapolation \(EAC=BAC/CPI\) is an <em>assumption</em>, not a physical law. A bottom-up forecast instead uses \(EAC=AC+ETC\). The two answers should be reconciled against technical remaining work.</p>
+<p>The formalism is useful only inside an explicit <strong>model contract</strong>: a defined system boundary, input ranges, configuration, assumptions, uncertainty sources, and an intended decision. Check both units and the semantics of the variables before executing the arithmetic. The result is a conditional engineering claim, not an unconditional guarantee.</p>
+<h2>Fully worked Northstar case</h2>
+<p>Suppose a configured propulsion-and-charging project has BAC = $9.0M, PV = $4.0M, EV = $3.2M, and AC = $4.0M at the gate. CPI = 0.80, SPI = 0.80, and CV = −$0.8M. Efficiency extrapolation yields $11.25M. But the engineering team re-estimates the remaining integration and assurance work at $6.3M, leading to a bottom-up EAC of $10.3M. These numbers are not an arithmetic contradiction; they encode two forecasts with different assumptions. The $0.95M gap should become a review question, not be averaged without reasoning. If only 5% of integration evidence exists, a nominal 80% schedule index could be misleadingly reassuring.</p>
+<p><img alt="Model of the linked reasoning steps" src="../figures/02-earned-value.svg"/></p>
+<h2>Counterexample and critical review</h2>
+<p><strong>Counterexample:</strong> A work package earns all of its budget at “software code complete,” but the interface is not integrated and safety tests fail. EV improves even though operational readiness deteriorates. Repair the measurement rule: allocate credit to independently reviewed design, integrated interface, and demonstrated requirement evidence. Do not simply inflate subjective percent-complete numbers.</p>
+<p>An independent reviewer should be able to reproduce the favorable result and find at least one material scenario in which it changes. A sensitivity study that does not touch an important assumption can be technically reproducible but decision-irrelevant. Record the source of every number, identify the accountable acceptance authority, and state what the evidence cannot establish.</p>
+<h2>Graduate problem set</h2>
+<p>Attempt each problem before opening the worked solution. In a graded submission, supply units, formulas, assumptions, and a reasoned interpretation—not just the numerical result.</p>
+<h3>Problem 1</h3>
+<p>Calculate the two indices and cost variance from PV = 5.0, EV = 4.1, AC = 4.8 (millions).</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>CPI = 4.1/4.8 ≈ 0.854; SPI = 4.1/5.0 = 0.820; CV = 4.1 − 4.8 = −0.7 million. Both indices are below 1.0, but neither identifies the technical cause.</p>
+</details>
+<h3>Problem 2</h3>
+<p>BAC = $12M and CPI = 0.80. Compare efficiency EAC with an AC = $6M, ETC = $7M forecast.</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>Efficiency EAC = $15M; bottom-up EAC = $13M. Investigate the assumption about remaining work, not an arbitrary midpoint.</p>
+</details>
+<h3>Problem 3</h3>
+<p>A subsystem is accepted in a bench test but fails end-to-end latency. What must change in the baseline?</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>Retain the bench result as limited evidence; revise the requirement evidence mapping and remaining integration plan, record an accountable discrepancy and reforecast schedule and cost before claiming closure.</p>
+</details>
+<h2>Laboratory and research transfer</h2>
+<p>Complete <a href="../labs/02-earned-value.html">the accompanying graduate laboratory</a>. Produce the artifact described there, compare your result to at least one alternative hypothesis, and record what additional evidence would change your recommendation.</p>
+<h2>Connections to the curriculum</h2>
+<ul>
+<li><a href="../../B2/OPEN-BOOK.html">Open Book 2 and its existing weekly lessons</a>.</li>
+<li><a href="../INDEX.html">Find supplementary calculations and datasets</a>.</li>
+<li>The canonical curriculum remains the source of assessed requirements; this study explains one demanding conceptual thread and does not replace its assignments.</li>
+</ul>
+<h2>Additional reference reading</h2><p>These external resources complement the fictional examples; they are not required for offline use.</p><ul><li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></li><li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a></li></ul></article></main></body></html>

@@ -1,0 +1,3 @@
+scenario,arrival_per_hour,service_per_hour
+nominal,8,10
+stressed,9.5,10

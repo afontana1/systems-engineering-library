@@ -1,0 +1,13 @@
+week,claim,counterexample,verification,decision
+1,A model has to earn its existence,"Tool purchase is not an outcome; uncontrolled duplication, misleading completeness and unrecorded assumptions are foreseeable failure modes.",,Unreviewed
+2,Choosing a language is not choosing a method,A tool may permit a relation that the chosen modeling method prohibits; syntactic validity therefore cannot establish method compliance.,,Unreviewed
+3,Stakeholder concern becomes a model view,An actor omitted from the context may later appear as an “unexpected” interface; an actor shown inside the system by mistake may hide a dependency the engineering team cannot control.,,Unreviewed
+4,"Relationships need semantics, not merely arrows","A common antipattern is a complete-looking graph with “trace” links everywhere but no semantics, versions or actual evidence.",,Unreviewed
+5,Behavior is a family of complementary projections,An activity diagram can describe processing order while accidentally allowing impossible state transitions; cross-view consistency must be checked.,,Unreviewed
+6,Structure is not the same as connectivity,"A polished block diagram cannot establish that both sides agree on units, time basis or fault behavior.",,Unreviewed
+7,Function allocation is a hypothesis,"Allocating every function to the “main software” conceals ownership, information flow, failure domains and the basis of downstream test design.",,Unreviewed
+8,Parametrics prevent attractive but impossible models,"A calculation with precise decimals can still be wrong if demand is peak demand and supply is average capacity, or if trips include multiple passengers.",,Unreviewed
+9,"A physical architecture is a trade, not a picture","A single aggregated score hides uncertainty, non-compensable risks and the reason a stakeholder values one criterion.",,Unreviewed
+10,Verification planning and evidence are different objects,"Counting test cases is not verification coverage; tests may be obsolete, unexecuted or inapplicable to the released configuration.",,Unreviewed
+11,Quality queries are executable arguments,Migrating a schema to a newer SysML representation without defining the meaning of each relationship can create apparently successful but semantically lossy models.,,Unreviewed
+12,The capstone is a defense of claims,"Model trace completeness, model correctness and operational fitness are distinct achievements; the first does not guarantee the others.",,Unreviewed

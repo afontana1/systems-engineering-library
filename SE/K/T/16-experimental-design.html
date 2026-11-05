@@ -1,0 +1,65 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Experimental design: ask a question the evidence can answer · Systems Engineering</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f7f8;color:#183b4b;font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:#116f76;text-underline-offset:3px}a:hover{color:#064e5c}header{background:linear-gradient(120deg,#16384b,#16736e);color:#fff;padding:25px max(20px,calc((100vw - 1100px)/2))}header a{color:#d5fafa}header .eyebrow{font-size:.8rem;letter-spacing:.11em;text-transform:uppercase}header h1{font-size:clamp(1.7rem,3vw,2.7rem);line-height:1.17;margin:.3em 0}.paper{max-width:1010px;margin:25px auto 80px;background:white;border:1px solid #dae6e7;border-radius:15px;padding:clamp(20px,4vw,54px)}h1,h2,h3{line-height:1.3}h2{margin-top:2em;border-bottom:1px solid #e2ebee;padding-bottom:.35em}h3{margin-top:1.5em}p,li{max-width:88ch}blockquote{border-left:4px solid #26a19a;padding:8px 17px;background:#eff8f7;margin-left:0}pre{background:#102e3b;color:#e9f7f4;padding:20px;border-radius:10px;overflow:auto}pre code{color:inherit}code{overflow-wrap:anywhere}p code,li code{background:#eef4f4;padding:2px 4px;border-radius:4px}table{border-collapse:collapse;display:block;overflow:auto}td,th{border:1px solid #d6e6e6;padding:9px}th{background:#eaf4f3}details{border:1px solid #d6e5e4;border-radius:10px;padding:14px 18px;margin:20px 0;background:#f8fcfb}summary{cursor:pointer;font-weight:700}.chaptertools{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.chaptertools a,.chaptertools button{border:1px solid #c4dedd;border-radius:7px;background:#eff9f8;padding:8px 14px;font:inherit}.related{border-top:1px solid #d5e4e4;margin-top:30px;padding-top:15px;display:flex;gap:12px;flex-wrap:wrap}.related a{padding:5px 12px;border:1px solid #cadcdc;border-radius:7px}mjx-container[jax=SVG]{max-width:100%;overflow-x:auto}svg{max-width:100%}@media(max-width:600px){.paper{margin:0;border-radius:0}}.activity{background:#edf8f7;border:1px solid #b8d7d3;border-radius:12px;padding:20px;margin:28px 0}.activity label{display:inline-flex;flex-direction:column;gap:4px;margin-right:14px;margin-bottom:12px;font-weight:650}.activity input{font:inherit;max-width:180px;border:1px solid #9bb4b8;border-radius:6px;padding:8px}.activity output{display:block;font-weight:700;color:#095d65;background:white;border-radius:7px;padding:13px;margin-top:8px}.equation{margin:22px 0;overflow-x:auto}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../_assets/mathjax-svg.js"></script><script defer src="../_assets/prism.js"></script><script defer src="../_assets/prism-python.js"></script><script defer src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/T/16-experimental-design.html" data-se-mode="standard"></script>
+</head><body><header><div class="eyebrow">Systems engineering · Core Concepts</div><h1>Experimental design: ask a question the evidence can answer</h1><p>Build factorial experiments, control confounding, estimate interactions, and plan meaningful decisions.</p><nav><a href="INDEX.html">← Browse concepts</a> · <a href="../../START-HERE.html" >Curricula</a></nav></header><main class="paper"><h1>Experimental design: ask a question the evidence can answer</h1>
+<p><em>Core Concepts · Quantitative methods · T16</em></p>
+<blockquote>
+<p>Build factorial experiments, control confounding, estimate interactions, and plan meaningful decisions.</p>
+</blockquote>
+<p><strong>Recommended preparation:</strong> <a href="06-inference.html">06 Inference</a>, <a href="10-decisions.html">10 Decisions</a></p>
+<p><strong>Related companion books:</strong> <a href="../B8/OPEN-BOOK.html">Book 8</a>, <a href="../B10/OPEN-BOOK.html">Book 10</a>, <a href="../B17/OPEN-BOOK.html">Book 17</a></p>
+<figure><img src="figures/experimental-reasoning.svg" alt="Conceptual teaching diagram" style="width:100%;max-width:930px"><figcaption style="font-size:.85rem;color:#54717b">A conceptual workflow, not a certified engineering process.</figcaption></figure><h2>1. Separate the research question from the simulation run</h2>
+<p>A simulation run is an observation produced by a particular model and a particular set of inputs. It becomes an <em>experiment</em> when we specify a question, control the design, and define how evidence will be interpreted. “Run the scheduler a hundred times” is not a question. “Does a second vehicle reduce the 90th-percentile waiting time by at least ten minutes under the defined demand distribution, without reducing completed requests?” is much closer.</p>
+<p>Before selecting trial count, define the estimand: the average response over demand streams, the tail delay for served requests, the probability of a service failure, or the interaction between a fleet change and a dispatch policy. Distinguish the <strong>unit of randomization</strong> (a synthetic demand stream), the <strong>unit of observation</strong> (a trip), and the <strong>unit of analysis</strong> (often the replication). Treating 400 trips generated within only four correlated days as 400 independent replications creates false confidence.</p>
+<h2>2. Use factorial designs to see interactions</h2>
+<p>A two-factor experiment might compare fleet size (one versus two vehicles) and dispatch policy (first-come versus priority-aware). Let the response be the mean delay in minutes for the hypothetical scenarios in a balanced $2\times2$ design:</p>
+<table>
+<thead>
+<tr>
+  <th></th>
+  <th style="text-align:right">First-come</th>
+  <th style="text-align:right">Priority-aware</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>One vehicle</td>
+  <td style="text-align:right">38</td>
+  <td style="text-align:right">30</td>
+</tr>
+<tr>
+  <td>Two vehicles</td>
+  <td style="text-align:right">22</td>
+  <td style="text-align:right">18</td>
+</tr>
+</tbody>
+</table>
+<p>The average effect of adding a vehicle is $[(22+18)-(38+30)]/2=-14$ minutes. The average effect of the priority-aware policy is $[(30+18)-(38+22)]/2=-6$ minutes. The interaction as a <strong>difference of differences</strong> is $(18-22)-(30-38)=4$ minutes: the policy's improvement is 8 minutes with one vehicle but 4 with two. It is misleading to attribute a single universal improvement to the policy.</p>
+<p>These values are deliberately illustrative cell means. If each cell contains one simulation run, you cannot estimate between-replication variability. Add several independently generated demand streams per cell, record the random seeds, and analyze both performance and uncertainty.</p>
+<h2>3. Pairing is a design choice, not a trick</h2>
+<p>If the same demand stream is run under alternatives A and B, compare paired differences $D_i=Y_{B,i}-Y_{A,i}$. The standard error of the average difference is $s_D/\sqrt{n}$, where $s_D$ is the sample standard deviation of the paired differences. Pairing removes some variability from differences in demand intensity, but it is not automatically valid if one architecture changes the population being observed. If B rejects more trips, comparing delay among completed trips may introduce selection bias.</p>
+<p>Never reuse a random seed across scenarios and then claim the runs are independent observations. Common random numbers create deliberate <em>correlation between alternatives</em>; independent replication groups still need genuinely distinct streams.</p>
+<h2>4. Control confounding and learning effects</h2>
+<p>A field trial might compare an old interface in Week 1 with a new interface in Week 2. Any improvement could result from staffing, weather, increased familiarity, or changed demand—not the interface itself. Random assignment, crossover design, matched comparison groups, and prespecified covariates can help, but each imposes assumptions. If emergency deployment prevents randomization, state exactly which causal claims the design cannot support.</p>
+<p>Simulation studies have confounders too. A model comparison that changes routing, trip duration, and vehicle count simultaneously cannot isolate which change drove the outcome. Treat model configuration as part of the recorded experimental unit.</p>
+<h2>5. Failure of a null test is not evidence of equivalence</h2>
+<p>An effect that is not statistically significant might be small, or the experiment might be underpowered. Define the smallest important effect before collecting data. A decision board may prefer a noninferiority test if the goal is “new policy no more than 3 minutes worse, while improving safety.” In that case the uncertainty bound must be interpreted relative to the 3-minute margin, not relative only to zero.</p>
+<p>Multiple exploratory comparisons increase the chance of spurious discoveries. Use a prespecified primary outcome for an operational gate, and label exploratory searches honestly. If a test campaign stops early when a favorable result appears, ordinary fixed-sample uncertainty formulas are no longer automatically calibrated.</p>
+<h2>6. Worked example: what does the interaction mean?</h2>
+<p>Suppose the two-vehicle system already has ample capacity. The priority-aware algorithm yields only a modest mean-time improvement because queues are already short. In the one-vehicle system, the same policy reallocates scarce capacity toward urgent requests, reducing their delays but potentially increasing the wait for nonurgent users. Mean waiting time alone hides distributional effects. Include completion rate, urgent-service performance, and an equity measure in the response vector.</p>
+<p>The experiment should report an interaction and a policy tradeoff, not one headline percentage. Ask what the result would look like under a burstier demand distribution. If that distribution is poorly estimated, run a sensitivity analysis rather than multiplying replications of a single optimistic model.</p>
+<h2>7. Interpretation and evidence boundaries</h2>
+<p>A factorial design identifies modeled effects within tested factor ranges; it does not automatically generalize to untested fleet sizes, locations, or vehicle failures. For each claimed benefit, record the model version, warm-up handling, demand source, random seeds, outcome definition, and uncertainty procedure. Independent replication, reproducible analysis, and model validation are different obligations.</p>
+<h2>Problems</h2>
+<p><strong>A.</strong> Calculate the effects and interaction in the table above. <strong>B.</strong> Explain why paired replications do not justify counting every passenger as independent. <strong>C.</strong> Write a practical decision rule for accepting the priority-aware policy that includes a safety or fairness constraint.</p>
+<details><summary>Worked-answer guidance</summary>
+
+<p>Fleet effect $-14$, policy effect $-6$, interaction $+4$ minutes under the stated cell means and effect definitions. A sound design compares independent demand-stream replications, evaluates all required outcomes, and prespecifies the decision threshold. A favorable mean does not cancel a failed safety constraint.</p>
+</details>
+
+<h2>Further connections</h2>
+<p><a href="06-inference.html">Statistical inference</a>, <a href="10-decisions.html">multiobjective decisions</a>, and <a href="19-simulation-credibility.html">simulation credibility</a> explain why a statistically tight estimate may still be an inadequate system decision.</p>
+<h2>Guided laboratory</h2>
+<p><a href="labs/16-experimental-design-workshop.html">Open the corresponding case-based lab</a></p>
+<div class="activity"><h3>Explore factorial effects</h3><p>Change the high-fleet, priority-aware cell mean while the other cells remain 38, 30, and 22 minutes.</p><label>New cell mean (minutes) <input id="c16" type="number" value="18" min="0" step="1"></label><output id="o16"></output></div><script>document.getElementById('c16').addEventListener('input',()=>{const d=Number(document.getElementById('c16').value),a=38,b=30,c=22;document.getElementById('o16').textContent='Fleet effect: '+((c+d-a-b)/2).toFixed(1)+' min · Policy effect: '+((b+d-a-c)/2).toFixed(1)+' min · Interaction: '+((d-c)-(b-a)).toFixed(1)+' min';});document.getElementById('c16').dispatchEvent(new Event('input'));</script><div class="related"><a href="INDEX.html">Back to concept hub</a><a href="../LAB-LIBRARY.html">Lab resource browser</a></div></main></body></html>

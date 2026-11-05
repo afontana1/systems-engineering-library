@@ -1,0 +1,150 @@
+# Chapter 4 — Physical architecture and contracts
+
+*Book 7: System Design and Integration · Week 4 — Mature the physical architecture, interfaces, and performance budgets*
+
+> **Reading route:** Study this chapter → attempt [Hypothetical Laboratory 4](../labs/lab-04-mature-the-physical-architecture-interfaces-and-perform.md) without looking at the solution → return to [Week 4 of the course guide](../../../C/P2/EN645768.md) for the independent assignment and rubric. The [short Phase 2 primer](../../P2-text/lessons/645-768-w04.md) is optional review, not the primary reading.
+
+## The engineering problem
+
+The Northstar concept has now been conditionally selected. Engineering must turn it into interfaces, allocations and budgets that can be implemented and tested, without treating open assumptions as resolved. The governing question this week is **physical architecture and contracts**. Decisions in this course are cumulative: an assumption made now will reappear as an allocation, a test condition, or a readiness limitation later. Always preserve the exact scenario, configuration and affected stakeholder when making a claim.
+
+One of the most useful distinctions in systems engineering is the difference between a *claim*, a *model*, and *evidence*. A claim says what must or does hold. A model explains or predicts behavior under named conditions. Evidence is a measured or inspected outcome from a known configuration. Moving among these three without recording assumptions produces false confidence even when all calculations are correct.
+
+## Build the intuition
+
+A physical design realizes functions through components, connectors, physical and logical interfaces, supply dependencies and budgets. Define interface semantics and timing alongside protocol names. Identify what constitutes a compatible revision; a wiring diagram is insufficient when units and stale-data behavior remain unspecified.
+
+There are two levels of reasoning. At the local level, ask whether the calculation, drawing, allocation, or test is internally correct. At the mission level, ask whether that local statement actually changes the stakeholder's decision. The distinction prevents a common mistake: optimizing a subsystem characteristic while harming the system-level outcome. In this case, an apparently efficient dispatch plan can be unacceptable if it systematically excludes accessible requests during event surges.
+
+A second discipline is to make the operating envelope visible. State the load, timing, participants, environmental assumptions, failure modes and decision authority. If the result depends on a parameter you have not measured, classify it as *conditional*. An uncertainty is not automatically a defect, but unexplained certainty is one.
+
+## A deeper explanation: interfaces are where local correctness becomes system risk
+
+### A connector is a contract between different worlds
+
+A physical architecture often looks complete when every required function has been assigned to a component. Yet integration failures commonly occur even when each component satisfies its own specification. The reason is that a boundary joins two different interpretations of time, state, data, energy, or responsibility. The interface is where those interpretations must be reconciled.
+
+Consider a Northstar route-authority message sent from a regional control center to a shuttle. The message may be structurally valid: it contains a route identifier and a permitted speed. But validity depends on more than field names. Is the route identifier globally unique? Does the message refer to the current map version? Does the speed apply immediately or at the next route segment? How long is the permission valid? What happens if a newer cancellation overtakes an older authorization? What should the shuttle do if it receives a duplicate command? Without these answers, two subsystems can pass independent tests and still disagree dangerously when integrated.
+
+An interface-control document therefore captures **semantics, timing, units, state assumptions, error behavior, and ownership**. Its role is not merely to standardize a packet format. It creates a common interpretation of what exchanges mean.
+
+### Timing budgets express end-to-end causality
+
+Suppose a safety response requires a control command to affect braking within 700 milliseconds. The budget might include event detection, sensor filtering, decision processing, communication, authorization, actuator response, and mechanical delay. A simple worst-case additive budget can be appropriate if the listed steps truly occur sequentially and the bounds are defensible. If some processes overlap, summing all maxima may be overly conservative. If delays are correlated or contain unbounded retries, adding average times may be dangerously optimistic.
+
+This distinction matters for probabilistic service targets as well. The 95th-percentile latency of component A plus the 95th-percentile latency of component B does **not** generally equal the 95th-percentile latency of the total path. Percentiles do not add linearly without special assumptions. The end-to-end distribution depends on dependence, shared workload, queueing, and branch behavior. If the mission criterion concerns the entire path, measure or model the entire path.
+
+### Units and states are equally important
+
+Many interface failures are described as “data issues,” but the underlying problem is often conceptual. A speed in meters per second and a speed in kilometers per hour are not interchangeable because both happen to be numerical. A timestamp with unknown time base cannot support precise ordering. A charge estimate without temperature or degradation assumptions is not a universal energy fact. Meaning is carried by units, coordinate frames, timestamps, uncertainty, and context.
+
+State assumptions are just as decisive. A message saying “seat 4 available” may be true when produced and false when consumed. A command to open a door is appropriate when the shuttle is stationary but unsafe when it is moving. Interfaces should express which states admit an operation, what postcondition a successful operation guarantees, and what errors the receiver is allowed to return. In software this resembles preconditions and postconditions; in mechanical and electrical integration the analogous contract includes loads, tolerances, operating envelopes, and protection behavior.
+
+### Integration order is a hypothesis about risk
+
+Teams sometimes integrate components in the order they become available. A more informative plan integrates according to the couplings most likely to invalidate the architecture. For Northstar, if emergency stop relies on communication and authenticated control, then integrating those elements early can expose timing and authority problems before the full system is assembled. A test that substitutes an ideal, zero-delay message channel can be useful for component debugging; it cannot establish the behavior of the final end-to-end control chain.
+
+A staged strategy should make its substitutions explicit. At first, use a simulated network to test protocol semantics; later, introduce real delay and loss; later still, combine workload, actual controller processing, and physical braking behavior. Each stage adds realism but may reduce ease of diagnosis. The engineering challenge is to learn from simplified setups without silently promoting their results into broader readiness claims.
+
+### Integration evidence is conditional
+
+If a timing test passes on hardware revision A with software release 2 and nominal temperature, that is evidence about that configuration and condition. A new controller board, altered priority rule, or different thermal environment can change the result. This does not mean every test must always be repeated. It means that any claim of continuing validity requires a reasoned change-impact analysis connecting the altered design to the evidence-producing mechanism.
+
+The deeper lesson is that integration is not simply assembly. It is the process of turning individually plausible subsystems into **one coherent system with shared meanings and defendable end-to-end properties**. Interfaces are where that coherence is either established or lost.
+
+## The mechanism beneath the method
+
+Physical architecture is the arrangement of responsibility, flow, failure containment and change propagation across real elements.
+
+### Distinguishing related ideas
+
+Connectivity is more than a diagram line: protocol units, timing, ownership and failure signaling determine whether integration can work.
+
+### Interpretation and boundary conditions
+
+A design with fewer components can still have more complex interfaces if one shared controller holds many critical responsibilities.
+
+
+## Deeper theory — interface engineering as the composition of contracts
+
+### A physical architecture is a claim about cooperation
+
+When a system is partitioned into components, the architecture makes a claim: *these elements, connected in these ways, can collectively realize the required behavior*. The claim is stronger than a statement that each element has passed its own tests. Components interact through geometry, power, data, control logic, time, maintenance procedures and human decisions. An interface is the place where two locally reasonable descriptions must become compatible. The systems engineer's job is to make the assumptions of each side visible before they become expensive field failures.
+
+A booking service can publish a route command that is syntactically valid yet operationally unusable. The vehicle may interpret the timestamp in local time, while dispatch uses UTC; a position field may be measured in meters in one model and kilometers in another; a “ready” flag may mean “powered on” to the vehicle supplier but “available for assignment” to operations. An interface control document must therefore define *meaning*, not just field names and wire formats. Unit consistency is necessary but insufficient: two systems can use seconds correctly while disagreeing about which event starts the clock.
+
+### Assume–guarantee reasoning
+
+A useful way to reason about composition is to specify each element with an assumption \(A\) about its environment and a guarantee \(G\) under that assumption. Informally: **if** the environment respects \(A\), **then** the component promises \(G\). A vehicle controller might guarantee acceptance or explicit rejection of a route command within 500 ms if the command is correctly authenticated, the controller is in an eligible mode and communications latency stays within a stated envelope. Dispatch in turn may assume that every acknowledgment includes the command identifier and control-mode revision.
+
+To compose two components, their assumptions must be compatible with what other elements can actually guarantee. A gap appears if dispatch assumes every command is executed exactly once while the communication layer guarantees only at-least-once delivery. Both individual specifications can be internally consistent while their combination fails. The missing system-level obligation is an idempotent state-transition protocol or another reconciliation method. Composition is a reasoning problem about shared assumptions, not merely a wiring activity.
+
+### Timing is an end-to-end property
+
+For a sequence of dependent stages, one useful deterministic upper bound is
+
+\[
+T_{\mathrm{end}}\leq T_{\mathrm{network}}+T_{\mathrm{queue}}+T_{\mathrm{compute}}+T_{\mathrm{vehicle}}+T_{\mathrm{human}},
+\]
+
+provided each term is itself a valid upper bound for the same operational scenario. Averages are not upper bounds. Nor can the 99th-percentile latencies of five components simply be added and called the system's 99th percentile: percentiles depend on the joint distribution of delays, including correlations. When queues share a bottleneck or several services slow during the same outage, independence assumptions may be particularly poor.
+
+Consider a dispatch path that has measured typical delays of 0.2 s for transmission, 0.1 s for computation and 0.3 s for vehicle acknowledgment. A reported typical total of 0.6 s tells us little about a five-second safety-related limit if a rare database lock can add 20 s. The right investigation examines worst-case mechanisms, relevant queue states and the operating domain—not merely a sum of typical component benchmarks.
+
+### Compatibility is temporal and configurational
+
+An interface can change over time. Imagine a controller firmware release that reinterprets the meaning of `cancel`, or a dispatch application that begins sending a new enum value. The nominal interfaces may look compatible in isolation but not across the mixed fleet that exists during rollout. Version negotiation, backwards compatibility, safe handling of unknown values and configuration-specific test evidence become part of interface assurance. An integration test passed against firmware v3 does not establish behavior for firmware v4 unless the change impact is understood.
+
+The same temporal problem arises with sensors. A route-clear message may be accurate when generated but dangerously stale when used. A robust interface includes timestamp semantics, maximum tolerated age, source identity and a fail-safe response to absent or contradictory data. In cyber-physical systems, *data freshness* is often a more important safety property than data type.
+
+### Integration sequence as an experiment in uncertainty
+
+Teams often integrate components in supplier-delivery order. That is administratively convenient but epistemically weak: it delays discovering the interactions most likely to invalidate the architecture. A better order identifies high-consequence interface assumptions, then creates the least expensive representative test capable of challenging each one. Test the booking-to-vehicle acknowledgment protocol with simulated packet loss before the entire fleet is purchased. Test accessibility handoffs with representative users and realistic constraints before declaring the human interface complete. Test shutdown behavior with controlled fault injection before a field emergency supplies the first real trial.
+
+This does not mean end-to-end integration can be replaced by interface stubs. A mocked service can verify a contract while failing to capture queue coupling or timing. Confidence grows through layers: analytical compatibility, contract tests, hardware/software integration and representative operational scenarios. Each layer supports a bounded claim about a particular configuration and environment. Good design maturity is the narrowing of important uncertainty, not the accumulation of completed checkboxes.
+
+## Worked engineering case
+
+A position feed expresses latitude/longitude but leaves coordinate reference, accuracy, timestamp source, heartbeat and stale threshold undefined. Two compliant-looking components may disagree on whether a 40-second-old report is usable.
+
+**Reason through the case in this order:**
+
+1. **Frame the decision.** What is the mission claim being evaluated? State who accepts or rejects the conclusion.
+2. **List supplied information.** Label each number or statement as requirement, observation, assumption, or estimate; name the units.
+3. **Check structure and arithmetic.** Show the formula, interfaces, event chain, or causal link; verify that numerator, denominator, configuration and time window agree.
+4. **Challenge the favorable interpretation.** Identify a plausible failure or operating condition that could reverse it. If a case includes a conditional probability or a percentile, do not promote it into a universal guarantee.
+5. **Select the next evidence.** Write a measurement or review criterion that could change your decision, rather than an activity with no pass/fail interpretation.
+
+These steps do not automatically prove the design. They prevent a correct local calculation from being offered as a conclusion about unmeasured system behavior. When assumptions are uncertain, calculate sensitivity or state the required experiment instead of inventing precision.
+
+## Competing explanations and failure modes
+
+Connectivity without meaning is not interoperability. This is why reviewers must distinguish *unknown* from *failed*, and *not applicable* from *not tested*. A robust decision record preserves an alternative hypothesis, the evidence needed to discriminate it, and the owner of that next investigation. Ask what would happen if the controlling requirement changed, a data feed became stale, or an operational context moved outside the model boundary.
+
+## How this connects to the next part of the lifecycle
+
+In the **concept** stage, design freedom is preserved and choices are screened against needs and feasibility. In **design and integration**, provisional choices become owned interfaces and controlled budgets. In **test and evaluation**, those statements become hypotheses tested against configurations and populations. Keeping this chain visible matters more than using the same document format across teams.
+
+Your prior connection is [Allocate requirements and define component functions](03-allocate-requirements-and-define-component-functions.md); the next connection is [Use prototypes and experiments to retire technology and design risk](05-use-prototypes-and-experiments-to-retire-technology-and.md). Treat this chapter as a bridge between them, not a standalone checklist. In the final review, someone must be able to reconstruct how a stakeholder need became a claim, why an option was chosen, what was actually implemented and which evidence supports operation.
+
+## Try the reasoning yourself
+
+**Problem A — Construct the decision.** Specify an interface control record with units, allowable age, fault signaling and version compatibility.
+
+**Problem B — Adversarial review.** What happens when a required feed is stale rather than missing?
+
+**Problem C — Evidence and limitation.** Propose one test or analysis with an acceptance criterion, a configuration identifier, a limit on generalization and a named decision owner. Explain what you would do if the result were borderline.
+
+<details><summary>Worked answer guidance (look only after trying)</summary>
+
+For **A**, produce the requested artifact with stable identifiers, explicit scenario assumptions and at least one exceptional condition. The answer is acceptable only if someone else could reconstruct the logic; plausible words alone are insufficient.
+
+For **B**, evaluate the question against the actual mission, not just the subsystem metric. An answer must name the stakeholder affected and a plausible mechanism by which the current interpretation could fail.
+
+For **C**, use a controlled artifact and a predeclared decision rule. A measured result can support only the specified configuration, environment and sampling conditions. Where that evidence does not yet exist, mark the claim *open* and assign a closure action rather than marking it *pass*.
+
+</details>
+
+## Practice before the assessed course work
+
+[Hypothetical Laboratory 4: Physical architecture and contracts](../labs/lab-04-mature-the-physical-architecture-interfaces-and-perform.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 4 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.

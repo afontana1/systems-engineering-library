@@ -1,0 +1,4 @@
+parameter,value,source_type
+urban_fraction,0.8,synthetic teaching assumption
+before,"[12, 20]",synthetic teaching assumption
+after,"[8, 32]",synthetic teaching assumption

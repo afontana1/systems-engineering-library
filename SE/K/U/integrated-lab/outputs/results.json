@@ -1,0 +1,342 @@
+{
+  "version": "v11.0 teaching laboratory",
+  "assumptions": "synthetic data; no safety certification",
+  "baseline": {
+    "config": {
+      "vehicles": 2,
+      "trip_min": 12.0,
+      "end_min": 80.0,
+      "target_served": 0.95,
+      "target_p90_wait_min": 20.0
+    },
+    "input_events": 13,
+    "unique_requests": 12,
+    "duplicates_ignored": 1,
+    "served": 12,
+    "unserved": 0,
+    "served_fraction": 1.0,
+    "p90_wait_min": 20.0,
+    "max_wait_min": 20.0,
+    "demonstration_pass": true,
+    "assignments": [
+      {
+        "request_id": "R01",
+        "origin": "A",
+        "destination": "B",
+        "vehicle": "V01",
+        "arrival_min": 0.0,
+        "start_min": 0.0,
+        "finish_min": 12.0,
+        "wait_min": 0.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R02",
+        "origin": "B",
+        "destination": "C",
+        "vehicle": "V02",
+        "arrival_min": 4.0,
+        "start_min": 4.0,
+        "finish_min": 16.0,
+        "wait_min": 0.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R03",
+        "origin": "C",
+        "destination": "A",
+        "vehicle": "V01",
+        "arrival_min": 8.0,
+        "start_min": 12.0,
+        "finish_min": 24.0,
+        "wait_min": 4.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R04",
+        "origin": "A",
+        "destination": "C",
+        "vehicle": "V02",
+        "arrival_min": 12.0,
+        "start_min": 16.0,
+        "finish_min": 28.0,
+        "wait_min": 4.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R05",
+        "origin": "C",
+        "destination": "B",
+        "vehicle": "V01",
+        "arrival_min": 16.0,
+        "start_min": 24.0,
+        "finish_min": 36.0,
+        "wait_min": 8.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R06",
+        "origin": "B",
+        "destination": "A",
+        "vehicle": "V02",
+        "arrival_min": 20.0,
+        "start_min": 28.0,
+        "finish_min": 40.0,
+        "wait_min": 8.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R07",
+        "origin": "A",
+        "destination": "B",
+        "vehicle": "V01",
+        "arrival_min": 24.0,
+        "start_min": 36.0,
+        "finish_min": 48.0,
+        "wait_min": 12.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R08",
+        "origin": "C",
+        "destination": "A",
+        "vehicle": "V02",
+        "arrival_min": 28.0,
+        "start_min": 40.0,
+        "finish_min": 52.0,
+        "wait_min": 12.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R09",
+        "origin": "B",
+        "destination": "C",
+        "vehicle": "V01",
+        "arrival_min": 32.0,
+        "start_min": 48.0,
+        "finish_min": 60.0,
+        "wait_min": 16.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R10",
+        "origin": "A",
+        "destination": "C",
+        "vehicle": "V02",
+        "arrival_min": 36.0,
+        "start_min": 52.0,
+        "finish_min": 64.0,
+        "wait_min": 16.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R11",
+        "origin": "C",
+        "destination": "A",
+        "vehicle": "V01",
+        "arrival_min": 40.0,
+        "start_min": 60.0,
+        "finish_min": 72.0,
+        "wait_min": 20.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R12",
+        "origin": "B",
+        "destination": "A",
+        "vehicle": "V02",
+        "arrival_min": 44.0,
+        "start_min": 64.0,
+        "finish_min": 76.0,
+        "wait_min": 20.0,
+        "status": "completed"
+      }
+    ],
+    "audit_sha256": "dd33ac2616ab82ce33b8d291e6e514d84c40a91f193e256599da4d4325450d7f"
+  },
+  "degraded_one_vehicle": {
+    "config": {
+      "vehicles": 1,
+      "trip_min": 12.0,
+      "end_min": 80.0,
+      "target_served": 0.95,
+      "target_p90_wait_min": 20.0
+    },
+    "input_events": 13,
+    "unique_requests": 12,
+    "duplicates_ignored": 1,
+    "served": 6,
+    "unserved": 6,
+    "served_fraction": 0.5,
+    "p90_wait_min": 40.0,
+    "max_wait_min": 40.0,
+    "demonstration_pass": false,
+    "assignments": [
+      {
+        "request_id": "R01",
+        "origin": "A",
+        "destination": "B",
+        "vehicle": "V01",
+        "arrival_min": 0.0,
+        "start_min": 0.0,
+        "finish_min": 12.0,
+        "wait_min": 0.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R02",
+        "origin": "B",
+        "destination": "C",
+        "vehicle": "V01",
+        "arrival_min": 4.0,
+        "start_min": 12.0,
+        "finish_min": 24.0,
+        "wait_min": 8.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R03",
+        "origin": "C",
+        "destination": "A",
+        "vehicle": "V01",
+        "arrival_min": 8.0,
+        "start_min": 24.0,
+        "finish_min": 36.0,
+        "wait_min": 16.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R04",
+        "origin": "A",
+        "destination": "C",
+        "vehicle": "V01",
+        "arrival_min": 12.0,
+        "start_min": 36.0,
+        "finish_min": 48.0,
+        "wait_min": 24.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R05",
+        "origin": "C",
+        "destination": "B",
+        "vehicle": "V01",
+        "arrival_min": 16.0,
+        "start_min": 48.0,
+        "finish_min": 60.0,
+        "wait_min": 32.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R06",
+        "origin": "B",
+        "destination": "A",
+        "vehicle": "V01",
+        "arrival_min": 20.0,
+        "start_min": 60.0,
+        "finish_min": 72.0,
+        "wait_min": 40.0,
+        "status": "completed"
+      },
+      {
+        "request_id": "R07",
+        "origin": "A",
+        "destination": "B",
+        "vehicle": "",
+        "arrival_min": 24.0,
+        "start_min": null,
+        "finish_min": null,
+        "wait_min": null,
+        "status": "unserved_capacity"
+      },
+      {
+        "request_id": "R08",
+        "origin": "C",
+        "destination": "A",
+        "vehicle": "",
+        "arrival_min": 28.0,
+        "start_min": null,
+        "finish_min": null,
+        "wait_min": null,
+        "status": "unserved_capacity"
+      },
+      {
+        "request_id": "R09",
+        "origin": "B",
+        "destination": "C",
+        "vehicle": "",
+        "arrival_min": 32.0,
+        "start_min": null,
+        "finish_min": null,
+        "wait_min": null,
+        "status": "unserved_capacity"
+      },
+      {
+        "request_id": "R10",
+        "origin": "A",
+        "destination": "C",
+        "vehicle": "",
+        "arrival_min": 36.0,
+        "start_min": null,
+        "finish_min": null,
+        "wait_min": null,
+        "status": "unserved_capacity"
+      },
+      {
+        "request_id": "R11",
+        "origin": "C",
+        "destination": "A",
+        "vehicle": "",
+        "arrival_min": 40.0,
+        "start_min": null,
+        "finish_min": null,
+        "wait_min": null,
+        "status": "unserved_capacity"
+      },
+      {
+        "request_id": "R12",
+        "origin": "B",
+        "destination": "A",
+        "vehicle": "",
+        "arrival_min": 44.0,
+        "start_min": null,
+        "finish_min": null,
+        "wait_min": null,
+        "status": "unserved_capacity"
+      }
+    ],
+    "audit_sha256": "65d9f5c687b8143c39ca21cef36af96df0809d6af30597ddfa10e10b941e7eb3"
+  },
+  "stochastic": {
+    "replications": 200,
+    "seed": 20261101,
+    "mean_gap_min": 4.0,
+    "mean_served_fraction": 0.919583,
+    "approximate_95pct_interval_for_replication_mean": [
+      0.906212,
+      0.932955
+    ],
+    "fraction_of_replications_meeting_demonstration_targets": 0.14,
+    "caveat": "Monte Carlo precision only; does not account for model error or prove field performance"
+  },
+  "traceability": {
+    "requirements": 8,
+    "requirements_with_tests": 8,
+    "trace_coverage_fraction": 1.0,
+    "missing_requirement_test_links": [],
+    "hazards_with_test_links": 4,
+    "hazards_missing_test_links": [],
+    "dangling_references": [],
+    "link_integrity_pass": true,
+    "caveat": "Link presence verifies a graph property, not correctness, independence or sufficiency of tests"
+  },
+  "verification_results": {
+    "REQ-01-idempotency": true,
+    "REQ-02-no-overlap": true,
+    "REQ-03-service-target-on-fixed-fixture": true,
+    "REQ-04-p90-wait-on-fixed-fixture": true,
+    "REQ-05-trace-links-present": true,
+    "REQ-06-degraded-scenario-exposes-capacity-risk": true
+  },
+  "all_fixture_checks_pass": true
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Work breakdown structures and technical baselines · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/wbs-and-baselines.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Work breakdown structures and technical baselines</h1>
+<p><strong>Reference entry · Foundations and management · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p>A <strong>work breakdown structure (WBS)</strong> organizes the total authorized work by deliverable and decomposition level. It is a control structure for scope, responsibility, estimation, and earned progress—not a chronological task list. A <strong>technical baseline</strong> is a versioned agreement about approved requirements, interfaces, models, designs, and associated decision evidence. A cost or schedule baseline describes planned resources and timing; changing one without reconciling the others creates a project that appears controlled only on paper.</p>
+<h2>Theory: decomposition, conservation, and change propagation</h2>
+<p>A well-formed WBS obeys a <strong>100-percent rule</strong> at every decomposition: children collectively cover their parent deliverable without double counting. Each control account joins scope to a responsible organization and measurable progress rules. For a work package <code>i</code>, planned value <code>PV_i</code>, earned value <code>EV_i</code>, and actual cost <code>AC_i</code> are distinct variables. At a review point, <code>CPI = sum(EV_i) / sum(AC_i)</code> and <code>SPI = sum(EV_i) / sum(PV_i)</code>. These ratios describe performance against a particular baseline; they do not measure technical adequacy or automatically predict physical completion.</p>
+<p>Technical change propagation is a directed dependency problem. A battery capacity increase may change mass, cooling, packaging, maintainability, software thresholds, test equipment, and certification evidence. An approved change should carry an impact set <code>I(change)</code> with affected requirements, interfaces, configuration items, work packages, and verification records. Without configuration identifiers, two cost reports can be internally accurate yet refer to different designs.</p>
+<h2>Worked example: a misleading recovery report</h2>
+<p>Suppose by week 12 a project has <code>PV = $400k</code>, <code>EV = $320k</code>, and <code>AC = $360k</code>. Then <code>CPI = 0.889</code> and <code>SPI = 0.80</code>. A simplistic estimate at completion for a <code>$900k</code> budget is <code>EAC = BAC / CPI = $1.0125M</code>, <strong>if</strong> future cost efficiency remains similar and the budgeted scope is unchanged. If the team deletes difficult verification work from the baseline, both ratios may improve while mission readiness worsens. A recovery proposal must show the revised work scope, evidence obligations, and schedule logic before comparing new metrics.</p>
+<h2>Engineering use and evidence</h2>
+<p>Define WBS elements by verifiable product or service outcomes. For each control account, record acceptance rules, owner, measurement method, baseline version, risks, and upstream/downstream dependencies. Establish a change board that can approve, reject, defer, or condition a change—and that records impacts on the integrated baseline. Use physical percent-complete rules or weighted milestones only where achievement can be observed; hours spent are not equivalent to value earned.</p>
+<h2>Limitations and connections</h2>
+<p>A precise WBS can still encode the wrong product, and earned-value indices become unstable for small packages or after frequent rebaselining. Schedule compression may increase rework and quality risk. Link the WBS to <strong>requirements</strong>, <strong>risk and issues</strong>, <strong>traceability</strong>, <strong>integration readiness</strong>, and <strong>technical assurance</strong> so that progress reflects delivered evidence, not administrative closure.</p>
+<h2>Technical analysis: distinguish delivered scope from measured cost</h2>
+<p>A work breakdown structure (WBS) organizes the product-oriented scope of work; it is not identical to the organization chart or a schedule. A baseline binds agreed product scope, requirements, design configuration, and planned cost/schedule at a specific revision. Earned-value calculations may diagnose control performance but cannot substitute for independent evidence that the delivered product satisfies requirements.</p>
+<p>Suppose a work package has budget at completion <code>BAC = $500k</code>, earned value <code>EV = $200k</code>, and actual cost <code>AC = $250k</code>. Its cost performance index is <code>CPI = EV/AC = 0.8</code>. Under the <strong>specific</strong> forecast assumption that future work continues at that CPI, estimated cost at completion is <code>EAC = BAC/CPI = $625k</code>. The implied overrun is <strong>$125k</strong>. A different completion strategy, scope revision, or nonrepresentative early cost profile can invalidate this extrapolation.</p>
+<p><strong>Evidence boundary.</strong> Identify the revision of each baseline, authorized change, remaining technical risk, and basis for percent-complete judgments. Treat forecast figures as conditional signals for management action, not definitive estimates of final affordability or technical quality.</p>
+<h2>Claim-specific sources</h2>
+<p>The following <strong>selected methodological claims</strong> are tied to identifiable sections or abstracts, not merely generic reading lists. Source scope is stated for each link. Numerical scenarios and computations in this article are <strong>original illustrative examples</strong>, not data, calculations, or endorsements supplied by the linked publishers. Links require internet access; the explanation remains readable offline.</p>
+<ul>
+<li><strong>C1:</strong> Technical planning organizes scope, resources and schedule according to product work breakdown and milestones. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/6-1-technical-planning/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §6.1 Technical Planning</a> · <em>direct guidance</em>.</li>
+<li><strong>C2:</strong> Configuration management defines and controls the technical baseline and its revisions. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/6-5-configuration-management/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §6.5 Configuration Management</a> · <em>direct guidance</em>.</li>
+</ul>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
+<li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="risk-vs-issue.html">Risk, issue, uncertainty, and opportunity</a></li>
+<li><a href="traceability-graph.html">Requirements traceability: a typed graph of engineering claims</a></li>
+<li><a href="good-requirements.html">Requirements: precise obligations, not persuasive sentences</a></li>
+<li><a href="integration-strategy.html">Integration build-up and readiness evidence</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B2/chapters/03-wbs-and-work-authorization.html">Book 2, Chapter 03: Chapter 3 · Scope Becomes Controllable Through Products</a></li>
+<li><a href="../B2/chapters/06-integrated-baseline-review.html">Book 2, Chapter 06: Chapter 6 · A Baseline Is a Defensible Agreement</a></li>
+<li><a href="../B7/chapters/12-conduct-the-final-design-integration-review-and-hand-of.html">Book 7, Chapter 12: Book 7 · Chapter 12: Design baseline handoff</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=dd64acb13d632">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="wbs-and-baselines.md">Editable Markdown</a></nav></main></body></html>

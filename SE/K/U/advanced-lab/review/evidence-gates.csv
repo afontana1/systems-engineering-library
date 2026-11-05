@@ -1,0 +1,8 @@
+gate,claim,required_evidence,pass_condition,status,comment
+G01,Architecture internally linked,models/architecture.json,Zero schema graph errors,TBD,Does not prove correct architecture
+G02,Idempotent ingestion,tests/test_advanced.py,Duplicate and conflict checks pass,TBD,No simultaneous transactions
+G03,Faults are observable,outputs/scenario-results.json,Loss and outage scenario statuses are visible,TBD,Experimental truth ledger
+G04,Resource nonoverlap,outputs/scenario-results.json,No completed assignment overlap,TBD,Only central reservation model
+G05,Statistics reproducible,outputs/scenario-results.json,Fixed seeded paired runs and stated precision,TBD,Model misspecification unresolved
+G06,Provenance bound to code and inputs,outputs/provenance.json,All sources hashed,TBD,Hash not independent validation
+G07,Field readiness,review/BOARD-DECISION.md,Independent validated field evidence,FAIL,No operational or safety certification

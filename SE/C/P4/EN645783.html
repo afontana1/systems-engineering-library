@@ -1,0 +1,1782 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.783 — Systems Engineering Process Improvement · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P4/EN645783.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/11-digital-thread.html">Digital threads, model credibility, and configuration provenance</a></aside><main><div class="course-actions"><a href="../../K/B17/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en645783--systems-engineering-process-improvement">EN.645.783 — Systems Engineering Process Improvement</h1>
+<p><strong>Credits:</strong> 3<br/>
+<strong>Prerequisite:</strong> EN.645.662 Introduction to Systems Engineering<br/>
+<strong>Recommended self-study preparation:</strong> completion of EN.645.667 Management of Systems Projects, EN.645.780 Agile Systems Engineering, and EN.645.782 Foundations of Digital and Mission Engineering</p>
+<h2 id="1-course-purpose">1. Course purpose</h2>
+<p>This course prepares a systems engineer to define, observe, model, assess, redesign, pilot, control, and sustain an engineering process improvement effort. The subject is not document proliferation, compliance theater, or indiscriminate removal of controls. The subject is the deliberate improvement of an engineering system so that it produces better technical decisions, more trustworthy evidence, lower avoidable delay and rework, and more reliable lifecycle outcomes.</p>
+<p>The learner will treat a systems engineering process as a sociotechnical system with purpose, customers, suppliers, roles, work products, decision rights, tools, queues, feedback, variation, constraints, incentives, and risks. Standards and maturity models are used as references and diagnostic aids—not as substitutes for understanding the organization’s actual performance. Quantitative evidence, stakeholder experience, process models, and controlled experiments must agree before a redesign is institutionalized.</p>
+<p>The final product is a controlled <strong>Systems Engineering Process Improvement Release</strong> containing a current-state assessment, executable process model, future-state design, pilot experiment, measurement and control plan, implementation roadmap, governance, and a live-change defense. The release must show why the selected intervention is expected to improve business and engineering outcomes, how unintended consequences will be detected, and when the organization should stop, reverse, tailor, or scale the change.</p>
+<h2 id="2-source-scope-and-self-study-adaptation">2. Source scope and self-study adaptation</h2>
+<p>The Fall 2026 JHU syllabus presents continuous process improvement in the context of systems engineering. Its first half emphasizes lectures, discussions, independent research, and individual assignments; its second half uses instructor-facilitated teamwork and a case study to define, map, model and simulate, assess, and improve a systems engineering process. The listed course topics include continuous improvement, engineering quality management, systems engineering standards and methods, systems engineering processes and products, process-improvement methods and challenges, and process mapping, modeling, and simulation. The source course culminates in a team process-model report and presentation, an examination, and a Team Report Improvement Opportunities evaluation. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.783.81" title="Fall 2026 syllabus for EN.645.783">1</a>, <a href="https://ep.jhu.edu/courses/645783-systems-engineering-process-improvement/" title="JHU course page — Systems Engineering Process Improvement">2</a>)</p>
+<p>This self-study version preserves that structure while adding:</p>
+<ul>
+<li>a controlled Phase 4 process event log, interview set, artifact baseline, and performance dataset;</li>
+<li>explicit separation of process compliance, capability, performance, value, and maturity;</li>
+<li>ISO/IEC/IEEE 15288:2023 and the ISO/IEC 330xx process-assessment family;</li>
+<li>CMMI capability and maturity concepts without claiming an official appraisal;</li>
+<li>BPMN-compatible process semantics and a lightweight process architecture;</li>
+<li>process mining, discrete-event simulation, measurement-system analysis, statistical process control, and designed pilot experiments;</li>
+<li>human, cultural, incentive, cybersecurity, safety, supplier, and data-governance considerations;</li>
+<li>formal current-state, future-state, pilot-readiness, and sustainment reviews;</li>
+<li>a structured solo role simulation and optional cohort version of the source team project;</li>
+<li>one midcourse examination, peer-style TRIO evaluation, revision cycles, and an oral defense.</li>
+</ul>
+<p>The course does not reproduce private Canvas lectures, unpublished JHU assignments, proprietary CMMI model content, or paywalled standards text. Where a standard is not freely available, the learner uses its public scope, an authorized organizational copy if available, and the INCOSE Handbook or SEBoK for explanatory material.</p>
+<h2 id="3-relationship-to-adjacent-courses">3. Relationship to adjacent courses</h2>
+<h3 id="inputs-from-earlier-courses">Inputs from earlier courses</h3>
+<p>The learner receives:</p>
+<ul>
+<li>lifecycle, technical-management, measurement, risk, configuration, and review foundations from Phase 0 and Phase 2;</li>
+<li>quantitative modeling, uncertainty, experimental-design, and systems-dynamics skills from Phase 3;</li>
+<li>the agile engineering operating model from EN.645.780;</li>
+<li>the authoritative-source, digital-thread, model, data, and mission-evidence environment from EN.645.782;</li>
+<li>the controlled Northstar Mobility Systems transformation repository and its unresolved bottlenecks.</li>
+</ul>
+<h3 id="outputs-to-later-courses">Outputs to later courses</h3>
+<p>The course produces:</p>
+<ul>
+<li>a governed enterprise process architecture and improvement baseline for Phase 5;</li>
+<li>measured organization, governance, supplier, interoperability, and decision-flow issues suitable for SoS and enterprise analysis;</li>
+<li>a portfolio artifact supporting C10 Technical Management and Process, C11 SoS/Enterprise/Mission Engineering, and C12 Professional Practice;</li>
+<li>certification-oriented study evidence without representing course completion as INCOSE certification or an official CMMI appraisal.</li>
+</ul>
+<h2 id="4-prerequisites-and-readiness-diagnostic">4. Prerequisites and readiness diagnostic</h2>
+<p>Before Week 1, complete a 75–90 minute diagnostic. The learner should be able to:</p>
+<ol>
+<li>Distinguish a lifecycle process, project procedure, work instruction, workflow, practice, method, tool, and work product.</li>
+<li>Trace one engineering decision from trigger through analysis, review, authorization, implementation, verification, and baseline update.</li>
+<li>Calculate median, percentile, proportion, confidence interval, and a simple process lead-time decomposition.</li>
+<li>Interpret a process map, causal-loop diagram, and discrete-event simulation output.</li>
+<li>Explain common-cause versus special-cause variation and why a target is not a control limit.</li>
+<li>Identify at least four ways a process metric can be gamed or misinterpreted.</li>
+<li>Reproduce one prior notebook or model from a fresh checkout.</li>
+<li>Explain why changing a process can create safety, security, quality, labor, supplier, and cultural risks.</li>
+</ol>
+<p><strong>Diagnostic standard:</strong> at least 80%, with no failure on measurement interpretation, evidence traceability, reproducibility, or change-risk reasoning. Complete targeted remediation before beginning the current-state assessment.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<p>By the end of the course, the learner will be able to:</p>
+<ol>
+<li><strong>Explain and compare</strong> continuous-improvement, quality-management, process-assessment, and capability-improvement approaches in a systems engineering context. <em>(C10, C12)</em></li>
+<li><strong>Define and scope</strong> a systems engineering process using purpose, outcomes, customers, suppliers, boundaries, triggers, work products, roles, decision rights, and constraints. <em>(C1, C10)</em></li>
+<li><strong>Crosswalk and tailor</strong> an organizational process against ISO/IEC/IEEE 15288, lifecycle information-item guidance, process-assessment frameworks, CMMI concepts, and local obligations. <em>(C10, C12)</em></li>
+<li><strong>Construct and validate</strong> current-state process models using SIPOC, value-stream, swimlane, BPMN-compatible, and process-architecture views. <em>(C4, C10)</em></li>
+<li><strong>Design and evaluate</strong> a measurement system that distinguishes flow, quality, value, risk, capability, conformance, and stakeholder outcomes. <em>(C8, C10)</em></li>
+<li><strong>Assess</strong> process capability and performance using documentary evidence, interviews, event data, maturity/capability criteria, variation analysis, and root-cause reasoning. <em>(C8, C10, C12)</em></li>
+<li><strong>Implement, verify, and validate</strong> a reproducible process simulation or analytic model for stated decisions and limitations. <em>(C7, C8, C10)</em></li>
+<li><strong>Generate and compare</strong> future-state process alternatives using Lean, DMAIC/PDCA, systems thinking, automation, digital-thread, governance, and human-centered considerations. <em>(C9, C10, C12)</em></li>
+<li><strong>Design and conduct</strong> a bounded pilot or experiment with hypotheses, factors, responses, controls, stop criteria, and ethical safeguards. <em>(C8, C10, C12)</em></li>
+<li><strong>Develop</strong> an implementation, adoption, training, tailoring, quality, configuration, audit, and process-control plan. <em>(C10, C12)</em></li>
+<li><strong>Lead or simulate</strong> a collaborative process-improvement team, conduct peer-style review, disposition findings, and reflect on team performance. <em>(C10, C12)</em></li>
+<li><strong>Recommend and defend</strong> a process-improvement release with quantified benefits, uncertainty, risks, residual issues, governance, and scale/reversal criteria. <em>(C9, C10, C12)</em></li>
+</ol>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>What outcome is the process intended to produce, for whom, and with what evidence of value?</li>
+<li>Which process problems are causal constraints, which are symptoms, and which are measurement artifacts?</li>
+<li>What should be standardized, what should be tailored, and what should remain judgment-based?</li>
+<li>How do standards and maturity models inform an assessment without becoming the objective?</li>
+<li>What variation is inherent in the process, and what variation signals a specific assignable cause?</li>
+<li>Which local optimization could worsen end-to-end flow, technical quality, or mission outcomes?</li>
+<li>How can a future-state process be tested before enterprise rollout?</li>
+<li>What human, cultural, incentive, supplier, security, and safety effects could defeat an apparently efficient design?</li>
+<li>Which measures will prove improvement, and how will gaming, burden, and unintended consequences be detected?</li>
+<li>When should an organization scale, tailor, pause, or reverse an intervention?</li>
+</ul>
+<h2 id="7-running-case-and-controlled-evidence">7. Running case and controlled evidence</h2>
+<h3 id="northstar-integrated-change-to-evidence-process">Northstar Integrated Change-to-Evidence Process</h3>
+<p>Northstar Mobility Systems has an urgent need to improve the process that converts a mission, stakeholder, operational, supplier, cybersecurity, safety, or field-observation change into an authorized technical baseline and release-readiness decision.</p>
+<p>The current process spans:</p>
+<ul>
+<li>intake and classification of change requests;</li>
+<li>mission and stakeholder impact analysis;</li>
+<li>requirements, architecture, interface, software, data, safety, cybersecurity, and test impact analysis;</li>
+<li>supplier coordination and contractual decisions;</li>
+<li>model, code, test, and digital-thread updates;</li>
+<li>change-control board and technical-review decisions;</li>
+<li>implementation, verification, validation, release authorization, and baseline closure;</li>
+<li>operational observation and feedback into subsequent decisions.</li>
+</ul>
+<p>The controlled case package contains:</p>
+<ul>
+<li>180 days of synthetic event-log data for 96 change requests;</li>
+<li>timestamps for intake, triage, analysis, review, rework, implementation, test, approval, and closure;</li>
+<li>change type, severity, origin, affected subsystem, campus, supplier, safety/security relevance, and outcome;</li>
+<li>14 stakeholder-interview summaries and six role-specific work diaries;</li>
+<li>sample requirements, models, interface records, test evidence, decision records, and configuration histories;</li>
+<li>documented missing data, duplicate identifiers, retrospective timestamps, and inconsistent closure criteria;</li>
+<li>three process variants used by different teams;</li>
+<li>a field incident in which a change was marked “closed” before accessibility validation was complete;</li>
+<li>pressure from leadership to cut median lead time by 40% without increasing escaped defects or residual risk.</li>
+</ul>
+<p>The learner may substitute an employer process only when authorized to use the information and when confidentiality, export-control, privacy, security, and proprietary obligations can be met. Otherwise use the fictional Northstar data.</p>
+<h3 id="required-stakeholder-roles">Required stakeholder roles</h3>
+<p>Solo learners rotate through:</p>
+<ul>
+<li>process owner;</li>
+<li>systems engineer/process architect;</li>
+<li>quality or assurance lead;</li>
+<li>data/measurement analyst;</li>
+<li>project/program manager;</li>
+<li>safety and cybersecurity reviewer;</li>
+<li>supplier representative;</li>
+<li>process performer;</li>
+<li>customer/mission owner;</li>
+<li>skeptical improvement-review board member.</li>
+</ul>
+<p>Cohort learners may assign roles, but every learner must maintain an individual evidence log and complete the final oral defense.</p>
+<h2 id="8-tool-paths">8. Tool paths</h2>
+<h3 id="required-baseline-tools">Required baseline tools</h3>
+<ul>
+<li>Git or equivalent version control;</li>
+<li>spreadsheet software;</li>
+<li>Python 3 with Jupyter, pandas, matplotlib, scipy/statsmodels, and SimPy;</li>
+<li>a process-mapping tool such as diagrams.net, Visio, Lucidchart, or textual Mermaid;</li>
+<li>issue tracking and a decision/action log.</li>
+</ul>
+<h3 id="recommended-additions">Recommended additions</h3>
+<ul>
+<li>BPMN-capable modeling through Camunda Modeler or another BPMN 2.0-compatible tool;</li>
+<li>process mining with PM4Py for event-log discovery and conformance exploration;</li>
+<li>Vensim PLE for feedback and adoption dynamics;</li>
+<li>a dashboard tool, provided every chart is reproducible from controlled source data.</li>
+</ul>
+<p>Tool output is not evidence by itself. The learner must preserve source, transformations, versions, assumptions, verification checks, and decision relevance.</p>
+<h2 id="9-course-repository-and-configuration-rules">9. Course repository and configuration rules</h2>
+<p>Use this course structure within the Phase 4 repository:</p>
+<ul>
+<li><code>/06-process-measures-and-experiments/00-charter-and-governance</code></li>
+<li><code>/06-process-measures-and-experiments/01-standards-and-process-architecture</code></li>
+<li><code>/06-process-measures-and-experiments/02-current-state-model</code></li>
+<li><code>/06-process-measures-and-experiments/03-measurement-and-data</code></li>
+<li><code>/06-process-measures-and-experiments/04-assessment-and-causes</code></li>
+<li><code>/06-process-measures-and-experiments/05-simulation-and-experiments</code></li>
+<li><code>/06-process-measures-and-experiments/06-future-state-and-pilot</code></li>
+<li><code>/06-process-measures-and-experiments/07-control-and-sustainment</code></li>
+<li><code>/06-process-measures-and-experiments/08-reviews-and-release</code></li>
+</ul>
+<p>Every significant artifact must record owner, purpose, source, version, status, assumptions, dependencies, review state, and change rationale. Every reported result must be reproducible from controlled source data or explicitly labeled as qualitative evidence.</p>
+<h2 id="10-assessment-plan">10. Assessment plan</h2>
+<table>
+<thead>
+<tr>
+<th>Assessment</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Four research discussions or written position exchanges</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Three individual assignments</td>
+<td style="text-align:right">18%</td>
+</tr>
+<tr>
+<td>Midcourse examination</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Current-State Process Assessment</td>
+<td style="text-align:right">17%</td>
+</tr>
+<tr>
+<td>Process model, simulation, and alternative analysis</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Future-state pilot and control package</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Final report, presentation, live change, and oral defense</td>
+<td style="text-align:right">12%</td>
+</tr>
+<tr>
+<td>TRIO peer/self assessment and improvement dispositions</td>
+<td style="text-align:right">3%</td>
+</tr>
+</tbody>
+</table>
+<p>A score of at least 80% is required overall. Critical evidence, measurement, safety/security, reproducibility, and governance failures are noncompensable.</p>
+<h2 id="11-course-map">11. Course map</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Week</th>
+<th>Primary focus</th>
+<th>Major evidence or review</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Continuous improvement and engineering quality</td>
+<td>Improvement charter and research position</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>Standards, process architecture, and assessment models</td>
+<td>Standards/tailoring crosswalk</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>Process definition, scope, stakeholders, and outcomes</td>
+<td>Process Definition Review</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>Current-state mapping, event logs, and conformance</td>
+<td>Validated as-is process baseline</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>Measurement system, variation, and baseline performance</td>
+<td>Measurement Baseline Review</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>Capability assessment, root causes, and midcourse exam</td>
+<td>Current-State Process Assessment</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>Process modeling, simulation, verification, and validation</td>
+<td>Executable Current-State Model Review</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>Future-state alternatives and process redesign</td>
+<td>Future-State Design Review</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Pilot/experiment design, adoption, and implementation</td>
+<td>Pilot Readiness Review</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Process control, governance, tailoring, and sustainment</td>
+<td>Control and Sustainment Review</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>Independent red team, TRIO evaluation, and scale decision</td>
+<td>Process Improvement Readiness Review</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>Final release, live change, presentation, and defense</td>
+<td>Final Process Improvement Review</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-major-review-gates">12. Major review gates</h2>
+<h3 id="process-definition-review--end-of-week-3">Process Definition Review — end of Week 3</h3>
+<p>The review confirms purpose, boundaries, stakeholders, outcomes, process architecture, standards context, improvement question, measurement intent, and research plan.</p>
+<h3 id="current-state-process-assessment--end-of-week-6">Current-State Process Assessment — end of Week 6</h3>
+<p>The review determines whether the process baseline is credible enough to support redesign. It requires validated maps, event-data quality findings, performance baselines, capability evidence, root-cause hypotheses, and limitations.</p>
+<h3 id="future-state-design-review--end-of-week-8">Future-State Design Review — end of Week 8</h3>
+<p>The review compares at least three process alternatives, including one low-automation alternative, and determines whether the preferred concept is ready for a controlled pilot.</p>
+<h3 id="pilot-readiness-review--end-of-week-9">Pilot Readiness Review — end of Week 9</h3>
+<p>The review approves or rejects the pilot based on hypotheses, design, safeguards, data, training, governance, stop criteria, and rollback readiness.</p>
+<h3 id="final-process-improvement-review--week-12">Final Process Improvement Review — Week 12</h3>
+<p>The learner requests authorization to scale, tailor, continue, or stop the intervention and defends the complete evidence chain under a live-change challenge.</p>
+<h2 id="13-final-capstone-requirements">13. Final capstone requirements</h2>
+<p>The <strong>Systems Engineering Process Improvement Release</strong> must include:</p>
+<ol>
+<li>executive decision request;</li>
+<li>process charter, stakeholders, outcomes, and boundaries;</li>
+<li>standards, obligations, and tailoring crosswalk;</li>
+<li>current-state process architecture and detailed map;</li>
+<li>event-log/data-quality report and measurement dictionary;</li>
+<li>baseline flow, quality, value, risk, and variation analysis;</li>
+<li>capability/maturity assessment with evidence ratings and limitations;</li>
+<li>root-cause and systemic-cause analysis;</li>
+<li>verified and validated process model or simulation;</li>
+<li>at least three future-state alternatives and selection rationale;</li>
+<li>future-state process, roles, controls, data, automation, and decision rights;</li>
+<li>pilot or experiment design and results or synthetic execution;</li>
+<li>implementation, adoption, training, supplier, and communication plan;</li>
+<li>process-control, audit, tailoring, knowledge-management, and sustainment plan;</li>
+<li>benefits, costs, risks, uncertainty, unintended-consequence, and reversal analysis;</li>
+<li>TRIO review, self-assessment, findings, and dispositions;</li>
+<li>live-change result and final oral defense record;</li>
+<li>controlled source, models, notebooks, data, generated products, and manifest.</li>
+</ol>
+<p>Screenshots without source are not acceptable evidence.</p>
+<h2 id="14-mastery-and-feedback-rules">14. Mastery and feedback rules</h2>
+<ul>
+<li>Every major artifact receives a self-review against its rubric before submission.</li>
+<li>At least two substantial artifacts must be revised after findings.</li>
+<li>The process model must pass structural, data, behavioral, and sensitivity checks appropriate to its intended use.</li>
+<li>The final recommendation must state uncertainty and prohibited uses.</li>
+<li>A learner who cannot reproduce a reported result, explain a process measure, or defend a control decision has not completed the course.</li>
+<li>Optional cohort review should use the TRIO rubric; solo learners perform an independent-role red team and document cognitive-bias safeguards.</li>
+</ul>
+<hr/>
+<h2 id="week-1--continuous-improvement-and-quality-in-systems-engineering">Week 1 — Continuous improvement and quality in systems engineering</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B17/chapters/01.html">Chapter 01</a> → <a href="../../K/B17/labs/01.html">Hypothetical Lab 01</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-783-w01.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment">Competency alignment</h3>
+<p>C1 (D), C10 (D), C12 (D)</p>
+<h3 id="professional-context-and-essential-question">Professional context and essential question</h3>
+<p>Northstar leadership wants a 40% lead-time reduction, but the process has produced an accessibility escape and inconsistent closure evidence. The essential question is: <strong>What does “better” mean for this engineering process, and how can improvement avoid trading technical integrity for speed?</strong></p>
+<h3 id="weekly-learning-outcomes">Weekly learning outcomes</h3>
+<ul>
+<li>Explain the difference among quality planning, assurance, control, correction, corrective action, and continuous improvement.</li>
+<li>Compare PDCA, DMAIC, Lean, systems thinking, process assessment, and maturity-model use.</li>
+<li>Define a business and engineering case for improvement without presupposing the solution.</li>
+<li>Identify process customers, performers, suppliers, decision authorities, and affected stakeholders.</li>
+<li>Establish research, citation, evidence, confidentiality, and ethics rules for the course project.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the Phase 4 mission-outcome-to-evidence chain.</li>
+<li>List three bottlenecks observed in EN.645.780 or EN.645.782 and the evidence supporting each.</li>
+<li>Explain why “faster approval” is not yet a valid improvement objective.</li>
+<li>Identify one process metric that could create harmful behavior.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior artifacts before beginning independent work.</p>
+<h3 id="required-study">Required study</h3>
+<ul>
+<li>Read the JHU Fall 2026 course description, expanded description, topics, CLOs, project structure, and resubmission expectations. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.783.81" title="Fall 2026 syllabus for EN.645.783">1</a>, <a href="https://ep.jhu.edu/courses/645783-systems-engineering-process-improvement/" title="JHU course page — Systems Engineering Process Improvement">2</a>)</li>
+<li>Read the ASQ DMAIC overview through the five phases and the PDCA overview. (<a href="https://asq.org/quality-resources/dmaic" title="ASQ DMAIC process">8</a>, <a href="https://asq.org/quality-resources/pdca-cycle" title="ASQ PDCA cycle">9</a>)</li>
+<li>Read SEBoK Quality Management, focusing on fact-based management, variation, and systematic improvement. (<a href="https://sebokwiki.org/wiki/Quality_Management" title="SEBoK — Quality Management">14</a>)</li>
+<li>Read SEBoK Assessing Systems Engineering Performance of Business and Enterprises, focusing on value and enterprise levers. (<a href="https://sebokwiki.org/wiki/Assessing_Systems_Engineering_Performance_of_Business_and_Enterprises" title="SEBoK — Assessing Systems Engineering Performance of Business and Enterprises">13</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes">Instructor-style lesson notes</h3>
+<ul>
+<li>A process is a system for producing outcomes; documentation is one possible process asset, not the process itself.</li>
+<li>Improvement should connect to mission, customer, technical, schedule, cost, risk, workforce, and learning outcomes.</li>
+<li>DMAIC is useful for an existing underperforming process; PDCA is a broader iterative learning cycle. Neither eliminates systems thinking.</li>
+<li>Quality assurance asks whether the process is adequate and followed; quality control examines outputs; improvement changes capability.</li>
+<li>A credible charter states the undesirable condition, evidence, consequence, scope, sponsor, authority, and exclusions.</li>
+</ul>
+<h3 id="worked-example">Worked example</h3>
+<p>A superficial charter says “reduce change-board meetings.” The worked example reframes the issue: median change lead time is 34 days, the 90th percentile is 81 days, 27% of requests are reworked after review, and three critical changes bypassed accessibility or cybersecurity evidence. The charter seeks to reduce avoidable waiting and rework while maintaining required assurance and reducing evidence escapes.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the result or decision changes.</p>
+<h3 id="guided-practice">Guided practice</h3>
+<ul>
+<li>Classify twelve Northstar observations as symptom, outcome, possible cause, constraint, or proposed solution.</li>
+<li>Build an initial SIPOC and stakeholder map.</li>
+<li>Draft problem and goal statements with baseline, target direction, guardrails, and scope.</li>
+<li>Run a pre-mortem on how the improvement project itself could fail.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected analysis.</p>
+<h3 id="independent-exercises">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Define 25 course terms in your own words and distinguish commonly confused pairs.</li>
+<li><strong>Application:</strong> Produce the improvement charter and high-level SIPOC for the Northstar process.</li>
+<li><strong>Analysis:</strong> Compare PDCA, DMAIC, Lean, process-assessment, and systems-dynamics approaches against this problem.</li>
+<li><strong>Synthesis:</strong> Write a two-page position paper: “What makes a systems engineering process effective?”</li>
+<li><strong>Stretch:</strong> Interview one process performer or review a published case and compare its definition of value with Northstar’s.</li>
+</ul>
+<h3 id="weekly-deliverable">Weekly deliverable</h3>
+<p><strong>Improvement Charter and Research Position</strong> containing problem, evidence, consequences, scope, stakeholders, authority, objectives, guardrails, exclusions, initial risks, method-selection rationale, and source register.</p>
+<p>Submit native or textual source, controlled data and transformations, generated views, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Problem/evidence/value framing</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Scope and stakeholder system</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Method comparison and rationale</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Risks, guardrails, and ethics</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Research quality and configuration</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures">Critical failures</h3>
+<ul>
+<li>Defining success only as speed, utilization, or compliance.</li>
+<li>Starting with a favored solution rather than an evidenced problem.</li>
+<li>Using confidential or personal data without authorization and protection.</li>
+<li>Failing to state technical-quality, safety, security, or stakeholder guardrails.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why is compliance not sufficient evidence of process effectiveness?</strong><br/>
+<strong>Answer guidance:</strong> A process may conform yet produce poor, delayed, risky, or low-value outcomes; effectiveness must be tied to intended results.</li>
+<li><strong>What is the difference between correction and corrective action?</strong><br/>
+<strong>Answer guidance:</strong> Correction fixes a detected nonconformity; corrective action addresses causes to prevent recurrence.</li>
+<li><strong>Why use a charter?</strong><br/>
+<strong>Answer guidance:</strong> To create a controlled agreement on purpose, scope, authority, evidence, objectives, risks, and boundaries.</li>
+<li><strong>What makes a measure a guardrail?</strong><br/>
+<strong>Answer guidance:</strong> It protects an outcome that must not degrade while another outcome is improved.</li>
+<li><strong>Why can process improvement create harm?</strong><br/>
+<strong>Answer guidance:</strong> It changes work, incentives, authority, information flow, assurance, workload, and risk exposure.</li>
+</ol>
+<h3 id="revision-and-mastery-gate">Revision and mastery gate</h3>
+<p>Revise the charter until every claimed problem has evidence, every objective has a guardrail, and the process owner or simulated sponsor can authorize the assessment.</p>
+<h3 id="suggested-workload">Suggested workload</h3>
+<p>Target: <strong>10–12 hours</strong>. Record actual time by research, process/data work, analysis/modeling, collaboration or role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update">Configuration and portfolio update</h3>
+<p>Create baseline <code>SEPI-0.1</code>, source register, ethics/data handling note, and tag <code>SEPI-W01-CHARTER</code>.</p>
+<hr/>
+<h2 id="week-2--standards-process-architecture-and-capability-frameworks">Week 2 — Standards, process architecture, and capability frameworks</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B17/chapters/02.html">Chapter 02</a> → <a href="../../K/B17/labs/02.html">Hypothetical Lab 02</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-783-w02.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-2">Competency alignment</h3>
+<p>C1 (D), C10 (A), C12 (D)</p>
+<h3 id="professional-context-and-essential-question-2">Professional context and essential question</h3>
+<p>Northstar uses fragments of lifecycle standards, agile guidance, supplier procedures, and local checklists. The essential question is: <strong>How can reference frameworks inform a tailored process without turning the improvement effort into a checklist audit?</strong></p>
+<h3 id="weekly-learning-outcomes-2">Weekly learning outcomes</h3>
+<ul>
+<li>Explain the purpose and limits of ISO/IEC/IEEE 15288 lifecycle process descriptions.</li>
+<li>Distinguish process purpose/outcomes, activities/tasks, information items, procedures, methods, and tools.</li>
+<li>Explain process capability, maturity, conformance, performance, and value as different assessment dimensions.</li>
+<li>Construct a process architecture and standards crosswalk for the selected process.</li>
+<li>Identify mandatory, recommended, tailored, and local process obligations.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-2">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Restate the Week 1 process purpose and boundaries.</li>
+<li>Name three candidate reference frameworks and the question each can answer.</li>
+<li>Explain why a maturity level is not a business outcome.</li>
+<li>Identify one required control that should not be removed merely because it creates delay.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior artifacts before beginning independent work.</p>
+<h3 id="required-study-2">Required study</h3>
+<ul>
+<li>Review the INCOSE standards page entries for ISO/IEC/IEEE 15288:2023, 15289:2019, 24748-1:2024, and the ISO/IEC 330xx family. (<a href="https://www.incose.org/about-systems-engineering/standards-policies/" title="INCOSE Systems Engineering Standards">3</a>)</li>
+<li>Review the INCOSE Systems Engineering Handbook description of lifecycle processes and tailoring. (<a href="https://www.incose.org/resources-publications/technical-publications/se-handbook/" title="INCOSE Systems Engineering Handbook, Fifth Edition overview">4</a>)</li>
+<li>Review ISO/IEC 33020:2019 public scope and capability-measurement purpose. (<a href="https://www.iso.org/standard/78526.html" title="ISO/IEC 33020:2019 — Process measurement framework for assessment of process capability">6</a>)</li>
+<li>Review CMMI capability and maturity levels and the model-viewer description. (<a href="https://cmmiinstitute.com/learning/appraisals/levels" title="CMMI capability and maturity levels">7</a>, <a href="https://cmmiinstitute.com/products/cmmi/cmmi-model-viewer" title="CMMI Model Viewer">19</a>)</li>
+<li>Read SEBoK process organization and standard-process/tailoring guidance. (<a href="https://sebokwiki.org/wiki/Organizing_Business_and_Enterprises_to_Perform_Systems_Engineering" title="SEBoK — Organizing Business and Enterprises to Perform Systems Engineering">12</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-2">Instructor-style lesson notes</h3>
+<ul>
+<li>ISO/IEC/IEEE 15288 defines lifecycle process purposes and outcomes; it does not prescribe one universal workflow.</li>
+<li>ISO/IEC 15289 focuses on lifecycle information-item content, while 24748 guidance supports lifecycle management and tailoring.</li>
+<li>ISO/IEC 33020 supports capability assessment; capability is the ability to consistently meet goals, not the presence of documents.</li>
+<li>CMMI capability levels apply to practice areas; maturity levels describe a staged organizational path. This course does not conduct an official appraisal.</li>
+<li>A process architecture shows relationships among processes, triggers, information, governance, and lifecycle context before detailed mapping.</li>
+</ul>
+<h3 id="worked-example-2">Worked example</h3>
+<p>The worked crosswalk takes “analyze change impact” and connects it to decision management, configuration management, information management, measurement, risk, stakeholder needs, requirements, architecture, and V&amp;V outcomes. It then separates normative obligations from Northstar-specific implementation choices such as a 48-hour triage target or automated orphan-trace query.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the result or decision changes.</p>
+<h3 id="guided-practice-2">Guided practice</h3>
+<ul>
+<li>Build a hierarchy from enterprise policy to lifecycle process, project-tailored process, procedure, work instruction, method, tool, and record.</li>
+<li>Crosswalk twelve Northstar process steps to lifecycle process purposes and outcomes.</li>
+<li>Classify each control as mandatory, conditionally required, recommended, local, or obsolete.</li>
+<li>Compare a capability profile with actual performance evidence and identify contradictions.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected analysis.</p>
+<h3 id="independent-exercises-2">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Produce a terminology table for conformance, capability, maturity, performance, quality, and value.</li>
+<li><strong>Application:</strong> Create the standards and obligations crosswalk.</li>
+<li><strong>Analysis:</strong> Identify over-control, under-control, duplication, and unjustified local requirements.</li>
+<li><strong>Synthesis:</strong> Build a one-page process architecture and tailoring rationale.</li>
+<li><strong>Stretch:</strong> Map selected process elements to CMMI practice areas using authorized public or licensed content.</li>
+</ul>
+<h3 id="weekly-deliverable-2">Weekly deliverable</h3>
+<p><strong>Process Architecture and Standards/Tailoring Crosswalk</strong> with source, applicability, obligation, local implementation, evidence, owner, rationale, and open issue for each relevant element.</p>
+<p>Submit native or textual source, controlled data and transformations, generated views, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-2">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Framework interpretation</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Process architecture coherence</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Crosswalk traceability</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Tailoring and obligation reasoning</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Limitations and source discipline</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-2">Critical failures</h3>
+<ul>
+<li>Treating a standard as a mandatory sequence when it defines outcomes.</li>
+<li>Claiming an official CMMI rating or appraisal.</li>
+<li>Removing a contractual, statutory, safety, or security control without authority.</li>
+<li>Confusing process capability with product quality or project success.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-2">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What does ISO/IEC/IEEE 15288 primarily define?</strong><br/>
+<strong>Answer guidance:</strong> A common framework of system lifecycle process purposes and outcomes.</li>
+<li><strong>Why separate a process from a method or tool?</strong><br/>
+<strong>Answer guidance:</strong> The process states what outcomes must be achieved; methods and tools are implementation choices.</li>
+<li><strong>What does capability assessment ask?</strong><br/>
+<strong>Answer guidance:</strong> Whether a process is implemented and managed with attributes that support consistent goal achievement.</li>
+<li><strong>Why can a mature process still underperform?</strong><br/>
+<strong>Answer guidance:</strong> The context, objectives, measures, execution, incentives, or design may be wrong despite institutionalization.</li>
+<li><strong>What is tailoring?</strong><br/>
+<strong>Answer guidance:</strong> A controlled adaptation of standard processes to project and organizational characteristics with rationale and governance.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-2">Revision and mastery gate</h3>
+<p>Resolve all crosswalk items that affect scope, mandatory controls, or assessment criteria before detailed process mapping.</p>
+<h3 id="suggested-workload-2">Suggested workload</h3>
+<p>Target: <strong>10–12 hours</strong>. Record actual time by research, process/data work, analysis/modeling, collaboration or role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-2">Configuration and portfolio update</h3>
+<p>Release process architecture <code>PA-0.1</code>, crosswalk <code>XW-0.1</code>, and tag <code>SEPI-W02-STANDARDS</code>.</p>
+<hr/>
+<h2 id="week-3--process-definition-boundaries-stakeholders-and-outcomes">Week 3 — Process definition, boundaries, stakeholders, and outcomes</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B17/chapters/03.html">Chapter 03</a> → <a href="../../K/B17/labs/03.html">Hypothetical Lab 03</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-783-w03.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-3">Competency alignment</h3>
+<p>C1 (A), C2 (D), C10 (A), C12 (D)</p>
+<h3 id="professional-context-and-essential-question-3">Professional context and essential question</h3>
+<p>A poorly bounded process model either omits causes or expands until nothing is actionable. The essential question is: <strong>What is the smallest defensible process boundary that still contains the decisions, feedback, and obligations needed to improve outcomes?</strong></p>
+<h3 id="weekly-learning-outcomes-3">Weekly learning outcomes</h3>
+<ul>
+<li>Define process purpose, outcomes, start/end events, units of work, states, and closure criteria.</li>
+<li>Identify customers, suppliers, performers, authorities, affected parties, and information owners.</li>
+<li>Construct SIPOC, context, outcome, and process-requirement views.</li>
+<li>Define process performance objectives and acceptance criteria.</li>
+<li>Conduct and pass a Process Definition Review.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-3">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reproduce the process architecture and top obligations without notes.</li>
+<li>Explain the difference between a process boundary and an organizational boundary.</li>
+<li>Identify one feedback loop currently outside the proposed scope.</li>
+<li>Name the process unit of work and its valid terminal states.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior artifacts before beginning independent work.</p>
+<h3 id="required-study-3">Required study</h3>
+<ul>
+<li>Read ASQ flowchart/process-map guidance on current-state mapping and purpose. (<a href="https://asq.org/quality-resources/flowchart" title="ASQ flowchart and process mapping guidance">11</a>)</li>
+<li>Review OMG BPMN 2.0.2 purpose and graphical process notation. (<a href="https://www.omg.org/spec/BPMN/2.0.2/" title="OMG Business Process Model and Notation 2.0.2">5</a>)</li>
+<li>Read SEBoK process-purpose and outcome definitions and process organization guidance. (<a href="https://sebokwiki.org/wiki/Organizing_Business_and_Enterprises_to_Perform_Systems_Engineering" title="SEBoK — Organizing Business and Enterprises to Perform Systems Engineering">12</a>, <a href="https://sebokwiki.org/wiki/Process_%28glossary%29" title="SEBoK process glossary">25</a>)</li>
+<li>Revisit the source syllabus expectation to define, map, model, simulate, assess, manage, and improve a selected process. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.783.81" title="Fall 2026 syllabus for EN.645.783">1</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-3">Instructor-style lesson notes</h3>
+<ul>
+<li>Boundary choice is a hypothesis about where causal leverage and governance reside.</li>
+<li>A process outcome is an achieved result, not an activity such as “hold a review.”</li>
+<li>Closure requires explicit technical and configuration evidence; an administrative status alone is insufficient.</li>
+<li>Stakeholder analysis must include people who bear process burden and risk, not only process owners and executives.</li>
+<li>Process requirements should be testable and distinguish mandatory outcomes from preferred performance targets.</li>
+</ul>
+<h3 id="worked-example-3">Worked example</h3>
+<p>The worked example rejects “change control from submission to approval” because it hides implementation, V&amp;V, baseline closure, and operational feedback. The accepted boundary starts with a recognized change trigger and ends only when the authorized baseline, evidence, communication, and residual-risk record are complete—or when the request is formally rejected with rationale.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the result or decision changes.</p>
+<h3 id="guided-practice-3">Guided practice</h3>
+<ul>
+<li>Create a context diagram showing external triggers, neighboring processes, repositories, and authorities.</li>
+<li>Define unit-of-work states and entry/exit criteria.</li>
+<li>Write eight process requirements and four quality attributes.</li>
+<li>Run role-based challenges from performer, supplier, assurance, mission owner, and data owner perspectives.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected analysis.</p>
+<h3 id="independent-exercises-3">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Complete a SIPOC and stakeholder concern table.</li>
+<li><strong>Application:</strong> Produce a process charter v2, context, state model, and outcome model.</li>
+<li><strong>Analysis:</strong> Compare two boundary options and identify omitted feedback and accountability.</li>
+<li><strong>Synthesis:</strong> Prepare and conduct the Process Definition Review.</li>
+<li><strong>Stretch:</strong> Define a process-product-line view showing allowed variants for different change classes.</li>
+</ul>
+<h3 id="weekly-deliverable-3">Weekly deliverable</h3>
+<p><strong>Process Definition Review Package</strong> containing charter v2, context and SIPOC, stakeholders, unit-of-work states, outcomes, process requirements, quality attributes, assumptions, exclusions, review criteria, findings, and dispositions.</p>
+<p>Submit native or textual source, controlled data and transformations, generated views, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-3">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boundary and purpose</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Stakeholder/outcome completeness</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Process requirements and states</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Standards and artifact traceability</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Review quality and disposition</td>
+<td style="text-align:right">20%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-3">Critical failures</h3>
+<ul>
+<li>Using approval as the only definition of process completion.</li>
+<li>Excluding performers or affected stakeholders from the process definition.</li>
+<li>Writing activities as outcomes or unverifiable process requirements.</li>
+<li>Proceeding with unresolved boundary or authority ambiguity.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-3">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is the unit of work?</strong><br/>
+<strong>Answer guidance:</strong> The item whose progression and outcome the process manages—in this case a controlled change request or change package.</li>
+<li><strong>Why model states?</strong><br/>
+<strong>Answer guidance:</strong> To clarify valid progression, waiting, rejection, rework, cancellation, completion, and evidence conditions.</li>
+<li><strong>What makes a process outcome useful?</strong><br/>
+<strong>Answer guidance:</strong> It is observable, stakeholder-relevant, and linked to process purpose.</li>
+<li><strong>Why include neighboring processes?</strong><br/>
+<strong>Answer guidance:</strong> Inputs, outputs, constraints, and feedback often cross the selected boundary.</li>
+<li><strong>What is the purpose of a definition review?</strong><br/>
+<strong>Answer guidance:</strong> To prevent detailed analysis of an incoherent or unauthorized process scope.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-3">Revision and mastery gate</h3>
+<p>Pass the Process Definition Review with no unresolved critical finding on purpose, scope, authority, outcome, or closure evidence.</p>
+<h3 id="suggested-workload-3">Suggested workload</h3>
+<p>Target: <strong>10–12 hours</strong>. Record actual time by research, process/data work, analysis/modeling, collaboration or role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-3">Configuration and portfolio update</h3>
+<p>Baseline <code>PDEF-1.0</code>, review record, dispositions, and tag <code>SEPI-W03-PDR</code>.</p>
+<hr/>
+<h2 id="week-4--current-state-process-mapping-event-logs-and-conformance">Week 4 — Current-state process mapping, event logs, and conformance</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B17/chapters/04.html">Chapter 04</a> → <a href="../../K/B17/labs/04.html">Hypothetical Lab 04</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-783-w04.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-4">Competency alignment</h3>
+<p>C4 (D), C8 (D), C10 (A)</p>
+<h3 id="professional-context-and-essential-question-4">Professional context and essential question</h3>
+<p>Documented procedures often differ from work as actually performed. The essential question is: <strong>What process is truly operating, including variants, queues, rework, workarounds, and invisible information work?</strong></p>
+<h3 id="weekly-learning-outcomes-4">Weekly learning outcomes</h3>
+<ul>
+<li>Construct validated current-state swimlane and BPMN-compatible models.</li>
+<li>Prepare and assess an event log for process discovery and conformance analysis.</li>
+<li>Distinguish designed process, enacted process, and remembered process.</li>
+<li>Identify queues, handoffs, loops, batching, workarounds, variants, and missing evidence.</li>
+<li>Validate the as-is model with stakeholder and data triangulation.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-4">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Restate valid process states and closure criteria.</li>
+<li>Identify the minimum event attributes needed for case-based process analysis.</li>
+<li>Explain why a retrospective timestamp can bias lead-time analysis.</li>
+<li>Name three forms of hidden work.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior artifacts before beginning independent work.</p>
+<h3 id="required-study-4">Required study</h3>
+<ul>
+<li>Read OMG BPMN 2.0.2 overview and use the specification as notation reference. (<a href="https://www.omg.org/spec/BPMN/2.0.2/" title="OMG Business Process Model and Notation 2.0.2">5</a>)</li>
+<li>Read ASQ flowchart guidance and the seven basic quality tools overview. (<a href="https://asq.org/quality-resources/flowchart" title="ASQ flowchart and process mapping guidance">11</a>, <a href="https://asq.org/quality-resources/seven-basic-quality-tools" title="ASQ seven basic quality tools">10</a>)</li>
+<li>Review PM4Py documentation for event log, case ID, activity, and timestamp concepts. (<a href="https://processintelligence.solutions/pm4py" title="PM4Py process-mining documentation">20</a>)</li>
+<li>Read SEBoK Information Management and Configuration Management as neighboring process controls. (<a href="https://sebokwiki.org/wiki/Information_Management" title="SEBoK — Information Management">27</a>, <a href="https://sebokwiki.org/wiki/Configuration_Management" title="SEBoK — Configuration Management">28</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-4">Instructor-style lesson notes</h3>
+<ul>
+<li>Use maps for different purposes: context, value stream, decision flow, responsibility, and executable behavior.</li>
+<li>An event log should have stable case identifiers, activity semantics, timestamps, actors or systems, and provenance.</li>
+<li>Process mining can expose paths and variants, but poor event semantics produce false precision.</li>
+<li>Conformance gaps may represent noncompliance, justified tailoring, tool behavior, emergency procedure, or bad data.</li>
+<li>Validate with data, artifacts, observation/interviews, and exception cases rather than one workshop.</li>
+</ul>
+<h3 id="worked-example-4">Worked example</h3>
+<p>The documented process shows one impact-analysis activity followed by a board review. The event data reveals three team variants, repeated “request clarification” loops, pre-board spreadsheet reconciliation, and testing that begins before configuration authorization. The example reconciles these into a canonical model with explicit variants and evidence-quality flags.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the result or decision changes.</p>
+<h3 id="guided-practice-4">Guided practice</h3>
+<ul>
+<li>Clean the first 25 Northstar cases and create an event-log data dictionary.</li>
+<li>Generate a simple variant table and directly-follows view.</li>
+<li>Map one nominal, one expedited, and one high-assurance case.</li>
+<li>Conduct a model walk-through and record discrepancies between procedure, data, and stakeholder accounts.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected analysis.</p>
+<h3 id="independent-exercises-4">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Create the current-state swimlane/BPMN model with states and evidence objects.</li>
+<li><strong>Application:</strong> Build the cleaned event log and variant/conformance summary.</li>
+<li><strong>Analysis:</strong> Identify waiting, batching, rework, handoff, and workaround patterns.</li>
+<li><strong>Synthesis:</strong> Produce a validated as-is baseline with confidence annotations.</li>
+<li><strong>Stretch:</strong> Use PM4Py to discover a process model and compare it with the manually validated model.</li>
+</ul>
+<h3 id="weekly-deliverable-4">Weekly deliverable</h3>
+<p><strong>Validated Current-State Process Baseline</strong> containing maps, notation conventions, event-log dictionary, cleaning log, variant analysis, conformance findings, exception taxonomy, stakeholder validation record, and known limitations.</p>
+<p>Submit native or textual source, controlled data and transformations, generated views, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-4">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Process semantic accuracy</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Event-log quality and provenance</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Variant/conformance analysis</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Validation and triangulation</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Clarity and configuration</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-4">Critical failures</h3>
+<ul>
+<li>Presenting the documented procedure as the actual process without validation.</li>
+<li>Using unstable case identifiers or unexplained timestamp substitutions.</li>
+<li>Treating every conformance deviation as performer failure.</li>
+<li>Hiding variants or exceptions to make the map appear clean.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-4">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a process case?</strong><br/>
+<strong>Answer guidance:</strong> One identifiable unit of work whose events form a process instance.</li>
+<li><strong>Why distinguish event time from record-entry time?</strong><br/>
+<strong>Answer guidance:</strong> Record-entry delay can distort sequence, duration, and causality.</li>
+<li><strong>What is conformance analysis?</strong><br/>
+<strong>Answer guidance:</strong> Comparison of observed execution with a reference model or rules to locate and interpret differences.</li>
+<li><strong>Why retain variants?</strong><br/>
+<strong>Answer guidance:</strong> Different risk classes or contexts may require legitimate tailored paths.</li>
+<li><strong>What validates an as-is map?</strong><br/>
+<strong>Answer guidance:</strong> Agreement among controlled data, artifacts, performers, authorities, and observed exception behavior.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-4">Revision and mastery gate</h3>
+<p>Resolve critical semantic, identifier, timestamp, and boundary issues before calculating baseline process performance.</p>
+<h3 id="suggested-workload-4">Suggested workload</h3>
+<p>Target: <strong>10–12 hours</strong>. Record actual time by research, process/data work, analysis/modeling, collaboration or role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-4">Configuration and portfolio update</h3>
+<p>Baseline <code>ASIS-1.0</code>, event log <code>EL-0.2</code>, cleaning script, and tag <code>SEPI-W04-ASIS</code>.</p>
+<hr/>
+<h2 id="week-5--measurement-system-variation-and-baseline-performance">Week 5 — Measurement system, variation, and baseline performance</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B17/chapters/05.html">Chapter 05</a> → <a href="../../K/B17/labs/05.html">Hypothetical Lab 05</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-783-w05.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-5">Competency alignment</h3>
+<p>C8 (A), C10 (A), C12 (D)</p>
+<h3 id="professional-context-and-essential-question-5">Professional context and essential question</h3>
+<p>Leadership wants one lead-time dashboard, while performers report that the metric hides change complexity and missing work. The essential question is: <strong>Which measures provide decision insight without rewarding harmful shortcuts or creating false certainty?</strong></p>
+<h3 id="weekly-learning-outcomes-5">Weekly learning outcomes</h3>
+<ul>
+<li>Develop an operational measurement dictionary and Goal–Question–Measure chain.</li>
+<li>Assess data completeness, validity, timeliness, repeatability, and measurement burden.</li>
+<li>Decompose lead time into touch, wait, queue, rework, and blocked time.</li>
+<li>Analyze distributions, percentiles, variation, stability, and subgroup differences.</li>
+<li>Design balanced flow, quality, value, risk, and human-system measures.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-5">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reproduce the event-log data-quality limitations.</li>
+<li>Explain common-cause and special-cause variation.</li>
+<li>Identify a leading and a lagging indicator for the process.</li>
+<li>Name one metric that could induce premature closure.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior artifacts before beginning independent work.</p>
+<h3 id="required-study-5">Required study</h3>
+<ul>
+<li>Read SEBoK Measurement and the Systems Engineering Measurement Primer. (<a href="https://sebokwiki.org/wiki/Measurement" title="SEBoK — Measurement">15</a>, <a href="https://sebokwiki.org/wiki/Systems_Engineering_Measurement_Primer" title="SEBoK — Systems Engineering Measurement Primer">16</a>)</li>
+<li>Read SEBoK Quality Management discussion of measurement-system analysis and variation. (<a href="https://sebokwiki.org/wiki/Quality_Management" title="SEBoK — Quality Management">14</a>)</li>
+<li>Read ASQ control-chart guidance and NIST process monitoring/control overview. (<a href="https://asq.org/quality-resources/control-chart" title="ASQ control-chart guidance">17</a>, <a href="https://www.itl.nist.gov/div898/handbook/pmc/pmc.htm" title="NIST/SEMATECH e-Handbook — Process Monitoring and Control">18</a>)</li>
+<li>Review NIST guidance on control charts and process improvement. (<a href="https://www.itl.nist.gov/div898/handbook/pmc/pmc.htm" title="NIST/SEMATECH e-Handbook — Process Monitoring and Control">18</a>, <a href="https://www.itl.nist.gov/div898/handbook/pri/pri.htm" title="NIST/SEMATECH e-Handbook — Process Improvement">21</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-5">Instructor-style lesson notes</h3>
+<ul>
+<li>Measures should support questions and decisions; collecting data without a use case creates burden and noise.</li>
+<li>Median alone hides tails, multimodality, blocked cases, and changes in work mix.</li>
+<li>A control limit is estimated from process behavior; a specification or target comes from need or policy.</li>
+<li>Process performance should be stratified by risk class, source, subsystem, supplier, and path when justified.</li>
+<li>Balance speed with first-pass quality, escaped defects, residual risk, evidence completeness, workload, and stakeholder experience.</li>
+</ul>
+<h3 id="worked-example-5">Worked example</h3>
+<p>The worked analysis shows median lead time falling from 34 to 28 days after teams begin closing requests at board approval rather than baseline completion. The dashboard appears improved, but post-approval work and two evidence escapes increase. The example corrects the operational definition and introduces complete-cycle lead time, first-pass evidence acceptance, reopen rate, and critical-evidence completeness.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the result or decision changes.</p>
+<h3 id="guided-practice-5">Guided practice</h3>
+<ul>
+<li>Create operational definitions for ten candidate measures.</li>
+<li>Calculate distribution summaries and time components for the Northstar event log.</li>
+<li>Build run/control charts only where data and assumptions permit.</li>
+<li>Conduct a metric abuse pre-mortem and define anti-gaming checks.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected analysis.</p>
+<h3 id="independent-exercises-5">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Produce the measurement dictionary and data collection plan.</li>
+<li><strong>Application:</strong> Build a reproducible baseline dashboard with distributions and subgroups.</li>
+<li><strong>Analysis:</strong> Assess stability, special causes, work-mix effects, and measurement-system limitations.</li>
+<li><strong>Synthesis:</strong> Recommend a balanced process performance model and review cadence.</li>
+<li><strong>Stretch:</strong> Estimate measurement burden and simplify the system without losing decision value.</li>
+</ul>
+<h3 id="weekly-deliverable-5">Weekly deliverable</h3>
+<p><strong>Measurement Baseline Review Package</strong> containing goals/questions/measures, operational definitions, data-quality analysis, baseline statistics, variation analysis, subgroup findings, dashboard source, metric risks, and review decisions.</p>
+<p>Submit native or textual source, controlled data and transformations, generated views, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-5">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decision-linked measure design</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Data and measurement quality</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Statistical/variation reasoning</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Balanced outcomes and anti-gaming</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Reproducibility and communication</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-5">Critical failures</h3>
+<ul>
+<li>Using averages alone for skewed or censored process data.</li>
+<li>Confusing targets/specifications with control limits.</li>
+<li>Changing closure definitions without restating the baseline.</li>
+<li>Publishing person-level rankings from weak or context-free process data.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-5">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why use percentiles?</strong><br/>
+<strong>Answer guidance:</strong> They show tail behavior and service levels hidden by averages.</li>
+<li><strong>What is common-cause variation?</strong><br/>
+<strong>Answer guidance:</strong> Variation inherent in the current process system rather than attributable to a specific unusual event.</li>
+<li><strong>Why stratify data?</strong><br/>
+<strong>Answer guidance:</strong> Different work classes or contexts can have different mechanisms and performance.</li>
+<li><strong>What is measurement burden?</strong><br/>
+<strong>Answer guidance:</strong> The time, cognitive load, tooling, and behavioral cost of collecting and maintaining measures.</li>
+<li><strong>What is a balanced measure set?</strong><br/>
+<strong>Answer guidance:</strong> A set covering flow, quality, value, risk, and human outcomes with guardrails.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-5">Revision and mastery gate</h3>
+<p>Pass the Measurement Baseline Review with accepted operational definitions and no unresolved critical data-quality or ethical-use issue.</p>
+<h3 id="suggested-workload-5">Suggested workload</h3>
+<p>Target: <strong>10–12 hours</strong>. Record actual time by research, process/data work, analysis/modeling, collaboration or role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-5">Configuration and portfolio update</h3>
+<p>Release <code>MEAS-1.0</code>, dashboard source, data-quality record, and tag <code>SEPI-W05-MBR</code>.</p>
+<hr/>
+<h2 id="week-6--process-capability-assessment-root-causes-and-midcourse-exam">Week 6 — Process capability assessment, root causes, and midcourse exam</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B17/chapters/06.html">Chapter 06</a> → <a href="../../K/B17/labs/06.html">Hypothetical Lab 06</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-783-w06.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-6">Competency alignment</h3>
+<p>C1 (A), C8 (A), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-6">Professional context and essential question</h3>
+<p>The current process has documented procedures and many review controls, yet performance is unstable and evidence escapes occur. The essential question is: <strong>What can the process reliably achieve, why does it behave this way, and which findings are strong enough to justify redesign?</strong></p>
+<h3 id="weekly-learning-outcomes-6">Weekly learning outcomes</h3>
+<ul>
+<li>Construct a bounded capability and maturity assessment without claiming formal appraisal status.</li>
+<li>Rate evidence quality and confidence for process findings.</li>
+<li>Use Pareto, cause-and-effect, 5-why, fault-tree, and causal-loop reasoning appropriately.</li>
+<li>Distinguish proximal cause, systemic cause, constraint, and correlation.</li>
+<li>Integrate standards, process, data, stakeholder, and risk evidence in a Current-State Process Assessment.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-6">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Restate the distinction among capability, maturity, performance, conformance, and value.</li>
+<li>Explain why “people do not follow the process” is usually an incomplete cause statement.</li>
+<li>Identify the three strongest baseline findings and evidence grades.</li>
+<li>Name one plausible alternative explanation for each major finding.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior artifacts before beginning independent work.</p>
+<h3 id="required-study-6">Required study</h3>
+<ul>
+<li>Read ISO/IEC 33020 public scope and capability-profile purpose. (<a href="https://www.iso.org/standard/78526.html" title="ISO/IEC 33020:2019 — Process measurement framework for assessment of process capability">6</a>)</li>
+<li>Read CMMI capability/maturity level descriptions. (<a href="https://cmmiinstitute.com/learning/appraisals/levels" title="CMMI capability and maturity levels">7</a>)</li>
+<li>Read SEBoK Assessing Systems Engineering Performance and Project Assessment and Control. (<a href="https://sebokwiki.org/wiki/Assessing_Systems_Engineering_Performance_of_Business_and_Enterprises" title="SEBoK — Assessing Systems Engineering Performance of Business and Enterprises">13</a>, <a href="https://sebokwiki.org/wiki/Project_Assessment_and_Control" title="SEBoK — Project Assessment and Control">29</a>)</li>
+<li>Review ASQ quality tools and problem-solving guidance. (<a href="https://asq.org/quality-resources/seven-basic-quality-tools" title="ASQ seven basic quality tools">10</a>, <a href="https://asq.org/quality-resources/problem-solving" title="ASQ problem-solving methods">22</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-6">Instructor-style lesson notes</h3>
+<ul>
+<li>Assessment should answer a decision question and use defined criteria, sampling, evidence, and limitations.</li>
+<li>Capability ratings summarize process attributes; they do not explain every performance result.</li>
+<li>Root-cause analysis is hypothesis generation and testing, not a ritual that guarantees one “root.”</li>
+<li>Causal loops reveal reinforcing behavior such as backlog → schedule pressure → bypass → rework → backlog.</li>
+<li>Findings should state condition, criterion, evidence, consequence, confidence, and recommended next analysis.</li>
+</ul>
+<h3 id="worked-example-6">Worked example</h3>
+<p>The initial cause statement blames slow reviewers. Data shows reviewer touch time is modest; the dominant delay is waiting for complete impact evidence. A causal analysis finds unclear evidence requirements, fragmented repositories, late supplier input, batch board cadence, and incentives to submit early. The improvement target shifts from reviewer utilization to evidence readiness and flow.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the result or decision changes.</p>
+<h3 id="guided-practice-6">Guided practice</h3>
+<ul>
+<li>Build a capability profile for selected process attributes using a transparent rubric.</li>
+<li>Create a finding/evidence matrix with confidence and contradiction columns.</li>
+<li>Perform Pareto and causal analysis on rework and waiting.</li>
+<li>Run a skeptical-reviewer challenge against the top five causes.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected analysis.</p>
+<h3 id="independent-exercises-6">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Complete the bounded process assessment and maturity/capability profile.</li>
+<li><strong>Application:</strong> Create root-cause and systemic-cause analyses for three priority problems.</li>
+<li><strong>Analysis:</strong> Assess risks and leverage points across people, process, tools, information, organization, and incentives.</li>
+<li><strong>Synthesis:</strong> Conduct the Current-State Process Assessment review.</li>
+<li><strong>Stretch:</strong> Compare findings with a second process variant or benchmark while controlling for context.</li>
+</ul>
+<h3 id="weekly-deliverable-6">Weekly deliverable</h3>
+<p><strong>Current-State Process Assessment</strong> containing assessment scope/method, criteria, evidence profile, capability and performance findings, causal analysis, constraints, risks, improvement opportunity backlog, limitations, review findings, and dispositions. Complete the closed-book/open-artifact midcourse exam.</p>
+<p>Submit native or textual source, controlled data and transformations, generated views, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-6">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Assessment method and evidence</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Capability/performance interpretation</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Causal and systems reasoning</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Prioritization and risk</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Review/communication quality</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-6">Critical failures</h3>
+<ul>
+<li>Claiming formal certification, appraisal, or maturity level.</li>
+<li>Using one anecdote or one metric as the sole cause evidence.</li>
+<li>Blaming individuals without examining system conditions.</li>
+<li>Proceeding to redesign with unresolved critical data or model credibility gaps.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-6">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a process finding?</strong><br/>
+<strong>Answer guidance:</strong> A traceable statement of condition versus criterion, supported by evidence and consequence.</li>
+<li><strong>Why rate evidence confidence?</strong><br/>
+<strong>Answer guidance:</strong> To prevent weak evidence from carrying the same decision weight as reproducible, triangulated evidence.</li>
+<li><strong>What is a systemic cause?</strong><br/>
+<strong>Answer guidance:</strong> A structure, policy, incentive, dependency, or feedback condition that repeatedly produces the outcome.</li>
+<li><strong>Why use multiple cause tools?</strong><br/>
+<strong>Answer guidance:</strong> Different tools reveal frequency, hierarchy, mechanism, feedback, or failure paths.</li>
+<li><strong>What is the current-state review decision?</strong><br/>
+<strong>Answer guidance:</strong> Whether evidence is sufficient to authorize modeling and future-state design, and what limitations must remain.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-6">Revision and mastery gate</h3>
+<p>Pass the midcourse exam and Current-State Process Assessment with no critical open finding on evidence integrity, cause reasoning, or stakeholder risk.</p>
+<h3 id="suggested-workload-6">Suggested workload</h3>
+<p>Target: <strong>10–12 hours</strong>. Record actual time by research, process/data work, analysis/modeling, collaboration or role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-6">Configuration and portfolio update</h3>
+<p>Baseline <code>CSA-1.0</code>, exam record, review dispositions, and tag <code>SEPI-W06-CSA</code>.</p>
+<hr/>
+<h2 id="week-7--process-modeling-and-simulation-for-improvement-decisions">Week 7 — Process modeling and simulation for improvement decisions</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B17/chapters/07.html">Chapter 07</a> → <a href="../../K/B17/labs/07.html">Hypothetical Lab 07</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-783-w07.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-7">Competency alignment</h3>
+<p>C7 (A), C8 (A), C10 (A)</p>
+<h3 id="professional-context-and-essential-question-7">Professional context and essential question</h3>
+<p>The team proposes more reviewers, continuous review, automated evidence checks, and smaller change batches. The essential question is: <strong>Which interventions should be tested in a model, and is the model credible enough for that decision?</strong></p>
+<h3 id="weekly-learning-outcomes-7">Weekly learning outcomes</h3>
+<ul>
+<li>Define process-model intended use, boundary, inputs, outputs, assumptions, and acceptance criteria.</li>
+<li>Implement a discrete-event or hybrid process model with queues, resources, rework, prioritization, and variants.</li>
+<li>Verify model logic, units, event sequencing, and reproducibility.</li>
+<li>Validate structure and behavior against current-state evidence.</li>
+<li>Use experiments and sensitivity analysis without overstating predictive accuracy.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-7">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the top causal mechanisms and baseline distributions.</li>
+<li>Distinguish model verification from validation.</li>
+<li>Identify which process features require stochastic representation.</li>
+<li>Name one decision the model must not support.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior artifacts before beginning independent work.</p>
+<h3 id="required-study-7">Required study</h3>
+<ul>
+<li>Read NIST Process Improvement introduction and DOE sections. (<a href="https://www.itl.nist.gov/div898/handbook/pri/pri.htm" title="NIST/SEMATECH e-Handbook — Process Improvement">21</a>, <a href="https://itl.nist.gov/div898/handbook/pri/section1/pri1.htm" title="NIST — Introduction to design of experiments for process improvement">23</a>)</li>
+<li>Review NIST experimental-design purpose and choosing a design. (<a href="https://itl.nist.gov/div898/handbook/pri/section1/pri1.htm" title="NIST — Introduction to design of experiments for process improvement">23</a>, <a href="https://www.itl.nist.gov/div898/handbook/pri/section3/pri3.htm" title="NIST — Choosing an experimental design">24</a>)</li>
+<li>Review SimPy documentation or equivalent DES tool guidance. (<a href="https://simpy.readthedocs.io/" title="SimPy discrete-event simulation documentation">30</a>)</li>
+<li>Revisit Phase 3 model credibility and uncertainty practices in EN.645.757 and EN.645.758.</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-7">Instructor-style lesson notes</h3>
+<ul>
+<li>The model should be no more complex than required for the stated improvement decision.</li>
+<li>Queues, priorities, calendars, batching, resource skills, rework, blocked states, and evidence dependencies often dominate engineering-process behavior.</li>
+<li>Historical fit is not proof that an intervention forecast is valid.</li>
+<li>Verification includes code review, event traces, conservation checks, extreme conditions, and deterministic test cases.</li>
+<li>Validation includes stakeholder face validity, distribution/behavior comparison, holdout cases, and limitation statements.</li>
+</ul>
+<h3 id="worked-example-7">Worked example</h3>
+<p>A spreadsheet capacity ratio predicts that adding one reviewer will cut lead time by 25%. The DES model shows little benefit because cases wait for incomplete supplier and test evidence, not reviewer capacity. An automated evidence-readiness check plus smaller review batches performs better, but benefits depend on adoption and false-positive rates.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the result or decision changes.</p>
+<h3 id="guided-practice-7">Guided practice</h3>
+<ul>
+<li>Build a deterministic five-case trace and reconcile every event with the process model.</li>
+<li>Fit or select bounded input distributions with transparent uncertainty.</li>
+<li>Implement baseline queue, resource, rework, and priority logic.</li>
+<li>Compare simulated and observed lead-time, WIP, rework, and path distributions.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected analysis.</p>
+<h3 id="independent-exercises-7">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Implement the verified current-state model in SimPy or an equivalent tool.</li>
+<li><strong>Application:</strong> Calibrate and validate it against controlled data.</li>
+<li><strong>Analysis:</strong> Test staffing, cadence, evidence-readiness, and automation scenarios.</li>
+<li><strong>Synthesis:</strong> Produce a model-use recommendation with sensitivity and prohibited uses.</li>
+<li><strong>Stretch:</strong> Couple DES with a simple system-dynamics adoption or backlog feedback model.</li>
+</ul>
+<h3 id="weekly-deliverable-7">Weekly deliverable</h3>
+<p><strong>Executable Current-State Process Model Review Package</strong> containing intended-use statement, conceptual model, source, inputs, assumptions, V&amp;V tests, calibration, sensitivity, scenario results, limitations, and clean-run instructions.</p>
+<p>Submit native or textual source, controlled data and transformations, generated views, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-7">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decision framing and conceptual model</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Implementation and verification</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Validation and data use</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Experiment/sensitivity reasoning</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Reproducibility and limitations</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-7">Critical failures</h3>
+<ul>
+<li>Using the model outside its stated intended use.</li>
+<li>Calibrating to one statistic while missing important paths or tails.</li>
+<li>Reporting stochastic results without replications or uncertainty.</li>
+<li>Submitting only screenshots or an opaque tool file.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-7">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why model the process?</strong><br/>
+<strong>Answer guidance:</strong> To test mechanisms and alternatives more safely and economically before changing the live organization.</li>
+<li><strong>What is verification?</strong><br/>
+<strong>Answer guidance:</strong> Evidence that the model was implemented correctly relative to its conceptual specification.</li>
+<li><strong>What is validation?</strong><br/>
+<strong>Answer guidance:</strong> Evidence that the model is sufficiently representative for the stated use.</li>
+<li><strong>Why test extreme conditions?</strong><br/>
+<strong>Answer guidance:</strong> They expose logic, resource, queue, and state errors.</li>
+<li><strong>Why state prohibited uses?</strong><br/>
+<strong>Answer guidance:</strong> Credibility is use-specific; a model fit for one decision may be unsafe for another.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-7">Revision and mastery gate</h3>
+<p>Pass the model review and clean reproduction; resolve every critical V&amp;V or intended-use finding before selecting a future-state process.</p>
+<h3 id="suggested-workload-7">Suggested workload</h3>
+<p>Target: <strong>10–12 hours</strong>. Record actual time by research, process/data work, analysis/modeling, collaboration or role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-7">Configuration and portfolio update</h3>
+<p>Release model <code>PROC-SIM-1.0</code>, environment lockfile, V&amp;V report, and tag <code>SEPI-W07-MODEL</code>.</p>
+<hr/>
+<h2 id="week-8--future-state-alternatives-and-systems-process-redesign">Week 8 — Future-state alternatives and systems process redesign</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B17/chapters/08.html">Chapter 08</a> → <a href="../../K/B17/labs/08.html">Hypothetical Lab 08</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-783-w08.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-8">Competency alignment</h3>
+<p>C4 (A), C9 (A), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-8">Professional context and essential question</h3>
+<p>The organization must choose between policy changes, role redesign, earlier evidence, automation, continuous review, or a larger structural change. The essential question is: <strong>Which future-state process improves outcomes under uncertainty while preserving necessary assurance and human judgment?</strong></p>
+<h3 id="weekly-learning-outcomes-8">Weekly learning outcomes</h3>
+<ul>
+<li>Generate distinct future-state process concepts rather than one preferred map.</li>
+<li>Apply Lean waste, flow, feedback, mistake-proofing, digital-thread, and human-centered principles.</li>
+<li>Define future-state roles, decision rights, information, controls, automation, variants, and exceptions.</li>
+<li>Evaluate alternatives using process simulation, stakeholder criteria, risk, cost, and implementation feasibility.</li>
+<li>Conduct a Future-State Design Review.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-8">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Restate the priority causal mechanisms and model limitations.</li>
+<li>Identify at least four intervention levers across people, process, tools, information, organization, and incentives.</li>
+<li>Name one control that must remain and one control that can be redesigned.</li>
+<li>Explain why automation of a poor rule can worsen the process.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior artifacts before beginning independent work.</p>
+<h3 id="required-study-8">Required study</h3>
+<ul>
+<li>Revisit ASQ DMAIC Improve phase and PDCA. (<a href="https://asq.org/quality-resources/dmaic" title="ASQ DMAIC process">8</a>, <a href="https://asq.org/quality-resources/pdca-cycle" title="ASQ PDCA cycle">9</a>)</li>
+<li>Read ASQ quality tools for value-stream, cause, mistake-proofing, and planning techniques. (<a href="https://asq.org/quality-resources/seven-basic-quality-tools" title="ASQ seven basic quality tools">10</a>, <a href="https://asq.org/quality-resources/problem-solving" title="ASQ problem-solving methods">22</a>)</li>
+<li>Revisit EN.645.780 flow, learning intervals, architecture, and continuous-evidence practices.</li>
+<li>Revisit EN.645.782 digital-thread authority, provenance, change-impact, and governance requirements.</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-8">Instructor-style lesson notes</h3>
+<ul>
+<li>Generate concepts before optimizing details: policy-only, role/flow, digital enablement, and structural redesign are useful contrasting families.</li>
+<li>Lean removes non-value-adding delay and rework; it does not remove assurance that protects mission outcomes.</li>
+<li>Future-state models must include exception and degraded paths, not only an ideal nominal flow.</li>
+<li>Automation needs authority, data quality, false-positive/negative handling, monitoring, fallback, and accountability.</li>
+<li>A process design is incomplete without roles, skills, incentives, workload, repositories, controls, and transition dependencies.</li>
+</ul>
+<h3 id="worked-example-8">Worked example</h3>
+<p>Three alternatives are compared: A) add review capacity and shorten board cadence; B) establish evidence-readiness criteria, cross-functional triage, and continuous low-risk authorization; C) integrate digital-thread impact queries, risk-class routing, and evidence-based release gates. A hybrid B/C performs best, but only if supplier data and accessibility evidence are available earlier.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the result or decision changes.</p>
+<h3 id="guided-practice-8">Guided practice</h3>
+<ul>
+<li>Create a morphological table of intervention choices.</li>
+<li>Design at least three coherent future-state alternatives, including a low-automation option.</li>
+<li>Model nominal, expedited, high-assurance, supplier-blocked, and emergency paths.</li>
+<li>Run trade, sensitivity, and stakeholder challenge analyses.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected analysis.</p>
+<h3 id="independent-exercises-8">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Create three future-state process maps and architecture views.</li>
+<li><strong>Application:</strong> Evaluate alternatives in the process model.</li>
+<li><strong>Analysis:</strong> Compare flow, quality, risk, workload, cost, adoption, and resilience.</li>
+<li><strong>Synthesis:</strong> Select and defend a preferred process with retained alternatives and conditions.</li>
+<li><strong>Stretch:</strong> Define a modular process architecture that supports controlled tailoring across programs.</li>
+</ul>
+<h3 id="weekly-deliverable-8">Weekly deliverable</h3>
+<p><strong>Future-State Design Review Package</strong> containing concepts, maps, roles, controls, information architecture, variants, simulation results, decision criteria, sensitivity, risk, cost, implementation dependencies, preferred concept, findings, and dispositions.</p>
+<p>Submit native or textual source, controlled data and transformations, generated views, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-8">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alternative breadth and coherence</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Process/human/digital design</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Quantitative and stakeholder evaluation</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Assurance, risk, and exception handling</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Decision rationale and review</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-8">Critical failures</h3>
+<ul>
+<li>Presenting one solution as if alternatives were considered.</li>
+<li>Equating fewer approvals with better assurance.</li>
+<li>Automating without authority, data-quality, error, fallback, or accountability design.</li>
+<li>Ignoring workforce burden, incentives, or supplier dependencies.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-8">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why require a low-automation alternative?</strong><br/>
+<strong>Answer guidance:</strong> To reveal whether technology is solving a real mechanism or merely adding complexity.</li>
+<li><strong>What is mistake-proofing?</strong><br/>
+<strong>Answer guidance:</strong> Designing the process so errors are prevented or detected at the earliest practical point.</li>
+<li><strong>Why model exception paths?</strong><br/>
+<strong>Answer guidance:</strong> Real engineering processes must handle urgent, incomplete, high-risk, and degraded conditions.</li>
+<li><strong>What makes an alternative coherent?</strong><br/>
+<strong>Answer guidance:</strong> Its roles, information, controls, tools, incentives, and governance work together.</li>
+<li><strong>What is the design-review decision?</strong><br/>
+<strong>Answer guidance:</strong> Whether a future-state concept is sufficiently evidenced and bounded to prepare for pilot.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-8">Revision and mastery gate</h3>
+<p>Pass the Future-State Design Review with an approved concept, retained alternative, critical controls, pilot assumptions, and unresolved-risk plan.</p>
+<h3 id="suggested-workload-8">Suggested workload</h3>
+<p>Target: <strong>10–12 hours</strong>. Record actual time by research, process/data work, analysis/modeling, collaboration or role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-8">Configuration and portfolio update</h3>
+<p>Baseline <code>TOBE-1.0</code>, decision record, review dispositions, and tag <code>SEPI-W08-FSDR</code>.</p>
+<hr/>
+<h2 id="week-9--pilot-experiments-implementation-and-adoption">Week 9 — Pilot experiments, implementation, and adoption</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B17/chapters/09.html">Chapter 09</a> → <a href="../../K/B17/labs/09.html">Hypothetical Lab 09</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-783-w09.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-9">Competency alignment</h3>
+<p>C8 (A), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-9">Professional context and essential question</h3>
+<p>A future-state map is only a hypothesis. The essential question is: <strong>How can Northstar test the process change on a bounded scale while protecting live work, people, evidence, and mission outcomes?</strong></p>
+<h3 id="weekly-learning-outcomes-9">Weekly learning outcomes</h3>
+<ul>
+<li>Define pilot hypotheses, factors, responses, guardrails, sample, duration, and decision rules.</li>
+<li>Select randomized, phased, matched, interrupted-time-series, or simulation-supported evaluation approaches.</li>
+<li>Design implementation roles, training, communications, support, and adoption feedback.</li>
+<li>Identify pilot safety, security, privacy, labor, supplier, and operational risks.</li>
+<li>Conduct a Pilot Readiness Review with stop and rollback criteria.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-9">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reproduce the preferred future-state mechanisms and assumptions.</li>
+<li>Distinguish a pilot objective from a rollout objective.</li>
+<li>Identify likely confounders and work-mix changes.</li>
+<li>Name two guardrails and two stop conditions.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior artifacts before beginning independent work.</p>
+<h3 id="required-study-9">Required study</h3>
+<ul>
+<li>Read NIST DOE introduction and choosing an experimental design. (<a href="https://itl.nist.gov/div898/handbook/pri/section1/pri1.htm" title="NIST — Introduction to design of experiments for process improvement">23</a>, <a href="https://www.itl.nist.gov/div898/handbook/pri/section3/pri3.htm" title="NIST — Choosing an experimental design">24</a>)</li>
+<li>Review ASQ DMAIC Improve/Control transition and project-planning tools. (<a href="https://asq.org/quality-resources/dmaic" title="ASQ DMAIC process">8</a>, <a href="https://asq.org/quality-resources/project-planning-tools" title="ASQ project planning and implementation tools">26</a>)</li>
+<li>Review SEBoK Project Assessment and Control and Risk Management. (<a href="https://sebokwiki.org/wiki/Project_Assessment_and_Control" title="SEBoK — Project Assessment and Control">29</a>, <a href="https://sebokwiki.org/wiki/Risk_Management" title="SEBoK — Risk Management">31</a>)</li>
+<li>Revisit EN.645.780 learning intervals, minimum viable evidence, and failed-increment recovery.</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-9">Instructor-style lesson notes</h3>
+<ul>
+<li>Pilot design should maximize learning while limiting exposure and avoiding irreversible commitment.</li>
+<li>Randomization is powerful but may be infeasible or unethical; matched or phased designs require explicit assumptions.</li>
+<li>Adoption is part of the intervention, not noise to remove from the analysis.</li>
+<li>Collect implementation fidelity and context data so outcome changes can be interpreted.</li>
+<li>Stop criteria should cover technical quality, safety/security, workload, data integrity, and stakeholder harm—not only schedule.</li>
+</ul>
+<h3 id="worked-example-9">Worked example</h3>
+<p>Northstar pilots cross-functional triage and automated evidence-readiness checks on medium-risk software changes at one campus for six weeks. High-safety and emergency changes remain on the current route. The design measures complete-cycle lead time, evidence acceptance, reopen rate, workload, and user experience, with rollback if false negatives or critical evidence omissions occur.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the result or decision changes.</p>
+<h3 id="guided-practice-9">Guided practice</h3>
+<ul>
+<li>Write a causal hypothesis from intervention to process and mission outcomes.</li>
+<li>Choose an evaluation design and simulate expected statistical/operational power.</li>
+<li>Create training, support, communication, and adoption-measure plans.</li>
+<li>Conduct a hazard and failure-mode review of the pilot.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected analysis.</p>
+<h3 id="independent-exercises-9">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Develop the pilot protocol and measurement plan.</li>
+<li><strong>Application:</strong> Produce implementation, training, support, and communication materials.</li>
+<li><strong>Analysis:</strong> Assess confounding, selection, novelty, spillover, and measurement threats.</li>
+<li><strong>Synthesis:</strong> Conduct the Pilot Readiness Review.</li>
+<li><strong>Stretch:</strong> Execute a synthetic pilot using the process model and generate a blind analysis package.</li>
+</ul>
+<h3 id="weekly-deliverable-9">Weekly deliverable</h3>
+<p><strong>Pilot Readiness Package</strong> containing hypothesis, scope, design, sample/work classes, measures, guardrails, data plan, training, communications, roles, risks, ethics, security, stop/rollback criteria, decision rules, dry-run evidence, and review dispositions.</p>
+<p>Submit native or textual source, controlled data and transformations, generated views, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-9">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hypothesis and evaluation design</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Measures, guardrails, and data</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Implementation and adoption system</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Risk/ethics/rollback readiness</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Review and decision criteria</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-9">Critical failures</h3>
+<ul>
+<li>Running a live pilot without authority or safeguards.</li>
+<li>Using before/after averages without addressing work mix or confounding.</li>
+<li>Treating non-adoption as performer resistance rather than intervention evidence.</li>
+<li>Lacking explicit stop and rollback criteria.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-9">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why is a pilot not a small rollout?</strong><br/>
+<strong>Answer guidance:</strong> A pilot is designed to test specific hypotheses and produce decision evidence under bounded exposure.</li>
+<li><strong>What is implementation fidelity?</strong><br/>
+<strong>Answer guidance:</strong> The degree to which the intervention is used as intended, including context and deviations.</li>
+<li><strong>Why measure adoption?</strong><br/>
+<strong>Answer guidance:</strong> Outcomes depend on actual use, usability, trust, skills, incentives, and support.</li>
+<li><strong>What is a guardrail?</strong><br/>
+<strong>Answer guidance:</strong> A protected outcome that must not worsen while the target outcome improves.</li>
+<li><strong>What is a rollback trigger?</strong><br/>
+<strong>Answer guidance:</strong> A predefined condition requiring pause or return to a safe baseline.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-9">Revision and mastery gate</h3>
+<p>Pass the Pilot Readiness Review; no live or synthetic execution may begin with unresolved critical safety, security, data, authority, or rollback finding.</p>
+<h3 id="suggested-workload-9">Suggested workload</h3>
+<p>Target: <strong>10–12 hours</strong>. Record actual time by research, process/data work, analysis/modeling, collaboration or role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-9">Configuration and portfolio update</h3>
+<p>Release <code>PILOT-1.0</code>, approved protocol, training baseline, and tag <code>SEPI-W09-PRR</code>.</p>
+<hr/>
+<h2 id="week-10--process-control-governance-tailoring-and-sustainment">Week 10 — Process control, governance, tailoring, and sustainment</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B17/chapters/10.html">Chapter 10</a> → <a href="../../K/B17/labs/10.html">Hypothetical Lab 10</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-783-w10.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-10">Competency alignment</h3>
+<p>C8 (A), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-10">Professional context and essential question</h3>
+<p>Initial gains often decay when attention shifts, staff rotate, measures are gamed, or the standard process cannot fit new contexts. The essential question is: <strong>How will Northstar know the process remains effective, and how will it adapt without losing control?</strong></p>
+<h3 id="weekly-learning-outcomes-10">Weekly learning outcomes</h3>
+<ul>
+<li>Design a process-control plan with measures, limits, review cadence, triggers, and response ownership.</li>
+<li>Distinguish monitoring, audit, assurance, control, evaluation, and continuous improvement.</li>
+<li>Define process ownership, governance, tailoring, waiver, configuration, and knowledge-management mechanisms.</li>
+<li>Use statistical process control appropriately and identify unsuitable applications.</li>
+<li>Design sustainment, training, competency, tooling, and process-asset maintenance.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-10">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Restate the pilot outcome measures, guardrails, and stop criteria.</li>
+<li>Explain the difference between a control limit and a target.</li>
+<li>Identify who owns process performance and who independently assures it.</li>
+<li>Name one expected context that requires tailoring.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior artifacts before beginning independent work.</p>
+<h3 id="required-study-10">Required study</h3>
+<ul>
+<li>Read ASQ control chart and statistical process control guidance. (<a href="https://asq.org/quality-resources/control-chart" title="ASQ control-chart guidance">17</a>, <a href="https://asq.org/quality-resources/statistical-process-control" title="ASQ statistical process control">32</a>)</li>
+<li>Read NIST process monitoring/control introduction and control-chart section. (<a href="https://www.itl.nist.gov/div898/handbook/pmc/pmc.htm" title="NIST/SEMATECH e-Handbook — Process Monitoring and Control">18</a>)</li>
+<li>Read SEBoK Quality Management, Measurement, Configuration Management, and Organizing Enterprises to Perform SE. (<a href="https://sebokwiki.org/wiki/Quality_Management" title="SEBoK — Quality Management">14</a>, <a href="https://sebokwiki.org/wiki/Measurement" title="SEBoK — Measurement">15</a>, <a href="https://sebokwiki.org/wiki/Configuration_Management" title="SEBoK — Configuration Management">28</a>, <a href="https://sebokwiki.org/wiki/Organizing_Business_and_Enterprises_to_Perform_Systems_Engineering" title="SEBoK — Organizing Business and Enterprises to Perform Systems Engineering">12</a>)</li>
+<li>Review ISO/IEC/IEEE 24748-1 lifecycle-management/tailoring context through the INCOSE standards page. (<a href="https://www.incose.org/about-systems-engineering/standards-policies/" title="INCOSE Systems Engineering Standards">3</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-10">Instructor-style lesson notes</h3>
+<ul>
+<li>Control is not freezing the process; it is maintaining predictable performance and responding appropriately to signals.</li>
+<li>Use control charts only with meaningful repeated measures and understood subgrouping; not every executive KPI is suitable.</li>
+<li>Process governance defines owner, authority, assurance independence, change control, tailoring, waiver, and escalation.</li>
+<li>Tailoring should be planned, recorded, risk-based, and reversible—not covert noncompliance.</li>
+<li>Sustainment requires skills, coaching, accessible process assets, tool support, onboarding, and periodic effectiveness review.</li>
+</ul>
+<h3 id="worked-example-10">Worked example</h3>
+<p>After the pilot, median lead time improves and evidence acceptance rises. A control plan distinguishes normal variation from an accessibility-evidence omission, which triggers immediate containment and causal review. A new supplier-heavy change class is introduced through a controlled tailoring profile rather than ad hoc workarounds.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the result or decision changes.</p>
+<h3 id="guided-practice-10">Guided practice</h3>
+<ul>
+<li>Define the process-control matrix: measure, chart/review, threshold, owner, response, and record.</li>
+<li>Create tailoring and waiver decision trees.</li>
+<li>Design process-asset versioning, training, competency, and retirement rules.</li>
+<li>Run three scenarios: drift, special cause, and changed operating context.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected analysis.</p>
+<h3 id="independent-exercises-10">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Produce the control and governance plan.</li>
+<li><strong>Application:</strong> Build reproducible run/control charts for appropriate measures.</li>
+<li><strong>Analysis:</strong> Test detection delay, false alarms, metric gaming, and burden.</li>
+<li><strong>Synthesis:</strong> Conduct the Control and Sustainment Review.</li>
+<li><strong>Stretch:</strong> Model improvement adoption and decay using a feedback model.</li>
+</ul>
+<h3 id="weekly-deliverable-10">Weekly deliverable</h3>
+<p><strong>Process Control and Sustainment Package</strong> containing governance, owner/assurance roles, measure/control matrix, charts and assumptions, response plans, audit/evaluation, tailoring/waiver, process-change control, competency/training, asset management, and maintenance triggers.</p>
+<p>Submit native or textual source, controlled data and transformations, generated views, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-10">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Control logic and statistical use</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Governance and decision rights</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Tailoring/configuration/assurance</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Sustainment and competency</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Failure response and burden</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-10">Critical failures</h3>
+<ul>
+<li>Using arbitrary red/yellow/green thresholds as statistical control evidence.</li>
+<li>Giving the process owner unchecked authority over independent assurance findings.</li>
+<li>Allowing unrecorded tailoring or workarounds.</li>
+<li>Creating a control system whose measurement burden exceeds its decision value.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-10">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is statistical control?</strong><br/>
+<strong>Answer guidance:</strong> A state in which observed variation is consistent with the established process system absent special causes.</li>
+<li><strong>What is process governance?</strong><br/>
+<strong>Answer guidance:</strong> The authorities, roles, rules, evidence, and escalation used to manage and change the process.</li>
+<li><strong>Why record tailoring?</strong><br/>
+<strong>Answer guidance:</strong> To preserve rationale, risk, repeatability, accountability, and learning.</li>
+<li><strong>What is a process asset?</strong><br/>
+<strong>Answer guidance:</strong> A controlled policy, process, procedure, template, model, training aid, measure definition, or reusable record.</li>
+<li><strong>When should a control chart be avoided?</strong><br/>
+<strong>Answer guidance:</strong> When the measure is infrequent, noncomparable, poorly defined, strongly mixed, or lacks meaningful time order.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-10">Revision and mastery gate</h3>
+<p>Pass the Control and Sustainment Review with accepted ownership, assurance, tailoring, response, and process-asset controls.</p>
+<h3 id="suggested-workload-10">Suggested workload</h3>
+<p>Target: <strong>10–12 hours</strong>. Record actual time by research, process/data work, analysis/modeling, collaboration or role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-10">Configuration and portfolio update</h3>
+<p>Baseline <code>CONTROL-1.0</code>, process asset library, and tag <code>SEPI-W10-CSR</code>.</p>
+<hr/>
+<h2 id="week-11--independent-red-team-trio-evaluation-and-scale-decision">Week 11 — Independent red team, TRIO evaluation, and scale decision</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B17/chapters/11.html">Chapter 11</a> → <a href="../../K/B17/labs/11.html">Hypothetical Lab 11</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-783-w11.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-11">Competency alignment</h3>
+<p>C9 (A), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-11">Professional context and essential question</h3>
+<p>Improvement teams can become attached to their design and underweight burden, exceptions, or evidence weaknesses. The essential question is: <strong>Would an independent team agree that the process is effective, credible, and ready to scale?</strong></p>
+<h3 id="weekly-learning-outcomes-11">Weekly learning outcomes</h3>
+<ul>
+<li>Conduct a rubric-based independent assessment of a process-improvement report and model.</li>
+<li>Identify improvement opportunities in technical content, evidence, process design, and presentation.</li>
+<li>Perform a candid team/self assessment of contribution, collaboration, bias, and review quality.</li>
+<li>Analyze pilot evidence and decide scale, continue, tailor, pause, or stop.</li>
+<li>Prepare a certification-oriented knowledge map without conflating it with certification.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-11">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Name the strongest and weakest evidence in the improvement case.</li>
+<li>Restate the live scale/stop decision criteria.</li>
+<li>Identify one confirmation bias in the team’s analysis.</li>
+<li>Explain what an independent appraisal would require beyond this course.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior artifacts before beginning independent work.</p>
+<h3 id="required-study-11">Required study</h3>
+<ul>
+<li>Review the source syllabus description of the Team Report Improvement Opportunities evaluation and team/self assessment. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.783.81" title="Fall 2026 syllabus for EN.645.783">1</a>)</li>
+<li>Review CMMI appraisal versus informal evaluation boundaries. (<a href="https://cmmiinstitute.com/products/cmmi/cmmi-model-viewer" title="CMMI Model Viewer">19</a>)</li>
+<li>Review INCOSE certification pathways and the knowledge-exam basis. (<a href="https://www.incose.org/certification/" title="INCOSE certification overview">33</a>, <a href="https://www.incose.org/certification/start-your-certification/taking-the-exam/" title="INCOSE knowledge exam information">34</a>)</li>
+<li>Revisit the INCOSE Handbook scope and process/tailoring coverage. (<a href="https://www.incose.org/resources-publications/technical-publications/se-handbook/" title="INCOSE Systems Engineering Handbook, Fifth Edition overview">4</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-11">Instructor-style lesson notes</h3>
+<ul>
+<li>Peer evaluation should use common criteria, evidence, and constructive explanations rather than preferences.</li>
+<li>TRIO asks both “how strong is the process model?” and “how could the team and model improve?”</li>
+<li>Self-assessment should address contribution quality, listening, conflict, integration, and bias—not only hours worked.</li>
+<li>Scale decisions should use pilot evidence, uncertainty, context similarity, readiness, and residual risk.</li>
+<li>Certification preparation is a secondary benefit; the course does not award ASEP, CSEP, ESEP, ISO, or CMMI credentials.</li>
+</ul>
+<h3 id="worked-example-11">Worked example</h3>
+<p>The red team finds that the selected process reduces median lead time but the benefit is concentrated in low-risk software changes. Supplier-heavy and accessibility-critical cases show no improvement, and automation false positives increase workload. The recommendation changes from enterprise rollout to a constrained scale-up plus supplier-data and accessibility-evidence experiments.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the result or decision changes.</p>
+<h3 id="guided-practice-11">Guided practice</h3>
+<ul>
+<li>Apply the final rubric blindly to the process release or a peer package.</li>
+<li>Create findings with criterion, evidence, consequence, and disposition expectation.</li>
+<li>Perform a sensitivity analysis on scale criteria and context assumptions.</li>
+<li>Complete the team/self contribution and improvement assessment.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected analysis.</p>
+<h3 id="independent-exercises-11">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Complete the TRIO evaluation and self-assessment.</li>
+<li><strong>Application:</strong> Red-team the process model, data, simulation, pilot, and control plan.</li>
+<li><strong>Analysis:</strong> Decide scale/continue/tailor/pause/stop by work class and context.</li>
+<li><strong>Synthesis:</strong> Conduct the Process Improvement Readiness Review.</li>
+<li><strong>Stretch:</strong> Build an INCOSE Handbook knowledge map linking course artifacts to examination domains.</li>
+</ul>
+<h3 id="weekly-deliverable-11">Weekly deliverable</h3>
+<p><strong>TRIO and Process Improvement Readiness Package</strong> containing rubric ratings, evidence-based comments, prioritized improvement opportunities, self/team assessment, red-team findings, scale decision, residual risks, certification-oriented knowledge map, and dispositions.</p>
+<p>Submit native or textual source, controlled data and transformations, generated views, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-11">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Independent evidence-based evaluation</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Improvement opportunity quality</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Scale/stop decision reasoning</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Self/team reflection</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Finding disposition and readiness</td>
+<td style="text-align:right">20%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-11">Critical failures</h3>
+<ul>
+<li>Using peer review as praise or fault-finding without evidence.</li>
+<li>Scaling solely because average performance improved.</li>
+<li>Claiming an official appraisal or certification outcome.</li>
+<li>Failing to disclose contradictory pilot evidence or contribution weaknesses.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-11">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is the purpose of TRIO?</strong><br/>
+<strong>Answer guidance:</strong> To assess process models and identify actionable improvements while reflecting on team performance.</li>
+<li><strong>What makes a review finding useful?</strong><br/>
+<strong>Answer guidance:</strong> Clear criterion, evidence, consequence, priority, owner, and expected resolution.</li>
+<li><strong>Why segment a scale decision?</strong><br/>
+<strong>Answer guidance:</strong> Interventions can work differently by risk class, context, supplier, or work type.</li>
+<li><strong>What is self-assessment for?</strong><br/>
+<strong>Answer guidance:</strong> To improve future contribution, collaboration, integration, and bias control.</li>
+<li><strong>What does INCOSE certification require?</strong><br/>
+<strong>Answer guidance:</strong> Current requirements vary by level; ASEP/CSEP include knowledge pathways, and certification is awarded only by INCOSE.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-11">Revision and mastery gate</h3>
+<p>Close or formally accept every critical red-team finding and make an evidence-based scale/continue/tailor/pause/stop recommendation.</p>
+<h3 id="suggested-workload-11">Suggested workload</h3>
+<p>Target: <strong>10–12 hours</strong>. Record actual time by research, process/data work, analysis/modeling, collaboration or role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-11">Configuration and portfolio update</h3>
+<p>Release <code>TRIO-1.0</code>, readiness record, disposition log, and tag <code>SEPI-W11-READINESS</code>.</p>
+<hr/>
+<h2 id="week-12--final-process-improvement-release-and-oral-defense">Week 12 — Final process improvement release and oral defense</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B17/chapters/12.html">Chapter 12</a> → <a href="../../K/B17/labs/12.html">Hypothetical Lab 12</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-783-w12.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-12">Competency alignment</h3>
+<p>C8 (A), C9 (A), C10 (A), C11 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-12">Professional context and essential question</h3>
+<p>Northstar’s review board changes the operating context during the final review. The essential question is: <strong>Can the improvement system absorb new evidence and still produce a transparent, governed, and defensible process decision?</strong></p>
+<h3 id="weekly-learning-outcomes-12">Weekly learning outcomes</h3>
+<ul>
+<li>Integrate the complete process-improvement evidence chain and controlled release.</li>
+<li>Quantify expected benefits, uncertainty, costs, risks, burden, and residual issues.</li>
+<li>Demonstrate process model, simulation, dashboard, traceability, and control evidence live.</li>
+<li>Adapt the recommendation to a changed assumption or work class.</li>
+<li>Defend process purpose, design, pilot, controls, limitations, and scale decision.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-12">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the process-improvement chain from mission outcome to control plan.</li>
+<li>Name the three strongest findings and the three most important limitations.</li>
+<li>Identify the weakest measure and weakest causal claim.</li>
+<li>Explain the recommended scale boundary and reversal condition.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior artifacts before beginning independent work.</p>
+<h3 id="required-study-12">Required study</h3>
+<ul>
+<li>Revisit the JHU source CLOs and group-project intent. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.783.81" title="Fall 2026 syllabus for EN.645.783">1</a>)</li>
+<li>Revisit SEBoK enterprise SE performance and quality management. (<a href="https://sebokwiki.org/wiki/Assessing_Systems_Engineering_Performance_of_Business_and_Enterprises" title="SEBoK — Assessing Systems Engineering Performance of Business and Enterprises">13</a>, <a href="https://sebokwiki.org/wiki/Quality_Management" title="SEBoK — Quality Management">14</a>)</li>
+<li>Revisit ISO/IEC 33020 capability purpose, CMMI level concepts, and the course’s non-appraisal limitation. (<a href="https://www.iso.org/standard/78526.html" title="ISO/IEC 33020:2019 — Process measurement framework for assessment of process capability">6</a>, <a href="https://cmmiinstitute.com/learning/appraisals/levels" title="CMMI capability and maturity levels">7</a>)</li>
+<li>Review all decision records, review findings, pilot evidence, control triggers, and maintenance conditions.</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-12">Instructor-style lesson notes</h3>
+<ul>
+<li>The final release should request a decision, authority, resources, and next action—not merely summarize course work.</li>
+<li>Benefits should be linked to a baseline, mechanism, pilot/model evidence, uncertainty, and guardrails.</li>
+<li>Process standardization and tailoring must be presented together.</li>
+<li>Live change tests whether the maps, data, model, measures, governance, and rationale are connected.</li>
+<li>Mature process improvement includes knowing where evidence is insufficient and what must be learned next.</li>
+</ul>
+<h3 id="worked-example-12">Worked example</h3>
+<p>During the defense, the board states that a second campus cannot share detailed event data and uses a different supplier contract. The learner updates the applicability assessment, removes unsupported automated routing, applies a reduced-data tailoring profile, reruns the simulation and scale criteria, and changes the recommendation to a staged transfer with a measurement-system pilot.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the result or decision changes.</p>
+<h3 id="guided-practice-12">Guided practice</h3>
+<ul>
+<li>Run a clean reproduction from a fresh checkout.</li>
+<li>Trace one change case through current-state evidence, future-state mechanism, pilot, control, and decision.</li>
+<li>Rehearse a live change to risk class, data availability, supplier behavior, or assurance obligation.</li>
+<li>Conduct executive, performer, quality, safety/security, supplier, and skeptical-reviewer challenges.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected analysis.</p>
+<h3 id="independent-exercises-12">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Complete the repository, manifest, and artifact audit.</li>
+<li><strong>Application:</strong> Prepare the 20–25 page report, appendices, 15-slide briefing, and controlled source release.</li>
+<li><strong>Analysis:</strong> Quantify benefits, uncertainty, costs, risks, burden, and applicability limits.</li>
+<li><strong>Synthesis:</strong> Conduct the Final Process Improvement Review, live change, and oral defense.</li>
+<li><strong>Stretch:</strong> Produce a two-year enterprise improvement roadmap connecting the process to Phase 5 SoS and enterprise governance.</li>
+</ul>
+<h3 id="weekly-deliverable-12">Weekly deliverable</h3>
+<p><strong>Final Systems Engineering Process Improvement Release</strong> containing the complete capstone package, controlled data/model source, clean reproduction, live-change result, final decision request, presentation, oral defense, review findings, dispositions, and Phase 5 handoff.</p>
+<p>Submit native or textual source, controlled data and transformations, generated views, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-12">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integrated process evidence chain</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Assessment/model/pilot credibility</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Future-state and control design</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Benefits, risks, and scale decision</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Live change and reproducibility</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Executive/technical defense</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-12">Critical failures</h3>
+<ul>
+<li>Submitting disconnected artifacts rather than a controlled improvement release.</li>
+<li>Failing clean reproduction or live change without transparent recovery.</li>
+<li>Overstating causal, capability, maturity, model, or pilot evidence.</li>
+<li>Recommending scale without owners, resources, controls, risks, tailoring, and reversal criteria.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-12">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is the strongest evidence of improvement?</strong><br/>
+<strong>Answer guidance:</strong> A reproducible, decision-relevant change in protected outcomes with a credible mechanism and bounded uncertainty.</li>
+<li><strong>What is the weakest link?</strong><br/>
+<strong>Answer guidance:</strong> A specific data, definition, cause, model, pilot, adoption, or control weakness and its decision consequence.</li>
+<li><strong>Why is live change important?</strong><br/>
+<strong>Answer guidance:</strong> It demonstrates connected process semantics, impact analysis, reproducibility, governance, and decision adaptation.</li>
+<li><strong>When should the process not be standardized?</strong><br/>
+<strong>Answer guidance:</strong> When context, risk, obligations, work class, data, or capability require controlled tailoring.</li>
+<li><strong>What should Phase 5 examine?</strong><br/>
+<strong>Answer guidance:</strong> Enterprise and SoS governance, organizational dependencies, authority, incentives, interoperability, and adaptation revealed by this process.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-12">Revision and mastery gate</h3>
+<p>Complete clean reproduction, pass the live change, defend the recommendation and limitations, close critical findings, and achieve at least 80% overall with Proficient or better on every critical dimension.</p>
+<h3 id="suggested-workload-12">Suggested workload</h3>
+<p>Target: <strong>10–12 hours</strong>. Record actual time by research, process/data work, analysis/modeling, collaboration or role simulation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-12">Configuration and portfolio update</h3>
+<p>Release final baseline <code>SEPI-1.0</code>, signed manifest, decision record, Phase 5 handoff, and tag <code>SEPI-W12-FINAL</code>.</p>
+<hr/>
+<h2 id="references">References</h2>
+<p><a href="OVERVIEW.html">Back to Phase 4 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+</main></body></html>

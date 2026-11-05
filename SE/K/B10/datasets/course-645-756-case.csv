@@ -1,0 +1,13 @@
+week,course,scenario,baseline_value,challenge_value,units,status,teaching_note
+1,645-756,Northstar synthetic evaluation,15.7,18.84,illustrative index,synthetic—not field data,Define the lifecycle technical-measurement strategy and decision chain
+2,645-756,Northstar synthetic evaluation,22.7,29.51,illustrative index,synthetic—not field data,"Characterize probability distributions, tails, dependence, and stochastic performance"
+3,645-756,Northstar synthetic evaluation,10.7,14.98,illustrative index,synthetic—not field data,"Establish data provenance, sampling validity, exploratory analysis, and measurement uncertainty"
+4,645-756,Northstar synthetic evaluation,17.7,19.47,illustrative index,synthetic—not field data,"Use estimation, confidence intervals, hypothesis, equivalence, and engineering significance"
+5,645-756,Northstar synthetic evaluation,24.7,29.64,illustrative index,synthetic—not field data,"Design efficient experiments with factors, responses, noise, power, randomization, and blocking"
+6,645-756,Northstar synthetic evaluation,12.7,16.51,illustrative index,synthetic—not field data,"Analyze factorial experiments, interactions, diagnostics, and confirmation evidence"
+7,645-756,Northstar synthetic evaluation,19.7,27.58,illustrative index,synthetic—not field data,Build and validate performance response models across use and environment
+8,645-756,Northstar synthetic evaluation,26.7,29.37,illustrative index,synthetic—not field data,"Analyze reliability, availability, maintainability, degradation, and censored evidence"
+9,645-756,Northstar synthetic evaluation,14.7,17.64,illustrative index,synthetic—not field data,Propagate uncertainty with analytic Monte Carlo simulation and sensitivity analysis
+10,645-756,Northstar synthetic evaluation,21.7,28.21,illustrative index,synthetic—not field data,"Quantify requirement compliance, technical margin, allocation risk, and design options"
+11,645-756,Northstar synthetic evaluation,9.7,13.58,illustrative index,synthetic—not field data,"Update lifecycle evidence and decide among upgrade, replacement, retirement, or more information"
+12,645-756,Northstar synthetic evaluation,16.7,18.37,illustrative index,synthetic—not field data,"Integrate, reproduce, challenge, and defend the lifecycle analytics decision"

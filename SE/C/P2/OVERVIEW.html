@@ -1,0 +1,216 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Phase 2 — Core systems-development lifecycle · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P2/OVERVIEW.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><blockquote>
+<p><strong>New complementary teaching volume:</strong> <a href="../../K/P2-text/README.html">36 Phase 2 Markdown chapters</a> · <a href="../../K/P2-text/OPEN-PHASE-2.html">Offline searchable Phase 2 website</a>. The three original course guides remain authoritative for complete assessment work.</p>
+</blockquote>
+<h1 id="phase-2--core-systems-development-lifecycle">Phase 2 — Core systems-development lifecycle</h1>
+<p>Phase 2 is the curriculum's principal realization chain. It takes a system from a defensible concept decision through design maturation and integration, then into verification, validation, test, evaluation, and readiness judgment.</p>
+<p>The phase is intentionally cumulative:</p>
+<ol>
+<li><strong>EN.645.767 — System Conceptual Design</strong> reopens the problem, develops operational and functional baselines, explores alternatives, and selects a concept.</li>
+<li><strong>EN.645.768 — System Design &amp; Integration</strong> transforms that concept into a controlled design, interface, integration, and technical-management baseline.</li>
+<li><strong>EN.645.769 — System Test &amp; Evaluation</strong> develops and evaluates the evidence needed to determine whether the realized system meets requirements and operational needs.</li>
+</ol>
+<p>The current JHU course descriptions and planning material treat these subjects as a connected lifecycle sequence. The self-study curriculum therefore requires the courses to be completed in order and uses one continuing program case. <a href="https://ep.jhu.edu/courses/645767-system-conceptual-design/" title="JHU — System Conceptual Design">JHU-767</a> <a href="https://ep.jhu.edu/courses/645768-system-design-integration/" title="JHU — System Design &amp; Integration">JHU-768</a> <a href="https://ep.jhu.edu/courses/645769-system-test-evaluation/" title="JHU — System Test &amp; Evaluation">JHU-769</a></p>
+<h2 id="phase-purpose">Phase purpose</h2>
+<p>By the end of Phase 2, the learner should be able to:</p>
+<ul>
+<li>frame and investigate an operational problem without prematurely selecting a solution;</li>
+<li>formulate needs, scenarios, measures, conceptual requirements, and logical architecture;</li>
+<li>generate and compare credible physical concepts under performance, affordability, schedule, uncertainty, and risk;</li>
+<li>mature a selected concept into a design baseline;</li>
+<li>define and control interfaces across technical and organizational boundaries;</li>
+<li>plan integration build-up, technical reviews, customer involvement, and technical management;</li>
+<li>construct a verification and validation strategy tied to requirements and stakeholder expectations;</li>
+<li>plan and interpret developmental, integration, environmental, operational, and acceptance testing;</li>
+<li>analyze discrepancies, limitations, residual risk, and evidence sufficiency;</li>
+<li>make and defend proceed, conditional-proceed, rework, or stop recommendations.</li>
+</ul>
+<h2 id="required-course-order">Required course order</h2>
+<ol>
+<li><a href="EN645767.html"><strong>EN.645.767 — System Conceptual Design</strong></a></li>
+<li><a href="EN645768.html"><strong>EN.645.768 — System Design &amp; Integration</strong></a></li>
+<li><a href="EN645769.html"><strong>EN.645.769 — System Test &amp; Evaluation</strong></a></li>
+</ol>
+<p>Do not reorder the chain. EN.645.768 should receive a controlled conceptual baseline from EN.645.767, and EN.645.769 should receive the design, interface, integration, and V&amp;V planning products from EN.645.768.</p>
+<h2 id="entry-requirements">Entry requirements</h2>
+<p>Before beginning Phase 2, the learner should have completed Phase 0 and Phase 1 or demonstrate equivalent competence in:</p>
+<ul>
+<li>systems thinking, lifecycle reasoning, requirements, architecture, interfaces, risk, configuration, and technical reviews;</li>
+<li>project governance, WBS, schedule, cost, earned-value basics, risk, and change control;</li>
+<li>model-based traceability across needs, requirements, behavior, structure, and verification;</li>
+<li>object-oriented and software-system analysis sufficient to judge software feasibility and architecture implications;</li>
+<li>spreadsheet and basic computational analysis;</li>
+<li>technical writing, review facilitation, and oral defense.</li>
+</ul>
+<p>EN.645.767 includes a formal readiness diagnostic. Failing it should trigger the specified bridge work rather than silent continuation.</p>
+<h2 id="common-running-case">Common running case</h2>
+<p>Phase 2 continues the <strong>Autonomous Campus Mobility 2030</strong> program.</p>
+<p>The case is used differently in each course:</p>
+<h3 id="en645767--concept-recompetition">EN.645.767 — concept recompetition</h3>
+<p>The earlier autonomous-shuttle baseline is treated as an incumbent proposal, not as the answer. The learner must reopen the problem and consider human-driven, fixed-route, partnership, hybrid, and bounded-autonomy concepts. The output is a selected conceptual baseline plus a retained alternative and explicit conditions.</p>
+<h3 id="en645768--design-and-integration">EN.645.768 — design and integration</h3>
+<p>The selected concept becomes the starting point for design maturation. The learner develops subsystem and discipline views, interfaces, enabling systems, design decisions, a SEMP, integration strategy, V&amp;V planning, customer feedback, and review readiness.</p>
+<h3 id="en645769--test-and-evaluation">EN.645.769 — test and evaluation</h3>
+<p>The designed system becomes the test article and operational capability under evaluation. The learner defines critical test parameters, test architecture, environments, developmental and operational events, discrepancy processes, data analysis, and readiness recommendations.</p>
+<h2 id="baseline-continuity-policy">Baseline-continuity policy</h2>
+<p>Each course must import the prior baseline with a formal receiving review. Imported artifacts must be classified as:</p>
+<ul>
+<li><strong>baselined</strong> — approved for use unless changed through control;</li>
+<li><strong>conditional</strong> — usable only under named assumptions or actions;</li>
+<li><strong>reference</strong> — informative but not authoritative;</li>
+<li><strong>retained alternative</strong> — preserved as a hedge or fallback;</li>
+<li><strong>open</strong> — unresolved and assigned for closure.</li>
+</ul>
+<p>A downstream course may change a prior decision, but only through recorded change impact, updated evidence, and review approval. It may not quietly replace earlier requirements, values, architecture, or assumptions.</p>
+<h2 id="shared-review-spine">Shared review spine</h2>
+<table>
+<thead>
+<tr>
+<th>Course</th>
+<th>Review</th>
+<th>Primary decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EN.645.767</td>
+<td>Problem Definition Review</td>
+<td>Is the study frame neutral, evidence-based, and decision-ready?</td>
+</tr>
+<tr>
+<td>EN.645.767</td>
+<td>Functional Architecture Review</td>
+<td>Is the logical baseline sufficient for concept generation?</td>
+</tr>
+<tr>
+<td>EN.645.767</td>
+<td>Down-select Review</td>
+<td>Is the preferred concept robust to values and uncertainty?</td>
+</tr>
+<tr>
+<td>EN.645.767</td>
+<td>Concept Validation/Baseline Review</td>
+<td>Should the concept proceed to detailed design, and under what conditions?</td>
+</tr>
+<tr>
+<td>EN.645.768</td>
+<td>System Requirements/Design Review</td>
+<td>Is the specification-to-design chain coherent and mature?</td>
+</tr>
+<tr>
+<td>EN.645.768</td>
+<td>Interface and Integration Readiness Review</td>
+<td>Are interfaces, enabling products, environments, and build-up plans ready?</td>
+</tr>
+<tr>
+<td>EN.645.768</td>
+<td>Preliminary/Critical Design-style reviews</td>
+<td>Is the design sufficiently mature to implement and integrate?</td>
+</tr>
+<tr>
+<td>EN.645.769</td>
+<td>Test Readiness Review</td>
+<td>Are articles, environments, procedures, instrumentation, data, and safety controls ready?</td>
+</tr>
+<tr>
+<td>EN.645.769</td>
+<td>Verification/Validation Evidence Review</td>
+<td>Does the evidence support requirement and stakeholder claims?</td>
+</tr>
+<tr>
+<td>EN.645.769</td>
+<td>Operational Readiness Recommendation</td>
+<td>Should the system proceed, proceed conditionally, rework, or stop?</td>
+</tr>
+</tbody>
+</table>
+<p>Review names are educational approximations. The decision criteria and evidence matter more than matching one organization's exact gate terminology.</p>
+<h2 id="shared-artifact-chain">Shared artifact chain</h2>
+<p>The phase should produce a continuous evidence chain:</p>
+<blockquote>
+<p>problem and opportunity<br/>
+→ stakeholders and needs<br/>
+→ ConOps and scenarios<br/>
+→ objectives, MOEs, MOPs, and thresholds<br/>
+→ conceptual requirements<br/>
+→ functional architecture<br/>
+→ physical concept alternatives<br/>
+→ quantitative decision and risk evidence<br/>
+→ selected concept baseline<br/>
+→ design decomposition and interfaces<br/>
+→ implementation and integration baseline<br/>
+→ verification and validation plan<br/>
+→ test procedures and data<br/>
+→ discrepancy and corrective-action evidence<br/>
+→ readiness recommendation</p>
+</blockquote>
+<p>Every major claim should be traceable upstream to rationale and downstream to planned or actual evidence.</p>
+<h2 id="phase-wide-engineering-rules">Phase-wide engineering rules</h2>
+<ol>
+<li><strong>Do not confuse document completion with technical maturity.</strong></li>
+<li><strong>Do not let the favored concept determine the measures used to select it.</strong></li>
+<li><strong>Do not accept screenshots as the only source for models or calculations.</strong></li>
+<li><strong>Do not treat a requirement as verified because a test was run; evaluate the result and evidence quality.</strong></li>
+<li><strong>Do not treat operational validation as a synonym for requirement verification.</strong></li>
+<li><strong>Record assumptions, dissent, waivers, and limitations.</strong></li>
+<li><strong>Use ranges and sensitivity where point values imply false precision.</strong></li>
+<li><strong>Include operators, maintainers, users, accessibility, safety, security, privacy, support, and transition concerns throughout the chain.</strong></li>
+<li><strong>Preserve configuration and change history across course boundaries.</strong></li>
+<li><strong>Require oral defense and receiving-team acceptance at each final handoff.</strong></li>
+</ol>
+<h2 id="workload-and-pacing">Workload and pacing</h2>
+<p>A fully expanded Phase 2 course is designed for approximately <strong>10–13 hours per week</strong>, with review and capstone weeks occasionally requiring more. Learners completing the program alongside full-time work may use a 16–18 week pace per course.</p>
+<p>Do not overlap the three courses unless the learner is using a real project with adequate mentoring and can preserve baseline discipline. Starting test planning early is good systems engineering; beginning EN.645.769 before the EN.645.768 design and integration baseline exists is not.</p>
+<h2 id="current-development-status">Current development status</h2>
+<table>
+<thead>
+<tr>
+<th>Course</th>
+<th>Status</th>
+<th>Last major revision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EN.645.767 System Conceptual Design</td>
+<td><strong>Fully expanded</strong></td>
+<td>2026-08-05</td>
+</tr>
+<tr>
+<td>EN.645.768 System Design &amp; Integration</td>
+<td><strong>Fully expanded</strong></td>
+<td>2026-08-05</td>
+</tr>
+<tr>
+<td>EN.645.769 System Test &amp; Evaluation</td>
+<td><strong>Fully expanded</strong></td>
+<td>2026-08-05</td>
+</tr>
+</tbody>
+</table>
+<p>All three Phase 2 courses are fully expanded. “Fully expanded” means the course includes a complete specification, readiness diagnostic, detailed weekly learning outcomes and readings, worked examples, guided and independent exercises, deliverable specifications, rubrics, mastery gates, formal reviews, a capstone, and handoff requirements.</p>
+<h2 id="phase-exit-criteria">Phase exit criteria</h2>
+<p>Phase 2 is complete when the learner can present a controlled portfolio showing:</p>
+<ul>
+<li>a defensible concept decision with alternatives, uncertainty, affordability, schedule, and risk;</li>
+<li>a coherent design and interface baseline;</li>
+<li>an integration and enabling-system strategy;</li>
+<li>a requirement-linked V&amp;V and T&amp;E architecture;</li>
+<li>actual or realistically simulated test data and discrepancy analysis;</li>
+<li>configuration, change, review, and corrective-action records;</li>
+<li>a readiness recommendation with residual risk and limitations;</li>
+<li>an oral defense that connects the entire evidence chain.</li>
+</ul>
+<h2 id="course-files">Course files</h2>
+<ul>
+<li><a href="EN645767.html">EN.645.767 — System Conceptual Design</a></li>
+<li><a href="EN645768.html">EN.645.768 — System Design &amp; Integration</a></li>
+<li><a href="EN645769.html">EN.645.769 — System Test &amp; Evaluation</a></li>
+</ul>
+<p><a href="OVERVIEW.html">Back to program README</a></p>
+<h2 id="references">References</h2>
+</main></body></html>

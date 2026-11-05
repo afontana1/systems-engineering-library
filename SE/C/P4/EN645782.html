@@ -1,0 +1,1952 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.782 — Foundations of Digital and Mission Engineering · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P4/EN645782.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/04-model-semantics.html">Model semantics, viewpoints, and digital traceability</a> · <a href="../../K/T/05-software-contracts.html">State machines, contracts, and distributed failures</a> · <a href="../../K/T/11-digital-thread.html">Digital threads, model credibility, and configuration provenance</a></aside><main><div class="course-actions"><a href="../../K/B16/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en645782--foundations-of-digital-and-mission-engineering">EN.645.782 — Foundations of Digital and Mission Engineering</h1>
+<p><strong>Credits:</strong> 3<br/>
+<strong>Prerequisite:</strong> EN.645.662 Introduction to Systems Engineering<br/>
+<strong>Recommended self-study preparation:</strong> completion of EN.645.631 Introduction to MBSE, EN.645.757 Foundations of Modeling and Simulation, EN.645.632 Applied Analytics for MBSE, and EN.645.780 Agile Systems Engineering</p>
+<h2 id="1-course-purpose">1. Course purpose</h2>
+<p>This course prepares a systems engineer to participate meaningfully in a digital-engineering and mission-engineering program without mistaking either discipline for tool acquisition, diagram production, or data accumulation. The learner will connect lifecycle decisions to authoritative data and models; define intended uses for models and simulations; apply MBSE method, language, and tool concepts; construct queryable system and mission representations; design a secure collaborative digital-engineering ecosystem; define credible digital-thread and digital-twin capabilities; and use mission engineering to evaluate end-to-end outcomes across systems, organizations, environments, and operational processes.</p>
+<p>The course retains the U.S. Department of Defense acquisition, policy, and mission-engineering context of the source course while using an unclassified public-safety mobility case that can be studied without controlled information. Defense-specific terms are learned and applied, but the engineering practices are framed so they can transfer to aerospace, transportation, healthcare, energy, infrastructure, and other mission-oriented enterprises.</p>
+<p>The final product is an integrated <strong>Digital Mission Engineering Strategy and Evidence Package</strong> that shows how models, data, simulations, architecture, digital threads, digital twins, and mission analysis support specific decisions. The package must demonstrate authority, provenance, traceability, credibility, security, configuration, and limitations—not merely attractive views.</p>
+<h2 id="2-source-scope-and-self-study-adaptation">2. Source scope and self-study adaptation</h2>
+<p>The Fall 2026 JHU syllabus organizes the source course around:</p>
+<ul>
+<li>review of the systems engineering process;</li>
+<li>the DoD Digital Engineering Strategy and Digital Engineering Competency Framework;</li>
+<li>modeling and simulation fundamentals and lifecycle uses;</li>
+<li>MBSE foundations, SysML, and OOSEM;</li>
+<li>model-based analytical capabilities and case studies;</li>
+<li>collaborative digital-engineering environments;</li>
+<li>digital threads and digital twins;</li>
+<li>mission-engineering approaches and methodologies; and</li>
+<li>application of digital engineering to mission engineering.</li>
+</ul>
+<p>The source course learning outcomes require learners to discuss lifecycle activities; explain DoD digital-engineering strategy and competency concepts; distinguish M&amp;S terms and uses; explain method, language, and tool; describe OOSEM; demonstrate SysML and model-based analytics; explain collaborative environments, threads, and twins; and distinguish digital engineering for systems, systems of systems, and missions. (<a href="https://ep.jhu.edu/courses/645782-foundations-of-digital-and-mission-engineering/" title="Foundations of Digital and Mission Engineering — JHU course page">1</a>, <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.782.81" title="Fall 2026 syllabus for EN.645.782">2</a>)</p>
+<p>This self-study version preserves those outcomes while adding:</p>
+<ul>
+<li>explicit intended-use and decision framing for every model, simulation, thread, and twin;</li>
+<li>executable repository queries and change-impact demonstrations;</li>
+<li>security, intellectual-property, data-rights, and access-control considerations;</li>
+<li>configuration, provenance, pedigree, quality, and reuse controls;</li>
+<li>model and simulation credibility planning from the beginning;</li>
+<li>the 2025 DoD Mission Architecture Style Guide;</li>
+<li>the final-adopted SysML v2 standard, with a SysML v1.7 compatibility path;</li>
+<li>formal review gates, red-team findings, correction cycles, and an oral defense.</li>
+</ul>
+<p>The course does not claim to reproduce private Canvas lectures, proprietary examples, or unpublished source-course assignments.</p>
+<h2 id="3-relationship-to-adjacent-courses">3. Relationship to adjacent courses</h2>
+<h3 id="inputs-from-earlier-courses">Inputs from earlier courses</h3>
+<p>The learner receives:</p>
+<ul>
+<li>lifecycle, stakeholder, requirements, architecture, verification, risk, and configuration foundations from Phases 0–2;</li>
+<li>a queryable MBSE baseline and model analytics from EN.645.631 and EN.645.632;</li>
+<li>M&amp;S intended-use, experiment, uncertainty, and credibility practices from EN.645.757, EN.645.756, and EN.645.758;</li>
+<li>an agile technical-management operating model, evidence backlog, and digital-thread needs from EN.645.780;</li>
+<li>the controlled Phase 4 Northstar Mobility Systems transformation repository.</li>
+</ul>
+<h3 id="outputs-to-later-courses">Outputs to later courses</h3>
+<p>The course produces:</p>
+<ul>
+<li>an authoritative-source and collaborative-environment baseline for EN.645.783;</li>
+<li>measurable digital-workflow and governance problems suitable for process assessment and improvement;</li>
+<li>mission-thread, interoperability, governance, and capability-dependency artifacts for Phase 5;</li>
+<li>an advanced C4/C11 portfolio artifact: a controlled digital mission-engineering environment with executable evidence and a defensible mission recommendation.</li>
+</ul>
+<h2 id="4-prerequisites-and-readiness-diagnostic">4. Prerequisites and readiness diagnostic</h2>
+<p>Before Week 1, complete a 75–90 minute diagnostic. The learner should be able to:</p>
+<ol>
+<li>Describe the major technical and technical-management processes across a system lifecycle.</li>
+<li>Trace one stakeholder need through requirements, architecture, analysis, verification evidence, operational observation, and decision.</li>
+<li>Distinguish a model, simulation, dataset, view, report, and authoritative record.</li>
+<li>Explain intended use, verification, validation, uncertainty, and configuration status for one prior analytic model.</li>
+<li>Execute or inspect a query that finds orphan requirements, missing allocations, or incomplete verification traces.</li>
+<li>Use version control and reproduce one prior model-generated or analytic result.</li>
+<li>Explain the difference among a system, a system of systems, an enterprise, a capability, and a mission.</li>
+<li>Identify information that should not be freely shared because of security, privacy, proprietary, export-control, or data-rights constraints.</li>
+</ol>
+<p><strong>Diagnostic standard:</strong> at least 80%, with no failure on traceability, model credibility, configuration, or information-protection reasoning. Complete targeted remediation before continuing.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<p>By the end of the course, the learner will be able to:</p>
+<ol>
+<li><strong>Relate</strong> systems-engineering technical and technical-management processes to acquisition and lifecycle decisions. <em>(C1, C10)</em></li>
+<li><strong>Explain and apply</strong> the DoD Digital Engineering Strategy, DoDI 5000.97, Digital Engineering Fundamentals, and DECF concepts to a program context. <em>(C4, C10, C12)</em></li>
+<li><strong>Classify, select, and govern</strong> models and simulations by intended use, lifecycle decision, fidelity, data, uncertainty, and credibility need. <em>(C6, C7, C8)</em></li>
+<li><strong>Plan and construct</strong> a coherent MBSE baseline using method, language, tool, metamodel, viewpoints, and configuration conventions. <em>(C2, C3, C4)</em></li>
+<li><strong>Apply</strong> SysML and a lightweight OOSEM flow to connect mission needs, stakeholder concerns, requirements, behavior, structure, interfaces, measures, and verification. <em>(C2, C3, C4)</em></li>
+<li><strong>Demonstrate</strong> model-based analytics through executable queries, matrices, calculations, impact analysis, and generated decision products. <em>(C4, C8, C9)</em></li>
+<li><strong>Architect and govern</strong> a secure collaborative digital-engineering ecosystem and authoritative sources of truth. <em>(C4, C10, C12)</em></li>
+<li><strong>Define and demonstrate</strong> a digital thread that connects authoritative data, models, evidence, decisions, and lifecycle changes. <em>(C4, C6, C10)</em></li>
+<li><strong>Specify and assess</strong> a digital-twin use case, synchronization approach, fidelity, validation, uncertainty, and operational limitations. <em>(C4, C7, C8)</em></li>
+<li><strong>Develop</strong> a mission problem, mission thread, mission architecture, measures, dependencies, gaps, and candidate interventions using the DoD Mission Engineering Guide and Mission Architecture Style Guide. <em>(C9, C11)</em></li>
+<li><strong>Explain and demonstrate</strong> how digital engineering supports mission engineering across systems, systems of systems, organizations, and operational environments. <em>(C4, C11)</em></li>
+<li><strong>Recommend and defend</strong> an integrated digital mission-engineering strategy with benefits, costs, risks, security, governance, workforce, credibility, and transition actions. <em>(C10, C11, C12)</em></li>
+</ol>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>Which decision, user, lifecycle stage, and consequence justify each digital artifact?</li>
+<li>What makes a model or dataset authoritative for one use but not another?</li>
+<li>How do method, language, tool, metamodel, data, and governance interact?</li>
+<li>Which digital continuity must be preserved, and which transformations or manual handoffs are acceptable?</li>
+<li>How is a digital thread tested rather than merely drawn?</li>
+<li>What distinguishes a digital twin from a simulation, dashboard, digital model, or digital shadow?</li>
+<li>What synchronization, fidelity, uncertainty, and validation are required for a twin’s stated use?</li>
+<li>How do mission questions change the model boundary and the systems that must be represented?</li>
+<li>How can mission architectures remain reusable, transparent, and comparable across organizations?</li>
+<li>Where do security, proprietary data, access, classification, and data rights constrain collaboration?</li>
+<li>What evidence shows that digital engineering improved a decision rather than only changing the tools used?</li>
+</ul>
+<h2 id="7-running-case-and-controlled-evidence">7. Running case and controlled evidence</h2>
+<h3 id="northstar-resilient-mobility-mission">Northstar Resilient Mobility Mission</h3>
+<p>Northstar Mobility Systems has been asked to support a regional public-safety mission: maintain safe movement of students, staff, emergency personnel, and critical supplies during severe weather, grid disruption, communications degradation, and transportation-capacity loss.</p>
+<p>The mission includes:</p>
+<ul>
+<li>autonomous and manually operated campus shuttles;</li>
+<li>municipal transit and emergency vehicles;</li>
+<li>dispatch, routing, accessibility, and rider-information services;</li>
+<li>charging infrastructure and the regional electric grid;</li>
+<li>campus emergency management, local government, hospitals, law enforcement, and mutual-aid partners;</li>
+<li>weather, traffic, cyber, infrastructure, and demand data;</li>
+<li>policies, staffing, training, contracts, communications, and operational procedures.</li>
+</ul>
+<p>The learner serves as <strong>Digital and Mission Engineering Lead</strong>. Required case evidence includes prior Phase 1–3 models and analyses, the EN.645.780 transformation operating model, synthetic operational and engineering data, stakeholder and organization records, controlled disruptions, and digital-environment constraints.</p>
+<p>The mission is intentionally broader than the Northstar product. A correct mission analysis may recommend changes to technology, organizations, policies, information exchanges, staffing, training, logistics, or procedures rather than a new vehicle feature.</p>
+<h3 id="controlled-scenario-changes">Controlled scenario changes</h3>
+<ul>
+<li><strong>Week 2:</strong> the sponsor changes the primary decision and imposes a data-rights constraint.</li>
+<li><strong>Week 6:</strong> a model query reveals inconsistent requirement, interface, and test identifiers.</li>
+<li><strong>Week 8:</strong> a supplier interface update breaks an automated trace and generated verification report.</li>
+<li><strong>Week 9:</strong> field telemetry shows bias and intermittent synchronization loss.</li>
+<li><strong>Week 11:</strong> a communications degradation invalidates the nominal mission approach.</li>
+<li><strong>Week 12:</strong> the review board requests a live change to one mission assumption and asks for impact evidence.</li>
+</ul>
+<p>The learner may substitute another unclassified mission only when equivalent system, SoS, organizational, data, and operational evidence exists.</p>
+<h2 id="8-resource-architecture">8. Resource architecture</h2>
+<h3 id="required-anchors">Required anchors</h3>
+<ul>
+<li>JHU course page and Fall 2026 abridged syllabus for source description, topics, goals, and CLOs. (<a href="https://ep.jhu.edu/courses/645782-foundations-of-digital-and-mission-engineering/" title="Foundations of Digital and Mission Engineering — JHU course page">1</a>, <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.782.81" title="Fall 2026 syllabus for EN.645.782">2</a>)</li>
+<li>DoD Systems Engineering Guidebook and Engineering of Defense Systems Guidebook for acquisition and lifecycle context. (<a href="https://ac.cto.mil/wp-content/uploads/2022/08/Systems-Eng-Guidebook_Feb2022-Cleared.pdf" title="DoD Systems Engineering Guidebook">3</a>, <a href="https://www.cto.mil/wp-content/uploads/2024/10/Eng-Def-Sys-Change2-7October2024-v3.pdf" title="Engineering of Defense Systems Guidebook, Change 2">4</a>)</li>
+<li>DoDI 5000.97, the 2018 Digital Engineering Strategy, DoD Digital Engineering Fundamentals, DECF v1.1, and DE Ecosystem General Requirements. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500097p.PDF" title="DoDI 5000.97 Digital Engineering">5</a>–<a href="https://www.cto.mil/wp-content/uploads/2023/06/Dig-Eng-Ecosystem-Reqs.pdf" title="Digital Engineering Ecosystem General Requirements">9</a>)</li>
+<li>DoDI 5000.61 for M&amp;S VV&amp;A policy and intended-use credibility. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500061p.pdf" title="DoDI 5000.61 Modeling and Simulation VV&amp;A">10</a>)</li>
+<li>NASA Systems Modeling Handbook as a tool-agnostic MBSE planning and model-product reference. (<a href="https://standards.nasa.gov/system/files/tmp/2025-03-12-NASA-HDBK-1009A.pdf" title="NASA Systems Modeling Handbook for Systems Engineering">11</a>)</li>
+<li>OMG SysML v2 and SysML v1.7 materials, plus the INCOSE OOSEM working group. (<a href="https://www.omg.org/sysml/SysML-2.htm" title="OMG SysML v2 Specification">12</a>–<a href="https://www.incose.org/group/object-oriented-se-method-working-group" title="INCOSE Object-Oriented Systems Engineering Method Working Group">15</a>)</li>
+<li>DoD Mission Engineering Guide 2.0 and the 2025 Mission Architecture Style Guide. (<a href="https://ac.cto.mil/wp-content/uploads/2023/11/MEG_2_Oct2023.pdf" title="Department of Defense Mission Engineering Guide 2.0">16</a>, <a href="https://ac.cto.mil/wp-content/uploads/2025/01/U-Mission-Architecture-Style-Guide-Final_07Jan2025.pdf" title="DoD Mission Architecture Style Guide">17</a>)</li>
+<li>OMG UAF resources where an architecture framework adds value to mission-level views. (<a href="https://www.omg.org/uaf/" title="OMG Unified Architecture Framework">18</a>)</li>
+<li>DoD Systems Engineering Modernization and Digital Engineering Body of Knowledge resources for current practice and transition context. (<a href="https://www.de-bok.org/" title="Digital Engineering Body of Knowledge">19</a>, <a href="https://www.cto.mil/wp-content/uploads/2023/06/SERC-WRT-1058-2023.pdf" title="Systems Engineering Modernization Policy, Practice, and Workforce Roadmap">20</a>)</li>
+</ul>
+<h3 id="reading-policy">Reading policy</h3>
+<p>Every reading must be tied to a decision or artifact. For each source, record:</p>
+<ol>
+<li>the claim or requirement being used;</li>
+<li>the artifact or decision it affects;</li>
+<li>the source date and status;</li>
+<li>assumptions or interpretation;</li>
+<li>limitations or conflicts;</li>
+<li>whether the source is authoritative, informative, or illustrative for the case.</li>
+</ol>
+<p>Do not copy terminology into a deliverable without showing how it changes the model, environment, analysis, or decision.</p>
+<h2 id="9-tool-and-repository-policy">9. Tool and repository policy</h2>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Acceptable options</th>
+<th>Minimum evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Systems and mission modeling</td>
+<td>SysML v2 reference implementation; Cameo/CATIA Magic; Enterprise Architect; Eclipse Papyrus; Capella; another standards-based tool</td>
+<td>Native or textual source, exported interchange where practical, package/viewpoint structure, validation results</td>
+</tr>
+<tr>
+<td>Model analytics</td>
+<td>Tool-native queries; SysML v2 API; Python with JSON/CSV/XML exports; SQL or graph queries</td>
+<td>Executable query, controlled input, expected result, test case, output artifact</td>
+</tr>
+<tr>
+<td>M&amp;S and analytics</td>
+<td>Python/Jupyter, SimPy, Vensim, MATLAB/Simulink, Modelica/OpenModelica, or prior validated models</td>
+<td>Source, environment, data, verification checks, results, uncertainty and limits</td>
+</tr>
+<tr>
+<td>Digital-thread prototype</td>
+<td>Git, issue/requirements store, model repository, test results, provenance manifests, lightweight graph/database</td>
+<td>At least three cross-domain executable queries and one change-impact demonstration</td>
+</tr>
+<tr>
+<td>Digital-twin prototype</td>
+<td>Simulation/model plus controlled telemetry or synthetic observations</td>
+<td>Intended-use specification, synchronization logic, state/data mapping, validation and uncertainty evidence</td>
+</tr>
+<tr>
+<td>Mission architecture</td>
+<td>SysML/UAF, architecture tool, graph model, or rigorously controlled diagrams-as-code</td>
+<td>Semantics, traceability, mission-thread identifiers, measures, dependencies, version and source</td>
+</tr>
+<tr>
+<td>Recording and review</td>
+<td>Any secure recording and presentation tool</td>
+<td>Review briefing, live demonstration, findings, dispositions, and oral defense</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sysml-policy">SysML policy</h3>
+<p>SysML v2 received final OMG adoption in July 2025 and is the preferred standards-learning path. A SysML v1.7 path remains acceptable because many deployed tools and prior course artifacts use v1.x. The learner must identify the chosen version, semantics, interchange limits, and any translation or compatibility assumptions. (<a href="https://www.omg.org/sysml/SysML-2.htm" title="OMG SysML v2 Specification">12</a>–<a href="https://www.omg.org/spec/SysML/1.7/About-SysML" title="OMG SysML v1.7">14</a>)</p>
+<h3 id="information-protection-policy">Information-protection policy</h3>
+<p>Use only public, fictional, or properly sanitized information. Every repository must define access roles, data classifications or sensitivity labels, proprietary/data-rights restrictions, export limitations where applicable, and release rules. “Authoritative” never means “universally accessible.”</p>
+<h2 id="10-assessment-and-grading-model">10. Assessment and grading model</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weekly knowledge checks and retrieval practice</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Weekly laboratories and controlled artifacts</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Digital Engineering Strategy and Competency Review — Week 2</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Model, M&amp;S, and MBSE Analytics Review — Week 6</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Digital Ecosystem, Thread, and Twin Credibility Reviews — Weeks 8–9</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Mission Architecture and Mission Analysis Reviews — Weeks 10–11</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Final Digital Mission Engineering Strategy, live change, and oral defense</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>100%</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="11-twelve-week-course-map">11. Twelve-week course map</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Week</th>
+<th>Topic</th>
+<th>Principal evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Lifecycle, acquisition, and digital/mission framing</td>
+<td>Decision-to-evidence lifecycle map and receiving review</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>Digital Engineering strategy, policy, competencies, and adoption</td>
+<td>DE strategy, use-case portfolio, competency and gap review</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>M&amp;S foundations, lifecycle uses, and credibility</td>
+<td>Model-use portfolio and VV&amp;A/credibility plan</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>MBSE pillars, model planning, semantics, and governance</td>
+<td>MBSE modeling plan, metamodel, viewpoints, conventions</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>SysML and lightweight OOSEM application</td>
+<td>Integrated system/mission model baseline</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>Model-based analytics and case-study review</td>
+<td>Query suite, matrices, calculations, impact analysis, midcourse review</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>Collaborative digital-engineering ecosystem and ASOT governance</td>
+<td>Ecosystem architecture, authority, security, and data-management plan</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>Digital thread architecture and executable traceability</td>
+<td>Thread information model, queries, break/recovery demonstration</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Digital twins, synchronization, fidelity, and credibility</td>
+<td>Twin use-case specification and credibility review</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Mission engineering foundations and mission architecture</td>
+<td>Mission problem, thread, architecture, measures, and review</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>Mission analysis, alternatives, gaps, and interventions</td>
+<td>Mission analysis, uncertainty, experiments, and recommendation</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>Integrated digital engineering for mission decisions</td>
+<td>Final strategy, live change, executive/technical defense</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-major-assignments-and-review-products">12. Major assignments and review products</h2>
+<h3 id="a-digital-engineering-strategy-and-competency-review--week-2">A. Digital Engineering Strategy and Competency Review — Week 2</h3>
+<p>Translate policy and strategy into a case-specific set of decisions, digital use cases, workforce competencies, governance responsibilities, measures, and a staged adoption hypothesis.</p>
+<h3 id="b-model-ms-and-mbse-analytics-review--week-6">B. Model, M&amp;S, and MBSE Analytics Review — Week 6</h3>
+<p>Show that the model portfolio has stated uses, semantics, configuration, credibility needs, and executable analytics that answer real questions.</p>
+<h3 id="c-digital-ecosystem-and-thread-credibility-review--week-8">C. Digital Ecosystem and Thread Credibility Review — Week 8</h3>
+<p>Demonstrate authoritative-source governance, data/provenance controls, cross-domain trace queries, change detection, and recovery from a broken interface.</p>
+<h3 id="d-digital-twin-credibility-review--week-9">D. Digital Twin Credibility Review — Week 9</h3>
+<p>Decide whether a proposed twin is fit for specified monitoring, prediction, rehearsal, or maintenance decisions. Reject or restrict unsupported uses.</p>
+<h3 id="e-mission-architecture-and-analysis-reviews--weeks-1011">E. Mission Architecture and Analysis Reviews — Weeks 10–11</h3>
+<p>Define the mission, architecture, measures, dependencies, gaps, alternatives, uncertainties, and candidate interventions. Show how digital evidence supports the recommendation.</p>
+<h3 id="f-final-digital-mission-engineering-strategy--week-12">F. Final Digital Mission Engineering Strategy — Week 12</h3>
+<p>Integrate the program, ecosystem, thread, twin, and mission-analysis products into a staged recommendation with governance, workforce, security, cost, measures, risks, and transition actions.</p>
+<h2 id="13-common-analytic-rubric">13. Common analytic rubric</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Exemplary</th>
+<th>Proficient</th>
+<th>Developing</th>
+<th>Insufficient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decision and intended-use framing</td>
+<td>Every artifact is tied to a named user, decision, context, consequence, and acceptance criterion</td>
+<td>Main artifacts have clear uses with minor gaps</td>
+<td>Several artifacts are activity- or tool-driven</td>
+<td>Artifacts are produced without decision purpose</td>
+</tr>
+<tr>
+<td>Semantics and model coherence</td>
+<td>Mission, requirements, behavior, structure, interfaces, measures, evidence, and decisions are semantically consistent</td>
+<td>Main relationships are coherent</td>
+<td>Views exist but cross-model consistency is weak</td>
+<td>Diagrams conflict or lack defined meaning</td>
+</tr>
+<tr>
+<td>Authority, provenance, and configuration</td>
+<td>Authority is use-specific and backed by source, status, ownership, pedigree, access, and configuration</td>
+<td>Main data/model assets are governed</td>
+<td>Important authority or provenance fields are missing</td>
+<td>“Single source of truth” is asserted without governance</td>
+</tr>
+<tr>
+<td>Analytics and reproducibility</td>
+<td>Queries, calculations, simulations, and impacts are executable, tested, versioned, and decision-relevant</td>
+<td>Most results are reproducible</td>
+<td>Some results depend on manual or undocumented steps</td>
+<td>Screenshots and claims replace executable evidence</td>
+</tr>
+<tr>
+<td>Credibility and uncertainty</td>
+<td>Intended use, verification, validation, uncertainty, assumptions, and limitations are explicit and proportionate</td>
+<td>Main credibility needs are addressed</td>
+<td>Credibility is uneven or late</td>
+<td>Models/twins are trusted without evidence</td>
+</tr>
+<tr>
+<td>Mission and SoS reasoning</td>
+<td>End-to-end outcomes, dependencies, organizations, environment, alternatives, and non-materiel factors are integrated</td>
+<td>Main mission dependencies and options are analyzed</td>
+<td>Analysis is mostly product-centric</td>
+<td>Mission engineering is treated as enlarged product design</td>
+</tr>
+<tr>
+<td>Security, rights, and collaboration</td>
+<td>Access, sensitivity, IP/data rights, release, interoperability, and cross-organization roles are engineered</td>
+<td>Main controls are present</td>
+<td>Controls are generic or incomplete</td>
+<td>Collaboration assumes unrestricted data and tools</td>
+</tr>
+<tr>
+<td>Communication and judgment</td>
+<td>Executive and technical products are candid, traceable, and adaptable under challenge</td>
+<td>Recommendation is defensible with minor gaps</td>
+<td>Important assumptions or limitations are hidden</td>
+<td>Learner cannot explain or revise the evidence chain</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-critical-mastery-criteria">14. Critical mastery criteria</h2>
+<p>The course cannot be passed through point accumulation while any of these remain:</p>
+<ul>
+<li>digital engineering is defined as buying tools, converting documents to PDFs, or placing files in one repository;</li>
+<li>an authoritative source is declared without owner, scope, status, pedigree, access, and acceptable-use rules;</li>
+<li>a digital thread is only a diagram and cannot answer cross-domain queries or detect a controlled break;</li>
+<li>a digital twin lacks a stated physical/operational referent, synchronization mechanism, intended use, validation, or uncertainty bounds;</li>
+<li>model and simulation results are used outside their validated context without disclosure;</li>
+<li>security, privacy, proprietary information, intellectual property, data rights, or access constraints are ignored;</li>
+<li>mission success is inferred from one system’s performance without end-to-end mission analysis;</li>
+<li>the mission architecture omits organizations, information exchanges, environment, assumptions, or non-materiel contributors;</li>
+<li>critical identifiers, baselines, or interfaces are inconsistent and unresolved;</li>
+<li>review findings are hidden or closed without evidence.</li>
+</ul>
+<p><strong>Completion standard:</strong> at least 80% overall; at least 70% in each major category; Proficient or better on every critical capstone dimension; all critical criteria satisfied; successful oral defense and live change.</p>
+<h2 id="15-final-capstone-and-oral-defense">15. Final capstone and oral defense</h2>
+<p>The capstone is a <strong>20–25 page Digital Mission Engineering Strategy</strong>, controlled model/data repository, 15-slide executive/technical briefing, three live queries, one live model/mission change, and a 25-minute oral defense.</p>
+<p>Required contents:</p>
+<ol>
+<li>executive decision and requested authorization;</li>
+<li>acquisition/lifecycle and mission context;</li>
+<li>digital-engineering policy and strategy translation;</li>
+<li>digital use-case portfolio and benefits hypothesis;</li>
+<li>competency, role, and workforce plan;</li>
+<li>model and simulation portfolio with intended uses and credibility status;</li>
+<li>MBSE method, language, tool, metamodel, viewpoints, and governance;</li>
+<li>authoritative-source and data-management architecture;</li>
+<li>collaborative digital-engineering ecosystem and security model;</li>
+<li>digital-thread information model, queries, change detection, and provenance;</li>
+<li>digital-twin intended use, synchronization, validation, uncertainty, and restrictions;</li>
+<li>mission problem, objectives, scenarios, measures, and mission threads;</li>
+<li>mission architecture, dependencies, gaps, alternatives, and non-materiel factors;</li>
+<li>analysis, experiments, uncertainty, sensitivity, and recommendation;</li>
+<li>staged implementation, cost/resources, measures, risks, governance, and sustainment;</li>
+<li>limitations, residual risk, rejected alternatives, review findings, and dispositions.</li>
+</ol>
+<h3 id="required-live-demonstrations">Required live demonstrations</h3>
+<ul>
+<li>Query from a mission outcome to contributing tasks, systems, interfaces, measures, and evidence.</li>
+<li>Query from a changed interface or assumption to affected model elements, analyses, tests, reports, and decisions.</li>
+<li>Demonstrate one twin-state update or simulated telemetry synchronization and show how uncertainty affects the allowed decision.</li>
+<li>Implement a review-board change and regenerate the affected evidence within the defense session.</li>
+</ul>
+<h3 id="oral-defense-question-bank">Oral-defense question bank</h3>
+<ol>
+<li>What is authoritative in your environment, for which use, and who decides?</li>
+<li>Show one place where the authoritative source differs by lifecycle stage or decision.</li>
+<li>Which Digital Engineering Strategy goal is hardest for Northstar, and why?</li>
+<li>Which DECF competency gap creates the greatest program risk?</li>
+<li>Distinguish model verification, validation, accreditation, and acceptance for use.</li>
+<li>Why is your chosen modeling language insufficient by itself?</li>
+<li>Which OOSEM step most changed the case model?</li>
+<li>Demonstrate a digital-thread query and explain how you tested it.</li>
+<li>What breaks when a supplier changes an interface identifier?</li>
+<li>Why is your proposed twin a twin rather than a simulation or dashboard?</li>
+<li>Which twin use did you reject because credibility was insufficient?</li>
+<li>How does the mission boundary differ from the Northstar product boundary?</li>
+<li>Which mission dependency creates the most severe single point of failure or fragility?</li>
+<li>Which recommended intervention is non-materiel, and why?</li>
+<li>How would your digital environment change for classified, multinational, or proprietary collaboration?</li>
+<li>What evidence shows that digital engineering improved a decision?</li>
+<li>What should be assessed and improved next in EN.645.783?</li>
+</ol>
+<h2 id="16-portfolio-and-completion-requirements">16. Portfolio and completion requirements</h2>
+<p>Retain:</p>
+<ul>
+<li>lifecycle decision/evidence map and receiving review;</li>
+<li>DE strategy, policy, competency, and adoption package;</li>
+<li>model-use and M&amp;S credibility register;</li>
+<li>MBSE plan, metamodel, viewpoints, conventions, and validation results;</li>
+<li>integrated SysML/OOSEM model baseline;</li>
+<li>executable analytics, matrices, calculations, and generated products;</li>
+<li>ecosystem architecture, ASOT register, access model, and governance;</li>
+<li>thread information model, queries, tests, provenance, and break/recovery record;</li>
+<li>twin use-case specification, synchronization prototype, validation, and use restrictions;</li>
+<li>mission problem, scenarios, threads, architecture, measures, dependencies, and alternatives;</li>
+<li>mission analysis, uncertainty, experiments, recommendation, and decision record;</li>
+<li>final strategy, briefing, live-change evidence, defense recording, findings, and dispositions;</li>
+<li>handoff manifest for EN.645.783 and Phase 5.</li>
+</ul>
+<h2 id="17-course-maintenance-record">17. Course maintenance record</h2>
+<p>Review annually or when a source changes. Confirm:</p>
+<ul>
+<li>JHU public syllabus, course topics, goals, and CLOs;</li>
+<li>DoDI 5000.97 and Digital Engineering Strategy status;</li>
+<li>DoD Digital Engineering Fundamentals, DE ecosystem requirements, DECF, and DEBoK updates;</li>
+<li>DoDI 5000.61 and M&amp;S VV&amp;A guidance;</li>
+<li>SysML v2, API and Services, KerML, SysML v1.7, UAF, and tool/interchange status;</li>
+<li>INCOSE OOSEM evolution and SysML v2 transition guidance;</li>
+<li>Mission Engineering Guide and Mission Architecture Style Guide revisions;</li>
+<li>definitions and guidance for digital threads and digital twins;</li>
+<li>cybersecurity, intellectual-property, data-rights, access, and collaboration requirements;</li>
+<li>whether exercises measure decision value, authority, reproducibility, and mission outcomes rather than tool use.</li>
+</ul>
+<hr/>
+<h2 id="week-1--lifecycle-acquisition-and-digitalmission-framing">Week 1 — Lifecycle, acquisition, and digital/mission framing</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B16/chapters/01.html">Chapter 01</a> → <a href="../../K/B16/labs/01.html">Hypothetical Lab 01</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-782-w01.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment">Competency alignment</h3>
+<p>C1 (D), C4 (A), C10 (D), C11 (D), C12 (A)</p>
+<h3 id="professional-context-and-essential-question">Professional context and essential question</h3>
+<p>A digital-engineering initiative fails early when lifecycle decisions, mission questions, and accountable users are not defined. The essential question is: <strong>Which decisions require connected digital evidence, and what consequence follows if that evidence is late, inconsistent, inaccessible, or wrong?</strong></p>
+<h3 id="weekly-learning-outcomes">Weekly learning outcomes</h3>
+<ul>
+<li>Reconstruct the principal technical and technical-management activities across the lifecycle and relate them to acquisition decisions.</li>
+<li>Distinguish system, system of systems, enterprise, capability, mission, mission thread, and operational scenario.</li>
+<li>Identify decision authorities, evidence users, timing, consequence, and information constraints.</li>
+<li>Frame the Northstar mission problem without assuming the product is the only intervention.</li>
+<li>Create a receiving baseline that distinguishes inherited evidence, assumptions, gaps, and unsupported claims.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Recreate a need-to-decision evidence chain from one Phase 2 or Phase 3 artifact.</li>
+<li>Name four technical-management controls that remain necessary in a digital environment.</li>
+<li>Distinguish a lifecycle model from an acquisition pathway and from a technical process.</li>
+<li>Identify one prior model that was authoritative for analysis but not for configuration or operations.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning independent synthesis.</p>
+<h3 id="required-study">Required study</h3>
+<ul>
+<li>JHU Fall 2026 syllabus: Description, Course Topics, Goals, and CLOs. Identify the source course’s required distinctions and demonstrations. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.782.81" title="Fall 2026 syllabus for EN.645.782">2</a>)</li>
+<li>DoD Systems Engineering Guidebook: Introduction and lifecycle/technical-process sections. Record which decisions need technical evidence. (<a href="https://ac.cto.mil/wp-content/uploads/2022/08/Systems-Eng-Guidebook_Feb2022-Cleared.pdf" title="DoD Systems Engineering Guidebook">3</a>)</li>
+<li>Engineering of Defense Systems Guidebook: overview and digital-engineering references. Identify connections among engineering, technical reviews, and acquisition. (<a href="https://www.cto.mil/wp-content/uploads/2024/10/Eng-Def-Sys-Change2-7October2024-v3.pdf" title="Engineering of Defense Systems Guidebook, Change 2">4</a>)</li>
+<li>DoDI 5000.97: Purpose, applicability, and definitions. Mark what is policy, what is implementation choice, and what is outside the case. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500097p.PDF" title="DoDI 5000.97 Digital Engineering">5</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes">Instructor-style lesson notes</h3>
+<ul>
+<li>Digital engineering is an integrated way of performing engineering; it does not replace systems engineering or acquisition accountability.</li>
+<li>Lifecycle stages create different evidence users and authority. A concept model, released design, test record, and operational state estimate can all describe the same system while having different authority.</li>
+<li>Mission engineering begins with mission outcomes and end-to-end dependencies. It may change products, organizations, processes, doctrine, training, logistics, policy, or information exchanges.</li>
+<li>Decision framing should state decision owner, question, timing, alternatives, evidence, consequence, and acceptable uncertainty.</li>
+<li>The receiving review prevents inherited models and dashboards from becoming trusted by default.</li>
+</ul>
+<h3 id="worked-example">Worked example</h3>
+<p>The sponsor asks Northstar to “build a digital twin for emergency mobility.” The example reframes this into four decisions: whether to pre-position vehicles, whether to curtail charging, how to route accessibility-dependent riders, and whether to request mutual aid. Each decision has different update rates, evidence, consequence, and uncertainty. The example shows that one monolithic twin is neither necessary nor automatically credible.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the decision or evidence changes.</p>
+<h3 id="guided-practice">Guided practice</h3>
+<ul>
+<li>Classify 20 case artifacts by lifecycle stage, owner, decision use, configuration status, and sensitivity.</li>
+<li>Create a decision-to-evidence map for the four emergency-mobility decisions.</li>
+<li>Draw separate product, enterprise, SoS, and mission boundaries and identify what crosses each.</li>
+<li>Write a mission-neutral receiving problem statement and challenge it for hidden solution bias.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected queries or analyses.</p>
+<h3 id="independent-exercises">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Build a 30-term glossary with source-grounded definitions and examples.</li>
+<li><strong>Application:</strong> Create a lifecycle decision register with at least 15 decisions, owners, evidence, timing, consequence, and uncertainty tolerance.</li>
+<li><strong>Analysis:</strong> Audit inherited Phase 1–3 artifacts and identify at least 12 authority, traceability, credibility, or configuration gaps.</li>
+<li><strong>Synthesis:</strong> Write a 1,200-word receiving memo that defines the mission, digital-engineering problem, evidence priorities, and initial review gates.</li>
+<li><strong>Stretch:</strong> Compare how the evidence strategy changes under major-capability, software, and urgent-capability acquisition patterns.</li>
+</ul>
+<h3 id="weekly-deliverable">Weekly deliverable</h3>
+<p><strong>Digital and Mission Engineering Receiving Package</strong> containing the lifecycle map, decision register, boundary views, evidence inventory, authority/gap assessment, mission-neutral problem statement, and receiving memo. Audience: sponsor, chief engineer, mission owner, and data/model governance lead. Length: 10–14 pages plus controlled tables and source files.</p>
+<p>Submit native or textual source, data and transformations, generated views, query/analysis source, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lifecycle and decision framing</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Boundary and mission reasoning</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Evidence/authority assessment</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Assumptions and information constraints</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Technical communication</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures">Critical failures</h3>
+<ul>
+<li>Treating the digital-engineering initiative as a tool-selection project.</li>
+<li>Assuming the Northstar product boundary equals the mission boundary.</li>
+<li>Declaring inherited data or models authoritative without review.</li>
+<li>Omitting decision owners, timing, consequence, or information restrictions.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why can two artifacts both be accurate but authoritative for different uses?</strong><br/>
+<strong>Answer guidance:</strong> Authority is scoped by decision, lifecycle state, configuration, owner, pedigree, and acceptable use.</li>
+<li><strong>What distinguishes a mission from a system?</strong><br/>
+<strong>Answer guidance:</strong> A mission is an intended outcome achieved by interacting systems, people, organizations, processes, and environment; a system is one engineered contributor.</li>
+<li><strong>What is the purpose of a receiving review?</strong><br/>
+<strong>Answer guidance:</strong> To establish what is inherited, controlled, credible, authoritative, missing, or disputed before use.</li>
+<li><strong>Why does digital engineering not remove technical management?</strong><br/>
+<strong>Answer guidance:</strong> Connected models and data increase the need for planning, authority, configuration, risk, decisions, access, and review.</li>
+<li><strong>What makes a decision-to-evidence map useful?</strong><br/>
+<strong>Answer guidance:</strong> It exposes whether the right evidence exists, is timely, trusted, accessible, and connected to the accountable decision.</li>
+</ol>
+<h3 id="revision-and-mastery-gate">Revision and mastery gate</h3>
+<p>Revise until every critical decision has an owner, evidence need, timing, consequence, and uncertainty statement; mission and product boundaries are distinct; and inherited authority claims are dispositioned. Score at least 80% and answer four of five questions correctly.</p>
+<h3 id="suggested-workload">Suggested workload</h3>
+<p>Target: <strong>10–13 hours</strong>. Record actual time by reading, model/data work, analysis, implementation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update">Configuration and portfolio update</h3>
+<p>Create course repository issue <code>DME-0001</code>, evidence inventory <code>ASSET-REGISTER-v0.1</code>, decision register <code>DECISION-REGISTER-v0.1</code>, and tag <code>DME-W01-RECEIVING</code>.</p>
+<hr/>
+<h2 id="week-2--digital-engineering-strategy-policy-competencies-and-adoption">Week 2 — Digital Engineering strategy, policy, competencies, and adoption</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B16/chapters/02.html">Chapter 02</a> → <a href="../../K/B16/labs/02.html">Hypothetical Lab 02</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-782-w02.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-2">Competency alignment</h3>
+<p>C4 (A), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-2">Professional context and essential question</h3>
+<p>Strategy and policy are useful only when translated into program behavior, competencies, controls, and measurable decisions. The essential question is: <strong>What must Northstar change in models, data, environment, workforce, governance, and contracts to realize digital-engineering value?</strong></p>
+<h3 id="weekly-learning-outcomes-2">Weekly learning outcomes</h3>
+<ul>
+<li>Explain the five Digital Engineering Strategy goals and the procedural expectations of DoDI 5000.97.</li>
+<li>Apply the DoD Digital Engineering Fundamentals to a program-level adoption plan.</li>
+<li>Assess workforce capability using DECF concepts and identify role-specific gaps.</li>
+<li>Define a portfolio of digital-engineering use cases with benefits hypotheses and measures.</li>
+<li>Distinguish strategic outcomes, enabling capabilities, activities, outputs, and vanity metrics.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-2">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Name the evidence failures found in Week 1 that policy or governance could address.</li>
+<li>Reconstruct the difference among authoritative source, ecosystem, artifact, thread, and twin.</li>
+<li>Identify one digital activity that adds cost without changing a decision.</li>
+<li>Name one prior competency gap that caused rework or delayed evidence.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning independent synthesis.</p>
+<h3 id="required-study-2">Required study</h3>
+<ul>
+<li>DoD Digital Engineering Strategy: vision, five goals, focus areas, and next steps. Extract one program implication per goal. (<a href="https://www.cto.mil/wp-content/uploads/2023/06/Dig-Eng-Strat-2018.pdf" title="Department of Defense Digital Engineering Strategy">6</a>)</li>
+<li>DoDI 5000.97: policy, responsibilities, program implementation, digital artifacts, threads, twins, ecosystem, and measures. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500097p.PDF" title="DoDI 5000.97 Digital Engineering">5</a>)</li>
+<li>DoD Digital Engineering Fundamentals: all nine fundamentals and definitions. Convert them into review questions. (<a href="https://www.cto.mil/wp-content/uploads/2023/06/Dig-Eng-Fundamentals-2022.pdf" title="DoD Digital Engineering Fundamentals">7</a>)</li>
+<li>DECF v1.1: executive summary, framework organization, foundational digital competencies, groups, and proficiency concept. (<a href="https://sercproddata.s3.us-east-2.amazonaws.com/technical_reports/reports/1616668486.A013_SERC%20WRT%201006_Technical%20Report%20SERC-2021-TR-005_FINAL.pdf" title="Developing the Digital Engineering Competency Framework v1.1">8</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-2">Instructor-style lesson notes</h3>
+<ul>
+<li>The 2018 strategy defines direction; DoDI 5000.97 establishes policy and responsibility; program plans define the actual implementation.</li>
+<li>The five goals are interdependent. Models without authority, infrastructure, methods, and workforce do not create a digital engineering capability.</li>
+<li>DECF is a workforce framework, not a single job description. Roles require different proficiency across data, models, methods, environment, and behaviors.</li>
+<li>Benefits should be framed as decision quality, cycle time, defect prevention, reuse, confidence, or lifecycle cost—not number of models or tools.</li>
+<li>Adoption should begin with high-value use cases, controlled pilots, baseline measures, and explicit stop/scale criteria.</li>
+</ul>
+<h3 id="worked-example-2">Worked example</h3>
+<p>A proposed initiative says, “Connect all tools and train everyone in SysML.” The example decomposes it into three use cases: automated requirement-to-test coverage, supplier-interface change impact, and emergency-route mission analysis. It maps each use case to strategy goals, competencies, owners, measures, data rights, risks, and a six-month pilot decision.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the decision or evidence changes.</p>
+<h3 id="guided-practice-2">Guided practice</h3>
+<ul>
+<li>Map each Digital Engineering Strategy goal to Northstar problems and expected evidence.</li>
+<li>Use the nine Digital Engineering Fundamentals as an audit checklist against the Week 1 baseline.</li>
+<li>Create role profiles for digital engineering lead, model owner, data steward, analyst, mission architect, security lead, and decision authority.</li>
+<li>Write benefit hypotheses with baseline, target, guardrail, observation period, and reversal condition.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected queries or analyses.</p>
+<h3 id="independent-exercises-2">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Produce a policy/strategy crosswalk showing source, requirement or goal, program implication, owner, and evidence.</li>
+<li><strong>Application:</strong> Assess 10 roles against selected DECF competencies and identify learning, hiring, mentoring, or tool-environment needs.</li>
+<li><strong>Analysis:</strong> Rank at least eight candidate digital-engineering use cases by decision value, feasibility, evidence risk, reuse, and security burden.</li>
+<li><strong>Synthesis:</strong> Prepare a staged 12-month digital-engineering adoption strategy and conduct the Digital Engineering Strategy and Competency Review.</li>
+<li><strong>Stretch:</strong> Draft two model/data deliverable clauses and explain data-rights, interchange, acceptance, and sustainment implications.</li>
+</ul>
+<h3 id="weekly-deliverable-2">Weekly deliverable</h3>
+<p><strong>Digital Engineering Strategy, Use-Case, and Competency Package</strong> containing policy crosswalk, use-case portfolio, benefit hypotheses, role/competency assessment, governance assignments, measures, pilot roadmap, risks, and review briefing. Length: 12–18 pages plus matrices.</p>
+<p>Submit native or textual source, data and transformations, generated views, query/analysis source, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-2">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Policy and strategy translation</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Use-case and benefit logic</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Competency and role assessment</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Governance, rights, and risk</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Review quality</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-2">Critical failures</h3>
+<ul>
+<li>Measuring success by tool count, model count, training hours, or digitized documents alone.</li>
+<li>Copying policy language without program implications or evidence.</li>
+<li>Assigning every role the same competency profile.</li>
+<li>Ignoring data rights, cybersecurity, contracting, sustainment, or workforce transition.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-2">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What are the five Digital Engineering Strategy goals?</strong><br/>
+<strong>Answer guidance:</strong> Formalize models for decisions; provide enduring authoritative truth; incorporate technology; establish supporting infrastructure/environment; transform culture/workforce.</li>
+<li><strong>How do DoDI 5000.97 and the strategy differ?</strong><br/>
+<strong>Answer guidance:</strong> The strategy provides vision and goals; the instruction establishes policy, responsibilities, and procedures.</li>
+<li><strong>Why is a use-case portfolio better than a tool roadmap?</strong><br/>
+<strong>Answer guidance:</strong> It ties investment to decisions, users, evidence, measures, risks, and value.</li>
+<li><strong>What does DECF add?</strong><br/>
+<strong>Answer guidance:</strong> Role- and proficiency-oriented knowledge, skills, abilities, and behaviors needed to perform digital engineering.</li>
+<li><strong>What is a guardrail measure?</strong><br/>
+<strong>Answer guidance:</strong> A measure that detects harm, gaming, or degraded assurance while pursuing the primary benefit.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-2">Revision and mastery gate</h3>
+<p>Approve no more than four first-wave use cases. Each must have a decision owner, value hypothesis, baseline, target, guardrail, competency owner, data/model needs, rights/security constraints, and stop/scale criteria. Resolve all major review findings.</p>
+<h3 id="suggested-workload-2">Suggested workload</h3>
+<p>Target: <strong>10–13 hours</strong>. Record actual time by reading, model/data work, analysis, implementation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-2">Configuration and portfolio update</h3>
+<p>Issue strategy decision <code>DR-782-001</code>, baseline the policy crosswalk and competency matrix, and tag <code>DME-W02-STRATEGY</code>.</p>
+<hr/>
+<h2 id="week-3--ms-foundations-lifecycle-uses-and-credibility">Week 3 — M&amp;S foundations, lifecycle uses, and credibility</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B16/chapters/03.html">Chapter 03</a> → <a href="../../K/B16/labs/03.html">Hypothetical Lab 03</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-782-w03.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-3">Competency alignment</h3>
+<p>C6 (D), C7 (A), C8 (A), C9 (D)</p>
+<h3 id="professional-context-and-essential-question-3">Professional context and essential question</h3>
+<p>A digital ecosystem can connect many models and still produce unreliable decisions. The essential question is: <strong>Which model or simulation is fit for which decision, with what fidelity, evidence, uncertainty, and approval?</strong></p>
+<h3 id="weekly-learning-outcomes-3">Weekly learning outcomes</h3>
+<ul>
+<li>Distinguish conceptual, descriptive, analytic, physics-based, statistical, discrete-event, agent-based, human-in-the-loop, and live/virtual/constructive representations.</li>
+<li>Define intended use, decision consequence, required fidelity, input data, outputs, and uncertainty for each model.</li>
+<li>Relate M&amp;S uses to concept, requirements, design, integration, test, operations, sustainment, and mission analysis.</li>
+<li>Construct a proportionate verification, validation, and accreditation or acceptance plan.</li>
+<li>Identify composition, reuse, transformation, and extrapolation risks in a model portfolio.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-3">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Explain model verification versus validation using a prior Phase 3 model.</li>
+<li>Name one case where higher fidelity would not improve the decision.</li>
+<li>Distinguish epistemic and aleatory uncertainty.</li>
+<li>Identify a prior model whose reuse would require new validation.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning independent synthesis.</p>
+<h3 id="required-study-3">Required study</h3>
+<ul>
+<li>DoDI 5000.61: policy, definitions, responsibilities, and VV&amp;A expectations. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500061p.pdf" title="DoDI 5000.61 Modeling and Simulation VV&amp;A">10</a>)</li>
+<li>DoDI 5000.97: model and simulation use within the digital engineering ecosystem. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500097p.PDF" title="DoDI 5000.97 Digital Engineering">5</a>)</li>
+<li>DoD Digital Engineering Fundamentals: model continuum, maturation, authority, and credibility. (<a href="https://www.cto.mil/wp-content/uploads/2023/06/Dig-Eng-Fundamentals-2022.pdf" title="DoD Digital Engineering Fundamentals">7</a>)</li>
+<li>Revisit EN.645.757 and EN.645.758 credibility, interoperability, and uncertainty evidence; identify which artifacts can be reused and under what conditions.</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-3">Instructor-style lesson notes</h3>
+<ul>
+<li>A model’s credibility is not an intrinsic badge. It is a judgment relative to intended use, context, evidence, uncertainty, and consequence.</li>
+<li>Model fidelity should be sufficient and purposeful. Excess fidelity can increase cost, obscure uncertainty, and delay learning.</li>
+<li>Reuse requires context comparison: purpose, assumptions, input domain, environment, time, version, data, and output interpretation.</li>
+<li>Composing individually credible models does not guarantee a credible federation or co-simulation. Interfaces, timing, semantics, and coupled uncertainty require evaluation.</li>
+<li>Accreditation or acceptance is a decision by an accountable authority that evidence is sufficient for a use; it is not another word for validation.</li>
+</ul>
+<h3 id="worked-example-3">Worked example</h3>
+<p>A fleet-charging simulation validated for normal weekday planning is proposed for emergency outage routing. The example compares intended uses, input ranges, demand behavior, grid assumptions, operator actions, and consequence. It concludes that parts of the model can be reused, but emergency demand, communication loss, and manual-override behavior require new validation and uncertainty treatment.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the decision or evidence changes.</p>
+<h3 id="guided-practice-3">Guided practice</h3>
+<ul>
+<li>Classify 18 case representations by type, execution, resolution, scope, and lifecycle use.</li>
+<li>Write intended-use statements for concept selection, interface verification, operator training, and emergency decision support.</li>
+<li>Build a model credibility argument with claims, evidence, assumptions, uncertainty, and limitations.</li>
+<li>Perform a reuse-context comparison for one prior Phase 3 model.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected queries or analyses.</p>
+<h3 id="independent-exercises-3">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Create an M&amp;S taxonomy and lifecycle-use matrix with examples and anti-examples.</li>
+<li><strong>Application:</strong> Build a model-use register for at least 12 Northstar models, simulations, datasets, and analytic services.</li>
+<li><strong>Analysis:</strong> Select three models and define proportionate verification, validation, uncertainty, and acceptance evidence.</li>
+<li><strong>Synthesis:</strong> Prepare a model portfolio and VV&amp;A/credibility strategy for the four selected digital-engineering use cases.</li>
+<li><strong>Stretch:</strong> Design a credibility assessment for a federated mission simulation with asynchronous data and mixed model ownership.</li>
+</ul>
+<h3 id="weekly-deliverable-3">Weekly deliverable</h3>
+<p><strong>Model and Simulation Portfolio, Intended-Use, and Credibility Package</strong> containing taxonomy, lifecycle matrix, model register, reuse assessment, credibility plans, accreditation/acceptance authorities, risks, and limits. Length: 12–16 pages plus controlled registers.</p>
+<p>Submit native or textual source, data and transformations, generated views, query/analysis source, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-3">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M&amp;S taxonomy and selection</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Intended-use precision</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Credibility and uncertainty</td>
+<td style="text-align:right">30%</td>
+</tr>
+<tr>
+<td>Reuse/composition reasoning</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Decision communication</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-3">Critical failures</h3>
+<ul>
+<li>Calling a model validated without naming the intended use.</li>
+<li>Using fidelity as a synonym for accuracy or credibility.</li>
+<li>Reusing a model outside its validated domain without analysis.</li>
+<li>Omitting uncertainty, decision consequence, or accountable acceptance authority.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-3">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is model verification?</strong><br/>
+<strong>Answer guidance:</strong> Evidence that the implementation correctly represents the conceptual model and specified mathematics/logic.</li>
+<li><strong>What is model validation?</strong><br/>
+<strong>Answer guidance:</strong> Evidence that the model adequately represents the real-world referent for an intended use.</li>
+<li><strong>What is accreditation or acceptance?</strong><br/>
+<strong>Answer guidance:</strong> An accountable decision that the model is acceptable for a specified use, based on evidence and risk.</li>
+<li><strong>Why is higher fidelity not always better?</strong><br/>
+<strong>Answer guidance:</strong> It can add cost, parameters, opacity, and delay without changing the decision or reducing dominant uncertainty.</li>
+<li><strong>What makes reuse risky?</strong><br/>
+<strong>Answer guidance:</strong> Differences in purpose, context, domain, assumptions, data, version, interfaces, or consequence.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-3">Revision and mastery gate</h3>
+<p>No model may enter the selected use-case portfolio without an intended-use statement, owner, configuration, input/output definition, credibility status, uncertainty/limitations, and acceptance authority. Score at least 80%.</p>
+<h3 id="suggested-workload-3">Suggested workload</h3>
+<p>Target: <strong>10–13 hours</strong>. Record actual time by reading, model/data work, analysis, implementation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-3">Configuration and portfolio update</h3>
+<p>Create <code>MODEL-USE-REGISTER-v0.1</code>, credibility claims library, reuse assessments, and tag <code>DME-W03-MS-CREDIBILITY</code>.</p>
+<hr/>
+<h2 id="week-4--mbse-pillars-model-planning-semantics-and-governance">Week 4 — MBSE pillars, model planning, semantics, and governance</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B16/chapters/04.html">Chapter 04</a> → <a href="../../K/B16/labs/04.html">Hypothetical Lab 04</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-782-w04.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-4">Competency alignment</h3>
+<p>C2 (D), C3 (D), C4 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-4">Professional context and essential question</h3>
+<p>Model-based engineering fails when a tool repository is created without a method, semantic scope, viewpoints, ownership, queries, or generated products. The essential question is: <strong>What model must be built, by whom, using which semantics and workflow, to answer which engineering and mission questions?</strong></p>
+<h3 id="weekly-learning-outcomes-4">Weekly learning outcomes</h3>
+<ul>
+<li>Distinguish MBSE method, language, tool, metamodel, model, view, viewpoint, repository, and generated artifact.</li>
+<li>Define model scope, purpose, questions, stakeholders, products, queries, packages, and governance.</li>
+<li>Select a SysML v2 or v1.7 path and document semantic/interchange limitations.</li>
+<li>Create a minimal metamodel or information model connecting mission and system concepts.</li>
+<li>Define naming, identifiers, authority, status, configuration, validation, and contribution workflows.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-4">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the model-plan elements used in EN.645.631 or EN.645.632.</li>
+<li>Name three cross-domain questions that diagrams alone cannot answer reliably.</li>
+<li>Distinguish model content quality from view/presentation quality.</li>
+<li>Identify one identifier or metamodel inconsistency inherited from prior courses.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning independent synthesis.</p>
+<h3 id="required-study-4">Required study</h3>
+<ul>
+<li>NASA Systems Modeling Handbook: planning the modeling effort, metamodel, model development, analysis, and generated products. (<a href="https://standards.nasa.gov/system/files/tmp/2025-03-12-NASA-HDBK-1009A.pdf" title="NASA Systems Modeling Handbook for Systems Engineering">11</a>)</li>
+<li>OMG SysML v2 overview and final-adoption information; identify requirements, structure, behavior, analysis, verification, textual syntax, and API implications. (<a href="https://www.omg.org/sysml/SysML-2.htm" title="OMG SysML v2 Specification">12</a>, <a href="https://www.omg.org/sysml/news-articles.htm" title="OMG SysML news and final adoption status">13</a>)</li>
+<li>OMG SysML v1.7 materials for the compatibility path and migration considerations. (<a href="https://www.omg.org/spec/SysML/1.7/About-SysML" title="OMG SysML v1.7">14</a>)</li>
+<li>INCOSE OOSEM working-group overview: method purpose and ongoing SysML v2 evolution. (<a href="https://www.incose.org/group/object-oriented-se-method-working-group" title="INCOSE Object-Oriented Systems Engineering Method Working Group">15</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-4">Instructor-style lesson notes</h3>
+<ul>
+<li>Method defines the sequence and logic of engineering work; language defines concepts and relations; tool implements capabilities and repository behavior.</li>
+<li>A metamodel is an agreement about kinds of elements and relationships. It enables queries, validation, exchange, and governance.</li>
+<li>Viewpoints are stakeholder/question-specific specifications; views are generated or curated representations conforming to them.</li>
+<li>Identifiers should persist across views and transformations. Names can change; identity and provenance must remain controlled.</li>
+<li>The model plan should define generated products so the program does not recreate disconnected documents manually.</li>
+</ul>
+<h3 id="worked-example-4">Worked example</h3>
+<p>The example starts with four disconnected artifacts: a mission-thread diagram, requirements spreadsheet, interface table, and test matrix. It defines a minimal information model linking MissionOutcome, MissionTask, Capability, System, Interface, Requirement, Measure, Model, Evidence, and Decision. Three queries replace manual reconciliation: unmet mission-task coverage, interfaces without verification evidence, and decisions based on superseded model versions.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the decision or evidence changes.</p>
+<h3 id="guided-practice-4">Guided practice</h3>
+<ul>
+<li>Write five model questions and identify required element/relationship types.</li>
+<li>Define viewpoints for mission owner, chief engineer, test lead, data steward, and executive decision authority.</li>
+<li>Construct the minimal metamodel and test it against the required queries.</li>
+<li>Create naming, identifier, package, state/status, ownership, and change rules.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected queries or analyses.</p>
+<h3 id="independent-exercises-4">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Produce a method/language/tool/metamodel comparison with Northstar examples.</li>
+<li><strong>Application:</strong> Write the course modeling plan, including scope, questions, viewpoints, products, queries, roles, milestones, and tool path.</li>
+<li><strong>Analysis:</strong> Audit the prior model baseline for semantic ambiguity, duplicated identity, weak ownership, and manual product generation.</li>
+<li><strong>Synthesis:</strong> Implement the minimal metamodel/information model and a small representative dataset in the selected tool.</li>
+<li><strong>Stretch:</strong> Map the minimal information model to SysML v2 concepts and document gaps or extensions.</li>
+</ul>
+<h3 id="weekly-deliverable-4">Weekly deliverable</h3>
+<p><strong>MBSE Modeling Plan and Semantic Foundation</strong> containing model purpose, questions, method, language/tool path, metamodel, viewpoints, package/identity conventions, governance, validation rules, generated products, query plan, and migration/interchange risks. Length: 12–18 pages plus native model source.</p>
+<p>Submit native or textual source, data and transformations, generated views, query/analysis source, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-4">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model purpose and questions</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Semantic/metamodel quality</td>
+<td style="text-align:right">30%</td>
+</tr>
+<tr>
+<td>Method and viewpoint design</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Governance and configuration</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Tool/version limitations</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-4">Critical failures</h3>
+<ul>
+<li>Choosing a tool before defining questions, semantics, and products.</li>
+<li>Using diagrams as the only model evidence.</li>
+<li>Allowing duplicated or unstable identity across artifacts.</li>
+<li>Omitting configuration, ownership, status, or validation rules.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-4">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What are the three classic MBSE pillars?</strong><br/>
+<strong>Answer guidance:</strong> Method, language, and tool.</li>
+<li><strong>What does a metamodel enable?</strong><br/>
+<strong>Answer guidance:</strong> Consistent semantics, validation, queries, exchange, governance, and automation.</li>
+<li><strong>How does a viewpoint differ from a view?</strong><br/>
+<strong>Answer guidance:</strong> A viewpoint specifies concerns, conventions, and rules; a view is a representation created for that viewpoint.</li>
+<li><strong>Why are persistent identifiers important?</strong><br/>
+<strong>Answer guidance:</strong> They preserve identity and traceability across names, views, transformations, versions, and tools.</li>
+<li><strong>What is a generated product?</strong><br/>
+<strong>Answer guidance:</strong> A controlled artifact produced from model content or queries rather than manually recreated.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-4">Revision and mastery gate</h3>
+<p>Approve the model plan only when every required decision question maps to model content, a viewpoint or query, an owner, and a generated product; the metamodel supports the thread and mission work; and version/interchange limits are explicit.</p>
+<h3 id="suggested-workload-4">Suggested workload</h3>
+<p>Target: <strong>10–13 hours</strong>. Record actual time by reading, model/data work, analysis, implementation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-4">Configuration and portfolio update</h3>
+<p>Baseline <code>MODEL-PLAN-v1.0</code>, <code>METAMODEL-v1.0</code>, viewpoint catalog, identifier policy, and tag <code>DME-W04-MODEL-PLAN</code>.</p>
+<hr/>
+<h2 id="week-5--sysml-and-lightweight-oosem-application">Week 5 — SysML and lightweight OOSEM application</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B16/chapters/05.html">Chapter 05</a> → <a href="../../K/B16/labs/05.html">Hypothetical Lab 05</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-782-w05.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-5">Competency alignment</h3>
+<p>C2 (D), C3 (A), C4 (A), C11 (D)</p>
+<h3 id="professional-context-and-essential-question-5">Professional context and essential question</h3>
+<p>A model-based method should transform stakeholder and mission concerns into coherent behavior, requirements, architecture, interfaces, and measures. The essential question is: <strong>Can the model explain how Northstar contributes to mission outcomes without collapsing mission, capability, and system levels?</strong></p>
+<h3 id="weekly-learning-outcomes-5">Weekly learning outcomes</h3>
+<ul>
+<li>Apply a lightweight OOSEM flow from stakeholder and mission analysis through logical and physical architecture.</li>
+<li>Construct SysML representations of requirements, behavior, structure, interfaces, states, measures, analysis, and verification.</li>
+<li>Separate mission tasks and capability needs from system functions and design elements.</li>
+<li>Allocate behavior and requirements while preserving rationale and alternatives.</li>
+<li>Validate model consistency across scenarios, requirements, behavior, structure, interfaces, and measures.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-5">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Restate the minimal metamodel and five model questions from Week 4.</li>
+<li>Explain why mission task, system function, and component operation are not interchangeable.</li>
+<li>Name two required behaviors under degraded communications.</li>
+<li>Identify one prior requirement that lacks a mission or stakeholder rationale.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning independent synthesis.</p>
+<h3 id="required-study-5">Required study</h3>
+<ul>
+<li>INCOSE OOSEM working-group materials: objectives, use cases/scenarios, logical architecture, alternatives, and verification relationship. (<a href="https://www.incose.org/group/object-oriented-se-method-working-group" title="INCOSE Object-Oriented Systems Engineering Method Working Group">15</a>)</li>
+<li>OMG SysML v2: requirement, action/behavior, state, part/structure, interface/port, analysis, and verification concepts. (<a href="https://www.omg.org/sysml/SysML-2.htm" title="OMG SysML v2 Specification">12</a>)</li>
+<li>NASA Systems Modeling Handbook: modeling stakeholder needs, requirements, behavior, interfaces, and V&amp;V products. (<a href="https://standards.nasa.gov/system/files/tmp/2025-03-12-NASA-HDBK-1009A.pdf" title="NASA Systems Modeling Handbook for Systems Engineering">11</a>)</li>
+<li>Review the Mission Engineering Guide discussion of traceability from mission tasks to solutions to avoid product-centric modeling. (<a href="https://ac.cto.mil/wp-content/uploads/2023/11/MEG_2_Oct2023.pdf" title="Department of Defense Mission Engineering Guide 2.0">16</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-5">Instructor-style lesson notes</h3>
+<ul>
+<li>OOSEM is used here as a reasoning flow, not as a rigid universal process.</li>
+<li>Mission tasks describe what must occur in the mission; capabilities describe the ability needed; system functions describe what a system does; components implement behavior.</li>
+<li>Logical architecture should remain solution-neutral long enough to preserve alternatives and expose dependencies.</li>
+<li>State and degraded-mode models are essential when mission outcomes depend on synchronization, communications, power, operator authority, or recovery.</li>
+<li>Model validation includes semantic and cross-view consistency, not merely syntax.</li>
+</ul>
+<h3 id="worked-example-5">Worked example</h3>
+<p>The mission task “Maintain accessible evacuation mobility” is decomposed into detect demand, prioritize riders, allocate capacity, communicate assignment, transport, and confirm completion. The example maps capabilities and participating systems without prematurely assigning all behavior to Northstar vehicles. A degraded-communications state model shows local fallback, delayed reconciliation, and evidence gaps.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the decision or evidence changes.</p>
+<h3 id="guided-practice-5">Guided practice</h3>
+<ul>
+<li>Build one nominal and one degraded mission scenario with explicit actors, triggers, information, decisions, and outcomes.</li>
+<li>Derive mission tasks, capability needs, system functions, and candidate allocations.</li>
+<li>Create context, requirement, activity/sequence, state, structure, and interface views for one thread.</li>
+<li>Run semantic and consistency checks using the model plan validation rules.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected queries or analyses.</p>
+<h3 id="independent-exercises-5">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Model a bounded accessibility-assistance scenario using the selected SysML path.</li>
+<li><strong>Application:</strong> Build an integrated baseline for three mission scenarios, at least 20 requirements, 15 functions/tasks, 10 systems/actors, and 12 interfaces.</li>
+<li><strong>Analysis:</strong> Identify orphan, duplicate, contradictory, overallocated, and unallocated elements and disposition them.</li>
+<li><strong>Synthesis:</strong> Apply the lightweight OOSEM flow and write a rationale showing how the logical architecture preserves at least two alternatives.</li>
+<li><strong>Stretch:</strong> Represent one mission/system relationship in both SysML v2 and the compatibility path and compare semantics/interchange.</li>
+</ul>
+<h3 id="weekly-deliverable-5">Weekly deliverable</h3>
+<p><strong>Integrated SysML/OOSEM Baseline v1</strong> containing mission/system context, stakeholder concerns, scenarios, tasks, capabilities, requirements, behaviors, states, logical/physical structure, interfaces, measures, verification links, alternatives, validation results, and rationale. Native source and generated views required.</p>
+<p>Submit native or textual source, data and transformations, generated views, query/analysis source, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-5">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mission-to-system separation</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Behavior/structure/interface coherence</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Requirements and traceability</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Alternatives and rationale</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Model validation and source quality</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-5">Critical failures</h3>
+<ul>
+<li>Assigning every mission task directly to the Northstar product.</li>
+<li>Using one diagram type to represent all semantics.</li>
+<li>Omitting degraded/off-nominal behavior or interface information.</li>
+<li>Closing validation findings without correcting model content.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-5">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why separate mission tasks from system functions?</strong><br/>
+<strong>Answer guidance:</strong> It preserves mission-level reasoning, alternatives, and multi-system contributions.</li>
+<li><strong>What does a logical architecture provide?</strong><br/>
+<strong>Answer guidance:</strong> A solution-neutral organization of behavior, information, and responsibilities before physical implementation.</li>
+<li><strong>Why model states?</strong><br/>
+<strong>Answer guidance:</strong> State-dependent behavior, authority, timing, degradation, and recovery cannot be inferred reliably from static structure.</li>
+<li><strong>What is an allocation rationale?</strong><br/>
+<strong>Answer guidance:</strong> Evidence and reasoning for assigning behavior, requirements, or responsibilities to architecture elements.</li>
+<li><strong>What is a semantic model defect?</strong><br/>
+<strong>Answer guidance:</strong> An element or relationship whose meaning is wrong, ambiguous, inconsistent, or unsupported even if the diagram is syntactically valid.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-5">Revision and mastery gate</h3>
+<p>The baseline must answer all Week 4 model questions, preserve mission/system distinction, include nominal and degraded behavior, pass defined validations, and contain no unresolved critical orphan, contradiction, interface, or allocation finding.</p>
+<h3 id="suggested-workload-5">Suggested workload</h3>
+<p>Target: <strong>10–13 hours</strong>. Record actual time by reading, model/data work, analysis, implementation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-5">Configuration and portfolio update</h3>
+<p>Baseline native model <code>MODEL-v1.0</code>, validation report, generated product set, and tag <code>DME-W05-INTEGRATED-MODEL</code>.</p>
+<hr/>
+<h2 id="week-6--model-based-analytics-and-case-study-review">Week 6 — Model-based analytics and case-study review</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B16/chapters/06.html">Chapter 06</a> → <a href="../../K/B16/labs/06.html">Hypothetical Lab 06</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-782-w06.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-6">Competency alignment</h3>
+<p>C4 (A), C8 (A), C9 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-6">Professional context and essential question</h3>
+<p>The value of an integrated model is demonstrated by the questions it can answer and the decisions it can improve. The essential question is: <strong>Can the Northstar model produce reproducible analysis, reveal inconsistencies, and support a decision better than disconnected artifacts?</strong></p>
+<h3 id="weekly-learning-outcomes-6">Weekly learning outcomes</h3>
+<ul>
+<li>Design and execute model queries, matrices, calculations, and generated reports.</li>
+<li>Connect descriptive model elements to analytic models, data, uncertainty, and decision criteria.</li>
+<li>Perform change-impact analysis across mission, requirements, architecture, interfaces, simulations, tests, and decisions.</li>
+<li>Evaluate a real-world or public case using the course decision/evidence framework.</li>
+<li>Conduct and respond to the Model, M&amp;S, and MBSE Analytics Review.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-6">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Name the five highest-priority model questions and expected answers.</li>
+<li>Reproduce one prior query and verify its result manually.</li>
+<li>Identify one analytic model whose input is not yet linked to an authoritative model element.</li>
+<li>Explain the difference between a view and a query result.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning independent synthesis.</p>
+<h3 id="required-study-6">Required study</h3>
+<ul>
+<li>NASA Systems Modeling Handbook: analysis, parametrics, queries, generated products, and model-based V&amp;V support. (<a href="https://standards.nasa.gov/system/files/tmp/2025-03-12-NASA-HDBK-1009A.pdf" title="NASA Systems Modeling Handbook for Systems Engineering">11</a>)</li>
+<li>DoD Digital Engineering Fundamentals: authority, governance, data quality, model credibility, ecosystem, and measurable value. (<a href="https://www.cto.mil/wp-content/uploads/2023/06/Dig-Eng-Fundamentals-2022.pdf" title="DoD Digital Engineering Fundamentals">7</a>)</li>
+<li>DoDI 5000.97: digital artifacts and digital-thread decision support. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500097p.PDF" title="DoDI 5000.97 Digital Engineering">5</a>)</li>
+<li>Select one public digital-engineering case or pilot from DEBoK/SERC/DoD resources and identify the decision, evidence, benefit, and limitation. (<a href="https://www.de-bok.org/" title="Digital Engineering Body of Knowledge">19</a>, <a href="https://www.cto.mil/wp-content/uploads/2023/06/SERC-WRT-1058-2023.pdf" title="Systems Engineering Modernization Policy, Practice, and Workforce Roadmap">20</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-6">Instructor-style lesson notes</h3>
+<ul>
+<li>Analytics include structural queries, coverage matrices, graph paths, calculations, simulations, sensitivity, and generated reports.</li>
+<li>Queries should have controlled definitions, test cases, expected results, failure behavior, and version compatibility.</li>
+<li>Change impact is a graph/reasoning problem: a change propagates through semantics, allocations, interfaces, analyses, evidence, decisions, and products.</li>
+<li>Automated reports are only trustworthy when source authority, transformation logic, query version, and configuration are recorded.</li>
+<li>Case studies should be analyzed for actual decision improvement, not retold as success stories.</li>
+</ul>
+<h3 id="worked-example-6">Worked example</h3>
+<p>A query reports 100% requirement verification coverage, but the example discovers that 12 verification cases point to superseded identifiers and two tests use an old interface version. The worked analysis distinguishes syntactic link coverage from valid evidence coverage and generates a corrected decision dashboard with uncertainty and stale-data warnings.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the decision or evidence changes.</p>
+<h3 id="guided-practice-6">Guided practice</h3>
+<ul>
+<li>Implement queries for mission-task coverage, requirement allocation, interface verification, stale evidence, and superseded model use.</li>
+<li>Create one parametric or analytic calculation linked to model properties and show unit/provenance checks.</li>
+<li>Inject a controlled identifier inconsistency and test detection, diagnosis, correction, and regenerated products.</li>
+<li>Use the case-study template to evaluate one public program claim.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected queries or analyses.</p>
+<h3 id="independent-exercises-6">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Define query specifications with question, logic, inputs, expected result, test data, and failure mode.</li>
+<li><strong>Application:</strong> Implement at least eight executable queries and two generated products.</li>
+<li><strong>Analysis:</strong> Perform change impact for a communications-interface change and produce affected elements, owners, evidence, decisions, and residual uncertainty.</li>
+<li><strong>Synthesis:</strong> Conduct the Model, M&amp;S, and MBSE Analytics Review with live queries, one analytic model, case-study comparison, and finding dispositions.</li>
+<li><strong>Stretch:</strong> Build a graph representation of the model and compare graph-query results with tool-native queries.</li>
+</ul>
+<h3 id="weekly-deliverable-6">Weekly deliverable</h3>
+<p><strong>Model Analytics and Midcourse Review Package</strong> containing query catalog, executable source, test cases, generated matrices/reports, linked analytic model, change-impact analysis, case-study review, live demonstration, findings, and corrections.</p>
+<p>Submit native or textual source, data and transformations, generated views, query/analysis source, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-6">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Query correctness and testing</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Cross-domain analytics</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Change-impact evidence</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Case-study judgment</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Review and corrective action</td>
+<td style="text-align:right">15%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-6">Critical failures</h3>
+<ul>
+<li>Counting links as valid evidence without checking status, identity, version, and acceptance.</li>
+<li>Using screenshots without executable query or transformation source.</li>
+<li>Failing to detect the controlled identifier inconsistency.</li>
+<li>Claiming benefit from a case without identifying the decision and evidence.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-6">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why can 100% trace coverage still be misleading?</strong><br/>
+<strong>Answer guidance:</strong> Links may be stale, invalid, semantically wrong, based on superseded versions, or unsupported by accepted evidence.</li>
+<li><strong>What should a query specification contain?</strong><br/>
+<strong>Answer guidance:</strong> Question, semantic logic, inputs, scope, expected result, test data, version, and failure behavior.</li>
+<li><strong>What is model-based change impact?</strong><br/>
+<strong>Answer guidance:</strong> Identification of affected model elements, analyses, interfaces, evidence, products, owners, and decisions due to a controlled change.</li>
+<li><strong>Why test generated reports?</strong><br/>
+<strong>Answer guidance:</strong> Transformation and query defects can produce polished but wrong decision products.</li>
+<li><strong>What makes a digital-engineering case credible?</strong><br/>
+<strong>Answer guidance:</strong> Clear baseline, decision, intervention, evidence, result, limitations, and plausible causal mechanism.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-6">Revision and mastery gate</h3>
+<p>Pass the live review with all required queries reproducible, the injected inconsistency detected and corrected, generated products tied to controlled source, and no critical stale-evidence or change-impact gap.</p>
+<h3 id="suggested-workload-6">Suggested workload</h3>
+<p>Target: <strong>10–13 hours</strong>. Record actual time by reading, model/data work, analysis, implementation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-6">Configuration and portfolio update</h3>
+<p>Release query package <code>QUERY-SUITE-v1.0</code>, generated-product manifest, midcourse review record, and tag <code>DME-W06-ANALYTICS-REVIEW</code>.</p>
+<hr/>
+<h2 id="week-7--collaborative-digital-engineering-ecosystem-and-asot-governance">Week 7 — Collaborative digital-engineering ecosystem and ASOT governance</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B16/chapters/07.html">Chapter 07</a> → <a href="../../K/B16/labs/07.html">Hypothetical Lab 07</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-782-w07.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-7">Competency alignment</h3>
+<p>C4 (A), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-7">Professional context and essential question</h3>
+<p>A collaborative environment must allow the right people and tools to use trusted information while preventing unauthorized, ambiguous, or uncontrolled use. The essential question is: <strong>How should Northstar organize infrastructure, workflows, authority, access, data, tools, and governance so collaboration is useful and defensible?</strong></p>
+<h3 id="weekly-learning-outcomes-7">Weekly learning outcomes</h3>
+<ul>
+<li>Architect a digital-engineering ecosystem across people, processes, methods, tools, data, networks, and governance.</li>
+<li>Define authoritative sources of truth by information type and use.</li>
+<li>Create governance for ownership, stewardship, quality, provenance, configuration, access, release, reuse, and retention.</li>
+<li>Analyze interoperability, translation, vendor lock-in, licensing, compute, availability, and legacy-tool risks.</li>
+<li>Define cybersecurity, proprietary, privacy, and data-rights controls proportionate to the case.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-7">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>List every authoritative-source claim currently made in the repository.</li>
+<li>Name two cases where the same datum exists in work-in-progress and released forms.</li>
+<li>Identify one tool integration that currently relies on manual copy/paste.</li>
+<li>Explain why one centralized database is not automatically an ASOT.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning independent synthesis.</p>
+<h3 id="required-study-7">Required study</h3>
+<ul>
+<li>DoD Digital Engineering Fundamentals: ASOT, governance, ecosystem, infrastructure, interoperability, workforce, and value. (<a href="https://www.cto.mil/wp-content/uploads/2023/06/Dig-Eng-Fundamentals-2022.pdf" title="DoD Digital Engineering Fundamentals">7</a>)</li>
+<li>DE Ecosystem General Requirements: collaboration, curation, exchange, storage, support, infrastructure, access, security, and lifecycle workflow categories. Treat draft numeric placeholders as illustrative, not normative. (<a href="https://www.cto.mil/wp-content/uploads/2023/06/Dig-Eng-Ecosystem-Reqs.pdf" title="Digital Engineering Ecosystem General Requirements">9</a>)</li>
+<li>DoDI 5000.97: ecosystem, access, protection, interoperability, artifacts, and responsibilities. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500097p.PDF" title="DoDI 5000.97 Digital Engineering">5</a>)</li>
+<li>Digital Engineering Strategy: Goals 2–5, especially authoritative truth, infrastructure, security/IP, culture, and workforce. (<a href="https://www.cto.mil/wp-content/uploads/2023/06/Dig-Eng-Strat-2018.pdf" title="Department of Defense Digital Engineering Strategy">6</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-7">Instructor-style lesson notes</h3>
+<ul>
+<li>An ASOT is governed authority, not necessarily one physical database. Authority can be federated, role-specific, and use-specific.</li>
+<li>Work in progress, released baselines, operational state, and archived evidence need distinct states and promotion rules.</li>
+<li>Interoperability requires semantic, syntactic, identity, unit, timing, version, and access agreements—not just file import.</li>
+<li>Access must support least privilege, need to know, appropriate sharing, and auditable use while enabling collaboration.</li>
+<li>The ecosystem is a sociotechnical system. Licensing, help, training, workflows, incentives, contracts, and latency can be as limiting as technology.</li>
+</ul>
+<h3 id="worked-example-7">Worked example</h3>
+<p>Northstar proposes a single cloud repository for all engineering data. The example rejects this as an incomplete architecture and defines federated authorities: requirements, model baseline, interface control, test evidence, operational telemetry, and mission assumptions. It specifies identity, metadata, access, promotion, synchronization, and conflict-resolution rules between them.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the decision or evidence changes.</p>
+<h3 id="guided-practice-7">Guided practice</h3>
+<ul>
+<li>Create an ASOT register with asset type, owner, steward, location, schema, status, authority scope, access, update, retention, and acceptable use.</li>
+<li>Draw the ecosystem context and logical architecture, including users, tools, services, repositories, networks, and external partners.</li>
+<li>Model one end-to-end workflow from change request through analysis, approval, baseline, verification, and release.</li>
+<li>Threat-model data leakage, stale synchronization, translation error, privilege misuse, and unavailable tools.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected queries or analyses.</p>
+<h3 id="independent-exercises-7">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Convert selected DE ecosystem requirements into case-specific, testable ecosystem requirements.</li>
+<li><strong>Application:</strong> Build the Northstar ecosystem architecture, ASOT register, role/access matrix, metadata schema, and release workflow.</li>
+<li><strong>Analysis:</strong> Compare centralized, federated, and hybrid authority approaches across resilience, ownership, access, latency, reuse, cost, and lock-in.</li>
+<li><strong>Synthesis:</strong> Write the Digital Engineering Ecosystem and Governance Plan with staged implementation and acceptance tests.</li>
+<li><strong>Stretch:</strong> Prototype a metadata catalog or graph that discovers assets, owners, versions, provenance, sensitivity, and dependent products.</li>
+</ul>
+<h3 id="weekly-deliverable-7">Weekly deliverable</h3>
+<p><strong>Digital Engineering Ecosystem and ASOT Governance Package</strong> containing architecture, ecosystem requirements, ASOT register, metadata/provenance schema, role/access matrix, workflows, interoperability contracts, security/rights analysis, tool/legacy strategy, acceptance tests, and implementation roadmap.</p>
+<p>Submit native or textual source, data and transformations, generated views, query/analysis source, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-7">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ecosystem architecture</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Authority and data governance</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Interoperability and workflow</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Security, access, and rights</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Implementation and acceptance</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-7">Critical failures</h3>
+<ul>
+<li>Equating ASOT with a single shared folder or database.</li>
+<li>Omitting work-in-progress versus released status and promotion rules.</li>
+<li>Assuming all users and partners can access all models and data.</li>
+<li>Ignoring semantic translation, identity, version, or vendor-lock-in risk.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-7">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Can an ASOT be federated?</strong><br/>
+<strong>Answer guidance:</strong> Yes. Authority can be distributed across governed sources with clear scope, identity, synchronization, and conflict rules.</li>
+<li><strong>What is the difference between owner and steward?</strong><br/>
+<strong>Answer guidance:</strong> The owner is accountable for authority and use; the steward manages quality, metadata, access, and lifecycle operations.</li>
+<li><strong>Why is file compatibility insufficient for interoperability?</strong><br/>
+<strong>Answer guidance:</strong> Meaning, identity, units, version, timing, and use may still be inconsistent.</li>
+<li><strong>Why separate work in progress from released data?</strong><br/>
+<strong>Answer guidance:</strong> To avoid accidental use of unapproved content while enabling collaboration and controlled promotion.</li>
+<li><strong>What makes an ecosystem requirement testable?</strong><br/>
+<strong>Answer guidance:</strong> A defined actor, capability, condition, measure, threshold, and verification method.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-7">Revision and mastery gate</h3>
+<p>The ecosystem plan must define authority for every critical asset class, auditable access and promotion, tested interoperability assumptions, security/data-rights controls, and acceptance criteria for the selected first-wave use cases.</p>
+<h3 id="suggested-workload-7">Suggested workload</h3>
+<p>Target: <strong>10–13 hours</strong>. Record actual time by reading, model/data work, analysis, implementation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-7">Configuration and portfolio update</h3>
+<p>Baseline <code>DEE-ARCH-v1.0</code>, <code>ASOT-REGISTER-v1.0</code>, access matrix, governance plan, and tag <code>DME-W07-ECOSYSTEM</code>.</p>
+<hr/>
+<h2 id="week-8--digital-thread-architecture-and-executable-traceability">Week 8 — Digital thread architecture and executable traceability</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B16/chapters/08.html">Chapter 08</a> → <a href="../../K/B16/labs/08.html">Hypothetical Lab 08</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-782-w08.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-8">Competency alignment</h3>
+<p>C4 (A), C6 (A), C10 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-8">Professional context and essential question</h3>
+<p>A digital thread is useful only when it preserves meaning and provenance across lifecycle changes and can answer decision questions. The essential question is: <strong>Can Northstar trace, query, and verify the path from mission need through engineering and operational evidence—and detect when that path breaks?</strong></p>
+<h3 id="weekly-learning-outcomes-8">Weekly learning outcomes</h3>
+<ul>
+<li>Define thread scope, nodes, relationships, authorities, events, transformations, and query use cases.</li>
+<li>Implement executable cross-domain queries with provenance and configuration.</li>
+<li>Detect stale, broken, ambiguous, or semantically invalid trace paths.</li>
+<li>Demonstrate change propagation and generated-product regeneration.</li>
+<li>Assess thread completeness, latency, trust, security, and operational resilience.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-8">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Recreate the ASOT register and identify authoritative source for each thread node type.</li>
+<li>Run one Week 6 query and record its dependencies.</li>
+<li>Identify where transformations or human interpretation occur.</li>
+<li>Name one thread segment that must operate when a connected service is unavailable.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning independent synthesis.</p>
+<h3 id="required-study-8">Required study</h3>
+<ul>
+<li>DoDI 5000.97 definitions and procedures for digital threads, artifacts, and lifecycle decision support. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500097p.PDF" title="DoDI 5000.97 Digital Engineering">5</a>)</li>
+<li>DoD Digital Engineering Fundamentals: authority, traceability, provenance, ecosystem, and credibility. (<a href="https://www.cto.mil/wp-content/uploads/2023/06/Dig-Eng-Fundamentals-2022.pdf" title="DoD Digital Engineering Fundamentals">7</a>)</li>
+<li>DE Ecosystem General Requirements: association, automated exchange, metadata, translation quality, notifications, query, and configuration. (<a href="https://www.cto.mil/wp-content/uploads/2023/06/Dig-Eng-Ecosystem-Reqs.pdf" title="Digital Engineering Ecosystem General Requirements">9</a>)</li>
+<li>OMG SysML v2 API/Services and interoperability framing; identify what a standard API does and does not solve. (<a href="https://www.omg.org/sysml/SysML-2.htm" title="OMG SysML v2 Specification">12</a>, <a href="https://www.omg.org/sysml/news-articles.htm" title="OMG SysML news and final adoption status">13</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-8">Instructor-style lesson notes</h3>
+<ul>
+<li>A digital thread is a governed, connected information capability—not a single line drawn through a lifecycle poster.</li>
+<li>Thread use cases should be queryable: coverage, provenance, impact, status, decision rationale, evidence freshness, and operational feedback.</li>
+<li>Every transformation can alter meaning. Record source, schema/version, transformation, validation, timestamp, and responsible service.</li>
+<li>Thread completeness is use-specific. A thread can be complete for design review and incomplete for operational safety monitoring.</li>
+<li>Resilience matters: the program should know which thread functions degrade, queue, reconcile, or fail safely during disconnection.</li>
+</ul>
+<h3 id="worked-example-8">Worked example</h3>
+<p>A supplier changes the identifier and units for charger current limits. The thread initially continues to show green because a copied spreadsheet remains unchanged. The example uses provenance and transformation checks to detect the break, identifies affected requirements, simulation inputs, test procedures, safety evidence, and mission-capacity claims, then regenerates the affected products after controlled correction.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the decision or evidence changes.</p>
+<h3 id="guided-practice-8">Guided practice</h3>
+<ul>
+<li>Define three thread use cases: mission-to-evidence, interface-change impact, and operational-anomaly-to-engineering decision.</li>
+<li>Create a thread information model with node and relation types, identity, authority, status, version, time, provenance, and access.</li>
+<li>Implement and test three cross-domain queries.</li>
+<li>Inject the supplier change, capture detection time, false-green behavior, impact, correction, and product regeneration.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected queries or analyses.</p>
+<h3 id="independent-exercises-8">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Write a thread-use-case specification for each selected query.</li>
+<li><strong>Application:</strong> Implement the digital-thread prototype with at least 50 connected items across five authoritative asset classes.</li>
+<li><strong>Analysis:</strong> Measure coverage, stale links, provenance completeness, query latency, and recovery from the controlled break.</li>
+<li><strong>Synthesis:</strong> Conduct the Digital Ecosystem and Thread Credibility Review with live queries and change demonstration.</li>
+<li><strong>Stretch:</strong> Add event notifications or continuous validation that detects a new stale or invalid relationship automatically.</li>
+</ul>
+<h3 id="weekly-deliverable-8">Weekly deliverable</h3>
+<p><strong>Digital Thread Prototype and Credibility Review Package</strong> containing thread use cases, information model, authorities, transformations, executable queries, tests, metrics, break/recovery record, generated products, security/access rules, review briefing, findings, and dispositions.</p>
+<p>Submit native or textual source, data and transformations, generated views, query/analysis source, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-8">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thread semantics and scope</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Executable queries and tests</td>
+<td style="text-align:right">30%</td>
+</tr>
+<tr>
+<td>Provenance/configuration</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Break detection and recovery</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Review communication</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-8">Critical failures</h3>
+<ul>
+<li>Presenting a thread diagram without executable use cases.</li>
+<li>Counting broken, stale, or semantically wrong links as coverage.</li>
+<li>Omitting transformation provenance or version.</li>
+<li>Failing to detect and disposition the supplier-induced break.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-8">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What makes a digital thread more than traceability links?</strong><br/>
+<strong>Answer guidance:</strong> Governed authority, semantics, transformations, provenance, events, queries, lifecycle use, and change behavior.</li>
+<li><strong>What is thread completeness?</strong><br/>
+<strong>Answer guidance:</strong> Sufficient connected information for a specified query or decision, not universal linkage of everything.</li>
+<li><strong>Why record transformations?</strong><br/>
+<strong>Answer guidance:</strong> Conversions can change units, meaning, precision, identity, status, or validity.</li>
+<li><strong>What should happen during disconnection?</strong><br/>
+<strong>Answer guidance:</strong> Defined degraded behavior such as cached read-only use, queued events, reconciliation, warning, or fail-safe restriction.</li>
+<li><strong>How is a thread tested?</strong><br/>
+<strong>Answer guidance:</strong> With query test cases, injected changes/errors, expected impacts, provenance checks, access tests, and regeneration evidence.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-8">Revision and mastery gate</h3>
+<p>Pass the live review with all three queries executable, the controlled break detected before decision use, provenance complete for critical transformations, affected products regenerated, and residual thread limitations disclosed.</p>
+<h3 id="suggested-workload-8">Suggested workload</h3>
+<p>Target: <strong>10–13 hours</strong>. Record actual time by reading, model/data work, analysis, implementation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-8">Configuration and portfolio update</h3>
+<p>Release <code>THREAD-PROTOTYPE-v1.0</code>, query tests, transformation manifest, break/recovery record, and tag <code>DME-W08-DIGITAL-THREAD</code>.</p>
+<hr/>
+<h2 id="week-9--digital-twins-synchronization-fidelity-and-credibility">Week 9 — Digital twins, synchronization, fidelity, and credibility</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B16/chapters/09.html">Chapter 09</a> → <a href="../../K/B16/labs/09.html">Hypothetical Lab 09</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-782-w09.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-9">Competency alignment</h3>
+<p>C4 (A), C7 (A), C8 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-9">Professional context and essential question</h3>
+<p>The term digital twin is often applied to any simulation or dashboard. The essential question is: <strong>What real entity or process is represented, how is its state synchronized, and which decisions are justified by the twin’s validated capabilities and uncertainty?</strong></p>
+<h3 id="weekly-learning-outcomes-9">Weekly learning outcomes</h3>
+<ul>
+<li>Distinguish digital model, simulation, digital shadow, digital thread, digital twin, dashboard, emulator, and test environment.</li>
+<li>Define twin referent, intended users, decisions, state variables, update rates, synchronization, and lifecycle.</li>
+<li>Specify fidelity, observability, data quality, estimation, validation, and uncertainty requirements.</li>
+<li>Assess cybersecurity, privacy, model drift, concept drift, missing data, and fail-safe use restrictions.</li>
+<li>Demonstrate a bounded twin prototype using controlled or synthetic telemetry.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-9">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Name the thread assets and queries that the twin will depend on.</li>
+<li>Identify which physical/operational states are directly observed versus estimated.</li>
+<li>Explain validation for a monitoring use versus a prediction use.</li>
+<li>Name one decision that must not be automated from the proposed twin.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning independent synthesis.</p>
+<h3 id="required-study-9">Required study</h3>
+<ul>
+<li>DoDI 5000.97 definitions and expectations for digital twins and threads. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500097p.PDF" title="DoDI 5000.97 Digital Engineering">5</a>)</li>
+<li>DoD Digital Engineering information sheet/summary for the relationship among models, M&amp;S, threads, and twins. (<a href="https://www.cto.mil/wp-content/uploads/2024/01/info-dodi-500097-de-summary.pdf" title="DoDI 5000.97 Digital Engineering summary and definitions">21</a>)</li>
+<li>DoDI 5000.61 for model credibility and acceptance principles. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500061p.pdf" title="DoDI 5000.61 Modeling and Simulation VV&amp;A">10</a>)</li>
+<li>Revisit Phase 3 material on state estimation, uncertainty, model drift, sensitivity, and validation as applicable.</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-9">Instructor-style lesson notes</h3>
+<ul>
+<li>A twin has a real or operational referent and a data relationship that updates or reconciles state. A static model is not a twin.</li>
+<li>Twins are use-specific. Monitoring, diagnosis, prediction, rehearsal, control, training, and maintenance require different evidence.</li>
+<li>Observability determines whether internal states can be inferred from available measurements. Estimated state should never be presented as directly measured.</li>
+<li>Synchronization has latency, missingness, ordering, identity, and reconciliation failure modes.</li>
+<li>Credibility must include model validity, sensor/data quality, estimation error, uncertainty, operational context, cybersecurity, and human use.</li>
+</ul>
+<h3 id="worked-example-9">Worked example</h3>
+<p>Northstar proposes a fleet digital twin for emergency dispatch. The example defines 12 state variables, of which seven are observed and five estimated. A biased battery sensor and intermittent communications create false availability predictions. The twin is accepted for planning and advisory dispatch with uncertainty warnings but rejected for autonomous emergency-routing authorization until additional validation and fail-safe controls exist.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the decision or evidence changes.</p>
+<h3 id="guided-practice-9">Guided practice</h3>
+<ul>
+<li>Write intended-use and prohibited-use statements for monitoring, prediction, rehearsal, and control.</li>
+<li>Define the referent, state vector, observation model, update rates, timestamps, synchronization, and reconciliation.</li>
+<li>Create validation tests for nominal, missing-data, delayed-data, biased-sensor, and changed-environment cases.</li>
+<li>Prototype one state update and show confidence/uncertainty in the resulting decision artifact.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected queries or analyses.</p>
+<h3 id="independent-exercises-9">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify 15 examples as digital model, simulation, shadow, twin, dashboard, or insufficiently specified.</li>
+<li><strong>Application:</strong> Produce a digital-twin use-case and architecture specification for one bounded Northstar decision.</li>
+<li><strong>Analysis:</strong> Evaluate fidelity, observability, synchronization, data quality, uncertainty, and cybersecurity risks.</li>
+<li><strong>Synthesis:</strong> Build a small twin prototype and conduct the Digital Twin Credibility Review, including a use approval/restriction decision.</li>
+<li><strong>Stretch:</strong> Compare event-driven and periodic synchronization and quantify the effect of latency on a selected decision.</li>
+</ul>
+<h3 id="weekly-deliverable-9">Weekly deliverable</h3>
+<p><strong>Digital Twin Intended-Use, Architecture, Prototype, and Credibility Package</strong> containing definitions, referent, use/prohibited use, state/observation model, data mapping, thread dependencies, synchronization, validation, uncertainty, security/privacy, drift monitoring, prototype evidence, and approval/restriction decision.</p>
+<p>Submit native or textual source, data and transformations, generated views, query/analysis source, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-9">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Twin definition and intended use</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>State/synchronization architecture</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Validation and uncertainty</td>
+<td style="text-align:right">30%</td>
+</tr>
+<tr>
+<td>Risk and use restrictions</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Prototype and review</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-9">Critical failures</h3>
+<ul>
+<li>Calling a dashboard or standalone simulation a twin without a referent and synchronization.</li>
+<li>Presenting estimated state as directly measured.</li>
+<li>Using the twin for a higher-consequence decision than its evidence supports.</li>
+<li>Ignoring missing, delayed, biased, spoofed, or drifted data.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-9">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What distinguishes a twin from a digital model?</strong><br/>
+<strong>Answer guidance:</strong> A twin represents a real referent and uses a controlled data relationship to update/reconcile state for stated uses.</li>
+<li><strong>What is observability?</strong><br/>
+<strong>Answer guidance:</strong> Whether internal state can be inferred from available outputs/measurements under the model.</li>
+<li><strong>Why must prohibited uses be stated?</strong><br/>
+<strong>Answer guidance:</strong> Users may otherwise extend a credible low-consequence use to an unsupported high-consequence decision.</li>
+<li><strong>What is synchronization error?</strong><br/>
+<strong>Answer guidance:</strong> Mismatch due to latency, missing/out-of-order data, identity, transformation, reconciliation, or stale state.</li>
+<li><strong>Can one twin be valid for monitoring but not prediction?</strong><br/>
+<strong>Answer guidance:</strong> Yes. Different uses require different model, data, horizon, validation, and uncertainty evidence.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-9">Revision and mastery gate</h3>
+<p>Approve the twin only for explicitly validated uses. The prototype must show timestamps, observed versus estimated state, uncertainty, synchronization failure handling, and prohibited-use warnings. Resolve the telemetry-bias and intermittent-link findings.</p>
+<h3 id="suggested-workload-9">Suggested workload</h3>
+<p>Target: <strong>10–13 hours</strong>. Record actual time by reading, model/data work, analysis, implementation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-9">Configuration and portfolio update</h3>
+<p>Release <code>TWIN-SPEC-v1.0</code>, prototype source, validation results, use approval record, and tag <code>DME-W09-DIGITAL-TWIN</code>.</p>
+<hr/>
+<h2 id="week-10--mission-engineering-foundations-and-mission-architecture">Week 10 — Mission engineering foundations and mission architecture</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B16/chapters/10.html">Chapter 10</a> → <a href="../../K/B16/labs/10.html">Hypothetical Lab 10</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-782-w10.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-10">Competency alignment</h3>
+<p>C9 (A), C11 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-10">Professional context and essential question</h3>
+<p>Mission engineering changes the unit of analysis from one product to an end-to-end outcome achieved by many systems and organizations under specific conditions. The essential question is: <strong>What mission must be accomplished, by whom and under what conditions, and which architecture best exposes dependencies, gaps, and alternatives?</strong></p>
+<h3 id="weekly-learning-outcomes-10">Weekly learning outcomes</h3>
+<ul>
+<li>Define mission problem, objective, scenario, context, assumptions, constraints, time horizon, and decision authority.</li>
+<li>Develop mission threads, tasks, activities, performers, systems, information exchanges, and effects.</li>
+<li>Define mission outcomes, MOEs, MOPs, risks, and evidence.</li>
+<li>Apply Mission Engineering Guide methodology elements and Mission Architecture Style Guide conventions.</li>
+<li>Create a model-based mission architecture that is reusable, traceable, and analyzable.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-10">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Restate the product, SoS, enterprise, and mission boundaries.</li>
+<li>Name three mission outcomes that cannot be inferred from vehicle performance alone.</li>
+<li>Identify authoritative sources for environment, demand, capability, and system-performance assumptions.</li>
+<li>Explain how the thread and twin products support mission architecture development.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning independent synthesis.</p>
+<h3 id="required-study-10">Required study</h3>
+<ul>
+<li>DoD Mission Engineering Guide 2.0: purpose, terminology, process, considerations, mission problem, architecture, analysis, recommendations, and digital-engineering support. (<a href="https://ac.cto.mil/wp-content/uploads/2023/11/MEG_2_Oct2023.pdf" title="Department of Defense Mission Engineering Guide 2.0">16</a>)</li>
+<li>Mission Architecture Style Guide: architecture role in each ME step, terminology, model content, viewpoints, relationships, and style/quality guidance. (<a href="https://ac.cto.mil/wp-content/uploads/2025/01/U-Mission-Architecture-Style-Guide-Final_07Jan2025.pdf" title="DoD Mission Architecture Style Guide">17</a>)</li>
+<li>OMG UAF overview for enterprise/mission architecture concepts where useful. (<a href="https://www.omg.org/uaf/" title="OMG Unified Architecture Framework">18</a>)</li>
+<li>DoD Digital Engineering Fundamentals: reuse, curation, authority, and models/data continuum. (<a href="https://www.cto.mil/wp-content/uploads/2023/06/Dig-Eng-Fundamentals-2022.pdf" title="DoD Digital Engineering Fundamentals">7</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-10">Instructor-style lesson notes</h3>
+<ul>
+<li>Mission engineering is iterative and decision-focused. It should produce repeatable, traceable, transparent evidence and options.</li>
+<li>A mission thread is a scenario-specific sequence of tasks, interactions, decisions, and effects; it is not just a system sequence diagram.</li>
+<li>Mission architecture should include operational environment, organizations, people, systems, information, tasks, dependencies, measures, assumptions, and alternatives.</li>
+<li>MOEs reflect mission outcome; MOPs describe performance of contributors. A strong system MOP does not guarantee mission effectiveness.</li>
+<li>Architecture style and common semantics matter because mission products must be shared and integrated across organizations.</li>
+</ul>
+<h3 id="worked-example-10">Worked example</h3>
+<p>The mission “evacuate mobility-dependent persons before hazardous weather closes key routes” is modeled as detect threat, forecast demand, identify riders, allocate accessible capacity, coordinate organizations, route resources, transport, verify completion, and recover. The example identifies dependencies on power, communications, staffing, policy authority, mutual aid, and rider data—not only vehicle availability.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the decision or evidence changes.</p>
+<h3 id="guided-practice-10">Guided practice</h3>
+<ul>
+<li>Write the mission problem and decision statement with scope, scenario, assumptions, constraints, and time horizon.</li>
+<li>Create nominal, degraded-communications, and grid-constrained mission threads.</li>
+<li>Define mission outcomes, MOEs, MOPs, thresholds, and data sources.</li>
+<li>Build the mission architecture and run style/semantic checks from the MASG.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected queries or analyses.</p>
+<h3 id="independent-exercises-10">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Build a mission glossary and source-grounded relationship map.</li>
+<li><strong>Application:</strong> Model at least three mission threads, 20 mission tasks, 12 performers/systems, 15 exchanges, and 10 measures.</li>
+<li><strong>Analysis:</strong> Identify critical dependencies, single points of failure, organizational seams, data gaps, and assumption sensitivity.</li>
+<li><strong>Synthesis:</strong> Conduct the Mission Architecture Review and disposition content, semantics, style, authority, and coverage findings.</li>
+<li><strong>Stretch:</strong> Represent selected mission architecture content using a UAF-aligned viewpoint and compare it with the SysML-centered representation.</li>
+</ul>
+<h3 id="weekly-deliverable-10">Weekly deliverable</h3>
+<p><strong>Mission Problem, Thread, and Architecture Package</strong> containing problem/decision statement, scenarios, assumptions, mission threads, tasks, performers, systems, exchanges, outcomes, measures, dependencies, risks, data sources, architecture views/model, style validation, review findings, and corrections.</p>
+<p>Submit native or textual source, data and transformations, generated views, query/analysis source, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-10">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mission problem and scenarios</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Architecture completeness and semantics</td>
+<td style="text-align:right">30%</td>
+</tr>
+<tr>
+<td>Measures and evidence</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Dependencies and gaps</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Review and reuse quality</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-10">Critical failures</h3>
+<ul>
+<li>Using the Northstar product architecture as the mission architecture.</li>
+<li>Omitting organizations, people, policy, information, environment, or non-materiel contributors.</li>
+<li>Confusing system performance measures with mission effectiveness.</li>
+<li>Creating views without controlled semantics, assumptions, and sources.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-10">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is the mission-engineering unit of analysis?</strong><br/>
+<strong>Answer guidance:</strong> An end-to-end mission outcome and the interacting systems, people, organizations, processes, environment, and alternatives that affect it.</li>
+<li><strong>What is a mission thread?</strong><br/>
+<strong>Answer guidance:</strong> A scenario-specific sequence/network of mission tasks, interactions, decisions, exchanges, and effects.</li>
+<li><strong>How does an MOE differ from an MOP?</strong><br/>
+<strong>Answer guidance:</strong> MOE assesses mission effectiveness/outcome; MOP assesses contributor or system performance.</li>
+<li><strong>Why use a mission architecture style guide?</strong><br/>
+<strong>Answer guidance:</strong> To improve common semantics, consistency, integration, sharing, analysis, and reuse across organizations.</li>
+<li><strong>Why are assumptions first-class architecture content?</strong><br/>
+<strong>Answer guidance:</strong> Mission conclusions can reverse when threat, environment, policy, demand, or system assumptions change.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-10">Revision and mastery gate</h3>
+<p>Pass the Mission Architecture Review with complete nominal and degraded threads, source-backed assumptions and measures, mission/product boundary separation, resolved critical architecture findings, and a reusable model baseline.</p>
+<h3 id="suggested-workload-10">Suggested workload</h3>
+<p>Target: <strong>10–13 hours</strong>. Record actual time by reading, model/data work, analysis, implementation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-10">Configuration and portfolio update</h3>
+<p>Baseline <code>MISSION-ARCH-v1.0</code>, mission measure dictionary, scenario set, review record, and tag <code>DME-W10-MISSION-ARCH</code>.</p>
+<hr/>
+<h2 id="week-11--mission-analysis-alternatives-gaps-and-interventions">Week 11 — Mission analysis, alternatives, gaps, and interventions</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B16/chapters/11.html">Chapter 11</a> → <a href="../../K/B16/labs/11.html">Hypothetical Lab 11</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-782-w11.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-11">Competency alignment</h3>
+<p>C7 (D), C8 (A), C9 (A), C11 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-11">Professional context and essential question</h3>
+<p>Mission architecture becomes useful when it supports transparent comparison of alternatives and reveals where intervention changes mission outcomes. The essential question is: <strong>Which combination of materiel and non-materiel changes produces robust mission improvement across uncertainty and degraded conditions?</strong></p>
+<h3 id="weekly-learning-outcomes-11">Weekly learning outcomes</h3>
+<ul>
+<li>Derive mission-analysis questions, alternatives, factors, scenarios, experiments, and decision criteria.</li>
+<li>Connect mission architecture to simulations, data, analytic models, and uncertainty.</li>
+<li>Identify capability gaps, redundancies, bottlenecks, fragilities, and opportunities.</li>
+<li>Compare technology, system, process, organization, staffing, training, policy, and information interventions.</li>
+<li>Assess robustness, sensitivity, feasibility, implementation, and residual mission risk.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-11">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reproduce the top five mission dependencies and their evidence.</li>
+<li>Name one mission measure with weak data quality or authority.</li>
+<li>Identify one candidate non-materiel intervention.</li>
+<li>Explain which digital-thread query supports the mission analysis.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning independent synthesis.</p>
+<h3 id="required-study-11">Required study</h3>
+<ul>
+<li>Mission Engineering Guide: mission analysis, recommendations, robustness, transparency, reuse, data curation, experimentation, and DOTMLPF-P considerations. (<a href="https://ac.cto.mil/wp-content/uploads/2023/11/MEG_2_Oct2023.pdf" title="Department of Defense Mission Engineering Guide 2.0">16</a>)</li>
+<li>Mission Architecture Style Guide: analysis integration, digital feedback, alternatives, and architecture updates. (<a href="https://ac.cto.mil/wp-content/uploads/2025/01/U-Mission-Architecture-Style-Guide-Final_07Jan2025.pdf" title="DoD Mission Architecture Style Guide">17</a>)</li>
+<li>Revisit EN.645.784 decision science and EN.645.756 metrics/uncertainty methods for objective structure, alternatives, experiments, and robustness.</li>
+<li>DoDI 5000.97 and Digital Engineering Fundamentals: model/data continuity, reuse, credibility, and decision artifacts. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500097p.PDF" title="DoDI 5000.97 Digital Engineering">5</a>, <a href="https://www.cto.mil/wp-content/uploads/2023/06/Dig-Eng-Fundamentals-2022.pdf" title="DoD Digital Engineering Fundamentals">7</a>)</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-11">Instructor-style lesson notes</h3>
+<ul>
+<li>Mission analysis should compare alternatives under multiple plausible scenarios and uncertainties, not optimize one nominal case.</li>
+<li>Interventions may be materiel or non-materiel. Training, policy, staffing, organization, data-sharing, and procedures can dominate a technology upgrade.</li>
+<li>Architecture should be updated with analysis results and evidence rather than left as a static pre-analysis picture.</li>
+<li>Transparency requires recording assumptions, constraints, source data, models, versions, scenarios, uncertainty, and decision logic.</li>
+<li>Robust recommendations acknowledge tradeoffs, implementation dependencies, residual risk, and conditions that change the decision.</li>
+</ul>
+<h3 id="worked-example-11">Worked example</h3>
+<p>Four alternatives are compared: add autonomous vehicles, establish mutual-aid dispatch, install mobile charging, and pre-register mobility-dependent riders with privacy controls. The example shows that the highest-performing technology option under nominal conditions is not the most robust under grid and communications degradation; a combined policy/data-sharing and mutual-aid intervention performs better across scenarios.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the decision or evidence changes.</p>
+<h3 id="guided-practice-11">Guided practice</h3>
+<ul>
+<li>Create objectives, measures, constraints, alternatives, scenarios, and uncertainty factors.</li>
+<li>Link each analysis input and output to mission architecture elements and authoritative sources.</li>
+<li>Run or reuse a bounded experiment across nominal, communication-loss, grid-loss, severe-demand, and staffing-shortage cases.</li>
+<li>Update the mission architecture and decision record with analysis findings.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected queries or analyses.</p>
+<h3 id="independent-exercises-11">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Build a capability-gap and intervention matrix including DOTMLPF-P categories or a civilian equivalent.</li>
+<li><strong>Application:</strong> Evaluate at least six interventions and three portfolios across five scenarios.</li>
+<li><strong>Analysis:</strong> Perform sensitivity, uncertainty, robustness, regret, and decision-reversal analysis for the leading portfolios.</li>
+<li><strong>Synthesis:</strong> Conduct the Mission Analysis and Recommendation Review with reproducible results and architecture updates.</li>
+<li><strong>Stretch:</strong> Design a live, virtual, or constructive experiment that would reduce the most decision-relevant uncertainty.</li>
+</ul>
+<h3 id="weekly-deliverable-11">Weekly deliverable</h3>
+<p><strong>Mission Analysis, Alternatives, and Recommendation Package</strong> containing questions, objectives, measures, alternatives, intervention portfolios, scenarios, model/data links, experiments, results, uncertainty/sensitivity, robustness, feasibility, implementation dependencies, architecture updates, recommendation, residual risk, and review findings.</p>
+<p>Submit native or textual source, data and transformations, generated views, query/analysis source, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-11">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Analysis design and traceability</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Alternatives and non-materiel breadth</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Uncertainty and robustness</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Mission recommendation and feasibility</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Reproducibility and transparency</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-11">Critical failures</h3>
+<ul>
+<li>Comparing only product or technology alternatives.</li>
+<li>Optimizing one nominal scenario without degraded conditions or uncertainty.</li>
+<li>Using analytic inputs that lack source, version, or architecture linkage.</li>
+<li>Recommending an option without implementation dependencies and residual risk.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-11">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why include non-materiel interventions?</strong><br/>
+<strong>Answer guidance:</strong> Mission outcomes depend on doctrine/policy, organization, training, leadership, personnel, facilities, information, and processes as well as technology.</li>
+<li><strong>What is a robust recommendation?</strong><br/>
+<strong>Answer guidance:</strong> One that performs acceptably across plausible scenarios/uncertainties and has understood tradeoffs and reversal conditions.</li>
+<li><strong>Why update the architecture after analysis?</strong><br/>
+<strong>Answer guidance:</strong> Analysis changes understanding of dependencies, performance, gaps, assumptions, and recommended structure/behavior.</li>
+<li><strong>What is decision reversal analysis?</strong><br/>
+<strong>Answer guidance:</strong> Identification of changes in weights, assumptions, scenarios, or data that would change the preferred alternative.</li>
+<li><strong>What is the role of experimentation?</strong><br/>
+<strong>Answer guidance:</strong> To reduce important uncertainty, test concepts and interactions, validate models, and inform implementation.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-11">Revision and mastery gate</h3>
+<p>The recommendation must compare materiel and non-materiel portfolios, remain defensible across degraded cases, expose decision-reversal conditions, link results to architecture and authoritative sources, and resolve the controlled communications-degradation event.</p>
+<h3 id="suggested-workload-11">Suggested workload</h3>
+<p>Target: <strong>10–13 hours</strong>. Record actual time by reading, model/data work, analysis, implementation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-11">Configuration and portfolio update</h3>
+<p>Release <code>MISSION-ANALYSIS-v1.0</code>, updated architecture <code>v1.1</code>, decision record <code>DR-782-002</code>, and tag <code>DME-W11-MISSION-ANALYSIS</code>.</p>
+<hr/>
+<h2 id="week-12--integrated-digital-engineering-for-mission-decisions">Week 12 — Integrated digital engineering for mission decisions</h2>
+<blockquote>
+<p><strong>Book-companion reading :</strong> <a href="../../K/B16/chapters/12.html">Chapter 12</a> → <a href="../../K/B16/labs/12.html">Hypothetical Lab 12</a> → original graded assignment below. <a href="../../K/P4-text/lessons/645-782-w12.html">Earlier concise primer</a>. This new callout is reversible; the assessed text has not changed.</p>
+</blockquote>
+<h3 id="competency-alignment-12">Competency alignment</h3>
+<p>C4 (A), C8 (A), C9 (A), C10 (A), C11 (A), C12 (A)</p>
+<h3 id="professional-context-and-essential-question-12">Professional context and essential question</h3>
+<p>The final challenge is not to assemble separate course artifacts but to demonstrate a governed, credible, and adaptable decision system. The essential question is: <strong>Can Northstar use connected digital evidence to make and revise a mission decision under review-board challenge?</strong></p>
+<h3 id="weekly-learning-outcomes-12">Weekly learning outcomes</h3>
+<ul>
+<li>Integrate strategy, competencies, model portfolio, MBSE, ecosystem, thread, twin, mission architecture, and analysis.</li>
+<li>Quantify benefits, costs, resources, risks, transition stages, measures, and governance.</li>
+<li>Demonstrate live queries, provenance, model/twin state, and change impact.</li>
+<li>Adapt the mission recommendation to a changed assumption while preserving configuration and rationale.</li>
+<li>Defend evidence, limitations, use restrictions, and residual risk to executive and technical reviewers.</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-12">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the full mission-outcome-to-evidence chain without notes.</li>
+<li>Name the three most important review findings and how they changed the strategy.</li>
+<li>Identify the weakest authoritative source and weakest credibility claim.</li>
+<li>Explain the next process-improvement question for EN.645.783.</li>
+</ul>
+<p>A learner unable to complete at least three of the four items should revisit the cited prior-course artifacts before beginning independent synthesis.</p>
+<h3 id="required-study-12">Required study</h3>
+<ul>
+<li>Revisit DoDI 5000.97 implementation and measurement expectations. (<a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500097p.PDF" title="DoDI 5000.97 Digital Engineering">5</a>)</li>
+<li>Revisit the Mission Engineering Guide discussion of digital engineering, transparency, robustness, curation, and recommendations. (<a href="https://ac.cto.mil/wp-content/uploads/2023/11/MEG_2_Oct2023.pdf" title="Department of Defense Mission Engineering Guide 2.0">16</a>)</li>
+<li>Revisit the Mission Architecture Style Guide feedback loop between architecture, analysis, experiments, test, and recommendations. (<a href="https://ac.cto.mil/wp-content/uploads/2025/01/U-Mission-Architecture-Style-Guide-Final_07Jan2025.pdf" title="DoD Mission Architecture Style Guide">17</a>)</li>
+<li>Review all course decision records, findings, limitations, and maintenance triggers.</li>
+</ul>
+<p>For every source, record one claim, one implication for Northstar, one limitation, and one unresolved question.</p>
+<h3 id="instructor-style-lesson-notes-12">Instructor-style lesson notes</h3>
+<ul>
+<li>The capstone should request a decision and authorization, not merely summarize learning.</li>
+<li>Benefits should be tied to baseline and measured decision outcomes; uncertainty about benefit should be explicit.</li>
+<li>A staged strategy should prioritize use cases and infrastructure that create reusable capability while controlling risk.</li>
+<li>Live change is the strongest test of whether the thread, model, analytics, and governance are real.</li>
+<li>Mature digital engineering includes knowing what cannot yet be trusted, automated, shared, or reused.</li>
+</ul>
+<h3 id="worked-example-12">Worked example</h3>
+<p>The review board changes the severe-weather assumption: the primary cellular network fails two hours earlier and mutual-aid vehicles have inconsistent accessibility metadata. The example runs the impact query, updates mission assumptions and affected threads, revises the analytic scenario, regenerates the recommendation, and records why the preferred portfolio changes from data-sharing plus mutual aid to local pre-positioning plus verified accessible capacity.</p>
+<p>Reproduce the example using controlled course data, change one assumption, and explain how the decision or evidence changes.</p>
+<h3 id="guided-practice-12">Guided practice</h3>
+<ul>
+<li>Run a pre-defense clean reproduction from a fresh checkout or environment.</li>
+<li>Trace one mission outcome through tasks, systems, interfaces, models, evidence, and decision.</li>
+<li>Rehearse the live change and define expected affected elements and products.</li>
+<li>Conduct executive, technical, mission-owner, security, and skeptical-reviewer role challenges.</li>
+</ul>
+<p>Checkpoint: compare the result with the reference rationale, record discrepancies, correct the source artifact, and rerun affected queries or analyses.</p>
+<h3 id="independent-exercises-12">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Complete the final repository and artifact completeness audit.</li>
+<li><strong>Application:</strong> Prepare the 20–25 page strategy, appendices, model/data release, and 15-slide briefing.</li>
+<li><strong>Analysis:</strong> Quantify benefits, implementation cost/resources, competency needs, risks, measures, and reversal/stop conditions.</li>
+<li><strong>Synthesis:</strong> Conduct the final Digital Mission Engineering Strategy Review, live queries, twin demonstration, live change, and oral defense.</li>
+<li><strong>Stretch:</strong> Produce a two-year capability roadmap showing reuse across additional missions and programs without overclaiming interoperability.</li>
+</ul>
+<h3 id="weekly-deliverable-12">Weekly deliverable</h3>
+<p><strong>Final Digital Mission Engineering Strategy and Evidence Release</strong> containing all capstone contents, controlled source, three live queries, twin state demonstration, live-change result, executive decision request, review recording, findings, dispositions, and handoff to EN.645.783 and Phase 5.</p>
+<p>Submit native or textual source, data and transformations, generated views, query/analysis source, a change log, and a one-page self-review. Screenshots alone are not acceptable evidence.</p>
+<h3 id="analytic-rubric-12">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integrated decision/evidence chain</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Authority, credibility, and governance</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Mission analysis and recommendation</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Implementation/value/risk strategy</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Live change and reproducibility</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Executive/technical defense</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum weekly performance is 80%, with no critical failure.</p>
+<h3 id="critical-failures-12">Critical failures</h3>
+<ul>
+<li>Providing a portfolio of disconnected artifacts rather than an integrated decision system.</li>
+<li>Failing the clean reproduction or live change without transparent recovery.</li>
+<li>Overstating twin, thread, model, or mission-analysis credibility.</li>
+<li>Recommending transformation without owners, resources, measures, risks, and stop/scale criteria.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-12">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is the strongest evidence that your digital engineering approach adds value?</strong><br/>
+<strong>Answer guidance:</strong> A measurable improvement in a consequential decision or evidence cycle with a credible causal chain, not artifact volume.</li>
+<li><strong>What is the weakest link in your evidence chain?</strong><br/>
+<strong>Answer guidance:</strong> Learner must identify a specific authority, data, model, transformation, interface, or governance weakness and its consequence.</li>
+<li><strong>Why is the live change important?</strong><br/>
+<strong>Answer guidance:</strong> It demonstrates connected semantics, impact analysis, reproducibility, configuration, decision update, and organizational response.</li>
+<li><strong>What should EN.645.783 improve?</strong><br/>
+<strong>Answer guidance:</strong> A measurable process bottleneck or governance weakness revealed by actual evidence, not a generic maturity aspiration.</li>
+<li><strong>When should the organization not use the twin or mission model?</strong><br/>
+<strong>Answer guidance:</strong> Outside approved use, context, data quality, synchronization, validation, uncertainty, security, or authority limits.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-12">Revision and mastery gate</h3>
+<p>Complete the clean reproduction, answer all live queries, implement and document the change, defend the recommendation and limitations, resolve critical findings, and achieve at least 80% overall with Proficient or better on every critical dimension.</p>
+<h3 id="suggested-workload-12">Suggested workload</h3>
+<p>Target: <strong>10–13 hours</strong>. Record actual time by reading, model/data work, analysis, implementation, review, and revision.</p>
+<h3 id="configuration-and-portfolio-update-12">Configuration and portfolio update</h3>
+<p>Release final baseline <code>DME-1.0</code>, signed manifest, final decision record, handoff package, and tag <code>DME-W12-FINAL</code>.</p>
+<hr/>
+<h2 id="references">References</h2>
+<p><a href="OVERVIEW.html">Back to Phase 4 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+</main></body></html>

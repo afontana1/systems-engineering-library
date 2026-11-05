@@ -1,0 +1,5 @@
+stage,p99_ms,hard_bound_ms
+telemetry,85,120
+broker,210,240
+authorization,150,170
+application,80,90

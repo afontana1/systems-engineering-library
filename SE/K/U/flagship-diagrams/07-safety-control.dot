@@ -1,0 +1,16 @@
+digraph G {
+ graph [rankdir=LR, bgcolor="transparent", label="Safety control and evidence", labelloc=t, fontname="DejaVu Sans", fontsize=17];
+ node [shape=box, style="rounded,filled", fillcolor="#e7f0f1", color="#356b73", fontname="DejaVu Sans", margin="0.16,0.12"]; edge[color="#527d83", penwidth=1.6];
+ n0 [label="Regulations / community"];
+ n1 [label="Mission authority"];
+ n2 [label="Operator"];
+ n3 [label="Dispatch software"];
+ n4 [label="Vehicle state"];
+ n5 [label="Hazard monitoring"];
+ n0 -> n1;
+ n1 -> n2;
+ n2 -> n3;
+ n3 -> n4;
+ n4 -> n5;
+ n5 -> n2;
+}

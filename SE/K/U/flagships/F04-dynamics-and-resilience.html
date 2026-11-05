@@ -1,0 +1,123 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>F04 · Dynamic systems, queues, feedback and resilience · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/U/flagships/F04-dynamics-and-resilience.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="f04--dynamic-systems-queues-feedback-and-resilience">F04 · Dynamic systems, queues, feedback and resilience</h1>
+<p><em>Flagship textbook chapter · applied analytics, modeling and simulation, system dynamics, SoS and enterprise engineering · approximate study time: 8–12 hours.</em></p>
+<p><strong>Learning outcome.</strong> Build, analyze and challenge a minimal dynamical model of mobility operations; distinguish stock-flow models from stochastic queues; explain stability, feedback, cascading failure and recovery; and design experiments that could falsify the model before relying on it.</p>
+<p><strong>Prerequisites:</strong> <a href="../../encyclopedia/stocks-flows-feedback.html">system dynamics</a>, <a href="../../encyclopedia/conceptual-m-and-s.html">modeling and simulation</a>, <a href="../../encyclopedia/flow-wip-and-queues.html">queueing</a>. Also see <a href="../derivations/06-queue-utilization.html">D06 queue utilization</a>, <a href="../derivations/08-stocks-flow-numerics.html">D08 numerical integration</a> and <a href="F03-statistical-assurance.html">F03 model credibility</a>.</p>
+<p><img alt="Competing reinforcing and balancing feedback loops" src="../flagship-diagrams/04-feedback-resilience.svg"/></p>
+<h2 id="1-a-system-is-dynamic-when-today-changes-tomorrow">1. A system is dynamic when today changes tomorrow</h2>
+<p>Static architecture diagrams identify components and connections; they do not reveal how backlogs grow, how operators adapt, how maintenance debt accumulates or how an emergency consumes capacity. Dynamic systems engineering asks how <strong>rates, delays, inventories, feedback and decision policies</strong> jointly produce behavior over time.</p>
+<p>Continue with Northstar's fictional regional mobility service. During a rail disruption, many riders simultaneously request a shuttle. Dispatch backlog rises, pickup times grow, more customers retry, and those retries increase arrival load further. The demand surge is not the sole issue: the service's own response policy can amplify demand. Adding vehicles may help, but additional vehicles may also overwhelm curb capacity or charging infrastructure. This is a coupled system problem.</p>
+<p>Different modeling approaches answer different questions. A <strong>stock-flow model</strong> asks how quantities accumulate and how rates change; a <strong>discrete-event queue</strong> represents individual arrivals, service completions, rules and resource contention; an <strong>agent-based model</strong> may represent heterogeneous rider/operator choices; a <strong>network model</strong> focuses on dependencies and paths. Choosing among them requires a decision question, not a preference for visual complexity.</p>
+<h2 id="2-conservation-as-a-modeling-invariant">2. Conservation as a modeling invariant</h2>
+<p>Let $B(t)$ be the number of pending accepted bookings, $a(t)$ the accepted arrival rate, and $c(t)$ the completed service rate, both in bookings/hour. A continuous approximation satisfies</p>
+<p>$$\frac{dB}{dt}=a(t)-c(t),$$</p>
+<p>subject to $B(t)\ge0$ and a physically meaningful service-capacity condition. This is a <strong>conservation equation</strong>. Requests do not vanish unless we explicitly model abandonment, cancellation, expiration or rejection. A model whose backlog decreases without a corresponding outflow is missing a process.</p>
+<p>For a simplified example, arrivals are 12/hour, departures 9/hour and $B(0)=4$ bookings. Over the next two hours with both rates constant and no capacity limits, backlog grows by $(12-9)2=6$ to $B(2)=10$ bookings. This arithmetic is useful to check simulation output before modeling stochastic events.</p>
+<p>If service varies with backlog, one idealized model is $c(B)=\mu,B/(K+B)$ for nonnegative $B$. Here $\mu$ is the maximum throughput and $K$ controls how quickly service approaches capacity. This <em>phenomenological</em> relation may be useful for experiments, but it is not a law of dispatch; its parameters need calibration and its behavior should be checked at $B=0$ and large $B$.</p>
+<h2 id="3-numerical-integration-and-error-control">3. Numerical integration and error control</h2>
+<p>For $\dot{x}=f(x,t)$, explicit Euler integration with step $h$ uses</p>
+<p>$$x_{k+1}=x_k+h f(x_k,t_k).$$</p>
+<p>For the test equation $\dot{x}=-kx$ with $x(0)=1$, the exact solution is $x(t)=e^{-kt}$. Euler gives $x_N=(1-kh)^N$ at time $Nh$. With $k=1/h_{unit}$, $h=0.25h_{unit}$ and four steps to $t=1h_{unit}$, Euler gives $(0.75)^4=0.31640625$ whereas the exact value is $e^{-1}\approx0.36787944$; the absolute error is about 0.05147.</p>
+<p>Halving $h$ should generally reduce error for a convergent method in a smooth regime, but an apparently stable plot is not a numerical accuracy test. For Euler on $\dot{x}=-kx$ with positive $k$, numerical stability of the linear iteration requires $|1-kh|&lt;1$, i.e. $0&lt;kh&lt;2$. That condition alone does not guarantee physical plausibility or sufficient accuracy. For nonnegative stocks, aggressive steps may create spurious negative quantities.</p>
+<p>Models should include invariant checks (e.g. conservation), solver comparison, time-step sensitivity, boundary conditions and parameter uncertainty. If a proposed policy decision changes when step size is halved, report numerical uncertainty rather than disguising it as a real system phenomenon.</p>
+<h2 id="4-littles-law-an-accounting-identity-under-conditions">4. Little's law: an accounting identity under conditions</h2>
+<p>A stable, flow-balanced service system observed over an appropriate long period satisfies <strong>Little's law</strong>:</p>
+<p>$$L=\lambda W,$$</p>
+<p>where $L$ is the long-run average number in system, $\lambda$ is the effective arrival/throughput rate, and $W$ is the average time in system. For a stable service with 12 completed requests per hour and a measured average system time of 0.25 hours, $L=12\times0.25=3$ requests.</p>
+<p>Little's law does not require exponential interarrival or service distributions. But it does require careful definitions of the same population and boundary, plus suitable stability/steady operation. In an emergency that continuously grows backlog, quoting a steady-state wait from Little's law without checking these conditions is misleading. Abandoned requests and rejected jobs must be accounted for consistently.</p>
+<h2 id="5-the-mm1-model-and-utilization-cliffs">5. The M/M/1 model and utilization cliffs</h2>
+<p>An <strong>M/M/1</strong> queue assumes Poisson arrivals with rate $\lambda$, independent exponential service times with rate $\mu$, a single server, infinite buffer, first-in-first-out service and stable utilization $\rho=\lambda/\mu&lt;1$. Under these strong assumptions,</p>
+<p>$$W=\frac1{\mu-\lambda},\qquad W_q=\frac{\lambda}{\mu(\mu-\lambda)},\qquad L=\frac{\lambda}{\mu-\lambda}.$$</p>
+<p>These formulas represent <strong>mean</strong> quantities in steady state, not guaranteed service-level percentiles.</p>
+<p>For $\lambda=12$/hour, $\mu=15$/hour: $\rho=0.8$, mean total time $W=1/3$ hour = 20 min; mean queue wait $W_q=12/(15\cdot3)$ hour = 16 min. Increasing service rate to 18/hour gives $\rho=2/3$, $W=1/6$ hour = 10 min, and $W_q=12/(18\cdot6)$ hour = 6.667 min. A 20% capacity increase cuts the modeled mean queue wait by more than half because the system was approaching saturation.</p>
+<p>A general statement like “one extra server cuts waits by a third” is not justified from this model. A second server is an <strong>M/M/2</strong> system with different equations; two servers can also share bottleneck resources. When arrival processes are bursty, service times are deterministic, booking priorities exist or dispatch is interrupted, empirical or discrete-event modeling is more appropriate.</p>
+<h2 id="6-capacity-sizing-from-a-target-mean-wait">6. Capacity sizing from a target mean wait</h2>
+<p>Suppose the architecture decision requires mean queue wait no more than 5 minutes (1/12 hour), under the M/M/1 model with arrival rate 12/hour. Solve</p>
+<p>$$\frac{12}{\mu(\mu-12)}\le\frac1{12}.$$</p>
+<p>Multiplying by positive denominators for $\mu&gt;12$ yields $\mu^2-12\mu-144\ge0$, with positive root</p>
+<p>$$\mu\ge\frac{12+\sqrt{720}}2\approx19.4164\text{ services/hour}.$$</p>
+<p>Thus the model says the service capacity must exceed about 19.42 per hour. In an actual design, add margin for uncertainty, downtime, variation and nonexponential behavior; validate that the measured service distribution supports this queue approximation. Do not round down to 19 and claim the bound is met.</p>
+<h2 id="7-feedback-structure-and-unintended-consequences">7. Feedback structure and unintended consequences</h2>
+<p>A <strong>reinforcing loop</strong> occurs when an effect intensifies the process that created it: long waits → more repeated booking attempts → greater API demand → more latency → longer waits. A <strong>balancing loop</strong> acts to oppose change: backlog rises → dispatch activates extra capacity → service completion rises → backlog declines. These causal sketches are hypotheses until their links, delays and units are translated into observable mechanisms.</p>
+<p>A robust model distinguishes <strong>demand</strong> from <strong>measured requests</strong>: repeated calls may inflate an API arrival counter without representing new riders. Without idempotency, a model may falsely recommend adding vehicle capacity to solve what is actually a retry-policy problem. This connects directly to <a href="F01-requirements-to-assurance.html">F01</a>: architecture semantics determine what the sensor is measuring.</p>
+<p>Feedback delays matter. Adding vehicles may take 30 minutes; public booking demand may shift within two minutes. An aggressive feedback controller responding to stale measurements can overshoot, causing wasteful repositioning or oscillation. A policy can be locally sensible and systemically unstable.</p>
+<h2 id="8-resilience-as-a-trajectory-not-a-label">8. Resilience as a trajectory, not a label</h2>
+<p>Resilience analysis asks how a system <strong>absorbs, adapts, recovers and learns</strong> after disruptions. A useful trajectory includes pre-event level, disturbance magnitude, degraded performance, time to restore, and a post-event configuration. One illustrative loss-of-service integral is</p>
+<p>$$\mathcal{L}=\int_{t_0}^{t_1}[P_{\text{target}}(t)-P(t)]_+,dt,$$</p>
+<p>where $P$ is a clearly chosen performance measure and $[x]_+=\max(x,0)$. The integral is an area under a deficiency curve, with units of performance×time. Lower $\mathcal L$ is better under this one metric, but it may not capture safety or distributional harm. A system that restores average service quickly by deprioritizing wheelchair users might score well on mean throughput while failing accessibility goals.</p>
+<p>For constant target 100 units and performance 60 units for two hours, loss area is $(100-60)\times2=80$ unit-hours. If an alternative maintains 80 units for three hours, its loss is $(100-80)\times3=60$ unit-hours. The latter has lower integrated service loss but longer recovery; which is preferable depends on stakeholder priorities and minimum acceptable service levels.</p>
+<h2 id="9-network-dependencies-and-cascading-failure">9. Network dependencies and cascading failure</h2>
+<p>System-of-systems behavior depends on technical and organizational relationships. Vehicles may be independently operated but share mapping updates, cellular gateways, charging sites, public API authentication and emergency-communications contracts. A network drawing should distinguish physical dependence, information dependence, contractual dependence and common cause.</p>
+<p>Simple network connectivity may reveal a single point of failure but not its probability, repair time or consequence. A hub with high graph centrality is not automatically the most important safety item; a low-degree component may be essential for an emergency mission. The mission consequence of a cut set should be assessed against operational scenarios, not inferred from topology alone.</p>
+<p>An especially important distinction is <strong>resilience versus redundancy</strong>. Two dispatch servers in the same floodplain and on the same power circuit are replicated, but not independent against flood or power loss. Alternative recovery procedures, information pathways, organizational decision rights and geographically separated operations may matter more than another copy of the same hardware.</p>
+<h2 id="10-model-calibration-challenge-and-credibility">10. Model calibration, challenge and credibility</h2>
+<p>Build model credibility through staged tests:</p>
+<ol>
+<li><strong>Dimensional and conservation audit:</strong> are all stocks, rates and time units consistent, and do events conserve bookings?</li>
+<li><strong>Code verification:</strong> do numerical results reproduce analytic special cases like constant-rate accumulation and $\dot{x}=-kx$?</li>
+<li><strong>Structural validation:</strong> does the model represent priority queues, retries, cancellation and fallback mechanisms relevant to the decision?</li>
+<li><strong>Empirical comparison:</strong> do predictions match withheld field observations in different operating regimes?</li>
+<li><strong>Sensitivity and uncertainty:</strong> which input assumptions can reverse the recommended action?</li>
+<li><strong>Operational envelope:</strong> where is the model not credible enough to drive policy?</li>
+</ol>
+<p>If a model predicts 6.7 minutes of mean queue wait under exponential assumptions but observations show 18 minutes, do not patch the output with an arbitrary constant and call it validated. Investigate arrival burstiness, hidden processing stages, class priorities, departures, resource contention, queuing discipline and measurement definitions. A useful model helps identify causes; it does not merely interpolate seen data.</p>
+<h2 id="11-worked-problems-with-explained-answers">11. Worked problems with explained answers</h2>
+<h3 id="exercise-1--stock-flow-accounting">Exercise 1 · Stock-flow accounting</h3>
+<p>Initial backlog 4, arrivals 12/hour, completions 9/hour, constant for two hours. Calculate final backlog, ignoring cancellation.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>$B(2)=4+(12-9)2=10$ accepted bookings. Six additional bookings are accounted for as net inflow.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-2--conservation-defect">Exercise 2 · Conservation defect</h3>
+<p>A simulation starts at 10 jobs, accepts 5 more, completes 7 and abandons 2, but reports 9 remaining. Is it consistent?</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>No. Conservation requires $10+5-7-2=6$ remaining. The discrepancy of 3 must be explained by another modeled flow or a bug; inspect event accounting.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-3--euler-versus-exact-decay">Exercise 3 · Euler versus exact decay</h3>
+<p>For $\dot{x}=-x$, $x(0)=1$, step 0.25, four Euler steps, find $x(1)$ and compare with exact.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>Euler $x_4=(1-0.25)^4=0.31640625$; exact $e^{-1}=0.36787944$. Absolute error about 0.05147; Euler underestimates here.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-4--littles-law">Exercise 4 · Little's law</h3>
+<p>Stable throughput 12 jobs/hour, average system time 15 minutes. Find mean work in system.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>$W=0.25$ hour; $L=\lambda W=12(0.25)=3$ jobs, with matching system boundary and population.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-5--mm1-baseline">Exercise 5 · M/M/1 baseline</h3>
+<p>For $\lambda=12$/hour and $\mu=15$/hour compute utilization, mean queue wait, and mean total time.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>$\rho=12/15=0.8$, $W_q=12/[15(15-12)]=0.266\overline6$ hour = 16 min, $W=1/(15-12)$ hour = 20 min.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-6--increased-service-capacity">Exercise 6 · Increased service capacity</h3>
+<p>At arrival 12/hour, increase service to 18/hour. Calculate mean wait and explain why change is nonlinear.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>$W_q=12/[18(18-12)]=1/9$ hour = 6.667 min; $W=1/6$ hour = 10 min. As capacity margin $\mu-\lambda$ increases, expected backlog and delay fall nonlinearly near saturation.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-7--find-a-capacity-threshold">Exercise 7 · Find a capacity threshold</h3>
+<p>At arrival 12/hour, what service rate gives mean queue wait at most five minutes in M/M/1?</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>Solve $12/[\mu(\mu-12)]\le1/12$: $\mu\ge(12+\sqrt{720})/2\approx19.4164$/hour. A design should use capacity margin and verify the model assumptions.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-8--recovery-area-metric">Exercise 8 · Recovery-area metric</h3>
+<p>Compare service levels 60/100 for two hours versus 80/100 for three hours; which has smaller integrated performance deficiency?</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>First: 80 unit-hours; second: 60 unit-hours. Second is better on this metric, though its longer disruption or distributional impact could matter under other criteria.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-9--reinforcing-loop-intervention">Exercise 9 · Reinforcing-loop intervention</h3>
+<p>Repeated booking attempts rise when delays are high. Identify an intervention that breaks the loop without requiring more vehicles.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>Make request operations idempotent and publish a reliable status with bounded backoff and retry behavior; one original booking should not create multiple active requests. Validate under network faults and measure both unique demand and raw API attempts.</p>
+<p>&lt;/details&gt;</p>
+<h3 id="exercise-10--misleading-redundancy">Exercise 10 · Misleading redundancy</h3>
+<p>Two servers share one electrical switchboard. Explain why multiplying their individual availability values is a poor estimate of joint mission availability.</p>
+<p>&lt;details&gt;&lt;summary&gt;Worked solution&lt;/summary&gt;</p>
+<p>The servers' failures are correlated through the common switchboard. A common-cause power failure can disable both; separate component calculations omit it. Model shared dependencies, recovery options and cut sets, then validate assumptions against failure data and fault injection.</p>
+<p>&lt;/details&gt;</p>
+<h2 id="12-hands-on-laboratory-and-project-deliverable">12. Hands-on laboratory and project deliverable</h2>
+<p>Open <a href="../flagship-notebooks/04-dynamics-queues.ipynb">Lab 4: dynamics and queues</a> or run <code>python flagship-labs/operational_dynamics.py</code>. Use the <a href="../flagship-worksheets/operations-experiment.csv">operations experiment worksheet</a>. Required experiments: check conservation; compare Euler steps; reproduce an M/M/1 capacity calculation; simulate a demand shock with an explicit backlog outflow; examine an intervention that reduces retries; identify where the steady-state queue formula is no longer applicable.</p>
+<p><strong>Deliverable:</strong> a small model credibility package with problem statement, system boundary, equations and units, input provenance, verification benchmarks, at least two validation comparisons (or a documented data gap), sensitivity experiments, decision implications and declared limits. A robust recommendation should survive reasonable changes to numerical resolution and disputed assumptions.</p>
+<p><strong>Connections:</strong> <a href="F01-requirements-to-assurance.html">F01 assurance</a> · <a href="F02-decisions-and-architecture.html">F02 decisions</a> · <a href="F03-statistical-assurance.html">F03 statistical evidence</a>. <strong>References:</strong> <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> and <a href="https://sebokwiki.org/">SEBoK</a>.</p>
+</main></body></html>

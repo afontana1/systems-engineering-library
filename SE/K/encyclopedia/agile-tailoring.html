@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Agile systems engineering and lifecycle tailoring · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/agile-tailoring.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Agile systems engineering and lifecycle tailoring</h1>
+<p><strong>Reference entry · Agile, digital and process engineering · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p><strong>Agile systems engineering</strong> uses feedback and incremental evidence to reduce uncertainty while the system evolves. <strong>Lifecycle tailoring</strong> chooses activities, rigor, cadence, review authorities, and artifacts appropriate to consequence and reversibility. Neither is synonymous with skipping architecture, baselines, or verification. The correct question is how rapidly a team can make an informed, safe decision—not how frequently it can declare a task finished.</p>
+<h2>Theory: feedback economics and controlled change</h2>
+<p>A shorter iteration can reduce the time between making an assumption and finding it wrong. But experiments have costs, dependencies, and hazard exposure. If a physical interface change requires a 12-week supplier lead time and costly qualification, a two-week sprint does not make the change reversible. Design modularity, test automation, digital models, and protected integration environments can lower the <strong>cost of learning</strong>, but only for the assumptions those tools actually exercise.</p>
+<p>Flow efficiency also matters. A task may be actively worked for two days yet wait six weeks for review and integration. Work-in-process limits, dependency mapping, and earlier evidence checks can improve lead time without increasing individual utilization. Assurance work belongs inside the engineering flow; treating it as a final gate creates a hidden queue and concentrates risk before release.</p>
+<h2>Worked example: two appropriate cadences</h2>
+<p>A shuttle program updates dispatch recommendation software weekly. For each build it runs regression tests, checks interface contracts, verifies the production artifact identity, and can roll back. The same program changes emergency braking logic only after hazard analysis, hardware-in-the-loop trials, controlled field evaluation, and independent sign-off. The safety-related change may take months; that is not a failure of agility if earlier experiments narrow uncertainty and prevent a costly late redesign. Both workstreams should track escaped defects, rework, and time-to-credible-evidence rather than story points alone.</p>
+<h2>Engineering use and evidence</h2>
+<p>Partition work by reversibility, consequence, uncertainty, coupling, testability, and change authority. For each class, specify a feedback interval, minimum evidence set, configuration rule, review threshold, and deployment/rollback method. Maintain a common architecture and versioned digital thread so rapid software decisions do not invalidate slower hardware evidence. Retrospectives should identify which assumptions were falsified and which technical controls actually improved learning.</p>
+<h2>Limitations and connections</h2>
+<p>A fast release count can be achieved by reducing test scope or shifting work onto operators. High autonomy without interface discipline can fragment systems. Connect agile tailoring to <strong>flow and queues</strong>, <strong>software lifecycle assurance</strong>, <strong>technical baselines</strong>, <strong>digital-thread provenance</strong>, and <strong>process improvement</strong>.</p>
+<h2>Technical analysis: tailor around consequences, not calendar cadence</h2>
+<p>A lifecycle is a <strong>feedback-and-control architecture</strong>. Its iteration length is only one parameter. Define the decision for each increment, the observation that could change that decision, the interval required to obtain it, and whether the resulting change is reversible. Hardware qualification, operator training, and shared interfaces may impose longer feedback loops than software implementation. A rapid cadence is therefore compatible with a slower, explicitly governed safety baseline.</p>
+<p>For an illustrative integration team, assume implementation takes <strong>4 days</strong>, automated checks <strong>1 day</strong>, and an approval queue <strong>15 days</strong>. End-to-end lead time is <strong>20 days</strong>, so the active-work fraction is only <code>5/20 = 25%</code>. Cutting implementation effort in half yields a <strong>18-day</strong> lead time if the queue is unchanged, not a 50% system improvement. The potentially stronger action is to reduce batch size, improve review readiness, or increase scarce approval capacity; measure the effect without bypassing mandatory independence.</p>
+<p><strong>Evidence boundary.</strong> Track elapsed time from validated demand to accepted engineering evidence, not just code commits or sprint completions. Segment by risk and hardware/software coupling, include rework after reviews, and report deployment incidents. The arithmetic is a deliberately simplified time budget, not a causal estimate that changing a particular approval policy will save 15 days. Tailoring must still respect applicable program-specific standards and authorities.</p>
+<h2>Claim-specific sources</h2>
+<p>The following <strong>selected methodological claims</strong> are tied to identifiable sections or abstracts, not merely generic reading lists. Source scope is stated for each link. Numerical scenarios and computations in this article are <strong>original illustrative examples</strong>, not data, calculations, or endorsements supplied by the linked publishers. Links require internet access; the explanation remains readable offline.</p>
+<ul>
+<li><strong>C1:</strong> Technical plans should tailor effort, rigor, review entry criteria and responsibilities to the system and project constraints. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/6-1-technical-planning/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §6.1 Technical Planning</a> · <em>direct guidance</em>.</li>
+<li><strong>C2:</strong> Software engineering plans and assurance responsibilities must be retained alongside iterative delivery. <strong>Evidence:</strong> <a href="https://swehb.nasa.gov/">NASA — NASA-HDBK-2203 Software Engineering and Assurance Handbook, Software planning, configuration, assurance and product evidence (see software lifecycle topics)</a> · <em>direct guidance</em>.</li>
+</ul>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="flow-wip-and-queues.html">Flow, work in process, and bottlenecks</a></li>
+<li><a href="software-lifecycle-evidence.html">CI/CD, configuration, and software assurance</a></li>
+<li><a href="wbs-and-baselines.html">Work breakdown structures and technical baselines</a></li>
+<li><a href="process-improvement.html">Process capability and continuous improvement</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B15/chapters/02.html">Book 15, Chapter 02: Week 02 · Agile Systems Engineering · Book chapter: Assess project characteristics and tailor the lifecycle, cadence, and controls</a></li>
+<li><a href="../B15/chapters/09.html">Book 15, Chapter 09: Week 09 · Agile Systems Engineering · Book chapter: Build quality, safety, security, and verification into every increment</a></li>
+<li><a href="../B15/chapters/10.html">Book 15, Chapter 10: Week 10 · Agile Systems Engineering · Book chapter: Create a cyber-physical DevSecOps and continual-integration system, then red-team a failed increment</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=ddcc95030144a">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="agile-tailoring.md">Editable Markdown</a></nav></main></body></html>

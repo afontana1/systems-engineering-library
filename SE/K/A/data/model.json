@@ -1,0 +1,22 @@
+{
+  "meta": {"baseline": "teaching-v1", "standard": "simplified educational metamodel, NOT OMG SysML v2"},
+  "nodes": [
+    {"id":"NEED-1","type":"Need"},
+    {"id":"REQ-1","type":"Requirement","criticality":"high"},
+    {"id":"REQ-2","type":"Requirement","criticality":"high"},
+    {"id":"DISPATCH","type":"Component"},
+    {"id":"ROUTE","type":"Component"},
+    {"id":"TEST-1","type":"Test"},
+    {"id":"TEST-2","type":"Test"},
+    {"id":"EV-1","type":"Evidence"}
+  ],
+  "edges": [
+    {"source":"REQ-1","target":"NEED-1","type":"refines"},
+    {"source":"REQ-1","target":"DISPATCH","type":"allocatedTo"},
+    {"source":"REQ-1","target":"TEST-1","type":"verifiedBy"},
+    {"source":"TEST-1","target":"EV-1","type":"produces"},
+    {"source":"REQ-2","target":"ROUTE","type":"allocatedTo"},
+    {"source":"REQ-2","target":"TEST-2","type":"verifiedBy"},
+    {"source":"DISPATCH","target":"ROUTE","type":"dependsOn"}
+  ]
+}

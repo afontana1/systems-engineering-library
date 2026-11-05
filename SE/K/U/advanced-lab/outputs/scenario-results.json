@@ -1,0 +1,957 @@
+{
+  "edition": "v12.0",
+  "system": "Northstar synthetic lab only",
+  "architecture": {
+    "valid": true,
+    "errors": [],
+    "component_count": 7,
+    "interface_count": 8,
+    "requirements_count": 6,
+    "hazards_count": 4,
+    "caveat": "Graph syntax, topology, and declared links checked; behavior and engineering claims need separate review"
+  },
+  "trace": {
+    "pass_links": true,
+    "errors": [],
+    "requirements_linked": 6,
+    "requirements_total": 6,
+    "scenarios_linked": [
+      "BASE",
+      "DELAY",
+      "LOSS",
+      "LOW-CAPACITY",
+      "OUTAGE",
+      "TELEMETRY"
+    ],
+    "caveat": "Links and syntax do not establish test adequacy"
+  },
+  "scenarios": {
+    "BASE": {
+      "scenario": {
+        "id": "BASE",
+        "vehicles": 2,
+        "trip_min": 12.0,
+        "horizon_min": 80.0,
+        "comm_delay_min": 0.0,
+        "drop_probability": 0.0,
+        "outage_vehicle": 0,
+        "outage_start": 0.0,
+        "outage_end": 0.0,
+        "telemetry_block_start": 0.0,
+        "telemetry_block_end": 0.0,
+        "seed": 41
+      },
+      "input_events": 13,
+      "unique_requests": 12,
+      "duplicates_ignored": 1,
+      "rejected_conflicts": 0,
+      "completed": 12,
+      "lost_messages": 0,
+      "unserved_capacity": 0,
+      "completion_fraction": 1.0,
+      "p90_wait_min": 20.0,
+      "vehicle_nonoverlap": true,
+      "records": [
+        {
+          "request_id": "R01",
+          "arrival_min": 0.0,
+          "received_min": 0.0,
+          "vehicle": "V01",
+          "start_min": 0.0,
+          "finish_min": 12.0,
+          "wait_min": 0.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R02",
+          "arrival_min": 4.0,
+          "received_min": 4.0,
+          "vehicle": "V02",
+          "start_min": 4.0,
+          "finish_min": 16.0,
+          "wait_min": 0.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R03",
+          "arrival_min": 8.0,
+          "received_min": 8.0,
+          "vehicle": "V01",
+          "start_min": 12.0,
+          "finish_min": 24.0,
+          "wait_min": 4.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R04",
+          "arrival_min": 12.0,
+          "received_min": 12.0,
+          "vehicle": "V02",
+          "start_min": 16.0,
+          "finish_min": 28.0,
+          "wait_min": 4.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R05",
+          "arrival_min": 16.0,
+          "received_min": 16.0,
+          "vehicle": "V01",
+          "start_min": 24.0,
+          "finish_min": 36.0,
+          "wait_min": 8.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R06",
+          "arrival_min": 20.0,
+          "received_min": 20.0,
+          "vehicle": "V02",
+          "start_min": 28.0,
+          "finish_min": 40.0,
+          "wait_min": 8.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R07",
+          "arrival_min": 24.0,
+          "received_min": 24.0,
+          "vehicle": "V01",
+          "start_min": 36.0,
+          "finish_min": 48.0,
+          "wait_min": 12.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R08",
+          "arrival_min": 28.0,
+          "received_min": 28.0,
+          "vehicle": "V02",
+          "start_min": 40.0,
+          "finish_min": 52.0,
+          "wait_min": 12.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R09",
+          "arrival_min": 32.0,
+          "received_min": 32.0,
+          "vehicle": "V01",
+          "start_min": 48.0,
+          "finish_min": 60.0,
+          "wait_min": 16.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R10",
+          "arrival_min": 36.0,
+          "received_min": 36.0,
+          "vehicle": "V02",
+          "start_min": 52.0,
+          "finish_min": 64.0,
+          "wait_min": 16.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R11",
+          "arrival_min": 40.0,
+          "received_min": 40.0,
+          "vehicle": "V01",
+          "start_min": 60.0,
+          "finish_min": 72.0,
+          "wait_min": 20.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R12",
+          "arrival_min": 44.0,
+          "received_min": 44.0,
+          "vehicle": "V02",
+          "start_min": 64.0,
+          "finish_min": 76.0,
+          "wait_min": 20.0,
+          "status": "completed"
+        }
+      ],
+      "evidence_sha256": "88857612e14554397e6ccb9db82f469f0bb0ce43f625537bdf4fac10ae1a3483",
+      "caveat": "Teaching simulation: omission of geography, accessibility, real faults and human operations prevents field claims"
+    },
+    "OUTAGE": {
+      "scenario": {
+        "id": "OUTAGE",
+        "vehicles": 2,
+        "trip_min": 12.0,
+        "horizon_min": 80.0,
+        "comm_delay_min": 0.0,
+        "drop_probability": 0.0,
+        "outage_vehicle": 1,
+        "outage_start": 0,
+        "outage_end": 70,
+        "telemetry_block_start": 0.0,
+        "telemetry_block_end": 0.0,
+        "seed": 41
+      },
+      "input_events": 13,
+      "unique_requests": 12,
+      "duplicates_ignored": 1,
+      "rejected_conflicts": 0,
+      "completed": 6,
+      "lost_messages": 0,
+      "unserved_capacity": 6,
+      "completion_fraction": 0.5,
+      "p90_wait_min": 40.0,
+      "vehicle_nonoverlap": true,
+      "records": [
+        {
+          "request_id": "R01",
+          "arrival_min": 0.0,
+          "received_min": 0.0,
+          "vehicle": "V02",
+          "start_min": 0.0,
+          "finish_min": 12.0,
+          "wait_min": 0.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R02",
+          "arrival_min": 4.0,
+          "received_min": 4.0,
+          "vehicle": "V02",
+          "start_min": 12.0,
+          "finish_min": 24.0,
+          "wait_min": 8.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R03",
+          "arrival_min": 8.0,
+          "received_min": 8.0,
+          "vehicle": "V02",
+          "start_min": 24.0,
+          "finish_min": 36.0,
+          "wait_min": 16.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R04",
+          "arrival_min": 12.0,
+          "received_min": 12.0,
+          "vehicle": "V02",
+          "start_min": 36.0,
+          "finish_min": 48.0,
+          "wait_min": 24.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R05",
+          "arrival_min": 16.0,
+          "received_min": 16.0,
+          "vehicle": "V02",
+          "start_min": 48.0,
+          "finish_min": 60.0,
+          "wait_min": 32.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R06",
+          "arrival_min": 20.0,
+          "received_min": 20.0,
+          "vehicle": "V02",
+          "start_min": 60.0,
+          "finish_min": 72.0,
+          "wait_min": 40.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R07",
+          "arrival_min": 24.0,
+          "received_min": 24.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R08",
+          "arrival_min": 28.0,
+          "received_min": 28.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R09",
+          "arrival_min": 32.0,
+          "received_min": 32.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R10",
+          "arrival_min": 36.0,
+          "received_min": 36.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R11",
+          "arrival_min": 40.0,
+          "received_min": 40.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R12",
+          "arrival_min": 44.0,
+          "received_min": 44.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        }
+      ],
+      "evidence_sha256": "ec4290e92e87e07ddc8877ca23311a80ee13c5968409a8c7862ce6bab89d0b8e",
+      "caveat": "Teaching simulation: omission of geography, accessibility, real faults and human operations prevents field claims"
+    },
+    "LOSS": {
+      "scenario": {
+        "id": "LOSS",
+        "vehicles": 2,
+        "trip_min": 12.0,
+        "horizon_min": 80.0,
+        "comm_delay_min": 0.0,
+        "drop_probability": 0.4,
+        "outage_vehicle": 0,
+        "outage_start": 0.0,
+        "outage_end": 0.0,
+        "telemetry_block_start": 0.0,
+        "telemetry_block_end": 0.0,
+        "seed": 41
+      },
+      "input_events": 13,
+      "unique_requests": 12,
+      "duplicates_ignored": 1,
+      "rejected_conflicts": 0,
+      "completed": 8,
+      "lost_messages": 4,
+      "unserved_capacity": 0,
+      "completion_fraction": 0.666667,
+      "p90_wait_min": 8.0,
+      "vehicle_nonoverlap": true,
+      "records": [
+        {
+          "request_id": "R01",
+          "arrival_min": 0.0,
+          "received_min": null,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unobserved_message_loss"
+        },
+        {
+          "request_id": "R02",
+          "arrival_min": 4.0,
+          "received_min": null,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unobserved_message_loss"
+        },
+        {
+          "request_id": "R03",
+          "arrival_min": 8.0,
+          "received_min": null,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unobserved_message_loss"
+        },
+        {
+          "request_id": "R04",
+          "arrival_min": 12.0,
+          "received_min": 12.0,
+          "vehicle": "V01",
+          "start_min": 12.0,
+          "finish_min": 24.0,
+          "wait_min": 0.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R05",
+          "arrival_min": 16.0,
+          "received_min": 16.0,
+          "vehicle": "V02",
+          "start_min": 16.0,
+          "finish_min": 28.0,
+          "wait_min": 0.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R06",
+          "arrival_min": 20.0,
+          "received_min": 20.0,
+          "vehicle": "V01",
+          "start_min": 24.0,
+          "finish_min": 36.0,
+          "wait_min": 4.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R07",
+          "arrival_min": 24.0,
+          "received_min": 24.0,
+          "vehicle": "V02",
+          "start_min": 28.0,
+          "finish_min": 40.0,
+          "wait_min": 4.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R08",
+          "arrival_min": 28.0,
+          "received_min": null,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unobserved_message_loss"
+        },
+        {
+          "request_id": "R09",
+          "arrival_min": 32.0,
+          "received_min": 32.0,
+          "vehicle": "V01",
+          "start_min": 36.0,
+          "finish_min": 48.0,
+          "wait_min": 4.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R10",
+          "arrival_min": 36.0,
+          "received_min": 36.0,
+          "vehicle": "V02",
+          "start_min": 40.0,
+          "finish_min": 52.0,
+          "wait_min": 4.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R11",
+          "arrival_min": 40.0,
+          "received_min": 40.0,
+          "vehicle": "V01",
+          "start_min": 48.0,
+          "finish_min": 60.0,
+          "wait_min": 8.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R12",
+          "arrival_min": 44.0,
+          "received_min": 44.0,
+          "vehicle": "V02",
+          "start_min": 52.0,
+          "finish_min": 64.0,
+          "wait_min": 8.0,
+          "status": "completed"
+        }
+      ],
+      "evidence_sha256": "019e3185079a48fe7adc4e3ffa9e3c980e13be7a39233878f8c6f4fc88b59ede",
+      "caveat": "Teaching simulation: omission of geography, accessibility, real faults and human operations prevents field claims"
+    },
+    "DELAY": {
+      "scenario": {
+        "id": "DELAY",
+        "vehicles": 2,
+        "trip_min": 12.0,
+        "horizon_min": 80.0,
+        "comm_delay_min": 12,
+        "drop_probability": 0.0,
+        "outage_vehicle": 0,
+        "outage_start": 0.0,
+        "outage_end": 0.0,
+        "telemetry_block_start": 0.0,
+        "telemetry_block_end": 0.0,
+        "seed": 41
+      },
+      "input_events": 13,
+      "unique_requests": 12,
+      "duplicates_ignored": 1,
+      "rejected_conflicts": 0,
+      "completed": 10,
+      "lost_messages": 0,
+      "unserved_capacity": 2,
+      "completion_fraction": 0.833333,
+      "p90_wait_min": 28.0,
+      "vehicle_nonoverlap": true,
+      "records": [
+        {
+          "request_id": "R01",
+          "arrival_min": 0.0,
+          "received_min": 12.0,
+          "vehicle": "V01",
+          "start_min": 12.0,
+          "finish_min": 24.0,
+          "wait_min": 12.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R02",
+          "arrival_min": 4.0,
+          "received_min": 16.0,
+          "vehicle": "V02",
+          "start_min": 16.0,
+          "finish_min": 28.0,
+          "wait_min": 12.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R03",
+          "arrival_min": 8.0,
+          "received_min": 20.0,
+          "vehicle": "V01",
+          "start_min": 24.0,
+          "finish_min": 36.0,
+          "wait_min": 16.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R04",
+          "arrival_min": 12.0,
+          "received_min": 24.0,
+          "vehicle": "V02",
+          "start_min": 28.0,
+          "finish_min": 40.0,
+          "wait_min": 16.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R05",
+          "arrival_min": 16.0,
+          "received_min": 28.0,
+          "vehicle": "V01",
+          "start_min": 36.0,
+          "finish_min": 48.0,
+          "wait_min": 20.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R06",
+          "arrival_min": 20.0,
+          "received_min": 32.0,
+          "vehicle": "V02",
+          "start_min": 40.0,
+          "finish_min": 52.0,
+          "wait_min": 20.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R07",
+          "arrival_min": 24.0,
+          "received_min": 36.0,
+          "vehicle": "V01",
+          "start_min": 48.0,
+          "finish_min": 60.0,
+          "wait_min": 24.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R08",
+          "arrival_min": 28.0,
+          "received_min": 40.0,
+          "vehicle": "V02",
+          "start_min": 52.0,
+          "finish_min": 64.0,
+          "wait_min": 24.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R09",
+          "arrival_min": 32.0,
+          "received_min": 44.0,
+          "vehicle": "V01",
+          "start_min": 60.0,
+          "finish_min": 72.0,
+          "wait_min": 28.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R10",
+          "arrival_min": 36.0,
+          "received_min": 48.0,
+          "vehicle": "V02",
+          "start_min": 64.0,
+          "finish_min": 76.0,
+          "wait_min": 28.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R11",
+          "arrival_min": 40.0,
+          "received_min": 52.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R12",
+          "arrival_min": 44.0,
+          "received_min": 56.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        }
+      ],
+      "evidence_sha256": "a348b204a1789bd6896aaa1b4150fb4b22a431e3be0863aade14495088741571",
+      "caveat": "Teaching simulation: omission of geography, accessibility, real faults and human operations prevents field claims"
+    },
+    "TELEMETRY": {
+      "scenario": {
+        "id": "TELEMETRY",
+        "vehicles": 2,
+        "trip_min": 12.0,
+        "horizon_min": 80.0,
+        "comm_delay_min": 0.0,
+        "drop_probability": 0.0,
+        "outage_vehicle": 0,
+        "outage_start": 0.0,
+        "outage_end": 0.0,
+        "telemetry_block_start": 0,
+        "telemetry_block_end": 45,
+        "seed": 41
+      },
+      "input_events": 13,
+      "unique_requests": 12,
+      "duplicates_ignored": 1,
+      "rejected_conflicts": 0,
+      "completed": 4,
+      "lost_messages": 0,
+      "unserved_capacity": 8,
+      "completion_fraction": 0.333333,
+      "p90_wait_min": 49.0,
+      "vehicle_nonoverlap": true,
+      "records": [
+        {
+          "request_id": "R01",
+          "arrival_min": 0.0,
+          "received_min": 0.0,
+          "vehicle": "V01",
+          "start_min": 45,
+          "finish_min": 57.0,
+          "wait_min": 45.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R02",
+          "arrival_min": 4.0,
+          "received_min": 4.0,
+          "vehicle": "V02",
+          "start_min": 45,
+          "finish_min": 57.0,
+          "wait_min": 41.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R03",
+          "arrival_min": 8.0,
+          "received_min": 8.0,
+          "vehicle": "V01",
+          "start_min": 57.0,
+          "finish_min": 69.0,
+          "wait_min": 49.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R04",
+          "arrival_min": 12.0,
+          "received_min": 12.0,
+          "vehicle": "V02",
+          "start_min": 57.0,
+          "finish_min": 69.0,
+          "wait_min": 45.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R05",
+          "arrival_min": 16.0,
+          "received_min": 16.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R06",
+          "arrival_min": 20.0,
+          "received_min": 20.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R07",
+          "arrival_min": 24.0,
+          "received_min": 24.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R08",
+          "arrival_min": 28.0,
+          "received_min": 28.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R09",
+          "arrival_min": 32.0,
+          "received_min": 32.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R10",
+          "arrival_min": 36.0,
+          "received_min": 36.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R11",
+          "arrival_min": 40.0,
+          "received_min": 40.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R12",
+          "arrival_min": 44.0,
+          "received_min": 44.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        }
+      ],
+      "evidence_sha256": "555b2fc8cf5f76ec5eeaf344640361f77c07cfa8a1caf164f489222af282bb52",
+      "caveat": "Teaching simulation: omission of geography, accessibility, real faults and human operations prevents field claims"
+    },
+    "LOW-CAPACITY": {
+      "scenario": {
+        "id": "LOW-CAPACITY",
+        "vehicles": 1,
+        "trip_min": 12.0,
+        "horizon_min": 80.0,
+        "comm_delay_min": 0.0,
+        "drop_probability": 0.0,
+        "outage_vehicle": 0,
+        "outage_start": 0.0,
+        "outage_end": 0.0,
+        "telemetry_block_start": 0.0,
+        "telemetry_block_end": 0.0,
+        "seed": 41
+      },
+      "input_events": 13,
+      "unique_requests": 12,
+      "duplicates_ignored": 1,
+      "rejected_conflicts": 0,
+      "completed": 6,
+      "lost_messages": 0,
+      "unserved_capacity": 6,
+      "completion_fraction": 0.5,
+      "p90_wait_min": 40.0,
+      "vehicle_nonoverlap": true,
+      "records": [
+        {
+          "request_id": "R01",
+          "arrival_min": 0.0,
+          "received_min": 0.0,
+          "vehicle": "V01",
+          "start_min": 0.0,
+          "finish_min": 12.0,
+          "wait_min": 0.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R02",
+          "arrival_min": 4.0,
+          "received_min": 4.0,
+          "vehicle": "V01",
+          "start_min": 12.0,
+          "finish_min": 24.0,
+          "wait_min": 8.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R03",
+          "arrival_min": 8.0,
+          "received_min": 8.0,
+          "vehicle": "V01",
+          "start_min": 24.0,
+          "finish_min": 36.0,
+          "wait_min": 16.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R04",
+          "arrival_min": 12.0,
+          "received_min": 12.0,
+          "vehicle": "V01",
+          "start_min": 36.0,
+          "finish_min": 48.0,
+          "wait_min": 24.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R05",
+          "arrival_min": 16.0,
+          "received_min": 16.0,
+          "vehicle": "V01",
+          "start_min": 48.0,
+          "finish_min": 60.0,
+          "wait_min": 32.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R06",
+          "arrival_min": 20.0,
+          "received_min": 20.0,
+          "vehicle": "V01",
+          "start_min": 60.0,
+          "finish_min": 72.0,
+          "wait_min": 40.0,
+          "status": "completed"
+        },
+        {
+          "request_id": "R07",
+          "arrival_min": 24.0,
+          "received_min": 24.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R08",
+          "arrival_min": 28.0,
+          "received_min": 28.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R09",
+          "arrival_min": 32.0,
+          "received_min": 32.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R10",
+          "arrival_min": 36.0,
+          "received_min": 36.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R11",
+          "arrival_min": 40.0,
+          "received_min": 40.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        },
+        {
+          "request_id": "R12",
+          "arrival_min": 44.0,
+          "received_min": 44.0,
+          "vehicle": null,
+          "start_min": null,
+          "finish_min": null,
+          "wait_min": null,
+          "status": "unserved_capacity"
+        }
+      ],
+      "evidence_sha256": "edcbae35c993e3751de545d8a4b1680563a7fdd3032f26fe22d52ad3c26dd0d4",
+      "caveat": "Teaching simulation: omission of geography, accessibility, real faults and human operations prevents field claims"
+    }
+  },
+  "experiment": {
+    "replications": 20,
+    "independent_arrival_streams": 20,
+    "seed": 911,
+    "mean_gap_min": 4.0,
+    "n": 12,
+    "mean_baseline": 0.85,
+    "mean_faulted": 0.475,
+    "paired_mean_difference": -0.375,
+    "approximate_normal_95pct_interval": [
+      -0.428651,
+      -0.321349
+    ],
+    "caveat": "Normal approximation for Monte Carlo precision of a synthetic model, NOT confidence in field effects or validity"
+  },
+  "checks": {
+    "architecture_graph_valid": true,
+    "trace_links_valid": true,
+    "baseline_no_overlap": true,
+    "outage_no_overlap": true,
+    "duplicate_idempotency_fixture": true,
+    "outage_fault_reduces_or_matches_service": true,
+    "message_loss_visible": true,
+    "telemetry_suppression_is_modeled": true
+  },
+  "fixture_checks_pass": true,
+  "board_recommendation": "NOT READY FOR FIELD USE: only synthetic model and local software evidence"
+}

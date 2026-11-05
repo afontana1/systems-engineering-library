@@ -1,0 +1,73 @@
+course,week,original_week_title,companion_markdown,study_guide
+645-632,1,"Receive the baseline, define intended use, and tailor the MBSE method and modeling plan",lessons/645-632-w01.md,../../phase-3/en-645-632-applied-analytics-for-model-based-systems-engineering.md#week-1
+645-632,2,"Analyze stakeholders, mission, scenarios, outcomes, and measures in the authoritative model",lessons/645-632-w02.md,../../phase-3/en-645-632-applied-analytics-for-model-based-systems-engineering.md#week-2
+645-632,3,Develop and analyze the functional architecture from black-box behavior to allocated white-box functions,lessons/645-632-w03.md,../../phase-3/en-645-632-applied-analytics-for-model-based-systems-engineering.md#week-3
+645-632,4,"Model state-based behavior, modes, exceptions, hazards, and temporal consistency",lessons/645-632-w04.md,../../phase-3/en-645-632-applied-analytics-for-model-based-systems-engineering.md#week-4
+645-632,5,Specify and evaluate the logical architecture and its responsibilities,lessons/645-632-w05.md,../../phase-3/en-645-632-applied-analytics-for-model-based-systems-engineering.md#week-5
+645-632,6,"Specify interfaces, exchanges, allocations, ownership, and model-based change exposure",lessons/645-632-w06.md,../../phase-3/en-645-632-applied-analytics-for-model-based-systems-engineering.md#week-6
+645-632,7,"Elicit, derive, validate, and query system requirements from the integrated analysis",lessons/645-632-w07.md,../../phase-3/en-645-632-applied-analytics-for-model-based-systems-engineering.md#week-7
+645-632,8,"Build executable parametric models with units, provenance, constraints, and linked analytics",lessons/645-632-w08.md,../../phase-3/en-645-632-applied-analytics-for-model-based-systems-engineering.md#week-8
+645-632,9,"Explore the trade space with alternatives, uncertainty, sensitivity, and model-based decision records",lessons/645-632-w09.md,../../phase-3/en-645-632-applied-analytics-for-model-based-systems-engineering.md#week-9
+645-632,10,"Specify physical architectures, variants, configurations, instances, and lifecycle baselines",lessons/645-632-w10.md,../../phase-3/en-645-632-applied-analytics-for-model-based-systems-engineering.md#week-10
+645-632,11,"Extend the modeling language and automate queries, validation rules, matrices, and generated products",lessons/645-632-w11.md,../../phase-3/en-645-632-applied-analytics-for-model-based-systems-engineering.md#week-11
+645-632,12,"Verify and validate the model, assess the design, respond to change, and defend the final baseline",lessons/645-632-w12.md,../../phase-3/en-645-632-applied-analytics-for-model-based-systems-engineering.md#week-12
+645-756,1,Define the lifecycle technical-measurement strategy and decision chain,lessons/645-756-w01.md,../../phase-3/en-645-756-metrics-modeling-and-simulation-for-systems-engineering.md#week-1
+645-756,2,"Characterize probability distributions, tails, dependence, and stochastic performance",lessons/645-756-w02.md,../../phase-3/en-645-756-metrics-modeling-and-simulation-for-systems-engineering.md#week-2
+645-756,3,"Establish data provenance, sampling validity, exploratory analysis, and measurement uncertainty",lessons/645-756-w03.md,../../phase-3/en-645-756-metrics-modeling-and-simulation-for-systems-engineering.md#week-3
+645-756,4,"Use estimation, confidence intervals, hypothesis, equivalence, and engineering significance",lessons/645-756-w04.md,../../phase-3/en-645-756-metrics-modeling-and-simulation-for-systems-engineering.md#week-4
+645-756,5,"Design efficient experiments with factors, responses, noise, power, randomization, and blocking",lessons/645-756-w05.md,../../phase-3/en-645-756-metrics-modeling-and-simulation-for-systems-engineering.md#week-5
+645-756,6,"Analyze factorial experiments, interactions, diagnostics, and confirmation evidence",lessons/645-756-w06.md,../../phase-3/en-645-756-metrics-modeling-and-simulation-for-systems-engineering.md#week-6
+645-756,7,Build and validate performance response models across use and environment,lessons/645-756-w07.md,../../phase-3/en-645-756-metrics-modeling-and-simulation-for-systems-engineering.md#week-7
+645-756,8,"Analyze reliability, availability, maintainability, degradation, and censored evidence",lessons/645-756-w08.md,../../phase-3/en-645-756-metrics-modeling-and-simulation-for-systems-engineering.md#week-8
+645-756,9,Propagate uncertainty with analytic Monte Carlo simulation and sensitivity analysis,lessons/645-756-w09.md,../../phase-3/en-645-756-metrics-modeling-and-simulation-for-systems-engineering.md#week-9
+645-756,10,"Quantify requirement compliance, technical margin, allocation risk, and design options",lessons/645-756-w10.md,../../phase-3/en-645-756-metrics-modeling-and-simulation-for-systems-engineering.md#week-10
+645-756,11,"Update lifecycle evidence and decide among upgrade, replacement, retirement, or more information",lessons/645-756-w11.md,../../phase-3/en-645-756-metrics-modeling-and-simulation-for-systems-engineering.md#week-11
+645-756,12,"Integrate, reproduce, challenge, and defend the lifecycle analytics decision",lessons/645-756-w12.md,../../phase-3/en-645-756-metrics-modeling-and-simulation-for-systems-engineering.md#week-12
+645-757,1,"Frame the M&S decision, intended use, terminology, and model-method trade space",lessons/645-757-w01.md,../../phase-3/en-645-757-foundations-of-modeling-and-simulation-in-systems-engineering.md#week-1
+645-757,2,Develop the M&S plan and conceptual model before implementation,lessons/645-757-w02.md,../../phase-3/en-645-757-foundations-of-modeling-and-simulation-in-systems-engineering.md#week-2
+645-757,3,"Characterize data quality, probability, dependence, and stochastic input models",lessons/645-757-w03.md,../../phase-3/en-645-757-foundations-of-modeling-and-simulation-in-systems-engineering.md#week-3
+645-757,4,"Use M&S for needs, opportunity, current-state, and baseline analysis",lessons/645-757-w04.md,../../phase-3/en-645-757-foundations-of-modeling-and-simulation-in-systems-engineering.md#week-4
+645-757,5,"Implement discrete-event processes, resources, queues, priorities, and statistics",lessons/645-757-w05.md,../../phase-3/en-645-757-foundations-of-modeling-and-simulation-in-systems-engineering.md#week-5
+645-757,6,Model detailed operations and complete computational verification,lessons/645-757-w06.md,../../phase-3/en-645-757-foundations-of-modeling-and-simulation-in-systems-engineering.md#week-6
+645-757,7,"Use simulation for concept exploration, alternatives, and scenario analysis",lessons/645-757-w07.md,../../phase-3/en-645-757-foundations-of-modeling-and-simulation-in-systems-engineering.md#week-7
+645-757,8,Analyze transient and steady-state output with defensible run controls,lessons/645-757-w08.md,../../phase-3/en-645-757-foundations-of-modeling-and-simulation-in-systems-engineering.md#week-8
+645-757,9,"Apply simulation in design and development using selection, ranking, and design of experiments",lessons/645-757-w09.md,../../phase-3/en-645-757-foundations-of-modeling-and-simulation-in-systems-engineering.md#week-9
+645-757,10,"Use M&S to support integration, verification, validation, and test decisions",lessons/645-757-w10.md,../../phase-3/en-645-757-foundations-of-modeling-and-simulation-in-systems-engineering.md#week-10
+645-757,11,"Plan and evaluate verification, validation, credibility, and accreditation for intended use",lessons/645-757-w11.md,../../phase-3/en-645-757-foundations-of-modeling-and-simulation-in-systems-engineering.md#week-11
+645-757,12,"Apply M&S to production and sustainment, survey advanced methods, and defend the final baseline",lessons/645-757-w12.md,../../phase-3/en-645-757-foundations-of-modeling-and-simulation-in-systems-engineering.md#week-12
+645-758,1,"Frame the advanced M&S decision, intended use, architecture, and credibility strategy",lessons/645-758-w01.md,../../phase-3/en-645-758-advanced-systems-modeling-and-simulation.md#week-1
+645-758,2,"Derive dynamic-system mathematics, standard forms, block diagrams, and numerical evidence",lessons/645-758-w02.md,../../phase-3/en-645-758-advanced-systems-modeling-and-simulation.md#week-2
+645-758,3,Model translational and rotational mechanical dynamics with realistic losses and constraints,lessons/645-758-w03.md,../../phase-3/en-645-758-advanced-systems-modeling-and-simulation.md#week-3
+645-758,4,"Couple electrical, electromechanical, thermal, and fluid domains",lessons/645-758-w04.md,../../phase-3/en-645-758-advanced-systems-modeling-and-simulation.md#week-4
+645-758,5,"Link MBSE, XML metadata, collaborative environments, and reusable M&S assets",lessons/645-758-w05.md,../../phase-3/en-645-758-advanced-systems-modeling-and-simulation.md#week-5
+645-758,6,"Design interoperable HLA/FMI federations, LVC interfaces, and composable co-simulations",lessons/645-758-w06.md,../../phase-3/en-645-758-advanced-systems-modeling-and-simulation.md#week-6
+645-758,7,Integrate the model baseline and design advanced simulation experiments,lessons/645-758-w07.md,../../phase-3/en-645-758-advanced-systems-modeling-and-simulation.md#week-7
+645-758,8,"Model natural and man-made environments as dynamic, correlated scenario systems",lessons/645-758-w08.md,../../phase-3/en-645-758-advanced-systems-modeling-and-simulation.md#week-8
+645-758,9,"Integrate technical performance with lifecycle cost, resources, maintenance, and affordability",lessons/645-758-w09.md,../../phase-3/en-645-758-advanced-systems-modeling-and-simulation.md#week-9
+645-758,10,Extend the model to population or biological dynamics and communicate behavior through visualization,lessons/645-758-w10.md,../../phase-3/en-645-758-advanced-systems-modeling-and-simulation.md#week-10
+645-758,11,"Assess continuous, discrete, hybrid, fixed-step, real-time, HIL, and final credibility constraints",lessons/645-758-w11.md,../../phase-3/en-645-758-advanced-systems-modeling-and-simulation.md#week-11
+645-758,12,"Reproduce, challenge, present, and defend the final complex-system simulation study",lessons/645-758-w12.md,../../phase-3/en-645-758-advanced-systems-modeling-and-simulation.md#week-12
+645-781,1,Establish why systems thinking is needed and frame a learning challenge,lessons/645-781-w01.md,../../phase-3/en-645-781-systems-thinking-and-systems-dynamics.md#week-1
+645-781,2,"Define dynamic behavior with reference modes, evidence, and time horizons",lessons/645-781-w02.md,../../phase-3/en-645-781-systems-thinking-and-systems-dynamics.md#week-2
+645-781,3,Build causal-loop diagrams as testable feedback hypotheses,lessons/645-781-w03.md,../../phase-3/en-645-781-systems-thinking-and-systems-dynamics.md#week-3
+645-781,4,Use archetypes and mental models to generate competing intervention hypotheses,lessons/645-781-w04.md,../../phase-3/en-645-781-systems-thinking-and-systems-dynamics.md#week-4
+645-781,5,"Translate feedback hypotheses into stocks, flows, units, and accumulation equations",lessons/645-781-w05.md,../../phase-3/en-645-781-systems-thinking-and-systems-dynamics.md#week-5
+645-781,6,Implement and verify the first executable Vensim model,lessons/645-781-w06.md,../../phase-3/en-645-781-systems-thinking-and-systems-dynamics.md#week-6
+645-781,7,"Explain delays, nonlinearities, oscillation, overshoot, and changing loop dominance",lessons/645-781-w07.md,../../phase-3/en-645-781-systems-thinking-and-systems-dynamics.md#week-7
+645-781,8,"Test structure and behavior, use data responsibly, and make a credibility claim",lessons/645-781-w08.md,../../phase-3/en-645-781-systems-thinking-and-systems-dynamics.md#week-8
+645-781,9,Apply feedback modeling to supply management and inventory dynamics,lessons/645-781-w09.md,../../phase-3/en-645-781-systems-thinking-and-systems-dynamics.md#week-9
+645-781,10,Apply systems thinking to healthcare and human-service delivery,lessons/645-781-w10.md,../../phase-3/en-645-781-systems-thinking-and-systems-dynamics.md#week-10
+645-781,11,"Design robust policy portfolios and identify leverage, resistance, and unintended consequences",lessons/645-781-w11.md,../../phase-3/en-645-781-systems-thinking-and-systems-dynamics.md#week-11
+645-781,12,"Defend the integrated systems insight, model use, and learning strategy",lessons/645-781-w12.md,../../phase-3/en-645-781-systems-thinking-and-systems-dynamics.md#week-12
+645-784,1,"Frame the decision, distinguish problem types, and expose decision-process risk",lessons/645-784-w01.md,../../phase-3/en-645-784-decision-science-and-analytics-in-systems-engineering.md#week-1
+645-784,2,"Translate stakeholder values into objectives, measures, and value structure",lessons/645-784-w02.md,../../phase-3/en-645-784-decision-science-and-analytics-in-systems-engineering.md#week-2
+645-784,3,"Model decisions, uncertainties, evidence, constraints, and alternatives",lessons/645-784-w03.md,../../phase-3/en-645-784-decision-science-and-analytics-in-systems-engineering.md#week-3
+645-784,4,"Apply constraints, dominance, and Pareto analysis to the selection problem",lessons/645-784-w04.md,../../phase-3/en-645-784-decision-science-and-analytics-in-systems-engineering.md#week-4
+645-784,5,Converge on a preferred selection using transparent value and decision methods,lessons/645-784-w05.md,../../phase-3/en-645-784-decision-science-and-analytics-in-systems-engineering.md#week-5
+645-784,6,"Visualize, communicate, and defend the pilot selection decision",lessons/645-784-w06.md,../../phase-3/en-645-784-decision-science-and-analytics-in-systems-engineering.md#week-6
+645-784,7,Reframe the engineering design problem and generate alternatives through morphology,lessons/645-784-w07.md,../../phase-3/en-645-784-decision-science-and-analytics-in-systems-engineering.md#week-7
+645-784,8,Formulate parametric design and conduct multiobjective search,lessons/645-784-w08.md,../../phase-3/en-645-784-decision-science-and-analytics-in-systems-engineering.md#week-8
+645-784,9,Design computational experiments to learn efficiently from the design space,lessons/645-784-w09.md,../../phase-3/en-645-784-decision-science-and-analytics-in-systems-engineering.md#week-9
+645-784,10,"Build, validate, and use surrogate models without hiding approximation error",lessons/645-784-w10.md,../../phase-3/en-645-784-decision-science-and-analytics-in-systems-engineering.md#week-10
+645-784,11,"Analyze uncertainty, sensitivity, robustness, regret, and value of information",lessons/645-784-w11.md,../../phase-3/en-645-784-decision-science-and-analytics-in-systems-engineering.md#week-11
+645-784,12,"Integrate, communicate, and defend the engineering design decision",lessons/645-784-w12.md,../../phase-3/en-645-784-decision-science-and-analytics-in-systems-engineering.md#week-12

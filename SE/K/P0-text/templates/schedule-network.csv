@@ -1,0 +1,6 @@
+Activity,Description,Duration_days,Predecessors
+A,Architecture authorization,3,
+B,Procure interface equipment,5,A
+C,Controller/dispatch definition,4,A
+D,Integration demo,3,B;C
+E,Acceptance review,2,D

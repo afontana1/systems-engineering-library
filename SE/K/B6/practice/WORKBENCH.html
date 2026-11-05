@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Interactive engineering workbench · Book 6 · Systems Engineering Learning Library</title><style>
+:root{--ink:#18374b;--teal:#08747a;--line:#d8e4e7;--muted:#617480}*{box-sizing:border-box}body{margin:0;background:#f3f6f7;color:var(--ink);font:16px/1.7 system-ui,Segoe UI,Arial,sans-serif}header{background:#173d51;color:white;padding:20px max(22px,calc((100vw - 1070px)/2))}header a{color:#ccedee}header h1{margin:6px 0;font-size:1.6rem;line-height:1.2}main{max-width:1100px;margin:24px auto;padding:34px 44px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 9px 30px #18374b0b}article h1{font-size:1.65rem}article h2{border-bottom:1px solid #e0e9eb;padding-top:14px;padding-bottom:6px;font-size:1.35rem}article h3{font-size:1.1rem}article p,article li{max-width:85ch}article table{border-collapse:collapse;width:100%;font-size:.94rem}article th,article td{border:1px solid var(--line);padding:9px;text-align:left}article th{background:#edf6f5}pre{overflow-x:auto;background:#142e40;color:#f0f5f7;padding:17px;border-radius:9px}pre code{color:inherit}code{font-size:.91em}p code,li code{background:#eaf1f2;padding:2px 4px}a{color:var(--teal)}a:hover{text-decoration-thickness:2px}details{background:#f1f7f6;border-left:3px solid #65a5a3;border-radius:7px;padding:8px 15px;margin:12px 0}summary{cursor:pointer;font-weight:650}.links{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.links a{display:inline-block;padding:7px 12px;border:1px solid #a6ceca;border-radius:8px;background:#e6f4f1;text-decoration:none;font-weight:600}.note{background:#edf7f6;padding:15px;border-left:4px solid #318a86;border-radius:8px}img,svg{max-width:100%}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}button,input{font:inherit}button{cursor:pointer} .workbench{background:#eef7f6;padding:20px;border-radius:12px;border:1px solid #c4e1dd}.ctrl{margin:15px 0}.ctrl label{display:block;font-weight:600}.ctrl input{width:100%}.output{font-size:1.4rem;font-weight:800;line-height:1.25} @media(max-width:650px){main{padding:19px;margin:10px}}
+</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B6/practice/WORKBENCH.html" data-se-mode="standard"></script>
+</head><body><header><div>Systems Engineering · Advanced Book Practice</div><h1>Interactive engineering workbench · Book 6</h1><a href="../OPEN-BOOK.html">Back to book</a> · <a href="INDEX.html">Advanced practice</a></header><main><article><div class="workbench"><p>Expected-loss preference and energy feasibility are different decision gates. All loss units are synthetic.</p><div class="ctrl"><label for="stress_probability">Stress Probability: <output id="o_stress_probability">0.25</output></label><input aria-label="stress probability" id="stress_probability" type="range" min="0" max="1" step="0.01" value="0.25"></div><div class="ctrl"><label for="charger_efficiency">Charger Efficiency: <output id="o_charger_efficiency">0.85</output></label><input aria-label="charger efficiency" id="charger_efficiency" type="range" min="0.5" max="1" step="0.01" value="0.85"></div><p id="result" class="output" aria-live="polite"></p></div><h2>Runnable Python source</h2><div class="links"><a href="book6.py" download>Download Python</a><a href="book6.ipynb" download>Download Jupyter notebook</a><a href="book6-concepts.csv" download>Download CSV</a></div><pre><code class="language-python">&quot;&quot;&quot;Independent teaching model — synthetic inputs and simplified assumptions.&quot;&quot;&quot;
+from math import exp, log
+
+def charging_feasible(vehicles, kwh_per_vehicle, chargers, kw, hours, efficiency=0.85):
+    if min(vehicles, kwh_per_vehicle, chargers, kw, hours, efficiency) &lt; 0 or efficiency &gt; 1:
+        raise ValueError(&#x27;domain&#x27;)
+    demand = vehicles * kwh_per_vehicle
+    supply = chargers * kw * hours * efficiency
+    return {&#x27;demand_kwh&#x27;: demand, &#x27;supply_kwh&#x27;: supply, &#x27;margin_kwh&#x27;: supply - demand, &#x27;feasible&#x27;: supply &gt;= demand}
+
+def regret_matrix(losses):
+    &quot;&quot;&quot;losses: dict of alternative -&gt; sequence of scenario losses; smaller better.&quot;&quot;&quot;
+    if not losses or len({len(v) for v in losses.values()}) != 1:
+        raise ValueError(&#x27;dimensions&#x27;)
+    n = len(next(iter(losses.values())))
+    if n == 0:
+        raise ValueError(&#x27;empty&#x27;)
+    mins = [min((v[i] for v in losses.values())) for i in range(n)]
+    return {k: [v[i] - mins[i] for i in range(n)] for k, v in losses.items()}
+
+def expected_losses(losses, scenario_probabilities):
+    if abs(sum(scenario_probabilities) - 1) &gt; 1e-09 or any((p &lt; 0 for p in scenario_probabilities)):
+        raise ValueError(&#x27;probabilities&#x27;)
+    if any((len(v) != len(scenario_probabilities) for v in losses.values())):
+        raise ValueError(&#x27;dimensions&#x27;)
+    return {k: sum((p * x for p, x in zip(scenario_probabilities, v))) for k, v in losses.items()}
+
+if __name__ == &#x27;__main__&#x27;:
+    print(&#x27;energy&#x27;,charging_feasible(4,12,2,7,3)); losses={&#x27;A&#x27;:[25,75],&#x27;B&#x27;:[38,45],&#x27;C&#x27;:[40,40]}; print(&#x27;expected&#x27;,expected_losses(losses,[.75,.25])); print(&#x27;regret&#x27;,regret_matrix(losses))
+</code></pre><script>function v(id){return document.getElementById(id).value}function show(x){document.getElementById("result").textContent=x}function update(){document.querySelectorAll(".ctrl input").forEach(x=>document.getElementById("o_"+x.id).textContent=x.value);let p=+v('stress_probability'),eta=+v('charger_efficiency');let losses={A:25+50*p,B:38+7*p,C:40};let pref=Object.entries(losses).sort((x,y)=>x[1]-y[1])[0];let margin=2*7*3*eta-4*12;show('Minimum expected loss: '+pref[0]+' ('+pref[1].toFixed(2)+' units) · 4-vehicle charging margin: '+margin.toFixed(2)+' kWh');}document.querySelectorAll(".ctrl input").forEach(x=>x.addEventListener("input",update));update();</script></article></main></body></html>

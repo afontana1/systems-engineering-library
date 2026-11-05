@@ -1,0 +1,149 @@
+{
+  "N41": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§4.1 Stakeholder Expectations Definition",
+    "url": "https://www.nasa.gov/reference/4-1-stakeholder-expectations-definition/",
+    "kind": "agency practitioner guidance"
+  },
+  "N42": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§4.2 Technical Requirements Definition",
+    "url": "https://www.nasa.gov/reference/4-2-technical-requirements-definition/",
+    "kind": "agency practitioner guidance"
+  },
+  "N43": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§4.3 Logical Decomposition",
+    "url": "https://www.nasa.gov/reference/4-0-system-design-processes/",
+    "kind": "agency practitioner guidance"
+  },
+  "N44": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§4.4 Design Solution Definition",
+    "url": "https://www.nasa.gov/reference/4-4-design-solution-definition/",
+    "kind": "agency practitioner guidance"
+  },
+  "N52": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§5.2 Product Integration",
+    "url": "https://www.nasa.gov/reference/5-2-product-integration/",
+    "kind": "agency practitioner guidance"
+  },
+  "N55": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§5.5 Product Transition",
+    "url": "https://www.nasa.gov/reference/5-5-product-transition/",
+    "kind": "agency practitioner guidance"
+  },
+  "N61": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§6.1 Technical Planning",
+    "url": "https://www.nasa.gov/reference/6-1-technical-planning/",
+    "kind": "agency practitioner guidance"
+  },
+  "N62": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§6.2 Requirements Management",
+    "url": "https://www.nasa.gov/reference/6-2-requirements-management/",
+    "kind": "agency practitioner guidance"
+  },
+  "N63": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§6.3 Interface Management",
+    "url": "https://www.nasa.gov/reference/6-3-interface-management/",
+    "kind": "agency practitioner guidance"
+  },
+  "N64": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§6.4 Technical Risk Management",
+    "url": "https://www.nasa.gov/reference/6-4-technical-risk-management/",
+    "kind": "agency practitioner guidance"
+  },
+  "N65": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§6.5 Configuration Management",
+    "url": "https://www.nasa.gov/reference/6-5-configuration-management/",
+    "kind": "agency practitioner guidance"
+  },
+  "N66": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§6.6 Technical Data Management",
+    "url": "https://www.nasa.gov/reference/6-6-technical-data-management/",
+    "kind": "agency practitioner guidance"
+  },
+  "N67": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§6.7 Technical Assessment",
+    "url": "https://www.nasa.gov/reference/6-7-technical-assessment/",
+    "kind": "agency practitioner guidance"
+  },
+  "N68": {
+    "publisher": "NASA",
+    "work": "NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2",
+    "locator": "§6.8 Decision Analysis",
+    "url": "https://www.nasa.gov/reference/6-8-decision-analysis/",
+    "kind": "agency practitioner guidance"
+  },
+  "M7009": {
+    "publisher": "NASA",
+    "work": "NASA-STD-7009B, Standard for Models and Simulations (2024)",
+    "locator": "Document Scope; credibility in model/simulation life cycle",
+    "url": "https://standards.nasa.gov/node/263",
+    "kind": "agency standard (not automatically applicable to every project)"
+  },
+  "SWE": {
+    "publisher": "NASA",
+    "work": "NASA-HDBK-2203 Software Engineering and Assurance Handbook",
+    "locator": "Software planning, configuration, assurance and product evidence (see software lifecycle topics)",
+    "url": "https://swehb.nasa.gov/",
+    "kind": "agency software guidance"
+  },
+  "NSEC": {
+    "publisher": "NIST",
+    "work": "SP 800-160 Vol. 1 Rev. 1, Engineering Trustworthy Secure Systems (2022)",
+    "locator": "System security engineering concepts, activities, tasks, and trustworthiness principles",
+    "url": "https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final",
+    "kind": "NIST special publication"
+  },
+  "NRISK": {
+    "publisher": "NIST",
+    "work": "SP 800-37 Rev. 2, Risk Management Framework (2018)",
+    "locator": "Risk governance and continuous monitoring lifecycle",
+    "url": "https://csrc.nist.gov/pubs/sp/800/37/r2/final",
+    "kind": "NIST special publication"
+  },
+  "STATS": {
+    "publisher": "NIST",
+    "work": "NIST/SEMATECH e-Handbook of Statistical Methods (2002, online)",
+    "locator": "Statistical methods, measurement and causal/experimental evaluation context",
+    "url": "https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods",
+    "kind": "NIST statistical handbook"
+  },
+  "MAIER": {
+    "publisher": "Maier, M.W.",
+    "work": "Architecting Principles for Systems-of-Systems, Systems Engineering 1(4), 267–284 (1998)",
+    "locator": "Abstract; constituent independence, classification and architecting principles",
+    "url": "https://doi.org/10.1002/%28sici%291520-6858%281998%291%3A4%3C267%3A%3Aaid-sys3%3E3.0.co%3B2-d",
+    "kind": "peer-reviewed journal paper; full text may be access-controlled"
+  },
+  "OSTROM": {
+    "publisher": "Ostrom, E.",
+    "work": "A General Framework for Analyzing Sustainability of Social-Ecological Systems, Science 325, 419–422 (2009)",
+    "locator": "Abstract; interacting governance, resource systems and users",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/19628857/",
+    "kind": "peer-reviewed journal paper; cross-domain analogy only"
+  }
+}

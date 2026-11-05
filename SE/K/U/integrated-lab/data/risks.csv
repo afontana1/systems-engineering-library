@@ -1,0 +1,5 @@
+risk_id,cause,event,effect,likelihood_estimate,impact_score,response,owner,evidence
+RISK-01,Common vehicle outage,Available fleet drops to one,Service-level failure,Unknown,5,Assess degraded scenario and define recovery option,FleetLead,outputs/results.json
+RISK-02,Synthetic assumptions not valid in the field,Model predicts unrealistic performance,False assurance,Unknown,5,Require external validation before deployment,AssuranceLead,review/REVIEW-BOARD.md
+RISK-03,Message replay or malformed input,Duplicate or conflicting service record,Incorrect audit history,Unknown,4,Reject conflicts and log duplicates,SoftwareLead,tests/test_lab.py
+RISK-04,Unmodeled human and accessibility needs,Design violates stakeholder needs,Exclusion or safety exposure,Unknown,5,Require participatory operational validation,SafetyLead,chapters/08-human-factors-safety.md

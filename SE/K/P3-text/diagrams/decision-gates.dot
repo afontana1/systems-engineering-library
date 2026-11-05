@@ -1,0 +1,1 @@
+digraph G {rankdir=LR;graph[bgcolor="transparent"];node[shape=box,style="rounded,filled",fillcolor="#edf5fc",color="#31658a",fontname="Arial"];edge[color="#397a9c"];"Candidate alternatives" -> "Hard feasibility constraints" -> "Pareto frontier" -> "Values and weights" -> "Uncertainty and regret" -> "Conditional decision";}

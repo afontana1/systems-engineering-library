@@ -1,0 +1,49 @@
+slug,title,revision,internal_review,selected_claim_sources,external_peer_review
+system-of-interest,"System of interest: purpose, boundary, and evidence",v51,v51 focused,2 selected,not performed
+boundaries-and-interfaces,Boundaries and interfaces: where local correctness meets system risk,v51,v51 focused,2 selected,not performed
+stakeholders-and-needs,"Stakeholders, needs, and value: translating plural interests into engineering decisions",v51,v51 focused,2 selected,not performed
+conops-and-scenarios,Concept of operations and scenarios,v51,v51 focused,2 selected,not performed
+good-requirements,"Requirements: precise obligations, not persuasive sentences",v50,v50 focused,publisher pointers,not performed
+v-and-v,"Verification, validation, and acceptance: the three different decisions",v50,v50 focused,publisher pointers,not performed
+wbs-and-baselines,Work breakdown structures and technical baselines,v51,v51 focused,2 selected,not performed
+risk-vs-issue,"Risk, issue, uncertainty, and opportunity",v51,v51 focused,2 selected,not performed
+model-language-method-tool,"Model, method, language, tool, and repository",v51,v51 focused,2 selected,not performed
+views-and-viewpoints,"Architecture views, viewpoints, and consistency",v51,v51 focused,2 selected,not performed
+traceability-graph,Requirements traceability: a typed graph of engineering claims,v51,v51 focused,2 selected,not performed
+object-responsibilities,Object-oriented domain models and responsibilities,v51,v51 focused,2 selected,not performed
+software-quality-attributes,Software quality attributes and architectural tactics,v51,v51 focused,2 selected,not performed
+software-lifecycle-evidence,"CI/CD, configuration, and software assurance",v51,v51 focused,2 selected,not performed
+functional-vs-physical,"Functional, logical, and physical architecture: preserving intent across realization",v51,v51 focused,2 selected,not performed
+allocation-matrix,"Allocation, coverage, and design responsibility",v51,v51 focused,2 selected,not performed
+interface-control,Interface control and integration contracts,v51,v51 focused,2 selected,not performed
+integration-strategy,Integration build-up and readiness evidence,v51,v51 focused,2 selected,not performed
+verification-matrix,Verification cross-reference matrices and test design,v50,v50 focused,publisher pointers,not performed
+engineering-trades,Engineering trade studies: making preferences and uncertainty inspectable,v50,v50 focused,publisher pointers,not performed
+metrics-hierarchy,Measures of effectiveness and performance,v51,v51 focused,2 selected,not performed
+probability-and-dependence,"Probability, dependence, and technical uncertainty",v50,v50 focused,publisher pointers,not performed
+conceptual-m-and-s,Conceptual modeling and intended use,v51,v51 focused,2 selected,not performed
+discrete-event-simulation,Discrete-event simulation and queues,v50,v50 focused,publisher pointers,not performed
+stocks-flows-feedback,"Stocks, flows, and feedback loops",v50,v50 focused,publisher pointers,not performed
+model-vv-and-credibility,"Simulation verification, validation, and credibility",v50,v50 focused,publisher pointers,not performed
+design-of-experiments,Design of experiments and sensitivity,v50,v50 focused,publisher pointers,not performed
+pareto-and-value,Pareto frontiers and multiobjective decisions,v50,v50 focused,publisher pointers,not performed
+bayesian-value-of-information,Decision uncertainty and value of information,v50,v50 focused,publisher pointers,not performed
+agile-tailoring,Agile systems engineering and lifecycle tailoring,v51,v51 focused,2 selected,not performed
+flow-wip-and-queues,"Flow, work in process, and bottlenecks",v50,v50 focused,publisher pointers,not performed
+digital-thread-and-twin,Digital thread and digital twin: preserving engineering meaning across time,v50,v50 focused,publisher pointers,not performed
+mission-engineering,Mission threads and capability analysis,v51,v51 focused,2 selected,not performed
+process-improvement,Process capability and continuous improvement,v50,v50 focused,publisher pointers,not performed
+sos-characteristics,Systems of systems: constituent autonomy and emergent mission performance,v51,v51 focused,2 selected,not performed
+enterprise-as-system,The enterprise as a system,v51,v51 focused,2 selected,not performed
+complexity-emergence,"Complexity, emergence, and adaptation",v51,v51 focused,2 selected,not performed
+authority-and-governance,"Authority, governance, and coordination",v51,v51 focused,2 selected,not performed
+resilience-adaptability,"Resilience, robustness, and graceful degradation",v50,v50 focused,publisher pointers,not performed
+intervention-and-learning,"Interventions, policy resistance, and learning loops",v51,v51 focused,2 selected,not performed
+system-safety-and-hazards,"System safety engineering: hazards, controls, and residual risk",v52,v52 new entry internal checks,2–3 publication anchors,not performed
+reliability-availability-maintainability,"Reliability, availability, and maintainability: three different promises",v52,v52 new entry internal checks,2–3 publication anchors,not performed
+human-systems-integration,Human systems integration: people are part of the architecture,v52,v52 new entry internal checks,2–3 publication anchors,not performed
+formal-verification-and-temporal-logic,"Formal verification: state, invariants, temporal logic, and proof boundaries",v52,v52 new entry internal checks,2–3 publication anchors,not performed
+statistical-acceptance-and-confidence,Statistical acceptance: sampling decisions are not proofs of perfection,v52,v52 new entry internal checks,2–3 publication anchors,not performed
+robust-optimization-and-margins,Robust optimization and technical margins: good decisions across plausible futures,v52,v52 new entry internal checks,2–3 publication anchors,not performed
+systems-security-engineering,"Systems security engineering: protect the mission, not just the network",v52,v52 new entry internal checks,2–3 publication anchors,not performed
+assurance-cases-and-evidence,Assurance cases: what evidence supports which engineering claim?,v52,v52 new entry internal checks,2–3 publication anchors,not performed

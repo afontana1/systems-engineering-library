@@ -1,0 +1,1 @@
+digraph Evidence {graph[rankdir=LR,bgcolor="transparent"];node [shape=box,style="rounded,filled",fillcolor="#eef3fb",color="#466a91",fontname="DejaVu Sans"];a[label="Need / scenario"];b[label="Requirement"];c[label="Function / allocation"];d[label="Interface contract"];e[label="Verification test"];f[label="Controlled result"];g[label="Review decision"];a->b->c->d->e->f->g;}

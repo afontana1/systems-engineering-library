@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Design of experiments and sensitivity · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/design-of-experiments.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed reference</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Design of experiments and sensitivity</h1>
+<p><strong>Reference entry · Analytics, modeling, simulation and decisions · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p><strong>Design of experiments (DOE)</strong> plans observations so competing explanations and design choices can be distinguished efficiently. It is more than running a collection of scenarios and drawing a response curve. Controlled factors, nuisance variables, randomization, replication, and a predeclared response measure determine whether an observed effect is attributable to a change rather than drift, selection, or chance.</p>
+<h2>Theory: effects, interactions, and identifiable claims</h2>
+<p>In a two-factor coded design with factors <code>x_A, x_B ∈ {-1,+1}</code>, a basic response model is <code>y = β0 + βA x_A + βB x_B + βAB x_A x_B + ε</code>. The interaction coefficient captures how the effect of A changes with B. A one-factor-at-a-time study cannot identify this interaction cleanly. Randomization protects against unmeasured time trends; blocking handles known nuisance groupings; replication estimates variation; repeated measurements without independently assigned experimental units are not independent replicates.</p>
+<p>Statistical significance does not guarantee engineering significance. Confidence intervals and a predeclared practical threshold matter more than a bare p-value. Multiple testing increases false discoveries unless managed through a planned analysis strategy. Computational DOE also needs surrogate-model validation: a smooth fitted surface may be wrong near a boundary, discontinuity, or untested environment.</p>
+<h2>Worked example: a hidden interaction</h2>
+<p>Suppose a dispatch algorithm is tested with low/high vehicle supply (A) and low/high demand (B), with mean waiting times of 4, 8, 5, and 19 minutes for <code>(low supply, low demand)</code>, <code>(low supply, high demand)</code>, <code>(high supply, low demand)</code>, and <code>(high supply, high demand)</code> respectively. This illustrative table is deliberately unusual: adding vehicles slightly worsens low-demand waiting time but strongly worsens high-demand waiting time, suggesting an implementation or coordination problem. The simple difference-in-differences is <code>(19 - 8) - (5 - 4) = 10 minutes</code>, an interaction requiring explanation before adoption. Replicates and blocked randomized runs are needed to tell whether this pattern persists beyond noise.</p>
+<h2>Engineering use and evidence</h2>
+<p>Specify the decision, experimental units, factors and ranges, response definition, expected variability, safety constraints, run order, and analysis before collecting results. Preserve raw data and random seeds. Fit candidate models, examine residuals and interactions, and confirm promising settings using new observations. For physical experimentation, document calibration and environmental conditions; for simulation, document code version and stochastic input models.</p>
+<h2>Limitations and connections</h2>
+<p>A factorial result is local to its chosen levels and may not generalize to deployment. Correlated uncontrolled factors can defeat naive causal interpretation. Connect DOE to <strong>probability</strong>, <strong>simulation credibility</strong>, <strong>process improvement</strong>, <strong>surrogate optimization</strong>, and <strong>value of information</strong>.</p>
+<h2>Technical analysis: a factorial interaction that a one-factor study misses</h2>
+<p>Consider two controllable choices: software batching (<code>A = −1</code> off; <code>+1</code> on) and cache capacity (<code>B = −1</code> small; <code>+1</code> large). Suppose measured average completion times (minutes) for the four treatments are <code>y(−,−)=14</code>, <code>y(+,−)=10</code>, <code>y(−,+)=12</code>, and <code>y(+,+)=4</code>. Under a balanced <code>2²</code> factorial design, the average effect of A is <code>(10+4)/2 − (14+12)/2 = −6</code> minutes; the effect of B is <code>(12+4)/2 − (14+10)/2 = −4</code> minutes. The <strong>interaction contrast</strong> is <code>14 − 10 − 12 + 4 = −4</code>, corresponding to an interaction <em>effect</em> of <code>−2</code> minutes and a coded-regression interaction coefficient <code>βAB = −1</code> minute. Define the convention explicitly: effect, contrast, and coefficient are not interchangeable.</p>
+<p>The interaction matters: batching saves four minutes with the small cache but <strong>eight</strong> with the large cache. An experiment changing only batching at the small-cache baseline would understate the potential joint benefit. Randomize experimental order to reduce drift bias; replicate to estimate noise; block by load regime if service demand changes over time. A design with one observation per cell has <strong>no pure-error degrees of freedom</strong>, so it cannot support a significance claim about the interaction without additional assumptions or replications.</p>
+<p>Document the response definition, treatment levels, operating envelope, randomization unit, and missing-run handling. Statistical significance is not a substitute for mission relevance or operational replication.</p>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods">NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)</a> — Statistical methods, experiments, reliability, and process assessment.</li>
+<li><a href="https://standards.nasa.gov/node/263">NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)</a> — Credibility practices for modeling and simulation used in decisions.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="probability-and-dependence.html">Probability, dependence, and technical uncertainty</a></li>
+<li><a href="model-vv-and-credibility.html">Simulation verification, validation, and credibility</a></li>
+<li><a href="process-improvement.html">Process capability and continuous improvement</a></li>
+<li><a href="bayesian-value-of-information.html">Decision uncertainty and value of information</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B10/chapters/05-design-efficient-experiments-with-factors-responses-noise-power-rand.html">Book 10, Chapter 05: Book 10 · Chapter 05 — Design efficient experiments with factors, responses, noise, power, randomization, and blocking</a></li>
+<li><a href="../B10/chapters/06-analyze-factorial-experiments-interactions-diagnostics-and-confirmat.html">Book 10, Chapter 06: Book 10 · Chapter 06 — Analyze factorial experiments, interactions, diagnostics, and confirmation evidence</a></li>
+<li><a href="../B14/chapters/09-design-computational-experiments-to-learn-efficiently-from-the-desig.html">Book 14, Chapter 09: Book 14 · Chapter 09 — Design computational experiments to learn efficiently from the design space</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=d10646083bdfe">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="design-of-experiments.md">Editable Markdown</a></nav></main></body></html>

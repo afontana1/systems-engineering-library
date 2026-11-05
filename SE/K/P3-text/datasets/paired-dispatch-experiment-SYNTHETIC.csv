@@ -1,0 +1,25 @@
+replication,scenario,fleet,arrival_rate_hr,mean_wait_min
+1,synthetic peak,2,10.191,2.210
+1,synthetic peak,3,10.191,0.000
+2,synthetic peak,2,17.600,12.636
+2,synthetic peak,3,17.600,9.572
+3,synthetic peak,2,15.010,8.276
+3,synthetic peak,3,15.010,5.740
+4,synthetic peak,2,14.478,8.228
+4,synthetic peak,3,14.478,4.558
+5,synthetic peak,2,16.510,10.678
+5,synthetic peak,3,16.510,7.791
+6,synthetic peak,2,15.142,9.821
+6,synthetic peak,3,15.142,6.716
+7,synthetic peak,2,13.497,7.316
+7,synthetic peak,3,13.497,3.417
+8,synthetic peak,2,15.794,10.117
+8,synthetic peak,3,15.794,7.364
+9,synthetic peak,2,18.799,14.674
+9,synthetic peak,3,18.799,10.589
+10,synthetic peak,2,18.997,14.017
+10,synthetic peak,3,18.997,11.180
+11,synthetic peak,2,12.404,5.275
+11,synthetic peak,3,12.404,2.493
+12,synthetic peak,2,13.574,7.648
+12,synthetic peak,3,13.574,3.655

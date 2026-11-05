@@ -1,0 +1,5 @@
+corridor,period,served,eligible,safety_incidents
+North,before,45,60,0
+North,after,56,60,0
+South,before,32,60,0
+South,after,30,60,1

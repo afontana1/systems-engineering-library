@@ -1,0 +1,2472 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.753 — Enterprise Systems Engineering · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P5/EN645753.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside style="background:#eaf6f4;padding:12px 25px;border-bottom:1px solid #c5e3df"><strong>Advanced textbook readings</strong> · <a href="../../K/G/chapters/05-sos.html">Systems of systems, authority and mission dependencies</a> · <a href="../../K/G/chapters/06-enterprise.html">Enterprise dynamics, equity and responsible intervention</a></aside><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/10-decisions.html">Multiobjective decisions, Pareto tradeoffs, and information value</a> · <a href="../../K/T/12-enterprises.html">Systems of systems, enterprise governance, and complex adaptation</a></aside><main><div class="course-actions"><a href="../../K/B19/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en645753--enterprise-systems-engineering">EN.645.753 — Enterprise Systems Engineering</h1>
+<p><strong>Credits:</strong> 3<br/>
+<strong>Prerequisite:</strong> EN.645.769 System Test &amp; Evaluation or advisor/instructor approval<br/>
+<strong>Recommended self-study preparation:</strong> EN.645.771 System of Systems Engineering, EN.645.781 Systems Thinking and Systems Dynamics, EN.645.784 Decision Science &amp; Analytics, EN.645.782 Foundations of Digital and Mission Engineering, and EN.645.783 Systems Engineering Process Improvement</p>
+<h2 id="1-course-purpose">1. Course purpose</h2>
+<p>This course prepares a systems engineer to analyze, architect, improve, and transform a <strong>large sociotechnical enterprise</strong>: a purposeful network of organizations, people, processes, information, technology, funding, policy, infrastructure, and external relationships that collectively produces outcomes no single organization controls.</p>
+<p>The enterprise is treated as the engineered system—not merely the setting in which product systems are acquired. The learner must reason across conflicting objectives, distributed authority, incentives, budgets, portfolios, organizational capabilities, value streams, information flows, technology and standards, workforce, public legitimacy, and environmental change. Traditional product-level requirements are replaced by negotiated outcomes, measures, capability gaps, investment choices, governance mechanisms, and transformation hypotheses. Architecture becomes a decision-support description of how strategy, value, capabilities, organizations, processes, information, systems, resources, and policies fit together. Improvement must remain credible even when participating organizations retain autonomy and can resist, reinterpret, or abandon the proposed change.</p>
+<p>The final product is a controlled <strong>Regional Mobility and Emergency Access Enterprise Transformation Release</strong> containing the enterprise charter and boundary, actor and authority model, value/outcome hierarchy, current-state enterprise architecture and process model, capability and portfolio analysis, enterprise dynamics model, external-scenario analysis, target operating-model alternatives, investment and incentive design, technology/standards/workforce roadmaps, transformation experiments, governance and measurement plan, implementation roadmap, live-change response, and oral defense.</p>
+<h2 id="2-source-scope-and-self-study-adaptation">2. Source scope and self-study adaptation</h2>
+<p>The Summer 2026 JHU syllabus describes Enterprise Systems Engineering as a multidisciplinary application of systems engineering and systems thinking to broad sociotechnical enterprises as complex adaptive systems. It emphasizes multiple independent organizations with their own objectives, resources, and authority structures; the absence of top-level cross-cutting authority; conflicting objectives; and creation of a process model showing key enterprise activities, interactions, and external factors. That model is then used to understand enterprise composition and dynamics and to evaluate issues or actions as the basis for engineering trades and recommendations. (<a href="https://apps.ep.jhu.edu/syllabus/summer-2026/645.753.81" title="Summer 2026 Syllabus for EN.645.753 Enterprise Systems Engineering">1</a>, <a href="https://ep.jhu.edu/courses/645753-enterprise-systems-engineering/" title="Enterprise Systems Engineering - 645.753">2</a>)</p>
+<p>The abridged public syllabus does not publish a detailed weekly sequence. This self-study adaptation therefore preserves the stated course outcomes and expands them using current public enterprise-systems-engineering guidance. It adds:</p>
+<ul>
+<li>explicit enterprise-boundary, value, stakeholder, authority, incentive, and legitimacy analysis;</li>
+<li>current-state and target enterprise architecture governed by stakeholder concerns and decision questions;</li>
+<li>capability-based planning across operational, system, and organizational capability;</li>
+<li>process, value-stream, information-flow, and enterprise-dynamics modeling;</li>
+<li>portfolio, investment, affordability, standards, technology, workforce, supplier, and data considerations;</li>
+<li>enterprise evaluation and assessment using balanced measures, uncertainty, and breakpoints rather than isolated project metrics;</li>
+<li>external scenarios, resilience, opportunity, and strategic-risk analysis;</li>
+<li>transformation alternatives, target operating models, transition architectures, experiments, adoption, and sustainment;</li>
+<li>formal review gates, required revision, a live enterprise-change challenge, and oral defense.</li>
+</ul>
+<p>The course does not reproduce private JHU lectures, unpublished assignments, or copyrighted textbook chapters. Public standards pages, public SEBoK and government resources, learner-authorized texts, and original exercises are used instead.</p>
+<h2 id="3-relationship-to-adjacent-courses">3. Relationship to adjacent courses</h2>
+<h3 id="inputs-from-en645771-and-earlier-phases">Inputs from EN.645.771 and earlier phases</h3>
+<p>The learner receives:</p>
+<ul>
+<li>the Regional Mobility and Emergency Access SoS architecture, constituent and organization registry, mission threads, interface and information baseline, evidence strategy, and evolution roadmap;</li>
+<li>controlled requirements, models, simulations, risks, decisions, process baselines, and digital-thread evidence from Phases 0–4;</li>
+<li>capability, uncertainty, resilience, and review methods that can be reused without being retaught.</li>
+</ul>
+<h3 id="outputs-to-en645742">Outputs to EN.645.742</h3>
+<p>The course produces:</p>
+<ul>
+<li>an enterprise value system, authority/incentive model, architecture, process and dynamics baseline;</li>
+<li>transformation alternatives, portfolio and investment decisions, target operating models, and transition experiments;</li>
+<li>unresolved feedback, adaptation, political, behavioral, path-dependence, and observability hypotheses for Management of Complex Systems;</li>
+<li>explicit claims about what can be governed, influenced, monitored, experimented with, or only learned over time.</li>
+</ul>
+<h2 id="4-prerequisites-and-readiness-diagnostic">4. Prerequisites and readiness diagnostic</h2>
+<p>Before Week 1, complete a 90-minute diagnostic. The learner should be able to:</p>
+<ol>
+<li>Distinguish system, SoS, enterprise, enterprise system, ecosystem, organization, portfolio, program, and complex adaptive system.</li>
+<li>Trace a regional outcome through mission threads, constituent contributions, enterprise processes, governance, investment, and evidence.</li>
+<li>Construct a stakeholder/authority map showing decision rights, resources, incentives, and veto points.</li>
+<li>Interpret a process map, value stream, capability map, causal-loop diagram, portfolio chart, and architecture viewpoint.</li>
+<li>Explain why efficiency, effectiveness, value, equity, resilience, and legitimacy can conflict.</li>
+<li>Perform a bounded multi-criteria or portfolio comparison with uncertainty and sensitivity.</li>
+<li>Reproduce one prior model or notebook from a clean checkout and identify its intended use and limitations.</li>
+<li>State how a proposed change could shift cost, risk, workload, or harm to another organization or population.</li>
+</ol>
+<p><strong>Diagnostic standard:</strong> at least 80%, with no failure on enterprise boundary, authority, value/outcome reasoning, process/dynamics interpretation, or evidence limits. Complete targeted remediation before establishing the enterprise baseline.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<p>By the end of the course, the learner will be able to:</p>
+<ol>
+<li><strong>Define and justify</strong> enterprise purpose, boundary, environment, actors, ownership, authority, resources, exclusions, and evolution conditions. <em>(C1, C10, C11, C12)</em></li>
+<li><strong>Elicit and reconcile</strong> enterprise outcomes, stakeholder values, objective conflicts, constraints, legitimacy concerns, and measures. <em>(C2, C9, C10, C11)</em></li>
+<li><strong>Model and assess</strong> governance, decision rights, incentives, funding, policy, accountability, and cooperation without assuming a single controlling authority. <em>(C10, C11, C12)</em></li>
+<li><strong>Develop</strong> current-state enterprise architecture and process/value-stream models connecting strategy, capabilities, organizations, processes, information, systems, resources, and external factors. <em>(C3, C4, C11)</em></li>
+<li><strong>Analyze</strong> enterprise behavior over time using process, network, feedback, delay, workload, and scenario evidence. <em>(C7, C8, C11, C12)</em></li>
+<li><strong>Conduct</strong> capability-gap, portfolio, investment, affordability, standards, technology, workforce, supplier, and data analyses. <em>(C3, C8, C9, C10, C11)</em></li>
+<li><strong>Design and compare</strong> target operating models and enterprise-architecture alternatives with explicit value, feasibility, uncertainty, and stakeholder effects. <em>(C3, C9, C10, C11)</em></li>
+<li><strong>Develop</strong> an enterprise evaluation and assessment system that detects progress, side effects, breakpoints, risk transfer, and opportunity. <em>(C8, C9, C10, C11)</em></li>
+<li><strong>Plan</strong> governed transformation experiments, transition architectures, adoption, communications, learning, configuration, and sustainment. <em>(C4, C6, C10, C11)</em></li>
+<li><strong>Recommend and defend</strong> an implementable enterprise transformation without overstating control, consensus, prediction, or evidence. <em>(C9, C10, C11, C12)</em></li>
+</ol>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>What makes the enterprise the appropriate unit of analysis?</li>
+<li>Whose value is being created, protected, reduced, or transferred?</li>
+<li>Which actors can authorize, fund, implement, block, reinterpret, or abandon change?</li>
+<li>Which outcomes require enterprise coordination and which should remain locally optimized?</li>
+<li>How do incentives, policies, processes, information, technology, workforce, and budgets interact?</li>
+<li>Which architecture views answer real enterprise decisions rather than produce decorative documentation?</li>
+<li>Where do delays, feedback, workload, adaptation, and local optimization create enterprise behavior?</li>
+<li>Which portfolio and investment choices improve capability under real constraints?</li>
+<li>What external changes could invalidate the current strategy or target operating model?</li>
+<li>Which transformation steps should be standardized, tailored, piloted, monitored, or reversed?</li>
+</ul>
+<h2 id="7-running-case-and-controlled-evidence">7. Running case and controlled evidence</h2>
+<h3 id="regional-mobility-and-emergency-access-enterprise">Regional Mobility and Emergency Access Enterprise</h3>
+<p>The learner serves as enterprise systems engineer for the fictional regional coalition introduced in EN.645.771. The technical SoS already has an architecture and evolution recommendation, but the coalition cannot implement it without resolving enterprise-level questions involving value, governance, funding, workforce, procurement, regulation, data, public trust, accessibility, labor, suppliers, and organizational incentives.</p>
+<p>The enterprise includes:</p>
+<ul>
+<li>municipal and regional transit authorities;</li>
+<li>campuses, hospitals, EMS, paratransit, and emergency-management organizations;</li>
+<li>traffic, public works, utilities, telecommunications, mapping, payment, and identity providers;</li>
+<li>technology vendors, contractors, unions, insurers, regulators, elected bodies, community organizations, and advocacy groups;</li>
+<li>state and federal funding, safety, privacy, accessibility, cybersecurity, and emergency partners.</li>
+</ul>
+<p>Controlled evidence includes:</p>
+<ul>
+<li>organization charters, budgets, service obligations, procurement constraints, and decision rights;</li>
+<li>synthetic demand, workforce, cost, service-quality, complaint, incident, accessibility, and process-event data;</li>
+<li>investment proposals and existing portfolio commitments;</li>
+<li>conflicting actor objectives and negotiation positions;</li>
+<li>current-state process maps with delays, rework, queues, data gaps, and handoff failures;</li>
+<li>technology, standards, supplier, workforce, and facility constraints;</li>
+<li>external scenarios involving funding loss, regulatory change, severe weather, vendor consolidation, workforce shortages, and public opposition.</li>
+</ul>
+<p>The case is fictional. No personal, medical, employment, law-enforcement, proprietary, or security-sensitive data are used.</p>
+<h3 id="required-case-artifacts">Required case artifacts</h3>
+<p>Maintain:</p>
+<ul>
+<li>enterprise charter, boundary, context, assumptions, and exclusions;</li>
+<li>actor, authority, resource, incentive, accountability, and legitimacy registry;</li>
+<li>value/outcome hierarchy and enterprise-measure dictionary;</li>
+<li>current-state enterprise architecture and process/value-stream model;</li>
+<li>capability, dependency, gap, overlap, and portfolio baseline;</li>
+<li>enterprise dynamics model and current-state assessment;</li>
+<li>technology, standards, data, supplier, workforce, and facility roadmaps;</li>
+<li>external-scenario, risk, opportunity, resilience, and breakpoint analysis;</li>
+<li>target operating-model alternatives and transition architectures;</li>
+<li>investment, incentive, governance, and implementation recommendations;</li>
+<li>transformation experiments, measures, review findings, decisions, and revision history.</li>
+</ul>
+<h2 id="8-tool-and-environment-policy">8. Tool and environment policy</h2>
+<p>Use open, inspectable, source-controlled tools unless a licensed environment is already available.</p>
+<p><strong>Minimum toolchain</strong></p>
+<ul>
+<li>Git or equivalent version control;</li>
+<li>Markdown plus CSV/JSON/YAML source artifacts;</li>
+<li>diagrams.net, Mermaid, PlantUML, or BPMN-compatible process tooling;</li>
+<li>Python 3 with Jupyter, pandas, scipy, and NetworkX;</li>
+<li>Vensim PLE, Insight Maker, or transparent Python for feedback/dynamics modeling;</li>
+<li>spreadsheet or notebook tools for portfolio, affordability, and scenario analysis.</li>
+</ul>
+<p><strong>Optional architecture path</strong></p>
+<ul>
+<li>a UAF 1.3-capable repository, ArchiMate-capable tool, or other enterprise-architecture environment;</li>
+<li>graph database and query tooling;</li>
+<li>process mining and discrete-event simulation tools;</li>
+<li>geospatial visualization for regional scenarios.</li>
+</ul>
+<p>A diagram is not an enterprise architecture unless its concerns, viewpoints, model kinds, relationships, assumptions, and decision uses are controlled. A scorecard is not an evaluation system unless measures have owners, definitions, data provenance, thresholds, interpretation rules, and responses. A transformation roadmap is not implementable unless authority, funding, workforce, adoption, dependencies, evidence, and reversal conditions are explicit.</p>
+<h2 id="9-resource-hierarchy">9. Resource hierarchy</h2>
+<h3 id="required-backbone">Required backbone</h3>
+<ul>
+<li>Summer 2026 JHU syllabus and current course page. (<a href="https://apps.ep.jhu.edu/syllabus/summer-2026/645.753.81" title="Summer 2026 Syllabus for EN.645.753 Enterprise Systems Engineering">1</a>, <a href="https://ep.jhu.edu/courses/645753-enterprise-systems-engineering/" title="Enterprise Systems Engineering - 645.753">2</a>)</li>
+<li>SEBoK Enterprise Systems Engineering, The Enterprise as a System, key concepts, background, and process activities. (<a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering" title="SEBoK: Enterprise Systems Engineering">3</a>, <a href="https://sebokwiki.org/wiki/The_Enterprise_as_a_System" title="SEBoK: The Enterprise as a System">4</a>, <a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Key_Concepts" title="SEBoK: Enterprise Systems Engineering Key Concepts">5</a>, <a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Process_Activities" title="SEBoK: Enterprise Systems Engineering Process Activities">6</a>, <a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Background" title="SEBoK: Enterprise Systems Engineering Background">7</a>)</li>
+<li>SEBoK Enterprise Capability Management and Related Business Activities. (<a href="https://sebokwiki.org/wiki/Enterprise_Capability_Management" title="SEBoK: Enterprise Capability Management">8</a>, <a href="https://sebokwiki.org/wiki/Related_Business_Activities" title="SEBoK: Related Business Activities">9</a>)</li>
+<li>INCOSE Enterprise Systems Engineering Working Group and current enterprise-transformation material. (<a href="https://www.incose.org/group/enterprise-systems-engineering/" title="INCOSE Enterprise Systems Engineering Working Group">10</a>, <a href="https://www.incose.org/resource/enabling-enterprise-transformation-using-systems-principles-and-concepts/" title="Enabling Enterprise Transformation Using Systems Principles and Concepts">11</a>)</li>
+</ul>
+<h3 id="architecture-process-and-governance-resources">Architecture, process, and governance resources</h3>
+<ul>
+<li>ISO/IEC/IEEE 42010:2022 architecture-description concepts. (<a href="https://www.iso.org/standard/74393.html" title="ISO/IEC/IEEE 42010:2022 Architecture Description">12</a>)</li>
+<li>OMG UAF 1.3 and BPMN 2.0.2. (<a href="https://www.omg.org/spec/UAF/" title="OMG Unified Architecture Framework 1.3">13</a>, <a href="https://www.omg.org/spec/BPMN/" title="OMG Business Process Model and Notation 2.0.2">14</a>)</li>
+<li>MITRE enterprise-systems-engineering theory and process-framework papers. (<a href="https://www.mitre.org/sites/default/files/publications/05_1483.pdf" title="Enterprise Systems Engineering Theory and Practice">15</a>, <a href="https://www.mitre.org/sites/default/files/pdf/06_1163.pdf" title="A Framework for Enterprise Systems Engineering Processes">16</a>)</li>
+</ul>
+<h3 id="evaluation-portfolio-and-transformation-resources">Evaluation, portfolio, and transformation resources</h3>
+<ul>
+<li>ISO 31000:2018 for enterprise risk and opportunity integration. (<a href="https://www.iso.org/standard/65694.html" title="ISO 31000:2018 Risk Management — Guidelines">17</a>)</li>
+<li>NIST Baldrige systems perspective and core values for organizational evaluation. (<a href="https://www.nist.gov/baldrige/about-baldrige-excellence-framework" title="NIST Baldrige Excellence Framework Overview">18</a>, <a href="https://www.nist.gov/baldrige/core-values-and-concepts" title="NIST Baldrige Core Values and Concepts">19</a>)</li>
+<li>GAO integrated portfolio-management practices. (<a href="https://www.gao.gov/assets/a258336.html" title="GAO-07-388 Integrated Portfolio Management Approach">20</a>)</li>
+<li>MIT system-dynamics material for behavior-over-time modeling. (<a href="https://ocw.mit.edu/courses/res-15-004-system-dynamics-systems-thinking-and-modeling-for-a-complex-world-january-iap-2020/" title="MIT System Dynamics: Systems Thinking and Modeling for a Complex World">21</a>)</li>
+</ul>
+<h3 id="tool-references">Tool references</h3>
+<ul>
+<li>Vensim PLE and Python/Jupyter documentation. (<a href="https://vensim.com/vensim-personal-learning-edition/" title="Vensim Personal Learning Edition">22</a>, <a href="https://docs.python.org/3/" title="Python 3 Documentation">23</a>)</li>
+</ul>
+<h2 id="10-assessment-structure">10. Assessment structure</h2>
+<table>
+<thead>
+<tr>
+<th>Assessment category</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weekly retrieval and knowledge checks</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Weekly enterprise artifacts and revision</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Enterprise architecture, process, and dynamics reviews</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Capability, portfolio, investment, and roadmap analysis</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Target operating model and transformation experiment</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Final Enterprise Transformation Release</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Live enterprise change and oral defense</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>Critical findings must be closed or explicitly accepted by a named authority. Point accumulation cannot compensate for fabricated evidence, hidden stakeholder harm, unsupported value claims, assumed authority, or a transformation that cannot be funded, adopted, governed, or measured.</p>
+<h2 id="11-twelve-week-course-map">11. Twelve-week course map</h2>
+<table>
+<thead>
+<tr>
+<th>Week</th>
+<th>Topic</th>
+<th>Primary evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Enterprise definition, boundary, purpose, and receiving review</td>
+<td>Enterprise charter and boundary baseline</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Actors, authority, objectives, legitimacy, and governance</td>
+<td>Actor/authority/incentive model</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Value, outcomes, measures, incentives, and burden transfer</td>
+<td>Value system and measure dictionary</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Enterprise processes, value streams, information, and work</td>
+<td>Current-state process and value-stream model</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Enterprise dynamics, feedback, delays, and current-state assessment</td>
+<td>Executable dynamics model and diagnosis</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Enterprise architecture and capability management</td>
+<td>Current architecture and capability-gap baseline</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Portfolio, investment, affordability, and resource allocation</td>
+<td>Portfolio decision and investment package</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Technology, standards, data, suppliers, workforce, and roadmaps</td>
+<td>Integrated enterprise roadmaps</td>
+</tr>
+<tr>
+<td>9</td>
+<td>External factors, strategic scenarios, risk, opportunity, and resilience</td>
+<td>Scenario and breakpoint analysis</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Target operating models, governance, and transformation alternatives</td>
+<td>Target architecture alternatives and trade study</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Transition architecture, experiments, adoption, evaluation, and sustainment</td>
+<td>Transformation roadmap and pilot-readiness package</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Final Enterprise Transformation Review and live enterprise change</td>
+<td>Controlled release, defense, and EN.645.742 handoff</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-formal-review-gates">12. Formal review gates</h2>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Timing</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enterprise Framing and Governance Review</td>
+<td>End of Week 2</td>
+<td>Is the boundary, purpose, actor set, authority, conflict, and legitimacy model credible enough for enterprise analysis?</td>
+</tr>
+<tr>
+<td>Value and Current-State Review</td>
+<td>End of Week 5</td>
+<td>Do value, measures, processes, and dynamics explain current enterprise behavior without hiding burden transfer or uncertainty?</td>
+</tr>
+<tr>
+<td>Enterprise Architecture and Portfolio Review</td>
+<td>End of Week 8</td>
+<td>Are capabilities, architecture, investments, resources, standards, technology, workforce, and suppliers aligned to enterprise outcomes?</td>
+</tr>
+<tr>
+<td>Scenario and Transformation Alternatives Review</td>
+<td>End of Week 10</td>
+<td>Do the target operating-model alternatives remain feasible and valuable across plausible external conditions?</td>
+</tr>
+<tr>
+<td>Transformation Readiness Review</td>
+<td>End of Week 11</td>
+<td>Are transition steps, experiments, governance, measures, adoption, funding, and reversal criteria credible?</td>
+</tr>
+<tr>
+<td>Final Enterprise Transformation Review</td>
+<td>Week 12</td>
+<td>Is the integrated recommendation coherent, implementable, reproducible, legitimate, and defensible under live change?</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-major-assignment-specifications">13. Major assignment specifications</h2>
+<h3 id="a-current-state-enterprise-architecture-and-process-model">A. Current-state enterprise architecture and process model</h3>
+<p>Produce a queryable or source-controlled architecture connecting enterprise outcomes, actors, authorities, capabilities, organizations, processes, information, systems, resources, policies, funding, measures, and external factors. Include at least three end-to-end value streams and two cross-organizational exception or degraded paths.</p>
+<h3 id="b-enterprise-dynamics-and-evaluation-package">B. Enterprise dynamics and evaluation package</h3>
+<p>Develop a bounded executable model explaining one important behavior-over-time problem such as access inequity, coordination delay, maintenance backlog, workforce overload, investment crowd-out, data-sharing erosion, or emergency-response degradation. Include model purpose, structure, equations or process logic, units, verification, behavior tests, sensitivity, uncertainty, limitations, and decision use.</p>
+<h3 id="c-capability-portfolio-and-investment-decision">C. Capability, portfolio, and investment decision</h3>
+<p>Compare existing and proposed capabilities, programs, systems, services, process changes, standards, technology, workforce, and data investments under resource constraints. Include affordability, dependencies, opportunity cost, uncertainty, stakeholder effects, and at least one low-investment or governance-first alternative.</p>
+<h3 id="d-enterprise-transformation-release">D. Enterprise transformation release</h3>
+<p>Define target operating-model alternatives, preferred transition architecture, governance, incentives, investment sequence, roadmaps, pilots, measures, adoption, change control, risk/opportunity, monitoring, and conditions for pausing, adapting, or reversing the transformation.</p>
+<h2 id="14-common-rubric-dimensions">14. Common rubric dimensions</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Excellent</th>
+<th>Proficient</th>
+<th>Developing</th>
+<th>Insufficient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enterprise framing and authority</td>
+<td>Boundary, actors, authority, resources, incentives, legitimacy, and exclusions are explicit and validated</td>
+<td>Main conditions are correct with minor gaps</td>
+<td>Important actors or authority assumptions are simplified</td>
+<td>Treats the enterprise as a single hierarchy or vague environment</td>
+</tr>
+<tr>
+<td>Value and stakeholder effects</td>
+<td>Outcomes, value, equity, burdens, conflicts, and measures are explicit and traceable</td>
+<td>Major values and tradeoffs are covered</td>
+<td>Uses generic benefits or incomplete stakeholder analysis</td>
+<td>Optimizes one actor while hiding enterprise harm</td>
+</tr>
+<tr>
+<td>Architecture, process, and dynamics</td>
+<td>Views and models answer decision questions and explain behavior over time</td>
+<td>Architecture and models are substantially coherent</td>
+<td>Multiple disconnected or decorative artifacts remain</td>
+<td>Diagrams do not support analysis or decisions</td>
+</tr>
+<tr>
+<td>Capability, portfolio, and affordability</td>
+<td>Gaps, dependencies, alternatives, resources, opportunity costs, and uncertainty are integrated</td>
+<td>Portfolio analysis is usable with minor gaps</td>
+<td>Decisions rely on weak estimates or local optimization</td>
+<td>Recommendation ignores constraints or existing commitments</td>
+</tr>
+<tr>
+<td>Transformation and governance</td>
+<td>Target model, transition, authority, incentives, adoption, measures, and sustainment are implementable</td>
+<td>Transformation is credible with minor gaps</td>
+<td>Roadmap depends on informal cooperation or vague ownership</td>
+<td>Recommendation cannot be authorized, funded, adopted, or controlled</td>
+</tr>
+<tr>
+<td>Analytic credibility and ethics</td>
+<td>Evidence is reproducible, uncertainty and harm are bounded, and claims match authority</td>
+<td>Methods generally support the claims</td>
+<td>Weak validation or hidden assumptions reduce confidence</td>
+<td>Evidence is fabricated, opaque, biased, or overstated</td>
+</tr>
+<tr>
+<td>Communication and configuration</td>
+<td>Clear, audience-appropriate, traceable, reproducible, and under control</td>
+<td>Reviewable with minor defects</td>
+<td>Difficult to navigate or reproduce</td>
+<td>Uncontrolled, contradictory, or misleading</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-critical-criteria-and-mastery-gates">15. Critical criteria and mastery gates</h2>
+<p>A learner cannot pass with any of the following unresolved:</p>
+<ul>
+<li>an enterprise boundary that excludes an actor, policy, funding source, workforce group, or external dependency essential to the claimed outcome;</li>
+<li>a value or performance recommendation that hides shifted cost, workload, risk, inequity, or loss of legitimacy;</li>
+<li>governance or implementation that assumes authority, funding, data rights, consent, or cooperation not actually available;</li>
+<li>a process, architecture, dynamics, portfolio, or scenario result that cannot be reproduced or whose intended use and uncertainty are unstated;</li>
+<li>a target operating model with no transition architecture, adoption mechanism, measurement plan, owner, or reversal condition;</li>
+<li>fabricated, proprietary, personal, security-sensitive, or otherwise unauthorized evidence.</li>
+</ul>
+<p><strong>Completion standard:</strong> at least 80% overall, at least 70% in every major category, Proficient or better on all critical capstone dimensions, clean reproduction, successful live change, and successful oral defense.</p>
+<h2 id="16-capstone-specification">16. Capstone specification</h2>
+<h3 id="decision">Decision</h3>
+<p>Recommend how the regional coalition should transform its enterprise over a five-year horizon to improve accessible mobility and emergency access while respecting distributed authority, constrained funding, workforce capacity, public legitimacy, vendor dependence, policy obligations, and uncertain external conditions.</p>
+<h3 id="required-outputs">Required outputs</h3>
+<ul>
+<li>20–25 page enterprise systems engineering report;</li>
+<li>15-slide executive/technical review briefing;</li>
+<li>controlled enterprise architecture and analysis repository;</li>
+<li>enterprise charter, actor/authority/incentive registry, and value hierarchy;</li>
+<li>current-state process, value-stream, information, and dynamics models;</li>
+<li>capability, gap, overlap, portfolio, affordability, and roadmap analysis;</li>
+<li>technology, standards, data, supplier, workforce, and facility roadmaps;</li>
+<li>external scenarios, risks, opportunities, resilience, and breakpoint analysis;</li>
+<li>at least three target operating-model alternatives;</li>
+<li>preferred transition architecture, governance, investment sequence, experiments, measures, adoption, and sustainment plan;</li>
+<li>decision record, residual conflicts, limitations, review findings, and dispositions;</li>
+<li>live-change response and EN.645.742 handoff.</li>
+</ul>
+<h3 id="live-change-challenge">Live-change challenge</h3>
+<p>During the final review, a funding source is reduced, a major actor withdraws, a union or community group rejects a work-design assumption, a privacy rule changes, a supplier is acquired, an emergency exposes a hidden dependency, or a performance measure is found to be gaming behavior. The learner must identify affected values, actors, authorities, processes, capabilities, investments, models, measures, risks, and transition steps; revise the recommendation; and state which evidence must be regenerated.</p>
+<h2 id="17-oral-defense-prompts">17. Oral defense prompts</h2>
+<ol>
+<li>Why is the enterprise—not the SoS or a single organization—the correct unit of analysis?</li>
+<li>Which stakeholder bears the largest hidden burden in the current state?</li>
+<li>What authority does the enterprise transformation lead actually possess?</li>
+<li>Which performance measure is most likely to be gamed, and how will you detect it?</li>
+<li>Which feedback loop most strongly resists the preferred transformation?</li>
+<li>Which capability gap is real, and which is an artifact of poor coordination or incentives?</li>
+<li>What existing investment should be stopped or reduced, and what is the opportunity cost?</li>
+<li>Which target operating-model assumption is least credible?</li>
+<li>How does the recommendation change under the most disruptive external scenario?</li>
+<li>What evidence would cause the coalition to pause or reverse the transformation?</li>
+<li>Which conflict cannot be engineered away and therefore requires an explicit governance choice?</li>
+<li>What should EN.645.742 examine as an emergent or adaptive complexity problem?</li>
+</ol>
+<h2 id="18-portfolio-and-maintenance">18. Portfolio and maintenance</h2>
+<p>Retain the controlled final release, major intermediate baselines, source models and notebooks, completed rubrics, review findings and dispositions, decision/assumption log, live-change evidence, oral-defense recording or transcript, and a one-page retrospective.</p>
+<table>
+<thead>
+<tr>
+<th>Revision date</th>
+<th>Change</th>
+<th>Reason</th>
+<th>Source/evidence</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-08-05</td>
+<td>Full course expansion</td>
+<td>Replace sparse outline with complete self-study course</td>
+<td>JHU Summer 2026 syllabus and current public enterprise guidance</td>
+<td>Added outcomes, weekly units, reviews, architecture/process/dynamics/portfolio work, capstone, and mastery gates</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="week-1--enterprise-definition-boundary-purpose-and-receiving-review">Week 1 — Enterprise definition, boundary, purpose, and receiving review</h2>
+<blockquote>
+<p><strong>Book companion · Week 1 :</strong> <a href="../../K/B19/chapters/01.html">Read Book 19, Chapter 01</a> → <a href="../../K/B19/labs/01.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-753-w01.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment">Competency alignment</h3>
+<p><strong>Program competencies:</strong> C1, C10, C11, C12<br/>
+<strong>Weekly role:</strong> Foundation<br/>
+<strong>Nominal effort:</strong> 10–12 hours</p>
+<h3 id="professional-context-and-essential-question">Professional context and essential question</h3>
+<p>Enterprise work fails early when the analyst inherits an organizational chart or technology portfolio and mistakes it for the enterprise. The boundary must follow the outcome, value system, actors, resources, authority, and environmental interactions relevant to the decision.</p>
+<blockquote>
+<p><strong>Essential question:</strong> What must be inside, outside, or explicitly interfaced for the enterprise claim and transformation purpose to be credible?</p>
+</blockquote>
+<h3 id="weekly-learning-outcomes">Weekly learning outcomes</h3>
+<ol>
+<li>Distinguish enterprise, enterprise system, SoS, ecosystem, organization, portfolio, program, and complex adaptive system using observable evidence.</li>
+<li>Define the regional enterprise purpose, outcomes, time horizon, decision scope, boundary, exclusions, and environment.</li>
+<li>Identify initial actors, resources, systems, services, policies, funding, and external dependencies.</li>
+<li>Create a receiving-review record linking EN.645.771 evidence to enterprise-level questions and gaps.</li>
+<li>State intended uses and prohibited uses for the enterprise models to be developed.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the prior week's main evidence chain from memory.</li>
+<li>Identify one inherited assumption that this week's work could invalidate.</li>
+<li>Complete a short terminology or interpretation check before opening the case files.</li>
+<li>State what decision the week's deliverable is intended to support.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined authority, value, or evidence assumption into the baseline.</p>
+<h3 id="required-study">Required study</h3>
+<ul>
+<li><strong>JHU course description and syllabus (<a href="https://apps.ep.jhu.edu/syllabus/summer-2026/645.753.81" title="Summer 2026 Syllabus for EN.645.753 Enterprise Systems Engineering">1</a>, <a href="https://ep.jhu.edu/courses/645753-enterprise-systems-engineering/" title="Enterprise Systems Engineering - 645.753">2</a>)</strong><br/>
+<strong>Purpose:</strong> Extract the stated enterprise conditions, modeling obligation, and decision purpose.<br/>
+<strong>Guiding questions:</strong> What must the process model explain? What makes authority different at enterprise scale?</li>
+<li><strong>SEBoK Enterprise Systems Engineering and The Enterprise as a System (<a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering" title="SEBoK: Enterprise Systems Engineering">3</a>, <a href="https://sebokwiki.org/wiki/The_Enterprise_as_a_System" title="SEBoK: The Enterprise as a System">4</a>)</strong><br/>
+<strong>Purpose:</strong> Study enterprise definitions, purposeful resources, interactions, and the case for a holistic systems view.<br/>
+<strong>Guiding questions:</strong> Which definition best fits the case? What would be omitted by an organization-only boundary?</li>
+<li><strong>SEBoK Enterprise Systems Engineering Background (<a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Background" title="SEBoK: Enterprise Systems Engineering Background">7</a>)</strong><br/>
+<strong>Purpose:</strong> Review enterprise context, system/organization relationships, and capability dependencies.<br/>
+<strong>Guiding questions:</strong> How does enterprise evolution differ from product development? Which dependencies cross ownership boundaries?</li>
+</ul>
+<p>Record concise notes answering every guiding question and identify at least one disagreement, limitation, or applicability concern for the regional case.</p>
+<h3 id="instructor-style-lesson-notes">Instructor-style lesson notes</h3>
+<ul>
+<li>An enterprise boundary is decision-relative. It should be broad enough to include mechanisms that materially shape the outcome and narrow enough to support analysis.</li>
+<li>The enterprise is not synonymous with the coalition office. It includes independent organizations and resources whose interactions create the result.</li>
+<li>Purpose, outcomes, value recipients, authority, time horizon, and transformation decision should be declared before architecture work begins.</li>
+<li>Exclusions require interface and assumption treatment; they do not disappear because they are outside the model.</li>
+<li>Receiving reviews distinguish inherited evidence from new enterprise assumptions and identify where SoS evidence is insufficient.</li>
+</ul>
+<h3 id="worked-example">Worked example</h3>
+<p>The inherited SoS roadmap assumes region-wide sharing of accessible-vehicle availability. The enterprise receiving review reveals that three providers are funded under different statutes, one vendor contract prohibits secondary data use, and a union agreement limits dispatch-role changes. The technical interface is feasible, but the enterprise boundary must include funding authorities, procurement, labor, privacy, and service-accountability actors.</p>
+<p>Reproduce the example in a small table, model, or notebook before applying the method to the running case. Record where the example is intentionally simplified.</p>
+<h3 id="guided-practice">Guided practice</h3>
+<ol>
+<li>Write a one-sentence enterprise purpose and a separate one-sentence transformation decision.</li>
+<li>Create a context table with actors/resources inside, outside, and at the boundary.</li>
+<li>For each excluded actor, record the dependency, assumption, owner, and evidence need.</li>
+<li>Classify inherited artifacts as accepted, conditionally accepted, rejected, or not applicable.</li>
+<li>Run a boundary challenge: remove one actor or resource and test whether the claimed outcome can still be explained.</li>
+</ol>
+<p>Pause after each step and compare the result with the stated decision purpose. Record discrepancies rather than forcing the artifact to match the expected story.</p>
+<h3 id="independent-exercises">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify 15 case entities as organization, enterprise resource, enterprise system, SoS constituent, portfolio item, or external factor.</li>
+<li><strong>Application:</strong> Produce the enterprise charter and boundary/context view.</li>
+<li><strong>Analysis:</strong> Compare two plausible boundaries and show how each changes measures, authority, data, and recommendations.</li>
+<li><strong>Synthesis:</strong> Define the model intended uses, users, decisions, time horizons, and prohibited claims.</li>
+<li><strong>Stretch:</strong> Build a machine-readable actor/resource registry and query all dependencies that cross the declared boundary.</li>
+</ul>
+<h3 id="weekly-deliverable">Weekly deliverable</h3>
+<p><strong>Enterprise Framing Baseline</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>2–3 page enterprise charter with purpose, decision, outcomes, time horizon, boundary, environment, assumptions, and exclusions.</li>
+<li>Context view and actor/resource registry with ownership and dependency fields.</li>
+<li>Receiving-review matrix for inherited SoS artifacts.</li>
+<li>Model intended-use and prohibited-use statement.</li>
+<li>One-page boundary sensitivity note.</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, evidence used, assumptions, limitations, unresolved conflicts, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boundary and purpose</td>
+<td style="text-align:right">35%</td>
+<td>Decision-relative, outcome-driven, explicit, and tested</td>
+</tr>
+<tr>
+<td>Enterprise distinction</td>
+<td style="text-align:right">25%</td>
+<td>Correctly separates enterprise, SoS, organizations, systems, and environment</td>
+</tr>
+<tr>
+<td>Receiving evidence</td>
+<td style="text-align:right">20%</td>
+<td>Inherited evidence, gaps, assumptions, and owners are controlled</td>
+</tr>
+<tr>
+<td>Communication/configuration</td>
+<td style="text-align:right">20%</td>
+<td>Clear, traceable, and reproducible</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures">Critical failures</h3>
+<ul>
+<li>Defines the enterprise as only the coalition office or technology stack.</li>
+<li>Excludes a mission-critical actor or funding/policy dependency without interface treatment.</li>
+<li>Claims that inherited SoS evidence establishes enterprise value or implementation feasibility.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why is an enterprise boundary decision-relative?</strong> — Because different decisions require different actors, resources, mechanisms, and external dependencies to be inside the analysis.</li>
+<li><strong>What distinguishes an enterprise from an enterprise system?</strong> — The enterprise is the purposeful sociotechnical network; an enterprise system is an engineered system used by or within that enterprise.</li>
+<li><strong>Why record prohibited model uses?</strong> — To prevent architecture and analysis outputs from being used for claims they were not built or validated to support.</li>
+<li><strong>What is a receiving review?</strong> — A controlled assessment of inherited artifacts, assumptions, gaps, applicability, ownership, and needed revision.</li>
+<li><strong>What makes an exclusion acceptable?</strong> — Its effect is represented through an interface, assumption, constraint, scenario, or uncertainty with an owner and evidence plan.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate">Revision and mastery gate</h3>
+<p>Revise until the boundary challenge identifies no unowned critical dependency and the charter clearly separates the enterprise purpose from the proposed solution.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required study</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Deliverable, review, and revision</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and reflection</td>
+<td style="text-align:right">0.5 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update">Configuration and portfolio update</h3>
+<p>Baseline <code>/01-enterprise-framing</code> and open decision, assumption, actor, and evidence logs.</p>
+<p>Record actual effort, decisions, assumptions, evidence changes, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-2--actors-authority-objectives-legitimacy-and-governance">Week 2 — Actors, authority, objectives, legitimacy, and governance</h2>
+<blockquote>
+<p><strong>Book companion · Week 2 :</strong> <a href="../../K/B19/chapters/02.html">Read Book 19, Chapter 02</a> → <a href="../../K/B19/labs/02.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-753-w02.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-2">Competency alignment</h3>
+<p><strong>Program competencies:</strong> C2, C10, C11, C12<br/>
+<strong>Weekly role:</strong> Foundation and integration<br/>
+<strong>Nominal effort:</strong> 10–12 hours</p>
+<h3 id="professional-context-and-essential-question-2">Professional context and essential question</h3>
+<p>Enterprise transformation is constrained less by organizational boxes than by decision rights, resources, incentives, accountability, legitimacy, and the ability of actors to refuse or reshape a change. A technically coherent proposal can be infeasible because no available governance mechanism can authorize or sustain it.</p>
+<blockquote>
+<p><strong>Essential question:</strong> Who can decide, fund, implement, block, appeal, or legitimize each enterprise change?</p>
+</blockquote>
+<h3 id="weekly-learning-outcomes-2">Weekly learning outcomes</h3>
+<ol>
+<li>Map actors, objectives, resources, authority, accountability, dependencies, and veto or appeal rights.</li>
+<li>Distinguish formal authority, contractual authority, operational influence, expertise, funding power, and social legitimacy.</li>
+<li>Identify objective conflicts, cooperation dependencies, principal-agent problems, and accountability gaps.</li>
+<li>Design alternative governance mechanisms without inventing top-level control.</li>
+<li>Conduct the Enterprise Framing and Governance Review.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-2">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the prior week's main evidence chain from memory.</li>
+<li>Identify one inherited assumption that this week's work could invalidate.</li>
+<li>Complete a short terminology or interpretation check before opening the case files.</li>
+<li>State what decision the week's deliverable is intended to support.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined authority, value, or evidence assumption into the baseline.</p>
+<h3 id="required-study-2">Required study</h3>
+<ul>
+<li><strong>SEBoK Enterprise Systems Engineering Key Concepts (<a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Key_Concepts" title="SEBoK: Enterprise Systems Engineering Key Concepts">5</a>)</strong><br/>
+<strong>Purpose:</strong> Focus on enterprise governance, distributed objectives, interactions, and adaptation.<br/>
+<strong>Guiding questions:</strong> Which actor behaviors are rational locally but harmful enterprise-wide?</li>
+<li><strong>SEBoK Related Business Activities (<a href="https://sebokwiki.org/wiki/Related_Business_Activities" title="SEBoK: Related Business Activities">9</a>)</strong><br/>
+<strong>Purpose:</strong> Review portfolio, resource allocation, budgeting, governance, and cross-enterprise relationships.<br/>
+<strong>Guiding questions:</strong> Where do business decisions constrain technical options? Which relationships rely on contracts versus cooperation?</li>
+<li><strong>INCOSE ESE Working Group scope (<a href="https://www.incose.org/group/enterprise-systems-engineering/" title="INCOSE Enterprise Systems Engineering Working Group">10</a>)</strong><br/>
+<strong>Purpose:</strong> Review current emphasis on capability planning, acquisition, mission architecture, and digital transformation.<br/>
+<strong>Guiding questions:</strong> Which enterprise decisions require model-based support? Which governance questions are not technical architecture questions?</li>
+</ul>
+<p>Record concise notes answering every guiding question and identify at least one disagreement, limitation, or applicability concern for the regional case.</p>
+<h3 id="instructor-style-lesson-notes-2">Instructor-style lesson notes</h3>
+<ul>
+<li>Authority is multidimensional and may be split among funding, policy, operations, data, safety, labor, procurement, and public accountability.</li>
+<li>Influence is not authority; a central network position does not grant the right to direct another organization.</li>
+<li>Governance defines how decisions are proposed, evaluated, authorized, contested, monitored, and revised.</li>
+<li>Legitimacy and consent affect adoption, data access, workforce behavior, and the durability of enterprise change.</li>
+<li>Objective conflict should be modeled, not smoothed into a fictitious shared objective.</li>
+</ul>
+<h3 id="worked-example-2">Worked example</h3>
+<p>A regional steering board can approve a shared data standard but cannot compel a private vendor to expose historical data or require a transit authority to reassign union-covered dispatch work. A feasible governance design combines procurement clauses, a data trust, operating agreements, labor consultation, public reporting, and an escalation path rather than asserting coalition command authority.</p>
+<p>Reproduce the example in a small table, model, or notebook before applying the method to the running case. Record where the example is intentionally simplified.</p>
+<h3 id="guided-practice-2">Guided practice</h3>
+<ol>
+<li>Populate an actor table with objectives, resources, formal authority, informal influence, accountability, and constraints.</li>
+<li>Create a RACI-like decision-rights matrix but add veto, appeal, funding, data-ownership, and legitimacy fields.</li>
+<li>Select five conflicts and distinguish negotiable preferences from legal or safety constraints.</li>
+<li>Develop three governance mechanisms for one cross-enterprise decision.</li>
+<li>Red-team each mechanism from the perspective of a low-power actor and an actor with blocking authority.</li>
+</ol>
+<p>Pause after each step and compare the result with the stated decision purpose. Record discrepancies rather than forcing the artifact to match the expected story.</p>
+<h3 id="independent-exercises-2">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Diagnose ten statements that confuse authority, responsibility, influence, and accountability.</li>
+<li><strong>Application:</strong> Build the actor/authority/incentive registry and governance map.</li>
+<li><strong>Analysis:</strong> Identify two principal-agent problems and two common-resource or coordination problems.</li>
+<li><strong>Synthesis:</strong> Design governance for shared accessibility data and emergency-priority transport.</li>
+<li><strong>Stretch:</strong> Represent decision rights and dependencies as a multilayer network and compare formal authority with operational influence.</li>
+</ul>
+<h3 id="weekly-deliverable-2">Weekly deliverable</h3>
+<p><strong>Enterprise Governance Baseline</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>Actor/authority/incentive/accountability registry.</li>
+<li>Objective-conflict and cooperation-dependency matrix.</li>
+<li>Decision-rights model covering at least eight enterprise decisions.</li>
+<li>Three governance mechanism alternatives with feasibility and legitimacy analysis.</li>
+<li>Review briefing, findings, and dispositions.</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, evidence used, assumptions, limitations, unresolved conflicts, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-2">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authority fidelity</td>
+<td style="text-align:right">30%</td>
+<td>Formal and informal power, veto, appeal, funding, data, and accountability are distinguished</td>
+</tr>
+<tr>
+<td>Conflict/incentive analysis</td>
+<td style="text-align:right">25%</td>
+<td>Objectives and local rationality are explicit</td>
+</tr>
+<tr>
+<td>Governance feasibility</td>
+<td style="text-align:right">30%</td>
+<td>Mechanisms can actually authorize and sustain change</td>
+</tr>
+<tr>
+<td>Review discipline</td>
+<td style="text-align:right">15%</td>
+<td>Findings and revisions are controlled</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-2">Critical failures</h3>
+<ul>
+<li>Assumes coalition authority over independent organizations.</li>
+<li>Treats public legitimacy, workforce consent, or legal accountability as communication issues only.</li>
+<li>Uses RACI alone for decisions involving veto, funding, data ownership, or appeal.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-2">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why is influence not authority?</strong> — Influence can shape decisions but does not necessarily carry a legitimate or enforceable right to decide.</li>
+<li><strong>What is an accountability gap?</strong> — A condition where responsibility for an outcome exists without authority, resources, evidence, or consequences sufficient to deliver it.</li>
+<li><strong>Why model veto and appeal rights?</strong> — Because they determine feasible sequencing, negotiation, and the durability of decisions.</li>
+<li><strong>What is a principal-agent problem?</strong> — An actor makes decisions on another's behalf while incentives, information, or accountability are misaligned.</li>
+<li><strong>What makes governance an architecture concern?</strong> — Decision rights and coordination mechanisms constrain which technical and organizational configurations can operate coherently.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-2">Revision and mastery gate</h3>
+<p>Pass the review only when every critical enterprise decision has a feasible authority path, unresolved conflicts are explicit, and no actor is assigned obligations without resources or consent mechanisms.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-2">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required study</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Deliverable, review, and revision</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and reflection</td>
+<td style="text-align:right">0.5 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-2">Configuration and portfolio update</h3>
+<p>Baseline <code>/02-actors-authority-governance</code>; update boundary and assumption logs.</p>
+<p>Record actual effort, decisions, assumptions, evidence changes, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-3--value-outcomes-measures-incentives-and-burden-transfer">Week 3 — Value, outcomes, measures, incentives, and burden transfer</h2>
+<blockquote>
+<p><strong>Book companion · Week 3 :</strong> <a href="../../K/B19/chapters/03.html">Read Book 19, Chapter 03</a> → <a href="../../K/B19/labs/03.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-753-w03.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-3">Competency alignment</h3>
+<p><strong>Program competencies:</strong> C2, C8, C9, C10, C11<br/>
+<strong>Weekly role:</strong> Development<br/>
+<strong>Nominal effort:</strong> 10–12 hours</p>
+<h3 id="professional-context-and-essential-question-3">Professional context and essential question</h3>
+<p>Enterprises rarely have one objective. Service access, safety, affordability, workforce quality, environmental impact, fiscal sustainability, vendor viability, privacy, and public trust can improve or degrade differently. Measures and incentives shape behavior, sometimes more strongly than formal policy.</p>
+<blockquote>
+<p><strong>Essential question:</strong> How will the enterprise know it is creating value without hiding who pays, waits, works more, or bears additional risk?</p>
+</blockquote>
+<h3 id="weekly-learning-outcomes-3">Weekly learning outcomes</h3>
+<ol>
+<li>Construct an enterprise value/outcome hierarchy with stakeholder-specific value propositions and conflicts.</li>
+<li>Define balanced enterprise measures with owners, formulas, provenance, cadence, thresholds, and interpretation rules.</li>
+<li>Identify burden transfer, externalities, metric gaming, Goodhart effects, and inequitable subgroup outcomes.</li>
+<li>Connect incentives and funding rules to expected actor behavior.</li>
+<li>Design a measurement system suitable for enterprise evaluation rather than project compliance alone.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-3">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the prior week's main evidence chain from memory.</li>
+<li>Identify one inherited assumption that this week's work could invalidate.</li>
+<li>Complete a short terminology or interpretation check before opening the case files.</li>
+<li>State what decision the week's deliverable is intended to support.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined authority, value, or evidence assumption into the baseline.</p>
+<h3 id="required-study-3">Required study</h3>
+<ul>
+<li><strong>SEBoK Enterprise Systems Engineering Process Activities: effectiveness, efficiency, value streams, and evaluation/assessment (<a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Process_Activities" title="SEBoK: Enterprise Systems Engineering Process Activities">6</a>)</strong><br/>
+<strong>Purpose:</strong> Study the distinction between efficiency and effectiveness and the enterprise evaluation role.<br/>
+<strong>Guiding questions:</strong> Which measures show value, not merely throughput? Where should breakpoints replace single thresholds?</li>
+<li><strong>NIST Baldrige systems perspective and core values (<a href="https://www.nist.gov/baldrige/about-baldrige-excellence-framework" title="NIST Baldrige Excellence Framework Overview">18</a>, <a href="https://www.nist.gov/baldrige/core-values-and-concepts" title="NIST Baldrige Core Values and Concepts">19</a>)</strong><br/>
+<strong>Purpose:</strong> Review leadership, strategy, customers, workforce, operations, results, ethics, resilience, and societal contribution as an integrated system.<br/>
+<strong>Guiding questions:</strong> Which categories are absent from the current enterprise measures?</li>
+<li><strong>ISO 31000 overview (<a href="https://www.iso.org/standard/65694.html" title="ISO 31000:2018 Risk Management — Guidelines">17</a>)</strong><br/>
+<strong>Purpose:</strong> Review value creation/protection, stakeholder inclusion, culture, and integration with governance and strategy.<br/>
+<strong>Guiding questions:</strong> How should risk and opportunity measures connect to objectives and decision processes?</li>
+</ul>
+<p>Record concise notes answering every guiding question and identify at least one disagreement, limitation, or applicability concern for the regional case.</p>
+<h3 id="instructor-style-lesson-notes-3">Instructor-style lesson notes</h3>
+<ul>
+<li>Enterprise value is plural and distributed. A regional average can improve while accessibility, neighborhood, workforce, or emergency outcomes worsen.</li>
+<li>Measures require operational definitions, provenance, context, uncertainty, owners, thresholds, and prescribed responses.</li>
+<li>Incentives can make an apparently irrational enterprise outcome locally rational for every actor.</li>
+<li>Leading indicators support intervention; lagging outcomes show whether value was actually realized.</li>
+<li>Measure portfolios need anti-gaming and burden-transfer checks.</li>
+</ul>
+<h3 id="worked-example-3">Worked example</h3>
+<p>A proposed on-time-performance target improves regional averages by allowing operators to skip time-consuming accessibility boarding support. The measure is technically accurate but creates burden transfer. The corrected value system adds accessible-trip completion, denied-service rate, operator workload, passenger harm, and subgroup reliability; funding incentives are redesigned so local schedule performance cannot be improved by shifting cost to vulnerable riders.</p>
+<p>Reproduce the example in a small table, model, or notebook before applying the method to the running case. Record where the example is intentionally simplified.</p>
+<h3 id="guided-practice-3">Guided practice</h3>
+<ol>
+<li>List value recipients, contributors, funders, regulators, and burden bearers.</li>
+<li>Create an outcome hierarchy separating ends, means, constraints, and diagnostic measures.</li>
+<li>Define ten measures with formulas, data sources, owners, cadence, uncertainty, and action rules.</li>
+<li>For each measure, write one gaming strategy and one countermeasure.</li>
+<li>Run a subgroup and burden-transfer review using the synthetic case data.</li>
+</ol>
+<p>Pause after each step and compare the result with the stated decision purpose. Record discrepancies rather than forcing the artifact to match the expected story.</p>
+<h3 id="independent-exercises-3">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify measures as outcome, capability, process, resource, risk, equity, resilience, or diagnostic.</li>
+<li><strong>Application:</strong> Build the value hierarchy and enterprise-measure dictionary.</li>
+<li><strong>Analysis:</strong> Trace three incentives to expected actor behavior and unintended enterprise effects.</li>
+<li><strong>Synthesis:</strong> Design a balanced enterprise evaluation dashboard and narrative decision protocol.</li>
+<li><strong>Stretch:</strong> Implement automated subgroup, missingness, threshold, and measure-drift checks in Python.</li>
+</ul>
+<h3 id="weekly-deliverable-3">Weekly deliverable</h3>
+<p><strong>Enterprise Value and Measurement System</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>Value/outcome hierarchy with stakeholder conflicts.</li>
+<li>Measure dictionary containing at least 15 measures and five anti-gaming controls.</li>
+<li>Incentive-to-behavior causal map.</li>
+<li>Burden-transfer and subgroup analysis.</li>
+<li>One-page measurement governance and response protocol.</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, evidence used, assumptions, limitations, unresolved conflicts, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-3">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value completeness</td>
+<td style="text-align:right">30%</td>
+<td>Multiple stakeholders, outcomes, constraints, and burdens are explicit</td>
+</tr>
+<tr>
+<td>Measure quality</td>
+<td style="text-align:right">30%</td>
+<td>Definitions, provenance, thresholds, uncertainty, and actions are operational</td>
+</tr>
+<tr>
+<td>Incentive analysis</td>
+<td style="text-align:right">25%</td>
+<td>Behavioral mechanisms and gaming are credible</td>
+</tr>
+<tr>
+<td>Equity/ethics</td>
+<td style="text-align:right">15%</td>
+<td>Subgroup and burden transfer are assessed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-3">Critical failures</h3>
+<ul>
+<li>Uses only aggregate averages for claims involving access or public value.</li>
+<li>Defines measures without owners, sources, or action rules.</li>
+<li>Recommends incentives without analyzing gaming or shifted burden.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-3">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why distinguish efficiency from effectiveness?</strong> — Efficiency concerns resource use; effectiveness concerns whether valuable enterprise outcomes are achieved.</li>
+<li><strong>What is burden transfer?</strong> — An apparent improvement achieved by shifting cost, delay, workload, risk, or harm to another actor or population.</li>
+<li><strong>Why need measure action rules?</strong> — A measure has little governance value unless actors know how evidence changes decisions or triggers investigation.</li>
+<li><strong>What is Goodhart's law in practice?</strong> — When a measure becomes a target, actors adapt to improve the number, potentially degrading the underlying outcome.</li>
+<li><strong>Why include societal and workforce measures?</strong> — They affect legitimacy, adoption, resilience, and the sustainability of enterprise performance.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-3">Revision and mastery gate</h3>
+<p>Revise until every top-level value claim has at least one outcome measure, one leading indicator, one burden-transfer check, and one named decision owner.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-3">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required study</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Deliverable, review, and revision</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and reflection</td>
+<td style="text-align:right">0.5 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-3">Configuration and portfolio update</h3>
+<p>Baseline <code>/03-value-and-measures</code>; link measures to actors, processes, capabilities, and decisions.</p>
+<p>Record actual effort, decisions, assumptions, evidence changes, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-4--enterprise-processes-value-streams-information-and-work">Week 4 — Enterprise processes, value streams, information, and work</h2>
+<blockquote>
+<p><strong>Book companion · Week 4 :</strong> <a href="../../K/B19/chapters/04.html">Read Book 19, Chapter 04</a> → <a href="../../K/B19/labs/04.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-753-w04.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-4">Competency alignment</h3>
+<p><strong>Program competencies:</strong> C3, C4, C10, C11<br/>
+<strong>Weekly role:</strong> Development<br/>
+<strong>Nominal effort:</strong> 11–13 hours</p>
+<h3 id="professional-context-and-essential-question-4">Professional context and essential question</h3>
+<p>The source course explicitly requires a process model of key enterprise elements and interactions. At enterprise scale, the model must include not only activity sequence but organizations, decision rights, information, resources, exceptions, delays, funding, policy, and feedback.</p>
+<blockquote>
+<p><strong>Essential question:</strong> How does work, information, authority, and value actually move across the enterprise—and where does it stall, loop, fragment, or lose accountability?</p>
+</blockquote>
+<h3 id="weekly-learning-outcomes-4">Weekly learning outcomes</h3>
+<ol>
+<li>Define process purpose, boundary, triggers, states, outcomes, actors, information, resources, and controls.</li>
+<li>Create BPMN-compatible current-state models for normal and exception/degraded flows.</li>
+<li>Develop value-stream and information-flow views with wait, rework, queue, handoff, and burden data.</li>
+<li>Identify variants, shadow processes, policy workarounds, and unowned transitions.</li>
+<li>Validate the process model against synthetic event data and actor evidence.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-4">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the prior week's main evidence chain from memory.</li>
+<li>Identify one inherited assumption that this week's work could invalidate.</li>
+<li>Complete a short terminology or interpretation check before opening the case files.</li>
+<li>State what decision the week's deliverable is intended to support.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined authority, value, or evidence assumption into the baseline.</p>
+<h3 id="required-study-4">Required study</h3>
+<ul>
+<li><strong>SEBoK ESE Process Activities: value stream analysis and enterprise management processes (<a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Process_Activities" title="SEBoK: Enterprise Systems Engineering Process Activities">6</a>)</strong><br/>
+<strong>Purpose:</strong> Study value creation, resource consumption, handoffs, and enterprise process areas.<br/>
+<strong>Guiding questions:</strong> Where is value created versus merely transferred? Which process areas connect strategy to implementation?</li>
+<li><strong>OMG BPMN 2.0.2 overview (<a href="https://www.omg.org/spec/BPMN/" title="OMG Business Process Model and Notation 2.0.2">14</a>)</strong><br/>
+<strong>Purpose:</strong> Review events, activities, gateways, message flows, pools/lanes, data, exceptions, and collaboration models.<br/>
+<strong>Guiding questions:</strong> Which notation is needed to show cross-organization ownership and exceptions?</li>
+<li><strong>MITRE Framework for Enterprise Systems Engineering Processes (<a href="https://www.mitre.org/sites/default/files/pdf/06_1163.pdf" title="A Framework for Enterprise Systems Engineering Processes">16</a>)</strong><br/>
+<strong>Purpose:</strong> Review strategic technical planning, capability analysis, technology planning, architecture, and enterprise assessment interactions.<br/>
+<strong>Guiding questions:</strong> Which activities are missing from the regional enterprise's current operating model?</li>
+</ul>
+<p>Record concise notes answering every guiding question and identify at least one disagreement, limitation, or applicability concern for the regional case.</p>
+<h3 id="instructor-style-lesson-notes-4">Instructor-style lesson notes</h3>
+<ul>
+<li>A process model should represent decisions and state changes, not merely a chronological list of meetings.</li>
+<li>Pools and message flows help expose independent organizations; lanes alone can imply authority that does not exist.</li>
+<li>Value-stream measures must distinguish processing time, waiting, rework, transfer, queue, abandonment, and external burden.</li>
+<li>Shadow processes often reveal unmet needs or infeasible formal controls rather than simple noncompliance.</li>
+<li>Model validation requires comparison with observed traces, stakeholder walkthroughs, and exception cases.</li>
+</ul>
+<h3 id="worked-example-4">Worked example</h3>
+<p>The formal incident-to-mobility-support process shows five steps and a 20-minute target. Event records reveal 14 variants, repeated eligibility checks, missing hospital-discharge timestamps, manual phone calls, and an average 74-minute wait. The process model adds message events, data-quality gates, escalation, fallback transport, and funding authorization, revealing that the largest delay is an unowned inter-organizational decision rather than vehicle availability.</p>
+<p>Reproduce the example in a small table, model, or notebook before applying the method to the running case. Record where the example is intentionally simplified.</p>
+<h3 id="guided-practice-4">Guided practice</h3>
+<ol>
+<li>Select three value streams: routine accessible trip, major-event surge, and emergency transfer.</li>
+<li>Define trigger, end state, customer/value recipient, owners, and evidence for each.</li>
+<li>Model normal and exception paths using collaboration semantics.</li>
+<li>Join event records to process steps and calculate processing, waiting, rework, and abandonment.</li>
+<li>Conduct a walkthrough from the perspective of operator, rider, hospital, funder, and regulator.</li>
+</ol>
+<p>Pause after each step and compare the result with the stated decision purpose. Record discrepancies rather than forcing the artifact to match the expected story.</p>
+<h3 id="independent-exercises-4">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Correct a defective cross-organization process model with hidden ownership and missing exceptions.</li>
+<li><strong>Application:</strong> Create the current-state process and value-stream baseline.</li>
+<li><strong>Analysis:</strong> Compare documented, observed, and perceived process variants.</li>
+<li><strong>Synthesis:</strong> Identify five leverage hypotheses supported by process and information evidence.</li>
+<li><strong>Stretch:</strong> Use process-mining or Python sequence analysis to discover variants and conformance gaps.</li>
+</ul>
+<h3 id="weekly-deliverable-4">Weekly deliverable</h3>
+<p><strong>Current-State Process and Value-Stream Baseline</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>Three cross-organizational process models with normal and exception paths.</li>
+<li>Value-stream table with processing, waiting, rework, queue, abandonment, cost, and burden.</li>
+<li>Information/data lineage and decision-rights overlays.</li>
+<li>Variant/conformance assessment with evidence limitations.</li>
+<li>Prioritized process hypotheses for Week 5 dynamics analysis.</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, evidence used, assumptions, limitations, unresolved conflicts, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-4">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Process semantics</td>
+<td style="text-align:right">30%</td>
+<td>States, events, ownership, messages, decisions, and exceptions are correct</td>
+</tr>
+<tr>
+<td>Evidence grounding</td>
+<td style="text-align:right">25%</td>
+<td>Observed data and stakeholder evidence validate the model</td>
+</tr>
+<tr>
+<td>Value-stream analysis</td>
+<td style="text-align:right">25%</td>
+<td>Wait, rework, burden, and value are quantified</td>
+</tr>
+<tr>
+<td>Enterprise insight</td>
+<td style="text-align:right">20%</td>
+<td>Cross-boundary causes and hypotheses are defensible</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-4">Critical failures</h3>
+<ul>
+<li>Uses a single swimlane hierarchy that implies nonexistent command authority.</li>
+<li>Models only the nominal process for an emergency or accessibility claim.</li>
+<li>Concludes that a bottleneck is causal without evidence or alternative explanations.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-4">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why use collaboration rather than one internal process?</strong> — Because independent organizations exchange messages and decisions without sharing one process owner.</li>
+<li><strong>What is a shadow process?</strong> — An unofficial workflow used to accomplish work when formal processes are unavailable, slow, or misaligned.</li>
+<li><strong>Why separate processing and waiting time?</strong> — They imply different causes and interventions.</li>
+<li><strong>What is conformance analysis?</strong> — Comparison of observed event sequences with the intended or modeled process.</li>
+<li><strong>Why model exceptions early?</strong> — They often drive enterprise risk, workload, and public outcomes more than nominal flow.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-4">Revision and mastery gate</h3>
+<p>Revise until each value stream has validated ownership, information, exception, and measurement semantics and the main delay/rework claims can be reproduced from source data.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-4">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required study</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Deliverable, review, and revision</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and reflection</td>
+<td style="text-align:right">0.5 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-4">Configuration and portfolio update</h3>
+<p>Baseline <code>/04-current-process-and-value-stream</code>; preserve event-data cleaning and model-source files.</p>
+<p>Record actual effort, decisions, assumptions, evidence changes, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-5--enterprise-dynamics-feedback-delays-and-current-state-assessment">Week 5 — Enterprise dynamics, feedback, delays, and current-state assessment</h2>
+<blockquote>
+<p><strong>Book companion · Week 5 :</strong> <a href="../../K/B19/chapters/05.html">Read Book 19, Chapter 05</a> → <a href="../../K/B19/labs/05.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-753-w05.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-5">Competency alignment</h3>
+<p><strong>Program competencies:</strong> C7, C8, C11, C12<br/>
+<strong>Weekly role:</strong> Development and review<br/>
+<strong>Nominal effort:</strong> 11–13 hours</p>
+<h3 id="professional-context-and-essential-question-5">Professional context and essential question</h3>
+<p>Static process and architecture views show structure but not why performance persists, oscillates, erodes, or rebounds. Enterprise assessment needs explicit behavior-over-time hypotheses linking workload, capacity, incentives, trust, investment, maintenance, demand, and external pressures.</p>
+<blockquote>
+<p><strong>Essential question:</strong> Which feedback structures and delays best explain the enterprise's observed behavior, and what evidence would falsify them?</p>
+</blockquote>
+<h3 id="weekly-learning-outcomes-5">Weekly learning outcomes</h3>
+<ol>
+<li>Define reference modes for important enterprise outcomes and process measures.</li>
+<li>Build causal-loop and stock-flow hypotheses linking process, capability, incentive, and external factors.</li>
+<li>Implement a bounded executable dynamics model with units and transparent equations.</li>
+<li>Verify structure, units, numerical behavior, extreme conditions, and sensitivity.</li>
+<li>Conduct the Value and Current-State Review and distinguish diagnosis from speculation.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-5">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the prior week's main evidence chain from memory.</li>
+<li>Identify one inherited assumption that this week's work could invalidate.</li>
+<li>Complete a short terminology or interpretation check before opening the case files.</li>
+<li>State what decision the week's deliverable is intended to support.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined authority, value, or evidence assumption into the baseline.</p>
+<h3 id="required-study-5">Required study</h3>
+<ul>
+<li><strong>MIT System Dynamics course material (<a href="https://ocw.mit.edu/courses/res-15-004-system-dynamics-systems-thinking-and-modeling-for-a-complex-world-january-iap-2020/" title="MIT System Dynamics: Systems Thinking and Modeling for a Complex World">21</a>)</strong><br/>
+<strong>Purpose:</strong> Review stocks, flows, feedback, delays, nonlinear response, reference modes, and policy resistance.<br/>
+<strong>Guiding questions:</strong> Which variables accumulate? Which delays separate action from outcome?</li>
+<li><strong>SEBoK ESE Process Activities: enterprise evaluation and assessment (<a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Process_Activities" title="SEBoK: Enterprise Systems Engineering Process Activities">6</a>)</strong><br/>
+<strong>Purpose:</strong> Study multi-scale assessment, breakpoints, continuous monitoring, and opportunity/risk.<br/>
+<strong>Guiding questions:</strong> What should the model reveal beyond compliance with individual thresholds?</li>
+<li><strong>NIST Baldrige systems perspective (<a href="https://www.nist.gov/baldrige/about-baldrige-excellence-framework" title="NIST Baldrige Excellence Framework Overview">18</a>, <a href="https://www.nist.gov/baldrige/core-values-and-concepts" title="NIST Baldrige Core Values and Concepts">19</a>)</strong><br/>
+<strong>Purpose:</strong> Review relationships among leadership, strategy, workforce, operations, knowledge, customers, and results.<br/>
+<strong>Guiding questions:</strong> Which cross-category relationships belong in the current-state hypothesis?</li>
+</ul>
+<p>Record concise notes answering every guiding question and identify at least one disagreement, limitation, or applicability concern for the regional case.</p>
+<h3 id="instructor-style-lesson-notes-5">Instructor-style lesson notes</h3>
+<ul>
+<li>Reference modes are evidence-backed patterns over time, not decorative line sketches.</li>
+<li>Stocks often include backlog, trained workforce, trust, asset condition, technical debt, and committed funding.</li>
+<li>Delays and nonlinear limits can make a reasonable policy produce overshoot, instability, or no visible short-term benefit.</li>
+<li>Model credibility begins with a clear question and bounded claim; complexity is not a substitute for validation.</li>
+<li>Competing hypotheses should be preserved when evidence cannot discriminate among them.</li>
+</ul>
+<h3 id="worked-example-5">Worked example</h3>
+<p>The coalition responds to missed trips by adding short-term contractor capacity. This reduces backlog temporarily but diverts funding from maintenance and training, increases coordination load, and raises turnover. A reinforcing erosion loop eventually reduces effective capacity. The model shows why repeated emergency contracting can worsen long-run service despite improving the first month's throughput.</p>
+<p>Reproduce the example in a small table, model, or notebook before applying the method to the running case. Record where the example is intentionally simplified.</p>
+<h3 id="guided-practice-5">Guided practice</h3>
+<ol>
+<li>Create reference modes for accessible-trip completion, backlog, workforce, trust, maintenance, and cost.</li>
+<li>Develop two competing causal hypotheses for one persistent problem.</li>
+<li>Convert the selected hypothesis into stocks, flows, auxiliaries, units, and equations.</li>
+<li>Run structure, units, extreme-condition, time-step, and parameter sensitivity tests.</li>
+<li>Compare simulated and observed patterns and record what the model cannot explain.</li>
+</ol>
+<p>Pause after each step and compare the result with the stated decision purpose. Record discrepancies rather than forcing the artifact to match the expected story.</p>
+<h3 id="independent-exercises-5">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Identify stocks, flows, feedback polarity, and delays in six enterprise statements.</li>
+<li><strong>Application:</strong> Build and verify the current-state dynamics model.</li>
+<li><strong>Analysis:</strong> Test at least three alternative causal explanations or parameter sets.</li>
+<li><strong>Synthesis:</strong> Produce a current-state assessment linking architecture, process, measures, and dynamics.</li>
+<li><strong>Stretch:</strong> Calibrate a bounded subset and perform global sensitivity or scenario discovery.</li>
+</ul>
+<h3 id="weekly-deliverable-5">Weekly deliverable</h3>
+<p><strong>Enterprise Dynamics and Current-State Assessment</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>Reference modes and evidence table.</li>
+<li>Causal-loop and executable stock-flow/process model.</li>
+<li>Verification, behavior, sensitivity, and uncertainty results.</li>
+<li>Current-state strengths, weaknesses, stabilizers, reinforcing problems, and evidence gaps.</li>
+<li>Review package with findings and revisions.</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, evidence used, assumptions, limitations, unresolved conflicts, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-5">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dynamic hypothesis</td>
+<td style="text-align:right">30%</td>
+<td>Structure explains observed behavior with explicit mechanisms</td>
+</tr>
+<tr>
+<td>Executable model quality</td>
+<td style="text-align:right">25%</td>
+<td>Units, equations, tests, and reproduction are sound</td>
+</tr>
+<tr>
+<td>Evidence/uncertainty</td>
+<td style="text-align:right">25%</td>
+<td>Calibration, alternatives, sensitivity, and limits are explicit</td>
+</tr>
+<tr>
+<td>Current-state assessment</td>
+<td style="text-align:right">20%</td>
+<td>Findings integrate value, process, architecture, and behavior</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-5">Critical failures</h3>
+<ul>
+<li>Uses a causal-loop diagram without behavior-over-time evidence.</li>
+<li>Presents a model run with no units, verification, or alternative hypotheses.</li>
+<li>Claims prediction where the model supports only explanation or scenario comparison.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-5">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why are backlogs stocks?</strong> — They accumulate the difference between arrivals and completions over time.</li>
+<li><strong>What is policy resistance?</strong> — Feedback and adaptation reduce, reverse, or delay the intended effect of an intervention.</li>
+<li><strong>Why test extreme conditions?</strong> — They reveal structural and equation errors that may be hidden near nominal conditions.</li>
+<li><strong>What is a breakpoint?</strong> — A condition where capability changes discontinuously or becomes unacceptable rather than gradually degrading.</li>
+<li><strong>Why retain competing hypotheses?</strong> — Because available evidence may not uniquely identify the true mechanism, and different structures imply different interventions.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-5">Revision and mastery gate</h3>
+<p>Pass the review only when the model reproduces at least two important reference modes, survives verification tests, and the assessment clearly separates supported findings, plausible hypotheses, and unknowns.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-5">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required study</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Deliverable, review, and revision</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and reflection</td>
+<td style="text-align:right">0.5 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-5">Configuration and portfolio update</h3>
+<p>Baseline <code>/05-enterprise-dynamics-and-assessment</code>; tag the current-state review release.</p>
+<p>Record actual effort, decisions, assumptions, evidence changes, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-6--enterprise-architecture-and-capability-management">Week 6 — Enterprise architecture and capability management</h2>
+<blockquote>
+<p><strong>Book companion · Week 6 :</strong> <a href="../../K/B19/chapters/06.html">Read Book 19, Chapter 06</a> → <a href="../../K/B19/labs/06.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-753-w06.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-6">Competency alignment</h3>
+<p><strong>Program competencies:</strong> C3, C4, C9, C10, C11<br/>
+<strong>Weekly role:</strong> Integration<br/>
+<strong>Nominal effort:</strong> 11–13 hours</p>
+<h3 id="professional-context-and-essential-question-6">Professional context and essential question</h3>
+<p>Enterprise architecture should answer high-value decisions: which capabilities are needed, how they depend on organizations and resources, where gaps and overlaps exist, and how changes propagate. It should not become an exhaustive inventory disconnected from value and transformation choices.</p>
+<blockquote>
+<p><strong>Essential question:</strong> What architecture views and capability relationships are necessary to decide how the enterprise should evolve?</p>
+</blockquote>
+<h3 id="weekly-learning-outcomes-6">Weekly learning outcomes</h3>
+<ol>
+<li>Define stakeholder concerns, architecture viewpoints, model kinds, and decision questions using ISO 42010 concepts.</li>
+<li>Construct integrated strategy, value, capability, organization, process, information, system, resource, policy, and measure views.</li>
+<li>Distinguish operational, system, and organizational capabilities.</li>
+<li>Identify capability gaps, overlaps, dependencies, fragility, ownership, and maturity.</li>
+<li>Generate current and target capability trajectories tied to enterprise outcomes.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-6">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the prior week's main evidence chain from memory.</li>
+<li>Identify one inherited assumption that this week's work could invalidate.</li>
+<li>Complete a short terminology or interpretation check before opening the case files.</li>
+<li>State what decision the week's deliverable is intended to support.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined authority, value, or evidence assumption into the baseline.</p>
+<h3 id="required-study-6">Required study</h3>
+<ul>
+<li><strong>ISO/IEC/IEEE 42010:2022 overview (<a href="https://www.iso.org/standard/74393.html" title="ISO/IEC/IEEE 42010:2022 Architecture Description">12</a>)</strong><br/>
+<strong>Purpose:</strong> Study architecture-description, stakeholder, concern, viewpoint, model kind, correspondence, and rationale concepts.<br/>
+<strong>Guiding questions:</strong> Which stakeholder concerns justify each enterprise view? How will consistency be checked?</li>
+<li><strong>SEBoK Enterprise Capability Management (<a href="https://sebokwiki.org/wiki/Enterprise_Capability_Management" title="SEBoK: Enterprise Capability Management">8</a>)</strong><br/>
+<strong>Purpose:</strong> Review operational, system, and organizational capabilities and vectoring the enterprise from baseline to desired outcomes.<br/>
+<strong>Guiding questions:</strong> Which capability gaps are organizational rather than technical? Which dependencies create portfolio constraints?</li>
+<li><strong>OMG UAF 1.3 overview (<a href="https://www.omg.org/spec/UAF/" title="OMG Unified Architecture Framework 1.3">13</a>)</strong><br/>
+<strong>Purpose:</strong> Review enterprise, strategic, operational, services, resources, personnel, security, standards, and roadmap concerns.<br/>
+<strong>Guiding questions:</strong> Which UAF concepts add value to the case without forcing unnecessary notation?</li>
+</ul>
+<p>Record concise notes answering every guiding question and identify at least one disagreement, limitation, or applicability concern for the regional case.</p>
+<h3 id="instructor-style-lesson-notes-6">Instructor-style lesson notes</h3>
+<ul>
+<li>Capabilities describe the ability to achieve an effect under stated conditions; they are not projects, organizations, or systems.</li>
+<li>Architecture viewpoints should be selected from stakeholder concerns and decision questions.</li>
+<li>Correspondences and queries expose inconsistency across value, capability, process, organization, information, and resource views.</li>
+<li>Capability gaps can arise from coordination, policy, workforce, information, or incentives—not only missing technology.</li>
+<li>Target capability trajectories need timing, dependencies, maturity, evidence, and retirement of obsolete capability.</li>
+</ul>
+<h3 id="worked-example-6">Worked example</h3>
+<p>The enterprise initially labels 'shared dispatch platform' as a capability gap. Architecture analysis shows the real gaps are cross-provider eligibility recognition, emergency-priority governance, trusted availability semantics, and trained coordination roles. A platform may enable these capabilities, but purchasing software alone would not close them.</p>
+<p>Reproduce the example in a small table, model, or notebook before applying the method to the running case. Record where the example is intentionally simplified.</p>
+<h3 id="guided-practice-6">Guided practice</h3>
+<ol>
+<li>List the top five enterprise decisions and their stakeholders/concerns.</li>
+<li>Define the minimum set of viewpoints and model kinds needed to answer them.</li>
+<li>Build a capability map with outcomes, conditions, owners, enabling systems/processes/skills, measures, and dependencies.</li>
+<li>Run queries for orphan capabilities, duplicated investments, single-owner dependencies, and missing organizational capability.</li>
+<li>Develop current, planned, and target capability trajectories.</li>
+</ol>
+<p>Pause after each step and compare the result with the stated decision purpose. Record discrepancies rather than forcing the artifact to match the expected story.</p>
+<h3 id="independent-exercises-6">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Correct 12 mislabeled projects, systems, services, and activities presented as capabilities.</li>
+<li><strong>Application:</strong> Build the current-state enterprise architecture and capability baseline.</li>
+<li><strong>Analysis:</strong> Identify five gaps, three overlaps, three fragile dependencies, and two false gaps caused by governance or process.</li>
+<li><strong>Synthesis:</strong> Define target capability increments and architecture correspondences.</li>
+<li><strong>Stretch:</strong> Implement graph queries and automated consistency checks across architecture source data.</li>
+</ul>
+<h3 id="weekly-deliverable-6">Weekly deliverable</h3>
+<p><strong>Enterprise Architecture and Capability Baseline</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>Stakeholder/concern/viewpoint matrix.</li>
+<li>Integrated architecture views with source-controlled relationships.</li>
+<li>Capability dictionary and dependency network.</li>
+<li>Gap, overlap, fragility, ownership, maturity, and evidence analysis.</li>
+<li>Current-to-target capability roadmap hypotheses.</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, evidence used, assumptions, limitations, unresolved conflicts, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-6">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decision-driven architecture</td>
+<td style="text-align:right">25%</td>
+<td>Views answer declared stakeholder concerns</td>
+</tr>
+<tr>
+<td>Capability semantics</td>
+<td style="text-align:right">25%</td>
+<td>Capabilities, enablers, conditions, owners, and measures are correct</td>
+</tr>
+<tr>
+<td>Cross-view consistency</td>
+<td style="text-align:right">25%</td>
+<td>Correspondences and queries expose gaps and conflicts</td>
+</tr>
+<tr>
+<td>Evolution value</td>
+<td style="text-align:right">25%</td>
+<td>Target trajectories support outcomes and realistic dependencies</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-6">Critical failures</h3>
+<ul>
+<li>Treats systems or projects as capabilities without stating the effect and conditions.</li>
+<li>Creates architecture views with no stakeholder concern or decision use.</li>
+<li>Declares a capability gap without checking process, governance, workforce, information, and incentive causes.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-6">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a capability?</strong> — The ability to achieve an effect under specified conditions and performance expectations.</li>
+<li><strong>Why distinguish capability types?</strong> — Operational, system, and organizational capabilities have different owners, evidence, and development mechanisms.</li>
+<li><strong>What is an architecture viewpoint?</strong> — A convention for constructing and using views to address specific stakeholder concerns.</li>
+<li><strong>What is an architecture correspondence?</strong> — A declared relationship or consistency rule among architecture elements or models.</li>
+<li><strong>Why are target capabilities trajectories rather than a single future state?</strong> — Capabilities mature, depend on other changes, and must be sequenced under resource and uncertainty constraints.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-6">Revision and mastery gate</h3>
+<p>Revise until every target capability traces to value, owners, enablers, measures, dependencies, and evidence and each architecture view has a declared decision use.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-6">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required study</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Deliverable, review, and revision</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and reflection</td>
+<td style="text-align:right">0.5 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-6">Configuration and portfolio update</h3>
+<p>Baseline <code>/06-enterprise-architecture-and-capabilities</code>; link architecture source to the measure and process registries.</p>
+<p>Record actual effort, decisions, assumptions, evidence changes, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-7--portfolio-investment-affordability-and-resource-allocation">Week 7 — Portfolio, investment, affordability, and resource allocation</h2>
+<blockquote>
+<p><strong>Book companion · Week 7 :</strong> <a href="../../K/B19/chapters/07.html">Read Book 19, Chapter 07</a> → <a href="../../K/B19/labs/07.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-753-w07.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-7">Competency alignment</h3>
+<p><strong>Program competencies:</strong> C8, C9, C10, C11<br/>
+<strong>Weekly role:</strong> Advanced application<br/>
+<strong>Nominal effort:</strong> 11–13 hours</p>
+<h3 id="professional-context-and-essential-question-7">Professional context and essential question</h3>
+<p>Enterprise strategy becomes real through portfolios of programs, systems, services, process changes, workforce initiatives, standards, facilities, data, and retirement actions. Each investment competes for money, people, attention, political capital, and change capacity.</p>
+<blockquote>
+<p><strong>Essential question:</strong> Which combination of investments and disinvestments creates the most robust enterprise value under resource, dependency, and adoption constraints?</p>
+</blockquote>
+<h3 id="weekly-learning-outcomes-7">Weekly learning outcomes</h3>
+<ol>
+<li>Define portfolio items, decision horizon, constraints, selection criteria, dependencies, and governance.</li>
+<li>Estimate lifecycle cost, resource demand, timing, uncertainty, opportunity cost, and benefit realization.</li>
+<li>Construct feasible portfolio alternatives rather than ranking items independently.</li>
+<li>Analyze affordability, crowd-out, sunk-cost bias, duplication, and stop/continue/reshape decisions.</li>
+<li>Recommend a portfolio with stage gates, evidence conditions, and contingency options.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-7">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the prior week's main evidence chain from memory.</li>
+<li>Identify one inherited assumption that this week's work could invalidate.</li>
+<li>Complete a short terminology or interpretation check before opening the case files.</li>
+<li>State what decision the week's deliverable is intended to support.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined authority, value, or evidence assumption into the baseline.</p>
+<h3 id="required-study-7">Required study</h3>
+<ul>
+<li><strong>SEBoK Related Business Activities and Enterprise Capability Management (<a href="https://sebokwiki.org/wiki/Related_Business_Activities" title="SEBoK: Related Business Activities">9</a>, <a href="https://sebokwiki.org/wiki/Enterprise_Capability_Management" title="SEBoK: Enterprise Capability Management">8</a>)</strong><br/>
+<strong>Purpose:</strong> Review portfolio management, resource allocation/budgeting, capability gaps, and current/future capability balance.<br/>
+<strong>Guiding questions:</strong> How should portfolio choices connect to capabilities and enterprise strategy?</li>
+<li><strong>GAO integrated portfolio-management practices (<a href="https://www.gao.gov/assets/a258336.html" title="GAO-07-388 Integrated Portfolio Management Approach">20</a>)</strong><br/>
+<strong>Purpose:</strong> Study alignment to strategic goals, enterprise-level review, affordability, balance, and continuous reassessment.<br/>
+<strong>Guiding questions:</strong> What governance prevents programs from being evaluated only in isolation?</li>
+<li><strong>SEBoK ESE Process Activities: strategic technical planning and enterprise evaluation (<a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Process_Activities" title="SEBoK: Enterprise Systems Engineering Process Activities">6</a>)</strong><br/>
+<strong>Purpose:</strong> Review capability pull, technology push, roadmaps, opportunities, and measurement.<br/>
+<strong>Guiding questions:</strong> Which evidence should trigger investment continuation, acceleration, redesign, or termination?</li>
+</ul>
+<p>Record concise notes answering every guiding question and identify at least one disagreement, limitation, or applicability concern for the regional case.</p>
+<h3 id="instructor-style-lesson-notes-7">Instructor-style lesson notes</h3>
+<ul>
+<li>Portfolio items include disinvestment, retirement, policy, workforce, process, data, standards, and governance changes—not only acquisition programs.</li>
+<li>Feasibility depends on shared resources, dependencies, timing, organizational change capacity, and minimum viable capability combinations.</li>
+<li>Benefit estimates should state recipients, timing, evidence, confidence, and conditions for realization.</li>
+<li>Sunk costs are not benefits; existing commitments may still create legal, technical, or transition constraints.</li>
+<li>Stage gates should buy information and preserve options, not merely authorize continued spending.</li>
+</ul>
+<h3 id="worked-example-7">Worked example</h3>
+<p>Three organizations propose separate dispatch modernization projects. Independent scoring ranks all highly. Portfolio analysis shows they compete for the same integration team, duplicate identity and mapping services, and cannot realize benefits until a shared governance and data-semantics initiative is complete. The preferred portfolio funds governance/data work first, pilots one interoperable service, pauses two acquisitions, and reserves an option to scale after evidence is available.</p>
+<p>Reproduce the example in a small table, model, or notebook before applying the method to the running case. Record where the example is intentionally simplified.</p>
+<h3 id="guided-practice-7">Guided practice</h3>
+<ol>
+<li>Create a portfolio-item register including investments, disinvestments, and enabling changes.</li>
+<li>Define costs, resources, benefits, dependencies, timing, uncertainty, and evidence gates.</li>
+<li>Construct at least four feasible portfolio combinations under budget and workforce constraints.</li>
+<li>Run sensitivity and scenario analysis for cost growth, participation, benefit delay, and funding cuts.</li>
+<li>Write stop/continue/reshape criteria for the five largest commitments.</li>
+</ol>
+<p>Pause after each step and compare the result with the stated decision purpose. Record discrepancies rather than forcing the artifact to match the expected story.</p>
+<h3 id="independent-exercises-7">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Diagnose independent project rankings that produce an infeasible portfolio.</li>
+<li><strong>Application:</strong> Build the enterprise portfolio and affordability model.</li>
+<li><strong>Analysis:</strong> Identify duplication, crowd-out, critical dependencies, and stranded investments.</li>
+<li><strong>Synthesis:</strong> Recommend a portfolio and investment-governance process.</li>
+<li><strong>Stretch:</strong> Implement constrained portfolio optimization with dependency and minimum-capability rules, then compare to a transparent heuristic.</li>
+</ul>
+<h3 id="weekly-deliverable-7">Weekly deliverable</h3>
+<p><strong>Enterprise Portfolio and Investment Decision</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>Portfolio-item register and capability trace.</li>
+<li>Lifecycle cost/resource/benefit/uncertainty model.</li>
+<li>At least four feasible portfolio alternatives, including a low-investment path.</li>
+<li>Sensitivity, affordability, opportunity-cost, and decision-reversal analysis.</li>
+<li>Recommendation with stage gates and stop/continue/reshape conditions.</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, evidence used, assumptions, limitations, unresolved conflicts, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-7">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Portfolio framing</td>
+<td style="text-align:right">25%</td>
+<td>Items, horizon, constraints, dependencies, and governance are complete</td>
+</tr>
+<tr>
+<td>Affordability/evidence</td>
+<td style="text-align:right">25%</td>
+<td>Costs, resources, benefits, timing, and uncertainty are credible</td>
+</tr>
+<tr>
+<td>Alternative quality</td>
+<td style="text-align:right">25%</td>
+<td>Combinations are feasible and reveal opportunity costs</td>
+</tr>
+<tr>
+<td>Decision robustness</td>
+<td style="text-align:right">25%</td>
+<td>Sensitivity, stage gates, and contingencies support the recommendation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-7">Critical failures</h3>
+<ul>
+<li>Ranks projects independently and labels the result a portfolio.</li>
+<li>Counts benefits without recipients, timing, evidence, or realization conditions.</li>
+<li>Recommends a portfolio that exceeds critical workforce, budget, or dependency constraints.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-7">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why is portfolio selection not project ranking?</strong> — The value and feasibility of one item depend on shared constraints, interactions, dependencies, timing, and the rest of the portfolio.</li>
+<li><strong>What is opportunity cost?</strong> — The value of the best feasible alternative forgone by committing resources to the selected option.</li>
+<li><strong>Why include disinvestment?</strong> — Retiring or stopping low-value commitments can release resources and reduce complexity.</li>
+<li><strong>What is a stage gate for?</strong> — To make an evidence-based decision about continuing, changing, scaling, pausing, or stopping an investment.</li>
+<li><strong>Why model change capacity?</strong> — Organizations have limited attention, leadership, training, and implementation bandwidth even when money exists.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-7">Revision and mastery gate</h3>
+<p>Revise until every selected item is affordable, dependency-feasible, traced to capability/value, and governed by evidence-based continuation criteria.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-7">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required study</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Deliverable, review, and revision</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and reflection</td>
+<td style="text-align:right">0.5 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-7">Configuration and portfolio update</h3>
+<p>Baseline <code>/07-portfolio-and-investment</code>; record portfolio decision and rejected combinations.</p>
+<p>Record actual effort, decisions, assumptions, evidence changes, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-8--technology-standards-data-suppliers-workforce-and-roadmaps">Week 8 — Technology, standards, data, suppliers, workforce, and roadmaps</h2>
+<blockquote>
+<p><strong>Book companion · Week 8 :</strong> <a href="../../K/B19/chapters/08.html">Read Book 19, Chapter 08</a> → <a href="../../K/B19/labs/08.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-753-w08.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-8">Competency alignment</h3>
+<p><strong>Program competencies:</strong> C3, C5, C10, C11<br/>
+<strong>Weekly role:</strong> Integration<br/>
+<strong>Nominal effort:</strong> 10–12 hours</p>
+<h3 id="professional-context-and-essential-question-8">Professional context and essential question</h3>
+<p>Enterprise capability depends on more than projects. Technology readiness, standards evolution, data rights and quality, supplier viability, workforce competence, facilities, and institutional knowledge often mature on different timelines and under different authorities.</p>
+<blockquote>
+<p><strong>Essential question:</strong> Which enabling assets and institutional capabilities must mature together, and where could misalignment strand the enterprise strategy?</p>
+</blockquote>
+<h3 id="weekly-learning-outcomes-8">Weekly learning outcomes</h3>
+<ol>
+<li>Develop integrated technology, standards, data, supplier, workforce, and facility roadmaps.</li>
+<li>Assess maturity, readiness, interoperability, lock-in, data rights, knowledge concentration, and transition risk.</li>
+<li>Distinguish technology push from capability pull and identify timing mismatches.</li>
+<li>Design standards adoption, exception, migration, and retirement strategies.</li>
+<li>Conduct the Enterprise Architecture and Portfolio Review.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-8">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the prior week's main evidence chain from memory.</li>
+<li>Identify one inherited assumption that this week's work could invalidate.</li>
+<li>Complete a short terminology or interpretation check before opening the case files.</li>
+<li>State what decision the week's deliverable is intended to support.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined authority, value, or evidence assumption into the baseline.</p>
+<h3 id="required-study-8">Required study</h3>
+<ul>
+<li><strong>SEBoK ESE Process Activities: strategic technical planning, technology and standards planning (<a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Process_Activities" title="SEBoK: Enterprise Systems Engineering Process Activities">6</a>)</strong><br/>
+<strong>Purpose:</strong> Study capability pull, technology push, readiness, roadmaps, and standards alignment.<br/>
+<strong>Guiding questions:</strong> Which roadmap mismatches create risk or opportunity?</li>
+<li><strong>INCOSE ESE Working Group and transformation resource (<a href="https://www.incose.org/group/enterprise-systems-engineering/" title="INCOSE Enterprise Systems Engineering Working Group">10</a>, <a href="https://www.incose.org/resource/enabling-enterprise-transformation-using-systems-principles-and-concepts/" title="Enabling Enterprise Transformation Using Systems Principles and Concepts">11</a>)</strong><br/>
+<strong>Purpose:</strong> Review current enterprise digital transformation, mission architecture, capability planning, acquisition, and model-based emphasis.<br/>
+<strong>Guiding questions:</strong> Which enterprise enablers require cross-organizational governance?</li>
+<li><strong>OMG UAF 1.3 and ISO 42010:2022 (<a href="https://www.omg.org/spec/UAF/" title="OMG Unified Architecture Framework 1.3">13</a>, <a href="https://www.iso.org/standard/74393.html" title="ISO/IEC/IEEE 42010:2022 Architecture Description">12</a>)</strong><br/>
+<strong>Purpose:</strong> Review standards and roadmap concerns plus architecture governance.<br/>
+<strong>Guiding questions:</strong> How will standards, personnel, resources, and milestones be represented and traced?</li>
+</ul>
+<p>Record concise notes answering every guiding question and identify at least one disagreement, limitation, or applicability concern for the regional case.</p>
+<h3 id="instructor-style-lesson-notes-8">Instructor-style lesson notes</h3>
+<ul>
+<li>A technology roadmap without capability timing and transition constraints is a forecast, not a plan.</li>
+<li>Standards can enable interoperability while also delaying innovation or creating migration debt.</li>
+<li>Data capability includes meaning, quality, rights, stewardship, access, retention, privacy, and the workforce to use it.</li>
+<li>Supplier concentration and knowledge concentration can create enterprise single points of failure.</li>
+<li>Roadmaps need decision points, alternatives, leading indicators, and retirement criteria.</li>
+</ul>
+<h3 id="worked-example-8">Worked example</h3>
+<p>The coalition plans a regional digital twin in Year 2, but the data-rights roadmap shows vendor contracts cannot be renegotiated until Year 3, the workforce roadmap lacks model-validation competence, and the standards roadmap depends on interfaces not adopted by two operators. The strategy is resequenced to establish governance, data semantics, skills, and contract options before investing in large-scale twin infrastructure.</p>
+<p>Reproduce the example in a small table, model, or notebook before applying the method to the running case. Record where the example is intentionally simplified.</p>
+<h3 id="guided-practice-8">Guided practice</h3>
+<ol>
+<li>Identify critical enabling technologies, standards, datasets, suppliers, roles, skills, facilities, and institutional knowledge.</li>
+<li>Score current/target maturity and evidence confidence.</li>
+<li>Map dependencies and timing to target capabilities and portfolio items.</li>
+<li>Develop at least two migration paths for a contested standard or vendor dependency.</li>
+<li>Run a roadmap alignment review under funding, supplier, and workforce scenarios.</li>
+</ol>
+<p>Pause after each step and compare the result with the stated decision purpose. Record discrepancies rather than forcing the artifact to match the expected story.</p>
+<h3 id="independent-exercises-8">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Distinguish technology readiness, integration readiness, adoption readiness, and operational readiness.</li>
+<li><strong>Application:</strong> Build integrated enterprise roadmaps.</li>
+<li><strong>Analysis:</strong> Identify five timing mismatches and three concentration or lock-in risks.</li>
+<li><strong>Synthesis:</strong> Define standards and supplier strategies with options and exit conditions.</li>
+<li><strong>Stretch:</strong> Implement a dependency/critical-path analysis across capability and enabling roadmaps.</li>
+</ul>
+<h3 id="weekly-deliverable-8">Weekly deliverable</h3>
+<p><strong>Integrated Enterprise Roadmap Baseline</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>Technology, standards, data, supplier, workforce, facility, and knowledge roadmaps.</li>
+<li>Maturity/readiness definitions and evidence.</li>
+<li>Cross-roadmap dependency and timing analysis.</li>
+<li>Migration, exception, lock-in, and retirement strategies.</li>
+<li>Architecture/Portfolio Review package and dispositions.</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, evidence used, assumptions, limitations, unresolved conflicts, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-8">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Roadmap integration</td>
+<td style="text-align:right">30%</td>
+<td>Capability, timing, ownership, resources, and dependencies align</td>
+</tr>
+<tr>
+<td>Readiness evidence</td>
+<td style="text-align:right">25%</td>
+<td>Maturity claims have explicit criteria and evidence</td>
+</tr>
+<tr>
+<td>Risk/options</td>
+<td style="text-align:right">25%</td>
+<td>Lock-in, concentration, migration, and alternatives are credible</td>
+</tr>
+<tr>
+<td>Review closure</td>
+<td style="text-align:right">20%</td>
+<td>Findings update architecture and portfolio decisions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-8">Critical failures</h3>
+<ul>
+<li>Uses vendor marketing or calendar dates as readiness evidence.</li>
+<li>Plans a data capability without rights, semantics, stewardship, privacy, or workforce treatment.</li>
+<li>Assumes one standard or supplier path with no migration or exit strategy.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-8">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is capability pull?</strong> — Enterprise outcomes and capability needs drive the search for enabling technologies and standards.</li>
+<li><strong>What is technology push?</strong> — Available or emerging technology motivates possible enterprise applications, whether or not current capabilities require it.</li>
+<li><strong>Why can standards create risk?</strong> — They can be immature, inconsistently adopted, constrain alternatives, or require costly migration.</li>
+<li><strong>What is knowledge concentration risk?</strong> — Critical enterprise capability depends on a small number of people or suppliers whose loss cannot be rapidly replaced.</li>
+<li><strong>Why integrate roadmaps?</strong> — An enabling asset has little value if dependent policy, workforce, data, funding, or operational capability is not ready.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-8">Revision and mastery gate</h3>
+<p>Pass the review only when target capabilities and selected investments have feasible enabling roadmaps, named owners, evidence gates, and credible alternatives for major dependencies.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-8">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required study</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Deliverable, review, and revision</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and reflection</td>
+<td style="text-align:right">0.5 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-8">Configuration and portfolio update</h3>
+<p>Baseline <code>/08-integrated-roadmaps</code>; update capability and portfolio decision records.</p>
+<p>Record actual effort, decisions, assumptions, evidence changes, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-9--external-factors-strategic-scenarios-risk-opportunity-and-resilience">Week 9 — External factors, strategic scenarios, risk, opportunity, and resilience</h2>
+<blockquote>
+<p><strong>Book companion · Week 9 :</strong> <a href="../../K/B19/chapters/09.html">Read Book 19, Chapter 09</a> → <a href="../../K/B19/labs/09.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-753-w09.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-9">Competency alignment</h3>
+<p><strong>Program competencies:</strong> C8, C9, C10, C11, C12<br/>
+<strong>Weekly role:</strong> Advanced analysis<br/>
+<strong>Nominal effort:</strong> 11–13 hours</p>
+<h3 id="professional-context-and-essential-question-9">Professional context and essential question</h3>
+<p>The source course requires external factors to be represented because enterprise evolution is shaped by policy, funding, technology, demographics, climate, markets, public trust, workforce, and shocks. A target model optimized for one forecast is fragile.</p>
+<blockquote>
+<p><strong>Essential question:</strong> Which external changes could invalidate the enterprise strategy, and what capabilities or options preserve value across them?</p>
+</blockquote>
+<h3 id="weekly-learning-outcomes-9">Weekly learning outcomes</h3>
+<ol>
+<li>Identify external drivers, predetermined elements, critical uncertainties, weak signals, and discontinuities.</li>
+<li>Develop internally consistent strategic scenarios rather than optimistic/base/pessimistic scaling.</li>
+<li>Integrate threat, opportunity, resilience, legitimacy, and breakpoint analysis with enterprise objectives.</li>
+<li>Stress-test portfolio, roadmaps, governance, measures, and operating assumptions.</li>
+<li>Identify robust actions, contingent options, signposts, triggers, and no-regret preparations.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-9">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the prior week's main evidence chain from memory.</li>
+<li>Identify one inherited assumption that this week's work could invalidate.</li>
+<li>Complete a short terminology or interpretation check before opening the case files.</li>
+<li>State what decision the week's deliverable is intended to support.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined authority, value, or evidence assumption into the baseline.</p>
+<h3 id="required-study-9">Required study</h3>
+<ul>
+<li><strong>JHU description and SEBoK ESE Background (<a href="https://apps.ep.jhu.edu/syllabus/summer-2026/645.753.81" title="Summer 2026 Syllabus for EN.645.753 Enterprise Systems Engineering">1</a>, <a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Background" title="SEBoK: Enterprise Systems Engineering Background">7</a>)</strong><br/>
+<strong>Purpose:</strong> Revisit the requirement to include external factors in enterprise evolution.<br/>
+<strong>Guiding questions:</strong> Which factors are outside direct control but inside the decision model?</li>
+<li><strong>ISO 31000:2018 overview (<a href="https://www.iso.org/standard/65694.html" title="ISO 31000:2018 Risk Management — Guidelines">17</a>)</strong><br/>
+<strong>Purpose:</strong> Study integration of uncertainty, objectives, stakeholders, culture, monitoring, and value creation/protection.<br/>
+<strong>Guiding questions:</strong> How should opportunity be treated alongside threat?</li>
+<li><strong>SEBoK ESE Process Activities: enterprise evaluation, sensitivity, risk and opportunity (<a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Process_Activities" title="SEBoK: Enterprise Systems Engineering Process Activities">6</a>)</strong><br/>
+<strong>Purpose:</strong> Review multi-scale assessment, breakpoints, continuous monitoring, and opportunity focus.<br/>
+<strong>Guiding questions:</strong> Which conditions disable a capability rather than merely reduce a metric?</li>
+</ul>
+<p>Record concise notes answering every guiding question and identify at least one disagreement, limitation, or applicability concern for the regional case.</p>
+<h3 id="instructor-style-lesson-notes-9">Instructor-style lesson notes</h3>
+<ul>
+<li>Scenarios are coherent alternative contexts, not point forecasts with different percentages.</li>
+<li>Predetermined elements differ from uncertainties; both should shape assumptions and monitoring.</li>
+<li>Enterprise resilience includes anticipation, absorption, adaptation, recovery, and learning across organizations.</li>
+<li>Risk and opportunity should be linked to objectives and transformation choices, not maintained as detached registers.</li>
+<li>Signposts and triggers make contingent strategy operational.</li>
+</ul>
+<h3 id="worked-example-9">Worked example</h3>
+<p>Four scenarios combine stable versus reduced federal funding with cooperative versus restrictive data policy. The preferred technology-heavy portfolio performs well only with stable funding and permissive data sharing. A governance/data-rights foundation plus modular pilots yields lower peak benefit but remains feasible in all four scenarios and preserves an option to scale.</p>
+<p>Reproduce the example in a small table, model, or notebook before applying the method to the running case. Record where the example is intentionally simplified.</p>
+<h3 id="guided-practice-9">Guided practice</h3>
+<ol>
+<li>List external drivers and classify control, influence, uncertainty, and time horizon.</li>
+<li>Select two high-impact uncertainties and construct four scenario logics.</li>
+<li>Describe consequences for actors, value, demand, funding, workforce, suppliers, policy, and capability.</li>
+<li>Stress-test current portfolio and roadmaps; identify breakpoints and decision reversals.</li>
+<li>Define no-regret actions, options, signposts, triggers, and contingency owners.</li>
+</ol>
+<p>Pause after each step and compare the result with the stated decision purpose. Record discrepancies rather than forcing the artifact to match the expected story.</p>
+<h3 id="independent-exercises-9">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Correct scenarios that merely scale one forecast.</li>
+<li><strong>Application:</strong> Build the external-factor and scenario baseline.</li>
+<li><strong>Analysis:</strong> Conduct scenario-specific risk/opportunity and breakpoint analysis.</li>
+<li><strong>Synthesis:</strong> Recommend a robust strategic posture and option portfolio.</li>
+<li><strong>Stretch:</strong> Use exploratory modeling or scenario discovery to identify conditions associated with unacceptable outcomes.</li>
+</ul>
+<h3 id="weekly-deliverable-9">Weekly deliverable</h3>
+<p><strong>Strategic Scenario and Resilience Package</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>External-driver register with evidence and ownership.</li>
+<li>At least four coherent scenarios and narratives.</li>
+<li>Stress-test results for architecture, portfolio, roadmaps, governance, and measures.</li>
+<li>Risk, opportunity, resilience, and breakpoint analysis.</li>
+<li>No-regret actions, contingent options, signposts, triggers, and owners.</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, evidence used, assumptions, limitations, unresolved conflicts, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-9">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Scenario quality</td>
+<td style="text-align:right">25%</td>
+<td>Contexts are coherent, distinct, and evidence-informed</td>
+</tr>
+<tr>
+<td>Stress testing</td>
+<td style="text-align:right">30%</td>
+<td>Enterprise assumptions and decisions are actually challenged</td>
+</tr>
+<tr>
+<td>Risk/opportunity/resilience</td>
+<td style="text-align:right">25%</td>
+<td>Threats, benefits, adaptation, and breakpoints are integrated</td>
+</tr>
+<tr>
+<td>Contingency design</td>
+<td style="text-align:right">20%</td>
+<td>Signposts, options, triggers, and owners are operational</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-9">Critical failures</h3>
+<ul>
+<li>Uses only best/base/worst numerical scaling.</li>
+<li>Treats external factors as risks without changing enterprise assumptions or decisions.</li>
+<li>Claims resilience without degraded modes, recovery, adaptation, or monitoring.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-9">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a strategic scenario?</strong> — A coherent description of a plausible external context used to test decisions and assumptions.</li>
+<li><strong>What is a predetermined element?</strong> — A future condition that is relatively certain within the decision horizon, even if its consequences are uncertain.</li>
+<li><strong>What is a no-regret action?</strong> — An action that creates value or preserves capability across a wide range of plausible futures.</li>
+<li><strong>What is a signpost?</strong> — Observable evidence indicating that one scenario or critical assumption is becoming more likely.</li>
+<li><strong>Why include opportunity?</strong> — Enterprise uncertainty can enable beneficial options and innovation, not only threaten objectives.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-9">Revision and mastery gate</h3>
+<p>Revise until at least one major current decision changes under scenario evidence and the recommended posture includes operational triggers rather than generic flexibility language.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-9">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required study</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Deliverable, review, and revision</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and reflection</td>
+<td style="text-align:right">0.5 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-9">Configuration and portfolio update</h3>
+<p>Baseline <code>/09-external-scenarios-and-resilience</code>; update risk/opportunity and assumption logs.</p>
+<p>Record actual effort, decisions, assumptions, evidence changes, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-10--target-operating-models-governance-and-transformation-alternatives">Week 10 — Target operating models, governance, and transformation alternatives</h2>
+<blockquote>
+<p><strong>Book companion · Week 10 :</strong> <a href="../../K/B19/chapters/10.html">Read Book 19, Chapter 10</a> → <a href="../../K/B19/labs/10.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-753-w10.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-10">Competency alignment</h3>
+<p><strong>Program competencies:</strong> C3, C9, C10, C11, C12<br/>
+<strong>Weekly role:</strong> Synthesis<br/>
+<strong>Nominal effort:</strong> 11–13 hours</p>
+<h3 id="professional-context-and-essential-question-10">Professional context and essential question</h3>
+<p>Enterprise transformation is not a single project plan. It changes value flows, decision rights, organizations, processes, information, systems, incentives, funding, workforce, and relationships. Alternatives should represent genuinely different operating logics, not cosmetic variations of one preferred solution.</p>
+<blockquote>
+<p><strong>Essential question:</strong> Which target enterprise configuration creates sustainable value under distributed authority and uncertain external conditions?</p>
+</blockquote>
+<h3 id="weekly-learning-outcomes-10">Weekly learning outcomes</h3>
+<ol>
+<li>Define target operating-model dimensions and architecture viewpoints.</li>
+<li>Generate at least three genuinely different enterprise transformation alternatives.</li>
+<li>Specify changes to governance, processes, capabilities, information, systems, workforce, incentives, funding, and accountability.</li>
+<li>Compare alternatives using value, feasibility, affordability, adoption, resilience, uncertainty, and stakeholder effects.</li>
+<li>Conduct the Scenario and Transformation Alternatives Review.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-10">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the prior week's main evidence chain from memory.</li>
+<li>Identify one inherited assumption that this week's work could invalidate.</li>
+<li>Complete a short terminology or interpretation check before opening the case files.</li>
+<li>State what decision the week's deliverable is intended to support.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined authority, value, or evidence assumption into the baseline.</p>
+<h3 id="required-study-10">Required study</h3>
+<ul>
+<li><strong>SEBoK Transforming the Enterprise Using a Systems Approach and ESE Process Activities (<a href="https://sebokwiki.org/wiki/Transforming_the_Enterprise_Using_a_Systems_Approach" title="SEBoK: Transforming the Enterprise Using a Systems Approach">24</a>, <a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Process_Activities" title="SEBoK: Enterprise Systems Engineering Process Activities">6</a>)</strong><br/>
+<strong>Purpose:</strong> Study enterprise change, effectiveness/efficiency, capability, strategy, architecture, and assessment relationships.<br/>
+<strong>Guiding questions:</strong> What must change together for transformation to be systemic rather than local?</li>
+<li><strong>INCOSE enterprise transformation resource (<a href="https://www.incose.org/resource/enabling-enterprise-transformation-using-systems-principles-and-concepts/" title="Enabling Enterprise Transformation Using Systems Principles and Concepts">11</a>)</strong><br/>
+<strong>Purpose:</strong> Review current emphasis on adjusting portfolios of programs, projects, systems, services, and organizations.<br/>
+<strong>Guiding questions:</strong> Which decisions require transformation-level systems evidence?</li>
+<li><strong>ISO 42010:2022 and UAF 1.3 (<a href="https://www.iso.org/standard/74393.html" title="ISO/IEC/IEEE 42010:2022 Architecture Description">12</a>, <a href="https://www.omg.org/spec/UAF/" title="OMG Unified Architecture Framework 1.3">13</a>)</strong><br/>
+<strong>Purpose:</strong> Use architecture concerns, viewpoints, correspondences, personnel, standards, resources, and roadmaps to define alternatives.<br/>
+<strong>Guiding questions:</strong> How will alternative operating models remain internally consistent and comparable?</li>
+</ul>
+<p>Record concise notes answering every guiding question and identify at least one disagreement, limitation, or applicability concern for the regional case.</p>
+<h3 id="instructor-style-lesson-notes-10">Instructor-style lesson notes</h3>
+<ul>
+<li>A target operating model describes how value is created and governed, not only a target IT architecture.</li>
+<li>Alternatives should vary governance and operating logic: centralized services, federated standards, shared utility, contractual network, mutual-aid compact, or governance-first paths.</li>
+<li>Architecture correspondences expose contradictions such as decentralized accountability with centralized data control.</li>
+<li>Transformation feasibility includes political, legal, workforce, procurement, data, supplier, and change-capacity constraints.</li>
+<li>A low-automation or governance-first alternative is often necessary to reveal whether technology is actually the limiting factor.</li>
+</ul>
+<h3 id="worked-example-10">Worked example</h3>
+<p>Alternative A creates a centralized regional mobility authority; Alternative B keeps independent operators but creates shared standards, a data trust, mutual-aid agreements, and pooled emergency funding; Alternative C uses a commercial platform and performance contracts. Authority analysis makes A legally infeasible in the horizon; C creates lock-in and weak public accountability. B provides less central control but better feasibility, resilience, and legitimacy when paired with staged technical services.</p>
+<p>Reproduce the example in a small table, model, or notebook before applying the method to the running case. Record where the example is intentionally simplified.</p>
+<h3 id="guided-practice-10">Guided practice</h3>
+<ol>
+<li>Define target operating-model dimensions and required viewpoints.</li>
+<li>Generate three alternatives with distinct governance and value-delivery logic.</li>
+<li>Model each alternative across capabilities, actors, processes, information, systems, resources, incentives, and roadmaps.</li>
+<li>Check cross-view correspondences and feasibility constraints.</li>
+<li>Evaluate under scenarios and stakeholder perspectives; identify decision reversals.</li>
+</ol>
+<p>Pause after each step and compare the result with the stated decision purpose. Record discrepancies rather than forcing the artifact to match the expected story.</p>
+<h3 id="independent-exercises-10">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Diagnose alternatives that differ only in vendor or implementation detail.</li>
+<li><strong>Application:</strong> Build three target operating-model alternatives.</li>
+<li><strong>Analysis:</strong> Compare value, authority, affordability, adoption, resilience, equity, and uncertainty.</li>
+<li><strong>Synthesis:</strong> Recommend a preferred alternative or staged hybrid with explicit tradeoffs.</li>
+<li><strong>Stretch:</strong> Conduct a facilitated role negotiation or multi-actor simulation and revise the governance design.</li>
+</ul>
+<h3 id="weekly-deliverable-10">Weekly deliverable</h3>
+<p><strong>Target Operating Model Alternatives and Trade Study</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>Alternative definitions and decision logic.</li>
+<li>Target architecture views and correspondence checks.</li>
+<li>Stakeholder, authority, incentive, adoption, affordability, and resilience analysis.</li>
+<li>Scenario robustness and decision-reversal results.</li>
+<li>Review package, recommendation, findings, and dispositions.</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, evidence used, assumptions, limitations, unresolved conflicts, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-10">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alternative distinctness</td>
+<td style="text-align:right">20%</td>
+<td>Operating logics and governance genuinely differ</td>
+</tr>
+<tr>
+<td>Architecture coherence</td>
+<td style="text-align:right">25%</td>
+<td>Cross-view relationships and constraints are consistent</td>
+</tr>
+<tr>
+<td>Enterprise feasibility</td>
+<td style="text-align:right">30%</td>
+<td>Authority, funding, workforce, data, policy, and adoption are credible</td>
+</tr>
+<tr>
+<td>Decision quality</td>
+<td style="text-align:right">25%</td>
+<td>Tradeoffs, uncertainty, scenarios, and stakeholder effects support the recommendation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-10">Critical failures</h3>
+<ul>
+<li>Presents one preferred design plus two straw alternatives.</li>
+<li>Recommends centralization without legal, political, or resource authority.</li>
+<li>Uses aggregate value to hide a material stakeholder loss or legitimacy problem.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-10">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a target operating model?</strong> — A description of how an enterprise will create value through governance, capabilities, organization, processes, information, technology, resources, and relationships.</li>
+<li><strong>Why require distinct alternatives?</strong> — To expose different assumptions, tradeoffs, and feasible mechanisms rather than confirm a preferred solution.</li>
+<li><strong>What is a transition architecture?</strong> — An intermediate enterprise configuration needed to move safely and feasibly from current to target state.</li>
+<li><strong>Why check correspondences?</strong> — An attractive view can contradict another, such as assigning accountability without authority or resources.</li>
+<li><strong>Why include a governance-first option?</strong> — It tests whether coordination, incentives, policy, or authority—not technology—is the binding constraint.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-10">Revision and mastery gate</h3>
+<p>Pass the review only when alternatives are feasible under actual authority, the preferred path remains defensible across scenarios, and rejected alternatives are rejected for evidence-based reasons.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-10">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required study</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Deliverable, review, and revision</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and reflection</td>
+<td style="text-align:right">0.5 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-10">Configuration and portfolio update</h3>
+<p>Baseline <code>/10-target-operating-models</code>; record the transformation alternative decision.</p>
+<p>Record actual effort, decisions, assumptions, evidence changes, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-11--transition-architecture-experiments-adoption-evaluation-and-sustainment">Week 11 — Transition architecture, experiments, adoption, evaluation, and sustainment</h2>
+<blockquote>
+<p><strong>Book companion · Week 11 :</strong> <a href="../../K/B19/chapters/11.html">Read Book 19, Chapter 11</a> → <a href="../../K/B19/labs/11.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-753-w11.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-11">Competency alignment</h3>
+<p><strong>Program competencies:</strong> C4, C6, C9, C10, C11<br/>
+<strong>Weekly role:</strong> Implementation synthesis<br/>
+<strong>Nominal effort:</strong> 11–13 hours</p>
+<h3 id="professional-context-and-essential-question-11">Professional context and essential question</h3>
+<p>Enterprise transformations fail when target-state diagrams skip the intermediate operating conditions, incentives, training, contracts, data migration, policy changes, workload, measurement, and learning required to get there. A credible roadmap treats implementation as a sequence of governed hypotheses and evidence decisions.</p>
+<blockquote>
+<p><strong>Essential question:</strong> How can the enterprise move toward the target model while preserving service, legitimacy, options, and the ability to learn or reverse course?</p>
+</blockquote>
+<h3 id="weekly-learning-outcomes-11">Weekly learning outcomes</h3>
+<ol>
+<li>Define transition architectures, increments, dependencies, owners, resources, and entry/exit criteria.</li>
+<li>Design transformation experiments with hypotheses, measures, comparison logic, guardrails, stop conditions, and learning decisions.</li>
+<li>Plan adoption, workforce, communications, procurement, data migration, policy, configuration, and operational continuity.</li>
+<li>Develop enterprise evaluation, governance, benefit-realization, and sustainment mechanisms.</li>
+<li>Conduct the Transformation Readiness Review.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-11">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the prior week's main evidence chain from memory.</li>
+<li>Identify one inherited assumption that this week's work could invalidate.</li>
+<li>Complete a short terminology or interpretation check before opening the case files.</li>
+<li>State what decision the week's deliverable is intended to support.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined authority, value, or evidence assumption into the baseline.</p>
+<h3 id="required-study-11">Required study</h3>
+<ul>
+<li><strong>SEBoK ESE Process Activities and Transforming the Enterprise (<a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Process_Activities" title="SEBoK: Enterprise Systems Engineering Process Activities">6</a>, <a href="https://sebokwiki.org/wiki/Transforming_the_Enterprise_Using_a_Systems_Approach" title="SEBoK: Transforming the Enterprise Using a Systems Approach">24</a>)</strong><br/>
+<strong>Purpose:</strong> Review strategic technical planning, evaluation, adaptation, and enterprise change.<br/>
+<strong>Guiding questions:</strong> What evidence should govern sequencing and adaptation?</li>
+<li><strong>NIST Baldrige systems perspective and core values (<a href="https://www.nist.gov/baldrige/about-baldrige-excellence-framework" title="NIST Baldrige Excellence Framework Overview">18</a>, <a href="https://www.nist.gov/baldrige/core-values-and-concepts" title="NIST Baldrige Core Values and Concepts">19</a>)</strong><br/>
+<strong>Purpose:</strong> Review organizational learning, workforce, agility/resilience, management by fact, ethics/transparency, and results.<br/>
+<strong>Guiding questions:</strong> What adoption and learning conditions are necessary for sustained change?</li>
+<li><strong>ISO 31000:2018 overview (<a href="https://www.iso.org/standard/65694.html" title="ISO 31000:2018 Risk Management — Guidelines">17</a>)</strong><br/>
+<strong>Purpose:</strong> Review integration with governance, strategy, culture, communication, monitoring, and continual improvement.<br/>
+<strong>Guiding questions:</strong> How will transformation risk and opportunity be reviewed as evidence changes?</li>
+</ul>
+<p>Record concise notes answering every guiding question and identify at least one disagreement, limitation, or applicability concern for the regional case.</p>
+<h3 id="instructor-style-lesson-notes-11">Instructor-style lesson notes</h3>
+<ul>
+<li>Transition architectures are real operating states with their own risks, controls, service levels, and authority—not arrows between current and target diagrams.</li>
+<li>Pilots should answer decision questions; activity completion is not evidence of value.</li>
+<li>Adoption depends on workflow fit, incentives, competence, trust, workload, leadership, and local adaptation.</li>
+<li>Benefit realization often occurs after delivery and therefore needs owners, measures, baselines, and continuation decisions.</li>
+<li>Sustainment includes governance, funding, workforce, data quality, model maintenance, audits, and retirement of obsolete processes or systems.</li>
+</ul>
+<h3 id="worked-example-11">Worked example</h3>
+<p>The preferred federated model begins with two operators and one hospital. The transition architecture includes parallel eligibility verification, a limited data trust, manual fallback, temporary funding, training, and an independent accessibility monitor. The pilot has explicit hypotheses, subgroup measures, stop conditions, and a decision to scale, adapt, or terminate. This is more credible than a region-wide launch milestone.</p>
+<p>Reproduce the example in a small table, model, or notebook before applying the method to the running case. Record where the example is intentionally simplified.</p>
+<h3 id="guided-practice-11">Guided practice</h3>
+<ol>
+<li>Decompose the preferred alternative into transition architectures and irreversible decisions.</li>
+<li>Define dependencies, owners, funding, workforce, contracts, policy, data, and continuity controls.</li>
+<li>Select two high-uncertainty assumptions and design bounded experiments.</li>
+<li>Define baselines, comparison logic, measures, guardrails, stop conditions, and evidence thresholds.</li>
+<li>Create governance, adoption, benefit-realization, configuration, audit, and sustainment plans.</li>
+</ol>
+<p>Pause after each step and compare the result with the stated decision purpose. Record discrepancies rather than forcing the artifact to match the expected story.</p>
+<h3 id="independent-exercises-11">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Correct a roadmap composed only of dates and deliverables.</li>
+<li><strong>Application:</strong> Build the transition architecture and transformation roadmap.</li>
+<li><strong>Analysis:</strong> Identify implementation bottlenecks, adoption failure modes, and irreversible commitments.</li>
+<li><strong>Synthesis:</strong> Design two experiments and a scale/adapt/stop decision protocol.</li>
+<li><strong>Stretch:</strong> Simulate adoption, workload, benefit delay, or transition risk under alternative sequences.</li>
+</ul>
+<h3 id="weekly-deliverable-11">Weekly deliverable</h3>
+<p><strong>Enterprise Transformation Readiness Package</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>Transition architectures and five-year roadmap.</li>
+<li>Dependency, authority, funding, workforce, procurement, data, policy, and continuity plan.</li>
+<li>At least two transformation experiments with hypotheses and decision rules.</li>
+<li>Adoption, communications, learning, configuration, and sustainment plan.</li>
+<li>Evaluation/benefit-realization system and review dispositions.</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, evidence used, assumptions, limitations, unresolved conflicts, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-11">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Transition feasibility</td>
+<td style="text-align:right">30%</td>
+<td>Intermediate states, dependencies, continuity, and ownership are credible</td>
+</tr>
+<tr>
+<td>Experiment quality</td>
+<td style="text-align:right">25%</td>
+<td>Hypotheses, measures, guardrails, and decisions produce useful learning</td>
+</tr>
+<tr>
+<td>Adoption/governance</td>
+<td style="text-align:right">25%</td>
+<td>Workforce, incentives, communication, authority, and local adaptation are addressed</td>
+</tr>
+<tr>
+<td>Evaluation/sustainment</td>
+<td style="text-align:right">20%</td>
+<td>Benefits, risks, evidence, configuration, and retirement are governed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-11">Critical failures</h3>
+<ul>
+<li>Uses target-state completion as proof of outcome realization.</li>
+<li>Runs a pilot with no comparison, guardrails, stop conditions, or decision use.</li>
+<li>Ignores transition workload, service continuity, workforce, contract, or data-migration risk.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-11">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is an irreversible decision?</strong> — A commitment that is costly or impossible to undo, such as long-term lock-in, asset disposal, legal restructuring, or workforce displacement.</li>
+<li><strong>What makes an experiment decision-relevant?</strong> — Its result changes a specific scale, adapt, pause, stop, or redesign decision.</li>
+<li><strong>Why are guardrails needed?</strong> — To prevent learning activities from causing unacceptable safety, equity, privacy, workforce, financial, or service harm.</li>
+<li><strong>What is benefit realization?</strong> — The governed process of determining whether intended enterprise outcomes occur after changes are delivered.</li>
+<li><strong>Why treat sustainment as design?</strong> — Capabilities and governance decay without ongoing funding, skills, data quality, maintenance, monitoring, and adaptation.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-11">Revision and mastery gate</h3>
+<p>Pass the review only when every major transition step has an owner, authority, resources, evidence gate, continuity plan, and condition for adaptation or reversal.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-11">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required study</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Deliverable, review, and revision</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and reflection</td>
+<td style="text-align:right">0.5 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-11">Configuration and portfolio update</h3>
+<p>Baseline <code>/11-transformation-roadmap-and-experiments</code>; freeze final-review candidate release.</p>
+<p>Record actual effort, decisions, assumptions, evidence changes, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-12--final-enterprise-transformation-review-and-live-enterprise-change">Week 12 — Final Enterprise Transformation Review and live enterprise change</h2>
+<blockquote>
+<p><strong>Book companion · Week 12 :</strong> <a href="../../K/B19/chapters/12.html">Read Book 19, Chapter 12</a> → <a href="../../K/B19/labs/12.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-753-w12.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-12">Competency alignment</h3>
+<p><strong>Program competencies:</strong> C3, C8, C9, C10, C11, C12<br/>
+<strong>Weekly role:</strong> Capstone and defense<br/>
+<strong>Nominal effort:</strong> 12–15 hours</p>
+<h3 id="professional-context-and-essential-question-12">Professional context and essential question</h3>
+<p>The final review evaluates whether the enterprise recommendation remains coherent when challenged across value, authority, process, capability, investment, dynamics, scenarios, adoption, and evidence. The objective is not to claim control over the enterprise; it is to show a disciplined, legitimate, and adaptive transformation strategy.</p>
+<blockquote>
+<p><strong>Essential question:</strong> Can the enterprise transformation recommendation survive clean reproduction, adversarial review, and a material live change without hiding uncertainty or authority limits?</p>
+</blockquote>
+<h3 id="weekly-learning-outcomes-12">Weekly learning outcomes</h3>
+<ol>
+<li>Integrate all course artifacts into one controlled enterprise transformation release.</li>
+<li>Reproduce key architecture queries, process measures, model results, portfolio decisions, and scenario conclusions from source.</li>
+<li>Respond to a live change by updating affected value, authority, process, capability, investment, model, measure, and roadmap elements.</li>
+<li>Present an executive and technical recommendation with unresolved conflicts and residual uncertainty.</li>
+<li>Defend the work orally and prepare the EN.645.742 complexity handoff.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-12">Prerequisite retrieval and readiness check</h3>
+<ul>
+<li>Reconstruct the prior week's main evidence chain from memory.</li>
+<li>Identify one inherited assumption that this week's work could invalidate.</li>
+<li>Complete a short terminology or interpretation check before opening the case files.</li>
+<li>State what decision the week's deliverable is intended to support.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined authority, value, or evidence assumption into the baseline.</p>
+<h3 id="required-study-12">Required study</h3>
+<ul>
+<li><strong>JHU course description (<a href="https://apps.ep.jhu.edu/syllabus/summer-2026/645.753.81" title="Summer 2026 Syllabus for EN.645.753 Enterprise Systems Engineering">1</a>, <a href="https://ep.jhu.edu/courses/645753-enterprise-systems-engineering/" title="Enterprise Systems Engineering - 645.753">2</a>)</strong><br/>
+<strong>Purpose:</strong> Recheck that the final release satisfies the source requirement to model enterprise activities, interactions, external factors, dynamics, and action impacts.<br/>
+<strong>Guiding questions:</strong> Which course claim is best supported? Which remains weakest?</li>
+<li><strong>SEBoK Enterprise Systems Engineering and Process Activities (<a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering" title="SEBoK: Enterprise Systems Engineering">3</a>, <a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering_Process_Activities" title="SEBoK: Enterprise Systems Engineering Process Activities">6</a>)</strong><br/>
+<strong>Purpose:</strong> Review enterprise purpose, opportunity, architecture, capability, evaluation, and transformation.<br/>
+<strong>Guiding questions:</strong> Does the release balance effectiveness, efficiency, value, risk, and opportunity?</li>
+<li><strong>INCOSE enterprise transformation resource (<a href="https://www.incose.org/resource/enabling-enterprise-transformation-using-systems-principles-and-concepts/" title="Enabling Enterprise Transformation Using Systems Principles and Concepts">11</a>)</strong><br/>
+<strong>Purpose:</strong> Review enterprise capability and portfolio adjustment as a systems problem.<br/>
+<strong>Guiding questions:</strong> Which transformation decisions are genuinely enterprise-level and which should remain local?</li>
+</ul>
+<p>Record concise notes answering every guiding question and identify at least one disagreement, limitation, or applicability concern for the regional case.</p>
+<h3 id="instructor-style-lesson-notes-12">Instructor-style lesson notes</h3>
+<ul>
+<li>A final release is a controlled evidence chain, not a folder of disconnected weekly submissions.</li>
+<li>Executive communication should state the decision, value, authority, cost, timing, risks, conflicts, and evidence without overstating certainty.</li>
+<li>Technical review should expose model scope, uncertainty, correspondence, reproduction, and unresolved findings.</li>
+<li>Live-change analysis tests whether architecture and evidence are connected enough to support real revision.</li>
+<li>The complexity handoff should identify adaptive and emergent mechanisms that enterprise planning could not resolve.</li>
+</ul>
+<h3 id="worked-example-12">Worked example</h3>
+<p>During the review, a major transit authority withdraws from pooled funding while remaining willing to share limited data. The learner must revise portfolio affordability, governance, capability ownership, value distribution, emergency mutual aid, measures, scenarios, transition experiments, and roadmap timing. A defensible response may preserve the strategy through a smaller coalition or may reverse the preferred target model.</p>
+<p>Reproduce the example in a small table, model, or notebook before applying the method to the running case. Record where the example is intentionally simplified.</p>
+<h3 id="guided-practice-12">Guided practice</h3>
+<ol>
+<li>Run a clean checkout and reproduce the declared key outputs.</li>
+<li>Complete cross-artifact consistency queries and close or accept findings.</li>
+<li>Prepare executive, technical, and stakeholder-specific views.</li>
+<li>Execute one randomly selected live change and update the decision record.</li>
+<li>Conduct an oral defense and produce the EN.645.742 hypothesis/uncertainty handoff.</li>
+</ol>
+<p>Pause after each step and compare the result with the stated decision purpose. Record discrepancies rather than forcing the artifact to match the expected story.</p>
+<h3 id="independent-exercises-12">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Complete the final traceability and configuration audit.</li>
+<li><strong>Application:</strong> Assemble and review the Enterprise Transformation Release.</li>
+<li><strong>Analysis:</strong> Identify the five weakest claims and either improve evidence or narrow the claim.</li>
+<li><strong>Synthesis:</strong> Execute the live change and defend the revised recommendation.</li>
+<li><strong>Stretch:</strong> Invite an external reviewer to represent a skeptical stakeholder and disposition findings.</li>
+</ul>
+<h3 id="weekly-deliverable-12">Weekly deliverable</h3>
+<p><strong>Final Enterprise Transformation Release</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>All capstone outputs listed in Section 16.</li>
+<li>Clean-reproduction log and automated/structured consistency checks.</li>
+<li>Executive and technical briefing materials.</li>
+<li>Live-change impact analysis and revised decision record.</li>
+<li>Oral-defense record, findings/dispositions, retrospective, and EN.645.742 handoff.</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, evidence used, assumptions, limitations, unresolved conflicts, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-12">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integrated enterprise reasoning</td>
+<td style="text-align:right">25%</td>
+<td>Value, authority, architecture, process, dynamics, portfolio, and transformation are coherent</td>
+</tr>
+<tr>
+<td>Reproducibility/evidence</td>
+<td style="text-align:right">25%</td>
+<td>Key outputs reproduce and claims match evidence</td>
+</tr>
+<tr>
+<td>Implementation/legitimacy</td>
+<td style="text-align:right">20%</td>
+<td>Governance, adoption, stakeholder effects, and authority are credible</td>
+</tr>
+<tr>
+<td>Live change</td>
+<td style="text-align:right">15%</td>
+<td>Impacts are found and the recommendation is revised correctly</td>
+</tr>
+<tr>
+<td>Defense/communication</td>
+<td style="text-align:right">15%</td>
+<td>Clear, candid, audience-appropriate, and technically sound</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-12">Critical failures</h3>
+<ul>
+<li>Cannot reproduce a decision-critical result.</li>
+<li>Hides an unresolved stakeholder harm, authority gap, or transformation infeasibility.</li>
+<li>Treats the live change as a narrative addendum without updating connected artifacts and decisions.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-12">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What makes the release enterprise-level?</strong> — It integrates outcomes, actors, authority, capabilities, processes, information, resources, portfolios, incentives, environment, and transformation—not only system architecture.</li>
+<li><strong>Why narrow a weak claim?</strong> — A bounded, evidence-supported claim is more credible than an expansive assertion the evidence cannot support.</li>
+<li><strong>What should a live-change response update?</strong> — All affected values, actors, authorities, processes, capabilities, investments, models, measures, risks, scenarios, and roadmap decisions.</li>
+<li><strong>What belongs in the complexity handoff?</strong> — Emergence, adaptation, feedback, strategic behavior, path dependence, ambiguity, observability limits, and safe-to-learn intervention questions.</li>
+<li><strong>What is the final decision standard?</strong> — The recommendation is valuable, feasible, legitimate, evidence-bounded, monitorable, and adaptable under distributed authority.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-12">Revision and mastery gate</h3>
+<p>Complete the course only after clean reproduction, closure or explicit acceptance of critical findings, successful live change, and an oral defense that accurately states authority and evidence limits.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-12">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required study</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Deliverable, review, and revision</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and reflection</td>
+<td style="text-align:right">0.5 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-12">Configuration and portfolio update</h3>
+<p>Tag the final release, archive source and review evidence, and baseline the <code>/12-complexity-handoff</code>.</p>
+<p>Record actual effort, decisions, assumptions, evidence changes, and unresolved limitations before closing the week.</p>
+<hr/>
+<p><a href="OVERVIEW.html">Back to Phase 5 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+<h2 id="references">References</h2>
+</main></body></html>

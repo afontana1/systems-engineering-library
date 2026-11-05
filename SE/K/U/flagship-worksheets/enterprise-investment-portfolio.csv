@@ -1,0 +1,4 @@
+investment,cost_units,benefit_units,depends_on,decision_rights,distributional_risk
+A,4,8,,region,excluded_partners
+B,5,11,A,hospital_coalition,accessibility_bias
+C,3,5,,transit_operators,rural_gaps

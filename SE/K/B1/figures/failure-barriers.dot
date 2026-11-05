@@ -1,0 +1,3 @@
+digraph Failure {graph[rankdir=LR,bgcolor="transparent"];node [shape=box,style="rounded,filled",fillcolor="#fff0e3",color="#985a2b",fontname="DejaVu Sans"];a[label="Delayed telemetry"];b[label="Measurement time overwritten"];c[label="False freshness classification"];d[label="Assignment to unavailable vehicle"];a->b->c->d;e[label="Schema-only test
+misses semantics",fillcolor="#ffe0dd"];f[label="Dashboard shares
+same flawed timestamp",fillcolor="#ffe0dd"];e->c [style=dashed];f->d [style=dashed];}

@@ -1,0 +1,7 @@
+{
+  "vehicles": 2,
+  "trip_min": 12.0,
+  "end_min": 80.0,
+  "target_served": 0.95,
+  "target_p90_wait_min": 20.0
+}

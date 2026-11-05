@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Requirements: precise obligations, not persuasive sentences · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/good-requirements.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed reference</span><span>Concept article · Graduate-level explanation</span></div><article class="article-body"><h1>Requirements: precise obligations, not persuasive sentences</h1>
+<p><strong>Reference entry · Foundations, design, and test · Expanded reference</strong></p>
+<h2>Definition</h2>
+<p>A <strong>requirement</strong> states an obligation that can be assessed for a particular system, element, process, or delivered service under declared conditions. A useful requirement identifies the responsible subject, required behavior or constraint, operating condition, measurable criterion, and verification route. It must also be necessary, feasible, consistent with neighboring requirements, and linked to a legitimate need. Grammar alone cannot establish these properties.</p>
+<p>A need expresses the desired outcome; a requirement makes a bounded technical commitment; a design describes one means of satisfying it; and a test provides evidence of a particular claim. Confusing those roles leads to overconstrained concepts and verification plans that merely repeat the specification.</p>
+<h2>A semantic model</h2>
+<p>Represent a behavioral requirement as <strong>(trigger, mode, subject, response, performance bound, exceptions, observation window)</strong>. The phrase “when a valid boarding request is received” is an event condition. “The dispatcher shall issue an acknowledgement within 2.0 seconds” is a temporal obligation. “At least 99% of such requests over the specified peak-demand envelope” introduces a population-level statistical criterion; it is not interchangeable with a per-request guarantee.</p>
+<p>In temporal logic, <strong>G(request → F≤2s acknowledgement)</strong> informally means every applicable request eventually receives an acknowledgement within two seconds. Such a universal requirement is stronger than a 99th-percentile target. The two may be appropriate to different safety or service needs and call for different evidence methods.</p>
+<p>Requirements must also be <strong>jointly realizable</strong>. Two individually readable statements—“every request receives immediate acknowledgement” and “all network traffic stops during maintenance”—may conflict unless maintenance is explicitly outside the first requirement's operating mode. Model-based consistency checks should search for these contradictions before implementation.</p>
+<h2>Worked example: an attractive but untestable requirement</h2>
+<p>Weak: “The campus shuttle shall provide fast, dependable service.” This does not identify a population, scenario, denominator, or criterion.</p>
+<p>Stronger candidate: “During term-time weekdays from 07:30 to 09:30, under demand of up to 180 trip requests per hour and normal weather, the dispatch service shall provide a definitive accepted/rejected response within two seconds for at least 99% of valid requests, measured at the public API over 30 operating days.”</p>
+<p>This is <strong>not yet automatically sufficient</strong>. The team must define a valid request, arrival-pattern assumptions, instrumentation, exclusion policy, whether repeated requests count, and a statistical acceptance rule. If 3,000 trials all pass, the observed rate is 100%, but that does not prove that the true rate is 100%; sampling uncertainty remains. For independence-sensitive statistical claims, the sampling design should account for peak-period clustering and correlated outages.</p>
+<p>A separate requirement should address accessibility or offline operation rather than hiding those obligations inside the latency statement.</p>
+<h2>Requirements quality workflow</h2>
+<ol>
+<li>Trace each candidate to an authorized stakeholder outcome or constraint.</li>
+<li>Check its subject, mode, trigger, response, metric, units, and acceptance decision rule.</li>
+<li>Separate mandatory constraints from design preferences and provisional assumptions.</li>
+<li>Check for gaps, contradictions, duplicate obligations, and unintended implementation constraints.</li>
+<li>Allocate ownership and identify derived interface or subsystem requirements.</li>
+<li>Plan the verifying evidence <strong>before</strong> committing to the baseline; flag anything not credibly testable.</li>
+<li>Apply versioned change control because later revisions can invalidate earlier tests and cost estimates.</li>
+</ol>
+<h2>Verification versus validity of the requirement</h2>
+<p>A test may establish that the service meets a two-second interface latency target while the experience remains unacceptable because boarding takes ten minutes. That is a <strong>validated-need gap</strong>, not necessarily a failed latency test. Conversely, users may report satisfaction even when an explicit regulatory requirement is violated. Verification and validation ask different questions.</p>
+<h2>Pitfalls and connections</h2>
+<p>Avoid compound “and” requirements that conceal multiple independent pass/fail criteria; avoid ambiguous quantifiers (“most,” “quickly,” “as needed”); avoid test cases that assume the intended implementation; and avoid numerical limits unsupported by stakeholder evidence or physical feasibility. Requirements link directly to scenario design, architecture allocation, traceability, verification matrices, interface contracts, and technical margins.</p>
+<h2>Reference shelf retained from the earlier primer</h2>
+<p>These links are supplied for deeper reading. Confirm current publication versions before relying on them for compliance.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — Reference chapters for lifecycle, needs, requirements, design, technical management, integration and V&amp;V.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Breadth-first conceptual encyclopedia and pointers to further references.</li>
+</ul>
+<p><strong>Expanded tutorial:</strong> <a href="../deep-dives/02-requirements-to-verification.html">From stakeholder need to verification evidence</a></p>
+<h2>Technical analysis: write a verifiable requirement without confusing it with a valid one</h2>
+<p>An operational need such as “dispatch promptly” does not specify a testable engineering threshold. A candidate requirement might be: <strong>“For accepted requests originating inside the defined service region, when the certified system is operating with no more than 30 concurrent active requests, the system shall issue an assignment decision within 2.0 seconds for at least 99% of requests over a predeclared representative 30-day operating sample.”</strong> This sentence fixes the event boundaries, population, load, statistic, time interval, and configuration; it still requires an acceptance sampling plan and handling of rejected or timed-out requests.</p>
+<p>The requirement can be <strong>verified yet strategically invalid</strong> if users care about vehicle arrival rather than assignment decision latency, or if excluding unaccepted requests hides service denial. Conversely, a stakeholder-approved need can be well-founded but lack a measurable and feasible product requirement. Always keep the two evidence chains separate: <em>requirement validation</em> asks whether the requirement accurately represents a genuine need; <em>product verification</em> asks whether the specified system meets the approved requirement. Do not equate a 99% sample proportion with 99% confidence; confidence depends on sample size, dependencies, and sampling design.</p>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA · Systems Engineering Handbook appendix (requirements and verification matrices)</a> — Requirements review criteria and verification planning context.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="stakeholders-and-needs.html">Stakeholders, needs, and value</a></li>
+<li><a href="verification-matrix.html">Verification cross-reference matrices and test design</a></li>
+<li><a href="v-and-v.html">Verification, validation, and acceptance</a></li>
+<li><a href="traceability-graph.html">Requirements traceability and impact analysis</a></li>
+</ul>
+<p><strong>Explore in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B1/chapters/04-requirements.html">Book 1, Chapter 4: Chapter 4 — Requirements are promises that must survive a test</a></li>
+<li><a href="../B7/chapters/02-close-the-system-specification.html">Book 7, Chapter 2: Book 7 · Chapter 2: Closing the system specification</a></li>
+<li><a href="../B9/chapters/07-elicit-derive-validate-and-query-system-requirements-from-the-integr.html">Book 9, Chapter 7: Book 9 · Chapter 07 — Elicit, derive, validate, and query system requirements from the integrated analysis</a></li>
+</ul>
+<p><strong>Use this reference responsibly:</strong> examples use hypothetical engineering data; the mathematical results rely on the assumptions stated in each passage. Recheck those assumptions for any real project.</p>
+</article><footer class="standalone-foot"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=df65cee2094b9">Open in the full encyclopedia</a><a href="good-requirements.md">Editable Markdown source</a></footer></main></body></html>

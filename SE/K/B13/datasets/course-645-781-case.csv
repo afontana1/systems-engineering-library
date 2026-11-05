@@ -1,0 +1,13 @@
+week,course,scenario,baseline_value,challenge_value,units,status,teaching_note
+1,645-781,Northstar synthetic evaluation,17.8,21.36,illustrative index,synthetic—not field data,Establish why systems thinking is needed and frame a learning challenge
+2,645-781,Northstar synthetic evaluation,24.8,32.24,illustrative index,synthetic—not field data,"Define dynamic behavior with reference modes, evidence, and time horizons"
+3,645-781,Northstar synthetic evaluation,12.8,17.92,illustrative index,synthetic—not field data,Build causal-loop diagrams as testable feedback hypotheses
+4,645-781,Northstar synthetic evaluation,19.8,21.78,illustrative index,synthetic—not field data,Use archetypes and mental models to generate competing intervention hypotheses
+5,645-781,Northstar synthetic evaluation,26.8,32.16,illustrative index,synthetic—not field data,"Translate feedback hypotheses into stocks, flows, units, and accumulation equations"
+6,645-781,Northstar synthetic evaluation,14.8,19.24,illustrative index,synthetic—not field data,Implement and verify the first executable Vensim model
+7,645-781,Northstar synthetic evaluation,21.8,30.52,illustrative index,synthetic—not field data,"Explain delays, nonlinearities, oscillation, overshoot, and changing loop dominance"
+8,645-781,Northstar synthetic evaluation,28.8,31.68,illustrative index,synthetic—not field data,"Test structure and behavior, use data responsibly, and make a credibility claim"
+9,645-781,Northstar synthetic evaluation,16.8,20.16,illustrative index,synthetic—not field data,Apply feedback modeling to supply management and inventory dynamics
+10,645-781,Northstar synthetic evaluation,23.8,30.94,illustrative index,synthetic—not field data,Apply systems thinking to healthcare and human-service delivery
+11,645-781,Northstar synthetic evaluation,11.8,16.52,illustrative index,synthetic—not field data,"Design robust policy portfolios and identify leverage, resistance, and unintended consequences"
+12,645-781,Northstar synthetic evaluation,18.8,20.68,illustrative index,synthetic—not field data,"Defend the integrated systems insight, model use, and learning strategy"

@@ -1,0 +1,210 @@
+{
+  "version": "v59",
+  "description": "Six curated learning journeys; these are navigation and reflection guides, not additional coursework.",
+  "journeys": [
+    {
+      "id": "needs",
+      "title": "From stakeholder need to testable requirements",
+      "audience": "Starting point",
+      "description": "Practice turning an ambiguous service request into a defensible engineering obligation.",
+      "outcome": "Explain the system boundary, name the stakeholder conflict, and propose a testable obligation.",
+      "prompt": "Can you state which stakeholder needs are excluded and how those exclusions affect acceptance?",
+      "steps": [
+        {
+          "kind": "Concept",
+          "label": "Define the system and its boundaries",
+          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=d8e1de722acc0",
+          "why": "How a mission-driven system boundary changes the claims, interfaces, and evidence that matter."
+        },
+        {
+          "kind": "Concept",
+          "label": "Separate stakeholder claims from measurable needs",
+          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=da9595994eeb3",
+          "why": "From contested stakeholder outcomes to defensible measures, constraints, and preferences."
+        },
+        {
+          "kind": "Textbook",
+          "label": "Read the operational-concept chapter",
+          "path": "K/B1/chapters/03-needs-and-conops.html",
+          "why": "See how competing needs become scenarios and measurable service claims."
+        },
+        {
+          "kind": "Practice",
+          "label": "Apply it in the Stakeholder Hearing",
+          "path": "K/B1/labs/lab-03-stakeholder-hearing.html",
+          "why": "Use the existing hypothetical lab to challenge and reconcile needs."
+        }
+      ]
+    },
+    {
+      "id": "safety",
+      "title": "From hazard to defensible assurance claim",
+      "audience": "Assurance",
+      "description": "Find the difference between naming a hazard and producing evidence that a control works.",
+      "outcome": "State a bounded safety claim with an identifiable hazard, control, and evidence gap.",
+      "prompt": "What observation would refute the safety claim, and who has authority to accept the residual risk?",
+      "steps": [
+        {
+          "kind": "Concept",
+          "label": "Understand hazards and required controls",
+          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=d829e15a0d4cb",
+          "why": "Hazard identification, causal controls, dependence, and accountable residual-risk decisions"
+        },
+        {
+          "kind": "Concept",
+          "label": "Build a claim–argument–evidence chain",
+          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=de50b71ae3099",
+          "why": "Bounded claims, typed evidence graphs, defeaters, decision authority, and configuration validity"
+        },
+        {
+          "kind": "Textbook",
+          "label": "Read about evidence sufficiency",
+          "path": "K/B8/chapters/10-analyze-results-determine-evidence-sufficiency-and-reco.html",
+          "why": "Distinguish statistical evidence from authority to accept residual risk."
+        },
+        {
+          "kind": "Practice",
+          "label": "Test an evidence-sufficiency decision",
+          "path": "K/B8/labs/lab-10-analyze-results-determine-evidence-sufficiency-and-reco.html",
+          "why": "Use the existing hypothetical lab to examine whether the claim is supported."
+        }
+      ]
+    },
+    {
+      "id": "simulation",
+      "title": "From simulation results to credible decisions",
+      "audience": "Modeling",
+      "description": "Follow a simulation through intended use, credibility checks, and a challenge exercise.",
+      "outcome": "Write a model credibility argument tied to a specific proposed decision.",
+      "prompt": "Which decision would change if the model were wrong about its most sensitive assumption?",
+      "steps": [
+        {
+          "kind": "Concept",
+          "label": "Define the modeling purpose and assumptions",
+          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=db8eae7a8e3ee",
+          "why": "Defining model purpose, abstraction, environment, assumptions, and credibility requirements."
+        },
+        {
+          "kind": "Concept",
+          "label": "Separate implementation verification from validation",
+          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=d4b5e67dcb0f2",
+          "why": "Verifying implementation, validating intended use, and qualifying uncertainty for a decision."
+        },
+        {
+          "kind": "Textbook",
+          "label": "Read about using simulation for design decisions",
+          "path": "K/B11/chapters/09-apply-simulation-in-design-and-development-using-selection-ranking-a.html",
+          "why": "Study ranking and decision interpretation under model uncertainty."
+        },
+        {
+          "kind": "Practice",
+          "label": "Challenge the simulation evidence",
+          "path": "K/B11/labs/lab-09-apply-simulation-in-design-and-development-using-selection-ranking-a.html",
+          "why": "Use the existing hypothetical lab to test alternatives and assumptions."
+        }
+      ]
+    },
+    {
+      "id": "trade",
+      "title": "From trade study to robust choice",
+      "audience": "Decision science",
+      "description": "Move from weighted preference to sensitivity and robustness, without mistaking precision for certainty.",
+      "outcome": "Defend a conditional design choice and identify its switching conditions.",
+      "prompt": "Which changed weight or uncertain scenario would reverse your preferred alternative?",
+      "steps": [
+        {
+          "kind": "Concept",
+          "label": "Frame objectives and constrained alternatives",
+          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=d39ba99b7db20",
+          "why": "Feasible options, Pareto efficiency, preference functions, uncertainty, and sensitivity."
+        },
+        {
+          "kind": "Concept",
+          "label": "Challenge the choice under uncertainty",
+          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=ddd706e06cd3d",
+          "why": "Expected value, worst-case costs, minimax regret, and scenario-dependent technical margins"
+        },
+        {
+          "kind": "Textbook",
+          "label": "Read robustness, regret and information value",
+          "path": "K/B14/chapters/11-analyze-uncertainty-sensitivity-robustness-regret-and-value-of-infor.html",
+          "why": "Learn how robustness changes design decisions."
+        },
+        {
+          "kind": "Practice",
+          "label": "Stress-test a decision",
+          "path": "K/B14/labs/lab-11-analyze-uncertainty-sensitivity-robustness-regret-and-value-of-infor.html",
+          "why": "Use the existing hypothetical decision science lab."
+        }
+      ]
+    },
+    {
+      "id": "interfaces",
+      "title": "From interface definition to integration evidence",
+      "audience": "Systems integration",
+      "description": "Understand ownership, change control, and verification across subsystem boundaries.",
+      "outcome": "Specify a versioned interface contract and describe how to test it.",
+      "prompt": "What fails when two independently correct components disagree about units, time, or authority?",
+      "steps": [
+        {
+          "kind": "Concept",
+          "label": "Define a testable interface contract",
+          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=dda682f83cc9d",
+          "why": "Versioned agreements for data, power, timing, state, ownership, and exception behavior."
+        },
+        {
+          "kind": "Concept",
+          "label": "Preserve configuration and test provenance",
+          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=d922e041d8ca8",
+          "why": "Baselines, effectivity, change-impact graphs, as-built reconciliation, and release authority."
+        },
+        {
+          "kind": "Textbook",
+          "label": "Read the physical-interface design chapter",
+          "path": "K/B7/chapters/04-mature-the-physical-architecture-interfaces-and-perform.html",
+          "why": "Follow an interface from contract to allocated design."
+        },
+        {
+          "kind": "Practice",
+          "label": "Practice contract review",
+          "path": "K/B7/labs/lab-04-mature-the-physical-architecture-interfaces-and-perform.html",
+          "why": "Use the existing physical architecture laboratory."
+        }
+      ]
+    },
+    {
+      "id": "mbse",
+      "title": "From architecture views to allocation evidence",
+      "audience": "Model-based engineering",
+      "description": "See why model meaning, allocation, and traceability must agree for a model to be useful.",
+      "outcome": "Explain what a model relationship means and which evidence validates the allocation.",
+      "prompt": "Which model inconsistency would invalidate your design decision even if every diagram looks complete?",
+      "steps": [
+        {
+          "kind": "Concept",
+          "label": "Choose the model semantics",
+          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=db3032ecc2404",
+          "why": "Distinguishing engineering purpose, modeling notation, method, tools, and model governance."
+        },
+        {
+          "kind": "Concept",
+          "label": "Trace engineering claims across models",
+          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=d7c6c77e3a16d",
+          "why": "Typed, versioned relationships that support impact analysis without confusing links with proof."
+        },
+        {
+          "kind": "Textbook",
+          "label": "Read functional allocation in MBSE",
+          "path": "K/B3/chapters/07-logical-architecture-functional-allocation-de.html",
+          "why": "Examine functional responsibility allocation and assumptions."
+        },
+        {
+          "kind": "Practice",
+          "label": "Critique an architecture allocation",
+          "path": "K/B3/labs/lab-07-logical-architecture-functional-allocation-de.html",
+          "why": "Use the existing hypothetical MBSE lab."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+budget_id,allocated_to,nominal,margin,unit,verified
+LATENCY,Dispatch,1.5,0.5,seconds,no
+POWER,Controller,3.7,0.4,kW,no

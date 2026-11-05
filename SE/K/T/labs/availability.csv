@@ -1,0 +1,4 @@
+subsystem,success_probability,shared_power
+server,0.99,yes
+vehicle,0.98,no
+power,0.98,yes

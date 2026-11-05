@@ -1,0 +1,15 @@
+digraph shuttle {
+ graph [rankdir=LR, bgcolor="transparent", pad="0.3", splines=polyline];
+ node [shape=box, style="rounded,filled", color="#a4c5ca", fontname="DejaVu Sans", fillcolor="#f1f7f7", fontcolor="#183c4e", margin="0.17,0.12"];
+ edge [fontname="DejaVu Sans", color="#527e88", fontcolor="#3c6670", fontsize=9];
+ rider [label="Rider and accessibility\nneeds"];
+ identity [label="Identity service"];
+ road [label="Road authority"];
+ energy [label="Charging provider"];
+ service [label="SYSTEM OF INTEREST\nCampus Mobility Service", fillcolor="#cae9e5", penwidth=2, color="#1b807e"];
+ rider -> service [label="request, boarding"];
+ service -> rider [label="status, trip"];
+ identity -> service [label="identity token"];
+ road -> service [label="road closures"];
+ energy -> service [label="charging availability"];
+}

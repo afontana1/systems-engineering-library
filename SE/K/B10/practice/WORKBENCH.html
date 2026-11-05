@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Interactive engineering workbench · Book 10</title><style>*{box-sizing:border-box}body{font:16px/1.6 system-ui,Segoe UI,sans-serif;margin:0;background:#f2f6f7;color:#19394b}header{padding:30px max(18px,calc((100vw - 1050px)/2));background:#193d50;color:white}header a{color:#c8f2ec}main{max-width:1050px;margin:26px auto;padding:0 18px 70px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:15px}.card{background:white;border:1px solid #d6e4e6;padding:22px;border-radius:12px;min-width:0}h1{line-height:1.22}h2{margin-top:0;font-size:1.3rem}label{display:block;margin:12px 0;font-weight:600}input,select{display:block;padding:8px;border:1px solid #aac9cc;border-radius:6px;margin-top:4px;max-width:100%}input[type=range]{width:100%}output{margin-left:12px}p[id]{padding:12px;background:#eaf5f4;color:#135f63;border-radius:8px;font-weight:750}small{color:#57747b}.downloads{display:flex;gap:10px;flex-wrap:wrap}.downloads a{background:#e6f3f0;padding:6px 10px;border-radius:7px}pre{background:#19323f;color:#dff6f2;white-space:pre;overflow:auto;padding:15px;border-radius:8px}button{background:#176e70;color:white;border:0;border-radius:6px;padding:9px 12px;cursor:pointer}</style><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B10/practice/WORKBENCH.html" data-se-mode="standard"></script>
+</head><body><header><a href="../OPEN-BOOK.html">Book 10</a><h1>Experiments and shared-outage reliability</h1><p>Experiment with assumptions and review the accompanying Python calculations.</p></header><main><div class="grid"><section class="card"><h2>Factorial interaction</h2><label>Cold, base <input id="cb" type="number" value="24"/></label><label>Cold, optimized <input id="co" type="number" value="18"/></label><label>Warm, base <input id="wb" type="number" value="16"/></label><label>Warm, optimized <input id="wo" type="number" value="14"/></label><p aria-live="polite" id="effect"></p><small>Enter four cell means; intervals require replicate variance, not these means alone.</small></section><section class="card"><h2>Common-cause availability</h2><label>Shared outage probability <input id="q" max="0.02" min="0" step="0.0005" type="range" value="0.008"/><output id="qout"></output></label><p aria-live="polite" id="avail"></p><small>MTTF 200 h, MTTR 5 h, conditional component independence and perfect failover assumed.</small></section></div><section class="card" style="margin-top:18px"><h2>Download practice sources</h2><div class="downloads"><a download="" href="LAB-NOTEBOOK.ipynb">LAB-NOTEBOOK.ipynb</a><a download="" href="factorial.csv">factorial.csv</a><a download="" href="reliability.csv">reliability.csv</a><a download="" href="tools.py">tools.py</a><a download="" href="availability.md">Availability (Markdown)</a><a download="" href="factorial.md">Factorial (Markdown)</a><a download="" href="lab-availability.md">Lab Availability (Markdown)</a><a download="" href="lab-factorial.md">Lab Factorial (Markdown)</a></div><p>Python is displayed for inspection; execution requires your own Python environment.</p><button id="copy" type="button">Copy source</button><span id="copystatus" role="status"></span><details><summary>View the Python source</summary><pre><code id="pycode">"""Northstar teaching tools: 2x2 factorial contrasts and redundancy assumptions."""
+from pathlib import Path
+import math,csv,json,statistics
+HERE=Path(__file__).parent
+
+def factorial(rows):
+    cells={}
+    for r in rows:
+        cells.setdefault((r['temp'],r['algorithm']),[]).append(float(r['wait']))
+    if set(cells)!={('cold','base'),('cold','optimized'),('warm','base'),('warm','optimized')}:
+        raise ValueError('Required cells missing')
+    m={key:statistics.mean(vals) for key,vals in cells.items()}
+    interaction=(m['warm','optimized']-m['warm','base'])-(m['cold','optimized']-m['cold','base'])
+    df=sum(len(vals)-1 for vals in cells.values())
+    mse=sum(sum((x-m[key])**2 for x in vals) for key,vals in cells.items())/df
+    se=math.sqrt(mse*sum(1/len(vals) for vals in cells.values()))
+    return {'means':{str(k):v for k,v in m.items()},'interaction':interaction,'mse':mse,'se':se,
+            'ci95_approx':(interaction-2.306*se,interaction+2.306*se)}
+
+def availability(uptime,repair,common_cause):
+    if uptime&lt;=0 or repair&lt;0 or not 0&lt;=common_cause&lt;1:raise ValueError('Bad input')
+    single=uptime/(uptime+repair)
+    independent=1-(1-single)**2
+    return {'single':single,'independent_pair':independent,
+            'adjusted_pair':(1-common_cause)*independent}
+
+if __name__=='__main__':
+    with (HERE/'factorial.csv').open(newline='') as f:rows=list(csv.DictReader(f))
+    print(json.dumps({'factorial':factorial(rows),'availability':availability(200,5,.008)},indent=2))
+</code></pre></details></section></main><script>function calculate(){let v=id=>+document.getElementById(id).value;document.getElementById('effect').textContent=`Optimization: cold ${(v('co')-v('cb')).toFixed(1)} min; warm ${(v('wo')-v('wb')).toFixed(1)} min; interaction ${((v('wo')-v('wb'))-(v('co')-v('cb'))).toFixed(1)} min`;let q=v('q'),a=200/205,ind=1-(1-a)**2,adjusted=(1-q)*ind;document.getElementById('qout').textContent=(q*100).toFixed(2)+'%';document.getElementById('avail').textContent=`Adjusted pair availability ${(100*adjusted).toFixed(3)}% · 99.5% gate ${adjusted>=.995?'passes':'fails'}`;}for(const id of ["cb", "co", "wb", "wo", "q"])document.getElementById(id).addEventListener('input',calculate);document.getElementById('copy').onclick=()=>{const source=document.getElementById('pycode').textContent;navigator.clipboard?.writeText(source).then(()=>document.getElementById('copystatus').textContent='Copied').catch(()=>document.getElementById('copystatus').textContent='Select the code to copy');};calculate();</script></body></html>

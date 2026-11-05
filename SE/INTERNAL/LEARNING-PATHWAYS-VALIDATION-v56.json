@@ -1,0 +1,62 @@
+{
+  "release": "v56",
+  "baseline": "v55",
+  "original_file_count": 3157,
+  "unchanged_original_files": 3151,
+  "intentionally_changed_original_files": [
+    "SE/K/STUDY-DESK.html",
+    "SE/K/U/OPEN-ENCYCLOPEDIA.html",
+    "SE/K/U/encyclopedia-v48.css",
+    "SE/K/U/encyclopedia-v48.js",
+    "SE/K/_assets/learning-map-v55.js",
+    "SE/START-HERE.html"
+  ],
+  "html_pages_checked": 1267,
+  "local_file_links_checked": 20653,
+  "broken_local_links": 0,
+  "indexed_resources_preserved": 1076,
+  "canonical_concepts": 56,
+  "routes": 6,
+  "stages": 18,
+  "assigned_unique_concepts": 56,
+  "linked_existing_labs": 18,
+  "internal_book_recommendations_valid": 168,
+  "cross_route_prerequisite_edges": 47,
+  "offline_entry_files": [
+    "SE/START-HERE.html",
+    "SE/K/LEARNING-PATHWAYS.html",
+    "SE/K/U/OPEN-ENCYCLOPEDIA.html"
+  ],
+  "browser_testing": "Direct Chromium page rendering and interactions; native file:// navigation unverified",
+  "limitations": [
+    "Study markers are self-reported, not graded mastery.",
+    "Shared study desk and legacy encyclopedia storage may need both clearing independently.",
+    "Native extracted file:// navigation and screen-reader audits are outstanding."
+  ],
+  "checks": {
+    "home_load": true,
+    "all_56_concepts": true,
+    "six_route_cards": true,
+    "all_three_levels": true,
+    "foundations_8": true,
+    "three_stages": true,
+    "three_existing_lab_links": true,
+    "stage_progress": true,
+    "recommended_prerequisites": true,
+    "context_path_url": true,
+    "article_render": true,
+    "return_to_route": true,
+    "next_in_route": true,
+    "mark_studied": true,
+    "progress_updates": true,
+    "continue_advances": true,
+    "complex_8": true,
+    "cross_route_prereqs": true,
+    "modeling_11": true,
+    "modeling_practice": true,
+    "practice_reader": true,
+    "mobile_no_horizontal_overflow": true,
+    "mobile_stage_jumps": true
+  },
+  "errors": []
+}

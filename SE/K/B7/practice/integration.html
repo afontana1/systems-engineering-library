@@ -1,0 +1,73 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reliability Allocation, Common Cause, and Integration Evidence · Systems Engineering Learning Library</title><style>
+:root{--ink:#18374b;--teal:#08747a;--line:#d8e4e7;--muted:#617480}*{box-sizing:border-box}body{margin:0;background:#f3f6f7;color:var(--ink);font:16px/1.7 system-ui,Segoe UI,Arial,sans-serif}header{background:#173d51;color:white;padding:20px max(22px,calc((100vw - 1070px)/2))}header a{color:#ccedee}header h1{margin:6px 0;font-size:1.6rem;line-height:1.2}main{max-width:1100px;margin:24px auto;padding:34px 44px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 9px 30px #18374b0b}article h1{font-size:1.65rem}article h2{border-bottom:1px solid #e0e9eb;padding-top:14px;padding-bottom:6px;font-size:1.35rem}article h3{font-size:1.1rem}article p,article li{max-width:85ch}article table{border-collapse:collapse;width:100%;font-size:.94rem}article th,article td{border:1px solid var(--line);padding:9px;text-align:left}article th{background:#edf6f5}pre{overflow-x:auto;background:#142e40;color:#f0f5f7;padding:17px;border-radius:9px}pre code{color:inherit}code{font-size:.91em}p code,li code{background:#eaf1f2;padding:2px 4px}a{color:var(--teal)}a:hover{text-decoration-thickness:2px}details{background:#f1f7f6;border-left:3px solid #65a5a3;border-radius:7px;padding:8px 15px;margin:12px 0}summary{cursor:pointer;font-weight:650}.links{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.links a{display:inline-block;padding:7px 12px;border:1px solid #a6ceca;border-radius:8px;background:#e6f4f1;text-decoration:none;font-weight:600}.note{background:#edf7f6;padding:15px;border-left:4px solid #318a86;border-radius:8px}img,svg{max-width:100%}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}button,input{font:inherit}button{cursor:pointer} .workbench{background:#eef7f6;padding:20px;border-radius:12px;border:1px solid #c4e1dd}.ctrl{margin:15px 0}.ctrl label{display:block;font-weight:600}.ctrl input{width:100%}.output{font-size:1.4rem;font-weight:800;line-height:1.25} @media(max-width:650px){main{padding:19px;margin:10px}}
+</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B7/practice/integration.html" data-se-mode="standard"></script>
+</head><body><header><div>Systems Engineering · Advanced Book Practice</div><h1>Reliability Allocation, Common Cause, and Integration Evidence</h1><a href="../OPEN-BOOK.html">Back to book</a> · <a href="INDEX.html">Advanced practice</a></header><main><article><h1>Advanced Workshop · Reliability Allocation, Common Cause, and Integration Evidence</h1>
+<p><em>Book 7 · Week 9 · series reliability · redundancy · common-cause failure · incremental integration</em></p>
+<p><strong>Placement:</strong> After the relevant chapter, use this workshop to extend the reasoning, then try <a href="lab-integration.html">the corresponding hypothetical lab</a>. The assessed course obligations remain in <a href="../../../C/P2/EN645768.html">the curriculum</a>.</p>
+<h2>1. A collection of dependable components may still be unreliable</h2>
+<p>Mission success depends on the structure of the system and its failure modes. Three essential elements arranged in series each need to operate for the mission to succeed; their failure opportunities accumulate. When component successes are independent, system availability for a series path is the product of element availabilities. For values 0.99, 0.98 and 0.995, the result is</p>
+<p>\[
+A_{\mathrm{series}}=0.99(0.98)(0.995)=0.965349.
+\]</p>
+<p>The result is approximately 96.53%. It is not permissible to multiply availability numbers when failures share a power supply, software image, network, common maintenance window or other dependency without examining the effect of that dependence. The calculation also presumes the stated availability applies to the same observation period and operational definition.</p>
+<h2>2. Redundancy works only when failure modes differ</h2>
+<p>Two independent identical components, each available with probability \(a\), provide parallel availability \(A_{\parallel}=1-(1-a)^2\) when either component can fulfill the function and switching is effective. At \(a=.98\), this equals 0.9996. It is tempting to call that “four nines,” but shared dependencies can dominate.</p>
+<p>Introduce a stylized common-cause outage with probability \(c=.01\) that makes both redundant components unavailable. Conditional on no common-cause outage, suppose their failures are independent. Then</p>
+<p>\[
+A_{\parallel,cc}=(1-c)\,[1-(1-a)^2]=0.989604.
+\]</p>
+<p>That is only about 98.96% for the redundant function, despite excellent nominal independent redundancy. The event model is deliberately simplified: real common-cause processes may be time-dependent and partially overlapping, and failover has nonzero detection and recovery delay. The engineer should not treat \(c\) as known without relevant evidence.</p>
+<h2>3. From probability arithmetic to failure logic</h2>
+<p>A fault tree starts with an unacceptable <strong>top event</strong>, such as “dispatch cannot provide authorized route guidance during the operating window.” Then it decomposes conditions connected by AND/OR gates. Minimal cut sets show the smallest combinations of basic events sufficient for the top event under the model. A shared data center outage can be a single-event cut set that defeats duplicated application instances. It may be more important than a second copy of an already reliable component.</p>
+<p>Failure Mode and Effects Analysis starts from potential element failure modes and propagates their local and system effects. The methods complement each other: fault trees reason backward from loss of function, while FMEA reasons forward from element failures. Neither method proves completeness. Human operations, maintenance access, cyber incidents and software common-mode defects need explicit coverage where relevant.</p>
+<h2>4. Integration should reduce uncertainty stage by stage</h2>
+<p>A responsible integration sequence exercises interfaces in an order designed to expose faults early. Start with contract tests and controlled stubs, then hardware/software integration under known fixtures, then faulted interactions, then full mission scenarios. Freeze or identify the configuration for each result. A subsystem result can support a particular local claim without proving integrated performance; that distinction should appear in the evidence register.</p>
+<p>For Northstar, sequence test of message validity and freshness before integrated dispatch timing. Then test dispatch against a vehicle simulator, then a real vehicle interface (in an authorized safe test setting), then end-to-end scenarios with deliberate telemetry loss. A new route-planner version that changes timestamp semantics may invalidate prior integrated results even if the API schema remains unchanged.</p>
+<h2>5. Engineering acceptance, not numerical theater</h2>
+<p>The goal is an evidence-backed judgment about the operating scenario, not the largest reliability number on a slide. Describe the boundary, failure dependence, maintenance and recovery assumptions, test configurations, observed defects, and unresolved hazards. If common-cause behavior is poorly known, report conditional ranges and propose evidence gathering instead of a single precise release claim.</p>
+<h2>Worked problem set — attempt before revealing solutions</h2>
+<h3>Problem 1</h3>
+<p>Compute series availability for .99, .98, and .995.</p>
+<details><summary>Show solution 1</summary>
+
+<p>.99×.98×.995 = .965349, or 96.5349%, under the independence and consistent-period assumptions.</p>
+</details>
+
+<h3>Problem 2</h3>
+<p>For two independent .98-available components, calculate parallel availability.</p>
+<details><summary>Show solution 2</summary>
+
+<p>1 − (1−.98)² = .9996, provided either component can provide service and failure independence holds.</p>
+</details>
+
+<h3>Problem 3</h3>
+<p>Introduce independent common-cause outage probability .01 as a gating event. Compute adjusted parallel availability.</p>
+<details><summary>Show solution 3</summary>
+
+<p>(1−.01)×.9996 = .989604. The common-cause gate reduces the result to about 98.96%.</p>
+</details>
+
+<h3>Problem 4</h3>
+<p>Why can successful unit tests not justify end-to-end readiness?</p>
+<details><summary>Show solution 4</summary>
+
+<p>They do not establish interface semantics, coupled failures, operating conditions, fault recovery, or configuration-specific mission effectiveness. Integrated evidence is additionally required.</p>
+</details>
+
+<h2>Independent transfer to the Northstar case</h2>
+<p>Use <code>book7.py</code> to compare the three-element series path with redundant middle element, both with and without a shared power outage. Write a fault tree with a single-point common-cause cut set. Draft a staged integration sequence with contract tests, simulated dependencies, degradation tests, and end-to-end evidence. Include test IDs and an explicit acceptance limitation.</p>
+<h2>Further reading and conventions</h2>
+<p>The worked numbers are synthetic instructional fixtures. Do not use them as empirical transportation predictions, certification evidence, or claims about a particular deployed product. Foundational references (external and optional):</p>
+<ul>
+<li><p><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></p>
+</li>
+<li><p><a href="https://sebokwiki.org/wiki/SEBoK_Introduction">SEBoK — Guide to Systems Engineering</a></p>
+</li>
+<li><p><a href="https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final">NIST SP 800-160 Vol. 1 Rev. 1</a></p>
+</li>
+</ul>
+<p><strong>Continue:</strong> <a href="lab-integration.html">Hypothetical application lab</a> · <a href="book7.py">Python source</a> · <a href="book7-interfaces.csv">Experiment dataset</a> · <a href="WORKBENCH.html">Interactive workbench</a>.</p>
+</article></main></body></html>

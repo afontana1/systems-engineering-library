@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Enterprise causal evaluation · Laboratory · Systems Engineering Library</title><style>*{box-sizing:border-box}body{margin:0;background:#f3f7f7;color:#193745;font:16px/1.74 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:#096c75;text-underline-offset:3px}header{background:linear-gradient(120deg,#17334b,#11717a);color:#fff;padding:28px max(20px,calc((100vw - 1120px)/2))}header a{color:#d7f4f3}header h1{font-size:clamp(1.75rem,4vw,2.65rem);margin:8px 0;line-height:1.16}header p{color:#d4e8eb;max-width:86ch}main{max-width:1120px;background:#fff;margin:23px auto 65px;padding:clamp(22px,4vw,55px);border:1px solid #d5e3e6;border-radius:13px}article{max-width:96ch;margin:auto}article p,article li{max-width:90ch}h2{margin-top:2.15em;border-bottom:1px solid #deebeb;padding-bottom:.35em;font-size:1.45em}h3{margin-top:1.55em;font-size:1.13em}table{border-collapse:collapse;width:100%;font-size:.9em}th,td{border:1px solid #d8e7e7;padding:9px;text-align:left}th{background:#ebf5f3}pre{overflow:auto;padding:15px;border-radius:9px;background:#192f41;color:#edf6f8}pre code{white-space:pre}code{font-size:.92em}p code,li code{background:#eaf2f2;color:#175c63;border-radius:4px;padding:1px 4px}blockquote{border-left:4px solid #4a9698;background:#eef7f5;padding:12px 18px;margin-left:0}details{background:#f1f7f7;border:1px solid #d1e5e2;border-radius:8px;padding:13px;margin:16px 0}summary{cursor:pointer;font-weight:700}article img{display:block;max-width:100%;margin:24px auto;max-height:380px}.nav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid #dde7e9;padding-top:24px;margin-top:35px}.nav a,.downloads a{display:inline-block;background:#eaf4f2;border:1px solid #c9dfdc;border-radius:7px;padding:7px 12px;margin:3px;text-decoration:none;font-weight:600;font-size:.91em}.muted{color:#607b86}.chips{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.chip{background:#ecf5f4;border-radius:30px;padding:3px 10px;color:#27656b;font-size:.8rem;font-weight:700}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}.card{display:block;background:#fff;border:1px solid #cfe0e2;border-radius:10px;padding:20px;text-decoration:none}.card:hover{border-color:#2a8d90;box-shadow:0 4px 14px #19364912}.card strong{display:block;font-size:1.05rem}.card p{font-size:.9rem;color:#53727a;margin:8px 0}.intro{max-width:850px}.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:13px}.tool{background:#f3faf8;border:1px solid #cfe4df;border-radius:10px;padding:16px}.tool input{padding:8px;width:120px;border:1px solid #bdced2;border-radius:5px}.tool output{font-weight:800;font-size:1.1em;color:#0c7472}.eyebrow{font-size:.73rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;color:#c6e7e5}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container svg{max-width:100%}@media(max-width:650px){main{margin:0;padding:20px;border:0;border-radius:0}header{padding:22px 19px}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/V/labs/06-enterprise.html" data-se-mode="standard"></script>
+</head><body><header><a href="../INDEX.html">Graduate methods collection</a><div class="eyebrow">Systems engineering · Advanced learning</div><h1>Enterprise causal evaluation · Laboratory</h1></header><main><article><h1>Laboratory 06 · Causal enterprise pilot review</h1>
+<p><em>Independent practice · Book 19 · Enterprise Systems Engineering · Week 10</em></p>
+<h2>Learning purpose</h2>
+<p>This hypothetical laboratory trains the student to apply a method under incomplete evidence and to defend a claim while preserving its assumptions. It is <strong>not</strong> a substitute for the original course's assessed deliverable. First read <a href="../chapters/06-enterprise.html">the textbook chapter</a>, then attempt the questions before consulting the reference diagnostics.</p>
+<h2>Mission brief</h2>
+<p>Two agencies propose rolling out shared dispatch after a promising pilot, even though demand shifted and one region may have absorbed displaced trips.</p>
+<h2>Available reference observations</h2>
+<table>
+<thead>
+<tr>
+<th>Evidence</th>
+<th>Starting condition</th>
+<th>Comparison or observation</th>
+<th>Expected reasoning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Difference-in-differences</td>
+<td>22→16 treated; 20→18 control</td>
+<td>-4 minute estimate</td>
+<td>Challenge parallel trends and spillovers</td>
+</tr>
+<tr>
+<td>Distributional safeguards</td>
+<td>Mean wait improves</td>
+<td>Some groups worsen</td>
+<td>Design subgroup and stop-rule monitoring</td>
+</tr>
+</tbody>
+</table>
+<h2>Required engineering deliverables</h2>
+<ol>
+<li><strong>Model contract (one page).</strong> State system boundary, intended use, configuration, assumptions, input uncertainty, outcome metrics, and exclusions. Identify who has authority to accept the conclusion.</li>
+<li><strong>Independent analysis.</strong> Compute the difference-in-differences estimate, draw the causal pathways, explain conditions under which the estimate fails, and propose subgroup safeguards and a reversible expansion decision. Reproduce relevant calculations using the <a href="../code/graduate_models.py">source model</a> or the <a href="../notebooks/06-enterprise.ipynb">executable notebook</a>. Do not use the model output as an unexplained oracle.</li>
+<li><strong>Counterexample.</strong> Change at least two assumptions in plausible adverse directions. Document whether the recommended action reverses, becomes infeasible, or loses evidentiary support.</li>
+<li><strong>Evidence matrix.</strong> Link each decision claim to the calculation, test or observation that supports it; include the source configuration and remaining defeaters.</li>
+<li><strong>Review memo (500–800 words).</strong> State a recommendation, two serious counterarguments, an evidence-closure plan, a conditional release boundary, and a trigger to reconsider the decision.</li>
+</ol>
+<h2>Structured procedure</h2>
+<p><strong>Step 1 — Reconstruct:</strong> calculate the nominal result by hand, documenting units and rounding. <strong>Step 2 — Verify:</strong> reproduce it from code. <strong>Step 3 — Falsify:</strong> try edge cases, missing observations, changed authority, or an adverse distribution. <strong>Step 4 — Validate:</strong> ask if the mathematical quantity corresponds to the actual operational decision. <strong>Step 5 — Defend:</strong> tell a skeptical review board what it may legitimately conclude and what remains unknown.</p>
+<h2>Reference diagnostics (open after attempting)</h2>
+<details><summary>Show expected reasoning and common failure modes</summary>
+<p>Correlation and before-after change are not causation; governance approval is not supplied by a statistically significant estimate. The correct answer is a <strong>bounded argument</strong>, not a declaration that the hypothetical transportation system is ready. A defensible memo explicitly identifies the evidence sources, tests that could falsify the claim, the configuration for which it holds, and its remaining uncertainty.</p>
+</details>
+<h2>Assessment rubric</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Points</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conceptual model and assumptions</td>
+<td style="text-align:right">20</td>
+<td>Relevant abstractions; limits and exclusions explicit</td>
+</tr>
+<tr>
+<td>Mathematical or formal correctness</td>
+<td style="text-align:right">25</td>
+<td>Units, derivations and reproducibility correct</td>
+</tr>
+<tr>
+<td>Counterexamples and uncertainty</td>
+<td style="text-align:right">20</td>
+<td>Two meaningful assumption challenges with consequences</td>
+</tr>
+<tr>
+<td>Traceability and provenance</td>
+<td style="text-align:right">15</td>
+<td>Results tied to evidence and configuration</td>
+</tr>
+<tr>
+<td>Technical judgment</td>
+<td style="text-align:right">20</td>
+<td>Conditional recommendation, counterarguments, closure plan</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total: 100 points.</strong> A computationally correct answer with no uncertainty and no evidence limitations cannot receive a high score.</p>
+<p><strong>Download:</strong> <a href="../code/graduate_models.py">Python model</a> · <a href="../code/test_graduate_models.py">Tests</a> · <a href="../notebooks/06-enterprise.ipynb">Notebook</a> · <a href="../data/enterprise.csv" download>Dataset</a>.</p>
+<div class="downloads"><a href="../data/enterprise.csv" download>Dataset</a><a href="../notebooks/06-enterprise.ipynb" download>Notebook</a><a href="06-enterprise.md" download>Editable Markdown</a></div></article></main></body></html>

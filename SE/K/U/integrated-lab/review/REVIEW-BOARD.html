@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Northstar · Integrated preliminary review board · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../../_assets/mathjax-svg.js"></script><script defer src="../../../_assets/prism.js"></script><script defer src="../../../_assets/prism-python.js"></script><script defer src="../../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../../_assets/learning-shell-v55.css">
+<script defer src="../../../_assets/learning-map-v55.js"></script>
+<script defer src="../../../_assets/learning-shell-v55.js" data-se-root="../../../../" data-se-page="K/U/integrated-lab/review/REVIEW-BOARD.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="northstar--integrated-preliminary-review-board">Northstar · Integrated preliminary review board</h1>
+<h2 id="decision-to-make">Decision to make</h2>
+<p><strong>Question:</strong> Is this <em>synthetic software model</em> ready for further controlled research? <strong>Not:</strong> Is a real regional transportation service safe to operate? The latter cannot be supported by these artifacts.</p>
+<p><strong>Recommended reference disposition:</strong> continue sandbox research; do <strong>not</strong> authorize operational dispatch, real passenger scheduling, vehicle control, or safety-critical use.</p>
+<h2 id="evidence-ledger-for-the-review">Evidence ledger for the review</h2>
+<table>
+<thead>
+<tr>
+<th>Claim / concern</th>
+<th>Evidence available</th>
+<th>Strongest warranted interpretation</th>
+<th>Known limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exact duplicate handling</td>
+<td><code>tests/test_lab.py</code>; <code>outputs/results.json</code></td>
+<td>Exact repeated request payload processed once within one run</td>
+<td>No durable storage, concurrency, authentication or network failures</td>
+</tr>
+<tr>
+<td>Non-overlap invariant</td>
+<td><code>src/northstar.py</code>; tests; assignment CSV</td>
+<td>No overlapping scheduled intervals in reference toy allocator</td>
+<td>Fixed trip time; not physical fleet safety</td>
+</tr>
+<tr>
+<td>Fixture service target</td>
+<td>12/12 completions; 20-minute p90</td>
+<td>Passes chosen narrow fixture thresholds</td>
+<td>Input demand intentionally invented</td>
+</tr>
+<tr>
+<td>Vehicle loss</td>
+<td>One-vehicle variant serves 6/12</td>
+<td>Critical model sensitivity to resource degradation</td>
+<td>Not a failure probability or outage frequency</td>
+</tr>
+<tr>
+<td>Stochastic arrivals</td>
+<td>200 seeded synthetic replications</td>
+<td>Performance changes under assumed arrival law</td>
+<td>No field validation of distribution or process</td>
+</tr>
+<tr>
+<td>Trace completeness</td>
+<td><code>src/assurance.py</code>; matrices</td>
+<td>Required IDs link without dangling references</td>
+<td>Links do not prove evidence sufficiency</td>
+</tr>
+<tr>
+<td>Hazard treatment</td>
+<td><code>data/hazards.csv</code>; human-factors lesson</td>
+<td>Preliminary identification of selected model hazards</td>
+<td>Critical real operational hazards uncontrolled</td>
+</tr>
+<tr>
+<td>Reproducibility</td>
+<td><code>outputs/input-hashes.json</code>; committed sources</td>
+<td>Inputs can be tracked and runs repeated</td>
+<td>Hashes not externally authenticated</td>
+</tr>
+</tbody>
+</table>
+<h2 id="questions-the-board-should-challenge">Questions the board should challenge</h2>
+<ol>
+<li>Are service targets connected to actual user outcomes or just fixture convenience?</li>
+<li>Why should twelve artificial requests stand for a regional mobility service?</li>
+<li>What is the policy if a request is unserved, a rider requires assistance, or communications fail?</li>
+<li>Is an exact duplicate replay the same problem as concurrent writes or a malicious replay? Why not?</li>
+<li>Which requirements are linked to <strong>passing evidence</strong> and which only have a test reference?</li>
+<li>What are the uncertainties behind the stochastic model and its confidence interval?</li>
+<li>Which changed inputs would make the earlier results stale?</li>
+<li>What real-world evidence and independent authority are required before any pilot?</li>
+</ol>
+<h2 id="required-board-package">Required board package</h2>
+<ul>
+<li>Boundaries, stakeholder needs, concept of operations, and explicitly excluded real systems.</li>
+<li>Baseline requirements, design and interface rationale, alternative evaluation.</li>
+<li>Source and tests, input hashes, result summaries and one deliberate negative test.</li>
+<li>Experiment plan, sensitivity results, model-credibility claims and limitations.</li>
+<li>Hazard register, open findings and action owners, including accessibility and information security.</li>
+<li>Change-impact matrix and configuration state.</li>
+<li><strong>Decision statement</strong> with scope, evidence, residual uncertainty, conditions and next review trigger.</li>
+</ul>
+<h2 id="reference-decision-wording">Reference decision wording</h2>
+<blockquote>
+<p>The software-only Northstar teaching prototype exhibits the specified deterministic scheduling and structural traceability behaviors for a synthetic reference fixture. A deliberate degradation test and invented stochastic-arrival sensitivity analysis show the service results are conditional. The package does not justify any operational transport, accessibility, cybersecurity, or safety assertion. The review accepts continued research within a controlled sandbox only, with unresolved findings and validation work assigned before reconsideration.</p>
+</blockquote>
+</main></body></html>

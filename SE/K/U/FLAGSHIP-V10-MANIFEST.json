@@ -1,0 +1,19 @@
+{
+  "edition": "v10.0",
+  "added_flagship_chapters": [
+    "F05-software-intensive-architecture.md",
+    "F06-optimization-and-control.md",
+    "F07-human-factors-and-safety.md",
+    "F08-simulation-uncertainty.md",
+    "F09-enterprise-systems-of-systems.md"
+  ],
+  "new_docs": 5,
+  "total_indexed_docs": 464,
+  "new_exercises": 44,
+  "new_python_test_count": 29,
+  "notebooks": 5,
+  "diagrams_dot_svg": 5,
+  "csv_worksheets": 5,
+  "standalone_site": "OPEN-ENCYCLOPEDIA.html",
+  "source": "v9.0 master archive, preserved with additive v10 files"
+}

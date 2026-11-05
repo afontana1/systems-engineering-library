@@ -1,0 +1,45 @@
+{
+ "model_id":"NS-MBSE-TEACHING-002", "revision":"v12-A", "mission":"Research reproducible synthetic request scheduling under degraded service; not real dispatch",
+ "components":[
+  {"id":"DemandGenerator","role":"Synthetic operational scenarios"},
+  {"id":"Intake","role":"Validate payload, deduplicate and reject conflicts"},
+  {"id":"Dispatcher","role":"Reserve non-overlapping vehicle service intervals"},
+  {"id":"FleetModel","role":"Represent synthetic resource capacity and downtime"},
+  {"id":"FaultInjector","role":"Inject communications and availability faults"},
+  {"id":"EvidenceRecorder","role":"Record statuses and calculation provenance"},
+  {"id":"AssuranceReviewer","role":"Check requirements linkage and bound claims"}
+ ],
+ "interfaces":[
+  {"id":"IF-01","from":"DemandGenerator","to":"FaultInjector","schema":"Request{id,minute,origin,destination,delivery_key}","failure_handling":"Reject invalid synthetic fields"},
+  {"id":"IF-02","from":"FaultInjector","to":"Intake","schema":"possibly delayed/lost request event","failure_handling":"Record message loss in truth ledger"},
+  {"id":"IF-03","from":"Intake","to":"Dispatcher","schema":"unique validated request","failure_handling":"Reject conflicts; retain audit"},
+  {"id":"IF-04","from":"FleetModel","to":"Dispatcher","schema":"availability intervals in minutes","failure_handling":"Reschedule across outage intervals"},
+  {"id":"IF-05","from":"FaultInjector","to":"FleetModel","schema":"outage schedule {vehicle,begin,end}","failure_handling":"Explicit unavailable interval"},
+  {"id":"IF-06","from":"Dispatcher","to":"EvidenceRecorder","schema":"assignment,status,wait and vehicle","failure_handling":"Record unserved paths"},
+  {"id":"IF-07","from":"EvidenceRecorder","to":"AssuranceReviewer","schema":"result digest plus scenario record","failure_handling":"Mark missing or stale evidence"},
+  {"id":"IF-08","from":"AssuranceReviewer","to":"EvidenceRecorder","schema":"review finding and disposition","failure_handling":"Prevent silent closure"}
+ ],
+ "requirements":[
+  {"id":"V12-R01","allocated_to":"Intake","verification_id":"V12-T01","acceptance":"Duplicate delivery exact copy is counted once; conflicting reuse rejected"},
+  {"id":"V12-R02","allocated_to":"Dispatcher","verification_id":"V12-T02","acceptance":"All completed intervals are non-overlapping on the same vehicle"},
+  {"id":"V12-R03","allocated_to":"FaultInjector","verification_id":"V12-T03","acceptance":"Synthetic message loss visible in truth ledger, never silently counted complete"},
+  {"id":"V12-R04","allocated_to":"FleetModel","verification_id":"V12-T04","acceptance":"Vehicle outage never overlaps an assigned completed interval"},
+  {"id":"V12-R05","allocated_to":"EvidenceRecorder","verification_id":"V12-T05","acceptance":"Input and code hashes accompany simulation output"},
+  {"id":"V12-R06","allocated_to":"AssuranceReviewer","verification_id":"V12-T06","acceptance":"All scenario and requirement IDs resolve; missing links disclosed"}
+ ],
+ "hazards":[
+  {"id":"V12-H01","title":"double resource booking","control_component":"Dispatcher","test_id":"V12-T02"},
+  {"id":"V12-H02","title":"unobserved request silently reported served","control_component":"EvidenceRecorder","test_id":"V12-T03"},
+  {"id":"V12-H03","title":"outage resource assigned","control_component":"FleetModel","test_id":"V12-T04"},
+  {"id":"V12-H04","title":"model treated as operational evidence","control_component":"AssuranceReviewer","test_id":"V12-T06"}
+ ],
+ "transitions":[
+  {"from":"received","to":"queued","guard":"valid unique message"},
+  {"from":"received","to":"rejected","guard":"invalid or conflicting message"},
+  {"from":"queued","to":"assigned","guard":"capacity and communication available"},
+  {"from":"queued","to":"unserved","guard":"horizon expires"},
+  {"from":"assigned","to":"completed","guard":"service completes within horizon"},
+  {"from":"assigned","to":"unserved","guard":"timeout before completion"}
+ ],
+ "assumptions":["One passenger per request","No geographic travel times, routes, safety or human intervention","Central reservation logic, not real-time dispatch","Request message loss detectable only by omniscient experimental truth ledger","Outage blocks represent unavailable intervals without repair modeling"]
+}

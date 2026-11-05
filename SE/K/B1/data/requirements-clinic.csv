@@ -1,0 +1,7 @@
+requirement_id,statement,source_need,test_id,criticality
+R-01,"The shuttle shall be safe, secure, and convenient.",,,high
+R-02,"The dispatcher shall always respond instantly.",N-07,T-2,medium
+R-03,"The system shall use database Brand Z.",,,low
+R-04,"The application shall provide updates quickly.",N-07,,medium
+R-05,"The vehicle shall send its status every two seconds and stop safely on network loss.",N-10,T-5,high
+R-06,"The service shall support accessible boarding.",N-12,,high

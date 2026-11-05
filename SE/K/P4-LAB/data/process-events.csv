@@ -1,0 +1,10 @@
+case,activity,day,actor
+C1,Submit,1,PM
+C1,SafetyReview,4,Safety
+C1,Approve,8,Board
+C2,Submit,2,PM
+C2,Approve,5,Board
+C2,SafetyReview,8,Safety
+C3,Submit,2,PM
+C3,SafetyReview,3,Safety
+C3,Approve,6,Board

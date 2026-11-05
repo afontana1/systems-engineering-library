@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Interactive engineering workbench · Book 4 · Systems Engineering Learning Library</title><style>
+:root{--ink:#18374b;--teal:#08747a;--line:#d8e4e7;--muted:#617480}*{box-sizing:border-box}body{margin:0;background:#f3f6f7;color:var(--ink);font:16px/1.7 system-ui,Segoe UI,Arial,sans-serif}header{background:#173d51;color:white;padding:20px max(22px,calc((100vw - 1070px)/2))}header a{color:#ccedee}header h1{margin:6px 0;font-size:1.6rem;line-height:1.2}main{max-width:1100px;margin:24px auto;padding:34px 44px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 9px 30px #18374b0b}article h1{font-size:1.65rem}article h2{border-bottom:1px solid #e0e9eb;padding-top:14px;padding-bottom:6px;font-size:1.35rem}article h3{font-size:1.1rem}article p,article li{max-width:85ch}article table{border-collapse:collapse;width:100%;font-size:.94rem}article th,article td{border:1px solid var(--line);padding:9px;text-align:left}article th{background:#edf6f5}pre{overflow-x:auto;background:#142e40;color:#f0f5f7;padding:17px;border-radius:9px}pre code{color:inherit}code{font-size:.91em}p code,li code{background:#eaf1f2;padding:2px 4px}a{color:var(--teal)}a:hover{text-decoration-thickness:2px}details{background:#f1f7f6;border-left:3px solid #65a5a3;border-radius:7px;padding:8px 15px;margin:12px 0}summary{cursor:pointer;font-weight:650}.links{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.links a{display:inline-block;padding:7px 12px;border:1px solid #a6ceca;border-radius:8px;background:#e6f4f1;text-decoration:none;font-weight:600}.note{background:#edf7f6;padding:15px;border-left:4px solid #318a86;border-radius:8px}img,svg{max-width:100%}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}button,input{font:inherit}button{cursor:pointer} .workbench{background:#eef7f6;padding:20px;border-radius:12px;border:1px solid #c4e1dd}.ctrl{margin:15px 0}.ctrl label{display:block;font-weight:600}.ctrl input{width:100%}.output{font-size:1.4rem;font-weight:800;line-height:1.25} @media(max-width:650px){main{padding:19px;margin:10px}}
+</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B4/practice/WORKBENCH.html" data-se-mode="standard"></script>
+</head><body><header><div>Systems Engineering · Advanced Book Practice</div><h1>Interactive engineering workbench · Book 4</h1><a href="../OPEN-BOOK.html">Back to book</a> · <a href="INDEX.html">Advanced practice</a></header><main><article><div class="workbench"><p>The reference booking ledger admits no more unique reservations than capacity. Replays with the same key must not consume additional capacity.</p><div class="ctrl"><label for="capacity">Capacity: <output id="o_capacity">2</output></label><input aria-label="capacity" id="capacity" type="range" min="1" max="5" step="1" value="2"></div><div class="ctrl"><label for="duplicate_requests">Duplicate Requests: <output id="o_duplicate_requests">2</output></label><input aria-label="duplicate requests" id="duplicate_requests" type="range" min="0" max="5" step="1" value="2"></div><p id="result" class="output" aria-live="polite"></p></div><h2>Runnable Python source</h2><div class="links"><a href="book4.py" download>Download Python</a><a href="book4.ipynb" download>Download Jupyter notebook</a><a href="book4-requests.csv" download>Download CSV</a></div><pre><code class="language-python">&quot;&quot;&quot;Independent teaching model — synthetic inputs and simplified assumptions.&quot;&quot;&quot;
+from math import exp, log
+
+class BookingLedger:
+    &quot;&quot;&quot;Single-process model of a key-guarded reservation transaction.&quot;&quot;&quot;
+
+    def __init__(self, capacity):
+        if capacity &lt; 0:
+            raise ValueError(&#x27;capacity&#x27;)
+        self.capacity = capacity
+        self.by_key = {}
+        self.accepted = 0
+
+    def book(self, key):
+        if not key:
+            raise ValueError(&#x27;key&#x27;)
+        if key in self.by_key:
+            return self.by_key[key]
+        result = &#x27;CONFIRMED&#x27; if self.accepted &lt; self.capacity else &#x27;REJECTED&#x27;
+        self.by_key[key] = result
+        if result == &#x27;CONFIRMED&#x27;:
+            self.accepted += 1
+        return result
+
+    def cancel(self, key):
+        if key not in self.by_key:
+            return &#x27;UNKNOWN&#x27;
+        if self.by_key[key] == &#x27;CANCELLED&#x27;:
+            return &#x27;CANCELLED&#x27;
+        if self.by_key[key] == &#x27;REJECTED&#x27;:
+            return &#x27;REJECTED&#x27;
+        self.by_key[key] = &#x27;CANCELLED&#x27;
+        self.accepted -= 1
+        return &#x27;CANCELLED&#x27;
+
+class VersionedTrip:
+
+    def __init__(self):
+        self.version = 0
+        self.status = &#x27;REQUESTED&#x27;
+
+    def commit(self, expected_version, next_status):
+        allowed = {&#x27;REQUESTED&#x27;: {&#x27;HELD&#x27;, &#x27;CANCELLED&#x27;}, &#x27;HELD&#x27;: {&#x27;CONFIRMED&#x27;, &#x27;CANCELLED&#x27;}, &#x27;CONFIRMED&#x27;: {&#x27;BOARDED&#x27;, &#x27;CANCELLED&#x27;}, &#x27;BOARDED&#x27;: {&#x27;COMPLETED&#x27;}, &#x27;COMPLETED&#x27;: set(), &#x27;CANCELLED&#x27;: set()}
+        if expected_version != self.version:
+            return &#x27;CONFLICT&#x27;
+        if next_status not in allowed[self.status]:
+            return &#x27;INVALID_TRANSITION&#x27;
+        self.status = next_status
+        self.version += 1
+        return &#x27;OK&#x27;
+
+if __name__ == &#x27;__main__&#x27;:
+    b=BookingLedger(1);  print([b.book(&#x27;A&#x27;),b.book(&#x27;A&#x27;),b.book(&#x27;B&#x27;)]);  t=VersionedTrip(); print(t.commit(0,&#x27;HELD&#x27;),t.commit(0,&#x27;CANCELLED&#x27;))
+</code></pre><script>function v(id){return document.getElementById(id).value}function show(x){document.getElementById("result").textContent=x}function update(){document.querySelectorAll(".ctrl input").forEach(x=>document.getElementById("o_"+x.id).textContent=x.value);let cap=+v('capacity'),dup=+v('duplicate_requests');let unique=Math.min(cap,3);show('Confirmed unique allocations: '+unique+' of capacity '+cap+'; '+dup+' duplicate retries add 0 allocations.');}document.querySelectorAll(".ctrl input").forEach(x=>x.addEventListener("input",update));update();</script></article></main></body></html>

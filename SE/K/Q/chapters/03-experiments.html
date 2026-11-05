@@ -1,0 +1,72 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Experimental design, interactions and causal interpretation · Systems Engineering Textbook</title><style>*{box-sizing:border-box}body{margin:0;background:#eff5f6;color:#173748;font:16px/1.75 system-ui,Segoe UI,sans-serif}a{color:#08747b;text-underline-offset:3px}header{background:linear-gradient(120deg,#17374f,#126f70);color:white;padding:28px max(20px,calc((100vw - 1060px)/2))}header a{color:#d8f7f4}.meta{font-size:.8rem;text-transform:uppercase;letter-spacing:.11em;color:#b8e1e1;font-weight:700}header h1{font-size:clamp(1.75rem,3.4vw,2.65rem);line-height:1.18;margin:.4em 0}header p{color:#d5eded;max-width:80ch}main{margin:22px auto 80px;padding:35px clamp(18px,5vw,60px);max-width:1050px;background:white;border:1px solid #d5e4e6;border-radius:14px}article p,article li{max-width:88ch}article h2{font-size:1.36rem;margin-top:2.3em;border-bottom:1px solid #d9e6e8;padding-bottom:.3em}article h3{font-size:1.13rem;margin-top:1.65em}article blockquote{border-left:4px solid #168b89;background:#eff8f7;margin-left:0;padding:10px 18px}article table{border-collapse:collapse;width:100%;overflow:auto;font-size:.93rem}th,td{border:1px solid #cfdfe1;padding:9px 12px;text-align:left}th{background:#edf6f5}pre{background:#153145;color:#f5f9fc;overflow:auto;padding:17px;border-radius:8px}code{font-size:.91em}article p code{background:#eaf3f4;padding:1px 5px}details{background:#f1f7f7;border-left:4px solid #5a9e9c;padding:10px 16px;margin:18px 0;border-radius:8px}summary{font-weight:700;cursor:pointer}mjx-container[jax=SVG]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display=true]{margin:1.2em 0!important}.links{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0}.links a,.tool{display:inline-block;border-radius:7px;padding:8px 12px;background:#dff0ee;color:#0a6669;text-decoration:none;font-weight:650}.note{border:1px solid #cbdfdf;background:#eef6f5;padding:12px 16px;border-radius:8px}@media(max-width:700px){main{margin:0;border:0;border-radius:0;padding:20px}}</style><script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],processEscapes:true},svg:{fontCache:'local'},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/Q/chapters/03-experiments.html" data-se-mode="standard"></script>
+</head><body><header><div class="meta"><a href="../INDEX.html">← Quantitative Engineering Textbook</a></div><h1>Experimental design, interactions and causal interpretation</h1><p>Textbook chapter · Northstar case</p></header><main><article><h1>Experimental design, interactions and causal interpretation</h1>
+<p><em>Textbook-depth conceptual sequence · EN.645.756 / EN.645.784 / EN.645.783 · Northstar engineering case</em></p>
+<p><strong>Prerequisites:</strong> basic algebra, unit discipline, structured requirements and probability as appropriate. <strong>Related books:</strong> <a href="../../B10/OPEN-BOOK.html">Book 10</a>, <a href="../../B14/OPEN-BOOK.html">Book 14</a>, <a href="../../B17/OPEN-BOOK.html">Book 17</a>.</p>
+<blockquote>
+<p><strong>Learning outcome:</strong> derive the central method, state its assumptions, evaluate a worked engineering claim, and explain where the conclusion would fail.</p>
+</blockquote>
+<h2>What an experiment can—and cannot—identify</h2>
+<p>Northstar wants to know whether increasing fleet size or improving dispatch software reduces waiting time more effectively. Merely comparing historical performance before and after a software release is weak evidence: weather, demand mix, road closures, and staffing may have changed simultaneously. Controlled experiments attempt to isolate the effect of an intervention by structuring how conditions are assigned and compared. But design quality does not follow from a sophisticated regression equation; it follows from the data-generating process.</p>
+<p>An experiment needs a response variable with a decision-relevant definition, factors that the experimenter can deliberately manipulate, nuisance variables that influence the response, experimental units, and a plan for randomization, replication and blocking. A simulation experiment must also identify its stochastic seed allocation and transient/warm-up handling. An actual field experiment adds ethical and operational constraints that may prevent random assignment.</p>
+<h2>The smallest useful factorial design</h2>
+<p>Take two factors: fleet size A (two or three vehicles), and algorithm B (old or revised). Code the low and high levels as <span class="se-tex">\(-1,+1\)</span>. Suppose the simulated mean waits (minutes) are:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align:right">Old B−</th>
+<th style="text-align:right">Revised B+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Two vehicles A−</td>
+<td style="text-align:right">18</td>
+<td style="text-align:right">14</td>
+</tr>
+<tr>
+<td>Three vehicles A+</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">7</td>
+</tr>
+</tbody>
+</table>
+<p>The main effect of A is the high-A mean minus the low-A mean: <span class="se-tex">\(((12+7)-(18+14))/2=-6.5\)</span> minutes. The main effect of B is <span class="se-tex">\(((14+7)-(18+12))/2=-4.5\)</span> minutes. The interaction contrast is <span class="se-tex">\(y_{++}-y_{+-}-y_{-+}+y_{--}=7-12-14+18=-1\)</span>. In the coded regression <span class="se-tex">\(y=\beta_0+\beta_A A+\beta_B B+\beta_{AB}AB\)</span>, the interaction coefficient is this contrast divided by four: <span class="se-tex">\(-0.25\)</span>. The <strong>interaction effect</strong> convention based on difference-of-differences is <span class="se-tex">\(-1\)</span> minute; stating which convention is used avoids a common factor-of-two or factor-of-four error.</p>
+<p>The interaction means software benefit differs by fleet size: it cuts 4 minutes with two vehicles, but 5 with three. This illustrative interaction is small relative to the main effects. In a real experiment, whether it is distinguishable from noise requires replicated observations, error estimates, and diagnostics. A table of cell means alone gives no uncertainty interval.</p>
+<h2>Why one factor at a time is usually inadequate</h2>
+<p>One-factor-at-a-time experimentation changes A while B stays fixed, then B while A stays fixed. That may miss interactions and fail to find a joint optimum. A full factorial design tests combinations so interactions can be estimated. With <span class="se-tex">\(k\)</span> two-level factors, a full factorial uses <span class="se-tex">\(2^k\)</span> settings before replication. This can become expensive, motivating fractional factorial screening designs. But fractional factorials intentionally confound some effects. The alias structure must be understood before declaring a variable harmless. Large main effects may also conceal curvature; adding center points or response-surface designs can test whether a linear approximation suffices.</p>
+<p>Blocking handles known nuisance variation. If response depends strongly on the day, assign configurations within comparable day blocks or use identical demand seeds for paired simulator comparisons. Randomize execution order when practical to avoid conflating treatment with drift, machine load, or analyst choices. Replication means repeating a design point with independently generated noise—not rerunning exactly the same deterministic code with the same seed.</p>
+<h2>Model specification and residual diagnosis</h2>
+<p>A fitted regression is a model of conditional average response, not a proof of causal effect. Examine residual structure, nonlinear response, heteroscedasticity, influential observations, and dependency between experimental runs. For a response like waiting time, raw normal-error assumptions may fail because times are nonnegative and right-skewed. Consider transformed responses, generalized models, or nonparametric/bootstrapped comparisons when justified by the design.</p>
+<p>Distinguish <strong>statistical significance</strong> from engineering significance. A change that saves 0.1 minute may be detectable with many replications yet irrelevant to an emergency-access objective. Conversely, a potentially important six-minute reduction may have a wide uncertainty interval in a small pilot. Set practical acceptance thresholds in advance, then use uncertainty and cost to decide what additional evidence is necessary.</p>
+<h2>Causality under operational constraints</h2>
+<p>A field deployment may have only one region, no randomization, and policy changes at the same time. Difference-in-differences can help under a credible parallel-trends assumption, but cannot automatically make confounded data causal. Interrupted time-series analyses need a model for seasonality and autocorrelation. Synthetic control methods need a plausible donor pool. Qualitative process tracing and negative controls can reveal alternative mechanisms. An engineer should document which claims are identified by design, which depend on untestable assumptions, and which are only descriptive.</p>
+<p>For Northstar, an ethical experiment might compare synthetic alternatives or low-risk scheduling policies before altering emergency dispatch. High-risk or access-denying treatments require governance and safeguards beyond numerical study design. The experimental protocol should identify stop criteria, data protection, responsible decision-makers and remediation.</p>
+<h2>Further depth: aliasing, power and confirmation</h2>
+<p>With three two-level factors A, B and C, a half fraction may use the generator <span class="se-tex">\(C=AB\)</span>, giving the defining relation <span class="se-tex">\(I=ABC\)</span>. In such a design, the estimated main effect A is aliased with the two-factor interaction BC, B with AC, and C with AB. If we declare that interactions are negligible, we can screen main effects cheaply—but that declaration is a scientific assumption. In connected cyber-physical systems, interactions can be the central phenomenon, so selecting a resolution that conceals them may defeat the experiment's purpose.</p>
+<p>Power analysis begins with a smallest practically important effect <span class="se-tex">\(\delta\)</span>, an estimate of noise SD, significance criterion and desired detection probability. Replication controls uncertainty; it does not compensate for confounding. A pilot that estimates the noise level can inform a properly powered confirmatory experiment. Beware of designing sample sizes from the smallest noisy pilot effect: estimates selected because they looked promising may exaggerate expected gains.</p>
+<p>A good confirmatory stage reserves a fresh dataset or new experimental runs. If the same data are used to choose features, tune a simulator, set thresholds and then test a claim, the stated interval may fail to account for selection. Pre-register the primary objective and decision rule when possible. Report the full response table, not only statistically favorable contrasts. When feasibility includes safety, distinguish experimental <em>performance improvement</em> from proof that all relevant hazards are bounded.</p>
+<h3>Interpretation drill</h3>
+<p>Suppose the software-revision benefit is −4 minutes with a two-vehicle fleet and −5 minutes with three vehicles. The interaction difference-of-differences is −1 minute. If measurement noise is 3 minutes per independent replication, do not declare this interaction significant from the four cell means alone. Estimate variation through replicated runs, preferably using common demand streams across corresponding treatments, and plot uncertainty before recommending a different algorithm for each fleet size.</p>
+<h2>Problems — attempt first</h2>
+<ol>
+<li>Compute the two main effects and interaction contrast from the table above.</li>
+<li>Why are 100 deterministic runs with exactly the same seed not 100 independent replications?</li>
+<li>Explain how blocking by day can reduce noise without changing treatment definition.</li>
+<li>Propose a safety-aware evaluation for a routing algorithm that may disadvantage remote neighborhoods.</li>
+</ol>
+<details><summary>Worked answers and engineering interpretation</summary><ol>
+<li>Main effects A = −6.5 minutes and B = −4.5 minutes. Interaction difference-of-differences = −1 minute; coded regression coefficient = −0.25.</li>
+<li>Identical seeded runs contain no new stochastic evidence and do not estimate variance across demand realizations.</li>
+<li>Comparing A and B within the same day removes some systematic day-to-day variation, improving precision if treatments are suitably randomized within blocks.</li>
+<li>Define underserved-subgroup outcomes, simulate realistic demand, monitor refusal and wait outcomes, add a hard minimum-service constraint, evaluate before deployment, and require governance approval with stop criteria.</li>
+</ol>
+</details>
+<h2>Practice laboratory and further learning</h2>
+<p><a href="../labs/03-experiments.html">Open the lab for this chapter</a> · <a href="../labs/03-experiments.md">Download editable Markdown lab</a> · <a download href="../notebooks/03-experiments.ipynb">Open the associated notebook</a> · <a download href="../code/engineering_math.py">Download the calculation source</a></p>
+<p><strong>Authoritative follow-up reading:</strong> <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a>, <a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook</a>, and <a href="https://www.incose.org/resources-publications/technical-publications/systems-engineering-body-of-knowledge/">Systems Engineering Body of Knowledge</a>. These are independent references, not endorsements of the fictional cases.</p>
+<p><a href="../INDEX.html">Return to the quantitative textbook collection</a></p>
+</article></main></body></html>

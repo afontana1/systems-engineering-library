@@ -1,0 +1,14 @@
+{
+  "release_config":"A",
+  "requirements":[{"id":"R1","rev":3},{"id":"R2","rev":3},{"id":"R3","rev":1},{"id":"R4","rev":2}],
+  "edges":[
+    {"source":"B1","kind":"satisfies","target":"R1"},{"source":"T1","kind":"verifies","target":"R1"},
+    {"source":"B2","kind":"satisfies","target":"R2"},{"source":"T2","kind":"verifies","target":"R2"},
+    {"source":"T3","kind":"verifies","target":"R3"},
+    {"source":"B4","kind":"satisfies","target":"R4"},{"source":"T4","kind":"verifies","target":"R4"}],
+  "executions":[
+    {"test":"T1","req_rev":3,"config":"A","result":"PASS"},
+    {"test":"T2","req_rev":2,"config":"A","result":"PASS"},
+    {"test":"T3","req_rev":1,"config":"A","result":"PASS"},
+    {"test":"T4","req_rev":2,"config":"B","result":"PASS"}]
+}

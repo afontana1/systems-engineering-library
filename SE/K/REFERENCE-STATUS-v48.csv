@@ -1,0 +1,41 @@
+slug,title,subject,state,prerequisites,related,book_chapters
+system-of-interest,"System of interest: purpose, boundary, and evidence",Foundations and management,reconstructed,,boundaries-and-interfaces;stakeholders-and-needs;conops-and-scenarios;sos-characteristics,B1-01;B6-01;B20-01
+boundaries-and-interfaces,Boundaries and interfaces: where local correctness meets system risk,Foundations and management,reconstructed,system-of-interest,system-of-interest;interface-control;functional-vs-physical;sos-characteristics,B1-10;B7-04;B18-05
+stakeholders-and-needs,"Stakeholders, needs, and value: translating plural interests into engineering decisions",Foundations and management,reconstructed,system-of-interest,conops-and-scenarios;good-requirements;metrics-hierarchy;pareto-and-value,B1-03;B6-02;B14-02
+conops-and-scenarios,Concept of operations and scenarios,Foundations and management,primer,stakeholders-and-needs;boundaries-and-interfaces,,
+good-requirements,"Requirements: precise obligations, not persuasive sentences",Foundations and management,reconstructed,stakeholders-and-needs;conops-and-scenarios,stakeholders-and-needs;verification-matrix;v-and-v;traceability-graph,B1-04;B7-02;B9-07
+v-and-v,"Verification, validation, and acceptance: the three different decisions",Foundations and management,reconstructed,good-requirements,good-requirements;verification-matrix;model-vv-and-credibility;integration-strategy,B1-11;B8-01;B8-10
+wbs-and-baselines,Work breakdown structures and technical baselines,Foundations and management,primer,good-requirements,,
+risk-vs-issue,"Risk, issue, uncertainty, and opportunity",Foundations and management,primer,system-of-interest,,
+model-language-method-tool,"Model, method, language, tool, and repository",MBSE and software-intensive systems,primer,views-and-viewpoints,,
+views-and-viewpoints,"Architecture views, viewpoints, and consistency",MBSE and software-intensive systems,primer,functional-vs-physical,,
+traceability-graph,Requirements traceability: a typed graph of engineering claims,MBSE and software-intensive systems,reconstructed,allocation-matrix;verification-matrix,good-requirements;v-and-v;digital-thread-and-twin;views-and-viewpoints,B5-02;B9-07;B16-09
+object-responsibilities,Object-oriented domain models and responsibilities,MBSE and software-intensive systems,primer,functional-vs-physical,,
+software-quality-attributes,Software quality attributes and architectural tactics,MBSE and software-intensive systems,primer,good-requirements;interface-control,,
+software-lifecycle-evidence,"CI/CD, configuration, and software assurance",MBSE and software-intensive systems,primer,software-quality-attributes;verification-matrix,,
+functional-vs-physical,"Functional, logical, and physical architecture: preserving intent across realization","Concept, design, integration and test",reconstructed,conops-and-scenarios,allocation-matrix;interface-control;good-requirements;engineering-trades,B1-05;B3-07;B7-03
+allocation-matrix,"Allocation, coverage, and design responsibility","Concept, design, integration and test",primer,good-requirements;functional-vs-physical,,
+interface-control,Interface control and integration contracts,"Concept, design, integration and test",primer,boundaries-and-interfaces;functional-vs-physical,,
+integration-strategy,Integration build-up and readiness evidence,"Concept, design, integration and test",primer,interface-control;v-and-v,,
+verification-matrix,Verification cross-reference matrices and test design,"Concept, design, integration and test",primer,good-requirements;v-and-v,,
+engineering-trades,Engineering trade studies: making preferences and uncertainty inspectable,"Concept, design, integration and test",reconstructed,stakeholders-and-needs;metrics-hierarchy,pareto-and-value;bayesian-value-of-information;probability-and-dependence;functional-vs-physical,B1-08;B6-09;B14-04
+metrics-hierarchy,Measures of effectiveness and performance,"Analytics, modeling, simulation and decisions",primer,stakeholders-and-needs,,
+probability-and-dependence,"Probability, dependence, and technical uncertainty","Analytics, modeling, simulation and decisions",reconstructed,,design-of-experiments;model-vv-and-credibility;resilience-adaptability;engineering-trades,B10-02;B10-09;B18-09
+conceptual-m-and-s,Conceptual modeling and intended use,"Analytics, modeling, simulation and decisions",primer,system-of-interest;metrics-hierarchy,,
+discrete-event-simulation,Discrete-event simulation and queues,"Analytics, modeling, simulation and decisions",primer,conceptual-m-and-s;flow-wip-and-queues,,
+stocks-flows-feedback,"Stocks, flows, and feedback loops","Analytics, modeling, simulation and decisions",primer,conceptual-m-and-s,,
+model-vv-and-credibility,"Simulation verification, validation, and credibility","Analytics, modeling, simulation and decisions",reconstructed,conceptual-m-and-s;v-and-v,conceptual-m-and-s;design-of-experiments;probability-and-dependence;v-and-v,B11-09;B12-12;B16-03
+design-of-experiments,Design of experiments and sensitivity,"Analytics, modeling, simulation and decisions",primer,probability-and-dependence;metrics-hierarchy,,
+pareto-and-value,Pareto frontiers and multiobjective decisions,"Analytics, modeling, simulation and decisions",primer,engineering-trades,,
+bayesian-value-of-information,Decision uncertainty and value of information,"Analytics, modeling, simulation and decisions",primer,probability-and-dependence;engineering-trades,,
+agile-tailoring,Agile systems engineering and lifecycle tailoring,"Agile, digital and process engineering",primer,wbs-and-baselines;software-lifecycle-evidence,,
+flow-wip-and-queues,"Flow, work in process, and bottlenecks","Agile, digital and process engineering",primer,metrics-hierarchy,,
+digital-thread-and-twin,Digital thread and digital twin: preserving engineering meaning across time,"Agile, digital and process engineering",reconstructed,traceability-graph;model-vv-and-credibility,traceability-graph;model-vv-and-credibility;software-lifecycle-evidence;mission-engineering,B16-08;B16-09;B5-10
+mission-engineering,Mission threads and capability analysis,"Agile, digital and process engineering",primer,conops-and-scenarios;sos-characteristics,,
+process-improvement,Process capability and continuous improvement,"Agile, digital and process engineering",primer,metrics-hierarchy;design-of-experiments,,
+sos-characteristics,Systems of systems: constituent autonomy and emergent mission performance,"Systems of systems, enterprises and complexity",reconstructed,boundaries-and-interfaces,boundaries-and-interfaces;mission-engineering;resilience-adaptability;authority-and-governance,B18-01;B18-04;B18-09
+enterprise-as-system,The enterprise as a system,"Systems of systems, enterprises and complexity",primer,sos-characteristics;stocks-flows-feedback,,
+complexity-emergence,"Complexity, emergence, and adaptation","Systems of systems, enterprises and complexity",primer,stocks-flows-feedback;sos-characteristics,,
+authority-and-governance,"Authority, governance, and coordination","Systems of systems, enterprises and complexity",primer,stakeholders-and-needs;sos-characteristics,,
+resilience-adaptability,"Resilience, robustness, and graceful degradation","Systems of systems, enterprises and complexity",primer,risk-vs-issue;probability-and-dependence,,
+intervention-and-learning,"Interventions, policy resistance, and learning loops","Systems of systems, enterprises and complexity",primer,process-improvement;complexity-emergence,,

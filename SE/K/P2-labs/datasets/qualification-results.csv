@@ -1,0 +1,5 @@
+test_id,claim,configuration,condition,measurement,result,deviation,status
+T-001,REQ-LAT-01,BUILD-2,normal,dispatch_latency_s,1.8,,pass
+T-002,REQ-LAT-01,BUILD-2,surge,dispatch_latency_s,2.4,,fail
+T-003,REQ-ACC-04,BUILD-2,event,accessible_pickup_min,25,,open
+T-004,REQ-STATE-03,BUILD-2,stale telemetry,fail-safe transition,yes,radio swapped,conditional

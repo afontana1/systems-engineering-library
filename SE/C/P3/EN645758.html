@@ -1,0 +1,2329 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.758 — Advanced Systems Modeling and Simulation · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P3/EN645758.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/07-queues.html">Queueing, congestion, and discrete-event simulation</a> · <a href="../../K/T/08-dynamics.html">Stocks, feedback, controls, and numerical stability</a></aside><main><div class="course-actions"><a href="../../K/B12/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en645758--advanced-systems-modeling-and-simulation">EN.645.758 — Advanced Systems Modeling and Simulation</h1>
+<p><strong>Credits:</strong> 3<br/>
+<strong>Phase:</strong> 3 — Quantitative analysis and model-driven decision support<br/>
+<strong>Source prerequisite:</strong> EN.645.662 Introduction to Systems Engineering<br/>
+<strong>Self-study prerequisite:</strong> EN.645.757 Foundations of Modeling and Simulation, plus working probability/statistics, differential equations, and programming or numerical-tool experience<br/>
+<strong>Recommended preparation:</strong> EN.645.784 Decision Science &amp; Analytics, EN.645.756 Metrics, Modeling, and Simulation, and EN.645.632 Applied Analytics for MBSE</p>
+<p><a href="OVERVIEW.html">Back to Phase 3 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+<hr/>
+<h2 id="1-course-purpose">1. Course purpose</h2>
+<p>This course develops the capability to lead the modeling and simulation of a complex physical or cyber-physical system whose behavior crosses engineering domains, time scales, model forms, tools, and organizational boundaries. The learner will formulate requirements-driven simulation questions; derive conceptual and mathematical models; implement continuous, discrete, hybrid, and real-time simulations; couple mechanical, electrical, thermal, fluid, control, environmental, cost, and population models; design interoperable and collaborative simulation environments; conduct advanced experiments; and issue a bounded credibility and use recommendation at a lifecycle decision point.</p>
+<p>The course is not a survey of software packages. Its central question is whether a controlled family of models can produce credible, reproducible evidence for a consequential engineering decision. A high-quality project therefore needs more than equations that run: it needs intended-use traceability, dimensional and numerical verification, interface contracts, data provenance, uncertainty treatment, validation evidence, configuration control, and an explicit statement of what the model does not support.</p>
+<h2 id="2-source-scope-and-self-study-adaptation">2. Source scope and self-study adaptation</h2>
+<p>The Fall 2026 JHU syllabus covers basic markup and modeling languages; MATLAB; translational and rotational mechanical systems; MBSE and SysML; standard forms and block diagrams; High Level Architecture and live-virtual-constructive simulation; collaborative simulation environments and asset repositories; electrical and electromechanical systems; natural and man-made environments; thermal and fluid systems; cost modeling; populations and disease; visualization and animation; and the future of M&amp;S. The source course requires MATLAB with Simulink and grades a project built from differential equations translated into Simulink, with significant interaction between at least two system types. <a href="https://ep.jhu.edu/courses/645758-advanced-systems-modeling-and-simulation/" title="Advanced Systems Modeling and Simulation — Johns Hopkins Engineering for Professionals">JHU-758-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></p>
+<p>This self-study version preserves that breadth and project standard while adapting fourteen source modules to twelve intensive weeks. It adds explicit requirements-to-model traceability, numerical-method verification, multi-tool interoperability using current FMI and HLA standards, open-source implementation options, advanced experiment design, uncertainty and sensitivity analysis, model-asset governance, real-time/HIL readiness criteria, NASA-STD-7009B credibility evidence, and a formal final use recommendation. <a href="https://standards.nasa.gov/standard/nasa/nasa-std-7009" title="NASA-STD-7009B — Standard for Models and Simulations">NASA-STD-7009B</a> <a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009" title="NASA-HDBK-7009B — NASA Handbook for Models and Simulations">NASA-HDBK-7009B</a> <a href="https://fmi-standard.org/" title="Functional Mock-up Interface 3.0.2">FMI</a> <a href="https://standards.ieee.org/ieee/1516/6687/" title="IEEE 1516-2025 High Level Architecture framework and related standard family">IEEE-HLA</a></p>
+<p>The preferred commercial path remains MATLAB/Simulink/Simscape because it matches the source course. The open path uses Python, OpenModelica, the Modelica Standard Library, and FMI tooling. A learner may combine paths, but every result must remain reproducible from controlled source.</p>
+<h2 id="3-relationship-to-adjacent-courses">3. Relationship to adjacent courses</h2>
+<h3 id="inputs-from-earlier-courses">Inputs from earlier courses</h3>
+<p>The learner should import or reconstruct:</p>
+<ul>
+<li>the Phase 2 requirements, architecture, interfaces, performance budgets, integration strategy, V&amp;V evidence, and operational scenarios;</li>
+<li>the EN.645.757 intended-use statement, conceptual-model specification, input-data models, experiment controls, and credibility plan;</li>
+<li>the EN.645.784 objectives, alternatives, decision thresholds, uncertainty questions, and robustness criteria;</li>
+<li>the EN.645.756 measure dictionary, statistical models, requirement margins, and lifecycle decision triggers;</li>
+<li>the EN.645.632 authoritative-model traces, configuration definitions, model-query results, and linked analytic evidence.</li>
+</ul>
+<h3 id="outputs-to-later-work">Outputs to later work</h3>
+<p>This course produces:</p>
+<ul>
+<li>a requirements-driven advanced M&amp;S plan and credibility strategy;</li>
+<li>verified mathematical and executable models spanning at least two significantly interacting physical domains;</li>
+<li>a controlled multi-domain parameter, unit, interface, and initial-condition dictionary;</li>
+<li>an HLA/FMI/co-simulation architecture and composability assessment;</li>
+<li>natural and man-made environment models;</li>
+<li>a model-linked lifecycle cost and resource analysis;</li>
+<li>a collaborative model-asset repository with metadata, provenance, tests, and reuse constraints;</li>
+<li>real-time or HIL readiness evidence;</li>
+<li>a reproducible experiment, uncertainty, sensitivity, and validation package;</li>
+<li>a final project presentation, oral defense, and bounded use recommendation suitable for Phase 4 digital-engineering work.</li>
+</ul>
+<h2 id="4-prerequisites-and-readiness-diagnostic">4. Prerequisites and readiness diagnostic</h2>
+<p>Complete the following without outside help:</p>
+<ol>
+<li>Solve a first-order linear ordinary differential equation and interpret its time constant.</li>
+<li>Convert a second-order mechanical equation into a first-order state-space representation.</li>
+<li>Explain the difference among parameter uncertainty, input variability, numerical error, structural uncertainty, and observation error.</li>
+<li>Use a numerical tool to integrate a small ODE system and plot state histories.</li>
+<li>Check dimensions and units in an equation involving force, torque, power, heat flow, voltage, and mass flow.</li>
+<li>Explain stiffness, step size, truncation error, and why solver choice can change a simulated result.</li>
+<li>Distinguish model verification, validation, credibility assessment, and authorization/accreditation for a stated use.</li>
+<li>Construct a simple experiment matrix and compute a confidence interval or uncertainty interval.</li>
+<li>Read a SysML/UML block, interface, state, or activity model and connect it to an executable analysis.</li>
+<li>Use version control to reproduce a model run from source, inputs, configuration, and documented tool versions.</li>
+</ol>
+<p>A learner below the standard should complete a two- to four-week bridge in differential equations, state-space modeling, numerical integration, units and dimensional analysis, Python/MATLAB basics, statistics, and EN.645.757 credibility practices before beginning the course.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Measurable course learning outcome</th>
+<th>Program competency</th>
+<th style="text-align:center">Level</th>
+<th>Primary evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLO-1</td>
+<td>Formulate an advanced M&amp;S intended use, decision chain, requirements trace, and credibility strategy for a complex physical system</td>
+<td>C1, C2, C7, C9</td>
+<td style="text-align:center">A</td>
+<td>Modeling Purpose and Credibility Review</td>
+</tr>
+<tr>
+<td>CLO-2</td>
+<td>Derive standard-form, block-diagram, transfer-function, and state-space representations and verify numerical implementations</td>
+<td>C7, C8</td>
+<td style="text-align:center">A</td>
+<td>Dynamic Model Verification Package</td>
+</tr>
+<tr>
+<td>CLO-3</td>
+<td>Construct and validate translational and rotational mechanical models with realistic loads, losses, constraints, and parameter uncertainty</td>
+<td>C7, C8</td>
+<td style="text-align:center">A</td>
+<td>Mechanical Dynamics Review</td>
+</tr>
+<tr>
+<td>CLO-4</td>
+<td>Couple electrical, electromechanical, thermal, and fluid models while preserving energy, units, interface semantics, and solver stability</td>
+<td>C3, C7, C8</td>
+<td style="text-align:center">A</td>
+<td>Multi-Domain Model Review</td>
+</tr>
+<tr>
+<td>CLO-5</td>
+<td>Design an interoperable and composable simulation architecture using HLA, FMI, or equivalent contracts, including time, data, and ownership rules</td>
+<td>C3, C5, C7, C10</td>
+<td style="text-align:center">A</td>
+<td>Federation/Co-Simulation Design Review</td>
+</tr>
+<tr>
+<td>CLO-6</td>
+<td>Establish a collaborative simulation environment and governed model-asset repository that supports reuse, provenance, testing, and configuration control</td>
+<td>C7, C10, C12</td>
+<td style="text-align:center">A</td>
+<td>Collaborative Environment Review</td>
+</tr>
+<tr>
+<td>CLO-7</td>
+<td>Model natural and man-made environments and quantify how scenario, fidelity, and correlation assumptions affect system conclusions</td>
+<td>C1, C7, C8</td>
+<td style="text-align:center">A</td>
+<td>Environment Model Review</td>
+</tr>
+<tr>
+<td>CLO-8</td>
+<td>Build lifecycle cost, resource, population, or biological submodels and connect them to technical performance and decisions</td>
+<td>C7, C8, C9</td>
+<td style="text-align:center">D/A</td>
+<td>Extended Domain Analysis</td>
+</tr>
+<tr>
+<td>CLO-9</td>
+<td>Configure continuous, discrete, hybrid, and real-time simulations and assess solver, sample-time, latency, determinism, and HIL constraints</td>
+<td>C5, C6, C7</td>
+<td style="text-align:center">A</td>
+<td>Real-Time Readiness Review</td>
+</tr>
+<tr>
+<td>CLO-10</td>
+<td>Design and execute advanced simulation experiments with verification, uncertainty, sensitivity, robustness, and validation evidence</td>
+<td>C6, C7, C8, C9</td>
+<td style="text-align:center">A</td>
+<td>Experiment and Credibility Review</td>
+</tr>
+<tr>
+<td>CLO-11</td>
+<td>Communicate complex dynamic behavior through accurate visualization and animation without hiding uncertainty, failure, or limitations</td>
+<td>C7, C12</td>
+<td style="text-align:center">A</td>
+<td>Technical Visualization Package</td>
+</tr>
+<tr>
+<td>CLO-12</td>
+<td>Reproduce, challenge, revise, and defend a controlled multi-domain simulation study and issue a bounded lifecycle use recommendation</td>
+<td>C7, C9, C12</td>
+<td style="text-align:center">A</td>
+<td>Final Project and Oral Defense</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>What engineering decision requires a dynamic model rather than a static calculation or test alone?</li>
+<li>Which physical phenomena, control logic, environment effects, and organizational assumptions must be explicit?</li>
+<li>When are transfer functions, state-space models, block diagrams, acausal equations, discrete-event models, or federated simulations appropriate?</li>
+<li>How do conservation laws, units, signs, causality, initial conditions, and interface contracts expose model defects?</li>
+<li>How should model fidelity vary across lifecycle decisions and computational constraints?</li>
+<li>When do separately valid components fail to compose into a valid integrated simulation?</li>
+<li>How do numerical error, timing, synchronization, and solver choices alter conclusions?</li>
+<li>What evidence is required before a model can support design, integration, test, training, or operational decisions?</li>
+<li>How should reusable simulation assets be governed so that reuse does not create hidden invalidity?</li>
+<li>What would change the final recommendation?</li>
+</ul>
+<h2 id="7-running-case-and-controlled-data">7. Running case and controlled data</h2>
+<p>Use the <strong>Autonomous Campus Mobility Energy, Thermal, and Control Testbed</strong> as the principal case. The system is one battery-electric campus shuttle operating on a representative route while interacting with fleet scheduling, charging infrastructure, weather, passenger demand, and supervisory control.</p>
+<h3 id="required-physical-domains">Required physical domains</h3>
+<p>The final model must include at least two significantly interacting domains. The recommended baseline includes:</p>
+<ul>
+<li>longitudinal translational vehicle dynamics;</li>
+<li>wheel/motor rotational dynamics;</li>
+<li>electrical battery, inverter, motor, and charger behavior;</li>
+<li>battery and cabin thermal behavior;</li>
+<li>coolant or ventilation fluid flow;</li>
+<li>discrete supervisory modes and faults;</li>
+<li>route, weather, traffic, passenger, and infrastructure environment;</li>
+<li>lifecycle energy, maintenance, and cost consequences.</li>
+</ul>
+<h3 id="synthetic-baseline-parameters">Synthetic baseline parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align:right">Baseline</th>
+<th style="text-align:right">Controlled uncertainty or range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Curb mass</td>
+<td style="text-align:right">2,850 kg</td>
+<td style="text-align:right">±120 kg</td>
+</tr>
+<tr>
+<td>Passenger payload</td>
+<td style="text-align:right">0–900 kg</td>
+<td style="text-align:right">Time-varying</td>
+</tr>
+<tr>
+<td>Battery usable energy</td>
+<td style="text-align:right">145 kWh</td>
+<td style="text-align:right">132–148 kWh with degradation</td>
+</tr>
+<tr>
+<td>Nominal DC bus</td>
+<td style="text-align:right">650 V</td>
+<td style="text-align:right">520–720 V</td>
+</tr>
+<tr>
+<td>Peak traction power</td>
+<td style="text-align:right">180 kW</td>
+<td style="text-align:right">Controller-limited</td>
+</tr>
+<tr>
+<td>Wheel radius</td>
+<td style="text-align:right">0.39 m</td>
+<td style="text-align:right">±1.5%</td>
+</tr>
+<tr>
+<td>Rolling-resistance coefficient</td>
+<td style="text-align:right">0.010</td>
+<td style="text-align:right">0.008–0.016</td>
+</tr>
+<tr>
+<td>Aerodynamic drag area</td>
+<td style="text-align:right">1.9 m²</td>
+<td style="text-align:right">1.7–2.2 m²</td>
+</tr>
+<tr>
+<td>Route grade</td>
+<td style="text-align:right">−8% to +8%</td>
+<td style="text-align:right">Segment dependent</td>
+</tr>
+<tr>
+<td>Ambient temperature</td>
+<td style="text-align:right">−15°C to 38°C</td>
+<td style="text-align:right">Seasonal distribution</td>
+</tr>
+<tr>
+<td>Battery thermal limit</td>
+<td style="text-align:right">48°C</td>
+<td style="text-align:right">Warning at 44°C</td>
+</tr>
+<tr>
+<td>Cabin comfort range</td>
+<td style="text-align:right">19–25°C</td>
+<td style="text-align:right">Occupancy dependent</td>
+</tr>
+<tr>
+<td>Charger power</td>
+<td style="text-align:right">100 kW</td>
+<td style="text-align:right">85–105 kW delivered</td>
+</tr>
+<tr>
+<td>Coolant flow</td>
+<td style="text-align:right">0.05–0.35 kg/s</td>
+<td style="text-align:right">Pump/control dependent</td>
+</tr>
+<tr>
+<td>Control sample time</td>
+<td style="text-align:right">10 ms</td>
+<td style="text-align:right">Multirate extensions allowed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="required-decision-questions">Required decision questions</h3>
+<p>The final simulation must support at least three of the following:</p>
+<ol>
+<li>Can the selected battery, motor, and cooling architecture complete the cold-weather and hot-weather duty cycles with required reserve?</li>
+<li>Which control and thermal-management strategy best balances trip time, energy, temperature margin, and component degradation?</li>
+<li>What charger and turnaround configuration supports the schedule under realistic efficiency and arrival variation?</li>
+<li>Which environmental, parameter, and interface uncertainties dominate requirement-compliance risk?</li>
+<li>Can the model execute with sufficient determinism and timing margin for controller or HIL testing?</li>
+<li>Is the integrated model credible enough to support a design, integration, test, procurement, or deployment decision?</li>
+</ol>
+<p>A separate small population/disease extension is introduced in Week 10 to preserve the source course’s biological-modeling scope. It must not be used to make health-policy claims beyond the synthetic exercise.</p>
+<h2 id="8-resource-architecture">8. Resource architecture</h2>
+<h3 id="primary-course-anchors">Primary course anchors</h3>
+<ul>
+<li>JHU EN.645.758 public course description and Fall 2026 syllabus for source scope, software expectations, topics, and project standard. <a href="https://ep.jhu.edu/courses/645758-advanced-systems-modeling-and-simulation/" title="Advanced Systems Modeling and Simulation — Johns Hopkins Engineering for Professionals">JHU-758-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></li>
+<li>NASA Systems Engineering Handbook for lifecycle, analysis, decision, verification, validation, interfaces, and technical management. <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li>NASA-STD-7009B and NASA-HDBK-7009B for M&amp;S credibility, intended use, lifecycle controls, verification, validation, uncertainty, and acceptance evidence. <a href="https://standards.nasa.gov/standard/nasa/nasa-std-7009" title="NASA-STD-7009B — Standard for Models and Simulations">NASA-STD-7009B</a> <a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009" title="NASA-HDBK-7009B — NASA Handbook for Models and Simulations">NASA-HDBK-7009B</a></li>
+<li>MATLAB/Simulink/Simscape documentation for the source-course implementation track. <a href="https://www.mathworks.com/help/matlab/" title="MATLAB documentation">MATLAB</a> <a href="https://www.mathworks.com/help/simulink/" title="Simulink documentation">SIMULINK</a> <a href="https://www.mathworks.com/help/simscape/" title="Simscape physical modeling documentation">SIMSCAPE</a></li>
+<li>Modelica 3.7, OpenModelica, and FMI 3.0.2 for the open, equation-based and co-simulation track. <a href="https://modelica.org/language/" title="Modelica Language Specification 3.7">MODELICA</a> <a href="https://openmodelica.org/doc/OpenModelicaUsersGuide/latest/" title="OpenModelica User's Guide">OPENMODELICA</a> <a href="https://fmi-standard.org/" title="Functional Mock-up Interface 3.0.2">FMI</a></li>
+<li>IEEE 1516-2025 HLA family and DoDI 5000.61 for distributed simulation architecture and credible use. <a href="https://standards.ieee.org/ieee/1516/6687/" title="IEEE 1516-2025 High Level Architecture framework and related standard family">IEEE-HLA</a> <a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500061p.pdf" title="DoDI 5000.61 — DoD Modeling and Simulation Verification, Validation, and Accreditation">DODI-5000-61</a></li>
+<li>NIST Engineering Statistics Handbook for experiment design and analysis. <a href="https://www.itl.nist.gov/div898/handbook/" title="NIST/SEMATECH Engineering Statistics Handbook">NIST-ESH</a></li>
+<li>NASA Cost Estimating Handbook for lifecycle cost-model structure and uncertainty. <a href="https://www.nasa.gov/ocfo/ppc-corner/nasa-cost-estimating-handbook-ceh/" title="NASA Cost Estimating Handbook, fourth edition">NASA-CEH</a></li>
+</ul>
+<h3 id="reading-policy">Reading policy</h3>
+<p>Every weekly reading entry identifies its purpose and a guiding question. Standards are not assigned cover to cover. Read the cited scope, concepts, process, or implementation sections required for the week and maintain a source note with:</p>
+<ul>
+<li>the claim or method extracted;</li>
+<li>the model or decision element it affects;</li>
+<li>assumptions or applicability conditions;</li>
+<li>the reference version and access date.</li>
+</ul>
+<h2 id="9-tools-and-working-environment">9. Tools and working environment</h2>
+<h3 id="track-a--source-course-commercial-path">Track A — Source-course commercial path</h3>
+<ul>
+<li>MATLAB and Simulink;</li>
+<li>Simscape for physical-network modeling where available;</li>
+<li>Stateflow or equivalent mode/control logic where available;</li>
+<li>Simulink Test, Design Optimization, or Real-Time only when licensed; equivalent evidence may be produced manually.</li>
+</ul>
+<h3 id="track-b--open-and-reproducible-path">Track B — Open and reproducible path</h3>
+<ul>
+<li>Python 3, NumPy, SciPy, pandas, matplotlib, Jupyter, pytest, and Pint;</li>
+<li>OpenModelica and the Modelica Standard Library;</li>
+<li>FMI-compatible export/import and FMPy or equivalent runner;</li>
+<li>optional Portico or another RTI for a bounded HLA exercise;</li>
+<li>Git and a plain-text metadata/catalog format.</li>
+</ul>
+<h3 id="tool-neutral-rules">Tool-neutral rules</h3>
+<ol>
+<li>Store equations, assumptions, parameters, units, interfaces, initial conditions, and experiment definitions outside screenshots.</li>
+<li>Preserve native source plus neutral exports where available.</li>
+<li>Record solver, tolerances, sample times, step size, seed policy, tool version, library version, platform, and execution command.</li>
+<li>Build automated checks for units, conservation, limiting cases, regression results, and interfaces.</li>
+<li>Do not claim tool agreement as physical validation; compare models, equations, referents, and data.</li>
+<li>A learner unable to access real-time hardware may complete a timing-in-the-loop or fixed-step readiness study rather than claiming HIL execution.</li>
+</ol>
+<h2 id="10-assessment-and-grading-model">10. Assessment and grading model</h2>
+<table>
+<thead>
+<tr>
+<th>Assessment</th>
+<th style="text-align:right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weekly retrieval, discussion-equivalent memos, and knowledge checks</td>
+<td style="text-align:right">10%</td>
+</tr>
+<tr>
+<td>Dynamic and domain-model assignments</td>
+<td style="text-align:right">25%</td>
+</tr>
+<tr>
+<td>Interoperability, environment, repository, cost, and real-time assignments</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Midcourse Multi-Domain Model Readiness Review</td>
+<td style="text-align:right">15%</td>
+</tr>
+<tr>
+<td>Final complex-system simulation project and presentation</td>
+<td style="text-align:right">20%</td>
+</tr>
+<tr>
+<td>Final reproducibility challenge and oral defense</td>
+<td style="text-align:right">10%</td>
+</tr>
+</tbody>
+</table>
+<p>A score of 80% is required for course completion. Every critical mastery criterion must also pass; a high average cannot compensate for an unreproducible model, unit/conservation failure, unsupported validity claim, or hidden interface/timing defect.</p>
+<h2 id="11-twelve-week-course-map">11. Twelve-week course map</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Week</th>
+<th>Focus</th>
+<th>Principal product</th>
+<th>Review or gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Intended use, architecture, credibility, metadata, and project plan</td>
+<td>Advanced M&amp;S Plan</td>
+<td>Modeling Purpose and Credibility Review</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>Dynamic-system mathematics, standard forms, block diagrams, and solvers</td>
+<td>Dynamic Model Verification Package</td>
+<td>Numerical Method Check</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>Translational and rotational mechanical systems</td>
+<td>Mechanical Model Baseline</td>
+<td>Mechanical Dynamics Review</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>Electrical, electromechanical, thermal, and fluid coupling</td>
+<td>Multi-Domain Physical Model</td>
+<td>Energy and Interface Review</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>MBSE linkage, XML/metadata, collaborative environments, and asset repositories</td>
+<td>Collaborative M&amp;S Environment</td>
+<td>Asset Governance Review</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>HLA, FMI, composability, LVC, and co-simulation</td>
+<td>Federation/Co-Simulation Architecture</td>
+<td>Interoperability Review</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>Integrated model assembly, input modeling, advanced experiments, and midcourse defense</td>
+<td>Multi-Domain Model Baseline</td>
+<td>Model Readiness Review</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>Natural and man-made environment modeling</td>
+<td>Environment and Scenario Package</td>
+<td>Environment Validity Review</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Cost, resource, maintenance, and lifecycle consequence modeling</td>
+<td>Technical-Cost Integrated Model</td>
+<td>Affordability Evidence Review</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Population, disease, biological, and hybrid-model extension; visualization</td>
+<td>Extended-Domain Case Study</td>
+<td>Model-Form and Communication Review</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>Continuous/discrete/hybrid timing, fixed-step execution, real-time, HIL, uncertainty, and credibility</td>
+<td>Real-Time and Credibility Package</td>
+<td>Experiment and Use Review</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>Final integrated project, presentation, live challenge, and lifecycle recommendation</td>
+<td>Controlled Simulation Study</td>
+<td>Final Project and Oral Defense</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-major-assignments-and-review-products">12. Major assignments and review products</h2>
+<h3 id="a-advanced-ms-plan">A. Advanced M&amp;S Plan</h3>
+<p>Define the decision, lifecycle milestone, intended use, requirements, model family, fidelity, data, interfaces, experiments, credibility needs, reuse strategy, and authorities. Include a risk register and explicit non-uses.</p>
+<h3 id="b-dynamic-model-verification-package">B. Dynamic Model Verification Package</h3>
+<p>Derive at least one subsystem in differential-equation, state-space, transfer-function, and block-diagram form. Compare an analytic or high-accuracy referent with at least two numerical configurations and explain errors.</p>
+<h3 id="c-multi-domain-physical-model">C. Multi-Domain Physical Model</h3>
+<p>Implement at least two significantly interacting physical domains. Required evidence includes conservation checks, units, interface contracts, limiting cases, solver/tolerance study, and parameter provenance.</p>
+<h3 id="d-federationco-simulation-architecture">D. Federation/Co-Simulation Architecture</h3>
+<p>Specify federates or FMUs, ownership, object/variable semantics, units, time policy, synchronization, initialization, error handling, data logging, configuration, and composability risks. Execute a bounded co-simulation where tool access permits.</p>
+<h3 id="e-extended-domain-case-study">E. Extended-Domain Case Study</h3>
+<p>Present a short case in environment, cost, biological/population, or visualization modeling. Explain the decision, model form, assumptions, data, outputs, credibility limits, and transferability to the principal project.</p>
+<h3 id="f-final-complex-system-simulation-study">F. Final complex-system simulation study</h3>
+<p>Deliver controlled source, equations, conceptual model, configuration, data, tests, experiment design, results, uncertainty/sensitivity, validation, limitations, cost/environment consequences, presentation, and a bounded use recommendation. The model must contain significant interaction between at least two domains, matching the source-course project standard. <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></p>
+<h2 id="13-common-analytic-rubric">13. Common analytic rubric</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Physical and mathematical correctness</td>
+<td style="text-align:right">25%</td>
+<td>Equations, signs, units, conservation, states, interfaces, initial conditions, and limiting behavior are defensible.</td>
+</tr>
+<tr>
+<td>Computational and numerical verification</td>
+<td style="text-align:right">20%</td>
+<td>Solver, step, tolerance, timing, regression, and reproducibility evidence is sufficient.</td>
+</tr>
+<tr>
+<td>Integration and interoperability</td>
+<td style="text-align:right">15%</td>
+<td>Coupling, time, ownership, semantics, configuration, and composability are explicit and tested.</td>
+</tr>
+<tr>
+<td>Experiment, uncertainty, and credibility</td>
+<td style="text-align:right">20%</td>
+<td>Runs, factors, responses, uncertainty, sensitivity, validation, limitations, and use conditions support the conclusion.</td>
+</tr>
+<tr>
+<td>Decision usefulness</td>
+<td style="text-align:right">10%</td>
+<td>Results trace to requirements, alternatives, margins, cost, risk, and a lifecycle decision.</td>
+</tr>
+<tr>
+<td>Communication and configuration control</td>
+<td style="text-align:right">10%</td>
+<td>Source, model, data, figures, metadata, reports, and review records are controlled and understandable.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-critical-mastery-criteria">14. Critical mastery criteria</h2>
+<p>The learner must demonstrate all of the following:</p>
+<ul>
+<li>every critical result reproduces from controlled source and documented environment;</li>
+<li>no unresolved dimensional, conservation, sign, initial-condition, or interface defect remains in a critical path;</li>
+<li>solver and timing choices are justified and tested rather than accepted by default;</li>
+<li>the final project contains at least two significantly interacting system types;</li>
+<li>requirements and decision claims trace to model outputs and evidence;</li>
+<li>interoperability/composability claims include semantic and temporal evidence, not merely file exchange;</li>
+<li>uncertainty, sensitivity, and validation are proportional to decision consequence;</li>
+<li>real-time or HIL capability is not claimed without timing and execution evidence;</li>
+<li>visualizations disclose uncertainty, events, failures, and relevant scales;</li>
+<li>the final recommendation states intended use, non-uses, residual risk, authority, revisit triggers, and what would change the conclusion.</li>
+</ul>
+<h2 id="15-final-capstone-and-oral-defense">15. Final capstone and oral defense</h2>
+<p>The final project answers a consequential question about the campus shuttle’s energy, thermal, propulsion, control, charging, environment, or integration design. The final package must include:</p>
+<ol>
+<li>decision statement, authority, intended use, and non-uses;</li>
+<li>requirements-to-model-to-measure trace;</li>
+<li>conceptual and mathematical model specification;</li>
+<li>controlled parameter, unit, interface, and initial-condition dictionaries;</li>
+<li>executable multi-domain model source and runbook;</li>
+<li>verification tests, numerical study, and defect log;</li>
+<li>environment and lifecycle cost/resource model;</li>
+<li>federation or co-simulation architecture and composability assessment;</li>
+<li>experiment design, uncertainty, sensitivity, and robustness results;</li>
+<li>validation evidence and credibility assessment;</li>
+<li>technical visualization or bounded animation;</li>
+<li>recommendation, limitations, residual risk, and revisit triggers;</li>
+<li>15-minute maximum project presentation;</li>
+<li>live reproducibility/change challenge and oral defense.</li>
+</ol>
+<h3 id="oral-defense-question-bank">Oral-defense question bank</h3>
+<ol>
+<li>Why is this model form appropriate for the decision?</li>
+<li>Which equation or interface is most consequential, and how was it verified?</li>
+<li>What conservation law or limiting case gives the strongest defect-detection power?</li>
+<li>How did solver and step-size choices affect the result?</li>
+<li>Which model components are valid independently but risky when composed?</li>
+<li>How are time, ownership, units, and initialization controlled across components?</li>
+<li>Which environment assumption most changes requirement compliance?</li>
+<li>What uncertainty dominates the recommendation?</li>
+<li>What evidence validates the model for this use?</li>
+<li>What real-time or HIL claim can the evidence support?</li>
+<li>What cost or lifecycle consequence changes the technical preference?</li>
+<li>What change would reverse the recommendation?</li>
+</ol>
+<h2 id="16-portfolio-and-completion-requirements">16. Portfolio and completion requirements</h2>
+<p>Retain:</p>
+<ul>
+<li>native source, neutral exports, scripts, environment lockfile, and runbook;</li>
+<li>conceptual, mathematical, interface, and federation specifications;</li>
+<li>requirements and measure traces;</li>
+<li>parameter, unit, initial-condition, and data-provenance dictionaries;</li>
+<li>test suite, regression baselines, numerical studies, and defect history;</li>
+<li>experiment definitions, raw outputs, processed results, and figure-generation scripts;</li>
+<li>uncertainty, sensitivity, validation, and credibility records;</li>
+<li>cost, environment, population/biological, and visualization case products;</li>
+<li>review agendas, findings, dispositions, presentation, and oral-defense record;</li>
+<li>final recommendation and downstream Phase 4 handoff.</li>
+</ul>
+<h2 id="17-course-maintenance-record">17. Course maintenance record</h2>
+<p>At least once per year:</p>
+<ul>
+<li>verify the current JHU syllabus and course software expectations;</li>
+<li>review current stable Modelica, OpenModelica, FMI, HLA, MATLAB/Simulink, and Python versions;</li>
+<li>verify NASA-STD-7009B and NASA-HDBK-7009B status;</li>
+<li>rerun reference models and update compatibility notes;</li>
+<li>refresh cybersecurity and supply-chain controls for executable models and third-party assets;</li>
+<li>verify every external link and remove unsupported or obsolete tool instructions;</li>
+<li>preserve the distinction between source-course scope and self-study enhancements.</li>
+</ul>
+<hr/>
+<h2 id="week-1--frame-the-advanced-ms-decision-intended-use-architecture-and-credibility-strategy">Week 1 — Frame the advanced M&amp;S decision, intended use, architecture, and credibility strategy</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 12):</strong> <a href="../../K/B12/chapters/01-frame-the-advanced-m-s-decision-intended-use-architecture-and-credib.html">Chapter 1 — Frame the advanced M&amp;S decision, intended use, architecture, and credibility strategy</a> · <a href="../../K/B12/labs/lab-01-frame-the-advanced-m-s-decision-intended-use-architecture-and-credib.html">Hypothetical Lab 1</a> · <a href="../../K/P3-text/lessons/645-758-w01.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="competency-alignment">Competency alignment</h3>
+<p>CLO-1, CLO-6, CLO-10, and CLO-12; program competencies C1, C2, C7, C9, C10, and C12.</p>
+<h3 id="professional-context-and-essential-question">Professional context and essential question</h3>
+<p>Advanced simulation begins with an engineering decision and an accountable user, not with a preferred package. This week establishes the simulation family, evidence chain, governance, and conditions under which the work may influence a lifecycle milestone.</p>
+<p><strong>Essential question:</strong> What must be true before this simulation is worth building and safe to use?</p>
+<h3 id="weekly-learning-outcomes">Weekly learning outcomes</h3>
+<ol>
+<li>Define a lifecycle decision, decision authority, intended use, users, consequences, and explicit non-uses.</li>
+<li>Trace stakeholder outcomes and requirements to model outputs, experiments, and acceptance evidence.</li>
+<li>Select candidate model forms, tools, fidelities, and interfaces based on decision needs.</li>
+<li>Tailor NASA-STD-7009B credibility activities and acceptance criteria to the project.</li>
+<li>Create model metadata, configuration, collaboration, and cybersecurity controls.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check">Prerequisite retrieval and readiness check</h3>
+<ol>
+<li>What is an intended use?</li>
+<li>How is a simulation requirement different from a system requirement?</li>
+<li>What is a credibility acceptance criterion?</li>
+<li>Which authority approves use of the evidence?</li>
+</ol>
+<h3 id="required-study">Required study</h3>
+<ul>
+<li><strong>JHU Fall 2026 syllabus — description, topics, CLOs, software, and project rubric.</strong> <strong>Purpose:</strong> Preserve the source course’s advanced physical-modeling, interoperability, collaboration, and project expectations. <strong>Guiding question:</strong> Which source topics must appear in the final study? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></li>
+<li><strong>NASA-STD-7009B — scope, M&amp;S lifecycle, credibility products, and acceptance.</strong> <strong>Purpose:</strong> Establish required evidence and technical-authority involvement. <strong>Guiding question:</strong> Which requirements apply to this intended use and consequence? <a href="https://standards.nasa.gov/standard/nasa/nasa-std-7009" title="NASA-STD-7009B — Standard for Models and Simulations">NASA-STD-7009B</a></li>
+<li><strong>NASA-HDBK-7009B — planning, credibility assessment, and use guidance.</strong> <strong>Purpose:</strong> Translate the standard into a practical project plan. <strong>Guiding question:</strong> What evidence should be planned before implementation begins? <a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009" title="NASA-HDBK-7009B — NASA Handbook for Models and Simulations">NASA-HDBK-7009B</a></li>
+<li><strong>NASA Systems Engineering Handbook — system analysis and decision analysis.</strong> <strong>Purpose:</strong> Connect M&amp;S to lifecycle decisions and technical baselines. <strong>Guiding question:</strong> What decision products must the model inform rather than replace? <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes">Instructor-style lesson notes</h3>
+<ul>
+<li>Write the decision as a choice or authorization, not as ‘simulate the shuttle.’ Identify the date, authority, alternatives, thresholds, consequences, and information value.</li>
+<li>Define the model family before the implementation: physical plant, controller, environment, cost, population extension, federation, data, visualization, and analysis scripts.</li>
+<li>Separate system requirements from simulation requirements. The vehicle may require a temperature margin; the simulation may require a maximum numerical error, update rate, trace coverage, and documented validity domain.</li>
+<li>Credibility is evidence relative to an intended use. Plan verification, validation, uncertainty, sensitivity, data quality, versioning, reviews, and acceptance criteria now.</li>
+<li>Treat executable models as software and supply-chain assets. Record dependencies, licenses, origin, security constraints, and who may modify or approve them.</li>
+</ul>
+<h3 id="worked-example">Worked example</h3>
+<p>The program must decide whether the 145-kWh battery and proposed cooling loop may proceed to detailed design for winter operation. The intended use is to estimate joint probability of completing the 42-km duty cycle with at least 18% energy reserve and battery temperature below 44°C. The model is not authorized for braking-safety certification or final battery life prediction. Acceptance requires unit/conservation tests, numerical convergence, comparison with component data, uncertainty treatment, and independent review. A colder-than-baseline weather distribution and a 12% coolant-pump degradation are identified as challenge conditions.</p>
+<h3 id="guided-practice">Guided practice</h3>
+<ol>
+<li>Write the decision and intended-use statement.</li>
+<li>Build the requirement → model element → measure → experiment → decision trace.</li>
+<li>Compare at least three candidate model architectures and fidelities.</li>
+<li>Draft the credibility, repository, review, and configuration plan.</li>
+</ol>
+<h3 id="independent-exercises">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify 20 statements as system requirement, simulation requirement, assumption, acceptance criterion, non-use, or decision condition.</li>
+<li><strong>Application:</strong> Create the Advanced M&amp;S Plan for the running case.</li>
+<li><strong>Analysis:</strong> Identify five ways a technically correct model could still be unfit for the intended decision.</li>
+<li><strong>Synthesis:</strong> Conduct a Modeling Purpose and Credibility Review with an independent red-team role.</li>
+<li><strong>Stretch:</strong> Represent the plan and traces in SysML or a machine-readable metadata schema and generate a coverage report.</li>
+</ul>
+<h3 id="weekly-deliverable">Weekly deliverable</h3>
+<p>Submit the decision statement, intended use/non-uses, stakeholder and requirement trace, model-family architecture, candidate method/fidelity comparison, data and validation plan, credibility acceptance criteria, risk register, repository structure, configuration policy, review calendar, and signed review record.</p>
+<h3 id="analytic-rubric">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decision and intended use</td>
+<td style="text-align:right">25%</td>
+<td>Authority, alternatives, thresholds, consequences, uses, and non-uses are explicit.</td>
+</tr>
+<tr>
+<td>Architecture and trace</td>
+<td style="text-align:right">25%</td>
+<td>Model family and outputs trace coherently to requirements and decisions.</td>
+</tr>
+<tr>
+<td>Credibility strategy</td>
+<td style="text-align:right">30%</td>
+<td>Verification, validation, uncertainty, data, review, and acceptance evidence are proportional.</td>
+</tr>
+<tr>
+<td>Governance</td>
+<td style="text-align:right">20%</td>
+<td>Configuration, collaboration, provenance, security, and responsibilities are controlled.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures">Critical failures</h3>
+<ul>
+<li>No decision authority or intended use is identified.</li>
+<li>Critical requirements have no planned output or evidence path.</li>
+<li>Credibility is deferred until after implementation.</li>
+<li>The plan assumes the preferred tool or model is automatically valid.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why define non-uses?</strong><br/>
+<em>Answer guidance:</em> To prevent evidence from being generalized beyond its validity and authority.</li>
+<li><strong>What makes a model requirement testable?</strong><br/>
+<em>Answer guidance:</em> A specified property, tolerance, condition, method, and acceptance threshold.</li>
+<li><strong>Who accepts model use?</strong><br/>
+<em>Answer guidance:</em> The designated decision or technical authority, informed by independent credibility evidence.</li>
+<li><strong>Why plan configuration now?</strong><br/>
+<em>Answer guidance:</em> Because equations, data, libraries, interfaces, and results evolve together and must remain reproducible.</li>
+<li><strong>What is the first project output?</strong><br/>
+<em>Answer guidance:</em> A decision-focused, reviewable M&amp;S plan—not a running model.</li>
+</ol>
+<h3 id="revision-and-mastery-gate">Revision and mastery gate</h3>
+<p>Pass the Modeling Purpose and Credibility Review with no untraced critical decision criterion, no undefined authority, and no unresolved critical planning finding.</p>
+<h3 id="suggested-workload">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and source notes</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Decision/trace architecture</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Credibility and governance plan</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review and revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>10.5</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update">Configuration and portfolio update</h3>
+<p>Commit the week’s source, data, metadata, tests, execution records, figures, review findings, and revised artifacts. Tag the accepted weekly baseline and record all tool, library, solver, and interface versions needed to reproduce it.</p>
+<hr/>
+<h2 id="week-2--derive-dynamic-system-mathematics-standard-forms-block-diagrams-and-numerical-evidence">Week 2 — Derive dynamic-system mathematics, standard forms, block diagrams, and numerical evidence</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 12):</strong> <a href="../../K/B12/chapters/02-derive-dynamic-system-mathematics-standard-forms-block-diagrams-and-.html">Chapter 2 — Derive dynamic-system mathematics, standard forms, block diagrams, and numerical evidence</a> · <a href="../../K/B12/labs/lab-02-derive-dynamic-system-mathematics-standard-forms-block-diagrams-and-.html">Hypothetical Lab 2</a> · <a href="../../K/P3-text/lessons/645-758-w02.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="competency-alignment-2">Competency alignment</h3>
+<p>CLO-2 and CLO-10; program competencies C7, C8, and C12.</p>
+<h3 id="professional-context-and-essential-question-2">Professional context and essential question</h3>
+<p>A graphical simulation is only as defensible as the equations, state definitions, units, and numerical method beneath it. This week builds a transparent dynamic-model baseline before domain complexity is added.</p>
+<p><strong>Essential question:</strong> How do we know the executable dynamics represent the equations rather than the solver’s artifacts?</p>
+<h3 id="weekly-learning-outcomes-2">Weekly learning outcomes</h3>
+<ol>
+<li>Derive ODE, state-space, transfer-function, and block-diagram representations of a bounded subsystem.</li>
+<li>Identify states, algebraic variables, inputs, outputs, parameters, constraints, and initial conditions.</li>
+<li>Select and compare fixed-step and variable-step numerical solvers using error and stability evidence.</li>
+<li>Verify an executable model against an analytic solution, limiting case, or independent implementation.</li>
+<li>Create reusable numerical regression tests and a solver decision record.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-2">Prerequisite retrieval and readiness check</h3>
+<ol>
+<li>What is a state variable?</li>
+<li>How do transfer functions differ from state-space models?</li>
+<li>What is numerical stiffness?</li>
+<li>Why can two solvers produce different answers?</li>
+</ol>
+<h3 id="required-study-2">Required study</h3>
+<ul>
+<li><strong>JHU syllabus — MATLAB, standard forms, and block diagrams topics.</strong> <strong>Purpose:</strong> Anchor the mathematical and implementation scope. <strong>Guiding question:</strong> Which representations must the learner be able to construct? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></li>
+<li><strong>Simulink documentation — simulation, solvers, continuous/discrete/hybrid models.</strong> <strong>Purpose:</strong> Understand solver configuration and execution semantics. <strong>Guiding question:</strong> Which solver properties matter for the selected dynamics? <a href="https://www.mathworks.com/help/simulink/" title="Simulink documentation">SIMULINK</a> <a href="https://www.mathworks.com/help/simulink/ug/choose-a-solver.html" title="Simulink solver selection guidance">SIMULINK-SOLVERS</a></li>
+<li><strong>Modelica 3.7 — equations, variables, connectors, and model semantics.</strong> <strong>Purpose:</strong> Compare causal block modeling with acausal equation-based modeling. <strong>Guiding question:</strong> What does the tool infer from the equation system? <a href="https://modelica.org/language/" title="Modelica Language Specification 3.7">MODELICA</a></li>
+<li><strong>OpenModelica user guide — model execution, scripting, and diagnostics.</strong> <strong>Purpose:</strong> Support the open implementation track. <strong>Guiding question:</strong> How can runs and parameters be controlled reproducibly? <a href="https://openmodelica.org/doc/OpenModelicaUsersGuide/latest/" title="OpenModelica User's Guide">OPENMODELICA</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-2">Instructor-style lesson notes</h3>
+<ul>
+<li>Begin with free-body or conservation statements. Define positive directions, reference frames, units, and initial conditions before rearranging equations.</li>
+<li>A transfer function suppresses initial conditions and internal-state meaning; state space retains states and supports multivariable, nonlinear, and control analyses.</li>
+<li>Block diagrams expose causality chosen by the modeler. Acausal equation-based tools solve the equation set and often make multi-domain reuse easier, but they do not eliminate modeling assumptions.</li>
+<li>Numerical verification needs more than a successful run. Compare step sizes, solver families, tolerances, energy or mass balance, event handling, and independent calculations.</li>
+<li>Store a solver decision record with dynamics, stiffness evidence, accuracy target, runtime, and real-time implications.</li>
+</ul>
+<h3 id="worked-example-2">Worked example</h3>
+<p>For a first-order battery thermal lump, C dT/dt = Q_in − hA(T−T_amb), the analytic step response provides a referent. With C=420 kJ/K, hA=0.9 kW/K, and a 12-kW heat step, the time constant is 466.7 s and the steady rise is 13.3 K. A coarse explicit fixed step of 120 s produces visible phase and amplitude error; 10 s and a variable-step solver agree within the 0.2 K acceptance tolerance. The regression test checks steady state, time constant, monotonicity, and energy balance.</p>
+<h3 id="guided-practice-2">Guided practice</h3>
+<ol>
+<li>Derive a first- and second-order subsystem from physical laws.</li>
+<li>Create state-space and block-diagram forms.</li>
+<li>Implement the model in the selected track and compare solver configurations.</li>
+<li>Write analytic, limiting-case, unit, and regression tests.</li>
+</ol>
+<h3 id="independent-exercises-2">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Convert four differential equations to state-space form and identify states and algebraic variables.</li>
+<li><strong>Application:</strong> Build the battery thermal or longitudinal-speed subsystem in MATLAB/Simulink or Python/OpenModelica.</li>
+<li><strong>Analysis:</strong> Compare at least three solver/step configurations and diagnose discrepancies.</li>
+<li><strong>Synthesis:</strong> Issue a Dynamic Model Verification Package and solver decision record.</li>
+<li><strong>Stretch:</strong> Implement the same subsystem in two tools and distinguish implementation agreement from physical validation.</li>
+</ul>
+<h3 id="weekly-deliverable-2">Weekly deliverable</h3>
+<p>Submit derivations, state and variable dictionary, block and state-space representations, executable source, analytic/independent referent, solver experiment, error plots, regression tests, solver decision record, defect log, and controlled baseline tag.</p>
+<h3 id="analytic-rubric-2">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mathematical derivation</td>
+<td style="text-align:right">30%</td>
+<td>Equations, states, signs, units, and initial conditions are correct and explicit.</td>
+</tr>
+<tr>
+<td>Numerical verification</td>
+<td style="text-align:right">30%</td>
+<td>Solver, step, tolerance, stability, and error evidence supports the configuration.</td>
+</tr>
+<tr>
+<td>Reproducibility</td>
+<td style="text-align:right">20%</td>
+<td>Source, parameters, commands, and tests reproduce the result.</td>
+</tr>
+<tr>
+<td>Interpretation</td>
+<td style="text-align:right">20%</td>
+<td>The learner explains representation and solver tradeoffs without overclaiming validation.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-2">Critical failures</h3>
+<ul>
+<li>A critical equation has inconsistent units or sign conventions.</li>
+<li>The model is accepted because it produces a plausible plot.</li>
+<li>Solver settings or initial conditions are undocumented.</li>
+<li>Tool-to-tool agreement is claimed as validation of the physical system.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-2">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a state?</strong><br/>
+<em>Answer guidance:</em> The minimum information needed with future inputs to determine future system behavior.</li>
+<li><strong>Why compare step sizes?</strong><br/>
+<em>Answer guidance:</em> To estimate numerical convergence and detect discretization-driven conclusions.</li>
+<li><strong>When is a transfer function insufficient?</strong><br/>
+<em>Answer guidance:</em> For nonlinear, multivariable, mode-dependent, or initial-condition-sensitive behavior.</li>
+<li><strong>What is a limiting-case test?</strong><br/>
+<em>Answer guidance:</em> A test at a parameter limit where behavior is known or simplifies.</li>
+<li><strong>What belongs in a solver decision record?</strong><br/>
+<em>Answer guidance:</em> Dynamics, stiffness, accuracy, step/tolerance, runtime, events, and execution constraints.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-2">Revision and mastery gate</h3>
+<p>Reproduce the accepted dynamic response from a clean environment and satisfy analytic/limiting-case, dimensional, and numerical acceptance criteria.</p>
+<h3 id="suggested-workload-2">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and derivation</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Numerical experiment</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Testing and revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-2">Configuration and portfolio update</h3>
+<p>Commit the week’s source, data, metadata, tests, execution records, figures, review findings, and revised artifacts. Tag the accepted weekly baseline and record all tool, library, solver, and interface versions needed to reproduce it.</p>
+<hr/>
+<h2 id="week-3--model-translational-and-rotational-mechanical-dynamics-with-realistic-losses-and-constraints">Week 3 — Model translational and rotational mechanical dynamics with realistic losses and constraints</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 12):</strong> <a href="../../K/B12/chapters/03-model-translational-and-rotational-mechanical-dynamics-with-realisti.html">Chapter 3 — Model translational and rotational mechanical dynamics with realistic losses and constraints</a> · <a href="../../K/B12/labs/lab-03-model-translational-and-rotational-mechanical-dynamics-with-realisti.html">Hypothetical Lab 3</a> · <a href="../../K/P3-text/lessons/645-758-w03.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="competency-alignment-3">Competency alignment</h3>
+<p>CLO-3 and CLO-10; program competencies C7, C8, and C12.</p>
+<h3 id="professional-context-and-essential-question-3">Professional context and essential question</h3>
+<p>Mechanical models are often deceptively simple. Tire radius, inertias, gear ratios, grade, drag, friction, saturation, and coordinate conventions can create large errors or hidden energy sources.</p>
+<p><strong>Essential question:</strong> Does the mechanical model conserve energy and produce credible force, torque, speed, and distance behavior across the operating envelope?</p>
+<h3 id="weekly-learning-outcomes-3">Weekly learning outcomes</h3>
+<ol>
+<li>Derive coupled translational and rotational equations for the shuttle drivetrain.</li>
+<li>Represent grade, aerodynamic drag, rolling resistance, gear ratio, wheel inertia, and traction limits.</li>
+<li>Verify force/torque/power consistency and energy balance.</li>
+<li>Estimate and calibrate uncertain mechanical parameters using synthetic test data.</li>
+<li>Assess sensitivity of trip time and energy to mechanical assumptions.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-3">Prerequisite retrieval and readiness check</h3>
+<ol>
+<li>How are force, torque, angular speed, and power related?</li>
+<li>What is reflected inertia through a gear ratio?</li>
+<li>How does road grade enter the force balance?</li>
+<li>What creates tire-slip or traction saturation?</li>
+</ol>
+<h3 id="required-study-3">Required study</h3>
+<ul>
+<li><strong>JHU syllabus — translational and rotational mechanical-system modules.</strong> <strong>Purpose:</strong> Preserve the source domain coverage. <strong>Guiding question:</strong> Which mechanical forms must be implemented? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></li>
+<li><strong>Simscape mechanical documentation or Modelica Mechanics libraries.</strong> <strong>Purpose:</strong> Use reusable components while retaining equation visibility. <strong>Guiding question:</strong> Which connector variables conserve power? <a href="https://www.mathworks.com/help/simscape/" title="Simscape physical modeling documentation">SIMSCAPE</a> <a href="https://doc.modelica.org/Modelica%204.1.0/Resources/helpDymola/Modelica.html" title="Modelica Standard Library 4.1.0 documentation">MODELICA-MSL</a></li>
+<li><strong>NASA-HDBK-7009B — verification tests and comparison evidence.</strong> <strong>Purpose:</strong> Structure the mechanical credibility package. <strong>Guiding question:</strong> Which referents and tests are credible for this subsystem? <a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009" title="NASA-HDBK-7009B — NASA Handbook for Models and Simulations">NASA-HDBK-7009B</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-3">Instructor-style lesson notes</h3>
+<ul>
+<li>Use one reference direction and record all sign conventions. Distinguish vehicle speed, wheel speed, motor speed, and slip.</li>
+<li>Reflect rotating inertias carefully. A gear ratio changes speed, torque, and apparent inertia; inconsistent conventions can produce order-of-magnitude error.</li>
+<li>Check instantaneous power across each ideal interface. With losses, the output power must not exceed input power.</li>
+<li>Model saturation and constraints explicitly: maximum motor torque, tire-road traction, braking limits, and speed limits.</li>
+<li>Calibration is not validation. Estimate drag and rolling resistance from one synthetic coast-down set, then evaluate on a separate route profile.</li>
+</ul>
+<h3 id="worked-example-3">Worked example</h3>
+<p>A 2,850-kg shuttle climbs a 6% grade at 12 m/s. Grade force is approximately 1,676 N; rolling resistance at coefficient 0.010 adds about 280 N; aerodynamic drag with drag area 1.9 m² and air density 1.2 kg/m³ adds about 164 N. Required wheel power before acceleration is roughly 25.4 kW. A model that reports 18 kW has a sign, gear, or loss defect. A separate energy integral over the hill is used to check mechanical work against elevation gain and losses.</p>
+<h3 id="guided-practice-3">Guided practice</h3>
+<ol>
+<li>Create the free-body and torque diagrams.</li>
+<li>Derive translational/rotational equations and interface power relationships.</li>
+<li>Implement a route profile with grade and speed command.</li>
+<li>Run conservation, coast-down, saturation, and parameter-calibration tests.</li>
+</ol>
+<h3 id="independent-exercises-3">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Solve force, torque, wheel-speed, gear-ratio, and reflected-inertia exercises.</li>
+<li><strong>Application:</strong> Implement the coupled shuttle mechanical plant.</li>
+<li><strong>Analysis:</strong> Estimate drag and rolling resistance from synthetic coast-down data and validate on a holdout profile.</li>
+<li><strong>Synthesis:</strong> Conduct a Mechanical Dynamics Review with energy and sensitivity evidence.</li>
+<li><strong>Stretch:</strong> Add a simple longitudinal tire-slip model and evaluate the consequence for low-friction braking or launch.</li>
+</ul>
+<h3 id="weekly-deliverable-3">Weekly deliverable</h3>
+<p>Submit diagrams, derivations, parameter/provenance table, executable model, route inputs, calibration and holdout results, force/torque/power traces, energy-balance test, saturation tests, sensitivity results, review findings, and revised baseline.</p>
+<h3 id="analytic-rubric-3">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mechanical correctness</td>
+<td style="text-align:right">30%</td>
+<td>Dynamics, frames, signs, gearing, losses, constraints, and initial conditions are correct.</td>
+</tr>
+<tr>
+<td>Energy and interface evidence</td>
+<td style="text-align:right">25%</td>
+<td>Power and work checks detect and bound defects.</td>
+</tr>
+<tr>
+<td>Calibration and validation</td>
+<td style="text-align:right">25%</td>
+<td>Parameters use separated calibration and evaluation evidence.</td>
+</tr>
+<tr>
+<td>Sensitivity and communication</td>
+<td style="text-align:right">20%</td>
+<td>Mechanical assumptions and decision effects are quantified and explained.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-3">Critical failures</h3>
+<ul>
+<li>Power is created across an interface without explanation.</li>
+<li>Gear or reference-frame conventions are ambiguous.</li>
+<li>Calibration data are reused as sole validation evidence.</li>
+<li>Traction, torque, or braking constraints are ignored when they affect the decision.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-3">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why check both force and energy?</strong><br/>
+<em>Answer guidance:</em> They detect different defects: instantaneous balance versus integrated work.</li>
+<li><strong>What is reflected inertia?</strong><br/>
+<em>Answer guidance:</em> Rotational inertia transformed through a gear ratio to an equivalent inertia at another shaft.</li>
+<li><strong>How should grade be modeled?</strong><br/>
+<em>Answer guidance:</em> As the gravitational force component along the route with a controlled sign convention.</li>
+<li><strong>Why use holdout data?</strong><br/>
+<em>Answer guidance:</em> To evaluate predictive behavior beyond calibration.</li>
+<li><strong>What is a critical mechanical nonlinearity?</strong><br/>
+<em>Answer guidance:</em> Saturation, slip, friction transition, backlash, or drag dependence on speed.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-3">Revision and mastery gate</h3>
+<p>Pass the Mechanical Dynamics Review with closed energy balance, verified gear/interface semantics, and acceptable holdout behavior across nominal and challenge routes.</p>
+<h3 id="suggested-workload-3">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and derivation</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>Calibration/validation</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review and revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-3">Configuration and portfolio update</h3>
+<p>Commit the week’s source, data, metadata, tests, execution records, figures, review findings, and revised artifacts. Tag the accepted weekly baseline and record all tool, library, solver, and interface versions needed to reproduce it.</p>
+<hr/>
+<h2 id="week-4--couple-electrical-electromechanical-thermal-and-fluid-domains">Week 4 — Couple electrical, electromechanical, thermal, and fluid domains</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 12):</strong> <a href="../../K/B12/chapters/04-couple-electrical-electromechanical-thermal-and-fluid-domains.html">Chapter 4 — Couple electrical, electromechanical, thermal, and fluid domains</a> · <a href="../../K/B12/labs/lab-04-couple-electrical-electromechanical-thermal-and-fluid-domains.html">Hypothetical Lab 4</a> · <a href="../../K/P3-text/lessons/645-758-w04.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="competency-alignment-4">Competency alignment</h3>
+<p>CLO-4, CLO-9, and CLO-10; program competencies C3, C5, C7, and C8.</p>
+<h3 id="professional-context-and-essential-question-4">Professional context and essential question</h3>
+<p>The final project must contain significant interaction between system types. This week creates that interaction and tests whether energy, causality, units, and numerical behavior remain coherent across domain boundaries.</p>
+<p><strong>Essential question:</strong> Can the integrated physical model exchange power, heat, and mass without hidden inconsistency or unstable coupling?</p>
+<h3 id="weekly-learning-outcomes-4">Weekly learning outcomes</h3>
+<ol>
+<li>Construct battery, inverter/motor, thermal-capacitance, heat-transfer, pump, and coolant-flow models at appropriate fidelity.</li>
+<li>Define electrical, mechanical, thermal, and fluid interface contracts with units and conservation semantics.</li>
+<li>Couple domains and verify power, energy, heat, and mass balances.</li>
+<li>Diagnose algebraic loops, stiffness, event chattering, and incompatible initialization.</li>
+<li>Compare causal block and acausal physical-network implementations.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-4">Prerequisite retrieval and readiness check</h3>
+<ol>
+<li>What variables form an electrical power pair?</li>
+<li>What variables form rotational and fluid power pairs?</li>
+<li>What creates an algebraic loop?</li>
+<li>Why can thermal-fluid models be stiff?</li>
+</ol>
+<h3 id="required-study-4">Required study</h3>
+<ul>
+<li><strong>JHU syllabus — electrical, electromechanical, thermal, and fluid topics.</strong> <strong>Purpose:</strong> Preserve the required multi-domain scope. <strong>Guiding question:</strong> Which domain interactions qualify as significant? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></li>
+<li><strong>Simscape documentation — physical networks and multi-domain components.</strong> <strong>Purpose:</strong> Support the source implementation path. <strong>Guiding question:</strong> How are conserving ports and reference nodes used? <a href="https://www.mathworks.com/help/simscape/" title="Simscape physical modeling documentation">SIMSCAPE</a></li>
+<li><strong>Modelica 3.7 and Modelica Standard Library domain packages.</strong> <strong>Purpose:</strong> Support acausal multi-domain modeling. <strong>Guiding question:</strong> How do connector flow and potential variables express conservation? <a href="https://modelica.org/language/" title="Modelica Language Specification 3.7">MODELICA</a> <a href="https://doc.modelica.org/Modelica%204.1.0/Resources/helpDymola/Modelica.html" title="Modelica Standard Library 4.1.0 documentation">MODELICA-MSL</a></li>
+<li><strong>Simulink solver guidance.</strong> <strong>Purpose:</strong> Diagnose stiffness, events, and solver configuration. <strong>Guiding question:</strong> What numerical evidence is required after coupling domains? <a href="https://www.mathworks.com/help/simulink/ug/choose-a-solver.html" title="Simulink solver selection guidance">SIMULINK-SOLVERS</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-4">Instructor-style lesson notes</h3>
+<ul>
+<li>Use power-conjugate variables: voltage/current, torque/angular velocity, force/velocity, pressure/volume flow, and temperature/entropy or heat flow as appropriate.</li>
+<li>Choose battery fidelity based on decision: ideal source, equivalent circuit, state-of-charge, temperature-dependent resistance, and degradation are different model claims.</li>
+<li>Thermal lumps require explicit capacitance, heat generation, conduction/convection paths, and boundary conditions. Fluid models require pressure, flow, resistance, pump behavior, and storage/compressibility assumptions.</li>
+<li>Cross-domain verification includes total energy accounting: chemical/electrical input equals mechanical work, stored energy change, thermal loss, and residual numerical error within tolerance.</li>
+<li>Acausal tools simplify physical connection but can create high-index algebraic systems. Causal tools make computation order visible but may force artificial signal direction.</li>
+</ul>
+<h3 id="worked-example-4">Worked example</h3>
+<p>The motor draws 70 kW electrical and delivers 63 kW mechanical at 90% efficiency, creating 7 kW heat. Battery internal resistance adds 3 kW heat. The coolant loop removes 8 kW while the battery thermal mass absorbs 2 kW, closing the instantaneous thermal balance. An initial integrated model accidentally subtracts motor loss from battery heat and reports falling temperature under high load. The energy audit identifies the sign defect immediately.</p>
+<h3 id="guided-practice-4">Guided practice</h3>
+<ol>
+<li>Define domain components and interface contracts.</li>
+<li>Implement the battery-motor-mechanical and thermal-fluid couplings.</li>
+<li>Run power, heat, mass, unit, initialization, and limiting-case tests.</li>
+<li>Compare at least two fidelity or implementation choices and record tradeoffs.</li>
+</ol>
+<h3 id="independent-exercises-4">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Complete power-pair, heat-balance, pump-curve, and thermal-time-constant calculations.</li>
+<li><strong>Application:</strong> Build the integrated electrical–mechanical–thermal model and add a bounded coolant loop.</li>
+<li><strong>Analysis:</strong> Perform an energy residual and solver/tolerance study under hill climb and fast charging.</li>
+<li><strong>Synthesis:</strong> Conduct the Multi-Domain Energy and Interface Review.</li>
+<li><strong>Stretch:</strong> Export one domain as an FMU and compare monolithic versus co-simulated behavior.</li>
+</ul>
+<h3 id="weekly-deliverable-4">Weekly deliverable</h3>
+<p>Submit the multi-domain conceptual model, equations and fidelity decisions, interface contracts, parameter/unit table, executable source, initialization strategy, energy/heat/mass audits, solver diagnostics, challenge scenarios, comparison results, review record, and corrected baseline.</p>
+<h3 id="analytic-rubric-4">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Domain models</td>
+<td style="text-align:right">25%</td>
+<td>Electrical, electromechanical, thermal, and fluid assumptions and equations are defensible.</td>
+</tr>
+<tr>
+<td>Coupling and conservation</td>
+<td style="text-align:right">30%</td>
+<td>Interfaces, units, power/heat/mass exchange, and residuals are correct.</td>
+</tr>
+<tr>
+<td>Numerical behavior</td>
+<td style="text-align:right">25%</td>
+<td>Initialization, stiffness, loops, events, tolerances, and solver effects are tested.</td>
+</tr>
+<tr>
+<td>Fidelity decision</td>
+<td style="text-align:right">20%</td>
+<td>Model detail is matched to intended use and computational constraints.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-4">Critical failures</h3>
+<ul>
+<li>Energy, heat, or mass residual exceeds tolerance without disposition.</li>
+<li>Interface units or ownership are implicit.</li>
+<li>Initialization produces a hidden nonphysical transient used in results.</li>
+<li>A domain is included cosmetically without significant interaction or decision relevance.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-4">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a conserving interface?</strong><br/>
+<em>Answer guidance:</em> An interface whose across/through variables enforce the relevant conservation law.</li>
+<li><strong>Why record energy residual?</strong><br/>
+<em>Answer guidance:</em> To detect signs, missing losses, inconsistent components, and numerical drift.</li>
+<li><strong>What is an algebraic loop?</strong><br/>
+<em>Answer guidance:</em> A set of instantaneous dependencies requiring simultaneous solution.</li>
+<li><strong>When is a simple battery model acceptable?</strong><br/>
+<em>Answer guidance:</em> When its omitted dynamics cannot change the intended decision within required accuracy.</li>
+<li><strong>Why compare monolithic and coupled runs?</strong><br/>
+<em>Answer guidance:</em> To quantify coupling and synchronization error, not to assume equivalence.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-4">Revision and mastery gate</h3>
+<p>Pass the Energy and Interface Review with significant cross-domain interaction, closed conservation tests, controlled initialization, and a justified solver/fidelity configuration.</p>
+<h3 id="suggested-workload-4">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and equations</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Multi-domain implementation</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Verification experiments</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>12.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-4">Configuration and portfolio update</h3>
+<p>Commit the week’s source, data, metadata, tests, execution records, figures, review findings, and revised artifacts. Tag the accepted weekly baseline and record all tool, library, solver, and interface versions needed to reproduce it.</p>
+<hr/>
+<h2 id="week-5--link-mbse-xml-metadata-collaborative-environments-and-reusable-ms-assets">Week 5 — Link MBSE, XML metadata, collaborative environments, and reusable M&amp;S assets</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 12):</strong> <a href="../../K/B12/chapters/05-link-mbse-xml-metadata-collaborative-environments-and-reusable-m-s-a.html">Chapter 5 — Link MBSE, XML metadata, collaborative environments, and reusable M&amp;S assets</a> · <a href="../../K/B12/labs/lab-05-link-mbse-xml-metadata-collaborative-environments-and-reusable-m-s-a.html">Hypothetical Lab 5</a> · <a href="../../K/P3-text/lessons/645-758-w05.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="competency-alignment-5">Competency alignment</h3>
+<p>CLO-1, CLO-6, and CLO-12; program competencies C3, C7, C10, and C12.</p>
+<h3 id="professional-context-and-essential-question-5">Professional context and essential question</h3>
+<p>Advanced simulation is usually developed by multiple disciplines and reused across programs. Without semantic metadata, provenance, review state, tests, and configuration rules, a repository becomes a collection of executable but unsafe artifacts.</p>
+<p><strong>Essential question:</strong> How can another engineer discover, understand, execute, assess, and safely reuse this model?</p>
+<h3 id="weekly-learning-outcomes-5">Weekly learning outcomes</h3>
+<ol>
+<li>Connect requirements, architecture, interfaces, parameters, experiments, and results between MBSE and executable models.</li>
+<li>Define machine-readable metadata using XML, JSON, or equivalent schemas.</li>
+<li>Design a collaborative simulation environment with roles, services, repositories, and controlled workflows.</li>
+<li>Create an M&amp;S asset catalog with provenance, applicability, verification, validation, licensing, and security fields.</li>
+<li>Evaluate reuse suitability and change impact for a candidate asset.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-5">Prerequisite retrieval and readiness check</h3>
+<ol>
+<li>What makes a model asset discoverable?</li>
+<li>What is provenance?</li>
+<li>How is configuration different from version?</li>
+<li>What evidence is needed before reuse for a new intended use?</li>
+</ol>
+<h3 id="required-study-5">Required study</h3>
+<ul>
+<li><strong>JHU syllabus — XML/UML, MBSE/SysML, collaborative environments, and asset repositories.</strong> <strong>Purpose:</strong> Preserve the source information-management topics. <strong>Guiding question:</strong> Which collaboration and repository capabilities must be demonstrated? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></li>
+<li><strong>NASA Systems Modeling Handbook or EN.645.632 handoff.</strong> <strong>Purpose:</strong> Connect descriptive and analytic models through controlled semantics and traces. <strong>Guiding question:</strong> Which authoritative elements own requirements, interfaces, parameters, and results? <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-1009" title="NASA-HDBK-1009A — NASA Systems Modeling Handbook for Systems Engineering">NASA-SMH</a></li>
+<li><strong>FMI specification — modelDescription XML and packaging concepts.</strong> <strong>Purpose:</strong> Study a real machine-readable simulation asset container. <strong>Guiding question:</strong> Which metadata make an FMU executable and interpretable? <a href="https://fmi-standard.org/" title="Functional Mock-up Interface 3.0.2">FMI</a></li>
+<li><strong>NASA-HDBK-7009B — records, configuration, reuse, and intended-use credibility.</strong> <strong>Purpose:</strong> Govern model assets beyond code storage. <strong>Guiding question:</strong> What evidence must accompany reuse? <a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009" title="NASA-HDBK-7009B — NASA Handbook for Models and Simulations">NASA-HDBK-7009B</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-5">Instructor-style lesson notes</h3>
+<ul>
+<li>Define authoritative ownership. The system model may own requirement and interface intent; the simulation repository owns executable source and tests; the data repository owns observations and provenance; the decision record owns the approved use.</li>
+<li>Metadata must support both people and automation: title, purpose, domain, owner, version, tool, dependencies, inputs, outputs, units, interfaces, validity range, tests, evidence, license, security, and known limitations.</li>
+<li>A collaborative environment includes identity/access, configuration, issue/change management, model execution, data services, review workflows, compute resources, and reproducible reporting.</li>
+<li>Reuse is a new use. Reassess intended purpose, operating domain, data, interfaces, fidelity, validation referents, numerical platform, and licensing/security constraints.</li>
+<li>Store review findings and dispositions alongside assets. A green status without the evidence and conditions is not meaningful.</li>
+</ul>
+<h3 id="worked-example-5">Worked example</h3>
+<p>A thermal FMU is cataloged as ‘validated.’ The metadata reveals validation only from 15–30°C, coolant flow above 0.15 kg/s, and a particular battery module. The shuttle winter scenario reaches −15°C and flow can fall to 0.08 kg/s during a pump fault. The reuse assessment marks the asset conditionally reusable for nominal summer studies but unacceptable for the winter fault decision until new evidence is produced.</p>
+<h3 id="guided-practice-5">Guided practice</h3>
+<ol>
+<li>Map authoritative content and exchange paths among MBSE, model, data, experiment, and decision repositories.</li>
+<li>Create a metadata schema and populate the current model assets.</li>
+<li>Design the collaborative environment and workflow states.</li>
+<li>Perform a reuse and change-impact assessment on one external or prior-course asset.</li>
+</ol>
+<h3 id="independent-exercises-5">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Identify missing metadata and governance defects in a provided asset catalog.</li>
+<li><strong>Application:</strong> Build the project model-asset repository and machine-readable catalog.</li>
+<li><strong>Analysis:</strong> Assess a candidate asset for a different operating environment and decision.</li>
+<li><strong>Synthesis:</strong> Conduct an Asset Governance and Collaborative Environment Review.</li>
+<li><strong>Stretch:</strong> Generate repository documentation and trace/coverage reports automatically from metadata.</li>
+</ul>
+<h3 id="weekly-deliverable-5">Weekly deliverable</h3>
+<p>Submit the authoritative-source map, environment architecture, role/access matrix, repository workflow, metadata schema, populated asset catalog, dependency and license inventory, reuse assessment, change-impact query/report, security/provenance controls, review record, and revised governance baseline.</p>
+<h3 id="analytic-rubric-5">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Semantic integration</td>
+<td style="text-align:right">25%</td>
+<td>Requirements, interfaces, parameters, experiments, and results have controlled ownership and traces.</td>
+</tr>
+<tr>
+<td>Asset metadata</td>
+<td style="text-align:right">25%</td>
+<td>Catalog fields support discovery, execution, assessment, and reuse.</td>
+</tr>
+<tr>
+<td>Collaboration and governance</td>
+<td style="text-align:right">30%</td>
+<td>Roles, workflow, configuration, review, access, and change control are practical.</td>
+</tr>
+<tr>
+<td>Reuse assessment</td>
+<td style="text-align:right">20%</td>
+<td>Applicability, evidence gaps, risks, and conditions are correctly identified.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-5">Critical failures</h3>
+<ul>
+<li>An executable result cannot be traced to its model, data, and configuration.</li>
+<li>Reuse is approved solely because an asset ran previously.</li>
+<li>Dependencies, licenses, or security constraints are undocumented.</li>
+<li>The repository stores only screenshots or binaries without source/evidence.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-5">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is an authoritative source?</strong><br/>
+<em>Answer guidance:</em> The controlled location responsible for a defined class of information.</li>
+<li><strong>Why is ‘validated’ insufficient metadata?</strong><br/>
+<em>Answer guidance:</em> Validation is conditional on intended use, domain, referent, and evidence.</li>
+<li><strong>What is a reusable asset package?</strong><br/>
+<em>Answer guidance:</em> Source or binary plus metadata, interfaces, dependencies, tests, evidence, limitations, and license/security information.</li>
+<li><strong>Why use machine-readable metadata?</strong><br/>
+<em>Answer guidance:</em> To enable automated discovery, validation, reporting, and change impact.</li>
+<li><strong>What is the key reuse question?</strong><br/>
+<em>Answer guidance:</em> Is the evidence adequate for the new intended use and conditions?</li>
+</ol>
+<h3 id="revision-and-mastery-gate-5">Revision and mastery gate</h3>
+<p>Another engineer must reproduce a selected asset from the catalog and correctly state its intended use, interfaces, evidence, limitations, and reuse conditions.</p>
+<h3 id="suggested-workload-5">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and semantic mapping</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Repository/schema implementation</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>Reuse assessment</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Review and revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>10.5</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-5">Configuration and portfolio update</h3>
+<p>Commit the week’s source, data, metadata, tests, execution records, figures, review findings, and revised artifacts. Tag the accepted weekly baseline and record all tool, library, solver, and interface versions needed to reproduce it.</p>
+<hr/>
+<h2 id="week-6--design-interoperable-hlafmi-federations-lvc-interfaces-and-composable-co-simulations">Week 6 — Design interoperable HLA/FMI federations, LVC interfaces, and composable co-simulations</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 12):</strong> <a href="../../K/B12/chapters/06-design-interoperable-hla-fmi-federations-lvc-interfaces-and-composab.html">Chapter 6 — Design interoperable HLA/FMI federations, LVC interfaces, and composable co-simulations</a> · <a href="../../K/B12/labs/lab-06-design-interoperable-hla-fmi-federations-lvc-interfaces-and-composab.html">Hypothetical Lab 6</a> · <a href="../../K/P3-text/lessons/645-758-w06.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="competency-alignment-6">Competency alignment</h3>
+<p>CLO-5, CLO-6, and CLO-9; program competencies C3, C5, C7, and C10.</p>
+<h3 id="professional-context-and-essential-question-6">Professional context and essential question</h3>
+<p>File compatibility is not simulation interoperability. Distributed and co-simulated components must agree about semantics, time, ownership, initialization, events, error handling, and validity at their interfaces.</p>
+<p><strong>Essential question:</strong> Can independently developed simulations compose into a credible integrated experiment?</p>
+<h3 id="weekly-learning-outcomes-6">Weekly learning outcomes</h3>
+<ol>
+<li>Explain HLA federation concepts, federates, RTI services, object models, ownership, and time management.</li>
+<li>Explain FMI Model Exchange, Co-Simulation, and Scheduled Execution and select an appropriate mode.</li>
+<li>Design data, semantic, temporal, and initialization contracts for coupled models.</li>
+<li>Assess composability, coupling error, latency, event order, and failure handling.</li>
+<li>Design a bounded LVC architecture and execute a small co-simulation where feasible.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-6">Prerequisite retrieval and readiness check</h3>
+<ol>
+<li>What is the difference between interoperability and composability?</li>
+<li>What is a federation object model?</li>
+<li>What is a co-simulation master algorithm?</li>
+<li>Why does time synchronization affect validity?</li>
+</ol>
+<h3 id="required-study-6">Required study</h3>
+<ul>
+<li><strong>JHU syllabus — HLA, LVC, collaborative simulation, and repositories.</strong> <strong>Purpose:</strong> Anchor the distributed-simulation scope. <strong>Guiding question:</strong> Which architectural elements must the learner construct? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></li>
+<li><strong>IEEE 1516-2025 HLA framework, interface, and object-model overview.</strong> <strong>Purpose:</strong> Use the current HLA family rather than legacy terminology alone. <strong>Guiding question:</strong> Which responsibilities belong to federates, federation, and RTI? <a href="https://standards.ieee.org/ieee/1516/6687/" title="IEEE 1516-2025 High Level Architecture framework and related standard family">IEEE-HLA</a></li>
+<li><strong>FMI 3.0.2 specification overview and interface modes.</strong> <strong>Purpose:</strong> Use an open model-exchange/co-simulation standard. <strong>Guiding question:</strong> When should a component expose equations, a solver, or scheduled partitions? <a href="https://fmi-standard.org/" title="Functional Mock-up Interface 3.0.2">FMI</a></li>
+<li><strong>DoDI 5000.61 — distributed simulation and VV&amp;A policy.</strong> <strong>Purpose:</strong> Keep credibility and authorization tied to intended use. <strong>Guiding question:</strong> What evidence is required for a distributed simulation? <a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500061p.pdf" title="DoDI 5000.61 — DoD Modeling and Simulation Verification, Validation, and Accreditation">DODI-5000-61</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-6">Instructor-style lesson notes</h3>
+<ul>
+<li>HLA provides a federation architecture and services for object exchange, ownership, synchronization, time, and management. It does not make federates semantically compatible or valid.</li>
+<li>FMI packages a dynamic model as an FMU. Model Exchange relies on the importing environment’s solver; Co-Simulation includes a solver; Scheduled Execution exposes partitions for coordinated execution.</li>
+<li>Define a shared information model: variable meaning, units, coordinate frame, reference, rate, timestamp, valid range, quality, ownership, and event semantics.</li>
+<li>Time policy must address logical time, wall time, lookahead, step negotiation, rollback or lack thereof, real-time pacing, latency, and deterministic replay.</li>
+<li>Composability assessment asks whether assumptions, resolutions, domains, interfaces, and behaviors remain compatible when models interact. Run coupling-step and event-order sensitivity tests.</li>
+</ul>
+<h3 id="worked-example-6">Worked example</h3>
+<p>The vehicle plant FMU publishes speed and battery temperature every 10 ms, while a fleet/environment federate updates grade and traffic every 1 s. A naive co-simulation holds grade constant and allows the controller to step past a sharp route transition, underestimating peak traction power by 9%. The corrected architecture exchanges route-segment events, aligns macro steps at discontinuities, records timestamps and quality, and tests 100 ms, 20 ms, and 10 ms coupling intervals.</p>
+<h3 id="guided-practice-6">Guided practice</h3>
+<ol>
+<li>Partition the integrated model into candidate federates/FMU components.</li>
+<li>Create the information model and interface contract.</li>
+<li>Define time, initialization, failure, logging, and configuration policies.</li>
+<li>Execute or dry-run a bounded federation/co-simulation and measure coupling sensitivity.</li>
+</ol>
+<h3 id="independent-exercises-6">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify interface defects as syntactic, semantic, temporal, numerical, ownership, or validity problems.</li>
+<li><strong>Application:</strong> Export/import one subsystem as an FMU or define a complete HLA federate contract.</li>
+<li><strong>Analysis:</strong> Run coupling-step, event-order, and latency sensitivity experiments.</li>
+<li><strong>Synthesis:</strong> Conduct the Federation/Co-Simulation Design Review.</li>
+<li><strong>Stretch:</strong> Implement a two-federate HLA demonstration with Portico or another RTI and compare with FMI co-simulation.</li>
+</ul>
+<h3 id="weekly-deliverable-6">Weekly deliverable</h3>
+<p>Submit the partition rationale, HLA/FMI mode decision, information/object model, interface control specification, time and initialization policy, failure/error handling, logging and replay design, cybersecurity boundary, composability risk register, bounded execution or dry-run evidence, coupling/latency sensitivity results, and review record.</p>
+<h3 id="analytic-rubric-6">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Architecture and standards use</td>
+<td style="text-align:right">25%</td>
+<td>HLA/FMI concepts and responsibilities are applied correctly.</td>
+</tr>
+<tr>
+<td>Semantic and temporal contracts</td>
+<td style="text-align:right">30%</td>
+<td>Meaning, units, ownership, time, events, initialization, and failure are explicit.</td>
+</tr>
+<tr>
+<td>Composability evidence</td>
+<td style="text-align:right">25%</td>
+<td>Coupling, latency, ordering, resolution, and assumption risks are tested or bounded.</td>
+</tr>
+<tr>
+<td>Credibility and governance</td>
+<td style="text-align:right">20%</td>
+<td>Configuration, logging, replay, security, VV&amp;A, and use conditions are controlled.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-6">Critical failures</h3>
+<ul>
+<li>Interoperability is claimed from successful file import alone.</li>
+<li>Time or event semantics are undefined.</li>
+<li>Components exchange variables with ambiguous units or ownership.</li>
+<li>A federation is accepted without composability or intended-use evidence.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-6">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What does HLA provide?</strong><br/>
+<em>Answer guidance:</em> A framework, rules, services, interfaces, and object-model structure for federations.</li>
+<li><strong>What are FMI’s principal modes?</strong><br/>
+<em>Answer guidance:</em> Model Exchange, Co-Simulation, and Scheduled Execution.</li>
+<li><strong>What is composability?</strong><br/>
+<em>Answer guidance:</em> The ability of model components to combine while preserving valid assumptions and behavior for the intended use.</li>
+<li><strong>Why test coupling step?</strong><br/>
+<em>Answer guidance:</em> Because macro-step and interpolation choices can change events, peaks, stability, and conclusions.</li>
+<li><strong>What is deterministic replay for?</strong><br/>
+<em>Answer guidance:</em> Reproducing and diagnosing a distributed execution from controlled inputs, versions, and event order.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-6">Revision and mastery gate</h3>
+<p>Pass the Interoperability Review with complete semantic/temporal contracts and evidence that coupling, initialization, and failure behavior cannot silently reverse a critical conclusion.</p>
+<h3 id="suggested-workload-6">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Standards study</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Architecture/contracts</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Execution/sensitivity</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-6">Configuration and portfolio update</h3>
+<p>Commit the week’s source, data, metadata, tests, execution records, figures, review findings, and revised artifacts. Tag the accepted weekly baseline and record all tool, library, solver, and interface versions needed to reproduce it.</p>
+<hr/>
+<h2 id="week-7--integrate-the-model-baseline-and-design-advanced-simulation-experiments">Week 7 — Integrate the model baseline and design advanced simulation experiments</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 12):</strong> <a href="../../K/B12/chapters/07-integrate-the-model-baseline-and-design-advanced-simulation-experime.html">Chapter 7 — Integrate the model baseline and design advanced simulation experiments</a> · <a href="../../K/B12/labs/lab-07-integrate-the-model-baseline-and-design-advanced-simulation-experime.html">Hypothetical Lab 7</a> · <a href="../../K/P3-text/lessons/645-758-w07.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="competency-alignment-7">Competency alignment</h3>
+<p>CLO-2 through CLO-6 and CLO-10; program competencies C3, C7, C8, C9, C10, and C12.</p>
+<h3 id="professional-context-and-essential-question-7">Professional context and essential question</h3>
+<p>Midcourse integration converts separate domain demonstrations into one controlled analytic instrument. The challenge is to distinguish physical behavior from parameter, numerical, coupling, and implementation effects before using the model for decisions.</p>
+<p><strong>Essential question:</strong> Is the integrated model ready for runs that will be treated as evidence?</p>
+<h3 id="weekly-learning-outcomes-7">Weekly learning outcomes</h3>
+<ol>
+<li>Assemble the controlled multi-domain model and verify its full interface and energy chain.</li>
+<li>Build stochastic and scenario inputs with provenance, dependence, and validity limits.</li>
+<li>Design screening, characterization, and confirmation experiments with efficient run plans.</li>
+<li>Establish run controls, random seeds, parallel execution, raw-output retention, and analysis automation.</li>
+<li>Conduct a formal Model Readiness Review and disposition defects.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-7">Prerequisite retrieval and readiness check</h3>
+<ol>
+<li>What is a run for record?</li>
+<li>How do verification and experiment readiness differ?</li>
+<li>Why preserve raw outputs?</li>
+<li>How are aleatory and epistemic uncertainties treated differently?</li>
+</ol>
+<h3 id="required-study-7">Required study</h3>
+<ul>
+<li><strong>NIST Engineering Statistics Handbook — DOE principles, screening, factorials, and response modeling.</strong> <strong>Purpose:</strong> Design efficient advanced experiments. <strong>Guiding question:</strong> Which factors, interactions, blocks, and responses matter? <a href="https://www.itl.nist.gov/div898/handbook/" title="NIST/SEMATECH Engineering Statistics Handbook">NIST-ESH</a></li>
+<li><strong>NASA-HDBK-7009B — input/data assessment, verification, uncertainty, and credibility products.</strong> <strong>Purpose:</strong> Define readiness evidence and run controls. <strong>Guiding question:</strong> What must be closed before results become decision evidence? <a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009" title="NASA-HDBK-7009B — NASA Handbook for Models and Simulations">NASA-HDBK-7009B</a></li>
+<li><strong>Simulink batch simulation or Python/OpenModelica scripting documentation.</strong> <strong>Purpose:</strong> Automate controlled experiment execution. <strong>Guiding question:</strong> How are parameter sets, seeds, runs, and outputs recorded? <a href="https://www.mathworks.com/help/simulink/run-simulation.html" title="Simulink programmatic and batch simulation guidance">SIMULINK-BATCH</a> <a href="https://openmodelica.org/doc/OpenModelicaUsersGuide/latest/" title="OpenModelica User's Guide">OPENMODELICA</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-7">Instructor-style lesson notes</h3>
+<ul>
+<li>Freeze a review baseline before experimentation. Record every equation, component, parameter, interface, solver, library, and unresolved issue.</li>
+<li>Use screening to identify important factors before expensive high-resolution experiments. Include interactions that are physically plausible.</li>
+<li>Separate scenario variables, controllable design factors, stochastic noise, epistemic parameter ranges, and numerical settings. Do not mix solver settings into the physical DOE without a clear verification purpose.</li>
+<li>Define response calculations before looking at results. Preserve time histories needed to investigate peaks, modes, failures, and integrals.</li>
+<li>A run for record requires approved configuration, inputs, seed policy, execution log, quality checks, and a controlled analysis script.</li>
+</ul>
+<h3 id="worked-example-7">Worked example</h3>
+<p>A 2^(6−2) fractional factorial screens ambient temperature, payload, route traffic, rolling resistance, cooling-pump efficiency, and controller aggressiveness. Responses are energy reserve, peak battery temperature, trip-time deviation, and real-time computational load. The design reveals a strong temperature × pump-efficiency interaction that would be missed by one-factor-at-a-time analysis. Four center/nominal repeats estimate execution and stochastic variation before a focused response-surface study.</p>
+<h3 id="guided-practice-7">Guided practice</h3>
+<ol>
+<li>Integrate domain components and run end-to-end verification.</li>
+<li>Define factors, ranges, distributions, dependence, responses, and decision thresholds.</li>
+<li>Create screening and confirmation designs and automate execution.</li>
+<li>Conduct the Model Readiness Review and rerun closed defects.</li>
+</ol>
+<h3 id="independent-exercises-7">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify candidate variables as design factor, scenario, noise, epistemic parameter, response, or numerical-control variable.</li>
+<li><strong>Application:</strong> Build the input model and automated experiment harness.</li>
+<li><strong>Analysis:</strong> Design and analyze a screening experiment with at least one interaction.</li>
+<li><strong>Synthesis:</strong> Conduct the midcourse Multi-Domain Model Readiness Review.</li>
+<li><strong>Stretch:</strong> Use adaptive or sequential experiment design to focus runs near a requirement boundary.</li>
+</ul>
+<h3 id="weekly-deliverable-7">Weekly deliverable</h3>
+<p>Submit the integrated baseline manifest, end-to-end verification results, input/provenance model, dependence assumptions, factor-response dictionary, screening and confirmation designs, power/run-budget rationale, automated harness, run ledger, raw/processed output structure, readiness checklist, findings/dispositions, and approved run-for-record configuration.</p>
+<h3 id="analytic-rubric-7">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integrated readiness</td>
+<td style="text-align:right">25%</td>
+<td>Interfaces, conservation, initialization, regression, and configuration evidence support execution.</td>
+</tr>
+<tr>
+<td>Input and uncertainty model</td>
+<td style="text-align:right">25%</td>
+<td>Ranges, distributions, dependence, provenance, and limits are defensible.</td>
+</tr>
+<tr>
+<td>Experiment design</td>
+<td style="text-align:right">30%</td>
+<td>Factors, responses, interactions, replication, blocking, and run economy support the decision.</td>
+</tr>
+<tr>
+<td>Automation and review</td>
+<td style="text-align:right">20%</td>
+<td>Runs are controlled, auditable, reproducible, and formally approved.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-7">Critical failures</h3>
+<ul>
+<li>Runs for record begin with unresolved critical model defects.</li>
+<li>Factor ranges or distributions have no source or rationale.</li>
+<li>One-factor-at-a-time work is used where interactions are decision-relevant.</li>
+<li>Raw outputs, seed/configuration records, or analysis scripts are not preserved.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-7">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a run for record?</strong><br/>
+<em>Answer guidance:</em> An execution from an approved configuration whose result may be used as decision evidence.</li>
+<li><strong>Why screen first?</strong><br/>
+<em>Answer guidance:</em> To identify influential factors and interactions before spending runs on detailed characterization.</li>
+<li><strong>Why preserve time histories?</strong><br/>
+<em>Answer guidance:</em> Aggregates can hide modes, peaks, transients, event order, and failure mechanisms.</li>
+<li><strong>What is blocking?</strong><br/>
+<em>Answer guidance:</em> Structuring an experiment to account for known nuisance variation.</li>
+<li><strong>What is the midcourse gate?</strong><br/>
+<em>Answer guidance:</em> Approval that the model and experiment system are ready to generate controlled evidence.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-7">Revision and mastery gate</h3>
+<p>No run for record proceeds until critical verification, input, interface, experiment, and reproducibility findings are closed or formally accepted by the designated authority.</p>
+<h3 id="suggested-workload-7">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integration and regression</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Input/DOE design</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Automation and pilot runs</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review/revision</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.5</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-7">Configuration and portfolio update</h3>
+<p>Commit the week’s source, data, metadata, tests, execution records, figures, review findings, and revised artifacts. Tag the accepted weekly baseline and record all tool, library, solver, and interface versions needed to reproduce it.</p>
+<hr/>
+<h2 id="week-8--model-natural-and-man-made-environments-as-dynamic-correlated-scenario-systems">Week 8 — Model natural and man-made environments as dynamic, correlated scenario systems</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 12):</strong> <a href="../../K/B12/chapters/08-model-natural-and-man-made-environments-as-dynamic-correlated-scenar.html">Chapter 8 — Model natural and man-made environments as dynamic, correlated scenario systems</a> · <a href="../../K/B12/labs/lab-08-model-natural-and-man-made-environments-as-dynamic-correlated-scenar.html">Hypothetical Lab 8</a> · <a href="../../K/P3-text/lessons/645-758-w08.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="competency-alignment-8">Competency alignment</h3>
+<p>CLO-7 and CLO-10; program competencies C1, C7, C8, and C9.</p>
+<h3 id="professional-context-and-essential-question-8">Professional context and essential question</h3>
+<p>A plant model can be correct yet decision-irrelevant if its operating environment is simplified incorrectly. Weather, route, traffic, infrastructure, human behavior, regulations, and adversarial or fault conditions often dominate system performance.</p>
+<p><strong>Essential question:</strong> Does the environment model reproduce the conditions, dependencies, and extreme combinations that drive the decision?</p>
+<h3 id="weekly-learning-outcomes-8">Weekly learning outcomes</h3>
+<ol>
+<li>Define natural and man-made environment boundaries, variables, events, and scenarios.</li>
+<li>Model time series, spatial segments, dependence, extremes, and scenario transitions.</li>
+<li>Distinguish observed, synthetic, forecast, and stress-test environment data.</li>
+<li>Validate environment behavior independently and in interaction with the system model.</li>
+<li>Quantify environment-model uncertainty and its effect on requirements.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-8">Prerequisite retrieval and readiness check</h3>
+<ol>
+<li>What is a scenario?</li>
+<li>How is a stochastic process different from independent sampling?</li>
+<li>Why are correlations important?</li>
+<li>What is a stress-test scenario?</li>
+</ol>
+<h3 id="required-study-8">Required study</h3>
+<ul>
+<li><strong>JHU syllabus — natural and man-made environment topics.</strong> <strong>Purpose:</strong> Preserve source-course environment scope. <strong>Guiding question:</strong> Which environment classes must be represented? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></li>
+<li><strong>NASA Systems Engineering Handbook — operational scenarios, environments, and off-nominal conditions.</strong> <strong>Purpose:</strong> Connect environment assumptions to requirements and validation. <strong>Guiding question:</strong> Which lifecycle environments constrain the system? <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li><strong>NASA-HDBK-7009B — data, validation, uncertainty, and applicability.</strong> <strong>Purpose:</strong> Assess environment-model credibility. <strong>Guiding question:</strong> What referents and limits apply to synthetic scenarios? <a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009" title="NASA-HDBK-7009B — NASA Handbook for Models and Simulations">NASA-HDBK-7009B</a></li>
+<li><strong>NIST Engineering Statistics Handbook — time/dependence/extreme or distribution analysis sections as needed.</strong> <strong>Purpose:</strong> Support data-driven environment characterization. <strong>Guiding question:</strong> Which statistical assumptions cannot be reduced to independent averages? <a href="https://www.itl.nist.gov/div898/handbook/" title="NIST/SEMATECH Engineering Statistics Handbook">NIST-ESH</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-8">Instructor-style lesson notes</h3>
+<ul>
+<li>Natural environment includes temperature, wind, precipitation, solar load, road friction, terrain, and seasonal patterns. Man-made environment includes traffic, signals, routes, charging availability, passenger behavior, maintenance, communications, policies, and operator actions.</li>
+<li>Preserve dependence: cold weather may coincide with higher HVAC load, lower battery performance, slower traffic, and reduced charging efficiency. Independent sampling can create impossible or under-stressed combinations.</li>
+<li>Use scenario tiers: historical/observed, nominal synthetic, plausible extreme, requirement-boundary, failure/adversarial, and exploratory future.</li>
+<li>Validate environment models against distributions, autocorrelation, transitions, extremes, spatial patterns, and subject-matter review—not only means.</li>
+<li>Report environment applicability separately from plant validity. A summer-validated environment does not support winter decisions.</li>
+</ul>
+<h3 id="worked-example-8">Worked example</h3>
+<p>Independent sampling combines −15°C with summer passenger demand and dry-road rolling resistance, creating an internally inconsistent case. A conditional scenario generator instead links season, time of day, demand, traffic, precipitation, road friction, and charging efficiency. Under correlated winter conditions, the 5th-percentile energy reserve falls from 19% to 11%, crossing the 18% requirement despite little change in mean reserve.</p>
+<h3 id="guided-practice-8">Guided practice</h3>
+<ol>
+<li>Define the environment ontology and boundary.</li>
+<li>Build correlated weather-route-traffic-demand scenarios.</li>
+<li>Validate environment outputs against synthetic referents and logic constraints.</li>
+<li>Propagate environment uncertainty through the integrated model and assess requirement impact.</li>
+</ol>
+<h3 id="independent-exercises-8">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Identify invalid independence, stationarity, and boundary assumptions in example environment models.</li>
+<li><strong>Application:</strong> Implement a time- and route-indexed natural/man-made environment generator.</li>
+<li><strong>Analysis:</strong> Compare independent, conditionally dependent, historical, and stress-test scenarios.</li>
+<li><strong>Synthesis:</strong> Conduct the Environment Validity Review and update the credibility plan.</li>
+<li><strong>Stretch:</strong> Use a Markov, copula, Gaussian-process, or weather-regime model and justify its added value.</li>
+</ul>
+<h3 id="weekly-deliverable-8">Weekly deliverable</h3>
+<p>Submit the environment conceptual model, variable and event dictionary, data/provenance notes, dependence structure, scenario taxonomy, generator source, validation diagnostics, logic constraints, stress tests, propagated system results, applicability limits, review record, and revised baseline.</p>
+<h3 id="analytic-rubric-8">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Environment structure</td>
+<td style="text-align:right">25%</td>
+<td>Natural/man-made variables, events, time, space, dependence, and boundaries are explicit.</td>
+</tr>
+<tr>
+<td>Data and validation</td>
+<td style="text-align:right">25%</td>
+<td>Observed/synthetic sources, diagnostics, extremes, and applicability are credible.</td>
+</tr>
+<tr>
+<td>System interaction</td>
+<td style="text-align:right">30%</td>
+<td>Environment effects propagate correctly and expose decision-relevant conditions.</td>
+</tr>
+<tr>
+<td>Uncertainty and communication</td>
+<td style="text-align:right">20%</td>
+<td>Limits, stress tests, correlations, and requirement effects are clear.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-8">Critical failures</h3>
+<ul>
+<li>Environment inputs are sampled independently despite known decision-relevant dependence.</li>
+<li>Extreme or off-nominal conditions are omitted without rationale.</li>
+<li>Synthetic data are presented as observed data.</li>
+<li>Environment validity is assumed from plant-model validity.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-8">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why model environment dynamically?</strong><br/>
+<em>Answer guidance:</em> Conditions evolve, correlate, trigger events, and interact with system states.</li>
+<li><strong>What is a scenario taxonomy?</strong><br/>
+<em>Answer guidance:</em> A controlled classification of nominal, observed, extreme, fault, and future cases.</li>
+<li><strong>Why validate autocorrelation?</strong><br/>
+<em>Answer guidance:</em> A correct marginal distribution can still have unrealistic temporal sequences.</li>
+<li><strong>What is applicability?</strong><br/>
+<em>Answer guidance:</em> The conditions and decisions for which evidence is adequate.</li>
+<li><strong>Why compare independent and correlated cases?</strong><br/>
+<em>Answer guidance:</em> To measure the consequence of dependence assumptions.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-8">Revision and mastery gate</h3>
+<p>Pass the Environment Validity Review with controlled scenario provenance, dependence and extreme-condition evidence, and explicit applicability limits for every decision claim.</p>
+<h3 id="suggested-workload-8">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and environment design</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>Validation and propagation</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-8">Configuration and portfolio update</h3>
+<p>Commit the week’s source, data, metadata, tests, execution records, figures, review findings, and revised artifacts. Tag the accepted weekly baseline and record all tool, library, solver, and interface versions needed to reproduce it.</p>
+<hr/>
+<h2 id="week-9--integrate-technical-performance-with-lifecycle-cost-resources-maintenance-and-affordability">Week 9 — Integrate technical performance with lifecycle cost, resources, maintenance, and affordability</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 12):</strong> <a href="../../K/B12/chapters/09-integrate-technical-performance-with-lifecycle-cost-resources-mainte.html">Chapter 9 — Integrate technical performance with lifecycle cost, resources, maintenance, and affordability</a> · <a href="../../K/B12/labs/lab-09-integrate-technical-performance-with-lifecycle-cost-resources-mainte.html">Hypothetical Lab 9</a> · <a href="../../K/P3-text/lessons/645-758-w09.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="competency-alignment-9">Competency alignment</h3>
+<p>CLO-8 and CLO-10; program competencies C8, C9, C10, and C12.</p>
+<h3 id="professional-context-and-essential-question-9">Professional context and essential question</h3>
+<p>Advanced M&amp;S should connect dynamic technical behavior to resources and affordability. Energy use, thermal stress, component cycling, charger demand, maintenance, spares, downtime, and model-development costs can change the preferred architecture.</p>
+<p><strong>Essential question:</strong> How do dynamic technical outcomes translate into cost and lifecycle consequences without false precision?</p>
+<h3 id="weekly-learning-outcomes-9">Weekly learning outcomes</h3>
+<ol>
+<li>Define a lifecycle cost model with WBS, ground rules, assumptions, base year, schedule, and uncertainty.</li>
+<li>Link simulation outputs to energy, maintenance, replacement, infrastructure, and downtime cost drivers.</li>
+<li>Develop parametric or analogy-based cost relationships and avoid double counting.</li>
+<li>Propagate technical and cost uncertainty and identify correlation and optimism risks.</li>
+<li>Compare alternatives using cost, effectiveness, risk, and value-of-information evidence.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-9">Prerequisite retrieval and readiness check</h3>
+<ol>
+<li>What is a cost-estimating relationship?</li>
+<li>What are ground rules and assumptions?</li>
+<li>How can double counting occur?</li>
+<li>Why must cost and technical uncertainty be correlated?</li>
+</ol>
+<h3 id="required-study-9">Required study</h3>
+<ul>
+<li><strong>JHU syllabus — cost-modeling topic.</strong> <strong>Purpose:</strong> Preserve source-course programmatic modeling scope. <strong>Guiding question:</strong> What cost model must be demonstrated? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></li>
+<li><strong>NASA Cost Estimating Handbook — process, WBS, methods, risk, and documentation.</strong> <strong>Purpose:</strong> Use a disciplined lifecycle cost framework. <strong>Guiding question:</strong> Which estimate class and method match the available maturity? <a href="https://www.nasa.gov/ocfo/ppc-corner/nasa-cost-estimating-handbook-ceh/" title="NASA Cost Estimating Handbook, fourth edition">NASA-CEH</a></li>
+<li><strong>NASA Systems Engineering Handbook — cost effectiveness and decision analysis.</strong> <strong>Purpose:</strong> Connect affordability to technical alternatives. <strong>Guiding question:</strong> How should cost evidence enter the decision? <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li><strong>NASA-HDBK-7009B — uncertainty and model-use limits.</strong> <strong>Purpose:</strong> Treat cost models as models requiring credibility evidence. <strong>Guiding question:</strong> What validation and uncertainty evidence is possible at this maturity? <a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009" title="NASA-HDBK-7009B — NASA Handbook for Models and Simulations">NASA-HDBK-7009B</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-9">Instructor-style lesson notes</h3>
+<ul>
+<li>Define estimate scope and WBS before equations. State base year, inflation treatment, schedule, quantity, learning, operations period, ownership, exclusions, and reserves.</li>
+<li>Map dynamic outputs to cost drivers: kWh, peak demand, battery throughput, thermal excursions, charge cycles, pump hours, failures, maintenance labor, fleet downtime, and infrastructure utilization.</li>
+<li>Avoid double counting when one cost relationship already includes subsystem management, integration, or operations content.</li>
+<li>Model correlation: higher mass may increase purchase cost, energy, brake/tire wear, and battery size simultaneously. Independent cost sampling can understate risk.</li>
+<li>Report ranges and confidence honestly. A detailed spreadsheet does not create mature data. Use sensitivity and value-of-information analysis to identify useful next evidence.</li>
+</ul>
+<h3 id="worked-example-9">Worked example</h3>
+<p>Architecture A uses a smaller battery and aggressive fast charging; B uses a larger battery and lower charge rate. A is cheaper to buy but the simulation predicts 2.1× fast-charge events, higher thermal excursions, and earlier battery replacement. Over an eight-year synthetic lifecycle, A’s median cost is lower by $70k but its 80th-percentile cost is higher by $95k. The decision changes when battery replacement correlation and downtime are included.</p>
+<h3 id="guided-practice-9">Guided practice</h3>
+<ol>
+<li>Define WBS, estimate scope, ground rules, assumptions, and decision outputs.</li>
+<li>Map simulation states/events to lifecycle cost drivers.</li>
+<li>Build base, risk, and sensitivity estimates for two alternatives.</li>
+<li>Conduct an Affordability Evidence Review and record unresolved data needs.</li>
+</ol>
+<h3 id="independent-exercises-9">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Identify scope, normalization, double-counting, and correlation defects in sample estimates.</li>
+<li><strong>Application:</strong> Build the technical-cost integrated model for battery/charger/cooling alternatives.</li>
+<li><strong>Analysis:</strong> Propagate uncertainty and produce tornado, distribution, and break-even analyses.</li>
+<li><strong>Synthesis:</strong> Issue a cost-effectiveness and affordability recommendation with evidence limits.</li>
+<li><strong>Stretch:</strong> Estimate the value of a thermal-aging test, supplier quote, or operational pilot before committing to an architecture.</li>
+</ul>
+<h3 id="weekly-deliverable-9">Weekly deliverable</h3>
+<p>Submit the WBS and estimate basis, ground rules/assumptions, cost-driver trace, model equations and source, calibration/analogy evidence, technical-to-cost interfaces, uncertainty/correlation model, alternative distributions, sensitivity/break-even/VOI results, review findings, and bounded affordability conclusion.</p>
+<h3 id="analytic-rubric-9">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estimate structure</td>
+<td style="text-align:right">25%</td>
+<td>Scope, WBS, base year, schedule, quantity, methods, and assumptions are controlled.</td>
+</tr>
+<tr>
+<td>Technical integration</td>
+<td style="text-align:right">30%</td>
+<td>Simulation outputs drive costs coherently without double counting.</td>
+</tr>
+<tr>
+<td>Risk and uncertainty</td>
+<td style="text-align:right">25%</td>
+<td>Ranges, correlation, sensitivity, optimism, and maturity are treated honestly.</td>
+</tr>
+<tr>
+<td>Decision usefulness</td>
+<td style="text-align:right">20%</td>
+<td>Cost-effectiveness, break-even, limitations, and information needs support action.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-9">Critical failures</h3>
+<ul>
+<li>Point estimates are presented without uncertainty for a consequential decision.</li>
+<li>Technical and cost outputs are disconnected or double counted.</li>
+<li>Estimate scope or base-year assumptions are undefined.</li>
+<li>Precision exceeds the maturity and evidence of the inputs.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-9">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why start with a WBS?</strong><br/>
+<em>Answer guidance:</em> To define scope, ownership, completeness, and prevent omissions/double counting.</li>
+<li><strong>What is a CER?</strong><br/>
+<em>Answer guidance:</em> A relationship that estimates cost from one or more technical/programmatic drivers.</li>
+<li><strong>Why integrate dynamic outputs?</strong><br/>
+<em>Answer guidance:</em> Usage, stress, cycles, failures, and downtime create lifecycle costs.</li>
+<li><strong>Why model correlation?</strong><br/>
+<em>Answer guidance:</em> Common drivers move multiple cost elements and can dominate tail risk.</li>
+<li><strong>What is value of information?</strong><br/>
+<em>Answer guidance:</em> The expected benefit of reducing uncertainty before deciding.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-9">Revision and mastery gate</h3>
+<p>Pass the Affordability Evidence Review with a complete estimate basis, traceable technical drivers, bounded uncertainty, and no unresolved critical double-counting or scope defect.</p>
+<h3 id="suggested-workload-9">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cost-method study</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Model integration</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>Risk/sensitivity analysis</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-9">Configuration and portfolio update</h3>
+<p>Commit the week’s source, data, metadata, tests, execution records, figures, review findings, and revised artifacts. Tag the accepted weekly baseline and record all tool, library, solver, and interface versions needed to reproduce it.</p>
+<hr/>
+<h2 id="week-10--extend-the-model-to-population-or-biological-dynamics-and-communicate-behavior-through-visualization">Week 10 — Extend the model to population or biological dynamics and communicate behavior through visualization</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 12):</strong> <a href="../../K/B12/chapters/10-extend-the-model-to-population-or-biological-dynamics-and-communicat.html">Chapter 10 — Extend the model to population or biological dynamics and communicate behavior through visualization</a> · <a href="../../K/B12/labs/lab-10-extend-the-model-to-population-or-biological-dynamics-and-communicat.html">Hypothetical Lab 10</a> · <a href="../../K/P3-text/lessons/645-758-w10.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="competency-alignment-10">Competency alignment</h3>
+<p>CLO-8, CLO-11, and CLO-12; program competencies C1, C7, C8, and C12.</p>
+<h3 id="professional-context-and-essential-question-10">Professional context and essential question</h3>
+<p>The source course includes populations, disease, visualization, and animation to broaden model-form judgment. This week uses a bounded passenger-exposure case to compare compartmental, agent, and hybrid reasoning while reinforcing ethical communication and model limits.</p>
+<p><strong>Essential question:</strong> How should model form and visualization change when the system contains heterogeneous people, contact processes, and uncertain biological behavior?</p>
+<h3 id="weekly-learning-outcomes-10">Weekly learning outcomes</h3>
+<ol>
+<li>Construct and interpret a simple stock-and-flow population or SIR/SEIR model.</li>
+<li>Compare compartmental, agent-based, network, and hybrid model forms for a defined question.</li>
+<li>Couple occupancy, ventilation, trip, and exposure assumptions without making unsupported health claims.</li>
+<li>Design visualizations and bounded animation that reveal states, flows, uncertainty, events, and limitations.</li>
+<li>Appraise model ethics, privacy, accessibility, and risk communication.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-10">Prerequisite retrieval and readiness check</h3>
+<ol>
+<li>What is a compartmental model?</li>
+<li>What assumptions underlie homogeneous mixing?</li>
+<li>When is an agent-based model useful?</li>
+<li>What makes a visualization misleading?</li>
+</ol>
+<h3 id="required-study-10">Required study</h3>
+<ul>
+<li><strong>JHU syllabus — populations/disease and visualization/animation topics.</strong> <strong>Purpose:</strong> Preserve the source interdisciplinary scope. <strong>Guiding question:</strong> What breadth should the case study demonstrate? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></li>
+<li><strong>CDC infectious-disease transmission model explainer and modeling handbook.</strong> <strong>Purpose:</strong> Use current primary public-health guidance for model form and limits. <strong>Guiding question:</strong> Which question and data justify SIR, SEIR, or agent-based structure? <a href="https://www.cdc.gov/cfa-modeling-and-forecasting/about/explainer-transmission-models.html" title="CDC explainer on infectious-disease transmission models">CDC-MODELS</a> <a href="https://www.cdc.gov/cfa-modeling-and-forecasting/modeling-handbook/mh-modelappraisal.html" title="CDC guidance for assessing a modeling framework and its results">CDC-APPRAISAL</a></li>
+<li><strong>NASA-HDBK-7009B — intended use, data, validation, uncertainty, and communication.</strong> <strong>Purpose:</strong> Apply the same credibility discipline to a biological model. <strong>Guiding question:</strong> What evidence is missing and how must that limit use? <a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009" title="NASA-HDBK-7009B — NASA Handbook for Models and Simulations">NASA-HDBK-7009B</a></li>
+<li><strong>MATLAB/Python visualization documentation as needed.</strong> <strong>Purpose:</strong> Produce reproducible, accessible figures or bounded animation. <strong>Guiding question:</strong> Which views explain mechanism rather than decorate the report? <a href="https://www.mathworks.com/help/matlab/" title="MATLAB documentation">MATLAB</a> <a href="https://matplotlib.org/stable/" title="Matplotlib documentation">MATPLOTLIB</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-10">Instructor-style lesson notes</h3>
+<ul>
+<li>A compartmental model groups people by state and usually assumes mixing within defined groups. It is useful for mechanisms and scenarios but may be inappropriate when contact structure and individual heterogeneity drive outcomes.</li>
+<li>Agent or network models can represent individual schedules, contacts, and interventions but require more data, computation, and validation.</li>
+<li>Keep the exercise synthetic. The purpose is model-form comparison and coupling to occupancy/ventilation, not clinical or policy advice.</li>
+<li>Visualization must show denominators, units, time, uncertainty, scenarios, thresholds, and events. Use accessible labels and descriptions; avoid deceptive axes or animation that implies precision.</li>
+<li>A good animation is reproducible from source and supports a question such as mode transition, spatial flow, heat path, or queue evolution. It does not replace quantitative analysis.</li>
+</ul>
+<h3 id="worked-example-10">Worked example</h3>
+<p>A synthetic SEIR model represents a 1,000-person campus population while shuttle occupancy and ventilation change effective contact during trips. A homogeneous-mixing model predicts little difference among routes; a schedule-stratified model identifies one high-occupancy transfer period as dominant. Because transmission and contact parameters are illustrative, the result is presented only as a demonstration of model-form sensitivity, not as a health recommendation.</p>
+<h3 id="guided-practice-10">Guided practice</h3>
+<ol>
+<li>Define the bounded decision/question and ethical non-uses.</li>
+<li>Build a simple compartmental population model and one structured extension.</li>
+<li>Couple a synthetic occupancy/ventilation scenario and run sensitivity analysis.</li>
+<li>Create a reproducible visualization/animation and conduct a communication red team.</li>
+</ol>
+<h3 id="independent-exercises-10">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Derive and simulate a basic SIR or stock-and-flow population model.</li>
+<li><strong>Application:</strong> Add occupancy, route, or group structure to the synthetic case.</li>
+<li><strong>Analysis:</strong> Compare compartmental and heterogeneous-model conclusions under parameter uncertainty.</li>
+<li><strong>Synthesis:</strong> Present an Extended-Domain Case Study with model-appraisal and communication limits.</li>
+<li><strong>Stretch:</strong> Implement a small agent-based or network variant and compare computational and validation demands.</li>
+</ul>
+<h3 id="weekly-deliverable-10">Weekly deliverable</h3>
+<p>Submit the bounded question/non-uses, conceptual and mathematical model, synthetic data and parameters, executable source, model-form comparison, uncertainty/sensitivity results, validation/appraisal checklist, ethical/privacy/accessibility assessment, reproducible figures or animation, presentation, peer/red-team feedback, and revised case study.</p>
+<h3 id="analytic-rubric-10">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model-form reasoning</td>
+<td style="text-align:right">30%</td>
+<td>Compartmental/agent/network/hybrid choices and assumptions match the question.</td>
+</tr>
+<tr>
+<td>Implementation and analysis</td>
+<td style="text-align:right">25%</td>
+<td>States, flows, coupling, units, uncertainty, and tests are correct.</td>
+</tr>
+<tr>
+<td>Credibility and ethics</td>
+<td style="text-align:right">20%</td>
+<td>Synthetic status, evidence gaps, non-uses, privacy, and policy limits are explicit.</td>
+</tr>
+<tr>
+<td>Visualization and communication</td>
+<td style="text-align:right">25%</td>
+<td>Figures/animation are accurate, reproducible, accessible, and mechanism-focused.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-10">Critical failures</h3>
+<ul>
+<li>Synthetic results are presented as real health evidence or advice.</li>
+<li>Homogeneous mixing or contact structure assumptions are hidden.</li>
+<li>Visualization omits denominator, uncertainty, or scenario conditions.</li>
+<li>Animation replaces rather than supports analysis.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-10">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is homogeneous mixing?</strong><br/>
+<em>Answer guidance:</em> An assumption that contacts occur uniformly within the modeled population or group.</li>
+<li><strong>Why use an SEIR rather than SIR model?</strong><br/>
+<em>Answer guidance:</em> To represent a latent exposed period when it matters to timing.</li>
+<li><strong>When prefer an agent model?</strong><br/>
+<em>Answer guidance:</em> When individual heterogeneity, networks, schedules, or localized interventions drive the question.</li>
+<li><strong>What is visualization validity?</strong><br/>
+<em>Answer guidance:</em> The view accurately represents controlled data, scales, uncertainty, and model meaning.</li>
+<li><strong>Why state ethical non-uses?</strong><br/>
+<em>Answer guidance:</em> To prevent synthetic or weak evidence from being misapplied to real people or policy.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-10">Revision and mastery gate</h3>
+<p>Pass the Model-Form and Communication Review with explicit synthetic status, correct dynamics, credible model-form comparison, and no unsupported health or policy claim.</p>
+<h3 id="suggested-workload-10">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and model-form design</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Sensitivity/appraisal</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Visualization and presentation</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>10.5</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-10">Configuration and portfolio update</h3>
+<p>Commit the week’s source, data, metadata, tests, execution records, figures, review findings, and revised artifacts. Tag the accepted weekly baseline and record all tool, library, solver, and interface versions needed to reproduce it.</p>
+<hr/>
+<h2 id="week-11--assess-continuous-discrete-hybrid-fixed-step-real-time-hil-and-final-credibility-constraints">Week 11 — Assess continuous, discrete, hybrid, fixed-step, real-time, HIL, and final credibility constraints</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 12):</strong> <a href="../../K/B12/chapters/11-assess-continuous-discrete-hybrid-fixed-step-real-time-hil-and-final.html">Chapter 11 — Assess continuous, discrete, hybrid, fixed-step, real-time, HIL, and final credibility constraints</a> · <a href="../../K/B12/labs/lab-11-assess-continuous-discrete-hybrid-fixed-step-real-time-hil-and-final.html">Hypothetical Lab 11</a> · <a href="../../K/P3-text/lessons/645-758-w11.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="competency-alignment-11">Competency alignment</h3>
+<p>CLO-9, CLO-10, and CLO-12; program competencies C5, C6, C7, C8, and C12.</p>
+<h3 id="professional-context-and-essential-question-11">Professional context and essential question</h3>
+<p>A model that runs faster than real time on a workstation is not automatically suitable for real-time or HIL use. Determinism, fixed-step accuracy, overruns, I/O, sample rates, latency, jitter, scheduling, and failure behavior must be measured.</p>
+<p><strong>Essential question:</strong> What execution and credibility evidence supports offline analysis, software-in-the-loop, real-time, or hardware-in-the-loop use?</p>
+<h3 id="weekly-learning-outcomes-11">Weekly learning outcomes</h3>
+<ol>
+<li>Classify continuous, discrete, event-driven, hybrid, and multirate model content.</li>
+<li>Select fixed-step and sample-time configurations and quantify accuracy/performance tradeoffs.</li>
+<li>Measure execution time, overruns, latency, jitter, event handling, and deterministic replay.</li>
+<li>Design SIL, PIL, rapid-control-prototype, or HIL interfaces and acceptance tests.</li>
+<li>Complete uncertainty, sensitivity, validation, and credibility assessment for the final intended use.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-11">Prerequisite retrieval and readiness check</h3>
+<ol>
+<li>Why does real-time simulation usually require fixed step?</li>
+<li>What is an overrun?</li>
+<li>How do sample rate and latency affect control behavior?</li>
+<li>What is the difference between SIL and HIL?</li>
+</ol>
+<h3 id="required-study-11">Required study</h3>
+<ul>
+<li><strong>JHU syllabus — continuous and real-time scope plus future-of-M&amp;S topic.</strong> <strong>Purpose:</strong> Preserve source-course execution and forward-looking scope. <strong>Guiding question:</strong> Which real-time claims are within the course? <a href="https://ep.jhu.edu/courses/645758-advanced-systems-modeling-and-simulation/" title="Advanced Systems Modeling and Simulation — Johns Hopkins Engineering for Professionals">JHU-758-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></li>
+<li><strong>Simulink real-time and solver/sample-time documentation.</strong> <strong>Purpose:</strong> Understand fixed-step, multirate, HIL, and execution constraints. <strong>Guiding question:</strong> What evidence distinguishes an offline model from a real-time application? <a href="https://www.mathworks.com/help/slrealtime/" title="Simulink Real-Time documentation">SIMULINK-REALTIME</a> <a href="https://www.mathworks.com/help/simulink/ug/choose-a-solver.html" title="Simulink solver selection guidance">SIMULINK-SOLVERS</a></li>
+<li><strong>FMI 3.0.2 Scheduled Execution and co-simulation timing concepts.</strong> <strong>Purpose:</strong> Connect portable models to coordinated execution. <strong>Guiding question:</strong> How are partitions, clocks, and scheduling exposed? <a href="https://fmi-standard.org/" title="Functional Mock-up Interface 3.0.2">FMI</a></li>
+<li><strong>NASA-STD-7009B and NASA-HDBK-7009B — credibility assessment and acceptance.</strong> <strong>Purpose:</strong> Complete the final evidence chain. <strong>Guiding question:</strong> What supports the stated use and what remains outside scope? <a href="https://standards.nasa.gov/standard/nasa/nasa-std-7009" title="NASA-STD-7009B — Standard for Models and Simulations">NASA-STD-7009B</a> <a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009" title="NASA-HDBK-7009B — NASA Handbook for Models and Simulations">NASA-HDBK-7009B</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-11">Instructor-style lesson notes</h3>
+<ul>
+<li>Classify every subsystem by continuous state, discrete state, event, sample time, and execution priority. Make rate transitions explicit.</li>
+<li>Fixed-step selection trades accuracy against computational deadline. Test step sizes with the same challenge scenarios used for decision results.</li>
+<li>Measure worst-case execution, not only average. Track deadline misses, jitter, I/O latency, logging overhead, initialization time, and recovery behavior.</li>
+<li>SIL executes production or representative software against a simulated plant; PIL executes on target-class processor; HIL includes real hardware and I/O. Each adds evidence and new failure modes.</li>
+<li>Finish credibility assessment by integrating verification, validation, data quality, uncertainty, sensitivity, numerical/timing evidence, peer review, limitations, and acceptance criteria.</li>
+</ul>
+<h3 id="worked-example-11">Worked example</h3>
+<p>The controller uses a 10-ms base rate and 100-ms thermal supervisor. At a 1-ms plant step the model is accurate but misses the 10-ms deadline on 3% of runs. A 5-ms fixed step meets timing but overestimates current peak by 4.8%; a multi-rate configuration with a 1-ms electrical partition and 10-ms mechanical/controller partition meets both accuracy and timing on the available target. The readiness claim is limited to SIL/timing-in-the-loop because no physical I/O hardware was tested.</p>
+<h3 id="guided-practice-11">Guided practice</h3>
+<ol>
+<li>Inventory rates, events, clocks, and execution partitions.</li>
+<li>Run fixed-step accuracy and performance experiments.</li>
+<li>Design the SIL/PIL/HIL architecture and acceptance tests.</li>
+<li>Complete uncertainty, sensitivity, validation, and credibility acceptance review.</li>
+</ol>
+<h3 id="independent-exercises-11">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify sample-time, latency, jitter, overrun, quantization, and rate-transition defects.</li>
+<li><strong>Application:</strong> Configure and test a fixed-step/multirate version of the integrated model.</li>
+<li><strong>Analysis:</strong> Produce accuracy-versus-runtime and deadline-margin curves under challenge conditions.</li>
+<li><strong>Synthesis:</strong> Conduct the Real-Time and Credibility Use Review and issue a bounded readiness statement.</li>
+<li><strong>Stretch:</strong> Deploy to desktop real-time, a target board, or a simulated I/O harness and automate overrun/fault injection.</li>
+</ul>
+<h3 id="weekly-deliverable-11">Weekly deliverable</h3>
+<p>Submit the rate/event inventory, fixed-step and sample-time rationale, timing instrumentation, accuracy/runtime experiments, worst-case execution and jitter results, overrun and fault tests, SIL/PIL/HIL architecture, I/O and safety assumptions, deterministic replay evidence, final uncertainty/sensitivity/validation assessment, credibility matrix, readiness/non-use statement, and review record.</p>
+<h3 id="analytic-rubric-11">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Timing architecture</td>
+<td style="text-align:right">25%</td>
+<td>Rates, events, partitions, transitions, latency, and I/O are explicit.</td>
+</tr>
+<tr>
+<td>Accuracy/performance evidence</td>
+<td style="text-align:right">30%</td>
+<td>Fixed-step, runtime, jitter, overrun, and challenge tests support the claim.</td>
+</tr>
+<tr>
+<td>HIL/SIL readiness</td>
+<td style="text-align:right">20%</td>
+<td>Execution level, interfaces, hazards, acceptance tests, and limits are honest.</td>
+</tr>
+<tr>
+<td>Credibility assessment</td>
+<td style="text-align:right">25%</td>
+<td>All evidence and limitations are integrated into a bounded use recommendation.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-11">Critical failures</h3>
+<ul>
+<li>Real-time or HIL capability is claimed without measured deadline and I/O evidence.</li>
+<li>Only average execution time is reported.</li>
+<li>Fixed-step error is not compared with the accepted offline baseline.</li>
+<li>Credibility acceptance ignores unresolved critical timing, data, or validation findings.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-11">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why fixed step for real time?</strong><br/>
+<em>Answer guidance:</em> Execution must complete predictably on a wall-clock schedule.</li>
+<li><strong>What is jitter?</strong><br/>
+<em>Answer guidance:</em> Variation in execution or I/O timing around the intended schedule.</li>
+<li><strong>What is an overrun?</strong><br/>
+<em>Answer guidance:</em> A computation that fails to complete before its deadline.</li>
+<li><strong>What distinguishes SIL from HIL?</strong><br/>
+<em>Answer guidance:</em> SIL uses simulated hardware/plant interfaces; HIL includes real hardware and I/O interacting with the simulation.</li>
+<li><strong>What is a bounded readiness statement?</strong><br/>
+<em>Answer guidance:</em> A claim limited to the tested configuration, conditions, evidence, and use.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-11">Revision and mastery gate</h3>
+<p>Pass the Experiment and Use Review with measured timing/accuracy evidence, no unsupported real-time/HIL claim, and explicit acceptance or rejection for each intended use.</p>
+<h3 id="suggested-workload-11">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Execution/timing study</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Fixed-step experiments</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>Credibility integration</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review/revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-11">Configuration and portfolio update</h3>
+<p>Commit the week’s source, data, metadata, tests, execution records, figures, review findings, and revised artifacts. Tag the accepted weekly baseline and record all tool, library, solver, and interface versions needed to reproduce it.</p>
+<hr/>
+<h2 id="week-12--reproduce-challenge-present-and-defend-the-final-complex-system-simulation-study">Week 12 — Reproduce, challenge, present, and defend the final complex-system simulation study</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 12):</strong> <a href="../../K/B12/chapters/12-reproduce-challenge-present-and-defend-the-final-complex-system-simu.html">Chapter 12 — Reproduce, challenge, present, and defend the final complex-system simulation study</a> · <a href="../../K/B12/labs/lab-12-reproduce-challenge-present-and-defend-the-final-complex-system-simu.html">Hypothetical Lab 12</a> · <a href="../../K/P3-text/lessons/645-758-w12.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<h3 id="competency-alignment-12">Competency alignment</h3>
+<p>All course outcomes; program competencies C1 through C12 as applicable, with primary emphasis on C7, C9, C10, and C12.</p>
+<h3 id="professional-context-and-essential-question-12">Professional context and essential question</h3>
+<p>The final week turns a technically interesting model into a controlled engineering evidence package. The learner must reproduce the results, respond to a consequential change, and state exactly what lifecycle action the evidence supports.</p>
+<p><strong>Essential question:</strong> Can an independent reviewer reproduce the study, challenge its weakest assumptions, and reach the same bounded conclusion?</p>
+<h3 id="weekly-learning-outcomes-12">Weekly learning outcomes</h3>
+<ol>
+<li>Integrate conceptual, mathematical, executable, environment, cost, interoperability, experiment, and credibility artifacts.</li>
+<li>Reproduce all critical results from a clean controlled environment.</li>
+<li>Conduct a live parameter/interface/requirement change and propagate impacts through models and conclusions.</li>
+<li>Present complex dynamic behavior accurately and answer technical-review questions.</li>
+<li>Issue a bounded lifecycle recommendation with limitations, residual risk, and revisit triggers.</li>
+</ol>
+<h3 id="prerequisite-retrieval-and-readiness-check-12">Prerequisite retrieval and readiness check</h3>
+<ol>
+<li>What is the complete evidence chain?</li>
+<li>Which finding is most likely to reverse the recommendation?</li>
+<li>What belongs in a model-use statement?</li>
+<li>How is a technical recommendation different from decision authority?</li>
+</ol>
+<h3 id="required-study-12">Required study</h3>
+<ul>
+<li><strong>JHU Fall 2026 syllabus — project rubric, presentations, and final course outcomes.</strong> <strong>Purpose:</strong> Confirm that the final project demonstrates significant multi-domain interaction, correct equations, implementation, analysis, and presentation. <strong>Guiding question:</strong> Does the project meet the source standard? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.758.81" title="Fall 2026 public syllabus for EN.645.758">JHU-758-SYLLABUS</a></li>
+<li><strong>NASA-STD-7009B and NASA-HDBK-7009B — final credibility and use assessment.</strong> <strong>Purpose:</strong> Complete the decision-ready evidence package. <strong>Guiding question:</strong> Which acceptance criteria pass, fail, or remain conditional? <a href="https://standards.nasa.gov/standard/nasa/nasa-std-7009" title="NASA-STD-7009B — Standard for Models and Simulations">NASA-STD-7009B</a> <a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009" title="NASA-HDBK-7009B — NASA Handbook for Models and Simulations">NASA-HDBK-7009B</a></li>
+<li><strong>DoDI 5000.61 — accreditation/use authority concepts for M&amp;S.</strong> <strong>Purpose:</strong> Separate developer evidence from authorization. <strong>Guiding question:</strong> Who may approve the model for the stated decision? <a href="https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodi/500061p.pdf" title="DoDI 5000.61 — DoD Modeling and Simulation Verification, Validation, and Accreditation">DODI-5000-61</a></li>
+<li><strong>Selected tool documentation and project runbook.</strong> <strong>Purpose:</strong> Rebuild, execute, and diagnose the final model. <strong>Guiding question:</strong> Can the result be reproduced without undocumented operator knowledge? <a href="https://www.mathworks.com/help/simulink/" title="Simulink documentation">SIMULINK</a> <a href="https://openmodelica.org/doc/OpenModelicaUsersGuide/latest/" title="OpenModelica User's Guide">OPENMODELICA</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-12">Instructor-style lesson notes</h3>
+<ul>
+<li>Build one final evidence map: decision → requirement/measure → model and interface → input/data → experiment → result → uncertainty/validation → risk → recommendation.</li>
+<li>Reproduction starts from a clean clone or package. Install the documented environment, verify hashes/versions, run tests, execute designated runs, and regenerate figures and reports.</li>
+<li>The live challenge changes one consequential element: battery supplier resistance, coolant-pump degradation, new winter distribution, charger interface delay, route grade error, controller sample time, cost escalation, or requirement threshold.</li>
+<li>The learner must use controlled traces and scripts to identify affected equations, parameters, components, experiments, cost results, evidence, and recommendation. Manual narrative alone does not pass.</li>
+<li>The final use recommendation states accepted configuration, conditions, validity domain, decision supported, authority, confidence/uncertainty, residual risk, non-uses, monitoring, and revisit triggers.</li>
+</ul>
+<h3 id="worked-example-12">Worked example</h3>
+<p>The baseline recommends the existing cooling loop for PDR because the joint probability of energy reserve and battery-temperature compliance is 0.91. During the defense, pump efficiency is reduced from 0.80 to 0.66 and the charger introduces a 150-ms control-message delay. The trace identifies thermal-fluid parameters, controller rate transitions, HLA/FMI interface timing, winter experiments, battery replacement cost, and five V&amp;V cases. Re-execution lowers joint compliance to 0.73 and creates two timing overruns. The revised recommendation is conditional: qualify the alternate pump and interface timing before design release.</p>
+<h3 id="guided-practice-12">Guided practice</h3>
+<ol>
+<li>Freeze and inventory the final baseline.</li>
+<li>Reproduce tests, runs, figures, and decision metrics from a clean environment.</li>
+<li>Conduct the project presentation, independent review, live challenge, and oral defense.</li>
+<li>Close findings and issue the final controlled use recommendation and handoff.</li>
+</ol>
+<h3 id="independent-exercises-12">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Audit every critical mastery criterion and resolve or formally accept each finding.</li>
+<li><strong>Application:</strong> Rebuild and reproduce the complete simulation study from the runbook.</li>
+<li><strong>Analysis:</strong> Red-team equations, interfaces, solver/timing, data, uncertainty, validation, cost, and environment assumptions.</li>
+<li><strong>Synthesis:</strong> Conduct the Final Project and Credibility/Use Review and issue the decision package.</li>
+<li><strong>Stretch:</strong> Create a continuous-integration workflow that executes model tests, FMU/interface checks, selected experiments, figure generation, and evidence reports on controlled change.</li>
+</ul>
+<h3 id="weekly-deliverable-12">Weekly deliverable</h3>
+<p>Submit the final plan, evidence map, conceptual/mathematical models, controlled multi-domain source, metadata/catalog, interfaces and federation architecture, environment and cost models, population/visualization case, test and numerical evidence, experiment inputs/raw outputs/analysis, uncertainty/sensitivity/validation, real-time readiness, credibility matrix, final report, 15-minute presentation, clean reproduction log, live-change trace/rerun/recommendation, oral-defense record, findings/dispositions, release manifest, and Phase 4 handoff.</p>
+<h3 id="analytic-rubric-12">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integrated technical evidence</td>
+<td style="text-align:right">30%</td>
+<td>Multi-domain equations, interfaces, environment, cost, experiments, and results are coherent and traceable.</td>
+</tr>
+<tr>
+<td>Reproducibility and credibility</td>
+<td style="text-align:right">25%</td>
+<td>Clean execution, tests, numerical/timing evidence, validation, uncertainty, and use limits are sufficient.</td>
+</tr>
+<tr>
+<td>Decision and adaptability</td>
+<td style="text-align:right">25%</td>
+<td>The recommendation follows evidence and is revised correctly under the live challenge.</td>
+</tr>
+<tr>
+<td>Presentation and defense</td>
+<td style="text-align:right">20%</td>
+<td>The learner communicates, navigates, explains, and answers review questions professionally.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-12">Critical failures</h3>
+<ul>
+<li>A critical result cannot be reproduced from controlled source.</li>
+<li>The final model lacks significant interaction between at least two system types.</li>
+<li>A critical unit, conservation, interface, timing, or validity defect remains unresolved.</li>
+<li>The learner preserves the preferred recommendation after challenge evidence invalidates its conditions.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-12">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is the final evidence chain?</strong><br/>
+<em>Answer guidance:</em> Trace from decision and requirements through models, data, experiments, results, credibility, risk, and recommendation.</li>
+<li><strong>What must a reproduction log record?</strong><br/>
+<em>Answer guidance:</em> Environment, versions, commands, inputs, hashes/configuration, tests, runs, outputs, and deviations.</li>
+<li><strong>Why require a live challenge?</strong><br/>
+<em>Answer guidance:</em> To demonstrate that the model is usable for change impact rather than only for a rehearsed presentation.</li>
+<li><strong>Who owns the decision?</strong><br/>
+<em>Answer guidance:</em> The designated authority; the analyst owns transparent evidence and recommendation.</li>
+<li><strong>What is the course’s final standard?</strong><br/>
+<em>Answer guidance:</em> A reproducible, credible, bounded multi-domain simulation study that supports a real lifecycle action.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-12">Revision and mastery gate</h3>
+<p>The learner must pass clean reproduction, critical mastery audit, live challenge, project presentation, and oral defense; close all critical findings; and issue a final use recommendation whose authority, intended use, non-uses, uncertainty, limitations, and revisit triggers are explicit.</p>
+<h3 id="suggested-workload-12">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Final integration and reproduction</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Red team and live challenge</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Presentation and defense</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Revision and handoff</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.5</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-12">Configuration and portfolio update</h3>
+<p>Commit the week’s source, data, metadata, tests, execution records, figures, review findings, and revised artifacts. Tag the accepted weekly baseline and record all tool, library, solver, and interface versions needed to reproduce it.</p>
+<hr/>
+<h2 id="references">References</h2>
+<p><a href="OVERVIEW.html">Back to Phase 3 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+</main></body></html>

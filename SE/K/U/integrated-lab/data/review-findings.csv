@@ -1,0 +1,5 @@
+finding_id,severity,observation,evidence,disposition,closure_criterion,owner
+F-001,High,Synthetic arrival distribution is not grounded in field observation,outputs/results.json,Open,Acquire representative data and validate model,Ana
+F-002,High,No real operator workload or accessibility evaluation,chapters/08-human-factors-safety.md,Open,Conduct participatory scenario review and interface testing,Mar
+F-003,Medium,Data fixtures contain only one passenger per request,data/requests.csv,Open,Specify and test actual capacity and boarding logic,Sam
+F-004,Medium,No cyber authentication or network loss simulation,src/northstar.py,Open,Create threat model and fault injection plan,Lee

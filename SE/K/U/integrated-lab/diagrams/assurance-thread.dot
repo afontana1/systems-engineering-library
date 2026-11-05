@@ -1,0 +1,8 @@
+digraph Assurance {
+ graph [rankdir=LR,bgcolor="white",fontname="Arial",label="Illustrative claim–evidence chain (not an operational safety case)",labelloc=t];
+ node [shape=box,style="rounded,filled",fontname="Arial",color="#b9d0d6",fillcolor="#f2f8f9"];
+ Need [label="NEED-03\nReviewable evidence"]; Req [label="REQ-01\nAt-most-once input"]; Arch [label="RequestLedger\nInterface IF-02"]; Test [label="T-01\nExact duplicate test"]; Result [label="Unit test result\nversioned code"]; Claim [label="Bounded model claim\nNO field assurance",fillcolor="#fff3dd",color="#d3b47c"];
+ Need->Req->Arch->Test->Result->Claim;
+ Risk [label="H-02\nDuplicate service record",fillcolor="#fff2ef"];
+ Risk->Test [style=dashed,label="hazard check"];
+}

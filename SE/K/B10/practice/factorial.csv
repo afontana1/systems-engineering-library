@@ -1,0 +1,13 @@
+temp,algorithm,rep,wait
+cold,base,1,23
+cold,base,2,24
+cold,base,3,25
+cold,optimized,1,17
+cold,optimized,2,18
+cold,optimized,3,19
+warm,base,1,15
+warm,base,2,16
+warm,base,3,17
+warm,optimized,1,13
+warm,optimized,2,14
+warm,optimized,3,15

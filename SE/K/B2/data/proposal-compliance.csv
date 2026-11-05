@@ -1,0 +1,4 @@
+clause_id,customer_clause,binding_type,proposal_location,evidence_owner,status
+RFP-01,Acceptance at 18 months,requirement,,,unverified
+RFP-02,Price <= 8.8M,requirement,,,unverified
+RFP-03,Accessibility demonstration,requirement,,,unverified

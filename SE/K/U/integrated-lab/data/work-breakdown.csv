@@ -1,0 +1,7 @@
+wbs_id,work_package,owner,predecessor,estimated_hours,exit_evidence
+1.1,Needs and ConOps,SELead,,10,chapters/01-mission-boundary.md
+1.2,Requirements and traceability,SELead,1.1,14,data/requirements.csv
+1.3,Architecture and interfaces,Architect,1.2,16,data/interfaces.csv
+1.4,Software and model implementation,SoftwareLead,1.3,24,src/northstar.py
+1.5,Experiment design and risk,SafetyLead,1.3,16,data/experiment-plan.csv
+1.6,Verification and review,TestLead,1.4;1.5,20,review/REVIEW-BOARD.md

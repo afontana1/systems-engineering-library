@@ -1,0 +1,1 @@
+digraph SoS {rankdir=LR; node [shape=box,style=rounded]; Rail -> Dispatch [label="transfer event"]; Paratransit -> Dispatch [label="accessible slot"]; EMS -> Dispatch [label="priority"]; Dispatch -> Hospital [label="arrival / intake"]; Rail -> Hospital [style=dashed,label="mission path"]; }

@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Phase 0 | Systems Engineering Knowledge Atlas</title><style>
+:root{color-scheme:light;--ink:#152a3f;--muted:#5a7184;--brand:#1764ab;--rule:#d7e1e9;--bg:#f5f8fa;--surface:#fff;--code:#edf3f8}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.68 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+a{color:var(--brand)}a:hover{text-decoration:none}header{padding:3rem max(25px,calc((100vw - 1170px)/2));background:linear-gradient(115deg,#092b49,#15507c);color:white}
+header h1{font-size:clamp(2rem,4vw,3rem);line-height:1.12;margin:.45em 0}header p{max-width:750px;color:#e3effa;font-size:1.06rem}header a{color:#d5edff}
+.eyebrow{letter-spacing:.14em;font-size:.75rem;font-weight:750;text-transform:uppercase;color:#9cd2ff}
+.stats{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}.stat{background:#ffffff20;padding:5px 13px;border-radius:99px;font-size:13px}
+.shell{display:grid;grid-template-columns:298px minmax(0,1fr);gap:25px;max-width:1430px;margin:26px auto;padding:0 22px}
+aside{position:sticky;top:16px;height:calc(100vh - 32px);background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:20px;overflow:auto;align-self:start}
+aside h2{font-size:.93rem;margin:0 0 13px}label{font-size:.76rem;color:var(--muted);display:block;margin:11px 0 4px;font-weight:700}
+input,select{font:inherit;width:100%;padding:10px;border-radius:8px;border:1px solid #b5cbdc;background:white;color:#163047}
+.navlesson{display:block;font-size:.80rem;line-height:1.32;padding:9px 7px;border-bottom:1px solid #e8eef3;text-decoration:none;color:#24445f}
+.navlesson span{display:inline-block;margin-right:5px;border-radius:4px;background:#edf3f7;padding:1px 5px;font-variant-numeric:tabular-nums;color:#37607a;font-weight:750}
+[hidden]{display:none!important}.navlesson:hover{background:#ecf4fd}#count{color:var(--muted);font-size:.75rem;margin:8px 0 12px}
+main{min-width:0}.opening,.chapter,.threadgroup{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:clamp(21px,4vw,40px);margin-bottom:22px}
+.opening h2,.threadgroup h2{margin-top:0;font-size:1.5rem}.openlinks{display:flex;flex-wrap:wrap;gap:9px}.openlinks a{padding:8px 12px;border:1px solid #cbd9e4;border-radius:7px;text-decoration:none;font-weight:650;font-size:.89rem}
+.course-flag{display:inline-block;font-size:.68rem;letter-spacing:.1em;color:#437a9b;font-weight:800}.back{font-size:.8rem}.chapter-header{display:flex;justify-content:space-between;align-items:center}
+.chapter h1{font-size:clamp(1.7rem,2.6vw,2.2rem);line-height:1.22;margin:12px 0 20px;max-width:780px}.chapter h2{font-size:1.25rem;border-top:1px solid var(--rule);margin-top:34px;padding-top:24px}
+.chapter h3{font-size:1.03rem;margin-top:25px}.chapter p,.chapter li{max-width:910px}.chapter blockquote{border-left:3px solid var(--brand);padding-left:14px;margin-left:0;color:#37516b}
+.chapter code{background:var(--code);padding:2px 5px;border-radius:4px;font-size:.89em}.chapter pre{background:#0c233a;color:#eaf4fa;padding:20px;overflow:auto;border-radius:8px}.chapter pre code{background:none;padding:0}
+.chapter table{border-collapse:collapse;width:100%;display:block;overflow-x:auto;font-size:.9rem}.chapter th,.chapter td{padding:10px 12px;border:1px solid var(--rule);vertical-align:top}.chapter th{background:#eef4f8;text-align:left}
+.chapter details{padding:15px 18px;border:1px solid #cbdde9;background:#f5faff;border-radius:10px;margin-top:16px}.chapter details summary{font-weight:750;color:#135d95;cursor:pointer}
+.threadgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.thread{border:1px solid #dce7ef;background:#fafcfd;padding:15px;border-radius:10px}.thread h3{font-size:1rem;margin:0 0 8px}.thread p{font-size:.84rem;color:#5c6e7c}.threadsteps{display:flex;flex-wrap:wrap;gap:6px}.threadsteps a{font-size:.75rem;border:1px solid #cbdbea;border-radius:5px;padding:3px 6px;text-decoration:none}
+.notice{border-left:4px solid #2e80b9;background:#eef7fc;padding:12px 18px;border-radius:5px}.small{color:var(--muted);font-size:.87rem}footer{padding:30px;text-align:center;color:var(--muted)}
+@media(max-width:870px){.shell{display:block;padding:0 12px}aside{position:static;height:auto;margin-bottom:16px;max-height:460px}header{padding:35px 20px}.chapter,.opening,.threadgroup{padding:21px}}
+@media print{aside,.back,.threadgroup{display:none!important}.shell{display:block}.chapter{break-before:page;border:0}header{color:black;background:white}.chapter details{display:block}body{background:white}}
+</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../_assets/mathjax-svg.js"></script><script defer src="../_assets/prism.js"></script><script defer src="../_assets/prism-python.js"></script><script defer src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/P0-text/OPEN-PHASE-0.html" data-se-mode="standard"></script>
+</head><body id="top">
+<header><span class="eyebrow">Systems Engineering • Companion Knowledge Library</span><h1>Phase 0 — The Concept Textbook</h1><p>A complementary learning layer for two 12-week systems-engineering foundations courses. Explanations, worked reasoning, retrieval practice, failure modes, links and source material—without losing your original course guides.</p><div class="stats"><span class="stat">24 teaching chapters</span><span class="stat">72 practice questions with explanations</span><span class="stat">2 courses · 12 weeks each</span><span class="stat">Offline and searchable</span></div></header>
+<div class="shell"><aside><h2>Browse lessons</h2><label for="query">Search title or concept</label><input autocomplete="off" id="query" placeholder="e.g. critical path, requirements" type="search"/><label for="course">Course</label><select id="course"><option value="all">Both courses</option><option value="645-662">645.662 · Systems Engineering</option><option value="645-667">645.667 · Systems Projects</option></select><p aria-live="polite" id="count">24 chapters visible</p><nav id="nav"><a class="navlesson" data-course="645-662" data-match="system boundaries, emergent behavior and interface contracts system of interest emergence context diagram interfaces" href="#chapter-645-662-01"><span>W01</span> System boundaries, emergent behavior and interface contracts</a>
+<a class="navlesson" data-course="645-662" data-match="lifecycle reasoning, iteration and review decisions lifecycle v model tailoring reviews" href="#chapter-645-662-02"><span>W02</span> Lifecycle reasoning, iteration and review decisions</a>
+<a class="navlesson" data-course="645-662" data-match="from missions and stakeholders to measurable success conops stakeholder needs moe mop tpm" href="#chapter-645-662-03"><span>W03</span> From missions and stakeholders to measurable success</a>
+<a class="navlesson" data-course="645-662" data-match="writing verifiable requirements and preserving rationale requirements traceability verification method change impact" href="#chapter-645-662-04"><span>W04</span> Writing verifiable requirements and preserving rationale</a>
+<a class="navlesson" data-course="645-662" data-match="functional analysis: behavior before architecture functional decomposition state machine functional flow allocation" href="#chapter-645-662-05"><span>W05</span> Functional analysis: behavior before architecture</a>
+<a class="navlesson" data-course="645-662" data-match="technical reviews as falsifiable assurance arguments functional baseline review criteria assurance finding closure" href="#chapter-645-662-06"><span>W06</span> Technical reviews as falsifiable assurance arguments</a>
+<a class="navlesson" data-course="645-662" data-match="physical architecture, allocation and contract-level interfaces physical architecture allocation matrix icd integration risk" href="#chapter-645-662-07"><span>W07</span> Physical architecture, allocation and contract-level interfaces</a>
+<a class="navlesson" data-course="645-662" data-match="trade studies, ahp and sensitivity without false precision decision matrix weights ahp sensitivity" href="#chapter-645-662-08"><span>W08</span> Trade studies, AHP and sensitivity without false precision</a>
+<a class="navlesson" data-course="645-662" data-match="se management plans, metrics and configuration discipline semp configuration management risk technical metrics" href="#chapter-645-662-09"><span>W09</span> SE management plans, metrics and configuration discipline</a>
+<a class="navlesson" data-course="645-662" data-match="systemic failures, causal reasoning and red-team thinking causal graph mco assurance gap interface failure" href="#chapter-645-662-10"><span>W10</span> Systemic failures, causal reasoning and red-team thinking</a>
+<a class="navlesson" data-course="645-662" data-match="integration, verification, validation and transition integration sequence verification validation acceptance transition" href="#chapter-645-662-11"><span>W11</span> Integration, verification, validation and transition</a>
+<a class="navlesson" data-course="645-662" data-match="synthesis: from trace chains to defensible system concepts architecture case evidence design decision competency map" href="#chapter-645-662-12"><span>W12</span> Synthesis: from trace chains to defensible system concepts</a>
+<a class="navlesson" data-course="645-667" data-match="governance, decision rights and the pm–se interface charter decision rights governance technical authority" href="#chapter-645-667-01"><span>W01</span> Governance, decision rights and the PM–SE interface</a>
+<a class="navlesson" data-course="645-667" data-match="from customer opportunity to compliant technical proposal rfp compliance matrix sow proposal strategy" href="#chapter-645-667-02"><span>W02</span> From customer opportunity to compliant technical proposal</a>
+<a class="navlesson" data-course="645-667" data-match="product-oriented wbs, control accounts and work authorization wbs wbs dictionary control account work package" href="#chapter-645-667-03"><span>W03</span> Product-oriented WBS, control accounts and work authorization</a>
+<a class="navlesson" data-course="645-667" data-match="estimating, budget structure and uncertainty cost estimating three-point estimate contingency management reserve" href="#chapter-645-667-04"><span>W04</span> Estimating, budget structure and uncertainty</a>
+<a class="navlesson" data-course="645-667" data-match="critical path, network logic, float and schedule credibility predecessor network critical path float schedule risk" href="#chapter-645-667-05"><span>W05</span> Critical path, network logic, float and schedule credibility</a>
+<a class="navlesson" data-course="645-667" data-match="integrated baseline reviews: can the plan actually be executed? integrated baseline scope-cost-schedule trace ibr control account" href="#chapter-645-667-06"><span>W06</span> Integrated baseline reviews: can the plan actually be executed?</a>
+<a class="navlesson" data-course="645-667" data-match="earned value, performance indices and honest forecasts ev pv ac cpi spi eac" href="#chapter-645-667-07"><span>W07</span> Earned value, performance indices and honest forecasts</a>
+<a class="navlesson" data-course="645-667" data-match="risk, issue, opportunity and baseline change as one control system risk response issue opportunity change control quality" href="#chapter-645-667-08"><span>W08</span> Risk, issue, opportunity and baseline change as one control system</a>
+<a class="navlesson" data-course="645-667" data-match="communication, negotiation, leadership and conflict diagnosis stakeholder communication conflict leadership escalation" href="#chapter-645-667-09"><span>W09</span> Communication, negotiation, leadership and conflict diagnosis</a>
+<a class="navlesson" data-course="645-667" data-match="managing integrated hardware, software and agile delivery hybrid project technical debt release evidence integrated forecasting" href="#chapter-645-667-10"><span>W10</span> Managing integrated hardware, software and agile delivery</a>
+<a class="navlesson" data-course="645-667" data-match="proposal red teams and executable-plan stress tests proposal review red team schedule stress baseline audit" href="#chapter-645-667-11"><span>W11</span> Proposal red teams and executable-plan stress tests</a>
+<a class="navlesson" data-course="645-667" data-match="management synthesis: defend the commitment and learn management baseline decision defense eac project learning" href="#chapter-645-667-12"><span>W12</span> Management synthesis: defend the commitment and learn</a></nav></aside>
+<main><section class="opening"><h2>How to study this library</h2><p class="notice">This volume teaches complementary concepts for <strong>every Phase 0 week</strong>. Your original guides remain the authoritative sequence for full assignments and mastery gates; these chapters are not an accredited course or an operational safety manual. All shuttle numbers are fictional.</p><p>Read the explanation, recreate the worked example, answer three transfer questions <em>before</em> opening the solutions, then complete the original guide's deliverable. Use the official NASA, GAO and SEBoK links for a deeper second pass.</p><div class="openlinks"><a href="README.html">Book index</a><a href="KNOWLEDGE-THREADS.html">Concept threads</a><a href="INTEGRATED-CASE.html">Integrated case</a><a href="GLOSSARY.html">Glossary</a><a href="../../C/P0/OVERVIEW.html">Original Phase 0 guides</a></div><p class="small">Standalone file: save or share this HTML together with the ZIP for full links to supporting Markdown and worksheets. Navigation/search work without internet.</p></section>
+<section class="threadgroup"><h2>Five concept threads across both courses</h2><p>Choose a thread to follow the same idea from technical engineering into project commitments.</p><div class="threadgrid"><div class="thread"><h3>Value and validation</h3><p>A mission problem becomes a set of user journeys, measurable success criteria, verifiable obligations and actual acceptance evidence.</p><div class="threadsteps"><a href="#chapter-645-662-01">645-662 · W1</a><a href="#chapter-645-662-03">645-662 · W3</a><a href="#chapter-645-662-04">645-662 · W4</a><a href="#chapter-645-662-11">645-662 · W11</a><a href="#chapter-645-662-12">645-662 · W12</a><a href="#chapter-645-667-02">645-667 · W2</a><a href="#chapter-645-667-12">645-667 · W12</a></div></div><div class="thread"><h3>Architecture and integration</h3><p>Functions allocate to products; interface contracts become integration evidence; exceptions reveal dependencies hidden by isolated tests.</p><div class="threadsteps"><a href="#chapter-645-662-05">645-662 · W5</a><a href="#chapter-645-662-07">645-662 · W7</a><a href="#chapter-645-662-09">645-662 · W9</a><a href="#chapter-645-662-10">645-662 · W10</a><a href="#chapter-645-662-11">645-662 · W11</a><a href="#chapter-645-667-10">645-667 · W10</a></div></div><div class="thread"><h3>Technical decisions and authority</h3><p>Feasibility, preference and approval are distinct: the strongest concept still requires the right authority and evidence.</p><div class="threadsteps"><a href="#chapter-645-662-02">645-662 · W2</a><a href="#chapter-645-662-06">645-662 · W6</a><a href="#chapter-645-662-08">645-662 · W8</a><a href="#chapter-645-667-01">645-667 · W1</a><a href="#chapter-645-667-08">645-667 · W8</a><a href="#chapter-645-667-11">645-667 · W11</a></div></div><div class="thread"><h3>Scope and executable commitments</h3><p>Required capability flows into product scope, work packages, resources, estimates, dependencies and an integrated baseline.</p><div class="threadsteps"><a href="#chapter-645-662-03">645-662 · W3</a><a href="#chapter-645-662-09">645-662 · W9</a><a href="#chapter-645-667-02">645-667 · W2</a><a href="#chapter-645-667-03">645-667 · W3</a><a href="#chapter-645-667-04">645-667 · W4</a><a href="#chapter-645-667-05">645-667 · W5</a><a href="#chapter-645-667-06">645-667 · W6</a></div></div><div class="thread"><h3>Uncertainty and control</h3><p>Uncertainty appears as fragile decisions, technical risks, schedule exposure and forecast variance. Control must change decisions, not just reports.</p><div class="threadsteps"><a href="#chapter-645-662-08">645-662 · W8</a><a href="#chapter-645-662-10">645-662 · W10</a><a href="#chapter-645-667-04">645-667 · W4</a><a href="#chapter-645-667-05">645-667 · W5</a><a href="#chapter-645-667-07">645-667 · W7</a><a href="#chapter-645-667-08">645-667 · W8</a><a href="#chapter-645-667-12">645-667 · W12</a></div></div></div></section>
+<article class="chapter" data-course="645-662" data-title="System boundaries, emergent behavior and interface contracts" id="chapter-645-662-01"><div class="chapter-header"><span class="course-flag">645-662 / WEEK 01</span><a class="back" href="#top">↑ Contents</a></div><h1>System boundaries, emergent behavior and interface contracts</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 1 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645662.html">Open the original Week 1 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> No course prerequisites<br/>
+<strong>Core concepts:</strong> system of interest, emergence, context diagram, interfaces</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Begin with a decision, not an object</h3>
+<p>A <em>system of interest</em> (SoI) is the set of interacting elements you are deliberately engineering for a stated decision. A bus is not automatically the SoI of a campus shuttle project. If the decision concerns <strong>safe transportation of passengers from origin to destination</strong>, dispatch, pickup locations, operational rules, passenger information, human supervision, and maintenance may belong in the service boundary. If the decision concerns a vehicle procurement, many of those are external systems connected by interfaces. Neither boundary is universally correct: the right boundary depends on the accountable outcome and decision authority.</p>
+<p>Write a boundary statement using four clauses: (1) purpose; (2) included elements and functions; (3) explicitly excluded but dependent systems; and (4) authority to control each interface. An interface is more than a line joining boxes. It is an agreement about what crosses a boundary: passengers, commands, data, energy, material, services, or responsibility. Interface descriptions need direction, trigger, format or units, timing, failure behavior, ownership, and test evidence.</p>
+<h3>Why a system is more than its parts</h3>
+<p>A fleet of individually safe vehicles can produce an unsafe transport service if queueing, dispatch rules, pedestrians, weather, and crossing interactions create hazardous conditions. Whole-system properties emerge from interactions: throughput, availability, safety, resilience, and user trust. A component-level pass does not prove a system-level pass. This is why the context model should lead naturally to scenarios and evidence, rather than remaining a static drawing.</p>
+<p>Systems thinking also means asking who bears the consequences. A decision that makes the shuttle operator's cost look lower by excluding campus network support may not reduce total service cost. It transfers work to a different organization. Distinguish <em>excluded from the contract</em> from <em>irrelevant to the mission</em>; only the first may be defensible.</p>
+<h3>A practical modeling sequence</h3>
+<p>Identify the service outcome, create two plausible SoI boundaries, enumerate external actors and systems, draw directed flows, and walk one normal and one off-nominal scenario across the flows. Mark interfaces without a single accountable owner. Maintain a boundary decision record with assumptions and a reason for choosing the boundary; revisit it when operating concepts change.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Illustrative case (invented numbers):</strong> A three-stop pilot delivers 240 trips/day. Boundary A includes vehicle and onboard control; dispatch and rider alerts are external. Boundary B includes those services. If dispatch fails for two hours, vehicles may all be operational but delivered trips fall by 25%. Under Boundary A the vehicle supplier can report 100% vehicle availability while the <em>service</em> fails. Boundary B allocates a service-level requirement and escalation route to the operator. Neither supplier report alone demonstrates the user outcome. Draw the dispatch-to-vehicle interface: route command (route ID, timestamp, validity interval, acknowledged receipt), fallback to safe stop on missing commands, and a test where the network is severed.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Draw a context model for a library book-return kiosk, choosing the boundary to cover completed returns rather than only its hardware.</li>
+<li>A vehicle meets every onboard test, yet routes are repeatedly canceled. Explain why this is not contradictory.</li>
+<li>Write a minimum interface contract for a shuttle receiving dispatch commands.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Include kiosk, scanning and local storage, authentication or inventory service (internal or external by choice), patrons and library operations; model book, identifier, acknowledgement and exception flows. State ownership for each boundary.</p>
+</li>
+<li>
+<p>Onboard verification addresses component requirements. Overall service effectiveness depends on dispatch, fleet scheduling, riders, networks and external conditions. System-level validation and availability must use the service boundary.</p>
+</li>
+<li>
+<p>Specify sender/receiver, schema with route ID and units, update rate and latency, acknowledgement and timeout, valid operating state, safety fallback, configuration identifier, responsible owner and evidence from interface tests.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: treating the diagram boundary as an organization chart. A service may cross organizations; governance and interface contracts preserve responsibility where ownership is split.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Boundary rationale + context diagram with 8 labeled interfaces. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-02">Lifecycle reasoning, iteration and review decisions</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-03">From missions and stakeholders to measurable success</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://sebokwiki.org/wiki/Guide_to_the_Systems_Engineering_Body_of_Knowledge_(SEBoK)">Guide to the Systems Engineering Body of Knowledge</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-662" data-title="Lifecycle reasoning, iteration and review decisions" id="chapter-645-662-02"><div class="chapter-header"><span class="course-flag">645-662 / WEEK 02</span><a class="back" href="#top">↑ Contents</a></div><h1>Lifecycle reasoning, iteration and review decisions</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 2 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645662.html">Open the original Week 2 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-662-01">System boundaries, emergent behavior and interface contracts</a><br/>
+<strong>Core concepts:</strong> lifecycle, V model, tailoring, reviews</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>A lifecycle is a risk-reduction logic</h3>
+<p>A lifecycle model organizes decisions across concept, definition, design, implementation, integration, acceptance, operation, sustainment and retirement. It is not a command to finish all thinking about requirements before discussing tests. Technical processes recur at increasing detail as understanding matures. In a V-shaped representation, decomposition and definition on the left prepare the evidence and integration paths on the right; it is a <strong>traceability metaphor</strong>, not a rule that no iteration is allowed.</p>
+<p>The key deliverable at each transition is not a ceremonial slide deck. It is an explicit answer to: what uncertainties have been reduced enough to authorize the next investment? Before implementation, interfaces may need stability. Before operations, operational hazards, people, procedures, maintenance and acceptance must be credible. A review should judge the actual evidence for its purpose rather than demand an identical template from every project.</p>
+<h3>What tailoring actually means</h3>
+<p>Tailoring changes process depth, timing, format, staffing and review cadence according to mission consequences and project uncertainty. It does <strong>not</strong> mean skipping failure-prone activities because they are inconvenient. For a low-risk internal information display, a lightweight requirements table and test checklist may be enough. For an autonomous vehicle operating near pedestrians, traceability, safety analysis, independent review and off-nominal operational testing cannot be justified away by a short calendar.</p>
+<p>Use a two-axis classification: <em>consequence of failure</em> and <em>uncertainty of technology/integration</em>. High-consequence, high-uncertainty work deserves early prototypes, formal checkpoints, independent challenge and operational constraints. Low-uncertainty, low-consequence work may permit direct implementation and rapid feedback. Tailoring rationale should state what control remains when a traditional document or review is reduced.</p>
+<h3>Review dispositions</h3>
+<p>Three useful dispositions are <strong>proceed</strong>, <strong>proceed with tracked conditions</strong>, and <strong>do not proceed</strong>. A conditional approval needs action owner, due date, closure evidence and authority to confirm closure. Important: a risk may be accepted by an authorized decision maker; an unsatisfied mandatory requirement cannot simply be labeled 'accepted risk' to manufacture compliance.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example:</strong> The pilot must operate near a newly redesigned crossing. A concept review finds that the crossing geometry is unverified. The team may be allowed to proceed with virtual interface modeling and depot testing, while road trials remain gated by verified geometry, pedestrian hazard analysis and a signed permit. This is targeted conditional approval, not a false claim that the design is ready for public operation.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Map a medical-device firmware change to at least four lifecycle decisions.</li>
+<li>Explain why "we are agile, so we do not need interface control" fails as a tailoring argument.</li>
+<li>Write three objective exit criteria for a shuttle concept review.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Define intended use and hazards; approve requirements and risk controls; confirm implementation and verification of changes; validate clinical/operational use; release and monitor. Trace each decision to evidence.</p>
+</li>
+<li>
+<p>Cadence can be iterative, but interacting teams still need versioned interface agreements, compatibility testing and responsibility for changes. Agile modifies how evidence evolves, not whether it exists.</p>
+</li>
+<li>
+<p>Example: all high-priority needs traced to requirements; each safety-critical interface has an accountable owner and preliminary test; all open high-severity review findings have disposition and restrictions on downstream work.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: equating a review date with readiness. Evidence-based criteria must control whether approval is given.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Lifecycle selection + decision gates with acceptance criteria. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://sebokwiki.org/wiki/Guide_to_the_Systems_Engineering_Body_of_Knowledge_(SEBoK)">Guide to the Systems Engineering Body of Knowledge</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-662" data-title="From missions and stakeholders to measurable success" id="chapter-645-662-03"><div class="chapter-header"><span class="course-flag">645-662 / WEEK 03</span><a class="back" href="#top">↑ Contents</a></div><h1>From missions and stakeholders to measurable success</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 3 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645662.html">Open the original Week 3 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-662-01">System boundaries, emergent behavior and interface contracts</a><br/>
+<strong>Core concepts:</strong> ConOps, stakeholder needs, MOE, MOP, TPM</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Describe use before specifying equipment</h3>
+<p>A mission statement says what worthwhile outcome a system enables and for whom. A Concept of Operations (ConOps) narrates how actors interact with the system across situations: normal operation, peak demand, equipment degradation, emergency response, maintenance and retirement. It is a bridge between a vague aspiration and the operational evidence by which success will be judged. Avoid writing a ConOps that presupposes a specific technology before alternatives are examined.</p>
+<p>A stakeholder need expresses desired value from a particular viewpoint. A shuttle rider may want predictable wait time; an accessibility representative may need equitable boarding; security personnel require safe emergency intervention. Needs often conflict. Capture both the need and why it matters. Resolve contradictions through explicit decisions, not by merging incompatible text.</p>
+<h3>Three different kinds of measure</h3>
+<p>A <strong>measure of effectiveness (MOE)</strong> evaluates mission outcomes in the intended context: e.g., percentage of rider trips completed within a service-time target. A <strong>measure of performance (MOP)</strong> describes system performance characteristics: e.g., fleet boarding throughput in passengers/hour. A <strong>technical performance measure (TPM)</strong> monitors a key design attribute while it matures: e.g., sensor detection latency or energy consumption per trip compared with the evolving target. The categories overlap in practice; label them by decision use rather than treating them as universal taxonomic boundaries.</p>
+<p>Measures need a numerator, denominator, sampling period, population, conditions and data owner. 'Service reliable' is not an MOE. 'At least 95% of scheduled trips completed within five minutes of published arrival over a 30-day pilot, excluding only documented campus closures' is inspectable. Challenge the exclusions: a measure can look favorable by removing difficult conditions that real users face.</p>
+<h3>Scenario to evidence chain</h3>
+<p>For each scenario, record trigger, preconditions, actor intentions, main steps, off-nominal branches and outcome. Link the outcome to a need, MOE, enabling functions and candidate requirements. This is a causal narrative, not merely a requirements list. If a need has no realistic scenario, challenge whether it is necessary. If a safety-critical scenario has no measure, ask how anyone will know whether the system is good enough.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example:</strong> 'Student returns to residence after a late lab.' Assumptions: rain, limited lighting, one vehicle in maintenance. Need: safe and predictable service. MOE: fraction of requested late trips with safe completed drop-off inside 20 minutes; MOP: usable late-night fleet capacity; TPM: pedestrian-classification latency at night. The service may meet the latency TPM yet fail the MOE because dispatch cannot recover from maintenance. This shows why evidence must span levels.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Write one normal and one degraded scenario for a campus shuttle route.</li>
+<li>Classify waiting time, lidar processing latency and fraction of riders arriving by curfew as MOE, MOP or TPM.</li>
+<li>Design an auditable success measure for accessibility.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Normal: user requests ride, receives pickup estimate, boards, reaches stop and exits. Degraded: communications fail; operator acknowledges, safe state is entered, alternate accessible transport is arranged, and closure is logged.</p>
+</li>
+<li>
+<p>Fraction arriving by curfew is an MOE; waiting time can be a service MOE or a service MOP depending on decision framing; lidar latency is a design TPM. Explain intended decision for ambiguous cases.</p>
+</li>
+<li>
+<p>For example, percent of mobility-device journeys completed without unplanned assistance under defined boarding scenarios over 100 audited trials; specify observer, denominator and failure categorization.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: using easily measured component speed as a proxy for user success without evidence of the connection.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> ConOps scenario matrix linking stakeholder need -&gt; MOE -&gt; system function. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-04">Writing verifiable requirements and preserving rationale</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-05">Functional analysis: behavior before architecture</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-08">Trade studies, AHP and sensitivity without false precision</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://sebokwiki.org/wiki/Guide_to_the_Systems_Engineering_Body_of_Knowledge_(SEBoK)">Guide to the Systems Engineering Body of Knowledge</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-662" data-title="Writing verifiable requirements and preserving rationale" id="chapter-645-662-04"><div class="chapter-header"><span class="course-flag">645-662 / WEEK 04</span><a class="back" href="#top">↑ Contents</a></div><h1>Writing verifiable requirements and preserving rationale</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 4 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645662.html">Open the original Week 4 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-662-03">From missions and stakeholders to measurable success</a><br/>
+<strong>Core concepts:</strong> requirements, traceability, verification method, change impact</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>The point of a requirement</h3>
+<p>A requirement defines an obligation a design must satisfy, not a design preference disguised as inevitability. It exists to constrain architecture, permit verification and communicate what is authorized. A complete requirement record has a unique ID, statement, source or rationale, owner, priority or criticality, verification approach, current status and trace links. Its identity should persist when wording is revised; do not create false trace continuity by reusing IDs for different obligations.</p>
+<p>A useful test is to ask whether a verification team could design a test from the statement without interviewing its author. Replace 'The shuttle shall be safe and fast' with separately testable claims. A sample requirement might be: 'While operating in the approved pedestrian zone at speeds no greater than 12 km/h, the shuttle shall initiate a controlled stop within 0.5 s after receipt of a verified emergency-stop signal.' This still needs definitions of time origin, data collection and acceptable tolerances, but it provides a technical starting point. Safety is not established by this single requirement; hazard-derived controls also matter.</p>
+<h3>The five transformations</h3>
+<p>Translate stakeholder need into (1) objective and scenario; (2) measurable system requirement; (3) architecture element or function responsible; (4) verification case with method, configuration and acceptance rule; and (5) validation evidence for user benefit. All five links should be navigable in both directions. Requirement coverage alone does not prove a good mission concept; a missing stakeholder need can be invisible to a requirement-only audit.</p>
+<p><strong>Verification methods:</strong> inspection checks directly observable attributes; analysis derives compliance from accepted models or calculations; demonstration observes behavior without necessarily gathering controlled quantitative data; test uses defined stimuli, measurements and acceptance criteria. Select the method based on what claim must be evidenced. A label such as 'Test' without a testable procedure is not a verification plan.</p>
+<h3>Managing changes</h3>
+<p>A change request should give reason, original and proposed wording, affected scenarios, functions, interfaces, test cases, cost/schedule/risk implications and decision authority. Baselines freeze a reference for disciplined comparison, not for preventing learning. When a requirement changes, evaluate downstream traces for invalidated evidence; a previously passing test may no longer test the approved obligation.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Trace example:</strong> Need N-04 'riders can stop a ride safely' → requirement R-17 'operator emergency-stop request acknowledged within 0.3 s, 99.9% of valid requests, in defined communication conditions' → function F-06 'handle emergency stop' → controller C-03 → test T-12 (1,000 scripted requests, specified clock synchronization and exception logging). A 99.9% target over 1,000 attempts permits at most one failure by the simple observed-fraction criterion, but the statistical confidence and safety adequacy need a separate argument. The rider-need validation is broader than this response-time test.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Improve: "The application shall be intuitive and available most of the time."</li>
+<li>What trace links must be rechecked when emergency-stop response time changes from 0.5 s to 0.3 s?</li>
+<li>Select verification method for: connector label, stopping distance, modeled battery endurance.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Split usability and availability. Example: 90% of representative first-time users can request pickup within two minutes without help in a defined study; service availability &gt;= 99.0% during scheduled hours over 30 days. Define populations and exclusions.</p>
+</li>
+<li>
+<p>Review hazard analysis, controller timing budget, allocated component requirements, interface contract, test stimulus and instrumentation, simulation assumptions, verification results and operational validation.</p>
+</li>
+<li>
+<p>Connector label: inspection. Stopping distance: controlled test. Battery endurance: model-based analysis supported by validation or physical tests. Multiple methods may be warranted for critical claims.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: writing non-measurable adjectives, or confusing a requirement’s verification with validation of the original human need.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Six-row needs-to-requirements-to-evidence traceability matrix. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-05">Functional analysis: behavior before architecture</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-06">Technical reviews as falsifiable assurance arguments</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-09">SE management plans, metrics and configuration discipline</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA Systems Engineering Handbook appendices (requirements, V&amp;V, functional analysis)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-662" data-title="Functional analysis: behavior before architecture" id="chapter-645-662-05"><div class="chapter-header"><span class="course-flag">645-662 / WEEK 05</span><a class="back" href="#top">↑ Contents</a></div><h1>Functional analysis: behavior before architecture</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 5 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645662.html">Open the original Week 5 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-662-03">From missions and stakeholders to measurable success</a>, <a href="#chapter-645-662-04">Writing verifiable requirements and preserving rationale</a><br/>
+<strong>Core concepts:</strong> functional decomposition, state machine, functional flow, allocation</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>A function names a transformation</h3>
+<p>A function describes something the system must do to transform an input, event or state into an outcome. It does not name the part that eventually performs it. 'Detect an approaching pedestrian' is a function; 'lidar sensor' is a possible physical design choice. Preserving the distinction prevents early hardware assumptions from dictating requirements. A functional architecture maps interactions and dependencies among functions, while a product/physical architecture maps implementation elements.</p>
+<p>Decompose a top-level service capability into functions until allocation and verification decisions become tractable. Decomposition should be collectively sufficient but avoid overlapping responsibilities. For shuttle operation: accept ride request; decide service eligibility; plan assignment; navigate route; monitor hazards; respond to emergencies; report status. Each function has input/output and control data, relevant modes and failure responses. A list of verbs without flows or conditions is not enough.</p>
+<h3>Behavior is temporal</h3>
+<p>Functional decomposition describes what must happen; sequence, state, timing and concurrency models clarify <em>when and under which conditions</em>. Build a small state machine: unavailable → ready → boarding → operating → stopped → recovering. For every transition, name its event and guard condition. Ask what happens to commands arriving in a forbidden state. A 'start motion' command that can be accepted during manual maintenance is a design hazard. State invariants are properties that must hold across all behavior in a given state.</p>
+<p><strong>Functional-flow reasoning:</strong> An apparently simple event such as 'passenger presses emergency stop' crosses recognition, arbitration, command transmission, braking actuation, status indication and recovery authorization. The end-to-end response time is approximately the sum of dependent stage latencies (plus possible queueing). If a response objective is 500 ms, allocating 250 ms to sensing, 200 ms to messaging and 150 ms to actuation already exceeds the budget—even before margins.</p>
+<h3>Functional completeness tests</h3>
+<p>Walk a nominal and three off-nominal scenarios through the model. Identify missing entry/exit conditions, external triggers, data losses and recovery paths. Mark functions with no requirement source and requirements with no behavioral realization. Do not infer reliability from a clean diagram: test the difficult transitions.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Worked timing budget (illustrative):</strong> Detection 90 ms + classification 110 ms + arbitration 50 ms + communication 80 ms + brake command activation 60 ms = 390 ms. A requirement to <em>initiate</em> braking within 500 ms leaves 110 ms nominal margin, but worst-case jitter and missed messages could consume it. To establish compliance, specify worst-case bounds, concurrency, clock basis and test conditions. A 390 ms average is insufficient to prove a 500 ms maximum.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Decompose "deliver a passenger safely" into five implementation-neutral functions.</li>
+<li>A system is in the MAINTENANCE state. Which transition guard prevents inadvertent departure?</li>
+<li>The worst-case latencies are 140, 170, 80 and 150 ms. Does the 500 ms bound hold?</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>One valid set: receive request; schedule trip; manage boarding; navigate and avoid hazards; confirm drop-off. Provide flows, not only functions.</p>
+</li>
+<li>
+<p>Require service-ready authorization, maintenance lock released, doors closed, positive operator/supervisor permission and no active emergency; define the controlled source of each signal.</p>
+</li>
+<li>
+<p>Sum = 540 ms, so no. Redesign or change constraints; averaging the stages or claiming nominal margin does not repair the worst-case requirement.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: equating a product breakdown with a functional breakdown; this hides options and creates circular reasoning.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Functional breakdown + state machine + worst-case latency budget. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-06">Technical reviews as falsifiable assurance arguments</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-07">Physical architecture, allocation and contract-level interfaces</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA Systems Engineering Handbook appendices (requirements, V&amp;V, functional analysis)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-662" data-title="Technical reviews as falsifiable assurance arguments" id="chapter-645-662-06"><div class="chapter-header"><span class="course-flag">645-662 / WEEK 06</span><a class="back" href="#top">↑ Contents</a></div><h1>Technical reviews as falsifiable assurance arguments</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 6 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645662.html">Open the original Week 6 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-662-04">Writing verifiable requirements and preserving rationale</a>, <a href="#chapter-645-662-05">Functional analysis: behavior before architecture</a><br/>
+<strong>Core concepts:</strong> functional baseline, review criteria, assurance, finding closure</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>What the reviewer is deciding</h3>
+<p>A functional baseline review asks whether the need-to-function definition is coherent enough to authorize design commitments. It is not an aesthetic check of slides. The reviewer should be able to follow claims backward to user need and forward to intended evidence. The most important questions are often counterfactual: if this interface fails, where is the response defined? If this requirement is removed, what mission need is lost? If a stakeholder assumption changes, what breaks?</p>
+<p>Use the <strong>claim–argument–evidence</strong> method. Claim: 'The proposed functions can support safe degraded operation.' Argument: each hazardous transition has a control, with functions allocated and measurable behavior. Evidence: state models, hazard records, requirements trace, simulations or prototypes, and independent review findings. An argument is not evidence. A design drawing by itself is rarely sufficient evidence for an operational safety claim.</p>
+<h3>Review package and finding taxonomy</h3>
+<p>Provide the mission and boundary decision, stakeholder needs, ConOps, scenarios, requirement quality report, functional architecture, traceability summary, key assumptions, risks, planned verification and configuration index. Tag materials by revision and date so that a reviewer knows the exact baseline under discussion. Use finding classes such as blocking, conditional action and editorial improvement; define them <strong>before</strong> the review.</p>
+<p>A finding entry should preserve observation, affected claim or artifact, consequence, proposed correction, owner, due date, closure criterion, and evidence of disposition. 'Discussed at meeting' is not closure. Good closure is demonstrable: 'Requirement R-15 updated; transition S4→S5 now guarded; regression test T-19 added; reviewer accepted revised configuration.'</p>
+<h3>Avoiding review theater</h3>
+<p>Reviewers need pre-read access and enough time to challenge assumptions. The presenter should avoid answering a deficiency by promising unspecified future work. A review that generates no findings may reflect a strong baseline, but it may also signal superficial challenge. Use an independent role-play: make one reviewer an operator, another a tester, another a safety authority, and another the sponsor. Each has a different failure sensitivity.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Finding example:</strong> Review question: 'What happens when a route command arrives while the shuttle is in emergency-stop recovery?' Evidence shows a sequence diagram but no guard. Blocking finding F-02: unspecified command rejection could permit motion; owner = controls lead; closure = state transition and control requirement added, interface protocol revised, negative test defined and passed on simulator. The team can work on cabin design in parallel but should not approve autonomous road operation.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Formulate a claim–argument–evidence chain for an accessible boarding feature.</li>
+<li>Decide whether "hazard analysis will be performed later" closes a blocking review finding.</li>
+<li>Write a testable closure criterion for an unlabeled control-interface message.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Claim: mobility-device users can board in the target environment. Argument: ramp geometry, docking tolerance, supervision and failure response support that scenario. Evidence: requirements trace, geometry analysis, prototype trials with representative users, and documented acceptance.</p>
+</li>
+<li>
+<p>No. It can become a conditional action if authorization is restricted and a credible safety argument permits the next step. Closure needs actual evidence that the hazard is addressed, not just a future intention.</p>
+</li>
+<li>
+<p>Document units, message schema, sender/receiver and version in the controlled ICD; generate a contract test that rejects malformed messages and records evidence; independent reviewer signs closure.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: accepting a polished briefing as proof that a baseline is complete and internally consistent.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Review evidence index + graded findings and closure log. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-07">Physical architecture, allocation and contract-level interfaces</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-10">Systemic failures, causal reasoning and red-team thinking</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-12">Synthesis: from trace chains to defensible system concepts</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://sebokwiki.org/wiki/Guide_to_the_Systems_Engineering_Body_of_Knowledge_(SEBoK)">Guide to the Systems Engineering Body of Knowledge</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-662" data-title="Physical architecture, allocation and contract-level interfaces" id="chapter-645-662-07"><div class="chapter-header"><span class="course-flag">645-662 / WEEK 07</span><a class="back" href="#top">↑ Contents</a></div><h1>Physical architecture, allocation and contract-level interfaces</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 7 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645662.html">Open the original Week 7 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-662-05">Functional analysis: behavior before architecture</a>, <a href="#chapter-645-662-06">Technical reviews as falsifiable assurance arguments</a><br/>
+<strong>Core concepts:</strong> physical architecture, allocation matrix, ICD, integration risk</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>From necessary functions to feasible products</h3>
+<p>Physical architecture identifies realizable elements—vehicles, controllers, networks, terminals, humans, facilities and procedures—and how they cooperate. Allocate each function to at least one responsible element, but preserve important shared responsibilities explicitly. A single function may span a passenger app, cloud service and onboard controller; the allocation matrix must reveal that interaction rather than arbitrarily choosing one box.</p>
+<p>An architecture choice is justified by quality attributes: latency, safety, availability, cost, maintainability, security and upgradeability. Different partitions change which interfaces are local and which traverse organizations or networks. Centralized dispatch can simplify global optimization but creates connectivity dependence. Local autonomy can improve degraded operation but increases onboard computation and software assurance responsibilities. Use constraints and trade studies to evaluate rather than rely on personal aesthetic preference.</p>
+<h3>Interface control as a technical agreement</h3>
+<p>An interface control document (ICD) defines a mutually understood contract between producers and consumers. Minimum data fields: purpose, owners, physical/logical boundary, exchanged items, schema and units, protocol and version, timing, availability/error assumptions, abnormal behavior, safety/security controls, change process and verification. For a message protocol, a version mismatch is not 'just software'; it may become an operations or safety defect.</p>
+<p>A controlled interface is checked bidirectionally. Producer-side testing proves it emits valid data; consumer-side testing proves it handles valid and invalid data. An end-to-end test checks combined behavior. Claiming compliance because each component tested against its own private assumptions invites integration failures.</p>
+<h3>Make architecture changeable</h3>
+<p>Mark high-risk design decisions with rationale and reversibility. A tightly coupled architecture may make every software update a fleet-wide event; a loose interface may permit independent upgrades but require stronger compatibility testing. The goal is not maximum modularity; it is sufficient cohesion inside components and sufficiently well-specified connections between them.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example:</strong> Function 'route assignment' is allocated to Dispatch Service D1, while 'execute assigned route' is allocated to Vehicle Controller V1. ICD-07 specifies route-ID string, map-version hash, stop sequence, epoch timestamp and expiration in UTC seconds. Onboard software rejects a stale command or mismatched map version and reports a reason. Test producer and consumer separately, then perform an integration test under a delayed network connection.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Contrast a centralized versus on-vehicle obstacle-classification function.</li>
+<li>List four ways identical message names can still produce an integration failure.</li>
+<li>Describe an allocation matrix entry for "notify rider of trip cancellation".</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Centralized processing needs bandwidth and bounded latency; on-vehicle processing needs onboard compute and software assurance. Assess safety, operational coverage, failover and cost.</p>
+</li>
+<li>
+<p>Units, coordinate frame, timing/latency, schema version, null handling, authentication and state assumptions may differ even with identical names.</p>
+</li>
+<li>
+<p>Dispatch generates cancellation; notification service delivers; passenger app presents and acknowledges; operations handles failure. Link requirement, responsible elements, interface IDs and tests.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: modeling interfaces as undirected connectors without ownership, protocol or failure behavior.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Two alternative physical architectures + one complete ICD. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-08">Trade studies, AHP and sensitivity without false precision</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-09">SE management plans, metrics and configuration discipline</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-11">Integration, verification, validation and transition</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-03">Product-oriented WBS, control accounts and work authorization</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA Systems Engineering Handbook appendices (requirements, V&amp;V, functional analysis)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-662" data-title="Trade studies, AHP and sensitivity without false precision" id="chapter-645-662-08"><div class="chapter-header"><span class="course-flag">645-662 / WEEK 08</span><a class="back" href="#top">↑ Contents</a></div><h1>Trade studies, AHP and sensitivity without false precision</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 8 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645662.html">Open the original Week 8 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-662-03">From missions and stakeholders to measurable success</a>, <a href="#chapter-645-662-07">Physical architecture, allocation and contract-level interfaces</a><br/>
+<strong>Core concepts:</strong> decision matrix, weights, AHP, sensitivity</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Separate constraints from preferences</h3>
+<p>An alternative that cannot meet a mandatory safety constraint is not a poor-scoring option; it is <strong>infeasible</strong>. Screen alternatives for non-negotiable constraints first. For feasible options define decision criteria with direction (larger or smaller is better), measurement method, evidence source and weight. Avoid double counting correlated criteria—'reliability' and 'uptime' may reflect much of the same advantage.</p>
+<p>A weighted additive model is <em>Score(A) = Σ w_i s_i(A)</em>, where weights are nonnegative and sum to one, and scores share a consistent preference scale. The numerical result is conditional on the choice of normalization and weights; it does not create objective truth. If cost is reported in dollars and safety is expressed as 1–5 ratings, they must be transformed to comparable utility scores by a defensible rule.</p>
+<h3>AHP as a structured elicitation tool</h3>
+<p>Analytic Hierarchy Process (AHP) can derive relative priorities from pairwise comparisons. It is useful when decision makers can more readily compare pairs than assign direct weights. Its consistency check helps identify contradictory preferences, but a consistent judgment may still be biased or based on poor evidence. Do not use AHP to imply that uncertainty in technical evidence has disappeared.</p>
+<h3>Sensitivity is part of the result</h3>
+<p>For each decisive assumption, ask how far it must move for the preferred option to change. Test plausible intervals for weights and performance estimates, including joint changes where appropriate. A decision is robust if the same choice remains preferable over credible variation; otherwise document the switch points and plan information gathering. Distinguish sensitivity to <em>stakeholder value</em> (weight changes) from sensitivity to <em>technical evidence</em> (score changes).</p>
+<h3>Decision record</h3>
+<p>Record alternatives, constraint screening, criteria and weighting authority, score transformations, sources, uncertainty, sensitivity results, dissent and conditions for reevaluation. For safety-critical decisions, separate assurance arguments from preference scoring: safety compliance is not something to trade away for a lower acquisition cost.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Worked example:</strong> Two feasible shuttle concepts are scored from 0–100 on access, cost and maintainability. A scores (90, 60, 70), B scores (70, 85, 80). Weights (0.50, 0.30, 0.20) give A = 45+18+14 = <strong>77</strong>, B = 35+25.5+16 = <strong>76.5</strong>. A wins by just 0.5; this is a fragile recommendation. If accessibility weight falls to 0.40 and cost rises to 0.40 (maintenance stays 0.20), scores change to A = 74, B = 78. The preferred alternative switches, so decision makers should understand why the original weights are justified.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Which comes first: mandatory accessibility compliance or weighted cost scoring?</li>
+<li>Compute scores for A=(90,60,70) and B=(70,85,80) under equal weights.</li>
+<li>A high score depends on an untested sensor claim. How should the decision record represent this?</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Screen mandatory compliance first, document any constraint waivers only through proper authority; then compare feasible alternatives.</p>
+</li>
+<li>
+<p>A = 73.33; B = 78.33 (both 0–100 scale), so B is preferred under equal weights.</p>
+</li>
+<li>
+<p>Represent the sensor estimate as uncertain, show score ranges/switch points, record evidence quality, propose a prototype or test, and condition commitment on the result.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: treating tiny differences in weighted totals as decisive proof, or trading a hard constraint as if it were a preference.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Feasibility matrix + trade model with three sensitivity scenarios. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-12">Synthesis: from trace chains to defensible system concepts</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://sebokwiki.org/wiki/Guide_to_the_Systems_Engineering_Body_of_Knowledge_(SEBoK)">Guide to the Systems Engineering Body of Knowledge</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-662" data-title="SE management plans, metrics and configuration discipline" id="chapter-645-662-09"><div class="chapter-header"><span class="course-flag">645-662 / WEEK 09</span><a class="back" href="#top">↑ Contents</a></div><h1>SE management plans, metrics and configuration discipline</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 9 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645662.html">Open the original Week 9 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-662-04">Writing verifiable requirements and preserving rationale</a>, <a href="#chapter-645-662-07">Physical architecture, allocation and contract-level interfaces</a><br/>
+<strong>Core concepts:</strong> SEMP, configuration management, risk, technical metrics</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>The technical plan is a coordination device</h3>
+<p>A Systems Engineering Management Plan (SEMP) tells a project how technical work is organized, integrated, checked and controlled. It identifies the lifecycle, work products, methods, roles, decision gates, interface management, V&amp;V strategy, metrics, information management and relationship to project controls. It should be short enough to use but precise enough that a new engineer can find the owner and approval route for a technical change.</p>
+<p>Three structures answer different questions: a Product Breakdown Structure (PBS) tells what elements form the delivered system; a Work Breakdown Structure (WBS) organizes product-oriented scope to be accomplished; the organization structure identifies who performs or owns that work. They are related by responsibility assignment, not interchangeable. A function is also not automatically a WBS element; functions describe required behavior whereas work packages describe authorized effort.</p>
+<h3>Managing technical evidence</h3>
+<p>A baseline is an approved reference configuration. Configuration items receive identifiers; documents and models receive versions; change requests receive impact assessment and approvals; verification evidence records which configuration was tested. Without this chain, 'the test passed' is ambiguous. A passing test on controller firmware 2.1 may not support delivery of firmware 2.3 with revised braking logic.</p>
+<p>A useful technical metric has an owner, collection method, target, trend, threshold and reaction rule. TPMs help make development drift visible before final acceptance. A requirement may limit stopping latency to 500 ms; interim design allocations can carry progressively tighter margin targets. Risk records should explain <strong>cause → event → consequence</strong>, with probability/consequence estimates, mitigation, owner, trigger and residual status. Simply labeling something 'high risk' does not make it actionable.</p>
+<h3>Integration as a management act</h3>
+<p>Technical planning and project planning should share milestones, dependencies and change data. A technical team cannot declare an interface stable while the project schedule quietly assumes significant downstream rework. Every review should reconcile the approved baseline, current forecast, maturity of evidence and open technical issues.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example:</strong> Controller firmware v1.5 passes stop-latency test T-08. A later fix v1.6 modifies message parsing. The configuration index must flag T-08 as potentially stale. The team assesses regression scope, reruns T-08 under the specified configuration, records the new result and updates the verification matrix. A green status based solely on the old run is not evidence for v1.6.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Write a risk in cause→event→consequence form about loss of campus connectivity.</li>
+<li>Distinguish PBS, WBS and organization structure for a shuttle charging station.</li>
+<li>Define a technical metric that gives early warning before battery endurance acceptance.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Because network redundancy is not yet demonstrated (cause), the dispatch link may be unavailable during peak service (event), causing canceled trips and unsafe ad hoc recovery (consequence). Add owner, trigger, mitigation and contingency.</p>
+</li>
+<li>
+<p>PBS: charger, electrical distribution, enclosure, monitoring software; WBS: engineering, procure/install/test each deliverable; organization: campus facilities, contractor, test lead and operations ownership.</p>
+</li>
+<li>
+<p>Energy per kilometer under defined route/load/weather, measured weekly on configured vehicles; trend to the endurance allocation, alert thresholds and decision to redesign or reserve more capacity.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: using an uncontrolled slide deck as the authoritative source for requirements, test results and risk decisions.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> SEMP outline + configuration and metrics registry. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-10">Systemic failures, causal reasoning and red-team thinking</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-11">Integration, verification, validation and transition</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-01">Governance, decision rights and the PM–SE interface</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/ocfo/ppc-corner/project-planning-and-control-overview/">NASA Project Planning and Control overview</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-662" data-title="Systemic failures, causal reasoning and red-team thinking" id="chapter-645-662-10"><div class="chapter-header"><span class="course-flag">645-662 / WEEK 10</span><a class="back" href="#top">↑ Contents</a></div><h1>Systemic failures, causal reasoning and red-team thinking</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 10 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645662.html">Open the original Week 10 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-662-06">Technical reviews as falsifiable assurance arguments</a>, <a href="#chapter-645-662-09">SE management plans, metrics and configuration discipline</a><br/>
+<strong>Core concepts:</strong> causal graph, MCO, assurance gap, interface failure</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Avoid the single-cause story</h3>
+<p>Complex accidents are often described with one memorable proximate fault. Such stories are useful only if they do not hide failed defenses. The Mars Climate Orbiter mission was lost after a ground software units mismatch contributed to navigation errors. NASA investigations also identified failures in communication, operations preparation and systems engineering controls. The lesson is not merely 'convert units'; it is to make assumptions testable at boundaries, monitor anomalies, and create escalation routes that work when people notice something surprising.</p>
+<p>Separate <em>trigger or proximal event</em> from underlying conditions that made it possible and from missing detection or recovery barriers. Build a causal map with branches for technical design, verification, information flow, governance, operational workload and response. Use evidence-based claims. Do not invent details about a historical accident to fit a preferred framework.</p>
+<h3>Challenge an engineering argument</h3>
+<p>A red team should ask which assumptions, interfaces and unlikely conditions could defeat an apparently reasonable design. Useful prompts include: What if the environment differs from test conditions? What if a producer emits correct-looking data in wrong units? What if a required warning is ignored because no single owner can act? What if independent controls secretly depend on the same network or clock?</p>
+<h3>Defense in depth without illusion</h3>
+<p>Layers are only independent when common-cause failures are addressed. Two safety monitors reading the same corrupted source do not provide fully independent protection. For each claimed defense, state its trigger, failure coverage, independence assumptions, test method and escape path. Test off-nominal transitions rather than only component happy paths.</p>
+<h3>Turning learning into preventive action</h3>
+<p>Map each credible failure pathway to prevention, detection, containment or recovery. Every corrective action should name an owner, controlled process or design change, measurable acceptance evidence and audit of effectiveness. An awareness presentation is not a substitute for correcting an unsafe interface contract.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Illustrative shuttle near miss:</strong> The map service publishes coordinates in degrees; the planner expects radians. The command passes schema validation because both fields are floating-point. Vehicle drifts toward a prohibited zone. Stronger controls include typed unit metadata, automated interface contract tests, plausibility bounds, independent geofencing and abnormal-event escalation. An incident report that blames only the programmer misses the missing system-level protections.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Name a proximate cause and two systemic contributors in a wrong-units incident.</li>
+<li>Why may two monitors not provide independent assurance?</li>
+<li>Write a corrective action with evidence for an ambiguous coordinate field.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Proximate event: incorrect value interpreted in target calculation. Contributors: untested interface assumptions, weak cross-team change communication, inadequate anomaly trend monitoring or unowned acceptance checks.</p>
+</li>
+<li>
+<p>They may share a sensor, reference frame, network, algorithm or power supply. A common error can fool both. Test independence assumptions and design diversity where necessary.</p>
+</li>
+<li>
+<p>Change schema to include unit and coordinate frame; add negative contract tests for mismatched units and boundary plausibility tests; require reviewed test logs against a versioned ICD before release.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: explaining a socio-technical failure as one human mistake while overlooking controls that should have caught it.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Causal map + defense audit with prevention/detection/recovery actions. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://llis.nasa.gov/lesson/641">NASA Mars Climate Orbiter mishap lesson</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.jpl.nasa.gov/news/mars-climate-orbiter-team-finds-likely-cause-of-loss/">JPL report on Mars Climate Orbiter error and engineering controls</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-662" data-title="Integration, verification, validation and transition" id="chapter-645-662-11"><div class="chapter-header"><span class="course-flag">645-662 / WEEK 11</span><a class="back" href="#top">↑ Contents</a></div><h1>Integration, verification, validation and transition</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 11 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645662.html">Open the original Week 11 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-662-07">Physical architecture, allocation and contract-level interfaces</a>, <a href="#chapter-645-662-09">SE management plans, metrics and configuration discipline</a><br/>
+<strong>Core concepts:</strong> integration sequence, verification, validation, acceptance, transition</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Five questions that should not be blended</h3>
+<p><strong>Implementation:</strong> was each element made to its design? <strong>Integration:</strong> can the elements work together through defined interfaces? <strong>Verification:</strong> does the realized system meet specified requirements? <strong>Validation:</strong> does it serve intended use in a representative setting? <strong>Acceptance:</strong> has the authorized customer accepted delivery against the agreed basis? These are related but different decisions. A component test can satisfy a low-level requirement while leaving an operational need unvalidated.</p>
+<p>Integration planning should follow dependency and risk, not just convenience. Test high-uncertainty interfaces early with stubs, simulators or prototype elements, then expand to end-to-end integration. Specify integration order, interface versions, required test assets and environment controls, failure triage, and evidence preservation. Later tests cannot reliably repair a missing record of which versions were assembled.</p>
+<h3>Designing evidence backwards</h3>
+<p>Start with the requirement, define the exact pass/fail rule, select verification method, specify stimulus and measurement, and identify configuration and environmental coverage. Then ask what validation scenarios demonstrate that users actually get the promised benefit. For safety or high consequence, an observed zero-failure sample may not establish that true failure probability is acceptably low. Statistical confidence, hazard analysis and independent assurance may be necessary.</p>
+<h3>Transition is a system event</h3>
+<p>Operational readiness includes trained operators, accessible procedures, maintenance spares, cybersecurity responsibilities, monitoring, emergency services, support contracts, rollback mechanisms and data stewardship. A technically verified product can fail in operations because enabling systems and personnel were omitted from readiness planning.</p>
+<h3>Build an evidence matrix</h3>
+<p>Each row has requirement ID, item/version, method, procedure, required environment, expected result, actual result, deviation reference, reviewer and acceptance decision. Link validation evidence to scenarios and stakeholder needs. Separate design validation, operational validation and formal customer acceptance when the program uses distinct authorities.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example:</strong> Req R-22: 'After loss of dispatch connectivity, vehicle shall enter defined safe state within 3 seconds.' Unit test injects simulated message loss into control software. Integration test disables the actual network between dispatch and prototype vehicle. System verification repeats under defined speed/load conditions. Operational validation checks whether passengers and operator can manage the degraded event safely. Acceptance requires the customer-approved evidence set and operating restrictions.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>A route app passes its functional tests but users cannot complete a journey in poor connectivity. Which evidence is missing?</li>
+<li>Write an integration sequence for dispatch, onboard controller and passenger app.</li>
+<li>Name four nontechnical artifacts necessary for operational transition.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>The design may be verified to its narrow requirements, but intended-use validation, degraded-network requirements, and relevant end-to-end tests are missing.</p>
+</li>
+<li>
+<p>First check each interface against a stub; then dispatch-controller contract and failure behavior; then app-dispatch flows; then full trip scenarios including disconnect and rollback, preserving versioned logs.</p>
+</li>
+<li>
+<p>Operator training, maintenance instructions, incident response plan, customer support/communications, accessibility procedures, service ownership, spare parts and authority to restrict operations.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: equating "all test cases passed" with "the service will achieve its mission".</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Integration strategy + verification/validation evidence matrix. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-662-12">Synthesis: from trace chains to defensible system concepts</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA Systems Engineering Handbook appendices (requirements, V&amp;V, functional analysis)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-662" data-title="Synthesis: from trace chains to defensible system concepts" id="chapter-645-662-12"><div class="chapter-header"><span class="course-flag">645-662 / WEEK 12</span><a class="back" href="#top">↑ Contents</a></div><h1>Synthesis: from trace chains to defensible system concepts</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 12 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645662.html">Open the original Week 12 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-662-06">Technical reviews as falsifiable assurance arguments</a>, <a href="#chapter-645-662-08">Trade studies, AHP and sensitivity without false precision</a>, <a href="#chapter-645-662-11">Integration, verification, validation and transition</a><br/>
+<strong>Core concepts:</strong> architecture case, evidence, design decision, competency map</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>The system concept is an argument you can inspect</h3>
+<p>A defensible preliminary concept tells a continuous story: mission and stakeholders → operating scenarios and success measures → requirements → functions → alternative architectures → selected design rationale → interfaces → planned realization and evidence → managed risk and decisions. Each arrow represents a potentially falsifiable connection. If any step disappears, the concept may be attractive but ungrounded.</p>
+<p>Do not conflate high document count with maturity. A concise, consistent architecture with clear assumptions is stronger than a huge repository of unlinked drafts. Construct a one-page evidence map in which each major claim points to a configuration-controlled artifact. A reader should be able to identify the 'as-of' version, unresolved questions, and the conditions under which the recommendation would change.</p>
+<h3>Defend decisions by separating facts, assumptions and values</h3>
+<p>Facts are supported by observations or accepted references. Assumptions are plausible but awaiting evidence. Values are stakeholder preferences and constraints used to make tradeoffs. A choice may be technically feasible yet unacceptable to an operating authority, or preferred under one weight profile but not another. The defense should not disguise those different kinds of judgments.</p>
+<p>A graduate-level oral defense probes counterfactuals: What changes if demand doubles? If a supplier misses a date? If connectivity is lost? If the system boundary includes emergency response? A good answer names the assumptions, traces the impact, and identifies the next information needed—not an improvised certainty.</p>
+<h3>The continuing knowledge map</h3>
+<p>Later MBSE courses formalize trace relationships; conceptual design deepens architectures and trade studies; integration and test courses quantify evidence; project management controls commitments; simulation and decision science deal with uncertainty. This volume supplies the common conceptual spine, not a substitute for those deeper competencies.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example defense brief:</strong> Claim: 'The proposed two-vehicle pilot can provide useful low-speed accessible transport.' Evidence: ConOps, pilot-route assumptions, requirements, scenario tests, access design, trade scoring and integration plan. Open conditions: safe pickup geometry unconfirmed, wet-weather sensor evidence incomplete. Recommendation: authorize detailed design and controlled test-site development, <strong>not</strong> public deployment. This is a defensible qualified decision because the authorization scope matches the evidence.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Trace one stakeholder need through an architecture element to proposed acceptance evidence.</li>
+<li>What should happen when a reviewer finds that an assumption makes the preferred trade option infeasible?</li>
+<li>Design a 90-second defense of a concept with one important unresolved risk.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>For predictable late-night service: need → completion-time MOE → dispatch and vehicle availability requirements → scheduling/communications functions → chosen architecture → representative degraded-operation test → user validation.</p>
+</li>
+<li>
+<p>Reopen feasibility screening and decision record, quantify alternatives and mitigation options, then revise or condition the decision. Do not just lower its weighting.</p>
+</li>
+<li>
+<p>State mission, selected concept and reason, strongest evidence, unresolved risk, operating/design restriction, owner and closure test. Explain what authority is requested and what is expressly excluded.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: presenting unverified operational readiness when only concept feasibility has been demonstrated.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Final claim–evidence map and concept-defense question bank. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://sebokwiki.org/wiki/Guide_to_the_Systems_Engineering_Body_of_Knowledge_(SEBoK)">Guide to the Systems Engineering Body of Knowledge</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-667" data-title="Governance, decision rights and the PM–SE interface" id="chapter-645-667-01"><div class="chapter-header"><span class="course-flag">645-667 / WEEK 01</span><a class="back" href="#top">↑ Contents</a></div><h1>Governance, decision rights and the PM–SE interface</h1>
+<p><strong>Knowledge chapter:</strong> 645-667 · Week 1 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645667.html">Open the original Week 1 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-662-09">SE management plans, metrics and configuration discipline</a><br/>
+<strong>Core concepts:</strong> charter, decision rights, governance, technical authority</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>A project is a temporary authority system</h3>
+<p>A project manager turns a desired capability into an authorized commitment under finite resources. Systems engineering defines and preserves technical coherence. These roles overlap at reviews, risk decisions, interfaces and baseline changes but are not interchangeable. The PM usually owns the integrated delivery commitment and escalates contractual changes; the chief systems engineer is normally accountable for technical integration and recommended technical decisions. Actual authority depends on the governance charter and contractual context.</p>
+<p>A charter establishes why the project exists, boundaries of authority, sponsor, objective, scope, constraints, major milestones, funding assumptions and initial risks. It is neither a fully detailed execution plan nor a license to change customer requirements at will. The crucial governance question is: <strong>Who can make which decision, with what evidence and concurrence?</strong></p>
+<h3>RACI is not sufficient by itself</h3>
+<p>A responsibility matrix indicates who is responsible, accountable, consulted and informed, but usually omits decision thresholds. Complement it with a decision-rights table: action (approve design change), proposing authority (chief engineer), required concurrence (safety, operations, contracting), threshold (cost/scope/safety effects), decision owner (change board or sponsor), required evidence and appeal/escalation. Never use a RACI to pretend the PM can override a legally designated technical or safety authority.</p>
+<h3>The management rhythm is an information system</h3>
+<p>A useful weekly technical-control cycle collects work-package progress, decisions, emerging risks and anomalies. A monthly integrated review reconciles technical maturity, scope, schedule, cost and forecast. Configuration and change boards occur when proposals need decisions, not only because a calendar says so. Each meeting needs pre-read, decision items, owner and output. Reporting must permit bad news to travel upward before options expire.</p>
+<h3>Handling disagreement</h3>
+<p>If the PM needs an earlier launch but safety evidence is incomplete, the legitimate options are reduce scope, change schedule/resources, add evidence or restrict operation—not redefine the test as optional. Governance makes such conflicts visible, assigns the decision to the proper authority and preserves a rationale for auditors and operators.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example:</strong> A sponsor requests an extra shuttle stop at month four. The SE assesses geofence, interfaces, accessibility, safety and tests. The PM assesses contract scope, work packages, cost and schedule. The delegated customer authority approves any modified commitment. A change record links both impact analyses before approval; an email saying 'sounds good' is not sufficient authority unless the governance framework explicitly makes it so.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Who should assess the technical effects of an added route stop, and who should approve contractual changes?</li>
+<li>Write a decision-rights rule for accepting a safety-critical residual risk.</li>
+<li>Identify three outputs from a useful monthly integrated review.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>The engineering team/technical lead assesses impacts; PM integrates commitments and formal change control; delegated contracting/sponsor authority approves changes within the actual contract governance.</p>
+</li>
+<li>
+<p>The designated safety/technical authority reviews independent evidence and residual risk; risk may only be accepted by the role delegated for that consequence level; record rationale and constraints.</p>
+</li>
+<li>
+<p>Reconciled current schedule/cost forecast, technical evidence/TPM status, actions and decisions, risk changes, change dispositions, and agreed escalation items.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: distributing responsibility widely while leaving no explicit, empowered decision owner.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Project charter + 12-row decision-rights table. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-02">From customer opportunity to compliant technical proposal</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-03">Product-oriented WBS, control accounts and work authorization</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-08">Risk, issue, opportunity and baseline change as one control system</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-09">Communication, negotiation, leadership and conflict diagnosis</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/ocfo/ppc-corner/project-planning-and-control-overview/">NASA Project Planning and Control overview</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-667" data-title="From customer opportunity to compliant technical proposal" id="chapter-645-667-02"><div class="chapter-header"><span class="course-flag">645-667 / WEEK 02</span><a class="back" href="#top">↑ Contents</a></div><h1>From customer opportunity to compliant technical proposal</h1>
+<p><strong>Knowledge chapter:</strong> 645-667 · Week 2 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645667.html">Open the original Week 2 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-667-01">Governance, decision rights and the PM–SE interface</a><br/>
+<strong>Core concepts:</strong> RFP, compliance matrix, SOW, proposal strategy</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Understand the offer as a set of commitments</h3>
+<p>A request for proposal (RFP) is not merely a topic prompt. It contains instructions for format and submission, evaluation criteria, technical and management requirements, contractual terms and often mandatory evidence. Read it with two passes: one for the underlying customer problem and another for every statement that can make the proposal nonresponsive. Create a compliance matrix mapping each obligation to a proposal section, responsible author, planned proof and compliance status. A beautiful narrative cannot compensate for omission of a mandatory condition.</p>
+<p>A <strong>Statement of Objectives</strong> emphasizes desired results, often leaving offerors freedom to propose methods. A <strong>Statement of Work</strong> states work to be performed, deliverables and responsibilities. A performance work statement describes outcomes or performance standards for services. The exact distinction is contract-dependent; read the governing instructions rather than assuming one universal template.</p>
+<h3>Translating customer need to a credible bid</h3>
+<p>Proposal strategy should couple a discriminating technical concept with believable delivery: requirements, architecture rationale, WBS, schedule, cost basis, resources, risk, quality, verification, and transition. Competitive language is not evidence. A claim like 'fully autonomous in all weather' creates a large burden of proof; narrow conditions and verified exceptions may produce a stronger, more credible offer.</p>
+<p>Use a assumptions/exclusions log. State who provides campus permits, utility connections, map data, accessible pickup zones and communications services. Unstated assumptions become later change disputes. Capture a bid/no-bid decision using feasibility, authority, capability, financial exposure and available evidence.</p>
+<h3>Internal reviews</h3>
+<p>A <em>pink-team</em> style review can test the story and completeness early; a red-team style review tests compliance, realism and evaluator perspective near submission. Names vary by organization. Review against explicit evaluation criteria, not only grammar and slide appearance.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example:</strong> The fictional campus RFP requires 95% of trips to arrive within five minutes of schedule and an audited accessible boarding demonstration. A proposal offers 97% modeled reliability but no operational demonstration plan. It may be persuasive about the model yet noncompliant on the independent accessible test. The compliance matrix catches the omission before bid submission and flags its budget/schedule consequences.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>An RFP says provide a cyber incident response plan in Appendix D. Where should the team track this?</li>
+<li>Write one customer-friendly assumption and one exclusion for campus charging infrastructure.</li>
+<li>Why might promising maximum performance under every conceivable condition make a bid weaker?</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Create a compliance-matrix row including exact obligation reference, owner, proposal location, evidence, due date and reviewer confirmation.</p>
+</li>
+<li>
+<p>Assumption: campus provides energized connection at specified location/rating by date. Exclusion: civil trenching and utility-meter modifications beyond defined interface; both must be permissible under the RFP.</p>
+</li>
+<li>
+<p>Unlimited claims increase technical, price and acceptance exposure; requirements may be unverifiable. A bounded operational envelope with tested performance is more credible.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: treating proposal compliance as a final proofreading step instead of a traceable engineering process.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Proposal compliance matrix + proposal assumptions register. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-11">Proposal red teams and executable-plan stress tests</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/ocfo/ppc-corner/project-planning-and-control-overview/">NASA Project Planning and Control overview</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.gao.gov/products/gao-20-195g">GAO Cost Estimating and Assessment Guide (2020)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-667" data-title="Product-oriented WBS, control accounts and work authorization" id="chapter-645-667-03"><div class="chapter-header"><span class="course-flag">645-667 / WEEK 03</span><a class="back" href="#top">↑ Contents</a></div><h1>Product-oriented WBS, control accounts and work authorization</h1>
+<p><strong>Knowledge chapter:</strong> 645-667 · Week 3 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645667.html">Open the original Week 3 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-667-01">Governance, decision rights and the PM–SE interface</a>, <a href="#chapter-645-662-07">Physical architecture, allocation and contract-level interfaces</a><br/>
+<strong>Core concepts:</strong> WBS, WBS dictionary, control account, work package</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Structure the work around deliverables</h3>
+<p>A Work Breakdown Structure (WBS) is a hierarchical decomposition of the work required to deliver project scope, ordinarily organized around products and major deliverables. It should cover all approved scope exactly once at each level: the <strong>100% rule</strong>. Use a dictionary to define each element's boundaries, deliverables, completion evidence, assumptions and exclusions. A WBS containing only activities such as 'meetings', 'review' and 'code' cannot reliably show what complete scope has been delivered.</p>
+<p>Distinguish a PBS, which depicts products and subsystems, from a WBS, which organizes work to create the authorized deliverables. Verification, training and documentation may be WBS scope even when they are not shuttle subsystems. A <em>control account</em> joins scope, cost and schedule under accountable management. Below it, work packages have measurable completion criteria, budgets and planned dates; planning packages reserve future work not yet decomposed in detail.</p>
+<h3>From breakdown to authorization</h3>
+<p>A work authorization identifies what team may start, under which baseline, budget, schedule and acceptance criteria. It protects the project from uncontrolled effort and unclear promises. The control-account manager must be able to reconcile WBS scope with the integrated schedule and cost estimate. If a change adds work, it should pass impact review before entering the performance baseline.</p>
+<h3>Evidence of completion</h3>
+<p>Percent complete must be grounded in observable milestones or physical progress. 'Software integration is 90% complete' is suspect if completion means passing the full cross-system regression suite and no integrated test has run. Prefer discrete earning rules tied to documented progress. Use internal milestones with value proportional to actual accomplished scope rather than optimism.</p>
+<h3>Quality check</h3>
+<p>Review sibling elements for overlaps and omissions; verify that every required deliverable has a WBS owner, budget, schedule activities and acceptance evidence. Then check reverse trace: budgeted work that does not contribute to an authorized deliverable may indicate inefficiency or scope drift.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example WBS:</strong> 1.0 Shuttle Pilot → 1.1 Vehicles, 1.2 Dispatch System, 1.3 Campus Interfaces, 1.4 Integration and Verification, 1.5 Operations Readiness. Under 1.3: 1.3.1 Stops and Signage, 1.3.2 Campus Network Interface. The dictionary for 1.3.2 explicitly includes network-contract specification, environment test, cybersecurity review and acceptance evidence; it excludes campus backbone replacement unless separately authorized.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Classify "automated braking module", "write software" and "system test campaign" in PBS versus WBS.</li>
+<li>Name four minimum fields for a WBS dictionary entry.</li>
+<li>A work package reports 80% complete without deliverable evidence. What should a reviewer ask?</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Braking module is a PBS product; software development work belongs in WBS deliverable scope; system test campaign is WBS scope with defined test deliverables, though not necessarily a physical PBS element.</p>
+</li>
+<li>
+<p>ID/name, scope and exclusions, deliverable, accountable owner, completion/acceptance evidence, assumptions, and dependencies.</p>
+</li>
+<li>
+<p>Ask for objective earning rules: passed test set, accepted interface build, reviewed documents or measurable units. Reassess earned progress if evidence does not exist.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: using an unstructured task list to define scope; the WBS should preserve product accountability as activities change.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Three-level WBS + dictionary for five work packages. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-04">Estimating, budget structure and uncertainty</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-05">Critical path, network logic, float and schedule credibility</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-06">Integrated baseline reviews: can the plan actually be executed?</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-07">Earned value, performance indices and honest forecasts</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://ntrs.nasa.gov/citations/20110012671">NASA Work Breakdown Structure Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/ocfo/ppc-corner/project-planning-and-control-overview/">NASA Project Planning and Control overview</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-667" data-title="Estimating, budget structure and uncertainty" id="chapter-645-667-04"><div class="chapter-header"><span class="course-flag">645-667 / WEEK 04</span><a class="back" href="#top">↑ Contents</a></div><h1>Estimating, budget structure and uncertainty</h1>
+<p><strong>Knowledge chapter:</strong> 645-667 · Week 4 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645667.html">Open the original Week 4 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-667-03">Product-oriented WBS, control accounts and work authorization</a><br/>
+<strong>Core concepts:</strong> cost estimating, three-point estimate, contingency, management reserve</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Every estimate is a conditional model</h3>
+<p>An estimate is an inference from defined scope, quantities, productivity, rates and risk conditions. It is not a promise that numbers are exact. A <em>basis of estimate</em> records each major cost element, source of data, calculation method, exclusions, confidence, escalation assumptions and date. Common approaches are analogous (compare similar work), parametric (use calibrated unit relationships), bottom-up (aggregate detailed work), and expert judgment (preferably structured and challenged). Cross-check one method against another when practical.</p>
+<p>Direct labor cost is commonly <strong>hours × loaded labor rate</strong>. Total planning cost also includes materials, subcontracts, tooling, travel, facilities, assurance and other applicable cost categories. Price to a customer is not identical to underlying cost; contract terms, profit or fee, indirect cost rules, and risk allocation matter. Never silently mix labor hours, calendar duration, dollars in different price years or fully burdened and unburdened rates.</p>
+<h3>Three-point reasoning</h3>
+<p>For an uncertain activity, elicit optimistic, most likely and pessimistic duration or effort estimates with coherent scenarios. A familiar illustrative PERT mean is <strong>(O + 4M + P)/6</strong>; it is a heuristic approximation, not a substitute for a probability model or data. A larger estimate range signals exposure but does not by itself specify the distribution's tail. Correlated uncertainties—one supplier delay affecting many packages—are especially dangerous if simply summed as independent buffers.</p>
+<h3>Reserves and budget logic</h3>
+<p>A cost baseline represents authorized planned work under stated conventions. Contingency for identified uncertainty is ordinarily integrated into the approved project plan according to the organization's rules; management reserve is held outside the performance measurement baseline for controlled use against unforeseen in-scope work, depending on the governing system. Neither reserve is an excuse to hide known mandatory scope. Explicitly distinguish baseline, funds authority, current forecast and total commitment.</p>
+<h3>Estimate updates</h3>
+<p>As prototype results, bids or performance data arrive, update the <em>forecast</em> and retain a record of why. Do not rewrite the original baseline simply to eliminate an unfavorable variance. A trustworthy estimate preserves versioned assumptions so an independent reviewer can reproduce it.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Worked example (fictional):</strong> 160 engineering hours at $130/hr = $20,800. Equipment = $18,000, software license = $2,500, external test = $6,000. Direct illustrative subtotal = <strong>$47,300</strong>. Add a separately documented 10% contingency ($4,730) for a specific in-scope test uncertainty → planned amount <strong>$52,030</strong>. Do not call a blanket 10% an objectively calculated risk exposure: justify it, and follow the project's accounting conventions for where reserve sits.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Compute loaded labor cost for 75 hours at $145/hour.</li>
+<li>PERT-style estimate for O=4, M=6, P=14 days?</li>
+<li>A new supplier quote increases forecast cost. Should the original baseline be overwritten?</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>$10,875, assuming the rate already includes all applicable labor burdens and no added categories.</p>
+</li>
+<li>
+<p>(4 + 4×6 + 14)/6 = 42/6 = 7 days. Do not treat this as a guaranteed completion date or a full probability distribution.</p>
+</li>
+<li>
+<p>No. Record the revised estimate to complete and variance against the approved baseline. Change the baseline only through authorized change control.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: quoting an exact dollar figure while its scope, rates and risk assumptions remain undocumented.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Basis-of-estimate workbook + uncertainty and reserve rationale. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-05">Critical path, network logic, float and schedule credibility</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-06">Integrated baseline reviews: can the plan actually be executed?</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-07">Earned value, performance indices and honest forecasts</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.gao.gov/products/gao-20-195g">GAO Cost Estimating and Assessment Guide (2020)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/ocfo/ppc-corner/project-planning-and-control-overview/">NASA Project Planning and Control overview</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-667" data-title="Critical path, network logic, float and schedule credibility" id="chapter-645-667-05"><div class="chapter-header"><span class="course-flag">645-667 / WEEK 05</span><a class="back" href="#top">↑ Contents</a></div><h1>Critical path, network logic, float and schedule credibility</h1>
+<p><strong>Knowledge chapter:</strong> 645-667 · Week 5 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645667.html">Open the original Week 5 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-667-03">Product-oriented WBS, control accounts and work authorization</a>, <a href="#chapter-645-667-04">Estimating, budget structure and uncertainty</a><br/>
+<strong>Core concepts:</strong> predecessor network, critical path, float, schedule risk</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>A schedule is a model of causality</h3>
+<p>A schedule is more than dates printed next to task names. It represents which outcomes enable later work, how much elapsed time tasks need, what resources they consume and which paths control completion. In an activity-on-node network, each activity has duration and predecessor logic. For a finish-to-start relationship, the earliest start is the maximum earliest finish of its predecessors. Earliest finish = earliest start + duration. Backward calculation from the required finish gives latest allowable dates; <em>total float</em> = latest start − earliest start. This uses a consistent time convention and assumes durations and resource constraints are as modeled.</p>
+<p>A critical path comprises zero-float activities under the modeled finish constraint, but multiple near-critical paths can matter. Duration estimates are not effort estimates: 40 labor hours might be performed over five days by one person or longer with intermittent access to a shared test facility. Calendars, holidays, approvals, staffing, external deliveries and capacity should be modeled explicitly.</p>
+<h3>What makes a schedule trustworthy</h3>
+<p>Each meaningful activity should have traceable scope, predecessors/successors, realistic duration, responsible resources and status logic. Long chains of mandatory date constraints or arbitrary lags can hide the actual driving path. Schedule metrics should expose unresolved logic, negative float and unusual constraints. Rolling-wave planning may refine distant activities while retaining major scope and milestone dependencies.</p>
+<h3>Resource feasibility</h3>
+<p>Two activities may be logically parallel yet compete for the same single test engineer or facility. The unconstrained network gives a lower bound on elapsed time. Resource leveling can extend the schedule and change the driving path. Distinguish critical path under pure logic from a resource-constrained critical chain. Model a recovery plan's effects on quality and risk, not only nominal days saved.</p>
+<h3>Schedule risk</h3>
+<p>When several uncertain tasks converge before one integration milestone, the finish probability is not derived from a single best-case path. Near-critical paths can become critical. A credible schedule risk review explores duration ranges, dependencies and correlated uncertainties. Do not confuse an earned-value schedule index with a forecast of actual completion time.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Worked network (days, finish-to-start):</strong> A architecture (3); B procurement (5) after A; C controller design (4) after A; D integration (3) after B and C; E acceptance (2) after D. Paths: A–B–D–E = 3+5+3+2 = <strong>13 days</strong>; A–C–D–E = 3+4+3+2 = <strong>12 days</strong>. Critical path is A–B–D–E, and C has 1 day of total float if no other constraints. If B needs six days, C’s nominal one-day float does not protect the completion milestone.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Recalculate completion time if B falls from 5 to 3 days and C remains 4.</li>
+<li>Why can a logically valid schedule still be impossible?</li>
+<li>What does zero total float imply, and what does it NOT imply?</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>A–B–D–E = 11; A–C–D–E = 12. The critical path switches to C and total completion becomes 12 days.</p>
+</li>
+<li>
+<p>Resource contention, availability calendars, external approvals, unrealistic durations or missing work can make the logic-only plan infeasible.</p>
+</li>
+<li>
+<p>Under the stated model, any delay to that activity without recovery impacts the constrained finish; it does not prove the date is statistically likely or that every near-critical path is safe.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: interpreting a critical-path chart as a probability distribution or a guarantee that resources exist.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Dependency network + forward/backward pass + resource-feasibility audit. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-06">Integrated baseline reviews: can the plan actually be executed?</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-10">Managing integrated hardware, software and agile delivery</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.gao.gov/products/gao-16-89g">GAO Schedule Assessment Guide (2015)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/ocfo/ppc-corner/project-planning-and-control-overview/">NASA Project Planning and Control overview</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-667" data-title="Integrated baseline reviews: can the plan actually be executed?" id="chapter-645-667-06"><div class="chapter-header"><span class="course-flag">645-667 / WEEK 06</span><a class="back" href="#top">↑ Contents</a></div><h1>Integrated baseline reviews: can the plan actually be executed?</h1>
+<p><strong>Knowledge chapter:</strong> 645-667 · Week 6 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645667.html">Open the original Week 6 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-667-03">Product-oriented WBS, control accounts and work authorization</a>, <a href="#chapter-645-667-04">Estimating, budget structure and uncertainty</a>, <a href="#chapter-645-667-05">Critical path, network logic, float and schedule credibility</a><br/>
+<strong>Core concepts:</strong> integrated baseline, scope-cost-schedule trace, IBR, control account</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Integration is the test</h3>
+<p>An Integrated Baseline Review (IBR) examines whether project scope, technical maturity, assigned responsibility, schedule, resources, budget, risks and performance measurement form a coherent executable plan. A spreadsheet can sum correctly and still conceal missing verification work or impossible facility usage. The review is not just 'budget validation'; it checks whether managers understand and can execute the authorized scope.</p>
+<p>Build an explicit mapping: requirement and product deliverable → WBS control account → work package → schedule activities → assigned resources → budget and earning rules → verification/acceptance evidence. Every arrow is a place where phantom scope can hide. At the start of work, technical baselines may still evolve, but the management plan must make uncertainty and authorized planning packages visible.</p>
+<h3>Interview the people who own the work</h3>
+<p>A credible IBR asks a control-account manager: What do you deliver? Why is your duration plausible? Which predecessor must finish? What makes the activity complete? What assumption could break the estimate? Who approves a variance correction or a change? These interviews test whether data are truly understood rather than merely assembled by planning software.</p>
+<h3>Findings and conditional readiness</h3>
+<p>Flag missing scope, impossible resource loads, unowned dependencies, undefined earning rules, unsupported rates and risk exposure without contingency plans. Review decisions may authorize low-risk work while withholding funds or activity for unresolved high-consequence areas. Track closure evidence with owner and approved restrictions.</p>
+<h3>Forecast is not baseline</h3>
+<p>During execution, the team maintains actuals and estimates to complete. An IBR-approved plan provides a baseline for measuring variance; it is not evidence that no forecast changes will ever be needed. A disciplined project differentiates (1) approved performance measurement baseline, (2) current estimate at completion and (3) change-controlled new commitments.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example:</strong> WBS 1.4 'Integration and Verification' contains $70k but the schedule shows integration complete before the campus network is installed. The test lead has not confirmed facility access. A passing IBR would be premature. Correct logic links, secure facility and network availability, update resource load and risk contingency, then record new schedule/cost implications before formal readiness.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Find two defects in a baseline with a test WBS account but no test activities or named tester.</li>
+<li>What should be reviewed when supplier hardware delivery moves by three weeks?</li>
+<li>Explain the difference between approved baseline and estimate at completion.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Scope-to-schedule disconnect and missing accountable resource; also undefined objective completion or EVM earning rules if no test evidence is planned.</p>
+</li>
+<li>
+<p>Affected predecessor logic and paths, integration facility window, resources, idle labor, cost and reserve, test plan, milestone commitment, risk and formal change authority.</p>
+</li>
+<li>
+<p>Baseline is approved reference for authorized scope and measurement; EAC is current prediction of total cost. They are not supposed to be equal when reality changes.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: approving an integrated baseline because all columns are filled, without testing causal relationships and resource feasibility.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> IBR evidence crosswalk + independent challenge checklist. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-07">Earned value, performance indices and honest forecasts</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-11">Proposal red teams and executable-plan stress tests</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-12">Management synthesis: defend the commitment and learn</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/ocfo/ppc-corner/project-planning-and-control-overview/">NASA Project Planning and Control overview</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://ntrs.nasa.gov/citations/20110012671">NASA Work Breakdown Structure Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.gao.gov/products/gao-16-89g">GAO Schedule Assessment Guide (2015)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-667" data-title="Earned value, performance indices and honest forecasts" id="chapter-645-667-07"><div class="chapter-header"><span class="course-flag">645-667 / WEEK 07</span><a class="back" href="#top">↑ Contents</a></div><h1>Earned value, performance indices and honest forecasts</h1>
+<p><strong>Knowledge chapter:</strong> 645-667 · Week 7 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645667.html">Open the original Week 7 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-667-03">Product-oriented WBS, control accounts and work authorization</a>, <a href="#chapter-645-667-04">Estimating, budget structure and uncertainty</a>, <a href="#chapter-645-667-06">Integrated baseline reviews: can the plan actually be executed?</a><br/>
+<strong>Core concepts:</strong> EV, PV, AC, CPI, SPI, EAC</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Separate planned work, completed work and cost paid</h3>
+<p>Earned Value Management (EVM) distinguishes <strong>Planned Value (PV)</strong>, budgeted value of work scheduled; <strong>Earned Value (EV)</strong>, budgeted value of actual work accomplished; and <strong>Actual Cost (AC)</strong>, what that work cost. These are all monetary quantities but answer different questions. A project that spends 80% of budget is not necessarily 80% complete. Earned progress requires objective completion evidence linked to WBS work packages.</p>
+<p>Define <strong>CV = EV − AC</strong>, <strong>SV = EV − PV</strong>, <strong>CPI = EV/AC</strong>, <strong>SPI = EV/PV</strong>, when denominators are nonzero. Negative CV indicates cost overrun relative to earned work; negative SV indicates less budgeted work accomplished than planned at the status date. SPI is <strong>not</strong> a direct measure of days late; it can become misleading late in a project as nearly all work is earned.</p>
+<h3>Forecasting with explicit assumptions</h3>
+<p>A basic EAC extrapolation assumes future CPI resembles past CPI: <strong>EAC = AC + (BAC − EV)/CPI</strong>. If the remaining work is fundamentally different, build a bottom-up estimate-to-complete and use <strong>EAC = AC + ETC</strong> instead. EAC forecasts should reconcile known technical scope changes, discrete supplier quotes, resource productivity, schedule impacts and uncertainty. <strong>VAC = BAC − EAC</strong> reveals the forecast variance at completion.</p>
+<p>For performance required to hit a target budget, <strong>TCPI(BAC) = (BAC − EV)/(BAC − AC)</strong>, if the denominator is positive. An implausibly high TCPI is an alert that the original target may be unrealistic. Never respond by manipulating earned percent complete.</p>
+<h3>Variance narratives</h3>
+<p>A useful report states root causes and actions, not just red indices: 'The integration package earned $40k versus $60k planned, with $55k spent because interface rework consumed test staff. The corrective action is to freeze ICD version and rerun contract tests; cost-to-complete has increased.' Tie the analysis to updated evidence and current risks.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Worked numbers:</strong> BAC=$500k; PV=$250k; EV=$200k; AC=$240k. CV=−$40k; SV=−$50k; CPI=0.8333; SPI=0.8. If future work matches cumulative CPI, EAC=240+300/0.8333≈<strong>$600k</strong>; VAC≈−$100k. TCPI to hit original BAC is (500−200)/(500−240)=<strong>1.154</strong>, meaning remaining work must be earned at a CPI of about 1.154—far better than current 0.833. This is a management challenge, not an automatic impossibility.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>For PV=120, EV=100, AC=125 (all $k), calculate CV, SV, CPI and SPI.</li>
+<li>Using BAC=300, EV=100, AC=125 ($k), compute CPI-based EAC.</li>
+<li>Why should SPI=0.9 not be translated automatically to "10% more days"?</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>CV=−25k; SV=−20k; CPI=100/125=0.8; SPI=100/120≈0.833.</p>
+</li>
+<li>
+<p>CPI=0.8; EAC=125+(300−100)/0.8 = 125+250 = $375k. This assumes future cost efficiency matches cumulative CPI.</p>
+</li>
+<li>
+<p>SPI compares budgeted work values at a date, not elapsed time; nonlinear work profiles, converging paths and late-project completion distort direct schedule-duration inference.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: reporting percent spent as percent complete, or treating the CPI extrapolation as a fact without assumptions.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Three-month earned-value status sheet with EAC scenarios and narrative. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-08">Risk, issue, opportunity and baseline change as one control system</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-10">Managing integrated hardware, software and agile delivery</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/wp-content/uploads/2018/06/nasa_evm_reference_card.pdf">NASA earned value management reference card</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/ocfo/ppc-corner/project-planning-and-control-overview/">NASA Project Planning and Control overview</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-667" data-title="Risk, issue, opportunity and baseline change as one control system" id="chapter-645-667-08"><div class="chapter-header"><span class="course-flag">645-667 / WEEK 08</span><a class="back" href="#top">↑ Contents</a></div><h1>Risk, issue, opportunity and baseline change as one control system</h1>
+<p><strong>Knowledge chapter:</strong> 645-667 · Week 8 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645667.html">Open the original Week 8 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-667-01">Governance, decision rights and the PM–SE interface</a>, <a href="#chapter-645-667-07">Earned value, performance indices and honest forecasts</a><br/>
+<strong>Core concepts:</strong> risk response, issue, opportunity, change control, quality</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Keep uncertainty distinct from realized problems</h3>
+<p>A <strong>risk</strong> is an uncertain future event with potential consequence; an <strong>issue</strong> is a condition already occurring that needs resolution; an <strong>opportunity</strong> is potential favorable uncertainty with a plausible action. A risk register should include cause, event, consequence, likelihood/impact logic, owner, response, trigger and residual exposure. When a risk materializes, transfer it to issue control while preserving the original record for learning.</p>
+<p>Responses differ: avoid a risk by changing strategy; reduce likelihood or consequence through mitigation; transfer certain contractual/financial consequences where meaningful; accept with accountable authorization and monitored contingency. Transferring a financial liability does not transfer moral or technical responsibility for a public safety outcome. Opportunities should be managed with the same skepticism about probability and evidence as threats.</p>
+<h3>The integrated change loop</h3>
+<p>A change request should connect the technical baseline (requirements/interfaces/architecture), management baseline (WBS/schedule/budget) and assurance plan (verification/quality). Impact analysis precedes approval; after approval, update all relevant controlled artifacts and communicate the effective version. Informal workarounds are especially risky when a safety-critical interface changes. Make the change board responsible for coherent dispositions rather than simply recording 'approved'.</p>
+<h3>Corrective versus preventive action</h3>
+<p>An issue can require immediate containment, root-cause analysis, permanent correction and verification of effectiveness. Quality assurance checks the process and controls; quality control inspects or tests outputs. Passing an end-item test may not justify a process that hides systematic defects, while perfect paperwork does not guarantee system performance.</p>
+<h3>Register hygiene</h3>
+<p>Review stale entries, triggered conditions, duplicate risks and disconnected owners. A risk score alone is not a decision: explicit thresholds and exposure to objectives matter. A high-probability minor inconvenience may rank differently from a low-probability fatal hazard; critical risks require consequence-based escalation independent of arithmetic scoring.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example:</strong> Risk: supplier firmware may not support the agreed versioned API by integration date, delaying full-system test (probability uncertain; high schedule impact). Trigger: versioned interface test fails at supplier demonstration. Mitigation: contract tests and emulator early; contingency: retain prior supported firmware and restrict features. When the demonstration fails, log an <strong>issue</strong> and initiate change analysis for revised integration plan, cost, test scope and acceptance evidence.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Classify: "supplier might deliver late" versus "supplier missed the contracted date yesterday."</li>
+<li>A change reduces purchase cost but removes an emergency-access feature. What must the board assess?</li>
+<li>Name difference between mitigation, contingency and issue correction.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>First is a risk; second is an issue. Keep linked records and update the schedule/forecast and supplier actions.</p>
+</li>
+<li>
+<p>Effect on mandatory requirements, hazards, operational scenarios, stakeholder acceptance, interface changes, tests, lifecycle cost, schedule and authority. Cost savings cannot make a mandatory safety control optional.</p>
+</li>
+<li>
+<p>Mitigation acts before a risk materializes; contingency is planned response if trigger occurs; correction resolves an already existing issue and should address underlying causes.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: treating a risk register as a monthly color chart unconnected to decisions, money, schedule or engineering changes.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Integrated risk–issue–change log with decisions and owners. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-09">Communication, negotiation, leadership and conflict diagnosis</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-10">Managing integrated hardware, software and agile delivery</a></li>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-12">Management synthesis: defend the commitment and learn</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/ocfo/ppc-corner/project-planning-and-control-overview/">NASA Project Planning and Control overview</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-667" data-title="Communication, negotiation, leadership and conflict diagnosis" id="chapter-645-667-09"><div class="chapter-header"><span class="course-flag">645-667 / WEEK 09</span><a class="back" href="#top">↑ Contents</a></div><h1>Communication, negotiation, leadership and conflict diagnosis</h1>
+<p><strong>Knowledge chapter:</strong> 645-667 · Week 9 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645667.html">Open the original Week 9 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-667-01">Governance, decision rights and the PM–SE interface</a>, <a href="#chapter-645-667-08">Risk, issue, opportunity and baseline change as one control system</a><br/>
+<strong>Core concepts:</strong> stakeholder communication, conflict, leadership, escalation</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Project communication is a design problem</h3>
+<p>Communication planning should be based on decisions that recipients must make, not on a generic desire to 'keep everyone informed'. A senior sponsor needs deviations from commitments, options, cost/schedule consequences and requests for authority. A test engineer needs configuration, requirements and defect evidence. An operator needs operational impact, readiness restrictions and escalation contact. The same situation must be represented consistently at different levels of detail.</p>
+<p>A stakeholder map considers interest, influence, affected outcomes, decision rights and likely communication needs. It is not a label of which people are 'difficult'. Resistance may reveal a legitimate neglected constraint. Listening for operational knowledge often improves requirements and implementation plans.</p>
+<h3>Diagnose conflict before choosing a technique</h3>
+<p>Distinguish conflict over technical evidence, resources, priorities, authority, process and personal treatment. If a technical lead disputes a schedule because the test environment is unavailable, negotiating better rapport will not make the facility exist. Identify the underlying interests and constraints, and establish a shared fact base. Use escalation when delegated authority is exceeded, when safety is implicated or when the dispute blocks the schedule.</p>
+<h3>Leader behavior under uncertainty</h3>
+<p>Effective technical leadership allows uncomfortable evidence to surface without punishing the messenger. Ask teams for what changed since the prior review, what assumptions are weakest and what help is needed. Keep decisions traceable, acknowledge uncertainty and avoid fictional green status. A concise decision log preserves date, options, facts, chosen action, authority, affected baseline and revisit conditions.</p>
+<h3>Remote and multi-organizational teams</h3>
+<p>Write interfaces between organizations as carefully as software interfaces: ownership, turnaround times, inputs, expected outputs and escalation. Asynchronous reports should include context and explicit requests rather than unexplained metrics. Misaligned incentives and time-zone handoffs can create project failures even when individual specialists are competent.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example:</strong> Software lead says a feature is 'done'; operations says it is unusable. Investigation shows software meant 'merged into branch' while operations meant 'trained, integrated and accepted in the field.' The PM convenes both parties, defines a common completion state with acceptance evidence, updates reporting and resolves schedule impact. A communication conflict was actually a definition-of-done and baseline integration failure.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Draft a two-sentence executive escalation for missing test equipment.</li>
+<li>How would you distinguish a relationship conflict from an engineering-evidence conflict?</li>
+<li>What should a decision log record after a disagreement about release readiness?</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>State affected milestone/mission impact and current evidence; present options with cost/schedule/risk and request an identified decision by a specific date. Avoid concealing constraints behind optimistic percentages.</p>
+</li>
+<li>
+<p>Check disputed facts, success criteria and authority first; independently review tests and constraints. If evidence agrees but trust/behavior remains problematic, address interpersonal/process issues separately.</p>
+</li>
+<li>
+<p>Decision date and authority, alternatives, evidence/revisions reviewed, concerns and concurrence, selected restriction or release, action owners, updated forecast and conditions for reconsideration.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: assuming more meetings solve a conflict whose root cause is incompatible acceptance definitions or unclear authority.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Stakeholder decision-communication matrix + release disagreement memo. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/ocfo/ppc-corner/project-planning-and-control-overview/">NASA Project Planning and Control overview</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://sebokwiki.org/wiki/Guide_to_the_Systems_Engineering_Body_of_Knowledge_(SEBoK)">Guide to the Systems Engineering Body of Knowledge</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-667" data-title="Managing integrated hardware, software and agile delivery" id="chapter-645-667-10"><div class="chapter-header"><span class="course-flag">645-667 / WEEK 10</span><a class="back" href="#top">↑ Contents</a></div><h1>Managing integrated hardware, software and agile delivery</h1>
+<p><strong>Knowledge chapter:</strong> 645-667 · Week 10 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645667.html">Open the original Week 10 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-667-05">Critical path, network logic, float and schedule credibility</a>, <a href="#chapter-645-667-07">Earned value, performance indices and honest forecasts</a>, <a href="#chapter-645-667-08">Risk, issue, opportunity and baseline change as one control system</a><br/>
+<strong>Core concepts:</strong> hybrid project, technical debt, release evidence, integrated forecasting</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Iterative development still creates commitments</h3>
+<p>Agile practices can improve learning, early integration and stakeholder feedback. They do not erase physical procurement lead times, assurance obligations or contractual milestones. A hybrid technical project needs a shared product architecture, configuration baseline, integration strategy and forecast across increments. Sprint velocity is a local throughput measure and cannot by itself establish cost or full-program completion.</p>
+<p>Distinguish work that can be released independently from work that requires coupled validation. A passenger notification feature may be iterated rapidly; braking-control software must be evaluated against specific hardware, operational scenarios and safety requirements. Definition of Done should include appropriate integration, test, documentation and configuration evidence, not merely the fact that code was merged or a story closed.</p>
+<h3>Reconcile different progress measures</h3>
+<p>Software boards often measure stories or features; EVM measures budgeted value of earned WBS scope. Map milestones to objective technical outputs. Do not translate story points directly into dollars without a defensible model. Product backlogs are expected to evolve, while approved project commitments must be changed through explicit authority. Preserve the distinction between internal reprioritization within scope and changes to the customer's agreed requirements.</p>
+<h3>Technical debt and rework</h3>
+<p>Fast delivery can defer useful internal improvements, but unresolved integration defects, security findings and safety evidence are not free progress. Make debt and rework visible in future capacity and estimated cost to complete. Use interface contract tests and continuous integration for fast feedback, while retaining formal release gates where consequence demands.</p>
+<h3>Crisis management</h3>
+<p>When a technical surprise causes delay, construct options: reduce nonessential scope, add targeted resources, resequence independent work, switch architecture, or rebaseline with authorization. For each option model time, cost, quality, risk and acceptance. 'Work weekends' is not a systems-level recovery plan.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example:</strong> Dispatch software completes four sprints, but vehicle hardware arrives six weeks late. The software team has 70 accepted stories; end-to-end readiness is still unknown. A useful response maps completed stories to approved capabilities, runs interface tests against a hardware emulator, reforecasts integration resources and preserves the public-service acceptance gate. Do not infer launch readiness from sprint burn-down.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Explain why a sprint burndown can be healthy while the overall project is delayed.</li>
+<li>Write a definition of done for a safety-relevant software interface change.</li>
+<li>Suggest two recovery options after a late hardware delivery, with risks.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Local backlog throughput may be on target even when physical procurement, system-level integration, external permits or verification are on the critical path.</p>
+</li>
+<li>
+<p>Peer-reviewed versioned code and interface schema; passing contract/negative tests; linked requirement and hazards; configured integration evidence; approved regression scope and release authority.</p>
+</li>
+<li>
+<p>Use a validated emulator and parallelize nondependent evidence, risking simulator fidelity; or add alternate vendor/parts, risking cost and compatibility. Analyze decisions and preserve integration acceptance.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: treating software output counts as proof of delivered system capability or customer acceptance.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Hybrid backlog-to-WBS mapping + integrated release readiness forecast. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-11">Proposal red teams and executable-plan stress tests</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/ocfo/ppc-corner/project-planning-and-control-overview/">NASA Project Planning and Control overview</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.gao.gov/products/gao-16-89g">GAO Schedule Assessment Guide (2015)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-667" data-title="Proposal red teams and executable-plan stress tests" id="chapter-645-667-11"><div class="chapter-header"><span class="course-flag">645-667 / WEEK 11</span><a class="back" href="#top">↑ Contents</a></div><h1>Proposal red teams and executable-plan stress tests</h1>
+<p><strong>Knowledge chapter:</strong> 645-667 · Week 11 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645667.html">Open the original Week 11 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-667-02">From customer opportunity to compliant technical proposal</a>, <a href="#chapter-645-667-06">Integrated baseline reviews: can the plan actually be executed?</a>, <a href="#chapter-645-667-10">Managing integrated hardware, software and agile delivery</a><br/>
+<strong>Core concepts:</strong> proposal review, red team, schedule stress, baseline audit</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>Evaluator and executor viewpoints</h3>
+<p>A proposal can satisfy formal format requirements yet remain unconvincing because costs, schedule and capabilities are inconsistent. Red-team review must ask two linked questions: <em>Would a knowledgeable customer trust this offer?</em> and <em>Could the proposed delivery team actually execute it?</em> First check mandatory compliance; then test feasibility and risk exposure. A gap in either category may invalidate the response.</p>
+<p>Use a review matrix with requirement/source, proposal claim, evidence location, reviewer disposition, severity and correction. Independent reviewers should verify calculations rather than assume they are correct because they appear in a polished chart. Check that every major promise has an owner, cost, schedule path, acceptance basis and externally controlled dependency.</p>
+<h3>Stress testing assumptions</h3>
+<p>Choose realistic disturbances: a key supplier slips, an external permit is delayed, accessibility testing reveals a redesign, software regression uncovers a security flaw, or the launch date moves earlier. Run each through the integrated baseline. Does the critical path change? Is a reserve really usable? Does contingency violate a technical constraint? What customer notification or approval is required?</p>
+<h3>Consistency across volumes</h3>
+<p>A schedule that promises user acceptance before prototype integration conflicts with the technical plan. A cost proposal that omits required independent testing conflicts with the compliance section. A risk register with a 'high' safety risk but no response conflicts with the readiness claim. Review by tracing between documents, not by reviewing each document in isolation.</p>
+<h3>Credibility of commitments</h3>
+<p>Correct discrepancies with explicit revised artifacts and an auditable proposal version. If the offer remains conditional, state the conditions. A red-team finding becomes meaningful only after its correction is checked. Keep a closure ledger with problem, decision, owner, deadline, affected pages/baselines and demonstrated resolution.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example:</strong> The pilot proposal offers a 12-week installation. Integration is budgeted for weeks 9–10, but charging infrastructure is promised by a third party in week 11. The red team identifies a dependency contradiction. The team either secures an earlier infrastructure date, uses an authorized temporary test setup, or moves the acceptance milestone and adjusts budget and customer commitment. A different font on the schedule slide is not a remedy.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>Identify the contradiction in a proposal that promises certification before hardware-in-the-loop tests.</li>
+<li>Stress a baseline with a 20-day supplier delay when the delivery path has 5 days float.</li>
+<li>What closes a serious red-team finding?</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Required evidence is planned after the conclusion it supports. Reorder tests/certification or change the authorized scope and demonstrate valid evidence sequence.</p>
+</li>
+<li>
+<p>Absent recovery, the schedule may slip roughly 15 days if the affected path remains driving; recompute full logic, resource effects and near-critical paths before reporting a new finish.</p>
+</li>
+<li>
+<p>Corrected controlled artifacts, recalculated impacts, objective evidence, an owner and independent verification of closure against the original finding.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: calling a review complete when findings are logged but their implications for the proposal and commitments remain unresolved.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Independent compliance/credibility red-team report. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="#chapter-645-667-12">Management synthesis: defend the commitment and learn</a></li>
+</ul>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.gao.gov/products/gao-16-89g">GAO Schedule Assessment Guide (2015)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.gao.gov/products/gao-20-195g">GAO Cost Estimating and Assessment Guide (2020)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/ocfo/ppc-corner/project-planning-and-control-overview/">NASA Project Planning and Control overview</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+<article class="chapter" data-course="645-667" data-title="Management synthesis: defend the commitment and learn" id="chapter-645-667-12"><div class="chapter-header"><span class="course-flag">645-667 / WEEK 12</span><a class="back" href="#top">↑ Contents</a></div><h1>Management synthesis: defend the commitment and learn</h1>
+<p><strong>Knowledge chapter:</strong> 645-667 · Week 12 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../C/P0/EN645667.html">Open the original Week 12 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="#chapter-645-667-06">Integrated baseline reviews: can the plan actually be executed?</a>, <a href="#chapter-645-667-08">Risk, issue, opportunity and baseline change as one control system</a>, <a href="#chapter-645-667-11">Proposal red teams and executable-plan stress tests</a><br/>
+<strong>Core concepts:</strong> management baseline, decision defense, EAC, project learning</p>
+<h2>How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2>Conceptual explanation</h2>
+<h3>A credible management baseline is an integrated explanation</h3>
+<p>The final management case connects charter and governance → customer requirements and bid compliance → product-oriented WBS → authorized work packages → resource-loaded schedule → estimate and budget → measured progress and forecast → risk/change/quality control → customer acceptance. A missing arrow implies a hidden assumption, an unowned decision or an untraceable cost.</p>
+<p>Distinguish evidence of <strong>planned executability</strong> from evidence of <strong>completed delivery</strong>. At proposal stage, a sound risk-adjusted plan supports a commitment but does not guarantee it. During execution, EV, technical measures, test evidence and supplier status support the current forecast. In operations, acceptance and service outcomes establish whether the project actually created value.</p>
+<h3>Defend the numbers as conditional</h3>
+<p>Explain why estimates are calibrated and where they are weak. State the model assumptions behind the critical path, reserves, EAC and acceptance dates. Demonstrate how a plausible disruption changes the decision. A thoughtful defense uses ranges and named triggers where uncertainty matters, yet still makes a recommendation backed by authority and evidence.</p>
+<h3>Ethical project control</h3>
+<p>Managers should not disguise unfavorable status by moving baseline dates or assigning unearned progress. The legitimate response to bad news is early, decision-ready escalation with choices and consequences. Preserve original records. A forecast that is unpleasant but reproducible protects the sponsor more than a green chart that collapses at acceptance.</p>
+<h3>Learn across technical and management disciplines</h3>
+<p>Systems engineering asks <em>what coherent capability and evidence are needed?</em> Project management asks <em>how will we deliver that capability with controlled commitments?</em> These are intertwined: a requirements change affects scope, cost, schedule and verification; a resource constraint affects what can actually be integrated and proven. This dependency is the intellectual link between EN.645.662 and EN.645.667.</p>
+<h2>Worked example: reason through the case</h2>
+<p><strong>Example final defense:</strong> The pilot offers limited two-vehicle operation, with public deployment conditional on accessible boarding and emergency response tests. Cost baseline is $500k and current EAC is $560k based on supplier quotes and remaining integration work. The critical path depends on campus charging availability; a delay contingency has a named decision date and sponsor. The plan asks for approval of a controlled pilot stage, not an unsupported guarantee of all-weather autonomous service.</p>
+<h2>Retrieval and transfer practice</h2>
+<ol>
+<li>State the minimum four management artifacts needed to defend a project date and budget.</li>
+<li>What is the ethical response if current evidence implies EAC exceeds BAC by 15%?</li>
+<li>Connect one systems-engineering change to management consequences.</li>
+</ol>
+<details>
+<summary><strong>Reveal explained answers after attempting the problems</strong></summary>
+<ol>
+<li>
+<p>Controlled scope/WBS with acceptance basis; logically valid/resource-feasible schedule; documented basis of estimate and budget; risk/dependency/decision record. Add EVM/status data when execution is underway.</p>
+</li>
+<li>
+<p>Report validated forecast and causes, define corrective/recovery alternatives with risks, seek delegated decisions and preserve original approved baseline.</p>
+</li>
+<li>
+<p>For example, changing the braking controller interface triggers requirements/ICD and regression tests, shifts integration activities and resources, increases ETC and may alter customer milestones and approval needs.</p>
+</li>
+</ol>
+</details>
+<h2>A failure mode to recognize</h2>
+<p>Mistake: defending baseline dates and dollars as certainty rather than a coherent, monitored and revisable commitment.</p>
+<h2>Put it into practice</h2>
+<p><strong>Produce:</strong> Project-control executive case + technical-to-management trace. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2>Where this connects</h2>
+<h2>Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.gao.gov/products/gao-20-195g">GAO Cost Estimating and Assessment Guide (2020)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.gao.gov/products/gao-16-89g">GAO Schedule Assessment Guide (2015)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/wp-content/uploads/2018/06/nasa_evm_reference_card.pdf">NASA earned value management reference card</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</article>
+</main></div><footer>Independent study resource · Phase 0 Edition 1.0 · 30 October 2026 · Links to third-party references require internet.</footer>
+<script>
+const query=document.getElementById('query'),course=document.getElementById('course');
+const chapters=[...document.querySelectorAll('.chapter')],navs=[...document.querySelectorAll('.navlesson')];
+function filter(){const q=query.value.trim().toLowerCase(),c=course.value;let n=0;
+ for(const a of chapters){const ok=(c==='all'||a.dataset.course===c)&&(!q||a.textContent.toLowerCase().includes(q));a.hidden=!ok;if(ok)n++}
+ for(const a of navs){const id=a.getAttribute('href').slice(1),x=document.getElementById(id);a.hidden=x.hidden}
+ document.getElementById('count').textContent=n+' of 24 chapters visible';}
+query.addEventListener('input',filter);course.addEventListener('change',filter);
+if(location.hash){let dest=document.querySelector(location.hash);if(dest && dest.classList.contains('chapter')){course.value='all';query.value='';filter()}}
+</script></body></html>

@@ -1,0 +1,2689 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.742 — Management of Complex Systems · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P5/EN645742.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside style="background:#eaf6f4;padding:12px 25px;border-bottom:1px solid #c5e3df"><strong>Advanced textbook readings</strong> · <a href="../../K/G/chapters/06-enterprise.html">Enterprise dynamics, equity and responsible intervention</a></aside><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/01-boundaries.html">System boundaries, outcomes, and emergence</a> · <a href="../../K/T/09-assurance.html">Reliability, hazard controls, and resilience</a> · <a href="../../K/T/12-enterprises.html">Systems of systems, enterprise governance, and complex adaptation</a></aside><main><div class="course-actions"><a href="../../K/B20/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en645742--management-of-complex-systems">EN.645.742 — Management of Complex Systems</h1>
+<p><strong>Credits:</strong> 3</p>
+<h2 id="1-course-purpose">1. Course purpose</h2>
+<p>This course develops the judgment needed to manage complex problem situations in which technical systems, organizations, people, institutions, incentives, histories, and environments interact across multiple scales. It is not a course in making a difficult project merely more orderly. It addresses situations where boundaries are contested, purposes conflict, behavior is nonlinear or emergent, future states are only partly predictable, authority is distributed, knowledge is incomplete, and interventions can change the very system being studied.</p>
+<p>The learner will combine systems theory, systems thinking, systems engineering, management, complexity science, and critical systems thinking. The emphasis is on selecting, combining, critiquing, and adapting systems approaches rather than treating any method as universally valid. The culminating capability is to formulate and defend a responsible multimethodological intervention for a consequential complex problem while explicitly bounding authority, evidence, uncertainty, ethics, and unintended consequences.</p>
+<h2 id="2-source-scope-and-self-study-adaptation">2. Source scope and self-study adaptation</h2>
+<p>The current JHU syllabus organizes the course around:</p>
+<ul>
+<li>introduction to management of complex systems;</li>
+<li>systems theory and systems thinking;</li>
+<li>complexity, chaos, and complex systems;</li>
+<li>examples of complex-system problems;</li>
+<li>Type A systems approaches for technical complexity;</li>
+<li>Type B systems approaches for process complexity;</li>
+<li>Type C systems approaches for structural complexity;</li>
+<li>Type D systems approaches for organizational complexity;</li>
+<li>Type E systems approaches for people complexity;</li>
+<li>Type F systems approaches for coercive complexity;</li>
+<li>critical systems theory and critical systems thinking;</li>
+<li>critical systems practice; and</li>
+<li>the future of complex-systems management. (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.742.81" title="Fall 2026 Syllabus for EN.645.742 Management of Complex Systems">1</a>, <a href="https://ep.jhu.edu/courses/645742-management-of-complex-systems/" title="Management of Complex Systems - 645.742">2</a>)</li>
+</ul>
+<p>The required source text is Michael C. Jackson's <em>Critical Systems Thinking and the Management of Complexity</em>. The source course is reading intensive and assesses discussion, module assignments, a complex-systems literature review, and a final project. This self-study version preserves that emphasis, but adapts it as follows:</p>
+<ul>
+<li>weekly discussion becomes a <strong>dialectical critique journal</strong> or optional peer seminar;</li>
+<li>module homework becomes method-application and critique assignments;</li>
+<li>the literature review becomes a structured 5–7 page review due at the end of Week 6;</li>
+<li>the final paper becomes a controlled intervention portfolio plus a 12–15 page synthesis paper and oral defense;</li>
+<li>every selected approach must be accompanied by an applicability claim, limitation analysis, and evidence plan;</li>
+<li>methods are used to support learning and responsible action, not to claim prediction or control that the situation does not permit.</li>
+</ul>
+<p>The source syllabus states that generative AI may not produce course assignments. For this self-study adaptation, use AI only as a disclosed reviewer, critic, or formatting assistant. Preserve an AI-use log, verify every claim and citation, and ensure that the analysis, judgments, diagrams, models, and writing remain your own.</p>
+<h2 id="3-relationship-to-adjacent-courses">3. Relationship to adjacent courses</h2>
+<h3 id="inputs-from-earlier-phases">Inputs from earlier phases</h3>
+<p>The learner should bring:</p>
+<ul>
+<li>controlled requirements, architectures, risk, test, and lifecycle evidence from Phases 0–2;</li>
+<li>system dynamics, uncertainty, decision analysis, modeling, simulation, and credibility skills from Phase 3;</li>
+<li>agile learning, digital-thread, mission-engineering, and process-improvement skills from Phase 4;</li>
+<li>the Phase 5 SoS architecture and enterprise-transformation baselines from EN.645.771 and EN.645.753.</li>
+</ul>
+<h3 id="distinct-contribution-of-this-course">Distinct contribution of this course</h3>
+<p>EN.645.771 asked how to engineer capability across independently managed constituent systems. EN.645.753 asked how to align enterprise value, governance, investment, processes, and transformation. EN.645.742 asks a different question:</p>
+<blockquote>
+<p>How should responsible leaders understand and intervene when the problem situation is multidimensional, adaptive, politically contested, path-dependent, only partly observable, and not amenable to a single methodology?</p>
+</blockquote>
+<p>The course may challenge or reverse conclusions from earlier courses. That is expected. The aim is not to preserve the previous answer; it is to expose where prior framing, authority, evidence, or methods were too narrow.</p>
+<h2 id="4-prerequisites-and-readiness-diagnostic">4. Prerequisites and readiness diagnostic</h2>
+<p><strong>Source prerequisite:</strong> EN.645.769 System Test and Evaluation, the healthcare equivalent, or advisor/instructor approval. (<a href="https://ep.jhu.edu/courses/645742-management-of-complex-systems/" title="Management of Complex Systems - 645.742">2</a>)</p>
+<p><strong>Self-study prerequisite:</strong> completion of Phases 0–4 and EN.645.771 and EN.645.753, or equivalent evidence of competence.</p>
+<p>Before Week 1, complete a readiness diagnostic. You should be able to:</p>
+<ol>
+<li>distinguish system, system of systems, enterprise, ecosystem, and complex adaptive system;</li>
+<li>construct and critique a causal-loop diagram and a behavior-over-time graph;</li>
+<li>explain uncertainty, sensitivity, risk propagation, resilience, and decision reversal;</li>
+<li>identify actor authority, incentives, conflicts, exclusions, and evidence ownership;</li>
+<li>compare a hard systems method, system dynamics, a soft/problem-structuring method, and a critical/boundary method;</li>
+<li>trace an intervention from purpose and stakeholder values through evidence, monitoring, and adaptation;</li>
+<li>distinguish model validation from social legitimacy and ethical acceptability;</li>
+<li>write a properly cited critical review that separates source claims, interpretation, and judgment.</li>
+</ol>
+<p><strong>Readiness standard:</strong> at least 80%, with no major misconception about complexity, power, causality, uncertainty, or method applicability. If the threshold is not met, revisit EN.645.781, EN.645.784, EN.645.753, and the Open University systems-thinking resources before continuing.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<p>By the end of the course, the learner will be able to:</p>
+<ol>
+<li>explain core systems concepts and complexity mechanisms and apply them to real problem situations;</li>
+<li>distinguish complication, dynamic complexity, organizational complexity, social pluralism, coercion, and complex adaptation;</li>
+<li>formulate a complex problem situation without prematurely fixing boundaries, purposes, stakeholders, or solutions;</li>
+<li>compare and critique Type A–F systems approaches in terms of assumptions, strengths, blind spots, ethics, and use conditions;</li>
+<li>apply selected hard, process, structural, organizational, participative, and critical methods to a shared case;</li>
+<li>identify feedback, delay, nonlinearity, path dependence, emergence, adaptation, scale mismatch, and observability limits;</li>
+<li>analyze power, legitimacy, boundary judgments, affected-but-unrepresented groups, and coercive conditions;</li>
+<li>construct a justified multimethodological intervention strategy rather than selecting methods by familiarity or fashion;</li>
+<li>design safe-to-learn interventions with monitoring, guardrails, stop conditions, and adaptation or reversal criteria;</li>
+<li>assess dynamic risk, resilience, cascading effects, and unintended consequences under irreducible uncertainty;</li>
+<li>evaluate an intervention using technical, organizational, human, ethical, and systemic evidence;</li>
+<li>produce and defend graduate-level scholarly work that accurately states sources, assumptions, uncertainty, authority, and limitations.</li>
+</ol>
+<p>Primary program competencies: <strong>C1, C4, C8, C9, C10, C11, and C12</strong>, with advanced integration of earlier competencies.</p>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>What makes a problem situation complex rather than merely difficult or complicated?</li>
+<li>Which assumptions about purpose, knowledge, control, prediction, and rationality are embedded in a method?</li>
+<li>When does a technically rigorous method become socially or ethically inadequate?</li>
+<li>How can different systems approaches be combined without producing an incoherent collection of tools?</li>
+<li>Who defines improvement, who controls resources, who supplies expertise, who bears harm, and who is excluded?</li>
+<li>What can be learned or influenced, and what remains irreducibly uncertain?</li>
+<li>How should leaders act when observation and intervention alter the system?</li>
+<li>What evidence is sufficient to continue, adapt, stop, or reverse an intervention?</li>
+</ul>
+<h2 id="7-running-case-and-controlled-evidence">7. Running case and controlled evidence</h2>
+<h3 id="regional-mobility-and-emergency-access-complex-problem-situation">Regional Mobility and Emergency Access Complex Problem Situation</h3>
+<p>Continue the Phase 5 regional ecosystem, but introduce a compound, contested situation:</p>
+<ul>
+<li>a prolonged heat emergency and rolling electrical outages;</li>
+<li>intermittent cellular and cloud-service failures;</li>
+<li>a cyber incident affecting traveler information and payment systems;</li>
+<li>labor shortages and work-rule disputes;</li>
+<li>conflicting municipal, hospital, campus, and private-vendor priorities;</li>
+<li>unequal access for disabled, low-income, rural, and non-English-speaking populations;</li>
+<li>online misinformation and declining public trust;</li>
+<li>delayed state and federal funding;</li>
+<li>legacy fleets, fragmented data rights, and incompatible modernization schedules;</li>
+<li>pressure for a rapid autonomous-mobility expansion despite incomplete safety and equity evidence.</li>
+</ul>
+<p>No actor has complete information or authority. Actors learn and change behavior. Measures can be gamed. Local optimization can worsen regional outcomes. The learner must not assume that the problem is a single objective, that stakeholder consensus exists, or that the system can be centrally designed.</p>
+<h3 id="controlled-case-materials">Controlled case materials</h3>
+<p>Maintain or create:</p>
+<ul>
+<li>actor, authority, interest, and affected-party registry;</li>
+<li>incident and decision timeline;</li>
+<li>behavior-over-time graphs for at least six outcomes;</li>
+<li>system-dynamics and network fragments;</li>
+<li>operational, organizational, and public-sentiment data with documented gaps;</li>
+<li>policies, contracts, labor agreements, standards, and legal constraints;</li>
+<li>prior SoS architecture and enterprise-transformation recommendations;</li>
+<li>conflicting stakeholder narratives and interview summaries;</li>
+<li>risk, resilience, and service-equity evidence;</li>
+<li>intervention log, monitoring data, findings, and revision history.</li>
+</ul>
+<h3 id="required-repository-structure">Required repository structure</h3>
+<p>Use the Phase 5 repository and add:</p>
+<ul>
+<li><code>/08-complexity-interventions-and-learning/01-framing-and-boundaries</code></li>
+<li><code>/08-complexity-interventions-and-learning/02-complexity-mechanisms</code></li>
+<li><code>/08-complexity-interventions-and-learning/03-type-a-through-f-critiques</code></li>
+<li><code>/08-complexity-interventions-and-learning/04-literature-review</code></li>
+<li><code>/08-complexity-interventions-and-learning/05-critical-systems-practice</code></li>
+<li><code>/08-complexity-interventions-and-learning/06-interventions-monitoring-and-learning</code></li>
+<li><code>/08-complexity-interventions-and-learning/07-final-defense</code></li>
+</ul>
+<p>Every major artifact must record author, date, source, purpose, assumptions, boundary judgments, method, evidence, affected groups, limitations, review status, and change rationale.</p>
+<h2 id="8-tool-and-integrity-policy">8. Tool and integrity policy</h2>
+<p>The course is method-centered, not tool-centered. Suitable tools include:</p>
+<ul>
+<li>Markdown, a citation manager, and Git for scholarship and configuration;</li>
+<li>diagrams.net, Kumu, or Graphviz for influence, network, and boundary views;</li>
+<li>Vensim PLE or an equivalent tool for bounded system-dynamics experiments;</li>
+<li>Python/Jupyter with pandas, NetworkX, and SALib for reproducible analysis;</li>
+<li>qualitative coding in a spreadsheet or open-source QDA tool;</li>
+<li>decision logs, assumption registers, and structured review checklists.</li>
+</ul>
+<p>Tool output is not evidence by itself. Preserve source data, transformations, model logic, version information, test results, and interpretation. Do not use an opaque complexity score, AI-generated stakeholder synthesis, or simulation result as a substitute for judgment.</p>
+<h2 id="9-resource-hierarchy">9. Resource hierarchy</h2>
+<h3 id="required-backbone">Required backbone</h3>
+<ul>
+<li>JHU course description and Fall 2026 syllabus (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.742.81" title="Fall 2026 Syllabus for EN.645.742 Management of Complex Systems">1</a>, <a href="https://ep.jhu.edu/courses/645742-management-of-complex-systems/" title="Management of Complex Systems - 645.742">2</a>).</li>
+<li>Jackson, <em>Critical Systems Thinking and the Management of Complexity</em> (<a href="https://www.wiley.com/en-us/Critical+Systems+Thinking+and+the+Management+of+Complexity-p-9781119118374" title="Jackson: Critical Systems Thinking and the Management of Complexity">3</a>).</li>
+<li>Jackson, <em>Critical Systems Thinking: A Practitioner's Guide</em>—especially Critical Systems Practice and EPIC (<a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781394203604" title="Jackson: Critical Systems Thinking — A Practitioner's Guide">4</a>, <a href="https://doi.org/10.1002/9781394203604.ch4" title="Critical Systems Practice — EPIC">15</a>).</li>
+</ul>
+<h3 id="open-systems-thinking-and-complexity-resources">Open systems-thinking and complexity resources</h3>
+<ul>
+<li>SEBoK entries on complexity, systems thinking, and SoS complexity (<a href="https://sebokwiki.org/wiki/Complexity" title="SEBoK: Complexity">5</a>–<a href="https://sebokwiki.org/wiki/Systems_Thinking" title="SEBoK: Systems Thinking">7</a>).</li>
+<li>INCOSE Complex Systems Working Group and complex-systems heuristics (<a href="https://www.incose.org/group/complex-systems-working-group" title="INCOSE Complex Systems Working Group">8</a>, <a href="https://www.incose.org/resource/system-engineering-heuristics-for-complex-systems" title="INCOSE: Systems Engineering Heuristics for Complex Systems">9</a>).</li>
+<li>Open University Systems Thinking Hub and STiP material (<a href="https://www.open.edu/openlearn/systems-thinking-hub" title="Open University Systems Thinking Hub">10</a>, <a href="https://www.open.edu/openlearn/science-maths-technology/understanding-systems-thinking-practice-stip" title="Open University: Understanding Systems Thinking in Practice">11</a>).</li>
+<li>Santa Fe Institute Complexity Explorer or equivalent introductory complexity-science material (<a href="https://www.complexityexplorer.org/" title="Santa Fe Institute Complexity Explorer">12</a>).</li>
+</ul>
+<h3 id="method-and-intervention-resources">Method and intervention resources</h3>
+<ul>
+<li>MIT system-dynamics learning resources and Vensim PLE (<a href="https://ocw.mit.edu/courses/res-15-004-system-dynamics-systems-thinking-and-modeling-for-a-complex-world-january-iap-2020/" title="MIT System Dynamics: Systems Thinking and Modeling for a Complex World">13</a>, <a href="https://vensim.com/vensim-personal-learning-edition/" title="Vensim Personal Learning Edition">14</a>).</li>
+<li>Open University soft-systems and systems-practice resources (<a href="https://www.open.edu/openlearn/mod/oucontent/view.php?id=4809&amp;section=15.8" title="Open University: Developing a Soft Systems Method">16</a>, <a href="https://www.open.edu/openlearn/science-maths-technology/computing-ict/systems-engineering-challenging-complexity/content-section-3.9.7" title="Open University: Soft Systems Methodology as a Learning Process">17</a>).</li>
+<li>Critical Systems Heuristics review and boundary-critique material (<a href="https://link.springer.com/article/10.1007/s11213-023-09665-9" title="Critical Systems Heuristics: A Systematic Review">18</a>).</li>
+<li>Jackson's Critical Systems Practice Explore and Check papers (<a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/sres.2746" title="Critical Systems Practice 1: Explore">19</a>, <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1002/sres.2912" title="Critical Systems Practice 4: Check">20</a>).</li>
+</ul>
+<h3 id="risk-resilience-and-responsible-intervention">Risk, resilience, and responsible intervention</h3>
+<ul>
+<li>ISO 31000 risk-management guidance (<a href="https://www.iso.org/standard/65694.html" title="ISO 31000:2018 Risk Management — Guidelines">21</a>).</li>
+<li>DoD Risk, Issue, and Opportunity Management Guide (<a href="https://www.cto.mil/wp-content/uploads/2024/05/RIO-2023-2-2.pdf" title="DoD Risk, Issue, and Opportunity Management Guide">22</a>).</li>
+<li>NIST cyber-resiliency engineering framework (<a href="https://csrc.nist.gov/pubs/sp/800/160/v2/r1/final" title="NIST SP 800-160 Volume 2 Revision 1: Developing Cyber-Resilient Systems">23</a>).</li>
+<li>NIST Community Resilience Planning Guide resources (<a href="https://www.nist.gov/community-resilience/planning-guide-briefs" title="NIST Community Resilience Planning Guide Briefs">24</a>).</li>
+<li>Cynefin as a contextual decision aid, used critically rather than as a universal classifier (<a href="https://hbr.org/2007/11/a-leaders-framework-for-decision-making" title="A Leader's Framework for Decision Making — Cynefin">25</a>).</li>
+</ul>
+<h2 id="10-assessment-structure">10. Assessment structure</h2>
+<table>
+<thead>
+<tr>
+<th>Assessment</th>
+<th style="text-align:right">Weight</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dialectical critique journal / optional seminar</td>
+<td style="text-align:right">20%</td>
+<td>Reconstruct, compare, challenge, and apply assigned readings while separating evidence from opinion</td>
+</tr>
+<tr>
+<td>Method-application assignments</td>
+<td style="text-align:right">20%</td>
+<td>Demonstrate bounded use and critique of Type A–F approaches</td>
+</tr>
+<tr>
+<td>Complex-systems literature review</td>
+<td style="text-align:right">30%</td>
+<td>Synthesize and critically evaluate scholarly literature on one complex-systems management theme</td>
+</tr>
+<tr>
+<td>Final multimethodological intervention project</td>
+<td style="text-align:right">30%</td>
+<td>Integrate framing, method selection, intervention, evidence, ethics, learning, and reflection</td>
+</tr>
+</tbody>
+</table>
+<p>All major submissions require at least one revision after feedback or self-red-team review. A high numerical score cannot compensate for fabricated evidence, hidden stakeholder harm, unacknowledged coercion, unsupported causal claims, or method selection without critique.</p>
+<h2 id="11-twelve-week-course-map">11. Twelve-week course map</h2>
+<table>
+<thead>
+<tr>
+<th>Week</th>
+<th>Topic</th>
+<th>Primary evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Complex problem situations, systems theory, and receiving review</td>
+<td>Complexity framing and case charter</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Complexity science, chaos, adaptation, scale, and irreducible uncertainty</td>
+<td>Dynamic hypotheses and uncertainty/observability map</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Type A — technical complexity and hard systems thinking</td>
+<td>Technical analysis plus applicability critique</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Type B — process complexity and the Vanguard Method</td>
+<td>Demand-flow process diagnosis and intervention limits</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Type C — structural complexity and system dynamics</td>
+<td>Executable structural model and behavior tests</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Type D — organizational complexity, sociotechnical systems, and viable organization</td>
+<td>Sociotechnical/VSM diagnosis and literature review</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Type E — people complexity: SAST, interactive planning, and SSM</td>
+<td>Pluralist problem-structuring and accommodation package</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Type F — coercive complexity: Team Syntegrity and Critical Systems Heuristics</td>
+<td>Power, boundary, legitimacy, and emancipation review</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Critical systems theory, critical systems thinking, and methodological critique</td>
+<td>Six-approach critique and pluralism principles</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Critical Systems Practice: Explore and Produce</td>
+<td>Multimethodological intervention strategy</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Critical Systems Practice: Intervene; dynamic risk, resilience, and safe-to-learn action</td>
+<td>Intervention pilot, monitoring, and adaptation plan</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Critical Systems Practice: Check; final defense and the way ahead</td>
+<td>Final portfolio, live-change response, and retrospective</td>
+</tr>
+</tbody>
+</table>
+<h2 id="12-formal-review-gates">12. Formal review gates</h2>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Timing</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Complexity Framing Review</td>
+<td>End of Week 2</td>
+<td>Is the problem situation framed across scales, perspectives, mechanisms, uncertainty, and observability without premature closure?</td>
+</tr>
+<tr>
+<td>Technical and Process Method Review</td>
+<td>End of Week 4</td>
+<td>Are Type A and B methods applied correctly and bounded by explicit assumptions and limitations?</td>
+</tr>
+<tr>
+<td>Structural and Organizational Review</td>
+<td>End of Week 6</td>
+<td>Do the dynamic and organizational diagnoses explain important behavior and support the literature review?</td>
+</tr>
+<tr>
+<td>Pluralism, Power, and Boundary Review</td>
+<td>End of Week 8</td>
+<td>Are affected parties, coercion, legitimacy, and boundary judgments explicit enough to proceed responsibly?</td>
+</tr>
+<tr>
+<td>Intervention Strategy Review</td>
+<td>End of Week 10</td>
+<td>Is the multimethodological strategy coherent, sequenced, justified, feasible, and ethically defensible?</td>
+</tr>
+<tr>
+<td>Intervention and Resilience Review</td>
+<td>End of Week 11</td>
+<td>Is the proposed action safe to learn from, monitorable, reversible or adaptable, and resilient to plausible surprises?</td>
+</tr>
+<tr>
+<td>Final Complex Systems Management Review</td>
+<td>Week 12</td>
+<td>Does the final recommendation integrate learning, evidence, critique, power, uncertainty, and responsible next action?</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-major-assignment-specifications">13. Major assignment specifications</h2>
+<h3 id="a-six-approach-application-and-critique-portfolio">A. Six-approach application and critique portfolio</h3>
+<p>For Types A–F, produce one bounded application and one critique. For each, state:</p>
+<ul>
+<li>the problem dimension addressed;</li>
+<li>philosophical and methodological assumptions;</li>
+<li>required conditions and data;</li>
+<li>method steps and products;</li>
+<li>useful insight produced;</li>
+<li>blind spots and likely failure modes;</li>
+<li>affected parties and ethical concerns;</li>
+<li>how the method complements or conflicts with other approaches.</li>
+</ul>
+<h3 id="b-complex-systems-literature-review">B. Complex-systems literature review</h3>
+<p>Write a 5–7 page scholarly review on one approved theme, such as emergence and management, adaptive governance, dynamic risk, critical systems thinking, resilience, coercive complexity, multimethodology, complex-program failure, or responsible intervention. Use at least eight credible sources, including peer-reviewed scholarship and at least two sources that disagree. The paper must synthesize themes, expose assumptions, compare evidence, identify limitations, and state implications for the running case.</p>
+<h3 id="c-multimethodological-intervention-strategy">C. Multimethodological intervention strategy</h3>
+<p>Use Critical Systems Practice to produce an EPIC-aligned strategy. Select and sequence methods based on the problem situation—not convenience. Explain what each method contributes, how outputs pass between methods, where paradigms or assumptions conflict, how affected parties participate, and how the strategy will adapt when new information emerges.</p>
+<h3 id="d-final-complex-systems-management-project">D. Final complex-systems management project</h3>
+<p>Produce a 12–15 page synthesis paper and controlled evidence package addressing a consequential issue in the regional case. Include framing, theory, Type A–F critique, multimethodology, intervention design, dynamic risk, resilience, ethics, monitoring, evidence, limitations, and reflection. The final recommendation must describe both what to do and what not to claim.</p>
+<h2 id="14-common-rubric-dimensions">14. Common rubric dimensions</h2>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Excellent</th>
+<th>Proficient</th>
+<th>Developing</th>
+<th>Insufficient</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Complexity framing</td>
+<td>Mechanisms, scales, actors, histories, boundaries, uncertainty, adaptation, and observability are explicit and revisable</td>
+<td>Major complexity conditions are credible with minor gaps</td>
+<td>Complexity is described mainly as size or difficulty</td>
+<td>Treats the situation as closed, stable, and centrally controllable</td>
+</tr>
+<tr>
+<td>Methodological understanding</td>
+<td>Reconstructs assumptions, logic, products, strengths, limits, and ethics of each approach</td>
+<td>Applies and critiques methods substantially correctly</td>
+<td>Uses methods mechanically or with weak critique</td>
+<td>Selects familiar tools without understanding use conditions</td>
+</tr>
+<tr>
+<td>Pluralism and power</td>
+<td>Multiple perspectives, boundary judgments, coercion, exclusion, legitimacy, and affected parties shape the work</td>
+<td>Major stakeholder and power conditions are addressed</td>
+<td>Participation is token or conflicts are simplified</td>
+<td>Assumes consensus or hides power and harm</td>
+</tr>
+<tr>
+<td>Causal and analytic credibility</td>
+<td>Claims match evidence; models are tested, bounded, and uncertainty-aware</td>
+<td>Analysis is usable with minor gaps</td>
+<td>Some causal overclaim or weak testing remains</td>
+<td>Correlation, narrative, or model output is presented as proof</td>
+</tr>
+<tr>
+<td>Intervention and learning</td>
+<td>Actions are coherent, safe-to-learn, monitored, adaptable, and linked to mechanisms</td>
+<td>Intervention is credible with minor gaps</td>
+<td>Monitoring or reversal logic is vague</td>
+<td>Proposes irreversible action without guardrails or learning</td>
+</tr>
+<tr>
+<td>Scholarly critique</td>
+<td>Sources are synthesized, contrasted, accurately cited, and used to develop original judgment</td>
+<td>Graduate-level analysis with minor gaps</td>
+<td>Mostly descriptive summary or limited source diversity</td>
+<td>Misrepresents sources, plagiarizes, or substitutes opinion for scholarship</td>
+</tr>
+<tr>
+<td>Communication and configuration</td>
+<td>Clear, candid, audience-aware, reproducible, and under control</td>
+<td>Reviewable with minor defects</td>
+<td>Difficult to navigate or reproduce</td>
+<td>Uncontrolled, contradictory, or misleading</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-critical-criteria-and-mastery-gates">15. Critical criteria and mastery gates</h2>
+<p>A learner cannot pass with any unresolved item below:</p>
+<ul>
+<li>defines complexity only by size, number of parts, or technical difficulty;</li>
+<li>claims prediction, optimization, consensus, or control beyond the evidence and authority available;</li>
+<li>applies a method without stating its assumptions, use conditions, and limitations;</li>
+<li>excludes materially affected groups or treats coercion and unequal power as ordinary stakeholder disagreement;</li>
+<li>makes causal claims from a diagram, anecdote, or unvalidated model without appropriate evidence;</li>
+<li>proposes intervention without monitoring, guardrails, adaptation, and stop/reversal criteria;</li>
+<li>combines methods incoherently or hides philosophical conflicts behind a list of tools;</li>
+<li>fabricates citations, data, stakeholder views, or results;</li>
+<li>cannot explain how the final recommendation changed through critique and learning.</li>
+</ul>
+<p>Course completion requires at least 80% overall, at least Proficient performance in complexity framing, methodological understanding, pluralism/power, and intervention/learning, successful completion of the literature review, and a defensible final oral examination.</p>
+<h2 id="16-capstone-specification">16. Capstone specification</h2>
+<h3 id="decision">Decision</h3>
+<p>Recommend how the regional coalition should respond to the compound mobility-and-emergency-access problem over the next 18 months without overstating prediction, consensus, or centralized control.</p>
+<h3 id="required-outputs">Required outputs</h3>
+<ol>
+<li>Executive problem-situation brief and explicit non-claims.</li>
+<li>Boundary, perspective, authority, and affected-party analysis.</li>
+<li>Complexity-mechanism map and reference modes.</li>
+<li>Type A–F application and critique matrix.</li>
+<li>Literature-review findings and implications.</li>
+<li>EPIC intervention strategy and method handoffs.</li>
+<li>At least one tested structural model and one participative/critical analysis.</li>
+<li>Intervention portfolio with hypotheses, guardrails, stop conditions, and ownership.</li>
+<li>Dynamic risk, resilience, cascading-effect, and uncertainty analysis.</li>
+<li>Monitoring, learning, adaptation, and reversal plan.</li>
+<li>Ethics, legitimacy, accessibility, equity, privacy, labor, and public-interest review.</li>
+<li>Configuration record, decision log, limitations, and retrospective.</li>
+<li>12–15 page synthesis paper and 15-minute executive/technical briefing.</li>
+</ol>
+<h3 id="live-change-challenge">Live-change challenge</h3>
+<p>During the final review, one condition will change—for example:</p>
+<ul>
+<li>a major private mobility platform withdraws data access;</li>
+<li>a new accessibility ruling changes service obligations;</li>
+<li>a labor action removes 20% of available operators;</li>
+<li>a severe heat event coincides with a hospital surge and charging outage;</li>
+<li>misinformation causes travelers to avoid designated emergency hubs;</li>
+<li>a cyber compromise invalidates trusted identity or payment services;</li>
+<li>a low-income municipality rejects the preferred funding arrangement.</li>
+</ul>
+<p>The learner must identify affected boundaries, assumptions, methods, actors, risks, models, interventions, evidence, and decisions; revise the recommendation; and state whether the intervention should continue, adapt, pause, or stop.</p>
+<h2 id="17-oral-defense-prompts">17. Oral defense prompts</h2>
+<ol>
+<li>Why is this a complex problem situation rather than a difficult engineering problem?</li>
+<li>Which boundaries are most consequential, and who has standing to challenge them?</li>
+<li>What did the Type A method reveal, and what would it have hidden if used alone?</li>
+<li>Where did process, structural, organizational, people, and coercive complexity require different approaches?</li>
+<li>Which method assumptions conflict, and how did you manage those conflicts?</li>
+<li>What evidence supports your causal claims, and what remains a hypothesis?</li>
+<li>Who benefits, who bears cost or risk, and who lacks effective voice?</li>
+<li>What uncertainty is reducible, and what must be managed as irreducible?</li>
+<li>Why is the proposed intervention safe enough to try?</li>
+<li>Which signals would cause adaptation, pause, reversal, or escalation?</li>
+<li>How could actors strategically respond and change the intervention's effects?</li>
+<li>What did Critical Systems Practice add beyond ordinary method selection?</li>
+<li>Which prior Phase 5 recommendation did you revise or reject, and why?</li>
+<li>What is the strongest critique of your final recommendation?</li>
+<li>What should the decision authority explicitly avoid claiming?</li>
+</ol>
+<h2 id="18-portfolio-handoff-and-maintenance">18. Portfolio, handoff, and maintenance</h2>
+<p>At course completion:</p>
+<ul>
+<li>tag the final Phase 5 release;</li>
+<li>archive the literature review, source library, annotations, and citation audit;</li>
+<li>preserve all Type A–F applications and critiques, including rejected methods;</li>
+<li>preserve models, source data, tests, assumptions, and reproduction instructions;</li>
+<li>archive review findings, dispositions, live-change evidence, and oral-defense notes;</li>
+<li>write a 2–3 page retrospective on changed beliefs, method partiality, power, uncertainty, and professional responsibility;</li>
+<li>create a six-month maintenance plan for monitoring the real-world topic, refreshing sources, and revisiting the intervention if conditions change.</li>
+</ul>
+<p>This is the final course in the planned curriculum. The completed portfolio should demonstrate not only the ability to engineer systems, but the judgment to recognize when engineering methods are partial, when participation and critique are necessary, and when responsible action requires learning rather than confident prediction.</p>
+<hr/>
+<h2 id="week-1--complex-problem-situations-systems-theory-and-receiving-review">Week 1 — Complex problem situations, systems theory, and receiving review</h2>
+<blockquote>
+<p><strong>Book companion · Week 1 :</strong> <a href="../../K/B20/chapters/01.html">Read Book 20, Chapter 01</a> → <a href="../../K/B20/labs/01.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-742-w01.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment">Competency alignment</h3>
+<p>C1 systems thinking; C9 decision reasoning; C11 complexity; C12 professional judgment.</p>
+<h3 id="professional-context-and-essential-question">Professional context and essential question</h3>
+<p>Leaders often label a program “complex” when it is merely large. The first responsibility is to diagnose what kind of complexity is present and to avoid converting a contested problem situation into a falsely precise problem statement.</p>
+<p><strong>Essential question:</strong> What evidence shows that the regional situation is complex, and which early framing choices could create blind spots?</p>
+<h3 id="weekly-learning-outcomes">Weekly learning outcomes</h3>
+<p>By the end of the week, you should be able to:</p>
+<ul>
+<li>distinguish simple, complicated, dynamically complex, organizationally complex, and complex-adaptive conditions</li>
+<li>define a problem situation without presuming a single purpose, owner, boundary, or solution</li>
+<li>identify open-system relationships, hierarchy, emergence, feedback, and multiple perspectives</li>
+<li>construct initial behavior-over-time graphs and a complexity-characteristics profile</li>
+<li>state provisional boundaries, exclusions, uncertainties, and non-claims</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check">Prerequisite retrieval and readiness check</h3>
+<p>Before beginning the new material:</p>
+<ul>
+<li>Retrieve the Phase 5 SoS and enterprise boundaries and list where they disagree.</li>
+<li>Draw one feedback loop from EN.645.753 from memory and explain its evidence.</li>
+<li>Identify one stakeholder affected by the regional ecosystem but not represented in formal governance.</li>
+<li>Write a 150-word distinction between “complicated” and “complex.”</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined boundary, power, causal, or method assumption into the week's baseline.</p>
+<h3 id="required-study">Required study</h3>
+<ul>
+<li><strong>JHU syllabus and course description (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.742.81" title="Fall 2026 Syllabus for EN.645.742 Management of Complex Systems">1</a>, <a href="https://ep.jhu.edu/courses/645742-management-of-complex-systems/" title="Management of Complex Systems - 645.742">2</a>)</strong><br/>
+<strong>Purpose:</strong> Anchor the course in its actual emphasis on systems theory, nonlinear behavior, irreducible uncertainty, adaptive strategy, and scholarly critique.<br/>
+<strong>Guiding questions:</strong> Which source-course expectations require a different mindset from traditional project control?</li>
+<li><strong>Jackson, introductory and systems-thinking sections (<a href="https://www.wiley.com/en-us/Critical+Systems+Thinking+and+the+Management+of+Complexity-p-9781119118374" title="Jackson: Critical Systems Thinking and the Management of Complexity">3</a>)</strong><br/>
+<strong>Purpose:</strong> Understand systems traditions, problem situations, and the need to match approaches to complexity dimensions.<br/>
+<strong>Guiding questions:</strong> What assumptions about purpose, knowledge, and control are made by conventional management?</li>
+<li><strong>SEBoK Complexity and Systems Thinking (<a href="https://sebokwiki.org/wiki/Complexity" title="SEBoK: Complexity">5</a>, <a href="https://sebokwiki.org/wiki/Systems_Thinking" title="SEBoK: Systems Thinking">7</a>)</strong><br/>
+<strong>Purpose:</strong> Establish a systems-engineering vocabulary for emergence, relationships, and prediction limits.<br/>
+<strong>Guiding questions:</strong> Which characteristics are observable in the running case, and which are only hypotheses?</li>
+</ul>
+<p>Record concise notes answering every guiding question. For the required book, read the named section rather than relying on a summary. Identify at least one claim you accept, one you question, and one implication for the running case.</p>
+<h3 id="instructor-style-lesson-notes">Instructor-style lesson notes</h3>
+<ul>
+<li>Complexity is not a compliment, excuse, or score; it is a claim about relationships, behavior, knowledge, and intervention.</li>
+<li>A system boundary is a judgment made for a purpose, not a discovered natural line.</li>
+<li>Open systems exchange information, energy, resources, people, legitimacy, and risk with an environment.</li>
+<li>Emergence describes whole-system properties arising through interaction; it does not mean “mysterious.”</li>
+<li>Problem formulation is already an intervention because it privileges some actors, outcomes, and evidence.</li>
+<li>The receiving review should preserve earlier artifacts but suspend commitment to their preferred solutions.</li>
+</ul>
+<h3 id="worked-example">Worked example</h3>
+<p>A regional authority frames the issue as “optimize autonomous shuttle deployment.” Reframing it as “maintain equitable emergency access during compound disruption” changes the relevant actors, boundaries, options, measures, and authority. The original optimization problem remains useful only as a bounded subproblem.</p>
+<p>Reconstruct the example in a diagram, table, memo, or model. Then state where the example is deliberately simplified and why the same conclusion might not transfer to the regional case.</p>
+<h3 id="guided-practice">Guided practice</h3>
+<ol>
+<li>Inventory prior Phase 5 claims and classify each as fact, assumption, interpretation, value judgment, or recommendation.</li>
+<li>Create six behavior-over-time graphs: access reliability, emergency travel time, workforce load, public trust, service inequity, and recovery time.</li>
+<li>Build a complexity profile covering diversity, connectivity, feedback, delay, adaptation, scale, authority, uncertainty, and conflict.</li>
+<li>Draft three alternative system boundaries and compare what each includes and excludes.</li>
+<li>Conduct a receiving review and record findings that must be resolved before method selection.</li>
+</ol>
+<p>Pause after each step. Compare the result with the decision purpose and record disagreement, ambiguity, and negative evidence instead of forcing convergence.</p>
+<h3 id="independent-exercises">Independent exercises</h3>
+<ul>
+<li>Foundation: classify 12 sample situations as simple, complicated, dynamically complex, pluralist, or coercive and justify each classification.</li>
+<li>Application: write the regional problem-situation charter and non-claims.</li>
+<li>Analysis: show how two plausible boundaries produce different measures and intervention options.</li>
+<li>Synthesis: create a one-page complexity framing for an executive who wants a single answer.</li>
+<li>Stretch: obtain a peer or external reviewer’s framing and document irreducible disagreements.</li>
+</ul>
+<h3 id="dialectical-critique-journal--optional-seminar">Dialectical critique journal / optional seminar</h3>
+<p>Write a 300–500 word response that:</p>
+<ol>
+<li>reconstructs one assigned author's central claim fairly;</li>
+<li>identifies its assumptions and strongest evidence;</li>
+<li>develops a substantive critique or counterexample;</li>
+<li>applies the claim to the regional case; and</li>
+<li>states what evidence or argument would change your current judgment.</li>
+</ol>
+<p>With a cohort, exchange critiques with at least two peers and respond to the strongest challenge. Studying solo, write a steelman and a red-team response separated by 24 hours.</p>
+<h3 id="weekly-deliverable">Weekly deliverable</h3>
+<p><strong>Complexity Framing and Receiving Package</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>problem-situation charter and decision purpose</li>
+<li>three candidate boundaries and boundary rationale</li>
+<li>behavior-over-time graphs with data/provenance notes</li>
+<li>complexity-characteristics profile</li>
+<li>stakeholder and affected-party preliminary registry</li>
+<li>assumption, uncertainty, exclusion, and non-claim log</li>
+<li>receiving-review findings and dispositions</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, approach used, assumptions, boundary judgments, evidence, affected groups, limitations, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Complexity distinction</td>
+<td style="text-align:right">20%</td>
+<td>Uses mechanisms rather than size or difficulty</td>
+</tr>
+<tr>
+<td>Boundary/purpose</td>
+<td style="text-align:right">20%</td>
+<td>Alternatives and exclusions are explicit</td>
+</tr>
+<tr>
+<td>Dynamic evidence</td>
+<td style="text-align:right">20%</td>
+<td>Reference modes are grounded and uncertainty-aware</td>
+</tr>
+<tr>
+<td>Perspective/affected parties</td>
+<td style="text-align:right">20%</td>
+<td>Formal and informal actors are visible</td>
+</tr>
+<tr>
+<td>Configuration/communication</td>
+<td style="text-align:right">20%</td>
+<td>Package is controlled, clear, and reviewable</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures">Critical failures</h3>
+<ul>
+<li>Treats the regional issue as a predefined autonomous-shuttle optimization problem.</li>
+<li>Presents a single boundary as objectively correct.</li>
+<li>Uses “emergent” or “irreducible” without evidence or operational meaning.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>Why is a boundary a judgment?</strong> — Because relevance depends on purpose, values, authority, evidence, and who is affected.</li>
+<li><strong>What distinguishes complication from complexity?</strong> — Complication can often be decomposed and predicted; complexity includes interaction, adaptation, feedback, uncertainty, or contested meaning that defeats straightforward decomposition.</li>
+<li><strong>Why use behavior-over-time graphs?</strong> — They make the dynamic problem explicit before choosing causes or solutions.</li>
+<li><strong>What is a non-claim?</strong> — A deliberate statement of what the analysis does not establish, predict, authorize, or optimize.</li>
+<li><strong>Why reopen earlier Phase 5 conclusions?</strong> — Earlier methods and boundaries may have hidden adaptation, conflict, coercion, or uncertainty.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate">Revision and mastery gate</h3>
+<p>Pass the receiving review only when the situation is framed as revisable, multiple boundaries are preserved, and no preferred solution has been smuggled into the problem definition.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required reading</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">2.5–3.5 hr</td>
+</tr>
+<tr>
+<td>Journal, deliverable, and review</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and revision</td>
+<td style="text-align:right">0.5–1 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update">Configuration and portfolio update</h3>
+<p>Baseline <code>/01-framing-and-boundaries</code> and link every later method artifact to the framing version it assumes.</p>
+<p>Record actual effort, changed beliefs, decisions, assumptions, evidence gaps, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-2--complexity-science-chaos-adaptation-scale-and-irreducible-uncertainty">Week 2 — Complexity science, chaos, adaptation, scale, and irreducible uncertainty</h2>
+<blockquote>
+<p><strong>Book companion · Week 2 :</strong> <a href="../../K/B20/chapters/02.html">Read Book 20, Chapter 02</a> → <a href="../../K/B20/labs/02.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-742-w02.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-2">Competency alignment</h3>
+<p>C1 systems thinking; C8 uncertainty; C11 complex adaptive systems; C12 evidence judgment.</p>
+<h3 id="professional-context-and-essential-question-2">Professional context and essential question</h3>
+<p>Managers need enough complexity science to recognize nonlinear dynamics, adaptation, network effects, and scale-dependent behavior—but not so much borrowed terminology that metaphor replaces analysis.</p>
+<p><strong>Essential question:</strong> Which complexity mechanisms plausibly generate the observed behavior, and which future conditions cannot be reduced to ordinary parameter uncertainty?</p>
+<h3 id="weekly-learning-outcomes-2">Weekly learning outcomes</h3>
+<p>By the end of the week, you should be able to:</p>
+<ul>
+<li>explain sensitivity to initial conditions, attractors, thresholds, phase transitions, networks, self-organization, adaptation, and path dependence</li>
+<li>distinguish deterministic chaos, stochastic variation, deep uncertainty, ambiguity, and ignorance</li>
+<li>analyze how patterns and interventions differ across temporal, spatial, organizational, and social scales</li>
+<li>construct testable dynamic hypotheses without claiming universal complexity laws</li>
+<li>develop an uncertainty and observability map linked to decisions</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-2">Prerequisite retrieval and readiness check</h3>
+<p>Before beginning the new material:</p>
+<ul>
+<li>Reproduce the Week 1 reference modes without notes.</li>
+<li>Identify one reinforcing and one balancing loop from prior work.</li>
+<li>Explain aleatory, epistemic, and deep uncertainty in one sentence each.</li>
+<li>List three ways an intervention could change actor behavior.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined boundary, power, causal, or method assumption into the week's baseline.</p>
+<h3 id="required-study-2">Required study</h3>
+<ul>
+<li><strong>Jackson complexity, chaos, and complex-systems sections (<a href="https://www.wiley.com/en-us/Critical+Systems+Thinking+and+the+Management+of+Complexity-p-9781119118374" title="Jackson: Critical Systems Thinking and the Management of Complexity">3</a>)</strong><br/>
+<strong>Purpose:</strong> Connect complexity science to management without confusing metaphor with method.<br/>
+<strong>Guiding questions:</strong> Which concepts have actionable implications and which require caution?</li>
+<li><strong>Santa Fe Institute introductory complexity material (<a href="https://www.complexityexplorer.org/" title="Santa Fe Institute Complexity Explorer">12</a>)</strong><br/>
+<strong>Purpose:</strong> Review adaptation, emergence, networks, nonlinear dynamics, and multiscale reasoning.<br/>
+<strong>Guiding questions:</strong> What observations would distinguish competing mechanisms?</li>
+<li><strong>INCOSE complex-systems resources (<a href="https://www.incose.org/group/complex-systems-working-group" title="INCOSE Complex Systems Working Group">8</a>, <a href="https://www.incose.org/resource/system-engineering-heuristics-for-complex-systems" title="INCOSE: Systems Engineering Heuristics for Complex Systems">9</a>)</strong><br/>
+<strong>Purpose:</strong> Translate complexity insights into systems-engineering heuristics and limitations.<br/>
+<strong>Guiding questions:</strong> Which heuristics are relevant to the regional case and how could they fail?</li>
+</ul>
+<p>Record concise notes answering every guiding question. For the required book, read the named section rather than relying on a summary. Identify at least one claim you accept, one you question, and one implication for the running case.</p>
+<h3 id="instructor-style-lesson-notes-2">Instructor-style lesson notes</h3>
+<ul>
+<li>Chaos can be deterministic yet practically unpredictable; randomness and chaos are not synonyms.</li>
+<li>Adaptation means actors or components change rules or behavior based on experience or conditions.</li>
+<li>Path dependence means current options and outcomes depend on historical sequences, not only current state.</li>
+<li>Scale matters: a locally stabilizing action can destabilize a regional network or a longer time horizon.</li>
+<li>Deep uncertainty concerns plausible futures, models, values, or probabilities that cannot be agreed or estimated reliably.</li>
+<li>A complexity mechanism is useful only if it changes observation, experiment, or intervention design.</li>
+</ul>
+<h3 id="worked-example-2">Worked example</h3>
+<p>A route-priority policy reduces immediate emergency travel time, causing other operators to reroute service. Over weeks, public ridership falls, fare revenue drops, and maintenance is deferred, increasing long-term emergency vulnerability. The causal mechanism spans minutes, weeks, and budgets; a short simulation of travel time alone misses the adaptation.</p>
+<p>Reconstruct the example in a diagram, table, memo, or model. Then state where the example is deliberately simplified and why the same conclusion might not transfer to the regional case.</p>
+<h3 id="guided-practice-2">Guided practice</h3>
+<ol>
+<li>Create a mechanism catalog for feedback, threshold, contagion, network centrality, adaptation, path dependence, and scale mismatch.</li>
+<li>Map what is observable directly, inferred through proxies, delayed, contested, or invisible.</li>
+<li>Form three competing dynamic hypotheses for declining public trust.</li>
+<li>Design one discriminating observation or small experiment for each hypothesis.</li>
+<li>Build a decision-centered uncertainty taxonomy: what can be reduced, monitored, hedged, diversified, or only bounded.</li>
+</ol>
+<p>Pause after each step. Compare the result with the decision purpose and record disagreement, ambiguity, and negative evidence instead of forcing convergence.</p>
+<h3 id="independent-exercises-2">Independent exercises</h3>
+<ul>
+<li>Foundation: distinguish chaos, noise, uncertainty, ambiguity, and surprise in five scenarios.</li>
+<li>Application: develop the regional uncertainty and observability map.</li>
+<li>Analysis: identify a likely tipping point and explain why evidence is or is not sufficient.</li>
+<li>Synthesis: write a mechanism-based explanation of one reference mode with two alternatives.</li>
+<li>Stretch: implement a small network or nonlinear model and show how conclusions change across scales.</li>
+</ul>
+<h3 id="dialectical-critique-journal--optional-seminar-2">Dialectical critique journal / optional seminar</h3>
+<p>Write a 300–500 word response that:</p>
+<ol>
+<li>reconstructs one assigned author's central claim fairly;</li>
+<li>identifies its assumptions and strongest evidence;</li>
+<li>develops a substantive critique or counterexample;</li>
+<li>applies the claim to the regional case; and</li>
+<li>states what evidence or argument would change your current judgment.</li>
+</ol>
+<p>With a cohort, exchange critiques with at least two peers and respond to the strongest challenge. Studying solo, write a steelman and a red-team response separated by 24 hours.</p>
+<h3 id="weekly-deliverable-2">Weekly deliverable</h3>
+<p><strong>Dynamic Hypotheses and Uncertainty Package</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>complexity-mechanism catalog</li>
+<li>multiscale map</li>
+<li>three competing dynamic hypotheses</li>
+<li>uncertainty taxonomy and decision implications</li>
+<li>observability/proxy/data-latency map</li>
+<li>candidate discriminating observations or experiments</li>
+<li>updated risk and non-claim register</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, approach used, assumptions, boundary judgments, evidence, affected groups, limitations, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-2">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mechanism accuracy</td>
+<td style="text-align:right">25%</td>
+<td>Concepts are used precisely and operationally</td>
+</tr>
+<tr>
+<td>Competing hypotheses</td>
+<td style="text-align:right">20%</td>
+<td>Alternatives are plausible and discriminable</td>
+</tr>
+<tr>
+<td>Scale reasoning</td>
+<td style="text-align:right">20%</td>
+<td>Local/global and short/long effects are explicit</td>
+</tr>
+<tr>
+<td>Uncertainty/observability</td>
+<td style="text-align:right">20%</td>
+<td>Limits are decision-linked</td>
+</tr>
+<tr>
+<td>Evidence discipline</td>
+<td style="text-align:right">15%</td>
+<td>Claims remain proportional to evidence</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-2">Critical failures</h3>
+<ul>
+<li>Treats a metaphor such as tipping point or emergence as established mechanism.</li>
+<li>Assigns precise probabilities to deep uncertainty without basis.</li>
+<li>Uses one model or scale as a complete representation of the situation.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-2">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>How can deterministic chaos still be unpredictable?</strong> — Small initial-state differences can grow rapidly, making long-range prediction impractical.</li>
+<li><strong>What is path dependence?</strong> — The sequence of prior states and decisions shapes current possibilities and outcomes.</li>
+<li><strong>What makes uncertainty “deep”?</strong> — Parties cannot credibly agree on models, probabilities, outcomes, or values.</li>
+<li><strong>Why maintain competing hypotheses?</strong> — Complex evidence is often consistent with multiple causal explanations.</li>
+<li><strong>What is observability?</strong> — The degree to which relevant states and mechanisms can be directly or indirectly detected in time for a decision.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-2">Revision and mastery gate</h3>
+<p>Complete the Complexity Framing Review only when mechanisms, hypotheses, uncertainty, scale, and observability are explicit and connected to decisions.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-2">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required reading</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">2.5–3.5 hr</td>
+</tr>
+<tr>
+<td>Journal, deliverable, and review</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and revision</td>
+<td style="text-align:right">0.5–1 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-2">Configuration and portfolio update</h3>
+<p>Baseline <code>/02-complexity-mechanisms</code>; register every later model or method against the hypothesis and scale it addresses.</p>
+<p>Record actual effort, changed beliefs, decisions, assumptions, evidence gaps, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-3--type-a--technical-complexity-and-hard-systems-thinking">Week 3 — Type A — technical complexity and hard systems thinking</h2>
+<blockquote>
+<p><strong>Book companion · Week 3 :</strong> <a href="../../K/B20/chapters/03.html">Read Book 20, Chapter 03</a> → <a href="../../K/B20/labs/03.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-742-w03.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-3">Competency alignment</h3>
+<p>C4 architecture; C8 quantitative analysis; C9 decision analysis; C11 methodological critique.</p>
+<h3 id="professional-context-and-essential-question-3">Professional context and essential question</h3>
+<p>Hard systems thinking, operations research, systems analysis, and systems engineering remain powerful when purposes are sufficiently clear, measures are accepted, and the system can be bounded. The risk is not using them—it is using them beyond those conditions.</p>
+<p><strong>Essential question:</strong> Which parts of the regional situation can be treated as technical decision problems, and what fails when Type A assumptions are extended to the whole problem?</p>
+<h3 id="weekly-learning-outcomes-3">Weekly learning outcomes</h3>
+<p>By the end of the week, you should be able to:</p>
+<ul>
+<li>reconstruct the philosophy, process, and products of hard systems thinking</li>
+<li>formulate a bounded technical decision with objectives, constraints, alternatives, model, and verification</li>
+<li>apply a transparent quantitative method to one subproblem</li>
+<li>critique optimization, decomposition, and requirement assumptions</li>
+<li>identify where Type A outputs should feed—not dominate—a broader intervention</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-3">Prerequisite retrieval and readiness check</h3>
+<p>Before beginning the new material:</p>
+<ul>
+<li>Retrieve one prior trade study and state its decision authority.</li>
+<li>List the stakeholder values embedded in its objective function.</li>
+<li>Identify one constraint that was treated as fixed but is politically negotiable.</li>
+<li>Explain verification, validation, and fitness for use.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined boundary, power, causal, or method assumption into the week's baseline.</p>
+<h3 id="required-study-3">Required study</h3>
+<ul>
+<li><strong>Jackson Type A: hard systems thinking (<a href="https://www.wiley.com/en-us/Critical+Systems+Thinking+and+the+Management+of+Complexity-p-9781119118374" title="Jackson: Critical Systems Thinking and the Management of Complexity">3</a>)</strong><br/>
+<strong>Purpose:</strong> Understand operational research, systems analysis, and systems engineering as an approach to technical complexity.<br/>
+<strong>Guiding questions:</strong> What makes a problem suitable, and what human or political conditions are assumed away?</li>
+<li><strong>SEBoK Systems Engineering Overview (<a href="https://sebokwiki.org/wiki/Systems_Engineering_Overview" title="SEBoK: Systems Engineering Overview">26</a>)</strong><br/>
+<strong>Purpose:</strong> Review disciplined lifecycle and decision practices that remain useful within bounded subproblems.<br/>
+<strong>Guiding questions:</strong> Which products are transferable into a multimethodological intervention?</li>
+<li><strong>INCOSE complex-systems heuristics (<a href="https://www.incose.org/resource/system-engineering-heuristics-for-complex-systems" title="INCOSE: Systems Engineering Heuristics for Complex Systems">9</a>)</strong><br/>
+<strong>Purpose:</strong> Use heuristics to challenge overconfidence in decomposition and optimization.<br/>
+<strong>Guiding questions:</strong> Where can local optimization create systemic harm?</li>
+</ul>
+<p>Record concise notes answering every guiding question. For the required book, read the named section rather than relying on a summary. Identify at least one claim you accept, one you question, and one implication for the running case.</p>
+<h3 id="instructor-style-lesson-notes-3">Instructor-style lesson notes</h3>
+<ul>
+<li>Type A methods are strongest when goals, boundaries, variables, constraints, and decision authority are sufficiently stable.</li>
+<li>A quantitative optimum is conditional on model structure, data, weights, constraints, and omitted effects.</li>
+<li>Technical decomposition can hide feedback and burden transfer across boundaries.</li>
+<li>Verification shows the method was implemented as intended; validation asks whether it is adequate for the decision.</li>
+<li>Hard evidence remains essential even in pluralist or coercive contexts, but it does not resolve legitimacy or value conflict.</li>
+<li>Use Type A to answer bounded questions, then expose its assumptions to other perspectives.</li>
+</ul>
+<h3 id="worked-example-3">Worked example</h3>
+<p>Optimize emergency vehicle staging across six hubs under a fixed heat-emergency scenario. The model improves expected response time, but assumes staffing availability, trusted routing data, and agreement that average response time dominates equity and worker fatigue. The solution is useful as one evidence stream, not the regional answer.</p>
+<p>Reconstruct the example in a diagram, table, memo, or model. Then state where the example is deliberately simplified and why the same conclusion might not transfer to the regional case.</p>
+<h3 id="guided-practice-3">Guided practice</h3>
+<ol>
+<li>Select one bounded technical decision with an identified authority.</li>
+<li>Define objectives, constraints, alternatives, measures, data, uncertainty, and excluded effects.</li>
+<li>Build or reuse a simple optimization, trade-study, or requirements-allocation model.</li>
+<li>Verify calculations and test sensitivity to weights, demand, and resource assumptions.</li>
+<li>Write an applicability critique and list what must be examined by later methods.</li>
+</ol>
+<p>Pause after each step. Compare the result with the decision purpose and record disagreement, ambiguity, and negative evidence instead of forcing convergence.</p>
+<h3 id="independent-exercises-3">Independent exercises</h3>
+<ul>
+<li>Foundation: identify Type A suitability and unsuitability in eight examples.</li>
+<li>Application: perform the bounded regional analysis.</li>
+<li>Analysis: test at least three plausible objective functions or stakeholder weighting schemes.</li>
+<li>Synthesis: write a technical recommendation with explicit conditions and non-claims.</li>
+<li>Stretch: compute a Pareto frontier and show which effects remain outside the model.</li>
+</ul>
+<h3 id="dialectical-critique-journal--optional-seminar-3">Dialectical critique journal / optional seminar</h3>
+<p>Write a 300–500 word response that:</p>
+<ol>
+<li>reconstructs one assigned author's central claim fairly;</li>
+<li>identifies its assumptions and strongest evidence;</li>
+<li>develops a substantive critique or counterexample;</li>
+<li>applies the claim to the regional case; and</li>
+<li>states what evidence or argument would change your current judgment.</li>
+</ol>
+<p>With a cohort, exchange critiques with at least two peers and respond to the strongest challenge. Studying solo, write a steelman and a red-team response separated by 24 hours.</p>
+<h3 id="weekly-deliverable-3">Weekly deliverable</h3>
+<p><strong>Type A Technical Analysis and Critique</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>bounded problem and decision authority</li>
+<li>objectives, constraints, alternatives, and measures</li>
+<li>reproducible model or analysis</li>
+<li>verification, validation, and sensitivity evidence</li>
+<li>conditional recommendation</li>
+<li>assumption and exclusion register</li>
+<li>critique of whole-problem applicability and handoff to other methods</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, approach used, assumptions, boundary judgments, evidence, affected groups, limitations, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-3">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Problem suitability</td>
+<td style="text-align:right">20%</td>
+<td>Bounded use is justified</td>
+</tr>
+<tr>
+<td>Technical rigor</td>
+<td style="text-align:right">25%</td>
+<td>Analysis is reproducible and correct</td>
+</tr>
+<tr>
+<td>Sensitivity/uncertainty</td>
+<td style="text-align:right">20%</td>
+<td>Conditionality is exposed</td>
+</tr>
+<tr>
+<td>Method critique</td>
+<td style="text-align:right">20%</td>
+<td>Blind spots and assumptions are substantive</td>
+</tr>
+<tr>
+<td>Handoff</td>
+<td style="text-align:right">15%</td>
+<td>Outputs are positioned for broader inquiry</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-3">Critical failures</h3>
+<ul>
+<li>Presents the technical optimum as the socially preferred regional outcome.</li>
+<li>Hides objective weights, exclusions, or authority assumptions.</li>
+<li>Uses model precision to imply certainty not supported by data or structure.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-3">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>When is hard systems thinking appropriate?</strong> — When purpose, boundaries, measures, constraints, and authority are sufficiently clear for the decision.</li>
+<li><strong>What makes an optimum conditional?</strong> — It depends on model structure, data, objectives, weights, constraints, and exclusions.</li>
+<li><strong>Why is validation essential?</strong> — Correct computation does not guarantee the model represents the decision situation adequately.</li>
+<li><strong>Can Type A be used in a coercive situation?</strong> — It can answer bounded technical questions, but cannot resolve power, legitimacy, or emancipation by itself.</li>
+<li><strong>What is the main course expectation?</strong> — Use the method competently and critique its partiality.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-3">Revision and mastery gate</h3>
+<p>Approve Type A work only as a bounded evidence product with explicit use conditions—not as the overarching intervention strategy.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-3">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required reading</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">2.5–3.5 hr</td>
+</tr>
+<tr>
+<td>Journal, deliverable, and review</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and revision</td>
+<td style="text-align:right">0.5–1 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-3">Configuration and portfolio update</h3>
+<p>Store in <code>/03-type-a-through-f-critiques/type-a</code>; link model version, data, assumptions, and decision record.</p>
+<p>Record actual effort, changed beliefs, decisions, assumptions, evidence gaps, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-4--type-b--process-complexity-and-the-vanguard-method">Week 4 — Type B — process complexity and the Vanguard Method</h2>
+<blockquote>
+<p><strong>Book companion · Week 4 :</strong> <a href="../../K/B20/chapters/04.html">Read Book 20, Chapter 04</a> → <a href="../../K/B20/labs/04.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-742-w04.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-4">Competency alignment</h3>
+<p>C9 process improvement; C10 management; C11 systems practice; C12 evidence and responsibility.</p>
+<h3 id="professional-context-and-essential-question-4">Professional context and essential question</h3>
+<p>Process complexity often arises when work crosses functional boundaries, demand is misclassified, queues and rework are hidden, and centrally imposed targets distort service. The Vanguard Method emphasizes studying demand and work in context before redesign.</p>
+<p><strong>Essential question:</strong> How does the regional response system actually handle demand, and which management assumptions create avoidable failure demand or delay?</p>
+<h3 id="weekly-learning-outcomes-4">Weekly learning outcomes</h3>
+<p>By the end of the week, you should be able to:</p>
+<ul>
+<li>explain the Type B process-complexity framing and Vanguard check-plan-do logic</li>
+<li>distinguish value demand from failure demand</li>
+<li>map end-to-end work, decision points, queues, rework, and measures in context</li>
+<li>identify how targets, specialization, and functional design shape behavior</li>
+<li>propose a bounded process experiment and critique method limitations</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-4">Prerequisite retrieval and readiness check</h3>
+<p>Before beginning the new material:</p>
+<ul>
+<li>Retrieve the current-state process from EN.645.753.</li>
+<li>Identify one queue, one rework loop, and one target-driven behavior.</li>
+<li>Explain the difference between purpose from the user perspective and organizational output.</li>
+<li>List data needed to observe demand at the point of transaction.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined boundary, power, causal, or method assumption into the week's baseline.</p>
+<h3 id="required-study-4">Required study</h3>
+<ul>
+<li><strong>Jackson Type B: the Vanguard Method (<a href="https://www.wiley.com/en-us/Critical+Systems+Thinking+and+the+Management+of+Complexity-p-9781119118374" title="Jackson: Critical Systems Thinking and the Management of Complexity">3</a>)</strong><br/>
+<strong>Purpose:</strong> Understand process complexity, demand analysis, and check-plan-do intervention.<br/>
+<strong>Guiding questions:</strong> What managerial assumptions does the method challenge?</li>
+<li><strong>Open University systems practice resources (<a href="https://www.open.edu/openlearn/systems-thinking-hub" title="Open University Systems Thinking Hub">10</a>, <a href="https://www.open.edu/openlearn/science-maths-technology/understanding-systems-thinking-practice-stip" title="Open University: Understanding Systems Thinking in Practice">11</a>)</strong><br/>
+<strong>Purpose:</strong> Review learning-in-context and the distinction between method and technique.<br/>
+<strong>Guiding questions:</strong> How should inquiry change practitioner understanding before redesign?</li>
+<li><strong>EN.645.783 process-improvement baseline</strong><br/>
+<strong>Purpose:</strong> Reuse event logs and process models while questioning their original purpose and measures.<br/>
+<strong>Guiding questions:</strong> Which earlier “improvements” may have optimized internal activity rather than regional purpose?</li>
+</ul>
+<p>Record concise notes answering every guiding question. For the required book, read the named section rather than relying on a summary. Identify at least one claim you accept, one you question, and one implication for the running case.</p>
+<h3 id="instructor-style-lesson-notes-4">Instructor-style lesson notes</h3>
+<ul>
+<li>Process maps built from procedures often differ from work as experienced by users and staff.</li>
+<li>Failure demand is demand caused by a failure to do something or do it right for the user.</li>
+<li>Targets can become de facto purposes and induce gaming, batching, or avoidance.</li>
+<li>Check studies purpose, demand, flow, capability, and system conditions before change.</li>
+<li>Plan redesigns work against demand; do tests assumptions rather than imposing a full rollout.</li>
+<li>Type B can underplay structural dynamics, plural values, coercion, and broader political economy.</li>
+</ul>
+<h3 id="worked-example-4">Worked example</h3>
+<p>A regional emergency-access hotline reports 90% call closure within 24 hours. Event-log and interview evidence shows that cases are closed when transferred, causing repeated calls and delayed transport. The target improves departmental statistics while increasing failure demand and public frustration.</p>
+<p>Reconstruct the example in a diagram, table, memo, or model. Then state where the example is deliberately simplified and why the same conclusion might not transfer to the regional case.</p>
+<h3 id="guided-practice-4">Guided practice</h3>
+<ol>
+<li>Select one end-to-end service process and define purpose from multiple user perspectives.</li>
+<li>Sample and classify demand, including failure demand and exceptional cases.</li>
+<li>Map actual flow, waits, handoffs, rework, rules, measures, and system conditions.</li>
+<li>Identify management thinking that creates observed behavior.</li>
+<li>Design one small process experiment with capability and user-outcome measures.</li>
+</ol>
+<p>Pause after each step. Compare the result with the decision purpose and record disagreement, ambiguity, and negative evidence instead of forcing convergence.</p>
+<h3 id="independent-exercises-4">Independent exercises</h3>
+<ul>
+<li>Foundation: classify 30 synthetic demand records as value, failure, preventable, or uncertain.</li>
+<li>Application: complete a check-stage diagnosis for the emergency-access process.</li>
+<li>Analysis: compare official performance measures with user-centered capability measures.</li>
+<li>Synthesis: propose a plan/do experiment and predict possible adaptation or gaming.</li>
+<li>Stretch: conduct a small event-log conformance analysis and compare it with interview evidence.</li>
+</ul>
+<h3 id="dialectical-critique-journal--optional-seminar-4">Dialectical critique journal / optional seminar</h3>
+<p>Write a 300–500 word response that:</p>
+<ol>
+<li>reconstructs one assigned author's central claim fairly;</li>
+<li>identifies its assumptions and strongest evidence;</li>
+<li>develops a substantive critique or counterexample;</li>
+<li>applies the claim to the regional case; and</li>
+<li>states what evidence or argument would change your current judgment.</li>
+</ol>
+<p>With a cohort, exchange critiques with at least two peers and respond to the strongest challenge. Studying solo, write a steelman and a red-team response separated by 24 hours.</p>
+<h3 id="weekly-deliverable-4">Weekly deliverable</h3>
+<p><strong>Type B Demand-Flow Diagnosis and Experiment</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>purpose statements from at least three perspectives</li>
+<li>demand classification with uncertainty</li>
+<li>actual-work and flow model</li>
+<li>capability and variation evidence</li>
+<li>management-thinking diagnosis</li>
+<li>bounded experiment with measures, guardrails, and rollback</li>
+<li>critique of Type B applicability and missing dimensions</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, approach used, assumptions, boundary judgments, evidence, affected groups, limitations, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-4">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Demand evidence</td>
+<td style="text-align:right">20%</td>
+<td>Classification is grounded and transparent</td>
+</tr>
+<tr>
+<td>Flow/system diagnosis</td>
+<td style="text-align:right">25%</td>
+<td>Queues, rework, rules, and measures explain behavior</td>
+</tr>
+<tr>
+<td>Purpose/measures</td>
+<td style="text-align:right">20%</td>
+<td>User and regional outcomes replace activity targets</td>
+</tr>
+<tr>
+<td>Experiment</td>
+<td style="text-align:right">20%</td>
+<td>Test is bounded and decision-oriented</td>
+</tr>
+<tr>
+<td>Critique</td>
+<td style="text-align:right">15%</td>
+<td>Structural, political, and ethical limits are explicit</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-4">Critical failures</h3>
+<ul>
+<li>Treats the documented process as actual work without observation.</li>
+<li>Labels inconvenient demand as failure demand from the organization’s perspective.</li>
+<li>Rolls out a redesign without a bounded learning test.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-4">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is failure demand?</strong> — Demand caused by failure to do something or do it right for the user.</li>
+<li><strong>Why study demand before redesign?</strong> — Process design should respond to actual variety and purpose, not assumed standard work.</li>
+<li><strong>How can targets distort behavior?</strong> — They can replace purpose and induce gaming, batching, avoidance, or premature closure.</li>
+<li><strong>What does check-plan-do mean?</strong> — Study the system, design against demand, then test and learn in practice.</li>
+<li><strong>What can Type B miss?</strong> — Long-run dynamics, organizational viability, plural values, power, and wider systemic effects.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-4">Revision and mastery gate</h3>
+<p>Complete the Technical and Process Method Review with separate judgments about where Type A and B are useful, incompatible, or mutually informing.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-4">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required reading</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">2.5–3.5 hr</td>
+</tr>
+<tr>
+<td>Journal, deliverable, and review</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and revision</td>
+<td style="text-align:right">0.5–1 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-4">Configuration and portfolio update</h3>
+<p>Store in <code>/03-type-a-through-f-critiques/type-b</code>; preserve demand sample, coding rules, maps, and experiment assumptions.</p>
+<p>Record actual effort, changed beliefs, decisions, assumptions, evidence gaps, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-5--type-c--structural-complexity-and-system-dynamics">Week 5 — Type C — structural complexity and system dynamics</h2>
+<blockquote>
+<p><strong>Book companion · Week 5 :</strong> <a href="../../K/B20/chapters/05.html">Read Book 20, Chapter 05</a> → <a href="../../K/B20/labs/05.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-742-w05.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-5">Competency alignment</h3>
+<p>C7 modeling and simulation; C8 uncertainty; C11 dynamic complexity; C12 model credibility.</p>
+<h3 id="professional-context-and-essential-question-5">Professional context and essential question</h3>
+<p>Structural complexity arises when feedback, accumulation, delay, and nonlinearity generate behavior that cannot be understood from events or component performance alone. System dynamics makes those structural hypotheses explicit and testable.</p>
+<p><strong>Essential question:</strong> Which feedback structure can explain the regional behavior over time, and how robust are policy conclusions to structural and parametric uncertainty?</p>
+<h3 id="weekly-learning-outcomes-5">Weekly learning outcomes</h3>
+<p>By the end of the week, you should be able to:</p>
+<ul>
+<li>explain Type C structural complexity and the system-dynamics worldview</li>
+<li>translate reference modes and causal hypotheses into stocks, flows, equations, and delays</li>
+<li>construct and test a bounded executable model</li>
+<li>analyze loop dominance, thresholds, sensitivity, policy resistance, and unintended consequences</li>
+<li>critique aggregation, quantification, and participation limitations</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-5">Prerequisite retrieval and readiness check</h3>
+<p>Before beginning the new material:</p>
+<ul>
+<li>Reproduce a stock-flow distinction.</li>
+<li>Identify one conservation or accounting relationship in the case.</li>
+<li>State the intended use and decision for the model.</li>
+<li>List two structural alternatives for the same observed pattern.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined boundary, power, causal, or method assumption into the week's baseline.</p>
+<h3 id="required-study-5">Required study</h3>
+<ul>
+<li><strong>Jackson Type C: system dynamics (<a href="https://www.wiley.com/en-us/Critical+Systems+Thinking+and+the+Management+of+Complexity-p-9781119118374" title="Jackson: Critical Systems Thinking and the Management of Complexity">3</a>)</strong><br/>
+<strong>Purpose:</strong> Understand structural complexity and the management value and limitations of system dynamics.<br/>
+<strong>Guiding questions:</strong> What does the method assume about causal explanation and participation?</li>
+<li><strong>MIT system dynamics resource (<a href="https://ocw.mit.edu/courses/res-15-004-system-dynamics-systems-thinking-and-modeling-for-a-complex-world-january-iap-2020/" title="MIT System Dynamics: Systems Thinking and Modeling for a Complex World">13</a>)</strong><br/>
+<strong>Purpose:</strong> Review reference modes, feedback, stocks/flows, model testing, and policy design.<br/>
+<strong>Guiding questions:</strong> What tests support learning rather than curve fitting?</li>
+<li><strong>Vensim PLE documentation (<a href="https://vensim.com/vensim-personal-learning-edition/" title="Vensim Personal Learning Edition">14</a>)</strong><br/>
+<strong>Purpose:</strong> Implement a transparent, reproducible model.<br/>
+<strong>Guiding questions:</strong> How will units, time step, initialization, and equations be verified?</li>
+</ul>
+<p>Record concise notes answering every guiding question. For the required book, read the named section rather than relying on a summary. Identify at least one claim you accept, one you question, and one implication for the running case.</p>
+<h3 id="instructor-style-lesson-notes-5">Instructor-style lesson notes</h3>
+<ul>
+<li>Stocks create memory and inertia; flows change stocks; delays separate action from observed effect.</li>
+<li>A causal-loop diagram is a hypothesis, not a validated model.</li>
+<li>Models should be built for a decision and tested against multiple behaviors and extreme conditions.</li>
+<li>Policy resistance often arises when feedback compensates for intervention.</li>
+<li>Structural uncertainty can dominate parameter uncertainty; alternative models should be preserved.</li>
+<li>System dynamics can obscure individual experience, power, meaning, and heterogeneity through aggregation.</li>
+</ul>
+<h3 id="worked-example-5">Worked example</h3>
+<p>A model links service reliability, public trust, ridership, revenue, maintenance capacity, workforce stress, and failure frequency. A subsidy improves service temporarily, but delayed maintenance and workforce attrition later reverse the gain. A second structure attributes the reversal mainly to cyber-related trust loss; both require discriminating evidence.</p>
+<p>Reconstruct the example in a diagram, table, memo, or model. Then state where the example is deliberately simplified and why the same conclusion might not transfer to the regional case.</p>
+<h3 id="guided-practice-5">Guided practice</h3>
+<ol>
+<li>Select one reference mode and define model purpose, boundary, horizon, and audience.</li>
+<li>Build a causal structure with at least two competing explanations.</li>
+<li>Translate the preferred hypothesis into an executable stock-flow model with units.</li>
+<li>Run structural, dimensional, extreme-condition, behavior, and sensitivity tests.</li>
+<li>Compare at least three policies and document decision reversals across structural alternatives.</li>
+</ol>
+<p>Pause after each step. Compare the result with the decision purpose and record disagreement, ambiguity, and negative evidence instead of forcing convergence.</p>
+<h3 id="independent-exercises-5">Independent exercises</h3>
+<ul>
+<li>Foundation: correct unit and stock-flow errors in a defective model.</li>
+<li>Application: build the regional structural model.</li>
+<li>Analysis: identify dominant loops across time and test one threshold.</li>
+<li>Synthesis: recommend a robust policy portfolio or explain why none is supported.</li>
+<li>Stretch: compare aggregated and subgroup versions to expose equity effects.</li>
+</ul>
+<h3 id="dialectical-critique-journal--optional-seminar-5">Dialectical critique journal / optional seminar</h3>
+<p>Write a 300–500 word response that:</p>
+<ol>
+<li>reconstructs one assigned author's central claim fairly;</li>
+<li>identifies its assumptions and strongest evidence;</li>
+<li>develops a substantive critique or counterexample;</li>
+<li>applies the claim to the regional case; and</li>
+<li>states what evidence or argument would change your current judgment.</li>
+</ol>
+<p>With a cohort, exchange critiques with at least two peers and respond to the strongest challenge. Studying solo, write a steelman and a red-team response separated by 24 hours.</p>
+<h3 id="weekly-deliverable-5">Weekly deliverable</h3>
+<p><strong>Type C Executable Structural Model and Policy Analysis</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>model purpose, boundary, horizon, reference modes, and hypotheses</li>
+<li>causal and stock-flow structure</li>
+<li>equations, units, data, initialization, and source files</li>
+<li>verification and behavior-validation evidence</li>
+<li>sensitivity, structural uncertainty, and decision-reversal analysis</li>
+<li>conditional policy findings and limitations</li>
+<li>critique of aggregation, participation, and power blind spots</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, approach used, assumptions, boundary judgments, evidence, affected groups, limitations, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-5">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structural reasoning</td>
+<td style="text-align:right">25%</td>
+<td>Feedback, stocks, delays, and nonlinearities explain behavior</td>
+</tr>
+<tr>
+<td>Implementation/testing</td>
+<td style="text-align:right">25%</td>
+<td>Model is reproducible and credibly tested</td>
+</tr>
+<tr>
+<td>Policy analysis</td>
+<td style="text-align:right">20%</td>
+<td>Findings are robust or reversals are explicit</td>
+</tr>
+<tr>
+<td>Uncertainty</td>
+<td style="text-align:right">15%</td>
+<td>Structural and parameter uncertainty are distinguished</td>
+</tr>
+<tr>
+<td>Critique</td>
+<td style="text-align:right">15%</td>
+<td>Aggregation and social limitations are candid</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-5">Critical failures</h3>
+<ul>
+<li>Uses a causal-loop diagram as proof.</li>
+<li>Calibrates to one behavior without structural or extreme-condition testing.</li>
+<li>Presents an aggregated policy gain while hiding subgroup harm.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-5">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What creates structural complexity?</strong> — Interacting feedback, accumulation, delay, nonlinearity, and endogenous response.</li>
+<li><strong>Why are stocks important?</strong> — They preserve history and create inertia and delayed response.</li>
+<li><strong>What is policy resistance?</strong> — System feedback offsets, redirects, or reverses an intervention.</li>
+<li><strong>Why preserve structural alternatives?</strong> — Different plausible causal structures can fit the same history but imply different policies.</li>
+<li><strong>What can system dynamics underrepresent?</strong> — Individual meaning, power, discrete events, network topology, and heterogeneity if not deliberately modeled.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-5">Revision and mastery gate</h3>
+<p>Approve the model only for its stated use after reproduction, tests, uncertainty analysis, and a clear account of what it cannot represent.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-5">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required reading</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">2.5–3.5 hr</td>
+</tr>
+<tr>
+<td>Journal, deliverable, and review</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and revision</td>
+<td style="text-align:right">0.5–1 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-5">Configuration and portfolio update</h3>
+<p>Store source, data, tests, and outputs in <code>/03-type-a-through-f-critiques/type-c</code>; tag the reviewed model baseline.</p>
+<p>Record actual effort, changed beliefs, decisions, assumptions, evidence gaps, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-6--type-d--organizational-complexity-sociotechnical-systems-and-viable-organization">Week 6 — Type D — organizational complexity, sociotechnical systems, and viable organization</h2>
+<blockquote>
+<p><strong>Book companion · Week 6 :</strong> <a href="../../K/B20/chapters/06.html">Read Book 20, Chapter 06</a> → <a href="../../K/B20/labs/06.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-742-w06.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-6">Competency alignment</h3>
+<p>C1 sociotechnical reasoning; C4 architecture; C10 governance; C11 organizational complexity.</p>
+<h3 id="professional-context-and-essential-question-6">Professional context and essential question</h3>
+<p>Organizations must coordinate work, technology, information, control, learning, and identity while remaining viable in changing environments. Type D approaches examine joint optimization and organizational cybernetics rather than assuming organization charts describe real control.</p>
+<p><strong>Essential question:</strong> How should the regional coalition organize autonomy, coordination, intelligence, control, and identity without destroying local viability?</p>
+<h3 id="weekly-learning-outcomes-6">Weekly learning outcomes</h3>
+<p>By the end of the week, you should be able to:</p>
+<ul>
+<li>explain sociotechnical systems thinking and joint optimization</li>
+<li>apply a sociotechnical analysis to work, technology, people, environment, and performance</li>
+<li>explain variety, regulation, recursion, and the Viable System Model</li>
+<li>diagnose autonomy/coordination and information-channel failures</li>
+<li>critique functionalism, managerialism, and treatment of conflict or coercion</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-6">Prerequisite retrieval and readiness check</h3>
+<p>Before beginning the new material:</p>
+<ul>
+<li>Retrieve the EN.645.753 governance and operating-model recommendation.</li>
+<li>Identify one work-system change that improved technology but harmed people or service.</li>
+<li>Explain requisite variety in your own words.</li>
+<li>List three recursive levels in the regional ecosystem.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined boundary, power, causal, or method assumption into the week's baseline.</p>
+<h3 id="required-study-6">Required study</h3>
+<ul>
+<li><strong>Jackson Type D: sociotechnical systems and organizational cybernetics/VSM (<a href="https://www.wiley.com/en-us/Critical+Systems+Thinking+and+the+Management+of+Complexity-p-9781119118374" title="Jackson: Critical Systems Thinking and the Management of Complexity">3</a>)</strong><br/>
+<strong>Purpose:</strong> Understand organizational complexity through work-system design and viability.<br/>
+<strong>Guiding questions:</strong> What must be jointly optimized and what organizational functions support viability?</li>
+<li><strong>Open University STiP resources on VSM and systems practice (<a href="https://www.open.edu/openlearn/science-maths-technology/understanding-systems-thinking-practice-stip" title="Open University: Understanding Systems Thinking in Practice">11</a>)</strong><br/>
+<strong>Purpose:</strong> Gain a practical introduction to organizational cybernetics and multiple systems approaches.<br/>
+<strong>Guiding questions:</strong> Where does the current coalition lack autonomy, coordination, intelligence, or policy coherence?</li>
+<li><strong>Phase 5 enterprise baseline</strong><br/>
+<strong>Purpose:</strong> Critique the target operating model using Type D assumptions.<br/>
+<strong>Guiding questions:</strong> Does the proposed governance match environmental variety and recursive organization?</li>
+</ul>
+<p>Record concise notes answering every guiding question. For the required book, read the named section rather than relying on a summary. Identify at least one claim you accept, one you question, and one implication for the running case.</p>
+<h3 id="instructor-style-lesson-notes-6">Instructor-style lesson notes</h3>
+<ul>
+<li>Sociotechnical design rejects optimizing technology while treating people as adjustable components.</li>
+<li>Joint optimization seeks mutually supportive social and technical arrangements, not a compromise after technical design.</li>
+<li>The VSM distinguishes operations, coordination, control, intelligence, and policy/identity functions.</li>
+<li>Requisite variety means regulatory capacity must be adequate for environmental variety.</li>
+<li>Recursion allows viable units within viable units; it also complicates authority and information design.</li>
+<li>Type D can become functionalist if conflict, domination, and contested purpose are treated as coordination defects.</li>
+</ul>
+<h3 id="worked-example-6">Worked example</h3>
+<p>The regional coalition centralizes all routing decisions to improve coordination. Local operators lose the ability to respond to street-level conditions, while the center becomes overloaded and slow. A VSM diagnosis suggests preserving local operational autonomy, strengthening coordination protocols, and improving strategic intelligence rather than centralizing every decision.</p>
+<p>Reconstruct the example in a diagram, table, memo, or model. Then state where the example is deliberately simplified and why the same conclusion might not transfer to the regional case.</p>
+<h3 id="guided-practice-6">Guided practice</h3>
+<ol>
+<li>Define the work system and identify social and technical subsystems.</li>
+<li>Evaluate joint optimization across tasks, roles, skills, technology, measures, and environment.</li>
+<li>Map recursive levels and VSM functions for the coalition.</li>
+<li>Diagnose variety mismatch, channel overload, missing feedback, and inappropriate centralization.</li>
+<li>Propose organizational design changes and test them against conflict and legitimacy concerns.</li>
+</ol>
+<p>Pause after each step. Compare the result with the decision purpose and record disagreement, ambiguity, and negative evidence instead of forcing convergence.</p>
+<h3 id="independent-exercises-6">Independent exercises</h3>
+<ul>
+<li>Foundation: classify organizational symptoms by VSM function or sociotechnical issue.</li>
+<li>Application: create the regional sociotechnical and VSM diagnosis.</li>
+<li>Analysis: test a centralization and decentralization alternative against environmental variety.</li>
+<li>Synthesis: propose a viable governance architecture with explicit autonomy and escalation rules.</li>
+<li>Stretch: simulate information delay or workload across the proposed control channels.</li>
+</ul>
+<h3 id="dialectical-critique-journal--optional-seminar-6">Dialectical critique journal / optional seminar</h3>
+<p>Write a 300–500 word response that:</p>
+<ol>
+<li>reconstructs one assigned author's central claim fairly;</li>
+<li>identifies its assumptions and strongest evidence;</li>
+<li>develops a substantive critique or counterexample;</li>
+<li>applies the claim to the regional case; and</li>
+<li>states what evidence or argument would change your current judgment.</li>
+</ol>
+<p>With a cohort, exchange critiques with at least two peers and respond to the strongest challenge. Studying solo, write a steelman and a red-team response separated by 24 hours.</p>
+<h3 id="weekly-deliverable-6">Weekly deliverable</h3>
+<p><strong>Type D Organizational Viability and Sociotechnical Diagnosis</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>work-system boundary and joint-optimization analysis</li>
+<li>recursive organization and VSM map</li>
+<li>variety and information-channel assessment</li>
+<li>autonomy, coordination, control, intelligence, and policy findings</li>
+<li>organizational design alternatives</li>
+<li>evidence and implementation risks</li>
+<li>critique of functionalist and conflict assumptions</li>
+<li>5–7 page literature review</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, approach used, assumptions, boundary judgments, evidence, affected groups, limitations, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-6">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sociotechnical analysis</td>
+<td style="text-align:right">20%</td>
+<td>Social and technical conditions are jointly examined</td>
+</tr>
+<tr>
+<td>VSM/viability</td>
+<td style="text-align:right">25%</td>
+<td>Functions, recursion, and variety are correctly used</td>
+</tr>
+<tr>
+<td>Governance alternatives</td>
+<td style="text-align:right">20%</td>
+<td>Autonomy and coordination are credible</td>
+</tr>
+<tr>
+<td>Critical reflection</td>
+<td style="text-align:right">15%</td>
+<td>Conflict and managerial assumptions are exposed</td>
+</tr>
+<tr>
+<td>Literature review</td>
+<td style="text-align:right">20%</td>
+<td>Sources are synthesized and critically evaluated</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-6">Critical failures</h3>
+<ul>
+<li>Uses the VSM as an organization-chart template.</li>
+<li>Assumes centralization automatically improves control.</li>
+<li>Submits a descriptive literature summary without comparison, critique, or implications.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-6">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is joint optimization?</strong> — Designing social and technical arrangements together for system performance and human outcomes.</li>
+<li><strong>What is requisite variety?</strong> — Regulatory capacity must match the variety of disturbances relevant to viability.</li>
+<li><strong>Why recursion?</strong> — Viable systems contain viable subsystems and participate in larger viable systems.</li>
+<li><strong>What is the role of intelligence?</strong> — To scan the environment and support adaptation and future planning.</li>
+<li><strong>What can Type D miss?</strong> — Deep value conflict, domination, exclusion, and coercion if treated as ordinary coordination issues.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-6">Revision and mastery gate</h3>
+<p>Complete the Structural and Organizational Review only after the executable model, organizational diagnosis, and literature review are mutually informative and explicitly bounded.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-6">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required reading</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">2.5–3.5 hr</td>
+</tr>
+<tr>
+<td>Journal, deliverable, and review</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and revision</td>
+<td style="text-align:right">0.5–1 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-6">Configuration and portfolio update</h3>
+<p>Store in <code>/03-type-a-through-f-critiques/type-d</code> and <code>/04-literature-review</code>; baseline review findings and source audit.</p>
+<p>Record actual effort, changed beliefs, decisions, assumptions, evidence gaps, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-7--type-e--people-complexity-sast-interactive-planning-and-soft-systems-methodology">Week 7 — Type E — people complexity: SAST, interactive planning, and Soft Systems Methodology</h2>
+<blockquote>
+<p><strong>Book companion · Week 7 :</strong> <a href="../../K/B20/chapters/07.html">Read Book 20, Chapter 07</a> → <a href="../../K/B20/labs/07.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-742-w07.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-7">Competency alignment</h3>
+<p>C1 perspectives; C2 stakeholder needs; C9 decision facilitation; C11 pluralism; C12 communication.</p>
+<h3 id="professional-context-and-essential-question-7">Professional context and essential question</h3>
+<p>People complexity is not noise around a technical problem. Different actors may hold legitimate but incompatible worldviews, purposes, and definitions of improvement. Type E approaches structure learning and accommodation without pretending that disagreement disappears.</p>
+<p><strong>Essential question:</strong> How can the coalition learn across conflicting worldviews and identify feasible accommodations without forcing false consensus?</p>
+<h3 id="weekly-learning-outcomes-7">Weekly learning outcomes</h3>
+<p>By the end of the week, you should be able to:</p>
+<ul>
+<li>explain pluralist problem contexts and distinguish consensus from accommodation</li>
+<li>apply Strategic Assumption Surfacing and Testing to competing strategies</li>
+<li>use interactive planning to explore idealized futures and backward constraints</li>
+<li>apply SSM through rich pictures, root definitions, CATWOE, conceptual activities, and comparison</li>
+<li>critique participation quality, facilitation power, and implementation limits</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-7">Prerequisite retrieval and readiness check</h3>
+<p>Before beginning the new material:</p>
+<ul>
+<li>List four materially different worldviews in the case.</li>
+<li>Identify one assumption supporting the preferred enterprise strategy.</li>
+<li>Explain why stakeholder interviews do not guarantee participation.</li>
+<li>Write a provisional definition of accommodation.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined boundary, power, causal, or method assumption into the week's baseline.</p>
+<h3 id="required-study-7">Required study</h3>
+<ul>
+<li><strong>Jackson Type E: SAST, Interactive Planning, and SSM (<a href="https://www.wiley.com/en-us/Critical+Systems+Thinking+and+the+Management+of+Complexity-p-9781119118374" title="Jackson: Critical Systems Thinking and the Management of Complexity">3</a>)</strong><br/>
+<strong>Purpose:</strong> Understand systems approaches for people complexity and pluralist problem situations.<br/>
+<strong>Guiding questions:</strong> How do the methods surface assumptions, worldviews, and desirable/feasible change?</li>
+<li><strong>Open University SSM and STiP resources (<a href="https://www.open.edu/openlearn/mod/oucontent/view.php?id=4809&amp;section=15.8" title="Open University: Developing a Soft Systems Method">16</a>, <a href="https://www.open.edu/openlearn/science-maths-technology/computing-ict/systems-engineering-challenging-complexity/content-section-3.9.7" title="Open University: Soft Systems Methodology as a Learning Process">17</a>)</strong><br/>
+<strong>Purpose:</strong> Practice rich pictures, purposeful activity models, and learning cycles.<br/>
+<strong>Guiding questions:</strong> How can conceptual models be used without claiming to model reality?</li>
+<li><strong>Checkland and Poulter reference (<a href="https://www.wiley.com/en-us/Learning+for+Action%3A+A+Short+Definitive+Account+of+Soft+Systems+Methodology+and+its+use+for+Practitioners%2C+Teachers+and+Students-p-9780470025543" title="Checkland and Poulter: Learning for Action">27</a>)</strong><br/>
+<strong>Purpose:</strong> Deepen understanding of SSM as inquiry and action research.<br/>
+<strong>Guiding questions:</strong> What constitutes rigorous use rather than decorative rich pictures?</li>
+</ul>
+<p>Record concise notes answering every guiding question. For the required book, read the named section rather than relying on a summary. Identify at least one claim you accept, one you question, and one implication for the running case.</p>
+<h3 id="instructor-style-lesson-notes-7">Instructor-style lesson notes</h3>
+<ul>
+<li>Pluralism means actors can engage and negotiate despite different values; it does not imply easy agreement.</li>
+<li>SAST examines assumptions supporting competing policies and their importance and certainty.</li>
+<li>Interactive planning asks what would be designed now if unconstrained by the existing system, then works toward feasible movement.</li>
+<li>SSM models purposeful activity systems based on declared worldviews, not the real world itself.</li>
+<li>Accommodation is a change actors can live with, even without shared beliefs.</li>
+<li>Facilitators influence agenda, language, participation, and interpretation; neutrality should not be assumed.</li>
+</ul>
+<h3 id="worked-example-7">Worked example</h3>
+<p>Transit managers frame emergency access as throughput, hospitals as clinical continuity, disabled travelers as autonomy and dignity, labor as safe sustainable work, and municipalities as fiscal legitimacy. An SSM inquiry reveals that a single “mobility optimization” model cannot represent these purposes. The group identifies an accommodation around minimum protected access and transparent burden-sharing.</p>
+<p>Reconstruct the example in a diagram, table, memo, or model. Then state where the example is deliberately simplified and why the same conclusion might not transfer to the regional case.</p>
+<h3 id="guided-practice-7">Guided practice</h3>
+<ol>
+<li>Create a rich picture including structures, processes, conflicts, emotions, exclusions, and environmental pressures.</li>
+<li>Develop four root definitions and CATWOE analyses from distinct worldviews.</li>
+<li>Build purposeful activity models and compare them with the current situation.</li>
+<li>Run a SAST matrix for three intervention strategies.</li>
+<li>Develop an idealized design and identify near-term changes that increase choice without pretending full consensus.</li>
+</ol>
+<p>Pause after each step. Compare the result with the decision purpose and record disagreement, ambiguity, and negative evidence instead of forcing convergence.</p>
+<h3 id="independent-exercises-7">Independent exercises</h3>
+<ul>
+<li>Foundation: distinguish objective, assumption, worldview, interest, and value judgment.</li>
+<li>Application: complete the regional SSM and SAST package.</li>
+<li>Analysis: show how the preferred intervention changes under two worldviews.</li>
+<li>Synthesis: propose accommodations and unresolved disagreements for governance.</li>
+<li>Stretch: facilitate an optional peer session and code whose contributions changed the analysis.</li>
+</ul>
+<h3 id="dialectical-critique-journal--optional-seminar-7">Dialectical critique journal / optional seminar</h3>
+<p>Write a 300–500 word response that:</p>
+<ol>
+<li>reconstructs one assigned author's central claim fairly;</li>
+<li>identifies its assumptions and strongest evidence;</li>
+<li>develops a substantive critique or counterexample;</li>
+<li>applies the claim to the regional case; and</li>
+<li>states what evidence or argument would change your current judgment.</li>
+</ol>
+<p>With a cohort, exchange critiques with at least two peers and respond to the strongest challenge. Studying solo, write a steelman and a red-team response separated by 24 hours.</p>
+<h3 id="weekly-deliverable-7">Weekly deliverable</h3>
+<p><strong>Type E Pluralist Problem-Structuring Package</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>rich picture and participation record</li>
+<li>four root definitions and CATWOE analyses</li>
+<li>purposeful activity models and real-world comparison</li>
+<li>SAST assumptions and strategy implications</li>
+<li>idealized design and feasible movement options</li>
+<li>accommodations, unresolved conflicts, and ownership</li>
+<li>facilitation reflection and method critique</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, approach used, assumptions, boundary judgments, evidence, affected groups, limitations, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-7">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Worldviews/participation</td>
+<td style="text-align:right">25%</td>
+<td>Multiple legitimate perspectives shape the analysis</td>
+</tr>
+<tr>
+<td>Method quality</td>
+<td style="text-align:right">25%</td>
+<td>SSM, SAST, and planning are used correctly</td>
+</tr>
+<tr>
+<td>Accommodation</td>
+<td style="text-align:right">20%</td>
+<td>Changes are feasible without false consensus</td>
+</tr>
+<tr>
+<td>Assumption critique</td>
+<td style="text-align:right">15%</td>
+<td>Strategic assumptions are explicit and tested</td>
+</tr>
+<tr>
+<td>Facilitation reflection</td>
+<td style="text-align:right">15%</td>
+<td>Power and participation limits are candid</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-7">Critical failures</h3>
+<ul>
+<li>Converts different worldviews into a single averaged objective.</li>
+<li>Treats CATWOE or a rich picture as a checklist.</li>
+<li>Claims consensus where actors merely complied or lacked power to object.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-7">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is accommodation?</strong> — A feasible change that participants can live with despite continuing differences.</li>
+<li><strong>What does a conceptual activity model represent?</strong> — Activities logically required by a declared worldview and root definition, not a literal model of reality.</li>
+<li><strong>What does SAST examine?</strong> — The assumptions supporting competing strategies, including their importance and certainty.</li>
+<li><strong>Why is idealized design useful?</strong> — It exposes constraints inherited from the current system and expands possible futures.</li>
+<li><strong>What is a facilitation risk?</strong> — The facilitator can shape agenda, language, inclusion, and interpretation while appearing neutral.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-7">Revision and mastery gate</h3>
+<p>Proceed only when plural perspectives materially alter the problem framing and options, and unresolved disagreement is preserved rather than averaged away.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-7">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required reading</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">2.5–3.5 hr</td>
+</tr>
+<tr>
+<td>Journal, deliverable, and review</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and revision</td>
+<td style="text-align:right">0.5–1 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-7">Configuration and portfolio update</h3>
+<p>Store in <code>/03-type-a-through-f-critiques/type-e</code>; preserve versions from each worldview and participation limitations.</p>
+<p>Record actual effort, changed beliefs, decisions, assumptions, evidence gaps, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-8--type-f--coercive-complexity-team-syntegrity-and-critical-systems-heuristics">Week 8 — Type F — coercive complexity: Team Syntegrity and Critical Systems Heuristics</h2>
+<blockquote>
+<p><strong>Book companion · Week 8 :</strong> <a href="../../K/B20/chapters/08.html">Read Book 20, Chapter 08</a> → <a href="../../K/B20/labs/08.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-742-w08.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-8">Competency alignment</h3>
+<p>C2 stakeholder legitimacy; C9 decision ethics; C10 governance; C11 coercive complexity; C12 professional responsibility.</p>
+<h3 id="professional-context-and-essential-question-8">Professional context and essential question</h3>
+<p>In coercive situations, some actors can define the agenda, control resources, set expertise, or impose consequences while others bear effects without meaningful voice. Treating this as ordinary stakeholder disagreement legitimizes domination.</p>
+<p><strong>Essential question:</strong> Who has power to define improvement and boundaries, who is affected without control, and what changes are required for responsible intervention?</p>
+<h3 id="weekly-learning-outcomes-8">Weekly learning outcomes</h3>
+<p>By the end of the week, you should be able to:</p>
+<ul>
+<li>distinguish pluralist from coercive problem contexts</li>
+<li>analyze power, control, expertise, legitimacy, and affected-but-unrepresented groups</li>
+<li>use Critical Systems Heuristics for is/ought boundary critique</li>
+<li>explain Team Syntegrity and its conditions for broad participation</li>
+<li>design protections against tokenism, retaliation, capture, and performative consultation</li>
+<li>critique emancipatory claims and the practitioner’s own authority</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-8">Prerequisite retrieval and readiness check</h3>
+<p>Before beginning the new material:</p>
+<ul>
+<li>Identify who controls funding, data, law, and agenda in the running case.</li>
+<li>List three groups affected but not formally represented.</li>
+<li>Describe one situation where consultation could create risk for participants.</li>
+<li>State one boundary judgment embedded in your Type A or E work.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined boundary, power, causal, or method assumption into the week's baseline.</p>
+<h3 id="required-study-8">Required study</h3>
+<ul>
+<li><strong>Jackson Type F: Team Syntegrity and Critical Systems Heuristics (<a href="https://www.wiley.com/en-us/Critical+Systems+Thinking+and+the+Management+of+Complexity-p-9781119118374" title="Jackson: Critical Systems Thinking and the Management of Complexity">3</a>)</strong><br/>
+<strong>Purpose:</strong> Understand systems approaches intended for coercive complexity.<br/>
+<strong>Guiding questions:</strong> What makes a situation coercive and what can these approaches realistically accomplish?</li>
+<li><strong>Critical Systems Heuristics review (<a href="https://link.springer.com/article/10.1007/s11213-023-09665-9" title="Critical Systems Heuristics: A Systematic Review">18</a>)</strong><br/>
+<strong>Purpose:</strong> Study boundary critique, sources of motivation, control, knowledge, and legitimacy.<br/>
+<strong>Guiding questions:</strong> How do “is” and “ought” questions expose hidden value judgments?</li>
+<li><strong>Open University systems-thinking resources on CSH (<a href="https://www.open.edu/openlearn/systems-thinking-hub" title="Open University Systems Thinking Hub">10</a>, <a href="https://www.open.edu/openlearn/science-maths-technology/understanding-systems-thinking-practice-stip" title="Open University: Understanding Systems Thinking in Practice">11</a>)</strong><br/>
+<strong>Purpose:</strong> Practice accessible boundary critique.<br/>
+<strong>Guiding questions:</strong> Whose voice, expertise, and witness are missing from the current intervention?</li>
+</ul>
+<p>Record concise notes answering every guiding question. For the required book, read the named section rather than relying on a summary. Identify at least one claim you accept, one you question, and one implication for the running case.</p>
+<h3 id="instructor-style-lesson-notes-8">Instructor-style lesson notes</h3>
+<ul>
+<li>Coercion exists when parties cannot freely participate or protect their interests, not only when force is explicit.</li>
+<li>CSH asks who ought to benefit, decide, supply expertise, and represent affected people—and compares that ideal with current conditions.</li>
+<li>Boundary judgments determine facts, values, and affected groups that count as relevant.</li>
+<li>Team Syntegrity seeks nonhierarchical dialogue across a structured network, but access and safety still require design.</li>
+<li>Participation can be extractive or performative if decisions are already fixed.</li>
+<li>A systems practitioner cannot grant emancipation; they can expose boundary judgments, redistribute process power, and refuse misleading legitimacy claims.</li>
+</ul>
+<h3 id="worked-example-8">Worked example</h3>
+<p>A public consultation invites disabled travelers to comment on a preselected autonomous-service plan. Procurement deadlines, inaccessible materials, and vendor confidentiality prevent meaningful change. A CSH critique shows that affected users provide “witness” but lack control, expertise resources, and decision influence. The intervention must reopen requirements and funding decisions, not merely add another listening session.</p>
+<p>Reconstruct the example in a diagram, table, memo, or model. Then state where the example is deliberately simplified and why the same conclusion might not transfer to the regional case.</p>
+<h3 id="guided-practice-8">Guided practice</h3>
+<ol>
+<li>Complete all CSH is/ought boundary questions for the preferred intervention.</li>
+<li>Map formal, informal, economic, legal, technical, discursive, and data power.</li>
+<li>Identify participation risks and design safeguards, compensation, accessibility, confidentiality, and escalation.</li>
+<li>Design a structured dialogue or Syntegrity-inspired process with transparent influence on decisions.</li>
+<li>Write practitioner positionality and authority statements.</li>
+</ol>
+<p>Pause after each step. Compare the result with the decision purpose and record disagreement, ambiguity, and negative evidence instead of forcing convergence.</p>
+<h3 id="independent-exercises-8">Independent exercises</h3>
+<ul>
+<li>Foundation: classify examples as conflict, pluralism, coercion, or uncertain and justify.</li>
+<li>Application: complete the regional CSH boundary critique.</li>
+<li>Analysis: compare stated governance with actual control of resources, expertise, and agenda.</li>
+<li>Synthesis: redesign the intervention and review process to increase legitimate influence.</li>
+<li>Stretch: ask an external reviewer to challenge whose interests and expertise remain invisible.</li>
+</ul>
+<h3 id="dialectical-critique-journal--optional-seminar-8">Dialectical critique journal / optional seminar</h3>
+<p>Write a 300–500 word response that:</p>
+<ol>
+<li>reconstructs one assigned author's central claim fairly;</li>
+<li>identifies its assumptions and strongest evidence;</li>
+<li>develops a substantive critique or counterexample;</li>
+<li>applies the claim to the regional case; and</li>
+<li>states what evidence or argument would change your current judgment.</li>
+</ol>
+<p>With a cohort, exchange critiques with at least two peers and respond to the strongest challenge. Studying solo, write a steelman and a red-team response separated by 24 hours.</p>
+<h3 id="weekly-deliverable-8">Weekly deliverable</h3>
+<p><strong>Type F Power, Boundary, and Legitimacy Package</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>is/ought CSH matrix</li>
+<li>power and resource-control map</li>
+<li>affected-but-unrepresented analysis</li>
+<li>participation-risk and safeguard plan</li>
+<li>decision-influence architecture</li>
+<li>practitioner positionality and authority statement</li>
+<li>revised intervention boundaries and method critique</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, approach used, assumptions, boundary judgments, evidence, affected groups, limitations, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-8">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coercion diagnosis</td>
+<td style="text-align:right">25%</td>
+<td>Power asymmetries and constraints on participation are explicit</td>
+</tr>
+<tr>
+<td>Boundary critique</td>
+<td style="text-align:right">25%</td>
+<td>Is/ought judgments are substantive and traceable</td>
+</tr>
+<tr>
+<td>Affected parties</td>
+<td style="text-align:right">20%</td>
+<td>Excluded and vulnerable groups have meaningful treatment</td>
+</tr>
+<tr>
+<td>Participation safeguards</td>
+<td style="text-align:right">15%</td>
+<td>Influence, safety, access, and accountability are designed</td>
+</tr>
+<tr>
+<td>Practitioner reflexivity</td>
+<td style="text-align:right">15%</td>
+<td>Own authority and limitations are candid</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-8">Critical failures</h3>
+<ul>
+<li>Treats coercion as merely a communication problem.</li>
+<li>Uses consultation to legitimize a fixed decision.</li>
+<li>Exposes vulnerable participants without safeguards or meaningful influence.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-8">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What distinguishes coercion from pluralism?</strong> — Actors lack equal ability to participate, protect interests, challenge boundaries, or influence decisions.</li>
+<li><strong>What is boundary critique?</strong> — Systematic examination of who and what is included, excluded, valued, controlled, known, and represented.</li>
+<li><strong>What are is/ought questions?</strong> — Comparison of current arrangements with normatively defensible arrangements.</li>
+<li><strong>Can a method remove power asymmetry?</strong> — No; it can expose and sometimes reshape process conditions, but material power requires substantive action.</li>
+<li><strong>Why state practitioner positionality?</strong> — The practitioner’s role, interests, access, expertise, and authority shape the intervention.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-8">Revision and mastery gate</h3>
+<p>Complete the Pluralism, Power, and Boundary Review only when affected groups, coercion, safeguards, and actual decision influence are explicit.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-8">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required reading</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">2.5–3.5 hr</td>
+</tr>
+<tr>
+<td>Journal, deliverable, and review</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and revision</td>
+<td style="text-align:right">0.5–1 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-8">Configuration and portfolio update</h3>
+<p>Store in <code>/03-type-a-through-f-critiques/type-f</code>; restrict sensitive data and preserve consent and participation constraints.</p>
+<p>Record actual effort, changed beliefs, decisions, assumptions, evidence gaps, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-9--critical-systems-theory-critical-systems-thinking-and-methodological-critique">Week 9 — Critical systems theory, critical systems thinking, and methodological critique</h2>
+<blockquote>
+<p><strong>Book companion · Week 9 :</strong> <a href="../../K/B20/chapters/09.html">Read Book 20, Chapter 09</a> → <a href="../../K/B20/labs/09.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-742-w09.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-9">Competency alignment</h3>
+<p>C1 systems philosophy; C9 methodology choice; C11 critical pluralism; C12 scholarly critique.</p>
+<h3 id="professional-context-and-essential-question-9">Professional context and essential question</h3>
+<p>The six approach families are partial. Critical systems thinking asks practitioners to understand that partiality, preserve pluralism, pursue improvement, attend to power, and reflect on their own practice. It is not permission to mix methods casually.</p>
+<p><strong>Essential question:</strong> What principles justify methodological pluralism, and how can methods be combined without philosophical incoherence or ethical evasion?</p>
+<h3 id="weekly-learning-outcomes-9">Weekly learning outcomes</h3>
+<p>By the end of the week, you should be able to:</p>
+<ul>
+<li>explain the commitments and intellectual foundations of critical systems thinking</li>
+<li>compare functionalist, interpretive, emancipatory, and postmodern critiques of systems practice</li>
+<li>construct a six-approach capability/limitation matrix</li>
+<li>identify paradigm, ontology, epistemology, value, and power assumptions</li>
+<li>define principles for coherent, responsible multimethodology</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-9">Prerequisite retrieval and readiness check</h3>
+<p>Before beginning the new material:</p>
+<ul>
+<li>Summarize the strongest insight and strongest limitation from each Type A–F approach.</li>
+<li>Identify two pairs of methods with potentially conflicting assumptions.</li>
+<li>State what “improvement” means in your current case and who could dispute it.</li>
+<li>Review the literature-review conclusions and note one changed belief.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined boundary, power, causal, or method assumption into the week's baseline.</p>
+<h3 id="required-study-9">Required study</h3>
+<ul>
+<li><strong>Jackson critical systems theory and critical systems thinking sections (<a href="https://www.wiley.com/en-us/Critical+Systems+Thinking+and+the+Management+of+Complexity-p-9781119118374" title="Jackson: Critical Systems Thinking and the Management of Complexity">3</a>)</strong><br/>
+<strong>Purpose:</strong> Understand critique, pluralism, improvement, and multimethodology.<br/>
+<strong>Guiding questions:</strong> What does it mean to be critical without simply rejecting every method?</li>
+<li><strong>Jackson 2024 practitioner guide (<a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781394203604" title="Jackson: Critical Systems Thinking — A Practitioner's Guide">4</a>)</strong><br/>
+<strong>Purpose:</strong> Connect CST principles to contemporary practice.<br/>
+<strong>Guiding questions:</strong> What mindset is required to use methods responsively rather than mechanically?</li>
+<li><strong>Critical Systems Practice overview (<a href="https://doi.org/10.1002/9781394203604.ch4" title="Critical Systems Practice — EPIC">15</a>)</strong><br/>
+<strong>Purpose:</strong> Prepare for EPIC and multimethodological intervention design.<br/>
+<strong>Guiding questions:</strong> How does CSP move from critique to practical action?</li>
+</ul>
+<p>Record concise notes answering every guiding question. For the required book, read the named section rather than relying on a summary. Identify at least one claim you accept, one you question, and one implication for the running case.</p>
+<h3 id="instructor-style-lesson-notes-9">Instructor-style lesson notes</h3>
+<ul>
+<li>Every methodology foregrounds some features and backgrounds others.</li>
+<li>Critical awareness means knowing assumptions, strengths, limits, consequences, and conditions of use.</li>
+<li>Pluralism seeks complementary insight but does not erase contradictions among methods.</li>
+<li>Improvement is provisional, contested, and ethically bounded; it should not be reduced to efficiency.</li>
+<li>Emancipatory concern asks whether arrangements constrain people’s ability to pursue legitimate interests.</li>
+<li>Reflective practice includes critique of the practitioner, sponsor, intervention process, and claimed evidence.</li>
+</ul>
+<h3 id="worked-example-9">Worked example</h3>
+<p>A technical optimization, system-dynamics model, SSM inquiry, and CSH critique produce different recommendations. Instead of choosing the most persuasive slide, the practitioner identifies which question each method answers, conflicts in assumptions, and a sequence in which boundary critique reshapes participation, SSM reframes purposes, system dynamics tests long-run mechanisms, and optimization supports a bounded resource decision.</p>
+<p>Reconstruct the example in a diagram, table, memo, or model. Then state where the example is deliberately simplified and why the same conclusion might not transfer to the regional case.</p>
+<h3 id="guided-practice-9">Guided practice</h3>
+<ol>
+<li>Complete the six-approach matrix: complexity dimension, assumptions, questions, outputs, strengths, limitations, ethics, and handoffs.</li>
+<li>Map philosophical conflicts and decide which can be sequenced, triangulated, or must remain unresolved.</li>
+<li>Define five methodological-pluralism principles for the case.</li>
+<li>Revisit “improvement” through technical, organizational, user, and affected-party perspectives.</li>
+<li>Conduct a self-red-team on preferred methods and professional identity.</li>
+</ol>
+<p>Pause after each step. Compare the result with the decision purpose and record disagreement, ambiguity, and negative evidence instead of forcing convergence.</p>
+<h3 id="independent-exercises-9">Independent exercises</h3>
+<ul>
+<li>Foundation: match methodological assumptions to approach families.</li>
+<li>Application: complete the regional six-approach critique matrix.</li>
+<li>Analysis: identify three incoherent method combinations and redesign them.</li>
+<li>Synthesis: write a critical systems thinking position statement for the coalition.</li>
+<li>Stretch: compare Jackson’s CST with another multimethodology or systemic-intervention tradition.</li>
+</ul>
+<h3 id="dialectical-critique-journal--optional-seminar-9">Dialectical critique journal / optional seminar</h3>
+<p>Write a 300–500 word response that:</p>
+<ol>
+<li>reconstructs one assigned author's central claim fairly;</li>
+<li>identifies its assumptions and strongest evidence;</li>
+<li>develops a substantive critique or counterexample;</li>
+<li>applies the claim to the regional case; and</li>
+<li>states what evidence or argument would change your current judgment.</li>
+</ol>
+<p>With a cohort, exchange critiques with at least two peers and respond to the strongest challenge. Studying solo, write a steelman and a red-team response separated by 24 hours.</p>
+<h3 id="weekly-deliverable-9">Weekly deliverable</h3>
+<p><strong>Critical Systems Thinking and Six-Approach Critique</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>six-approach capability/limitation matrix</li>
+<li>philosophical and methodological assumption map</li>
+<li>method conflict and complementarity analysis</li>
+<li>provisional definition of improvement</li>
+<li>pluralism, power, ethics, and evidence principles</li>
+<li>practitioner self-critique</li>
+<li>implications for the intervention strategy</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, approach used, assumptions, boundary judgments, evidence, affected groups, limitations, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-9">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Method reconstruction</td>
+<td style="text-align:right">25%</td>
+<td>All approaches are represented accurately</td>
+</tr>
+<tr>
+<td>Critical comparison</td>
+<td style="text-align:right">25%</td>
+<td>Strengths, limits, and assumptions are substantive</td>
+</tr>
+<tr>
+<td>Pluralism coherence</td>
+<td style="text-align:right">20%</td>
+<td>Combinations are justified, not eclectic</td>
+</tr>
+<tr>
+<td>Improvement/power</td>
+<td style="text-align:right">15%</td>
+<td>Values and emancipation remain explicit</td>
+</tr>
+<tr>
+<td>Reflexivity</td>
+<td style="text-align:right">15%</td>
+<td>Practitioner and sponsor assumptions are examined</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-9">Critical failures</h3>
+<ul>
+<li>Equates critical thinking with personal skepticism or disagreement.</li>
+<li>Creates an unstructured toolbox without method logic or conflict analysis.</li>
+<li>Defines improvement solely as efficiency, performance, or sponsor preference.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-9">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is methodological partiality?</strong> — Every methodology reveals some dimensions while obscuring or simplifying others.</li>
+<li><strong>What is critical awareness?</strong> — Understanding assumptions, strengths, limits, consequences, and use conditions.</li>
+<li><strong>Why can pluralism be difficult?</strong> — Methods may rest on incompatible views of reality, knowledge, purpose, and power.</li>
+<li><strong>What makes multimethodology coherent?</strong> — Methods are selected and sequenced for explicit questions, with handoffs and conflicts managed.</li>
+<li><strong>What is reflexivity?</strong> — Systematic examination of how the practitioner, sponsor, and intervention shape knowledge and outcomes.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-9">Revision and mastery gate</h3>
+<p>Approve the critique only if it can explain why each method is or is not used and can preserve unresolved conflicts honestly.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-9">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required reading</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">2.5–3.5 hr</td>
+</tr>
+<tr>
+<td>Journal, deliverable, and review</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and revision</td>
+<td style="text-align:right">0.5–1 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-9">Configuration and portfolio update</h3>
+<p>Baseline <code>/05-critical-systems-practice/01-cst-critique</code>; link every proposed method to its capability/limitation entry.</p>
+<p>Record actual effort, changed beliefs, decisions, assumptions, evidence gaps, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-10--critical-systems-practice-explore-and-produce">Week 10 — Critical Systems Practice: Explore and Produce</h2>
+<blockquote>
+<p><strong>Book companion · Week 10 :</strong> <a href="../../K/B20/chapters/10.html">Read Book 20, Chapter 10</a> → <a href="../../K/B20/labs/10.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-742-w10.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-10">Competency alignment</h3>
+<p>C1 framing; C9 decision design; C10 management; C11 multimethodology; C12 professional practice.</p>
+<h3 id="professional-context-and-essential-question-10">Professional context and essential question</h3>
+<p>Critical Systems Practice operationalizes CST through EPIC: Explore the problem situation, Produce an intervention strategy, Intervene flexibly, and Check progress and learning. Explore and Produce prevent method choice from preceding problem understanding.</p>
+<p><strong>Essential question:</strong> What multimethodological intervention strategy is warranted by the problem situation, and how will its methods work together over time?</p>
+<h3 id="weekly-learning-outcomes-10">Weekly learning outcomes</h3>
+<p>By the end of the week, you should be able to:</p>
+<ul>
+<li>apply the Explore stage to multiple systemic perspectives and primary/secondary issues</li>
+<li>select methods using explicit problem-method reasoning</li>
+<li>construct a Produce-stage intervention architecture with sequencing and handoffs</li>
+<li>define participation, governance, evidence, ethics, and adaptation arrangements</li>
+<li>plan resources, schedule, review, and configuration without pretending the intervention is linear</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-10">Prerequisite retrieval and readiness check</h3>
+<p>Before beginning the new material:</p>
+<ul>
+<li>Reproduce the EPIC stages and their purpose.</li>
+<li>Review all review findings and unresolved tensions.</li>
+<li>List candidate methods and the exact question each would answer.</li>
+<li>Identify one sponsor constraint that could distort method selection.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined boundary, power, causal, or method assumption into the week's baseline.</p>
+<h3 id="required-study-10">Required study</h3>
+<ul>
+<li><strong>Jackson Critical Systems Practice chapter (<a href="https://doi.org/10.1002/9781394203604.ch4" title="Critical Systems Practice — EPIC">15</a>)</strong><br/>
+<strong>Purpose:</strong> Understand EPIC and the logic of responsive multimethodological practice.<br/>
+<strong>Guiding questions:</strong> How do Explore and Produce differ from ordinary project scoping and method selection?</li>
+<li><strong>CSP Explore paper (<a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/sres.2746" title="Critical Systems Practice 1: Explore">19</a>)</strong><br/>
+<strong>Purpose:</strong> Deepen multiperspectival exploration and issue identification.<br/>
+<strong>Guiding questions:</strong> What evidence supports primary and secondary issue selection?</li>
+<li><strong>Open University STiP resources (<a href="https://www.open.edu/openlearn/science-maths-technology/understanding-systems-thinking-practice-stip" title="Open University: Understanding Systems Thinking in Practice">11</a>)</strong><br/>
+<strong>Purpose:</strong> Compare practical systems approaches and intervention thinking.<br/>
+<strong>Guiding questions:</strong> How can method choice remain transparent to participants?</li>
+</ul>
+<p>Record concise notes answering every guiding question. For the required book, read the named section rather than relying on a summary. Identify at least one claim you accept, one you question, and one implication for the running case.</p>
+<h3 id="instructor-style-lesson-notes-10">Instructor-style lesson notes</h3>
+<ul>
+<li>Explore uses multiple systemic perspectives to prevent one framing from dominating.</li>
+<li>Primary issues receive direct intervention; secondary issues shape feasibility, ethics, and learning.</li>
+<li>Produce chooses methodologies, models, and methods based on issue structure and stakeholder conditions.</li>
+<li>Methods can be sequenced, nested, used in parallel, or triangulated—but handoffs must be designed.</li>
+<li>An intervention strategy includes participation, governance, data, evidence, facilitation, resources, safety, and adaptation.</li>
+<li>EPIC is iterative; new learning can require returning to Explore or Produce.</li>
+</ul>
+<h3 id="worked-example-10">Worked example</h3>
+<p>The strategy begins with CSH to reopen boundaries and participation, uses SSM to structure different emergency-access purposes, applies system dynamics to test long-term workforce/trust mechanisms, uses VSM to redesign coalition coordination, and applies optimization only to a bounded staging decision. Each handoff has named products, owners, and limitations.</p>
+<p>Reconstruct the example in a diagram, table, memo, or model. Then state where the example is deliberately simplified and why the same conclusion might not transfer to the regional case.</p>
+<h3 id="guided-practice-10">Guided practice</h3>
+<ol>
+<li>Use multiple systemic perspectives to identify primary and secondary issues.</li>
+<li>Construct a problem-method fit matrix using the Type A–F critiques.</li>
+<li>Define method sequence, handoffs, iteration triggers, and conflict management.</li>
+<li>Design participation, authority, data, facilitation, review, and ethics arrangements.</li>
+<li>Build an intervention backlog, schedule, resource estimate, and configuration plan.</li>
+</ol>
+<p>Pause after each step. Compare the result with the decision purpose and record disagreement, ambiguity, and negative evidence instead of forcing convergence.</p>
+<h3 id="independent-exercises-10">Independent exercises</h3>
+<ul>
+<li>Foundation: distinguish a method, methodology, model, technique, and intervention strategy.</li>
+<li>Application: produce the regional EPIC Explore record.</li>
+<li>Analysis: compare two plausible multimethodological strategies.</li>
+<li>Synthesis: write the full Produce-stage strategy and decision rationale.</li>
+<li>Stretch: run a tabletop handoff between two methods and identify information loss or conflict.</li>
+</ul>
+<h3 id="dialectical-critique-journal--optional-seminar-10">Dialectical critique journal / optional seminar</h3>
+<p>Write a 300–500 word response that:</p>
+<ol>
+<li>reconstructs one assigned author's central claim fairly;</li>
+<li>identifies its assumptions and strongest evidence;</li>
+<li>develops a substantive critique or counterexample;</li>
+<li>applies the claim to the regional case; and</li>
+<li>states what evidence or argument would change your current judgment.</li>
+</ol>
+<p>With a cohort, exchange critiques with at least two peers and respond to the strongest challenge. Studying solo, write a steelman and a red-team response separated by 24 hours.</p>
+<h3 id="weekly-deliverable-10">Weekly deliverable</h3>
+<p><strong>EPIC Explore and Produce Intervention Strategy</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>multiperspectival Explore record</li>
+<li>primary and secondary issue map</li>
+<li>problem-method fit matrix</li>
+<li>method sequence, handoffs, iterations, and conflict handling</li>
+<li>participation, authority, ethics, and facilitation plan</li>
+<li>data, model, evidence, and review plan</li>
+<li>schedule, resources, governance, risk, and configuration</li>
+<li>rejected strategies and decision rationale</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, approach used, assumptions, boundary judgments, evidence, affected groups, limitations, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-10">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Explore quality</td>
+<td style="text-align:right">20%</td>
+<td>Multiple perspectives and issues are substantive</td>
+</tr>
+<tr>
+<td>Method selection</td>
+<td style="text-align:right">25%</td>
+<td>Choices follow explicit problem-method reasoning</td>
+</tr>
+<tr>
+<td>Integration/handoffs</td>
+<td style="text-align:right">20%</td>
+<td>Sequence and products are coherent</td>
+</tr>
+<tr>
+<td>Participation/ethics</td>
+<td style="text-align:right">20%</td>
+<td>Power, access, safety, and authority are designed</td>
+</tr>
+<tr>
+<td>Execution planning</td>
+<td style="text-align:right">15%</td>
+<td>Resources, evidence, governance, and iteration are credible</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-10">Critical failures</h3>
+<ul>
+<li>Selects methods because they are familiar or already available.</li>
+<li>Treats EPIC as a linear project lifecycle.</li>
+<li>Omits participation, authority, safety, or method-conflict planning.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-10">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is the purpose of Explore?</strong> — To understand the problem situation through multiple systemic perspectives and identify primary and secondary issues.</li>
+<li><strong>What is produced in Produce?</strong> — A justified, structured, resourced multimethodological intervention strategy.</li>
+<li><strong>What is a method handoff?</strong> — An explicit transfer of outputs, assumptions, questions, and limitations between approaches.</li>
+<li><strong>Why keep rejected strategies?</strong> — They preserve decision rationale and support revision when conditions change.</li>
+<li><strong>When should EPIC return to Explore?</strong> — When intervention, evidence, or context changes the problem understanding materially.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-10">Revision and mastery gate</h3>
+<p>Pass the Intervention Strategy Review only when method selection, handoffs, participation, ethics, evidence, and adaptation are reviewable and justified.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-10">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required reading</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">2.5–3.5 hr</td>
+</tr>
+<tr>
+<td>Journal, deliverable, and review</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and revision</td>
+<td style="text-align:right">0.5–1 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-10">Configuration and portfolio update</h3>
+<p>Baseline <code>/05-critical-systems-practice/02-explore-produce</code>; create an intervention strategy version and change triggers.</p>
+<p>Record actual effort, changed beliefs, decisions, assumptions, evidence gaps, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-11--critical-systems-practice-intervene-dynamic-risk-resilience-and-safe-to-learn-action">Week 11 — Critical Systems Practice: Intervene; dynamic risk, resilience, and safe-to-learn action</h2>
+<blockquote>
+<p><strong>Book companion · Week 11 :</strong> <a href="../../K/B20/chapters/11.html">Read Book 20, Chapter 11</a> → <a href="../../K/B20/labs/11.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-742-w11.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-11">Competency alignment</h3>
+<p>C6 V&amp;V; C8 risk/uncertainty; C10 implementation; C11 resilience; C12 responsible action.</p>
+<h3 id="professional-context-and-essential-question-11">Professional context and essential question</h3>
+<p>Complex interventions change relationships, incentives, expectations, and information. The objective is not to “implement the solution” but to act responsibly, observe, learn, and adapt while protecting people and essential capability.</p>
+<p><strong>Essential question:</strong> What intervention can be attempted safely enough to generate decision-relevant learning under dynamic risk and irreducible uncertainty?</p>
+<h3 id="weekly-learning-outcomes-11">Weekly learning outcomes</h3>
+<p>By the end of the week, you should be able to:</p>
+<ul>
+<li>translate the intervention strategy into bounded, testable action</li>
+<li>construct dynamic risk and cascading-effect models</li>
+<li>design resilience through prevention, absorption, adaptation, recovery, and learning</li>
+<li>define hypotheses, measures, leading indicators, guardrails, stop conditions, and reversibility</li>
+<li>plan flexible intervention and evidence collection without freezing the method strategy</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-11">Prerequisite retrieval and readiness check</h3>
+<p>Before beginning the new material:</p>
+<ul>
+<li>Identify the highest-risk irreversible action in the strategy.</li>
+<li>List three possible strategic actor responses.</li>
+<li>Retrieve the Week 2 uncertainty map and Week 8 safeguards.</li>
+<li>State the minimum evidence needed to continue after a pilot.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined boundary, power, causal, or method assumption into the week's baseline.</p>
+<h3 id="required-study-11">Required study</h3>
+<ul>
+<li><strong>Jackson CSP Intervene material in the practitioner guide (<a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781394203604" title="Jackson: Critical Systems Thinking — A Practitioner's Guide">4</a>, <a href="https://doi.org/10.1002/9781394203604.ch4" title="Critical Systems Practice — EPIC">15</a>)</strong><br/>
+<strong>Purpose:</strong> Understand flexible action and return to earlier EPIC stages when learning requires it.<br/>
+<strong>Guiding questions:</strong> What does disciplined flexibility look like?</li>
+<li><strong>ISO 31000 and DoD RIO guide (<a href="https://www.iso.org/standard/65694.html" title="ISO 31000:2018 Risk Management — Guidelines">21</a>, <a href="https://www.cto.mil/wp-content/uploads/2024/05/RIO-2023-2-2.pdf" title="DoD Risk, Issue, and Opportunity Management Guide">22</a>)</strong><br/>
+<strong>Purpose:</strong> Integrate continuous risk, issue, and opportunity management.<br/>
+<strong>Guiding questions:</strong> How do risk ownership, indicators, and review change in a dynamic system?</li>
+<li><strong>NIST cyber and community resilience resources (<a href="https://csrc.nist.gov/pubs/sp/800/160/v2/r1/final" title="NIST SP 800-160 Volume 2 Revision 1: Developing Cyber-Resilient Systems">23</a>, <a href="https://www.nist.gov/community-resilience/planning-guide-briefs" title="NIST Community Resilience Planning Guide Briefs">24</a>)</strong><br/>
+<strong>Purpose:</strong> Design resilience across disruption, degradation, recovery, and adaptation.<br/>
+<strong>Guiding questions:</strong> Which essential functions and vulnerable populations require protected outcomes?</li>
+</ul>
+<p>Record concise notes answering every guiding question. For the required book, read the named section rather than relying on a summary. Identify at least one claim you accept, one you question, and one implication for the running case.</p>
+<h3 id="instructor-style-lesson-notes-11">Instructor-style lesson notes</h3>
+<ul>
+<li>Safe-to-learn does not mean low stakes; it means bounded exposure, protected essentials, monitoring, and the ability to stop or adapt.</li>
+<li>Dynamic risks change as actors learn, dependencies shift, and interventions redistribute load.</li>
+<li>Resilience includes anticipation, absorption, adaptation, recovery, and institutional learning.</li>
+<li>Leading indicators should be tied to mechanisms, not selected because they are easy to count.</li>
+<li>Guardrails protect critical outcomes and vulnerable groups; stop conditions convert ethics into operational decisions.</li>
+<li>Flexible intervention requires configuration control so changes and outcomes remain interpretable.</li>
+</ul>
+<h3 id="worked-example-11">Worked example</h3>
+<p>Pilot a protected emergency-access protocol in two districts rather than region-wide. The pilot includes minimum accessibility service, workforce load limits, offline dispatch fallback, public communication, independent monitoring, and stop criteria for inequitable denial rates, safety incidents, or unmanageable staff fatigue.</p>
+<p>Reconstruct the example in a diagram, table, memo, or model. Then state where the example is deliberately simplified and why the same conclusion might not transfer to the regional case.</p>
+<h3 id="guided-practice-11">Guided practice</h3>
+<ol>
+<li>Select one bounded intervention and state hypotheses about mechanisms and actor responses.</li>
+<li>Map cascading risk, common-cause conditions, burden transfer, and vulnerable populations.</li>
+<li>Define resilience functions and minimum acceptable service.</li>
+<li>Specify leading indicators, outcome measures, guardrails, stop/reversal criteria, and review cadence.</li>
+<li>Run tabletop stress tests for at least four compound disruptions and revise the pilot.</li>
+</ol>
+<p>Pause after each step. Compare the result with the decision purpose and record disagreement, ambiguity, and negative evidence instead of forcing convergence.</p>
+<h3 id="independent-exercises-11">Independent exercises</h3>
+<ul>
+<li>Foundation: distinguish mitigation, contingency, resilience, robustness, adaptability, and recovery.</li>
+<li>Application: build the regional safe-to-learn pilot package.</li>
+<li>Analysis: identify how the intervention could create new incentives, gaming, or inequity.</li>
+<li>Synthesis: recommend continue/adapt/pause/stop criteria before the pilot begins.</li>
+<li>Stretch: implement a simple stress-test or Monte Carlo analysis without assigning false precision to deep uncertainty.</li>
+</ul>
+<h3 id="dialectical-critique-journal--optional-seminar-11">Dialectical critique journal / optional seminar</h3>
+<p>Write a 300–500 word response that:</p>
+<ol>
+<li>reconstructs one assigned author's central claim fairly;</li>
+<li>identifies its assumptions and strongest evidence;</li>
+<li>develops a substantive critique or counterexample;</li>
+<li>applies the claim to the regional case; and</li>
+<li>states what evidence or argument would change your current judgment.</li>
+</ol>
+<p>With a cohort, exchange critiques with at least two peers and respond to the strongest challenge. Studying solo, write a steelman and a red-team response separated by 24 hours.</p>
+<h3 id="weekly-deliverable-11">Weekly deliverable</h3>
+<p><strong>Intervention, Dynamic Risk, and Resilience Package</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>intervention hypotheses and causal mechanisms</li>
+<li>scope, authority, participants, and protected essential outcomes</li>
+<li>dynamic risk and cascading-effect map</li>
+<li>resilience and degraded-operation strategy</li>
+<li>measures, leading indicators, guardrails, and stop conditions</li>
+<li>stress tests and revised pilot design</li>
+<li>learning, governance, configuration, and communication plan</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, approach used, assumptions, boundary judgments, evidence, affected groups, limitations, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-11">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Intervention logic</td>
+<td style="text-align:right">20%</td>
+<td>Action is linked to explicit mechanisms and questions</td>
+</tr>
+<tr>
+<td>Dynamic risk</td>
+<td style="text-align:right">20%</td>
+<td>Propagation and adaptation are considered</td>
+</tr>
+<tr>
+<td>Resilience</td>
+<td style="text-align:right">20%</td>
+<td>Essential functions and recovery are credible</td>
+</tr>
+<tr>
+<td>Guardrails/ethics</td>
+<td style="text-align:right">20%</td>
+<td>Vulnerable groups and stop conditions are protected</td>
+</tr>
+<tr>
+<td>Learning/adaptation</td>
+<td style="text-align:right">20%</td>
+<td>Evidence and decision rules support real revision</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-11">Critical failures</h3>
+<ul>
+<li>Proposes a large irreversible rollout as the first learning step.</li>
+<li>Uses generic risk scores without propagation, indicators, or ownership.</li>
+<li>Defines success while omitting safety, accessibility, workforce, or equity guardrails.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-11">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What makes an intervention safe-to-learn?</strong> — Bounded exposure, protected essentials, monitoring, guardrails, and credible stop or adaptation options.</li>
+<li><strong>How is dynamic risk different?</strong> — Risk changes through feedback, actor adaptation, dependencies, and the intervention itself.</li>
+<li><strong>What is a guardrail?</strong> — A protected condition that constrains action even if primary performance improves.</li>
+<li><strong>Why define stop criteria in advance?</strong> — It reduces motivated reasoning and makes ethical limits operational.</li>
+<li><strong>What is disciplined flexibility?</strong> — Adapting methods and action through explicit evidence, authority, configuration, and review—not improvising without traceability.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-11">Revision and mastery gate</h3>
+<p>Pass the Intervention and Resilience Review only when essential outcomes are protected, decision rules are explicit, and the pilot can generate useful learning without unacceptable exposure.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-11">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required reading</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">2.5–3.5 hr</td>
+</tr>
+<tr>
+<td>Journal, deliverable, and review</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and revision</td>
+<td style="text-align:right">0.5–1 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-11">Configuration and portfolio update</h3>
+<p>Baseline <code>/06-interventions-monitoring-and-learning/01-pilot</code>; record stress tests, approvals, and precommitted decision rules.</p>
+<p>Record actual effort, changed beliefs, decisions, assumptions, evidence gaps, and unresolved limitations before closing the week.</p>
+<hr/>
+<h2 id="week-12--critical-systems-practice-check-final-defense-and-the-way-ahead">Week 12 — Critical Systems Practice: Check; final defense and the way ahead</h2>
+<blockquote>
+<p><strong>Book companion · Week 12 :</strong> <a href="../../K/B20/chapters/12.html">Read Book 20, Chapter 12</a> → <a href="../../K/B20/labs/12.html">Practice the hypothetical lab</a>. Keep the original assigned readings, assessed deliverable and grading rubric. <a href="../../K/P5-text/lessons/645-742-w12.html">Earlier short primer</a>.</p>
+</blockquote>
+<h3 id="competency-alignment-12">Competency alignment</h3>
+<p>All course competencies; emphasis on C11 integration and C12 reflective professional practice.</p>
+<h3 id="professional-context-and-essential-question-12">Professional context and essential question</h3>
+<p>Check evaluates both the intervention and the systems approaches used. The final product must show what improved, for whom, at what cost, under what uncertainty, and what the practitioner learned about methods, power, evidence, and responsibility.</p>
+<p><strong>Essential question:</strong> What can responsibly be concluded, what should change next, and what does the intervention reveal about managing complex systems?</p>
+<h3 id="weekly-learning-outcomes-12">Weekly learning outcomes</h3>
+<p>By the end of the week, you should be able to:</p>
+<ul>
+<li>evaluate intervention outcomes, mechanisms, participation, harms, and learning</li>
+<li>assess the usefulness and limitations of the selected methods and multimethodology</li>
+<li>reproduce the evidence chain and disposition review findings</li>
+<li>respond to a live system change by revisiting boundaries, methods, risks, and decisions</li>
+<li>defend a bounded recommendation and professional retrospective</li>
+</ul>
+<h3 id="prerequisite-retrieval-and-readiness-check-12">Prerequisite retrieval and readiness check</h3>
+<p>Before beginning the new material:</p>
+<ul>
+<li>Reproduce the final decision-critical outputs from a clean repository checkout.</li>
+<li>List the five weakest claims in the draft final paper.</li>
+<li>Identify one group that could reasonably reject the definition of improvement.</li>
+<li>State what evidence would overturn the recommendation.</li>
+</ul>
+<p><strong>Readiness threshold:</strong> 80%. Correct misunderstandings before continuing; do not carry an unexamined boundary, power, causal, or method assumption into the week's baseline.</p>
+<h3 id="required-study-12">Required study</h3>
+<ul>
+<li><strong>Jackson CSP Check paper and practitioner guide (<a href="https://onlinelibrary.wiley.com/doi/pdf/10.1002/sres.2912" title="Critical Systems Practice 4: Check">20</a>, <a href="https://onlinelibrary.wiley.com/doi/book/10.1002/9781394203604" title="Jackson: Critical Systems Thinking — A Practitioner's Guide">4</a>)</strong><br/>
+<strong>Purpose:</strong> Evaluate progress, improvement, method performance, reflection, and next action.<br/>
+<strong>Guiding questions:</strong> How should the practitioner judge both outcomes and the intervention process?</li>
+<li><strong>JHU source outcomes and assessment expectations (<a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.742.81" title="Fall 2026 Syllabus for EN.645.742 Management of Complex Systems">1</a>)</strong><br/>
+<strong>Purpose:</strong> Confirm that the release demonstrates explanation, comparison, critique, formulation, and scholarly analysis.<br/>
+<strong>Guiding questions:</strong> Which learning outcome remains least supported?</li>
+<li><strong>INCOSE complex-systems resources (<a href="https://www.incose.org/group/complex-systems-working-group" title="INCOSE Complex Systems Working Group">8</a>, <a href="https://www.incose.org/resource/system-engineering-heuristics-for-complex-systems" title="INCOSE: Systems Engineering Heuristics for Complex Systems">9</a>)</strong><br/>
+<strong>Purpose:</strong> Connect the final reflection to ongoing systems-engineering practice.<br/>
+<strong>Guiding questions:</strong> What heuristics remain useful and what cautions should accompany them?</li>
+</ul>
+<p>Record concise notes answering every guiding question. For the required book, read the named section rather than relying on a summary. Identify at least one claim you accept, one you question, and one implication for the running case.</p>
+<h3 id="instructor-style-lesson-notes-12">Instructor-style lesson notes</h3>
+<ul>
+<li>Check asks whether improvement occurred, how it was judged, and who might disagree.</li>
+<li>Evaluation should examine mechanisms and unintended consequences, not only target metrics.</li>
+<li>Method evaluation asks which approaches helped, misled, conflicted, or required adaptation.</li>
+<li>A live change tests whether the repository connects boundaries, assumptions, models, actors, interventions, and decisions.</li>
+<li>A mature conclusion narrows unsupported claims rather than defending the original plan.</li>
+<li>The way ahead is an adaptive learning agenda, not a declaration that complexity has been solved.</li>
+</ul>
+<h3 id="worked-example-12">Worked example</h3>
+<p>During final review, a private platform withdraws data access. The technical model loses demand visibility, the process pilot loses automated triage, the VSM intelligence function degrades, public trust risks increase, and participation concerns change. The learner narrows the pilot, activates offline processes, revises evidence thresholds, and pauses one automated feature.</p>
+<p>Reconstruct the example in a diagram, table, memo, or model. Then state where the example is deliberately simplified and why the same conclusion might not transfer to the regional case.</p>
+<h3 id="guided-practice-12">Guided practice</h3>
+<ol>
+<li>Run a clean reproduction and complete a source/citation audit.</li>
+<li>Evaluate outcomes, mechanisms, distributional effects, participation, and unintended consequences.</li>
+<li>Complete a method-performance retrospective for Types A–F and EPIC.</li>
+<li>Execute a randomly selected live change and update connected artifacts and the decision.</li>
+<li>Conduct the final oral defense and write the next-learning agenda.</li>
+</ol>
+<p>Pause after each step. Compare the result with the decision purpose and record disagreement, ambiguity, and negative evidence instead of forcing convergence.</p>
+<h3 id="independent-exercises-12">Independent exercises</h3>
+<ul>
+<li>Foundation: complete the final traceability, citation, and configuration audit.</li>
+<li>Application: assemble the final complex-systems management release.</li>
+<li>Analysis: narrow or retract the five weakest claims.</li>
+<li>Synthesis: execute the live change and defend continue/adapt/pause/stop.</li>
+<li>Stretch: invite reviewers representing technical, community, labor, and critical perspectives and disposition their findings.</li>
+</ul>
+<h3 id="dialectical-critique-journal--optional-seminar-12">Dialectical critique journal / optional seminar</h3>
+<p>Write a 300–500 word response that:</p>
+<ol>
+<li>reconstructs one assigned author's central claim fairly;</li>
+<li>identifies its assumptions and strongest evidence;</li>
+<li>develops a substantive critique or counterexample;</li>
+<li>applies the claim to the regional case; and</li>
+<li>states what evidence or argument would change your current judgment.</li>
+</ol>
+<p>With a cohort, exchange critiques with at least two peers and respond to the strongest challenge. Studying solo, write a steelman and a red-team response separated by 24 hours.</p>
+<h3 id="weekly-deliverable-12">Weekly deliverable</h3>
+<p><strong>Final Complex Systems Management Release</strong></p>
+<p>Required contents:</p>
+<ul>
+<li>all capstone outputs in Section 16</li>
+<li>clean reproduction and citation audit</li>
+<li>evaluation of outcomes, mechanisms, harms, and participation</li>
+<li>Type A–F and EPIC method-performance retrospective</li>
+<li>live-change analysis and revised decision</li>
+<li>executive and technical briefings</li>
+<li>oral-defense record, findings/dispositions, and adaptive next-learning agenda</li>
+</ul>
+<p>Include a one-page review note stating the decision supported, approach used, assumptions, boundary judgments, evidence, affected groups, limitations, and changes made to prior baselines.</p>
+<h3 id="analytic-rubric-12">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Proficient standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integrated reasoning</td>
+<td style="text-align:right">25%</td>
+<td>Complexity, methods, power, intervention, and evidence are coherent</td>
+</tr>
+<tr>
+<td>Scholarly/evidence quality</td>
+<td style="text-align:right">20%</td>
+<td>Sources and results reproduce and support bounded claims</td>
+</tr>
+<tr>
+<td>Improvement/ethics</td>
+<td style="text-align:right">20%</td>
+<td>Benefits, harms, legitimacy, and disagreement are explicit</td>
+</tr>
+<tr>
+<td>Live change/adaptation</td>
+<td style="text-align:right">20%</td>
+<td>Connected impacts and decision revision are correct</td>
+</tr>
+<tr>
+<td>Defense/reflection</td>
+<td style="text-align:right">15%</td>
+<td>Communication is candid, critical, and professionally mature</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-12">Critical failures</h3>
+<ul>
+<li>Cannot reproduce or source a decision-critical claim.</li>
+<li>Hides harm, coercion, failed assumptions, or negative evidence to preserve the recommendation.</li>
+<li>Treats the final review as closure rather than a decision about next learning and action.</li>
+</ul>
+<p>Any critical failure requires revision regardless of the numerical score.</p>
+<h3 id="knowledge-check-and-answer-guidance-12">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What does Check evaluate?</strong> — Outcomes, mechanisms, participation, harms, method performance, learning, and next action.</li>
+<li><strong>Why evaluate methods as well as outcomes?</strong> — Method assumptions and interactions shape what was seen, done, and claimed.</li>
+<li><strong>What should a live change update?</strong> — Affected boundaries, actors, assumptions, methods, models, risks, safeguards, evidence, and decisions.</li>
+<li><strong>Why narrow a claim?</strong> — Credibility improves when conclusions match evidence and authority.</li>
+<li><strong>What is the “way ahead”?</strong> — A governed agenda for continued observation, adaptation, participation, and responsible intervention.</li>
+</ol>
+<p>Create five additional retrieval questions and answer them without notes 48–72 hours later.</p>
+<h3 id="revision-and-mastery-gate-12">Revision and mastery gate</h3>
+<p>Complete the course only after clean reproduction, citation verification, critical-finding disposition, successful live change, and an oral defense that states both recommendations and non-claims.</p>
+<p>Minimum weekly score: 80%, with no critical failure and at least Proficient performance on the first two rubric criteria.</p>
+<h3 id="suggested-workload-12">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Retrieval and required reading</td>
+<td style="text-align:right">3–4 hr</td>
+</tr>
+<tr>
+<td>Worked example and guided practice</td>
+<td style="text-align:right">2–2.5 hr</td>
+</tr>
+<tr>
+<td>Independent analysis/modeling</td>
+<td style="text-align:right">2.5–3.5 hr</td>
+</tr>
+<tr>
+<td>Journal, deliverable, and review</td>
+<td style="text-align:right">2.5–3 hr</td>
+</tr>
+<tr>
+<td>Knowledge check and revision</td>
+<td style="text-align:right">0.5–1 hr</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-12">Configuration and portfolio update</h3>
+<p>Tag the final repository release, archive evidence and review records, and baseline the six-month monitoring and maintenance plan.</p>
+<p>Record actual effort, changed beliefs, decisions, assumptions, evidence gaps, and unresolved limitations before closing the week.</p>
+<hr/>
+<p><a href="OVERVIEW.html">Back to Phase 5 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+<h2 id="references">References</h2>
+</main></body></html>

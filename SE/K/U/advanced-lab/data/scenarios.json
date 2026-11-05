@@ -1,0 +1,8 @@
+[
+ {"id":"BASE","seed":41,"vehicles":2},
+ {"id":"OUTAGE","seed":41,"vehicles":2,"outage_vehicle":1,"outage_start":0,"outage_end":70},
+ {"id":"LOSS","seed":41,"vehicles":2,"drop_probability":0.40},
+ {"id":"DELAY","seed":41,"vehicles":2,"comm_delay_min":12},
+ {"id":"TELEMETRY","seed":41,"vehicles":2,"telemetry_block_start":0,"telemetry_block_end":45},
+ {"id":"LOW-CAPACITY","seed":41,"vehicles":1}
+]

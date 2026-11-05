@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Pareto frontiers and multiobjective decisions · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/pareto-and-value.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed reference</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Pareto frontiers and multiobjective decisions</h1>
+<p><strong>Reference entry · Analytics, modeling, simulation and decisions · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p>A <strong>Pareto-efficient</strong> alternative is one for which no feasible competitor improves at least one objective without worsening another. Pareto analysis identifies tradeoff structure; it does not choose a preferred solution. A <strong>value model</strong> then represents stakeholder preferences, with assumptions about attribute scales, weights, interactions, and risk. Treating a weighted sum as an objective physical truth confuses preferences with measured system behavior.</p>
+<h2>Theory: dominance precedes preference aggregation</h2>
+<p>For objectives to maximize, <code>a</code> dominates <code>b</code> when <code>f_i(a) &gt;= f_i(b)</code> for every objective <code>i</code> and strict inequality holds for at least one. Dominated alternatives can usually be excluded from further preference comparison <strong>if</strong> objectives, uncertainty, and feasibility are correctly defined. A common additive value form <code>V(x)=Σ w_i v_i(x_i)</code> requires justified single-attribute value functions and conditions supporting additive independence. A weight is not automatically a percentage of importance; its interpretation depends on the attribute ranges and value scales.</p>
+<p>Hard constraints belong outside compensatory scoring when they truly cannot be traded away. Safety compliance cannot legitimately be offset by faster service through a sufficiently large performance weight. Sensitivity analyses should vary weights, attribute transformations, and uncertain outcomes. When alternatives switch rank under minor plausible changes, the decision is fragile and should be presented as conditional rather than definitive.</p>
+<h2>Worked example: two decisions hidden by one score</h2>
+<p>Consider two feasible concepts with normalized waiting-time value and life-cycle affordability value: A <code>(0.9, 0.4)</code> and B <code>(0.7, 0.8)</code>. Both are Pareto-efficient. Under weights <code>(0.6,0.4)</code>, <code>V(A)=0.70</code> and <code>V(B)=0.74</code>, so B leads. Under <code>(0.8,0.2)</code>, <code>V(A)=0.80</code> and <code>V(B)=0.72</code>, so A leads. The rank reversal is not a computational error; it reveals an unresolved preference question. A safety minimum, if mandatory, must be enforced before comparing either score.</p>
+<h2>Engineering use and evidence</h2>
+<p>Elicit objectives from stakeholders, define operational measures and valid ranges, identify constraints, screen for dominated options, then construct and challenge value functions. Display the Pareto frontier and uncertainty bands, not only a single winner. Test dependence and double counting: travel time and on-time percentage may represent overlapping value. Record the decision authority and what preference or data changes would justify revisiting the selection.</p>
+<h2>Limitations and connections</h2>
+<p>Value models can conceal unequal impacts on different populations and may encode arbitrary normalization choices. A broad Pareto set can still omit genuinely novel design alternatives. Connect this topic to <strong>trade studies</strong>, <strong>stakeholder needs</strong>, <strong>metrics</strong>, <strong>uncertainty</strong>, and <strong>engineering governance</strong>.</p>
+<h2>Technical analysis: decision invariance and a switching threshold</h2>
+<p>A Pareto frontier is computed from <em>raw outcomes and correctly oriented objectives</em>, not from stakeholder weights. Suppose two feasible designs have normalized utility differences <code>v_A−v_B</code> of <code>+0.25</code> for waiting time, <code>−0.48</code> for energy use, and <code>−0.25</code> for cost. With additive weights <code>w_wait = w</code>, <code>w_energy = 0.2</code>, and <code>w_cost = 0.8−w</code> (nonnegative weights summing to one), the utility difference is <code>ΔV = 0.25w − 0.48(0.2) − 0.25(0.8−w) = 0.50w−0.296</code>. Thus A becomes preferred only for <code>w &gt; 0.592</code>; with <code>w = 0.50</code>, B wins by <code>0.046</code>. This makes the <strong>switching threshold</strong> more informative than reporting one ranking alone.</p>
+<p>Those differences use the same externally anchored value scales as the trade-study illustration. If normalization is recomputed using the current set of candidates, introducing a new candidate can alter the score scale and the ranking, even if A and B do not change. The additive representation also requires defensible preference separability; shared environmental effects can invalidate independent attribute valuations. Hard safety thresholds remain constraints, not attributes to compensate away with a favorable weight.</p>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
+<li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="engineering-trades.html">Engineering trade studies: making preferences and uncertainty inspectable</a></li>
+<li><a href="stakeholders-and-needs.html">Stakeholders, needs, and value: translating plural interests into engineering decisions</a></li>
+<li><a href="metrics-hierarchy.html">Measures of effectiveness and performance</a></li>
+<li><a href="bayesian-value-of-information.html">Decision uncertainty and value of information</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B14/chapters/04-apply-constraints-dominance-and-pareto-analysis-to-the-selection-pro.html">Book 14, Chapter 04: Book 14 · Chapter 04 — Apply constraints, dominance, and Pareto analysis to the selection problem</a></li>
+<li><a href="../B14/chapters/05-converge-on-a-preferred-selection-using-transparent-value-and-decisi.html">Book 14, Chapter 05: Book 14 · Chapter 05 — Converge on a preferred selection using transparent value and decision methods</a></li>
+<li><a href="../B6/chapters/09-objectives-value-functions-and-multiattribute-evaluatio.html">Book 6, Chapter 09: Book 6 · Chapter 9: Value functions and double counting</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=d60c78a649c6e">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="pareto-and-value.md">Editable Markdown</a></nav></main></body></html>

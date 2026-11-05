@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Common-cause availability · Systems Engineering</title>
+<style>:root{--ink:#193849;--teal:#167575;--bg:#f4f7f8;--line:#d5e4e5}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.76 system-ui,-apple-system,Segoe UI,Arial,sans-serif}header{background:#193c50;color:white;padding:22px max(20px,calc((100vw - 1050px)/2))}header a{color:#d3f7f0;text-decoration:none;margin-right:20px}main{max-width:1050px;margin:25px auto 75px;background:white;border:1px solid var(--line);border-radius:13px;padding:clamp(20px,5vw,58px)}h1{font-size:clamp(1.8rem,3vw,2.35rem);line-height:1.2}h2{margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:7px}h3{margin-top:1.5em}a{color:var(--teal);text-underline-offset:3px}p,li{max-width:85ch}blockquote{margin:16px 0;padding:8px 17px;background:#ecf6f5;border-left:4px solid var(--teal)}table{display:block;max-width:100%;overflow:auto;border-collapse:collapse}td,th{border:1px solid var(--line);padding:10px;vertical-align:top}th{background:#eaf4f3}pre{background:#1a3644;color:#f3f8fa;padding:18px;border-radius:10px;overflow:auto}code{font-size:.88em}p code{background:#edf2f3;padding:2px 5px;border-radius:4px}details{border:1px solid var(--line);border-radius:10px;background:#f8fbfb;padding:14px 17px;margin:12px 0}summary{font-weight:750;cursor:pointer}.actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 28px}.actions a{background:#e4f3f1;border:1px solid #b7d9d7;border-radius:7px;padding:8px 13px;font-weight:650;text-decoration:none}.note{background:#eef7f6;border:1px solid #c9e3e0;padding:16px;border-radius:8px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style>
+<script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']] },svg:{fontCache:'local'},startup:{typeset:false}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B10/practice/availability.html" data-se-mode="standard"></script>
+</head><body><header><a href="../OPEN-BOOK.html">Book 10</a><a href="WORKBENCH.html">Interactive workbench</a><a href="../../LAB-LIBRARY.html">Lab resources</a></header><main>
+<div class="actions"><a href="availability.html">Concept workshop</a><a href="lab-availability.html">Applied lab</a><a download="" href="reliability.csv">Download data</a><a download="" href="tools.py">Download Python</a><a download="" href="LAB-NOTEBOOK.ipynb">Download notebook</a><a download="" href="availability.md">Download this Markdown</a></div><h1>Workshop 8 · Why redundancy does not erase common-cause risk</h1>
+<p><em>Companion to Book X, Chapter 8 · Reliability, availability and maintenance</em></p>
+<h2>An attractive availability estimate</h2>
+<p>The Northstar dispatch platform has two nominally redundant servers. Each server has a mean uptime of 200 hours and a mean repair time of 5 hours. In a simplified alternating up/down model, its steady-state availability is</p>
+<p>\[
+A=\frac{MTTF}{MTTF+MTTR}=\frac{200}{205}\approx0.97561.
+\]</p>
+<p>If server outages are independent and either server can provide the necessary service, the nominal parallel availability is</p>
+<p>\[
+A_{\mathrm{ind}}=1-(1-A)^2\approx0.999405.
+\]</p>
+<p>That looks excellent. It is also conditional on independence, perfect failover, adequate capacity, shared-network availability and the definition of “service available.” A design can have two independent servers powered by one failing facility or routed through one identity provider. Those dependencies invalidate the naive independence argument.</p>
+<h2>Introduce common-cause outage</h2>
+<p>Assume a common-cause event makes both servers unavailable with probability \(q\) at a randomly sampled instant; conditional on no common-cause event, component outages remain independent. Under <strong>that explicit stylized model</strong>, system availability becomes</p>
+<p>\[
+A_{\mathrm{sys}}=(1-q)\bigl[1-(1-A)^2\bigr].
+\]</p>
+<p>At \(q=0.008\), \(A_{\mathrm{sys}}\approx0.99141\). This is below a fictional requirement of 0.995. A mere <strong>0.8% probability of shared outage</strong> overwhelms much of the apparent benefit of dual servers. If a mitigation reduces \(q\) to 0.002 without changing the conditional component assumptions, availability rises to approximately 0.99741 and the numerical gate passes.</p>
+<p>The improvement is meaningful only if the reduction in common-cause probability is supported by engineering evidence. Examples might include independent power feeds, separate networks, resilient identity infrastructure, controlled updates, and verified fault isolation. A parameter reduction written into a spreadsheet is not a mitigation.</p>
+<h2>Steady state is not mission reliability</h2>
+<p>Steady-state availability is the fraction of time a service is up under a long-run stochastic model. Reliability is the probability a required function survives a defined interval without failure. Maintainability is the ability to restore function under specified conditions and resources. The ratios and models differ. A fleet can have high annual availability yet experience an unacceptable 30-minute interruption during an emergency event. Mission windows and consequence therefore belong in the acceptance claim.</p>
+<p>Redundancy also incurs operational dependencies: replication lag, duplicate actions, quorum behavior, failover time, degraded capacity and synchronized software defects. Fault injection and restoration testing are needed to demonstrate that redundant components actually implement the assumed fault-tolerance behavior.</p>
+<h2>Worked problems</h2>
+<p><strong>Problem 1.</strong> Compute single-server availability using the given means.</p>
+<details><summary>Worked solution 1</summary>
+<p>\(200/(200+5)=0.975609756\), or about 97.56% under the alternating renewal assumptions.</p>
+</details>
+<p><strong>Problem 2.</strong> Compute parallel availability assuming independence.</p>
+<details><summary>Worked solution 2</summary>
+<p>\(1-(5/205)^2\approx0.999405\), or about 99.9405%. The conditional assumption is essential.</p>
+</details>
+<p><strong>Problem 3.</strong> Compute common-cause-adjusted availability when \(q=0.008\).</p>
+<details><summary>Worked solution 3</summary>
+<p>\(0.992[1-(5/205)^2]\approx0.991410\). This is below 0.995, so the modeled architecture fails the gate even though the independence-only model passes.</p>
+</details>
+<p><strong>Problem 4.</strong> Why might moving one server to a second building not reduce a shared-outage probability sufficiently?</p>
+<details><summary>Worked solution 4</summary>
+<p>The two buildings might retain shared identity services, network routing, software releases, operations staff, geographical hazards or external dependencies. Common-cause mitigation requires a dependency model and evidence, not merely physical separation.</p>
+</details>
+<h2>Transfer to engineering work</h2>
+<p>Run the availability tool at several common-cause probabilities and repair times. Produce a dependency diagram identifying at least five sources of shared failure, a sensitivity table and an evidence plan for validating a proposed mitigation. Revisit Book X Chapter 8's reliability discussion and distinguish demonstrated availability from model-predicted availability.</p>
+</main></body></html>

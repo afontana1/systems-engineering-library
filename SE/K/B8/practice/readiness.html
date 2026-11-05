@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Test evidence and readiness · Systems Engineering</title>
+<style>:root{--ink:#193849;--teal:#167575;--bg:#f4f7f8;--line:#d5e4e5}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.76 system-ui,-apple-system,Segoe UI,Arial,sans-serif}header{background:#193c50;color:white;padding:22px max(20px,calc((100vw - 1050px)/2))}header a{color:#d3f7f0;text-decoration:none;margin-right:20px}main{max-width:1050px;margin:25px auto 75px;background:white;border:1px solid var(--line);border-radius:13px;padding:clamp(20px,5vw,58px)}h1{font-size:clamp(1.8rem,3vw,2.35rem);line-height:1.2}h2{margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:7px}h3{margin-top:1.5em}a{color:var(--teal);text-underline-offset:3px}p,li{max-width:85ch}blockquote{margin:16px 0;padding:8px 17px;background:#ecf6f5;border-left:4px solid var(--teal)}table{display:block;max-width:100%;overflow:auto;border-collapse:collapse}td,th{border:1px solid var(--line);padding:10px;vertical-align:top}th{background:#eaf4f3}pre{background:#1a3644;color:#f3f8fa;padding:18px;border-radius:10px;overflow:auto}code{font-size:.88em}p code{background:#edf2f3;padding:2px 5px;border-radius:4px}details{border:1px solid var(--line);border-radius:10px;background:#f8fbfb;padding:14px 17px;margin:12px 0}summary{font-weight:750;cursor:pointer}.actions{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 28px}.actions a{background:#e4f3f1;border:1px solid #b7d9d7;border-radius:7px;padding:8px 13px;font-weight:650;text-decoration:none}.note{background:#eef7f6;border:1px solid #c9e3e0;padding:16px;border-radius:8px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style>
+<script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']] },svg:{fontCache:'local'},startup:{typeset:false}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B8/practice/readiness.html" data-se-mode="standard"></script>
+</head><body><header><a href="../OPEN-BOOK.html">Book 8</a><a href="WORKBENCH.html">Interactive workbench</a><a href="../../LAB-LIBRARY.html">Lab resources</a></header><main>
+<div class="actions"><a href="readiness.html">Concept workshop</a><a href="lab-readiness.html">Applied lab</a><a download="" href="requests.csv">Download data</a><a download="" href="tools.py">Download Python</a><a download="" href="LAB-NOTEBOOK.ipynb">Download notebook</a><a download="" href="readiness.md">Download this Markdown</a></div><h1>Workshop 6 · A favorable latency metric can conceal a failed service</h1>
+<p><em>Companion to Book VIII, Chapter 10 · Evidence sufficiency and readiness decisions</em></p>
+<h2>Separate the numerator from the population</h2>
+<p>A test report claims Northstar meets its 90th-percentile passenger-wait limit: the completed-trip wait p90 is 18 minutes. Management wants to authorize operations. A detailed audit of the 12 synthetic requests finds that <strong>10 were served and 2 were dropped</strong>. An apparent pass on latency cannot substitute for evidence about availability and unserved requests. A metric that silently excludes failures can reward a system for refusing difficult work.</p>
+<p>A defensible test plan names each metric's <strong>population, inclusion rule, statistic, limit and decision authority</strong> before execution. The sample dataset contains ten waits: 5, 7, 10, 12, 13, 14, 15, 16, 18, 20 minutes, plus two dropped requests. The nearest-rank empirical 90th percentile uses the ordered observation at rank \(\lceil 0.9n\rceil\). With \(n=10\), it is the ninth observation, <strong>18 minutes</strong>. Other quantile conventions can yield different values, so the method belongs in the protocol.</p>
+<p>The completed-service fraction is \(10/12\approx0.8333\), below the fictional service-coverage requirement of 0.95. Even if a latency test passes at a limit of 18 minutes, the overall gate <strong>fails</strong>. A separate requirement of <em>zero lost safety-critical messages</em> would also need its own evidence and authority.</p>
+<h2>Construct a claim–argument–evidence table</h2>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Measurement</th>
+<th>Gate</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Completed-trip wait</td>
+<td>Nearest-rank p90, completed requests only</td>
+<td>At most 18 minutes</td>
+<td>Pass on this dataset</td>
+</tr>
+<tr>
+<td>Request completion</td>
+<td>Served divided by all eligible requests</td>
+<td>At least 0.95</td>
+<td>Fail: 0.833</td>
+</tr>
+<tr>
+<td>Fault-handling behavior</td>
+<td>Executed fault scenarios and recorded state</td>
+<td>All specified fault constraints satisfied</td>
+<td>Not established by this dataset</td>
+</tr>
+</tbody>
+</table>
+<p>The third row is neither automatically passing nor failing: the dataset does not evaluate it. This is why an integrated review distinguishes <strong>pass</strong>, <strong>fail</strong>, <strong>not tested</strong>, <strong>inapplicable</strong>, and <strong>invalid evidence</strong>. Treating all nonpasses as “open tests” destroys diagnostic information and distorts readiness.</p>
+<h2>Conditional readiness and uncertainty</h2>
+<p>The 12-request synthetic fixture is not a random sample of regional demand, so it does not automatically yield a population-level confidence bound. Even if requests were independent random opportunities, a point estimate of 10/12 would carry large sampling uncertainty. The correct recommendation is a <em>bounded no-go pending defect remediation and stronger representative evidence</em>, not a blanket declaration that the system will always fail or always succeed.</p>
+<p>A review board should also demand traceable test procedures, stable configuration identifiers, calibration or measurement records where relevant, deviation logs, known sensor limitations, and explicit operational constraints. Decisions need a stated authority, not merely an engineering vote.</p>
+<h2>Worked problems</h2>
+<p><strong>Problem 1.</strong> Using the stated nearest-rank rule, calculate the p90 for the ten served requests.</p>
+<details><summary>Worked solution 1</summary>
+<p>Rank \(\lceil0.9\times10\rceil=9\); the ninth ordered wait is 18 minutes. Declare the quantile method; a software package may default to interpolation instead.</p>
+</details>
+<p><strong>Problem 2.</strong> A team removes the two dropped requests and reports 100% completion. What is the denominator error?</p>
+<details><summary>Worked solution 2</summary>
+<p>The completion denominator must include all <strong>eligible requests</strong>, not only successfully completed ones. Otherwise the definition excludes precisely the service failures it is supposed to measure.</p>
+</details>
+<p><strong>Problem 3.</strong> Suppose one more request is served but at a 30-minute wait. Does that automatically improve the readiness case?</p>
+<details><summary>Worked solution 3</summary>
+<p>Completion rises to 11/12 (91.7%) but remains below 95%; the latency p90 may worsen. You must calculate each gate separately and avoid using a composite score to conceal a failed mandatory constraint.</p>
+</details>
+<p><strong>Problem 4.</strong> What would a defensible review recommendation say?</p>
+<details><summary>Worked solution 4</summary>
+<p>“The fixed-case completed-trip p90 met the specified threshold under the declared quantile convention, but completion failed 10/12 versus the 95% gate. This evidence does not establish operational readiness. Correct the service loss, repeat representative tests on the controlled configuration, and close the other required acceptance claims.”</p>
+</details>
+<h2>Transfer to engineering work</h2>
+<p>Download the request outcome CSV and compute metrics independently. Construct an evidence ledger with method, denominator, configuration, result and authority. Draft a one-page readiness recommendation, including a concise dissent argument. This exercise complements the original Book VIII evidence-sufficiency chapter rather than replacing the full test planning assignment.</p>
+</main></body></html>

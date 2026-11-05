@@ -1,0 +1,2 @@
+hazard_id,unsafe_state,control,owner,verification,residual_assumption
+H-07,stale_route_approved,timestamp_gate,dispatch_lead,failure_injection,partner_feed_accuracy

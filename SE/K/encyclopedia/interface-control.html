@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Interface control and integration contracts · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/interface-control.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Interface control and integration contracts</h1>
+<p><strong>Reference entry · Concept, design, integration and test · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p>An <strong>interface contract</strong> specifies the conditions under which elements can exchange matter, energy, information, control, or institutional commitments. An interface-control document (ICD) records the contract and its configuration. A connector drawing identifies what touches what; a dependable contract also addresses syntax, units, semantics, timing, ordering, fault behavior, ownership, security, and evolution.</p>
+<h2>Theory: assume–guarantee reasoning</h2>
+<p>For connected components <code>A</code> and <code>B</code>, define assumptions <code>A_A</code> and guarantees <code>G_A</code>, and likewise for <code>B</code>. A useful composition argument checks whether <code>G_A</code> satisfies the assumptions required by <code>B</code>, and whether <code>G_B</code> satisfies the assumptions required by <code>A</code>. Circular assurances are not proofs unless a suitable compositional rule or temporal argument is provided. Versioning matters because a producer can remain schema-compatible while changing semantic meaning, such as interpreting an unqualified timestamp as UTC instead of local time.</p>
+<p>Quantitative interfaces require budgets for data age, jitter, bandwidth, power, or force. At a 10 Hz telemetry rate, average spacing is 100 ms; that alone does not guarantee that data will be no older than 100 ms at consumption. Packet loss, queuing, and clock offset may increase effective age. Contracts should define what a consumer does when information is late, contradictory, unavailable, or unauthenticated.</p>
+<h2>Worked example: a unit error at a valid connector</h2>
+<p>A vehicle reports speed as the number <code>12.0</code>. The sender means metres per second, while a downstream subsystem interprets kilometres per hour. The encoded field is a valid number, the network delivers it correctly, and a basic schema check passes. Yet the consumer underestimates speed by a factor of 3.6. A typed contract including unit, reference frame, timestamp basis, valid range, and failure semantics would reject or transform this value. End-to-end testing must exercise the complete conversion chain, not only isolated serialization.</p>
+<h2>Engineering use and evidence</h2>
+<p>List each interface's producer and consumer, data or energy semantics, units, expected ranges, timing envelope, security controls, error behavior, version policy, verification method, and owner. Treat physical connectors, operator handoffs, supplier obligations, and external services as interfaces where their failures can cross a system boundary. Use contract tests for normal, boundary, stale, malformed, degraded, and version-skew conditions.</p>
+<h2>Limitations and connections</h2>
+<p>An ICD is a snapshot of agreed behavior, not evidence that deployment follows it. Endpoints can each pass local tests while their interaction fails under load or partial outage. Connect interface control to <strong>system boundaries</strong>, <strong>architecture views</strong>, <strong>allocation</strong>, <strong>software quality</strong>, and <strong>system-of-systems interoperability</strong>.</p>
+<h2>Technical analysis: schema compatibility is more than equal field names</h2>
+<p>An interface contract should fix the semantics of fields as well as wire format: dimensional units, reference frame, time origin, identifiers, uncertainty, validity interval, cardinality, exceptional responses, and version-negotiation rules. The same floating-point field can be syntactically compatible while representing incompatible quantities.</p>
+<p>Suppose one control service sends estimated speed as <strong>72 km/h</strong>, while another expects <strong>m/s</strong>. Correct conversion is <code>72 × 1000/3600 = 20 m/s</code>. Treating the literal <strong>72</strong> as meters per second produces a value <strong>3.6 times too large</strong>. An integration test that merely confirms the number is positive will pass. A typed contract can express <code>speed[m/s]</code>, allowable range, and timestamp tolerance; a conformance test should assert transformation and reject an unknown unit. Similar hazards arise when local clock times are confused with UTC or when a sensor's data age is ignored.</p>
+<p><strong>Evidence boundary.</strong> Establish who may change the contract and how consumers migrate across revisions. Versioned interface-control documents, executable schemas, and test traces are complementary; none independently guarantees end-to-end correctness under overload, stale data, or actuator faults.</p>
+<h2>Claim-specific sources</h2>
+<p>The following <strong>selected methodological claims</strong> are tied to identifiable sections or abstracts, not merely generic reading lists. Source scope is stated for each link. Numerical scenarios and computations in this article are <strong>original illustrative examples</strong>, not data, calculations, or endorsements supplied by the linked publishers. Links require internet access; the explanation remains readable offline.</p>
+<ul>
+<li><strong>C1:</strong> Interface requirements, changes, responsible organizations and compatibility verification belong in managed interface procedures. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/6-3-interface-management/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §6.3 Interface Management</a> · <em>direct guidance</em>.</li>
+<li><strong>C2:</strong> Security engineering must include system interfaces, environments and trust boundaries. <strong>Evidence:</strong> <a href="https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final">NIST — SP 800-160 Vol. 1 Rev. 1, Engineering Trustworthy Secure Systems (2022), System security engineering concepts, activities, tasks, and trustworthiness principles</a> · <em>scope-supported interpretation</em>.</li>
+</ul>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
+<li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="boundaries-and-interfaces.html">Boundaries and interfaces: where local correctness meets system risk</a></li>
+<li><a href="allocation-matrix.html">Allocation, coverage, and design responsibility</a></li>
+<li><a href="integration-strategy.html">Integration build-up and readiness evidence</a></li>
+<li><a href="sos-characteristics.html">Systems of systems: constituent autonomy and emergent mission performance</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B7/chapters/04-mature-the-physical-architecture-interfaces-and-perform.html">Book 7, Chapter 04: Book 7 · Chapter 4: Physical architecture and contracts</a></li>
+<li><a href="../B9/chapters/06-specify-interfaces-exchanges-allocations-ownership-and-model-based-c.html">Book 9, Chapter 06: Book 9 · Chapter 06 — Specify interfaces, exchanges, allocations, ownership, and model-based change exposure</a></li>
+<li><a href="../B18/chapters/05.html">Book 18, Chapter 05: Week 05 · System of Systems Engineering · Chapter 05 — Information architecture and multidimensional interoperability</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=dda682f83cc9d">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="interface-control.md">Editable Markdown</a></nav></main></body></html>

@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>02 · Requirements, traceability, and evidence arguments · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/U/concepts/02-requirements-evidence.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="02--requirements-traceability-and-evidence-arguments">02 · Requirements, traceability, and evidence arguments</h1>
+<p><strong>Concept dossier · Foundations / MBSE / integration and test</strong><br/>
+<strong>Prerequisites:</strong> operational outcomes and scenarios; difference between verification and validation.</p>
+<h2 id="separate-five-things-that-are-often-conflated">Separate five things that are often conflated</h2>
+<p>A stakeholder <strong>need</strong> describes a valued outcome. A system <strong>requirement</strong> constrains required behavior or performance. An <strong>architecture element</strong> offers a design response. A <strong>test</strong> is a procedure that collects evidence. An <strong>acceptance decision</strong> interprets that evidence under an agreed rule. Conflating these creates false assurance: a green test can establish only what it actually measured, not that the original need is satisfied.</p>
+<p>For a fictional accessible shuttle service:</p>
+<ul>
+<li>Need N-01: riders can board safely and predictably in the designated operating area.</li>
+<li>Requirement R-07: under a defined boarding scenario, the deployed service shall display the boarding-point change to the user within 15 seconds of dispatch approval.</li>
+<li>Architecture A-12: dispatch event broker and rider-notification interface.</li>
+<li>Test T-19: inject approved curb-change events and measure notification latency with synchronized clocks.</li>
+<li>Evidence E-19: raw timestamps, configuration, sample inclusion decisions and test report.</li>
+<li>Claim C-01: R-07 is satisfied for the specified configuration and tested conditions, subject to the pre-agreed acceptance rule.</li>
+</ul>
+<p>The 15-second figure is <strong>illustrative</strong>, not an externally validated safety threshold.</p>
+<h2 id="traceability-is-a-typed-graph">Traceability is a typed graph</h2>
+<p>Represent the thread as a directed graph <code>G=(V,E)</code> with <strong>typed</strong> nodes: need, requirement, architecture, interface, test, evidence, claim, risk and change. Typed edges include <em>derives</em>, <em>allocated_to</em>, <em>verified_by</em>, <em>produced</em>, <em>supports</em> and <em>changes</em>. A simplistic spreadsheet containing identical IDs in two columns may miss wrong edge semantics or invalid versions.</p>
+<p>Useful automated checks:</p>
+<ol>
+<li>Every in-scope approved requirement has at least one parent rationale or explicitly justified origin.</li>
+<li>Every verifiable requirement has a linked verification method and an evidence-producing activity.</li>
+<li>Evidence configurations match the claim: test of software v2.1 does not necessarily support release v2.3.</li>
+<li>Changes propagate by traversing dependency edges in the relevant direction; reviewers distinguish affected items from definitely invalidated items.</li>
+<li>Every critical claim identifies an owner, scope, conditions, uncertainties and acceptance authority.</li>
+</ol>
+<p>A requirement is not “verified” by having a test link. It is supported by <strong>suitable evidence evaluated against criteria</strong>.</p>
+<h2 id="why-passfail-is-more-subtle-than-it-looks">Why pass/fail is more subtle than it looks</h2>
+<p>Suppose the requirement is “latency no more than 15 seconds for at least 99% of eligible events.” A single timing run below 15 seconds proves almost nothing about a 99th-percentile population claim. A procedure must define the sampling frame, event mix, timing accuracy, exclusions, dependence between trials, confidence criterion, software and hardware versions and what happens to discrepancies. A 95% confidence statement is not equivalent to a 95% performance requirement.</p>
+<p>If 0 failures appear in <code>n</code> independent Bernoulli trials with common failure probability <code>p</code>, a <strong>one-sided</strong> 95% confidence upper bound for <code>p</code> is <code>1 - 0.05^(1/n)</code>. For <code>n=100</code>, this is about 2.95%; zero observed failures would not support a claim that <code>p</code> is below 1%. Real tests may violate independent-identically-distributed assumptions and require a different analysis.</p>
+<h2 id="an-evidence-argument-not-a-paperwork-chain">An evidence argument, not a paperwork chain</h2>
+<p>An assurance-style argument states:</p>
+<blockquote>
+<p><strong>Claim:</strong> A declared configuration meets the user-notification latency requirement in the specified operating envelope.</p>
+</blockquote>
+<p><strong>Reasoning:</strong> Requirements map to observable event timestamps; clocks are calibrated; sampling adequately covers intended events; discrepancies are resolved according to approved rules.</p>
+<p><strong>Evidence:</strong> Controlled test logs, procedure version, sample description, calibration records, independent review and an approved deviation register.</p>
+<p><strong>Limitations:</strong> Storm-related radio outages and untested device configurations are outside the claim, unless explicitly included and supported.</p>
+<p>The reasoning can be challenged: Is the event definition biased? Are trials correlated? Can the test harness understate real-world latency? An argument is a structured way to expose such vulnerabilities rather than conceal them.</p>
+<h2 id="change-impact-worked-example">Change-impact worked example</h2>
+<p>Change request CR-06 replaces the push-notification vendor. Trace from interface IF-04 to architecture A-12, requirement R-07, test T-19, security controls and associated evidence. Old results may remain useful for other unchanged subsystems, but E-19 may no longer support R-07. The response is targeted impact analysis, not reflexively rerunning every test or blindly accepting the old report.</p>
+<h2 id="practice-with-solutions">Practice with solutions</h2>
+<p><strong>A.</strong> Why is “shall be user-friendly” weak? <strong>Answer:</strong> no observable behavior, target population, operational condition or success criterion is defined. Elicit the intended user outcome before choosing a measurable substitute.</p>
+<p><strong>B.</strong> What does 100% requirement-to-test link coverage establish? <strong>Answer:</strong> only that links exist under the coverage query. It does not establish test adequacy, result validity, correct versions or validation of stakeholder needs.</p>
+<p><strong>C.</strong> A successful bench test uses v1.4 but the field system uses v1.5. Can it be cited? <strong>Answer:</strong> only after configuration-impact analysis justifies what remains applicable; do not silently claim identical evidence.</p>
+<p><strong>Transfer artifact:</strong> a five-requirement trace graph with two alternative failure paths, a test-case table, a change-impact query and a one-page evidence argument.</p>
+<h2 id="connections">Connections</h2>
+<p><a href="01-outcomes-boundaries.html">System boundaries and needs</a> · <a href="03-architecture-states.html">Architectures and state models</a> · <a href="07-experimental-evidence.html">Experiments and confidence</a> · <a href="11-digital-thread.html">Digital provenance</a>.<br/>
+<strong>Legacy primers:</strong> <a href="../../encyclopedia/verification-matrix.html">Verification matrix</a>, <a href="../../encyclopedia/v-and-v.html">V&amp;V</a>.</p>
+</main></body></html>

@@ -1,0 +1,16 @@
+digraph Fault {
+rankdir=LR; graph [fontname="Arial",bgcolor="transparent",pad="0.25"];
+node [shape=box,style="rounded,filled",fontname="Arial",color="#b9d5d7",fillcolor="#f0f8f8",fontcolor="#193e4b"];
+edge [color="#47818c",fontname="Arial",fontsize=10];
+Demand -> Receipt;
+Receipt -> Queue [label="received"];
+Receipt -> Lost [label="message drop",color="#b46b3e"];
+Queue -> Assign [label="resource ready"];
+Queue -> Expire [label="horizon exceeded",color="#b46b3e"];
+Assign -> Complete [label="finish before horizon"];
+Outage -> Assign [label="blocks intervals",color="#b46b3e",style=dashed];
+Telemetry -> Assign [label="holds dispatch",color="#b46b3e",style=dashed];
+Complete [fillcolor="#e8f4ed"];
+Lost [fillcolor="#fff2e8"];
+Expire [fillcolor="#fff2e8"];
+}

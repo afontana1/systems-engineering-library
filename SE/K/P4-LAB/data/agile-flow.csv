@@ -1,0 +1,7 @@
+change_id,wip,throughput_per_week,modeled_weeks,assurance_gate
+A1,12,3,4.0,must_pass
+A2,10,3,3.333,must_pass
+A3,8,3,2.667,must_pass
+A4,6,3,2.0,must_pass
+A5,6,2,3.0,must_pass
+A6,5,2.5,2.0,must_pass

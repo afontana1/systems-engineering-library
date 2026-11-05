@@ -1,0 +1,4 @@
+failure_probability,attempts,original_rps,downstream_capacity_rps
+0.15,3,100,110
+0.40,3,100,110
+0.05,2,100,110

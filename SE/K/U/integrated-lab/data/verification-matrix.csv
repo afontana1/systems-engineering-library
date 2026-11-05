@@ -1,0 +1,9 @@
+test_id,req_ids,method,fixture,expected_outcome,actual_status,evidence_path
+T-01,REQ-01;REQ-08,Automated,duplicate_and_conflict,Ignore one exact duplicate and reject conflict,Run tests,tests/test_lab.py
+T-02,REQ-02,Automated,baseline,No overlap for any vehicle,Run tests,outputs/results.json
+T-03,REQ-03,Automated,baseline,Served fraction >= 0.95,Run tests,outputs/results.json
+T-04,REQ-04,Automated,baseline,P90 wait <= 20,Run tests,outputs/results.json
+T-05,REQ-05,Automated,requirements_hazards_tests,Complete local graph links,Run tests,outputs/results.json
+T-06,REQ-06,Automated,one_vehicle,Served target not reached,Run tests,outputs/results.json
+T-07,REQ-07,Automated,invalid_passengers,ValueError is raised,Run tests,tests/test_lab.py
+T-08,REQ-08,Automated,conflicting_id,ValueError is raised,Run tests,tests/test_lab.py

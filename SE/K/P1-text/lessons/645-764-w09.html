@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Build the dependability, safety, resilience, and supply-chain case · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/P1-text/lessons/645-764-w09.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="build-the-dependability-safety-resilience-and-supply-chain-case">Build the dependability, safety, resilience, and supply-chain case</h1>
+<p><strong>Companion chapter:</strong> EN.645.764, Week 09 · Phase 1 edition 1.0 (2026-10-30)<br/>
+<strong>Original course:</strong> <a href="../../../C/P1/EN645764.html">Software Systems Engineering</a> — find <strong>Week 9</strong> for assignment, assessment criteria and complete reading plan.<br/>
+<strong>Concepts:</strong> FMEA, fault containment, supply chain, security case<br/>
+<strong>Use of case:</strong> Synthetic Autonomous Campus Shuttle case; all values and designs are educational, not field safety guidance.</p>
+<h2 id="the-question-to-answer">The question to answer</h2>
+<blockquote>
+<p>How do you make a credible argument about software dependability?</p>
+</blockquote>
+<h2 id="conceptual-tutorial">Conceptual tutorial</h2>
+<h3 id="assurance-requires-a-structured-claim">Assurance requires a structured claim</h3>
+<p>A dependability case states a claim ('service avoids duplicate active reservations under specified failures'), reasons and supporting evidence, and assumptions. Failure mode and effects analysis (FMEA) enumerates how elements fail and the consequences. Threat analysis enumerates purposeful misuse. These are complementary; a malicious command and an accidental malformed message may share mitigations but require different evidence.</p>
+<p>Prioritize by severity, likelihood and detectability only with care: a risk-priority number is not a physical probability. Safety-related decisions must use the governing hazard process and authorized reviewers. Identify independent controls, recovery, observability, supply-chain dependencies and residual exposure. Check what happens after a partial repair and whether operators can recognize degraded state.</p>
+<h3 id="secure-development-is-lifecycle-behavior">Secure development is lifecycle behavior</h3>
+<p>Dependency pinning, provenance, access reviews, secret handling, vulnerability response and reproducible build records reduce risk. A software bill of materials is an inventory, not proof of security. Follow NIST SSDF as a control framework and connect its practices to concrete review/evidence files.</p>
+<h2 id="worked-application-follow-the-reasoning">Worked application: follow the reasoning</h2>
+<p><strong>Fault tree sketch.</strong> Duplicate reservation can require (A) concurrent requests and (B) absent/failed atomic guard, or (C) replay of unrecognized message. Mitigations include transactional uniqueness, idempotency records, reconciliation and alerting. Tests must exercise both concurrency and replay, not simply verify the nominal path.</p>
+<h2 id="practice-before-viewing-solutions">Practice before viewing solutions</h2>
+<ol>
+<li>Does an SBOM prove software is secure?</li>
+<li>Why is an FMEA RPN not a probability?</li>
+<li>Name two independent duplicate-reservation controls.</li>
+</ol>
+<p>&lt;details&gt;
+&lt;summary&gt;&lt;strong&gt;Show worked answers&lt;/strong&gt;&lt;/summary&gt;</p>
+<ol>
+<li><strong>Does an SBOM prove software is secure?</strong> No, it inventories components; vulnerabilities, build integrity and correct operation still need evidence.</li>
+<li><strong>Why is an FMEA RPN not a probability?</strong> Severity, occurrence and detectability ordinal rankings are often multiplied as prioritization heuristics, not statistically calibrated likelihoods.</li>
+<li><strong>Name two independent duplicate-reservation controls.</strong> Atomic constraint/version check and persisted idempotency token, plus reconciliation.</li>
+</ol>
+<p>&lt;/details&gt;</p>
+<h2 id="the-misconception-to-avoid">The misconception to avoid</h2>
+<p><strong>Watch for:</strong> Equating extensive risk spreadsheets with validated controls gives false confidence.</p>
+<h2 id="applied-exercise-and-portfolio-handoff">Applied exercise and portfolio handoff</h2>
+<p><strong>Do:</strong> Create a small assurance case with five threats/failure modes, controls and test evidence. Treat this as preparation for the fuller deliverables and rubric in the original <strong>Week 9</strong> guide; the companion is not a substitute for those graded artifacts.</p>
+<h2 id="concept-connections">Concept connections</h2>
+<ul>
+<li><a href="../deep-dives/distributed-uncertainty.html">Further conceptual deep dive: Distributed systems: timeouts, duplicates and eventual knowledge</a></li>
+<li><a href="../deep-dives/quantitative-qualities.html">Further conceptual deep dive: Quantitative performance and reliability without misleading averages</a></li>
+<li><a href="../deep-dives/assurance.html">Further conceptual deep dive: Security, safety and release evidence as structured claims</a></li>
+</ul>
+<h2 id="read-more-in-authoritative-references">Read more in authoritative references</h2>
+<ul>
+<li><a href="https://c4model.com/">C4 model — software architecture views</a></li>
+<li><a href="https://csrc.nist.gov/pubs/sp/800/218/final">NIST SP 800-218 — Secure Software Development Framework</a></li>
+<li><a href="https://www.computer.org/education/bodies-of-knowledge/software-engineering">IEEE Computer Society SWEBOK Guide</a></li>
+</ul>
+<hr/>
+<p><a href="645-764-w08.html">Previous chapter</a> · <a href="645-764-w10.html">Next chapter</a></p>
+</main></body></html>

@@ -1,0 +1,13 @@
+week,course,scenario,baseline_value,challenge_value,units,status,teaching_note
+1,645-758,Northstar synthetic evaluation,17.1,20.52,illustrative index,synthetic—not field data,"Frame the advanced M&S decision, intended use, architecture, and credibility strategy"
+2,645-758,Northstar synthetic evaluation,24.1,31.33,illustrative index,synthetic—not field data,"Derive dynamic-system mathematics, standard forms, block diagrams, and numerical evidence"
+3,645-758,Northstar synthetic evaluation,12.1,16.94,illustrative index,synthetic—not field data,Model translational and rotational mechanical dynamics with realistic losses and constraints
+4,645-758,Northstar synthetic evaluation,19.1,21.01,illustrative index,synthetic—not field data,"Couple electrical, electromechanical, thermal, and fluid domains"
+5,645-758,Northstar synthetic evaluation,26.1,31.32,illustrative index,synthetic—not field data,"Link MBSE, XML metadata, collaborative environments, and reusable M&S assets"
+6,645-758,Northstar synthetic evaluation,14.1,18.33,illustrative index,synthetic—not field data,"Design interoperable HLA/FMI federations, LVC interfaces, and composable co-simulations"
+7,645-758,Northstar synthetic evaluation,21.1,29.54,illustrative index,synthetic—not field data,Integrate the model baseline and design advanced simulation experiments
+8,645-758,Northstar synthetic evaluation,28.1,30.91,illustrative index,synthetic—not field data,"Model natural and man-made environments as dynamic, correlated scenario systems"
+9,645-758,Northstar synthetic evaluation,16.1,19.32,illustrative index,synthetic—not field data,"Integrate technical performance with lifecycle cost, resources, maintenance, and affordability"
+10,645-758,Northstar synthetic evaluation,23.1,30.03,illustrative index,synthetic—not field data,Extend the model to population or biological dynamics and communicate behavior through visualization
+11,645-758,Northstar synthetic evaluation,11.1,15.54,illustrative index,synthetic—not field data,"Assess continuous, discrete, hybrid, fixed-step, real-time, HIL, and final credibility constraints"
+12,645-758,Northstar synthetic evaluation,18.1,19.91,illustrative index,synthetic—not field data,"Reproduce, challenge, present, and defend the final complex-system simulation study"

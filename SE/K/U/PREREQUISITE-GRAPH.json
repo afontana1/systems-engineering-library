@@ -1,0 +1,790 @@
+{
+  "nodes": [
+    {
+      "slug": "allocation-matrix",
+      "title": "Allocation, coverage, and design responsibility",
+      "immediate_prerequisites": [
+        "good-requirements",
+        "functional-vs-physical"
+      ],
+      "study_order": 28
+    },
+    {
+      "slug": "bayesian-value-of-information",
+      "title": "Decision uncertainty and value of information",
+      "immediate_prerequisites": [
+        "probability-and-dependence",
+        "engineering-trades"
+      ],
+      "study_order": 19
+    },
+    {
+      "slug": "complexity-emergence",
+      "title": "Complexity, emergence, and adaptation",
+      "immediate_prerequisites": [
+        "stocks-flows-feedback",
+        "sos-characteristics"
+      ],
+      "study_order": 31
+    },
+    {
+      "slug": "flow-wip-and-queues",
+      "title": "Flow, work in process, and bottlenecks",
+      "immediate_prerequisites": [
+        "metrics-hierarchy"
+      ],
+      "study_order": 11
+    },
+    {
+      "slug": "discrete-event-simulation",
+      "title": "Discrete-event simulation and queues",
+      "immediate_prerequisites": [
+        "conceptual-m-and-s",
+        "flow-wip-and-queues"
+      ],
+      "study_order": 20
+    },
+    {
+      "slug": "probability-and-dependence",
+      "title": "Probability, distributions, and dependence",
+      "immediate_prerequisites": [],
+      "study_order": 1
+    },
+    {
+      "slug": "process-improvement",
+      "title": "Process capability and continuous improvement",
+      "immediate_prerequisites": [
+        "metrics-hierarchy",
+        "design-of-experiments"
+      ],
+      "study_order": 24
+    },
+    {
+      "slug": "stakeholders-and-needs",
+      "title": "Stakeholders, needs, and value",
+      "immediate_prerequisites": [
+        "system-of-interest"
+      ],
+      "study_order": 5
+    },
+    {
+      "slug": "resilience-adaptability",
+      "title": "Resilience, robustness, and graceful degradation",
+      "immediate_prerequisites": [
+        "risk-vs-issue",
+        "probability-and-dependence"
+      ],
+      "study_order": 12
+    },
+    {
+      "slug": "metrics-hierarchy",
+      "title": "Measures of effectiveness and performance",
+      "immediate_prerequisites": [
+        "stakeholders-and-needs"
+      ],
+      "study_order": 6
+    },
+    {
+      "slug": "engineering-trades",
+      "title": "Trade studies, constraints, and sensitivity",
+      "immediate_prerequisites": [
+        "stakeholders-and-needs",
+        "metrics-hierarchy"
+      ],
+      "study_order": 10
+    },
+    {
+      "slug": "stocks-flows-feedback",
+      "title": "Stocks, flows, and feedback loops",
+      "immediate_prerequisites": [
+        "conceptual-m-and-s"
+      ],
+      "study_order": 18
+    },
+    {
+      "slug": "system-of-interest",
+      "title": "System of interest and purpose",
+      "immediate_prerequisites": [],
+      "study_order": 2
+    },
+    {
+      "slug": "views-and-viewpoints",
+      "title": "Architecture views, viewpoints, and consistency",
+      "immediate_prerequisites": [
+        "functional-vs-physical"
+      ],
+      "study_order": 26
+    },
+    {
+      "slug": "risk-vs-issue",
+      "title": "Risk, issue, uncertainty, and opportunity",
+      "immediate_prerequisites": [
+        "system-of-interest"
+      ],
+      "study_order": 4
+    },
+    {
+      "slug": "conops-and-scenarios",
+      "title": "Concept of operations and scenarios",
+      "immediate_prerequisites": [
+        "stakeholders-and-needs",
+        "boundaries-and-interfaces"
+      ],
+      "study_order": 9
+    },
+    {
+      "slug": "software-quality-attributes",
+      "title": "Software quality attributes and architectural tactics",
+      "immediate_prerequisites": [
+        "good-requirements",
+        "interface-control"
+      ],
+      "study_order": 33
+    },
+    {
+      "slug": "mission-engineering",
+      "title": "Mission threads and capability analysis",
+      "immediate_prerequisites": [
+        "conops-and-scenarios",
+        "sos-characteristics"
+      ],
+      "study_order": 22
+    },
+    {
+      "slug": "conceptual-m-and-s",
+      "title": "Conceptual modeling and intended use",
+      "immediate_prerequisites": [
+        "system-of-interest",
+        "metrics-hierarchy"
+      ],
+      "study_order": 8
+    },
+    {
+      "slug": "object-responsibilities",
+      "title": "Object-oriented domain models and responsibilities",
+      "immediate_prerequisites": [
+        "functional-vs-physical"
+      ],
+      "study_order": 23
+    },
+    {
+      "slug": "model-language-method-tool",
+      "title": "Model, method, language, tool, and repository",
+      "immediate_prerequisites": [
+        "views-and-viewpoints"
+      ],
+      "study_order": 29
+    },
+    {
+      "slug": "v-and-v",
+      "title": "Verification, validation, and acceptance",
+      "immediate_prerequisites": [
+        "good-requirements"
+      ],
+      "study_order": 25
+    },
+    {
+      "slug": "sos-characteristics",
+      "title": "System of systems and constituent independence",
+      "immediate_prerequisites": [
+        "boundaries-and-interfaces"
+      ],
+      "study_order": 7
+    },
+    {
+      "slug": "software-lifecycle-evidence",
+      "title": "CI/CD, configuration, and software assurance",
+      "immediate_prerequisites": [
+        "software-quality-attributes",
+        "verification-matrix"
+      ],
+      "study_order": 37
+    },
+    {
+      "slug": "model-vv-and-credibility",
+      "title": "Simulation verification, validation, and credibility",
+      "immediate_prerequisites": [
+        "conceptual-m-and-s",
+        "v-and-v"
+      ],
+      "study_order": 35
+    },
+    {
+      "slug": "boundaries-and-interfaces",
+      "title": "Boundaries, environment, and interfaces",
+      "immediate_prerequisites": [
+        "system-of-interest"
+      ],
+      "study_order": 3
+    },
+    {
+      "slug": "functional-vs-physical",
+      "title": "Functional, logical, and physical architectures",
+      "immediate_prerequisites": [
+        "conops-and-scenarios"
+      ],
+      "study_order": 15
+    },
+    {
+      "slug": "traceability-graph",
+      "title": "Requirements traceability and impact analysis",
+      "immediate_prerequisites": [
+        "allocation-matrix",
+        "verification-matrix"
+      ],
+      "study_order": 36
+    },
+    {
+      "slug": "verification-matrix",
+      "title": "Verification cross-reference matrices and test design",
+      "immediate_prerequisites": [
+        "good-requirements",
+        "v-and-v"
+      ],
+      "study_order": 30
+    },
+    {
+      "slug": "design-of-experiments",
+      "title": "Design of experiments and sensitivity",
+      "immediate_prerequisites": [
+        "probability-and-dependence",
+        "metrics-hierarchy"
+      ],
+      "study_order": 14
+    },
+    {
+      "slug": "agile-tailoring",
+      "title": "Agile systems engineering and lifecycle tailoring",
+      "immediate_prerequisites": [
+        "wbs-and-baselines",
+        "software-lifecycle-evidence"
+      ],
+      "study_order": 39
+    },
+    {
+      "slug": "wbs-and-baselines",
+      "title": "Work breakdown structures and technical baselines",
+      "immediate_prerequisites": [
+        "good-requirements"
+      ],
+      "study_order": 27
+    },
+    {
+      "slug": "pareto-and-value",
+      "title": "Pareto frontiers and multiobjective decisions",
+      "immediate_prerequisites": [
+        "engineering-trades"
+      ],
+      "study_order": 17
+    },
+    {
+      "slug": "interface-control",
+      "title": "Interface control and integration contracts",
+      "immediate_prerequisites": [
+        "boundaries-and-interfaces",
+        "functional-vs-physical"
+      ],
+      "study_order": 21
+    },
+    {
+      "slug": "authority-and-governance",
+      "title": "Authority, governance, and coordination",
+      "immediate_prerequisites": [
+        "stakeholders-and-needs",
+        "sos-characteristics"
+      ],
+      "study_order": 13
+    },
+    {
+      "slug": "intervention-and-learning",
+      "title": "Interventions, policy resistance, and learning loops",
+      "immediate_prerequisites": [
+        "process-improvement",
+        "complexity-emergence"
+      ],
+      "study_order": 38
+    },
+    {
+      "slug": "enterprise-as-system",
+      "title": "The enterprise as a system",
+      "immediate_prerequisites": [
+        "sos-characteristics",
+        "stocks-flows-feedback"
+      ],
+      "study_order": 32
+    },
+    {
+      "slug": "good-requirements",
+      "title": "Requirements and acceptance criteria",
+      "immediate_prerequisites": [
+        "stakeholders-and-needs",
+        "conops-and-scenarios"
+      ],
+      "study_order": 16
+    },
+    {
+      "slug": "integration-strategy",
+      "title": "Integration build-up and readiness evidence",
+      "immediate_prerequisites": [
+        "interface-control",
+        "v-and-v"
+      ],
+      "study_order": 34
+    },
+    {
+      "slug": "digital-thread-and-twin",
+      "title": "Digital thread and digital twin",
+      "immediate_prerequisites": [
+        "traceability-graph",
+        "model-vv-and-credibility"
+      ],
+      "study_order": 40
+    }
+  ],
+  "edges": [
+    {
+      "source": "system-of-interest",
+      "target": "boundaries-and-interfaces",
+      "type": "prerequisite",
+      "reason": "Understand system of interest and purpose before applying boundaries, environment, and interfaces"
+    },
+    {
+      "source": "system-of-interest",
+      "target": "stakeholders-and-needs",
+      "type": "prerequisite",
+      "reason": "Understand system of interest and purpose before applying stakeholders, needs, and value"
+    },
+    {
+      "source": "stakeholders-and-needs",
+      "target": "conops-and-scenarios",
+      "type": "prerequisite",
+      "reason": "Understand stakeholders, needs, and value before applying concept of operations and scenarios"
+    },
+    {
+      "source": "boundaries-and-interfaces",
+      "target": "conops-and-scenarios",
+      "type": "prerequisite",
+      "reason": "Understand boundaries, environment, and interfaces before applying concept of operations and scenarios"
+    },
+    {
+      "source": "stakeholders-and-needs",
+      "target": "good-requirements",
+      "type": "prerequisite",
+      "reason": "Understand stakeholders, needs, and value before applying requirements and acceptance criteria"
+    },
+    {
+      "source": "conops-and-scenarios",
+      "target": "good-requirements",
+      "type": "prerequisite",
+      "reason": "Understand concept of operations and scenarios before applying requirements and acceptance criteria"
+    },
+    {
+      "source": "stakeholders-and-needs",
+      "target": "metrics-hierarchy",
+      "type": "prerequisite",
+      "reason": "Understand stakeholders, needs, and value before applying measures of effectiveness and performance"
+    },
+    {
+      "source": "conops-and-scenarios",
+      "target": "functional-vs-physical",
+      "type": "prerequisite",
+      "reason": "Understand concept of operations and scenarios before applying functional, logical, and physical architectures"
+    },
+    {
+      "source": "functional-vs-physical",
+      "target": "views-and-viewpoints",
+      "type": "prerequisite",
+      "reason": "Understand functional, logical, and physical architectures before applying architecture views, viewpoints, and consistency"
+    },
+    {
+      "source": "views-and-viewpoints",
+      "target": "model-language-method-tool",
+      "type": "prerequisite",
+      "reason": "Understand architecture views, viewpoints, and consistency before applying model, method, language, tool, and repository"
+    },
+    {
+      "source": "good-requirements",
+      "target": "allocation-matrix",
+      "type": "prerequisite",
+      "reason": "Understand requirements and acceptance criteria before applying allocation, coverage, and design responsibility"
+    },
+    {
+      "source": "functional-vs-physical",
+      "target": "allocation-matrix",
+      "type": "prerequisite",
+      "reason": "Understand functional, logical, and physical architectures before applying allocation, coverage, and design responsibility"
+    },
+    {
+      "source": "boundaries-and-interfaces",
+      "target": "interface-control",
+      "type": "prerequisite",
+      "reason": "Understand boundaries, environment, and interfaces before applying interface control and integration contracts"
+    },
+    {
+      "source": "functional-vs-physical",
+      "target": "interface-control",
+      "type": "prerequisite",
+      "reason": "Understand functional, logical, and physical architectures before applying interface control and integration contracts"
+    },
+    {
+      "source": "good-requirements",
+      "target": "v-and-v",
+      "type": "prerequisite",
+      "reason": "Understand requirements and acceptance criteria before applying verification, validation, and acceptance"
+    },
+    {
+      "source": "good-requirements",
+      "target": "verification-matrix",
+      "type": "prerequisite",
+      "reason": "Understand requirements and acceptance criteria before applying verification cross-reference matrices and test design"
+    },
+    {
+      "source": "v-and-v",
+      "target": "verification-matrix",
+      "type": "prerequisite",
+      "reason": "Understand verification, validation, and acceptance before applying verification cross-reference matrices and test design"
+    },
+    {
+      "source": "allocation-matrix",
+      "target": "traceability-graph",
+      "type": "prerequisite",
+      "reason": "Understand allocation, coverage, and design responsibility before applying requirements traceability and impact analysis"
+    },
+    {
+      "source": "verification-matrix",
+      "target": "traceability-graph",
+      "type": "prerequisite",
+      "reason": "Understand verification cross-reference matrices and test design before applying requirements traceability and impact analysis"
+    },
+    {
+      "source": "interface-control",
+      "target": "integration-strategy",
+      "type": "prerequisite",
+      "reason": "Understand interface control and integration contracts before applying integration build-up and readiness evidence"
+    },
+    {
+      "source": "v-and-v",
+      "target": "integration-strategy",
+      "type": "prerequisite",
+      "reason": "Understand verification, validation, and acceptance before applying integration build-up and readiness evidence"
+    },
+    {
+      "source": "functional-vs-physical",
+      "target": "object-responsibilities",
+      "type": "prerequisite",
+      "reason": "Understand functional, logical, and physical architectures before applying object-oriented domain models and responsibilities"
+    },
+    {
+      "source": "good-requirements",
+      "target": "software-quality-attributes",
+      "type": "prerequisite",
+      "reason": "Understand requirements and acceptance criteria before applying software quality attributes and architectural tactics"
+    },
+    {
+      "source": "interface-control",
+      "target": "software-quality-attributes",
+      "type": "prerequisite",
+      "reason": "Understand interface control and integration contracts before applying software quality attributes and architectural tactics"
+    },
+    {
+      "source": "software-quality-attributes",
+      "target": "software-lifecycle-evidence",
+      "type": "prerequisite",
+      "reason": "Understand software quality attributes and architectural tactics before applying ci/cd, configuration, and software assurance"
+    },
+    {
+      "source": "verification-matrix",
+      "target": "software-lifecycle-evidence",
+      "type": "prerequisite",
+      "reason": "Understand verification cross-reference matrices and test design before applying ci/cd, configuration, and software assurance"
+    },
+    {
+      "source": "probability-and-dependence",
+      "target": "design-of-experiments",
+      "type": "prerequisite",
+      "reason": "Understand probability, distributions, and dependence before applying design of experiments and sensitivity"
+    },
+    {
+      "source": "metrics-hierarchy",
+      "target": "design-of-experiments",
+      "type": "prerequisite",
+      "reason": "Understand measures of effectiveness and performance before applying design of experiments and sensitivity"
+    },
+    {
+      "source": "system-of-interest",
+      "target": "conceptual-m-and-s",
+      "type": "prerequisite",
+      "reason": "Understand system of interest and purpose before applying conceptual modeling and intended use"
+    },
+    {
+      "source": "metrics-hierarchy",
+      "target": "conceptual-m-and-s",
+      "type": "prerequisite",
+      "reason": "Understand measures of effectiveness and performance before applying conceptual modeling and intended use"
+    },
+    {
+      "source": "conceptual-m-and-s",
+      "target": "discrete-event-simulation",
+      "type": "prerequisite",
+      "reason": "Understand conceptual modeling and intended use before applying discrete-event simulation and queues"
+    },
+    {
+      "source": "flow-wip-and-queues",
+      "target": "discrete-event-simulation",
+      "type": "prerequisite",
+      "reason": "Understand flow, work in process, and bottlenecks before applying discrete-event simulation and queues"
+    },
+    {
+      "source": "conceptual-m-and-s",
+      "target": "model-vv-and-credibility",
+      "type": "prerequisite",
+      "reason": "Understand conceptual modeling and intended use before applying simulation verification, validation, and credibility"
+    },
+    {
+      "source": "v-and-v",
+      "target": "model-vv-and-credibility",
+      "type": "prerequisite",
+      "reason": "Understand verification, validation, and acceptance before applying simulation verification, validation, and credibility"
+    },
+    {
+      "source": "stakeholders-and-needs",
+      "target": "engineering-trades",
+      "type": "prerequisite",
+      "reason": "Understand stakeholders, needs, and value before applying trade studies, constraints, and sensitivity"
+    },
+    {
+      "source": "metrics-hierarchy",
+      "target": "engineering-trades",
+      "type": "prerequisite",
+      "reason": "Understand measures of effectiveness and performance before applying trade studies, constraints, and sensitivity"
+    },
+    {
+      "source": "engineering-trades",
+      "target": "pareto-and-value",
+      "type": "prerequisite",
+      "reason": "Understand trade studies, constraints, and sensitivity before applying pareto frontiers and multiobjective decisions"
+    },
+    {
+      "source": "probability-and-dependence",
+      "target": "bayesian-value-of-information",
+      "type": "prerequisite",
+      "reason": "Understand probability, distributions, and dependence before applying decision uncertainty and value of information"
+    },
+    {
+      "source": "engineering-trades",
+      "target": "bayesian-value-of-information",
+      "type": "prerequisite",
+      "reason": "Understand trade studies, constraints, and sensitivity before applying decision uncertainty and value of information"
+    },
+    {
+      "source": "metrics-hierarchy",
+      "target": "flow-wip-and-queues",
+      "type": "prerequisite",
+      "reason": "Understand measures of effectiveness and performance before applying flow, work in process, and bottlenecks"
+    },
+    {
+      "source": "conceptual-m-and-s",
+      "target": "stocks-flows-feedback",
+      "type": "prerequisite",
+      "reason": "Understand conceptual modeling and intended use before applying stocks, flows, and feedback loops"
+    },
+    {
+      "source": "good-requirements",
+      "target": "wbs-and-baselines",
+      "type": "prerequisite",
+      "reason": "Understand requirements and acceptance criteria before applying work breakdown structures and technical baselines"
+    },
+    {
+      "source": "system-of-interest",
+      "target": "risk-vs-issue",
+      "type": "prerequisite",
+      "reason": "Understand system of interest and purpose before applying risk, issue, uncertainty, and opportunity"
+    },
+    {
+      "source": "risk-vs-issue",
+      "target": "resilience-adaptability",
+      "type": "prerequisite",
+      "reason": "Understand risk, issue, uncertainty, and opportunity before applying resilience, robustness, and graceful degradation"
+    },
+    {
+      "source": "probability-and-dependence",
+      "target": "resilience-adaptability",
+      "type": "prerequisite",
+      "reason": "Understand probability, distributions, and dependence before applying resilience, robustness, and graceful degradation"
+    },
+    {
+      "source": "boundaries-and-interfaces",
+      "target": "sos-characteristics",
+      "type": "prerequisite",
+      "reason": "Understand boundaries, environment, and interfaces before applying system of systems and constituent independence"
+    },
+    {
+      "source": "stakeholders-and-needs",
+      "target": "authority-and-governance",
+      "type": "prerequisite",
+      "reason": "Understand stakeholders, needs, and value before applying authority, governance, and coordination"
+    },
+    {
+      "source": "sos-characteristics",
+      "target": "authority-and-governance",
+      "type": "prerequisite",
+      "reason": "Understand system of systems and constituent independence before applying authority, governance, and coordination"
+    },
+    {
+      "source": "sos-characteristics",
+      "target": "enterprise-as-system",
+      "type": "prerequisite",
+      "reason": "Understand system of systems and constituent independence before applying the enterprise as a system"
+    },
+    {
+      "source": "stocks-flows-feedback",
+      "target": "enterprise-as-system",
+      "type": "prerequisite",
+      "reason": "Understand stocks, flows, and feedback loops before applying the enterprise as a system"
+    },
+    {
+      "source": "conops-and-scenarios",
+      "target": "mission-engineering",
+      "type": "prerequisite",
+      "reason": "Understand concept of operations and scenarios before applying mission threads and capability analysis"
+    },
+    {
+      "source": "sos-characteristics",
+      "target": "mission-engineering",
+      "type": "prerequisite",
+      "reason": "Understand system of systems and constituent independence before applying mission threads and capability analysis"
+    },
+    {
+      "source": "stocks-flows-feedback",
+      "target": "complexity-emergence",
+      "type": "prerequisite",
+      "reason": "Understand stocks, flows, and feedback loops before applying complexity, emergence, and adaptation"
+    },
+    {
+      "source": "sos-characteristics",
+      "target": "complexity-emergence",
+      "type": "prerequisite",
+      "reason": "Understand system of systems and constituent independence before applying complexity, emergence, and adaptation"
+    },
+    {
+      "source": "traceability-graph",
+      "target": "digital-thread-and-twin",
+      "type": "prerequisite",
+      "reason": "Understand requirements traceability and impact analysis before applying digital thread and digital twin"
+    },
+    {
+      "source": "model-vv-and-credibility",
+      "target": "digital-thread-and-twin",
+      "type": "prerequisite",
+      "reason": "Understand simulation verification, validation, and credibility before applying digital thread and digital twin"
+    },
+    {
+      "source": "wbs-and-baselines",
+      "target": "agile-tailoring",
+      "type": "prerequisite",
+      "reason": "Understand work breakdown structures and technical baselines before applying agile systems engineering and lifecycle tailoring"
+    },
+    {
+      "source": "software-lifecycle-evidence",
+      "target": "agile-tailoring",
+      "type": "prerequisite",
+      "reason": "Understand ci/cd, configuration, and software assurance before applying agile systems engineering and lifecycle tailoring"
+    },
+    {
+      "source": "metrics-hierarchy",
+      "target": "process-improvement",
+      "type": "prerequisite",
+      "reason": "Understand measures of effectiveness and performance before applying process capability and continuous improvement"
+    },
+    {
+      "source": "design-of-experiments",
+      "target": "process-improvement",
+      "type": "prerequisite",
+      "reason": "Understand design of experiments and sensitivity before applying process capability and continuous improvement"
+    },
+    {
+      "source": "process-improvement",
+      "target": "intervention-and-learning",
+      "type": "prerequisite",
+      "reason": "Understand process capability and continuous improvement before applying interventions, policy resistance, and learning loops"
+    },
+    {
+      "source": "complexity-emergence",
+      "target": "intervention-and-learning",
+      "type": "prerequisite",
+      "reason": "Understand complexity, emergence, and adaptation before applying interventions, policy resistance, and learning loops"
+    },
+    {
+      "source": "good-requirements",
+      "target": "mission-engineering",
+      "type": "helpful connection",
+      "reason": "Provides a complementary perspective; not needed to begin mission threads and capability analysis"
+    },
+    {
+      "source": "model-vv-and-credibility",
+      "target": "design-of-experiments",
+      "type": "helpful connection",
+      "reason": "Provides a complementary perspective; not needed to begin design of experiments and sensitivity"
+    },
+    {
+      "source": "risk-vs-issue",
+      "target": "engineering-trades",
+      "type": "helpful connection",
+      "reason": "Provides a complementary perspective; not needed to begin trade studies, constraints, and sensitivity"
+    },
+    {
+      "source": "sos-characteristics",
+      "target": "digital-thread-and-twin",
+      "type": "helpful connection",
+      "reason": "Provides a complementary perspective; not needed to begin digital thread and digital twin"
+    },
+    {
+      "source": "authority-and-governance",
+      "target": "agile-tailoring",
+      "type": "helpful connection",
+      "reason": "Provides a complementary perspective; not needed to begin agile systems engineering and lifecycle tailoring"
+    },
+    {
+      "source": "flow-wip-and-queues",
+      "target": "process-improvement",
+      "type": "helpful connection",
+      "reason": "Provides a complementary perspective; not needed to begin process capability and continuous improvement"
+    },
+    {
+      "source": "intervention-and-learning",
+      "target": "resilience-adaptability",
+      "type": "helpful connection",
+      "reason": "Provides a complementary perspective; not needed to begin resilience, robustness, and graceful degradation"
+    },
+    {
+      "source": "views-and-viewpoints",
+      "target": "digital-thread-and-twin",
+      "type": "helpful connection",
+      "reason": "Provides a complementary perspective; not needed to begin digital thread and digital twin"
+    },
+    {
+      "source": "resilience-adaptability",
+      "target": "mission-engineering",
+      "type": "helpful connection",
+      "reason": "Provides a complementary perspective; not needed to begin mission threads and capability analysis"
+    },
+    {
+      "source": "software-quality-attributes",
+      "target": "resilience-adaptability",
+      "type": "helpful connection",
+      "reason": "Provides a complementary perspective; not needed to begin resilience, robustness, and graceful degradation"
+    },
+    {
+      "source": "bayesian-value-of-information",
+      "target": "mission-engineering",
+      "type": "helpful connection",
+      "reason": "Provides a complementary perspective; not needed to begin mission threads and capability analysis"
+    },
+    {
+      "source": "enterprise-as-system",
+      "target": "authority-and-governance",
+      "type": "helpful connection",
+      "reason": "Provides a complementary perspective; not needed to begin authority, governance, and coordination"
+    }
+  ]
+}

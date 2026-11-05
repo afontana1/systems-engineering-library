@@ -1,0 +1,341 @@
+{
+  "version": "v56",
+  "routes": [
+    {
+      "id": "foundations",
+      "title": "Systems engineering fundamentals",
+      "subtitle": "Make defensible system boundaries, discover stakeholder value, and express obligations before design.",
+      "level": "Start here",
+      "steps": [
+        "system-of-interest",
+        "boundaries-and-interfaces",
+        "stakeholders-and-needs",
+        "conops-and-scenarios",
+        "good-requirements",
+        "metrics-hierarchy",
+        "risk-vs-issue",
+        "wbs-and-baselines"
+      ],
+      "stages": [
+        {
+          "level": "Beginner",
+          "title": "Understand the problem",
+          "goal": "Distinguish the system of interest, its interfaces, and whose needs matter.",
+          "check": "What belongs inside the boundary, and whose outcomes could be omitted?",
+          "practiceId": "book13-lab-1",
+          "steps": [
+            "system-of-interest",
+            "boundaries-and-interfaces",
+            "stakeholders-and-needs"
+          ]
+        },
+        {
+          "level": "Intermediate",
+          "title": "From needs to measurable obligations",
+          "goal": "Turn operational scenarios into verifiable requirements and performance measures.",
+          "check": "Can an engineer test the proposed obligation without interpreting intent?",
+          "practiceId": "book13-lab-4",
+          "steps": [
+            "conops-and-scenarios",
+            "good-requirements",
+            "metrics-hierarchy"
+          ]
+        },
+        {
+          "level": "Advanced",
+          "title": "Control and defend the baseline",
+          "goal": "Recognize uncertainty and establish a versioned technical management baseline.",
+          "check": "Which claim changes when the baseline changes, and who authorizes that change?",
+          "practiceId": "book15-lab-6",
+          "steps": [
+            "risk-vs-issue",
+            "wbs-and-baselines"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "title": "Architecture and model-based engineering",
+      "subtitle": "Move from functional concepts to credible models, interfaces, allocations and traceable digital evidence.",
+      "level": "Core engineering",
+      "steps": [
+        "functional-vs-physical",
+        "views-and-viewpoints",
+        "model-language-method-tool",
+        "allocation-matrix",
+        "interface-control",
+        "object-responsibilities",
+        "traceability-graph",
+        "digital-thread-and-twin",
+        "technical-data-governance-and-lineage"
+      ],
+      "stages": [
+        {
+          "level": "Beginner",
+          "title": "Understand model viewpoints",
+          "goal": "Separate functions from implementation and select views with a defined purpose.",
+          "check": "What question does each view answer, and what does it deliberately omit?",
+          "practiceId": "v16-645-631-h-02",
+          "steps": [
+            "functional-vs-physical",
+            "views-and-viewpoints",
+            "model-language-method-tool"
+          ]
+        },
+        {
+          "level": "Intermediate",
+          "title": "Allocate responsibilities",
+          "goal": "Define allocations, contracts and object behavior that can be checked together.",
+          "check": "Could two different teams interpret the same interface differently?",
+          "practiceId": "v16-645-631-h-06",
+          "steps": [
+            "allocation-matrix",
+            "interface-control",
+            "object-responsibilities"
+          ]
+        },
+        {
+          "level": "Advanced",
+          "title": "Connect the evidence",
+          "goal": "Preserve typed trace links, digital-thread meaning and trustworthy technical data lineage.",
+          "check": "Can a reviewer reproduce which model baseline supported a decision?",
+          "practiceId": "v16-645-631-h-11",
+          "steps": [
+            "traceability-graph",
+            "digital-thread-and-twin",
+            "technical-data-governance-and-lineage"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "evidence",
+      "title": "Verification, test and assurance",
+      "subtitle": "Find out what can be claimed from tests, observations, proofs, hazard controls and limitations.",
+      "level": "Evidence and assurance",
+      "steps": [
+        "human-systems-integration",
+        "v-and-v",
+        "verification-matrix",
+        "measurement-traceability-and-calibration",
+        "statistical-acceptance-and-confidence",
+        "formal-verification-and-temporal-logic",
+        "system-safety-and-hazards",
+        "integration-strategy",
+        "test-fidelity-and-similarity",
+        "environmental-qualification-and-test-levels",
+        "assurance-cases-and-evidence"
+      ],
+      "stages": [
+        {
+          "level": "Beginner",
+          "title": "Understand evidence and human use",
+          "goal": "Distinguish verification from validation while preparing human-centered test objectives.",
+          "check": "What would pass a specification but fail in real operation?",
+          "practiceId": "v17-645-769-h-02",
+          "steps": [
+            "human-systems-integration",
+            "v-and-v",
+            "verification-matrix"
+          ]
+        },
+        {
+          "level": "Intermediate",
+          "title": "Measure and prove carefully",
+          "goal": "Use traceable measurements, statistical acceptance and formal properties while accounting for hazards.",
+          "check": "Which uncertainties or unmodeled behaviors could invalidate acceptance?",
+          "practiceId": "v17-645-769-h-04",
+          "steps": [
+            "measurement-traceability-and-calibration",
+            "statistical-acceptance-and-confidence",
+            "formal-verification-and-temporal-logic",
+            "system-safety-and-hazards"
+          ]
+        },
+        {
+          "level": "Advanced",
+          "title": "Integrate qualification evidence",
+          "goal": "Compare laboratory evidence with operational conditions and build a claim-based decision.",
+          "check": "What evidence would a skeptical independent reviewer still need?",
+          "practiceId": "v17-645-769-h-12",
+          "steps": [
+            "integration-strategy",
+            "test-fidelity-and-similarity",
+            "environmental-qualification-and-test-levels",
+            "assurance-cases-and-evidence"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "modeling",
+      "title": "Simulation, uncertainty and decisions",
+      "subtitle": "Model mechanisms and uncertainty before making comparative design or investment choices.",
+      "level": "Analytical methods",
+      "steps": [
+        "probability-and-dependence",
+        "conceptual-m-and-s",
+        "flow-wip-and-queues",
+        "discrete-event-simulation",
+        "stocks-flows-feedback",
+        "model-vv-and-credibility",
+        "design-of-experiments",
+        "engineering-trades",
+        "pareto-and-value",
+        "bayesian-value-of-information",
+        "robust-optimization-and-margins"
+      ],
+      "stages": [
+        {
+          "level": "Beginner",
+          "title": "Model the decision, not the software",
+          "goal": "Identify uncertain inputs, intended use and the operational queues that shape performance.",
+          "check": "What quantity must the model predict for this decision to be useful?",
+          "practiceId": "v18-645-757-02-lab",
+          "steps": [
+            "probability-and-dependence",
+            "conceptual-m-and-s",
+            "flow-wip-and-queues"
+          ]
+        },
+        {
+          "level": "Intermediate",
+          "title": "Build and challenge simulation evidence",
+          "goal": "Study event flow and feedback, then verify models and design interpretable experiments.",
+          "check": "Do the results change when you perturb plausible assumptions?",
+          "practiceId": "v18-645-757-05-lab",
+          "steps": [
+            "discrete-event-simulation",
+            "stocks-flows-feedback",
+            "model-vv-and-credibility",
+            "design-of-experiments"
+          ]
+        },
+        {
+          "level": "Advanced",
+          "title": "Make defensible choices under uncertainty",
+          "goal": "Compare options using preference models, Pareto frontiers, information value and robust criteria.",
+          "check": "Which alternative remains defensible if priorities or conditions change?",
+          "practiceId": "v18-645-784-11-lab",
+          "steps": [
+            "engineering-trades",
+            "pareto-and-value",
+            "bayesian-value-of-information",
+            "robust-optimization-and-margins"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "delivery",
+      "title": "Software, delivery and sustainment",
+      "subtitle": "Deliver trustworthy software-intensive systems and keep them usable over their full lifecycle.",
+      "level": "Engineering lifecycle",
+      "steps": [
+        "software-quality-attributes",
+        "software-lifecycle-evidence",
+        "reliability-availability-maintainability",
+        "agile-tailoring",
+        "configuration-assurance-and-change-control",
+        "systems-security-engineering",
+        "supply-chain-assurance-and-provenance",
+        "lifecycle-sustainment-economics",
+        "obsolescence-and-technology-refresh"
+      ],
+      "stages": [
+        {
+          "level": "Beginner",
+          "title": "Quality, evidence and reliability",
+          "goal": "Understand quality tradeoffs, deployment evidence and sustained service performance.",
+          "check": "Can a successful release still be operationally unreliable?",
+          "practiceId": "v16-645-764-h-04",
+          "steps": [
+            "software-quality-attributes",
+            "software-lifecycle-evidence",
+            "reliability-availability-maintainability"
+          ]
+        },
+        {
+          "level": "Intermediate",
+          "title": "Control change and threats",
+          "goal": "Adapt delivery processes, trace configuration changes and engineer trust boundaries.",
+          "check": "How would you prove that the tested version is the deployed version?",
+          "practiceId": "v16-645-764-h-10",
+          "steps": [
+            "agile-tailoring",
+            "configuration-assurance-and-change-control",
+            "systems-security-engineering"
+          ]
+        },
+        {
+          "level": "Advanced",
+          "title": "Plan long-term support",
+          "goal": "Address supplier provenance, life-cycle costs and inevitable technology refresh.",
+          "check": "What hidden support dependencies could dominate the acquisition price?",
+          "practiceId": "v17-645-768-h-09",
+          "steps": [
+            "supply-chain-assurance-and-provenance",
+            "lifecycle-sustainment-economics",
+            "obsolescence-and-technology-refresh"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "complex",
+      "title": "Systems of systems and enterprise complexity",
+      "subtitle": "Reason about autonomous actors, governance, feedback, resilience and adaptive intervention.",
+      "level": "Advanced systems",
+      "steps": [
+        "sos-characteristics",
+        "mission-engineering",
+        "authority-and-governance",
+        "enterprise-as-system",
+        "complexity-emergence",
+        "resilience-adaptability",
+        "process-improvement",
+        "intervention-and-learning"
+      ],
+      "stages": [
+        {
+          "level": "Beginner",
+          "title": "Understand autonomous constituents",
+          "goal": "Characterize systems of systems and use mission threads to expose interdependence.",
+          "check": "Which constituent can refuse an integration change, and what then?",
+          "practiceId": "p5v20771lab01",
+          "steps": [
+            "sos-characteristics",
+            "mission-engineering"
+          ]
+        },
+        {
+          "level": "Intermediate",
+          "title": "Make authority and emergence visible",
+          "goal": "Connect governance, enterprise incentives and nonlinear behavior.",
+          "check": "Who can authorize a change, and who bears consequences?",
+          "practiceId": "p5v20753lab05",
+          "steps": [
+            "authority-and-governance",
+            "enterprise-as-system",
+            "complexity-emergence"
+          ]
+        },
+        {
+          "level": "Advanced",
+          "title": "Intervene with evidence and humility",
+          "goal": "Analyze resilience, improvement claims and how interventions create new feedback.",
+          "check": "What observation would cause you to reverse an intervention?",
+          "practiceId": "p5v20742lab11",
+          "steps": [
+            "resilience-adaptability",
+            "process-improvement",
+            "intervention-and-learning"
+          ]
+        }
+      ]
+    }
+  ],
+  "coverage": 56,
+  "model": "Advisory prerequisites; progression reflects reader-confirmed study, not assessment. No new assignments."
+}

@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Objectives, value functions, and multiattribute evaluation · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/P2-text/lessons/645-767-w09.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="objectives-value-functions-and-multiattribute-evaluation">Objectives, value functions, and multiattribute evaluation</h1>
+<p><strong>Companion chapter:</strong> EN.645.767 · Week 09 · Phase 2 edition 1.0 (2026-10-30)<br/>
+<strong>Original study guide:</strong> <a href="../../../C/P2/EN645767.html">System Conceptual Design</a> — consult <strong>Week 9</strong> for the complete assignment, original source readings and mastery rubric.<br/>
+<strong>Concepts:</strong> objectives hierarchy, value function, trade weights, Pareto dominance<br/>
+<strong>Case:</strong> Fictional Autonomous Campus Shuttle, dispatch and transport service; all figures are illustrative, not deployment guidance.</p>
+<h2 id="the-engineering-question">The engineering question</h2>
+<blockquote>
+<p>How do you compare concepts without disguising preferences as mathematics?</p>
+</blockquote>
+<h2 id="conceptual-tutorial">Conceptual tutorial</h2>
+<h3 id="values-are-judgments-not-measurements-alone">Values are judgments, not measurements alone</h3>
+<p>An objectives hierarchy connects top-level mission outcomes to measurable attributes, with nonredundant branches and clear direction of improvement. Transform raw quantities to a common 0–1 value scale only when the anchors represent meaningful preference differences. For cost, a decreasing linear scale may suffice over a narrow justified range; for safety or access, a nonlinear threshold may be more appropriate.</p>
+<p>A weighted additive score <code>V = Σ wᵢ vᵢ(xᵢ)</code> is meaningful under assumptions including appropriate scaling and additive preference independence. Weights are not percentages of attention or raw importance ratings. They represent tradeoff ratios between <em>defined swings</em> from worst to best attribute levels. Use stakeholder-informed swing weighting and publish sensitivity to changing weights.</p>
+<h3 id="screen-dominance-first">Screen dominance first</h3>
+<p>A concept is Pareto dominated if another is no worse on every considered attribute and strictly better on at least one. Dominated options usually need no preference weights to exclude them, assuming no hidden constraints. For remaining alternatives, compare uncertainty bands, different stakeholder perspectives and possible regret. Keep mandatory requirements outside the compensating value model.</p>
+<h2 id="worked-example-follow-the-reasoning">Worked example: follow the reasoning</h2>
+<p><strong>Transparent value calculation.</strong> Two feasible concepts have normalized values for availability and affordability: A <code>(0.9, 0.4)</code>, B <code>(0.7, 0.8)</code>. With weights <code>(0.6, 0.4)</code>, A scores <code>0.70</code> and B scores <code>0.74</code>. B wins narrowly. If availability weight changes to <code>0.7</code> (affordability <code>0.3</code>), A scores <code>0.75</code> and B <code>0.73</code>, reversing the choice. The small difference exposes preference sensitivity; it is not a measurement of engineering certainty.</p>
+<h2 id="retrieval-questions--attempt-these-first">Retrieval questions — attempt these first</h2>
+<ol>
+<li>What does a swing weight compare?</li>
+<li>When is an alternative Pareto dominated?</li>
+<li>Why can raw milliseconds not be added directly to dollars?</li>
+</ol>
+<p>&lt;details&gt;&lt;summary&gt;&lt;strong&gt;Reveal explained answers&lt;/strong&gt;&lt;/summary&gt;</p>
+<ol>
+<li><strong>What does a swing weight compare?</strong> Preference for a defined change from one anchored attribute level to another.</li>
+<li><strong>When is an alternative Pareto dominated?</strong> When another option is at least as good on every considered attribute and better on one.</li>
+<li><strong>Why can raw milliseconds not be added directly to dollars?</strong> Different units and non-equivalent value scales make the sum meaningless without a preference model.</li>
+</ol>
+<p>&lt;/details&gt;</p>
+<h2 id="critical-misconception">Critical misconception</h2>
+<p><strong>Watch for:</strong> Declaring a close weighted score a "scientific winner" omits weighting uncertainty and stakeholder disagreement.</p>
+<h2 id="transfer-exercise--portfolio-artifact">Transfer exercise / portfolio artifact</h2>
+<p><strong>Make:</strong> Create anchored value curves for four attributes, score three feasible concepts, then identify weight ranges that reverse the ranking. Compare your work against the full original <strong>Week 9</strong> assessment, not only this short companion exercise.</p>
+<h2 id="connect-concepts-across-courses">Connect concepts across courses</h2>
+<ul>
+<li><a href="../deep-dives/evidence-chain.html">One mission, three baselines: the decision-and-evidence chain</a></li>
+<li><a href="../deep-dives/trades-and-preferences.html">Trade studies: feasibility, preference and uncertainty are different axes</a></li>
+<li><a href="../deep-dives/experimental-design.html">A small factorial experiment, explained from first principles</a></li>
+</ul>
+<h2 id="continue-with-authoritative-sources">Continue with authoritative sources</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook — systems design, product realization and technical management</a></li>
+<li><a href="https://www.nasa.gov/reference/6-7-technical-assessment/">NASA Technical Assessment — technical reviews and engineering measures</a></li>
+<li><a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook — DOE, measurement and reliability</a></li>
+</ul>
+<hr/>
+<p><a href="645-767-w08.html">Previous chapter</a> · <a href="645-767-w10.html">Next chapter</a></p>
+</main></body></html>

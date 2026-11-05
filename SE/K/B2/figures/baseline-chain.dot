@@ -1,0 +1,1 @@
+digraph G { rankdir=LR; graph [bgcolor="transparent"]; node [shape=box,style="rounded,filled",fillcolor="#edf6f6",color="#43818a"]; Need -> Requirement -> WBS -> Schedule -> Budget -> Evidence; Risk -> Schedule; Change -> WBS; Change -> Evidence; }

@@ -1,0 +1,4 @@
+parameter,value,source_type
+costs,"[3, 4, 2]",synthetic teaching assumption
+values,"[7, 6, 4]",synthetic teaching assumption
+budget,6,synthetic teaching assumption

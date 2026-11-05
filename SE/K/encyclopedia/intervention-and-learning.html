@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Interventions, policy resistance, and learning loops · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/intervention-and-learning.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Interventions, policy resistance, and learning loops</h1>
+<p><strong>Reference entry · Systems of systems, enterprises and complexity · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p>An <strong>intervention</strong> is a deliberate change to a system's rules, structures, incentives, technology, or work practices intended to alter outcomes. A <strong>learning loop</strong> uses evidence about results to revise the underlying hypothesis, not merely fine-tune an implementation plan. <strong>Policy resistance</strong> occurs when feedback and adaptation offset or reverse a policy's intended effect. In human systems, what counts as improvement may be contested, so learning must include whose experiences and costs are observed.</p>
+<h2>Theory: causal identification and adaptive control</h2>
+<p>Represent the intended pathway as <code>intervention → intermediate mechanism → outcome</code>, with confounders and competing feedback drawn explicitly. Before-after correlation is not sufficient when demand, resources, seasonal factors, or reporting policies also change. Stronger designs may use randomized pilots, staggered deployment, interrupted time series, or carefully matched comparison groups. Quantitative results should be paired with mechanism evidence: did the change actually affect the step believed to cause improvement?</p>
+<p>Intervention timing matters. Delays between action and visible effect can cause oscillation when managers repeatedly adjust policy before prior changes have propagated. Agents may adapt strategically, creating second-order effects. <strong>Safe-to-learn</strong> design bounds exposure, provides stop criteria, retains a rollback option, and makes unanticipated harm visible early. For high-consequence hazards, experimentation must respect strict protections rather than treating operational risk as a learning opportunity.</p>
+<h2>Worked example: the metric improves while service worsens</h2>
+<p>A maintenance organization rewards technicians for closed tickets. Closures rise from 90 to 115/week, and leadership declares success. Yet repeat incidents rise from 8 to 30/week and mean time to durable repair increases. The policy changed the incentive to close quickly, not the underlying repair quality. A revised evaluation tracks recurrence-adjusted closure, service downtime, safety exceptions, and burden on customers. The initial causal hypothesis (“reward closures → faster effective repair”) is rejected despite the attractive local productivity number.</p>
+<h2>Engineering use and evidence</h2>
+<p>Write a falsifiable intervention hypothesis, the expected causal mechanism, the affected groups, and measures of intended and unintended outcomes. Set a baseline and credible counterfactual strategy. Define scope, permissions, monitoring, escalation thresholds, and rollback authority before deployment. After each learning cycle, distinguish implementation failure, model failure, and a change in stakeholder objectives; they call for different responses.</p>
+<h2>Limitations and connections</h2>
+<p>Some organizational changes are not reversible; ethical review and legitimacy are therefore substantive engineering considerations. A small pilot may not reveal network effects at scale. Connect interventions to <strong>process improvement</strong>, <strong>complex systems</strong>, <strong>feedback dynamics</strong>, <strong>governance</strong>, and <strong>enterprise engineering</strong>.</p>
+<h2>Technical analysis: separate learning signals from causal impact</h2>
+<p>An engineering intervention is a hypothesis: <em>changing this mechanism should improve this outcome for this population without unacceptable harm elsewhere</em>. Pre/post comparisons alone cannot identify causality if operating demand, training, or reporting simultaneously changes. A comparison group may help, but only under a credible counterfactual assumption.</p>
+<p>For illustration, a dispatch pilot's late-arrival rate falls from <strong>20% to 12%</strong> while a similar untreated route falls from <strong>18% to 15%</strong>. The treated improvement is <strong>8 percentage points</strong> and the comparison improvement is <strong>3</strong>; a simple difference-in-differences estimate of the intervention's incremental reduction is <strong>5 percentage points</strong> (<code>(12−20)−(15−18) = −5</code>). This is not a causal estimate unless the groups would have exhibited similar trends without treatment and no major spillovers or composition changes invalidate that assumption.</p>
+<p><strong>Evidence boundary.</strong> Predeclare the outcome, denominators, exposure window, disbenefits, and stop/rollback rule. Repeating small, reversible experiments can reduce uncertainty but cannot ethically substitute for precautions when consequences are irreversible. Include front-line and excluded stakeholder perspectives, not just dashboards controlled by the intervention owner.</p>
+<h2>Claim-specific sources</h2>
+<p>The following <strong>selected methodological claims</strong> are tied to identifiable sections or abstracts, not merely generic reading lists. Source scope is stated for each link. Numerical scenarios and computations in this article are <strong>original illustrative examples</strong>, not data, calculations, or endorsements supplied by the linked publishers. Links require internet access; the explanation remains readable offline.</p>
+<ul>
+<li><strong>C1:</strong> Technical indicators and reviews should be monitored to assess actual progress and trigger corrective action. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/6-7-technical-assessment/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §6.7 Technical Assessment</a> · <em>direct guidance</em>.</li>
+<li><strong>C2:</strong> Statistical experimental design and population characterization are relevant when evaluating an improvement rather than comparing raw pre/post scores. <strong>Evidence:</strong> <a href="https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods">NIST — NIST/SEMATECH e-Handbook of Statistical Methods (2002, online), Statistical methods, measurement and causal/experimental evaluation context</a> · <em>statistical-method context</em>.</li>
+</ul>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods">NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)</a> — Statistical methods, experiments, reliability, and process assessment.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)</a> — Community-maintained secondary guide; use its references for further research.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="process-improvement.html">Process capability and continuous improvement</a></li>
+<li><a href="stocks-flows-feedback.html">Stocks, flows, and feedback loops</a></li>
+<li><a href="complexity-emergence.html">Complexity, emergence, and adaptation</a></li>
+<li><a href="authority-and-governance.html">Authority, governance, and coordination</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B20/chapters/10.html">Book 20, Chapter 10: Week 10 · Management of Complex Systems · Chapter 10 — Critical Systems Practice: Explore and Produce</a></li>
+<li><a href="../B20/chapters/11.html">Book 20, Chapter 11: Week 11 · Management of Complex Systems · Chapter 11 — Critical Systems Practice: Intervene; dynamic risk, resilience, and safe-to-learn action</a></li>
+<li><a href="../B17/chapters/12.html">Book 17, Chapter 12: Week 12 · Systems Engineering Process Improvement · Book chapter: Final process improvement release and oral defense</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=d601071637e3d">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="intervention-and-learning.md">Editable Markdown</a></nav></main></body></html>

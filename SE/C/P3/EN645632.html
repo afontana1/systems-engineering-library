@@ -1,0 +1,2304 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.632 — Applied Analytics for Model Based Systems Engineering · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../K/_assets/mathjax-svg.js"></script><script defer src="../../K/_assets/prism.js"></script><script defer src="../../K/_assets/prism-python.js"></script><script defer src="../../K/_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../K/_assets/learning-shell-v55.css">
+<script defer src="../../K/_assets/learning-map-v55.js"></script>
+<script defer src="../../K/_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="C/P3/EN645632.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../START-HERE.html">← Course library</a>　 /　 Course curriculum</div></header><aside class="core-concepts-entry" style="max-width:1080px;margin:17px auto -10px;padding:12px 20px;background:#eaf6f4;border:1px solid #b9d8d6;border-radius:10px;font:14px/1.6 system-ui"><strong>Concept reading:</strong> <a href="../../K/T/INDEX.html">Core Concepts</a> · <a href="../../K/T/04-model-semantics.html">Model semantics, viewpoints, and digital traceability</a></aside><main><div class="course-actions"><a href="../../K/B9/OPEN-BOOK.html">Companion book and laboratories</a><a href="../../K/U/OPEN-ENCYCLOPEDIA.html">Explore concepts</a></div><h1 id="en645632--applied-analytics-for-model-based-systems-engineering">EN.645.632 — Applied Analytics for Model Based Systems Engineering</h1>
+<p><strong>Credits:</strong> 3<br/>
+<strong>Phase:</strong> 3 — Quantitative analysis and model-driven decision support<br/>
+<strong>Prerequisite:</strong> EN.645.631 Introduction to Model Based Systems Engineering<br/>
+<strong>Recommended preparation:</strong> EN.645.757 Foundations of Modeling and Simulation, EN.645.784 Decision Science &amp; Analytics, and EN.645.756 Metrics, Modeling, and Simulation, or equivalent experience</p>
+<p><a href="OVERVIEW.html">Back to Phase 3 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+<hr/>
+<h2 id="1-course-purpose">1. Course purpose</h2>
+<p>This course develops the capability to use an authoritative system model as an analytic environment rather than as a collection of diagrams. The learner will plan and tailor an MBSE effort, construct an integrated SysML model using an OOSEM-informed method, query and validate the model, connect quantitative analyses to model elements, represent alternatives and configurations, extend the language for a bounded domain, generate controlled specifications and reports, and assess whether a proposed design is supported by the complete model-based evidence chain.</p>
+<p>The course is intentionally different from EN.645.631. The introductory course establishes modeling foundations, viewpoints, semantic consistency, and basic traceability. This course asks the model to do work: detect defects, answer engineering questions, evaluate alternatives, control variants, propagate change, generate evidence, and support a reviewable recommendation. Diagram appearance is assessed only as part of communication quality; semantic correctness, queryability, traceability, executable analysis, configuration control, and decision usefulness carry the technical weight.</p>
+<h2 id="2-source-scope-and-self-study-adaptation">2. Source scope and self-study adaptation</h2>
+<p>The Fall 2026 JHU syllabus organizes the source course around fourteen topics: course and methodology overview; planning the system-modeling effort; stakeholder-needs analysis; functional architecture and analysis; state-based behavior analysis; logical architecture specification; interface specification and allocation; system-requirements elicitation; parametric analysis and trade studies; physical architecture specification; system configurations and baselines; extending the modeling language; model verification and validation; and reviewing and assessing the design. It also identifies five central capabilities: applying MBSE and SysML, using advanced language and tool features, extending SysML, tailoring OOSEM, and creating an integrated system model. <a href="https://ep.jhu.edu/courses/645632-applied-analytics-for-model-based-systems-engineering/" title="Applied Analytics for Model Based Systems Engineering — Johns Hopkins Engineering for Professionals">JHU-632-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></p>
+<p>The source course uses Cameo Enterprise Architecture 2021x, weekly modeling assignments, discussions, and a single model that is progressively enhanced through four submissions. This self-study adaptation preserves that cumulative project structure and assessment weighting while adding explicit review gates, reproducible external analytics, open-tool alternatives, model-quality criteria, query and validation evidence, configuration rules, and oral defense. <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></p>
+<p>NASA-HDBK-1009A is the main open modeling-process reference. It treats model planning as a technical plan within systems-engineering planning, provides a tool-agnostic metamodel connecting requirements, behavior, structure, parameters, and V&amp;V, and shows how model content can generate systems-engineering products. The handbook uses SysML v1.7 examples, while the course also provides a SysML v2 track because SysML v2 is now a formally adopted OMG specification with textual syntax, formal semantics, API/services, and stronger support for automation. <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-1009" title="NASA-HDBK-1009A — NASA Systems Modeling Handbook for Systems Engineering">NASA-HDBK-1009A</a> <a href="https://www.omg.org/sysml/SysML-2.htm" title="OMG SysML v2 specification overview">OMG-SYSML2</a> <a href="https://github.com/Systems-Modeling/SysML-v2-Release" title="OMG Systems Modeling Community SysML v2 release repository">SYSML2-RELEASE</a></p>
+<h2 id="3-relationship-to-adjacent-courses">3. Relationship to adjacent courses</h2>
+<h3 id="inputs-from-earlier-courses">Inputs from earlier courses</h3>
+<p>The learner should import or reconstruct:</p>
+<ul>
+<li>the EN.645.631 authoritative-model baseline, modeling conventions, viewpoint catalog, requirements/behavior/structure/V&amp;V traces, query results, and change-impact evidence;</li>
+<li>the Phase 2 stakeholder, concept, architecture, interface, requirement, integration, verification, validation, and test baselines;</li>
+<li>the EN.645.757 intended-use, conceptual-model, input-data, experiment, verification, validation, and credibility records;</li>
+<li>the EN.645.784 objective hierarchy, alternative definitions, Pareto and robustness results, and decision record;</li>
+<li>the EN.645.756 controlled measure dictionary, statistical models, uncertainty records, requirement-margin results, and lifecycle recommendation.</li>
+</ul>
+<h3 id="outputs-to-later-work">Outputs to later work</h3>
+<p>This course produces:</p>
+<ul>
+<li>a project-tailored MBSE method and modeling plan;</li>
+<li>an integrated stakeholder, behavior, logical, physical, interface, requirement, parametric, configuration, V&amp;V, and decision model;</li>
+<li>a controlled model-query library, validation suite, report set, and change-impact workflow;</li>
+<li>a model-linked analytic package with executable equations, external notebooks or services, provenance, uncertainty, and result objects;</li>
+<li>a domain extension or library with governance and migration rules;</li>
+<li>a configuration and baseline strategy that distinguishes type, variant, instance, option, state, and lifecycle baseline;</li>
+<li>an evidence-based design assessment suitable for EN.645.758 Advanced Systems Modeling and Simulation and for later digital-engineering work.</li>
+</ul>
+<h2 id="4-prerequisites-and-readiness-diagnostic">4. Prerequisites and readiness diagnostic</h2>
+<p>Complete the following without outside help:</p>
+<ol>
+<li>Explain the difference among an MBSE methodology, a modeling language, a metamodel, a model, a viewpoint, and a tool.</li>
+<li>Construct or interpret requirement, activity, state, sequence, block-definition, internal-block, parametric, and package views.</li>
+<li>Trace a stakeholder need to a requirement, behavior, structural element, interface, and verification case.</li>
+<li>Distinguish logical architecture from physical architecture and explain why the distinction matters during trade studies.</li>
+<li>Identify an orphan requirement, an unallocated behavior, an incompatible interface, and an invalid model relationship.</li>
+<li>Explain satisfy, verify, derive, refine, allocate, specialization, composition, item flow, and dependency relationships.</li>
+<li>Use a modeling tool to create packages, elements, relationships, tables, matrices, and at least one reusable query or filtered view.</li>
+<li>Use a spreadsheet or Python notebook to evaluate a small parametric model and preserve units, assumptions, and source data.</li>
+<li>Explain verification of a model implementation, validation of a model for intended use, and verification/validation of the engineered system.</li>
+<li>Commit a controlled model source, exports, supporting data, and change record to a versioned repository.</li>
+</ol>
+<p>A learner below the standard should revisit EN.645.631 and complete a one- to two-week bridge in SysML semantics, package and viewpoint organization, requirement and allocation traces, logical-versus-physical architecture, tables/matrices/queries, basic Python or spreadsheet analysis, and model configuration management.</p>
+<h2 id="5-course-learning-outcomes">5. Course learning outcomes</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Measurable course learning outcome</th>
+<th>Program competency</th>
+<th style="text-align:center">Level</th>
+<th>Primary evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLO-1</td>
+<td>Tailor an OOSEM-informed MBSE methodology and modeling plan to a defined project, decision set, lifecycle, team, and tool environment</td>
+<td>C1, C3, C10, C12</td>
+<td style="text-align:center">A</td>
+<td>Modeling Purpose and Plan Review</td>
+</tr>
+<tr>
+<td>CLO-2</td>
+<td>Analyze stakeholders, needs, missions, scenarios, outcomes, and measures using one integrated model and explicit source provenance</td>
+<td>C2, C3, C8</td>
+<td style="text-align:center">A</td>
+<td>Stakeholder and Operational Analysis Package</td>
+</tr>
+<tr>
+<td>CLO-3</td>
+<td>Construct and analyze functional and state-based behavior, including allocation, exceptional paths, modes, hazards, and temporal consistency</td>
+<td>C3, C6</td>
+<td style="text-align:center">A</td>
+<td>Behavioral Architecture Review</td>
+</tr>
+<tr>
+<td>CLO-4</td>
+<td>Specify a solution-neutral logical architecture and evaluate responsibilities, interactions, coupling, cohesion, and feasibility</td>
+<td>C3, C9</td>
+<td style="text-align:center">A</td>
+<td>Logical Architecture Baseline</td>
+</tr>
+<tr>
+<td>CLO-5</td>
+<td>Define, allocate, and analyze interfaces and exchanges across logical and physical boundaries, including ownership and change impact</td>
+<td>C3, C5, C6</td>
+<td style="text-align:center">A</td>
+<td>Interface and Allocation Review</td>
+</tr>
+<tr>
+<td>CLO-6</td>
+<td>Elicit, derive, validate, and query requirements using stakeholder, behavior, architecture, measure, risk, and V&amp;V evidence</td>
+<td>C2, C3, C6, C8</td>
+<td style="text-align:center">A</td>
+<td>Requirements Analytics Review</td>
+</tr>
+<tr>
+<td>CLO-7</td>
+<td>Implement model-linked parametric analyses and trade studies with units, provenance, alternatives, uncertainty, sensitivity, and reproducible results</td>
+<td>C7, C8, C9</td>
+<td style="text-align:center">A</td>
+<td>Parametric Trade Study Review</td>
+</tr>
+<tr>
+<td>CLO-8</td>
+<td>Specify physical architectures, variants, configurations, instances, and lifecycle baselines without corrupting common model content</td>
+<td>C3, C5, C10</td>
+<td style="text-align:center">A</td>
+<td>Physical/Configuration Baseline Review</td>
+</tr>
+<tr>
+<td>CLO-9</td>
+<td>Extend the modeling language or project metamodel for a bounded domain using governed stereotypes, libraries, constraints, and migration rules</td>
+<td>C3, C10</td>
+<td style="text-align:center">D/A</td>
+<td>Domain Extension Package</td>
+</tr>
+<tr>
+<td>CLO-10</td>
+<td>Build model queries, tables, matrices, reports, and validation rules that detect defects and generate controlled engineering products</td>
+<td>C2, C3, C6, C10</td>
+<td style="text-align:center">A</td>
+<td>Model Quality Automation Package</td>
+</tr>
+<tr>
+<td>CLO-11</td>
+<td>Verify and validate the model and assess design evidence, limitations, unresolved risk, and readiness for the intended decision</td>
+<td>C3, C6, C7, C9</td>
+<td style="text-align:center">A</td>
+<td>Final Design Assessment</td>
+</tr>
+<tr>
+<td>CLO-12</td>
+<td>Navigate, reproduce, challenge, revise, and defend the integrated model during a live technical review</td>
+<td>C12</td>
+<td style="text-align:center">A</td>
+<td>Final model walkthrough and oral defense</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-essential-questions">6. Essential questions</h2>
+<ul>
+<li>Which engineering questions must the model answer, and which information does each answer require?</li>
+<li>Which content belongs in the authoritative model, which belongs in a linked analytic model, and which remains an external record?</li>
+<li>How should a methodology be tailored without losing semantic consistency or required evidence?</li>
+<li>What is the smallest coherent set of viewpoints, queries, tables, and reports that supports the project?</li>
+<li>Which behavior is solution-neutral, and where have implementation assumptions leaked into the logical model?</li>
+<li>How do state, activity, interaction, structure, requirements, measures, and V&amp;V evidence constrain one another?</li>
+<li>How can model queries reveal coverage gaps, inconsistencies, coupling, change exposure, and review risk?</li>
+<li>When should an equation execute inside the modeling tool, through a linked notebook, or through a separate simulation service?</li>
+<li>How are alternatives and variants represented without duplicating or silently diverging common content?</li>
+<li>What justifies a domain-specific extension, and how will it be governed, validated, and migrated?</li>
+<li>What evidence shows that the model is correct enough and credible enough for the stated review or decision?</li>
+<li>What would cause the design recommendation to change?</li>
+</ul>
+<h2 id="7-running-case-and-controlled-model-baseline">7. Running case and controlled model baseline</h2>
+<h3 id="case--autonomous-campus-mobility-2030-winter-and-accessibility-expansion">Case — Autonomous Campus Mobility 2030 Winter and Accessibility Expansion</h3>
+<p>The program must decide whether and how to expand the Phase 2 campus-mobility pilot to year-round operation across a second campus zone while maintaining accessibility, safety, service, energy, charging, maintenance, and cost objectives. Earlier models and analyses exist, but they were created for different decisions and at different maturities. The learner is the lead model-based systems analyst responsible for turning those artifacts into one governed model and using it to assess the expansion design.</p>
+<p>The starting baseline intentionally contains defects:</p>
+<ul>
+<li>two stakeholder needs have no authoritative source;</li>
+<li>five requirements are duplicated or inconsistent across documents and model packages;</li>
+<li>one accessible-service scenario is not represented in the functional architecture;</li>
+<li>the winter degraded mode has incomplete state transitions;</li>
+<li>charging and dispatch functions are allocated differently in two views;</li>
+<li>three data exchanges lack type, units, rate, or ownership;</li>
+<li>one physical variant inherits an obsolete battery assumption;</li>
+<li>the external analytics notebook uses different parameter names and units than the model;</li>
+<li>the verification matrix contains tests not linked to the current requirement baseline;</li>
+<li>no query or report can show the complete need-to-evidence chain.</li>
+</ul>
+<h3 id="controlled-starter-parameters">Controlled starter parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align:right">Baseline</th>
+<th>Unit</th>
+<th>Initial uncertainty or options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Peak passenger arrivals</td>
+<td style="text-align:right">118</td>
+<td>passengers/hour</td>
+<td>90–150; weather and event dependent</td>
+</tr>
+<tr>
+<td>Accessible-trip fraction</td>
+<td style="text-align:right">0.12</td>
+<td>proportion</td>
+<td>0.08–0.18</td>
+</tr>
+<tr>
+<td>Fleet size</td>
+<td style="text-align:right">10</td>
+<td>vehicles</td>
+<td>8, 10, or 12</td>
+</tr>
+<tr>
+<td>Nominal seats per vehicle</td>
+<td style="text-align:right">8</td>
+<td>passengers</td>
+<td>6 or 8; accessibility configuration dependent</td>
+</tr>
+<tr>
+<td>Usable battery energy</td>
+<td style="text-align:right">84</td>
+<td>kWh</td>
+<td>76–92</td>
+</tr>
+<tr>
+<td>Mild-weather energy intensity</td>
+<td style="text-align:right">1.15</td>
+<td>kWh/km</td>
+<td>1.00–1.35</td>
+</tr>
+<tr>
+<td>Cold-weather multiplier</td>
+<td style="text-align:right">1.28</td>
+<td>ratio</td>
+<td>1.15–1.45</td>
+</tr>
+<tr>
+<td>Charger power</td>
+<td style="text-align:right">100</td>
+<td>kW</td>
+<td>50 or 100</td>
+</tr>
+<tr>
+<td>Charger count</td>
+<td style="text-align:right">4</td>
+<td>chargers</td>
+<td>3–6</td>
+</tr>
+<tr>
+<td>Nominal boarding time</td>
+<td style="text-align:right">24</td>
+<td>seconds/passenger</td>
+<td>conditional by passenger and stop type</td>
+</tr>
+<tr>
+<td>Accessible boarding increment</td>
+<td style="text-align:right">82</td>
+<td>seconds/event</td>
+<td>55–125</td>
+</tr>
+<tr>
+<td>Dispatch-compute latency threshold</td>
+<td style="text-align:right">250</td>
+<td>ms</td>
+<td>requirement candidate</td>
+</tr>
+<tr>
+<td>Target service availability</td>
+<td style="text-align:right">0.97</td>
+<td>proportion</td>
+<td>conditional by operating mode</td>
+</tr>
+<tr>
+<td>Target 95th-percentile wait</td>
+<td style="text-align:right">8</td>
+<td>minutes</td>
+<td>stakeholder threshold candidate</td>
+</tr>
+<tr>
+<td>Annual operating-cost ceiling</td>
+<td style="text-align:right">3.2</td>
+<td>USD millions</td>
+<td>±15% ROM uncertainty</td>
+</tr>
+</tbody>
+</table>
+<p>All values are fictional and exist only for instruction. The learner may change them only through a controlled assumption or decision record.</p>
+<h2 id="8-project-tailored-method-and-model-architecture">8. Project-tailored method and model architecture</h2>
+<p>Use an OOSEM-informed sequence, tailored to the case:</p>
+<ol>
+<li>characterize the problem, stakeholders, mission, scenarios, outcomes, and measures;</li>
+<li>analyze black-box and white-box behavior;</li>
+<li>establish state, mode, and interaction semantics;</li>
+<li>define a solution-neutral logical architecture;</li>
+<li>identify interfaces, exchanges, ownership, and allocations;</li>
+<li>derive and validate requirements against the analysis;</li>
+<li>construct and execute parametric and trade-study models;</li>
+<li>synthesize and compare physical architectures and variants;</li>
+<li>control configurations, baselines, assumptions, and decisions;</li>
+<li>verify model semantics and implementation, validate intended-use adequacy, and assess the design.</li>
+</ol>
+<p>The model repository should separate, but connect:</p>
+<ul>
+<li>project governance and modeling plan;</li>
+<li>source and stakeholder evidence;</li>
+<li>problem/operational analysis;</li>
+<li>logical behavior and architecture;</li>
+<li>physical architecture and variants;</li>
+<li>requirements, measures, risks, and decisions;</li>
+<li>interfaces and allocations;</li>
+<li>parametrics and linked analytics;</li>
+<li>V&amp;V cases, results, and evidence;</li>
+<li>libraries, profiles/extensions, queries, validation, and reports;</li>
+<li>review baselines and generated products.</li>
+</ul>
+<h2 id="9-resource-architecture">9. Resource architecture</h2>
+<h3 id="required-backbone">Required backbone</h3>
+<ul>
+<li><strong>JHU course page and Fall 2026 syllabus</strong> — source scope, sequence, CLOs, Cameo context, cumulative project, and grading structure. <a href="https://ep.jhu.edu/courses/645632-applied-analytics-for-model-based-systems-engineering/" title="Applied Analytics for Model Based Systems Engineering — Johns Hopkins Engineering for Professionals">JHU-632-COURSE</a> <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></li>
+<li><strong>NASA-HDBK-1009A</strong> — Sections 4–9 and relevant appendices on MBSE, model planning, setup, metamodel, model building, and generated products. <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-1009" title="NASA-HDBK-1009A — NASA Systems Modeling Handbook for Systems Engineering">NASA-HDBK-1009A</a></li>
+<li><strong>OMG SysML v2 specification and release repository</strong> — current language semantics, examples, libraries, textual notation, API/services, and reference implementation. <a href="https://www.omg.org/sysml/SysML-2.htm" title="OMG SysML v2 specification overview">OMG-SYSML2</a> <a href="https://github.com/Systems-Modeling/SysML-v2-Release" title="OMG Systems Modeling Community SysML v2 release repository">SYSML2-RELEASE</a> <a href="https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation" title="SysML v2 pilot implementation">SYSML2-PILOT</a></li>
+<li><strong>INCOSE OOSEM Working Group material</strong> — method purpose, tailoring, and integration of object-oriented systems engineering with MBSE. <a href="https://www.incose.org/group/object-oriented-se-method-working-group/" title="INCOSE Object-Oriented Systems Engineering Method Working Group">INCOSE-OOSEM</a></li>
+<li><strong>Course texts:</strong> Delligatti, <em>SysML Distilled</em>; Friedenthal, Moore, and Steiner, <em>A Practical Guide to SysML</em>. Use the editions listed in the source syllabus or later editions where available. <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></li>
+</ul>
+<h3 id="applied-and-advanced-resources">Applied and advanced resources</h3>
+<ul>
+<li>NASA Systems Engineering Handbook for stakeholder, requirement, logical decomposition, design, V&amp;V, technical planning, configuration, and decision context. <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li>NASA Model-Based Systems Analysis and Engineering Phase I report for contemporary model-analysis integration patterns. <a href="https://ntrs.nasa.gov/citations/20250007050" title="NASA Model-Based Systems Analysis and Engineering Phase I report">NASA-MBSAE</a></li>
+<li>Cameo validation and simulation documentation for learners using the commercial tool track. <a href="https://docs.nomagic.com/spaces/CRMP2024xR3/pages/227170843/Validation" title="Cameo model validation documentation">CAMEO-VALIDATION</a> <a href="https://docs.nomagic.com/spaces/CST2024x/pages/136729316/Validation+and+verification" title="Cameo Simulation Toolkit validation and verification">CAMEO-SIM-VV</a></li>
+<li>Eclipse Papyrus and the SysML v2 pilot for open-tool and language-transition practice. <a href="https://projects.eclipse.org/projects/modeling.papyrus" title="Eclipse Papyrus project">PAPYRUS</a> <a href="https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation" title="SysML v2 pilot implementation">SYSML2-PILOT</a></li>
+<li>Python, Jupyter, pandas, SciPy, and Pint for reproducible linked analytics, data interchange, uncertainty calculations, and unit checking. <a href="https://docs.python.org/3/" title="Python 3 documentation">PYTHON</a> <a href="https://jupyter.org/documentation" title="Project Jupyter documentation">JUPYTER</a> <a href="https://pandas.pydata.org/docs/" title="pandas documentation">PANDAS</a> <a href="https://docs.scipy.org/doc/scipy/" title="SciPy documentation">SCIPY</a> <a href="https://pint.readthedocs.io/en/stable/" title="Pint unit-handling documentation">PINT</a></li>
+</ul>
+<h2 id="10-tools-and-working-environment">10. Tools and working environment</h2>
+<h3 id="track-a--cameo--magic-systems-of-systems-architect">Track A — Cameo / Magic Systems of Systems Architect</h3>
+<p>Use Cameo Enterprise Architecture 2021x if matching the source course, or a current compatible Cameo/Magic Systems of Systems Architect installation. Required capabilities include packages, tables, matrices, queries, validation suites, report generation, parametrics or linked simulation, profiles/stereotypes, and variant/configuration representation. Record the exact version and plug-ins.</p>
+<h3 id="track-b--sysml-v2-referencepilot-environment">Track B — SysML v2 reference/pilot environment</h3>
+<p>Use the current OMG Systems Modeling Community release repository and pilot implementation. Combine textual SysML v2, visualization, API queries, model libraries, and Jupyter or Python analytics. Because reference-implementation features evolve, pin the release and record any missing capability or workaround. <a href="https://github.com/Systems-Modeling/SysML-v2-Release" title="OMG Systems Modeling Community SysML v2 release repository">SYSML2-RELEASE</a> <a href="https://github.com/Systems-Modeling/SysML-v2-Pilot-Implementation" title="SysML v2 pilot implementation">SYSML2-PILOT</a></p>
+<h3 id="track-c--open-sysml-v1x-environment">Track C — Open SysML v1.x environment</h3>
+<p>Use Eclipse Papyrus SysML plus Python/Jupyter for advanced queries, validation, parametrics, and reports where the modeling tool lacks a direct equivalent. Maintain an equivalence matrix explaining how each required capability is implemented. <a href="https://projects.eclipse.org/projects/modeling.papyrus" title="Eclipse Papyrus project">PAPYRUS</a></p>
+<h3 id="common-requirements">Common requirements</h3>
+<p>Every track must produce:</p>
+<ul>
+<li>editable model source, not screenshots alone;</li>
+<li>stable identifiers or an explicit identity scheme;</li>
+<li>machine-readable exports or API results for critical elements and relationships;</li>
+<li>reproducible analytic source and environment;</li>
+<li>model query and validation evidence;</li>
+<li>a change history and review baseline;</li>
+<li>generated products that can be traced back to model content.</li>
+</ul>
+<h2 id="11-assessment-and-grading-model">11. Assessment and grading model</h2>
+<p>The weighting preserves the source course’s structure while adapting discussion to self-study critique and defense:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th style="text-align:right">Weight</th>
+<th>Self-study evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Technical critique and method discussion</td>
+<td style="text-align:right">15%</td>
+<td>Weekly position/critique memo, alternative interpretation, optional peer response, and disposition</td>
+</tr>
+<tr>
+<td>Modeling and analytics assignments</td>
+<td style="text-align:right">25%</td>
+<td>Weekly model increments, query outputs, analytic results, validation evidence, and revision</td>
+</tr>
+<tr>
+<td>Cumulative course project</td>
+<td style="text-align:right">60%</td>
+<td>Week 4 progress baseline 5%; Week 7 midterm baseline and walkthrough 15%; Week 10 progress baseline 10%; Week 12 final model, report, walkthrough, and defense 30%</td>
+</tr>
+</tbody>
+</table>
+<p>A course grade of at least 80% is required. Critical mastery criteria are noncompensable.</p>
+<h2 id="12-twelve-week-course-map">12. Twelve-week course map</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Week</th>
+<th>Focus</th>
+<th>Major evidence or review</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td>Methodology overview, model receiving, intended use, and modeling-plan tailoring</td>
+<td>Modeling Purpose and Plan Review</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td>Stakeholder-needs, mission, scenario, outcome, and measure analysis</td>
+<td>Stakeholder/Operational Analysis Package</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td>Functional architecture and black-box/white-box analysis</td>
+<td>Functional Architecture Baseline</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td>State-based behavior, modes, exceptions, and temporal consistency</td>
+<td>Project Progress Submission 1 and Behavioral Architecture Review</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td>Logical architecture specification and responsibility allocation</td>
+<td>Logical Architecture Baseline</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td>Interface specification, exchanges, allocation, and change exposure</td>
+<td>Interface and Allocation Review</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td>System-requirements elicitation, derivation, quality, coverage, and V&amp;V traces</td>
+<td>Midterm Integrated Model Submission and Walkthrough</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td>Parametric analysis foundations, units, equations, execution, and analytic linkage</td>
+<td>Executable Parametric Baseline</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td>Trade-space exploration, alternatives, uncertainty, sensitivity, and recommendation</td>
+<td>Parametric Trade Study Review</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td>Physical architecture, variants, configurations, instances, and baselines</td>
+<td>Project Progress Submission 3 and Physical/Configuration Review</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td>Language extension, libraries, queries, validation rules, and generated reports</td>
+<td>Model Quality and Domain Extension Review</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td>Model V&amp;V, design assessment, live challenge, final walkthrough, and oral defense</td>
+<td>Final Integrated Model and Design Assessment</td>
+</tr>
+</tbody>
+</table>
+<h2 id="13-major-assignments-and-review-products">13. Major assignments and review products</h2>
+<h3 id="a-modeling-purpose-and-plan-review">A. Modeling Purpose and Plan Review</h3>
+<p>Define decision owners, engineering questions, lifecycle scope, model boundary, method tailoring, viewpoints, data and analysis interfaces, roles, tools, conventions, access, configuration, validation, reports, and review schedule.</p>
+<h3 id="b-behavioral-architecture-review">B. Behavioral Architecture Review</h3>
+<p>Demonstrate traceable mission/scenario behavior, functional decomposition, state/mode semantics, exceptional paths, measures, allocations, and unresolved behavioral risk. This is the first cumulative project submission.</p>
+<h3 id="c-midterm-integrated-model-submission">C. Midterm Integrated Model Submission</h3>
+<p>Submit one model containing stakeholder, operational, functional, state, logical, interface, requirement, V&amp;V, risk, decision, and configuration content. Include query and validation results plus a recorded walkthrough of no more than 15 minutes, matching the source-course presentation expectation.</p>
+<h3 id="d-parametric-trade-study-review">D. Parametric Trade Study Review</h3>
+<p>Execute a model-linked analysis comparing at least three physical or operational alternatives. Preserve units, equations, input provenance, uncertainty, sensitivity, model version, result objects, decision criteria, and recommendation conditions.</p>
+<h3 id="e-physicalconfiguration-baseline-review">E. Physical/Configuration Baseline Review</h3>
+<p>Demonstrate common architecture, variants, option sets, instances, operating modes, lifecycle baselines, applicability rules, inherited properties, and configuration-specific requirements and V&amp;V evidence without uncontrolled duplication.</p>
+<h3 id="f-model-quality-and-domain-extension-review">F. Model Quality and Domain Extension Review</h3>
+<p>Show a justified domain extension or reusable library, model queries, matrices/tables, validation rules, report generation, defect disposition, governance, and migration/retirement rules.</p>
+<h3 id="g-final-integrated-model-and-design-assessment">G. Final Integrated Model and Design Assessment</h3>
+<p>Submit the controlled model, generated products, linked analytic source/results, query and validation library, extension package, review record, final design assessment, live challenge response, recorded walkthrough, and oral defense.</p>
+<h2 id="14-common-analytic-rubric">14. Common analytic rubric</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Semantic and methodological correctness</td>
+<td style="text-align:right">25%</td>
+<td>Elements, relationships, abstractions, and method steps are valid and project-tailored.</td>
+</tr>
+<tr>
+<td>Integration and traceability</td>
+<td style="text-align:right">25%</td>
+<td>Stakeholder, behavior, architecture, requirements, interfaces, parameters, V&amp;V, risk, and decisions form a coherent graph.</td>
+</tr>
+<tr>
+<td>Analytic usefulness</td>
+<td style="text-align:right">20%</td>
+<td>Queries, executable analyses, alternatives, uncertainty, and change-impact results answer stated engineering questions.</td>
+</tr>
+<tr>
+<td>Model quality and governance</td>
+<td style="text-align:right">20%</td>
+<td>Organization, identity, configuration, validation, libraries, baselines, provenance, and generated products are controlled.</td>
+</tr>
+<tr>
+<td>Communication and defense</td>
+<td style="text-align:right">10%</td>
+<td>Views, tables, reports, walkthrough, limitations, and responses to challenge are clear and technically honest.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-critical-mastery-criteria">15. Critical mastery criteria</h2>
+<p>The course cannot be passed if any of the following remains unresolved:</p>
+<ul>
+<li>no controlled model source or inability to reopen and navigate the final baseline;</li>
+<li>critical stakeholder need, requirement, behavior, interface, or verification case is orphaned without an accepted disposition;</li>
+<li>logical and physical architecture are conflated in a way that invalidates alternative analysis;</li>
+<li>a consequential parametric result cannot be reproduced from controlled equations, inputs, units, and versioned source;</li>
+<li>variants or baselines contain silent inconsistent duplicates of common content;</li>
+<li>model validation is limited to visual inspection or “the tool accepted it”;</li>
+<li>generated specifications or reports disagree with the authoritative model;</li>
+<li>the domain extension changes semantics without governance, validation, or migration rules;</li>
+<li>the final recommendation exceeds the model’s intended use or hides unresolved uncertainty and risk;</li>
+<li>the learner cannot explain and revise the model during the oral defense.</li>
+</ul>
+<h2 id="16-final-capstone-and-oral-defense">16. Final capstone and oral defense</h2>
+<p>The final capstone answers:</p>
+<blockquote>
+<p>Which winter and accessibility expansion architecture should the campus mobility program baseline, what model-based evidence supports it, and under what conditions should the decision be revisited?</p>
+</blockquote>
+<p>The final package must include:</p>
+<ol>
+<li>modeling plan and tailored method;</li>
+<li>integrated authoritative model;</li>
+<li>stakeholder, mission, scenario, outcome, and measure views;</li>
+<li>functional, state, interaction, logical, interface, and physical architecture;</li>
+<li>requirement, risk, decision, assumption, and V&amp;V traces;</li>
+<li>executable parametric and trade-space analysis with uncertainty and sensitivity;</li>
+<li>variant, configuration, instance, and baseline model;</li>
+<li>query library, validation suite, coverage matrices, and change-impact results;</li>
+<li>domain extension or reusable library and governance note;</li>
+<li>generated specification/report set with provenance;</li>
+<li>model V&amp;V and design-assessment report;</li>
+<li>review findings, revisions, residual risk, and decision conditions;</li>
+<li>a 15-minute maximum recorded model walkthrough;</li>
+<li>a live or recorded oral defense.</li>
+</ol>
+<h3 id="oral-defense-prompts">Oral-defense prompts</h3>
+<p>The examiner should select at least eight:</p>
+<ol>
+<li>Show the trace from one stakeholder concern to decision evidence.</li>
+<li>Demonstrate that a selected behavior is solution-neutral or explain where it is not.</li>
+<li>Change one operational assumption and show the impacted elements and analyses.</li>
+<li>Explain why one interface belongs at the chosen logical or physical boundary.</li>
+<li>Reproduce one parametric result and demonstrate unit consistency.</li>
+<li>Show how an alternative or variant differs without duplicating the common baseline.</li>
+<li>Run a model query that reveals a nontrivial quality or coverage issue.</li>
+<li>Explain one custom validation rule and the defect it prevents.</li>
+<li>Defend the domain extension and identify how it could be retired or migrated.</li>
+<li>Identify the weakest validation evidence in the model.</li>
+<li>Explain what generated product would change after a selected model edit.</li>
+<li>State what new evidence would reverse the final recommendation.</li>
+</ol>
+<h2 id="17-portfolio-and-completion-requirements">17. Portfolio and completion requirements</h2>
+<p>Retain:</p>
+<ul>
+<li>native model files and machine-readable exports;</li>
+<li>exact tool versions, plug-ins, profiles, libraries, and environment records;</li>
+<li>modeling plan, method tailoring, viewpoint catalog, and conventions;</li>
+<li>queries, validation suites, matrices, tables, reports, and generation instructions;</li>
+<li>external analytic code, data, environments, tests, and result objects;</li>
+<li>requirement, interface, measure, assumption, risk, decision, V&amp;V, and configuration registers;</li>
+<li>four project baselines and recorded walkthroughs;</li>
+<li>review findings, revision history, oral-defense record, and final decision assessment.</li>
+</ul>
+<p>The course is complete when the learner earns at least 80%, passes every critical mastery criterion, closes all critical review findings, reproduces the required analytic result, and completes the final walkthrough and oral defense.</p>
+<h2 id="18-course-maintenance-record">18. Course maintenance record</h2>
+<p>At least annually:</p>
+<ul>
+<li>verify the current JHU course description and public syllabus;</li>
+<li>review SysML v2 specification, API/services, pilot/release, and tool maturity;</li>
+<li>verify NASA-HDBK-1009A status and any SysML v2 update;</li>
+<li>refresh Cameo, Papyrus, Python, and notebook instructions;</li>
+<li>test all model queries, validation rules, report generation, and analytic notebooks;</li>
+<li>review whether source-course textbooks or editions have changed;</li>
+<li>record all material changes in the repository manifest and course change log.</li>
+</ul>
+<hr/>
+<h2 id="week-1--receive-the-baseline-define-intended-use-and-tailor-the-mbse-method-and-modeling-plan">Week 1 — Receive the baseline, define intended use, and tailor the MBSE method and modeling plan</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 9):</strong> <a href="../../K/B9/chapters/01-receive-the-baseline-define-intended-use-and-tailor-the-mbse-method-.html">Chapter 1 — Receive the baseline, define intended use, and tailor the MBSE method and modeling plan</a> · <a href="../../K/B9/labs/lab-01-receive-the-baseline-define-intended-use-and-tailor-the-mbse-method-.html">Hypothetical Lab 1</a> · <a href="../../K/P3-text/lessons/645-632-w01.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C1, C3, C10, C12</p>
+<h3 id="professional-context-and-essential-question">Professional context and essential question</h3>
+<p>The program has several models and documents, but no agreed authoritative baseline or modeling purpose. <strong>Essential question:</strong> What model-based work is necessary for this decision, and how will the project know that the model is adequate and controlled?</p>
+<h3 id="weekly-learning-outcomes">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>inventory and assess inherited model, document, data, analysis, and configuration assets</li>
+<li>define decision owners, engineering questions, intended uses, lifecycle scope, and model boundaries</li>
+<li>tailor an OOSEM-informed method to the project rather than following a diagram checklist</li>
+<li>construct a modeling plan covering products, viewpoints, roles, tools, conventions, access, configuration, validation, and reviews</li>
+<li>define model-quality measures, query needs, and acceptance criteria</li>
+<li>issue a controlled model-receiving and modeling-purpose decision</li>
+</ul>
+<h3 id="retrieval-and-readiness-check">Retrieval and readiness check</h3>
+<ol>
+<li>What makes a model authoritative?</li>
+<li>How is a methodology different from a modeling language?</li>
+<li>What belongs in a modeling plan?</li>
+<li>Why must intended use be defined before model V&amp;V?</li>
+</ol>
+<h3 id="required-study">Required study</h3>
+<ul>
+<li><strong>JHU Fall 2026 syllabus — course topics, CLOs, software, workload, and cumulative project structure.</strong> <strong>Purpose:</strong> Anchor the self-study work to the source course. <strong>Guiding question:</strong> Which advanced features and submissions must the course reproduce? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></li>
+<li><strong>NASA-HDBK-1009A Sections 4–6 — MBSE overview, model planning, and model setup.</strong> <strong>Purpose:</strong> Establish the official planning and organization backbone. <strong>Guiding question:</strong> Which model products, conventions, roles, and management decisions belong in the plan? <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-1009" title="NASA-HDBK-1009A — NASA Systems Modeling Handbook for Systems Engineering">NASA-HDBK-1009A</a></li>
+<li><strong>INCOSE OOSEM Working Group overview.</strong> <strong>Purpose:</strong> Understand the purpose and tailoring of an object-oriented systems-engineering method. <strong>Guiding question:</strong> Which method activities are required for this project, and which can be reduced or reordered? <a href="https://www.incose.org/group/object-oriented-se-method-working-group/" title="INCOSE Object-Oriented Systems Engineering Method Working Group">INCOSE-OOSEM</a></li>
+<li><strong>OMG SysML v2 overview or the SysML v1.7 material matching the selected track.</strong> <strong>Purpose:</strong> Confirm language scope and version-specific capability. <strong>Guiding question:</strong> Which semantics and automation features affect the project architecture? <a href="https://www.omg.org/sysml/SysML-2.htm" title="OMG SysML v2 specification overview">OMG-SYSML2</a> <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-1009" title="NASA-HDBK-1009A — NASA Systems Modeling Handbook for Systems Engineering">NASA-HDBK-1009A</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes">Instructor-style lesson notes</h3>
+<p>Begin with a receiving audit, not immediate remodeling. Record source, owner, version, purpose, status, tool, schema, and known defects for every inherited asset. An attractive model with unknown provenance is not an authoritative baseline.</p>
+<p>Intended use is narrower than a project slogan. Define the review or decision, owner, alternatives, claims, consequence of error, required confidence, time horizon, and users. One model may support multiple uses, but each use needs its own adequacy statement.</p>
+<p>Tailor the method by mapping engineering questions to model content, analyses, viewpoints, queries, products, and reviews. Do not remove a method step simply because the tool makes it inconvenient.</p>
+<p>The modeling plan is part of technical planning. Include information architecture, package structure, identity and naming, element ownership, access, branch/baseline strategy, libraries, profiles, data exchange, validation, report generation, and retirement.</p>
+<p>Define measurable quality indicators such as orphan count, unresolved validation severity, trace coverage, duplicated semantic content, stale generated products, unowned interfaces, and failed analytic synchronization. Metrics do not replace judgment, but they make review repeatable.</p>
+<h3 id="worked-example">Worked example</h3>
+<p>The inherited shuttle model contains 2,418 elements in three top-level packages. A receiving query finds 46 requirements without verification links, 17 behaviors with no owner, two physical variants using different units for usable energy, and a generated interface document that is three revisions behind. The learner narrows the intended use to selecting a winter/accessibility expansion baseline, declares the requirements and configuration packages authoritative after correction, treats legacy diagrams as views rather than sources, and defines five mandatory queries and three review baselines.</p>
+<h3 id="guided-practice">Guided practice</h3>
+<ol>
+<li>Create an asset and provenance inventory.</li>
+<li>Write five engineering questions and identify the required model elements, queries, analyses, and products for each.</li>
+<li>Tailor the OOSEM-informed method and create a method-to-artifact matrix.</li>
+<li>Draft the modeling plan and conduct the Modeling Purpose and Plan Review.</li>
+</ol>
+<h3 id="independent-exercises">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify 25 items as source evidence, authoritative model content, derived view, analysis input, analysis output, review record, or configuration artifact.</li>
+<li><strong>Application:</strong> Run or manually perform a receiving audit for orphan, duplicate, stale, inconsistent, and unowned content.</li>
+<li><strong>Analysis:</strong> Compare two possible model architectures and explain the consequences for reuse, access, configuration, querying, and report generation.</li>
+<li><strong>Synthesis:</strong> Issue the tailored modeling plan, viewpoint catalog, query plan, validation plan, and baseline decision.</li>
+<li><strong>Stretch:</strong> Implement a script or API call that inventories element counts, relationship counts, owners, stereotypes/types, and modified dates by package.</li>
+</ul>
+<h3 id="weekly-deliverable">Weekly deliverable</h3>
+<p>Submit the asset/provenance inventory, intended-use and decision statement, engineering-question matrix, tailored method, model-content and viewpoint plan, package/identity conventions, roles and access plan, configuration/baseline strategy, tool/equivalence matrix, query and validation plan, review schedule, receiving-defect register, and approved Modeling Purpose and Plan Review record.</p>
+<h3 id="analytic-rubric">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purpose and scope</td>
+<td style="text-align:right">25%</td>
+<td>Decision, users, intended uses, boundaries, consequence, and adequacy needs are explicit.</td>
+</tr>
+<tr>
+<td>Method tailoring</td>
+<td style="text-align:right">25%</td>
+<td>Activities and artifacts are justified by engineering questions and lifecycle needs.</td>
+</tr>
+<tr>
+<td>Model governance</td>
+<td style="text-align:right">30%</td>
+<td>Identity, ownership, organization, access, configuration, validation, reports, and reviews are executable.</td>
+</tr>
+<tr>
+<td>Receiving assessment</td>
+<td style="text-align:right">20%</td>
+<td>Inherited assets and defects are evidence-based and dispositioned.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures">Critical failures</h3>
+<ul>
+<li>The modeling plan is a list of diagrams rather than a plan for engineering information and decisions.</li>
+<li>No authoritative source or identity scheme is established.</li>
+<li>Tool choice is treated as methodology.</li>
+<li>Critical inherited defects are ignored to preserve schedule.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is intended use?</strong><br/>
+<em>Answer guidance:</em> The bounded decision, claim, review, or activity for which a model and its evidence are judged adequate.</li>
+<li><strong>What is a derived view?</strong><br/>
+<em>Answer guidance:</em> A presentation generated from authoritative model content; it should not become an uncontrolled competing source.</li>
+<li><strong>Why tailor OOSEM?</strong><br/>
+<em>Answer guidance:</em> Projects differ in decisions, lifecycle, risk, organization, and available evidence; tailoring preserves required reasoning while avoiding ritual work.</li>
+<li><strong>What is a model baseline?</strong><br/>
+<em>Answer guidance:</em> An identified, controlled configuration of model content and associated artifacts approved for a stated purpose.</li>
+<li><strong>Why define queries early?</strong><br/>
+<em>Answer guidance:</em> They clarify what information and relationships the model must contain and make quality/decision needs testable.</li>
+</ol>
+<h3 id="revision-and-mastery-gate">Revision and mastery gate</h3>
+<p>The learner must identify an authoritative model boundary, connect each engineering question to required content and analysis, define an executable governance and quality plan, and close all critical receiving defects or document an approved containment before model development proceeds.</p>
+<h3 id="suggested-workload">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reading and readiness</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>Receiving audit and queries</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Method and plan development</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>Review and revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>10.5</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update">Configuration and portfolio update</h3>
+<p>Create the course repository, preserve inherited assets read-only, establish the first controlled baseline, and commit the modeling plan, inventories, query outputs, review record, and change log.</p>
+<hr/>
+<h2 id="week-2--analyze-stakeholders-mission-scenarios-outcomes-and-measures-in-the-authoritative-model">Week 2 — Analyze stakeholders, mission, scenarios, outcomes, and measures in the authoritative model</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 9):</strong> <a href="../../K/B9/chapters/02-analyze-stakeholders-mission-scenarios-outcomes-and-measures-in-the-.html">Chapter 2 — Analyze stakeholders, mission, scenarios, outcomes, and measures in the authoritative model</a> · <a href="../../K/B9/labs/lab-02-analyze-stakeholders-mission-scenarios-outcomes-and-measures-in-the-.html">Hypothetical Lab 2</a> · <a href="../../K/P3-text/lessons/645-632-w02.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C2, C3, C8, C12</p>
+<h3 id="professional-context-and-essential-question-2">Professional context and essential question</h3>
+<p>Stakeholder statements arrive with different authority, vocabulary, time horizons, and embedded solutions. <strong>Essential question:</strong> What problem, outcomes, operations, and measures must the system model represent before architecture analysis begins?</p>
+<h3 id="weekly-learning-outcomes-2">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>identify stakeholders, roles, concerns, authorities, sources, and conflicts</li>
+<li>separate needs and desired outcomes from proposed solutions and inherited assumptions</li>
+<li>model mission, context, operational scenarios, off-nominal conditions, and external systems</li>
+<li>connect stakeholder outcomes to MOEs, thresholds, measures, data sources, and decision criteria</li>
+<li>query the model for missing source provenance, conflicting concerns, uncovered scenarios, and unmeasured outcomes</li>
+<li>baseline a reviewable stakeholder and operational analysis</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-2">Retrieval and readiness check</h3>
+<ol>
+<li>What is the difference between a stakeholder concern and a requirement?</li>
+<li>What is an operational scenario?</li>
+<li>How does an MOE differ from an MOP?</li>
+<li>Why preserve source authority and date?</li>
+</ol>
+<h3 id="required-study-2">Required study</h3>
+<ul>
+<li><strong>NASA-HDBK-1009A Sections 7–9 and ConOps appendix material for stakeholder identification, expectations, ConOps, and MOE products.</strong> <strong>Purpose:</strong> Use the handbook metamodel and generated-product approach. <strong>Guiding question:</strong> Which elements and relationships must exist to generate stakeholder and ConOps products? <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-1009" title="NASA-HDBK-1009A — NASA Systems Modeling Handbook for Systems Engineering">NASA-HDBK-1009A</a></li>
+<li><strong>NASA Systems Engineering Handbook — stakeholder expectations and system design processes.</strong> <strong>Purpose:</strong> Connect stakeholder analysis to technical requirements and later architecture. <strong>Guiding question:</strong> How are conflicts, constraints, and measures resolved and baselined? <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li><strong>Course texts — use-case, requirement, context, package, and relationship sections.</strong> <strong>Purpose:</strong> Apply precise SysML semantics. <strong>Guiding question:</strong> Which element should carry source, rationale, and outcome information? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-2">Instructor-style lesson notes</h3>
+<p>Model stakeholders as accountable roles or organizations, not merely names on a diagram. Record concern, authority, source, date, priority, conflict, and decision right.</p>
+<p>Needs should state a desired outcome or capability without embedding an unjustified implementation. Preserve the original statement and create an analyzed interpretation rather than silently rewriting source evidence.</p>
+<p>Operational scenarios provide the bridge from concerns to behavior. Include nominal, peak, degraded, emergency, maintenance, accessibility, cybersecurity, and transition conditions as appropriate.</p>
+<p>Measures need operational definitions. Link each outcome to a measure, unit, population, environment, statistic, threshold or target, data source, uncertainty, and decision use. A measure name alone is not analytic content.</p>
+<p>Use queries to find needs without sources, concerns without resolution, scenarios without actors/outcomes, and outcomes without measures. The query result becomes review evidence and a quality trend.</p>
+<h3 id="worked-example-2">Worked example</h3>
+<p>A stakeholder statement says, ‘Use larger autonomous vehicles so wheelchair users never wait longer.’ The learner preserves the source, extracts the outcome ‘provide equitable accessible wait performance,’ models wheelchair users, dispatch operations, stop infrastructure, and weather as contextual factors, defines 95th-percentile accessible wait time by zone and operating mode as the MOE, and records larger vehicles as only one candidate solution. A query reveals that the winter-emergency scenario has no accessibility outcome or measure, forcing a correction before functional analysis.</p>
+<h3 id="guided-practice-2">Guided practice</h3>
+<ol>
+<li>Build the stakeholder/role/concern/source model.</li>
+<li>Create a context and mission model with external systems and exchanges.</li>
+<li>Model at least six operational scenarios, including two degraded or emergency cases.</li>
+<li>Create the outcome/measure dictionary and run coverage/conflict queries.</li>
+</ol>
+<h3 id="independent-exercises-2">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Rewrite ten solution-biased statements as source-preserving needs and candidate solutions.</li>
+<li><strong>Application:</strong> Model stakeholders, concerns, needs, mission, context, scenarios, outcomes, and measures for the expansion case.</li>
+<li><strong>Analysis:</strong> Identify conflicts among service, accessibility, safety, cost, privacy, and maintenance concerns and model their decision ownership.</li>
+<li><strong>Synthesis:</strong> Generate a stakeholder-needs and ConOps review package directly from model content.</li>
+<li><strong>Stretch:</strong> Create a query or dashboard that reports source provenance, scenario coverage, outcome-to-measure coverage, and unresolved conflicts by stakeholder authority.</li>
+</ul>
+<h3 id="weekly-deliverable-2">Weekly deliverable</h3>
+<p>Submit the stakeholder and authority model, concern/source register, analyzed needs, context and mission views, operational-scenario set, outcome/MOE dictionary, conflict and decision records, provenance and coverage query outputs, generated stakeholder/ConOps product, review findings, and revised baseline.</p>
+<h3 id="analytic-rubric-2">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source and stakeholder rigor</td>
+<td style="text-align:right">25%</td>
+<td>Authority, provenance, concerns, conflicts, and roles are explicit.</td>
+</tr>
+<tr>
+<td>Operational completeness</td>
+<td style="text-align:right">30%</td>
+<td>Context and scenarios cover nominal, degraded, accessibility, and transition conditions.</td>
+</tr>
+<tr>
+<td>Outcome and measure quality</td>
+<td style="text-align:right">25%</td>
+<td>Outcomes are solution-neutral and linked to operationally defined measures.</td>
+</tr>
+<tr>
+<td>Query and generated evidence</td>
+<td style="text-align:right">20%</td>
+<td>Coverage and conflict results are reproducible from model content.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-2">Critical failures</h3>
+<ul>
+<li>Source statements are overwritten with analyst interpretations.</li>
+<li>A proposed solution is modeled as a stakeholder need without rationale.</li>
+<li>Critical off-nominal or accessibility scenarios are omitted.</li>
+<li>Outcomes have no measurable definition or data source.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-2">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is source provenance?</strong><br/>
+<em>Answer guidance:</em> The identity, authority, date, version, and context of the evidence from which model content is derived.</li>
+<li><strong>Why preserve a source statement?</strong><br/>
+<em>Answer guidance:</em> It allows review of interpretation and prevents the model from silently changing stakeholder intent.</li>
+<li><strong>What makes an MOE operational?</strong><br/>
+<em>Answer guidance:</em> Defined unit, population, environment, statistic, time basis, threshold/target, data source, and decision use.</li>
+<li><strong>What is a scenario coverage gap?</strong><br/>
+<em>Answer guidance:</em> A required mission, stakeholder, mode, or condition has no represented operational sequence and outcome.</li>
+<li><strong>Why model conflicts?</strong><br/>
+<em>Answer guidance:</em> Conflicts require explicit decision authority and cannot be resolved by hiding one stakeholder's concern.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-2">Revision and mastery gate</h3>
+<p>Every critical stakeholder concern must have source and authority, every selected outcome must have an operational measure, and all required nominal/degraded/accessibility scenarios must be represented and queryable. Critical conflicts require an owner and disposition path.</p>
+<h3 id="suggested-workload-2">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and source review</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>Stakeholder/context modeling</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Scenario and measure modeling</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>Queries, review, and revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>10.5</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-2">Configuration and portfolio update</h3>
+<p>Commit source evidence separately from analyzed content, preserve stable IDs, export the measure dictionary, and baseline the stakeholder/operational package with query results and review dispositions.</p>
+<hr/>
+<h2 id="week-3--develop-and-analyze-the-functional-architecture-from-black-box-behavior-to-allocated-white-box-functions">Week 3 — Develop and analyze the functional architecture from black-box behavior to allocated white-box functions</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 9):</strong> <a href="../../K/B9/chapters/03-develop-and-analyze-the-functional-architecture-from-black-box-behav.html">Chapter 3 — Develop and analyze the functional architecture from black-box behavior to allocated white-box functions</a> · <a href="../../K/B9/labs/lab-03-develop-and-analyze-the-functional-architecture-from-black-box-behav.html">Hypothetical Lab 3</a> · <a href="../../K/P3-text/lessons/645-632-w03.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C6, C9</p>
+<h3 id="professional-context-and-essential-question-3">Professional context and essential question</h3>
+<p>The system must transform inputs into outcomes across many scenarios before a physical solution is chosen. <strong>Essential question:</strong> What must the system do, in what sequence and conditions, and where are the functional gaps, overloads, and couplings?</p>
+<h3 id="weekly-learning-outcomes-3">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>construct black-box functional behavior from scenarios and outcomes</li>
+<li>decompose functions using clear transformation, control, and enabling semantics</li>
+<li>model inputs, outputs, controls, resources, performance properties, and exceptions</li>
+<li>connect scenario behavior, functions, measures, requirements candidates, and hazards</li>
+<li>allocate white-box functions to candidate logical performers without prematurely selecting physical components</li>
+<li>use model queries and matrices to detect missing functions, duplicate responsibilities, and overloaded performers</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-3">Retrieval and readiness check</h3>
+<ol>
+<li>What is black-box behavior?</li>
+<li>What makes a function solution-neutral?</li>
+<li>What is the difference between decomposition and sequencing?</li>
+<li>Why are enabling functions part of the architecture?</li>
+</ol>
+<h3 id="required-study-3">Required study</h3>
+<ul>
+<li><strong>Course texts — activity, use-case, sequence, allocation, and block sections.</strong> <strong>Purpose:</strong> Apply behavior and allocation semantics correctly. <strong>Guiding question:</strong> Which relationships express decomposition, flow, call, allocation, and ownership? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></li>
+<li><strong>NASA Systems Engineering Handbook — logical decomposition and functional analysis.</strong> <strong>Purpose:</strong> Connect operational scenarios to logical behavior and requirements. <strong>Guiding question:</strong> How do functions, performance, interfaces, and allocations evolve iteratively? <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li><strong>NASA-HDBK-1009A metamodel and model-building sections.</strong> <strong>Purpose:</strong> Maintain cross-pillar relationships among behavior, requirements, structure, and parameters. <strong>Guiding question:</strong> Which behavior elements must connect to requirements and V&amp;V? <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-1009" title="NASA-HDBK-1009A — NASA Systems Modeling Handbook for Systems Engineering">NASA-HDBK-1009A</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-3">Instructor-style lesson notes</h3>
+<p>Begin with system-as-a-black-box behavior for each mission thread. Name functions as verb-object transformations and define entry, exit, input, output, control, and performance semantics.</p>
+<p>Functional decomposition is not an organization chart. Decompose only when child functions collectively explain the parent and provide useful allocation, interface, requirement, or analysis detail.</p>
+<p>Model support and enabling behavior: initialize, monitor, secure, diagnose, recover, maintain, update, configure, and transition. These functions often dominate lifecycle risk and are absent from nominal scenario diagrams.</p>
+<p>White-box analysis introduces logical performers and responsibility allocation. Keep logical performers technology-neutral enough to compare implementation concepts.</p>
+<p>Use N2, allocation, CRUD-like responsibility, and flow matrices to find duplicated control, unowned data, cyclic dependencies, excessive coupling, and single performers carrying incompatible responsibilities.</p>
+<h3 id="worked-example-3">Worked example</h3>
+<p>The black-box function ‘Provide On-Demand Accessible Trip’ is decomposed into accept request, assess eligibility/accommodation, plan service, reserve capacity, dispatch vehicle, board passenger, transport, alight, and confirm completion. An initial allocation puts request validation, dispatch optimization, vehicle assignment, and exception management in one logical performer. The responsibility matrix reveals a high-coupling control bottleneck and no performer for degraded communications. The learner separates policy validation, service orchestration, and vehicle control and adds an offline dispatch-recovery function.</p>
+<h3 id="guided-practice-3">Guided practice</h3>
+<ol>
+<li>Select two nominal and two degraded scenarios and derive black-box behavior.</li>
+<li>Build a function hierarchy and flow model with controls/resources and performance properties.</li>
+<li>Identify enabling, safety, security, maintenance, and transition functions.</li>
+<li>Allocate functions to candidate logical performers and run gap/coupling queries.</li>
+</ol>
+<h3 id="independent-exercises-3">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Diagnose poorly named, solution-biased, duplicated, and non-transformational functions.</li>
+<li><strong>Application:</strong> Create the functional architecture for service request, dispatch, charging, accessibility, and degraded operations.</li>
+<li><strong>Analysis:</strong> Use allocation and flow matrices to identify overload, unowned behavior, excessive coupling, and inconsistent decomposition.</li>
+<li><strong>Synthesis:</strong> Baseline a functional architecture with rationale, measures, hazards, and candidate requirement links.</li>
+<li><strong>Stretch:</strong> Compute network metrics for the functional dependency graph and compare them with engineering judgment about change or failure propagation.</li>
+</ul>
+<h3 id="weekly-deliverable-3">Weekly deliverable</h3>
+<p>Submit scenario-to-function traces, black-box and white-box activity models, function hierarchy and definitions, input/output/control/resource semantics, performance properties, enabling and degraded functions, logical performer candidates, allocation and flow matrices, gap/coupling query results, rationale, review findings, and revised functional baseline.</p>
+<h3 id="analytic-rubric-3">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Behavior semantics</td>
+<td style="text-align:right">25%</td>
+<td>Functions and flows have clear transformation, control, and completion meaning.</td>
+</tr>
+<tr>
+<td>Coverage and decomposition</td>
+<td style="text-align:right">25%</td>
+<td>Mission, degraded, enabling, and lifecycle behavior are complete and traceable.</td>
+</tr>
+<tr>
+<td>Allocation analysis</td>
+<td style="text-align:right">30%</td>
+<td>Logical performers and allocations expose coupling, overload, gaps, and alternatives.</td>
+</tr>
+<tr>
+<td>Model integration</td>
+<td style="text-align:right">20%</td>
+<td>Behavior connects consistently to scenarios, measures, hazards, requirements candidates, and reviews.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-3">Critical failures</h3>
+<ul>
+<li>Functions are named as components or organizations.</li>
+<li>Nominal behavior is modeled while safety, recovery, maintenance, or transition behavior is absent.</li>
+<li>Allocation selects physical products before logical alternatives are analyzed.</li>
+<li>A query finds critical unowned behavior and no disposition is recorded.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-3">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is black-box behavior?</strong><br/>
+<em>Answer guidance:</em> Externally observable transformation and interaction without exposing internal performers.</li>
+<li><strong>What is white-box behavior?</strong><br/>
+<em>Answer guidance:</em> Behavior expressed through internal responsibilities, interactions, and allocations.</li>
+<li><strong>Why model enabling functions?</strong><br/>
+<em>Answer guidance:</em> They make mission behavior possible, safe, secure, supportable, recoverable, and maintainable.</li>
+<li><strong>What is functional cohesion?</strong><br/>
+<em>Answer guidance:</em> The degree to which a performer or decomposition groups closely related responsibilities.</li>
+<li><strong>What is an allocation?</strong><br/>
+<em>Answer guidance:</em> A mapping of behavior, requirement, property, or other responsibility to an element that performs or owns it.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-3">Revision and mastery gate</h3>
+<p>All critical scenarios must be covered by coherent functions, every critical function must have a logical owner or accepted open issue, and the learner must demonstrate at least one architecture insight obtained from a query or matrix rather than from diagram inspection alone.</p>
+<h3 id="suggested-workload-3">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and behavior review</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>Functional modeling</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Allocation and query analysis</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review and revision</td>
+<td style="text-align:right">1.5</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>10.5</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-3">Configuration and portfolio update</h3>
+<p>Baseline the functional architecture separately from physical design, export function and allocation tables, preserve query results, and link review findings to affected model elements.</p>
+<hr/>
+<h2 id="week-4--model-state-based-behavior-modes-exceptions-hazards-and-temporal-consistency">Week 4 — Model state-based behavior, modes, exceptions, hazards, and temporal consistency</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 9):</strong> <a href="../../K/B9/chapters/04-model-state-based-behavior-modes-exceptions-hazards-and-temporal-con.html">Chapter 4 — Model state-based behavior, modes, exceptions, hazards, and temporal consistency</a> · <a href="../../K/B9/labs/lab-04-model-state-based-behavior-modes-exceptions-hazards-and-temporal-con.html">Hypothetical Lab 4</a> · <a href="../../K/P3-text/lessons/645-632-w04.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C6, C12</p>
+<h3 id="professional-context-and-essential-question-4">Professional context and essential question</h3>
+<p>Many failures occur because the system behaves correctly in a nominal flow but incorrectly during mode changes, interruptions, retries, or recovery. <strong>Essential question:</strong> Are the system and its critical elements behaviorally complete and consistent across states, events, modes, and exceptional conditions?</p>
+<h3 id="weekly-learning-outcomes-4">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>identify entities and subsystems whose behavior depends materially on state or mode</li>
+<li>construct state machines with valid states, events, guards, actions, entry/exit behavior, and completion semantics</li>
+<li>model operating modes and cross-element mode coordination</li>
+<li>connect hazards, failures, exceptions, degraded behavior, and recovery to state transitions</li>
+<li>check consistency among scenarios, activities, interactions, requirements, and state machines</li>
+<li>complete the first cumulative project submission and behavioral review</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-4">Retrieval and readiness check</h3>
+<ol>
+<li>What distinguishes a state from an activity?</li>
+<li>What is a guard?</li>
+<li>What is a mode?</li>
+<li>How can two locally valid state machines create a system-level deadlock?</li>
+</ol>
+<h3 id="required-study-4">Required study</h3>
+<ul>
+<li><strong>Course texts — state-machine and sequence/interaction sections.</strong> <strong>Purpose:</strong> Apply state and event semantics precisely. <strong>Guiding question:</strong> When should behavior be represented by state, activity, or interaction? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></li>
+<li><strong>Cameo or selected-tool documentation on simulation and behavioral validation.</strong> <strong>Purpose:</strong> Use execution or trace inspection where available. <strong>Guiding question:</strong> Which state defects can the tool detect, and which require engineering reasoning? <a href="https://docs.nomagic.com/spaces/CST2024x/pages/136729316/Validation+and+verification" title="Cameo Simulation Toolkit validation and verification">CAMEO-SIM-VV</a></li>
+<li><strong>NASA Systems Engineering Handbook — product validation, verification, risk, and logical decomposition.</strong> <strong>Purpose:</strong> Connect modes and recovery to requirements and evidence. <strong>Guiding question:</strong> Which off-nominal states require verification or validation planning? <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-4">Instructor-style lesson notes</h3>
+<p>A state represents a condition during which invariant properties or event responses apply. Do not turn every activity step into a state. Use state machines where history, mode, lifecycle, availability, or event legality matters.</p>
+<p>Define events and guards explicitly. A transition labeled ‘error’ without source, detection logic, guard, action, and destination is not analysable.</p>
+<p>System modes coordinate multiple performers. Model allowed combinations and transition responsibilities; independent subsystem state machines can create forbidden configurations, race conditions, or deadlocks.</p>
+<p>Trace hazards and failure modes to detection, containment, degraded service, recovery, and safe-state behavior. Recovery without a restoration criterion is incomplete.</p>
+<p>Cross-view consistency queries should compare scenario events, state transitions, activity actions, interface signals, and requirements. The goal is not identical diagrams but compatible semantics.</p>
+<h3 id="worked-example-4">Worked example</h3>
+<p>During cold-weather charging, the vehicle can be in Available, Reserved, EnRoute, Charging, Degraded, Isolated, or Maintenance states. The charger can be Idle, Negotiating, Energizing, Paused, Faulted, or LockedOut. A simulation trace reveals that a network timeout moves the vehicle to Degraded while the charger remains Energizing and the dispatch service still marks the vehicle Available. The learner adds coordinated timeout events, ownership, invariant constraints, a safe isolation action, and a recovery verification case.</p>
+<h3 id="guided-practice-4">Guided practice</h3>
+<ol>
+<li>Select three critical stateful elements and define state invariants and event dictionaries.</li>
+<li>Model system operating modes and permitted subsystem-state combinations.</li>
+<li>Trace at least five hazards or failures through detection, containment, degradation, recovery, and return-to-service.</li>
+<li>Run simulation, manual traces, or consistency queries and conduct the Behavioral Architecture Review.</li>
+</ol>
+<h3 id="independent-exercises-4">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Correct state models containing ambiguous states, missing triggers, overlapping guards, unreachable states, and unbounded retries.</li>
+<li><strong>Application:</strong> Create vehicle, charging, and service-orchestration state machines plus system operating modes.</li>
+<li><strong>Analysis:</strong> Check scenario, activity, interaction, state, interface, and requirement consistency for nominal and degraded threads.</li>
+<li><strong>Synthesis:</strong> Submit Project Progress Baseline 1 with behavioral evidence and a 5–8 minute walkthrough.</li>
+<li><strong>Stretch:</strong> Use model checking, simulation scripts, or generated transition tables to search for deadlock, forbidden modes, or unhandled events.</li>
+</ul>
+<h3 id="weekly-deliverable-4">Weekly deliverable</h3>
+<p>Submit event and state dictionaries, state and mode models, invariant and allowed-combination rules, hazard/failure/recovery traces, cross-view consistency queries, simulation or manual trace evidence, Behavioral Architecture Review package, recorded walkthrough, findings, revisions, and Project Progress Baseline 1.</p>
+<h3 id="analytic-rubric-4">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>State semantics</td>
+<td style="text-align:right">25%</td>
+<td>States, events, guards, actions, and invariants are precise and nonredundant.</td>
+</tr>
+<tr>
+<td>Mode coordination</td>
+<td style="text-align:right">25%</td>
+<td>Cross-element modes and forbidden combinations are modeled and owned.</td>
+</tr>
+<tr>
+<td>Failure and recovery</td>
+<td style="text-align:right">25%</td>
+<td>Detection, containment, degraded behavior, recovery, and restoration evidence are complete.</td>
+</tr>
+<tr>
+<td>Integrated consistency</td>
+<td style="text-align:right">25%</td>
+<td>State behavior agrees with scenarios, activities, interfaces, requirements, and hazards.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-4">Critical failures</h3>
+<ul>
+<li>Activities are relabeled as states without state invariants or event semantics.</li>
+<li>Critical events have no owner or transition response.</li>
+<li>A hazardous state combination is possible and undispositioned.</li>
+<li>Recovery returns to operation without defined readiness criteria or verification.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-4">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a state invariant?</strong><br/>
+<em>Answer guidance:</em> A condition that must remain true while an element is in a state.</li>
+<li><strong>What is a guard?</strong><br/>
+<em>Answer guidance:</em> A Boolean condition that must be true for a triggered transition to occur.</li>
+<li><strong>What is an orthogonal region?</strong><br/>
+<em>Answer guidance:</em> A concurrent region of a state machine whose state evolves in parallel with other regions.</li>
+<li><strong>Why model system modes?</strong><br/>
+<em>Answer guidance:</em> They coordinate allowed behavior and configurations across multiple elements.</li>
+<li><strong>What is an unhandled event?</strong><br/>
+<em>Answer guidance:</em> An event that can occur in a state but has no specified response, deferment, or prohibition.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-4">Revision and mastery gate</h3>
+<p>Critical stateful elements must have complete event and recovery behavior, prohibited mode combinations must be constrained, and the learner must resolve all critical cross-view inconsistencies before the project progress baseline is accepted.</p>
+<h3 id="suggested-workload-4">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and event analysis</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>State/mode modeling</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Consistency and trace analysis</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review, walkthrough, and revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-4">Configuration and portfolio update</h3>
+<p>Tag Project Baseline 1, preserve executable/manual traces and query outputs, export transition tables, and link review findings to model changes and verification cases.</p>
+<hr/>
+<h2 id="week-5--specify-and-evaluate-the-logical-architecture-and-its-responsibilities">Week 5 — Specify and evaluate the logical architecture and its responsibilities</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 9):</strong> <a href="../../K/B9/chapters/05-specify-and-evaluate-the-logical-architecture-and-its-responsibiliti.html">Chapter 5 — Specify and evaluate the logical architecture and its responsibilities</a> · <a href="../../K/B9/labs/lab-05-specify-and-evaluate-the-logical-architecture-and-its-responsibiliti.html">Hypothetical Lab 5</a> · <a href="../../K/P3-text/lessons/645-632-w05.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C9</p>
+<h3 id="professional-context-and-essential-question-5">Professional context and essential question</h3>
+<p>The program needs an internal solution concept that organizes responsibilities without locking into vendors, products, or deployment choices. <strong>Essential question:</strong> Which logical architecture best realizes the required behavior while controlling coupling, failure propagation, change, and verification complexity?</p>
+<h3 id="weekly-learning-outcomes-5">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>define logical performers, responsibilities, properties, ports, and interactions</li>
+<li>allocate functional and state behavior to logical architecture elements</li>
+<li>separate policy, orchestration, control, data, sensing, actuation, and support responsibilities</li>
+<li>evaluate cohesion, coupling, criticality, trust boundaries, failure containment, and change exposure</li>
+<li>compare at least two logical architecture patterns or decompositions</li>
+<li>baseline a solution-neutral logical architecture with explicit rationale and open risks</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-5">Retrieval and readiness check</h3>
+<ol>
+<li>What is a logical performer?</li>
+<li>How does logical architecture differ from software architecture?</li>
+<li>What is coupling?</li>
+<li>Why compare logical alternatives before physical synthesis?</li>
+</ol>
+<h3 id="required-study-5">Required study</h3>
+<ul>
+<li><strong>Course texts — block, internal structure, allocation, package, and interaction sections.</strong> <strong>Purpose:</strong> Specify logical elements and relationships correctly. <strong>Guiding question:</strong> How should responsibilities, ports, and exchanges be represented? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></li>
+<li><strong>NASA Systems Engineering Handbook — logical decomposition and design solution definition.</strong> <strong>Purpose:</strong> Preserve iterative separation of logical and physical work. <strong>Guiding question:</strong> Which logical analyses support physical alternative generation? <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li><strong>INCOSE OOSEM material.</strong> <strong>Purpose:</strong> Use object-oriented responsibility and interaction reasoning. <strong>Guiding question:</strong> How does OOSEM transition from behavior to logical and physical architecture? <a href="https://www.incose.org/group/object-oriented-se-method-working-group/" title="INCOSE Object-Oriented Systems Engineering Method Working Group">INCOSE-OOSEM</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-5">Instructor-style lesson notes</h3>
+<p>Logical architecture answers who or what is responsible in an abstract sense. Elements may represent services, control domains, information stores, human roles, or operational resources without naming implementation products.</p>
+<p>Allocate behavior and states, but also model ownership of information, policy, time, safety constraints, and exception handling. Hidden ownership is a common source of integration failure.</p>
+<p>Use ports and exchanges to express required interaction semantics. Avoid drawing generic associations that conceal direction, type, units, timing, security, or contractual responsibility.</p>
+<p>Analyze cohesion, coupling, fan-in/fan-out, cyclic dependence, trust boundaries, failure containment, test isolation, and likely volatility. No single metric determines architecture quality.</p>
+<p>Compare at least two decompositions, such as centralized orchestration versus federated zone control. Record why the preferred logical baseline is chosen and which decisions are deferred.</p>
+<h3 id="worked-example-5">Worked example</h3>
+<p>Two logical alternatives are modeled. Alternative L1 uses one Campus Mobility Orchestrator for request intake, dispatch, charging coordination, and incident response. Alternative L2 separates Service Policy, Dispatch Optimization, Energy Coordination, and Incident Management. L1 has fewer interfaces but creates a safety and availability concentration. L2 has clearer ownership and containment but more contracts and synchronization. The model query shows that 68% of critical functions depend on L1’s single performer; the selected hybrid retains common policy but separates safety-critical vehicle authorization and charging isolation.</p>
+<h3 id="guided-practice-5">Guided practice</h3>
+<ol>
+<li>Create two logical decomposition candidates.</li>
+<li>Allocate functions, states, information ownership, hazards, and measures.</li>
+<li>Define ports, exchanges, contracts, and trust/failure boundaries.</li>
+<li>Run architecture metrics and conduct a structured comparison.</li>
+</ol>
+<h3 id="independent-exercises-5">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify elements as operational, logical, physical, software, data, or organizational and correct abstraction leaks.</li>
+<li><strong>Application:</strong> Build the selected logical architecture and complete behavior/responsibility allocations.</li>
+<li><strong>Analysis:</strong> Compare alternatives using coupling, criticality, failure containment, testability, change exposure, and stakeholder outcomes.</li>
+<li><strong>Synthesis:</strong> Issue the Logical Architecture Baseline with rationale and deferred decisions.</li>
+<li><strong>Stretch:</strong> Use graph analysis or a model query to identify articulation points, strongly connected components, or high-change-exposure logical elements.</li>
+</ul>
+<h3 id="weekly-deliverable-5">Weekly deliverable</h3>
+<p>Submit logical alternatives, performer and responsibility definitions, behavior/state/information/hazard allocations, ports and exchange semantics, trust and failure-containment boundaries, architecture metric/query results, alternative comparison, selected baseline, decision record, deferred decisions, risks, and review dispositions.</p>
+<h3 id="analytic-rubric-5">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Abstraction integrity</td>
+<td style="text-align:right">25%</td>
+<td>Logical content is solution-neutral and free of unjustified physical leakage.</td>
+</tr>
+<tr>
+<td>Responsibility and interaction</td>
+<td style="text-align:right">25%</td>
+<td>Ownership, behavior, information, ports, and contracts are complete and coherent.</td>
+</tr>
+<tr>
+<td>Architecture analysis</td>
+<td style="text-align:right">30%</td>
+<td>Alternatives are compared using multiple technical and lifecycle concerns.</td>
+</tr>
+<tr>
+<td>Decision rationale</td>
+<td style="text-align:right">20%</td>
+<td>Selection, deferrals, risks, and assumptions are explicit and traceable.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-5">Critical failures</h3>
+<ul>
+<li>Vendor products or deployment nodes appear in the logical baseline without justified abstraction.</li>
+<li>Critical information or safety decisions have no owner.</li>
+<li>Architecture selection is based only on element or interface count.</li>
+<li>No alternative logical decomposition is considered.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-5">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a logical performer?</strong><br/>
+<em>Answer guidance:</em> An abstract element assigned responsibility for behavior or information without committing to a physical implementation.</li>
+<li><strong>What is cohesion?</strong><br/>
+<em>Answer guidance:</em> The degree to which responsibilities within an element belong together.</li>
+<li><strong>What is a trust boundary?</strong><br/>
+<em>Answer guidance:</em> A boundary across which identity, integrity, confidentiality, authority, or assurance assumptions change.</li>
+<li><strong>Why model deferred decisions?</strong><br/>
+<em>Answer guidance:</em> They preserve uncertainty and prevent an unmade choice from becoming an implicit baseline.</li>
+<li><strong>What is failure containment?</strong><br/>
+<em>Answer guidance:</em> Architecture that limits fault propagation and supports detection, isolation, and recovery.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-5">Revision and mastery gate</h3>
+<p>The logical architecture must realize all critical behavior, assign all critical responsibilities, preserve solution neutrality, compare at least two credible decompositions, and close or explicitly accept critical coupling, trust, and failure-containment risks.</p>
+<h3 id="suggested-workload-5">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and alternatives</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>Logical modeling</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Architecture queries and comparison</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review and revision</td>
+<td style="text-align:right">1.5</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>10.5</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-5">Configuration and portfolio update</h3>
+<p>Baseline logical architecture separately from physical variants, export allocation and interaction matrices, and preserve the alternative decision record and query results.</p>
+<hr/>
+<h2 id="week-6--specify-interfaces-exchanges-allocations-ownership-and-model-based-change-exposure">Week 6 — Specify interfaces, exchanges, allocations, ownership, and model-based change exposure</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 9):</strong> <a href="../../K/B9/chapters/06-specify-interfaces-exchanges-allocations-ownership-and-model-based-c.html">Chapter 6 — Specify interfaces, exchanges, allocations, ownership, and model-based change exposure</a> · <a href="../../K/B9/labs/lab-06-specify-interfaces-exchanges-allocations-ownership-and-model-based-c.html">Hypothetical Lab 6</a> · <a href="../../K/P3-text/lessons/645-632-w06.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C5, C6, C10</p>
+<h3 id="professional-context-and-essential-question-6">Professional context and essential question</h3>
+<p>Interfaces are where independently designed responsibilities meet and where changes propagate. <strong>Essential question:</strong> Are the exchanges, contracts, ownership, and allocations precise enough to support physical synthesis, integration, and change control?</p>
+<h3 id="weekly-learning-outcomes-6">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>identify logical, physical, human, data, power, control, maintenance, and organizational interfaces</li>
+<li>define exchange types, direction, units, rate, timing, quality, protocol, security, and failure semantics</li>
+<li>assign interface ownership, provider/consumer obligations, and verification responsibility</li>
+<li>complete behavior-to-structure, requirement-to-architecture, and measure-to-property allocations</li>
+<li>use matrices and queries to detect incompatible, untyped, unowned, duplicated, and high-change-exposure interfaces</li>
+<li>perform a model-based change-impact analysis and issue the Interface and Allocation Review</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-6">Retrieval and readiness check</h3>
+<ol>
+<li>What is an interface contract?</li>
+<li>How does an interface differ from an exchange?</li>
+<li>Who owns a shared interface?</li>
+<li>What makes change-impact evidence credible?</li>
+</ol>
+<h3 id="required-study-6">Required study</h3>
+<ul>
+<li><strong>NASA-HDBK-1009A interface metamodel appendix and model-product sections.</strong> <strong>Purpose:</strong> Use a consistent interface information model. <strong>Guiding question:</strong> Which elements and relationships are required to generate interface products? <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-1009" title="NASA-HDBK-1009A — NASA Systems Modeling Handbook for Systems Engineering">NASA-HDBK-1009A</a></li>
+<li><strong>NASA Systems Engineering Handbook — interface management and configuration management.</strong> <strong>Purpose:</strong> Connect model content to lifecycle ownership and control. <strong>Guiding question:</strong> How are interface changes approved and verified? <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li><strong>Course texts — ports, item flows, internal structure, allocations, and matrices.</strong> <strong>Purpose:</strong> Apply the selected SysML version correctly. <strong>Guiding question:</strong> Which semantics belong on ports, exchanges, blocks, or requirements? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-6">Instructor-style lesson notes</h3>
+<p>An interface is a boundary and agreement; an exchange is what crosses it. Model both. A line labeled ‘data’ is insufficient for architecture or verification.</p>
+<p>Define semantic, physical, temporal, quality, security, and failure properties. Examples include schema, units, coordinate frame, valid range, update rate, latency, jitter, freshness, authority, acknowledgment, retry, and degraded behavior.</p>
+<p>Assign an interface owner and configuration authority while preserving provider and consumer responsibilities. Ownership does not mean one side may change the contract unilaterally.</p>
+<p>Allocations are analytic assertions and must be checked. Behavior may be split across elements; requirements may constrain interactions; measures may be computed from multiple properties.</p>
+<p>Change-impact analysis follows the relationship graph and configuration rules. Distinguish potentially affected from confirmed affected elements, and preserve the query, baseline, rationale, and disposition.</p>
+<h3 id="worked-example-6">Worked example</h3>
+<p>A proposal changes accessible boarding events from a binary flag to a structured accommodation request. The impact query identifies the passenger app contract, dispatch policy, vehicle reservation function, privacy requirement, state transitions, data store, training procedure, six tests, and the wait-time analytics notebook. The learner distinguishes required changes from false-positive graph neighbors, updates the interface schema and version policy, and records compatibility and migration behavior.</p>
+<h3 id="guided-practice-6">Guided practice</h3>
+<ol>
+<li>Create an interface inventory and classify boundary/exchange types.</li>
+<li>Define complete contracts for at least eight critical interfaces.</li>
+<li>Complete allocation matrices and ownership/verification responsibility.</li>
+<li>Execute one controlled change request and conduct the Interface and Allocation Review.</li>
+</ol>
+<h3 id="independent-exercises-6">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Repair interface definitions missing direction, type, unit, timing, ownership, or failure behavior.</li>
+<li><strong>Application:</strong> Model service, vehicle, charger, operator, passenger, maintenance, and external-campus interfaces.</li>
+<li><strong>Analysis:</strong> Rank interfaces by criticality, coupling, volatility, assurance, integration difficulty, and change exposure.</li>
+<li><strong>Synthesis:</strong> Issue the controlled interface baseline and change-impact report.</li>
+<li><strong>Stretch:</strong> Create a reusable interface-contract template or metamodel extension and a query that enforces required fields by interface class.</li>
+</ul>
+<h3 id="weekly-deliverable-6">Weekly deliverable</h3>
+<p>Submit the interface inventory, contract definitions, ports/exchanges, data and signal dictionaries, ownership/RACI, allocation matrices, interface requirements and V&amp;V links, criticality/change-exposure analysis, change request, reproducible impact query, confirmed impacts, compatibility/migration decision, review findings, and revised baseline.</p>
+<h3 id="analytic-rubric-6">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Contract completeness</td>
+<td style="text-align:right">30%</td>
+<td>Exchange semantics, timing, quality, security, failure, and compatibility are explicit.</td>
+</tr>
+<tr>
+<td>Ownership and allocation</td>
+<td style="text-align:right">25%</td>
+<td>Provider, consumer, authority, behavior, requirement, and verification responsibilities are coherent.</td>
+</tr>
+<tr>
+<td>Risk and change analysis</td>
+<td style="text-align:right">25%</td>
+<td>Criticality, volatility, coupling, and change impact are evidence-based.</td>
+</tr>
+<tr>
+<td>Model quality</td>
+<td style="text-align:right">20%</td>
+<td>Matrices, queries, identifiers, and generated interface products are reproducible.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-6">Critical failures</h3>
+<ul>
+<li>Critical exchanges remain untyped or unitless.</li>
+<li>No configuration authority or verification owner exists for a critical interface.</li>
+<li>A change is declared low impact based only on diagram inspection.</li>
+<li>Provider and consumer assumptions conflict without disposition.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-6">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is an interface contract?</strong><br/>
+<em>Answer guidance:</em> The controlled agreement defining the boundary, exchanges, obligations, constraints, quality, failure, compatibility, and verification semantics.</li>
+<li><strong>What is an item flow?</strong><br/>
+<em>Answer guidance:</em> A modeled specification of an item or value conveyed across a connector or interaction path.</li>
+<li><strong>What is impact overreach?</strong><br/>
+<em>Answer guidance:</em> Treating every graph neighbor as truly affected without engineering confirmation.</li>
+<li><strong>Why version interfaces?</strong><br/>
+<em>Answer guidance:</em> Consumers and providers may evolve independently; versioning supports compatibility, migration, and controlled retirement.</li>
+<li><strong>What is allocation completeness?</strong><br/>
+<em>Answer guidance:</em> Every required responsibility or constraint has an appropriate owner, performer, or realization relationship.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-6">Revision and mastery gate</h3>
+<p>Every critical interface must have complete semantics, owner, provider/consumer obligations, requirements, and V&amp;V responsibility. The learner must reproduce one change-impact query and justify each confirmed impact and exclusion.</p>
+<h3 id="suggested-workload-6">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and inventory</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>Interface and allocation modeling</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Change-impact analysis</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review and revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-6">Configuration and portfolio update</h3>
+<p>Baseline interfaces and allocations, export machine-readable contract and matrix data, preserve the change request and impact-query parameters, and update the decision and risk records.</p>
+<hr/>
+<h2 id="week-7--elicit-derive-validate-and-query-system-requirements-from-the-integrated-analysis">Week 7 — Elicit, derive, validate, and query system requirements from the integrated analysis</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 9):</strong> <a href="../../K/B9/chapters/07-elicit-derive-validate-and-query-system-requirements-from-the-integr.html">Chapter 7 — Elicit, derive, validate, and query system requirements from the integrated analysis</a> · <a href="../../K/B9/labs/lab-07-elicit-derive-validate-and-query-system-requirements-from-the-integr.html">Hypothetical Lab 7</a> · <a href="../../K/P3-text/lessons/645-632-w07.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C2, C3, C6, C8</p>
+<h3 id="professional-context-and-essential-question-7">Professional context and essential question</h3>
+<p>Requirements are not merely imported text; they should be justified by stakeholder outcomes, behavior, architecture, interfaces, measures, risks, and V&amp;V strategy. <strong>Essential question:</strong> Does the model contain a necessary, sufficient, consistent, feasible, and verifiable requirement baseline for the expansion decision?</p>
+<h3 id="weekly-learning-outcomes-7">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>elicit and derive requirements from stakeholder, behavior, state, interface, measure, risk, and architecture evidence</li>
+<li>distinguish stakeholder, system, subsystem, interface, constraint, performance, and derived requirements</li>
+<li>write or refine requirements with conditions, subject, action, object, measurable criterion, and verification intent</li>
+<li>model derivation, refinement, satisfaction, allocation, verification, rationale, source, and assumption relationships</li>
+<li>use queries and validation rules to assess quality, coverage, conflict, circularity, duplication, feasibility, and change exposure</li>
+<li>complete the midterm integrated model submission and walkthrough</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-7">Retrieval and readiness check</h3>
+<ol>
+<li>What is a derived requirement?</li>
+<li>What is the difference between satisfy and verify?</li>
+<li>What is a circular derivation?</li>
+<li>Why is a trace count not the same as trace quality?</li>
+</ol>
+<h3 id="required-study-7">Required study</h3>
+<ul>
+<li><strong>NASA-HDBK-1009A technical-requirement, MOP/TPM, and V&amp;V model sections.</strong> <strong>Purpose:</strong> Build the requirement and evidence metamodel correctly. <strong>Guiding question:</strong> Which traces are needed to generate requirement and V&amp;V products? <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-1009" title="NASA-HDBK-1009A — NASA Systems Modeling Handbook for Systems Engineering">NASA-HDBK-1009A</a></li>
+<li><strong>NASA Systems Engineering Handbook — technical requirements definition and product verification/validation.</strong> <strong>Purpose:</strong> Connect requirement quality to lifecycle evidence. <strong>Guiding question:</strong> How are requirements validated before they are verified? <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li><strong>Cameo requirements validation or selected-tool validation documentation.</strong> <strong>Purpose:</strong> Automate repeatable checks. <strong>Guiding question:</strong> Which quality rules can be encoded and which require human judgment? <a href="https://docs.nomagic.com/spaces/CRMP2024xR3/pages/227170843/Validation" title="Cameo model validation documentation">CAMEO-VALIDATION</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-7">Instructor-style lesson notes</h3>
+<p>Derive requirements from the integrated analysis and preserve the rationale. A requirement should not exist solely because an old document contained it.</p>
+<p>Separate requirement validation from verification. Validation asks whether the requirement is the right statement of stakeholder and mission need; verification asks whether the implemented system satisfies it.</p>
+<p>Use semantic properties and structured text where possible: condition, subject, action, object, value, unit, tolerance, environment, time basis, and verification method. Natural language remains necessary but should be analyzable.</p>
+<p>Queries can find missing sources, rationale, measures, owners, satisfaction, verification, or parent traces; duplicate IDs; conflicting values; circular derivation; and configuration-inapplicable requirements. Human review is still needed for necessity, feasibility, and unintended incentives.</p>
+<p>The midterm baseline should be navigable as one graph. The walkthrough must demonstrate cross-view reasoning, not a tour of diagrams.</p>
+<h3 id="worked-example-7">Worked example</h3>
+<p>The source baseline says, ‘The system shall provide rapid service in winter.’ The model traces the statement to an accessibility and service outcome, defines the population and operating mode, links 95th-percentile wait time and service availability measures, derives separate system requirements for winter accessible wait and availability, allocates contributing properties to dispatch, fleet, charging, and recovery logical elements, and creates analysis/test verification cases. A query finds that the proposed 8-minute threshold has no stakeholder acceptance record, so it remains a candidate target until the decision owner approves it.</p>
+<h3 id="guided-practice-7">Guided practice</h3>
+<ol>
+<li>Build a requirement taxonomy and structured requirement template.</li>
+<li>Derive/refine at least 25 requirements from current model evidence.</li>
+<li>Create satisfy/allocate/verify/rationale/source relationships and planned V&amp;V methods.</li>
+<li>Run quality/coverage queries and conduct the midterm integrated model walkthrough.</li>
+</ol>
+<h3 id="independent-exercises-7">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Correct ambiguous, compound, unverifiable, solution-biased, or configuration-confused requirements.</li>
+<li><strong>Application:</strong> Create the system, interface, performance, constraint, and derived requirement baseline.</li>
+<li><strong>Analysis:</strong> Use model validation and human review to identify conflicts, circular derivation, infeasibility, and incentive problems.</li>
+<li><strong>Synthesis:</strong> Submit the Week 7 midterm model and a 15-minute maximum walkthrough demonstrating end-to-end traces.</li>
+<li><strong>Stretch:</strong> Create a custom requirement-quality or coverage validation rule and test it on deliberately defective content.</li>
+</ul>
+<h3 id="weekly-deliverable-7">Weekly deliverable</h3>
+<p>Submit the requirement taxonomy and template, source and derivation traces, requirement baseline, measure and property links, satisfy/allocate/verify relations, verification planning, quality and coverage query results, validation findings, change exposure, generated requirement/V&amp;V products, midterm model file/export, walkthrough, review record, and revised baseline.</p>
+<h3 id="analytic-rubric-7">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Requirement validity and quality</td>
+<td style="text-align:right">30%</td>
+<td>Requirements are necessary, clear, singular, feasible, measurable, and appropriately classified.</td>
+</tr>
+<tr>
+<td>Trace semantics</td>
+<td style="text-align:right">25%</td>
+<td>Source, derivation, rationale, architecture, measure, satisfaction, allocation, and V&amp;V relationships are meaningful.</td>
+</tr>
+<tr>
+<td>Automated and human analysis</td>
+<td style="text-align:right">25%</td>
+<td>Queries and validation expose defects while judgment addresses necessity and feasibility.</td>
+</tr>
+<tr>
+<td>Integrated walkthrough</td>
+<td style="text-align:right">20%</td>
+<td>The learner navigates and explains coherent end-to-end evidence.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-7">Critical failures</h3>
+<ul>
+<li>Critical requirements have no stakeholder/mission rationale.</li>
+<li>Satisfy or verify links are used as decorative relationships without evidence meaning.</li>
+<li>A critical requirement is unverifiable or has an unapproved threshold.</li>
+<li>The midterm model cannot be navigated as one integrated baseline.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-7">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is requirement validation?</strong><br/>
+<em>Answer guidance:</em> Confirmation that a requirement correctly and adequately expresses stakeholder, mission, and lifecycle need.</li>
+<li><strong>What is a derived requirement?</strong><br/>
+<em>Answer guidance:</em> A lower-level or additional requirement logically necessary because of analysis, architecture, interface, risk, or constraint.</li>
+<li><strong>What is a circular derivation?</strong><br/>
+<em>Answer guidance:</em> A set of requirements justified only by one another with no external need, constraint, analysis, or decision foundation.</li>
+<li><strong>Why include verification intent early?</strong><br/>
+<em>Answer guidance:</em> It exposes ambiguity, infeasibility, missing measurement capability, and excessive cost before implementation.</li>
+<li><strong>What makes a trace meaningful?</strong><br/>
+<em>Answer guidance:</em> A defined semantic relationship with evidence, rationale, direction, ownership, and reviewable consequence.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-7">Revision and mastery gate</h3>
+<p>All critical requirements must have valid source/rationale, measurable semantics, architecture and measure connections, planned V&amp;V, and applicable configuration. The learner must pass the midterm walkthrough and close critical quality/coverage findings.</p>
+<h3 id="suggested-workload-7">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and requirement review</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>Requirement and trace modeling</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Queries and validation</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td>Walkthrough, review, and revision</td>
+<td style="text-align:right">2.5</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-7">Configuration and portfolio update</h3>
+<p>Tag the midterm baseline, archive the walkthrough, export requirement and V&amp;V tables, preserve validation/query results, and record all approved threshold and applicability decisions.</p>
+<hr/>
+<h2 id="week-8--build-executable-parametric-models-with-units-provenance-constraints-and-linked-analytics">Week 8 — Build executable parametric models with units, provenance, constraints, and linked analytics</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 9):</strong> <a href="../../K/B9/chapters/08-build-executable-parametric-models-with-units-provenance-constraints.html">Chapter 8 — Build executable parametric models with units, provenance, constraints, and linked analytics</a> · <a href="../../K/B9/labs/lab-08-build-executable-parametric-models-with-units-provenance-constraints.html">Hypothetical Lab 8</a> · <a href="../../K/P3-text/lessons/645-632-w08.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C7, C8, C9</p>
+<h3 id="professional-context-and-essential-question-8">Professional context and essential question</h3>
+<p>The integrated model now contains properties and thresholds, but it cannot yet calculate whether candidate architectures meet them. <strong>Essential question:</strong> How can the model execute or invoke quantitative relationships without losing units, provenance, uncertainty, or reproducibility?</p>
+<h3 id="weekly-learning-outcomes-8">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>identify engineering questions suitable for parametric or linked analytic treatment</li>
+<li>define value types, units, dimensions, properties, constraint parameters, equations, and applicability</li>
+<li>construct executable parametric relationships for energy, capacity, wait, availability, latency, and cost</li>
+<li>connect model properties to external Python/Jupyter analytics where appropriate</li>
+<li>preserve input provenance, uncertainty, configuration, run parameters, and result objects</li>
+<li>verify calculations using hand checks, dimensional analysis, boundary tests, and independent implementation</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-8">Retrieval and readiness check</h3>
+<ol>
+<li>What is a constraint block or constraint definition?</li>
+<li>Why are units part of semantics?</li>
+<li>When should analysis be external to the model?</li>
+<li>What is computational verification?</li>
+</ol>
+<h3 id="required-study-8">Required study</h3>
+<ul>
+<li><strong>Course texts — parametric diagram, value type, constraint, and allocation sections.</strong> <strong>Purpose:</strong> Implement quantitative relationships correctly. <strong>Guiding question:</strong> How are parameters bound to model properties? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></li>
+<li><strong>NASA-HDBK-1009A requirements/parameters/metamodel sections.</strong> <strong>Purpose:</strong> Connect measures and technical requirements to model properties. <strong>Guiding question:</strong> Which performance relationships belong in the authoritative model? <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-1009" title="NASA-HDBK-1009A — NASA Systems Modeling Handbook for Systems Engineering">NASA-HDBK-1009A</a></li>
+<li><strong>NASA MBSA&amp;E Phase I report.</strong> <strong>Purpose:</strong> Study contemporary links among system models, disciplinary analysis, and decision evidence. <strong>Guiding question:</strong> How are analysis inputs, outputs, and assumptions synchronized? <a href="https://ntrs.nasa.gov/citations/20250007050" title="NASA Model-Based Systems Analysis and Engineering Phase I report">NASA-MBSAE</a></li>
+<li><strong>Pint, SciPy, Jupyter, or selected tool simulation documentation.</strong> <strong>Purpose:</strong> Create reproducible, unit-aware execution. <strong>Guiding question:</strong> How will the same calculation be independently checked? <a href="https://pint.readthedocs.io/en/stable/" title="Pint unit-handling documentation">PINT</a> <a href="https://docs.scipy.org/doc/scipy/" title="SciPy documentation">SCIPY</a> <a href="https://jupyter.org/documentation" title="Project Jupyter documentation">JUPYTER</a> <a href="https://docs.nomagic.com/spaces/CST2024x/pages/136729316/Validation+and+verification" title="Cameo Simulation Toolkit validation and verification">CAMEO-SIM-VV</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-8">Instructor-style lesson notes</h3>
+<p>Choose analyses based on decisions and requirements, not because a parametric diagram is available. Define the question, output measure, alternatives, uncertainty, and acceptance use first.</p>
+<p>Use value types and units consistently. Celsius/Kelvin offsets, percentages, rates, currency years, coordinate frames, and time bases require explicit semantics beyond a unit label.</p>
+<p>Keep simple governing equations and their bindings visible in the model. Use external notebooks or services for data cleaning, statistical fitting, optimization, large simulation, or methods that need stronger testing and libraries.</p>
+<p>Treat external analyses as controlled model elements: owner, version, input schema, output schema, assumptions, environment, verification tests, run ID, result ID, and applicability.</p>
+<p>Verification should include independent hand cases, dimensional analysis, boundary/extreme cases, monotonicity, regression tests, and comparison with an independent implementation where consequence warrants.</p>
+<h3 id="worked-example-8">Worked example</h3>
+<p>The learner models usable energy, route distance, energy intensity, cold multiplier, reserve fraction, charger power, charging efficiency, vehicle count, and availability. A unit-aware Python function calculates daily energy margin and charging demand. The first run shows a 19% discrepancy with the in-tool model because the notebook treats charger power in watts while the model exports kilowatts. A schema and Pint unit check prevent recurrence. Boundary tests cover zero demand, maximum cold multiplier, one failed charger, and inaccessible vehicle removal.</p>
+<h3 id="guided-practice-8">Guided practice</h3>
+<ol>
+<li>Define the analytic questions and select in-tool versus linked execution.</li>
+<li>Create unit-aware properties and at least four constraint relationships.</li>
+<li>Build the external input/output schema and reproducible notebook or script.</li>
+<li>Perform computational verification and issue the Executable Parametric Baseline.</li>
+</ol>
+<h3 id="independent-exercises-8">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Repair equations with unit, sign, time-basis, or binding defects.</li>
+<li><strong>Application:</strong> Implement energy/charging, service-capacity, availability, and cost relationships.</li>
+<li><strong>Analysis:</strong> Compare in-tool and external results, diagnose discrepancies, and analyze boundary behavior.</li>
+<li><strong>Synthesis:</strong> Create a model-linked analytic package with provenance, uncertainty placeholders, tests, and result objects.</li>
+<li><strong>Stretch:</strong> Use the SysML v2 API or a Cameo/Papyrus export to automatically populate analytic inputs and write controlled results back to the model.</li>
+</ul>
+<h3 id="weekly-deliverable-8">Weekly deliverable</h3>
+<p>Submit analytic-question definitions, property/value-type/unit library, constraints and bindings, model-to-analysis input/output mapping, executable source and environment, baseline datasets, hand and automated tests, dimensional/boundary results, discrepancy log, result objects, trace links to requirements/measures/configurations, and the approved Executable Parametric Baseline.</p>
+<h3 id="analytic-rubric-8">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quantitative semantics</td>
+<td style="text-align:right">30%</td>
+<td>Properties, units, dimensions, equations, and applicability are correct and explicit.</td>
+</tr>
+<tr>
+<td>Model-analysis integration</td>
+<td style="text-align:right">25%</td>
+<td>Inputs, outputs, provenance, configuration, and results are controlled and traceable.</td>
+</tr>
+<tr>
+<td>Verification quality</td>
+<td style="text-align:right">25%</td>
+<td>Independent checks, boundaries, tests, and discrepancy resolution support correctness.</td>
+</tr>
+<tr>
+<td>Decision relevance</td>
+<td style="text-align:right">20%</td>
+<td>Analyses answer stated requirements and engineering questions.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-8">Critical failures</h3>
+<ul>
+<li>A consequential equation uses untyped or inconsistent units.</li>
+<li>External analysis inputs are manually copied without provenance or synchronization control.</li>
+<li>A result is accepted because two implementations share the same untested logic.</li>
+<li>The analysis has no trace to a decision, requirement, measure, or configuration.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-8">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a value type?</strong><br/>
+<em>Answer guidance:</em> A reusable definition of value semantics such as dimension, unit, quantity kind, constraints, and representation.</li>
+<li><strong>What is a binding?</strong><br/>
+<em>Answer guidance:</em> A relationship asserting equality or connection among constraint parameters and model properties.</li>
+<li><strong>Why use an external analytic model?</strong><br/>
+<em>Answer guidance:</em> It may provide stronger numerical, statistical, optimization, testing, data, or performance capability while the system model preserves context and traceability.</li>
+<li><strong>What is dimensional analysis?</strong><br/>
+<em>Answer guidance:</em> Checking that equations and results are consistent in physical dimensions and units.</li>
+<li><strong>What is a result object?</strong><br/>
+<em>Answer guidance:</em> A controlled representation of an analytic run's outputs, inputs, version, configuration, uncertainty, and applicability.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-8">Revision and mastery gate</h3>
+<p>At least four consequential relationships must execute reproducibly with correct units and configuration, pass independent verification, and produce controlled results linked to requirements, measures, alternatives, and decisions.</p>
+<h3 id="suggested-workload-8">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and analytic design</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>Parametric modeling</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>External implementation and tests</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Review and revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-8">Configuration and portfolio update</h3>
+<p>Pin analytic environment and model/tool versions, commit schemas and source, preserve run IDs and tests, and baseline value-type, constraint, and result libraries.</p>
+<hr/>
+<h2 id="week-9--explore-the-trade-space-with-alternatives-uncertainty-sensitivity-and-model-based-decision-records">Week 9 — Explore the trade space with alternatives, uncertainty, sensitivity, and model-based decision records</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 9):</strong> <a href="../../K/B9/chapters/09-explore-the-trade-space-with-alternatives-uncertainty-sensitivity-an.html">Chapter 9 — Explore the trade space with alternatives, uncertainty, sensitivity, and model-based decision records</a> · <a href="../../K/B9/labs/lab-09-explore-the-trade-space-with-alternatives-uncertainty-sensitivity-an.html">Hypothetical Lab 9</a> · <a href="../../K/P3-text/lessons/645-632-w09.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C7, C8, C9, C12</p>
+<h3 id="professional-context-and-essential-question-9">Professional context and essential question</h3>
+<p>A deterministic calculation can rank options under one assumption set while hiding reversals across uncertainty, operating conditions, or stakeholder preferences. <strong>Essential question:</strong> Which alternatives are feasible and robust, what drives the result, and what evidence would change the recommendation?</p>
+<h3 id="weekly-learning-outcomes-9">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>represent at least three architecture or operational alternatives using controlled model variation</li>
+<li>define objectives, measures, constraints, scenarios, uncertainties, and decision criteria</li>
+<li>execute trade studies across configurations and operating conditions</li>
+<li>perform sensitivity, uncertainty, threshold, and decision-reversal analysis</li>
+<li>write analytic results and recommendation conditions back into the model without making outputs authoritative facts</li>
+<li>conduct and revise the Parametric Trade Study Review</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-9">Retrieval and readiness check</h3>
+<ol>
+<li>What is a Pareto-dominated alternative?</li>
+<li>What is sensitivity analysis?</li>
+<li>What is a decision reversal?</li>
+<li>Why distinguish an analysis result from a decision?</li>
+</ol>
+<h3 id="required-study-9">Required study</h3>
+<ul>
+<li><strong>NASA Systems Engineering Handbook — decision analysis and design solution definition.</strong> <strong>Purpose:</strong> Use a disciplined alternative-analysis process. <strong>Guiding question:</strong> How are criteria, uncertainty, sensitivity, and rationale documented? <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li><strong>EN.645.784 and EN.645.756 course artifacts or equivalent readings.</strong> <strong>Purpose:</strong> Reuse objectives, Pareto, robustness, and uncertainty methods. <strong>Guiding question:</strong> Which earlier decision assumptions must be synchronized with the model? <a href="OVERVIEW.html" title="Phase 3 quantitative analysis and model-driven decision support overview">PHASE3-README</a></li>
+<li><strong>OMG SysML v2 and selected-tool configuration/analysis features.</strong> <strong>Purpose:</strong> Represent alternatives and results consistently. <strong>Guiding question:</strong> Which variation mechanism preserves common content and traceability? <a href="https://www.omg.org/sysml/SysML-2.htm" title="OMG SysML v2 specification overview">OMG-SYSML2</a> <a href="https://github.com/Systems-Modeling/SysML-v2-Release" title="OMG Systems Modeling Community SysML v2 release repository">SYSML2-RELEASE</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-9">Instructor-style lesson notes</h3>
+<p>Model alternatives as controlled variation, not copied packages. Separate common content, option points, applicability rules, parameter sets, and alternative-specific rationale.</p>
+<p>Define feasibility before preference. Requirements, physical constraints, safety, accessibility, and integration rules can eliminate alternatives before value aggregation.</p>
+<p>Run across operating scenarios and uncertainty distributions. Show intervals, probabilities, fronts, and reversal conditions rather than a single ranked score.</p>
+<p>Sensitivity analysis should identify important uncertain inputs, model forms, criteria weights, and thresholds. A large local derivative does not automatically mean large decision importance.</p>
+<p>Write results back as dated, versioned analysis runs and conclusions. The decision record identifies authority, selected option, conditions, dissent, residual risk, and revisit triggers.</p>
+<h3 id="worked-example-9">Worked example</h3>
+<p>Alternatives compare 8/10/12 vehicles, 50/100-kW charging, centralized/federated dispatch, and two accessibility layouts. The deterministic baseline favors 8 vehicles and four 100-kW chargers. Uncertainty analysis shows only a 0.42 probability of meeting winter accessible-wait and availability targets. A 10-vehicle mixed-layout alternative has higher cost but 0.88 joint compliance and lower regret. The ranking reverses if peak demand remains below 102 passengers/hour or if accessible boarding increment falls below 60 seconds. The recommendation becomes a staged 10-vehicle baseline with a demand confirmation gate.</p>
+<h3 id="guided-practice-9">Guided practice</h3>
+<ol>
+<li>Define alternatives, option points, scenarios, constraints, objectives, and uncertainties.</li>
+<li>Execute the model-linked trade study and generate feasibility/Pareto results.</li>
+<li>Perform sensitivity, threshold, and decision-reversal analysis.</li>
+<li>Conduct the Parametric Trade Study Review and revise the recommendation.</li>
+</ol>
+<h3 id="independent-exercises-9">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Identify dominated, infeasible, and incomparable alternatives from a small result table.</li>
+<li><strong>Application:</strong> Evaluate fleet, charger, dispatch, and accessibility alternatives across mild, winter, peak-event, and degraded scenarios.</li>
+<li><strong>Analysis:</strong> Test input uncertainty, model form, criteria weights, thresholds, and configuration assumptions for ranking changes.</li>
+<li><strong>Synthesis:</strong> Issue a bounded recommendation, conditions, residual risk, and revisit triggers in the model-based decision record.</li>
+<li><strong>Stretch:</strong> Automate alternative generation and result ingestion through the SysML v2 API, Cameo macros, or a reproducible configuration table.</li>
+</ul>
+<h3 id="weekly-deliverable-9">Weekly deliverable</h3>
+<p>Submit alternative/configuration definitions, objective and measure traces, constraints and scenarios, controlled run matrix, reproducible results, feasibility and Pareto analysis, uncertainty and sensitivity results, threshold and reversal conditions, model-linked result objects, recommendation and dissent, decision record, review findings, and revision.</p>
+<h3 id="analytic-rubric-9">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alternative and criterion integrity</td>
+<td style="text-align:right">25%</td>
+<td>Options, constraints, objectives, measures, and applicability are explicit and coherent.</td>
+</tr>
+<tr>
+<td>Analytic rigor</td>
+<td style="text-align:right">30%</td>
+<td>Runs, uncertainty, sensitivity, feasibility, and reversal analysis are reproducible and appropriate.</td>
+</tr>
+<tr>
+<td>Model integration</td>
+<td style="text-align:right">20%</td>
+<td>Configurations and results remain controlled and traceable without duplication.</td>
+</tr>
+<tr>
+<td>Decision quality</td>
+<td style="text-align:right">25%</td>
+<td>Recommendation, conditions, risks, dissent, and triggers match the evidence.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-9">Critical failures</h3>
+<ul>
+<li>Only one preferred design and cosmetic variations are analyzed.</li>
+<li>A weighted score hides infeasibility or noncompensable constraints.</li>
+<li>Uncertain inputs are fixed without justification.</li>
+<li>The model records the recommendation as an immutable fact without version, authority, or conditions.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-9">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is feasibility?</strong><br/>
+<em>Answer guidance:</em> Satisfaction of mandatory constraints and applicability conditions before preference comparison.</li>
+<li><strong>What is a decision reversal?</strong><br/>
+<em>Answer guidance:</em> A change in selected alternative caused by plausible changes in assumptions, evidence, model form, thresholds, or preferences.</li>
+<li><strong>What is robustness?</strong><br/>
+<em>Answer guidance:</em> Performance or preference stability across relevant uncertainty, scenarios, and assumptions.</li>
+<li><strong>Why preserve dissent?</strong><br/>
+<em>Answer guidance:</em> A minority technical judgment or stakeholder concern may become important when assumptions change.</li>
+<li><strong>What is an analysis run?</strong><br/>
+<em>Answer guidance:</em> A controlled execution identified by model, configuration, inputs, methods, environment, and outputs.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-9">Revision and mastery gate</h3>
+<p>The trade study must include at least three credible alternatives, mandatory feasibility, uncertainty and sensitivity, explicit reversal conditions, and a controlled recommendation whose conditions and authority are traceable in the model.</p>
+<h3 id="suggested-workload-9">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and experiment design</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>Alternative modeling and runs</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Uncertainty and sensitivity</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Review and revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-9">Configuration and portfolio update</h3>
+<p>Tag the trade-study model and analytic source, archive run manifests and result tables, and update the model decision, assumption, uncertainty, and risk registers.</p>
+<hr/>
+<h2 id="week-10--specify-physical-architectures-variants-configurations-instances-and-lifecycle-baselines">Week 10 — Specify physical architectures, variants, configurations, instances, and lifecycle baselines</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 9):</strong> <a href="../../K/B9/chapters/10-specify-physical-architectures-variants-configurations-instances-and.html">Chapter 10 — Specify physical architectures, variants, configurations, instances, and lifecycle baselines</a> · <a href="../../K/B9/labs/lab-10-specify-physical-architectures-variants-configurations-instances-and.html">Hypothetical Lab 10</a> · <a href="../../K/P3-text/lessons/645-632-w10.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C5, C10</p>
+<h3 id="professional-context-and-essential-question-10">Professional context and essential question</h3>
+<p>The selected direction must become a controlled physical solution family that supports procurement, integration, operation, maintenance, and evolution. <strong>Essential question:</strong> How can common architecture and valid variation be represented without uncontrolled duplication or configuration ambiguity?</p>
+<h3 id="weekly-learning-outcomes-10">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>map logical responsibilities to candidate physical hardware, software, human, facility, and organizational elements</li>
+<li>define physical decomposition, deployment, interfaces, properties, and realization relationships</li>
+<li>distinguish type, specialization, option, variant, configuration, instance, serial item, operating state, and lifecycle baseline</li>
+<li>represent common content, option points, applicability, inheritance, overrides, and constraints</li>
+<li>query configuration-specific requirements, interfaces, parameters, risks, and V&amp;V evidence</li>
+<li>complete Project Progress Submission 3 and the Physical/Configuration Baseline Review</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-10">Retrieval and readiness check</h3>
+<ol>
+<li>What is the difference between a variant and an instance?</li>
+<li>What is a baseline?</li>
+<li>When is specialization appropriate?</li>
+<li>Why can copy-and-modify corrupt configuration control?</li>
+</ol>
+<h3 id="required-study-10">Required study</h3>
+<ul>
+<li><strong>Course texts — blocks, specialization, composition, instances, packages, and allocations.</strong> <strong>Purpose:</strong> Apply structural and variation semantics. <strong>Guiding question:</strong> Which relationship expresses common type, variation, realization, and instance? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></li>
+<li><strong>NASA Systems Engineering Handbook — design solution, configuration management, product integration, and transition.</strong> <strong>Purpose:</strong> Connect architecture to lifecycle baselines and realization. <strong>Guiding question:</strong> Which baselines and authorities control the solution over time? <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li><strong>OMG SysML v2 variation, specialization, and configuration examples or selected-tool documentation.</strong> <strong>Purpose:</strong> Use current or track-equivalent variation mechanisms. <strong>Guiding question:</strong> How are option points and applicability constrained? <a href="https://www.omg.org/sysml/SysML-2.htm" title="OMG SysML v2 specification overview">OMG-SYSML2</a> <a href="https://github.com/Systems-Modeling/SysML-v2-Release" title="OMG Systems Modeling Community SysML v2 release repository">SYSML2-RELEASE</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-10">Instructor-style lesson notes</h3>
+<p>Physical architecture includes hardware, software, data stores, communication, humans, facilities, support equipment, suppliers, and organizational responsibilities where they are part of the realized system.</p>
+<p>Realization maps logical responsibility to physical implementation. Many-to-many mappings are common and should be explicit for integration, verification, safety, and change analysis.</p>
+<p>Use types for common definitions, variants for valid alternatives, configurations for selected combinations, and instances for actual or planned individual realizations. Operating state is not a product variant.</p>
+<p>Define option compatibility and applicability. A battery option may require a charger, thermal, software, mass, maintenance, and verification option set. Invalid combinations should be prevented or detected.</p>
+<p>Baselines identify approved configurations at lifecycle gates. Preserve as-designed, as-built, as-tested, as-deployed, and as-maintained differences where the decision requires them.</p>
+<h3 id="worked-example-10">Worked example</h3>
+<p>The common vehicle type has mobility, energy, compute, communication, passenger, accessibility, and safety subsystems. Variants include standard 8-seat, accessible 6-seat, and winter-enhanced accessible. A copied package initially carries an obsolete 76-kWh usable-energy value into the winter variant while the battery type now specifies 84 kWh. The learner replaces copies with specialization and property redefinition, adds compatibility rules between thermal kit and charger firmware, creates ten planned vehicle instances, and distinguishes the as-designed fleet configuration from the as-tested pilot configuration.</p>
+<h3 id="guided-practice-10">Guided practice</h3>
+<ol>
+<li>Map logical performers and behavior to physical elements.</li>
+<li>Define common physical architecture and at least three variants/options.</li>
+<li>Create compatibility/applicability rules and planned instances.</li>
+<li>Query configuration-specific evidence and conduct the Physical/Configuration Review.</li>
+</ol>
+<h3 id="independent-exercises-10">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Classify examples as type, variant, option, configuration, instance, state, or baseline.</li>
+<li><strong>Application:</strong> Build the vehicle, charger, service platform, operations center, passenger interface, maintenance, and campus infrastructure physical architecture.</li>
+<li><strong>Analysis:</strong> Detect invalid combinations, stale inherited values, unallocated logical responsibilities, and configuration-specific requirement/V&amp;V gaps.</li>
+<li><strong>Synthesis:</strong> Submit Project Progress Baseline 3 and a 10-minute configuration-focused walkthrough.</li>
+<li><strong>Stretch:</strong> Generate a bill of materials, configuration status account, or variant feature matrix directly from model content.</li>
+</ul>
+<h3 id="weekly-deliverable-10">Weekly deliverable</h3>
+<p>Submit logical-to-physical realization, physical decomposition/deployment and interfaces, common type and option/variant model, compatibility and applicability constraints, planned instances, as-designed/as-tested/as-deployed baselines, configuration-specific properties/requirements/V&amp;V, invalid-combination query results, generated configuration product, walkthrough, review record, and revised Project Progress Baseline 3.</p>
+<h3 id="analytic-rubric-10">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Physical realization</td>
+<td style="text-align:right">25%</td>
+<td>Logical responsibilities and constraints map coherently to physical elements and interfaces.</td>
+</tr>
+<tr>
+<td>Variation semantics</td>
+<td style="text-align:right">30%</td>
+<td>Types, options, variants, configurations, instances, states, and baselines are correctly distinguished.</td>
+</tr>
+<tr>
+<td>Configuration integrity</td>
+<td style="text-align:right">25%</td>
+<td>Compatibility, applicability, inheritance, overrides, and evidence are controlled.</td>
+</tr>
+<tr>
+<td>Lifecycle usefulness</td>
+<td style="text-align:right">20%</td>
+<td>Generated products support procurement, integration, test, deployment, and maintenance decisions.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-10">Critical failures</h3>
+<ul>
+<li>Variants are maintained as uncontrolled copied packages.</li>
+<li>A state or operating mode is represented as a product configuration.</li>
+<li>Invalid option combinations cannot be detected.</li>
+<li>As-designed and as-tested configurations are treated as identical despite known differences.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-10">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a variant?</strong><br/>
+<em>Answer guidance:</em> A valid alternative form of a common system or element defined by controlled variation.</li>
+<li><strong>What is an instance?</strong><br/>
+<em>Answer guidance:</em> A particular realized or planned individual with identity and values based on one or more types/configurations.</li>
+<li><strong>What is configuration applicability?</strong><br/>
+<em>Answer guidance:</em> The condition under which an element, requirement, interface, analysis, or V&amp;V item applies to a configuration.</li>
+<li><strong>What is a baseline?</strong><br/>
+<em>Answer guidance:</em> An approved, identified configuration used as a reference for control and further work.</li>
+<li><strong>Why preserve as-maintained configuration?</strong><br/>
+<em>Answer guidance:</em> Field changes, replacements, software versions, and repairs may alter performance, risk, and evidence applicability.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-10">Revision and mastery gate</h3>
+<p>The model must distinguish common and variable content, prevent or detect invalid combinations, trace logical responsibilities to physical realization, and report configuration-specific requirements, parameters, risks, and V&amp;V evidence for at least two baselines.</p>
+<h3 id="suggested-workload-10">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and classification</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>Physical and variation modeling</td>
+<td style="text-align:right">4.0</td>
+</tr>
+<tr>
+<td>Configuration queries/products</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Walkthrough, review, and revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-10">Configuration and portfolio update</h3>
+<p>Tag Project Baseline 3, archive the walkthrough, export configuration and applicability tables, and update model libraries, option decisions, and baseline records.</p>
+<hr/>
+<h2 id="week-11--extend-the-modeling-language-and-automate-queries-validation-rules-matrices-and-generated-products">Week 11 — Extend the modeling language and automate queries, validation rules, matrices, and generated products</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 9):</strong> <a href="../../K/B9/chapters/11-extend-the-modeling-language-and-automate-queries-validation-rules-m.html">Chapter 11 — Extend the modeling language and automate queries, validation rules, matrices, and generated products</a> · <a href="../../K/B9/labs/lab-11-extend-the-modeling-language-and-automate-queries-validation-rules-m.html">Hypothetical Lab 11</a> · <a href="../../K/P3-text/lessons/645-632-w11.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C10, C12</p>
+<h3 id="professional-context-and-essential-question-11">Professional context and essential question</h3>
+<p>Generic language constructs do not automatically express project-specific assurance, accessibility, analytic, or configuration concepts, and manual reviews do not scale. <strong>Essential question:</strong> What bounded language extension and automation will improve semantic quality without creating an ungoverned private language?</p>
+<h3 id="weekly-learning-outcomes-11">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>identify a genuine domain or methodology concept not adequately represented by existing language/library constructs</li>
+<li>design a minimal stereotype, annotation, library, or SysML v2 specialization with properties, constraints, and allowed relationships</li>
+<li>define governance, ownership, naming, documentation, versioning, validation, migration, and retirement rules</li>
+<li>build reusable queries, matrices, tables, validation rules, and generated reports</li>
+<li>test the extension and automation against positive, negative, boundary, and migration cases</li>
+<li>conduct the Model Quality and Domain Extension Review</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-11">Retrieval and readiness check</h3>
+<ol>
+<li>What is a profile?</li>
+<li>When should a model use a library instead of a language extension?</li>
+<li>What is a validation rule?</li>
+<li>Why can custom stereotypes reduce interoperability?</li>
+</ol>
+<h3 id="required-study-11">Required study</h3>
+<ul>
+<li><strong>JHU syllabus CLOs on extending SysML, queries, reports, verification, and advanced tool features.</strong> <strong>Purpose:</strong> Ensure the work demonstrates source-course capability. <strong>Guiding question:</strong> Which features must be shown in the final model? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></li>
+<li><strong>OMG SysML v2 specification/release materials on specialization, metadata, libraries, API, and validation.</strong> <strong>Purpose:</strong> Use current extension and automation semantics. <strong>Guiding question:</strong> Can the need be met through standard specialization or library content? <a href="https://www.omg.org/sysml/SysML-2.htm" title="OMG SysML v2 specification overview">OMG-SYSML2</a> <a href="https://github.com/Systems-Modeling/SysML-v2-Release" title="OMG Systems Modeling Community SysML v2 release repository">SYSML2-RELEASE</a></li>
+<li><strong>Cameo validation documentation or selected-tool equivalents.</strong> <strong>Purpose:</strong> Implement model-quality automation. <strong>Guiding question:</strong> How are rule scope, severity, message, and repair guidance defined? <a href="https://docs.nomagic.com/spaces/CRMP2024xR3/pages/227170843/Validation" title="Cameo model validation documentation">CAMEO-VALIDATION</a></li>
+<li><strong>NASA-HDBK-1009A metamodel and generated-product sections.</strong> <strong>Purpose:</strong> Preserve traceability to standard systems-engineering products. <strong>Guiding question:</strong> How will custom content appear in generated views and reports? <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-1009" title="NASA-HDBK-1009A — NASA Systems Modeling Handbook for Systems Engineering">NASA-HDBK-1009A</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-11">Instructor-style lesson notes</h3>
+<p>Extend only when a concept has stable semantics, repeated use, required properties/constraints, and review value. First test whether standard elements, specialization, value types, requirements, or a reusable library are sufficient.</p>
+<p>A good extension defines purpose, base element, properties, units, multiplicities, allowed relationships, constraints, notation, examples, anti-examples, owner, version, and migration path.</p>
+<p>Keep the extension small. Examples for this course include AccessibleServiceConstraint, AnalyticResult, EvidenceClaim, ModelUse, InterfaceContract, or ConfigurationApplicability. Do not recreate the entire project vocabulary as stereotypes.</p>
+<p>Automated quality combines queries, tables, matrices, validation rules, and generated products. Rules should have stable IDs, severity, rationale, scope, detection logic, repair guidance, false-positive handling, and tests.</p>
+<p>Report generation is not document export by screenshot. A generated product should include source element IDs, baseline/version, generation time, query/filter definition, and controlled narrative sections where human judgment is required.</p>
+<h3 id="worked-example-11">Worked example</h3>
+<p>The project repeatedly needs to connect a requirement or decision claim to an external analytic run with model version, code version, dataset hash, configuration, inputs, uncertainty, result, and validity conditions. Standard dependency plus comments is inconsistent, so the learner creates a minimal AnalyticResult extension/library concept, validation rules requiring provenance and applicability, a query listing stale results after property changes, and a generated evidence appendix. Migration tests show how existing ad hoc result blocks are converted and how the extension can map to SysML v2 metadata in a future tool.</p>
+<h3 id="guided-practice-11">Guided practice</h3>
+<ol>
+<li>Write an extension decision comparing standard language, library, and custom extension options.</li>
+<li>Define and implement one bounded extension with examples and constraints.</li>
+<li>Create at least five reusable model queries and three custom validation rules.</li>
+<li>Generate two engineering products and conduct the Model Quality and Domain Extension Review.</li>
+</ol>
+<h3 id="independent-exercises-11">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Critique extensions that merely rename standard elements, lack constraints, or embed project-specific values.</li>
+<li><strong>Application:</strong> Implement the selected extension/library and apply it to at least ten model elements.</li>
+<li><strong>Analysis:</strong> Test query/validation precision, recall, false positives, performance, and change behavior.</li>
+<li><strong>Synthesis:</strong> Deliver the extension guide, automation library, generated products, governance, and migration plan.</li>
+<li><strong>Stretch:</strong> Use the SysML v2 API, Cameo scripting, or EMF/Papyrus tooling to run validation and report generation in a repeatable command or workflow.</li>
+</ul>
+<h3 id="weekly-deliverable-11">Weekly deliverable</h3>
+<p>Submit the extension decision, metamodel/profile/library definition, property and relationship semantics, constraints and validation rules, examples/anti-examples, query library, matrices/tables, generated requirement/interface/evidence or V&amp;V products, tests and defect-seeding results, false-positive dispositions, governance and ownership, version/migration/retirement plan, review record, and revised model.</p>
+<h3 id="analytic-rubric-11">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Extension necessity and semantics</td>
+<td style="text-align:right">25%</td>
+<td>The need is genuine and the extension is minimal, precise, and compatible with standard language.</td>
+</tr>
+<tr>
+<td>Automation quality</td>
+<td style="text-align:right">30%</td>
+<td>Queries, validation, matrices, and reports detect meaningful issues and generate useful products.</td>
+</tr>
+<tr>
+<td>Testing and interoperability</td>
+<td style="text-align:right">25%</td>
+<td>Positive, negative, boundary, migration, and false-positive cases are controlled.</td>
+</tr>
+<tr>
+<td>Governance</td>
+<td style="text-align:right">20%</td>
+<td>Ownership, versioning, documentation, adoption, migration, and retirement are executable.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-11">Critical failures</h3>
+<ul>
+<li>The extension duplicates a standard construct without justification.</li>
+<li>Custom semantics exist only in diagram notation or tribal knowledge.</li>
+<li>Validation rules have no tests, stable IDs, or repair guidance.</li>
+<li>Generated products cannot identify their model baseline or source elements.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-11">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is a profile?</strong><br/>
+<em>Answer guidance:</em> A mechanism for extending a modeling language through defined stereotypes, properties, constraints, and notation without changing the base metamodel.</li>
+<li><strong>What is a model library?</strong><br/>
+<em>Answer guidance:</em> Reusable model content such as value types, definitions, patterns, requirements, or domain elements that may avoid language extension.</li>
+<li><strong>What is validation severity?</strong><br/>
+<em>Answer guidance:</em> The classified consequence and required response when a model rule is violated.</li>
+<li><strong>What is a false positive?</strong><br/>
+<em>Answer guidance:</em> A rule reports a violation even though the modeled content is acceptable for the stated context.</li>
+<li><strong>Why plan migration?</strong><br/>
+<em>Answer guidance:</em> Extensions, tools, and standards evolve; model content must move without semantic loss or permanent vendor lock-in.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-11">Revision and mastery gate</h3>
+<p>The learner must justify and govern one bounded extension or library, demonstrate tested queries and validation rules that find seeded defects, and generate at least two traceable engineering products from the controlled model.</p>
+<h3 id="suggested-workload-11">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study and extension decision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>Queries, validation, and reports</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>Testing, review, and revision</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-11">Configuration and portfolio update</h3>
+<p>Version the extension/library separately, record dependencies and compatible tool versions, preserve validation tests and generated product templates, and baseline the automation package.</p>
+<hr/>
+<h2 id="week-12--verify-and-validate-the-model-assess-the-design-respond-to-change-and-defend-the-final-baseline">Week 12 — Verify and validate the model, assess the design, respond to change, and defend the final baseline</h2>
+<blockquote>
+<p><strong>Companion reading (Library, Book 9):</strong> <a href="../../K/B9/chapters/12-verify-and-validate-the-model-assess-the-design-respond-to-change-an.html">Chapter 12 — Verify and validate the model, assess the design, respond to change, and defend the final baseline</a> · <a href="../../K/B9/labs/lab-12-verify-and-validate-the-model-assess-the-design-respond-to-change-an.html">Hypothetical Lab 12</a> · <a href="../../K/P3-text/lessons/645-632-w12.html">Short review primer</a>. Read the book and attempt the lab before completing this week's independent assignment and rubric.</p>
+</blockquote>
+<p><strong>Primary competency emphasis:</strong> C3, C6, C7, C9, C12</p>
+<h3 id="professional-context-and-essential-question-12">Professional context and essential question</h3>
+<p>The final model must support a real design recommendation and survive independent challenge. <strong>Essential question:</strong> Is the integrated model correct, credible, current, and sufficient for selecting and baselining the winter/accessibility expansion architecture?</p>
+<h3 id="weekly-learning-outcomes-12">Weekly learning outcomes</h3>
+<p>By the end of the week, the learner will be able to:</p>
+<ul>
+<li>integrate stakeholder, behavior, logical, physical, interface, requirement, parametric, configuration, V&amp;V, risk, and decision evidence</li>
+<li>verify model syntax, semantics, calculations, queries, generation, and configuration behavior</li>
+<li>validate model scope, assumptions, behavior, measures, and analytic adequacy for the intended decision</li>
+<li>assess design feasibility, requirement compliance, robustness, residual risk, evidence gaps, and readiness</li>
+<li>respond to a live change or defect using queries, impact analysis, rerun, and controlled revision</li>
+<li>navigate and defend the final model and issue a bounded design recommendation</li>
+</ul>
+<h3 id="retrieval-and-readiness-check-12">Retrieval and readiness check</h3>
+<ol>
+<li>What is model verification?</li>
+<li>What is model validation?</li>
+<li>What is design assessment?</li>
+<li>What evidence distinguishes an accepted model use from an approved system design?</li>
+</ol>
+<h3 id="required-study-12">Required study</h3>
+<ul>
+<li><strong>JHU Fall 2026 syllabus — model V&amp;V and reviewing/assessing design topics.</strong> <strong>Purpose:</strong> Confirm the capstone demonstrates all source-course CLOs. <strong>Guiding question:</strong> Can the learner show advanced tool features and an integrated model? <a href="https://apps.ep.jhu.edu/syllabus/fall-2026/645.632.81" title="Fall 2026 public syllabus for EN.645.632">JHU-632-SYLLABUS</a></li>
+<li><strong>NASA-HDBK-1009A V&amp;V metamodel and generated V&amp;V products.</strong> <strong>Purpose:</strong> Complete requirements, planning, results, reports, and traceability. <strong>Guiding question:</strong> Which model elements demonstrate V&amp;V evidence coverage? <a href="https://standards.nasa.gov/standard/NASA/NASA-HDBK-1009" title="NASA-HDBK-1009A — NASA Systems Modeling Handbook for Systems Engineering">NASA-HDBK-1009A</a></li>
+<li><strong>NASA Systems Engineering Handbook — technical assessment, decision analysis, configuration, verification, and validation.</strong> <strong>Purpose:</strong> Separate evidence, recommendation, and authority. <strong>Guiding question:</strong> What unresolved evidence prevents a baseline decision? <a href="https://www.nasa.gov/reference/systems-engineering-handbook/" title="NASA Systems Engineering Handbook">NASA-SEH</a></li>
+<li><strong>Selected tool validation/simulation documentation.</strong> <strong>Purpose:</strong> Run the final model-quality and execution checks. <strong>Guiding question:</strong> Which defects are tool-detectable and which require review? <a href="https://docs.nomagic.com/spaces/CRMP2024xR3/pages/227170843/Validation" title="Cameo model validation documentation">CAMEO-VALIDATION</a> <a href="https://docs.nomagic.com/spaces/CST2024x/pages/136729316/Validation+and+verification" title="Cameo Simulation Toolkit validation and verification">CAMEO-SIM-VV</a></li>
+</ul>
+<h3 id="instructor-style-lesson-notes-12">Instructor-style lesson notes</h3>
+<p>Build an explicit evidence chain: decision and intended use → stakeholder outcomes → scenarios and measures → behavior → logical and physical architecture → interfaces → requirements → analyses and results → V&amp;V evidence → risk and recommendation.</p>
+<p>Model verification includes schema/rule validation, semantic review, relationship and coverage queries, executable calculation tests, report-generation checks, configuration/variant tests, and reproducibility from controlled source.</p>
+<p>Model validation is intended-use dependent. Compare behavior and outputs with source evidence, subject-matter expertise, test/operational data, prior accepted models, and stakeholder review. Document disagreement and limits.</p>
+<p>Design assessment considers feasibility, completeness, margins, requirement compliance, integration/test readiness, affordability, supportability, accessibility, safety, cybersecurity, robustness, and residual risk. A model may be valid while the design remains unacceptable.</p>
+<p>The live challenge changes one consequential element: a new accessibility regulation, a colder weather distribution, a charger supplier change, a discovered timing defect, or a revised budget. The learner must use the model to find and revise impacts rather than narrate them from memory.</p>
+<h3 id="worked-example-12">Worked example</h3>
+<p>The final recommendation selects a 10-vehicle mixed accessible fleet with four 100-kW chargers, separated safety authorization, and staged winter deployment. During the defense, a supplier changes charger efficiency from 0.94 to 0.86 and removes a communication feature. The impact query identifies energy-margin equations, charging interfaces, one state transition, two requirements, three variants, seven verification cases, the cost model, and the generated interface specification. The rerun reduces joint compliance probability from 0.88 to 0.71. The learner revises the recommendation to qualify an alternate charger or add a fifth charger before full winter deployment and updates the decision conditions.</p>
+<h3 id="guided-practice-12">Guided practice</h3>
+<ol>
+<li>Generate the final evidence-chain and coverage products.</li>
+<li>Run complete model verification, seeded-defect tests, and reproducibility checks.</li>
+<li>Conduct intended-use validation and the design assessment with independent red-team questions.</li>
+<li>Perform the live challenge, recorded walkthrough, oral defense, and final controlled revision.</li>
+</ol>
+<h3 id="independent-exercises-12">Independent exercises</h3>
+<ul>
+<li><strong>Foundation:</strong> Audit every critical mastery criterion and close or formally accept each issue.</li>
+<li><strong>Application:</strong> Complete and regenerate the final authoritative model, reports, queries, validations, and analytic results from controlled source.</li>
+<li><strong>Analysis:</strong> Challenge assumptions, alternatives, configuration applicability, model form, thresholds, interfaces, and V&amp;V coverage.</li>
+<li><strong>Synthesis:</strong> Conduct the Final Integrated Model and Design Assessment and issue the controlled recommendation.</li>
+<li><strong>Stretch:</strong> Create a continuous-integration workflow that validates the textual/model export, runs analytic tests, executes quality queries, and rebuilds selected reports on each controlled change.</li>
+</ul>
+<h3 id="weekly-deliverable-12">Weekly deliverable</h3>
+<p>Submit the final native model and machine-readable exports, model plan and method, all four project baselines, complete evidence-chain map, query and validation suite/results, analytic source/environment/tests/results, variant/configuration/baseline model, extension/library, generated products, model V&amp;V report, design assessment and decision record, residual risk and evidence gaps, live-challenge impact/rerun/revision, 15-minute maximum walkthrough, oral-defense record, review findings and dispositions, portfolio manifest, and EN.645.758 handoff.</p>
+<h3 id="analytic-rubric-12">Analytic rubric</h3>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Weight</th>
+<th>Evidence of mastery</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integrated evidence chain</td>
+<td style="text-align:right">30%</td>
+<td>All critical model pillars, analyses, configurations, V&amp;V, risks, and decisions are coherent and traceable.</td>
+</tr>
+<tr>
+<td>Verification and validation</td>
+<td style="text-align:right">25%</td>
+<td>Semantic, computational, automation, configuration, reproducibility, and intended-use evidence is sufficient and bounded.</td>
+</tr>
+<tr>
+<td>Design assessment</td>
+<td style="text-align:right">20%</td>
+<td>Feasibility, compliance, robustness, risk, gaps, and conditions support the recommendation.</td>
+</tr>
+<tr>
+<td>Defense and adaptability</td>
+<td style="text-align:right">25%</td>
+<td>The learner navigates, reproduces, explains, challenges, and revises the model responsibly.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-failures-12">Critical failures</h3>
+<ul>
+<li>A critical result, query, or generated product cannot be reproduced from controlled source.</li>
+<li>The final model contains unresolved critical semantic or configuration defects.</li>
+<li>Model validity is claimed without intended-use evidence or limitations.</li>
+<li>The live challenge is dismissed, hidden, or handled outside configuration control to preserve the preferred recommendation.</li>
+</ul>
+<h3 id="knowledge-check-and-answer-guidance-12">Knowledge check and answer guidance</h3>
+<ol>
+<li><strong>What is model verification?</strong><br/>
+<em>Answer guidance:</em> Evidence that the model and its implementations, equations, queries, transformations, and configurations conform to their specifications and intended logic.</li>
+<li><strong>What is model validation?</strong><br/>
+<em>Answer guidance:</em> Evidence that the model is an adequate representation for its stated intended use.</li>
+<li><strong>What is design assessment?</strong><br/>
+<em>Answer guidance:</em> Evaluation of whether the proposed design, based on integrated evidence, is feasible, compliant, robust, supportable, and ready for a decision or next lifecycle step.</li>
+<li><strong>Why separate recommendation from authority?</strong><br/>
+<em>Answer guidance:</em> A model-based technical recommendation does not replace customer, safety, regulatory, contractual, or program decision authority.</li>
+<li><strong>What is the final responsibility of the model-based analyst?</strong><br/>
+<em>Answer guidance:</em> State what the evidence supports, what it does not, residual risk, decision conditions, and what would change the conclusion.</li>
+</ol>
+<h3 id="revision-and-mastery-gate-12">Revision and mastery gate</h3>
+<p>The learner must reproduce the model and analytic evidence, pass the walkthrough and oral defense, respond correctly to the live challenge, close all critical findings, and issue a final recommendation whose authority, intended use, uncertainty, limitations, conditions, and revisit triggers are explicit.</p>
+<h3 id="suggested-workload-12">Suggested workload</h3>
+<table>
+<thead>
+<tr>
+<th>Activity</th>
+<th style="text-align:right">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Final integration and report generation</td>
+<td style="text-align:right">3.5</td>
+</tr>
+<tr>
+<td>Verification, validation, and red team</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Live challenge and defense</td>
+<td style="text-align:right">3.0</td>
+</tr>
+<tr>
+<td>Revision and handoff</td>
+<td style="text-align:right">2.0</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align:right"><strong>11.5</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-and-portfolio-update-12">Configuration and portfolio update</h3>
+<p>Tag the final release, preserve native and neutral exports, archive the environment and runbook, record model/tool/profile/library versions, and complete the downstream handoff and portfolio manifest.</p>
+<hr/>
+<h2 id="references">References</h2>
+<p><a href="OVERVIEW.html">Back to Phase 3 README</a> · <a href="OVERVIEW.html">Back to program README</a></p>
+</main></body></html>

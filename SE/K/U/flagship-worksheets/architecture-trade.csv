@@ -1,0 +1,4 @@
+alternative,response_value,safety_value,affordability_value,hard_constraints_met,source_or_uncertainty,review_status
+A,0.85,0.75,0.95,yes,Hypothetical values; must elicit,candidate
+B,0.75,0.95,0.7,yes,Hypothetical values; must elicit,candidate
+C,0.65,0.88,0.9,yes,Hypothetical values; must elicit,candidate

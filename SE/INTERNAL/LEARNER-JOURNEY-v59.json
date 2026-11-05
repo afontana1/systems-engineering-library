@@ -1,0 +1,38 @@
+{
+  "release": "v59",
+  "scope": "Learner-journey audit, repair and continuity",
+  "journey_count": 6,
+  "journey_step_count": 24,
+  "journey_ids": [
+    "needs",
+    "safety",
+    "simulation",
+    "trade",
+    "interfaces",
+    "mbse"
+  ],
+  "link_fixes": {
+    "standalone_phase4_fragments": 12,
+    "graduate_reader_anchor_links": 10,
+    "book_reader_lab_catalog_hashes": 20,
+    "home_workshop_link": 1
+  },
+  "learner_disclosure": "Unmarked/visited is not graded mastery; browser-local storage is optional.",
+  "validations": {
+    "html_pages": 1269,
+    "local_targets_resolved": 23220,
+    "dynamic_lab_frags": 260,
+    "dynamic_atlas_frags": 162,
+    "browser_interactions_passed": 16,
+    "browser_interactions_total": 16,
+    "original_files_unchanged": 3134,
+    "modified_original_files": 37,
+    "deleted_original_files": 0
+  },
+  "limitations": [
+    "No human usability tests",
+    "Browser does not allow native file URL navigation",
+    "Progress stored locally only if browser allows it",
+    "Not a full textbook correctness or screen-reader audit"
+  ]
+}

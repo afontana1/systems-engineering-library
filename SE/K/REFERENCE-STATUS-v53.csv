@@ -1,0 +1,57 @@
+slug,title,revision,internal_review,selected_claim_sources,external_peer_review
+system-of-interest,"System of interest: purpose, boundary, and evidence",v51,earlier internal review retained,earlier trace retained,not performed
+boundaries-and-interfaces,Boundaries and interfaces: where local correctness meets system risk,v51,earlier internal review retained,earlier trace retained,not performed
+stakeholders-and-needs,"Stakeholders, needs, and value: translating plural interests into engineering decisions",v51,earlier internal review retained,earlier trace retained,not performed
+conops-and-scenarios,Concept of operations and scenarios,v51,earlier internal review retained,earlier trace retained,not performed
+good-requirements,"Requirements: precise obligations, not persuasive sentences",v50,earlier internal review retained,earlier trace retained,not performed
+v-and-v,"Verification, validation, and acceptance: the three different decisions",v50,earlier internal review retained,earlier trace retained,not performed
+wbs-and-baselines,Work breakdown structures and technical baselines,v51,earlier internal review retained,earlier trace retained,not performed
+risk-vs-issue,"Risk, issue, uncertainty, and opportunity",v51,earlier internal review retained,earlier trace retained,not performed
+model-language-method-tool,"Model, method, language, tool, and repository",v51,earlier internal review retained,earlier trace retained,not performed
+views-and-viewpoints,"Architecture views, viewpoints, and consistency",v51,earlier internal review retained,earlier trace retained,not performed
+traceability-graph,Requirements traceability: a typed graph of engineering claims,v51,earlier internal review retained,earlier trace retained,not performed
+object-responsibilities,Object-oriented domain models and responsibilities,v51,earlier internal review retained,earlier trace retained,not performed
+software-quality-attributes,Software quality attributes and architectural tactics,v51,earlier internal review retained,earlier trace retained,not performed
+software-lifecycle-evidence,"CI/CD, configuration, and software assurance",v51,earlier internal review retained,earlier trace retained,not performed
+functional-vs-physical,"Functional, logical, and physical architecture: preserving intent across realization",v51,earlier internal review retained,earlier trace retained,not performed
+allocation-matrix,"Allocation, coverage, and design responsibility",v51,earlier internal review retained,earlier trace retained,not performed
+interface-control,Interface control and integration contracts,v51,earlier internal review retained,earlier trace retained,not performed
+integration-strategy,Integration build-up and readiness evidence,v51,earlier internal review retained,earlier trace retained,not performed
+verification-matrix,Verification cross-reference matrices and test design,v50,earlier internal review retained,earlier trace retained,not performed
+engineering-trades,Engineering trade studies: making preferences and uncertainty inspectable,v50,earlier internal review retained,earlier trace retained,not performed
+metrics-hierarchy,Measures of effectiveness and performance,v51,earlier internal review retained,earlier trace retained,not performed
+probability-and-dependence,"Probability, dependence, and technical uncertainty",v50,earlier internal review retained,earlier trace retained,not performed
+conceptual-m-and-s,Conceptual modeling and intended use,v51,earlier internal review retained,earlier trace retained,not performed
+discrete-event-simulation,Discrete-event simulation and queues,v50,earlier internal review retained,earlier trace retained,not performed
+stocks-flows-feedback,"Stocks, flows, and feedback loops",v50,earlier internal review retained,earlier trace retained,not performed
+model-vv-and-credibility,"Simulation verification, validation, and credibility",v50,earlier internal review retained,earlier trace retained,not performed
+design-of-experiments,Design of experiments and sensitivity,v50,earlier internal review retained,earlier trace retained,not performed
+pareto-and-value,Pareto frontiers and multiobjective decisions,v50,earlier internal review retained,earlier trace retained,not performed
+bayesian-value-of-information,Decision uncertainty and value of information,v50,earlier internal review retained,earlier trace retained,not performed
+agile-tailoring,Agile systems engineering and lifecycle tailoring,v51,earlier internal review retained,earlier trace retained,not performed
+flow-wip-and-queues,"Flow, work in process, and bottlenecks",v50,earlier internal review retained,earlier trace retained,not performed
+digital-thread-and-twin,Digital thread and digital twin: preserving engineering meaning across time,v50,earlier internal review retained,earlier trace retained,not performed
+mission-engineering,Mission threads and capability analysis,v51,earlier internal review retained,earlier trace retained,not performed
+process-improvement,Process capability and continuous improvement,v50,earlier internal review retained,earlier trace retained,not performed
+sos-characteristics,Systems of systems: constituent autonomy and emergent mission performance,v51,earlier internal review retained,earlier trace retained,not performed
+enterprise-as-system,The enterprise as a system,v51,earlier internal review retained,earlier trace retained,not performed
+complexity-emergence,"Complexity, emergence, and adaptation",v51,earlier internal review retained,earlier trace retained,not performed
+authority-and-governance,"Authority, governance, and coordination",v51,earlier internal review retained,earlier trace retained,not performed
+resilience-adaptability,"Resilience, robustness, and graceful degradation",v50,earlier internal review retained,earlier trace retained,not performed
+intervention-and-learning,"Interventions, policy resistance, and learning loops",v51,earlier internal review retained,earlier trace retained,not performed
+system-safety-and-hazards,"System safety engineering: hazards, controls, and residual risk",v52,earlier internal review retained,earlier trace retained,not performed
+reliability-availability-maintainability,"Reliability, availability, and maintainability: three different promises",v52,earlier internal review retained,earlier trace retained,not performed
+human-systems-integration,Human systems integration: people are part of the architecture,v52,earlier internal review retained,earlier trace retained,not performed
+formal-verification-and-temporal-logic,"Formal verification: state, invariants, temporal logic, and proof boundaries",v52,earlier internal review retained,earlier trace retained,not performed
+statistical-acceptance-and-confidence,Statistical acceptance: sampling decisions are not proofs of perfection,v52,earlier internal review retained,earlier trace retained,not performed
+robust-optimization-and-margins,Robust optimization and technical margins: good decisions across plausible futures,v52,earlier internal review retained,earlier trace retained,not performed
+systems-security-engineering,"Systems security engineering: protect the mission, not just the network",v52,earlier internal review retained,earlier trace retained,not performed
+assurance-cases-and-evidence,Assurance cases: what evidence supports which engineering claim?,v52,earlier internal review retained,earlier trace retained,not performed
+lifecycle-sustainment-economics,Life-cycle sustainment economics: cost after delivery is a design variable,v53,"v53 new entry, arithmetic and structure checks",2,not performed
+configuration-assurance-and-change-control,Configuration assurance: proving that the tested design is the delivered design,v53,"v53 new entry, arithmetic and structure checks",2,not performed
+supply-chain-assurance-and-provenance,"Supply-chain assurance: provenance, substitutions, and hidden dependencies",v53,"v53 new entry, arithmetic and structure checks",2,not performed
+technical-data-governance-and-lineage,"Technical data governance: lineage, meaning, and controlled reuse",v53,"v53 new entry, arithmetic and structure checks",2,not performed
+environmental-qualification-and-test-levels,Environmental qualification: test severity is not operational realism,v53,"v53 new entry, arithmetic and structure checks",2,not performed
+test-fidelity-and-similarity,Test fidelity and similarity: deciding what laboratory evidence transfers,v53,"v53 new entry, arithmetic and structure checks",2,not performed
+obsolescence-and-technology-refresh,Obsolescence and technology refresh: planning for vanishing parts,v53,"v53 new entry, arithmetic and structure checks",2,not performed
+measurement-traceability-and-calibration,Measurement traceability and calibration: accuracy is a chain of evidence,v53,"v53 new entry, arithmetic and structure checks",2,not performed

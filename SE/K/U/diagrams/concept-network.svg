@@ -1,0 +1,46 @@
+<svg viewBox="0 0 1200 480" role="img" aria-label="Editorial network of fourteen systems engineering concepts, arrows are learning connections" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#9bb9bd"/></marker></defs>
+<path d="M135 117 Q250 106 365 117" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M135 117 Q600 106 1065 117" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M135 117 Q370 250 605 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M135 117 Q488 250 840 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M365 117 Q485 106 605 117" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M365 117 Q365 178 365 261" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M365 117 Q250 250 135 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M605 117 Q722 106 840 117" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M605 117 Q835 178 1065 261" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M605 117 Q370 250 135 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M840 117 Q952 178 1065 261" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M840 117 Q602 250 365 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M1065 117 Q715 178 365 261" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M1065 117 Q835 178 605 261" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M1065 117 Q835 250 605 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M135 261 Q250 322 365 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M135 261 Q488 250 840 261" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M365 261 Q485 250 605 261" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M365 261 Q602 322 840 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M605 261 Q722 250 840 261" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M605 261 Q835 250 1065 261" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M605 261 Q370 322 135 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M840 261 Q602 322 365 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M840 261 Q840 322 840 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M1065 261 Q835 322 605 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M135 405 Q250 394 365 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M135 405 Q370 394 605 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M365 405 Q602 394 840 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<path d="M605 405 Q722 394 840 405" fill="none" stroke="#bdd1d2" stroke-width="1.8" opacity=".53" marker-end="url(#arr)"/>
+<a href="#doc=d8d7a71d29e2b"><g><rect x="30" y="69" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="53" cy="96" r="13" fill="#176876"/><text x="53" y="101" text-anchor="middle" font-size="10" fill="white">1</text><text x="74" y="100" fill="#173d51" font-size="13.2" font-weight="650">Outcomes &amp; boundar…</text></g></a>
+<a href="#doc=d12248df0cd4a"><g><rect x="260" y="69" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="283" cy="96" r="13" fill="#176876"/><text x="283" y="101" text-anchor="middle" font-size="10" fill="white">2</text><text x="304" y="100" fill="#173d51" font-size="13.2" font-weight="650">Requirements &amp; evi…</text></g></a>
+<a href="#doc=d4269179dac9b"><g><rect x="500" y="69" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="523" cy="96" r="13" fill="#176876"/><text x="523" y="101" text-anchor="middle" font-size="10" fill="white">3</text><text x="544" y="100" fill="#173d51" font-size="13.2" font-weight="650">Architecture &amp; sta…</text></g></a>
+<a href="#doc=d38dbe6750f6b"><g><rect x="735" y="69" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="758" cy="96" r="13" fill="#176876"/><text x="758" y="101" text-anchor="middle" font-size="10" fill="white">4</text><text x="779" y="100" fill="#173d51" font-size="13.2" font-weight="650">Software quality</text></g></a>
+<a href="#doc=d13f36d9f6f89"><g><rect x="960" y="69" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="983" cy="96" r="13" fill="#176876"/><text x="983" y="101" text-anchor="middle" font-size="10" fill="white">5</text><text x="1004" y="100" fill="#173d51" font-size="13.2" font-weight="650">Trades &amp; uncertain…</text></g></a>
+<a href="#doc=d17447c58f326"><g><rect x="30" y="213" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="53" cy="240" r="13" fill="#176876"/><text x="53" y="245" text-anchor="middle" font-size="10" fill="white">6</text><text x="74" y="244" fill="#173d51" font-size="13.2" font-weight="650">Cost &amp; project con…</text></g></a>
+<a href="#doc=d3f93f640cf87"><g><rect x="260" y="213" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="283" cy="240" r="13" fill="#176876"/><text x="283" y="245" text-anchor="middle" font-size="10" fill="white">7</text><text x="304" y="244" fill="#173d51" font-size="13.2" font-weight="650">Experimental evidence</text></g></a>
+<a href="#doc=d9cb8767d0e88"><g><rect x="500" y="213" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="523" cy="240" r="13" fill="#176876"/><text x="523" y="245" text-anchor="middle" font-size="10" fill="white">8</text><text x="544" y="244" fill="#173d51" font-size="13.2" font-weight="650">Model credibility</text></g></a>
+<a href="#doc=de3de2535685c"><g><rect x="735" y="213" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="758" cy="240" r="13" fill="#176876"/><text x="758" y="245" text-anchor="middle" font-size="10" fill="white">9</text><text x="779" y="244" fill="#173d51" font-size="13.2" font-weight="650">Queues &amp; feedback</text></g></a>
+<a href="#doc=d7cb5aab904e4"><g><rect x="960" y="213" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="983" cy="240" r="13" fill="#176876"/><text x="983" y="245" text-anchor="middle" font-size="10" fill="white">10</text><text x="1004" y="244" fill="#173d51" font-size="13.2" font-weight="650">Reliability &amp; resi…</text></g></a>
+<a href="#doc=db16a19388347"><g><rect x="30" y="357" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="53" cy="384" r="13" fill="#176876"/><text x="53" y="389" text-anchor="middle" font-size="10" fill="white">11</text><text x="74" y="388" fill="#173d51" font-size="13.2" font-weight="650">Digital thread &amp; t…</text></g></a>
+<a href="#doc=d2608b73ec79e"><g><rect x="260" y="357" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="283" cy="384" r="13" fill="#176876"/><text x="283" y="389" text-anchor="middle" font-size="10" fill="white">12</text><text x="304" y="388" fill="#173d51" font-size="13.2" font-weight="650">Agility &amp; assurance</text></g></a>
+<a href="#doc=d59b0dde78cc3"><g><rect x="500" y="357" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="523" cy="384" r="13" fill="#176876"/><text x="523" y="389" text-anchor="middle" font-size="10" fill="white">13</text><text x="544" y="388" fill="#173d51" font-size="13.2" font-weight="650">SoS &amp; enterprise g…</text></g></a>
+<a href="#doc=d25aa76c53fda"><g><rect x="735" y="357" width="210" height="55" rx="12" fill="#fcffff" stroke="#8fb5c2" stroke-width="1.4"/><circle cx="758" cy="384" r="13" fill="#176876"/><text x="758" y="389" text-anchor="middle" font-size="10" fill="white">14</text><text x="779" y="388" fill="#173d51" font-size="13.2" font-weight="650">Causal &amp; ethical i…</text></g></a>
+</svg>

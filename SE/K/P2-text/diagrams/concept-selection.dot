@@ -1,0 +1,5 @@
+digraph G {graph [rankdir=LR,bgcolor="transparent",nodesep="0.35",ranksep="0.5",label="Decision logic (a score never overrides a mandatory gate)",labelloc="t",fontname="DejaVu Sans",fontsize=14];node [shape=box,style="rounded,filled",color="#bad2df",fillcolor="#ecf6fb",fontname="DejaVu Sans",fontsize=10];edge [color="#4082a2",penwidth=1.5];problem [label="Mission and 
+uncertainties"];families [label="Diverse concept
+families"];gate [label="Hard feasibility
+checks",shape=diamond,fillcolor="#fff2dc"];value [label="Value and tradeoffs"];unc [label="Uncertainty + DOE"];choice [label="Defensible down-select
+with closure conditions"];reject [label="Exclude / revisit",fillcolor="#ffecec"];problem->families->gate;gate->value [label="Pass"];gate->reject [label="Fail"];value->unc->choice;}

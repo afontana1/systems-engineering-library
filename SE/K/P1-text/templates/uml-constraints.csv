@@ -1,0 +1,2 @@
+constraint_id,context,type,expression,natural_language,counterexample,test_id
+INV-01,Trip,invariant,at most one active assignment,Trip may not have 2 live assignments,Two assignments for one trip,T-INV-01

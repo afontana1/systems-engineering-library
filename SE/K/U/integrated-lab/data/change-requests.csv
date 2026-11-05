@@ -1,0 +1,3 @@
+change_id,proposal,source,requirements_affected,interfaces_affected,tests_affected,risks_affected,approval_status
+CR-001,Support groups of two passengers,Operations,REQ-07,IF-01;IF-02,T-07,RISK-04,Pending analysis
+CR-002,Support intermittent network delivery,SoftwareLead,REQ-01;REQ-08,IF-01;IF-02,T-01;T-08,RISK-03,Pending analysis

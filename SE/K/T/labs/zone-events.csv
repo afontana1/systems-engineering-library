@@ -1,0 +1,6 @@
+decision_time,last_valid_time,zone_clear,signature_valid,current_revision,expected_permit
+12,8,true,true,true,true
+12,4,true,true,true,false
+12,9,false,true,true,false
+12,8,true,false,true,false
+12,8,true,true,false,false

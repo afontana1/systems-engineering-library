@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Decision analysis, risk preferences, and value of information · Systems Engineering Library</title><style>*{box-sizing:border-box}body{background:#f4f7f8;margin:0;color:#193847;font:16px/1.76 system-ui,"Segoe UI",Arial,sans-serif}header{background:linear-gradient(112deg,#1b3a50,#137477);padding:30px max(18px,calc((100vw - 1060px)/2));color:white}header a{color:#e0fbfa}header h1{font-size:clamp(1.65rem,3vw,2.5rem);line-height:1.15;margin:.3em 0}header p{color:#dbf0f0;max-width:85ch}main{max-width:1070px;background:#fff;border:1px solid #d6e4e5;border-radius:12px;margin:28px auto 60px;padding:clamp(20px,4vw,55px)}article{max-width:91ch;margin:auto}h2{font-size:1.43em;margin-top:2em;border-bottom:1px solid #dbe6e8;padding-bottom:6px}h3{font-size:1.13em;margin-top:1.6em}a{color:#08757a;text-underline-offset:3px}p,li{max-width:90ch}table{border-collapse:collapse;max-width:100%;width:100%}td,th{border:1px solid #d4e2e4;padding:10px;text-align:left}th{background:#eaf5f4}blockquote{border-left:4px solid #238887;margin-left:0;background:#edf7f6;padding:10px 18px}pre{background:#183449;color:#e8f3f4;padding:16px;overflow-x:auto}code{font-size:.92em}p code{padding:1px 4px;background:#e8f2f4}details{padding:13px 17px;margin:16px 0;background:#edf6f5;border-radius:8px;border:1px solid #cee2e1}summary{font-weight:700;cursor:pointer}.links{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.links a{padding:7px 13px;background:#e7f3f2;border-radius:6px;font-weight:700}.figure{margin:26px 0;text-align:center}.figure img{max-width:100%;max-height:340px}.math-block{margin:18px 0;overflow-x:auto}mjx-container[jax=SVG]{max-width:100%;overflow-x:auto;overflow-y:hidden}article hr{border:0;border-top:1px solid #dbe6e8;margin:36px 0}@media(max-width:750px){header{padding:25px 18px}main{margin:0;border:0;border-radius:0}}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:"local"},startup:{typeset:false},options:{skipHtmlTags:["script","style","noscript","textarea","pre","code"]}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/GS/chapters/14-decision-science.html" data-se-mode="standard"></script>
+</head><body><header><small>Graduate textbook studies · Systems Engineering</small><h1>Decision analysis, risk preferences, and value of information</h1><p><a href="../INDEX.html">Graduate studies</a> · <a href="../../OPEN-BOOKS.html">All companion books</a></p></header><main><article><h1>Decision analysis, risk preferences, and value of information</h1>
+<p><em>Graduate study for Book 14 — Decision Science and Analytics. Companion to the existing course materials; the definitions, mathematics and decisions below are educational rather than operational approvals.</em></p>
+<h2>The governing question</h2>
+<blockquote>
+<p>How can two technically informed decision makers rationally choose different architectures from the same data?</p>
+</blockquote>
+<h2>Theory and conceptual structure</h2>
+<p>Engineering decisions require a distinction among <strong>feasibility</strong>, <strong>facts</strong>, <strong>preferences</strong>, and <strong>uncertainty</strong>. Hard safety and legal constraints should reject infeasible options before compensatory scoring. Within the feasible set, a value or utility model makes preferences explicit. A weighted sum is legitimate only when scales, independence conditions and tradeoff meaning have been justified. A weight of 0.6 does not automatically mean an attribute is “60% important”; it specifies a marginal tradeoff under the chosen scaling.</p>
+<p>Expected-value decisions are not equivalent to expected-utility decisions when stakeholders are risk-averse or outcomes have asymmetric consequences. The distinction is acute for emergencies: an option with slightly lower expected waiting time but a fat tail of dangerous delays may be unacceptable. Use scenario trees or utility functions and show who bears the downside. Avoid collapsing an entire distribution into a single mean without an accompanying constraint or risk measure.</p>
+<p>Value of information asks whether learning can change a decision enough to justify its cost. <strong>Expected value of perfect information (EVPI)</strong> provides an upper bound on the benefit from any test; <strong>expected value of sample information (EVSI)</strong> depends on how informative the test is and how its results update the prior. Neither quantity alone certifies that a test is safe or feasible. Tests also consume calendar time and may expose participants to risk.</p>
+<p>The analyst should perform preference and probability sensitivity analyses separately. A recommendation that reverses for modest changes in either should be conditional, perhaps requiring a pilot or a staged investment. Governance requires an accountable decision owner and an explicit rule for revisiting the choice when new evidence arrives.</p>
+<h2>Formal model and derivation</h2>
+<p><div class="math-block">\[a^*=\arg\max_{a\in\mathcal F}\sum_s P(s)\,U(a,s).\]</div>
+<div class="math-block">\[EVPI=\sum_s P(s)\max_{a\in\mathcal F}U(a,s)-\max_{a\in\mathcal F}\sum_sP(s)U(a,s).\]</div>
+The perfect-information decision is an unattainable benchmark; EVPI is not the value of an actual imperfect sensor or field trial.</p>
+<p>The formalism is useful only inside an explicit <strong>model contract</strong>: a defined system boundary, input ranges, configuration, assumptions, uncertainty sources, and an intended decision. Check both units and the semantics of the variables before executing the arithmetic. The result is a conditional engineering claim, not an unconditional guarantee.</p>
+<h2>Fully worked Northstar case</h2>
+<p>Suppose severe demand occurs with probability 0.30. Architecture A yields utilities 90 in normal demand and 40 in severe demand; B yields 75 and 70. Expected utilities are A = 0.7×90 + 0.3×40 = 75 and B = 0.7×75 + 0.3×70 = 73.5. The current choice is A. With perfect demand information, choose A in normal conditions and B in severe conditions: expected utility 0.7×90 + 0.3×70 = 84, hence EVPI = 9 utility units. If the state probability rises above 1/3, B becomes preferable. The probability threshold and feasible pilot cost should be part of the decision memo.</p>
+<p><img alt="Model of the linked reasoning steps" src="../figures/14-decision-science.svg"/></p>
+<h2>Counterexample and critical review</h2>
+<p><strong>Counterexample:</strong> A scoring model permits exceptional convenience to compensate for inadequate emergency stopping performance. If stopping is a hard constraint, the model is invalid even if stakeholders agree on the weights. Reject the unsafe alternative first.</p>
+<p>An independent reviewer should be able to reproduce the favorable result and find at least one material scenario in which it changes. A sensitivity study that does not touch an important assumption can be technically reproducible but decision-irrelevant. Record the source of every number, identify the accountable acceptance authority, and state what the evidence cannot establish.</p>
+<h2>Graduate problem set</h2>
+<p>Attempt each problem before opening the worked solution. In a graded submission, supply units, formulas, assumptions, and a reasoned interpretation—not just the numerical result.</p>
+<h3>Problem 1</h3>
+<p>Verify the expected utilities for A and B in the two-state example.</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>A = 75; B = 73.5, hence A wins by 1.5 under the stated utility scale and probabilities.</p>
+</details>
+<h3>Problem 2</h3>
+<p>Calculate EVPI and explain its units.</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>84−75 = 9 utility units. Converting that to dollars needs an explicitly elicited utility-to-money tradeoff; it is not automatically $9.</p>
+</details>
+<h3>Problem 3</h3>
+<p>Find the severe-demand probability p where preferences reverse.</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>90−50p = 75−5p; p=15/45=1/3. Above this threshold B has higher expected utility.</p>
+</details>
+<h2>Laboratory and research transfer</h2>
+<p>Complete <a href="../labs/14-decision-science.html">the accompanying graduate laboratory</a>. Produce the artifact described there, compare your result to at least one alternative hypothesis, and record what additional evidence would change your recommendation.</p>
+<h2>Connections to the curriculum</h2>
+<ul>
+<li><a href="../../B14/OPEN-BOOK.html">Open Book 14 and its existing weekly lessons</a>.</li>
+<li><a href="../INDEX.html">Find supplementary calculations and datasets</a>.</li>
+<li>The canonical curriculum remains the source of assessed requirements; this study explains one demanding conceptual thread and does not replace its assignments.</li>
+</ul>
+<h2>Additional reference reading</h2><p>These external resources complement the fictional examples; they are not required for offline use.</p><ul><li><a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook</a></li><li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a></li></ul></article></main></body></html>

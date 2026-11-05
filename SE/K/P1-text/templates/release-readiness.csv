@@ -1,0 +1,2 @@
+claim_id,criticality,claim,requirement_ids,evidence_ids,open_gap,decision,approval_authority
+C-01,high,No duplicate active assignments,R-021,T-44,Concurrency test pending,hold,Chief engineer

@@ -1,0 +1,4 @@
+candidate,vehicles,kwh_each,chargers,kw,window_hours,efficiency,normal_loss,stress_loss
+A,4,12,2,7,3,0.85,25,75
+B,3,10,2,7,3,0.85,38,45
+C,3,10,2,7,3,0.85,40,40

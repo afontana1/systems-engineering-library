@@ -1,0 +1,8 @@
+digraph G {graph [rankdir=LR,bgcolor="transparent",nodesep="0.3",ranksep="0.5",label="Concept -> design -> evidence",labelloc="t",fontname="DejaVu Sans",fontsize=16];node [shape=box,style="rounded,filled",color="#bad2df",fillcolor="#ecf6fb",fontname="DejaVu Sans",fontsize=11];edge [color="#4082a2",penwidth=1.5]; NEED [label="Stakeholder need
+NEED-04"]; SC [label="ConOps + MOE
+SC-05 / MOE-02"];REQ [label="Requirement
+REQ-14/C"];IF [label="Interface + design
+IF-03/B / DES-1.3"];TEST [label="Procedure & article
+VT-14 / LAB-03"];EVD [label="Run + review
+RUN-38 / ANA-14"];VAL [label="Use validation
+VAL-06"];NEED->SC->REQ->IF->TEST->EVD;SC->VAL;}

@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Writing verifiable requirements and preserving rationale · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/P0-text/lessons/645-662-w04.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="writing-verifiable-requirements-and-preserving-rationale">Writing verifiable requirements and preserving rationale</h1>
+<p><strong>Knowledge chapter:</strong> 645-662 · Week 4 · Phase 0 first-pass edition (2026-10-30)<br/>
+<strong>Primary learning guide:</strong> <a href="../../../C/P0/EN645662.html">Open the original Week 4 teaching and deliverables</a><br/>
+<strong>Prior knowledge:</strong> <a href="645-662-w03.html">From missions and stakeholders to measurable success</a><br/>
+<strong>Core concepts:</strong> requirements, traceability, verification method, change impact</p>
+<h2 id="how-to-use-this-chapter">How to use this chapter</h2>
+<p>Read the conceptual treatment, reproduce the worked example without looking, answer the three practice prompts, then compare to the explained solutions. Finish by producing the original guide's larger artifact. All shuttle data and project numbers here are <strong>fictional teaching assumptions</strong>, not operating or safety guidance.</p>
+<h2 id="conceptual-explanation">Conceptual explanation</h2>
+<h3 id="the-point-of-a-requirement">The point of a requirement</h3>
+<p>A requirement defines an obligation a design must satisfy, not a design preference disguised as inevitability. It exists to constrain architecture, permit verification and communicate what is authorized. A complete requirement record has a unique ID, statement, source or rationale, owner, priority or criticality, verification approach, current status and trace links. Its identity should persist when wording is revised; do not create false trace continuity by reusing IDs for different obligations.</p>
+<p>A useful test is to ask whether a verification team could design a test from the statement without interviewing its author. Replace 'The shuttle shall be safe and fast' with separately testable claims. A sample requirement might be: 'While operating in the approved pedestrian zone at speeds no greater than 12 km/h, the shuttle shall initiate a controlled stop within 0.5 s after receipt of a verified emergency-stop signal.' This still needs definitions of time origin, data collection and acceptable tolerances, but it provides a technical starting point. Safety is not established by this single requirement; hazard-derived controls also matter.</p>
+<h3 id="the-five-transformations">The five transformations</h3>
+<p>Translate stakeholder need into (1) objective and scenario; (2) measurable system requirement; (3) architecture element or function responsible; (4) verification case with method, configuration and acceptance rule; and (5) validation evidence for user benefit. All five links should be navigable in both directions. Requirement coverage alone does not prove a good mission concept; a missing stakeholder need can be invisible to a requirement-only audit.</p>
+<p><strong>Verification methods:</strong> inspection checks directly observable attributes; analysis derives compliance from accepted models or calculations; demonstration observes behavior without necessarily gathering controlled quantitative data; test uses defined stimuli, measurements and acceptance criteria. Select the method based on what claim must be evidenced. A label such as 'Test' without a testable procedure is not a verification plan.</p>
+<h3 id="managing-changes">Managing changes</h3>
+<p>A change request should give reason, original and proposed wording, affected scenarios, functions, interfaces, test cases, cost/schedule/risk implications and decision authority. Baselines freeze a reference for disciplined comparison, not for preventing learning. When a requirement changes, evaluate downstream traces for invalidated evidence; a previously passing test may no longer test the approved obligation.</p>
+<h2 id="worked-example-reason-through-the-case">Worked example: reason through the case</h2>
+<p><strong>Trace example:</strong> Need N-04 'riders can stop a ride safely' → requirement R-17 'operator emergency-stop request acknowledged within 0.3 s, 99.9% of valid requests, in defined communication conditions' → function F-06 'handle emergency stop' → controller C-03 → test T-12 (1,000 scripted requests, specified clock synchronization and exception logging). A 99.9% target over 1,000 attempts permits at most one failure by the simple observed-fraction criterion, but the statistical confidence and safety adequacy need a separate argument. The rider-need validation is broader than this response-time test.</p>
+<h2 id="retrieval-and-transfer-practice">Retrieval and transfer practice</h2>
+<ol>
+<li>Improve: "The application shall be intuitive and available most of the time."</li>
+<li>What trace links must be rechecked when emergency-stop response time changes from 0.5 s to 0.3 s?</li>
+<li>Select verification method for: connector label, stopping distance, modeled battery endurance.</li>
+</ol>
+<p>&lt;details&gt;
+&lt;summary&gt;&lt;strong&gt;Reveal explained answers after attempting the problems&lt;/strong&gt;&lt;/summary&gt;</p>
+<ol>
+<li>
+<p>Split usability and availability. Example: 90% of representative first-time users can request pickup within two minutes without help in a defined study; service availability &gt;= 99.0% during scheduled hours over 30 days. Define populations and exclusions.</p>
+</li>
+<li>
+<p>Review hazard analysis, controller timing budget, allocated component requirements, interface contract, test stimulus and instrumentation, simulation assumptions, verification results and operational validation.</p>
+</li>
+<li>
+<p>Connector label: inspection. Stopping distance: controlled test. Battery endurance: model-based analysis supported by validation or physical tests. Multiple methods may be warranted for critical claims.</p>
+</li>
+</ol>
+<p>&lt;/details&gt;</p>
+<h2 id="a-failure-mode-to-recognize">A failure mode to recognize</h2>
+<p>Mistake: writing non-measurable adjectives, or confusing a requirement’s verification with validation of the original human need.</p>
+<h2 id="put-it-into-practice">Put it into practice</h2>
+<p><strong>Produce:</strong> Six-row needs-to-requirements-to-evidence traceability matrix. Use the more demanding assignment and rubric in the original course guide to decide whether the artifact is ready for your portfolio. This knowledge chapter teaches the ideas; the course guide specifies the assessment.</p>
+<h2 id="where-this-connects">Where this connects</h2>
+<ul>
+<li><strong>Builds toward:</strong> <a href="645-662-w05.html">Functional analysis: behavior before architecture</a></li>
+<li><strong>Builds toward:</strong> <a href="645-662-w06.html">Technical reviews as falsifiable assurance arguments</a></li>
+<li><strong>Builds toward:</strong> <a href="645-662-w09.html">SE management plans, metrics and configuration discipline</a></li>
+</ul>
+<h2 id="authoritative-resources-for-a-deeper-second-pass">Authoritative resources for a deeper second pass</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA Systems Engineering Handbook appendices (requirements, V&amp;V, functional analysis)</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — read as a second, authoritative treatment; check definitions, limits and case-specific applicability.</li>
+</ul>
+</main></body></html>

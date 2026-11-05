@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Agile engineering as a constrained flow and assurance system · Systems Engineering Library</title><style>*{box-sizing:border-box}body{background:#f4f7f8;margin:0;color:#193847;font:16px/1.76 system-ui,"Segoe UI",Arial,sans-serif}header{background:linear-gradient(112deg,#1b3a50,#137477);padding:30px max(18px,calc((100vw - 1060px)/2));color:white}header a{color:#e0fbfa}header h1{font-size:clamp(1.65rem,3vw,2.5rem);line-height:1.15;margin:.3em 0}header p{color:#dbf0f0;max-width:85ch}main{max-width:1070px;background:#fff;border:1px solid #d6e4e5;border-radius:12px;margin:28px auto 60px;padding:clamp(20px,4vw,55px)}article{max-width:91ch;margin:auto}h2{font-size:1.43em;margin-top:2em;border-bottom:1px solid #dbe6e8;padding-bottom:6px}h3{font-size:1.13em;margin-top:1.6em}a{color:#08757a;text-underline-offset:3px}p,li{max-width:90ch}table{border-collapse:collapse;max-width:100%;width:100%}td,th{border:1px solid #d4e2e4;padding:10px;text-align:left}th{background:#eaf5f4}blockquote{border-left:4px solid #238887;margin-left:0;background:#edf7f6;padding:10px 18px}pre{background:#183449;color:#e8f3f4;padding:16px;overflow-x:auto}code{font-size:.92em}p code{padding:1px 4px;background:#e8f2f4}details{padding:13px 17px;margin:16px 0;background:#edf6f5;border-radius:8px;border:1px solid #cee2e1}summary{font-weight:700;cursor:pointer}.links{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.links a{padding:7px 13px;background:#e7f3f2;border-radius:6px;font-weight:700}.figure{margin:26px 0;text-align:center}.figure img{max-width:100%;max-height:340px}.math-block{margin:18px 0;overflow-x:auto}mjx-container[jax=SVG]{max-width:100%;overflow-x:auto;overflow-y:hidden}article hr{border:0;border-top:1px solid #dbe6e8;margin:36px 0}@media(max-width:750px){header{padding:25px 18px}main{margin:0;border:0;border-radius:0}}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:"local"},startup:{typeset:false},options:{skipHtmlTags:["script","style","noscript","textarea","pre","code"]}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/GS/chapters/15-agile-flow.html" data-se-mode="standard"></script>
+</head><body><header><small>Graduate textbook studies · Systems Engineering</small><h1>Agile engineering as a constrained flow and assurance system</h1><p><a href="../INDEX.html">Graduate studies</a> · <a href="../../OPEN-BOOKS.html">All companion books</a></p></header><main><article><h1>Agile engineering as a constrained flow and assurance system</h1>
+<p><em>Graduate study for Book 15 — Agile Systems Engineering. Companion to the existing course materials; the definitions, mathematics and decisions below are educational rather than operational approvals.</em></p>
+<h2>The governing question</h2>
+<blockquote>
+<p>When can faster sprint completion make a safety-relevant engineering program slower?</p>
+</blockquote>
+<h2>Theory and conceptual structure</h2>
+<p>Agile systems engineering is not a prescription to replace lifecycle evidence with user stories. It is a strategy for delivering learning and integrated capability in smaller, inspectable increments while retaining responsibility for requirements, architecture, hazards, interfaces, and assurance. The key unit of work should carry an observable acceptance condition, configuration identifier and associated evidence—not merely a ticket in a completed column.</p>
+<p>Queueing theory clarifies the relationship between work in progress (WIP), throughput and cycle time. Under a stable, well-defined boundary, Little's law relates mean WIP to mean throughput and mean time in the system. This is an average relationship, not a guarantee of individual lead time. A high utilization review board can exhibit long, volatile queues; raising the sprint team's coding throughput can simply move the bottleneck into test and verification.</p>
+<p>A value stream includes design, model updates, integration, independent test, risk acceptance, and release. Visualizing only development tickets hides the true engineering cycle time. Split work into increments only when architectural interfaces and verification contracts permit meaningful evidence. If small deliveries each require repeated full qualification, batching policy may need to balance information value against setup cost.</p>
+<p>Measurements are vulnerable to Goodhart effects. A team rewarded for closing tickets may reduce ticket size artificially, defer difficult defects, or declare done before safety evidence exists. Countermeasures include configuration-specific acceptance evidence, escaped-defect rates, rework flow, and decision latency. Continuous improvement must use these together rather than elevate a single velocity target into a success criterion.</p>
+<h2>Formal model and derivation</h2>
+<p><div class="math-block">\[L=\lambda W,\qquad W=\frac{L}{\lambda}.\]</div>
+For a simple M/M/1 approximation, \(W_q=\lambda/[\mu(\mu-\lambda)]\) when \(\lambda&lt;\mu\). Near saturation, waiting time increases nonlinearly. These formulas require steady-state assumptions and a coherent definition of arrivals and completions.</p>
+<p>The formalism is useful only inside an explicit <strong>model contract</strong>: a defined system boundary, input ranges, configuration, assumptions, uncertainty sources, and an intended decision. Check both units and the semantics of the variables before executing the arithmetic. The result is a conditional engineering claim, not an unconditional guarantee.</p>
+<h2>Fully worked Northstar case</h2>
+<p>Suppose a safety review board finishes an average of 8 engineering changes per week while 20 are in the queue/in process. Little's law implies 2.5 weeks mean time in the review system if the process is stable. Now development increases arrivals from 7 to 7.8/week while review capacity stays 8. In an M/M/1 illustrative model, mean total time jumps from 1 week at λ=7 to 5 weeks at λ=7.8. The point is not that actual review time is exponentially distributed, but that utilization and variation can swamp the benefit of faster upstream delivery.</p>
+<p><img alt="Model of the linked reasoning steps" src="../figures/15-agile-flow.svg"/></p>
+<h2>Counterexample and critical review</h2>
+<p><strong>Counterexample:</strong> Leadership celebrates 30% more story closures while integration defects double and reviewers' queue ages. The supposed productivity gain reflects boundary selection. Re-measure from approved change proposal to evidence-backed capability release.</p>
+<p>An independent reviewer should be able to reproduce the favorable result and find at least one material scenario in which it changes. A sensitivity study that does not touch an important assumption can be technically reproducible but decision-irrelevant. Record the source of every number, identify the accountable acceptance authority, and state what the evidence cannot establish.</p>
+<h2>Graduate problem set</h2>
+<p>Attempt each problem before opening the worked solution. In a graded submission, supply units, formulas, assumptions, and a reasoned interpretation—not just the numerical result.</p>
+<h3>Problem 1</h3>
+<p>A stable review system has WIP 24 and throughput 8/week. Estimate mean lead time.</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>W = 24/8 = 3 weeks. Clarify whether the 24 items and rate refer to the same workflow boundary.</p>
+</details>
+<h3>Problem 2</h3>
+<p>Using M/M/1, compare mean system times at λ=7 and 7.8 with μ=8 per week.</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>W = 1/(8−7)=1 week versus 1/(8−7.8)=5 weeks. This depends on a stylized arrival/service model.</p>
+</details>
+<h3>Problem 3</h3>
+<p>Propose a definition of done for a hazard-affecting software change.</p>
+<details><summary>Worked answer and engineering interpretation</summary>
+<p>It should include configured source, reviewed hazard impact, passed interface and regression tests, linked evidence, responsible safety acceptance and deployment rollback conditions.</p>
+</details>
+<h2>Laboratory and research transfer</h2>
+<p>Complete <a href="../labs/15-agile-flow.html">the accompanying graduate laboratory</a>. Produce the artifact described there, compare your result to at least one alternative hypothesis, and record what additional evidence would change your recommendation.</p>
+<h2>Connections to the curriculum</h2>
+<ul>
+<li><a href="../../B15/OPEN-BOOK.html">Open Book 15 and its existing weekly lessons</a>.</li>
+<li><a href="../INDEX.html">Find supplementary calculations and datasets</a>.</li>
+<li>The canonical curriculum remains the source of assessed requirements; this study explains one demanding conceptual thread and does not replace its assignments.</li>
+</ul>
+<h2>Additional reference reading</h2><p>These external resources complement the fictional examples; they are not required for offline use.</p><ul><li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a></li><li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></li></ul></article></main></body></html>

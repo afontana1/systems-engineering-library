@@ -1,0 +1,4 @@
+decision_id,decision,alternatives,criterion,chosen,assumption,evidence,revision_trigger
+DEC-01,Number of teaching vehicles,1;2;3,Service target at illustrative cost,2,Fixed demand fixture is meaningful only as a teaching input,outputs/results.json,New credible arrival data
+DEC-02,Handling duplicate messages,Ignore exact duplicate;reject all repeats,Preserve at-most-once processing without silent conflicts,Ignore exact and reject changed payload,Single-process teaching environment,tests/test_lab.py,Concurrency introduced
+DEC-03,Prototype disposition,Approve operations;continue pilot;stop,Only synthetic proof of algorithmic properties,Continue research only,No human safety claim possible from synthetic tests,review/REVIEW-BOARD.md,Independent external validation

@@ -1,0 +1,34 @@
+import unittest
+from phase4_lab import (little_law_time,mm1_system_time,critical_path,evidence_closure,
+                        twin_freshness,independent_series_success,process_summary,difference_in_differences)
+class Calculations(unittest.TestCase):
+ def test_little(self):self.assertEqual(little_law_time(18,3),6)
+ def test_little_zero(self):self.assertEqual(little_law_time(0,3),0)
+ def test_little_bad(self):
+  with self.assertRaises(ValueError):little_law_time(3,0)
+ def test_mm1(self):self.assertEqual(mm1_system_time(4,5),1)
+ def test_mm1_high(self):self.assertAlmostEqual(mm1_system_time(4.8,5),5)
+ def test_mm1_unstable(self):
+  with self.assertRaises(ValueError):mm1_system_time(5,5)
+ def test_critical_path(self):self.assertEqual(critical_path({'a':(3,[]),'b':(4,['a']),'c':(2,['a'])})[0],7)
+ def test_critical_parallel(self):self.assertEqual(critical_path({'a':(3,[]),'b':(4,[]),'c':(2,['a','b'])})[0],6)
+ def test_cycle(self):
+  with self.assertRaises(ValueError):critical_path({'a':(1,['b']),'b':(2,['a'])})
+ def test_unknown(self):
+  with self.assertRaises(ValueError):critical_path({'a':(1,['b'])})
+ def test_closure_true(self):self.assertTrue(evidence_closure([{'from_id':'R-07','edge_type':'verified_by','to_id':'T-14','to_version':'v3','approved':'yes'}],'R-07','v3'))
+ def test_closure_version(self):self.assertFalse(evidence_closure([{'from_id':'R-07','edge_type':'verified_by','to_id':'T-14','to_version':'v2','approved':'yes'}],'R-07','v3'))
+ def test_closure_unapproved(self):self.assertFalse(evidence_closure([{'from_id':'R-07','edge_type':'verified_by','to_id':'T-14','to_version':'v3','approved':'no'}],'R-07','v3'))
+ def test_twin_fresh(self):self.assertEqual(twin_freshness('2026-10-01T10:00:00+00:00','2026-10-01T10:03:00+00:00',300),(180,True))
+ def test_twin_stale(self):self.assertFalse(twin_freshness('2026-10-01T10:00:00','2026-10-01T10:06:00',300)[1])
+ def test_twin_future(self):
+  with self.assertRaises(ValueError):twin_freshness('2026-10-01T10:02:00','2026-10-01T10:01:00',100)
+ def test_independent(self):self.assertAlmostEqual(independent_series_success([.95]*3),.857375)
+ def test_bad_probability(self):
+  with self.assertRaises(ValueError):independent_series_success([1.01])
+ def test_summary(self):self.assertEqual(process_summary([8,9,12,13,15,18,21,22,34,66])['median'],16.5)
+ def test_p90(self):self.assertEqual(process_summary([8,9,12,13,15,18,21,22,34,66])['p90_nearest_rank'],34)
+ def test_empty_times(self):
+  with self.assertRaises(ValueError):process_summary([])
+ def test_diff(self):self.assertEqual(difference_in_differences(30,20,28,25),-7)
+if __name__=='__main__':unittest.main()

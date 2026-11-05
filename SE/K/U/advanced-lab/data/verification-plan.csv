@@ -1,0 +1,7 @@
+test_id,requirements,scenarios,method,evidence,limitation
+V12-T01,V12-R01,BASE,Unit test,tests/test_advanced.py,Tests do not cover concurrency
+V12-T02,V12-R02,BASE;OUTAGE;LOW-CAPACITY,Property check,outputs/scenario-results.json,Toy temporal model only
+V12-T03,V12-R03,LOSS,Fault injection,outputs/scenario-results.json,Experimental truth ledger is omniscient
+V12-T04,V12-R04,OUTAGE,Interval intersection test,tests/test_advanced.py,Vehicle repair not modeled
+V12-T05,V12-R05,BASE,File integrity check,outputs/provenance.json,Hash does not attest to validity
+V12-T06,V12-R06,BASE;OUTAGE;LOSS;DELAY;TELEMETRY;LOW-CAPACITY,Trace graph check,outputs/scenario-results.json,Link presence is not verification sufficiency

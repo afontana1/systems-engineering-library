@@ -1,0 +1,13 @@
+week,claim,counterexample,verification,decision
+1,Software engineering must preserve system intent,A software roadmap that tracks story points but not system constraints can be on schedule and still unsafe or unusable.,,Unreviewed
+2,Traceability connects implementation to justified choices,"Code commit hashes without semantic links to requirements are provenance, not complete traceability.",,Unreviewed
+3,Read system models critically,Relying on “the system model says so” is especially dangerous when model authors and software teams use different meanings of availability or real time.,,Unreviewed
+4,Architecture is the set of costly-to-reverse decisions,Microservices do not automatically confer scalability or reliability; each network boundary is another partial-failure mechanism.,,Unreviewed
+5,Iteration must still produce system evidence,"Velocity measures delivery throughput, not mission effectiveness or safety confidence.",,Unreviewed
+6,Quality attributes must be formulated as scenarios,Architecture review scores without measured scenarios produce false precision.,,Unreviewed
+7,Distributed systems convert partial failure into design work,Global locks are rarely a free substitute for carefully scoped invariants and operational recovery plans.,,Unreviewed
+8,Performance and security share resource budgets,A performance test conducted with authentication disabled cannot support claims about the deployed secured system.,,Unreviewed
+9,Dependability is a claim supported by argument and evidence,Adding probabilities to unvalidated common-cause events can create a misleadingly precise safety number.,,Unreviewed
+10,The verification chain includes build identity,A thousand passing tests can leave a critical hazard uncovered if coverage is counted without requirement and scenario semantics.,,Unreviewed
+11,Operations is part of the design,Operational dashboards that show only CPU and HTTP success can miss mission harm; include user-impact and safety-relevant metrics.,,Unreviewed
+12,The final baseline is a reasoned technical argument,"Technology trend assessments should include opportunity cost, migration risk and the evidence that would cause a recommendation to change.",,Unreviewed

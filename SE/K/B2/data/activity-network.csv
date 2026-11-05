@@ -1,0 +1,6 @@
+activity,duration_weeks,predecessors
+A,2,
+B,4,A
+C,3,A
+D,5,B;C
+E,2,D

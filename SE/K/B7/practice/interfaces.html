@@ -1,0 +1,68 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Interface Contracts and End-to-End Timing Budgets · Systems Engineering Learning Library</title><style>
+:root{--ink:#18374b;--teal:#08747a;--line:#d8e4e7;--muted:#617480}*{box-sizing:border-box}body{margin:0;background:#f3f6f7;color:var(--ink);font:16px/1.7 system-ui,Segoe UI,Arial,sans-serif}header{background:#173d51;color:white;padding:20px max(22px,calc((100vw - 1070px)/2))}header a{color:#ccedee}header h1{margin:6px 0;font-size:1.6rem;line-height:1.2}main{max-width:1100px;margin:24px auto;padding:34px 44px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 9px 30px #18374b0b}article h1{font-size:1.65rem}article h2{border-bottom:1px solid #e0e9eb;padding-top:14px;padding-bottom:6px;font-size:1.35rem}article h3{font-size:1.1rem}article p,article li{max-width:85ch}article table{border-collapse:collapse;width:100%;font-size:.94rem}article th,article td{border:1px solid var(--line);padding:9px;text-align:left}article th{background:#edf6f5}pre{overflow-x:auto;background:#142e40;color:#f0f5f7;padding:17px;border-radius:9px}pre code{color:inherit}code{font-size:.91em}p code,li code{background:#eaf1f2;padding:2px 4px}a{color:var(--teal)}a:hover{text-decoration-thickness:2px}details{background:#f1f7f6;border-left:3px solid #65a5a3;border-radius:7px;padding:8px 15px;margin:12px 0}summary{cursor:pointer;font-weight:650}.links{display:flex;gap:12px;flex-wrap:wrap;margin:15px 0}.links a{display:inline-block;padding:7px 12px;border:1px solid #a6ceca;border-radius:8px;background:#e6f4f1;text-decoration:none;font-weight:600}.note{background:#edf7f6;padding:15px;border-left:4px solid #318a86;border-radius:8px}img,svg{max-width:100%}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto}button,input{font:inherit}button{cursor:pointer} .workbench{background:#eef7f6;padding:20px;border-radius:12px;border:1px solid #c4e1dd}.ctrl{margin:15px 0}.ctrl label{display:block;font-weight:600}.ctrl input{width:100%}.output{font-size:1.4rem;font-weight:800;line-height:1.25} @media(max-width:650px){main{padding:19px;margin:10px}}
+</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B7/practice/interfaces.html" data-se-mode="standard"></script>
+</head><body><header><div>Systems Engineering · Advanced Book Practice</div><h1>Interface Contracts and End-to-End Timing Budgets</h1><a href="../OPEN-BOOK.html">Back to book</a> · <a href="INDEX.html">Advanced practice</a></header><main><article><h1>Advanced Workshop · Interface Contracts and End-to-End Timing Budgets</h1>
+<p><em>Book 7 · Week 6 · interface ownership · units · critical paths · synchronized failure</em></p>
+<p><strong>Placement:</strong> After the relevant chapter, use this workshop to extend the reasoning, then try <a href="lab-interfaces.html">the corresponding hypothetical lab</a>. The assessed course obligations remain in <a href="../../../C/P2/EN645768.html">the curriculum</a>.</p>
+<h2>1. An interface is an enforceable agreement</h2>
+<p>A physical or software interface is not merely a connector on an architecture diagram. It is the boundary where different owners exchange data, material, energy, timing obligations, authority, and fault responsibility. A useful <strong>interface control document</strong> identifies the supplier and consumer, units, schemas, allowed states, version compatibility, timing behavior, security permissions, error responses, and change authority. Without those elements, both neighboring teams can satisfy their local specifications while the system fails.</p>
+<p>Consider a fictional route authorization interface between Northstar dispatch and a vehicle. A permission message may contain a route identifier, permitted operating window, issuing authority, validity signature, and sequence number. A cryptographically valid signature is not enough if the permission has expired or refers to the wrong route revision. Interface verification must exercise negative conditions and recovery paths, not just valid-message decoding.</p>
+<h2>2. Use budget arithmetic carefully</h2>
+<p>For a sequence of deterministic operations, total latency is the sum. For a fork-join structure, the critical path includes the slowest parallel branch, not the sum of independent branches. Let authentication take 120 ms, route evaluation take 200 ms, vehicle-capacity validation take 150 ms, and commitment take 80 ms. If route and capacity checks are sequential, the total is 550 ms. If their results are independent and they can run concurrently, the path is</p>
+<p>\[
+T=120+\max(200,150)+80=400\ \mathrm{ms}.
+\]</p>
+<p>For a 500 ms deadline this leaves 100 ms nominal deterministic margin. If a 90 ms retry occurs before commitment, the scenario rises to 490 ms and only 10 ms remains. This is a useful budget argument, <strong>not a p99 latency prediction</strong>. Real execution times fluctuate, branching introduces dependence, and retries can change the load distribution. Measure the full critical path in representative conditions.</p>
+<h2>3. Distinguish tolerance stacks from probabilistic estimates</h2>
+<p>Suppose a location timestamp is accurate to ±20 ms and network transport adds 35–65 ms. Adding 20 and 65 to estimate a conservative timing guard may be justified if both are independent bounded maxima of relevant delays, but not if one is a statistical p95 and the other a stated maximum. It is common to mix percentiles, hard limits, and averages in one spreadsheet, producing a number with no defensible interpretation.</p>
+<p>Units are another quiet source of failures. A component may publish velocity in miles per hour while another expects meters per second; an energy budget may mix kilowatt-hours and kilowatts. Interface contracts should define units at the schema boundary and include automated checks or typed quantities where possible. A successful parser cannot detect a perfectly formatted but physically nonsensical value unless the contract includes range and unit semantics.</p>
+<h2>4. Integration evidence is interface-specific</h2>
+<p>An integration test should not simply “verify the interface.” Identify exactly what is claimed: message schema compatibility, semantic consistency, authorization, latency, timeout behavior, freshness, and safe fallback. A time-sync failure can make valid data stale; a retry can create conflicting decisions; and an operator override can introduce a second authority. The interface test matrix should include both nominal and faulted scenarios and should tie every test to a specific configuration.</p>
+<h2>5. When optimization changes safety</h2>
+<p>Parallelization may reduce nominal latency but create a race between route evaluation and capacity assignment. A cached route may reduce a 200 ms call to 20 ms but return obsolete restrictions. Therefore a performance improvement proposal needs an accompanying assurance argument: which existing hazards are unchanged, which new hazards are introduced, and what evidence would support release? The fastest design is not automatically the mission-effective design.</p>
+<h2>Worked problem set — attempt before revealing solutions</h2>
+<h3>Problem 1</h3>
+<p>Compute serial latency for 120, 200, 150, and 80 ms stages.</p>
+<details><summary>Show solution 1</summary>
+
+<p>120+200+150+80=550 ms, exceeding the 500 ms requirement.</p>
+</details>
+
+<h3>Problem 2</h3>
+<p>Compute the parallel critical path when 200 and 150 ms branches may run concurrently.</p>
+<details><summary>Show solution 2</summary>
+
+<p>120+max(200,150)+80=400 ms, providing 100 ms nominal deterministic margin.</p>
+</details>
+
+<h3>Problem 3</h3>
+<p>A 90 ms retry is introduced. What is the scenario duration and margin?</p>
+<details><summary>Show solution 3</summary>
+
+<p>400+90=490 ms with 10 ms margin; it is not an end-to-end percentile guarantee.</p>
+</details>
+
+<h3>Problem 4</h3>
+<p>Why does an interface document need units and valid-time rules?</p>
+<details><summary>Show solution 4</summary>
+
+<p>A message can be syntactically compatible but physically wrong or stale. Units, time windows and authorization are part of semantic compatibility.</p>
+</details>
+
+<h2>Independent transfer to the Northstar case</h2>
+<p>Create an interface contract for the booking–dispatch–vehicle path with explicit units, deadlines and owner responsibilities. Compare serial and parallel timing using <code>book7.py</code>, then add a retry and a stale-permission rejection. Draw a critical-path diagram, write a negative-test matrix, and propose which timing and security claims need real measurements rather than deterministic budget estimates.</p>
+<h2>Further reading and conventions</h2>
+<p>The worked numbers are synthetic instructional fixtures. Do not use them as empirical transportation predictions, certification evidence, or claims about a particular deployed product. Foundational references (external and optional):</p>
+<ul>
+<li><p><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></p>
+</li>
+<li><p><a href="https://sebokwiki.org/wiki/SEBoK_Introduction">SEBoK — Guide to Systems Engineering</a></p>
+</li>
+<li><p><a href="https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final">NIST SP 800-160 Vol. 1 Rev. 1</a></p>
+</li>
+</ul>
+<p><strong>Continue:</strong> <a href="lab-interfaces.html">Hypothetical application lab</a> · <a href="book7.py">Python source</a> · <a href="book7-interfaces.csv">Experiment dataset</a> · <a href="WORKBENCH.html">Interactive workbench</a>.</p>
+</article></main></body></html>

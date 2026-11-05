@@ -1,0 +1,13 @@
+week,course,scenario,baseline_value,challenge_value,units,status,teaching_note
+1,645-632,Northstar synthetic evaluation,15.0,18.0,illustrative index,synthetic—not field data,"Receive the baseline, define intended use, and tailor the MBSE method and modeling plan"
+2,645-632,Northstar synthetic evaluation,22.0,28.6,illustrative index,synthetic—not field data,"Analyze stakeholders, mission, scenarios, outcomes, and measures in the authoritative model"
+3,645-632,Northstar synthetic evaluation,10.0,14.0,illustrative index,synthetic—not field data,Develop and analyze the functional architecture from black-box behavior to allocated white-box functions
+4,645-632,Northstar synthetic evaluation,17.0,18.7,illustrative index,synthetic—not field data,"Model state-based behavior, modes, exceptions, hazards, and temporal consistency"
+5,645-632,Northstar synthetic evaluation,24.0,28.8,illustrative index,synthetic—not field data,Specify and evaluate the logical architecture and its responsibilities
+6,645-632,Northstar synthetic evaluation,12.0,15.6,illustrative index,synthetic—not field data,"Specify interfaces, exchanges, allocations, ownership, and model-based change exposure"
+7,645-632,Northstar synthetic evaluation,19.0,26.6,illustrative index,synthetic—not field data,"Elicit, derive, validate, and query system requirements from the integrated analysis"
+8,645-632,Northstar synthetic evaluation,26.0,28.6,illustrative index,synthetic—not field data,"Build executable parametric models with units, provenance, constraints, and linked analytics"
+9,645-632,Northstar synthetic evaluation,14.0,16.8,illustrative index,synthetic—not field data,"Explore the trade space with alternatives, uncertainty, sensitivity, and model-based decision records"
+10,645-632,Northstar synthetic evaluation,21.0,27.3,illustrative index,synthetic—not field data,"Specify physical architectures, variants, configurations, instances, and lifecycle baselines"
+11,645-632,Northstar synthetic evaluation,9.0,12.6,illustrative index,synthetic—not field data,"Extend the modeling language and automate queries, validation rules, matrices, and generated products"
+12,645-632,Northstar synthetic evaluation,16.0,17.6,illustrative index,synthetic—not field data,"Verify and validate the model, assess the design, respond to change, and defend the final baseline"

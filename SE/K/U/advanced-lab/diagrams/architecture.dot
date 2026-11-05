@@ -1,0 +1,20 @@
+digraph Architecture {
+rankdir=LR; graph [fontname="Arial", bgcolor="transparent", pad="0.24", nodesep="0.5", ranksep="0.65"];
+node [shape=box, style="rounded,filled", fontname="Arial", fontsize=12, color="#b8d4d6", fillcolor="#f0f8f8", fontcolor="#193e4b", margin="0.16,0.12"];
+edge [fontname="Arial",color="#357e88",fontsize=9];
+DemandGenerator [label="Synthetic demand"];
+FaultInjector [label="Fault injector\n(loss · delay · outage)"];
+Intake [label="Validated intake\n/ deduplication"];
+Dispatcher [label="Time-slot\ndispatcher"];
+FleetModel [label="Fleet availability\nand outages"];
+EvidenceRecorder [label="Evidence\nrecorder"];
+AssuranceReviewer [label="Independent\nassurance review"];
+DemandGenerator -> FaultInjector [label="IF-01"];
+FaultInjector -> Intake [label="IF-02"];
+Intake -> Dispatcher [label="IF-03"];
+FleetModel -> Dispatcher [label="IF-04"];
+FaultInjector -> FleetModel [label="IF-05"];
+Dispatcher -> EvidenceRecorder [label="IF-06"];
+EvidenceRecorder -> AssuranceReviewer [label="IF-07"];
+AssuranceReviewer -> EvidenceRecorder [label="IF-08 (review)",style=dashed];
+}

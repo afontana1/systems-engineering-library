@@ -1,0 +1,4 @@
+scenario,uptime_h,repair_h,common_cause
+naive,200,5,0
+shared_dependency,200,5,0.008
+mitigated,200,5,0.002

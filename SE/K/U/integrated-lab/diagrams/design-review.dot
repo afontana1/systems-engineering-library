@@ -1,0 +1,10 @@
+digraph Review {
+ graph [rankdir=TB,bgcolor="white",fontname="Arial",label="Review logic: favorable result ≠ readiness",labelloc=t];
+ node [shape=box,style="rounded,filled",fontname="Arial",color="#8eb9c0",fillcolor="#edf6f7"];
+ Baseline [label="Fixed fixture: 12/12\nP90 wait: 20 min"];
+ Stress [label="Synthetic arrivals +\n1-vehicle degradation"];
+ Limits [label="Model fidelity and\nhuman/safety evidence gaps",fillcolor="#fff2e6"];
+ Review [label="Independent review of\nclaims, configuration, risk"];
+ Decision [label="Research-only continuation\nNo operational deployment",fillcolor="#e4f3eb",color="#8cb3a0"];
+ Baseline->Review;Stress->Review;Limits->Review;Review->Decision;
+}

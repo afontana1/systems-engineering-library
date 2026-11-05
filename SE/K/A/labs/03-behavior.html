@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Lab 3: Behavioral contracts and temporal safety · Systems Engineering</title><style>*{box-sizing:border-box}body{margin:0;background:#f1f5f5;color:#173447;font:16px/1.7 system-ui,"Segoe UI",sans-serif}a{color:#0b7577;text-underline-offset:3px}header{background:linear-gradient(125deg,#172e47,#126d70);color:#fff;padding:28px max(20px,calc((100vw - 1160px)/2))}header a{color:#d3eeee}header h1{font-size:clamp(1.8rem,3vw,2.65rem);line-height:1.18;margin:.3em 0}header p{color:#d8eeee;max-width:88ch}main{max-width:1150px;margin:20px auto 80px;background:white;border:1px solid #d3e2e2;border-radius:12px;padding:clamp(18px,4vw,55px)}article h2{font-size:1.38rem;padding-bottom:8px;border-bottom:1px solid #d7e3e5;margin-top:2em}article h3{font-size:1.14rem;margin-top:1.5em}article p,article li{max-width:91ch}article img{display:block;max-width:100%;max-height:460px;margin:20px auto;border:1px solid #d3e2e2;border-radius:7px;background:white}article table{width:100%;border-collapse:collapse;font-size:.94em}th,td{border:1px solid #d7e3e5;padding:9px 12px;text-align:left}th{background:#e7f3f2}pre{overflow:auto;padding:18px;background:#173447;color:#f6f8fa;border-radius:8px;white-space:pre-wrap}code{font-size:.91em}p code,li code{background:#eef4f4;padding:1px 5px;border-radius:3px}blockquote{margin-left:0;border-left:4px solid #4ba3a1;background:#eff6f5;padding:8px 18px}details{border-left:4px solid #4f9b99;background:#eef6f5;border-radius:7px;padding:10px 16px;margin:18px 0}summary{cursor:pointer;font-weight:700}.linkrow{display:flex;gap:10px;flex-wrap:wrap;margin:17px 0}.linkrow a,.btn{background:#e1f0ef;border:1px solid #c0dcd9;border-radius:7px;padding:8px 12px;text-decoration:none;font-weight:650}mjx-container[jax=SVG]{overflow-x:auto;max-width:100%}.eyebrow{font-size:.75rem;font-weight:750;letter-spacing:.13em;text-transform:uppercase;color:#bde3e1}.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:15px}.card{border:1px solid #d2e1e2;padding:22px;border-radius:10px;background:#fff}.card h3{margin:.35em 0;font-size:1.18em}.card p{color:#526975;line-height:1.6}.card small{color:#6d8089}.card label{display:block;margin-top:12px}.card a{font-weight:650}.pill{display:inline-block;padding:3px 8px;background:#e3f3f1;border-radius:25px;font-size:.78rem}.workbench{background:#eef6f5;padding:20px;border:1px solid #cddfdf;border-radius:10px;margin-top:30px}.workbench label{display:block;margin:9px 0}.workbench input[type=range]{width: min(380px,95%);vertical-align:middle}.workbench strong{font-variant-numeric:tabular-nums}nav a{color:#fff}input[type=search]{width:100%;max-width:600px;padding:12px;border:1px solid #b9d4d4;border-radius:7px;font:inherit}.reading{max-width:84ch}.back{display:inline-block;margin-bottom:12px}.math-note{font-size:.88rem;color:#52717c}.filelinks{padding:12px 16px;background:#f3f8f8;border-radius:8px}@media(max-width:720px){main{margin:0;border:0;border-radius:0;padding:18px}header{padding:22px 18px}}</style><script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true},svg:{fontCache:'local'},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/A/labs/03-behavior.html" data-se-mode="standard"></script>
+</head><body><header><div class="eyebrow">Independent hypothetical laboratory · Systems Engineering Learning Library</div><h1>Lab 3: Behavioral contracts and temporal safety</h1><p>Graduate-depth architecture and assurance sequence · Fictional Northstar engineering case</p><a class="back" href="../INDEX.html">← Architecture textbook</a></header><main><article><h1>Laboratory — State invariants, retries and stale-data safety</h1>
+<p><em>Architecture and Assurance · Applied investigation · Fictional Northstar system</em></p>
+<p><a href="../chapters/03-behavior.html">Read associated textbook chapter</a> · <a href="../code/model_checks.py">Download executable model</a> · <a href="../INDEX.html">Open sequence index</a></p>
+<h2>Case briefing</h2>
+<p>A dispatch client retries after a timeout, while a second client requests the same available vehicle. The first assignment may have committed before its acknowledgement was lost. Later, the road-status feed becomes stale. The dispatcher must preserve exclusivity and a defined fallback mode.</p>
+<h2>Experiment and analysis tasks</h2>
+<ol>
+<li>Use <code>ReservationBook</code> to show that the same key/payload is idempotent, a key with changed payload is rejected, and two keys cannot both claim one vehicle.</li>
+<li>Write the request state transition table, including cancellation and timeout paths missing from the introductory five-state model.</li>
+<li>Describe a non-atomic two-thread interleaving that violates assignment exclusivity, then repair it with an atomic guarded commit.</li>
+<li>Use <code>route_status_ok</code> at 4, 5 and 6 seconds of data age. Distinguish information freshness from physical road state.</li>
+<li>Write one safety property and one liveness property. State the fairness and network recovery assumptions required for liveness.</li>
+</ol>
+<h2>Submission package</h2>
+<p>Submit a reproducibility log (exact parameter values and code version), a model or data table, a primary engineering finding, a plausible counterexample, a one-page assumption and uncertainty register, and a <strong>300–500 word</strong> decision memo. Preserve adverse results. If you vary a parameter, show both the baseline and modified results rather than silently replacing an earlier outcome.</p>
+<h2>Hints and instructor check</h2>
+<details><summary>Reference observations — open only after attempting the lab</summary><p>Repeated identical commands have the same effect in the teaching module; conflicting payloads fail; a second claimant receives rejection. Age 5 seconds is accepted by the example rule, 6 seconds is rejected. A strong answer explicitly avoids claiming distributed exactly-once delivery or real-world road safety from these checks.</p>
+</details>
+<h2>Assessment rubric (100 points)</h2>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th style="text-align:right">Points</th>
+<th>What constitutes persuasive performance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conceptual and modeling correctness</td>
+<td style="text-align:right">25</td>
+<td>Types, definitions, units and assumptions are justified</td>
+</tr>
+<tr>
+<td>Reproducible evidence</td>
+<td style="text-align:right">25</td>
+<td>Another reader can regenerate each numerical or state result</td>
+</tr>
+<tr>
+<td>Adverse case and sensitivity</td>
+<td style="text-align:right">20</td>
+<td>At least one meaningful counterexample is analyzed</td>
+</tr>
+<tr>
+<td>Engineering decision quality</td>
+<td style="text-align:right">20</td>
+<td>Scope, limitations, residual risks and next test are explicit</td>
+</tr>
+<tr>
+<td>Traceability and communication</td>
+<td style="text-align:right">10</td>
+<td>Version, data, and claims are clearly linked</td>
+</tr>
+</tbody>
+</table>
+<p>A numerically correct result with a missing denominator, incompatible revision, or hidden failed case does not earn full evidence credit. This exercise is a synthetic teaching investigation, not a deployment approval.</p>
+<section class="filelinks">Download files: <a download="" href="03-behavior.md">Lab Markdown</a> · <a download="" href="../notebooks/03-behavior.ipynb">Jupyter notebook</a> · <a download="" href="../code/model_checks.py">Python source</a> · <a href="../../LAB-LIBRARY.html">Resource browser</a> · </section></article></main></body></html>

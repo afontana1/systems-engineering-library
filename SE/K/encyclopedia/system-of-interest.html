@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>System of interest: purpose, boundary, and evidence · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/system-of-interest.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Graduate-level explanation</span></div><article class="article-body"><h1>System of interest: purpose, boundary, and evidence</h1>
+<p><strong>Reference entry · Foundations · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p>A <strong>system of interest (SoI)</strong> is the collection of elements, interactions, and responsibilities being examined for a stated purpose. Its identity follows from a decision and a mission, not merely from the organization chart or a drawing. The same shuttle operation can be treated as a vehicle subsystem for a battery engineer, a dispatch-and-fleet system for an operations engineer, or a mobility service within a campus transportation ecosystem for a public-policy decision. All three boundaries can be legitimate, but their claims and evidence are different.</p>
+<p>An <em>enabling system</em> supplies capabilities for creating, operating, maintaining, or retiring the SoI; an <em>external system</em> exchanges matter, energy, information, services, or obligations with it. A system can be an element of a larger system while simultaneously containing many smaller systems. A boundary therefore must declare what counts as internal, what is external, who owns each interface, and which assumptions are being held fixed.</p>
+<h2>Theory: purpose precedes decomposition</h2>
+<p>A system description should connect a mission outcome to a measurable state or event. Let an operational scenario be a tuple <strong>(actors, demand, environment, mission, constraints, observation window)</strong>. An engineering claim is meaningful only over a defined set of such scenarios. “The service is reliable” is incomplete; “at least 98% of scheduled departures occur within five minutes during the academic weekday peak, excluding declared severe-weather closures” has a testable denominator, window, threshold, and scope.</p>
+<p>The <strong>system boundary</strong> can be represented by a directed graph: nodes are constituents and external actors; edges are transfers or commitments. A boundary partitions nodes into internal and external groups. Every edge crossing the partition is an interface, and its assumptions must be made explicit. Boundary selection changes which causes are endogenous, which appear as disturbances, and who can actually change the outcome. A narrow vehicle-only analysis may miss a common dispatch outage that disables the entire service.</p>
+<p>This also distinguishes <em>function</em> from <em>purpose</em>. Carrying a passenger is a function; enabling equitable, timely access to campus is a service purpose. A design can execute its assigned function correctly yet fail the larger mission when scheduling, accessibility, pricing, or human interaction is considered.</p>
+<h2>Worked example: a decision that changes the boundary</h2>
+<p>Suppose a proposed campus shuttle redesign is evaluated during a one-hour peak. Assume 180 passenger requests, 162 completed within the target waiting time, 12 completed late, and 6 were not served. The <strong>on-time service fraction over all requests</strong> is 162/180 = <strong>90%</strong>. Reporting 162/174 = 93.1% instead silently excludes the six unserved passengers and can make a degraded service appear better.</p>
+<p>If the design team excludes the reservation application from its SoI, the six abandoned requests can disappear from the measured demand. If it includes the app, dispatch, accessible-vehicle allocation, and operations staff, these become diagnosable causes. The right boundary is the smallest one that still contains the mechanisms and decision rights needed to explain the stated outcome—not necessarily the smallest hardware assembly.</p>
+<p>A boundary review should ask: Would a plausible external dependency reverse our conclusion? If yes, model that dependency explicitly or treat it as a documented scenario variable rather than silently assuming it away.</p>
+<h2>Engineering use: a repeatable boundary decision</h2>
+<ol>
+<li><strong>State the decision.</strong> Specify the question the model or design must answer and its intended audience.</li>
+<li><strong>Specify outcomes.</strong> Name the beneficiary, metric, population, scenario, and time horizon.</li>
+<li><strong>Draw the boundary.</strong> Mark constituents, human actors, enabling systems, and environmental disturbances.</li>
+<li><strong>Account for transfers.</strong> For each crossing edge, specify units, protocols, latency, failure behavior, responsibility, and evidence.</li>
+<li><strong>Stress the boundary.</strong> Test it with maintenance, failure, cyber, access, seasonal demand, and retirement scenarios.</li>
+<li><strong>Record exclusions.</strong> Identify questions the representation cannot answer without expanding the boundary.</li>
+</ol>
+<h2>Assumptions, failure modes, and evidence</h2>
+<p>A SoI definition is not a claim that the world is closed. Market incentives, operator decisions, infrastructure failures, and feedback may be outside formal control but still shape outcomes. Beware <strong>boundary laundering</strong>: excluding the failing mechanism and then declaring the remaining subsystem successful. Beware also uncontrolled expansion: a boundary so broad that no accountable decision remains.</p>
+<p>Credible evidence includes a scenario catalog; a context diagram with typed interfaces; operational measures with explicit denominators; an ownership matrix for cross-boundary dependencies; and counterexamples that challenge the chosen boundary. The boundary should be revisited after major architecture, mission, or stakeholder changes—not assumed permanent.</p>
+<h2>Connections that matter</h2>
+<p>The SoI is the anchor for stakeholder analysis, ConOps, functional architecture, requirements, test scope, model credibility, and systems-of-systems governance. Traceability is only meaningful when a requirement's subject and operational boundary are unambiguous. A verification pass within the SoI does not automatically validate the parent mission.</p>
+<h2>Reference shelf retained from the earlier primer</h2>
+<p>These links are supplied for deeper reading. Confirm current publication versions before relying on them for compliance.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — Reference chapters for lifecycle, needs, requirements, design, technical management, integration and V&amp;V.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Breadth-first conceptual encyclopedia and pointers to further references.</li>
+</ul>
+<p><strong>Expanded tutorial:</strong> <a href="../deep-dives/01-system-boundaries-and-interfaces.html">System boundaries, ownership and interfaces</a></p>
+<h2>Technical analysis: boundaries determine both reliability and accountability</h2>
+<p>The system of interest (SoI) is the entity about which an engineering decision makes claims. Its boundary is an analytical and governance choice: which components, people, services, environmental conditions, and support functions are included in requirements and evidence? Declaring an external dependency out of scope does not make its effect disappear from delivered mission performance.</p>
+<p>Suppose a vehicle subsystem operates successfully on <strong>99%</strong> of mission attempts when it receives valid dispatch data, but the dispatch service is available on only <strong>95%</strong> of attempts. If those events are independent under the same mission definition, end-to-end success is <code>0.99 × 0.95 = 0.9405</code>, or <strong>94.05%</strong>, not 99%. The calculation must not be used with dependent events without conditioning on common hazards. A narrow SoI boundary can report high component reliability while concealing degraded user outcomes.</p>
+<p><strong>Evidence boundary.</strong> Document the external dependency, accountable owner, interface promise, and observed success denominator. Maintain separate component and mission claims. When the boundary moves, revalidate the metrics, hazards, verification responsibilities, and configuration baseline; numbers copied without their original boundary can become misleading.</p>
+<h2>Claim-specific sources</h2>
+<p>The following <strong>selected methodological claims</strong> are tied to identifiable sections or abstracts, not merely generic reading lists. Source scope is stated for each link. Numerical scenarios and computations in this article are <strong>original illustrative examples</strong>, not data, calculations, or endorsements supplied by the linked publishers. Links require internet access; the explanation remains readable offline.</p>
+<ul>
+<li><strong>C1:</strong> Systems engineering spans design, realization, management, operations and retirement of systems. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/6-1-technical-planning/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §6.1 Technical Planning</a> · <em>scope-supported interpretation</em>.</li>
+<li><strong>C2:</strong> System boundaries and mission operational needs affect who should be identified as a stakeholder and how success is defined. <strong>Evidence:</strong> <a href="https://www.nasa.gov/reference/4-1-stakeholder-expectations-definition/">NASA — NASA Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2, §4.1 Stakeholder Expectations Definition</a> · <em>direct guidance</em>.</li>
+</ul>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)</a> — Community-maintained secondary guide; use its references for further research.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="boundaries-and-interfaces.html">Boundaries, environment, and interfaces</a></li>
+<li><a href="stakeholders-and-needs.html">Stakeholders, needs, and value</a></li>
+<li><a href="conops-and-scenarios.html">Concept of operations and scenarios</a></li>
+<li><a href="sos-characteristics.html">System of systems and constituent independence</a></li>
+</ul>
+<p><strong>Explore in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B1/chapters/01-what-is-the-system.html">Book 1, Chapter 1: Chapter 1 — What, exactly, is the system?</a></li>
+<li><a href="../B6/chapters/01-reopen-the-problem-and-audit-the-incumbent-baseline.html">Book 6, Chapter 1: Book 6 · Chapter 1: Framing before solutions</a></li>
+<li><a href="../B20/chapters/01.html">Book 20, Chapter 1: Week 01 · Management of Complex Systems · Chapter 01 — Complex problem situations, systems theory, and receiving review</a></li>
+</ul>
+<p><strong>Use this reference responsibly:</strong> examples use hypothetical engineering data; the mathematical results rely on the assumptions stated in each passage. Recheck those assumptions for any real project.</p>
+</article><footer class="standalone-foot"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=d8e1de722acc0">Open in the full encyclopedia</a><a href="system-of-interest.md">Editable Markdown source</a></footer></main></body></html>

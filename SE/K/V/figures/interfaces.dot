@@ -1,0 +1,1 @@
+digraph evidence {rankdir=LR;graph [bgcolor="transparent",nodesep=.35];node [shape=box,style="rounded,filled",fillcolor="#e8f3f3",color="#2a7379",fontname="Arial"];edge[color="#537983"];"Requirements" -> "Assumptions & guarantees" -> "Components" -> "Composition" -> "Integration tests";}

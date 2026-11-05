@@ -1,0 +1,4 @@
+option,vehicles,nominal_service,energy_kwh_per_hr,cost_index
+A,1,6,12,2
+B,2,12,24,4
+C,3,18,36,5

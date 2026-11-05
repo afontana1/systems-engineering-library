@@ -1,0 +1,15 @@
+digraph G {
+ graph [rankdir=LR, bgcolor="transparent", label="Software trust and failure boundaries", labelloc=t, fontname="DejaVu Sans", fontsize=17];
+ node [shape=box, style="rounded,filled", fillcolor="#e7f0f1", color="#356b73", fontname="DejaVu Sans", margin="0.16,0.12"]; edge[color="#527d83", penwidth=1.6];
+ n0 [label="Passenger app"];
+ n1 [label="API gateway"];
+ n2 [label="Booking command log"];
+ n3 [label="Dispatch"];
+ n4 [label="Vehicle telemetry"];
+ n5 [label="Operator console"];
+ n0 -> n1;
+ n1 -> n2;
+ n2 -> n3;
+ n4 -> n3;
+ n3 -> n5;
+}

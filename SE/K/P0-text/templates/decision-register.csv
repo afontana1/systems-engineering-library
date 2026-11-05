@@ -1,0 +1,2 @@
+Decision ID,Date,Decision needed,Alternatives,Evidence and uncertainty,Owner/authority,Decision,Conditions,Affected artifacts,Revisit trigger
+DEC-01,,Authorize controlled prototype test?,Go / conditional go / no-go,Interfaces partially tested,Technical review board,Conditional,No public operation before safety evidence,ConOps; risk log; plan,High-severity test finding

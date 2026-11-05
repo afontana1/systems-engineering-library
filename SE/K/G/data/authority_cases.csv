@@ -1,0 +1,5 @@
+scenario,observed_age_s,processing_s,execution_s,skew_s,signed,scope,revision
+nominal,0,18,7,3,1,1,1
+stale,0,29,7,3,1,1,1
+wrong_revision,0,10,7,0,1,1,0
+wrong_scope,0,8,7,0,1,0,1

@@ -1,0 +1,107 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EN.645.780 · Week 03 — Use Lean flow, queues, WIP, batch size, and value-stream evidence to shorten learning · Systems Engineering Library</title><style>
+:root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../../_assets/mathjax-svg.js"></script><script defer src="../../_assets/prism.js"></script><script defer src="../../_assets/prism-python.js"></script><script defer src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
+<script defer src="../../_assets/learning-map-v55.js"></script>
+<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/P4-text/lessons/645-780-w03.html" data-se-mode="standard"></script>
+</head><body><header><div class="crumb"><a href="../../../START-HERE.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="en645780--week-03--use-lean-flow-queues-wip-batch-size-and-value-stream-evidence-to-shorten-learning">EN.645.780 · Week 03 — Use Lean flow, queues, WIP, batch size, and value-stream evidence to shorten learning</h1>
+<p><strong>Phase 4 Companion Textbook · Agile Systems Engineering</strong><br/>
+<strong>Primary concept:</strong> Flow, work-in-process, and queueing<br/>
+<strong>Status:</strong> Original companion explanation plus adapted excerpts from the supplied Week 3 learning guide.<br/>
+<strong>Data:</strong> Worked numerical values are synthetic teaching illustrations, not field observations.</p>
+<h2 id="why-this-idea-matters">Why this idea matters</h2>
+<p>A systems engineer must produce a decision that remains defensible when the conditions change. This chapter focuses on <strong>flow, work-in-process, and queueing</strong>: how to reason from purpose and evidence to a bounded action. The objective is not to memorize a term, but to state what it permits, when it fails, and what observable evidence would change your conclusion.</p>
+<h2 id="build-the-mental-model">Build the mental model</h2>
+<p>Total lead time is active work <strong>plus waiting and rework</strong>. A review board working at nearly full utilization can generate long queues because arrivals and service times vary. Little’s Law gives L = λW for a stable system, where L is average work in process, λ throughput, and W average flow time. It does not by itself prove a causal effect of imposing a WIP limit. Use arrival/service data, aging work items and blocked-state reasons to locate actual constraints.</p>
+<p><strong>Useful diagnostic distinction:</strong> Reducing busy time is not automatically reducing delivery time; watch queues, rework and service quality.</p>
+<h2 id="the-underlying-mechanisms-lessons-to-retain">The underlying mechanisms: lessons to retain</h2>
+<p>The following instructional notes are adapted from the corresponding original course guide. They form a compact mechanism checklist to use while reading the new explanation and doing the chapter exercise.</p>
+<ul>
+<li>A value stream begins with a need or question and ends when usable value or evidence reaches the decision-maker or operator. Departmental process maps often stop too early.</li>
+<li>Lead time includes waiting. Touch time measures active work. Improving utilization at one specialty can increase queues and total lead time.</li>
+<li>Little’s Law relates average WIP, throughput, and cycle time under stable assumptions. It is a diagnostic relationship, not permission to ignore variability or priority classes.</li>
+<li>Large batches hide defects, delay integration, and increase the cost of changed assumptions. Very small batches can create excessive transaction cost; the optimum is contextual.</li>
+<li>WIP limits expose constraints. They do not solve them automatically.</li>
+<li>Measures must include value/evidence age and quality, not just item count.</li>
+</ul>
+<h2 id="worked-reasoning-the-northstar-mobility-case">Worked reasoning: the Northstar mobility case</h2>
+<p>If 24 changes remain in the pipeline and the system closes 3 changes per week, estimated average flow time is 8 weeks under stable-flow assumptions. Reducing open changes to 12 with unchanged throughput would correspond to about 4 weeks; however, if the review board remains the bottleneck, throughput may also change. Record demand and departures before promising a result.</p>
+<h3 id="compare-with-the-guides-worked-case">Compare with the guide's worked case</h3>
+<p>The original guide uses the following short case discussion. Reproduce the reasoning with a changed assumption rather than copying its conclusion.</p>
+<p>The current NMS interface-change stream takes 42 calendar days: 6 hours of engineering touch time, 12 days waiting for architecture review, 10 days waiting for supplier response, 14 days waiting for integration-lab availability, and 6 days of rework. A future-state experiment creates a weekly cross-domain interface clinic, a supplier response service-level expectation, and a standing emulator slot. The target is 18 days lead time with no increase in escaped interface defects.</p>
+<p>Reproduce the example with the supplied case data, then change one assumption and explain the effect on the conclusion.</p>
+<h3 id="how-to-challenge-the-example">How to challenge the example</h3>
+<ol>
+<li><strong>Boundary:</strong> Name the engineered product, process, actors and environment relevant to this claim. List one important exclusion.</li>
+<li><strong>Evidence:</strong> Identify one source that would let an independent reviewer reproduce or falsify the result.</li>
+<li><strong>Failure mode:</strong> Test what happens when an input is stale, unavailable, biased, incorrectly configured or in conflict with another artifact.</li>
+<li><strong>Decision:</strong> State who can authorize the next action, which guardrail could block it, and how the decision will be recorded.</li>
+</ol>
+<h2 id="learning-objectives-from-the-original-guide">Learning objectives from the original guide</h2>
+<ul>
+<li>Construct current- and future-state engineering value-stream maps.</li>
+<li>Measure lead time, touch time, queue time, WIP, throughput, blocked time, rework, and feedback age.</li>
+<li>Explain Little’s Law and the effects of WIP and batch size without treating them as universal optimization formulas.</li>
+<li>Identify policy, approval, information, tool, supplier, and integration constraints that create queues.</li>
+<li>Design a bounded flow experiment with expected outcomes and guardrails.</li>
+</ul>
+<h2 id="practice-questions-with-guided-answers">Practice questions with guided answers</h2>
+<p>Attempt the questions before expanding each answer. These five knowledge checks and their answer guidance are <strong>adapted from the supplied Week 3 course guide</strong>; their inclusion does not replace the larger independent assignment.</p>
+<ol>
+<li>
+<p><strong>What is flow efficiency?</strong></p>
+<p>&lt;details&gt;&lt;summary&gt;Show explanation&lt;/summary&gt;</p>
+<p>Touch time divided by total lead time, interpreted carefully for the service and data boundary.</p>
+<p>&lt;/details&gt;</p>
+</li>
+<li>
+<p><strong>Why can 100% resource utilization be harmful?</strong></p>
+<p>&lt;details&gt;&lt;summary&gt;Show explanation&lt;/summary&gt;</p>
+<p>It removes capacity to absorb variability, creates queues, and lengthens feedback and delivery time.</p>
+<p>&lt;/details&gt;</p>
+</li>
+<li>
+<p><strong>What does a WIP limit do first?</strong></p>
+<p>&lt;details&gt;&lt;summary&gt;Show explanation&lt;/summary&gt;</p>
+<p>Makes excess work and constraints visible and forces prioritization; it does not itself remove the constraint.</p>
+<p>&lt;/details&gt;</p>
+</li>
+<li>
+<p><strong>What is a value-stream customer?</strong></p>
+<p>&lt;details&gt;&lt;summary&gt;Show explanation&lt;/summary&gt;</p>
+<p>The person or system that can use the resulting value or evidence to achieve an outcome or make a decision.</p>
+<p>&lt;/details&gt;</p>
+</li>
+<li>
+<p><strong>What is a guardrail measure?</strong></p>
+<p>&lt;details&gt;&lt;summary&gt;Show explanation&lt;/summary&gt;</p>
+<p>A measure that detects harmful side effects while pursuing the primary improvement target.</p>
+<p>&lt;/details&gt;</p>
+</li>
+</ol>
+<h2 id="extended-transfer-exercise">Extended transfer exercise</h2>
+<p>Construct a one-page <strong>claim–evidence–decision map</strong> for this week's topic. Include a claim, current baseline, configuration or version, measurable response, source and timestamp of evidence, alternative explanation, reviewer, unresolved uncertainty and stop/go rule. Then deliberately inject one defect (missing source, wrong version, unexpected consequence or inadequate coverage) and explain how the decision should change.</p>
+<p><strong>Stretch:</strong> Use a second scenario with a different consequence level or stakeholder group. Explain why the same method may require different assurance controls.</p>
+<h2 id="companion-encyclopedia-pathway">Companion encyclopedia pathway</h2>
+<ul>
+<li><a href="../deep-dives/assurance-increments.html">Deeper tutorial: Agile increments with an evidence-based safety boundary</a></li>
+<li><a href="../KNOWLEDGE-THREADS.html">Connected Phase 4 concept threads</a></li>
+<li><a href="../INTEGRATED-CASE.html">Phase 4 integrated Northstar case</a></li>
+<li><a href="../TEMPLATES-AND-LABS.html">Editable worksheets</a> · <a href="../RESOURCE-SHELF.html">Authoritative reading shelf</a></li>
+</ul>
+<h2 id="bridge-to-the-assessed-curriculum">Bridge to the assessed curriculum</h2>
+<p>The companion explains the concepts; the original guide supplies the complete assignment, sources, rubric and formal mastery gate. This is the guide's weekly deliverable:</p>
+<p><strong>Engineering Flow Diagnosis and Experiment Plan</strong> containing maps, metrics, dataset, calculations, constraint analysis, future state, experiment charter, and a 1,200-word executive essay on why “everyone being busy” is not a flow strategy.</p>
+<p>Submit controlled source files, data/calculations, generated views, a change log, and a one-page self-review against the rubric. Screenshots alone are not acceptable evidence.</p>
+<p><strong>Common critical failures to avoid (from the guide):</strong></p>
+<ul>
+<li>Using velocity or utilization as the sole success measure.</li>
+<li>Omitting waiting, rework, or blocked time.</li>
+<li>Proposing WIP reduction without addressing safety-critical expedite classes or resource constraints.</li>
+<li>Claiming causation from an unrun experiment.</li>
+</ul>
+<p><strong>Mastery and revision standard:</strong></p>
+<p>Maps must be based on traceable observations or supplied data, not invented percentages. The experiment must include a baseline, falsifiable prediction, guardrails, and stop/reversal conditions.</p>
+<p>Return to the <a href="../../../C/P4/EN645780.html">original Week 3 guide</a> for its full instructions, readings and assessment rubric. This companion chapter alone cannot confer academic credit or professional qualification.</p>
+<hr/>
+<p><a href="645-780-w02.html">← Week 2</a> · <a href="645-780-w04.html">Week 4 →</a> · <a href="../README.html">Phase 4 contents</a></p>
+</main></body></html>

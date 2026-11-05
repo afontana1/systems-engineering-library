@@ -1,0 +1,16 @@
+digraph G {
+ graph [rankdir=LR, bgcolor="transparent", label="Constrained optimization and feedback", labelloc=t, fontname="DejaVu Sans", fontsize=17];
+ node [shape=box, style="rounded,filled", fillcolor="#e7f0f1", color="#356b73", fontname="DejaVu Sans", margin="0.16,0.12"]; edge[color="#527d83", penwidth=1.6];
+ n0 [label="Stakeholder objectives"];
+ n1 [label="Feasible design set"];
+ n2 [label="Fleet optimizer"];
+ n3 [label="Deployed fleet"];
+ n4 [label="Measurements"];
+ n5 [label="Policy controller"];
+ n0 -> n1;
+ n1 -> n2;
+ n2 -> n3;
+ n3 -> n4;
+ n4 -> n5;
+ n5 -> n3;
+}

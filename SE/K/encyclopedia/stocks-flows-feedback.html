@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Stocks, flows, and feedback loops · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><!-- v55 unified offline learning navigation -->
+<link rel="stylesheet" href="../_assets/learning-shell-v55.css">
+<script defer src="../_assets/learning-map-v55.js"></script>
+<script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/encyclopedia/stocks-flows-feedback.html" data-se-mode="standard"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../U/OPEN-ENCYCLOPEDIA.html#browse">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed reference</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Stocks, flows, and feedback loops</h1>
+<p><strong>Reference entry · Analytics, modeling, simulation and decisions · Expanded reference</strong></p>
+<h2>Definition and diagnostic distinction</h2>
+<p>A <strong>stock</strong> is an accumulated quantity; a <strong>flow</strong> is a rate that increases or decreases a stock; a <strong>feedback loop</strong> links system state to decisions that change future flows. Stock–flow modeling explains why apparently reasonable actions create delays, overshoot, oscillation, or policy resistance. A causal-loop diagram suggests relationships; a quantified stock–flow model must additionally preserve units, initial conditions, constraints, and conservation.</p>
+<h2>Theory: conservation and dynamics</h2>
+<p>For stock <code>S(t)</code>, <code>dS/dt = inflow(t) - outflow(t)</code>. If <code>S</code> is vehicles awaiting maintenance (vehicles), both flows must be vehicles/day. Using counts and rates interchangeably creates dimensional errors that numerical solvers cannot fix. In a first-order backlog-reduction model, <code>dB/dt = arrivals - B/τ</code>, where <code>τ</code> is the mean clearing time. With constant arrivals <code>a</code>, the equilibrium is <code>B* = aτ</code>; after a disturbance, the idealized return is exponential with characteristic time <code>τ</code>.</p>
+<p>Delays and saturation reshape behavior. A manager who increases hiring whenever backlog is high may create an oscillation if recruiting and training take months and hiring decisions use stale information. Nonlinear constraints—limited training capacity, fatigue, or resource competition—can change which feedback loop dominates over time. Causal inference still requires evidence; a feedback diagram alone cannot identify effect sizes or establish that a policy caused an observed change.</p>
+<h2>Worked example: a backlog that cannot be managed by slogans</h2>
+<p>A maintenance shop receives 18 repairs/day and clears backlog at rate <code>B/4</code> repairs/day. Its equilibrium backlog is <code>18 × 4 = 72 repairs</code>. Starting from 100 repairs, the initial net change is <code>18 - 100/4 = -7 repairs/day</code>. A target of 20 repairs cannot be achieved sustainably without reducing arrival rate or shortening effective clearance time; staffing overtime for two weeks may reduce the backlog temporarily but cannot change the equilibrium. A policy simulation should include repair capacity, rework, parts delays, and fatigue before recommending sustained overtime.</p>
+<h2>Engineering use and evidence</h2>
+<p>Inventory the stocks that cannot change instantaneously, quantify their inflows/outflows, and identify information delays, decision policies, nonlinear limits, and feedback polarity. Check that stocks cannot become negative under the chosen numerical method and time step. Test extreme conditions, historical reference modes, unit consistency, and competing structural hypotheses. Use intervention experiments to distinguish a credible causal explanation from a diagram that merely fits past behavior.</p>
+<h2>Limitations and connections</h2>
+<p>Aggregated stocks can conceal distributional inequity, local bottlenecks, or rare mission failures. Many parameters are difficult to identify from limited data. Connect this topic to <strong>complexity and emergence</strong>, <strong>process improvement</strong>, <strong>queueing</strong>, <strong>policy learning</strong>, and <strong>enterprise dynamics</strong>.</p>
+<h2>Technical analysis: conservation and numerical stability</h2>
+<p>Let <code>B(t)</code> be an unfinished-work backlog in items, <code>a(t)</code> the arrival rate (items/day), and <code>c(t)</code> the actual completion rate (items/day). A conserved balance is <code>dB/dt = a(t) − c(t)</code>, subject to <code>B ≥ 0</code> and a completion policy that cannot serve more work than is available. If arrivals are constant at 12 items/day and completions average only 10/day, backlog grows by about 60 items over a 30-day interval. A “20% productivity improvement” on a different team does not alter this equation unless it increases <em>actual end-to-end completions</em>.</p>
+<p>A simple feedback policy could command <code>c = min(c_max, B/τ)</code> with target clearing time <code>τ</code>. For constant arrival rate <code>a</code> below capacity, the unconstrained equilibrium is <code>B* = aτ</code>. With <code>τ=2 days</code> and <code>a=10/day</code>, <code>B*=20 items</code>. Explicit Euler integration when unconstrained gives <code>B_(k+1)=B_k+Δt(a−B_k/τ)</code>; its linear error factor is <code>1−Δt/τ</code>. Numerical convergence requires <code>0&lt;Δt&lt;2τ</code> and nonoscillatory convergence requires <code>0&lt;Δt≤τ</code> for this simplified linear segment. A four-day step at <code>τ=2</code> lies at the instability boundary and can produce spurious oscillations or negative inventories without safeguards.</p>
+<p>A dynamic model is only as credible as its stock definition, time units, delays, and policy assumptions. Test dimensional consistency and conservation at every step, then compare simulated reference behavior with historical evidence. Numerical artifacts must not be mistaken for organizational feedback.</p>
+<h2>Verified source pointers</h2>
+<p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
+<ul>
+<li><a href="https://standards.nasa.gov/node/263">NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)</a> — Credibility practices for modeling and simulation used in decisions.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)</a> — Community-maintained secondary guide; use its references for further research.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts</strong></p>
+<ul>
+<li><a href="complexity-emergence.html">Complexity, emergence, and adaptation</a></li>
+<li><a href="flow-wip-and-queues.html">Flow, work in process, and bottlenecks</a></li>
+<li><a href="intervention-and-learning.html">Interventions, policy resistance, and learning loops</a></li>
+<li><a href="enterprise-as-system.html">The enterprise as a system</a></li>
+</ul>
+<p><strong>Go deeper in the 240-chapter textbooks</strong></p>
+<ul>
+<li><a href="../B13/chapters/05-translate-feedback-hypotheses-into-stocks-flows-units-and-accumulati.html">Book 13, Chapter 05: Book 13 · Chapter 05 — Translate feedback hypotheses into stocks, flows, units, and accumulation equations</a></li>
+<li><a href="../B13/chapters/07-explain-delays-nonlinearities-oscillation-overshoot-and-changing-loo.html">Book 13, Chapter 07: Book 13 · Chapter 07 — Explain delays, nonlinearities, oscillation, overshoot, and changing loop dominance</a></li>
+<li><a href="../B19/chapters/05.html">Book 19, Chapter 05: Week 05 · Enterprise Systems Engineering · Chapter 05 — Enterprise dynamics, feedback, delays, and current-state assessment</a></li>
+</ul>
+<p><strong>Further reference context</strong></p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — General lifecycle and technical-management perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Main_Page">Guide to the Systems Engineering Body of Knowledge</a> — Broad terminology and disciplinary context.</li>
+</ul>
+<p><strong>Editorial scope:</strong> Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.</p>
+</article><nav class="standalone-actions"><a href="../U/OPEN-ENCYCLOPEDIA.html#doc=dc3490970b069">Read in encyclopedia</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="stocks-flows-feedback.md">Editable Markdown</a></nav></main></body></html>
