@@ -4,16 +4,18 @@ A static learning library of systems engineering concepts, textbooks, courses,
 and practical exercises. The website homepage is generated from
 `SE/START-HERE.html`.
 
-## Publish with GitHub Pages
+## Publish with GitHub Actions
 
-1. Create a GitHub repository and upload this folder's contents, including
-   `index.html`, `.nojekyll`, and the complete `SE` folder. Include the dotfile
-   when uploading.
-2. In the repository, open **Settings > Pages**.
-3. Under **Build and deployment**, select **Deploy from a branch**.
-4. Select the branch containing these files (usually `main`), select **/(root)**,
-   and save.
-5. Wait for the Pages deployment to finish, then use the website link shown there.
+1. In the repository, open **Settings > Pages**.
+2. Under **Build and deployment > Source**, select **GitHub Actions**.
+3. Push this project, including `.github/workflows/deploy-pages.yml`, to `main`.
+4. Open **Actions > Deploy GitHub Pages** to follow the deployment. You can also
+   launch it using **Run workflow** on `main`.
+5. When the workflow succeeds, use the website link in the deployment summary.
+
+Each push to `main` regenerates `index.html` from `SE/START-HERE.html`, checks
+library links and search behavior, and deploys the generated homepage plus the
+complete `SE` folder. Repository tooling is excluded from the website artifact.
 
 A repository named `<username>.github.io` publishes at
 `https://<username>.github.io/`. Other repository names publish at
@@ -21,12 +23,13 @@ A repository named `<username>.github.io` publishes at
 both layouts.
 
 No framework, package installation, or server-side application is required.
-The `.nojekyll` file preserves the static assets in `SE/K/_assets`.
+The workflow publishes the static files directly, including `SE/K/_assets`.
 Python lab files are downloadable exercises to run locally.
 
 ## Update or preview
 
-After editing `SE/START-HERE.html`, regenerate the root homepage:
+GitHub Actions regenerates the homepage automatically. After editing
+`SE/START-HERE.html`, regenerate it locally when previewing:
 
 ```powershell
 python scripts/prepare_github_pages.py
