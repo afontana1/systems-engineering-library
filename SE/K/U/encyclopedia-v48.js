@@ -20,31 +20,9 @@
   const stages = ['Beginner','Intermediate','Advanced'];
   const routeOf = slug => PATHS.find(p=>p.steps.includes(slug));
   const atlasUrl = id => 'K/U/OPEN-ENCYCLOPEDIA.html#doc='+encodeURIComponent(id);
-  // Reflect both the v54 atlas state and the v55 shared study desk where available.
-  const studied = id => !!(progress.done[id] || window.SEStudyV55?.load()?.done?.[atlasUrl(id)]);
-  function setStudied(id,value){
-    if(value) progress.done[id]=true;else delete progress.done[id];
-    const shared=window.SEStudyV55;
-    if(shared){const url=atlasUrl(id),old=!!shared.load()?.done?.[url];
-      if(old!==value)shared.toggle('done',url,byId.get(id)?.title||'Reference concept','Concept reference');
-    }
-    persist();
-  }
-  function setSaved(id,value){
-    if(value) progress.saved[id]=true;else delete progress.saved[id];
-    const shared=window.SEStudyV55;
-    if(shared){const url=atlasUrl(id),old=!!shared.load()?.saved?.[url];
-      if(old!==value)shared.toggle('saved',url,byId.get(id)?.title||'Reference concept','Concept reference');
-    }
-    persist();
-  }
   const badPaths = PATHS.flatMap(p=>p.steps.filter(s=>!bySlug.has(s)));
   if (badPaths.length) console.warn('Invalid path slugs:',badPaths);
   let subject='all',letter='all',searchLimit=10,current=null,previous='#discover',activePath=null;
-  let progress={done:{},saved:{},recent:[]};
-  try {const old=JSON.parse(localStorage.getItem('se_atlas_done_v8')||'{}');progress.done=old||{};}catch(e){}
-  try {const now=JSON.parse(localStorage.getItem('se_atlas_study_v54')||'null');if(now&&typeof now==='object')progress={done:now.done||progress.done,saved:now.saved||{},recent:now.recent||[]};}catch(e){}
-  const persist=()=>{try {localStorage.setItem('se_atlas_study_v54',JSON.stringify(progress));localStorage.setItem('se_atlas_done_v8',JSON.stringify(progress.done));}catch(e) {}};
   $('#docsN').textContent=docs.length.toLocaleString();
   $('#expandedN').textContent=catalog.length;
   const knownSubjects=[...new Set(catalog.map(c=>c.subject))];
@@ -58,7 +36,7 @@
   }
   function kindLabel(d) {const k=classify(d);return k==='concept'?'Concept reference':k==='book'?'Textbook chapter':k==='lab'?'Practice / lab':'Supporting resource';}
   function show(mode) {
-    for(const id of ['discover','paths','pathview','browse','results','reading','saved']) {
+    for(const id of ['discover','paths','pathview','browse','results','reading']) {
       const x=document.getElementById(id);if(x)x.hidden=(id!==mode);
     }
     document.querySelectorAll('.toplinks a[href^="#"],.side-menu a[href^="#"]').forEach(a=> {
@@ -70,12 +48,11 @@
   }
   function pathCard(p){
     const a=el('a','route-card');a.href='#path='+p.id;
-    const n=p.steps.filter(s=>studied(bySlug.get(s)?.id)).length;
     a.append(el('span','route-level',p.level),el('h3',null,p.title),el('p',null,p.subtitle));
     const stageTags=el('div','route-stage-tags');
     stages.forEach(level=>stageTags.append(el('span',null,level)));
     a.append(stageTags);
-    const footer=el('div','route-bottom');footer.append(el('span',null,p.steps.length+' reference concepts · 3 levels'),el('span',null,n+' / '+p.steps.length+' studied'));
+    const footer=el('div','route-bottom');footer.append(el('span',null,p.steps.length+' reference concepts · 3 levels'));
     a.append(footer);return a;
   }
   function renderPaths(){const h=$('#pathCards');h.replaceChildren();for(const p of PATHS)h.append(pathCard(p));}
@@ -88,47 +65,39 @@
     for(const s of ['system-of-interest','stakeholders-and-needs','good-requirements','v-and-v']){
       const c=bySlug.get(s);if(c)starters.append(readingMini(byId.get(c.id),'Concept reference · '+c.subject));
     }
-    const recent=$('#continuePanel');recent.replaceChildren();
-    const ids=progress.recent.filter(id=>byId.has(id)).slice(0,4);
-    if(ids.length)ids.forEach(id=>recent.append(readingMini(byId.get(id))));
-    else recent.append(el('p','micro','Open a concept or chapter and it will appear here for quick return.'));
+
   }
   function renderPath(p) {
     activePath=p.id;
     $('#pathTitle').textContent=p.title;$('#pathIntro').textContent=p.subtitle;
-    const n=p.steps.filter(s=>studied(bySlug.get(s)?.id)).length;
-    $('#pathProgress').textContent=n+' of '+p.steps.length+' studied · 3 stages';
+    $('#pathProgress').textContent=p.steps.length+' concepts · 3 stages';
     const host=$('#pathSteps'),jumps=$('#pathStageNav'),continueHost=$('#pathContinue');
     host.replaceChildren();jumps.replaceChildren();continueHost.replaceChildren();
-    const firstOutstanding=p.steps.find(s=>!studied(bySlug.get(s)?.id))||p.steps[0];
-    const firstC=bySlug.get(firstOutstanding);
-    const start=el('a','route-continue-link',(n===p.steps.length?'Review':'Continue')+' route: '+firstC.title);
-    start.href=hrefDoc(firstC.id,p.id);continueHost.append(start);
-    continueHost.append(el('span','route-progress-note', n===p.steps.length?'All concepts marked studied; revisit for retention.':'Study markers reflect reading, not graded mastery.'));
+    const firstC=bySlug.get(p.steps[0]);
+    if(firstC){const start=el('a','route-continue-link','Start with: '+firstC.title);start.href=hrefDoc(firstC.id,p.id);continueHost.append(start);}
+    continueHost.append(el('span','route-progress-note','Follow the sequence or jump directly to any topic.'));
     let position=0;
     for(const [stageIndex,stage] of p.stages.entries()){
       const group=el('li','path-stage');group.id='route-stage-'+stageIndex;
-      const completed=stage.steps.filter(slug=>studied(bySlug.get(slug)?.id)).length;
-      const jump=el('button','stage-jump',stage.level+' · '+completed+'/'+stage.steps.length);
+      const jump=el('button','stage-jump',stage.level+' · '+stage.steps.length+' concepts');
       jump.type='button';jump.addEventListener('click',()=>document.getElementById(group.id)?.scrollIntoView({behavior:'smooth',block:'start'}));
       jumps.append(jump);
       const header=el('div','stage-header');const left=el('div');left.append(el('span','stage-eyebrow',stage.level+' · '+(stageIndex+1)+' of 3'),el('h3',null,stage.title),el('p',null,stage.goal));
-      header.append(left,el('span','stage-progress',completed+' / '+stage.steps.length+' studied'));group.append(header);
+      header.append(left);group.append(header);
       const stepList=el('ol','path-stage-steps');
       for(const slug of stage.steps){
         const c=bySlug.get(slug);if(!c)continue;
         const li=el('li','path-step'),num=++position;
-        const unmet=(c.prerequisites||[]).filter(s=>bySlug.has(s)&&!studied(bySlug.get(s).id));
         const top=el('div','step-top');top.append(el('span','step-number',String(num).padStart(2,'0')),
-          el('span','step-state',studied(c.id)?'✓ Studied':unmet.length?'Suggested preparation available':'Ready to explore'));
+          el('span','step-state','Concept reference'));
         const link=el('a','step-main');link.href=hrefDoc(c.id,p.id);link.append(el('h4',null,c.title),el('p',null,c.summary));
         li.append(top,link);
         if(c.prerequisites?.length){
-          const details=el('details','step-prereqs');const count=unmet.length;
-          details.append(el('summary',null,'Recommended prerequisites · '+(c.prerequisites.length-count)+' of '+c.prerequisites.length+' studied'));
+          const details=el('details','step-prereqs');
+          details.append(el('summary',null,'Suggested background · '+c.prerequisites.length+' concepts'));
           const links=el('div','step-prereq-links');
           c.prerequisites.forEach(s=>{const pre=bySlug.get(s);if(!pre)return;
-            const preRoute=routeOf(s);const a=el('a',null,(studied(pre.id)?'✓ ':'○ ')+pre.title+(preRoute?.id!==p.id?' · another route':''));
+            const preRoute=routeOf(s);const a=el('a',null,pre.title+(preRoute?.id!==p.id?' · another route':''));
             a.href=hrefDoc(pre.id,preRoute?.id);links.append(a);
           });details.append(links);li.append(details);
         }
@@ -171,7 +140,6 @@
   function topicCard(c){
     const a=el('a','topiccard');a.href=hrefDoc(c.id);
     const top=el('div','topic-top');top.append(el('span','tag tag-deep','Reference concept'));
-    if(studied(c.id))top.append(el('span','tag tag-studied','Studied'));
     a.append(top,el('h3',null,c.title),el('p',null,c.summary),el('span','topic-subject',c.subject));
     return a;
   }
@@ -275,18 +243,10 @@
       a.href=hrefDoc(current)+'&section='+encodeURIComponent(h.id);host.append(a);
     }
   }
-  function isSaved(id){return !!(progress.saved[id] || window.SEStudyV55?.load()?.saved?.[atlasUrl(id)]);}
-  function addRecent(id){progress.recent=[id,...progress.recent.filter(x=>x!==id)].slice(0,25);persist();}
   function readingActions(d){
     const host=$('#readerActions');host.replaceChildren();
     host.append(sideLink('Open standalone HTML',sourceHref(d)),sideLink('Markdown source',markdownHref(d)));
-    const mark=el('label','mark-read'),cb=el('input');cb.type='checkbox';cb.checked=studied(d.id);
-    cb.addEventListener('change',()=>{setStudied(d.id,cb.checked);renderPaths();starterAndRecent();if(activePath){const p=PATHS.find(x=>x.id===activePath);if(p)renderPathContentOnly(p);} });
-    mark.append(cb,document.createTextNode(' Mark studied'));host.append(mark);
-    const b=el('button','bookmark-btn',isSaved(d.id)?'★ Saved':'☆ Save for later');b.type='button';b.setAttribute('aria-pressed',String(isSaved(d.id)));
-    b.addEventListener('click',()=>{setSaved(d.id,!isSaved(d.id));b.textContent=isSaved(d.id)?'★ Saved':'☆ Save for later';b.setAttribute('aria-pressed',String(isSaved(d.id)));});host.append(b);
   }
-  function renderPathContentOnly(p){const id=current;renderPath(p); if(id&&byId.has(id)) show('reading');}
   function articleRelations(d,c){
     const side=$('#related');side.replaceChildren();
     if(!c){side.append(el('h2',null,'Continue learning'));
@@ -326,8 +286,7 @@
     const concept=catalog.find(x=>x.id===id);
     if(from&&PATHS.some(p=>p.id===from&&p.steps.includes(concept?.slug)))activePath=from;
     else if(concept&&!PATHS.some(p=>p.id===activePath&&p.steps.includes(concept.slug)))activePath=routeOf(concept.slug)?.id||null;
-    current=id;addRecent(id);
-    if(window.SEStudyV55)window.SEStudyV55.record(atlasUrl(id),d.title,kindLabel(d));
+    current=id;
     const c=catalog.find(x=>x.id===id);
     $('#readingMeta').textContent=kindLabel(d)+(d.course?' · '+d.course:'');
     readingActions(d);
@@ -339,16 +298,8 @@
       const safe=String(section||'').replace(/[^A-Za-z0-9_-]/g,'');
       const target=safe?document.getElementById(safe):null;
       if(target)target.scrollIntoView();else $('#reading').scrollIntoView({block:'start'});
-      if(window.MathJax?.typesetPromise)window.MathJax.typesetPromise([paper]).catch(()=>{});
+      if(window.SEEnhance)window.SEEnhance();else if(window.MathJax?.typesetPromise)window.MathJax.typesetPromise([paper]).catch(()=>{});
     });
-  }
-  function savedList(){
-    const blocks=[['#savedList',Object.keys(progress.saved)],['#recentList',progress.recent],['#studiedList',Object.keys(progress.done)]];
-    for(const [id,ids] of blocks){const host=$(id);host.replaceChildren();
-      const valid=ids.filter(i=>byId.has(i)).slice(0,30);
-      if(!valid.length)host.append(el('p','micro','No resources here yet. Open an article and use Save or Mark studied.'));
-      else valid.forEach(i=>host.append(readingMini(byId.get(i))));
-    }
   }
   function route(){
     const frag=decodeURIComponent(location.hash.substring(1)||'discover');
@@ -356,11 +307,10 @@
     if(args.has('doc')){const id=args.get('doc');if(byId.has(id)){readDoc(id,args.get('section'),args.get('from'));return;}}
     if(args.has('q')){const q=args.get('q');$('#search').value=q;renderSearch(q);return;}
     if(args.has('path')){const p=PATHS.find(p=>p.id===args.get('path'));if(p){renderPath(p);requestAnimationFrame(()=>$('#pathview').scrollIntoView({block:'start'}));return;}}
-    const viewName=['browse','paths','saved','discover'].includes(frag)?frag:'discover';
+    const viewName=['browse','paths','discover'].includes(frag)?frag:'discover';
     current=null;
     if(viewName==='browse')renderBrowse();
     if(viewName==='paths')renderPaths();
-    if(viewName==='saved')savedList();
     if(viewName==='discover')starterAndRecent();
     show(viewName);window.scrollTo(0,0);
   }
@@ -376,17 +326,12 @@
   document.querySelectorAll('[data-example]').forEach(b=>b.addEventListener('click',()=>{const q=b.dataset.example;$('#search').value=q;location.hash='q='+encodeURIComponent(q);route();}));
   $('#more').addEventListener('click',()=>{searchLimit+=10;renderSearch($('#search').value.trim());});
   $('#back').addEventListener('click',()=>{location.hash=previous.startsWith('#doc=')?'browse':previous.slice(1);route();});
-  $('#resetProgress').addEventListener('click',()=>{
-    if(!window.confirm('Clear saved, studied, and recently opened resources on this browser?'))return;
-    progress={done:{},saved:{},recent:[]};persist();savedList();starterAndRecent();renderPaths();
-    $('#progressMessage').textContent='Encyclopedia-only markers cleared. Shared study desk markers can be cleared separately on the Study Desk.';
-  });
   document.addEventListener('click', e=>{const a=e.target.closest?.('a[href^="#doc="]');if(!a||!$('#reading').hidden)return;if(!$('#results').hidden&&$('#search').value.trim()){previous='#q='+encodeURIComponent($('#search').value.trim());return;}previous=location.hash&&!location.hash.startsWith('#doc=')?location.hash:'#browse';});
   // Changing a hash view is equivalent to navigating to a new page for keyboard users.
   // Do not move focus on incremental search updates or internal article-outline jumps.
   function focusRoutedHeading(){
     if(location.hash.includes('&section='))return;
-    const visible=['discover','paths','pathview','browse','results','reading','saved']
+    const visible=['discover','paths','pathview','browse','results','reading']
       .map(id=>document.getElementById(id)).find(x=>x&&!x.hidden);
     if(!visible)return;
     const heading=visible.querySelector('h1,h2');

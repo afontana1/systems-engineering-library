@@ -13,13 +13,13 @@
         {
           "kind": "Concept",
           "label": "Define the system and its boundaries",
-          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=d8e1de722acc0",
+          "path": "K/encyclopedia/system-of-interest.html",
           "why": "How a mission-driven system boundary changes the claims, interfaces, and evidence that matter."
         },
         {
           "kind": "Concept",
           "label": "Separate stakeholder claims from measurable needs",
-          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=da9595994eeb3",
+          "path": "K/encyclopedia/stakeholders-and-needs.html",
           "why": "From contested stakeholder outcomes to defensible measures, constraints, and preferences."
         },
         {
@@ -47,13 +47,13 @@
         {
           "kind": "Concept",
           "label": "Understand hazards and required controls",
-          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=d829e15a0d4cb",
+          "path": "K/encyclopedia/system-safety-and-hazards.html",
           "why": "Hazard identification, causal controls, dependence, and accountable residual-risk decisions"
         },
         {
           "kind": "Concept",
           "label": "Build a claim–argument–evidence chain",
-          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=de50b71ae3099",
+          "path": "K/encyclopedia/assurance-cases-and-evidence.html",
           "why": "Bounded claims, typed evidence graphs, defeaters, decision authority, and configuration validity"
         },
         {
@@ -81,13 +81,13 @@
         {
           "kind": "Concept",
           "label": "Define the modeling purpose and assumptions",
-          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=db8eae7a8e3ee",
+          "path": "K/encyclopedia/conceptual-m-and-s.html",
           "why": "Defining model purpose, abstraction, environment, assumptions, and credibility requirements."
         },
         {
           "kind": "Concept",
           "label": "Separate implementation verification from validation",
-          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=d4b5e67dcb0f2",
+          "path": "K/encyclopedia/model-vv-and-credibility.html",
           "why": "Verifying implementation, validating intended use, and qualifying uncertainty for a decision."
         },
         {
@@ -115,13 +115,13 @@
         {
           "kind": "Concept",
           "label": "Frame objectives and constrained alternatives",
-          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=d39ba99b7db20",
+          "path": "K/encyclopedia/engineering-trades.html",
           "why": "Feasible options, Pareto efficiency, preference functions, uncertainty, and sensitivity."
         },
         {
           "kind": "Concept",
           "label": "Challenge the choice under uncertainty",
-          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=ddd706e06cd3d",
+          "path": "K/encyclopedia/robust-optimization-and-margins.html",
           "why": "Expected value, worst-case costs, minimax regret, and scenario-dependent technical margins"
         },
         {
@@ -149,13 +149,13 @@
         {
           "kind": "Concept",
           "label": "Define a testable interface contract",
-          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=dda682f83cc9d",
+          "path": "K/encyclopedia/interface-control.html",
           "why": "Versioned agreements for data, power, timing, state, ownership, and exception behavior."
         },
         {
           "kind": "Concept",
           "label": "Preserve configuration and test provenance",
-          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=d922e041d8ca8",
+          "path": "K/encyclopedia/configuration-assurance-and-change-control.html",
           "why": "Baselines, effectivity, change-impact graphs, as-built reconciliation, and release authority."
         },
         {
@@ -183,13 +183,13 @@
         {
           "kind": "Concept",
           "label": "Choose the model semantics",
-          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=db3032ecc2404",
+          "path": "K/encyclopedia/model-language-method-tool.html",
           "why": "Distinguishing engineering purpose, modeling notation, method, tools, and model governance."
         },
         {
           "kind": "Concept",
           "label": "Trace engineering claims across models",
-          "path": "K/U/OPEN-ENCYCLOPEDIA.html#doc=d7c6c77e3a16d",
+          "path": "K/encyclopedia/traceability-graph.html",
           "why": "Typed, versioned relationships that support impact analysis without confusing links with proof."
         },
         {

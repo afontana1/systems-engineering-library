@@ -9,8 +9,8 @@ The learning atlas connects **56 engineering concept references**, **20 graduate
 - [Follow a learning pathway](LEARNING-PATHWAYS.html) for a recommended beginner-to-advanced order.
 - [Complete a learner journey](LEARNER-JOURNEYS.html) to connect theory, a chapter and existing practice.
 - [Read a textbook](OPEN-BOOKS.html) or [find a lab](LAB-LIBRARY.html).
-- [Visit the study desk](STUDY-DESK.html) for saved and studied items.
+- [Visit the concept directory](CONCEPTS.html) for concept references.
 
-The [library homepage](../START-HERE.html) provides a guided starting point. The [offline reading guide](OFFLINE-HELP.html) explains extracting the library, browser-based study markers and navigation.
+The [library homepage](../../index.html) provides a guided starting point. The [offline reading guide](OFFLINE-HELP.html) explains extracting the library, browser-based study markers and navigation.
 
 The library's instructional scenarios are illustrative. Technical claims should always be evaluated against the evidence and assumptions given in the relevant article.

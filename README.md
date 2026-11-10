@@ -1,47 +1,51 @@
 # Systems Engineering Library
 
-A static learning library of systems engineering concepts, textbooks, courses,
-and practical exercises. The website homepage is generated from
-`SE/START-HERE.html`.
+The homepage is **`index.html` at the repository root**. It links directly to
+Concepts, Subject Guides, Courses, Textbooks, Labs, and the Encyclopedia. There
+is no separate homepage source or homepage generator.
 
-## Publish with GitHub Actions
+Website: https://afontana1.github.io/systems-engineering-library/
 
-1. In the repository, open **Settings > Pages**.
-2. Under **Build and deployment > Source**, select **GitHub Actions**.
-3. Push this project, including `.github/workflows/deploy-pages.yml`, to `main`.
-4. Open **Actions > Deploy GitHub Pages** to follow the deployment. You can also
-   launch it using **Run workflow** on `main`.
-5. When the workflow succeeds, use the website link in the deployment summary.
+## Main sections
 
-Each push to `main` regenerates `index.html` from `SE/START-HERE.html`, checks
-library links and search behavior, and deploys the generated homepage plus the
-complete `SE` folder. Repository tooling is excluded from the website artifact.
+- **Concepts:** `SE/K/CONCEPTS.html` for the 56 reference concepts; `SE/K/T/INDEX.html` for cross-course core concepts.
+- **Subject Guides:** `SE/K/LEARNING-PATHWAYS.html` and `SE/K/LEARNER-JOURNEYS.html`.
+- **Courses:** `SE/C/PROGRAM.html`, with six curriculum phases and direct links from each course to its book and assigned concepts.
+- **Textbooks:** `SE/K/OPEN-BOOKS.html`, listing 20 course-aligned books and the advanced architecture, quantitative, graduate-methods, and other advanced texts.
+- **Labs:** `SE/K/LAB-LIBRARY.html`.
+- **Encyclopedia:** `SE/K/U/OPEN-ENCYCLOPEDIA.html`, available from the shared global navigation bar.
 
-A repository named `<username>.github.io` publishes at
-`https://<username>.github.io/`. Other repository names publish at
-`https://<username>.github.io/<repository>/`. The site's relative links support
-both layouts.
+The common navigation is implemented in `SE/K/_assets/learning-shell-v55.js`
+and `learning-shell-v55.css`. Drop-down menus expose only useful secondary
+choices; other pages do not require an encyclopedia detour to reach concepts.
 
-No framework, package installation, or server-side application is required.
-The workflow publishes the static files directly, including `SE/K/_assets`.
-Python lab files are downloadable exercises to run locally.
+## GitHub Pages deployment
 
-## Update or preview
+1. In **Settings > Pages**, choose **GitHub Actions** as the build and deployment source.
+2. Push the repository, including `.github/workflows/deploy-pages.yml`, to `main`.
+3. The workflow runs link and search tests and publishes `index.html`, `.nojekyll`, and the complete `SE/` tree.
 
-GitHub Actions regenerates the homepage automatically. After editing
-`SE/START-HERE.html`, regenerate it locally when previewing:
+All links are relative so both repository Pages and `<username>.github.io`
+root-hosted layouts are supported. There is no framework, database, application
+cache, account management, or study-progress storage.
 
-```powershell
-python scripts/prepare_github_pages.py
-```
+## Local preview and validation
 
-To preview from this folder:
+From the repository root:
 
-```powershell
+```bash
 python -m http.server 8000
 ```
 
-Open `http://localhost:8000/`. Study progress is stored in the current browser.
+Open http://localhost:8000/. To run the same checks as the deployment:
 
-The encyclopedia HTML is approximately 20 MB; its initial download can be slow
-on mobile connections. The complete library is approximately 66 MiB.
+```bash
+python scripts/check_links.py
+node scripts/check_search.js
+```
+
+Mathematical notation is rendered using the bundled offline MathJax files.
+The source directory retains the original chapter, concept, lab, and textbook
+URLs to keep existing cross-references intact. The full Encyclopedia is large
+(approximately 21 MB), so the lighter Concepts directory is the default topic
+entry point.

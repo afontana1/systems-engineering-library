@@ -27,7 +27,48 @@
    });
    return s;
  }
+ // Typeset unambiguous algebra that older HTML chapters left as literal text.
+ // Conservative matching: complete equals/comparison expressions only, not prose or code blocks.
+ const formulaToken='(?:[A-Za-z_α-ωΑ-ΩλμρστθβΔΣ][A-Za-z0-9_α-ωΑ-ΩλμρστθβΔΣ]*|[0-9]+(?:\\.[0-9]+)?[A-Za-z_]*)'+'(?:\\([^()]{1,20}\\))?';
+ const formulaExpr=formulaToken+'(?:\\s*[+\\-−*/×^]\\s*'+formulaToken+')*';
+ const equationPattern=new RegExp('(?<![\\w])('+formulaExpr+'\\s*(?:=|≈|≤|≥)\\s*'+formulaExpr+'(?:\\s*=\\s*'+formulaExpr+')*)','g');
+ const mathOps={λ:'\\lambda ',μ:'\\mu ',ρ:'\\rho ',τ:'\\tau ',σ:'\\sigma ',θ:'\\theta ',β:'\\beta ',Δ:'\\Delta ',Σ:'\\sum ',ε:'\\varepsilon ',π:'\\pi ','≈':'\\approx ','≤':'\\le ','≥':'\\ge ','≠':'\\ne ','×':'\\times ','−':'-','²':'^{2}','³':'^{3}','±':'\\pm '};
+ const texSource=value=>String(value).replace(/[λμρτσθβΔΣεπα≈≤≥≠×−²³±]/g,ch=>mathOps[ch]||ch).replace(/%/g,'\\%');
+ function formatPlainEquations(root){
+   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),edits=[];
+   while(walker.nextNode()){
+     const n=walker.currentNode,p=n.parentElement;
+     if(!p||p.closest(skip+',a,.se-equation,.se-inline-math,.math-display,.math-inline')||!p.closest('p,li,td'))continue;
+     const source=n.nodeValue;
+     if(!source||!/[=≈≤≥]/.test(source)||source.includes('\\(')||source.length>3000)continue;
+     const matches=[...source.matchAll(equationPattern)].filter(m=>m[1].length>=5&&m[1].length<110);
+     if(matches.length)edits.push([n,source,matches]);
+   }
+   for(const [node,source,matches] of edits){
+     const frag=document.createDocumentFragment();let at=0;
+     for(const m of matches){
+       if(m.index<at)continue;
+       if(m.index>at)frag.append(document.createTextNode(source.slice(at,m.index)));
+       const span=document.createElement('span');span.className='se-inline-math';
+       span.textContent='\\('+texSource(m[1])+'\\)';frag.append(span);at=m.index+m[1].length;
+     }
+     if(at<source.length)frag.append(document.createTextNode(source.slice(at)));
+     if(at>0)node.replaceWith(frag);
+   }
+ }
+ function formatInlineCode(root){
+   for(const code of root.querySelectorAll('p code,li code,td code')){
+     if(code.closest('pre,a,.se-no-math,.math-display,.math-inline')||code.children.length)continue;
+     const raw=code.textContent.trim();
+     if(raw.length>105||!/[λμρτθσβΔΣ≈≤≥≠=]/.test(raw)||/[$\\\n]|https?:|\.html|\.py/.test(raw))continue;
+     if(/\b(?:function|return|import|const|let|class)\b/.test(raw))continue;
+     const span=document.createElement('span');span.className='se-inline-math';
+     span.textContent='\\('+texSource(raw)+'\\)';code.replaceWith(span);
+   }
+ }
  function prepare(root){
+   formatInlineCode(root);
+   formatPlainEquations(root);
    // Unified encyclopedia stored block TeX as <div class=math-display><code>…</code></div>.
    // Replace that non-executable code wrapper with genuine MathJax delimiters.
    root.querySelectorAll('.math-display:not([data-se-equation])').forEach(el=>{

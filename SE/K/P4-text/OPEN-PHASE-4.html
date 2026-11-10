@@ -11,7 +11,6 @@ a{color:var(--primary);text-underline-offset:3px}.hero{background:linear-gradien
 @media print{.hero,.sidebar,.reader-toolbar{display:none}.shell{display:block;padding:0}.reader{border:0;padding:0;box-shadow:none}.doc{display:none!important}.doc.selected{display:block!important}body{background:white;color:#111}}
 </style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer src="../_assets/mathjax-svg.js"></script><script defer src="../_assets/prism.js"></script><script defer src="../_assets/prism-python.js"></script><script defer src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
 <link rel="stylesheet" href="../_assets/learning-shell-v55.css">
-<script defer src="../_assets/learning-map-v55.js"></script>
 <script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/P4-text/OPEN-PHASE-4.html" data-se-mode="standard"></script>
 </head><body>
 <header class="hero"><div class="kicker">Systems Engineering Knowledge Library · Edition 5.0</div><h1>Phase 4: Agile, Digital and Mission Engineering</h1><p>36 teaching chapters, 12 concept tutorials, an integrated synthetic mobility case, and editable lab resources in the accompanying ZIP. This entire reader works offline; no account or network needed.</p><div class="stats"><span class="stat">36 weekly lessons</span><span class="stat">12 deep dives</span><span class="stat">3 course maps</span><span class="stat" id="read-progress">0 / 36 lessons read</span></div></header>
@@ -3895,8 +3894,8 @@ a{color:var(--primary);text-underline-offset:3px}.hero{background:linear-gradien
  const docs=[...document.querySelectorAll('.doc')], buttons=[...document.querySelectorAll('.entry')];
  const search=document.querySelector('#search'), filter=document.querySelector('#filter'), mark=document.querySelector('#mark-read');
  const storageKey='se-phase4-completion-v1';let done={},current='overview';
- try{done=JSON.parse(localStorage.getItem(storageKey)||'{}')||{};}catch(_e){done={};}
- function write(){try{localStorage.setItem(storageKey,JSON.stringify(done));}catch(_e){}}
+ try{done=JSON.parse(null||'{}')||{};}catch(_e){done={};}
+ function write(){try{undefined;}catch(_e){}}
  const byId=Object.fromEntries(docs.map(d=>[d.dataset.id,d]));
  const text=Object.fromEntries(docs.map(d=>[d.dataset.id,(d.textContent+' '+d.dataset.title).toLowerCase()]));
  function updateProgress(){

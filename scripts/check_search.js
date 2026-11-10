@@ -3,7 +3,7 @@
 const fs=require('fs');
 const path=require('path');
 const assert=require('assert');
-const source=path.join(__dirname,'..','K','U');
+const source=path.join(__dirname,'..','SE','K','U');
 const html=fs.readFileSync(path.join(source,'OPEN-ENCYCLOPEDIA.html'),'utf8');
 const match=html.match(/<script\s+type="application\/json"\s+id="corpus"[^>]*>(.*?)<\/script>/s);
 assert(match,'the embedded offline search collection exists');

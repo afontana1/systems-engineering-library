@@ -2,7 +2,7 @@
 
 56 canonical reference entries and 1076 searchable resources. Eight new entries are introduced in v53. Existing record identifiers remain stable. Articles are locally readable; publisher citations require internet access. Independent external peer review and complete 240-chapter mathematical audit remain outstanding.
 
-[Open interactive encyclopedia](U/OPEN-ENCYCLOPEDIA.html) · [v53 coverage report](../INTERNAL/ENCYCLOPEDIA-COVERAGE-v53.md) · [Structured catalog](REFERENCE-CATALOG-v53.json)
+[Open interactive encyclopedia](U/OPEN-ENCYCLOPEDIA.html) · [Structured catalog](REFERENCE-CATALOG-v53.json)
 
 ## Foundations and management
 
