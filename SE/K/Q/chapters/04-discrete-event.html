@@ -47,4 +47,34 @@
 <p><a href="../labs/04-discrete-event.html">Open the lab for this chapter</a> · <a href="../labs/04-discrete-event.md">Download editable Markdown lab</a> · <a download href="../notebooks/04-discrete-event.ipynb">Open the associated notebook</a> · <a download href="../code/engineering_math.py">Download the calculation source</a></p>
 <p><strong>Authoritative follow-up reading:</strong> <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a>, <a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook</a>, and <a href="https://www.incose.org/resources-publications/technical-publications/systems-engineering-body-of-knowledge/">Systems Engineering Body of Knowledge</a>. These are independent references, not endorsements of the fictional cases.</p>
 <p><a href="../INDEX.html">Return to the quantitative textbook collection</a></p>
+
+<!-- STEP04-QUANTITATIVE-START -->
+<section class="qse-integrated" aria-label="Integrated quantitative methods case">
+<h2>Step 04 integrated case — NS-QSE4.1: verify a finite-horizon dispatch queue</h2>
+<p>The integrated queue is not an M/M/1 model. It represents a <strong>finite one-hour intake window</strong> in which request arrival times are sampled uniformly over the hour; each request is assigned to the first available of \(c\) parallel servers, which takes a constant \(s\) minutes per request. The simulation intentionally removes route geometry, passenger grouping, labor breaks, priority discipline, failed vehicles, and time-varying dispatch rules. It is useful for queue-mechanics education and for identifying assumptions to test next, not for credible regional fleet sizing.</p>
+<h3>Event-calendar recurrence and conservation</h3>
+<p>Let the ordered arrivals be \(a_1\le\dots\le a_n\). Maintain each server's next available time \(f_j\), initialized to zero. For request \(i\), choose \(j^*=\arg\min_j(f_j,j)\) with a deterministic tie break; service begins at \(b_i=\max(a_i,f_{j^*})\), waiting is \(w_i=b_i-a_i\ge0\), and finish is \(f_{j^*}\gets b_i+s\). This yields two mandatory invariants: \(0\le a_i\le b_i\le f_i\) for every request, and</p>
+<p>\[
+N_{\mathrm{arrived}}=N_{\mathrm{finished\ by\ 60}}+N_{\mathrm{finished\ after\ 60}}.
+\]</p>
+<p>Every request in this simplified model finishes eventually; overtime is counted, not treated as disappearance or abandonment. The code rejects unsorted arrivals, invalid server counts, negative demand and nonfinite numbers. <code>ns-qse4-policy-days.csv</code> contains all daily results for four policies and three conditions.</p>
+<h3>Controlled outcomes and comparison with queueing benchmarks</h3>
+<p>For the twelve storm windows, request-weighted average waiting time is approximately <strong>17.98 minutes</strong> for two servers at 10 minutes each, and <strong>2.52 minutes</strong> for three servers at 8 minutes each. The timely fraction, defined as the fraction whose wait is at most 12 minutes, increases from approximately <strong>42.59%</strong> to <strong>98.15%</strong>. But in compound demand plus slower travel, even the combined policy reaches only <strong>82.95%</strong> timely service, below the illustrative 90% minimum. It also finishes approximately <strong>26.89%</strong> of requests after the intake hour. Thus its nominal benefit does not pass the combined stress screen.</p>
+<p>An M/M/1 stationarity result is an independent <strong>analytic benchmark</strong>: \(W=1/(\mu-\lambda)\), where arrivals and service are exponential, one server operates steadily, and \(\lambda&lt;\mu\). You must not insert the multi-server deterministic 60-minute simulation parameters into that formula and present the result as validation. What can be checked are basic limits: no arrivals implies zero wait; adding a truly idle server cannot worsen any FCFS job's wait under the identical arrival stream and common deterministic service duration; reducing service time should not increase waits under the stated assignment rule.</p>
+<h3>Replication, warm-up, and uncertainty</h3>
+<p>The finite intake-hour experiment is a <strong>transient study</strong>; clearing the queue between days is part of its model definition. A real dispatcher operating through multiple shifts may inherit backlog and nonempty server states. Clearing it at each hour could be dangerously optimistic. For a steady-state queue, warm-up handling and long-run batch means are appropriate, but merely deleting warm-up observations without checking stationarity creates another bias. Replicate <em>entire coherent shifts or days</em>, not correlated requests, when constructing confidence intervals for policy differences.</p>
+<details><summary>Worked exercises and interpretation</summary>
+
+<ol>
+<li><strong>Tiny event trace.</strong> Two servers, three arrivals at [0, 1, 2] minutes and fixed five-minute service. Service starts at [0, 1, 5]; waits are [0, 0, 3]; finishes are [5, 6, 10]. All three requests complete, so conservation holds.</li>
+<li><strong>Deadline.</strong> If only completions by minute 60 count, is the combined policy's compound timely fraction a measure of completed-by-deadline success? No. <code>timely_fraction</code> refers to <em>wait before pickup</em>; overtime completions are counted separately. Conflating the metrics could approve an unsuitable design.</li>
+<li><strong>Invalid model.</strong> Supply decreasing arrival times. The checker must reject them; sorting silently would conceal a bad upstream event log and weaken traceability.</li>
+</ol>
+</details>
+
+<p><strong>Transfer:</strong> Book 11's broader mobility simulator and Book 18's interdependent constituents need additional mechanisms before any quantitative prediction is considered operationally credible.</p>
+
+</section>
+<style>@media(max-width:700px){article{max-width:100%;overflow-x:auto}article :is(p,li):has(mjx-container){max-width:100%;overflow-x:auto}}</style>
+<!-- STEP04-QUANTITATIVE-END -->
 </article></main></body></html>

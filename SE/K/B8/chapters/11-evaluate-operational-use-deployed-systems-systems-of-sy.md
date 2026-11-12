@@ -89,3 +89,25 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 11: Operational and autonomy evaluation](../labs/lab-11-evaluate-operational-use-deployed-systems-systems-of-sy.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 11 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-TE8.1 — operational validation, accessibility, and systems of systems
+
+### Verify the artifact; validate the service
+
+An integrated vehicle and dispatch broker can satisfy interface tests while failing a stakeholder's transportation need. Operational validation asks whether the service provides timely, safe and equitable access under real use conditions. TE8-R05 therefore specifies the eligible accessibility-request denominator, pickup time origin and a threshold: at least 95% timely within 12 minutes. The synthetic pilot observes **19 successes in 20 trials**. Its point estimate of 95% is not a defensible population lower confidence guarantee, and twenty convenient trips are unlikely to cover shift changes, weather, event demand and accessibility-device variability.
+
+A field test requires an explicit sampling frame. If dispatchers exclude inaccessible routes from 'eligible demand,' their claimed success fraction may rise while users' effective access gets worse. Report unmet demand separately, stratify where justified, define opt-out and missing-record treatment, and consult affected stakeholders on what constitutes useful service. Consent, privacy and safety obligations remain relevant even in an educational case study using synthetic data.
+
+### Autonomous and federated systems complicate responsibility
+
+If a reservation depends on a municipal traffic feed, a partner operator, a third-party identity provider and a fleet manager, failures may share a cause, and no single component team has full authority. Record constituent configurations, external interface contracts, operational boundaries, human override mechanisms and loss-of-connection behavior. An AI planner's favorable average performance cannot replace explicit safe-state assertions or independently evaluate unusual environments outside its training distribution. Model performance drift and nondeterminism must be addressed in the evidence plan.
+
+Operational evaluation should test *whole mission threads*: request → eligibility decision → dispatch → pickup → recovery from disruption → complaint resolution. A realistic successful demonstration must show end-user usefulness rather than only a transaction success response. Repeating a clean demonstration many times does not exercise uncommon but consequential failures.
+
+**Exercise.** A partner fleet improves mean wait time by rejecting difficult accessible pickups. Is the operating concept validated?
+
+<details><summary>Worked answer</summary>
+
+No. Average speed for retained requests does not measure the mission outcome for all eligible users. Include refused/unserved requests, stratified timeliness and stakeholder-defined success, then reassess the operational concept and governance agreements.
+
+</details>

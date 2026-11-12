@@ -1,0 +1,189 @@
+{
+  "conditional_mixture": {
+    "count_variance": 29.414135984950292,
+    "expected_count": 13.934426229508198
+  },
+  "credibility": {
+    "evidence_kind": "synthetic withheld-generator cross-check, not external validation",
+    "permissions_all_granted": false,
+    "synthetic_bias_minutes": -1.375,
+    "synthetic_rmse_minutes": 1.9039432764659772
+  },
+  "deployment_disposition": "HOLD: unvalidated synthetic case and absent required permissions",
+  "factorial": {
+    "baseline": 16.87970720431435,
+    "capacity": 5.368331266647408,
+    "capacity_average_effect": -9.598227189805502,
+    "combined": 2.3464505917954566,
+    "interaction_difference_in_differences": 3.8262974957228817,
+    "process": 10.031529033739517,
+    "process_average_effect": -4.935029422713393
+  },
+  "input_sha256": "8cc0b2a0d15d22bd2f0e05dd895703ea3415bf347e03a93ea7d965ba4beba063",
+  "paired_storm_delta_baseline_minus_combined": {
+    "mean_delta": 14.533256612518896,
+    "percentile_95pct_interval": [
+      10.857386407227544,
+      18.013151685153417
+    ]
+  },
+  "policies": {
+    "capacity": {
+      "all_scenarios_screen_pass": false,
+      "illustrative_cost_plus_wait_penalty_usd": 988.1943553392383,
+      "scenarios": {
+        "clear": {
+          "days": 12,
+          "mean_daily_wait_minutes": 0.6513684694760036,
+          "overtime_fraction": 0.225,
+          "request_weighted_mean_wait_minutes": 0.6820256778249266,
+          "requests": 120,
+          "timely_fraction": 1.0
+        },
+        "compound": {
+          "days": 12,
+          "mean_daily_wait_minutes": 11.13771988232793,
+          "overtime_fraction": 0.38257575757575757,
+          "request_weighted_mean_wait_minutes": 12.020684984102356,
+          "requests": 264,
+          "timely_fraction": 0.5681818181818182
+        },
+        "storm": {
+          "days": 12,
+          "mean_daily_wait_minutes": 5.368331266647408,
+          "overtime_fraction": 0.3101851851851852,
+          "request_weighted_mean_wait_minutes": 5.820394062227468,
+          "requests": 216,
+          "timely_fraction": 0.8148148148148148
+        }
+      },
+      "weighted_wait_penalty_usd_per_window": 898.1943553392383
+    },
+    "combined": {
+      "all_scenarios_screen_pass": false,
+      "illustrative_cost_plus_wait_penalty_usd": 552.6798587309671,
+      "scenarios": {
+        "clear": {
+          "days": 12,
+          "mean_daily_wait_minutes": 0.31223699542095545,
+          "overtime_fraction": 0.15833333333333333,
+          "request_weighted_mean_wait_minutes": 0.3178867696222725,
+          "requests": 120,
+          "timely_fraction": 1.0
+        },
+        "compound": {
+          "days": 12,
+          "mean_daily_wait_minutes": 5.523163146336107,
+          "overtime_fraction": 0.2689393939393939,
+          "request_weighted_mean_wait_minutes": 6.018117295589076,
+          "requests": 264,
+          "timely_fraction": 0.8295454545454546
+        },
+        "storm": {
+          "days": 12,
+          "mean_daily_wait_minutes": 2.3464505917954566,
+          "overtime_fraction": 0.2037037037037037,
+          "request_weighted_mean_wait_minutes": 2.5213254171384216,
+          "requests": 216,
+          "timely_fraction": 0.9814814814814815
+        }
+      },
+      "weighted_wait_penalty_usd_per_window": 422.6798587309671
+    },
+    "process": {
+      "all_scenarios_screen_pass": false,
+      "illustrative_cost_plus_wait_penalty_usd": 1638.6297843894595,
+      "scenarios": {
+        "clear": {
+          "days": 12,
+          "mean_daily_wait_minutes": 1.5217978965976777,
+          "overtime_fraction": 0.18333333333333332,
+          "request_weighted_mean_wait_minutes": 1.6020875037879323,
+          "requests": 120,
+          "timely_fraction": 1.0
+        },
+        "compound": {
+          "days": 12,
+          "mean_daily_wait_minutes": 18.85764669058286,
+          "overtime_fraction": 0.4696969696969697,
+          "request_weighted_mean_wait_minutes": 19.98540892398975,
+          "requests": 264,
+          "timely_fraction": 0.375
+        },
+        "storm": {
+          "days": 12,
+          "mean_daily_wait_minutes": 10.031529033739517,
+          "overtime_fraction": 0.3425925925925926,
+          "request_weighted_mean_wait_minutes": 10.747990983787988,
+          "requests": 216,
+          "timely_fraction": 0.625
+        }
+      },
+      "weighted_wait_penalty_usd_per_window": 1593.6297843894595
+    },
+    "status_quo": {
+      "all_scenarios_screen_pass": false,
+      "illustrative_cost_plus_wait_penalty_usd": 2631.228352913671,
+      "scenarios": {
+        "clear": {
+          "days": 12,
+          "mean_daily_wait_minutes": 3.273594695458088,
+          "overtime_fraction": 0.275,
+          "request_weighted_mean_wait_minutes": 3.488991251767216,
+          "requests": 120,
+          "timely_fraction": 0.9416666666666667
+        },
+        "compound": {
+          "days": 12,
+          "mean_daily_wait_minutes": 29.734060399769184,
+          "overtime_fraction": 0.571969696969697,
+          "request_weighted_mean_wait_minutes": 31.21650453699086,
+          "requests": 264,
+          "timely_fraction": 0.23484848484848486
+        },
+        "storm": {
+          "days": 12,
+          "mean_daily_wait_minutes": 16.87970720431435,
+          "overtime_fraction": 0.49074074074074076,
+          "request_weighted_mean_wait_minutes": 17.975020843089453,
+          "requests": 216,
+          "timely_fraction": 0.42592592592592593
+        }
+      },
+      "weighted_wait_penalty_usd_per_window": 2631.228352913671
+    }
+  },
+  "posterior": {
+    "clear": {
+      "conditional_95pct_interval_per_hour": [
+        8.3215978231602,
+        11.90114715029132
+      ],
+      "exposure_hours": 12,
+      "posterior_mean_per_hour": 10.0,
+      "posterior_rate_hours": 12.2,
+      "posterior_shape": 122.0,
+      "synthetic_total": 120
+    },
+    "storm": {
+      "conditional_95pct_interval_per_hour": [
+        15.588947628896328,
+        20.2539111484518
+      ],
+      "exposure_hours": 12,
+      "posterior_mean_per_hour": 17.868852459016395,
+      "posterior_rate_hours": 12.2,
+      "posterior_shape": 218.0,
+      "synthetic_total": 216
+    }
+  },
+  "recommended_screen_choice": "combined",
+  "thermal": {
+    "control_multiplier_h025": 0.5,
+    "control_multiplier_h1": -1.0,
+    "euler_h025_deg_c": 37.8377110975,
+    "euler_h1_deg_c": 38.56,
+    "exact_deg_c": 37.64437811779848,
+    "uncooled_exact_deg_c": 39.7093945023589
+  }
+}

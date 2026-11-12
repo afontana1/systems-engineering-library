@@ -125,3 +125,21 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [02 — Previous chapter](02-translate-stakeholder-values-into-objectives-measures-and-value-stru.md) · [04 — Next chapter](04-apply-constraints-dominance-and-pareto-analysis-to-the-selection-pro.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-DA14.1 decision-analysis laboratory: Chapter 03
+
+### From influence diagrams to accountable evidence
+
+An influence diagram distinguishes **decision nodes** (square: pilot A–F, later design controls), **uncertainty nodes** (circles: demand, vendor lead time, service failures, winter charging and workforce acceptance), **outcome nodes** (wait, availability, completed accessible trips, cost, emissions), and **value nodes** (diamonds: fundamental objectives and preferences). An information arrow into a decision means the information is available *before* the choice; a causal or relevance arrow into an outcome means the outcome depends on that parent. Do not draw an arrow solely because two variables appear correlated. The [editable diagram](../case/decision-evidence.svg) identifies a minimum defensible chain; it is a decision-analysis abstraction, not a validated causal graph.
+
+### Conditional probability is not a risk score
+
+Let \(H\) denote an adverse delivery/support state and \(T^+\) a positive independent test. Our illustrative beliefs are \(P(H)=0.30\), sensitivity \(P(T^+\mid H)=0.80\), and specificity \(P(T^-\mid\neg H)=0.85\). By total probability, \(P(T^+)=0.30(0.80)+0.70(0.15)=0.345\). Bayes' rule gives \(P(H\mid T^+)=0.24/0.345=\mathbf{0.69565}\), far below one despite a positive test. Conversely \(P(H\mid T^-)=0.06/0.655=0.09160\). These probabilities are input beliefs and likelihoods invented for teaching; none can be inferred from the source alternatives table.
+
+The controlled [decision analyzer](../tools/step03_book14_decision.py) stores all pilot attributes and added beliefs in [JSON](../case/decision-inputs.json). Its first gate checks for nonfinite inputs, impossible percentages, duplicate IDs, negative values and nonnormalized probabilities. Input validation is not real-world calibration, but it prevents a malformed dataset from producing plausible-looking scores. The difference between two uncertainty stories is substantive: random passenger arrivals represent operational variability, while uncertainty about a vehicle vendor's serviceability is epistemic and potentially reducible by testing. A single “risk = 3” label does not replace this decomposition.
+
+**Worked consequence example.** Suppose the candidate is D, the unobserved state is adverse and payoff under D is 57 points, whereas under C it is 67. Selecting D before knowing the state exposes ten points of conditional regret. In the normal state the corresponding difference reverses: D yields 80 and C 74, so C incurs six points of conditional regret. These point values are **synthetic utility judgments**, not dollar losses; do not subtract the published five-year cost again unless the payoff model is rebuilt.
+
+**Exercise and worked solution.** A reviewer reports an adverse-state probability of 70% after a positive test, then claims the original state probability was 70%. **Solution:** The approximately 69.6% posterior applies *conditional on the test result*. Before the test, the example prior remains 30%. The likelihood model connects them: posterior odds equal prior odds times the likelihood ratio \(0.8/0.15\). If sensitivity/specificity or sampling populations change, both posteriors must be recomputed. For real deployment one must document source, independence, base-rate stability and decision timing.
+
+**Red-team prompt.** Identify information that cannot be learned in a short pilot, and check whether the influence diagram improperly treats model outputs from Books 11–13 as independent observations.

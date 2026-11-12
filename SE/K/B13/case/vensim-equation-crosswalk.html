@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS-FB13.1 Vensim Equation Crosswalk</title><style>body{margin:0;background:#f4f8f9;color:#173645;font:16px/1.72 system-ui,sans-serif}header{padding:16px max(18px,calc((100vw - 1050px)/2));background:#173f52}header a{color:#c6f5ee}main{max-width:1050px;margin:24px auto;padding:clamp(18px,4vw,42px);border:1px solid #d6e3e5;border-radius:12px;background:white}a{color:#0b6b70}h1{line-height:1.2}h2{margin-top:1.8rem}p,li{max-width:100ch}table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}td,th{padding:9px;border:1px solid #dae3e6;vertical-align:top}th{background:#edf5f4}code{overflow-wrap:anywhere}pre{overflow:auto;padding:12px;background:#ecf3f5}img{max-width:100%;height:auto}@media(max-width:700px){main{margin:0;padding:18px;border:0;border-radius:0}}</style><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script></head><body><header><a href="INDEX.html">← NS-FB13.1 case</a> · <a href="../OPEN-BOOK.html">Book 13</a></header><main><h1>NS-FB13.1 — Vensim equation and unit crosswalk (not an executed <code>.mdl</code>)</h1>
+<p><strong>Purpose:</strong> support a student implementing an independent authoritative Vensim model for EN.645.781. The checked executable artifact in this release is Python. Vensim PLE was <strong>not</strong> installed or run; the following mathematical crosswalk is neither a claim of syntactic Vensim <code>.mdl</code> conformity nor evidence of executable model equivalence. Rates are daily; <code>TIME STEP = 0.5 day</code>, <code>FINAL TIME = 360 day</code>.</p>
+<table>
+<thead>
+<tr>
+  <th>Stock (unit)</th>
+  <th style="text-align:right">Initial value</th>
+  <th>Differential equation</th>
+  <th>Main hazards/guards</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Unavailable fleet (vehicles)</td>
+  <td style="text-align:right">1.9</td>
+  <td><code>dU/dt = breakdowns - repairs</code></td>
+  <td><code>0&lt;=U&lt;=14</code> vehicles, with bounded rates</td>
+</tr>
+<tr>
+  <td>Standard request backlog (requests)</td>
+  <td style="text-align:right">265</td>
+  <td><code>dBs/dt = standard_arrivals - standard_completed - standard_abandoned</code></td>
+  <td>Cap completions by realizable available work</td>
+</tr>
+<tr>
+  <td>Accessible request backlog (requests)</td>
+  <td style="text-align:right">45</td>
+  <td><code>dBa/dt = accessible_arrivals - accessible_completed - accessible_abandoned</code></td>
+  <td>Explicit priority allocation; no negative backlog</td>
+</tr>
+<tr>
+  <td>Perceived backlog (requests)</td>
+  <td style="text-align:right">310</td>
+  <td><code>dP/dt = (Bs+Ba-P)/18</code></td>
+  <td>First-order information delay, 18 days</td>
+</tr>
+<tr>
+  <td>Trust index (index units)</td>
+  <td style="text-align:right">63</td>
+  <td><code>dT/dt = (target_trust-T)/45</code></td>
+  <td>bounded 0–100; synthetic response hypothesis</td>
+</tr>
+</tbody>
+</table>
+<p>Algebraic variables (units): <code>active_vehicles=14-U</code> (vehicles); <code>demand_rate=1260*demand_multiplier*(0.75+0.25*T/70)</code> (requests/day); <code>accessible_arrivals = demand_rate*0.14</code> (requests/day); <code>surge = surge_max*P/(P+380)</code> (dimensionless); <code>capacity=active_vehicles*93*(1+surge)</code> (requests/day); <code>breakdowns=active_vehicles*0.00645*failure_multiplier*(1+1.8*surge)</code> (vehicles/day); <code>repairs=MIN(U/24*repair_multiplier,0.12*repair_multiplier)</code> (vehicles/day). The Python code additionally caps rates at available stock per Euler step and allocates completions by accessible reservation followed by standard capacity. For an independent Vensim version, make these step-specific guards explicit and test structural invariance as time step changes. <code>target_trust=MAX(20,MIN(88,82-0.11*(abandoned_s+abandoned_a)-5*surge-0.03*Ba))</code> is an assumed behavioral function; coefficients have dimensional units suppressed in the shorthand and must be declared as conversion factors when running Vensim dimensional analysis.</p>
+<h2>Translation and parity protocol</h2>
+<ol>
+<li>Define the five stocks above using Vensim <code>INTEG</code> and the five initial conditions; define units for each conversion coefficient (<code>index day/request</code>, <code>index/request</code>, etc.).</li>
+<li>Define each inflow/outflow as a rate; use <code>MIN</code> and <code>MAX</code> guards and document any solver-specific semantics and nonnegativity assumptions.</li>
+<li>Run <code>0.5</code>-day integration for 360 days and compare <code>status_quo</code> nominal final backlog, average active fleet, cumulative completions, and group abandonment with <code>summary.json</code>.</li>
+<li>Repeat at one and quarter-day steps; inspect time-step sensitivity of both primary output measures and any threshold guard transitions.</li>
+<li>Use Vensim's dimension and equation checks. Delayed observation is modeled as a first-order stock, <strong>not</strong> a pure transportation delay. Confirm that diagram feedback signs agree with the equations.</li>
+<li>Version any differences and run perturbations (zero accessible demand, saturated repairs, demand shock). Do not label the model validated until structure, reference modes, and policy consequences are challenged by independent reviewers.</li>
+</ol>
+<h2>Important limitations</h2>
+<p>The imported eight-quarter synthetic course observations are <strong>not fitted</strong> by these parameters. <code>abandoned</code> is a deliberately simplified cancellation mechanism; <code>trust</code> is an illustrative proxy, not a survey construct; capacity is homogeneous in vehicles and no passenger travel-time distribution is simulated. Book 11's dispatch event simulation and Book 12's vehicle physics are separate representations and <strong>not dynamically coupled</strong> to this model.</p>
+</main></body></html>

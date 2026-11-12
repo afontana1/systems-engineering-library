@@ -1,0 +1,49 @@
+{
+  "case_id": "NS-ENT19.1",
+  "description": "Entirely synthetic regional mobility and emergency access enterprise; no measured behavior or authority inferred",
+  "horizon_weeks": 26,
+  "opening_requests": 20,
+  "weekly_arrivals": 50,
+  "stress_weekly_arrivals": 65,
+  "initial_adoption": 0.20,
+  "adoption_growth_with_governance": 0.18,
+  "adoption_attrition": 0.05,
+  "budget_cap_usd_m": 3.60,
+  "workforce_cap_fte": 8.0,
+  "accessible_demand_four_hours": 62,
+  "standard_demand_four_hours": 186,
+  "accessible_min_fraction": 0.90,
+  "standard_min_fraction": 0.90,
+  "coordination_min_completion_fraction": 0.95,
+  "joint_scenario_target_probability": 0.95,
+  "investments": [
+    {"id":"G","name":"Joint governance and review charter","cost_usd_m":0.35,"fte":1.0,"requires":[],"weekly_clearance_gain":7,"accessible_gain":0,"standard_gain":0},
+    {"id":"D","name":"Privacy-governed data-sharing agreement","cost_usd_m":0.55,"fte":1.5,"requires":["G"],"weekly_clearance_gain":5,"accessible_gain":0,"standard_gain":3},
+    {"id":"A","name":"Accessible flexible-service capacity","cost_usd_m":1.30,"fte":3.0,"requires":["D"],"weekly_clearance_gain":0,"accessible_gain":12,"standard_gain":0},
+    {"id":"W","name":"Joint workforce training and relief","cost_usd_m":0.65,"fte":2.0,"requires":["G"],"weekly_clearance_gain":4,"accessible_gain":3,"standard_gain":4},
+    {"id":"R","name":"Emergency backup and response continuity","cost_usd_m":1.10,"fte":2.0,"requires":["D"],"weekly_clearance_gain":0,"accessible_gain":0,"standard_gain":0,"flood_accessible_gain":16,"flood_standard_gain":24},
+    {"id":"C","name":"Cross-organization dispatch integration","cost_usd_m":0.95,"fte":2.5,"requires":["D"],"weekly_clearance_gain":6,"accessible_gain":0,"standard_gain":13}
+  ],
+  "scenarios": [
+    {"id":"nominal","probability":0.55,"weekly_clearance":43,"accessible_capacity":55,"standard_capacity":178},
+    {"id":"workforce","probability":0.20,"weekly_clearance":38,"accessible_capacity":48,"standard_capacity":170},
+    {"id":"funding","probability":0.10,"weekly_clearance":41,"accessible_capacity":51,"standard_capacity":166},
+    {"id":"flood","probability":0.15,"weekly_clearance":34,"accessible_capacity":40,"standard_capacity":134}
+  ],
+  "portfolios": {
+    "status_quo":[],
+    "governance_first":["G","D","W"],
+    "capacity_first":["G","D","A","C"],
+    "resilience_first":["G","D","R","W"],
+    "staged_transform":["G","D","A","R"],
+    "fully_integrated":["G","D","A","W","R","C"]
+  },
+  "authority_required": [
+    {"actor":"Regional transit authority","decision":"Fleet and service allocation","status":"hypothetical only"},
+    {"actor":"Municipal appropriation bodies","decision":"Joint investment authorization","status":"not obtained"},
+    {"actor":"Privacy and data owners","decision":"Cross-entity dispatch data-sharing","status":"not obtained"},
+    {"actor":"Workforce and labor representatives","decision":"New duties and training arrangements","status":"not obtained"},
+    {"actor":"Accessibility and affected-community representatives","decision":"Equity and legitimacy review","status":"not completed"},
+    {"actor":"Hospitals and emergency partners","decision":"Service and escalation protocols","status":"not obtained"}
+  ]
+}

@@ -33,3 +33,15 @@ A successful gate records its evidence, limitations, responsible reviewer and op
 <details><summary>Worked answer</summary>Approve **continued laboratory learning and controlled synthetic experimentation**; do not approve external dispatch use, safety qualification or mission performance claims.</details>
 
 **Submit:** a two-page review memo with supporting links, dissenting observations and explicit authorization limits. Related: [v11 review board](../../integrated-lab/review/REVIEW-BOARD.md).
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Independent reviewer: defend against false positives.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+A review should contain a deliberate **defeater** for every attractive result. Examples: duplicate messages accepted as additional demand, sampled wait computed only over survivors, a stale telemetry event treated as current, or approval attributed to a non-authorized role. U2 runs a battery of mutated-output tests that must fail rather than only testing valid cases.
+
+**Worked counterexample:** Changing a completed trip's resource to V01 during the OUTAGE block makes an apparent on-time schedule physically inconsistent even though the total completed count is unchanged. Likewise, changing a true completed status to `unobserved_message_loss` without revising aggregate counts should be detected as an inconsistent ledger. The independent U2 audit catches both.
+
+**Exercise and solution:** What does a valid counterexample prove? It shows a *particular stated invariant* can be violated by a specific altered record and that the checker can detect it; it does not prove all conceivable faults are covered. Assess fault injection diversity, checker independence, and limitations of model fidelity.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

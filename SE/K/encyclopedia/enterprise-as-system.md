@@ -46,6 +46,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 - [SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)](https://sebokwiki.org/wiki/Main_Page) — Community-maintained secondary guide; use its references for further research.
 
+
+
+## Step 02 review studio — system optimization with competing owners
+
+The campus mobility system optimizes “average trip time,” but the accessibility office values reliable boarding for mobility-impaired riders and facilities controls curb-space allocation. Those decisions are owned by different groups. The **enterprise boundary** includes their governance interactions even if the technical engineering team owns only the dispatch software.
+
+**Solved exercise:** A new dispatch algorithm reduces mean journey time for 900 ordinary trips from 12 to 10 minutes while increasing mean journey time for 100 accessible trips from 15 to 25 minutes. The original population mean is `(900×12+100×15)/1000 = 12.3` min. The new mean is `(900×10+100×25)/1000 = 11.5` min—an aggregate improvement hiding a **10-minute deterioration** in accessible service. Declaring success based solely on the mean would substitute one group's objective for the enterprise's full purpose.
+
+**Decision implication:** define disaggregated service outcomes, mandatory accessibility obligations, who has authority over tradeoffs, and which feedback signals prompt reassessment. Mean performance is not evidence that all constituencies are treated acceptably. A system model that omits institutional incentives may predict technically efficient behavior that no actual organization will sustain.
+
 ## Follow the knowledge
 
 **Related concepts**

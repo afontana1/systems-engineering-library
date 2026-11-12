@@ -1,0 +1,9 @@
+id,requirement,baseline,kind,status,reference,limitation
+E01,CD6-R01,NS-CD6.1,CALCULATION,MODEL_PASS,capacity model; fleet assumptions,Unvalidated utilization and throughput
+E02,CD6-R02,NS-CD6.1,PILOT,PLANNED,pilot p90 design,No observed percentile
+E03,CD6-R03,NS-CD6.1,GEOGRAPHY_MODEL,MODEL_PASS,coverage assumption table,Not a field accessibility audit
+E04,CD6-R04,NS-CD6.1,ESTIMATE,MODEL_PASS,annual OPEX table,Supplier quotes missing
+E05,CD6-R05,NS-CD6.1,ESTIMATE,MODEL_PASS,capital budget table,Contingency and taxes excluded
+E06,CD6-R06,NS-CD6.1,TIMING_ANALYSIS,MODEL_FAIL,560 ms degraded chain,A failed degraded case needs a fallback design
+E07,CD6-R07,NS-CD6.1,FIELD_TEST,NOT_EXECUTED,accessible fallback exercise,No real users observed
+E08,CD6-R08,NS-CD6.0,CONFIGURATION_AUDIT,PASS,old crosswalk,Stale baseline

@@ -39,6 +39,12 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)](https://standards.nasa.gov/node/263) — Credibility practices for modeling and simulation used in decisions.
 - [SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)](https://sebokwiki.org/wiki/Main_Page) — Community-maintained secondary guide; use its references for further research.
 
+## Step 02 deeper treatment: executable accounting and policy feedback
+
+A causal arrow from demand to backlog describes influence but not units or accumulation. For \(B\) requests in a queue with arrival rate \(a\) and completion rate \(c\), the stock accounting relation is \(dB/dt=a-c\). If \(a=10\) requests/hour, \(c=12\) requests/hour and \(B(0)=30\), a capacity-saturated idealization clears the initial backlog in 15 hours. If demand increases to 13/hour, the same capacity produces sustained growth of 1 request/hour instead. The model must stop service from consuming nonexistent requests; naive integration can otherwise generate negative backlog.
+
+A **model check** should test dimensions, bounds, extreme conditions, time-step convergence, alternative causal structures and held-out observational behavior. “Fixes that fail” is a hypothesis about a delayed adverse feedback, not a universal explanation. An intervention that shortens assignment time might increase demand enough to worsen final pickup time; that alternative loop must be represented before treating the model as decision credible. Follow the complete [stock–flow verification example](systems-dynamics-model-checks.md) and [critical boundary analysis](critical-systems-thinking.md).
+
 ## Follow the knowledge
 
 **Related concepts**

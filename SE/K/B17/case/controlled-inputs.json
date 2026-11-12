@@ -1,0 +1,79 @@
+{
+  "case_id": "NS-PI17.1",
+  "intended_use": "instructional-policy-screen",
+  "source_note": "Fully synthetic generated extension, not the 96-change historical log asserted in the course outline; tiny Phase 4 event-log sample is a separate file.",
+  "generation": {
+    "seed": 17017,
+    "n": 96,
+    "mean_arrival_days": 1.8
+  },
+  "policies": [
+    {
+      "name": "baseline",
+      "workers": {
+        "analysis": 3,
+        "evidence": 2,
+        "review": 2,
+        "implementation": 3,
+        "verification": 2
+      },
+      "cadence_days": 7,
+      "service_factor": 1.0,
+      "rework_probability": 0.27,
+      "false_positive_probability": 0.02,
+      "max_rework": 2
+    },
+    {
+      "name": "reviewer-only",
+      "workers": {
+        "analysis": 3,
+        "evidence": 2,
+        "review": 3,
+        "implementation": 3,
+        "verification": 2
+      },
+      "cadence_days": 7,
+      "service_factor": 1.0,
+      "rework_probability": 0.27,
+      "false_positive_probability": 0.02,
+      "max_rework": 2
+    },
+    {
+      "name": "evidence-readiness",
+      "workers": {
+        "analysis": 3,
+        "evidence": 3,
+        "review": 2,
+        "implementation": 3,
+        "verification": 2
+      },
+      "cadence_days": 2,
+      "service_factor": 0.82,
+      "rework_probability": 0.15,
+      "false_positive_probability": 0.09,
+      "max_rework": 2
+    },
+    {
+      "name": "combined-guardrails",
+      "workers": {
+        "analysis": 4,
+        "evidence": 3,
+        "review": 2,
+        "implementation": 4,
+        "verification": 3
+      },
+      "cadence_days": 2,
+      "service_factor": 0.8,
+      "rework_probability": 0.12,
+      "false_positive_probability": 0.05,
+      "max_rework": 2
+    }
+  ],
+  "illustrative_screens": {
+    "lead_mean_all_days_max": 28,
+    "lead_p90_all_days_max": 55,
+    "held_count_max": 0,
+    "critical_released_without_evidence_max": 0
+  },
+  "assurance_rule": "Every safety/accessibility/cyber request must visit an evidence stage before release; a computational visit does not prove the evidence was valid."
+}

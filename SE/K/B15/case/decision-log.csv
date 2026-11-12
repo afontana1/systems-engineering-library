@@ -1,0 +1,6 @@
+record,decision,trigger,evidence,authority,remaining_uncertainty
+NS-ASE15-D01,Instrument current-state response and age,Unobserved queue and handoff baseline,Scenario and daily-flow definitions,Transformation lead,Actual arrival/service/rework measurements
+NS-ASE15-D02,Permit tightly scoped learning pilot,Assured synthetic policy passes own screening,scenario-summary.csv; evidence-register.csv,Chief engineer and independent assurance lead,External validity and facility constraints
+NS-ASE15-D03,HOLD production/autonomy changes,No physical configuration qualification,Chapters 8-10 gate analysis,Independent safety and operational release authority,Real security/safety/accessibility evidence
+NS-ASE15-D04,Run supplier resilience challenge,Supplier stress violates screening,Scenario supplier_disruption,Supply-chain lead and systems architect,Correlation of supplier delay and technical rework
+NS-ASE15-D05,Revisit scale only after causal measurement,Simulated scenarios vary multiple levers,Chapter 12 decision review,CEO with portfolio governance,Cost benefit and human factors

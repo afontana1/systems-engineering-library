@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Design for supportability, lifecycle sustainment, and end-of-life · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/encyclopedia/supportability-and-end-of-life.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical explanation</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Design for supportability, lifecycle sustainment, and end-of-life</h1>
+<p><strong>Reference entry · Design maturation, service engineering and lifecycle economics</strong></p>
+<h2>Support is an architectural concern</h2>
+<p>Operational systems depend on enabling products: spares, tools, service instructions, technicians, data systems, suppliers, calibration services, and disposal paths. An architecture that meets initial throughput but cannot be repaired promptly may fail the mission. <strong>Supportability</strong> is the designed ability to keep restoring required service, not just the maintenance plan written after hardware selection. At concept and design reviews, quantify access, diagnosis, replaceability, sparing, interoperability, obsolescence risk, training burden and safe end-of-life handling.</p>
+<p>Availability is not reliability. In a simple renewal approximation with independent alternating operating and repair times, inherent availability is</p>
+<p>\[
+A_i=\frac{\mathrm{MTBF}}{\mathrm{MTBF}+\mathrm{MTTR}}.
+\]</p>
+<p>An illustrative component with mean time between failures 200 h and mean corrective repair time 4 h has \(A_i=200/204\approx98.04\%\). That ignores logistics waiting, preventive maintenance, shared failures and mission scheduling. Operational availability requires a boundary that includes supply and administrative delays; a service-level denominator is not automatically component operating hours. If replacement requires a rarely stocked device, spares dominate real-world recovery.</p>
+<h2>Worked discounted maintenance decision</h2>
+<p>Suppose a fictional subsystem redesign costs $70,000 now and is projected to avoid $18,000 in maintenance per year for six years, with year-end savings and a 4% annual discount rate. Its savings present value is</p>
+<p>\[
+PV=18{,}000\sum_{t=1}^{6}(1.04)^{-t}
+=18{,}000\frac{1-(1.04)^{-6}}{0.04}
+\approx\$94{,}358.
+\]</p>
+<p>The <strong>net present value of maintenance savings alone</strong> is approximately $24,358. The comparison omits operating disruption, additional training, energy impacts, risk, taxes, salvage, inflation and component life. The positive sign is conditional, not proof the redesign should be selected. For example, a mandatory capacity or safety constraint may favor a different design even if its financial NPV is lower.</p>
+<h2>Spares and service constraints</h2>
+<p>A spares strategy needs demand distributions, replenishment time, supplier dependency, interchangeability and criticality. Using average demand alone hides stockout tail risk. For a simple Poisson demand model with mean \(\lambda=2\) units during replenishment lead time, the probability demand exceeds 3 stocked units is</p>
+<p>\[
+P(N&gt;3)=1-e^{-2}\left(1+2+\frac{2^2}{2!}+\frac{2^3}{3!}\right)\approx0.1429.
+\]</p>
+<p>This is a <strong>14.3% hypothetical lead-time stockout probability</strong> for that simplistic model. A shared supplier outage or surge would change the distribution. Check the assumption rather than interpreting this number as field assurance.</p>
+<h2>Engineering artifacts and lifecycle decisions</h2>
+<p>A complete design-for-support package includes: replaceable-unit breakdown and accessibility drawing, failure-detection coverage, maintenance task analysis, support equipment list, sparing rationale, supplier and obsolescence controls, reliability growth evidence, operator training concept, hazardous-material register, and disposal/recycling procedure. Every requirement should identify an owner, verification method, and operating configuration. A closed-loop sustainment review links observed failures and repair delays to revised design and lifecycle-cost assumptions.</p>
+<h2>Exercise and answer</h2>
+<p>If repair time doubles from 4 h to 8 h at the same 200 h MTBF, inherent availability drops to \(200/208\approx96.15\%\). Show why a robust spare-parts plan could improve <strong>operational</strong> recovery without changing intrinsic component failure rate; distinguish a replacement time reduction from a reliability improvement. Name two end-of-life obligations that a cost-only portfolio would miss.</p>
+<h2>Limits and primary sources</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — enabling products, operations, technical assessment and lifecycle support.</li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/">NIST Engineering Statistics Handbook</a> — distribution models, uncertainty and reliability methods.</li>
+</ul>
+<p>Related: <a href="reliability-availability-maintainability.html">reliability/availability</a>, <a href="lifecycle-sustainment-economics.html">lifecycle economics</a>, <a href="supply-chain-assurance-and-provenance.html">supply-chain assurance</a>. All figures are synthetic, and the simplistic availability and stockout models require project validation.</p>
+</article><nav class="standalone-actions"><a href="metrics-hierarchy.html">Read concept</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="metrics-hierarchy.md">Editable Markdown</a></nav></main></body></html>

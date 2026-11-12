@@ -48,4 +48,20 @@ A guard \(E(t)\le E_{min}\) changes discrete mode \(q\). Energy continuity holds
 <li><a href="../INDEX.html">Find supplementary calculations and datasets</a>.</li>
 <li>The canonical curriculum remains the source of assessed requirements; this study explains one demanding conceptual thread and does not replace its assignments.</li>
 </ul>
-<h2>Additional reference reading</h2><p>These external resources complement the fictional examples; they are not required for offline use.</p><ul><li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></li><li><a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook</a></li></ul></article></main></body></html>
+<h2>Additional reference reading</h2><p>These external resources complement the fictional examples; they are not required for offline use.</p><ul><li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a></li><li><a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook</a></li></ul>
+<!-- STEP04-GRADUATE-METHODS-START -->
+<section class="ns-gs4-extension" aria-label="NS-GS4.1 methodological extension"><h2>NS-GS4.1 extension — a convergent solver can miss a discrete safety event</h2>
+<p>The case couples a continuous battery-energy state to a discrete command that should stop the mission at a reserve threshold. The toy power trajectory is chosen because it permits an <strong>exact solution</strong>, making the numerical error independently checkable. See <a href="../integrated/data/ns-gs4.1-case.json">inputs</a>, <a href="../integrated/code/ns_gs_case.py">model</a>, and <a href="../integrated/outputs/ns-gs4.1-results.json">results</a>.</p>
+<h3>State model, exact integral, and event definition</h3>
+<p>Define \(E(t)\) in kWh and a load \(P(t)=a+bt\), where \(a=4\) kW and \(b=0.5\) kW/hour. The differential equation is \(dE/dt=-P(t)\); with \(E(0)=18\), integration gives \(E(t)=18-4t-0.25t^2\), where \(t\) is hours. At three hours, \(E(3)=3.75\) kWh. Reserve is 4.0 kWh. The exact guard crossing solves \(18-4t-0.25t^2=4\), or \(t=(-4+\sqrt{30})/0.5\approx2.95445\) h. A continuous guard therefore trips <strong>before</strong> the three-hour deadline.</p>
+<h3>Numerical method and falsifying counterexample</h3>
+<p>Left-point explicit Euler with step \(h\), assuming \(T/h=n\) is integral, uses \(E_{i+1}=E_i-(a+bi h)h\). Summing the arithmetic series gives</p>
+<p>\[E_h(T)=E_0-aT-\frac{b}{2}(T^2-Th),\qquad E_h(T)-E(T)=\frac{bTh}{2}.\]</p>
+<p>At \(T=3\), step \(h=0.5\) returns \(4.125\) kWh and fails to observe the threshold before the run terminates. At \(h=0.25\), final energy is \(3.9375\) kWh and the first <strong>grid-detected</strong> crossing is 3.0 h—still later than the true crossing. At \(h=0.125\), error halves again to 0.09375 kWh, as the first-order formula predicts. A lower residual alone is not enough; event localization, minimum step and guard semantics need explicit tests.</p>
+<h3>Worked exercise and explained solution</h3>
+<p><strong>Problem.</strong> At \(h=0.125\) h, what final energy and left-Euler error should a reproducibility check expect?</p>
+<p><strong>Solution.</strong> Error \(=(0.5)(3)(0.125)/2=0.09375\) kWh. Estimated final \(3.75+0.09375=3.84375\) kWh. The correct crossing remains about 2.95445 h. Do <strong>not</strong> report the grid time of 3 h as a verified safe event trigger. The <a href="../integrated/labs/INTEGRATED-CASE.html">integrated lab</a> adds a rejected step-size input as a negative test.</p>
+<p><strong>Canonical overlap.</strong> The <a href="../../U/flagships/F08-simulation-uncertainty.html">simulation-uncertainty flagship</a> addresses wider validation questions; this exercise isolates numerical event error.</p>
+</section><style id="ns-gs4-responsive">article{min-width:0;overflow-wrap:break-word}article :is(table,pre){display:block;max-width:100%;overflow-x:auto}article :is(p,li):has(mjx-container){overflow-x:auto}article mjx-container{max-width:100%;overflow-x:auto}article img{max-width:100%}body{overflow-wrap:break-word}</style>
+<!-- STEP04-GRADUATE-METHODS-END -->
+</article></main></body></html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Critical systems thinking: boundaries, power, and methodological choice · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/encyclopedia/critical-systems-thinking.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical explanation</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Critical systems thinking: boundaries, power, and methodological choice</h1>
+<p><strong>Reference entry · Systems of systems, enterprise and complexity · Worked technical treatment</strong></p>
+<h2>Why a mathematically optimal answer can still be wrong</h2>
+<p><strong>Critical systems thinking</strong> asks whose purposes define a system, who has authority to draw its boundary, whose knowledge counts, and which consequences remain outside the chosen model. It does not reject formal methods. It clarifies when an apparently rigorous optimization represents only a narrow decision-maker's values, omits affected people, or makes uncertain institutional assumptions look like objective facts.</p>
+<p>A classical systems model may define the Campus Mobility system as vehicles, dispatch software and charging stations. Students might optimize mean wait time over completed rides. But riders unable to access the reservation app are absent from those observations; campus staff responsible for accessibility or maintenance may not be represented in the objective function. A solution can be <em>technically efficient within its selected boundary</em> while socially or operationally invalid.</p>
+<h2>Boundary critique as an engineering method</h2>
+<p>Record at least two versions of the system boundary: the officially declared boundary and a challenger boundary constructed from affected stakeholders. For each, explicitly identify the client or beneficiary, decision-maker, experts, affected but non-participating parties, intended measures of success, and costs pushed outside the boundary. Separate descriptive claims (“who currently decides?”) from normative claims (“who ought to decide?”).</p>
+<p>A boundary review should yield a <strong>decision log</strong>, not just a discussion. For example, an initial optimization objective might be mean wait time conditional on completed rides. A challenged objective could add probability of service denial, accessibility coverage, shift changes for drivers, and local traffic risk. This changes data collection, model scope, and possibly the preferred alternative. Document who accepted or rejected those revisions and with what authority.</p>
+<h2>Choose methods for the problem situation</h2>
+<p>Hard systems methods are useful when objectives, boundaries and causal relations are reasonably stable and measurable. Participatory or soft-systems methods can surface conflicting interpretations, contested problem definitions, and institutional constraints. Critical systems practice combines methods while making assumptions and exclusions visible. A system dynamics model can explore feedback; a stakeholder workshop can uncover missing incentives; an optimization model can evaluate a negotiated set of objectives. The techniques are complementary, not interchangeable.</p>
+<p>No particular method removes politics or power from an engineering decision. Workshop participants may not represent affected communities; a feedback model may encode disputed causal assumptions; an optimization may bury values in weights. Report limitations instead of claiming that engagement or formalization created consensus.</p>
+<h2>Example: the fairness denominator</h2>
+<p>In a hypothetical week, group A submits 80 eligible requests and receives 72 on-time rides, while group B submits 20 requests and receives 10. Overall, on-time service is \((72+10)/(80+20)=82\%\). Group-specific rates are 90% and 50%. Reporting only the aggregate conceals a 40-percentage-point disparity. The counts are synthetic and do not establish the cause of that disparity. A boundary critique asks whether all affected users could submit requests in the first place, whether the service definition is fair, and whether equal rates are the appropriate design objective.</p>
+<p>A technical follow-up could formulate a constrained allocation: maximize total served demand subject to a negotiated minimum access threshold. But the threshold itself is a value choice needing consultation and governance, not a number derivable from queueing theory alone.</p>
+<h2>Practical review protocol</h2>
+<ol>
+<li>Describe the problem from at least three roles: sponsor, operator, and affected party without formal authority.</li>
+<li>List boundary inclusions and exclusions, including omitted risks and data populations.</li>
+<li>Identify the method used and why alternatives were not chosen.</li>
+<li>Make the decision criteria and value assumptions explicit.</li>
+<li>Test a counter-framing using a changed objective or boundary; note whether conclusions change.</li>
+<li>Preserve dissent, residual uncertainty and authority for the final choice.</li>
+</ol>
+<p>The output can be a short boundary-and-method audit linked to the ConOps, metric hierarchy, models and decision record.</p>
+<h2>Intellectual and engineering references</h2>
+<ul>
+<li>Werner Ulrich, <em>Critical Heuristics of Social Planning</em> (1983) — foundational boundary critique and critical systems heuristics.</li>
+<li>Gerald Midgley, <em>Systemic Intervention: Philosophy, Methodology, and Practice</em> (2000) — methodological pluralism and boundary judgments.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — stakeholder and technical decision processes; not a substitute for normative critique.</li>
+<li>Related: <a href="stakeholders-and-needs.html">stakeholder needs</a>; <a href="enterprise-as-system.html">enterprise as a system</a>; <a href="stocks-flows-feedback.html">systems thinking and feedback</a>; <a href="metrics-hierarchy.html">decision metrics</a>.</li>
+</ul>
+<p><em>Scope:</em> This article explains a critical methodology and a hypothetical diagnostic case; it does not imply any specific organizational decision is ethically settled.</p>
+</article><nav class="standalone-actions"><a href="metrics-hierarchy.html">Read concept</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="metrics-hierarchy.md">Editable Markdown</a></nav></main></body></html>

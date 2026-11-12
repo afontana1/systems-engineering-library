@@ -82,3 +82,35 @@ This chapter builds from [previous chapter](10-express-precise-constraints-with-
 - [Deep workshop — Responsibility, Persistence, and Concurrent Design](../practice/design.md)
 - [Corresponding independent laboratory](../practice/lab-design.md)
 - [Interactive workbench](../practice/WORKBENCH.html)
+
+## Step 03 integrated reference: persistence, transactions, and recovery
+
+### 11.1 A schema can enforce a domain invariant
+
+The synthetic repository uses separate reservation, assignment, and audit-event tables. The essential concurrency defense is a **partial unique index**:
+
+```sql
+CREATE UNIQUE INDEX one_active_vehicle_slot
+  ON assignment(vehicle, slot)
+  WHERE state = 'ACTIVE';
+```
+
+It permits multiple historical released assignments while excluding two simultaneously active assignments for the same vehicle and slot. SQLite's constraint is a useful demonstration of the invariant; it does not address interval overlaps, distributed stores, clock semantics, or a production authorization model.
+
+A separate `UNIQUE(token)` reservation constraint establishes stable retry identity, but a duplicate token is safe to reuse only when its immutable payload matches the original. Otherwise token collision can alias two different user intents. A robust API must also define token scope, lifetime, and actor binding, not simply place arbitrary strings in a column.
+
+### 11.2 Preserve cross-table invariants atomically
+
+The booking transaction must insert the reservation, active assignment, and audit event as one commit or roll them all back. In the [Python demonstration](../tools/step03_book4_contract_check.py), a failed assignment insert causes the reservation insert to roll back. Cancellation similarly releases the active assignment and records a cancellation event in one transaction. These examples use standard-library `sqlite3` and do not need a network service.
+
+The recovery rule should say what is durable, not just “use a transaction.” If a process crashes after commit but before returning a response, retry must return the already committed reservation. If it crashes before commit, retry may create it exactly once under the unique token constraint. Testing both sides of this boundary is essential to the claimed idempotency contract.
+
+### 11.3 Decision boundary and sizing
+
+The illustrative synchronous path is \(L=120+80+150=350\) ms against a 500-ms target, leaving a 150-ms arithmetic margin. That is a budget, not performance evidence. Database lock contention, filesystem behavior, transaction logging, and loaded workloads may change tail latency. A measurement plan must declare throughput, contention mix, percentile and baseline hardware; the test data should record actual outcomes rather than reuse these budget numbers as observations.
+
+The schema does not specify personally identifiable information retention. A real design requires a privacy threat model, access restrictions, auditable deletions or retention, and migration policy. An audit record can need long-lived provenance even when rider-identifying data must be minimized—an explicit design tension.
+
+**Solved checkpoint.** `F-05` tries to assign a second reservation to `V-01` in `AM-01`. The unique index rejects it, the transaction rolls back, and no orphan reservation becomes visible. A preflight `SELECT` by itself would not have guaranteed this result under concurrency.
+
+**Exercise.** Extend the schema to support a time interval. Propose a locking or exclusion mechanism appropriate to your chosen database engine and a two-client race test. Explain why copying SQLite syntax directly to another engine may not preserve semantics.

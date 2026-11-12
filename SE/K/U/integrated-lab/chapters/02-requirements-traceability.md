@@ -36,3 +36,15 @@ A system receives a second event with the same `request_id` but different destin
 </details>
 
 **Gate evidence:** a requirements-to-test matrix, a written treatment of the conflict-id case, and one justified requirement change with an explicit verification impact.
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: A trace link is not a verified requirement.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+Traceability has at least two independent tests: **referential integrity**, where every declared identifier resolves, and **claim adequacy**, where the test actually probes the requirement. Both lab runners report intact declared links, but that is a graph property rather than a guarantee of coverage, independence or field relevance. An experiment can be perfectly referenced and still omit an accessibility subgroup.
+
+**Worked reconciliation:** v11 reports eight linked requirements in its own matrix; v12 reports six linked requirements in a different verification plan. The arithmetic `8/8 = 100%` and `6/6 = 100%` does **not** mean that fourteen distinct real mission obligations have been discharged. Requirements may overlap, and the two sets have different scopes and acceptance language.
+
+**Exercise and explained answer:** A test is linked to “loss observable to dispatch” but only checks a simulator's omniscient truth ledger. Does the link close the claim? **No.** It demonstrates that simulated loss appears in a developer-accessible record. A real intake system must separately show receipt acknowledgments, end-to-end reconciliation, and alert latency. Write a new verification procedure for those mechanisms before claiming operational observability.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

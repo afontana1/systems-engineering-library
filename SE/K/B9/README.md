@@ -21,6 +21,10 @@ This book supplies long-form explanatory chapters, example reasoning, reproducib
 - **Week 11:** [Extend the modeling language and automate queries, validation rules, matrices, and generated products](chapters/11-extend-the-modeling-language-and-automate-queries-validation-rules-m.md) → [Hypothetical lab](labs/lab-11-extend-the-modeling-language-and-automate-queries-validation-rules-m.md)
 - **Week 12:** [Verify and validate the model, assess the design, respond to change, and defend the final baseline](chapters/12-verify-and-validate-the-model-assess-the-design-respond-to-change-an.md) → [Hypothetical lab](labs/lab-12-verify-and-validate-the-model-assess-the-design-respond-to-change-an.md)
 
+## NS-MBA9.1 integrated model-analytics case
+
+Every chapter now uses [one controlled model-analytics dossier](case/INDEX.html), with an [editable structured model](case/model.json), [six requirements](case/requirements.csv), [six verification-evidence statuses](case/evidence-register.csv), a [supplier change record](case/configuration-change.csv), a [typed evidence-chain diagram](case/model-evidence-flow.svg), and a [standard-library Python checker](tools/step03_book9_model_check.py). The case compares three fictional winter fleet variants, detects stale evidence, and propagates a charger interface change. **The design is suitable only for conditional study, not operational release.**
+
 ## Engineering evidence discipline
 
 Follow a traceable chain of **question → representation → assumption/data → computation or explanation → sensitivity → supported claim → owner and next evidence**. Validate mathematical examples for their assumptions, not simply arithmetic. Do not treat a hypothetical result as operational validation.

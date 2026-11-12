@@ -1,0 +1,177 @@
+{
+  "case_id": "NS-CE4.1",
+  "description": "Synthetic regional emergency dispatch evidence chain; teaching example only, not operational certification",
+  "revision": "2.1",
+  "constraints": {
+    "min_peak_trips": 105,
+    "max_p90_wait_minutes": 16,
+    "max_capex_million": 7.8
+  },
+  "alternatives": [
+    {
+      "id": "compact",
+      "capex_million": 6.3,
+      "nominal_peak_trips": 98,
+      "nominal_p90_wait_minutes": 18,
+      "storm_peak_trips": 90,
+      "storm_p90_wait_minutes": 23
+    },
+    {
+      "id": "regional",
+      "capex_million": 7.0,
+      "nominal_peak_trips": 112,
+      "nominal_p90_wait_minutes": 14,
+      "storm_peak_trips": 100,
+      "storm_p90_wait_minutes": 20
+    },
+    {
+      "id": "resilient",
+      "capex_million": 7.65,
+      "nominal_peak_trips": 110,
+      "nominal_p90_wait_minutes": 15,
+      "storm_peak_trips": 107,
+      "storm_p90_wait_minutes": 16
+    }
+  ],
+  "interface": {
+    "contract_revision": "2.0",
+    "observed_revision": "2.1",
+    "max_age_seconds": 2.0,
+    "events": [
+      {
+        "sequence": 1,
+        "timestamp_seconds": 0.0,
+        "observed_at_seconds": 0.4
+      },
+      {
+        "sequence": 2,
+        "timestamp_seconds": 0.5,
+        "observed_at_seconds": 0.8
+      },
+      {
+        "sequence": 4,
+        "timestamp_seconds": 1.0,
+        "observed_at_seconds": 1.4
+      },
+      {
+        "sequence": 2,
+        "timestamp_seconds": 0.5,
+        "observed_at_seconds": 4.0
+      }
+    ]
+  },
+  "trial_groups": {
+    "standard": {
+      "timely": 55,
+      "late": 6,
+      "unserved": 3
+    },
+    "accessible": {
+      "timely": 10,
+      "late": 3,
+      "unserved": 3
+    }
+  },
+  "acceptance": {
+    "min_total_timely_fraction": 0.9,
+    "min_accessible_timely_fraction": 0.9,
+    "max_zero_failure_probability": 0.01,
+    "zero_failure_trials": 60,
+    "alpha": 0.05
+  },
+  "simulation": {
+    "baseline_arrivals_per_hour": 8,
+    "service_per_hour": 10,
+    "stress_arrivals_per_hour": 11,
+    "paired_baseline_wait_minutes": [
+      19,
+      21,
+      16,
+      23,
+      25,
+      18
+    ],
+    "paired_treatment_wait_minutes": [
+      16,
+      17,
+      15,
+      21,
+      18,
+      18
+    ],
+    "t_critical_df5_95_two_sided": 2.571
+  },
+  "evidence": [
+    {
+      "claim": "CL-CAP",
+      "requirement": "REQ-CAP",
+      "artifact": "EV-CAP",
+      "revision": "2.1",
+      "status": "PASS",
+      "scope": "nominal",
+      "required_scope": "storm",
+      "payload": "capacity_test_nominal_v2.1",
+      "sha256": "016159a907766374c4aeadbdc85c7e1db7aea51eaf16dec359c14cb0d3bc4ed8"
+    },
+    {
+      "claim": "CL-WAIT",
+      "requirement": "REQ-WAIT",
+      "artifact": "EV-WAIT",
+      "revision": "2.0",
+      "status": "PASS",
+      "scope": "storm",
+      "required_scope": "storm",
+      "payload": "wait_simulation_storm_v2.0",
+      "sha256": "3b3cec6f443e48e06078d67979f2c047982b52eb8ad0ed21759141123a6e9f92"
+    },
+    {
+      "claim": "CL-ACCESS",
+      "requirement": "REQ-ACCESS",
+      "artifact": "EV-ACCESS",
+      "revision": "2.1",
+      "status": "FAIL",
+      "scope": "storm",
+      "required_scope": "storm",
+      "payload": "accessibility_trial_v2.1",
+      "sha256": "bb30ed54f50f282167fabb90406de98fdb54a0ada47fcf8c85e7ad7a0c82ae89"
+    },
+    {
+      "claim": "CL-INT",
+      "requirement": "REQ-INT",
+      "artifact": "EV-INT",
+      "revision": "2.0",
+      "status": "PASS",
+      "scope": "storm",
+      "required_scope": "storm",
+      "payload": "dispatch_contract_v2.0",
+      "sha256": "bc0bcb28cd7d99e214fc167c7bbec0e65dc30de86a56c624a7b60b182452a815"
+    },
+    {
+      "claim": "CL-ENT",
+      "requirement": "REQ-ENT",
+      "artifact": "EV-ENT",
+      "revision": "2.1",
+      "status": "PASS",
+      "scope": "storm",
+      "required_scope": "storm",
+      "payload": "enterprise_trial_synthetic",
+      "sha256": "3f2efa19e8d30628b7e25ae449c694dc13f446e4f291b613cd29320b32be60a2"
+    }
+  ],
+  "permissions": {
+    "safety_approval": false,
+    "accessibility_consultation": false,
+    "data_governance_approval": false,
+    "operations_authorization": false
+  },
+  "enterprise": {
+    "pilot_pre_wait_minutes": 22,
+    "pilot_post_wait_minutes": 16,
+    "comparison_pre_wait_minutes": 20,
+    "comparison_post_wait_minutes": 18,
+    "pilot_access_pre_minutes": 28,
+    "pilot_access_post_minutes": 24,
+    "comparison_access_pre_minutes": 24,
+    "comparison_access_post_minutes": 25
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "baseline": "NS-2.3",
+  "nodes": [
+    {
+      "id": "N-RIDE",
+      "type": "need",
+      "title": "Predictable rider access"
+    },
+    {
+      "id": "R-ACK",
+      "type": "requirement",
+      "in_scope": true,
+      "scenarios": [
+        "peak"
+      ],
+      "title": "Acknowledgement within 4 seconds"
+    },
+    {
+      "id": "R-ENERGY",
+      "type": "requirement",
+      "in_scope": true,
+      "scenarios": [
+        "route"
+      ],
+      "title": "Usable energy above demand"
+    },
+    {
+      "id": "C-DISP",
+      "type": "element",
+      "title": "Dispatch service"
+    },
+    {
+      "id": "C-BATT",
+      "type": "element",
+      "title": "Battery system"
+    },
+    {
+      "id": "T-ACK",
+      "type": "test",
+      "title": "Peak load timing test"
+    },
+    {
+      "id": "T-ENERGY",
+      "type": "test",
+      "title": "Route energy analysis"
+    },
+    {
+      "id": "E-ACK",
+      "type": "evidence",
+      "test_id": "T-ACK",
+      "build": "NS-2.2",
+      "scenario": "peak",
+      "accepted": true,
+      "passed": true
+    }
+  ],
+  "edges": [
+    {
+      "from": "R-ACK",
+      "relation": "derivesFrom",
+      "to": "N-RIDE"
+    },
+    {
+      "from": "R-ENERGY",
+      "relation": "derivesFrom",
+      "to": "N-RIDE"
+    },
+    {
+      "from": "R-ACK",
+      "relation": "allocatedTo",
+      "to": "C-DISP"
+    },
+    {
+      "from": "R-ENERGY",
+      "relation": "allocatedTo",
+      "to": "C-BATT"
+    },
+    {
+      "from": "T-ACK",
+      "relation": "verifies",
+      "to": "R-ACK"
+    },
+    {
+      "from": "T-ENERGY",
+      "relation": "verifies",
+      "to": "R-ENERGY"
+    },
+    {
+      "from": "E-ACK",
+      "relation": "resultOf",
+      "to": "T-ACK"
+    },
+    {
+      "from": "E-ACK",
+      "relation": "supports",
+      "to": "R-ACK"
+    }
+  ]
+}

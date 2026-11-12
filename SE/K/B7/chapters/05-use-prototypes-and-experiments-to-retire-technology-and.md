@@ -99,3 +99,41 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 5: Prototypes as risk-retirement tools](../labs/lab-05-use-prototypes-and-experiments-to-retire-technology-and.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 5 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-DI7.1 — experiments that can overturn a design claim
+
+### Design a test to distinguish competing explanations
+
+The gateway and dispatcher redesigns may interact. An experiment should therefore vary both rather than benchmark them one at a time in a single favorable configuration. The controlled [synthetic 2×2 dataset](../case/doe-synthetic.csv) has three illustrative readings in each cell. Its cell means are 488 ms for standard gateway/serial dispatch, 472 ms for fast/serial, 451 ms for standard/parallel, and 428 ms for fast/parallel.
+
+For a balanced two-factor design, the *gateway main effect* is the average fast-minus-standard contrast across dispatch settings:
+
+\[
+E_G=\frac{(472+428)-(488+451)}{2}=-19.5\ \mathrm{ms}.
+\]
+
+The dispatcher main effect is \(-40.5\) ms. The interaction contrast is
+
+\[
+I=(428-451)-(472-488)=-7\ \mathrm{ms}.
+\]
+
+The interaction means that the saving from one change depends on the other setting. It is not a statistical significance claim; these few illustrative readings were constructed for arithmetic practice. A proper experiment would randomize configuration order, block environmental drift, repeat independent trials, verify timestamps, estimate variance and assess whether the operational request population was represented.
+
+### The tail matters more than a favorable mean
+
+Suppose, solely as a hypothetical *distributional model*, the combined design's response time were normal with mean 428 ms and standard deviation 20 ms. Then
+
+\[
+P(T>450)=1-\Phi\left(\frac{450-428}{20}\right)\approx 0.1357.
+\]
+
+A 428-ms mean therefore cannot establish a 450-ms p99 target; it would be a serious category error to equate mean performance with a tail requirement. Real latency can be skewed, multimodal or heavy-tailed. The Gaussian illustration is not fitted to the twelve constructed records and should not be reported as measured service risk.
+
+**Exercise.** A team advertises the fastest synthetic cell as proof that the system will meet the 500-ms 99th-percentile requirement. Identify three missing evidence elements.
+
+<details><summary>Worked resolution</summary>
+
+The team needs representative randomized and sustained degraded-load observations, a justified end-to-end percentile estimator with uncertainty, and configuration-controlled evidence tying the exact gateway/dispatcher build to the requirement. It must also account for clock accuracy, correlated retry storms and the margin policy. Without these, record MODEL_ONLY or TEST_PENDING.
+
+</details>

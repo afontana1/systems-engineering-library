@@ -1,0 +1,67 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS-CPS12.1 Multi-domain Vehicle · Systems Engineering Library</title><link rel="stylesheet" href="../../_assets/learning-shell-v55.css"><style>body{margin:0;background:#f4f8f9;color:#173645;font:16px/1.72 system-ui,sans-serif}header{padding:16px max(18px,calc((100vw - 1050px)/2));background:#173f52}header a{color:#c6f5ee}main{max-width:1050px;margin:24px auto;padding:clamp(18px,4vw,42px);border:1px solid #d6e3e5;border-radius:12px;background:white}a{color:#0b6b70}h1{line-height:1.2}h2{margin-top:1.8rem}p,li{max-width:100ch}table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}td,th{padding:9px;border:1px solid #dae3e6;vertical-align:top}th{background:#edf5f4}code{overflow-wrap:anywhere}pre{overflow:auto;padding:12px;background:#ecf3f5}img{max-width:100%;height:auto}@media(max-width:700px){main{margin:0;padding:18px;border:0;border-radius:0}}</style><script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B12/case/INDEX.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script></head><body><header><a href="../README.html">← Book 12</a> · <a href="../OPEN-BOOK.html">Textbook</a></header><main><h1>NS-CPS12.1 — Controlled multi-domain mobility engineering case</h1>
+<p><em>Book 12, Advanced Systems Modeling and Simulation · EN.645.758 · Version 1.0</em></p>
+<p><a href="../OPEN-BOOK.html">Read the twelve chapters</a> · <a href="../../../C/P3/EN645758.html">Course outcomes</a> · <a href="../../B11/case/INDEX.html">Book 11 operational simulation</a></p>
+<h2>Intended use and top-level decision</h2>
+<p>This is a <strong>synthetic single-vehicle screening and teaching model</strong> for mechanical, battery/electrical and thermal coupling. It inherits the campus mobility <em>context</em> of Book 11 without inheriting any false claim that its 24 periodic route loops represent measured fleet operations. The present decision is <strong>HOLD for deployment, procurement, cell-temperature qualification, controller/HIL readiness and FMI/HLA interoperability claims</strong>; the model <em>is</em> reproducible for a bounded teaching sensitivity comparison.</p>
+<p>The full plant <a href="../tools/step03_book12_coupled_vehicle.py">Python source</a> consumes <a href="model-inputs.json">controlled inputs</a> and writes <a href="experiment-results.csv">80 experiment rows</a> plus a <a href="summary.json">machine-readable summary</a>. Inputs use the source course's <strong>2,850 kg curb mass</strong>, with <strong>300 kg assumed passenger load</strong>, <strong>145 kWh usable battery</strong>, <strong>650 V fixed current proxy</strong>, <strong>180 kW motor limit</strong>, and <strong>0.39 m wheel radius</strong>. Each scenario repeats five road segments (total 3.5 km) <strong>24 times</strong> (84 km) using 0.5-second explicit Euler integration. The simulation integrates motion, state of charge and a single bulk pack temperature. It omits tire slip, regenerative pack acceptance, spatial battery gradients, realistic stops, controller sample-rate separation and charging events.</p>
+<p><img src="multidomain-evidence.svg" alt="Engineering model and evidence flow" /></p>
+<p><a href="multidomain-evidence.svg">Open the editable evidence flow diagram</a>.</p>
+<h2>How the numerical system works</h2>
+<p>The motor force request is bounded by \(P_{\mathrm{wheel}}\) limits, after subtracting rolling, grade and aerodynamic road resistance. Electrical consumption includes traction inefficiency, cabin and pump loads and a fixed-voltage estimate of ohmic heat; a first-order lumped thermal state integrates heating and flow-dependent heat transfer to ambient. The simulation computes mechanical, electrical and thermal balance residuals. These are <strong>internal checks</strong>, not validation against real systems.</p>
+<p>The route has a <strong>net positive grade-weighted elevation change per period</strong>. Its repetition is an intentionally simple teaching scenario but <strong>not</strong> a valid closed-loop physical route; absolute range and charger scheduling must not be inferred from the 84 km figure. All scenarios start the pack at 31°C; hot soak and cell gradients are not modeled. An assumed <code>charger_kw=100</code> is recorded for analytical charging exercises but is <strong>not used as a simulated event</strong>.</p>
+<h2>Worked results, regenerated from the controlled baseline</h2>
+<table>
+<thead>
+<tr>
+  <th>Scenario</th>
+  <th style="text-align:right">Mean modeled energy used (kWh)</th>
+  <th style="text-align:right">Mean of modeled peak temperature (°C)</th>
+  <th style="text-align:right">Mean ending SOC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Mild (22°C), high flow (0.30 kg/s)</td>
+  <td style="text-align:right">28.16</td>
+  <td style="text-align:right">31.00</td>
+  <td style="text-align:right">0.6858</td>
+</tr>
+<tr>
+  <td>Hot (38°C), low flow (0.05 kg/s)</td>
+  <td style="text-align:right">32.38</td>
+  <td style="text-align:right">41.88</td>
+  <td style="text-align:right">0.6567</td>
+</tr>
+<tr>
+  <td>Hot (38°C), high flow (0.30 kg/s)</td>
+  <td style="text-align:right">33.36</td>
+  <td style="text-align:right">40.98</td>
+  <td style="text-align:right">0.6499</td>
+</tr>
+<tr>
+  <td>Cold (−15°C), high flow</td>
+  <td style="text-align:right">36.49</td>
+  <td style="text-align:right">31.00</td>
+  <td style="text-align:right">0.6284</td>
+</tr>
+<tr>
+  <td>Hot (38°C), low flow, +25% grade sensitivity</td>
+  <td style="text-align:right">35.14</td>
+  <td style="text-align:right">42.07</td>
+  <td style="text-align:right">0.6377</td>
+</tr>
+</tbody>
+</table>
+<p>The high-flow hot case is about <strong>0.90°C cooler</strong> than the low-flow hot case but uses about <strong>0.98 kWh more</strong> battery energy, under the invented pump/heat-transfer formulas. The model shows 16 of 16 bounded parameter draws meet each synthetic algebraic reserve, time and bulk-temperature threshold in each scenario; those passes are <strong>not</strong> a field reliability estimate or a real safety qualification. The average modeled 3.5 km driving repetition takes approximately <strong>6.46 minutes</strong>, explicitly excluding stops, dwell, traffic and queues.</p>
+<h2>Reproducing and falsifying claims</h2>
+<p>From the repository root, use Python 3 with only the standard library:</p>
+<pre><code class="language-bash">python SE/K/B12/tools/step03_book12_coupled_vehicle.py --write
+python scripts/check_step03_book12.py
+python SE/K/B12/tools/step03_book12_coupled_vehicle.py --laps 1 --dt 1
+python SE/K/B12/tools/step03_book12_coupled_vehicle.py --laps 1 --dt 0.25
+</code></pre>
+<p>The 1-second versus 0.25-second one-lap teaching convergence gives approximately <strong>1.14516 versus 1.13776 kWh</strong>, respectively; finer steps should be studied at route guard transitions. These values come from the controlled model, not road tests. Run <code>scripts/check_step03_book12.py</code> after any source or configuration edit. Both <a href="requirements.csv">requirement trace</a> and <a href="credibility-register.csv">credibility register</a> explicitly identify what has not been validated; their <code>status</code> fields must not be upgraded merely because a solver completed.</p>
+<h2>Interface and review boundaries</h2>
+<p>The <a href="multidomain-evidence.svg">diagram</a> separates operational mission, prescribed route, speed regulator, vehicle mechanics, battery storage, thermal state, coolant actuator, requirement checks and independent review. It is an <em>architectural schematic</em>: the program uses a monolithic sequential solver, not HLA, FMI, FMU packaging, Simscape, hardware synchronization, or a 10 ms controller implementation. Potential future joint Book 11/Book 12 work must couple a field-calibrated vehicle model to fleet dispatch, traffic, charging, availability and passenger events using explicit timestamps, units and provenance. A reviewer should first correct the route's elevation closure and pack thermal validation before attaching deployment claims.</p>
+<p>For coverage, see the 12-week outcome crosswalk and editorial audit. All costs, physical response curves, route segments, efficiencies, and evidence gaps in this case are teaching constructions.</p>
+</main></body></html>

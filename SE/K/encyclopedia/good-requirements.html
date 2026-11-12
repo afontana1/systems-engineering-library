@@ -41,13 +41,32 @@
 <h2>Technical analysis: write a verifiable requirement without confusing it with a valid one</h2>
 <p>An operational need such as “dispatch promptly” does not specify a testable engineering threshold. A candidate requirement might be: <strong>“For accepted requests originating inside the defined service region, when the certified system is operating with no more than 30 concurrent active requests, the system shall issue an assignment decision within 2.0 seconds for at least 99% of requests over a predeclared representative 30-day operating sample.”</strong> This sentence fixes the event boundaries, population, load, statistic, time interval, and configuration; it still requires an acceptance sampling plan and handling of rejected or timed-out requests.</p>
 <p>The requirement can be <strong>verified yet strategically invalid</strong> if users care about vehicle arrival rather than assignment decision latency, or if excluding unaccepted requests hides service denial. Conversely, a stakeholder-approved need can be well-founded but lack a measurable and feasible product requirement. Always keep the two evidence chains separate: <em>requirement validation</em> asks whether the requirement accurately represents a genuine need; <em>product verification</em> asks whether the specified system meets the approved requirement. Do not equate a 99% sample proportion with 99% confidence; confidence depends on sample size, dependencies, and sampling design.</p>
+<section class="phase1-expansion" id="worked-method">
+<h2>In-depth method: from a requirement to defensible evidence</h2>
+<p>The companion <a href="../methods/requirements-verification-handbook.html">requirements and verification method guide</a> provides a complete, reproducible chain from a stakeholder need to a test plan. It includes a requirement record with applicability conditions, a 3.50-second allocated timing path, measurement uncertainty, a binomial acceptance calculation, and a verification matrix. Those steps matter because the apparent precision of a sentence is not yet evidence of compliance.</p>
+<h3>Decide exactly which event is being measured</h3>
+<p>Consider two statements that seem equivalent: “reply within four seconds of a request” and “reply within four seconds of receipt of a valid request at the ingress boundary.” The first is ambiguous about user network latency, duplicate requests and requests denied by validation. The second defines a measurable interval, but its exclusion of invalid requests must be separately justified. Define the start event, stop event, clock source, population, load profile, and exclusion decisions in the baseline <strong>before</strong> examining data.</p>
+<h3>A derived budget is a claim with assumptions</h3>
+<p>If a serial path contains parsing, gateway checks, queue delay, scheduler computation and outbound notification, a preliminary design may allocate 0.15, 0.35, 0.55, 1.15 and 0.60 seconds respectively. These sum to 2.80 seconds. A 0.70-second contingency allocation produces 3.50 seconds, leaving 0.50 seconds below a 4.00-second requirement. The calculation only makes sense if these are compatible bounding allowances. Adding several independent 95th percentiles does <strong>not</strong> generally yield a valid 95th-percentile bound for the entire path.</p>
+<h3>Requirement quality is not evidence sufficiency</h3>
+<p>For a population target of at least 99% timely responses, observing 300 zero-failure events leads to a one-sided 95% exact upper confidence bound on the failure fraction:</p>
+<p>\[
+p_{f,U}=1-0.05^{1/300}\approx0.00994.
+\]</p>
+<p>This calculation is conditional on independently sampled, identically distributed outcomes from the defined population. It does not establish performance under untested degraded-network scenarios, or validate whether four-second acknowledgements actually satisfy riders' needs. The <a href="../methods/requirements-verification-handbook.html">worked guide</a> shows how the sampling assumptions, instrument uncertainty and evidence configuration constrain the conclusion.</p>
+<p><strong>Practice check.</strong> Rewrite one “reliable service” statement into a requirement with its own subject, conditions, denominator and verification decision rule. Then identify at least one stakeholder outcome that the requirement cannot establish.</p>
+</section>
 <h2>Verified source pointers</h2>
 <p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
 <ul>
 <li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA · Systems Engineering Handbook appendix (requirements and verification matrices)</a> — Requirements review criteria and verification planning context.</li>
 <li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section id="step03-concept-study"><h2>Step 02 review studio — separate threshold, population, and confidence</h2>
+<p>“Confirm requests quickly” is ambiguous. A stronger requirement might state: <em>In NS-B1 under workload W, at least 99% of valid bookings shall receive a confirmed result within 8 seconds.</em> This is testable only after defining workload W, valid booking, result receipt, clock boundaries, timeouts and errors, and whether 99% describes a long-run population or a finite acceptance sample.</p>
+<p><strong>Solved exercise:</strong> if 300 independent, representative trials all complete on time, is a 99% pass probability demonstrated at a one-sided 95% confidence level? With zero failures, the exact upper failure-probability bound is <code>1−0.05^(1/300)≈0.009936</code>, <em>just below</em> 1%. Under the stated Bernoulli assumptions, such a plan narrowly supports a bound below 1%. If failures are correlated during an outage, the calculation cannot be used without revising the sampling model.</p>
+<p><strong>Requirements boundary:</strong> a statistically verified threshold can still be the wrong stakeholder requirement. Validation needs representative users and mission context, not just a well-written “shall” sentence.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="stakeholders-and-needs.html">Stakeholders, needs, and value</a></li>

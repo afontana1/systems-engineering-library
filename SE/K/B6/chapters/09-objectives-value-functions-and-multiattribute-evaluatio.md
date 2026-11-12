@@ -102,3 +102,30 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 - [Deep workshop — Robust Concepts, Regret, and Value of Information](../practice/robust.md)
 - [Corresponding independent laboratory](../practice/lab-robust.md)
 - [Interactive workbench](../practice/WORKBENCH.html)
+
+
+## Step 03 integrated reference: NS-CD6.1 — value functions, weight sensitivity and scope of preference
+
+After hard constraints are screened, a multiattribute model makes the *remaining* stakeholder tradeoffs explicit. It is a preference representation, not a physical law. Define anchored, clipped partial values for pickup wait \(w\), accessible coverage \(a\), and annual operating cost \(o\):
+
+\[v_w=\mathrm{clip}_{[0,1]}\left(\frac{14-w}{6}\right),\quad v_a=\mathrm{clip}_{[0,1]}\left(\frac{a-90}{10}\right),\quad v_o=\mathrm{clip}_{[0,1]}\left(\frac{1.30-o}{0.50}\right).\]
+
+The stipulated anchors are policy choices: wait between 8 and 14 minutes, coverage between 90% and 100%, and OPEX between $0.8M and $1.3M/year. With weights \((0.4,0.3,0.3)\), \(V=0.4v_w+0.3v_a+0.3v_o\). All alternatives may be scored for sensitivity investigation, but **only feasible ones can win the current selection**.
+
+### Complete worked comparison
+
+For B: \((v_w,v_a,v_o)=(0.9167,0.70,0.36)\), hence \(V_B=0.6847\). For C: \((0.75,0.80,0.64)\), hence \(V_C=0.7320\). The modeled selection is C. The result is not automatically robust to different decision-maker weights. Let wait weight be \(x\) and split the remaining weight equally between coverage and cost:
+
+\[V_B-V_C=x(0.9167-0.75)+\frac{1-x}{2}\big[(0.70-0.80)+(0.36-0.64)\big].\]
+
+Solving the expression with unrounded component values gives \(x\approx0.53271\). Above that threshold B becomes preferred; below it C remains preferred, provided both still satisfy hard constraints. **This crossing is an elicitation question**, not a forecast probability. If stakeholders care much more about fast pickup than the other two metrics together, the decision can change.
+
+### Examine hidden double counting
+
+Some analysts separately score *average wait*, *p90 wait* and *user satisfaction with wait*, effectively multiplying the influence of delay while pretending the attributes are distinct. Dependence is not always prohibited, but it must be understood before assigning weights. Prefer one directly meaningful service measure and test whether a separate attribute captures a truly different outcome (e.g., access inequity among neighborhoods).
+
+### Practice and answer
+
+**Exercise:** Can option A's relatively good operating-cost value outweigh its modeled 92% accessible coverage? **Answer:** No. Accessible coverage is a hard threshold of 95%; a higher value score cannot compensate unless the authorized decision-maker **formally changes the requirement**, which requires a separate stakeholder and impact review. Rerun the [case auditor](../tools/step03_book6_concept_check.py) after modifying a *copy* of weights; do not edit the approved data in place.
+
+**Boundary:** Additive value requires care about preference independence, anchors, and scale meaning. Numerical scores are defensible only when the underlying measures and elicitation procedure are documented.

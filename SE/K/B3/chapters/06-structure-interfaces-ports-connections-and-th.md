@@ -81,3 +81,38 @@ In [Lab 6: Structure is not the same as connectivity](../labs/lab-06-structure-i
 ## Continuity
 
 This chapter builds from [previous chapter](05-behavior-modeling-use-cases-activities-action.md) and leads toward [next chapter](07-logical-architecture-functional-allocation-de.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-631-w06.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Phase 5 technical reading: Treat interface freshness as an explicit model constraint
+
+A speed interface reported as `0.3 m/s` can be unusable when its timestamp is older than its contract allows. In the fictional CM-B2 interface control extract, speed and brake signals are refreshed every 50 ms with 150 ms maximum valid age; a 180 ms-old value must inhibit door opening irrespective of a nominal magnitude. This requires not just a connection arrow but an item definition, units, clock semantics, validity rule and associated verification. The [worked SysML/traceability reference](../../methods/sysml-v2-modeling-and-traceability.md) includes the minimum structural notation, related interface CSV and a plan for validation in an official parser without claiming the skeleton has been tool-certified.
+
+## Step 03 integrated reference: ports are contracts, not lines
+
+### Make interface claims observable
+
+A useful interface contract specifies producer, consumer, payload type, units, time base, validity interval, failure behavior and responsible authority. Connecting a component box to another component box does not establish that their representations agree. In NS-MB3, `IF-01` sends a position-age measure from `TELEMETRY` to `DISPATCH`, expressed in milliseconds with an allowed age of 200 ms. That contract is incomplete unless it states which clock created the timestamp, what happens on clock resets, whether message age is measured on receipt or use, and the response to unavailable telemetry.
+
+A basic data-age predicate is
+
+\[
+a(t)=t_{\mathrm{use}}-t_{\mathrm{sample}}\le 200\ \mathrm{ms}.
+\]
+
+This is meaningful only if the timestamps are on a sufficiently synchronized clock or the age is computed through a monotonic local clock under a justified transport model. If a sensor message is sampled at 1.000 s and used at 1.245 s, its observed age is 245 ms and the freshness constraint fails, irrespective of whether the network delivered it “successfully.” A validation rule should reject missing timestamps, negative ages caused by clock inconsistency, unexpected units and malformed identifiers.
+
+### Budget processing delay explicitly
+
+The nominal dispatch command path comprises four synthetic processing segments: 90, 110, 80 and 45 ms. Under an additive serial-path assumption,
+
+\[
+L_{\mathrm{nom}}=90+110+80+45=325\ \mathrm{ms},\quad
+M_{\mathrm{nom}}=400-325=75\ \mathrm{ms}.
+\]
+
+In degraded mode the segments are 120, 140, 120 and 80 ms, for a total of \(460\) ms and margin \(-60\) ms. The nominal requirement `REQ-04` is not automatically violated by a degraded-mode result because its declared scope is nominal; however, the degraded result is a **design issue** that must be evaluated against service and safety needs. It would be misleading to claim universal command responsiveness from the nominal 75-ms margin. If segments execute in parallel, adding them overstates latency; if retries or batching occur, the four-component estimate may understate tail behavior. A verified interface analysis needs an execution model or measured traces.
+
+### Contract tests and change impact
+
+For each interface, define a valid case and at least one failure case: wrong unit, missing timestamp, out-of-order sequence, duplicate message, stale value, and incompatible schema revision. Record whether the receiver rejects, falls back, or enters a degraded state. A release should not infer compatibility from matching component names; the consuming function's preconditions and assumptions must be checked against what the producer guarantees.
+
+**Exercise with answer.** A position update is sampled at 12.000 s and used at 12.180 s. Is `IF-01` satisfied? Under the stated synchronized-clock assumption, yes: age is 180 ms, leaving a 20-ms margin. If telemetry is sampled at 12.000 s and used at 12.245 s, no: age is 245 ms. The same payload can therefore be acceptable at one use instant and stale at another.

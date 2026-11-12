@@ -42,6 +42,29 @@ At review, demand reliability at the mission duration, restoration distribution,
 - **R1 · Distinct RAM disciplines and lifecycle activities:** [NASA Office of Safety and Mission Assurance, Reliability and Maintainability — policy and guidance](https://sma.nasa.gov/sma-disciplines/reliability-and-maintainability).
 - **R2 · R&M program objectives:** [NASA-STD-8729.1A, NASA R&M Standard for Spaceflight and Support Systems — document scope](https://standards.nasa.gov/standard/nasa/nasa-std-87291).
 
+## What right-censored observations contribute
+
+In a life test of eight hypothetical modules, failures at 20, 50 and 80 operating hours and five right-censored survivors at 100 hours give **three failures over 650 observed module-hours**, not three failures over 150 hours. Under independent, noninformatively censored *exponential* lifetimes, the likelihood is \(L(\lambda)=\lambda^d\exp(-\lambda T)\). Its maximum occurs at \(\widehat\lambda=d/T=3/650\;\mathrm{h}^{-1}\), so \(\widehat R(50)=\exp(-150/650)\approx0.794\).
+
+A distribution-free Kaplan–Meier step estimate yields \(S(50)=(7/8)(6/7)=0.75\). Different answers reflect a model assumption, not an arithmetic error. Censoring units are observed survivors, not invented failures or disposable rows. See [the worked censored-reliability method](../methods/reliability-and-censored-evidence.md), including risk sets and common-cause limitations.
+
+## Phase 4 technical reading: Mission reliability and system safety are different claims
+
+Reliability \(R(t)=P(T>t)\) describes survival of a defined function over time. A safety claim describes avoidance or control of unacceptable consequences in a named context. A highly reliable software service can consistently issue unsafe commands. In a simplified per-demand fault tree, two independently failing barriers have combined probability \(p_Ap_B\), but a common-cause event adds a separate path: \(p_C+(1-p_C)p_Ap_B\). With \(p_A=0.02\), \(p_B=0.01\), \(p_C=0.003\), the top-event probability is 0.0031994 rather than 0.0002. This is illustrative model sensitivity, not estimated field risk. [Read the causal model and assurance limitations](../methods/safety-fault-trees-and-assurance.md) before using redundancy calculations in a safety review.
+
+
+## Step 02 review exercise: availability is not the same as reliability
+
+For a repairable two-state component with mean time between failures \(MTBF=200\) hours and mean corrective repair time \(MTTR=5\) hours, a simple steady-state *inherent availability* model gives
+
+\[
+A_i=\frac{MTBF}{MTBF+MTTR}=\frac{200}{205}\approx97.56\%.
+\]
+
+This calculation does not include logistics, diagnosis delays, preventive maintenance, support staffing, mission scheduling or common outages. A system could meet this inherent availability yet fail a service requirement requiring 99.5% availability within specific mission windows. For operational availability, define the time included in the numerator and denominator and the demand conditions that constitute 'available'.
+
+**Exercise (answer).** If repair improves to 2 hours while MTBF is unchanged, \(A_i=200/202\approx99.01\%\). This is still below 99.5%. Do not assume constant failure and repair rates, independent faults or mature steady state without supporting data; censored observations and time-dependent degradation need different models.
+
 ## Follow the knowledge
 
 - **Prerequisites:** [Probability and dependence](probability-and-dependence.md), [System boundaries](system-of-interest.md).

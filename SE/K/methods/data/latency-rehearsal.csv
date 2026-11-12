@@ -1,0 +1,13 @@
+request_id,duration_s,scenario,build
+REQ-001,2.60,peak,NS-2.3
+REQ-002,3.10,peak,NS-2.3
+REQ-003,3.90,peak,NS-2.3
+REQ-004,3.70,peak,NS-2.3
+REQ-005,3.00,peak,NS-2.3
+REQ-006,3.50,peak,NS-2.3
+REQ-007,4.10,peak,NS-2.3
+REQ-008,3.40,peak,NS-2.3
+REQ-009,2.80,peak,NS-2.3
+REQ-010,3.60,peak,NS-2.3
+REQ-011,3.20,peak,NS-2.3
+REQ-012,3.70,peak,NS-2.3

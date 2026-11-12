@@ -89,3 +89,29 @@ The review decision should preserve a controlled design baseline: drawings and m
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 11: Verification, validation and CDR](../labs/lab-11-baseline-verification-validation-customer-evidence-and-.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 11 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-DI7.1 — verification, validation and evidence currency
+
+### Requirements coverage is not demonstrated compliance
+
+The [verification matrix](../case/evidence-register.csv) records eight requirement IDs and the configuration applicability of each evidence record. Only DI7-R03 has a baseline-current *synthetic laboratory* record; DI7-R02 has an older NS-DI7.0 record, DI7-R07 is merely planned, and DI7-R08 is missing. The remaining calculations are models. A complete table of links is therefore not a complete proof of compliance. Verification asks whether the built system meets specified requirements; validation asks whether the delivered system satisfies stakeholder needs in its actual context.
+
+A correct verification judgment needs at least a measurement definition, method, test population, acceptance rule, instrument uncertainty, execution trace, controlled configuration and review authority. For a p99 latency limit, a single average is not enough. A test that achieves zero failures in 300 independent Bernoulli trials provides an illustrative one-sided 95% exact upper bound on failure probability of
+
+\[
+p_U=1-0.05^{1/300}\approx0.00994.
+\]
+
+That is roughly 0.994% per trial; it is **not** a guarantee of the 99th-percentile deadline if the trials do not match the defined operating population or are correlated. Statistical claims are limited by test design and independence assumptions, not simply sample size.
+
+### CDR readiness versus release authorization
+
+A critical design review may judge a design mature enough to proceed toward integration while leaving operational testing open. The release decision must separately gate unacceptable requirement violations and stale verification records. NS-DI7.1 has an expected mission reliability of 0.97863 against 0.98 and operational availability proxy 0.98644 against 0.99. It also has planned, stale and missing evidence. These are not cured by a well-organized matrix or by calling an analysis "verified."
+
+**Exercise.** If 300 independent trials have no failures, what additional information is needed before concluding DI7-R02 passes?
+
+<details><summary>Worked resolution</summary>
+
+Define the test population and degraded conditions, the response-time failure rule, clock instrumentation, independence/serial dependence, exact tested configuration and the acceptance confidence. Also reconcile the 10% design-reserve policy. If any of these are absent, the approximate statistical bound alone is insufficient.
+
+</details>

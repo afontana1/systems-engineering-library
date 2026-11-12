@@ -117,3 +117,44 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [01 — Previous chapter](01-frame-the-m-s-decision-intended-use-terminology-and-model-method-tra.md) · [03 — Next chapter](03-characterize-data-quality-probability-dependence-and-stochastic-inpu.md) · [Book index](../README.md)
+
+## Step 03 integrated mobility simulation case: conceptual model and plan
+
+### Define entities, state, events, processes and the simulation clock
+
+The [NS-MS11.1 specification](../case/model-assumptions.json) describes a *terminating* 06:00–18:00 operating day, not a stationary infinite-horizon service. A `request` holds an arrival time, accessibility need, boarding duration, trip duration and nominal battery energy. A `vehicle` has eligibility, state and fractional state of charge (SOC). `charger` is a shared resource. `waiting` and `charge_queue` are ordered collections. The clock jumps to the minimum timestamp in a priority event queue—there is no one-minute polling step.
+
+A compact conceptual event transition specification is:
+
+| Event | Preconditions | State transition | Observable evidence |
+|---|---|---|---|
+| Request arrival | Arrival before 18:00 | Append request; attempt dispatch | Request ID, time, waiting population |
+| Pickup / dispatch | Compatible idle vehicle | Remove earliest *eligible* request; occupy vehicle | Waiting time, assignment, SOC |
+| Trip completion | Occupied vehicle | Return to idle or join charge queue if SOC below 0.22 | Completion count, charging trigger |
+| Charge start | Queued vehicle and idle charger | Occupy charger | Resource usage and start time |
+| Charge completion | Charging vehicle | Restore SOC to 1, release charger | Charger occupancy, idle fleet |
+
+The implementation intentionally sends **one request at a time per vehicle**, even though the guide describes physical capacity of eight passengers and two mobility-device positions. Thus it studies *vehicle-level dispatch and access*, **not** passenger packing, pooling, transfer, or actual capacity compliance. At least \(\lceil0.25F\rceil\) vehicles are synthetically marked accessible; their compatibility and policy require independent field review. An accessible vehicle can serve either kind of request; an ordinary vehicle cannot serve an accessible request. Earliest *compatible* waiting request is used, which is not globally FIFO: report this distinction when evaluating fairness.
+
+### Formal invariants and conceptual tests
+
+Let \(I(t),T(t),Q(t),C(t)\) be the number of idle, occupied on trip, waiting to charge and charging vehicles. Then the conservation property is
+
+\[I(t)+T(t)+Q(t)+C(t)=F,\quad 0\le C(t)\le c,\quad 0\le SOC_i(t)\le1.\]
+
+Likewise, total requests arrived \(A(t)\) must equal \(W(t)+P(t)+D(t)\) when \(W\) is awaiting pickup, \(P\) is on a trip and \(D\) is completed, provided no cancellation mechanism exists. These are **verification invariants**: they detect impossible execution states without proving the conceptual model resembles a real fleet. Charging is triggered after a trip; if service energy would make SOC negative, the code **rejects** the scenario instead of silently driving through a depleted battery. The module does not model detours to a physical charging site.
+
+### Worked trace independent of randomness
+
+Construct two deterministic requests at times 0 and 1 minute with boarding 1 minute, travel 4 minutes, energy 0.1, and one ordinary-compatible vehicle. The first pickup occurs at 0 and completes at 5; the second pickup is at 5. Recorded waits are 0 and 4 minutes and the nearest-rank p90 is 4 minutes. This event trace checks priority, service occupancy and the queue, without requiring a probability model. The regression suite `scripts/check_step03_book11.py` implements an equivalent deterministic example and malformed-input checks; its software success is not operational validation.
+
+### A reproducible modeling plan
+
+1. Freeze the purpose and output semantics (pickup wait is start of service minus arrival; queues remaining at closing count as **not picked up by close**).
+2. Freeze the scope, units, seed set, exogenous request generation and charger policy before inspecting alternatives.
+3. Implement deterministic tests and resource invariants; compare against a hand trace.
+4. Conduct paired seed experiments and identify one-sided service failures; then challenge assumptions and solicit independent referent data.
+
+**Exercise and solution.** A programmer adds a variable `charging=5` while the case declares four chargers. Which defect is demonstrated? **Solution:** computational resource conservation is violated (\(C>c\)); no increased number of replications could fix it. Separately, finding \(C\le c\) in every run would still not validate charger placement, travel-to-charge times, or real charger availability.
+
+**Engineering exclusion:** a model that is internally coherent but omits operator shifts should not be used to make the staffing decision named in the original course; staffing remains an explicit separate data and model development task. [Case dossier](../case/INDEX.html) · [Chapter 3](03-characterize-data-quality-probability-dependence-and-stochastic-inpu.md).

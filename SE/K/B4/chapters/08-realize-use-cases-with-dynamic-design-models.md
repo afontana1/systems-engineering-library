@@ -71,3 +71,31 @@ An interaction design is credible when implementers can identify who owns each s
 ## Continuity
 
 This chapter builds from [previous chapter](07-assign-responsibilities-and-build-the-static-.md) and leads toward [next chapter](09-apply-design-patterns-with-restraint.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/605-704-w08.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: realization, exceptions, and idempotent interactions
+
+### 8.1 From the use-case promise to a design sequence
+
+Realization demonstrates that the proposed objects and components can collectively meet the observable use-case contract. For `UC-01`, the positive path is straightforward; the hard question is whether every abnormal path preserves durable identity and resource exclusivity. The sequence must expose a transaction boundary and specify rollback behavior when any operation in that boundary fails.
+
+Network retries create a common illusion: “the client did not receive the reply” does not mean “the server did not commit.” A response can be lost after persistence succeeds. Retrying without a durable token may create a second reservation. The baseline uses a unique token plus immutable payload check to make the retry safe under the explicitly scoped single-store model.
+
+### 8.2 Distinguish probability from guaranteed behavior
+
+Suppose (hypothetically) each request attempt independently loses its response with probability \(p=0.08\). With up to three attempts, the chance of receiving *at least one* response is
+
+\[
+P(\text{response by attempt 3})=1-p^3=1-0.08^3=0.999488.
+\]
+
+That number is a communication-model result, **not** a service-availability guarantee. Shared outages cause dependent failures, and a delivered response may still carry a business rejection. More importantly, retry success does not imply semantic idempotence: the durable deduplication mechanism is what prevents duplicate bookings after an uncertain commit.
+
+### 8.3 Failure injection and observability
+
+Build a scenario matrix with failure at: token lookup, eligibility evaluation, reservation insert, assignment insert, audit append, commit acknowledgement, and notification delivery. For each point, state (1) whether the transaction commits; (2) whether a retry can be accepted; (3) which audit and error evidence is available; and (4) whether a side effect may have happened. The case script exercises a subset—database uniqueness, cancellation, and token replay—using in-memory SQLite.
+
+The example's `commitAssignment` stores both state and audit in one database transaction. A production architecture with an external event broker would need an outbox or similarly explicit delivery contract. Adding a message bus does not eliminate the dual-write problem.
+
+**Solved checkpoint.** A request's reservation insert succeeds, assignment insert violates the unique active-slot index, and a transaction rolls back. The correct observable result is a conflict without a committed orphan reservation or audit event. Check by counting rows after the rejected fixture `F-05`.
+
+**Exercise.** Replace the three independent retry attempts with a common outage event of probability 0.03, followed otherwise by independent loss probability 0.08. Compute the three-attempt response probability using the law of total probability; explain why the independence-only formula now overstates reliability.

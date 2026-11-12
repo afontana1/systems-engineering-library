@@ -27,6 +27,10 @@ The chapter explains why a method is appropriate, the lab rehearses a fictional 
 ## How this volume connects to the other two
 SoS architecture identifies constituent dependencies; enterprise analysis identifies the institutions and incentives shaping them; critical systems practice tests boundaries, power and competing purposes. A strong final answer can combine them without treating a model as authority.
 
+## NS-SOS18.1 regional emergency access
+
+All twelve chapters extend the fictional Northstar SoS with a [controlled regional emergency-access case](case/INDEX.html), [source assumptions](case/controlled-inputs.json), a [reproducible standard-library capacity and freshness model](tools/step03_book18_sos.py), [complete policy results](case/policy-coverage.csv), [per-scenario screens](case/scenario-screens.csv), [constituent authority](case/authority-registry.csv), [distributed verification](case/vnv-distributed-matrix.csv), and a [failed compound-hazard and rail-interface change drill](case/computed-evidence.json). **These are invented capacities and scenario weights, not calibrated operating evidence.** The original chapters and all twelve laboratories are preserved.
+
 ## Calculation and model lab
 Shared self-contained Python demonstrations and synthetic datasets: [`K/P5-LAB/`](../P5-LAB/).
 

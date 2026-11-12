@@ -1,0 +1,5 @@
+incident,duration_min,observed_impact,cause,disposition
+INC-1,5,unavailable reservations,bad configuration,resolved
+INC-2,7,unavailable reservations,dependency outage,resolved
+INC-3,10,unavailable reservations,database failover,resolved
+INC-4,14,unavailable reservations,overload and retry amplification,resolved

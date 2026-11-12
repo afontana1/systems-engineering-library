@@ -21,6 +21,10 @@ This book supplies long-form explanatory chapters, example reasoning, reproducib
 - **Week 11:** [Analyze uncertainty, sensitivity, robustness, regret, and value of information](chapters/11-analyze-uncertainty-sensitivity-robustness-regret-and-value-of-infor.md) → [Hypothetical lab](labs/lab-11-analyze-uncertainty-sensitivity-robustness-regret-and-value-of-infor.md)
 - **Week 12:** [Integrate, communicate, and defend the engineering design decision](chapters/12-integrate-communicate-and-defend-the-engineering-design-decision.md) → [Hypothetical lab](labs/lab-12-integrate-communicate-and-defend-the-engineering-design-decision.md)
 
+## NS-DA14.1 campus mobility decision-science laboratory
+
+The twelve chapters share the [NS-DA14.1 controlled decision dossier](case/INDEX.html), including the [course-based six-alternative inputs and explicit teaching assumptions](case/decision-inputs.json), [reproducible standard-library analyzer](tools/step03_book14_decision.py), [pilot screening](case/pilot-screening.csv), [full design/rejection table](case/design-candidates.csv), [nondominated finite-grid designs](case/efficient-designs.csv), [factorial experiment](case/factorial-doe.csv), [surrogate holdout](case/surrogate-holdout.csv), [value-of-information computations](case/summary.json), [morphology register](case/morphology.csv) and [evidence/credibility register](case/evidence-register.csv). The six course pilot alternatives are preserved unchanged. All new thresholds, utility weights, design equations and likelihoods are explicitly synthetic; this case is **HOLD** for real decisions and does not supersede Book 11–13 validation boundaries.
+
 ## Engineering evidence discipline
 
 Follow a traceable chain of **question → representation → assumption/data → computation or explanation → sensitivity → supported claim → owner and next evidence**. Validate mathematical examples for their assumptions, not simply arithmetic. Do not treat a hypothetical result as operational validation.

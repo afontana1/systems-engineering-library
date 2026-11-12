@@ -77,3 +77,34 @@ In [Lab 5: Sequence models expose missing responsibility](../labs/lab-05-analyze
 ## Continuity
 
 This chapter builds from [previous chapter](04-discover-candidate-classes-and-build-the-stat.md) and leads toward [next chapter](06-model-state-dependent-behavior-and-conduct-th.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/605-704-w05.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: sequence models and collaboration boundaries
+
+### 5.1 Derive messages from responsibilities
+
+A useful dynamic design model makes it clear **who knows a fact and who can change it**. In `UC-02`, a dispatcher initiates a command; `ReservationService` validates the token and request; `AssignmentPolicy` evaluates eligibility; a repository commits reservation, assignment and audit event. This division ensures that the UI is not the system of record and that policy is testable without a live database.
+
+| Order | Message | Contract |
+|---|---|---|
+| 1 | `submit(token, payload)` | Request has authenticated actor and canonical payload |
+| 2 | `findExisting(token)` | Existing result must agree with payload |
+| 3 | `isEligible(vehicle, request, observation)` | Accessible and freshness rules hold |
+| 4 | `commitAssignment(...)` | Transaction preserves active-slot uniqueness |
+| 5 | `appendEvent(...)` | Audit record committed atomically with state change |
+| 6 | `return(reservationId)` | ID identifies durable committed reservation |
+
+Sequence order does not itself provide atomicity. An interaction diagram showing a check before an insert may accidentally expose a race: two handlers each see an empty slot, then both insert. The linearization point must be tied to a real database uniqueness constraint or another justified serializing mechanism. See the [executable transaction example](../tools/step03_book4_contract_check.py).
+
+### 5.2 Make failures explicit
+
+Consider the failure after the reservation row is inserted but before its assignment row is written. If these operations share a transaction, rollback returns the database to its previous valid state. If the audit writer is an independently reachable service, transaction boundaries are no longer automatically shared. A design might instead use a transactional outbox and asynchronous delivery, which changes the external consistency contract and demands retry/deduplication tests. The case deliberately keeps the audit event in one SQLite transaction to teach the simpler guarantee without claiming distributed atomicity.
+
+A message sequence should include guards and exceptional responses. With an accessibility-required request, policy rejection must occur before the commit. With stale telemetry, the caller receives a rejection that communicates the freshness reason without exposing another rider's information.
+
+### 5.3 Quantifying interactions
+
+The baseline budgets 120 ms for authentication, 80 ms for policy, and 150 ms for commit and event: a **serial-path estimate** of \(350\) ms. If authentication and policy can safely overlap, a different model is necessary: \(L_{parallel}=\max(L_{auth},L_{policy})+L_{commit}\), which equals \(270\) ms for the illustrative values. Parallelization is not an automatic optimization; policy might depend on identity attributes, invalidating independence. And neither equation establishes a measured tail latency.
+
+**Solved checkpoint.** Two identical HTTP retries arrive at nearly the same instant. A sequence diagram with `findExisting()` followed by `insert()` is insufficient. The durable unique token index provides the conflict point; the losing request must query the committed winner and verify payload identity before returning the original result.
+
+**Exercise.** Add a notification service that is temporarily unavailable. Show two designs: one in which notification failure rolls back booking, and another where booking commits and notification retries asynchronously. State the user-facing guarantees and operational tradeoffs of each.

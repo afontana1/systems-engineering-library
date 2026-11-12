@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Enterprise portfolio decisions under constraints · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/encyclopedia/enterprise-portfolio-decisions.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical explanation</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Enterprise portfolio decisions under constraints</h1>
+<p><strong>Reference entry · Enterprise engineering, affordability and decision analysis</strong></p>
+<h2>The portfolio is a system, not a ranked wish list</h2>
+<p>An enterprise portfolio allocates scarce capital, personnel, schedule and risk capacity among interventions whose benefits, dependencies and consequences may interact. Selecting projects independently by benefit-cost ratio can be wrong when projects are indivisible, share enabling infrastructure, or create conflicting constraints. Define the boundary—programs, operating units, suppliers, workforce, external stakeholders—before choosing a value model.</p>
+<p>For binary investment choices \(x_i\in\{0,1\}\), a simple first model is</p>
+<p>\[
+\max_x\sum_i v_i x_i\quad\text{subject to}\quad\sum_i c_i x_i\le B.
+\]</p>
+<p>Here \(v_i\) is an explicitly defined benefit score (not automatically a dollar value), \(c_i\) is a compatible resource quantity, and \(B\) is the resource limit. A project dependence such as “B requires A” becomes \(x_B\le x_A\). A mutually exclusive architecture choice uses \(x_A+x_B\le1\). A complete investment decision also needs timing, uncertainty, operational effects, equity and safety constraints; a linear sum is a useful starting approximation, not a universal objective.</p>
+<h2>Worked enumeration</h2>
+<p>Consider three <em>indivisible</em> proposed improvements: A costs 4 units and yields value 7; B costs 3 and yields 5; C costs 5 and yields 9. A budget of 8 allows the singletons, A+B (cost 7, value 12), and B+C (cost 8, value 14), but not A+C (cost 9) or all three. <strong>B+C is the feasible maximum at value 14</strong> if benefits are additive and there are no dependencies. Ratios \(7/4=1.75\), \(5/3\approx1.67\), \(9/5=1.80\) would rank C then A then B, but greedy ranking can fail on constrained, indivisible selections; enumeration or integer optimization gives the defensible optimum for the stated model.</p>
+<p>Now assume C needs an enabling A subsystem. The extra constraint \(x_C\le x_A\) makes C infeasible under the budget because A+C costs 9; A+B, value 12, becomes the winner. The requirements architecture—not merely the budget spreadsheet—changes the decision.</p>
+<h2>Risk, resource conflict and stage gates</h2>
+<p>A scenario-based alternative replaces fixed \(v_i\) with \(v_{is}\) for plausible states \(s\). Compute expected value only after defining justified probabilities; otherwise use scenario regret, robust feasibility, explicit qualitative comparisons or value-of-information reasoning. Workforce hours and integration-slot availability often bind before nominal funding does. Model them as additional constraints instead of inventing shadow prices without an economic basis.</p>
+<p>An evidence-based stage gate records the objective, budget version, candidate set, assumptions, exclusions, decision authority, dissent, sensitivity, and next evidence trigger. A portfolio should be reassessed after an interface change, supplier failure or new operating objective. An approved project is not a proven benefit until the relevant outcomes have been measured.</p>
+<h2>Exercise with check</h2>
+<p>For the unconstrained example, decrease the budget from 8 to 7. The optimum becomes A+B with value 12; neither C+B nor A+C is affordable. Then introduce a workforce limit allowing at most one of A and B. Re-enumerate feasible options and state which constraint causes the new selection. Explain why a positive net-present value alone is insufficient when a mandatory safety obligation is unmet.</p>
+<h2>Limits and sources</h2>
+<p>Benefit scores require stakeholder-approved scales; adding unlike units without justification is invalid. Project interactions can defeat additivity. A purely financial optimization can exclude accessibility or resilience unless these are encoded as constraints or separately governed criteria. Related: <a href="enterprise-as-system.html">enterprise as system</a>, <a href="pareto-and-value.html">Pareto value</a>, <a href="bayesian-value-of-information.html">Bayesian information</a>, and <a href="authority-and-governance.html">authority and governance</a>.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — trade study, technical decision analysis and lifecycle perspective.</li>
+<li><a href="https://sebokwiki.org/wiki/Enterprise_Systems_Engineering">SEBoK enterprise systems engineering</a> — enterprise scope and governance context.</li>
+</ul>
+<p><em>Scope:</em> Values and costs are synthetic abstract units. No actual portfolio is appraised.</p>
+</article><nav class="standalone-actions"><a href="metrics-hierarchy.html">Read concept</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="metrics-hierarchy.md">Editable Markdown</a></nav></main></body></html>

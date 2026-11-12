@@ -1,0 +1,9 @@
+id,topic,claim_or_risk,required_evidence,gate_owner,status
+PI17-R01,Data provenance,"New 96-case sample is synthetic and not course historical data",Controlled generator and separate baseline labels,Measurement lead,DISCLOSED
+PI17-R02,Service calibration,"Service times and arrival model need independent observation",Signed event extracts and sampling protocol,Model credibility lead,OPEN
+PI17-R03,Assurance,"A station visit does not prove correct safety or accessibility evidence",Version-matched signed test and approval records,Independent assurance lead,OPEN
+PI17-R04,Adoption,"Changed cadence and staffing may alter behavior and supplier burdens",Bounded supervised pilot and interviews,Process owner,OPEN
+PI17-R05,Conformance,"Elementary event order checker is not a standards appraisal",Approved assessment method and qualified assessors,Quality authority,OPEN
+PI17-R06,Decision risk,"Nominal eligible policies can fail under demand stress",Stress traces and stop/reversal criteria,Program board,OPEN
+PI17-R07,Data governance,"Real process logs may hold sensitive supplier or personnel data",Access control and retention/privacy review,Data steward,OPEN
+PI17-R08,Test validity,"Replications quantify stochastic model variability but not structural uncertainty",Independent holdout and sensitivity validation,Model credibility lead,OPEN

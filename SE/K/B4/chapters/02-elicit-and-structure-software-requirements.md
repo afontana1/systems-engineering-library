@@ -72,3 +72,44 @@ The governing distinction is between *specification correctness* and *implementa
 ## Continuity
 
 This chapter builds from [previous chapter](01-establish-the-ooad-problem-scope-and-modeling.md) and leads toward [next chapter](03-capture-functional-requirements-with-use-case.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/605-704-w02.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: requirements as enforceable software contracts
+
+### 2.1 Write an observable behavior, not an implementation preference
+
+A software requirement should identify a trigger, intended response, observable outcome, acceptance rule, and boundary conditions. Compare “use a reservation database” with `SW-03`: *for two submissions carrying an identical request token and identical immutable payload, return the same reservation identifier without creating another assignment*. The second statement supports a repeatable test while leaving technology choices open.
+
+The [controlled requirement set](../case/model-baseline.json) includes seven synthetic requirements. They cover durable reservation identity, unique active assignment, retry idempotency, cancellation, accessibility, telemetry freshness, and audit provenance. A traceability relationship is meaningful only when a specific test can distinguish a compliant implementation from a noncompliant one.
+
+### 2.2 Specify failure and boundary cases
+
+For a request \(r=(k,p)\), with token \(k\) and immutable payload \(p\), let \(F(k,p)\) denote its result. Idempotency requires
+
+\[
+\operatorname{id}(F_{t_1}(k,p))=\operatorname{id}(F_{t_2}(k,p))\quad (t_2>t_1).
+\]
+
+Operationally, a repeated submission should return the first durable reservation ID. A different payload submitted under the same token should fail explicitly, rather than silently borrowing the old reservation. This is not the same as guaranteeing exactly-once processing over a network; it is a bounded application contract with durable deduplication.
+
+| Requirement | Positive acceptance scenario | Adversarial scenario |
+|---|---|---|
+| SW-03 | Retry same token and payload: identical ID | Same token with changed vehicle: reject |
+| SW-04 | Cancel active reservation: slot becomes available | Cancel twice: do not emit duplicate state change |
+| SW-05 | Accessible rider: eligible vehicle | Non-accessible vehicle: reject before commit |
+| SW-06 | Telemetry age 6 s: eligible | Age 22 s: reject at 15-s freshness limit |
+
+Distinguish the 15-second **maximum acceptable observation age** from a 15-second sampling period. A nominal update frequency does not guarantee an observation is current at decision time. The effective age is decision timestamp minus observation timestamp, ideally measured using a common trusted time basis and taking network delay into account.
+
+### 2.3 Quantify a timing budget without overclaiming
+
+The illustrative command path includes authentication (120 ms), policy decision (80 ms), and transactional commit plus audit event (150 ms). Its modeled serial latency is
+
+\[
+L=120+80+150=350\ \mathrm{ms};\qquad M=500-L=150\ \mathrm{ms}.
+\]
+
+A 150-ms arithmetic margin does **not** prove a 500-ms performance requirement. Queueing, network retransmission, tail latencies, clock measurement, load, and dependency correlations remain unmeasured. A performance test should specify the percentile, workload, observation method, and configuration. If the requirement is for the 99th percentile, comparing only average component times is invalid.
+
+**Solved checkpoint.** A review report links `SW-06` to a test marked PASS at revision 1. The requirement is now revision 2. The correct disposition is *stale evidence*, even if the result is plausible. Rerun the relevant acceptance test against the new requirement interpretation and the declared baseline.
+
+**Exercise.** Rewrite “the interface shall be fast” as a measurable requirement, naming the load, event origin, event endpoint, tail percentile, and maximum time. Do not infer those values from the 350-ms illustrative budget; assign and justify them as design assumptions.

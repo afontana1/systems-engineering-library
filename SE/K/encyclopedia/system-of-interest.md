@@ -75,6 +75,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)](https://sebokwiki.org/wiki/Main_Page) — Community-maintained secondary guide; use its references for further research.
 
+
+
+## Step 02 review studio — the system boundary changes the test you owe
+
+A team declares the rider phone app to be its system of interest. That boundary is appropriate for testing app UI behavior; it is inadequate for concluding that a rider can reliably secure a shuttle. The full service includes dispatch, allocations, vehicle availability, operator procedures, notification networks, and external actors. The boundary chosen must match the claim made.
+
+**Solved exercise:** the app passes 100% of its confirmation-screen tests, but some confirmations refer to reservations that were rolled back by the allocation database. Is the service-level booking claim satisfied? **No.** The app's display can be correct relative to its input and wrong relative to the underlying committed service state. Add end-to-end tests reconciling client state with a committed allocation and exercise retry/timeout conditions.
+
+**Diagnostic:** identify the system's mission, owners, external exchanges, physical/operational domain, assumptions, failure modes, and authorized decisions. Explicit boundaries improve engineering reasoning; artificially narrow boundaries can transfer unowned risks rather than eliminate them.
+
 ## Follow the knowledge
 
 **Related concepts**

@@ -21,4 +21,15 @@
 <p>First, the one-sided 95% upper bound on failure probability is about 0.994%, not 0.1%, under the Bernoulli assumptions. Second, simulator runs and real operating events may not have representative, independent failure behavior; model credibility and coverage are separate obligations.</p>
 <p>&lt;/details&gt;</p>
 <p><strong>Transfer artifact:</strong> A trial definition, exposure record, exact bound, applicability envelope, and list of uncovered failure modes. See <a href="../../encyclopedia/v-and-v.html">verification and validation</a>.</p>
+
+<!-- STEP04-FLAGSHIP-U1-START -->
+<section class="ns-u4-extension" aria-label="NS-U4.1 flagship technical extension"><h3>D04 extension · Wilson bound and the acceptance fallacy</h3>
+<p>For $k=72,n=80$, $\hat p=.9$ and $z=1.96$, define $d=1+z^2/n$; then the two-sided Wilson lower endpoint is</p>
+<p>$$L=\frac{\hat p+z^2/(2n)-z\sqrt{\hat p(1-\hat p)/n+z^2/(4n^2)}}{d}.$$</p>
+<p>Computing this gives about 0.8149 (exact digits depend on rounding). Thus a 90% <strong>sample</strong> success rate does not demonstrate that a population success probability is at least 90% with this confidence procedure. Under conservative timing, the point estimate is only 67/80=.8375, and accessible performance is 10/16=.625. The formula requires independent representative Bernoulli trials; correlated failures reduce effective information.</p>
+<p><strong>Exercise and solution.</strong> If 0 failures occur in 20 independent tests, the one-sided 95% upper failure-probability bound is $1-.05^{1/20}\approx0.1391$; zero observed failures is not proof of zero true risk. <a href="../flagship-integration/data/ns-u4.1-case.json">Acceptance fixture</a>.</p>
+</section>
+<script id="ns-u4-inline-math">window.MathJax=window.MathJax||{};window.MathJax.tex=window.MathJax.tex||{};window.MathJax.tex.inlineMath=[["$","$"]];</script>
+<style id="ns-u4-responsive">main{min-width:0;max-width:100%;overflow-wrap:break-word}main :is(table,pre){max-width:100%;overflow-x:auto}main :is(p,li):has(mjx-container){overflow-x:auto}main mjx-container{max-width:100%;overflow-x:auto}.ns-u4-extension{min-width:0;max-width:100%;border-top:2px solid #9acac9;margin-top:38px;padding-top:16px}.ns-u4-extension a{overflow-wrap:anywhere}</style>
+<!-- STEP04-FLAGSHIP-U1-END -->
 </main></body></html>

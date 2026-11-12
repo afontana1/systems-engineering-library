@@ -21,4 +21,13 @@
 <p>Capacity increases from 15 to 16 jobs/hour. At λ=12, W changes from 20 to 15 minutes; at λ=14, W changes from 60 to 30 minutes. The nonlinear benefit is greatest when capacity is close to demand, given the model assumptions.</p>
 <p>&lt;/details&gt;</p>
 <p><strong>Transfer artifact:</strong> Boundary, arrival/service evidence, λ, μ, utilization, delay, model checks and a sensitivity curve. See <a href="../../encyclopedia/flow-wip-and-queues.html">flow, WIP and queues</a>.</p>
+
+<!-- STEP04-FLAGSHIP-U1-START -->
+<section class="ns-u4-extension" aria-label="NS-U4.1 flagship technical extension"><h3>D06 extension · A discrete conservation check and queue boundary</h3>
+<p>A single-class FIFO queue obeys $B_{t+1}=B_t+A_t-S_t$, with $S_t=\min(B_t+A_t,C_t)$ and all variables in requests per <em>one service window</em>. Over $N$ windows, telescoping yields $B_N=B_0+\sum_t A_t-\sum_t S_t$. NS-U4.1 computes this separately for standard and accessible service. In the baseline normal scenario, accessible capacity 4 per window cannot clear arrivals $[4,5,6,7,6,4]$, leaving 8 accessible requests unfinished after the observation horizon. The unfinished cases remain in the denominator for timely-service analysis. Little's law $L=\lambda W$ applies to properly defined, stable long-run systems, not automatically to this finite transient with remaining backlog.</p>
+<p><strong>Exercise and solution.</strong> If arrivals total 32, served total 24 and the system starts empty, $B_N=8$ by conservation. Deleting those eight would be an accounting error. <a href="../flagship-integration/outputs/ns-u4.1-results.json">Capacity trace</a>.</p>
+</section>
+<script id="ns-u4-inline-math">window.MathJax=window.MathJax||{};window.MathJax.tex=window.MathJax.tex||{};window.MathJax.tex.inlineMath=[["$","$"]];</script>
+<style id="ns-u4-responsive">main{min-width:0;max-width:100%;overflow-wrap:break-word}main :is(table,pre){max-width:100%;overflow-x:auto}main :is(p,li):has(mjx-container){overflow-x:auto}main mjx-container{max-width:100%;overflow-x:auto}.ns-u4-extension{min-width:0;max-width:100%;border-top:2px solid #9acac9;margin-top:38px;padding-top:16px}.ns-u4-extension a{overflow-wrap:anywhere}</style>
+<!-- STEP04-FLAGSHIP-U1-END -->
 </main></body></html>

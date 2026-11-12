@@ -1,0 +1,4 @@
+split,period,exposure_hours,arrivals,notes
+calibration,weekday_A,5,39,synthetic observations
+calibration,weekday_B,5,51,synthetic observations
+holdout,weekday_C,1,14,held-out synthetic challenge count

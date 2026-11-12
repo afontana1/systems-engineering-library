@@ -1,0 +1,6 @@
+risk_id,condition,mechanism,affected_claim,control,owner,evidence_to_close,disposition
+R18-01,shared electric grid outage,correlated constituent capacity loss,mission throughput,distributed backup energy,municipal utility and owners,observed outage test,OPEN
+R18-02,stale communications,invalid routing freshness,mission throughput and privacy,fail-closed interface and federation,regional-coordinator,independent timestamp/cyber test,OPEN
+R18-03,compound grid-flood,joint road/power impairment beyond scenario basis,coverage,exercise and scenario expansion,regional council,compound stress field observations,FAILED-SYNTHETIC
+R18-04,supplier interface revision,revision mismatch means trace is stale,assurance and operations,schema negotiation and contract test,rail and regional coordinator,signed version test,FAILED-SYNTHETIC
+R18-05,priority routing,allocated capacity may exclude standard residents,equity and legitimacy,governed allocation rule,accessibility advisory board,engagement and equity review,OPEN

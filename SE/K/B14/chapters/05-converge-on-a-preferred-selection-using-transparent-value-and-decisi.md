@@ -115,3 +115,23 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [04 — Previous chapter](04-apply-constraints-dominance-and-pareto-analysis-to-the-selection-pro.md) · [06 — Next chapter](06-visualize-communicate-and-defend-the-pilot-selection-decision.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-DA14.1 decision-analysis laboratory: Chapter 05
+
+### Transparent additive value with a decision-reversal threshold
+
+After screening, the decision authority must express trade preferences rather than ask the algorithm to invent them. The synthetic weighted-additive value model uses six scaled objectives, explicit fixed anchors, and weights that sum to one; its values have no physical units. Pilot C scores **0.708571**, and pilot D scores **0.724524**, a difference \(\Delta V=0.015952\) in D's favor. That small gap is not a statistical confidence interval, an observed difference, or proof of decision robustness. The [value decomposition](../case/pilot-screening.csv) is reproducible using a single function rather than several inconsistent spreadsheets.
+
+**Worked sensitivity derivation.** Hold the other four weights fixed and shift a preference mass \(\delta\) from waiting-time weight to accessible-coverage weight. The original weights are \(w_{wait}=0.30\) and \(w_{access}=0.28\). D has higher normalized wait value by \((11.2-8.9)/15=0.153333\), but lower accessible-coverage value by \((0.98-0.99)/0.15=-0.066667\). Thus the new difference is
+\[
+\Delta V(\delta)=0.01595238-\delta(0.153333+0.066667)=0.01595238-0.22\delta.
+\]
+The scores tie near \(\delta=0.07251\). Shifting only **7.25 percentage points** of weight from waiting time to accessible coverage changes the preference: \(w_{wait}\approx0.22749\), \(w_{access}\approx0.35251\). This reversal is *conditional on the particular value functions, anchors, and feasible alternatives*. It is not a survey result and not a reason to choose whichever weight set favors a sponsor.
+
+### Compensability and outranking checks
+
+An outranking-style review can say “D is preferred on wait, availability and emissions, but C has the stronger accessibility and earlier-deployment case; no final ordering without stakeholder thresholds.” This approach does not demand cardinal trade units for every objective. A veto on insufficient accessible coverage should be enforced before either additive scoring or outranking. Weighted sums may omit supported nondominated points in a nonconvex design frontier; the ranking method is not a replacement for Pareto search in Project 2.
+
+**Exercise and explained solution.** Change only weights to \(w_{wait}=0.20\) and \(w_{access}=0.38\); the remaining weights are unchanged. Which candidate ranks first? **Solution:** This transfers \(\delta=0.10\), so \(\Delta V=0.015952-0.022=-0.006048\). C now outranks D, without any change in hardware, field evidence, or feasibility. A decision report must record the actual approved weights, sensitivity range and any preference disagreements, not merely publish one score.
+
+**When this fails.** Additivity presumes relevant preference independence. If accessible coverage has a discontinuous ethical or legal significance, or if cost includes operational changes already captured by the wait model, a simple sum may be inappropriate. Request a noncompensatory governance decision before merging dimensions. The case includes a [review evidence register](../case/evidence-register.csv) that documents this gap.

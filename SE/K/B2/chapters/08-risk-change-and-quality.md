@@ -80,3 +80,30 @@ Probability multiplied by impact is a rough screening aid, not a complete decisi
 ## Put this into practice
 
 Work through [Lab 8: The Timeout Change Board](../labs/lab-08-risk-change-and-quality.md), then write a short paragraph on how the laboratory simplifies the real-world management problem. Use the [existing short Week 8 primer](../../P0-text/lessons/645-667-w08.md) for a second explanation. The assessed deliverable is defined in the original course guide, not by the hypothetical lab.
+
+## Step 03 integrated reference — one technical change, multiple control systems
+
+A change to a safety-relevant interface can affect requirements, failure modes, cost, schedule, supplier obligations and verification evidence at the same time. The management task is to preserve a **causal impact record** across those objects. NS-B1's emergency-status allocation is 2.5 seconds; suppose a supplier proposes a gateway revision that increases network latency by 0.3 seconds. Under a deterministic allocated-budget model, the existing 1.65-second nominal allocation becomes 1.95 seconds and leaves 0.55 seconds of allocation margin. That arithmetic does not establish compliance at the tail of a real latency distribution.
+
+### Change-control sequence
+
+1. Record the exact proposed interface value and affected configuration.
+2. Recompute the technical budget and identify operating conditions where the assumption may fail.
+3. Trace to NS-R-02 and NS-R-04, hazard controls, and any stale procedures or evidence.
+4. Identify affected WBS accounts (gateway, software, verification), schedule dependencies, and vendor commitments.
+5. Present options, residual risks and authority separately; approve the technical and financial decisions through their proper boards.
+6. Rebaseline only the approved objects and preserve the original values for future comparison.
+
+There is an important distinction between **risk** (an uncertain future event), an **issue** (a condition already observed), and **change** (a proposed adjustment to a controlled baseline). A supplier delay that has already happened is no longer merely a prospective probability. The remaining duration and secondary rework uncertainty still require forecasts, but past variance cannot be erased by moving it back into the risk register.
+
+### Quantify the mitigation decision
+
+Using NS-M1's fictional supplier event, baseline probability 0.25 and incremental cost $0.4M imply $0.10M expected cost exposure. An intervention costing $0.03M that reduces probability to 0.10 yields residual exposure $0.04M. Gross reduction is $0.06M and net expected reduction $0.03M, conditional on the stated model. If the intervention causes a one-week acceptance-test delay or raises safety risk, those consequences must be examined separately. Also examine whether interface-rework event costs overlap with supplier rework, to avoid double counting.
+
+### Quality control is not configuration control
+
+Quality assurance evaluates whether the agreed process can produce credible results; quality control inspects outputs against acceptance criteria. Configuration management identifies which revision an observed result applies to. A valid test performed on NS-B0 may be a well-executed test yet insufficient evidence for NS-B1. Quality and configuration checks jointly prevent “green-but-stale” evidence.
+
+**Practice with answer.** A revised gateway reduces unit price but requires repeating an environmental qualification. Can the cost board authorize it solely from the price delta? **Answer:** no; the total change includes technical acceptance, configuration-specific evidence, qualification cost, schedule and delegated approvals. Prepare a consolidated change package and name any open conditions rather than marking them resolved.
+
+**Reference:** [NASA Systems Engineering Handbook](https://www.nasa.gov/reference/systems-engineering-handbook/) discusses configuration management, risk and product verification as coordinated engineering processes.

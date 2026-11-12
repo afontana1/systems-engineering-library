@@ -112,3 +112,25 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 - [Deep workshop — Interface Contracts and End-to-End Timing Budgets](../practice/interfaces.md)
 - [Corresponding independent laboratory](../practice/lab-interfaces.md)
 - [Interactive workbench](../practice/WORKBENCH.html)
+
+## Step 03 integrated technical reference: NS-DI7.1 — multidisciplinary design review
+
+### A PDR-style argument is a set of linked, qualified claims
+
+A preliminary design review should ask not simply whether all disciplines have produced slides, but whether each allocated obligation can plausibly be realized and later demonstrated. The evidence chain is *requirement → design feature → physical interface → analytic or experimental basis → remaining risk → verification plan*. A familiar failure mode is accepting a local success as a system-level result: 440-ms modeled command timing is encouraging, but it does not neutralize the reliability and maintainability shortfalls elsewhere in the design.
+
+The [NS-DI7.1 design model](../case/model-baseline.json) provides a deliberately contradictory case. The combined timing redesign has 60-ms modeled reserve, satisfying the 50-ms policy **if the additive model is valid**. Per-shift energy is 26.3 kWh against 30 kWh, with 3.7-kWh modeled allowance. But an eight-hour mission with independent failure rate 0.0015/h and shared rate 0.0012/h has modeled survival of only about 0.9786, below the target of 0.98. Logistics-adjusted long-run availability is about 0.9864 against 0.99. Neither shortfall disappears because a timing chart has turned green.
+
+### Decision structure, not color coding
+
+Separate the review into (1) explicit requirement and configuration, (2) method and assumptions, (3) maturity of evidence, (4) residual exposure and (5) responsible owner and next decision. Use **pass under assumptions**, **failed calculation**, **not yet tested**, and **stale evidence** as different statuses. Reserve *accepted* for a claim with a known authority and the required scope of evidence. Risk retirement may require changing hardware, spares strategy or mission length; deferment must have an owner, closure criterion and deadline.
+
+A PDR may conditionally authorize continued design even if operation remains on HOLD. That decision should include a reversal condition—for example, if a shared-failure mechanism cannot be bounded, the redundancy architecture must be revised before integration.
+
+**Exercise.** Draft a three-line review decision using the latency, mission reliability and evidence register.
+
+<details><summary>Worked resolution</summary>
+
+Continue detailed design of the combined timing variant provisionally; do not approve operational release. Assign reliability to reduce/characterize the shared failure rate, and assign verification to execute the degraded p99 test on NS-DI7.1. Preserve DI7-R02 as STALE until test evidence on the revised configuration exists.
+
+</details>

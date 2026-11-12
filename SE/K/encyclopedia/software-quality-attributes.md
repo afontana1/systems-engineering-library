@@ -46,6 +46,24 @@ These sources establish authoritative terminology or methods in their own publis
 - [NIST · SP 800-160 Vol. 1 Rev. 1, Engineering Trustworthy Secure Systems (2022)](https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final) — System-level security and trustworthiness engineering.
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 
+## Phase 3 technical reference: Model constraints connect functional correctness to qualities
+
+An availability or maintainability tactic cannot substitute for a precise correctness constraint. A worker-allocation service must state whether reservations may share workers, the meaning of `Pending`, `Active` and `Closed`, and the operation's atomicity obligations. A UML multiplicity or a pre-insert application query is insufficient to prevent a concurrency race. A database uniqueness constraint and transaction discipline may enforce the exclusivity requirement, but still need stress tests under retries and failures. [The software-contract method](../methods/uml-ocl-software-contracts.md) connects conceptual invariants, executable snapshot checks and persistence mechanisms to an actual assurance argument.
+
+## Phase 5 technical reading: Correctness must survive concurrent operations
+
+The invariant “at most one active reservation per worker” is \(\sum_r\mathbf1(r.\mathrm{worker}=w\land r.\mathrm{active})\le1\). A service that first queries availability and then inserts a row can violate this invariant if two request handlers both read zero before committing. A reproducible [transactional concurrency example](../methods/transactional-concurrency-and-assurance.md) contrasts this flawed check-then-act design with a SQLite partial unique index that rejects the second conflicting insert. That database mechanism supports one local safety property, not global distributed linearizability, recovery correctness or end-to-end timely service.
+
+
+
+## Step 02 review studio — convert a quality adjective into a scenario
+
+“Maintainable,” “available,” and “secure” are not interchangeable grades. Each quality attribute needs a scenario: stimulus, source, environment, affected artifact, system response, and a measurable response criterion. For a supervisor console, a relevant availability scenario could be *loss of one status publisher under peak test traffic*, with required degraded behavior and a recovery-time bound. A broad annual uptime percentage would not prove the degraded emergency-status claim.
+
+**Solved calculation:** if a subsystem has assumed mean time between failures of 200 h and mean time to restore of 5 h, its simple steady-state inherent availability model is `A=200/(200+5)=0.97561`, or roughly 97.6%. This model excludes planned outages, logistics delay, dependence, and changes in failure/repair rates. It does **not** show the probability that a particular emergency event is displayed within 2.5 s.
+
+**Design exercise (answered):** two designs claim identical 99.5% availability, but one has frequent 5-minute outages and the other has rare 12-hour outages. Are they equivalent for a critical dispatch service? **No.** Mission impact depends on outage duration distribution, timing, safety fallback, and operational context. Report appropriate quality-attribute scenarios and not just an aggregate figure.
+
 ## Follow the knowledge
 
 **Related concepts**

@@ -1,0 +1,60 @@
+{
+  "design_efficient": 5,
+  "design_feasible": 10,
+  "design_total": 1440,
+  "doe_runs": 8,
+  "information_value": {
+    "diagnostic_conditional": {
+      "negative": {
+        "best_decision": "D",
+        "outcome_probability": 0.6549999999999999,
+        "posterior_adverse": 0.09160305343511449,
+        "weighted_payoff": 51.019999999999996
+      },
+      "positive": {
+        "best_decision": "C",
+        "outcome_probability": 0.345,
+        "posterior_adverse": 0.6956521739130435,
+        "weighted_payoff": 23.849999999999998
+      }
+    },
+    "evpi": 3.0,
+    "evsi": 1.769999999999996,
+    "net_value": 1.269999999999996,
+    "no_test_best": "D",
+    "no_test_expected_by_alternative": {
+      "C": 71.89999999999999,
+      "D": 73.1
+    },
+    "no_test_value": 73.1,
+    "perfect_information_value": 76.1,
+    "with_test_value": 74.86999999999999
+  },
+  "model_id": "NS-DA14.1",
+  "pilot_feasible": [
+    "C",
+    "D"
+  ],
+  "pilot_preferred": "D",
+  "pilot_scores": {
+    "A": 0.5429523809523811,
+    "B": 0.4758095238095238,
+    "C": 0.7085714285714285,
+    "D": 0.7245238095238095,
+    "E": 0.45638095238095255,
+    "F": 0.29419047619047617
+  },
+  "surrogate_holdout_error": {
+    "cost_musd": {
+      "mae": 1.5090368843395652e-08,
+      "maximum_absolute_error": 1.8829165782108248e-08
+    },
+    "wait_p90_min": {
+      "mae": 0.04743310181441396,
+      "maximum_absolute_error": 0.10745287534312808
+    }
+  },
+  "surrogate_holdout_runs": 16,
+  "surrogate_train_runs": 36,
+  "warning": "All decision thresholds, value weights, design-response equations, and likelihoods are illustrative; no real procurement or design qualification."
+}

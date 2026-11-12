@@ -99,3 +99,25 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 5: Integration and SIL/HIL paths](../labs/lab-05-construct-the-integration-test-approach-sil-hil-paths-a.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 5 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-TE8.1 — integration sequence and SIL/HIL test credibility
+
+### Tests should isolate faults before full-system ambiguity
+
+Plan an integration ladder with explicit entry and exit criteria. First test serializer/schema and replay rejection in software; then exercise broker-to-gateway transaction handling under concurrent load; then add the real controller in HIL; finally evaluate radio disruption and accessible pickup behavior in a controlled field setting. At each step the failure localization question changes: a SIL failure can be a software race; a HIL-only failure may arise from clock skew, queue buffering, power transients or a simulated interface mismatch.
+
+The critical inheritance from Book 7 is the **modeled** 440-ms degraded path and separate 50-ms reserve policy. A serial sum of stage latencies is not the measured 99th percentile of a whole path. Under concurrency, queueing and retries, the end-to-end distribution can be much worse than a sum of mean or nominal stage costs. Define injection points for adversarial retries, dropped acknowledgments, and redundant allocation messages. Store raw input/event traces so failures can be replayed on a *controlled* article, not a moving development branch.
+
+### Evidence is versioned at its weakest link
+
+The [evidence register](../case/evidence-register.csv) lists TE8-E06 as a HIL allocation demonstration on **NS-DI7.0**. Its provenance may be genuine, but the result cannot be promoted to current TE8-R06 compliance without bounding software changes. A successful SIL result for NS-DI7.1 could raise confidence in the revised logic but would not automatically cover HIL hardware timing or field behavior. Use an explicit applicability argument or repeat the HIL test on the controlled article.
+
+For each test, freeze the input stimulus, firmware checksum, instrumentation configuration, environmental setting, pass/fail rule and raw logs. Treat **verification of the test setup** as a separate test from the product under test. A deliberately faulty clock and a deliberately duplicated reservation should both create expected alarms during setup qualification.
+
+**Exercise.** A new firmware update changes gateway buffering after HIL testing. What can remain useful, and what needs review?
+
+<details><summary>Worked answer</summary>
+
+Unchanged structural interface tests may remain informative with a justified change-impact assessment. Latency distributions, replay/sequence handling and end-to-end timing claims require re-evaluation, typically retest, because the update changes the causal mechanism being measured. Preserve the former record but mark its scope explicitly.
+
+</details>

@@ -77,3 +77,33 @@ In [Lab 12: The final baseline is a reasoned technical argument](../labs/lab-12-
 ## Continuity
 
 This chapter builds from [previous chapter](11-manage-delivery-operations-maintenance-evolut.md) and leads toward your final course defense. Revisit the corresponding [weekly primer](../../P1-text/lessons/645-764-w12.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+
+## Step 03 integrated reference: the release decision as a structured engineering argument
+
+### Combine claims instead of averaging them
+
+Book 5 concludes with the NS-SW5.1 release board. A successful model calculation is relevant, but the board must consider every mandatory obligation. The candidate service rate of 20 requests/s yields a *model-only* peak p95 proxy of **469.57 ms** against a 500 ms boundary. That result supports further testing, not production acceptance. The register simultaneously shows a availability-risk warning, stale build provenance and an unexecuted recovery drill. These are independent blockers, not low-scoring features that can be outweighed by performance.
+
+| Decision dimension | Synthetic evidence | Engineering conclusion |
+|---|---|---|
+| Peak performance | Analytical queue proxy 469.57 ms at 10/s | Promising, needs end-to-end measurement |
+| Availability | 36 of 43.2 allowance minutes used | Only 7.2 minutes remain |
+| Release exposure | Hypothetical canary could consume 9 minutes | Exceeds budget by 1.8 minutes |
+| Build identity | `BLD-50` belongs to NS-SW5.0 | Stale for NS-SW5.1 |
+| Recovery | `DRILL-51` is planned but unexecuted | Recovery requirement open |
+| Reservation invariants | Synthetic transaction checks pass | Useful but not distributed-field proof |
+
+The correct decision in this teaching case is **NO-GO**. A conditional approval would need explicit authority and scope, renewed build evidence, executed recovery evidence, and an exposure plan compatible with the service policy. The table illustrates the logic; it does not replace a formal authorization process for a real system.
+
+### A technology choice is an experiment with migration costs
+
+A new message broker, managed database, service mesh or observability backend may reduce one weakness while adding dependencies, security surface, licensing constraints or team skill requirements. Evaluate alternatives using a capability claim, failure mode, migration mechanism, training and rollback plan, operational measurements and evidence refresh cost. Do not select a technology just because the vendor describes it as cloud native or fault tolerant.
+
+A trustworthy adoption proposal names which requirements improve, which evidence becomes stale, how a canary would be measured, who can terminate it, and what would falsify the claimed benefit. Never reuse synthetic input as if it were operational data. Where an external standard is cited, check that the revision and use are appropriate to the project rather than declaring compliance by association.
+
+### Capstone investigation
+
+Run `python3 SE/K/B5/tools/step03_book5_system_check.py --json` from the root. Inspect the evidence status and edit a *copy* of the case to evaluate a hypothetical recovery-drill pass. **Question:** Would changing `DRILL-51` to a pass make release valid? **Answer:** No. SWS-02 remains at risk under the proposed canary, the build attestation remains stale, and nine prospective downtime minutes still exceed the 7.2-minute remaining budget. Correct release decisions must be conjunctions of required claims, not averages of unrelated measures.
+
+**Connection to next studies.** The software system's assurance data should inform integration testing, lifecycle supportability, enterprise risk, and eventual systems-of-systems operations. Treat this chapter as a pattern for evidence-based technical review, not a shortcut to certification.

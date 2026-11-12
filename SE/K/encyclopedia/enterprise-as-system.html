@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>The enterprise as a system · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>The enterprise as a system · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
 <link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
 <script data-se-mode="standard" data-se-page="K/encyclopedia/enterprise-as-system.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
 </head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>The enterprise as a system</h1>
@@ -32,7 +32,11 @@
 <li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
 <li><a href="https://sebokwiki.org/wiki/Main_Page">SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)</a> — Community-maintained secondary guide; use its references for further research.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section id="step03-concept-study"><h2>Step 02 review studio — system optimization with competing owners</h2>
+<p>The campus mobility system optimizes “average trip time,” but the accessibility office values reliable boarding for mobility-impaired riders and facilities controls curb-space allocation. Those decisions are owned by different groups. The <strong>enterprise boundary</strong> includes their governance interactions even if the technical engineering team owns only the dispatch software.</p>
+<p><strong>Solved exercise:</strong> A new dispatch algorithm reduces mean journey time for 900 ordinary trips from 12 to 10 minutes while increasing mean journey time for 100 accessible trips from 15 to 25 minutes. The original population mean is <code>(900×12+100×15)/1000 = 12.3</code> min. The new mean is <code>(900×10+100×25)/1000 = 11.5</code> min—an aggregate improvement hiding a <strong>10-minute deterioration</strong> in accessible service. Declaring success based solely on the mean would substitute one group's objective for the enterprise's full purpose.</p>
+<p><strong>Decision implication:</strong> define disaggregated service outcomes, mandatory accessibility obligations, who has authority over tradeoffs, and which feedback signals prompt reassessment. Mean performance is not evidence that all constituencies are treated acceptably. A system model that omits institutional incentives may predict technically efficient behavior that no actual organization will sustain.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="authority-and-governance.html">Authority, governance, and coordination</a></li>

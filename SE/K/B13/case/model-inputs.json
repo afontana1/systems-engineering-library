@@ -1,0 +1,37 @@
+{
+  "model_id": "NS-FB13.1",
+  "description": "Synthetic teaching model of fleet/maintenance/service/trust feedback; not calibrated to the eight-quarter observations",
+  "units": {"time": "day", "backlog": "requests", "fleet": "vehicles", "demand": "requests/day", "trust": "index 0..100"},
+  "days": 360,
+  "time_step_days": 0.5,
+  "total_vehicles": 14,
+  "initial_unavailable_vehicles": 1.9,
+  "initial_standard_backlog": 265,
+  "initial_accessible_backlog": 45,
+  "initial_perceived_backlog": 310,
+  "initial_trust_index": 63,
+  "base_requests_per_day": 1260,
+  "accessible_request_fraction": 0.14,
+  "trips_per_active_vehicle_day": 93,
+  "base_breakdown_hazard_per_vehicle_day": 0.00645,
+  "repair_time_days": 24,
+  "repair_capacity_vehicles_per_day": 0.12,
+  "abandon_time_days": 2.6,
+  "perception_time_days": 18,
+  "trust_response_days": 45,
+  "surge_backlog_half_saturation": 380,
+  "surge_breakdown_stress": 1.8,
+  "scenarios": [
+    {"id":"status_quo","surge_max_fraction":0.12,"repair_multiplier":1.0,"accessible_capacity_fraction":0.14},
+    {"id":"surge_only","surge_max_fraction":0.30,"repair_multiplier":1.0,"accessible_capacity_fraction":0.14},
+    {"id":"maintenance_first","surge_max_fraction":0.12,"repair_multiplier":1.65,"accessible_capacity_fraction":0.14},
+    {"id":"access_first","surge_max_fraction":0.12,"repair_multiplier":1.0,"accessible_capacity_fraction":0.22},
+    {"id":"combined","surge_max_fraction":0.12,"repair_multiplier":1.65,"accessible_capacity_fraction":0.22}
+  ],
+  "sensitivity": [
+    {"id":"nominal","demand_multiplier":1.0,"failure_multiplier":1.0},
+    {"id":"low_demand","demand_multiplier":0.92,"failure_multiplier":1.0},
+    {"id":"high_demand","demand_multiplier":1.08,"failure_multiplier":1.0},
+    {"id":"high_failures","demand_multiplier":1.0,"failure_multiplier":1.20}
+  ]
+}

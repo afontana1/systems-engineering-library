@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Chapter 11 — Mission analysis, alternatives, gaps, and interventions · Systems Engineering Library</title><style>
 :root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
-<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
-<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B16/chapters/11.html" data-se-mode="standard"></script>
+<link href="../../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/B16/chapters/11.html" data-se-root="../../../" defer="" src="../../_assets/learning-shell-v55.js"></script>
 </head><body><header><div class="crumb"><a href="../../../../index.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="chapter-11--mission-analysis-alternatives-gaps-and-interventions">Chapter 11 — Mission analysis, alternatives, gaps, and interventions</h1>
 <p><strong>Book 16: Foundations of Digital and Mission Engineering</strong> · Course EN.645.782 · Week 11<br/>
 <strong>Companion to:</strong> <a href="../../../C/P4/EN645782.html">Original weekly course guide</a> · <a href="../labs/11.html">Hypothetical laboratory</a> · <a href="../README.html">Book contents</a></p>
@@ -25,7 +26,6 @@
 <li>Robust recommendations acknowledge tradeoffs, implementation dependencies, residual risk, and conditions that change the decision.</li>
 </ul>
 <p>The statements above originate in the assigned course guide; use them as technical claims to test against a specific scenario, not as terminology to memorize. For each claim, ask what observation could show that it is false or inapplicable in the current design. The same discipline distinguishes an engineering argument from a procedural assertion.</p>
-
 <p>Mission analysis therefore begins with operational scenarios and capability dependencies rather than a catalog of attractive technologies. It identifies bottlenecks, substitute pathways, time-critical interactions, and modes of degraded operation. Alternative architectures can be evaluated through a mixture of operational expertise, models, simulations, and experiments. The important outcome is not a single global efficiency score but an explicit account of <strong>which mission conditions are improved, which are unaffected, and where new vulnerabilities appear</strong>. That account guides investment and further evidence gathering.</p>
 <p>Mission outcomes depend on interactions among assets, organizations, procedures, and adversarial or environmental conditions. Improving an individual platform does not necessarily improve mission effectiveness if another capability becomes the limiting factor. A higher-capacity vehicle may do little for emergency access when dispatch authority or road availability is the binding constraint.</p>
 <h3>Mission engineering evaluates combinations of capabilities</h3><h2 id="v45-b16-c11-graduate-depth-mission-gaps-are-dependencies-not-isolated-shortfalls">Graduate depth: mission gaps are dependencies, not isolated shortfalls</h2>
@@ -38,7 +38,6 @@
 <h3 id="v45-b16-c11-dynamic-dependencies-and-decision-gates">Dynamic dependencies and decision gates</h3>
 <p>Interventions unfold over time. New infrastructure can require staff skills, governance agreements, data standards, and maintenance capacity before its nominal capability exists. A capability roadmap is therefore a dependency network with lead times, maturity thresholds, and failure modes, not merely a list of procurements. Critical-path logic identifies necessary precedence; real-option reasoning identifies where staged investment preserves the ability to change course after learning. A decision gate should specify what evidence is needed to fund, field, expand, or stop each intervention.</p>
 <p>For Northstar, a candidate regional information exchange may improve emergency routing only after agencies agree on data meanings, access policy, fallback procedures, and incident command authority. Its success cannot be inferred from a demonstration that two systems transmit messages in a laboratory. The mission assurance argument must connect interoperability to the operational effect through realistic degraded scenarios. The final recommendation should make assumptions, residual gaps, cross-boundary dependencies, and competing stakeholder outcomes explicit.</p>
-
 <h2 id="worked-northstar-engineering-case">Worked Northstar engineering case</h2>
 <p>Four alternatives are compared: add autonomous vehicles, establish mutual-aid dispatch, install mobile charging, and pre-register mobility-dependent riders with privacy controls. The example shows that the highest-performing technology option under nominal conditions is not the most robust under grid and communications degradation; a combined policy/data-sharing and mutual-aid intervention performs better across scenarios.</p>
 <p>Compare purchasing two vehicles against a mutual-aid agreement plus improved prepositioning. Test whether accessibility, response-time and staffing requirements are satisfied under the same disruption scenarios.</p>
@@ -80,4 +79,49 @@
 <li>DoDI 5000.97 and Digital Engineering Fundamentals: model/data continuity, reuse, credibility, and decision artifacts. ([5], [7])</li>
 </ul>
 <p><strong>Source note:</strong> Reading descriptions and competency claims above refer to the supplied course guide. See the <a href="../../../C/P4/EN645782.html">original guide</a> for full reading citations, graded instructions and rubrics. External references are not reproduced in this package.</p>
-</main></body></html>
+<section class="step03-deeper-reading" id="step03-book16-dme-r1-chapter-11"><h2>Step 03 — NS-DME16.1 integrated digital mission engineering laboratory — Week 11</h2>
+<p><strong>Controlled case:</strong> <a href="../case/INDEX.html">NS-DME16.1 guide</a> · <a href="../tools/step03_book16_mission.py">Python evidence and mission model</a> · <a href="../case/controlled-inputs.json">inputs</a>. This additional teaching section uses synthetic assumptions, not operational qualification.</p>
+<h3>Compare materiel and non-materiel interventions on the same mission measure</h3>
+<p>The mission intervention study evaluates four controlled policies: P0 status quo, P1 add vehicles only, P2 deploy backup power, offline dispatch and mutual-aid procedures, and P3 combine fleet growth with continuity measures. P2 is deliberately a <strong>mixed organizational/technology intervention</strong>. Its performance hypothesis is that preserving capabilities under disruption can matter more than increasing nominal equipment count. The <a href="../case/mission-summary.csv">machine-readable mission summary</a> reproduces these outcomes.</p>
+<table>
+<thead>
+<tr>
+<th>Policy</th>
+<th style="text-align:right">Additional illustrative cost</th>
+<th style="text-align:right">Joint scenario coverage</th>
+<th style="text-align:right">Expected standard served fraction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0 status quo</td>
+<td style="text-align:right">$0</td>
+<td style="text-align:right">0.62</td>
+<td style="text-align:right">0.89804</td>
+</tr>
+<tr>
+<td>P1 fleet only</td>
+<td style="text-align:right">$1.50 million</td>
+<td style="text-align:right">0.62</td>
+<td style="text-align:right">0.94438</td>
+</tr>
+<tr>
+<td>P2 continuity</td>
+<td style="text-align:right">$0.65 million</td>
+<td style="text-align:right">0.80</td>
+<td style="text-align:right">0.95726</td>
+</tr>
+<tr>
+<td>P3 combined</td>
+<td style="text-align:right">$2.15 million</td>
+<td style="text-align:right">0.92</td>
+<td style="text-align:right">0.97684</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Worked marginal benefit.</strong> Moving P0→P2 adds 0.18 modeled scenario coverage for $0.65 million, or 0.2769 units of coverage per $1 million. Moving P2→P3 adds 0.12 for another $1.50 million, or 0.0800 per $1 million. These are <em>educational trade-study slopes</em>, not benefit–cost ratios: the numerator is scenario probability mass from invented weights, while the costs omit operations, capital replacement, implementation delay, safety burden and uncertainty. The ratios cannot be used for procurement authorization.</p>
+<p>All policies fail the illustrative 0.95 scenario-coverage gate. P3 achieves 0.92 because road closure (probability 0.08) still prevents a standard or accessible service floor, even with mutual aid. A decision review should <strong>retain the remaining 8% scenario as an explicit gap</strong> and test interventions such as alternative road networks, additional accessible resource sharing, relocation or prepositioning, rather than declaring a near-pass acceptable.</p>
+<p><strong>Sensitivity experiment.</strong> Reassign 0.03 probability from normal to road closure while keeping the four weights summing to one. P3 coverage changes from \(0.92\) to \(0.89\) because the added probability falls into its only failing scenario. P0 coverage changes from 0.62 to 0.59. This finite-difference derivative, \(\Delta M/\Delta p_{\rm road}=-1\) under paired normal-to-road transfer, holds only while the set of passing scenarios is unchanged. If policy thresholds move, the measure can jump discontinuously; smooth gradient optimization is then misleading.</p>
+<p><strong>Explained exercise.</strong> A portfolio analyst ranks P1 above P2 because P1 serves more accessible trips on normal days. Explain the missing decision rule: compare all groups against mission floors across disruption scenarios, preserve hard safety/accessibility constraints, and separately evaluate cost and risk. P1's improved nominal capacity does not improve joint scenario coverage in this model. The correct next action is a disciplined P2/P3 feasibility and validation study, not immediate adoption of either policy.</p>
+<p><strong>Transfer and uncertainty.</strong> The intervention effects assume additive fractional improvements capped at 1.0. Physical and organizational interventions can interact, fail together, create new hazards, or shift responsibilities. Do not treat the synthetic scenario distribution as representative or the modeled 0.92 as a confidence interval. The technical conclusion is a conditional screen with important unanswered operational questions.</p>
+</section></main></body></html>

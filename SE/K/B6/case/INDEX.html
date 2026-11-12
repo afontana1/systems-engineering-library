@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS-CD6.1 Conceptual Design · Systems Engineering Library</title><link rel="stylesheet" href="../../_assets/learning-shell-v55.css"><style>body{margin:0;background:#f4f7f8;color:#183645;font:16px/1.7 system-ui,sans-serif}header{padding:16px max(18px,calc((100vw - 1000px)/2));background:#173f52}header a{color:#c6f5ee}main{max-width:1000px;margin:24px auto;padding:clamp(18px,4vw,40px);border:1px solid #d6e3e5;border-radius:12px;background:white}a{color:#0b6b70}h1{line-height:1.2}h2{margin-top:1.8rem}p,li{max-width:100ch}table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}td,th{padding:9px;border:1px solid #dae3e6;vertical-align:top}th{background:#edf5f4}code{overflow-wrap:anywhere}pre{overflow:auto;padding:12px;background:#ecf3f5}img{max-width:100%;height:auto}@media(max-width:700px){main{margin:0;padding:18px;border:0;border-radius:0}}</style><script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B6/case/INDEX.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script></head><body><header><a href="../README.html">← Book 6</a> · <a href="../OPEN-BOOK.html">Open textbook</a></header><main><h1>NS-CD6.1 — System Conceptual Design case</h1>
+<p><strong>Synthetic teaching material.</strong> This is a new conceptual-design baseline, not the deployment configuration of Books 1–5. Never present any modeled value as an observed mobility-service outcome.</p>
+<h2>Study the controlled artifacts</h2>
+<ul>
+<li><a href="concepts.csv">Concept and decision inputs</a> and <a href="model-baseline.json">machine-readable assumptions</a>.</li>
+<li><a href="requirements.csv">Requirements and verification plans</a>, <a href="functions.csv">functional model</a>, and <a href="evidence-register.csv">evidence register</a>.</li>
+<li><a href="architecture.dot">Editable architecture diagram</a> and <a href="architecture.svg">accessible diagram</a>.</li>
+<li><a href="doe-synthetic.csv">Synthetic 2×2 experiment</a>; these are hypothetical simulator outputs, <em>not</em> independent field samples.</li>
+<li><a href="../tools/step03_book6_concept_check.py">Reproducible concept auditor</a> using Python's standard library.</li>
+</ul>
+<h2>Decision problem and constraints</h2>
+<p>A campus mobility service must accommodate an assumed 42-trip/hour event surge with a <strong>10% reserve</strong>, a <em>modeled</em> 90th-percentile pickup wait no greater than 12 minutes, accessibility-offer coverage of at least 95%, capital estimate no greater than $3.0 million, and annual operating estimate no greater than $1.2 million. The scope is 250 service days at 8 hours/day. All numbers are invented for teaching.</p>
+<p>Four <strong>different concept families</strong> are considered: (A) a scheduled fixed loop, (B) pooled on-demand vehicles, (C) a hybrid trunk-and-feeder design, and (D) brokered partner service. Do not equate low capital cost with feasible operations or apply value weights to infeasible concepts.</p>
+<p>Required peak capacity with reserve is</p>
+<p>\[C_{\min}=42(1+0.10)=46.2\ \mathrm{trips/h}.\]</p>
+<p>At the declared utilization assumptions, A produces 53.33 trips/h, B 47.60, C 52.80, and D 45.00. A fails coverage; D fails reserve capacity, wait, and annual operating cost. B and C satisfy the <strong>point-estimate</strong> screens. The weighted illustrative value scores are 0.6847 (B) and 0.7320 (C). C is <strong>recommended for a controlled pilot only</strong>, not cleared for field deployment or production procurement.</p>
+<h2>Why the decision remains conditional</h2>
+<p>For C, a 10% throughput loss leaves 47.52 trips/h, above the 46.2 trips/h nominal-reserve threshold, while a 15% loss leaves 44.88 trips/h below threshold. Its nominal interface chain totals 420 ms under a 500 ms analytic budget, but a degraded case totals 560 ms. A current pilot p90 wait observation is absent; accessibility coverage has not been independently tested; the booking fallback has not been tested; and one configuration evidence record belongs to the previous baseline.</p>
+<p><strong>Evidence gate:</strong> selection for a pilot is not readiness for an operational release. In particular, nominal cost and capacity estimates alone do not verify the requirements.</p>
+<h2>Mathematics to reproduce</h2>
+<p>For a five-year constant-dollar cost model with end-of-year OPEX and 5% discount rate,</p>
+<p>\[PV_5=\sum_{t=1}^{5}(1.05)^{-t} \approx 4.32948;\qquad LCC_C=2.25+0.98PV_5\approx 6.493\ \mathrm{million\ USD}.\]</p>
+<p>For wait, accessibility, and operating-cost partial values, respectively, use anchored linear scales over 8–14 minutes, 90–100%, and $0.8–1.3M/year. With weights 0.40/0.30/0.30 the higher feasible value is C. If the wait weight varies while the other two share the remainder equally, B first overtakes C at approximately 0.5327. This weight sensitivity is not a probability of success.</p>
+<p>The 2×2 synthetic experiment shows a -3.1 minute <em>mean main effect</em> for the higher policy setting, a -1.5 minute main effect for reserve capacity, and a -0.6 minute difference-of-differences interaction. No empirical significance should be claimed from manufactured replicate data.</p>
+<h2>Investigations</h2>
+<ol>
+<li>Explain the bias introduced by interviewing only riders who already use the shuttle.</li>
+<li>Recompute capacity after a 15% utilization reduction, and draft the pilot observation needed to replace the utilization assumption.</li>
+<li>Determine the switching wait weight, then discuss whether the value anchors make sense for an accessibility-focused population.</li>
+<li>Distinguish an insufficient degraded timing result from a proof that the hybrid concept can never meet the requirement.</li>
+<li>Prepare a concept handoff record separating immutable constraints from unresolved assumptions and experiment conditions.</li>
+</ol>
+<h2>Reference standards and method sources</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/4-0-system-design-processes/">NASA Systems Engineering Handbook, system design processes</a> — stakeholder expectations, concept alternatives, requirements, iterative design and validation.</li>
+<li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA Systems Engineering Handbook, trade-study glossary</a> — transparent criteria, assumptions, data and sensitivity.</li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/">NIST/SEMATECH Engineering Statistics Handbook</a> — experimental design and interpretation. Source links guide deeper review; the local explanation is the primary instructional content.</li>
+</ul>
+</main></body></html>

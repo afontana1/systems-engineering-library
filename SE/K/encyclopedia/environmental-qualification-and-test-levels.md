@@ -29,6 +29,16 @@ Environmental margins must be tied to a defined reference level and failure crit
 - **E1 · Environmental testing guidance for NASA GSFC programs, not universal qualification limits.:** [NASA GSFC-STD-7000B, General Environmental Verification Standard (GEVS)](https://standards.nasa.gov/node/791). Environmental testing guidance for NASA GSFC programs, not universal qualification limits.
 - **E2 · Verification activity planning, traceability and acceptance.:** [NASA Systems Engineering Handbook, Verification and Validation](https://www.nasa.gov/reference/5-0-product-realization/). Verification activity planning, traceability and acceptance.
 
+## Step 02 deeper treatment: environmental envelope versus qualification claim
+
+An environmental test is meaningful only relative to its **declared exposure envelope**: operating and nonoperating temperatures, gradients, humidity, altitude, vibration spectrum, shock, duration, duty cycle, mounting and failure mechanisms. A successful high-temperature chamber test under an unrepresentative fixture does not show that every integrated-system hot spot meets its limit. Qualification, acceptance screening, development testing and accelerated aging answer different questions; do not substitute one label for another.
+
+**Worked thermal-budget check.** A hypothetical enclosure dissipates a steady \(P=18\,\mathrm W\). In a single-node linear thermal approximation with resistance \(R_\theta=1.5\,\mathrm{K/W}\), equilibrium rise is \(\Delta T=PR_\theta=27\,\mathrm K\). At an assumed 35 °C ambient, predicted component temperature is 62 °C. If a design limit is 60 °C, the model predicts an exceedance of 2 °C. This is a preliminary deterministic screening result, not a measured qualification result: transient response, airflow, radiation, mounting, spatial gradients, tolerances and dissipation variation are absent.
+
+An adequate test plan states article configuration, instrument calibration, locations, stabilization criterion, dwell time, power modes, pass/fail observables, anomaly handling and post-test inspections. For accelerated tests, state the physical degradation law and the temperature or stress range in which it is credible; extrapolating a high-temperature failure rate without a validated acceleration mechanism can be badly misleading.
+
+For a change from enclosure version B2 to B3, trace which heat paths and environmental tests remain applicable. Link the test evidence to [parametric models](parametric-models-and-units.md), [test similarity and fidelity](test-fidelity-and-similarity.md), and [design-risk retirement](design-risk-retirement.md).
+
 ## Follow the knowledge
 
 - **Prerequisites:** [Verification, validation, and acceptance: the three different decisions](v-and-v.md), [System safety engineering: hazards, controls, and residual risk](system-safety-and-hazards.md).

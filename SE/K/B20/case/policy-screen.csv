@@ -1,0 +1,5 @@
+policy,additional_cost_m,hypothetical_weighted_screen_coverage,status,nominal_accessible_fraction,nominal_standard_fraction
+status_quo,0.0,0,HOLD — approvals absent,0.9137380191693291,0.985939497230507
+routing_only,0.45,0,HOLD — approvals absent,0.8716956802063185,1.0
+co_design,0.7,0.35,HOLD — approvals absent,1.0,0.9766009852216748
+adaptive_guardrails,1.25,0.35,HOLD — approvals absent,1.0,1.0

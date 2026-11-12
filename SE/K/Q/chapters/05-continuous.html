@@ -43,4 +43,39 @@
 <p><a href="../labs/05-continuous.html">Open the lab for this chapter</a> · <a href="../labs/05-continuous.md">Download editable Markdown lab</a> · <a download href="../notebooks/05-continuous.ipynb">Open the associated notebook</a> · <a download href="../code/engineering_math.py">Download the calculation source</a></p>
 <p><strong>Authoritative follow-up reading:</strong> <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a>, <a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook</a>, and <a href="https://www.incose.org/resources-publications/technical-publications/systems-engineering-body-of-knowledge/">Systems Engineering Body of Knowledge</a>. These are independent references, not endorsements of the fictional cases.</p>
 <p><a href="../INDEX.html">Return to the quantitative textbook collection</a></p>
+
+<!-- STEP04-QUANTITATIVE-START -->
+<section class="qse-integrated" aria-label="Integrated quantitative methods case">
+<h2>Step 04 integrated case — a thermal balance and a falsifiable solver check</h2>
+<p>The queue model is discrete-event; the <strong>same emergency-dispatch exercise</strong> also requires a continuous battery thermal estimate. NS-QSE4.1 intentionally uses a single lumped state to teach a conservation law and numerical verification. It does <strong>not</strong> claim that the battery is spatially uniform, that its coolant loop has been validated, or that the model predicts a vehicle's safe operating envelope.</p>
+<h3>Derive a first-order thermal state model</h3>
+<p>Let \(T\) be pack temperature in degrees Celsius; \(T_a=36\ ^\circ\mathrm C\) ambient temperature; \(a=0.4\ \mathrm h^{-1}\) the lumped thermal conductance divided by effective heat capacity; \(q=4\ ^\circ\mathrm C/\mathrm h\) the heat input divided by heat capacity; and \(u=1.5\ ^\circ\mathrm C/\mathrm h\) a constant cooling extraction, also normalized by capacity. The modeled energy balance is</p>
+<p>\[
+\frac{dT}{dt}=a(T_a-T)+q-u,
+\qquad T(0)=32\ ^\circ\mathrm C.
+\]</p>
+<p>All terms have units of degrees Celsius per hour. This is an affine first-order differential equation, not a thermodynamic assertion that heat itself has temperature units. Starting from the physical balance \(C\,dT/dt=UA(T_a-T)+Q_{\rm heat}-Q_{\rm cooling}\), the normalization defines \(a=UA/C\), \(q=Q_{\rm heat}/C\) and \(u=Q_{\rm cooling}/C\). It neglects temperature dependence and dynamics in the cooling actuator. The equilibrium is \(T_\infty=T_a+(q-u)/a=42.25\ ^\circ\mathrm C\). Separation or the integrating factor gives</p>
+<p>\[
+T(t)=T_\infty+(T_0-T_\infty)e^{-at}.
+\]</p>
+<p>At two hours the exact answer is approximately <strong>37.6444°C</strong>; with cooling removed it becomes approximately <strong>39.7094°C</strong>. Neither temperature establishes battery safety without appropriate thresholds and physical validation.</p>
+<h3>Numerical method and observed discretization error</h3>
+<p>Forward Euler approximates the derivative by \([T_{k+1}-T_k]/h\), giving \(T_{k+1}=T_k+h[a(T_a-T_k)+q-u]\). With \(h=1\) hour (two steps), the result is <strong>38.5600°C</strong>, about <strong>0.9156°C</strong> above the exact solution. With \(h=0.25\) hour (eight steps), the result is <strong>37.8377°C</strong>, about <strong>0.1933°C</strong> high. Reducing the step improves this case's error, but accuracy is not guaranteed merely by choosing a smaller number; a solution can remain wrong if physics or units are wrong. For the homogeneous decay, Euler's amplification factor is \(1-ah\), so explicit stability requires \(|1-ah|&lt;1\), or \(0&lt;ah&lt;2\), while monotone decay requires the stronger \(0&lt;ah\le1\).</p>
+<p>The exact solution acts as a <strong>code-verification benchmark</strong> because it checks the implemented time integrator against an analytic solution to the <em>same equations</em>. It cannot validate the assumed \(a,q,u\) or the lumped thermal structure. External thermocouple readings, calibration records, power and coolant-flow measurements, and uncertainty propagation would be required for validation.</p>
+<h3>Coupled engineering implication</h3>
+<p>Higher intake demand may increase traction and HVAC load, potentially raising \(q\), while grid disruption may reduce cooling effectiveness \(u\). That creates a physical dependence with the queue's compound scenario. This release does not compute such a joint physical coupling: it treats the thermal exercise as a companion model. Never interpret the two numerical reports as if they came from a coupled validated digital twin.</p>
+<details><summary>Worked exercises and interpretation</summary>
+
+<ol>
+<li><strong>Initial slope.</strong> \(dT/dt\vert_{t=0}=0.4(36-32)+4-1.5=4.1\ ^\circ\mathrm C/\mathrm h\). Thus the first Euler step with \(h=1\) produces 36.1°C; the next produces 38.56°C.</li>
+<li><strong>Uncooled equilibrium.</strong> For \(u=0\), \(T_\infty=36+4/0.4=46\ ^\circ\mathrm C\). The two-hour transient is below the equilibrium because the initial temperature was lower.</li>
+<li><strong>Numerical failure.</strong> For \(h=6\) h, \(|1-0.4(6)|=1.4&gt;1\): Euler errors grow from one homogeneous step to the next. The case runner rejects step sizes that do not divide the stated two-hour horizon; analyze this long-step limit algebraically rather than pretending it is a supported two-hour experiment.</li>
+</ol>
+</details>
+
+<p>The exact and Euler outputs are stored together in the controlled JSON report so a future edit that changes the time or units must also change the verification expectation.</p>
+
+</section>
+<style>@media(max-width:700px){article{max-width:100%;overflow-x:auto}article :is(p,li):has(mjx-container){max-width:100%;overflow-x:auto}}</style>
+<!-- STEP04-QUANTITATIVE-END -->
 </article></main></body></html>

@@ -77,3 +77,40 @@ The final check is whether the model can answer a consequential question and rev
 ## Continuity
 
 This chapter builds from [previous chapter](02-modeling-plan-methodology-language-tool-and-r.md) and leads toward [next chapter](04-requirements-modeling-relationship-semantics-.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-631-w03.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: requirements arise from situated operations
+
+### Distinguish a concern, a need, and an imposed technical claim
+
+A stakeholder concern is a question or interest, such as “Can riders trust a dispatch when the network is intermittent?” A need is a desired capability in an operational context. A technical requirement is a controlled claim about system behavior or performance with a scope and a method of verification. The three cannot be treated as synonyms. In the Northstar model, `NEED-03` groups the concern about timely and understandable decisions. It gives rise to `REQ-03` (position age at most 200 ms) and `REQ-04` (nominal command processing at most 400 ms). Those thresholds are **fictional design assumptions**, not values proven sufficient for safety.
+
+The system context includes riders, dispatch operators, vehicles, a telemetry provider, route-planning logic, and the safety interlock. A context boundary answers *who exchanges what with the system*, not *how the system is internally decomposed*. Operational scenarios make that boundary testable. A nominal scenario begins with a rider request and ends with a confirmed, authorized departure. A degraded scenario adds delayed telemetry and retries. An exception scenario introduces a duplicate departure token. Omitting exceptions biases the model toward perfect-day behavior.
+
+### Write a scenario as a trace of events
+
+| Step | Actor or system | Event | Observable result |
+|---|---|---|---|
+| 1 | Rider | Requests a trip | Unique request ID recorded |
+| 2 | Planner | Selects vehicle | Candidate assignment and status available |
+| 3 | Telemetry | Reports position | Timestamp and age checked |
+| 4 | Gate | Validates authorization | Allow or deny decision logged |
+| 5 | Dispatcher | Issues tokenized command | One accepted token per departure |
+| 6 | Rider/operator | Receives status | Outcome and reason observable |
+
+One operational thread can have multiple views: a context view identifies external interactions, an activity view orders activities, a sequence view describes messages, and a state view constrains legal transitions. A view is incomplete if it hides a condition necessary to interpret its events; this is why context and viewpoint metadata belong in the model.
+
+### Connect service demand to the architecture choice
+
+The fictional peak need is eight trips per hour. With constant ideal capacity \(r=3\) trips/vehicle/hour, a necessary fleet bound is
+
+\[
+n \ge \left\lceil\frac{8}{3}\right\rceil=3.
+\]
+
+This calculation constrains candidate designs, but does **not** prove an eight-trip realized throughput: charging, traffic, staffing, dwell-time variation, and disruptions reduce effective capacity. The outcome required of a later simulation or field trial is a measured distribution of successful trips under a defined operational scenario, not merely a multiplication of advertised vehicle ratings.
+
+### Practice with answer
+
+**Exercise.** A product owner asks, “Make the shuttle responsive.” Convert this into a model-ready concern, one need, one possible requirement, and a falsifying scenario. **Answer:** Concern: riders need timely confirmations. Need: an understandable dispatch outcome during intermittent connectivity. Illustrative requirement: in nominal operation, `REQ-04`, measured command processing at most 400 ms under a declared event workload. Falsifying scenario: telemetry or acknowledgement is delayed until the decision uses stale position information. The 400-ms target must be justified by operational analysis before it is accepted as adequate.
+
+The [case baseline](../case/INDEX.html) gives stable identities for these statements; [Chapter 4](04-requirements-modeling-relationship-semantics-.md) explains how to maintain their trace semantics.

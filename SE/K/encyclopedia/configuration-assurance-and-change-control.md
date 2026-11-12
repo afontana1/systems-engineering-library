@@ -35,6 +35,19 @@ Watch for unreviewed supplier substitutions, undocumented firmware patches, stal
 - **C1 · Identification, control, status accounting and audits of baselines.:** [NASA Systems Engineering Handbook, 6.5 Configuration Management](https://www.nasa.gov/reference/6-5-configuration-management/). Identification, control, status accounting and audits of baselines.
 - **C2 · Configuration integrity and recorded changes:** [NASA NPR 7123.1 Systems Engineering Procedural Requirements, configuration management process](https://nodis3.gsfc.nasa.gov/displayAll.cfm?Internal_ID=N_PR_7123_0001_&page_name=ALL). Configuration integrity and recorded changes; not the illustrative graph metrics.
 
+## Phase 4 technical reading: Evidence expires when assumptions or configurations change
+
+A test result applies to a specific configuration, method and operating envelope. For the synthetic campus shuttle, CM-B2 build controller-2.4.1 has two declared passing observations. Changing only the release record to CM-B3 build controller-2.4.2 leaves all links intact but makes both observations stale. A simple [executable audit](../methods/model-baselines-and-evidence.md) detects the four label mismatches. Other changes, such as sensor age limits or field load, can invalidate evidence without any build string changing; those require engineering impact analysis, not merely a text comparison. [Follow the longitudinal case](../methods/campus-mobility-engineering-case.md) from stakeholder need through safety disposition.
+
+
+## Step 02 review exercise: a passed test is not configuration-independent
+
+Assume a requirement R-17 is verified by test T-21 against software **S2**, firmware **F4** and a calibrated sensor with serial **C19**. A later release updates software to **S3** and changes retry timing. A file named `test-pass.csv` is not adequate proof for S3. The evidence claim should include a tuple \(E=(R,T,S,F,C,\text{environment},\text{date},\text{results})\). Compare its declared tuple to the proposed release configuration, identify what design behavior changed, and classify the evidence as directly applicable, reusable with a justified equivalence argument, or stale pending retest.
+
+For a synthetic example, requirements R-17 and R-18 both depend on dispatch timing; R-19 covers a mechanically independent bracket. A change to retries affects R-17 and R-18 through behavior/interface links; R-19 might remain unaffected if a documented dependency analysis supports it. Running every test is sometimes wasteful, while blindly reusing every pass is unsafe. Preserve a controlled change record that explains affected paths, test selection and approval authority.
+
+**Exercise (answer).** If the sensor C19 calibration expired before T-21, even the original S2 result may be unsuitable for the stated measurement-accuracy claim. The correct response is to investigate calibration applicability and uncertainty, not to relabel the result as accepted by changing the filename.
+
 ## Follow the knowledge
 
 - **Prerequisites:** [Work breakdown structures and technical baselines](wbs-and-baselines.md), [Requirements traceability: a typed graph of engineering claims](traceability-graph.md).

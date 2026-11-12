@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>CI/CD, configuration, and software assurance · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>CI/CD, configuration, and software assurance · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
 <link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
 <script data-se-mode="standard" data-se-page="K/encyclopedia/software-lifecycle-evidence.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
 </head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>CI/CD, configuration, and software assurance</h1>
@@ -32,7 +32,19 @@
 <li><a href="https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final">NIST · SP 800-160 Vol. 1 Rev. 1, Engineering Trustworthy Secure Systems (2022)</a> — System-level security and trustworthiness engineering.</li>
 <li><a href="https://www.nasa.gov/reference/2-4-distinctions-between-product-verification-and-product-validation/">NASA · Distinctions between product verification and validation</a> — Separate conformity to specifications from fitness for intended use.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section class="phase3-expansion" id="phase3-method-reading">
+<h2>Phase 3 technical reference: From a design rule to independent delivery evidence</h2>
+<p>“No two active reservations share a worker” is a testable engineering claim. A useful evidence chain includes a named invariant, an implementation mechanism such as an atomic unique allocation, a negative test fixture, a concurrency test, and recorded software/configuration revisions. A passing Python audit of one snapshot proves only that the <strong>represented state</strong> satisfied those rules at that instant; it does not establish race freedom, event-order correctness or fault recovery. See <a href="../methods/uml-ocl-software-contracts.html">the OCL and executable-contract example</a> for deliberately broken data and the distinction between logical policy and deployed enforcement.</p>
+</section>
+<section class="phase5-expansion">
+<h2>Phase 5 technical reading: Turn software contracts into failure-aware tests</h2>
+<p>A static UML/OCL-style uniqueness rule is only a specification unless the deployment enforces it under the intended concurrency and persistence conditions. In a two-client interleaving both clients observe an unallocated worker; without atomic enforcement both can insert active reservations. With a partial unique index one insert is rejected, though retry, acknowledgement loss and remote side effects still require explicit design. The <a href="../methods/transactional-concurrency-and-assurance.html">concurrency and assurance guide</a> provides executable contradictory and corrected cases plus a test matrix for idempotency, failure recovery and versioned evidence.</p>
+</section>
+<section id="step03-concept-study"><h2>Step 02 review studio — a passing pipeline with stale evidence</h2>
+<p>Continuous integration certifies that a particular pipeline ran a particular set of checks against a particular artifact. It does not automatically establish that requirements were appropriate, the software is safe, or tests represented the target deployment. An evidence chain should identify source revision, dependency versions, build configuration, test data, environment, approval, and deployed artifact digest.</p>
+<p><strong>Solved exercise:</strong> the build for NS-B2 passes 1,000 unit tests, but the interface contract test suite ran only on NS-B1. Can the team claim interface conformance for NS-B2? <strong>No.</strong> The test results are tied to an older configuration. A documented equivalence argument may justify reuse if the changed elements are demonstrably irrelevant, but the passing unit-test count does not resolve applicability by itself.</p>
+<p><strong>Design response:</strong> gate a release on versioned contract tests, configuration-specific verification, SBOM/dependency checks where relevant, and independent review for high-consequence behavior. Deployment and rollback mechanisms also require testing: “can roll back” is not a guarantee that state migrations are reversible. Preserve negative findings and exceptions instead of rewriting a clean report after a failure.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="traceability-graph.html">Requirements traceability: a typed graph of engineering claims</a></li>

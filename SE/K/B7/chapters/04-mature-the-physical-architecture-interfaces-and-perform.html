@@ -2,8 +2,8 @@
 
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Chapter 4 — Physical architecture and contracts · Systems Engineering Library</title><style>
 :root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
-<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
-<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B7/chapters/04-mature-the-physical-architecture-interfaces-and-perform.html" data-se-mode="standard"></script>
+<link href="../../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/B7/chapters/04-mature-the-physical-architecture-interfaces-and-perform.html" data-se-root="../../../" defer="" src="../../_assets/learning-shell-v55.js"></script>
 </head><body><header><div class="crumb"><a href="../../../../index.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="chapter-4--physical-architecture-and-contracts">Chapter 4 — Physical architecture and contracts</h1>
 <p><em>Book 7: System Design and Integration · Week 4 — Mature the physical architecture, interfaces, and performance budgets</em></p>
 <blockquote>
@@ -59,7 +59,6 @@ T_{\mathrm{end}}\leq T_{\mathrm{network}}+T_{\mathrm{queue}}+T_{\mathrm{compute}
 <h3>Integration sequence as an experiment in uncertainty</h3>
 <p>Teams often integrate components in supplier-delivery order. That is administratively convenient but epistemically weak: it delays discovering the interactions most likely to invalidate the architecture. A better order identifies high-consequence interface assumptions, then creates the least expensive representative test capable of challenging each one. Test the booking-to-vehicle acknowledgment protocol with simulated packet loss before the entire fleet is purchased. Test accessibility handoffs with representative users and realistic constraints before declaring the human interface complete. Test shutdown behavior with controlled fault injection before a field emergency supplies the first real trial.</p>
 <p>This does not mean end-to-end integration can be replaced by interface stubs. A mocked service can verify a contract while failing to capture queue coupling or timing. Confidence grows through layers: analytical compatibility, contract tests, hardware/software integration and representative operational scenarios. Each layer supports a bounded claim about a particular configuration and environment. Good design maturity is the narrowing of important uncertainty, not the accumulation of completed checkboxes.</p>
-
 <h2 id="worked-engineering-case">Worked engineering case</h2>
 <p>A position feed expresses latitude/longitude but leaves coordinate reference, accuracy, timestamp source, heartbeat and stale threshold undefined. Two compliant-looking components may disagree on whether a 40-second-old report is usable.</p>
 <p><strong>Reason through the case in this order:</strong></p>
@@ -87,4 +86,51 @@ T_{\mathrm{end}}\leq T_{\mathrm{network}}+T_{\mathrm{queue}}+T_{\mathrm{compute}
 <p>&lt;/details&gt;</p>
 <h2 id="practice-before-the-assessed-course-work">Practice before the assessed course work</h2>
 <p><a href="../labs/lab-04-mature-the-physical-architecture-interfaces-and-perform.html">Hypothetical Laboratory 4: Physical architecture and contracts</a> provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 4 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.</p>
-</main></body></html>
+<section class="step03-deeper-reading" id="step03-book7-integrated-r1"><h2>Step 03 integrated technical reference: NS-DI7.1 — physical architecture and margin accounting</h2>
+<h3>From a five-stage path to a design alternative</h3>
+<p>Physical design couples computing hardware, software scheduling, transport and vehicle actuation. The initial degraded command model consumes 490 of an allowed 500 ms. An absolute ten-millisecond allowance is <strong>2% of the deadline</strong>, not the required 10% design reserve. The design review compares two changes: a faster gateway saves 15 ms and parallelized dispatch computation saves 35 ms. Under the stated additive model, the alternatives are:</p>
+<table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th style="text-align:right">Degraded model (ms)</th>
+<th style="text-align:right">Margin to 500 ms</th>
+<th>At least 50 ms reserve?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Original</td>
+<td style="text-align:right">490</td>
+<td style="text-align:right">10</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Faster gateway only</td>
+<td style="text-align:right">475</td>
+<td style="text-align:right">25</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Parallel dispatch only</td>
+<td style="text-align:right">455</td>
+<td style="text-align:right">45</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Both changes</td>
+<td style="text-align:right">440</td>
+<td style="text-align:right">60</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>A more detailed implementation could introduce overhead, synchronization and correlated delay that negate an assumed saving. Thus the combined redesign is a candidate to prototype, <strong>not</strong> evidence that a percentile deadline has been met. The earlier <a href="../case/doe-synthetic.csv">synthetic factorial experiment</a> provides a separate measurement illustration; the results should not be substituted for a production timing test.</p>
+<h3>Coupled energy and reliability budgets</h3>
+<p>The energy model sums 22.4 kWh traction, 2.1 kWh heating and 1.8 kWh communications to obtain 26.3 kWh. Its remaining allowance is 3.7 kWh against a 30-kWh per-shift budget. Extra compute work must be allocated against that allowance as well as the latency reserve. The power, timing and thermal owners should all sign off on a gateway change; otherwise apparent timing progress can conceal a higher-level budget violation.</p>
+<p>Margins should be declared consistently: \(M_{\rm abs}=L-\hat x\), while \(M_{\rm fraction}=(L-\hat x)/L\) for an upper-bound limit \(L\). Do not express a 60-ms allowance as a measured reliability or claim safety merely because an arithmetic margin is positive.</p>
+<p><strong>Exercise.</strong> A safety-security review adds 18 ms of validation to the combined design. Decide whether the result passes the deadline and reserve policies.</p>
+<details><summary>Worked resolution</summary>
+<p>The model becomes 458 ms. It passes the 500-ms absolute deadline by 42 ms but fails the separate 50-ms minimum reserve. Either recover at least 8 ms elsewhere, change the controlled reserve rule with authority, or record the nonconformance for review. No measured p99 result is implied.</p>
+</details>
+</section></main></body></html>

@@ -77,3 +77,28 @@ In [Lab 2: Traceability connects implementation to justified choices](../labs/la
 ## Continuity
 
 This chapter builds from [previous chapter](01-define-the-software-systems-engineering-role-.md) and leads toward [next chapter](03-interpret-and-critique-the-system-model-for-s.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-764-w02.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+
+## Step 03 integrated reference: allocation, interfaces and versioned traceability
+
+### Trace a requirement through a specific interface
+
+Consider **SWS-03**, which prohibits overlapping accepted reservations for the same vehicle and slot. Its responsible element is `allocation-store`. The [IF-02 contract](../case/interfaces.csv) specifies `CommitAssignment`, a 160 ms timeout, and *reconciliation by token* after an uncertain acknowledgment. This matters because a client-side timeout does **not** mean the transaction failed. The server may have committed and lost the reply. Retrying a new reservation blindly can create a conflicting claim even when the underlying database is healthy.
+
+A defensible allocation trace runs from the stakeholder's no-double-booking need to SWS-03, to the allocation-store owner, to IF-02, to the atomic uniqueness invariant, to transaction tests, and finally to evidence bound to a particular revision. An interface ID is not enough; the trace also needs the *reason* the transaction property is necessary. A diagram that draws an arrow from API to database does not express commitment or exactly-once semantics.
+
+### Prove the budget is explicit
+
+The reservation path contains an illustrative fixed contribution of 70 ms network, 45 ms authentication, and 55 ms commit: a total of 170 ms **before** the variable dispatch wait. If the end-to-end requirement is 500 ms, the variable part has at most 330 ms in the nominal decomposition:
+
+\[B_{\mathrm{variable}}=500-(70+45+55)=330\text{ ms}.\]
+
+A component owner cannot promise “fast enough” independently; budget assumptions must be consistent across the trace. Moreover, simply summing reported per-stage 95th percentiles is generally invalid because stages can be correlated. We use fixed amounts here specifically to expose the mechanism; the real test must measure *end-to-end* requests at a declared load.
+
+### Version edges, not just nodes
+
+Evidence `BLD-50` in [the model baseline](../case/model-baseline.json) is marked `PASS`, yet refers to NS-SW5.0. The software under consideration is NS-SW5.1. Evidence currency depends on the identity of the tested artifact, relevant environment and the change-impact argument. Merely changing the label on a spreadsheet would be invalid. In a controlled digital thread, a revision produces an impact set: changed contracts, affected components, tests to repeat, and claims whose evidence no longer applies.
+
+**Exercise.** A developer increases the IF-02 timeout from 160 to 240 ms but leaves the user-visible 500 ms requirement unchanged. How should reviewers respond? **Answer.** Reconsider the path budget and retry behavior. The proposed change could consume 80 ms of margin and prolong uncertainty after partial failure; it is not an isolated configuration tweak. Re-run integration, timeout, duplicate-attempt and tail-latency tests.
+
+**Reference records:** [Requirements](../case/requirements.csv), [interfaces](../case/interfaces.csv), and [evidence](../case/evidence-register.csv).

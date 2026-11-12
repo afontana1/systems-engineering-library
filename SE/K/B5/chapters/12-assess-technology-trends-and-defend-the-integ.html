@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Chapter 12 — The final baseline is a reasoned technical argument · Systems Engineering Library</title><style>
 :root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
-<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
-<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B5/chapters/12-assess-technology-trends-and-defend-the-integ.html" data-se-mode="standard"></script>
+<link href="../../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/B5/chapters/12-assess-technology-trends-and-defend-the-integ.html" data-se-root="../../../" defer="" src="../../_assets/learning-shell-v55.js"></script>
 </head><body><header><div class="crumb"><a href="../../../../index.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="chapter-12--the-final-baseline-is-a-reasoned-technical-argument">Chapter 12 — The final baseline is a reasoned technical argument</h1>
 <p><em>Book V: Software Systems Engineering · Week 12 — Assess technology trends and defend the integrated software baseline</em></p>
 <p><strong>Reading contract:</strong> Work through the explanations, attempt the questions without looking at the answers, and complete <a href="../labs/lab-12-assess-technology-trends-and-defend-the-integ.html">Hypothetical Lab 12</a> before attempting <a href="../../../C/P1/EN645764.html">the assessed Week 12 coursework</a>. For a shorter overview use the <a href="../../P1-text/lessons/645-764-w12.html">earlier Phase 1 primer</a>.</p>
@@ -31,7 +32,6 @@
 <h3 id="depth-v46-b5-12-preserve-proof-obligations-through-upgrades">Preserve proof obligations through upgrades</h3>
 <p>A technology migration should identify the claims it threatens, the old and new configurations, and the evidence needed to reestablish confidence. For a new sensor-fusion component, that might include data schema compatibility, closed-loop timing tests, fault-injection behavior, and a rollback strategy. A test passed on a simulation build is not automatically evidence for the deployed binary. Reproducible builds, dependency inventories, signed artifacts, and test-to-build provenance make the argument inspectable.</p>
 <p>The design-review question is therefore <em>which properties must remain true as technology changes, and how will we know?</em> Record the invariants, change triggers, evidence owners, and operational constraints. For Northstar, adoption of a fashionable autonomy model is not justified until its failure behavior, observability, lifecycle support, and integration cost are credibly compared with the established baseline. Engineering maturity is the capacity to change without losing the reasons a system was trusted.</p>
-
 <h2 id="what-can-go-wrongand-why">What can go wrong—and why</h2>
 <p>Technology trend assessments should include opportunity cost, migration risk and the evidence that would cause a recommendation to change.</p>
 <p>Test the proposed design against a counterexample. If the representation cannot express what happens when a message is duplicated, a dependency fails, a configuration changes or a stakeholder rejects an assumption, it may be too weak for the decision. Some omissions are deliberate and acceptable; the engineering obligation is to name their scope and make the next necessary evidence request explicit.</p>
@@ -43,4 +43,55 @@
 <p>In <a href="../labs/lab-12-assess-technology-trends-and-defend-the-integ.html">Lab 12: The final baseline is a reasoned technical argument</a>, you will: Defend an integrated software release packet, respond to one adversarial change request and issue a conditional go/no-go recommendation. The lab provides practice rather than a ready-to-submit answer. When you can explain your method, alternative, limits and evidence, return to the real course's Week 12 deliverable and grading rubric.</p>
 <h2 id="continuity">Continuity</h2>
 <p>This chapter builds from <a href="11-manage-delivery-operations-maintenance-evolut.html">previous chapter</a> and leads toward your final course defense. Revisit the corresponding <a href="../../P1-text/lessons/645-764-w12.html">weekly primer</a> only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.</p>
-</main></body></html>
+<section class="step03-deeper-reading" id="step03-book5-integrated-r1"><h2>Step 03 integrated reference: the release decision as a structured engineering argument</h2>
+<h3>Combine claims instead of averaging them</h3>
+<p>Book 5 concludes with the NS-SW5.1 release board. A successful model calculation is relevant, but the board must consider every mandatory obligation. The candidate service rate of 20 requests/s yields a <em>model-only</em> peak p95 proxy of <strong>469.57 ms</strong> against a 500 ms boundary. That result supports further testing, not production acceptance. The register simultaneously shows a availability-risk warning, stale build provenance and an unexecuted recovery drill. These are independent blockers, not low-scoring features that can be outweighed by performance.</p>
+<table>
+<thead>
+<tr>
+<th>Decision dimension</th>
+<th>Synthetic evidence</th>
+<th>Engineering conclusion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Peak performance</td>
+<td>Analytical queue proxy 469.57 ms at 10/s</td>
+<td>Promising, needs end-to-end measurement</td>
+</tr>
+<tr>
+<td>Availability</td>
+<td>36 of 43.2 allowance minutes used</td>
+<td>Only 7.2 minutes remain</td>
+</tr>
+<tr>
+<td>Release exposure</td>
+<td>Hypothetical canary could consume 9 minutes</td>
+<td>Exceeds budget by 1.8 minutes</td>
+</tr>
+<tr>
+<td>Build identity</td>
+<td><code>BLD-50</code> belongs to NS-SW5.0</td>
+<td>Stale for NS-SW5.1</td>
+</tr>
+<tr>
+<td>Recovery</td>
+<td><code>DRILL-51</code> is planned but unexecuted</td>
+<td>Recovery requirement open</td>
+</tr>
+<tr>
+<td>Reservation invariants</td>
+<td>Synthetic transaction checks pass</td>
+<td>Useful but not distributed-field proof</td>
+</tr>
+</tbody>
+</table>
+<p>The correct decision in this teaching case is <strong>NO-GO</strong>. A conditional approval would need explicit authority and scope, renewed build evidence, executed recovery evidence, and an exposure plan compatible with the service policy. The table illustrates the logic; it does not replace a formal authorization process for a real system.</p>
+<h3>A technology choice is an experiment with migration costs</h3>
+<p>A new message broker, managed database, service mesh or observability backend may reduce one weakness while adding dependencies, security surface, licensing constraints or team skill requirements. Evaluate alternatives using a capability claim, failure mode, migration mechanism, training and rollback plan, operational measurements and evidence refresh cost. Do not select a technology just because the vendor describes it as cloud native or fault tolerant.</p>
+<p>A trustworthy adoption proposal names which requirements improve, which evidence becomes stale, how a canary would be measured, who can terminate it, and what would falsify the claimed benefit. Never reuse synthetic input as if it were operational data. Where an external standard is cited, check that the revision and use are appropriate to the project rather than declaring compliance by association.</p>
+<h3>Capstone investigation</h3>
+<p>Run <code>python3 SE/K/B5/tools/step03_book5_system_check.py --json</code> from the root. Inspect the evidence status and edit a <em>copy</em> of the case to evaluate a hypothetical recovery-drill pass. <strong>Question:</strong> Would changing <code>DRILL-51</code> to a pass make release valid? <strong>Answer:</strong> No. SWS-02 remains at risk under the proposed canary, the build attestation remains stale, and nine prospective downtime minutes still exceed the 7.2-minute remaining budget. Correct release decisions must be conjunctions of required claims, not averages of unrelated measures.</p>
+<p><strong>Connection to next studies.</strong> The software system's assurance data should inform integration testing, lifecycle supportability, enterprise risk, and eventual systems-of-systems operations. Treat this chapter as a pattern for evidence-based technical review, not a shortcut to certification.</p>
+</section></main></body></html>

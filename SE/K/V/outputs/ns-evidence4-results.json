@@ -1,0 +1,146 @@
+{
+  "case_id": "NS-CE4.1",
+  "concepts": [
+    {
+      "cost_pass": true,
+      "id": "compact",
+      "nominal_service_pass": false,
+      "robust_screen_pass": false,
+      "storm_service_pass": false
+    },
+    {
+      "cost_pass": true,
+      "id": "regional",
+      "nominal_service_pass": true,
+      "robust_screen_pass": false,
+      "storm_service_pass": false
+    },
+    {
+      "cost_pass": true,
+      "id": "resilient",
+      "nominal_service_pass": true,
+      "robust_screen_pass": true,
+      "storm_service_pass": true
+    }
+  ],
+  "deployment_disposition": "HOLD \u2014 synthetic evidence only; independent validation, approvals and stakeholder review required",
+  "enterprise": {
+    "accessible_difference_in_differences_minutes": -5,
+    "causal_claim_identified": false,
+    "difference_in_differences_minutes": -4,
+    "naive_pilot_before_after_minutes": -6,
+    "parallel_trends_established": false
+  },
+  "input_sha256": "2e501d355736e73bb0df2ce684a755f2ace8558821d88c50d1a9d2e95eac91af",
+  "integrated_technical_screen_pass": false,
+  "interfaces": {
+    "contract_pass": false,
+    "contract_revision": "2.0",
+    "observed_revision": "2.1",
+    "violations": [
+      {
+        "event": 3,
+        "expected": 3,
+        "sequence": 4,
+        "type": "gap"
+      },
+      {
+        "event": 4,
+        "sequence": 2,
+        "type": "duplicate_or_reordered"
+      },
+      {
+        "age_seconds": 3.5,
+        "event": 4,
+        "type": "stale"
+      },
+      {
+        "event": 0,
+        "type": "revision_mismatch"
+      }
+    ]
+  },
+  "provenance": {
+    "actionable_coverage": 0.2,
+    "all_permissions_explicitly_granted": false,
+    "paths": [
+      {
+        "actionable": false,
+        "artifact": "EV-CAP",
+        "claim": "CL-CAP",
+        "defects": [
+          "scope_mismatch"
+        ],
+        "requirement": "REQ-CAP"
+      },
+      {
+        "actionable": false,
+        "artifact": "EV-WAIT",
+        "claim": "CL-WAIT",
+        "defects": [
+          "revision_stale"
+        ],
+        "requirement": "REQ-WAIT"
+      },
+      {
+        "actionable": false,
+        "artifact": "EV-ACCESS",
+        "claim": "CL-ACCESS",
+        "defects": [
+          "does_not_pass"
+        ],
+        "requirement": "REQ-ACCESS"
+      },
+      {
+        "actionable": false,
+        "artifact": "EV-INT",
+        "claim": "CL-INT",
+        "defects": [
+          "revision_stale"
+        ],
+        "requirement": "REQ-INT"
+      },
+      {
+        "actionable": true,
+        "artifact": "EV-ENT",
+        "claim": "CL-ENT",
+        "defects": [],
+        "requirement": "REQ-ENT"
+      }
+    ],
+    "structural_coverage": 1.0
+  },
+  "revision": "2.1",
+  "simulation": {
+    "claim_of_validation": false,
+    "illustrative_t_interval_minutes": [
+      0.2268695891005459,
+      5.439797077566121
+    ],
+    "nominal_mm1_total_minutes": 30.0,
+    "nominal_utilization": 0.8,
+    "paired_mean_reduction_minutes": 2.8333333333333335,
+    "paired_reduction_minutes": [
+      3,
+      4,
+      1,
+      2,
+      7,
+      0
+    ],
+    "paired_sample_sd_minutes": 2.48327740429189,
+    "stress_stationary_mean_defined": false
+  },
+  "testing": {
+    "accessible_timely_fraction": 0.625,
+    "population_timely_fraction": 0.8125,
+    "requests": 80,
+    "served": 74,
+    "served_only_timely_fraction": 0.8783783783783784,
+    "timeliness_screen_pass": false,
+    "timely": 65,
+    "unserved": 6,
+    "zero_failure_screen_pass": false,
+    "zero_failure_upper_exact_iid": 0.04870291331009746
+  }
+}

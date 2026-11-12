@@ -74,3 +74,29 @@ Do not close a high-impact finding by changing narrative wording while leaving s
 ## Put this into practice
 
 Work through [Lab 11: The Adversarial Proposal Review](../labs/lab-11-proposal-red-team.md), then write a short paragraph on how the laboratory simplifies the real-world management problem. Use the [existing short Week 11 primer](../../P0-text/lessons/645-667-w11.md) for a second explanation. The assessed deliverable is defined in the original course guide, not by the hypothetical lab.
+
+## Step 03 integrated reference — red-team the argument, not the prose
+
+An adversarial proposal review tries to find where the offer's claims rely on unspoken assumptions, mismatched revisions or evidence that could not exist under the plan. The synthetic NS-M1 proposal has an $8.4M illustrative offer, a $7.2M PMB, a 13-week schedule *teaching subset*, and an NS-B1 technical demonstrator. A red team must not mistake the small schedule network for the entire delivery schedule or treat baseline arithmetic as proof of cost realism.
+
+### Five falsifiable attack questions
+
+| Claim | Red-team test | Example failure |
+|---|---|---|
+| “Price is within ceiling” | Reconcile estimate and terms | Offer omits required qualification work |
+| “Work is fully scoped” | Verify WBS dictionary and 100% coverage | No owner for long-term test-fixture maintenance |
+| “Schedule is achievable” | Recompute network with resources and correlated risks | Parallel tasks need same specialist |
+| “Technical readiness is demonstrated” | Trace requirement to configuration-current evidence | NS-R-04 evidence is stale |
+| “Risks are funded” | Compare distribution, reserves and correlated causes | Shared interface rework counted twice or omitted |
+
+Do not simply assign each section a score. Identify the **defeating observation**: what data would make the claim false? A bid can survive a cosmetic review and fail the first independent estimate, interface demonstration or contractual compliance check. Red-team work is most valuable before commitments become expensive to reverse.
+
+### Calculate a bounded exposure
+
+Suppose the offer ceiling is $8.5M and the bid is $8.4M. Nominal difference is only $0.1M. That is a **commercial headroom**, not a 90th-percentile reserve or an engineering assurance margin. If the technical baseline requires $0.15M of unestimated test fixture work, the price arithmetic alone provides no authority to assume the work will be recovered from the $0.6M management reserve; it may be in-scope work that should have been costed in the PMB.
+
+A useful red-team finding states claim, counter-evidence, consequence, correction, owner and decision deadline. Distinguish **fatal** defects (mandatory noncompliance), **correctable** omissions (missing trace with evidence available), and **uncertain** hypotheses requiring a targeted experiment or independent estimate. That classification supports a bid/no-bid judgment instead of an undifferentiated list of concerns.
+
+**Practice with answer.** The cost model assumes no retesting, while the interface change record requires a new acceptance procedure. **Answer:** flag a cross-artifact contradiction; quantify the missing work and schedule dependence, revise the bid and baseline under authority, and decline claims of full verification until current evidence exists.
+
+**Source:** [GAO Cost Estimating and Assessment Guide](https://www.gao.gov/products/gao-20-195g) offers a framework for testing estimate credibility, documentation and independent review.

@@ -1,0 +1,6 @@
+id,function,input,output,requirement_suffixes
+F01,Detect rider mobility need,stakeholder need,booking request,"R02,R03,R07"
+F02,Make feasible accessible offer,request and service envelope,offer or explicit nonservice decision,"R01,R02,R03"
+F03,Dispatch allocated capacity,accepted offer and current capacity,assignment,"R01,R06"
+F04,Monitor and recover service,vehicle state and exceptions,reroute or fallback,"R06,R07"
+F05,Record outcomes and evidence,service events and configuration,verifiable performance record,"R02,R03,R08"

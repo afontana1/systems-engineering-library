@@ -95,3 +95,37 @@ Consider a hypothetical service whose model shows cancellation after assignment 
 Conduct [Hypothetical Lab 6](../labs/lab-06-functional-review-board.md) as a simulated board hearing. Then prepare the original course's `662_W06_FBR_Package_v1.0`, including the review criteria, indexed evidence, recorded findings, closure actions, and defensible decision. Your course guide's actual gate is authoritative; the lab supplies only a rehearsal.
 
 **Next:** [Chapter 7 — Architecture and interfaces](07-allocating-architecture-and-interfaces.md).
+
+
+## Step 03 technical studio — conduct an evidence-based functional review
+
+A baseline review should close a *question*, not celebrate delivery of a document. Consider Northstar at the end of functional definition. The board is asked to approve functional requirements, behavior, allocations in principle, and an interface risk-retirement plan for configuration **NS-B1**.
+
+### Minimum review logic
+
+| Claim under review | Required evidence | Defeater or open finding |
+|---|---|---|
+| All stakeholder needs have functional paths | Need→requirement→function matrix | No documented behavior for stale status |
+| Abnormal behavior is controlled | State-machine exception traces | Duplicate allocation after retry |
+| Timing budgets are plausible | End-to-end allocation totaling 1.65 s | Network 0.70 s allowance lacks load test |
+| Requirements are testable | NS-T identifiers and acceptance methods | Missing definition of peak workload |
+
+Use *coverage* and *evidence quality* as distinct measures. A matrix with four of four rows linked is **100% structurally covered**, but one link may point to stale or irrelevant evidence. A board should report (1) structural links, (2) configuration applicability, (3) method validity, and (4) independently unresolved risk rather than collapse these into a single completeness percentage.
+
+### A practical decision record
+
+The board can decide to *proceed with conditions*: architecture trades may continue, but operational deployment is not authorized. Record the exact baseline NS-B1, the conditions (test retry semantics; define peak-load acceptance; validate the network latency bound), accountable owners, deadlines, and what evidence will prove closure. The decision should expire or be reconsidered when the baseline or operating domain changes.
+
+### Solved review-board question
+
+All requirement IDs are populated and the team has 100% trace links, but NS-R-04's verification report is for NS-B0 while the current design is NS-B1. Can the board say verification is complete? **No.** The evidence record exists, but its *applicability* is unproven. Either justify equivalence with a controlled impact analysis or repeat the relevant test. See the [case traceability matrix](../case/traceability.csv), which deliberately includes one such stale row.
+
+## Step 03 reference deepening — make review closure testable
+
+A functional baseline review should inspect whether every critical operational thread has a declared response to both normal and exceptional events. Build a review matrix with rows such as *rider request*, *duplicate request*, *status message timeout*, *communication recovery*, and *operator override*. For each, record required initiating condition, state changes, responsible function, interface, expected output and verification evidence. An empty error-handling cell is a technical omission, not a formatting problem.
+
+For the NS-B1 timing thread, the four allocated nominal stages total \(0.35+0.25+0.70+0.35=1.65\) seconds against a 2.50-second system budget, leaving **0.85 seconds nominal allocation margin**. A committee should ask whether the allocations correspond to disjoint stages, whether there is hidden buffering, and whether the 0.70-second network allowance describes worst case, percentile, or an illustrative budget. The arithmetic alone is not measured end-to-end performance.
+
+Define review finding **FR-07**: “The baseline lacks an explicit stale-status display and test on network recovery.” Close it only when (1) functional behavior is updated, (2) interface messages include age/freshness metadata, (3) the procedure tests late and reordered messages, and (4) signed evidence applies to NS-B1. “Team agrees to fix” is a corrective-action plan, not closure. Technical authorities should refuse to accept a complete baseline solely because every diagram has an approval stamp.
+
+**Practice:** A board sees 100% of functional boxes linked to requirements but no loss-of-network scenario. **Answer:** review completeness by scenarios and transitions, not only by link count; log the missing thread, owner, closure evidence and effect on the gate decision.

@@ -1,0 +1,209 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Requirements engineering and verification evidence · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/requirements-verification-handbook.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Requirements engineering and verification evidence</h1>
+<p><em>Technical method guide · Requirements, measurement, test design, and assurance · Phase 1 expansion</em></p>
+<p><strong>What this chapter enables.</strong> You should be able to convert a stakeholder outcome into a controlled technical obligation, allocate a quantified budget, develop a defensible acceptance test, and decide which requirement claims the resulting evidence actually supports. This is a complete illustrative procedure, not a substitute for a program-approved verification plan.</p>
+<p><strong>Prerequisites:</strong> <a href="../encyclopedia/stakeholders-and-needs.html">Stakeholder needs</a>, <a href="../encyclopedia/system-of-interest.html">system boundary</a>, <a href="../encyclopedia/good-requirements.html">good requirements</a>, and <a href="../encyclopedia/v-and-v.html">verification versus validation</a>.</p>
+<h2>1. An assurance chain starts with two different questions</h2>
+<p>Suppose the fictional Northstar Campus Shuttle program wants riders to obtain an assignment promptly, including during the morning rush. The stakeholder outcome is <strong>predictable access to transportation</strong>. An engineering team might define a measurable dispatch acknowledgement requirement. That technical requirement is only a <em>proxy</em> for part of the original outcome: fast assignment does not imply a vehicle arrives promptly or that riders with accessibility needs have equitable service.</p>
+<p>Write an explicit chain:</p>
+<ol>
+<li><strong>Need N-01:</strong> riders can reliably obtain transportation during published service periods.</li>
+<li><strong>Operational scenario S-01:</strong> peak weekday demand, with nominal network availability and an offered load defined by a reproducible load generator.</li>
+<li><strong>System requirement R-ACK-01:</strong> the dispatch service shall return a definitive acceptance or rejection response within <strong>4.0 seconds</strong> for at least <strong>99% of eligible requests</strong> in scenario S-01.</li>
+<li><strong>Architecture obligation A-ACK:</strong> the inbound gateway, queue, scheduling algorithm, and notification interface must jointly support R-ACK-01.</li>
+<li><strong>Verification case T-ACK:</strong> a controlled test observes the request-to-response interval, with a predetermined sampling plan and decision rule.</li>
+<li><strong>Evidence E-ACK:</strong> source timestamps, code/build identifier, scenario parameters, instrument calibration, sample accounting, and reviewed results.</li>
+<li><strong>Validation activity V-RIDE:</strong> measure actual pickup delays and rider outcomes separately in representative service conditions.</li>
+</ol>
+<p>The values and conditions above are <strong>hypothetical teaching choices</strong>. They are not a safety standard or a validated service-level target.</p>
+<h2>2. Design a requirement record rather than an isolated sentence</h2>
+<p>The requirement is not complete until terms and configuration are governed. The following is a compact reference record.</p>
+<table>
+<thead>
+<tr>
+  <th>Field</th>
+  <th>Example and why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Identifier and revision</td>
+  <td><code>R-ACK-01</code>, revision <code>B</code>; tests must cite the applicable revision</td>
+</tr>
+<tr>
+  <td>Subject and action</td>
+  <td>Dispatch service returns one definitive response</td>
+</tr>
+<tr>
+  <td>Trigger and start time</td>
+  <td>Receipt of a syntactically valid, unique request at the service ingress</td>
+</tr>
+<tr>
+  <td>End time</td>
+  <td>Response fully emitted at the controlled service-egress boundary</td>
+</tr>
+<tr>
+  <td>Population</td>
+  <td>Eligible requests; exclusion rules are approved <em>before</em> the run</td>
+</tr>
+<tr>
+  <td>Operating conditions</td>
+  <td>S-01 peak-load profile; software build, hardware, network, clock source, and seed recorded</td>
+</tr>
+<tr>
+  <td>Quantified claim</td>
+  <td>At least 99% meet 4.0 seconds</td>
+</tr>
+<tr>
+  <td>Verification method</td>
+  <td>Instrumented system test; independent log reconciliation</td>
+</tr>
+<tr>
+  <td>Decision authority</td>
+  <td>Named verification lead; exceptions cannot be silently discarded</td>
+</tr>
+<tr>
+  <td>Parent and rationale</td>
+  <td>N-01, S-01, expected user benefit, and documented assumptions</td>
+</tr>
+</tbody>
+</table>
+<p>A requirement can be unambiguous and still be <strong>wrong for the mission</strong>. Validate the <em>need-to-requirement translation</em> by asking users whether acknowledgement latency is causally related to what they value. Keep a separate response to rejection, retry storms, outages, and accessible communication needs; combining these into one statement hides failure modes.</p>
+<h2>3. Derive and check a timing allocation</h2>
+<p>A budget communicates engineering responsibility. For a simplified <strong>serial, single-request critical path</strong>, suppose a team proposes:</p>
+<table>
+<thead>
+<tr>
+  <th>Segment</th>
+  <th style="text-align:right">Proposed engineering allowance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Ingress parsing</td>
+  <td style="text-align:right">0.15 s</td>
+</tr>
+<tr>
+  <td>Authentication and gateway</td>
+  <td style="text-align:right">0.35 s</td>
+</tr>
+<tr>
+  <td>Queue and dispatch wait</td>
+  <td style="text-align:right">0.55 s</td>
+</tr>
+<tr>
+  <td>Scheduler</td>
+  <td style="text-align:right">1.15 s</td>
+</tr>
+<tr>
+  <td>Outbound response</td>
+  <td style="text-align:right">0.60 s</td>
+</tr>
+<tr>
+  <td>Contingency allocation</td>
+  <td style="text-align:right">0.70 s</td>
+</tr>
+<tr>
+  <td><strong>Allocated path</strong></td>
+  <td style="text-align:right"><strong>3.50 s</strong></td>
+</tr>
+<tr>
+  <td><strong>Unallocated headroom to 4.00 s</strong></td>
+  <td style="text-align:right"><strong>0.50 s</strong></td>
+</tr>
+</tbody>
+</table>
+<p>For the declared <em>serial worst-case allocation model</em>,</p>
+<p>\[
+T_{\mathrm{allocated}}=\sum_{i=1}^{5}T_i+T_{\mathrm{contingency}}=3.50\ \mathrm{s}.
+\]</p>
+<p>This is not a proof that 99% of requests respond within 4 seconds. If the values are 95th-percentile times, <strong>their sum is not generally a 95th or 99th percentile</strong> of the total. Queueing delay depends on arrival patterns and utilization. Parallel paths, shared resources, failures, and correlations require explicit modeling. Identify both the budget owner and the evidence needed to support every allocation.</p>
+<p><strong>Change exercise.</strong> If a new identity provider adds 0.65 seconds to the gateway bound, the allocated path becomes 4.15 seconds and exceeds the system threshold. A design change or requirement renegotiation is required; moving the number into “margin” without a technical plan is not an engineering solution.</p>
+<h2>4. Convert a percentile claim into a statistical test</h2>
+<p>The claim “at least 99% of eligible requests meet 4.0 seconds” is about a population proportion, not a sample maximum. Define an indicator for each eligible observation:</p>
+<p>\[
+X_i = \begin{cases}1,&amp; T_i \leq 4.0\ \mathrm{s}\\0,&amp; T_i&gt;4.0\ \mathrm{s}.\end{cases}
+\]</p>
+<p>Let \(p_f=P(X_i=0)\) be the unknown failure probability in the <em>specified test population</em>. In a simplified independent, identically distributed Bernoulli model, if <strong>zero failures</strong> appear among \(n\) observations, then a one-sided exact \(100(1-\alpha)\%\) upper confidence limit is</p>
+<p>\[
+p_{f,U}=1-\alpha^{1/n}.
+\]</p>
+<p>For \(\alpha=0.05\) and \(n=300\), \(p_{f,U}\approx 0.00994\). Thus <strong>300 zero-failure observations</strong> provide a one-sided 95% confidence upper limit just below a 1% failure probability, <em>under those sampling assumptions</em>. The theoretical minimum is</p>
+<p>\[
+n\geq\left\lceil\frac{\ln\alpha}{\ln(1-p_{f,\max})}\right\rceil=299.
+\]</p>
+<p>That is not proof of zero risk, and the 95% confidence statement is about the statistical procedure's long-run coverage, not a 95% posterior probability that the parameter lies below 1%. If repeated requests share a common outage, trial independence fails; 300 tightly clustered events are not equivalent to 300 independent operational conditions. A program must justify representative load profiles, stratification, dependence, and sample selection.</p>
+<p>For \(k&gt;0\) failures, the one-sided exact binomial upper bound solves</p>
+<p>\[
+\sum_{j=0}^{k}{n\choose j}p_{f,U}^{j}(1-p_{f,U})^{n-j}=\alpha.
+\]</p>
+<p>The accompanying <a href="code/verification_confidence.py">standard-library verification calculator</a> computes this bound from a latency CSV. It intentionally does <strong>not</strong> label a test result “verified”: statistical bounds are only one piece of the evidence review.</p>
+<h2>5. Measurement uncertainty changes a pass/fail decision</h2>
+<p>A measured time has instrument and synchronization uncertainty. For an <em>individual maximum-time requirement</em> (different from the 99% population claim), suppose the reported measured duration is 3.93 seconds with an expanded uncertainty of ±0.12 seconds at a declared coverage level. If the approved conservative rule requires the <strong>upper uncertainty limit</strong> below 4.0 seconds, the result is not a pass:</p>
+<p>\[
+3.93+0.12=4.05\ \mathrm{s}&gt;4.00\ \mathrm{s}.
+\]</p>
+<p>Conversely a 3.82-second reading gives 3.94 seconds and passes that particular guard-banded rule. Do not automatically add ±0.12 seconds to each event and then apply a binomial model without defining how common-mode clock bias, event-level noise, and the percentile decision interact. Measurement uncertainty and operational variability are different phenomena.</p>
+<h2>6. A verification matrix must carry the <em>result</em>, not just the link</h2>
+<table>
+<thead>
+<tr>
+  <th>Requirement</th>
+  <th>Method / case</th>
+  <th>Configuration</th>
+  <th>Acceptance</th>
+  <th>Recorded disposition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>R-ACK-01 rev B</td>
+  <td>System timing test T-ACK</td>
+  <td>build <code>NS-2.3</code>; S-01</td>
+  <td>One-sided 95% upper \(p_f\leq0.01\); approved sampling assumptions</td>
+  <td><strong>Pending</strong> until data, uncertainty, and representativeness are reviewed</td>
+</tr>
+<tr>
+  <td>R-REJECT-02 rev A</td>
+  <td>Interface test T-REJECT</td>
+  <td>build <code>NS-2.3</code></td>
+  <td>Each invalid request receives specified error code</td>
+  <td><strong>Pending</strong> unless relevant executed evidence exists</td>
+</tr>
+<tr>
+  <td>N-01</td>
+  <td>Rider validation V-RIDE</td>
+  <td>operational pilot</td>
+  <td>Stakeholder-approved service outcomes</td>
+  <td><strong>Not verified by T-ACK</strong>; different evidence question</td>
+</tr>
+</tbody>
+</table>
+<p>A completeness number such as 100% “tests linked” only means the trace graph is populated. The review should distinguish <strong>planned</strong>, <strong>executed</strong>, <strong>passed</strong>, <strong>accepted evidence</strong>, <strong>waived with authority</strong>, and <strong>not applicable</strong>. Test data for build <code>NS-2.2</code> should not close a requirement about <code>NS-2.3</code> without documented equivalence or re-verification rationale.</p>
+<h3>The minimum evidence packet</h3>
+<p>Keep the approved requirement revision; procedure revision; test article and build; software and calibration records; random seeds and generated demand; exact time origin; raw data; rejected/excluded events; deviations; uncertainty calculations; result summary; independent review; and a decision memo identifying the supported claim and unresolved limitations. A summary screenshot cannot replace the underlying observations.</p>
+<h2>7. Failure modes that invalidate otherwise impressive results</h2>
+<ul>
+<li><strong>Wrong denominator:</strong> excluding timeouts or invalid-looking responses <em>after</em> seeing the data biases the success fraction.</li>
+<li><strong>Wrong environment:</strong> running at idle load says nothing about S-01 peak demand.</li>
+<li><strong>Wrong clock:</strong> comparing timestamps from unsynchronized clocks can create fictitious speed or delay.</li>
+<li><strong>Wrong configuration:</strong> a green result from an obsolete software build is not current evidence.</li>
+<li><strong>Wrong claim:</strong> dispatch acknowledgement cannot, by itself, validate rider pickup time.</li>
+<li><strong>Wrong statistical model:</strong> clustered observations may not support a binomial independence model.</li>
+<li><strong>Wrong incentives:</strong> reaching “99%” overall can conceal poor outcomes for a relevant subgroup; report strata and operational exclusions.</li>
+</ul>
+<h2>8. Guided application with a worked answer</h2>
+<p><strong>Problem.</strong> In a peak-load rehearsal of 12 requests, 11 finish within 4 seconds and one takes 4.1 seconds. Can the team close the 99% claim at one-sided 95% confidence?</p>
+<p><strong>Solution.</strong> No. The observed failure rate is 1/12 ≈ 8.33%, already above 1%. More importantly, such a tiny run provides weak population evidence. Calculate the exact one-sided upper confidence bound using <a href="code/verification_confidence.py">the bundled calculator</a> and <a href="data/latency-rehearsal.csv">sample data</a>. Inspect whether one slow request was part of a correlated burst; its cause matters for the engineering response. Regardless of the statistical outcome, the team must review configuration and coverage before accepting evidence.</p>
+<p><strong>Follow-on exercise.</strong> Design a stratified plan that includes nominal connectivity, degraded connectivity, morning load and low-demand periods. Which strata belong inside the requirement's applicability conditions, which require separate requirements, and what statistical procedure accommodates the planned strata?</p>
+<h2>Source basis and curriculum connections</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — lifecycle engineering and product verification/validation distinctions.</li>
+<li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA Systems Engineering Handbook appendices C–E</a> — requirement wording, verification matrix, validation plan.</li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/">NIST/SEMATECH e-Handbook of Statistical Methods</a> — binomial and statistical methods context.</li>
+<li><a href="../B1/chapters/04-requirements.html">Book 1, Chapter 4</a>, <a href="../B8/chapters/10-analyze-results-determine-evidence-sufficiency-and-reco.html">Book 8, Chapter 10</a>, <a href="../../C/P0/EN645662.html">EN.645.662 course</a>, <a href="../../C/P2/EN645769.html">EN.645.769 course</a>.</li>
+<li><a href="../encyclopedia/good-requirements.html">Requirements concept</a>, <a href="../encyclopedia/verification-matrix.html">verification matrix concept</a>, <a href="../encyclopedia/traceability-graph.html">traceability concept</a>.</li>
+</ul>
+<p><strong>Scope note.</strong> All numbers, configurations, and Northstar scenarios are invented for instruction. External sources provide methodological context; they have not reviewed these examples or established that this fictional system is acceptable.</p>
+<footer class="reference-note"><a href="requirements-verification-handbook.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

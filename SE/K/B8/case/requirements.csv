@@ -1,0 +1,9 @@
+requirement_id,criterion,unit,threshold,decision_rule,applies_to,test_family
+TE8-R01,Degraded end-to-end command response p99 no more than 500 ms,ms,500,p99 upper bound,NS-DI7.1,timing
+TE8-R02,Per-shift electrical energy no more than 30 kWh,kWh,30,upper limit,NS-DI7.1,energy
+TE8-R03,Eight-hour mission reliability at least 0.98,probability,0.98,lower limit,NS-DI7.1,reliability
+TE8-R04,Logistics-adjusted long-run operational availability at least 0.99,fraction,0.99,lower limit,NS-DI7.1,availability
+TE8-R05,At least 95% of eligible accessibility pickups within 12 minutes,fraction,0.95,lower limit,NS-DI7.1,accessibility
+TE8-R06,No two active reservations can own the same physical vehicle,boolean,0,zero conflicting allocations,NS-DI7.1,transaction
+TE8-R07,Recovery from a specified service loss within 12 minutes,min,12,upper limit,NS-DI7.1,recovery
+TE8-R08,Reject stale or replayed dispatch commands without actuation,boolean,0,zero accepted replays,NS-DI7.1,cybersecurity

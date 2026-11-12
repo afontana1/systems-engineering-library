@@ -111,6 +111,12 @@ A correct computed result is not automatically a system acceptance result; expla
 
 </details>
 
+## Worked inference extension: what a confidence interval actually estimates
+
+Start with an estimand: the mean dispatch processing time in a specified load and build, **not** the largest response time across all conditions. With four independent synthetic readings 9, 10, 11 and 10 milliseconds, the sample mean is 10, the sample standard deviation is \(\sqrt{2/3}\), and its standard error is \(\sqrt{2/3}/2=0.4082\) ms. A two-sided 95% Student-*t* interval uses \(t_{0.975,3}=3.18245\), giving about \([8.70,11.30]\) ms. This is not a confidence interval on a 99th percentile and cannot verify a high-reliability timing limit.
+
+A practical equivalence test would predefine a maximum *engineering-important* difference before using the sample. A high p-value against equality is not evidence that two systems are equivalent. Work through [inference and experimental design](../../methods/statistical-inference-and-experiments.md) and explain what additional representative data would be required for the actual program acceptance claim.
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -148,3 +154,23 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [03 — Previous chapter](03-establish-data-provenance-sampling-validity-exploratory-analysis-and.md) · [05 — Next chapter](05-design-efficient-experiments-with-factors-responses-noise-power-rand.md) · [Book index](../README.md)
+
+## Step 03 integrated quantitative case: estimation is not acceptance
+
+The [NS-QA10.1 factorial data](../case/factorial-trials.csv) make a useful demonstration of statistical estimators, but the decision is about `QA-01` cold-mode p95, not merely a comparison of cell means.
+
+### Work an inferential interval carefully
+
+For the cold optimized cell, the six latencies are 475, 481, 487, 493, 499, and 505 ms, so the sample mean is 490 ms. The deviations are \(-15,-9,-3,3,9,15\); their sum of squares is 630 \(\text{ms}^2\), giving the **within-cell sample variance** \(s^2=630/5=126\) \(\text{ms}^2\). Under independent normal observations, the standard error of the mean is \(\sqrt{126/6}=4.583\) ms and a two-sided 95% t interval is approximately \(490\pm2.571(4.583)=[478.22,501.78]\) ms.
+
+This is an interval for the **cell population mean under the stated model**, not for p95 and not a compliance interval. It also does not account for unmodeled shift-to-shift variation. If the test order were confounded with controller version, the interval could be precise around a biased contrast.
+
+### Equivalence and engineering importance
+
+A failure to reject a difference from zero is not proof of equivalence. To claim practical equivalence with tolerance \(\delta\), specify the acceptable interval \([-\delta,+\delta]\) before viewing results and use an equivalence procedure such as two one-sided tests under the appropriate sampling model. An effect of 5 ms may be statistically detectable yet immaterial to a 500 ms system deadline; an undetected 50 ms effect can be mission-critical when a study is underpowered.
+
+### Test a claim that is actually specified
+
+The null claim for release is not “cold optimized mean equals 500 ms.” It is a tail and evidence-sufficiency question. A distribution-free, one-sided exceedance demonstration is possible if one defines independent representative Bernoulli trials; with zero exceedances among \(n\) trials, the exact upper 95% bound is \(1-0.05^{1/n}\). At \(n=6\) it is roughly 39.3%, much too weak for a 5% exceedance target. This calculation also would not fix an unrepresentative test regime.
+
+**Exercise and answer.** A researcher reports \(p=.07\) and declares two controllers equivalent. Why is this invalid? The probability-value concerns a hypothesis test against a null, not a declared practical equivalence margin. Construct an interval for the relevant difference and compare it with a justified tolerance using an equivalence procedure.

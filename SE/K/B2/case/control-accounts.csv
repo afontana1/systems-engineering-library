@@ -1,0 +1,6 @@
+account,deliverable,BAC_MUSD,PV_MUSD,EV_MUSD,AC_MUSD
+CA-01,System architecture and configuration,1.20,1.10,1.00,1.05
+CA-02,Vehicle and gateway integration,2.00,0.90,0.65,0.80
+CA-03,Dispatch software and interfaces,1.60,0.70,0.50,0.58
+CA-04,Verification and evidence,1.40,0.20,0.15,0.18
+CA-05,Deployment preparation and training,1.00,0.10,0.10,0.09

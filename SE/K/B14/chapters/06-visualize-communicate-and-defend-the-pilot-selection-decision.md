@@ -121,3 +121,23 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [05 — Previous chapter](05-converge-on-a-preferred-selection-using-transparent-value-and-decisi.md) · [07 — Next chapter](07-reframe-the-engineering-design-problem-and-generate-alternatives-thr.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-DA14.1 decision-analysis laboratory: Chapter 06
+
+### Communicate tradeoffs without laundering assumptions into certainty
+
+The Selection Decision Review should show an **alternative register first**, followed by hard gates, the feasible Pareto set, preference decompositions, sensitivity boundaries, source data and disputed assumptions. A chart of all six weighted scores alone is misleading: it makes ineligible alternatives appear as competing procurement choices. A better display separates A–F screening, C/D objective tradeoffs, weight-reversal analysis and residual unknowns. Link each plotted point to a source row and identify axes with units; show estimated coverage as a fraction with a stated denominator, not as an unqualified “accessibility score.”
+
+### Reconstruct a decision summary from controlled data
+
+[The screening file](../case/pilot-screening.csv) preserves the original numeric measures and adds flags. On the course table, D has a modeled 90th-percentile wait **2.3 minutes less** than C, with **$0.7M greater** five-year cost, **0.01 lower** accessible coverage, **4 months later** deployment, **0.008 higher** availability and **38 tCO2e/year lower** emissions. All numbers are comparisons between synthetic baseline entries, not observed confidence bounds. The difference is calculable independently from the CSV. The assumed value model gives D a 0.01595 advantage, reversible by shifting about 0.07251 weight toward accessible coverage.
+
+A decision slide should ask “Does 2.3 minutes of wait improvement justify the cost, time and coverage trade?” rather than “Why is D the winner?” A defensible table records whether evidence is course-provided, derived by an arithmetic rule, an analyst assumption, or independently measured; that distinction may be represented with annotation or separate columns. Avoid truncated scales that magnify 0.01 of coverage as an enormous absolute change. Show absolute percentages and the population of eligible trips before asserting equity consequences.
+
+### Controlled recommendation and dissent
+
+The model's **conditional screening preference** is D *only* if the decision authority approves the illustrated weights and gates. A stakeholder may reasonably favor C because of its accessible-trip measure and quicker deployment; record that dissent and the precise conditions under which the ranking changes. A credible authorization record includes the decision owner, baseline version, approved preferences, exclusions, uncertainty, risk and legal gates, re-open triggers, and the next evidence acquisition. It also explicitly says that five-year cost is not the pilot budget and that Book 11's noncompliant modeled service targets remain unresolved.
+
+**Worked exercise.** A director asks for a single graphic showing that D is “18% superior.” **Solution:** Refuse the unsupported percentage. The value scores differ by about 0.016 on an arbitrary 0–1 anchored preference scale, and their ratio has no invariant meaning. Report the actual attribute differences, preference conditions and a weight-switch interval. A graphic cannot turn synthetic scenario numbers into verified performance. If stakeholders insist on a scalar, report it as *conditional value score, not percent better*.
+
+**Practice and solution check.** Recreate the C/D comparison using the raw table; then hide the cost and coverage columns. You will make D appear uniformly attractive, demonstrating selection bias by omission. Restore the measures, include the named negative review, and place a distinct **HOLD for operational adoption** label in the decision memorandum until qualification evidence exists.

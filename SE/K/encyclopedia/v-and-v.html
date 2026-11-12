@@ -47,7 +47,11 @@
 <li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
 <li><a href="https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods">NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)</a> — Statistical methods, experiments, reliability, and process assessment.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section id="step03-concept-study"><h2>Step 02 review studio — a verified wrong requirement is still a failure</h2>
+<p><strong>Verification</strong> asks whether the engineered system conforms to specified requirements for a defined configuration and test domain. <strong>Validation</strong> asks whether the system satisfies its intended use and stakeholder needs. A requirement saying “the app shall show an acknowledgment within 8 seconds” may be verified while the service delivers phantom reservations or unusable pickup instructions.</p>
+<p><strong>Solved exercise:</strong> NS-R-01 passes a synthetic 8-second response test, but in representative user trials riders confuse “request received” with “vehicle reserved.” Has the stakeholder need for dependable booking been validated? <strong>No.</strong> The test may support a timing verification claim; it does not establish correct semantic confirmation or user understanding. Revise the ConOps and requirement hierarchy, then test the actual rider outcome.</p>
+<p><strong>Evidence rule:</strong> state the intended use, configuration, population and acceptance method. Testing a component in a simulator may provide valid lower-level evidence while leaving operational use unvalidated. Do not substitute the words verification and validation for each other in safety or release decisions.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="good-requirements.html">Requirements and acceptance criteria</a></li>

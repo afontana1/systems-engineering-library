@@ -1,0 +1,7 @@
+id,description,cost_musd,wait_p90_min,accessible_coverage,deployment_months,availability,emissions_tco2e_annual,integration_risk,feasible,rejected_by,value_score,pareto_efficient
+A,Fixed-route electric shuttle,8.8,15.5,0.93,9,0.965,118,2,False,accessible coverage,0.5429523809523811,False
+B,Autonomous pod fleet,10.6,9.8,0.88,16,0.94,86,5,False,cost; deployment; accessible coverage; availability; integration risk,0.4758095238095238,False
+C,Demand-responsive accessible vans,9.4,11.2,0.99,7,0.952,142,2,True,,0.7085714285714285,True
+D,Mixed shuttle-and-van fleet,10.1,8.9,0.98,11,0.96,104,3,True,,0.7245238095238095,True
+E,Regional transit partnership,7.6,18.4,0.9,6,0.935,126,3,False,accessible coverage; availability,0.45638095238095255,False
+F,Refurbished incumbent buses,6.9,20.1,0.86,5,0.91,215,2,False,accessible coverage; availability,0.29419047619047617,False

@@ -123,3 +123,29 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [08 — Previous chapter](08-analyze-transient-and-steady-state-output-with-defensible-run-contro.md) · [10 — Next chapter](10-use-m-s-to-support-integration-verification-validation-and-test-deci.md) · [Book index](../README.md)
+
+## Step 03 integrated mobility simulation case: design of experiments and selection
+
+### Formulate factors, responses and a decision constraint
+
+A simulation experiment tests the response surface of **a specified executable representation**. For the campus case, candidate factors include fleet size, charger count, accessible-capable fleet fraction, request intensity and travel-time stress. The current controlled experiment changes fleet size and environment only; it keeps four chargers and a one-request dispatch policy. The [configuration file](../case/model-assumptions.json) makes these omitted factors visible so no one mistakes a narrow search for a global optimum.
+
+For each \((F,E)\), the primary response \(Y_{F,E,r}\) is the day-specific standard p90 in replication \(r\). Secondary responses include accessible p90 and fraction not picked up by close. The requirement set imposes **simultaneous** feasibility: \(Q_s\le12\), \(Q_a\le15\) and \(U<0.01\). A cheap fleet failing accessible service cannot be accepted simply because it has a favorable scalar objective. If a trade function is nevertheless proposed, hard safety and accessibility constraints need explicit sponsor and legal authority rather than a covert numerical penalty.
+
+### A small factorial calculation
+
+For a two-level model with \(F\in\{12,14\}\) and \(E\in\{0,1\}\), a main-effect estimate for fleet can be \(\widehat\beta_F=\tfrac12[(\bar Y_{14,0}-\bar Y_{12,0})+(\bar Y_{14,1}-\bar Y_{12,1})]\) under effects coding. The environment-by-fleet interaction is the difference of conditional fleet effects,
+
+\[\widehat I=(\bar Y_{14,1}-\bar Y_{12,1})-(\bar Y_{14,0}-\bar Y_{12,0}).\]
+
+This tells the reviewer whether fleet increments respond differently under stress. **Caution:** the quantity uses four *scenario means*. It is neither an event count nor a field parameter; the stress case itself is an imposed 20%/30% input change. Code reviewers should compute each mean from the [CSV](../case/replication-output.csv) rather than copying an unreferenced chart.
+
+### Ranking and selection without self-deception
+
+If multiple candidates meet all constraints, a ranking-and-selection experiment can seek a candidate with the smallest expected cost or delay to within an *indifference zone*. Predefine the practical improvement \(\delta\), family-wise error risk, and how many candidate comparisons will be made. Repeatedly selecting the lowest observed sample mean without addressing selection bias is a winner's-curse problem. A replication count adequate for rough baseline screening may not separate two near-ties. The current data do not demonstrate feasibility for any candidate; therefore computing a precise optimum among 8, 10, 12 and 14 would be decision theater.
+
+When no candidate passes a requirement, use *diagnostic experiments*: compare all-accessible versus mixed fleet allocations, test charger locations with a spatial model, add driver-shift resources, or introduce pooled request routing. These are future controlled hypotheses requiring conceptual model changes and verification—not features already proved by the current demonstration. Carry forward all original failed tests rather than overwriting them with more attractive alternative results.
+
+**Worked exercise.** Suppose four synthetic factor-cell mean p90 results are \(70,37\) minutes for fleets 12/14 at baseline and \(345,220\) for 12/14 under stress. The baseline fleet effect is \(37-70=-33\), the stress effect \(220-345=-125\), and the interaction \(-125-(-33)=-92\) minutes. **Interpretation:** the fleet addition has a greater absolute modeled benefit when the system is more congested; nevertheless 37 and 220 both miss the 12-minute target. Different inference and field validation are still needed before acting on the difference.
+
+[Case data](../case/INDEX.html) · [Chapter 10](10-use-m-s-to-support-integration-verification-validation-and-test-deci.md).

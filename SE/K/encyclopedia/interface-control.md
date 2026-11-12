@@ -46,6 +46,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 
+
+
+## Step 02 review studio — syntax is not semantic compatibility
+
+Two components can exchange syntactically valid JSON while disagreeing about units, clock semantics, retries, or stale messages. A proper interface control document describes the physical/logical boundary, information schema, units, timing, version, exception handling, security expectations, and ownership of validation.
+
+**Solved exercise:** producer A emits `status_age_ms=900`, and consumer B interprets the value as seconds. Both pass isolated serialization tests. What failed? **The information contract**: the producer and consumer share a field name without a common semantic type. Replace the ambiguous value with a versioned schema declaring milliseconds and unit-aware parsing. Add negative integration tests for unit mismatch, old schema versions, missing mandatory fields, duplicate messages, and incorrect ordering.
+
+For the fictional Northstar system, detection 0.35 s, gateway 0.25 s, transport 0.70 s, and display 0.35 s sum to 1.65 s, leaving 0.85 s against a 2.50 s allocation. This arithmetic check is not a measured latency distribution; a percentage-based acceptance target needs a separate test design and workload definition.
+
 ## Follow the knowledge
 
 **Related concepts**

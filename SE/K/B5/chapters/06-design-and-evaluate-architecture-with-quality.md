@@ -81,3 +81,26 @@ In [Lab 6: Quality attributes must be formulated as scenarios](../labs/lab-06-de
 ## Continuity
 
 This chapter builds from [previous chapter](05-integrate-agile-product-engineering-with-syst.md) and leads toward [next chapter](07-engineer-cloud-service-distributed-and-config.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-764-w06.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+
+## Step 03 integrated reference: quality-attribute scenarios with tail-risk calculations
+
+### Specify load, environment and observable
+
+For the peak reservation scenario, the stimulus is ten requests per second; the environment is normal peak operation; the response is an end-to-end acknowledgment; and the measure is 95th-percentile latency below 500 ms for a precisely specified request population. This is more testable than “responsive.” It still needs percentile estimation rules, failure handling, observation boundaries and a measurement duration before operational acceptance.
+
+Use a deliberately simplified M/M/1 queue to expose capacity sensitivity. Let arrivals be Poisson at rate \(\lambda\) and exponentially distributed service capacity at \(\mu\), with \(\lambda<\mu\). In this model the stationary time in system has exponential tail with rate \(\mu-\lambda\), giving
+
+\[t_{0.95}=\frac{-\ln(0.05)}{\mu-\lambda}.\]
+
+With the original 18 requests/s service rate at peak \(\lambda=10\), the 95th-percentile queueing/system time is 374.47 ms. Adding **assumed deterministic** 170 ms for surrounding stages gives 544.47 ms: above the 500 ms threshold. At the candidate rate 20 requests/s, the proxy becomes 299.57 + 170 = **469.57 ms** and satisfies the analytical boundary with only 30.43 ms of modeled margin.
+
+### Why this is not a production percentile
+
+The real server may have multiple workers, non-Poisson arrivals, bursty workloads, correlated network and database delays, priority scheduling, and retries. The analytical distribution does not include those effects. Further, the 95th percentile of a sum is not in general the sum of stage percentiles. Here fixed-stage assumptions make the addition legitimate **within the chosen model**, not in measured operations. Validate with endpoint timestamps, a load generator that preserves realistic arrival patterns, and an uncertainty estimate for the percentile.
+
+### Cross-attribute trade
+
+Increasing capacity can reduce queue delay while introducing new instances, deployment complexity, network dependencies, and monitoring overhead. Record not merely the latency improvement but its effect on availability, security and rollback complexity. A solution is better only relative to the defined weighted and hard constraints, not because one metric improves.
+
+**Exercise.** If \(\mu\) falls to 17/s at the same peak load, recompute the proxy. **Answer.** \(t_{0.95}=2.995732/7\approx427.96\) ms, plus 170 ms = 597.96 ms. That exceeds the limit by almost 98 ms. At near-saturation the same model predicts rapidly increasing delay; it does not justify extrapolating a measurement from low utilization.

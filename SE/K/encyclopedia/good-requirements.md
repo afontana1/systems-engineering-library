@@ -67,6 +67,41 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook appendix (requirements and verification matrices)](https://www.nasa.gov/reference/system-engineering-handbook-appendix/) — Requirements review criteria and verification planning context.
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 
+## In-depth method: from a requirement to defensible evidence
+
+The companion [requirements and verification method guide](../methods/requirements-verification-handbook.md) provides a complete, reproducible chain from a stakeholder need to a test plan. It includes a requirement record with applicability conditions, a 3.50-second allocated timing path, measurement uncertainty, a binomial acceptance calculation, and a verification matrix. Those steps matter because the apparent precision of a sentence is not yet evidence of compliance.
+
+### Decide exactly which event is being measured
+
+Consider two statements that seem equivalent: “reply within four seconds of a request” and “reply within four seconds of receipt of a valid request at the ingress boundary.” The first is ambiguous about user network latency, duplicate requests and requests denied by validation. The second defines a measurable interval, but its exclusion of invalid requests must be separately justified. Define the start event, stop event, clock source, population, load profile, and exclusion decisions in the baseline **before** examining data.
+
+### A derived budget is a claim with assumptions
+
+If a serial path contains parsing, gateway checks, queue delay, scheduler computation and outbound notification, a preliminary design may allocate 0.15, 0.35, 0.55, 1.15 and 0.60 seconds respectively. These sum to 2.80 seconds. A 0.70-second contingency allocation produces 3.50 seconds, leaving 0.50 seconds below a 4.00-second requirement. The calculation only makes sense if these are compatible bounding allowances. Adding several independent 95th percentiles does **not** generally yield a valid 95th-percentile bound for the entire path.
+
+### Requirement quality is not evidence sufficiency
+
+For a population target of at least 99% timely responses, observing 300 zero-failure events leads to a one-sided 95% exact upper confidence bound on the failure fraction:
+
+\[
+p_{f,U}=1-0.05^{1/300}\approx0.00994.
+\]
+
+This calculation is conditional on independently sampled, identically distributed outcomes from the defined population. It does not establish performance under untested degraded-network scenarios, or validate whether four-second acknowledgements actually satisfy riders' needs. The [worked guide](../methods/requirements-verification-handbook.md) shows how the sampling assumptions, instrument uncertainty and evidence configuration constrain the conclusion.
+
+**Practice check.** Rewrite one “reliable service” statement into a requirement with its own subject, conditions, denominator and verification decision rule. Then identify at least one stakeholder outcome that the requirement cannot establish.
+
+
+
+
+## Step 02 review studio — separate threshold, population, and confidence
+
+“Confirm requests quickly” is ambiguous. A stronger requirement might state: *In NS-B1 under workload W, at least 99% of valid bookings shall receive a confirmed result within 8 seconds.* This is testable only after defining workload W, valid booking, result receipt, clock boundaries, timeouts and errors, and whether 99% describes a long-run population or a finite acceptance sample.
+
+**Solved exercise:** if 300 independent, representative trials all complete on time, is a 99% pass probability demonstrated at a one-sided 95% confidence level? With zero failures, the exact upper failure-probability bound is `1−0.05^(1/300)≈0.009936`, *just below* 1%. Under the stated Bernoulli assumptions, such a plan narrowly supports a bound below 1%. If failures are correlated during an outage, the calculation cannot be used without revising the sampling model.
+
+**Requirements boundary:** a statistically verified threshold can still be the wrong stakeholder requirement. Validation needs representative users and mission context, not just a well-written “shall” sentence.
+
 ## Follow the knowledge
 
 **Related concepts**

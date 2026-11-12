@@ -1,0 +1,7 @@
+test_id,requirement_id,requirement_revision,baseline,outcome,source_type,limitation
+TEST-01,REQ-01,1,NS-MB3.1,PASS,synthetic_fixture,No physical dispatch run performed
+TEST-02,REQ-02,1,NS-MB3.1,PASS,analytic_capacity,Assumes constant trips per hour and no downtime
+TEST-03,REQ-03,1,NS-MB3.1,PASS,synthetic_fixture,Older requirement revision
+TEST-04,REQ-04,1,NS-MB3.1,PASS,analytic_budget,Nominal timing only
+TEST-05,REQ-05,1,NS-MB3.1,PASS,analytic_energy,Ignores weather and battery degradation
+TEST-06,REQ-06,1,NS-MB3.1,PLANNED,test_plan,No execution outcome exists

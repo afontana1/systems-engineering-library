@@ -29,3 +29,15 @@ For request loss, the simulated truth ledger records attempts that disappeared. 
 <details><summary>Worked answer</summary>No. It tests one stipulated interval. Add distributions or a repair state model, justify them with evidence, and test sensitivity; without empirical data, results remain hypothetical.</details>
 
 **Submit:** fault-injection matrix, before/after service metrics, detection assumptions, and one revised hazard. Related: [v11 human factors and safety](../../integrated-lab/chapters/08-human-factors-safety.md).
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Fault injection, common modes and degraded policy.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+The six provided v12 scenarios target distinct causes: capacity reduction, vehicle outage, dropped input messages, communications delay, telemetry blocking and nominal operation. A **failure taxonomy** is needed because a single completion percentage can mask fundamentally different safety and recovery obligations.
+
+**Worked comparison:** Under the original fixture, BASE completes 12/12, OUTAGE 6/12, LOSS 8/12 (four lost messages), and TELEMETRY 4/12. These are independent synthetic *interventions* rather than a reliability estimate. Treat the differences as causal outcomes **inside this deterministic/specified fault model**, not measured real incidence or severity.
+
+**Exercise and solution:** If LOSS yields lower mean waiting time among completed requests, is it an improvement? No: removing requests from the served population can artificially improve wait statistics. Include all unique arrivals in the denominator and display unknown/lost status rather than silently discarding the most harmful observations.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

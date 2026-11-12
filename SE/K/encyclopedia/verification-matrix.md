@@ -38,6 +38,38 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Distinctions between product verification and validation](https://www.nasa.gov/reference/2-4-distinctions-between-product-verification-and-product-validation/) — Separate conformity to specifications from fitness for intended use.
 - [NIST · Technical Note 1297, Reporting Measurement Uncertainty (1993)](https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-7-reporting-uncertainty) — Standard and expanded uncertainty, coverage factors, and reporting conditions.
 
+## In-depth method: evaluating what a verification row really establishes
+
+A VCRM is a control surface for an argument, not a tally of green hyperlinks. The [requirements-to-evidence guide](../methods/requirements-verification-handbook.md) includes a complete fictional test plan, raw rehearsal data, a statistical confidence calculation, and a cross-reference matrix that distinguishes planned evidence from accepted evidence.
+
+### Represent each test result as a scoped proposition
+
+A result should be read as: “Procedure T at revision P, applied to configured item B in scenario S, observed measurement M with instrument uncertainty U, and the approved rule produced disposition D.” If B or S does not match the current requirement, the result may still be useful background, but is not automatically closing evidence. A representative row needs at least **requirement ID/revision, method and procedure, test configuration, applicable conditions, objective criterion, result, discrepancies, reviewer, and disposition**.
+
+A useful statistical boundary for a zero-failure demonstration with \(n\) independent binary trials is
+
+\[
+p_{f,U}=1-\alpha^{1/n}.
+\]
+
+At 95% one-sided confidence, 300 zero-failure observations yield a failure-probability upper bound of roughly 0.994%. That conclusion depends on the sampling model; 300 repeated requests in the same quiet minute may offer poor evidence for peak-load operation. Coverage reporting should therefore separate **requirement linkage**, **procedural completion**, **evidence applicability**, **statistical adequacy**, and **acceptance authority**.
+
+**Review challenge.** A requirement says that 99% of peak-load requests shall finish within four seconds. One hundred idle-load requests all finish in under a second. The matrix has a passing test link. Which requirement has been verified? The answer is *not the stated peak-load population claim* unless the idle-load result has a formally justified relation to that claim.
+
+## Phase 5 technical reading: Design a verification matrix that does not overclaim
+
+The project's controlled VCRM maps `REQ-ACK` to synthetic `TEST-ACK-01`/`EV-ACK` and states the 2.0 s acceptance bound, recorded maximum 1.74 s, CM-B2 build and limited test load. A passing maximum observation does not establish a deadline-tail probability, and an injected command-gate test does not cover every hazard pathway. The [complete VCRM, ICD, hazard and change-impact package](../methods/campus-mobility-engineering-artifacts.md) demonstrates test provenance, accepted scope and explicit residual limitations. Version IDs allow independent configuration-currency checks instead of counting all green status labels as adequate evidence.
+
+
+
+## Step 02 review studio — distinguish a populated matrix from a closed claim
+
+A verification matrix should state requirement, method, configuration, procedure, measured result, acceptance rule, evidence location, review status and open findings. A check mark is the *conclusion* of a documented reasoning chain, not the evidence itself.
+
+**Solved exercise:** in the fictional Northstar baseline, all four requirements have a linked verification procedure. Three reference current NS-B1 evidence; NS-R-04 refers to NS-B0. The trace matrix is **100% populated**, but only **75% has current-configuration evidence on its face**. Does that mean exactly 75% of the requirements are verified? **Not necessarily.** The other three procedures may be invalid or incomplete, and the fourth may be reusable if a formal impact analysis establishes equivalence. Treat 75% as a superficial currency indicator, not an assurance score.
+
+**Next action:** document the evidence currency question, assign an owner, resolve by equivalence analysis or repeat test, and retain the original report and disposition. A controlled matrix preserves negative and inconclusive evidence rather than deleting rows to make progress look better.
+
 ## Follow the knowledge
 
 **Related concepts**

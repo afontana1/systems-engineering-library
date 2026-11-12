@@ -39,6 +39,22 @@ These sources establish authoritative terminology or methods in their own publis
 - [NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)](https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods) — Statistical methods, experiments, reliability, and process assessment.
 - [NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)](https://standards.nasa.gov/node/263) — Credibility practices for modeling and simulation used in decisions.
 
+## Factorial effects are contrasts, not labels
+
+A balanced two-factor experiment is more informative than changing A while holding B fixed because it estimates the interaction. For treatment means \(\bar Y_{--}=10.55\), \(\bar Y_{+-}=8.975\), \(\bar Y_{-+}=7.95\), and \(\bar Y_{++}=6.75\) ms, the main effect of A is \((8.975+6.75-10.55-7.95)/2=-1.3875\) ms. The AB interaction effect is \((10.55+6.75-8.975-7.95)/2=+0.1875\) ms. A positive interaction here means the combined latency reduction is somewhat smaller than the sum of the two separate reductions on this response scale. It is not a statement about all other load conditions.
+
+Why does this matter? With only an A-only comparison, the analyst has no estimate of whether replication B changes scheduler effectiveness. Each factor combination also needs genuine independently randomized experimental replications. Thousands of requests from a single unaltered run are not equivalent to independently applied treatment settings. See [the full statistical and factorial treatment](../methods/statistical-inference-and-experiments.md), with synthetic data and independent residual calculations.
+
+
+
+## Step 02 review studio — calculate effects before interpreting causality
+
+A hypothetical two-factor, two-level dispatch experiment has response times (minutes): `A−,B−=20`; `A+,B−=16`; `A−,B+=14`; `A+,B+=8`. The estimated **A main effect** is the high-A mean minus low-A mean: `(16+8)/2−(20+14)/2 = −5` minutes. The **B effect** is `(14+8)/2−(20+16)/2 = −7` minutes. The two-factor interaction contrast is `(20+8−16−14)/2=−1` minute (under this conventional contrast scaling).
+
+**Solved exercise:** can we declare either factor statistically significant from these four observations? **No.** With one observation per treatment combination, a saturated two-factor interaction model has no residual degrees of freedom to estimate random error. Replicate, randomize order, record run conditions, and check model assumptions before constructing intervals or significance claims. The estimated contrasts are still useful *descriptive* results for this synthetic experiment.
+
+**Evidence boundary:** factor interactions are decision-relevant; a one-factor-at-a-time experiment could miss them. Correlated noise, uncontrolled demand drift, and nonrepresentative experiments can still invalidate a clean factorial table.
+
 ## Follow the knowledge
 
 **Related concepts**

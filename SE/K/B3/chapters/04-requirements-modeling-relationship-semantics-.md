@@ -129,3 +129,49 @@ This chapter builds from [previous chapter](03-stakeholders-concerns-needs-conte
 ## Extended worked problems and lab
 
 Study the [worked problem workshop on typed model graph queries](../practice/graph.md), then complete the [extended laboratory](../practice/lab-graph.md). The exercises are separate from the original assessed coursework.
+
+## Worked semantic audit: a verification link is not a verified requirement
+
+The [MBSE semantic-modeling method guide](../../methods/mbse-semantic-modeling-handbook.md) gives a complete typed-graph example with machine-checkable JSON and a repository audit program. The key addition to this chapter is that **identity and evidence applicability are part of relationship semantics**, not administrative notes.
+
+Imagine requirement R-ACK, component C-DISP, test T-ACK and result E-ACK. Suppose the model includes `R-ACK allocatedTo C-DISP`, `T-ACK verifies R-ACK`, and `E-ACK resultOf T-ACK`. Even if result E-ACK is marked passed, a model baseline `NS-2.3` must not automatically inherit evidence from build `NS-2.2`.
+
+Define current evidence as the existence of a relevant test and accepted result tied to the current build and scenario:
+
+\[
+\exists e,t:\operatorname{targets}(t,r)\land\operatorname{producedBy}(e,t)\land\operatorname{accepted}(e)\land\operatorname{build}(e)=b.
+\]
+
+This is an illustrative quality rule, not a universal formal proof obligation from the SysML standard. An authorized equivalence argument may permit evidence reuse, but the argument must be explicit and reviewed.
+
+**Reproduce the finding:** Run the [audit program](../../methods/code/model_trace_audit.py) on [stale](../../methods/data/model-stale.json) and [corrected](../../methods/data/model-corrected.json) model baselines. The first identifies a stale timing test and a missing energy result; the second identifies two structurally covered requirements. Neither report alone proves real-world compliance. Separate the graph's structural checks from scientific evaluation of the evidence.
+
+## Phase 5 technical reading: Tool-checkable requirement relationship semantics
+
+In a controlled SysML v2 workflow, represent stable identifiers and explicit relation meanings rather than counting arrows. Campus Mobility's `REQ-DOOR` is derived from `NEED-ACCESS`, allocated to the door controller, related to `H-DOOR`, and tested by `TEST-DOOR-01`. The documentary crosswalk checks the consistency of those identities across a requirement table, interface definitions and evidence. A separate, conformant language tool must parse/resolve the SysML source: the teaching crosswalk is not a SysML parser. Review the [SysML v2 modeling and traceability chapter](../../methods/sysml-v2-modeling-and-traceability.md) and produce a diagnostics record tied to the tool and model versions.
+
+## Step 03 integrated reference: traceability is a typed argument
+
+### A graph edge must say exactly what it asserts
+
+Model relations are not decorative arrows. `derive` relates a requirement to a motivating need; `allocate` identifies responsibility; `satisfy` asserts an architectural candidate is intended to meet a requirement; `verify` relates a test method or case to a requirement. The evidence *result* belongs to a particular execution, revision, configuration, scenario and measurement procedure. Even a perfectly populated trace matrix can contain an invalid technical assertion. In NS-MB3 all six requirements have named components and tests; that does **not** mean all six are verified.
+
+Represent the trace graph as \(G=(V,E,\tau_V,\tau_E)\), where \(\tau_V\) and \(\tau_E\) give vertex and relationship types. A checker may enforce `test → requirement` but forbid `test → stakeholder` when the latter relation is not part of its declared metamodel. Referential integrity is necessary; it does not establish semantics. A test called `TEST-03` has a reference to `REQ-03`; its execution states requirement revision 1, while the current requirement is revision 2. That means the result is **stale**, not current evidence, regardless of the old PASS label.
+
+### Calculate coverage without concealing failures
+
+Let \(R\) denote requirements, \(A\) those with an allocated component, \(T\) those with linked tests, and \(E\) those with current passing fixtures. A graph audit of the synthetic NS-MB3 JSON yields
+
+\[
+|R|=6,\quad |A|=6,\quad |T|=6,\quad |E|=4.
+\]
+
+The first two structural coverage ratios are 100%, whereas the current linked-fixture ratio is \(4/6=66.7\%\). The denominator is deliberately explicit: a weak metric can appear strong by counting all historical results regardless of revision or by excluding planned tests from the denominator. The four passing fixtures are still *illustrations*; they are not observed physical-system evidence. The model's `TEST-06` is merely planned and `TEST-03` is stale. These cases should be represented separately, not hidden under one “incomplete” label.
+
+### Preserve trace meaning through a change
+
+When `REQ-03` changes, first update its revision and justification, then find dependent interfaces, measures, tests and stakeholder views. Determine whether each relation remains valid. Existing PASS results stay immutable as historical records, but cannot be promoted to support the revised requirement without an applicability argument or a new test. A critical review should follow one complete chain and ask where evidence quality or semantics could fail, rather than treating trace density as proof of system correctness.
+
+### Practice with answer
+
+**Exercise.** A reviewer sees six requirement-to-test links and declares 100% verification. Identify two errors. **Answer:** (1) Test assignment or test-case existence is not executed evidence; (2) both requirement revision and configuration must match the decision. The case has only four current passing *synthetic fixtures*, and independent operational validation remains absent. Run `python3 ../tools/step03_book3_model_check.py` from the book's `chapters/` directory or use the repository-root invocation in [the case README](../case/INDEX.html).

@@ -123,3 +123,27 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [08 — Previous chapter](08-test-structure-and-behavior-use-data-responsibly-and-make-a-credibil.md) · [10 — Next chapter](10-apply-systems-thinking-to-healthcare-and-human-service-delivery.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-FB13.1 case: feedback, conservation, and policy learning — Week 9
+
+*Integrated chapter: Chapter 09 — Apply feedback modeling to supply management and inventory dynamics. Northstar NS-FB13.1 is a transparent teaching baseline; the following methods are not field-validated.*
+
+### Transfer the *accumulation logic*, not the campus coefficients
+
+A supply chain needs at least on-hand inventory \(I\), outstanding orders/pipeline \(L\), and unmet orders \(B\), each with a declared unit of physical items. A purchase order is not a receipt: in the toy example, an order released today arrives four days later. The inventory conservation law is \(I_{t+1}=I_t+\mathrm{receipts}_t-\mathrm{shipments}_t\) when losses are zero; unmet demand is tracked separately rather than silently erased. The decision rule sets **orders**, not inventory directly. A naive rule can repeatedly order what appears to be missing while ignoring goods already in transit.
+
+The [two reproducible transfer traces](../case/inventory-position-aware.csv) use 160 initial units, four days of 20-unit pipeline receipts, a fixed target of 180 units, and a demand step from 20 to 28 units/day after day 7. Under the naive rule, `order = min(100,max(0,180−on_hand+backorders))`; under the position-aware rule, `order = min(100,max(0,180−on_hand−on_order+backorders))`. Both are particular simplified heuristics, not optimal inventory theory. A true general inventory position is on hand plus on order minus backorders, subject to spoilage, returns and allocated stock.
+
+### Worked bullwhip-style response
+
+Under the fixed example, the naive rule reaches **100 units/day** of replenishment ordering even though consumer demand increases only to 28 units/day; the position-aware rule peaks at **28 units/day** because it accounts for the incoming pipeline. By day 35, the naive rule leaves 224 units on hand versus 68 under the position-aware policy. These results expose **order amplification and overshoot under a particular controller**; they do not show a universal service-level victory for position-aware ordering, since the lower ending stock can create resilience concerns under a new shock.
+
+A second check distinguishes a **pipeline delay** from a smoothing delay. Goods ordered at day \(t\) are transported for four days; a perception stock with \(dP/dt=(D-P)/4\) would instead distribute information response continuously and is not identical to a fixed delivery delay. Choosing the wrong delay structure can change oscillations and inventory coverage even if both equations contain the number four.
+
+**Worked exercise.** Demand is 28 items/day and four-day lead time is deterministic. Ignoring uncertainty, what average pipeline is required to sustain that throughput? **Solution:** Little's-law-style flow accounting gives \(L\approx28\times4=112\) items in transit at steady state. Counting only 68 items on the shelf and omitting 112 in transit would overstate the shortage by 112 units. This equation is a steady-flow approximation requiring consistent order and arrival rates; it does not apply unchanged during stockouts or nonstationary deliveries.
+
+**Practice extension:** Vary lead time to six days and compare the controllers' order maxima, ending stock and total unfilled demand; describe which results depend on the assumed deterministic transport pipeline.
+
+### Reproduce the evidence and challenge the result
+
+The [NS-FB13.1 case dossier](../case/INDEX.html) publishes its [controlled inputs](../case/model-inputs.json), [Python calculation model](../tools/step03_book13_feedback.py), [policy-by-condition evidence](../case/experiment-results.csv), [equation and unit crosswalk for Vensim](../case/vensim-equation-crosswalk.md), and [claim limitations](../case/credibility-register.csv). Reproduce results with `python3 SE/K/B13/tools/step03_book13_feedback.py --write` from the repository root. This is a **synthetic teaching simulation**: correctly conserving its stocks and reproducing its output does **not** calibrate the causal structure or authorize real mobility policy. The Book 11 event simulator and Book 12 physical vehicle model answer other questions and are not dynamically coupled.

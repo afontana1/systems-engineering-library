@@ -101,3 +101,31 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 10: Integration readiness and sequencing](../labs/lab-10-plan-system-integration-and-conduct-the-integration-rea.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 10 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-DI7.1 — integration order as a dependency graph
+
+### Construct an integration sequence, not a list of demos
+
+Integration should expose dangerous assumptions as early as practical. In the [controlled case baseline](../case/model-baseline.json), the work packages are A (foundation, 1 week), B (gateway, 2 weeks after A), C (controller, 3 weeks after A), D (broker/dispatch integration, 2 weeks after B and C), E (end-to-end test, 2 weeks after D), and F (review, 1 week after E). The earliest finishes are A=1, B=3, C=4, D=6, E=8, F=9 weeks. The controlling path is A–C–D–E–F and totals **nine weeks**.
+
+In a precedence graph, the earliest finish of task \(i\) is
+
+\[
+EF_i=d_i+\max_{j\in\mathrm{pred}(i)}EF_j,
+\]
+
+with maximum zero for a task with no predecessors. The model excludes resource contention, rework and probabilistic duration. It therefore supplies a baseline integration sequence, not a completion-date promise. Testing a gateway alone before the controller is ready is useful only if the surrogate accurately captures the interface conditions needed by later tests.
+
+### Test interfaces before the full system
+
+Build a risk-first sequence: schema and unit checks; authorization and idempotency; latency tracing under degraded load; physical controller safe states; human override; integrated fleet exercise. Each stage should define stimulus, observable response, failure-injection condition, configuration identifier and explicit exit criteria. The initial 490-ms degraded timing model has a ten-millisecond nominal allowance, which is an especially strong reason to instrument each stage and measure correlated waiting.
+
+At the integration readiness review, document blocked prerequisites instead of turning them into ambiguous action items. DI7-R02 has a stale test; DI7-R07 has a planned but unexecuted accessibility exercise; DI7-R08 lacks a current baseline reconciliation. These prevent a complete readiness claim even if hardware modules are on site.
+
+**Exercise.** If controller task C grows from three to five weeks, what is the new modeled integration duration? Why might this underestimate the real delay?
+
+<details><summary>Worked resolution</summary>
+
+C finishes in week 6, D in week 8, E in week 10 and F in week 11, giving eleven weeks on A–C–D–E–F. The model assumes no shared-resource queueing, rework, supplier disruption or correlated test failures, any of which could extend actual completion.
+
+</details>

@@ -122,3 +122,25 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [05 — Previous chapter](05-specify-and-evaluate-the-logical-architecture-and-its-responsibiliti.md) · [07 — Next chapter](07-elicit-derive-validate-and-query-system-requirements-from-the-integr.md) · [Book index](../README.md)
+
+## Step 03 integrated technical reference: NS-MBA9.1 — interface contracts and semantic change
+
+### Make every exchange reviewable
+
+An interface is more than a labeled connector. `I01` connects Dispatch to SafetyGateway with an `AssignmentCommand` and 200-ms freshness requirement. `I02` transmits `BatteryEnergy` from Depot to Dispatch in **kWh**, with a 1000-ms freshness specification. A contract records producing and consuming authority, data type, unit, time reference, range, validity interval, behavior on failure and versioning policy. A message can pass syntactic validation while being semantically wrong if it sends an outdated energy estimate or silently changes kWh to Wh.
+
+Treat an interface change as a **semantic model event**. Supplier request `CR-42` changes charging power from 30 to 27 kW and modeled efficiency from 0.90 to 0.82. That change should invalidate earlier estimates even though the interface ID `I02` remains unchanged. The [change record](../case/configuration-change.csv) and [model dependency graph](../case/model-evidence-flow.svg) support an automated impact query.
+
+### Use graph reachability, then human judgment
+
+In the controlled trace graph, changing `I02` reaches analysis `M05`, requirement `R05`, and evidence item `E05`. The [Python checker](../tools/step03_book9_model_check.py) prints those four identifiers. This is an **impact candidate list**, not a proof that all affected relations are represented: physical connectors, supplier maintenance changes, and certification obligations may be missing from the abstract graph. Engineers must challenge its completeness and establish which generated documents, tests and owners require action.
+
+A generated interface-control document is current only if its source baseline and generation configuration are current. Regenerating a document may faithfully reproduce a semantically invalid model. Report generation needs regression tests and independent review, not only an automated button.
+
+**Exercise.** A data exporter changes `BatteryEnergy` from kWh to Wh without changing the schema name. What should the integration validator do?
+
+<details><summary>Worked answer</summary>
+
+Reject the payload or require an explicitly versioned conversion contract. A value of `240000` Wh and `240` kWh may describe the same energy, but a model that treats the former as kWh overstates the state by 1000×. Validate units and metadata before consuming the value; create a change record for downstream analyses.
+
+</details>

@@ -1,0 +1,6 @@
+claim,owner,verification_method,validation_evidence,acceptance_rule,current_status,missing_evidence
+accessible throughput,paratransit/campus/hospital,capacity arithmetic and interface contract tests,representative accessible evacuation exercise,>=62 in 4h under agreed scenarios,OPEN,controlled physical and staff exercise
+standard throughput,bus/rail/hospital,multiconstituent integration test,drill with passenger behavior and traffic,>=186 in 4h,OPEN,route times and staffing
+fresh decision information,regional-coordinator,"timestamp, revision, provenance and cyber checks",degraded communications drill,<=5min and trusted data origin,OPEN,replay and failover test
+emergency receiving,hospital-network,intake handoff conformance,hospital receiver validation,>=248 combined and clinical workflow,OPEN,clinical process evidence
+cross-owner change,rail/regional-coordinator,revision and change impact,live cutover rehearsal,no unsupported schema after change,FAILED-SYNTHETIC,revision 2.0 unverified

@@ -46,6 +46,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)](https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods) — Statistical methods, experiments, reliability, and process assessment.
 - [SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)](https://sebokwiki.org/wiki/Main_Page) — Community-maintained secondary guide; use its references for further research.
 
+
+
+## Step 02 review studio — when an apparently successful intervention backfires
+
+Suppose reducing dispatch queue size by rejecting marginal requests improves *mean wait among served riders* from 18 to 12 minutes. The queue looks healthier. But if service refusal rises from 5% to 20%, the policy may have shifted the burden outside the measured population. Feedback systems demand explicit stock/flow boundaries and denominators.
+
+**Solved exercise:** with 100 potential riders, first policy serves 95 at 18 minutes average while the second serves 80 at 12 minutes average. Is the second policy categorically superior? **No.** The observed mean only describes served riders. Report refusals and unmet demand separately, and examine accessibility effects before making a policy decision. Define a performance vector such as `{served fraction, wait distribution, cancellations, accessibility}` rather than one scalar.
+
+**Learning loop:** specify the intervention hypothesis, causal mechanism, leading/lagging indicators, potential confounders, a stop/reverse trigger, and evidence that would disconfirm the model. Before attributing change to the intervention, consider demand shifts and regression to the mean; a before/after comparison alone rarely identifies cause.
+
 ## Follow the knowledge
 
 **Related concepts**

@@ -77,3 +77,40 @@ In the Northstar case, the routing engine should not silently authorize boarding
 ## Continuity
 
 This chapter builds from the earlier Foundation books and leads toward [next chapter](02-elicit-and-structure-software-requirements.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/605-704-w01.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: defining the domain and its invariants
+
+### 1.1 The difference between a concept and a software responsibility
+
+Continue the [NS-OO4.1 reservation-service case](../case/INDEX.html) throughout this book. A rider makes a reservation; a dispatcher allocates a vehicle; a cancellation frees capacity. The **analysis** model answers what must remain true even if the implementation changes. The **design** model answers which components will enforce those truths. The vocabulary overlaps but the models are not interchangeable.
+
+A `Reservation` has a stable identity and lifecycle; a `Vehicle` has eligibility attributes; an `Assignment` relates a reservation to a vehicle for a defined time slot. A `ReservationService` is a service boundary, not automatically a domain entity. A button and a database row are presentation and persistence constructs. Classifying them separately prevents the common mistake of treating every noun as a class.
+
+| Analysis concept | Identity or value? | Domain rule | Candidate design owner |
+|---|---|---|---|
+| Reservation | Entity: survives reassignment | A request token cannot create two different reservations | ReservationService + repository |
+| Assignment | Association entity: slot-specific | Only one active assignment per vehicle and slot | AssignmentPolicy + persistent constraint |
+| Location reading | Timestamped value | Age at the decision must not exceed 15 s | Eligibility policy |
+| Audit event | Immutable fact | Describes actor, transition and committed version | Transactional audit writer |
+
+This classification is an *hypothesis*. Challenge it with change scenarios: if reservation identity survives a reassignment, `Assignment` cannot be the same entity as `Reservation`. If a location reading is updated in place, the system loses the exact information used to authorize an earlier allocation. Thus its observation time and provenance must survive long enough for the intended evidence purpose.
+
+### 1.2 Turn business rules into proof obligations
+
+For a vehicle \(v\) and service slot \(s\), define the set of active assignments
+
+\[
+A(v,s)=\{a\mid a.vehicle=v \land a.slot=s \land a.state=ACTIVE\}.
+\]
+
+Requirement `SW-02` becomes \(|A(v,s)|\leq 1\). This statement is stronger than the procedural suggestion “check whether a vehicle is already booked.” A read-before-write check can be true for two competing requests at the same time. The invariant must be preserved at the mutation boundary, including under contention.
+
+`SW-05` adds an implication: an accessibility-required reservation that has an active assignment must be assigned an accessibility-eligible vehicle. `SW-03` adds a token-to-reservation mapping: repeated requests with the *same* token **and payload** return the same durable identity, while reuse with a changed payload is an error. These are three distinct obligations; no single class diagram proves them.
+
+### 1.3 Scope and evidence
+
+The case assumes one reservation database and discrete service slots. It omits schedule overlaps across adjacent slots, live safety interlocks, authorization, real-world privacy policy, and cross-region replication. The diagrams therefore do not constitute a safety case or a production architecture. The [case baseline](../case/model-baseline.json) and [diagram](../diagrams/oo4-reservation-model.svg) are controlled examples; the [Python/SQLite checker](../tools/step03_book4_contract_check.py) tests selected invariants, not all environmental claims.
+
+**Solved checkpoint.** A team calls `TripRequest`, `Reservation`, `BlueConfirmButton`, and `INSERT` four “business classes.” Keep `Reservation` as an entity, treat `TripRequest` as an input command unless it has a separately evidenced lifecycle, classify the button as presentation, and `INSERT` as a persistence operation. The distinction allows the UI or database technology to change without redefining the customer's business rule.
+
+**Exercise.** A trip can span two slots. Modify \(|A(v,s)|\leq1\) so that overlapping time intervals, not equal slot labels, count as conflict. Explain why a unique `(vehicle,slot)` index would then be insufficient. An acceptable answer proposes an interval-overlap predicate and a transaction/locking enforcement mechanism, not merely an extra `if` statement.

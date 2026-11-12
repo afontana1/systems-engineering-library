@@ -1,0 +1,11 @@
+digraph NorthstarSchedule {
+  graph [rankdir=LR, bgcolor="transparent", pad="0.28", nodesep=0.75, ranksep=0.75];
+  node [shape=box, fontname="DejaVu Sans", fontsize=12, style="rounded,filled", fillcolor="#e4f3f1", color="#236f72", fontcolor="#193e4a", penwidth=1.5, margin="0.16,0.11"];
+  edge [color="#617985", penwidth=1.6, arrowsize=0.7];
+  A [label="A · Charter\n2 weeks",fillcolor="#cce6e0"];
+  B [label="B · Vehicle acquisition\n4 weeks",fillcolor="#b7e0da"];
+  C [label="C · Software spec\n3 weeks (1w float)",fillcolor="#f5efd9",color="#ad925c"];
+  D [label="D · Integration\n5 weeks",fillcolor="#b7e0da"];
+  E [label="E · Acceptance\n2 weeks",fillcolor="#b7e0da"];
+  A->B; A->C; B->D; C->D; D->E;
+}

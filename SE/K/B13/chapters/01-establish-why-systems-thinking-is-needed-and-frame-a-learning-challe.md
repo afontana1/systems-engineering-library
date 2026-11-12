@@ -111,3 +111,25 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 Start of the book · [02 — Next chapter](02-define-dynamic-behavior-with-reference-modes-evidence-and-time-horiz.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-FB13.1 case: feedback, conservation, and policy learning — Week 1
+
+*Integrated chapter: Chapter 01 — Establish why systems thinking is needed and frame a learning challenge. Northstar NS-FB13.1 is a transparent teaching baseline; the following methods are not field-validated.*
+
+### A dynamic-problem charter, not an event chronology
+
+The first task is to distinguish three genuinely different explanations of the Northstar mobility difficulty. **Event:** the mean reported daily request rate in quarter 5 is 1,370 and the p90 wait is 21.4 minutes. **Behavior:** requests grow from 920/day in quarter 1 to 1,370/day in quarter 5 while reported wait initially improves (18.0 to 14.2 minutes by quarter 3) and then deteriorates. **Candidate mechanism:** capacity expansion initially absorbs growth; delayed repair demand and rider response later erode availability, while dispatch teams compensate with overtime. Only the first two statements are contained in the synthetic observations; the third is a hypothesis, not a causal finding.
+
+An auditable charter fixes five elements: the decision owner (campus mobility operator), the decision (maintenance capacity versus short-term surge versus protected access), a time horizon (the inherited eight quarters for reference patterns and a separately initialized 360-day policy illustration), the system boundary (requests, two backlog groups, fleet availability, perceived service pressure and trust), and out-of-boundary influences (weather, municipal transit, student schedule, charging infrastructure, rider disability-related trip requirements). A valid purpose statement is: *explain whether delayed capacity response could generate persistent unserved requests and compare plausible interventions without claiming actual fleet sufficiency*. The success criterion is an intelligible, falsifiable mechanism plus a traceable set of trade-offs; it is **not** simply the highest final throughput.
+
+### Worked comparison: why throughput growth is not a resolution
+
+Between quarters 1 and 5, reported completions rise from 805 to 1,110 trips/day, or \((1110-805)/805=37.9\%\). Requests rise from 920 to 1,370 per day, or \((1370-920)/920=48.9\%\). A simple same-quarter flow gap therefore rises from 115 to 260 requests/day. This does *not* establish that 260 requests accumulate every day: the table does not distinguish rejected, withdrawn, deferred, rescheduled or repeat demands. It does show why claiming success from completions alone is defective. In the new model, discarded requests are accounted as explicit abandonment, so the boundary becomes visible.
+
+**Worked exercise.** A reviewer asserts that the decrease in trust from 63 to 61 proves maintenance caused the delay. Is this supportable? **Solution:** no. The table shows an association across eight synthetic points. Capacity, demand, communications and sampling may all change. A causal claim requires temporal process evidence, a plausible mechanism and competing-hypothesis tests. Reframe it as a testable statement: *holding demand and other causes fixed, faster restoration of unavailable vehicles raises completion capacity and could lower abandonment over a year*. The controlled simulator tests the implication under assumed equations only.
+
+**Practice extension:** Redraw the boundary to include rejected requests; state which conclusions could reverse when denial rather than abandonment is treated as the primary outcome.
+
+### Reproduce the evidence and challenge the result
+
+The [NS-FB13.1 case dossier](../case/INDEX.html) publishes its [controlled inputs](../case/model-inputs.json), [Python calculation model](../tools/step03_book13_feedback.py), [policy-by-condition evidence](../case/experiment-results.csv), [equation and unit crosswalk for Vensim](../case/vensim-equation-crosswalk.md), and [claim limitations](../case/credibility-register.csv). Reproduce results with `python3 SE/K/B13/tools/step03_book13_feedback.py --write` from the repository root. This is a **synthetic teaching simulation**: correctly conserving its stocks and reproducing its output does **not** calibrate the causal structure or authorize real mobility policy. The Book 11 event simulator and Book 12 physical vehicle model answer other questions and are not dynamically coupled.

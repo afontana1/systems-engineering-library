@@ -1,0 +1,148 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pareto search, scenario regret, and robust design decisions · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/pareto-and-robust-design.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Pareto search, scenario regret, and robust design decisions</h1>
+<p><em>Technical method guide · Multiobjective optimization, constraints, sensitivity, and decision policy · Phase 2 expansion</em></p>
+<p><strong>What this guide enables.</strong> Distinguish feasible design sets from Pareto-efficient candidates, calculate scenario losses and regret, compare expected-loss and minimax-regret decisions, and test whether the selected engineering alternative remains defensible when assumptions change. All candidate designs and monetary equivalents are synthetic.</p>
+<p><strong>Prerequisites:</strong> <a href="../encyclopedia/engineering-trades.html">Engineering trades</a>, <a href="../encyclopedia/pareto-and-value.html">Pareto analysis</a>, <a href="../encyclopedia/robust-optimization-and-margins.html">robust optimization and margins</a>, and <a href="bayesian-decision-handbook.html">Bayesian decisions</a>.</p>
+<h2>1. Start with constraints; do not hide them inside arbitrary weights</h2>
+<p>Let the design vector be \(x\in X\), where \(X\) contains actual implementable configurations, not diagrams of nonexistent alternatives. A conventional single-objective formulation is</p>
+<p>\[
+\min_{x\in X} f(x)\quad\text{subject to}\quad g_i(x)\le 0,\;h_j(x)=0.
+\]</p>
+<p>In systems engineering, \(g_i\) may encode response-time limits, energy budgets, minimum coverage, regulatory constraints, or an architecture policy. A candidate that violates a binding safety requirement must not be made acceptable simply by multiplying safety by a low weight. First distinguish <strong>hard constraints</strong>, negotiable preferences, and uncertain requirements. Record any exception authority and the verification evidence for each constraint.</p>
+<p>For multiple objectives, \(f(x)=(f_1(x),\dots,f_m(x))\), there is generally no single natural best vector. A design \(x\) <strong>dominates</strong> \(y\) for minimization if every objective for \(x\) is no worse and at least one is strictly better:</p>
+<p>\[
+\left[\forall j,\;f_j(x)\le f_j(y)\right]\land
+\left[\exists j,\;f_j(x)&lt; f_j(y)\right].
+\]</p>
+<p>The <strong>Pareto set</strong> is the collection not dominated by another evaluated feasible candidate. Pareto efficiency is not proof that a design is affordable, good, or stakeholder-approved. It only says there is no currently evaluated alternative that improves at least one selected objective without worsening another.</p>
+<h2>2. A six-design engineering trade with three operating scenarios</h2>
+<p>The Northstar team compares six hypothetical shuttle dispatch designs. Capitalized expenditure is represented as cost \(C\) in <strong>thousands of dollars</strong>, energy use as kWh per mission, and mean dispatch delay under three scenarios in <strong>seconds</strong>. Lower is preferred for all three, but cost and energy measure different consequences from delay. The expected-delay model assigns probabilities 0.6, 0.3 and 0.1 to nominal, peak, and disruption conditions; these are <em>planning assumptions</em>, not measured frequencies.</p>
+<table>
+<thead>
+<tr>
+  <th>Design</th>
+  <th style="text-align:right">Cost ($k)</th>
+  <th style="text-align:right">Energy (kWh)</th>
+  <th style="text-align:right">Nominal delay (s)</th>
+  <th style="text-align:right">Peak delay (s)</th>
+  <th style="text-align:right">Disruption delay (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>A</td>
+  <td style="text-align:right">120</td>
+  <td style="text-align:right">65</td>
+  <td style="text-align:right">5.5</td>
+  <td style="text-align:right">7.0</td>
+  <td style="text-align:right">9.0</td>
+</tr>
+<tr>
+  <td>B</td>
+  <td style="text-align:right">135</td>
+  <td style="text-align:right">58</td>
+  <td style="text-align:right">4.8</td>
+  <td style="text-align:right">6.0</td>
+  <td style="text-align:right">7.5</td>
+</tr>
+<tr>
+  <td>C</td>
+  <td style="text-align:right">142</td>
+  <td style="text-align:right">54</td>
+  <td style="text-align:right">4.6</td>
+  <td style="text-align:right">5.9</td>
+  <td style="text-align:right">7.2</td>
+</tr>
+<tr>
+  <td>D</td>
+  <td style="text-align:right">115</td>
+  <td style="text-align:right">73</td>
+  <td style="text-align:right">5.8</td>
+  <td style="text-align:right">7.4</td>
+  <td style="text-align:right">10.2</td>
+</tr>
+<tr>
+  <td>E</td>
+  <td style="text-align:right">150</td>
+  <td style="text-align:right">52</td>
+  <td style="text-align:right">4.2</td>
+  <td style="text-align:right">5.7</td>
+  <td style="text-align:right">6.9</td>
+</tr>
+<tr>
+  <td>F</td>
+  <td style="text-align:right">155</td>
+  <td style="text-align:right">60</td>
+  <td style="text-align:right">5.1</td>
+  <td style="text-align:right">6.5</td>
+  <td style="text-align:right">8.1</td>
+</tr>
+</tbody>
+</table>
+<p>Define objective vector \(f(x)=[C(x),E(x),\max_s D(x,s)]\): capital cost, energy and worst-scenario delay. Design <strong>F is dominated</strong> by B, C and E; for example B costs less (135 versus 155), uses less energy (58 versus 60) and has a better worst delay (7.5 versus 8.1). Designs A–E are mutually nondominated in this <em>evaluated candidate set</em>. They constitute a sampled trade frontier, not necessarily the globally optimal frontier over all possible designs.</p>
+<p>An engineering owner might impose \(\max_s D(x,s)\le 8.0\) seconds. Then A, D and F are <strong>infeasible</strong>; B, C and E remain. This is a robust, <em>all three modeled scenarios</em> constraint. It does not certify the design for unmodeled disruptions or measurement uncertainty. The <a href="data/design-trade-scenarios.csv">candidate dataset</a> and <a href="code/robust_trade.py">analysis program</a> calculate dominance and feasibility explicitly.</p>
+<h2>3. Expected value and regret can prefer different designs</h2>
+<p>To illustrate a <em>decision</em> rather than merely an optimization vector, assume a stakeholder-endorsed monetization of <strong>$10,000-equivalent loss per second of mean delay</strong>. Define for each scenario \(s\)</p>
+<p>\[
+L(x,s)=C(x)+10D(x,s)\quad[\$\text{ thousands equivalent}],
+\]</p>
+<p>where \(C\) is also in thousands of dollars. This coefficient is a <strong>hypothetical preference or consequence model</strong>: it is not a financial law. Energy remains a separately reported objective and possible constraint; omitting it from \(L\) must be an explicit decision, not an unnoticed disappearance of value.</p>
+<p>The expected loss given the assumed scenario probabilities is</p>
+<p>\[
+E[L(x,S)]=\sum_s p_s L(x,s).
+\]</p>
+<p>For D, the expected delay is \(0.6(5.8)+0.3(7.4)+0.1(10.2)=6.72\) seconds, so \(E[L(D,S)]=115+10(6.72)=182.2\) thousand-equivalent units. For A the expected loss is \(120+10[0.6(5.5)+0.3(7.0)+0.1(9.0)]=183.0\). D therefore has the lowest expected loss <em>among all six options</em> under these probabilities, despite its poor disruption performance.</p>
+<p>Regret instead compares a decision to the best that <strong>could have been chosen if the scenario were known</strong>:</p>
+<p>\[
+R(x,s)=L(x,s)-\min_{y\in X}L(y,s).
+\]</p>
+<p>Using all six candidates as the comparator set, D has losses \([173,189,217]\), while A has \([175,190,210]\). The scenario-by-scenario best losses are \([173,189,210]\), giving <strong>D regrets \([0,0,7]\)</strong> and <strong>A regrets \([2,1,0]\)</strong>. The minimax-regret policy</p>
+<p>\[
+\min_x\max_s R(x,s)
+\]</p>
+<p>chooses <strong>A</strong> (maximum regret 2), while expected-loss minimization chooses <strong>D</strong> (expected loss 182.2). Neither method is inherently universally correct: they implement <em>different decision principles</em>. If the 8-second hard constraint is applied, both A and D leave the feasible set, and the comparison must be recomputed <strong>within B, C, E</strong>, not treated as if the original recommendation survived unchanged.</p>
+<h2>4. Robust optimization is more than taking a worst row of a table</h2>
+<p>Robust optimization makes uncertainty part of the design formulation:</p>
+<p>\[
+\min_{x\in X}\max_{u\in\mathcal U} L(x,u)
+\quad\text{subject to}\quad g_i(x,u)\le0\ \forall u\in\mathcal U.
+\]</p>
+<p>Here \(\mathcal U\) is an explicitly justified <strong>uncertainty set</strong>: scenarios, uncertain physical parameters, bounded coefficients, or structured disturbances. A very wide set can make solutions prohibitively conservative; a narrow set can conceal credible failures. A probability-based alternative is a chance constraint such as \(P(g(x,U)\le0)\ge 0.99\), but that requires a defensible probability model. A scenario list alone cannot justify a 99% chance-constrained guarantee.</p>
+<p>Optimization reports should name (a) the candidate generator, (b) the feasibility checks, (c) the evaluation model and its validity region, (d) uncertainty representation, (e) scaling/normalization of objectives, and (f) search stopping and approximation error. For computational optimization, store seeds, executable version, constraints, input units and solver tolerance. Use an independent re-evaluation of a selected candidate rather than trusting only the surrogate that found it.</p>
+<p><strong>Sensitivity is a decision test.</strong> The expected-loss ranking here depends on the assumed probabilities and $10k/s consequence conversion. Increasing the disruption probability from 0.1 to 0.3 while reducing the nominal probability from 0.6 to 0.4 raises D's expected loss more than A's because D is particularly poor under disruption. Examine the point at which the choice changes; a policy based on a knife-edge assumption should be escalated for more information or better architecture design.</p>
+<h2>5. When a weighted sum does and does not help</h2>
+<p>A weighted objective \(J(x)=\sum_j w_j\tilde f_j(x)\) can be useful after selecting <strong>units, normalization, decision scales and weights</strong>. A raw addition of milliseconds, kWh and dollars is meaningless. Even with proper normalization, choosing weights after observing which candidate wins can mask advocacy as analysis. Weighted sums can fail to reveal nonconvex parts of a continuous Pareto frontier; alternatives such as epsilon-constraint search or reference-point methods may be preferable.</p>
+<p>A design trade should separate <em>facts about alternatives</em> from <em>stakeholder preferences</em>. Measured cost, energy and latency with uncertainty are engineering claims. Their relative desirability depends on value elicitation, affordability, mission needs and accountable decision authority. A Pareto chart can simplify conversation, but it cannot replace that conversation.</p>
+<h2>6. Evidence, limitations, and exercises</h2>
+<p>The small program <a href="code/robust_trade.py">robust_trade.py</a> computes the full Pareto set, scenario losses, expected loss, maximum regret, and robust feasibility. It uses ordinary Python and no optimization library. It is exhaustive over the six given designs; it <strong>does not search continuous architecture space</strong> or guarantee a globally efficient solution.</p>
+<p>For review, ask whether scenarios span plausible threats; whether constraints are actually verified; whether model outputs have uncertainty intervals; whether correlated failures were considered; whether the preferred design changes under reasonable probability or weight perturbations; whether all stakeholders accepted the loss conversion; and whether the actual implemented design preserves modeled properties.</p>
+<p><strong>Exercise A:</strong> impose \(\max_s D(x,s)\le 8.0\) and compute expected loss and maximum regret using only B, C and E; explain why the original expected-loss winner is no longer eligible.</p>
+<p><strong>Exercise B:</strong> increase disruption probability to 0.3 and reduce nominal to 0.4; recompute expected losses. State which assumptions require evidence before any project decision.</p>
+<h2>7. Derive the decision-switching threshold</h2>
+<p>The expected-loss comparison between A and D is close enough that uncertainty about operating conditions matters. Let disruption probability be \(q\), hold peak probability at 0.3, and allocate the remainder \(0.7-q\) to the normal scenario, with \(0\le q\le0.7\). The loss difference between D and A is</p>
+<p>\[
+\begin{aligned}
+E[L(D,S)-L(A,S)]
+&amp;=(115-120)+10[(0.7-q)(5.8-5.5)\\
+&amp;\qquad+0.3(7.4-7.0)+q(10.2-9.0)]\\
+&amp;=-5+10(0.33+0.9q)=-1.7+9q.
+\end{aligned}
+\]</p>
+<p>The switch occurs at \(q^*=1.7/9\approx0.1889\). For \(q&lt;q^*\), D has lower assumed expected loss; for \(q&gt;q^*\), A does. At the original \(q=0.1\), the difference is \(-0.8\) thousand-equivalent units. Increasing disruption to \(q=0.3\) while reducing normal operation to 0.4 changes that difference to \(+1.0\). The selected design flips without a single engineering performance estimate changing—only the scenario probabilities changed.</p>
+<p>This is the purpose of <strong>switching-value analysis</strong>: identify the input assumption at which the recommendation reverses. The threshold is not itself evidence that the scenario probabilities are correct. It tells the team what operational data would be valuable to collect and what assumptions deserve management review. If the hard worst-scenario delay constraint is binding, both A and D are infeasible regardless of this threshold, so the switching analysis is a <em>conditional comparison</em> rather than the final choice.</p>
+<h2>8. Distinguish empirical dominance from robust dominance</h2>
+<p>Suppose predicted peak delay has a credible interval or range rather than one exact point. Point-estimate dominance may disappear when the estimates overlap and each design is evaluated under the same adverse conditions. A <strong>robust dominance</strong> claim needs a clearly defined uncertainty set and must hold for every included state or parameter realization. If \(f_j(x,u)\) varies with \(u\), checking \(f_j(x,u_0)\le f_j(y,u_0)\) only at nominal \(u_0\) does not establish robust dominance.</p>
+<p>A physically grounded study may use a model of demand, sensor outages, or battery degradation to generate common scenarios for each design. Keeping <em>common random numbers</em> across simulated alternatives can reduce the variance of pairwise differences; however, it must be recorded as paired simulation evidence, not misrepresented as independent observations. For expensive multiobjective simulations, surrogate prediction errors should be measured on withheld designs, with promising candidates reevaluated using the original high-fidelity model.</p>
+<p><strong>Stakeholder values and risk attitude are distinct from the design data.</strong> An alternative can be Pareto-efficient and still undesirable because it has poor risk concentration, difficult maintenance, unquantified compliance burden, or weak provenance. Extend the objective vector only when a property is genuinely decision-relevant and operationally measurable. Otherwise present it as a qualitative constraint or review issue, not a made-up weighted numerical score.</p>
+<h2>9. A decision record suitable for later audit</h2>
+<p>A final trade report should preserve: the purpose and authority of the decision; design and performance assumptions; input units; data or model versions; scenario probabilities and their source; constraint thresholds and margins; which designs are infeasible or dominated and why; the preferred decision principle; the switching values; and a dissent/uncertainty log. If downstream requirements change, this record enables a fresh trade without reconstructing the original rationale from presentation slides.</p>
+<p>The static <a href="code/robust_trade.py">trade evaluator</a> supplies a small reference implementation. Modify its probability arguments and feasible-set constraint, then compare results against the algebra above. Real architecture optimization requires an appropriate solver and independent technical review; the program intentionally makes no claims of general solver optimality.</p>
+<h3>Sources and curriculum connections</h3>
+<ul>
+<li><a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST Engineering Statistics Handbook</a> for experiment design, response surfaces and uncertainty interpretation.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> for technical trades, decision rationale and lifecycle evidence practice.</li>
+<li><a href="../B14/chapters/04-apply-constraints-dominance-and-pareto-analysis-to-the-selection-pro.html">Book 14, Chapter 4 — Constraints and Pareto</a>, <a href="../B14/chapters/08-formulate-parametric-design-and-conduct-multiobjective-search.html">Chapter 8 — Multiobjective search</a>, <a href="../B14/chapters/11-analyze-uncertainty-sensitivity-robustness-regret-and-value-of-infor.html">Chapter 11 — Uncertainty and regret</a>.</li>
+<li><strong>Curriculum:</strong> EN.645.784 (weeks 4, 8 and 11), EN.645.767 (concept trades), EN.645.756 (sensitivity and technical margin).</li>
+</ul>
+<footer class="reference-note"><a href="pareto-and-robust-design.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

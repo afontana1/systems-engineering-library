@@ -107,3 +107,41 @@ For the Northstar service, a reviewable decomposition maps each mission outcome 
 Use [Hypothetical Lab 5](../labs/lab-05-functional-architecture.md) to repair an intentionally incomplete dispatch model. Then return to **Week 5 in the original EN.645.662 guide** and build `662_W05_FunctionalArchitecture_v1.0` with the full functional hierarchy, three behavioral views, state model, flows, and trace matrices. The lab is practice, not a replacement for the graded artifact.
 
 **Next:** [Chapter 6 — The Functional Baseline Review](06-reviewing-the-functional-baseline.md). **Reference:** [Chapter 4 — Requirements](04-requirements.md).
+
+
+## Step 03 technical studio — separate function, state, and physical owner
+
+A function expresses a transformation or decision; a state expresses a persistent condition; a component expresses an allocation choice. Conflating them causes requirements to disappear between diagrams. Northstar's **Allocate ride** function consumes a valid request and produces either an exclusive allocation record or an explicit rejection. Its state machine has at least `requested`, `reserved`, `confirmed`, `cancelled`, and `expired` states. An implementation may use several software services, but a functional contract should not depend on their names.
+
+### An invariant across a failed retry
+
+For a given reservation `r`, let `Active(r)` be the set of distinct vehicles currently assigned to it. A fundamental model invariant is
+
+\[
+\forall r:\quad |Active(r)|\leq 1.
+\]
+
+The critical transition is **reserve**. The precondition is that the request is eligible and has no conflicting active allocation; the postcondition is exactly one committed owner or an explicit failure. Imagine a network timeout after the reservation commits. If the client retries and the server inserts a second active allocation, the user-facing operation may appear successful but the invariant fails. Solve it with an atomic allocation transaction and an idempotency key or equivalent design; do not rely on a read-then-write check that can race.
+
+### Functional decomposition with failure obligations
+
+| Function | Input | Output | Failure/exception |
+|---|---|---|---|
+| Validate request | Rider, stop, time | Eligibility decision | Denial with reason |
+| Assign resource | Validated request, availability | Exclusive owner | Conflict/retry |
+| Publish confirmation | Committed allocation | Observable rider message | Delivery unknown; recover/reconcile |
+| Supervise status | Timed status stream | Operator indication | Staleness recognized |
+
+### Solved state-model exercise
+
+A design permits `cancelled → confirmed` on any late acknowledgment. Is that necessarily correct? **No.** An acknowledgment sent before cancellation might arrive after it. Without revision or event-order semantics, the late message can resurrect a cancelled request. Require the acknowledgment to reference a current reservation version, and reject obsolete state transitions. The precise solution depends on authority and ordering rules, which should be documented as part of the behavioral contract.
+
+## Step 03 reference deepening — specify behaviors as invariants and transitions
+
+Functional decomposition answers **what must occur**, but the system's correctness also depends on the order in which actions are allowed. For Northstar reservation ownership, define states `unassigned`, `held(vehicle_id)`, and `released`. An invariant is that each active reservation has at most one active vehicle owner. A create/hold transition must be atomic: checking “no owner” and assigning one later permits competing dispatch requests to pass the same check before either commits.
+
+A minimal transition contract is: `hold(r,v)` succeeds only if `owner(r)=none`; on success the owner becomes `v`, and on failure it remains unchanged. Repeated identical commands should not produce a second allocation; an idempotency token can distinguish a retry from a new request. To implement the atomic condition in a database, use an appropriate transaction or unique constraint rather than relying solely on a flowchart.
+
+The consequence is a cross-view check. The functional view must include “reject conflicting allocation”; the interface view must carry a reservation identifier; the physical view must identify the authoritative storage/commit point; and verification must deliberately test simultaneous requests plus retry behavior. A neat decomposition missing any of those links is not yet a credible behavior model.
+
+**Practice with solution:** Two workers both read `owner=none` then both write different owners. What failed? The **atomicity of the precondition-plus-update**, not the logical statement of the invariant. Add a test that starts concurrent allocations against the same reservation and checks one successful commit, one rejected conflict, and the final single owner.

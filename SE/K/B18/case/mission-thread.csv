@@ -1,0 +1,6 @@
+thread_step,owner,precondition,event,postcondition,evidence,fallback
+01-intake,regional-coordinator,request consent,receive mobility request,classified accessible/standard,privacy-approved request record,voice call
+02-availability,rail/transit/campus/paratransit,constituent reports fresh,collect capacity and interface revision,freshness and provenance tagged,signed availability sample,manual liaison
+03-dispatch,regional-coordinator,capacity and authority present,allocate accessible then standard slots,reservation commitments,dispatch transaction log,agreed fallback schedule
+04-transport,independent transport owners,acknowledged commitment,move passenger,arrival confirmation,multiconstituent trip receipt,alternate carrier
+05-receiving,hospital-network,intake capacity verified,accept arrival,mission outcome recorded,hospital receiving record,alternate facility

@@ -1,0 +1,10 @@
+evidence_id,requirement_id,artifact,configuration,status,interpretation,procedure
+TE8-E01,TE8-R01,40 degraded latency observations,NS-DI7.1,SYNTHETIC_EXECUTED,observed 0 above 500 ms; no 99th-percentile compliance confidence,TE8-P-01
+TE8-E02,TE8-R02,per-shift energy calculation,NS-DI7.1,MODEL_ONLY,"26.3 kWh, no operational energy test",TE8-P-02
+TE8-E03,TE8-R03,mission-survival model,NS-DI7.1,MODEL_FAIL,"0.97863 against 0.98, unmeasured shared hazard",TE8-P-03
+TE8-E04,TE8-R04,logistics availability approximation,NS-DI7.1,MODEL_FAIL,0.98644 against 0.99; no confidence interval,TE8-P-04
+TE8-E05,TE8-R05,20 accessibility pickup trials,NS-DI7.1,SYNTHETIC_EXECUTED,19 of 20 within 12 minutes; insufficient to infer >= 0.95,TE8-P-05
+TE8-E06,TE8-R06,HIL allocation test,NS-DI7.0,STALE,old software baseline; not applicable without impact analysis,TE8-P-06
+TE8-E07,TE8-R08,replay and stale-command test,NS-DI7.1,PLANNED,not executed,TE8-P-07
+TE8-E08,TE8-R07,single recovery drill,NS-DI7.1,SYNTHETIC_FAIL,14 min versus 12-minute threshold,TE8-P-08
+TE8-E09,TE8-R06,software transaction repeatability,NS-DI7.1,MODEL_ONLY,"no duplicates in constructed transactions, not field-representative",TE8-P-09

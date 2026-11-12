@@ -1,6 +1,6 @@
 # Systems Engineering Concept Encyclopedia · v53
 
-56 canonical reference entries and 1076 searchable resources. Eight new entries are introduced in v53. Existing record identifiers remain stable. Articles are locally readable; publisher citations require internet access. Independent external peer review and complete 240-chapter mathematical audit remain outstanding.
+Historical v53 snapshot: 56 reference entries and 1,076 resources at that release. The current library contains 80 canonical concepts and 1,100 searchable Encyclopedia resources; see the full [concept directory](CONCEPTS.html). Eight new entries are introduced in v53. Existing record identifiers remain stable. Articles are locally readable; publisher citations require internet access. Independent external peer review and complete 240-chapter mathematical audit remain outstanding.
 
 [Open interactive encyclopedia](U/OPEN-ENCYCLOPEDIA.html) · [Structured catalog](REFERENCE-CATALOG-v53.json)
 

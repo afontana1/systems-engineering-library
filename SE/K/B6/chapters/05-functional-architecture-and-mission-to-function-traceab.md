@@ -99,3 +99,24 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 5: Functions independent of components](../labs/lab-05-functional-architecture-and-mission-to-function-traceab.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 5 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+
+## Step 03 integrated reference: NS-CD6.1 — functional architecture without vehicle lock-in
+
+The central discipline of functional design is to describe transformations that any viable concept must perform, before allocating them to hardware, software or people. The [controlled functional record](../case/functions.csv) identifies F01 Detect mobility need, F02 Make feasible offer, F03 Dispatch allocated capacity, F04 Monitor and recover, and F05 Record outcomes and evidence. A brokered service and a self-operated shuttle may implement these functions differently while being evaluated against the same mission.
+
+### Trace transformations instead of repeating organization names
+
+For each function, specify triggering conditions, inputs, outputs, control policy, state, failure output and observable result. F02 needs a booking request and a current service envelope; its valid outputs are an accessible offer **or a clearly recorded inability to serve**. Omitting the failure output produces a misleading coverage denominator because unserved requests disappear. F03 consumes an accepted offer and a capacity commitment; a proposed dispatch is not successful service until allocation is exclusive and executable.
+
+A simple functional thread is `F01 → F02 → F03 → F04`, with F05 recording outcomes from every stage. This is a **causal dependency**, not a claim that the physical system is strictly sequential. Monitoring is concurrent with dispatch, and recovery can redirect the flow to an operator. Timing matters because an offer based on stale capacity can be invalid before a passenger ever boards.
+
+### Quantify the consequence of allocation
+
+Candidate C assigns a trunk route and feeder vehicles to the same mobility mission. The simple arithmetic offers 40 + 12.8 = 52.8 effective trips/h. The decomposition is valid only if the trunk and feeder capacities represent disjoint served demand or an explicitly modeled transfer flow. If every feeder passenger must transfer to the trunk, summing their capacities **overstates** system throughput: a serial chain's throughput is bounded by the slower stage, \(C_{\mathrm{system}}\le\min(C_{\mathrm{feeder}},C_{\mathrm{trunk}})\) for that passenger class. This alternative interpretation is a useful counterexample; the case assumes parallel service contributions pending scenario validation.
+
+### Review questions and answer
+
+**Exercise:** A design team maps the need “accessible trip offered” only to F03 Dispatch. What is missing? **Answer:** F01 must accept eligible requests, F02 must apply accessibility feasibility and refusals, F04 must handle degraded or missing paths, and F05 must make coverage independently observable. The dispatch function is necessary but insufficient. Cross-check every CD6 requirement against [the function record](../case/functions.csv) and decide whether a missing link is a design defect or an unsupported mission claim.
+
+**Boundary:** A functional map is not a physical interface specification, a safety assurance case, or an interoperability demonstration. Its value is to make those later analyses traceable to the original mission.

@@ -8,6 +8,10 @@ Each chapter teaches concepts for the correspondingly numbered course week, and 
 
 Open `OPEN-BOOK.html` for the searchable, self-contained offline reader. Source chapters live in `chapters/`; practice labs in `labs/`. The optional computational notebook is in `notebooks/`.
 
+## NS-SW5.1 coordinated software case
+
+All twelve chapters develop a common [reservation and release-engineering case](case/INDEX.html), with [controlled requirements](case/requirements.csv), [interface contracts](case/interfaces.csv), [architecture](case/architecture.svg), [incident data](case/incident-log.csv), [verification evidence](case/evidence-register.csv), and [reproducible checks](tools/step03_book5_system_check.py). All measurements and incident records are fictional. A structural model pass and favorable analytic estimate do **not** establish operational release readiness.
+
 ## Book contents
 
 - Week 1: [Chapter](chapters/01-define-the-software-systems-engineering-role-.md) → [Hypothetical lab](labs/lab-01-define-the-software-systems-engineering-role-.md) — Software engineering must preserve system intent

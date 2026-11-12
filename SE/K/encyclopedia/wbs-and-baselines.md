@@ -46,6 +46,14 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 
+
+
+## Step 02 review studio — a baseline change that looks like recovery
+
+A team reports planned value (PV) 400, earned value (EV) 320, and actual cost (AC) 360, all in thousands of budget units. Compute `CPI = EV/AC = 0.8889` and `SPI = EV/PV = 0.80`. Now the program manager proposes removing a difficult safety-test work package from the WBS so the indicators improve. Is that schedule recovery or scope change? **Answer:** it is a scope change. It may be legitimate only after the product obligations and residual risks are reviewed by the authorized decision maker; the deleted task cannot make its safety evidence unnecessary. Update the *product baseline, WBS, cost/schedule baseline, and verification plan together*.
+
+**Review exercise (solved):** a test work package has been earned at 100% because 40 test runs completed, yet none used the approved current interface schema. Should the package be recorded as complete? **Not without a justified acceptance rule and configuration applicability.** Output counts are not equivalent to accepted deliverables. A defensible earning rule would require an approved test report applicable to the controlled configuration, not merely executed test hours. Forecast indices also depend on the estimation and earning rules; they cannot certify product performance.
+
 ## Follow the knowledge
 
 **Related concepts**

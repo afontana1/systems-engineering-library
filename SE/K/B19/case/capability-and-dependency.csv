@@ -1,0 +1,7 @@
+capability,owner,baseline_gap,investment,dependency,evidence_gate
+Interagency governance,Coalition plus independent authorities,No unified decision rights,G,Appropriation and delegated charter,Signed multi-agency charter
+Privacy-constrained exchange,Independent data owners,Conflicting data retention rules,D,G,Data-use and provenance agreement
+Accessible surge service,Paratransit and regional operators,Insufficient capacity in stress events,A,D,Accessible service validation
+Cross-trained incident staff,Operators and labor bodies,Skill scarcity and fatigue,W,G,Agreed staffing and training
+Continuity of response,Utilities and emergency management,Shared grid/flood exposure,R,D,Compound-hazard trial
+Dispatch coordination,Vendors and operators,Contract/semantic mismatch,C,D,Version and degraded operation test

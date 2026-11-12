@@ -2,7 +2,7 @@
 
 **Course:** EN.645.662 — Introduction to Systems Engineering · **Scope:** 12 reading chapters and 12 fictional practice laboratories, one pair per original weekly learning unit.
 
-This is the actual teaching companion to the course guide, not an accreditation claim or an operational authorization. The guide supplies independent assignments and mastery rubrics; this book explains their prerequisites and the labs provide fictional rehearsals. The first four chapters from v13 remain unchanged.
+This is the actual teaching companion to the course guide, not an accreditation claim or an operational authorization. The guide supplies independent assignments and mastery rubrics; this book explains their prerequisites and the labs provide fictional rehearsals. All twelve original chapters have been retained and now include a coordinated technical studio using one controlled synthetic engineering baseline.
 
 ## How to study
 
@@ -11,6 +11,10 @@ This is the actual teaching companion to the course guide, not an accreditation 
 3. Complete its hypothetical lab and review the explanation only after attempting the tasks.
 4. Use the older [short weekly primer](../P0-text/lessons/645-662-w01.md) or [unified encyclopedia](../U/OPEN-ENCYCLOPEDIA.html) for alternate perspectives.
 5. Complete the **course guide assignment**, which is more extensive and authoritative than its lab rehearsal.
+
+## One controlled example across the full book
+
+The [Northstar NS-B1 integrated case](case/INDEX.html) carries requirements, interfaces, architecture decisions, hazards and verification evidence through all twelve chapters. Its [editable baseline](case/northstar-reference-baseline.json), [traceability matrix](case/traceability.csv) and [standard-library reproducibility script](tools/step03_case_check.py) permit independent checking. One test record is deliberately stale to make evidence-validity review meaningful. All figures are fictional; the case does not authorize an actual shuttle system.
 
 ## Chapter and lab index
 

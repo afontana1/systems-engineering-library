@@ -1,0 +1,4 @@
+id,from,to,operation,timeout_ms,retry,fail_mode
+IF-01,operator-interface,reservation-api,CreateReservation,500,"same idempotency key, bounded attempts",explicit failure; do not claim reservation
+IF-02,reservation-api,allocation-store,CommitAssignment,160,reconcile by token after uncertain response,no duplicate slot via atomic unique constraint
+IF-03,telemetry-ingest,reservation-api,LatestVehicleState,100,none for stale sample,deny dispatch when observation age >5 s

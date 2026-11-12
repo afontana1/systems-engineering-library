@@ -1,0 +1,2 @@
+change_id,element,baseline_before,baseline_after,old_value,new_value,impact,authority
+CR-42,I02,NS-MBA9.1,NS-MBA9.2,30 kW and 0.90 efficiency,27 kW and 0.82 efficiency,"Recompute charging energy, review R05, revalidate interfaces and evidence",pending

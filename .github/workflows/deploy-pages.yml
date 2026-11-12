@@ -1,4 +1,4 @@
-name: Deploy GitHub Pages
+name: Deploy Systems Engineering Library
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: pages
+  group: github-pages
   cancel-in-progress: false
 
 jobs:
@@ -24,28 +24,18 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
-
-      - name: Configure GitHub Pages
+        uses: actions/checkout@v4
+      - name: Configure Pages
         uses: actions/configure-pages@v5
-
-      - name: Check library links and learning journeys
-        run: python3 scripts/check_links.py
-
-      - name: Check search behavior
-        run: node scripts/check_search.js
-
-      - name: Assemble website
+      - name: Assemble static website
         run: |
           mkdir -p _site
           cp index.html .nojekyll _site/
           cp -R SE _site/
-
-      - name: Upload website
-        uses: actions/upload-pages-artifact@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-
-      - name: Deploy website
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

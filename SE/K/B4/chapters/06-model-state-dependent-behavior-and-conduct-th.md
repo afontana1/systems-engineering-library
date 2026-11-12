@@ -95,3 +95,33 @@ This chapter builds from [previous chapter](05-analyze-dynamic-behavior-and-disc
 - [Deep workshop — State Machines, Invariants, and Idempotent Commands](../practice/state.md)
 - [Corresponding independent laboratory](../practice/lab-state.md)
 - [Interactive workbench](../practice/WORKBENCH.html)
+
+## Step 03 integrated reference: state machines as test oracles
+
+### 6.1 Specify allowed transitions
+
+The controlled reservation states are `REQUESTED`, `OFFERED`, `ASSIGNED`, `COMPLETED`, and `CANCELLED`. Legitimate transitions include `REQUESTED → OFFERED`, `OFFERED → ASSIGNED`, and `ASSIGNED → COMPLETED`; cancellation is permitted from each nonterminal state. The full [transition list](../case/model-baseline.json) is data, not merely an illustrative picture.
+
+Let \(S\) be the state set, \(E\) the event set, and \(\delta:S\times E\rightharpoonup S\) a partial transition function. The arrow is **partial**: some state/event pairs have no defined transition and must be rejected. For example, `complete(CANCELLED)` is invalid, as is `assign(COMPLETED)`.
+
+The checker verifies that every declared transition references a known state and that no two transitions use the same `(source_state,event)` key with different outcomes. This catches structural ambiguity in the fixture. It does *not* establish all safety or liveness properties of a deployed dispatcher.
+
+### 6.2 Connect lifecycle state to resource state
+
+A reservation being `ASSIGNED` implies an active assignment relation; after cancellation, that relation must be released. The invariant therefore spans at least two stateful records. An implementation that changes only a reservation's status can look right in the reservation UI while leaking fleet capacity.
+
+A stronger contract is:
+
+\[
+state(r)=CANCELLED\ \Longrightarrow\ \nexists a:\ a.reservation=r\land a.state=ACTIVE.
+\]
+
+The reverse implication requires care: a requested, unassigned reservation may also have no active assignment. Avoid expressing a biconditional unless the domain lifecycle supports it. Define whether cancellation of a completed trip is disallowed, or is a separate financial adjustment; do not overload one transition with two meanings.
+
+### 6.3 State coverage versus transition coverage
+
+A test suite that reaches all five states may never exercise a cancellation from the `OFFERED` state. State coverage and transition coverage measure different things. The baseline declares six transitions; an ideal transition-coverage plan maps at least one test to each permitted edge and adds invalid-event tests at terminal states. Concurrent state transitions require an additional family of interleaving tests that no purely sequential edge count captures.
+
+**Solved checkpoint.** A client calls `cancel` twice on the same reservation. The first call commits `ASSIGNED → CANCELLED`, releases the resource, and writes an audit event. The second call should be a documented idempotent no-op or a clear already-cancelled response, **not** another release or another invented lifecycle transition. The example checker implements the no-op variant.
+
+**Exercise.** Build a transition table with all source states and `offer`, `assign`, `complete`, `cancel`. Label forbidden transitions and explain their observable responses. Then propose one test that deliberately forces cancellation and assignment to race.

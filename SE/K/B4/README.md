@@ -8,6 +8,10 @@ Each chapter teaches concepts for the correspondingly numbered course week, and 
 
 Open `OPEN-BOOK.html` for the searchable, self-contained offline reader. Source chapters live in `chapters/`; practice labs in `labs/`. The optional computational notebook is in `notebooks/`.
 
+## NS-OO4.1 integrated case
+
+All twelve chapters use the same [reservation-service study case](case/INDEX.html), with controlled [requirements and model data](case/model-baseline.json), [scenario fixtures](case/scenario-fixtures.csv), [traceability](case/traceability.csv), a [responsibility diagram](diagrams/oo4-reservation-model.svg), and a [standard-library Python/SQLite checker](tools/step03_book4_contract_check.py). The tests demonstrate narrowly scoped design obligations; they do **not** establish language-model conformance, operational safety, or production correctness.
+
 ## Book contents
 
 - Week 1: [Chapter](chapters/01-establish-the-ooad-problem-scope-and-modeling.md) → [Hypothetical lab](labs/lab-01-establish-the-ooad-problem-scope-and-modeling.md) — Analysis discovers concepts; design assigns responsibilities

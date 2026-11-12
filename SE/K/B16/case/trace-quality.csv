@@ -1,0 +1,6 @@
+requirement,linked,evidence_status,configuration_screen_complete,operationally_qualified,evidence_ids
+R-ACCESS,True,CURRENT,True,False,E-ACCESS
+R-COMMS,True,CURRENT,True,False,E-COMMS
+R-CRITICAL,True,CURRENT,True,False,E-CRITICAL
+R-ENERGY,True,CURRENT,True,False,E-ENERGY
+R-STD,True,CURRENT,True,False,E-STD

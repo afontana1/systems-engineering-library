@@ -33,6 +33,16 @@ Common errors include assuming a certificate is permanent, approving a substitut
 - **S1 · Risk across suppliers, development, acquisition and delivery, not a guarantee of authenticity.:** [NIST SP 800-161 Rev.1 Update 1, Cybersecurity Supply Chain Risk Management](https://csrc.nist.gov/pubs/sp/800/161/r1/upd1/final). Risk across suppliers, development, acquisition and delivery, not a guarantee of authenticity.
 - **S2 · Security engineering and integrity within systems life cycle.:** [NIST SP 800-160 Volume 1 Rev. 1, Engineering Trustworthy Secure Systems](https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final). Security engineering and integrity within systems life cycle.
 
+## Step 02 deeper treatment: engineering a substitution decision
+
+Suppose a fielded controller has a discontinued pressure sensor and the supplier proposes a pin-compatible alternative. “Pin-compatible” establishes at most a limited mechanical/electrical claim, not equivalence of dynamic response, calibration drift, lifetime, electromagnetic susceptibility, material compatibility or firmware interpretation. Define the **change-impact envelope** before approving the substitution.
+
+Construct a controlled comparison with source identifiers for both parts: physical/interface specification; functional and environmental bounds; new failure modes; calibration and traceability requirements; software driver assumptions; safety and cybersecurity exposure; warranty/repair implications; affected requirements and test evidence. Classify each evidence item as unchanged, conditionally reusable, invalid or unknown. The default for an unknown safety-critical interaction is not a green compliance status.
+
+**Illustrative calculation.** A sensor has a nominal 20 ms response time; the replacement is reported at 35 ms under one bench condition. If the system-level deadline is 150 ms and other modeled segments consume 120 ms, the original nominal slack was 10 ms and the replacement produces a nominal *overrun* of 5 ms: \(150-(120+35)=-5\,\mathrm{ms}\). This arithmetic identifies an integration risk, but actual deadlines require bound analysis, uncertainty, system loading and representative environmental tests. Do not silently reinterpret a worst-case budget using typical observed values.
+
+Record supplier provenance, component lot, firmware revision, counterfeit screening where relevant, test conditions and decision authority. Critical risks include common-mode supply disruption, hidden design changes and evidence inherited from an obsolete baseline. Connect this record to [architecture variants](architecture-variants-and-configurations.md), [configuration assurance](configuration-assurance-and-change-control.md), and [interface control](interface-control.md).
+
 ## Follow the knowledge
 
 - **Prerequisites:** [Risk, issue, uncertainty, and opportunity](risk-vs-issue.md), [Configuration assurance: proving that the tested design is the delivered design](configuration-assurance-and-change-control.md).

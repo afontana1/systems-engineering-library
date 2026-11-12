@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Chapter 3 — Turn conflicting human needs into an operational concept · Systems Engineering Library</title><style>
 :root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
-<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
-<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B1/chapters/03-needs-and-conops.html" data-se-mode="standard"></script>
+<link href="../../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/B1/chapters/03-needs-and-conops.html" data-se-root="../../../" defer="" src="../../_assets/learning-shell-v55.js"></script>
 </head><body><header><div class="crumb"><a href="../../../../index.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="chapter-3--turn-conflicting-human-needs-into-an-operational-concept">Chapter 3 — Turn conflicting human needs into an operational concept</h1>
 <p><em>Companion to EN.645.662, Week 3: mission, stakeholders, ConOps, scenarios, MOEs, MOPs, and TPMs.</em></p>
 <h2 id="one-service-incompatible-definitions-of-success">One service, incompatible definitions of success</h2>
@@ -59,7 +60,6 @@
 <h3>Tradeoffs are partly normative, not only technical</h3>
 <p>Stakeholder conflicts cannot always be resolved by calculation because they concern different kinds of value. A sponsor prioritizing cost, a safety officer imposing a non-negotiable hazard constraint, and riders prioritizing equitable access are not all supplying interchangeable weights for a score. Some claims are <strong>constraints</strong>: they define what a permissible design must not violate. Others are preferences to be balanced among feasible designs. A weighted score that lets low cost compensate for an unacceptable safety condition is not a neutral engineering solution; it embeds a choice about what may be traded away.</p>
 <p>The deeper purpose of operational analysis is to make those choices explicit early. The ConOps should state which needs are independently evidenced, which are provisional interpretations, who has authority to resolve conflicts, and which outcomes the system must demonstrate later. It is an evolving model of the work the system must support—not a marketing narrative and not a disguised architecture specification.</p>
-
 <h2 id="36-worked-case-conflict-resolution-without-inventing-consensus">3.6 Worked case: conflict resolution without inventing consensus</h2>
 <p>Imagine five fictional stakeholder interviews:</p>
 <table>
@@ -116,5 +116,49 @@
 <p><strong>D.</strong> In a sample of 100 eligible requests, 10 are cancelled and 81 of the remaining 90 meet the time target. Calculate (i) timely among served and (ii) timely among requested. <strong>Answers:</strong> 81/90 = 90%; 81/100 = 81%. These estimate different performance constructs.</p>
 <h2 id="39-apply-the-chapter">3.9 Apply the chapter</h2>
 <p>Run <a href="../labs/lab-03-stakeholder-hearing.html">Hypothetical Lab 3: The Stakeholder Hearing</a> and produce the original guide's Week 3 <code>662_W03_NeedsConOps_v1.0</code> artifact, including at least one degraded scenario and a defensible measurement plan. Do not replace real stakeholder validation with fictional dialogue when preparing a real design.</p>
-<p><strong>Previous:</strong> <a href="02-lifecycle-evidence.html">Chapter 2</a>. <strong>Next:</strong> <a href="04-requirements.html">Chapter 4 — Requirements as testable contracts</a>.</p>
-</main></body></html>
+<section id="step03-book-studio"><h2>Step 03 technical studio — turn a stakeholder conflict into testable scenarios</h2>
+<p>An operational concept is not a list of stakeholder quotations. It is a model of how an intended capability behaves in particular settings, including failures, human decisions, and interactions across the boundary. For Northstar, use three invented stakeholder needs from the <a href="../case/northstar-reference-baseline.json">controlled case</a>: riders need intelligible booking status, dispatchers need timely emergency indications, and operators need accountable vehicle allocations.</p>
+<h3>Scenario with an observable end state</h3>
+<p><strong>Normal scenario:</strong> at 09:00 a rider requests a trip from one of four designated stops. The dispatch service checks eligibility and availability, reserves a vehicle, and sends a confirmation. The rider either receives a confirmed pickup instruction or an explicit rejection; silent ambiguity is not an acceptable outcome.</p>
+<p><strong>Degraded scenario:</strong> a network partition occurs after the allocation database commits a reservation but before the rider receives confirmation. The rider retries. The design must specify whether the retry is idempotent, whether an old allocation is retained or cancelled, and what the operator sees. A “successful booking” screen does not prove unique allocation. Record this scenario as a separate verification pathway.</p>
+<p><strong>Human scenario:</strong> an operator must decide whether to suspend service when status messages become stale. A dashboard that correctly renders a stale indicator may still fail its mission if the indicator is not understood or if staffing rules make the response impossible. This requires a representative human-in-the-loop evaluation, not solely a software unit test.</p>
+<h3>Trace from need to engineering claim</h3>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Candidate requirement</th>
+<th>Scenario and evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Understandable booking status</td>
+<td>NS-R-01: confirmation within 8 seconds under a <em>specified workload</em></td>
+<td>Normal and partition/retry scenarios; end-to-end timestamps</td>
+</tr>
+<tr>
+<td>Timely emergency awareness</td>
+<td>NS-R-02: allocated maximum path budget of 2.5 seconds</td>
+<td>Controlled message timing plus loss/staleness injections</td>
+</tr>
+<tr>
+<td>Accountable allocation</td>
+<td>NS-R-03: zero duplicate active allocations in a defined database boundary</td>
+<td>Concurrent reservation and restart experiment</td>
+</tr>
+</tbody>
+</table>
+<p>A measurable requirement is not automatically a valid need translation. Ask whether 8 seconds is actually acceptable to representative riders, whether the test workload includes peak demand, and whether the failure response preserves accessibility. Those are <strong>validation</strong> questions distinct from verifying the written requirement.</p>
+<h3>Solved critique</h3>
+<p>A ConOps lists only nominal trips and says “the system shall fail safely.” What is missing? At minimum, failure triggers, the responsible operator, degraded states, notification routes, recovery authority, and an explicit accepted operating domain. Without those, “safely” has no operationally observable meaning. The correct revision is not a longer adjective but an executable or walk-through scenario with decision points.</p>
+</section><p><strong>Previous:</strong> <a href="02-lifecycle-evidence.html">Chapter 2</a>. <strong>Next:</strong> <a href="04-requirements.html">Chapter 4 — Requirements as testable contracts</a>.</p>
+<section class="step03-deeper-reading" id="step03-book1-deepening-r2"><h2>Step 03 reference deepening — operational measures require denominators</h2>
+<p>A stated goal such as “reduce waiting time” does not identify which population, observation window or undesirable outcomes matter. In a teaching approximation, an M/M/1 queue with Poisson arrivals at six requests/hour and exponential service at nine requests/hour has traffic intensity \(\rho=\lambda/\mu=2/3\) and expected <strong>total time in system</strong></p>
+<p>\[
+W=\frac{1}{\mu-\lambda}=\frac{1}{3}\text{ hour}=20\text{ minutes}.
+\]</p>
+<p>This is not automatically the time a rider waits at a curb. It includes the modeled service time and assumes a stable stationary queue with one server, independent arrivals and service times. At arrival rate 8/hour with unchanged capacity 9/hour, the expected total time rises to 60 minutes, showing why average-load performance alone can mask congestion near capacity.</p>
+<p>Define a mission measure with a numerator and denominator: e.g. <em>the fraction of eligible booking attempts during designated service hours that receive an understandable acceptance or rejection within eight seconds</em>. Record exclusions, inaccessible channels, canceled requests and missing observations. A mean may hide the tail; add the 95th percentile, coverage by accessibility group, and a clear failure-denominator rule. A ConOps should state where staffing, network outages and emergency override change the operating mode.</p>
+<p><strong>Practice:</strong> Does reporting “95% of successful reservations completed within eight seconds” prove the same outcome? <strong>Answer:</strong> no; it conditions the denominator on successful reservations and may omit failed, timed-out or inaccessible attempts. The definition of success is part of the engineering requirement.</p>
+</section></main></body></html>

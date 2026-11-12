@@ -46,6 +46,54 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)](https://standards.nasa.gov/node/263) — Credibility practices for modeling and simulation used in decisions.
 
+## In-depth method: a model that supports decisions and audit queries
+
+The [MBSE semantic-modeling method guide](../methods/mbse-semantic-modeling-handbook.md) constructs a governed graph of needs, requirements, architecture elements, verification cases, and evidence; adds a state-machine invariant and a dimensional energy balance; and includes a [reproducible trace audit](../methods/code/model_trace_audit.py). It is intentionally notation-independent so the engineering logic is visible independent of a SysML tool.
+
+### Type checks prevent false inference
+
+A `verifies(test, requirement)` link describes a planned relation between test and requirement. It is **not** proof that the test was executed or that current evidence was accepted. A defensible evidence claim also requires an appropriate scenario, baseline match and result disposition. If test evidence is from build `NS-2.2` but the model baseline is `NS-2.3`, a graph can be complete in link count and still have **stale verification evidence**.
+
+### Parametric models expose physical contradictions
+
+A route-energy model might state
+
+\[
+E_{\rm required}=e_d D+P_{\rm aux}T.
+\]
+
+For \(e_d=0.24\) kWh/km, \(D=180\) km, \(P_{\rm aux}=2\) kW and \(T=10\) h, demand is 63.2 kWh. With 70 kWh usable energy, margin is 6.8 kWh. Increasing traction use to 0.29 kWh/km raises demand to 72.2 kWh, producing a negative margin. A diagram can be syntactically valid while this engineering constraint fails. Units, assumptions, and analysis provenance therefore belong in the model, not in an unattached spreadsheet.
+
+**Standards distinction:** the engineering schema above is an educational example. For normative SysML v2 syntax, rely on the [OMG specification](https://www.omg.org/spec/SysML/2.0); a validated model and a conformant language implementation are separate assurance questions.
+
+## A behavioral invariant is a claim about allowed traces
+
+The technical meaning of a state-machine model can be expressed as a transition relation \(s\xrightarrow{e}s'\), with explicit guards and effects. For a vehicle with one assignable seat, a testable safety invariant is \(0\le\mathrm{allocated}(s)\le1\). An `ASSIGN` event may be legal only for a validated request and only when an assignment is available; a repeated `ASSIGN` must be idempotent or rejected without changing capacity.
+
+A small state-space exploration can produce the counterexample `VALIDATE(0) → ASSIGN(0) → ASSIGN(0)` when a defective model increments capacity twice. This is evidence of a defect in **that finite abstract model**, not proof of a distributed implementation's correctness. Read [state contracts and bounded model checking](../methods/mbse-behavioral-contracts.md) alongside the existing typed model/evidence handbook to connect model semantics to verified architecture claims.
+
+## Phase 3 technical reference: Language semantics and executable assertions are not interchangeable
+
+A UML association of optional `Worker[0..1]` to a reservation describes one object's multiplicity. It does **not** ensure that a worker is unique across **all** active reservations. OCL-style invariants can specify cross-object consistency—e.g., `Reservation.allInstances()->select(r | r.status = Status::Active)->isUnique(r | r.worker)`—while preconditions express when an activation is permitted. Neither an OCL statement nor a Python snapshot validator automatically supplies transaction isolation or a conforming language implementation. The [UML/OCL worked guide](../methods/uml-ocl-software-contracts.md) demonstrates valid and invalid fixtures, operation contracts and a concrete duplicate-allocation counterexample, distinguishing model claims from enforcement evidence.
+
+## Phase 4 technical reading: Distinguish language conformance from model checking
+
+SysML v2 is a modeling language specified by OMG with a KerML semantic foundation; a modeling methodology specifies activities and rationale; a modeling tool implements notation, semantics, queries, repository behavior and diagnostics. A tiny JSON object graph can teach traceability and check typed links, but it is **not** SysML v2 text, a conformant API representation, or a formal language proof. The Campus Mobility exercise validates declared need–requirement–component–control–evidence relationships and configuration labels; it cannot establish real component behavior or that the hazard inventory is complete. The [baseline and semantic-validation guide](../methods/model-baselines-and-evidence.md) gives an exact migration plan for tool-based SysML parsing and query validation.
+
+## Phase 5 technical reading: From modeling syntax to a defensible engineering model
+
+A modeling language, a modeling method and a validation tool are distinct. The SysML v2 example starts with definitions (`part def Shuttle`) and typed usages (`part campusShuttle : Shuttle`) and then builds an external, inspectable trace from `NEED-ACCESS` through `REQ-DOOR`, the door controller and `EV-DOOR`. Structural references can be tested independently of the language parser, but a passing graph check is **not** SysML v2 conformance. The invariant \(\mathrm{permitOpen}\Rightarrow(\mathrm{speedValid}\land\mathrm{brakeValid}\land v\le0.5\;\mathrm{m/s}\land\mathrm{brakeEngaged})\) shows how engineering rules supplement structure. The [SysML v2 and traceability guide](../methods/sysml-v2-modeling-and-traceability.md) provides the illustrative text, exact tool-validation workflow, testable CSV crosswalk and explicit limitations.
+
+
+
+## Step 02 review studio — four kinds of agreement that should not be conflated
+
+A modeling *method* specifies why and how engineers reason; a *language* specifies legal forms and semantics; a *tool* implements some functions over those forms; a *model* is a particular statement about a particular system. A diagram can be visually persuasive while being semantically invalid, and a syntactically valid model can encode a false design assumption.
+
+**Solved exercise:** a local Python checker confirms every requirement ID in a JSON graph points to an existing component and test. Does this make the graph a SysML v2-conformant model? **No.** It demonstrates one limited graph property. Language conformance requires checks against the actual relevant grammar/semantics in a conforming implementation, while engineering adequacy requires a separate intended-use, correctness, and evidence review.
+
+**Practice:** write four separate acceptance claims for a model: parse succeeds; typed relations are well formed; a target engineering invariant holds; and results are credible for a stated decision. Record which tool and which test supplies evidence for each; do not promote a static-graph check into formal language conformance.
+
 ## Follow the knowledge
 
 **Related concepts**

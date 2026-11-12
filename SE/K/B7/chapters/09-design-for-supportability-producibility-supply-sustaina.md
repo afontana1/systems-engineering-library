@@ -102,3 +102,38 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 - [Deep workshop — Reliability Allocation, Common Cause, and Integration Evidence](../practice/integration.md)
 - [Corresponding independent laboratory](../practice/lab-integration.md)
 - [Interactive workbench](../practice/WORKBENCH.html)
+
+## Step 03 integrated technical reference: NS-DI7.1 — supportability and lifecycle design
+
+### Restore the service, not merely the device
+
+The reliability estimate in Chapter 7 gives 400-h mean time between failures and 2.5-h mean direct repair time. Support engineering must include spare availability, access to tools, deployment and return-to-service checks. As an illustrative *conditional* repair model, suppose a replacement is immediately available with probability 0.90 and takes 2 h to restore; otherwise waiting increases total restoration time to 8 h. Then
+
+\[
+E[T_{\mathrm{restore}}]=0.90(2)+0.10(8)=2.6\ \mathrm{h}.
+\]
+
+The 2.6-hour scenario should not be combined blindly with the separate 2.5-hour MTTR and 3-hour logistics proxy: they are **alternative modeling abstractions**, not independent delay terms. State exactly which downtime distribution is being used before inserting it into an availability calculation.
+
+### Lifecycle cost as a controlled financial model
+
+The [support baseline](../case/model-baseline.json) assumes $2.8 million initial cost, $0.42 million annual operation, $0.11 million annual support, five year-end operating periods, 5% discounting, and $0.2 million end-of-year-five retirement cost. Under these artificial cash-flow conventions,
+
+\[
+LCC=2.8+\sum_{t=1}^{5}\frac{0.42+0.11}{1.05^t}+\frac{0.2}{1.05^5}
+\approx 5.2513\ \text{million dollars}.
+\]
+
+This is not a universal economic optimum. A support architecture that costs more initially might reduce downtime, environmental burdens or safety risk. Supply concentration and parts obsolescence also create tail exposure that expected annual costs can conceal.
+
+### Review the enabling systems
+
+For each replaceable item, establish repair access, handling hazards, training prerequisites, compatible spares, software configuration checks and controlled disposal. A line on a maintainability scorecard is inadequate if the field technician cannot actually reach the component or verify the replacement firmware.
+
+**Exercise.** If spare availability falls from 90% to 70%, compute the expected restoration time under the two-outcome toy model.
+
+<details><summary>Worked resolution</summary>
+
+\(0.70(2)+0.30(8)=3.8\) hours. That 1.2-hour increase illustrates why supply policy is an engineering parameter. It does not prove the resulting operational availability without a consistent stochastic downtime model.
+
+</details>

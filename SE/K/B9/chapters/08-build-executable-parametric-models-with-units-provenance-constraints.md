@@ -115,3 +115,37 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [07 — Previous chapter](07-elicit-derive-validate-and-query-system-requirements-from-the-integr.md) · [09 — Next chapter](09-explore-the-trade-space-with-alternatives-uncertainty-sensitivity-an.md) · [Book index](../README.md)
+
+## Step 03 integrated technical reference: NS-MBA9.1 — executable parametrics and dimensional assurance
+
+### Bind physical quantities to controlled assumptions
+
+For a candidate with \(N\) vehicles, mean cycle \(T_c\) minutes, and per-vehicle daily energy \(e\), the teaching model calculates
+
+\[
+\mu=\frac{60N}{T_c}\ \mathrm{trips/hour},\qquad E_d=Ne\ \mathrm{kWh/day}.
+\]
+
+For \(C\) chargers, charging power \(P\) kW, window \(t\) hours and efficiency \(\eta\), the simple gross energy-recovery bound is
+
+\[
+E_{rec}=CPt\eta\ \mathrm{kWh},\qquad M=E_{rec}-E_d.
+\]
+
+Variant B uses \(N=12\), \(T_c=48\) min, \(e=20\) kWh/day, \(C=4\), \(P=30\) kW, \(t=2.5\) h and \(\eta=0.90\). Thus \(\mu=15\) trips/h, \(E_d=240\) kWh/day, \(E_{rec}=270\) kWh and \(M=30\) kWh. The [editable model](../case/model.json) and [executable checker](../tools/step03_book9_model_check.py) use those same inputs.
+
+### Recalculate after a change rather than reusing a green icon
+
+The supplier changes the assumed charger to **27 kW at 82% efficiency**. Under otherwise unchanged assumptions, \(E_{rec}=4(27)(2.5)(0.82)=221.4\) kWh, so \(M=-18.6\) kWh. Adding a fifth charger would give \(5(27)(2.5)(0.82)=276.75\) kWh and a **36.75-kWh** nominal margin. However, the fifth unit is only a *design alternative*: no electrical integration, footprint, safety or acquisition evidence has been collected. Read this as an energy-screening calculation, not a charging-infrastructure approval.
+
+### Check units, structural validity and validity range
+
+`kW × h` yields kWh. Replacing hours with minutes without dividing by 60 creates an exact-looking 60× error. The equation also assumes steady charger power, unrestricted battery acceptance, available connectors, a complete charging window and aggregate energy fungibility. Real vehicles may have different charge states or taper curves. A robust parametric audit includes dimension checking, input domain checks, limiting cases, monotonicity, and a second independently computed estimate; the checker rejects nonpositive cycle times and efficiencies outside `(0,1]`.
+
+**Exercise.** How long would four changed chargers need, at fixed 27 kW and 82% efficiency, to deliver 240 kWh?
+
+<details><summary>Worked answer</summary>
+
+\(t=240/[4(27)(0.82)]\approx2.710\) hours. It exceeds the 2.5-hour window by roughly 12.6 minutes, making the unchanged four-charger configuration infeasible under the assumed operating schedule. Real charge taper would require a more detailed model.
+
+</details>

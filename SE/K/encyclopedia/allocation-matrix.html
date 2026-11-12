@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Allocation, coverage, and design responsibility · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Allocation, coverage, and design responsibility · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
 <link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
 <script data-se-mode="standard" data-se-page="K/encyclopedia/allocation-matrix.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
 </head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Allocation, coverage, and design responsibility</h1>
@@ -32,7 +32,11 @@
 <li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
 <li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section id="step03-concept-study"><h2>Step 02 review studio — coverage can conceal responsibility gaps</h2>
+<p>A requirement-to-component matrix is useful only when its relationship types are explicit. <em>Allocated to</em> is not the same as <em>verified by</em>, <em>depends on</em>, or <em>owned by</em>. Multiple allocations can be legitimate: an end-to-end performance claim may be decomposed into stage budgets, but a single system-level owner must remain accountable for integration.</p>
+<p><strong>Solved exercise:</strong> NS-R-02 has four latency allocations of 0.35, 0.25, 0.70 and 0.35 s. The sum is 1.65 s, leaving a nominal 0.85 s against the system-level 2.50 s budget. Does the matrix establish verification coverage? <strong>No.</strong> It shows architectural and arithmetic allocation coverage. A separate verification relation must identify an end-to-end procedure, applicable configuration, evidence, and acceptance rule. Missing any one of these can leave a superficially complete matrix with an unverified claim.</p>
+<p><strong>Matrix audit:</strong> review every high-consequence requirement for a primary owner, decomposed responsibility, interface boundaries, verification mechanism, and change-impact path. Detect orphan functions as well as orphan requirements; both can signal mistaken scope or unreviewed design assumptions.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="functional-vs-physical.html">Functional, logical, and physical architecture: preserving intent across realization</a></li>

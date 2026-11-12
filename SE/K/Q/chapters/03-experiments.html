@@ -68,4 +68,57 @@
 <p><a href="../labs/03-experiments.html">Open the lab for this chapter</a> · <a href="../labs/03-experiments.md">Download editable Markdown lab</a> · <a download href="../notebooks/03-experiments.ipynb">Open the associated notebook</a> · <a download href="../code/engineering_math.py">Download the calculation source</a></p>
 <p><strong>Authoritative follow-up reading:</strong> <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a>, <a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook</a>, and <a href="https://www.incose.org/resources-publications/technical-publications/systems-engineering-body-of-knowledge/">Systems Engineering Body of Knowledge</a>. These are independent references, not endorsements of the fictional cases.</p>
 <p><a href="../INDEX.html">Return to the quantitative textbook collection</a></p>
+
+<!-- STEP04-QUANTITATIVE-START -->
+<section class="qse-integrated" aria-label="Integrated quantitative methods case">
+<h2>Step 04 integrated case — a blocked \(2^2\) quantitative experiment</h2>
+<p>A useful experiment changes factors while holding the stochastic demand streams comparable. NS-QSE4.1 evaluates two policy factors on <em>twelve shared synthetic storm days</em>: factor \(A\) changes available parallel dispatch servers from two to three; factor \(B\) changes deterministic service duration from 10 to 8 minutes/request. The response \(Y\) is the <strong>equal-day average of each day's mean waiting time</strong>, in minutes, before service starts. The four cells do not establish real causal effects: their outcomes are causally defined <strong>inside the model</strong>, which excludes several potentially decisive physical mechanisms.</p>
+<h3>Construct the factorial contrast</h3>
+<p>Let \(Y_{00}\) be two servers/10 minutes, \(Y_{10}\) three servers/10 minutes, \(Y_{01}\) two servers/8 minutes, and \(Y_{11}\) three servers/8 minutes. Controlled simulation gives:</p>
+<table>
+<thead>
+<tr>
+  <th>Factor setting</th>
+  <th style="text-align:right">Mean of daily mean waits, min</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>\(Y_{00}\), baseline</td>
+  <td style="text-align:right">16.880</td>
+</tr>
+<tr>
+  <td>\(Y_{10}\), capacity</td>
+  <td style="text-align:right">5.368</td>
+</tr>
+<tr>
+  <td>\(Y_{01}\), process</td>
+  <td style="text-align:right">10.032</td>
+</tr>
+<tr>
+  <td>\(Y_{11}\), combined</td>
+  <td style="text-align:right">2.346</td>
+</tr>
+</tbody>
+</table>
+<p>With factors coded \(-1,+1\), the <strong>average main effect</strong> of capacity is \(\widehat E_A=(Y_{10}+Y_{11}-Y_{00}-Y_{01})/2=-9.598\) minutes. The process effect is \(\widehat E_B=(Y_{01}+Y_{11}-Y_{00}-Y_{10})/2=-4.935\) minutes. The difference-in-differences is \(\Delta_{AB}=Y_{11}-Y_{10}-Y_{01}+Y_{00}=+3.826\) minutes. Under effect coding, the regression coefficient of the \(AB\) interaction is \(\widehat\beta_{AB}=\Delta_{AB}/4=+0.9566\) minutes. <strong>Do not</strong> confuse the interaction contrast with its coded regression coefficient. The positive interaction indicates diminishing combined benefit relative to simply adding the individual wait reductions on this response scale; it does not imply that combined service gets worse.</p>
+<h3>Experimental units, paired blocks, and generalization</h3>
+<p>The day is the independent design unit in this controlled simulation. The per-request observations within a day share the generated environment and must not be treated as independent day replicates. The common-random-number construction pairs policy outputs within a day. The report provides a 2,500-resample paired interval for baseline minus combined daily mean wait of about <strong>10.86–18.01 minutes</strong>. Its uncertainty is conditional on only twelve synthetic days and a uniform-within-hour arrival generator, not on a measured population of emergency days.</p>
+<p>A physical experiment would also randomize dispatch interventions where ethics and operations permit, block by weather, workload and shift, register deviations, and preserve safety and accessibility constraints. In an observational before–after pilot, concurrent roadworks, staffing changes, or seasonal demand can confound the policy comparison. Interaction estimates may also change if one reports p90 wait or abandoned requests rather than average waiting time.</p>
+<h3>Adverse diagnostic</h3>
+<p>A policy can appear efficient because it completes service <strong>after the one-hour intake window</strong>. The simulator records <code>overtime_completions</code>; it does not silently drop those trips. A valid design-of-experiments report must say whether such overtime is allowed or charged to the next shift. Try a slower service time and observe both the waiting response and overtime fraction; an apparent improvement in one metric alone is not sufficient.</p>
+<details><summary>Worked exercises and interpretation</summary>
+
+<ol>
+<li><strong>Main effect.</strong> Using the table, verify capacity effect: \((5.368+2.346-16.880-10.032)/2\approx-9.599\) minutes. Rounding causes a small difference from the full-precision result.</li>
+<li><strong>Interaction.</strong> Calculate \(2.346-5.368-10.032+16.880=3.826\) minutes. If \(\Delta_{AB}=0\), the two factors are additive on the specified response scale, not necessarily on reliability or cost scales.</li>
+<li><strong>Confounding.</strong> What if all high-capacity tests occur in clear weather and all low-capacity tests in storms? Capacity and weather are confounded; a difference in outcomes cannot be attributed uniquely to capacity. Block or randomize and collect weather-specific evidence.</li>
+</ol>
+</details>
+
+<p>The editable inputs, daily response CSV, and analysis code allow students to repeat the factorial contrast or intentionally change the response definition; such changes must be recorded as a <strong>new analysis configuration</strong>.</p>
+
+</section>
+<style>@media(max-width:700px){article{max-width:100%;overflow-x:auto}article :is(p,li):has(mjx-container){max-width:100%;overflow-x:auto}}</style>
+<!-- STEP04-QUANTITATIVE-END -->
 </article></main></body></html>

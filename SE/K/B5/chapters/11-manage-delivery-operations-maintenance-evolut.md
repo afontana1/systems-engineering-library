@@ -72,3 +72,24 @@ Operations completes the lifecycle evidence loop: incidents update hazards, requ
 ## Continuity
 
 This chapter builds from [previous chapter](10-design-testing-ci-and-an-integrated-software-.md) and leads toward [next chapter](12-assess-technology-trends-and-defend-the-integ.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-764-w11.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+
+## Step 03 integrated reference: operate the service against meaningful error budgets
+
+### Build the measurement rule first
+
+SWS-02 calls for at least 99.9% availability over a declared 30-day interval. Define what counts as available, which users and endpoints are in scope, how scheduled maintenance counts, and which probes observe the service. The time-budget calculation in [the case](../case/INDEX.html) gives 43.2 minutes allowable unavailability. The fictional incidents use 36 minutes, so the service has **7.2 minutes left**, but this is not a request-based reliability estimate and does not extrapolate to future months.
+
+An error budget is useful only when a release policy responds to it. A proposed canary predicted to impose nine additional minutes would exceed the remaining allowance by 1.8 minutes. In this controlled scenario, the proposed release is blocked unless an accountable authority explicitly revises the plan or accepts a documented exception. The first response to low remaining budget should be to reduce operational exposure, improve rollbacks and repair the failure modes consuming the budget—not simply redefine the SLO after observing incidents.
+
+### Choose alerts to support action
+
+Monitor request success, percentile latency, rejected stale observations, retry volumes, duplicate-assignment constraints, and externally observed availability. Use alerts tied to actionable customer impact rather than every transient internal error. Multiwindow burn-rate alerting can distinguish acute consumption from sustained deterioration; choose windows based on operational response capabilities. High retry rates may be a symptom of overload rather than a reason to retry more aggressively.
+
+An incident review records the service boundary, first observed user impact, detection lag, mitigation time, configuration change, dependent systems, and evidence for root-cause hypotheses. It does not merely nominate an individual at fault. If monitoring lacked coverage during the outage, mark the uncertainty honestly. Instrumentation should preserve useful service, version and correlation attributes while respecting data minimization.
+
+### Maintenance is engineering change
+
+Patch cadence, key rotation, infrastructure migration and scaling policy can invalidate assumptions made at design time. A recovery drill for NS-SW5.0 may not prove recovery of NS-SW5.1 after a database migration. Treat operational dashboards, runbooks, drills, and change records as versioned engineering artifacts with review gates.
+
+**Exercise.** A provider offers a 99.99% monthly uptime statement for its database. May the reservation service now claim 99.99% availability? **Answer.** No. End-to-end availability includes all required dependencies, application defects, operator workflow and the SLI definition. One dependency's advertised metric is neither measured system evidence nor an arithmetic guarantee.

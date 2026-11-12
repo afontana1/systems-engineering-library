@@ -105,3 +105,27 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [01 — Previous chapter](01-establish-why-systems-thinking-is-needed-and-frame-a-learning-challe.md) · [03 — Next chapter](03-build-causal-loop-diagrams-as-testable-feedback-hypotheses.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-FB13.1 case: feedback, conservation, and policy learning — Week 2
+
+*Integrated chapter: Chapter 02 — Define dynamic behavior with reference modes, evidence, and time horizons. Northstar NS-FB13.1 is a transparent teaching baseline; the following methods are not field-validated.*
+
+### Distinguish an observed reference mode from a simulated trajectory
+
+A behavior-over-time graph must specify its vertical quantity, unit, population, collection interval, time axis and the range of uncertainty. The course's eight-quarter table includes requests/day, completed trips/day, p90 wait in **minutes**, active fleet in vehicles, maintenance backlog in **vehicle-days**, trust in index points, and accessible fulfillment as a proportion. These should be seven **separate** properly scaled plots; putting a trust index and a service wait on one axis produces a visually persuasive but meaningless slope comparison. Quarterly p90 values are summaries of unshown trip-level waits, not individual observations or a continuous trajectory. A model that lacks travel-time distributions cannot legitimately predict the p90 wait statistic.
+
+Form competing reference modes: sustained expansion with increasing delays, stable service after repair relief, demand reduction driven by falling trust, and recovery after a delayed investment. The key shape from quarter 3 to quarter 6 is a wait reversal (14.2 to 23.1 minutes) while active fleet falls (13.4 to 11.9); there are too few observations to infer the delay mechanism. Annotate quarter 4 as a proposed turning point, and challenge that proposal against maintenance records and changing rider mix.
+
+### Worked baseline and measurement logic
+
+Quarter-5 request completion ratio is \(1110/1370=0.8102\) and quarter-1 ratio is \(805/920=0.8750\). Calling these *same-quarter completion-to-request ratios* avoids pretending they are individual fulfilled-trip fractions: carryover work may make the numerator and denominator represent different cohorts. The model instead reports cumulative completions divided by cumulative arrivals over 360 days, with explicit starting and ending backlog. Its status-quo nominal ratio is about **0.92736**, which must **not** be used to overwrite the original observed ratios; different time bases and invented parameters explain the difference.
+
+The stock-model reference mode is also bounded: initial standard backlog 265 requests, accessible backlog 45, total fleet 14 with 1.9 unavailable, trust 63, and a separate first-order perception stock. The initial active fleet of 12.1 is chosen for a synthetic starting point and is not a fitted estimate of the first-quarter fleet.
+
+**Worked exercise.** From the course table, wait grows from 16.8 in quarter 4 to 23.1 in quarter 6. Compute the absolute change and say what remains unknown. **Solution:** \(23.1-16.8=6.3\) minutes, about 37.5% of the quarter-4 wait. We do not know rider sample sizes, confidence intervals, seasonal bias, accessibility-specific waits, or whether a small number of long waits caused the p90 shift. Therefore an apparent rising curve is a problem definition, not validation of a feedback model.
+
+**Practice extension:** Specify two new data collections that would discriminate between delayed repair and demand-composition explanations without conflating the observed p90 with model abandonment.
+
+### Reproduce the evidence and challenge the result
+
+The [NS-FB13.1 case dossier](../case/INDEX.html) publishes its [controlled inputs](../case/model-inputs.json), [Python calculation model](../tools/step03_book13_feedback.py), [policy-by-condition evidence](../case/experiment-results.csv), [equation and unit crosswalk for Vensim](../case/vensim-equation-crosswalk.md), and [claim limitations](../case/credibility-register.csv). Reproduce results with `python3 SE/K/B13/tools/step03_book13_feedback.py --write` from the repository root. This is a **synthetic teaching simulation**: correctly conserving its stocks and reproducing its output does **not** calibrate the causal structure or authorize real mobility policy. The Book 11 event simulator and Book 12 physical vehicle model answer other questions and are not dynamically coupled.

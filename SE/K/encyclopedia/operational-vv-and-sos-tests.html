@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Operational V&amp;V across distributed systems of systems · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/encyclopedia/operational-vv-and-sos-tests.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical explanation</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Operational V&amp;V across distributed systems of systems</h1>
+<p><strong>Reference entry · Deployed systems, constituent autonomy and operational assessment</strong></p>
+<h2>Why constituent qualification is not enough</h2>
+<p>A system of systems combines constituent systems that may retain separate missions, owners, release cadences and operational authority. Local verification shows conformance to a constituent specification; it does not guarantee interoperability, collective mission outcomes or safe degraded operation. Test plans need <strong>cross-boundary</strong> objectives: message semantics, time alignment, failure propagation, joint command authority, human handoff, independently updated software, and emergent behavior under realistic scenario distributions.</p>
+<p>Distinguish three claims. (1) <strong>Verification:</strong> the integrated configuration meets a specified requirement under the procedure. (2) <strong>Validation:</strong> the deployed operation serves the intended stakeholder mission. (3) <strong>Operational evaluation:</strong> evidence about performance, suitability, resilience and sustainment in representative use. These can overlap in test activities but have different decision questions. Failure-free laboratory exercises cannot automatically be generalized to field safety or mission reliability.</p>
+<h2>Worked statistical decision bound</h2>
+<p>Suppose the fictional Campus Mobility fleet must demonstrate a per-mission failure probability below 0.5% with a one-sided 95% confidence method, assuming <strong>independent, identically distributed Bernoulli missions</strong> and exactly defined failure events. With no failures in \(n\) independent trials, the exact one-sided upper bound is</p>
+<p>\[
+p_U=1-0.05^{1/n}.
+\]</p>
+<p>For 300 trials, \(p_U\approx0.00994\), about <strong>0.994%</strong>: insufficient for the 0.5% target under this rule. The minimum \(n\) satisfying \(p_U\le0.005\) is</p>
+<p>\[
+n\ge\frac{\log(0.05)}{\log(0.995)}\approx597.65,
+\]</p>
+<p>or <strong>598 independent zero-failure trials</strong>. This is an <em>illustrative statistical calculation</em>. Correlated missions, changes in weather, repeated operators, shared code or nonrandom scenarios can invalidate the iid interpretation. The bound also does not establish the absence of hazards not exercised by the trial definition.</p>
+<h2>Build an operational evidence matrix</h2>
+<p>For each mission thread record: operational mode; participating constituent versions; network and clock assumptions; stakeholder objective; system-level measure; safety or cybersecurity constraint; procedural test; observed dataset; exclusions; failure-injection scenarios; and accountable approving authority. Include provider loss during a dispatch, delayed hazard alarms, conflict between autonomous local and centralized decisions, restoration after power interruption, and safe fallback. A configuration change in one constituent triggers an <em>impact assessment</em> even if the neighboring constituents remain unchanged.</p>
+<p>A multi-owner test federation should define time synchronization, data usage rights, fault containment and authority to stop a test. An interface handshake can pass while semantic units are incompatible; test a realistic end-to-end mission with negative and boundary cases. For autonomy, include operator attention, mode confusion, distribution shifts and explicit constraints on learning or policy updates. Report representativeness rather than labeling every test “operational.”</p>
+<h2>Practice and checks</h2>
+<p>A team runs 600 missions with zero observed failures and quotes the formula above. Under iid conditions the bound is \(1-0.05^{1/600}\approx0.00498\), just under 0.5%. Challenge the claim: if the 600 trials repeat the same route, controller version, weather and support crew, what target population can the statistic validly describe? Draft a test matrix row for a stale-data cross-constituent failure and state what evidence would constitute validation rather than merely integration verification.</p>
+<h2>Sources and limitations</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — distinction among requirements, verification, validation and lifecycle operations.</li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/">NIST/SEMATECH Statistical Handbook</a> — inference and sampling assumptions.</li>
+</ul>
+<p>Related: <a href="sos-characteristics.html">system-of-systems characteristics</a>, <a href="v-and-v.html">V&amp;V</a>, <a href="statistical-acceptance-and-confidence.html">statistical acceptance</a>, <a href="configuration-assurance-and-change-control.html">configuration control</a>. This example does not constitute a release or safety assurance decision for a real system.</p>
+</article><nav class="standalone-actions"><a href="metrics-hierarchy.html">Read concept</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="metrics-hierarchy.md">Editable Markdown</a></nav></main></body></html>

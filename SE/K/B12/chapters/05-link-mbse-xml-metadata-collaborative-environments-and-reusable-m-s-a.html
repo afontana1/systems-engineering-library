@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Chapter 05 — Link MBSE, XML metadata, collaborative environments, and reusable M&amp;S assets · Systems Engineering Library</title><style>
 :root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
-<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
-<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B12/chapters/05-link-mbse-xml-metadata-collaborative-environments-and-reusable-m-s-a.html" data-se-mode="standard"></script>
+<link href="../../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/B12/chapters/05-link-mbse-xml-metadata-collaborative-environments-and-reusable-m-s-a.html" data-se-root="../../../" defer="" src="../../_assets/learning-shell-v55.js"></script>
 </head><body><header><div class="crumb"><a href="../../../../index.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="chapter-05--link-mbse-xml-metadata-collaborative-environments-and-reusable-ms-assets">Chapter 05 — Link MBSE, XML metadata, collaborative environments, and reusable M&amp;S assets</h1>
 <p><em>Book 12 · EN.645.758 · Advanced Systems Modeling and Simulation · Week 5 of 12</em></p>
 <p><strong>Study sequence:</strong> Read this chapter → complete <a href="../labs/lab-05-link-mbse-xml-metadata-collaborative-environments-and-reusable-m-s-a.html">Hypothetical Lab 5</a> → attempt the <a href="../../../C/P3/EN645758.html">original Week 5 assessment</a> using its complete rubric. The <a href="../../P3-text/lessons/645-758-w05.html">earlier concise companion lesson</a> remains available for a quick recap.</p>
@@ -21,7 +22,6 @@
 <h3 id="what-to-keep-separate">What to keep separate</h3>
 <p>A parameter is a model input or characteristic; an <em>observation</em> is data recorded with a defined process; a <em>claim</em> is an assertion to be tested; an <em>inference</em> extrapolates under assumptions; and a <em>decision</em> includes consequences and responsibility. These cannot be interchanged. For this topic, start from the named engineering question, write a minimally sufficient representation, state units and operating range, then identify a counterexample that could change the result. A model may be fully verified as software while still failing to represent its intended real-world use.</p>
 <p>The prior connection is <strong>Couple electrical, electromechanical, thermal, and fluid domains</strong>. That prior work constrains the current boundary and data definitions; changing it silently breaks comparisons. The subsequent connection is <strong>Design interoperable HLA/FMI federations, LVC interfaces, and composable co-simulations</strong>. Carry forward source identifiers, units, uncertainty and model versions rather than exporting a single attractive result.</p>
-
 <p>Metadata should therefore describe identities, units, reference frames, parameter provenance, validity domains, solver assumptions, and version dependencies. Trace links to a systems model are valuable only if they record whether a parameter was measured, estimated, derived, or chosen for demonstration. Reuse creates an additional governance obligation: when a source model changes, its consumers must know which results may no longer be valid. Interoperability is fundamentally about shared <strong>meaning across independently evolving artifacts</strong>.</p>
 <p>A simulation asset becomes reusable when another engineer can recover what its quantities mean, which assumptions bound it, and how its inputs and outputs correspond to an external model. Exporting an XML file or connecting tools through middleware does not ensure that two teams agree on coordinate frames, units, time origins, or state initialization. A vehicle model reporting velocity in kilometers per hour and a controller expecting meters per second can exchange perfectly valid numbers and still produce a dangerous design error.</p>
 <h3>Model reuse requires semantic interoperability, not file compatibility</h3><h2 id="graduate-depth-model-exchange-as-semantic-preservation-and-configuration-control">Graduate depth: model exchange as semantic preservation and configuration control</h2>
@@ -72,4 +72,63 @@
 <p>Using a controlled Northstar scenario, prepare a two-page analysis explaining (1) the stakeholder decision; (2) the representation and its boundaries; (3) source data and assumptions; (4) a reconstructable example or diagram; (5) an adverse scenario; and (6) what new evidence would alter the recommendation. Then use the fictional <a href="../labs/lab-05-link-mbse-xml-metadata-collaborative-environments-and-reusable-m-s-a.html">Lab 5</a> to rehearse the technique and complete the original course's more demanding weekly deliverable.</p>
 <p>The <strong>course guide remains authoritative for assessment</strong>. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.</p>
 <p><a href="04-couple-electrical-electromechanical-thermal-and-fluid-domains.html">04 — Previous chapter</a> · <a href="06-design-interoperable-hla-fmi-federations-lvc-interfaces-and-composab.html">06 — Next chapter</a> · <a href="../README.html">Book index</a></p>
-</main></body></html>
+<section class="step03-deeper-reading" id="step03-book12-cps-r1"><h2>Step 03 integrated NS-CPS12.1 case: governed MBSE and simulation assets</h2>
+<h3>Separate engineering meaning, file syntax and execution semantics</h3>
+<p>Model-based systems engineering (MBSE) can express stakeholder needs, architecture blocks, allocation and interface requirements; a numerical simulation specifies state derivatives and step semantics. Exchanging XML or JSON <strong>syntax</strong> between tools does not prove those models share the same <strong>meaning</strong>. The shuttle's <code>battery_usable_kwh=145</code> might denote beginning-of-life usable capacity, aged usable capacity or nominal rating. A receiving model that interprets it as joules, or as total nameplate capacity, can produce plausible-looking but incorrect results. A model-asset record must therefore declare at least identifier, version, author/owner, intended use, source provenance, variable definition, unit, validity range, execution assumptions, review status and dependencies.</p>
+<p>The controlled <a href="../case/model-inputs.json">case model JSON</a> is deliberately small enough for a human reviewer to inspect. It fixes the route, physical assumptions, controller gains, sampling ranges and synthetic requirements. The implementation refuses a nonpositive capacity, duplicate route segment identifier, invalid efficiency, impossible scenario flow or out-of-range integration step. <strong>Schema/semantic validation</strong> catches some incorrect inputs before an expensive run; it does not replace calibrated data or an independent model review.</p>
+<h3>A workable versioned asset contract</h3>
+<p>For each source item assign an immutable logical identifier and a concrete revision:</p>
+<table>
+<thead>
+<tr>
+<th>Asset</th>
+<th>Controlled identifier</th>
+<th>Consumer</th>
+<th>Required invariant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shuttle plant parameters</td>
+<td><code>NS-CPS12.1/plant/1.0</code></td>
+<td>Python integration</td>
+<td>SI units, declared ranges, known initialization</td>
+</tr>
+<tr>
+<td>Route scenario</td>
+<td><code>NS-CPS12.1/route/1.0</code></td>
+<td>force/power model</td>
+<td>sequence length positive; grade as fraction</td>
+</tr>
+<tr>
+<td>Requirement <code>R-THERM</code></td>
+<td><code>NS-CPS12.1/req/thermal/1.0</code></td>
+<td>result evaluator</td>
+<td>maximum °C and declared time horizon</td>
+</tr>
+<tr>
+<td>Result set</td>
+<td><code>NS-CPS12.1/results/1.0</code></td>
+<td>reviewer</td>
+<td>input revision, seed, code revision, units</td>
+</tr>
+</tbody>
+</table>
+<p>A revision to <code>cooling_ua_per_flow_w_per_k_per_kgps</code> changes model physics and <em>must</em> invalidate derived experiment CSV and any previously issued case decision. This is a dependency graph, not merely a filename convention. The source JSON is readable by humans, but real projects should additionally record content hashes and tool/container versions. The <a href="../case/credibility-register.csv">credibility register</a> records the validity status of each important dependency.</p>
+<h3>Derive a reproducible digital thread</h3>
+<p>Suppose a thermal engineer revises \(UA(\dot m)=35+900\dot m\) to \(UA(\dot m)=35+650\dot m\) W/K. At 0.30 kg/s the modeled transfer coefficient changes from 305 to 230 W/K, <strong>24.6% lower</strong>, so all hot-flow temperature claims are potentially stale. A correct change process identifies the parameter ID, affected equations, requirement R-THERM, test evidence, generated results and decision memo; it then regenerates those results. Merely changing a diagram label while leaving the CSV untouched breaks the evidence chain.</p>
+<p>The controlled tool can reconstruct experiment results deterministically with <code>python SE/K/B12/tools/step03_book12_coupled_vehicle.py --write</code>. Its use of a fixed pseudorandom seed is sufficient for a <strong>teaching reproduction</strong> on the declared Python runtime. Full formal provenance additionally needs a source commit ID, hashes, platform/solver build, test run and signed review. A notebook screenshot and a model simulation export are not independently reproducible evidence unless the original data and run controls remain available.</p>
+<h3>From structured metadata to collaborative review</h3>
+<p>A minimal interface record can be represented in JSON (or translated to XML), for example:</p>
+<pre><code class="language-json">{"name":"pack_temp","type":"Float64","unit":"degC","causality":"output",
+ "source":"thermal_plant","sample_period_s":0.5,"validity":[-20,55],
+ "owner":"thermal_model_owner","version":"1.0"}
+</code></pre>
+<p>This is <em>illustrative metadata</em>, not FMI <code>modelDescription.xml</code>, a SysML v2 repository format or a conforming XML schema. The essential properties are <strong>unit, causal ownership, timing and range</strong>; using the word “standard” without conforming to its schema would create a dangerous interoperability claim.</p>
+<p>Collaborative teams need a review rule: authors may propose parameter changes; domain owners check physical meaning; integrators check execution and test breakage; decision owners accept intended use. Do not share a mutable “latest-model.json” without a revision record, because readers cannot tell which results belong to which assumptions.</p>
+<h3>Exercise and worked answer</h3>
+<p><strong>A.</strong> A dataset reports battery capacity as <code>145000</code> with no unit. Can it be accepted? <strong>Solution.</strong> No: 145,000 Wh would be 145 kWh, whereas 145,000 kWh is three orders of magnitude different; both are syntactically valid numbers. An automated parser must reject missing units or require a controlled conversion, and a reviewer must confirm “usable” versus “nominal” semantics.</p>
+<p><strong>B.</strong> A researcher changes the warning threshold from 44 to 46°C but not the physical limit. Which downstream artifacts change? <strong>Solution.</strong> Any warning event/alert outputs, requirements trace, potential control-mode transition tests, and final risk memo. If the current code only reports max temperature, its absence of a warning-control implementation must remain explicit; do not imply a controller update occurred.</p>
+<p><strong>C.</strong> A file imports successfully into another tool. Is reuse verified? <strong>Solution.</strong> File parse success checks representation compatibility only; check time semantics, units, physical conservation, supported input range and benchmark outputs at controlled reference points before claiming equivalence.</p>
+<p><strong>Deliverable:</strong> a model-asset catalog with owners/versions and a requirement-to-equation-to-test trace. Include a deliberately malformed parameter file and show that validation rejects it; attach the <a href="../tools/step03_book12_coupled_vehicle.py">reference simulator</a>.</p>
+</section></main></body></html>

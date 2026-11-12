@@ -86,3 +86,31 @@ A mature baseline preserves decision history without preserving every obsolete a
 ## Put this into practice
 
 Work through [Lab 6: The Baseline Hearing](../labs/lab-06-integrated-baseline-review.md), then write a short paragraph on how the laboratory simplifies the real-world management problem. Use the [existing short Week 6 primer](../../P0-text/lessons/645-667-w06.md) for a second explanation. The assessed deliverable is defined in the original course guide, not by the hypothetical lab.
+
+## Step 03 integrated reference — test an integrated baseline, not four unrelated files
+
+An integrated baseline review (IBR) should test whether *technical scope*, *work authorization*, *time-phased budget*, *schedule logic* and *risks* describe the same project. The reviewer does not merely check that each tab exists. A cost baseline may omit a verification campaign that the technical configuration requires, while a schedule shows acceptance before the test equipment has arrived. Individually plausible artifacts can contradict one another.
+
+### A five-link consistency chain
+
+![Northstar management and technical claim linkage](../figures/ns-m1-claim-chain.svg)
+
+1. **Requirement:** NS-R-02 imposes a controlled emergency-status timing budget in the NS-B1 technical baseline.
+2. **Product:** The status gateway and supervisor console appear in the physical architecture and interface contract.
+3. **Work package:** CA-02 funds gateway integration and CA-04 funds verification evidence in NS-M1.
+4. **Schedule:** Integration must precede acceptance, while procurement and software specification have explicit prerequisites.
+5. **Evidence:** Closure requires configuration-current test and inspection records, not merely earned-value credit.
+
+If any link is missing, request a named corrective action and owner. The [account table](../case/control-accounts.csv) sums to $7.2M, but a balanced total alone does not prove the scope is adequate. Likewise the separate $0.6M management reserve is not a hidden category from which reviewers can simply fund already-forgotten in-scope work.
+
+### Quantify one audit finding
+
+Suppose acceptance testing is budgeted for 12 fixture-days at $4,500/day, but a hardware change requires 18 fixture-days. At unchanged rates, the incremental direct cost is \((18-12)\times4{,}500=\$27{,}000\). If the extra days move a critical schedule milestone or require retests of previous configurations, there can be further effects. The IBR finding should distinguish the **certain arithmetic difference** from uncertain secondary effects and designate who will re-estimate them.
+
+### Review disposition and evidence standard
+
+A well-formed finding identifies the violated criterion, source artifact and revision, concrete observation, impact, accountable owner, due date, and independent closure evidence. In contrast, “schedule needs improvement” provides no closure test. An open finding with an approved plan is not the same as a closed finding. If the missing work is genuinely in scope, correct the scope/budget integration before treating the project as reliably baselined.
+
+**Practice with answer.** A project claims complete work authorization, yet no account funds test-automation maintenance after the first release. **Answer:** determine whether that deliverable is required by approved lifecycle scope; if it is, amend the work package dictionary, cost basis and schedule, with a controlled approval. Do not treat its absence as a future unforeseen risk eligible for automatic management-reserve use.
+
+**Reference:** [GAO Cost Estimating and Assessment Guide](https://www.gao.gov/products/gao-20-195g) emphasizes technical baseline, WBS, schedule, risk and independent review as interconnected bases of estimate credibility.

@@ -78,6 +78,10 @@ A correct computed result is not automatically a system acceptance result; expla
 
 </details>
 
+## Phase 3 technical reference: Environmental scenarios induce dependence between model inputs
+
+A simulation that independently draws road distance and effective speed can create unrealistic combinations if an environmental regime jointly increases detours and slows travel. Under the synthetic \(T=D/V\) case, \(\rho=-0.6\) gives a modeled deadline exceedance of about **9.694%** for a 12 s threshold, versus **6.171%** when inputs are assumed uncorrelated. The ~3.52 percentage-point difference dwarfs the trial-sampling SE. The [complete joint-input propagation guide](../../methods/correlated-uncertainty-propagation.md) derives the covariance term, simulates joint normals and distinguishes model-form uncertainty, parameter uncertainty and Monte Carlo error. In a dynamic environment, verify time-lag dependence too—not just a static Pearson correlation.
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -115,3 +119,41 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [07 — Previous chapter](07-integrate-the-model-baseline-and-design-advanced-simulation-experime.md) · [09 — Next chapter](09-integrate-technical-performance-with-lifecycle-cost-resources-mainte.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-CPS12.1 case: correlated environments and scenario chronology
+
+### Environmental models must have causal structure
+
+Weather, road grade, passenger load, temperature, traffic and charger access are not independent decorative random inputs. A heat wave may simultaneously raise ambient temperature, auxiliary cooling demand, battery temperature and charging station loads. A peak campus event may raise passenger payload, road congestion and service demand together. Sampling each variable independently can severely understate the combined tail. Conversely imposing arbitrary perfect correlation can invent failure regimes that never occur. State which dependency is a physical mechanism, which is supported by measurements and which is only a stress-test assumption.
+
+In the controlled [scenario register](../case/model-inputs.json), ambient is −15°C, 22°C or 38°C; coolant mass flow is 0.05 or 0.30 kg/s; grade multiplier ranges up to 1.25 in the published scenario. The stress scenario combines **38°C ambient, low coolant flow and 25% scaled grade**, but it does *not* sample a joint weather distribution or claim these variables are statistically correlated. Interpret it as a **constructed adverse case**, not an estimated return-period event. The five route segments have deterministic reference speeds and grades. `sample_parameters()` varies mass, drag and rolling resistance with bounded independent uniforms, and all scenarios reuse each draw to enable fair comparisons.
+
+### Dependence changes aggregate variability
+
+For two uncertain loads \(X\) and \(Y\),
+
+\[
+\operatorname{Var}(X+Y)=\sigma_X^2+\sigma_Y^2+2\rho\sigma_X\sigma_Y.
+\]
+
+If both have standard deviation 2 kW, independent total standard deviation is \(\sqrt8\approx2.83\) kW; with \(\rho=0.8\), it is \(\sqrt{8+6.4}\approx3.79\) kW, about 34% higher. The mean stays unchanged under this simple model, but tail stress becomes more likely. This exact covariance calculation is reproducible without a simulation library; it does not establish that \(\rho=0.8\) is empirically appropriate. If the inputs are constrained, non-Gaussian or nonlinear, a covariance matrix alone may be inadequate.
+
+### Time alignment and spatial meaning
+
+An ambient temperature sampled once at time zero is not a forecast for a full mission. For a time-varying forcing \(T_a(t)\), the pack state responds through a first-order thermal filter: spikes shorter than \(\tau=C_b/UA\) are attenuated, while prolonged heat exposure accumulates. The route position samples grades spatially \(g(s)\), and the supervisor converts that to time \(g(s(t))\). If a weather sample is indexed by wall-clock time while the vehicle model restarts its clock for each lap, transient exposures may accidentally repeat or shift. The demonstrator uses fixed ambient throughout each run and therefore cannot capture such chronology; readers should explicitly label these omissions.
+
+A scenario archive should record generation algorithm, seed, distribution and joint dependence, temporal resolution, spatial reference, truncation, units and intended-use scope. A 38°C scenario is not interchangeable with “extreme hot weather” unless local climatology, humidity, solar loading and exposure duration are represented. The baseline also omits wind and rain effects on traction and cooling, so a seemingly robust weather run may still miss real hazards.
+
+### Worked stress comparison
+
+Across 16 parameter draws, the **hot low-flow** modeled mean battery use is about **32.38 kWh**; the **hot grade-stress** scenario uses approximately **35.14 kWh**, an increase of **2.75 kWh** over 84 km. Mean modeled peak temperature rises from approximately **41.88°C** to **42.07°C**. The causal chain in this surrogate is uphill force → higher wheel energy → greater electrical/ohmic thermal load. The grade scaling is an artificial sensitivity test: because the periodic route does not close elevation, these numbers do not represent a real repeated campus circuit. They are still useful for detecting how the equations respond to a controlled variation.
+
+### Exercises with solutions
+
+**A.** Let correlated uncertain cabin and traction peaks each have standard deviation 2 kW and correlation −0.5. Find combined standard deviation. **Solution.** \(\sqrt{4+4+2(-0.5)(2)(2)}=\sqrt4=2\) kW. Negative dependence lowers aggregate variance in the specified linear model; it does not necessarily reduce worst-case correlated failure if the joint model is wrong.
+
+**B.** Why is a single 38°C constant-ambient run not a hot-soak validation? **Solution.** It fixes pack initial state at 31°C, ignores solar load and changing ventilation and lacks pack thermocouple evidence. Initial conditions and long-term forcing need explicit exposure scenarios.
+
+**C.** A synthetic route's net elevation gain is nonzero each lap. How should it be used? **Solution.** Only as a bounded power/sensitivity exercise; redesign as an elevation-closed route before using it for absolute trip range or fleet charging decisions.
+
+**Deliverable:** a scenario-dependency diagram, a second stress case with justified dependence, a time-alignment checklist and a validity note distinguishing adverse construction from calibrated probability.

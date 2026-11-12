@@ -1,0 +1,17 @@
+policy,scenario,probability,access_path_capacity,standard_path_capacity,shared_capacity,accessible_delivered,standard_delivered,data_age_min,flow_ok,data_ok,interface_current,joint_screen_pass
+status-quo,normal,0.55,70,260,270,62,186,2,True,True,True,True
+status-quo,grid,0.2,59.75,197.0,243.0,59.75,183.25,3,False,True,True,False
+status-quo,flood,0.15,66.5,137.5,238.0,62,137.5,4,False,True,True,False
+status-quo,comms,0.1,70,247.0,178.2,62,116.2,12,False,False,True,False
+backup-power,normal,0.55,70,260,270,62,186,2,True,True,True,True
+backup-power,grid,0.2,70.0,236.0,264.6,62,186,3,True,True,True,True
+backup-power,flood,0.15,66.5,137.5,238.0,62,137.5,4,False,True,True,False
+backup-power,comms,0.1,70,247.0,178.2,62,116.2,12,False,False,True,False
+data-federation,normal,0.55,70,260,270,62,186,2,True,True,True,True
+data-federation,grid,0.2,59.75,197.0,243.0,59.75,183.25,3,False,True,True,False
+data-federation,flood,0.15,66.5,187.5,238.0,62,176.0,4,False,True,True,False
+data-federation,comms,0.1,70,247.0,264.6,62,186,2,True,True,True,True
+integrated,normal,0.55,70,260,270,62,186,2,True,True,True,True
+integrated,grid,0.2,70.0,236.0,264.6,62,186,3,True,True,True,True
+integrated,flood,0.15,66.5,212.4,264.6,62,186,4,True,True,True,True
+integrated,comms,0.1,70,247.0,264.6,62,186,2,True,True,True,True

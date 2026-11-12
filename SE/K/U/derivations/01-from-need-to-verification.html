@@ -35,4 +35,13 @@
 <p>&lt;/details&gt;</p>
 <p><strong>Transfer artifact:</strong> A typed eight-column claim-to-evidence chain with a configuration identifier and one counterexample for each significant claim.</p>
 <p>See also <a href="../../encyclopedia/good-requirements.html">requirements primer</a>, <a href="../../encyclopedia/verification-matrix.html">verification matrix</a> and <a href="../../encyclopedia/traceability-graph.html">traceability graph</a>.</p>
+
+<!-- STEP04-FLAGSHIP-U1-START -->
+<section class="ns-u4-extension" aria-label="NS-U4.1 flagship technical extension"><h3>D01 extension · A conservative acceptance predicate</h3>
+<p>A mission need must be decomposed into <em>measured outcome</em>, <em>measurement guarantee</em>, and <em>authority</em>. For a clock-reported time $\hat t$, unknown true latency satisfies $t\in[\hat t-u,\hat t+u]$ when clock error is bounded by $u$. Thus a guaranteed success at threshold $T$ requires $\hat t+u\le T$; a merely possible success requires $\hat t-u\le T$. Conflating these inequalities silently converts uncertainty into proof. NS-U4.1 gives 72 nominal successes out of 80, but only 67 conservative successes with $T=8$ s and $u=0.25$ s. Both counts are observations from a synthetic fixture, not operational qualification. The requirement-to-result graph should include instrument method, uncertainty source, configuration revision, subgroup and operating domain.</p>
+<p><strong>Exercise and solution.</strong> Is a 7.9 s reading guaranteed if $u=0.25$ s? No, because $7.9+0.25=8.15&gt;8$. At $u=0.05$ s it is guaranteed. The change improves timing classification, not authorization. <a href="../flagship-integration/code/ns_u_case.py">Check model</a>.</p>
+</section>
+<script id="ns-u4-inline-math">window.MathJax=window.MathJax||{};window.MathJax.tex=window.MathJax.tex||{};window.MathJax.tex.inlineMath=[["$","$"]];</script>
+<style id="ns-u4-responsive">main{min-width:0;max-width:100%;overflow-wrap:break-word}main :is(table,pre){max-width:100%;overflow-x:auto}main :is(p,li):has(mjx-container){overflow-x:auto}main mjx-container{max-width:100%;overflow-x:auto}.ns-u4-extension{min-width:0;max-width:100%;border-top:2px solid #9acac9;margin-top:38px;padding-top:16px}.ns-u4-extension a{overflow-wrap:anywhere}</style>
+<!-- STEP04-FLAGSHIP-U1-END -->
 </main></body></html>

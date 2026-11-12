@@ -1,0 +1,5 @@
+id,name,p90_wait_min,accessible_coverage_pct,capex_musd,opex_musd_per_year
+A,Fixed loop,10.8,92,2.4,0.86
+B,Pooled on-demand,8.5,97,2.7,1.12
+C,Hybrid trunk + feeders,9.5,98,2.25,0.98
+D,Brokered partner fleet,12.4,96,0.4,1.25

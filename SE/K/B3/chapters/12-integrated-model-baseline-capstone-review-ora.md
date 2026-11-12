@@ -77,3 +77,34 @@ Review decisions should preserve the model commit, relevant tool versions, impor
 ## Continuity
 
 This chapter builds from [previous chapter](11-model-quality-queries-reports-change-impact-g.md) and leads toward your final course defense. Revisit the corresponding [weekly primer](../../P1-text/lessons/645-631-w12.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: defend a configuration-specific model argument
+
+### What a review must decide
+
+A model baseline is a set of versioned assertions and evidence, not a binder of completed diagrams. The NS-MB3 baseline supports a *conditional* conclusion: candidate B passes a necessary ideal-capacity threshold, nominal command processing has a positive analytical timing margin, and the simplified shift-energy model has positive margin. But the same baseline explicitly has one stale verification fixture (`REQ-03`), one planned duplicate-token test without a passing result (`REQ-06`), an unresolved degraded-path latency question, and no physical-service validation. An unconditional operational release would therefore be indefensible on this model alone.
+
+A review should expose each claim's premise, evidence type, validity boundary and next decision. Use the six requirements as the spine of the review, but do not allow a status dashboard to replace the engineering argument. For example, the capacity case is \(Q_B=3(3)=9\) ideal trips/hour compared with a requirement of 8. That leaves only 1 trip/hour (12.5%) model headroom; availability or dwell variation could reverse the conclusion. The energy case gives \(20.352\) kWh against a 30-kWh illustrative limit. Neither supports a statement about measured real-world reliability without observed evidence.
+
+### A compact model-review decision matrix
+
+| Claim | Model result | Confidence and boundary | Review action |
+|---|---|---|---|
+| Peak capacity | Candidate B: 9 ideal trips/hour | Ideal arithmetic, not field throughput | Model/simulate variation; validate demand and trip rate |
+| Nominal command delay | 325 ms ≤ 400 ms | Four serial budget elements only | Measure representative path and tail |
+| Degraded command delay | 460 ms on assumed path | No explicit degraded target | Define safe fallback and acceptance |
+| Energy reserve | 9.648 kWh model margin | Fixed energy coefficients | Calibrate against realistic duty cycles |
+| Telemetry freshness | `TEST-03` stale | Requirement revision mismatch | Reverify `REQ-03@2` |
+| Duplicate-token guard | Planned only | No execution evidence | Run concurrent retry and recovery tests |
+
+The decision should be written in operational terms: *Authorize continuation of detailed design and evidence collection for candidate B, but do not authorize physical deployment or claim verification closure.* It is a legitimate engineering outcome to finish a capstone with a defended conditional decision rather than a blanket PASS.
+
+### Reproducible oral defense
+
+A reviewer should be able to point to one source for each numeric assumption, run the same [model checker](../tools/step03_book3_model_check.py), inspect the [evidence register](../case/evidence-register.csv), and produce the same statuses. Ask the team to change `REQ-03` back to revision 1 in a copy of the case and observe the evidence-currency result, then explain why such an edit would not be an acceptable production shortcut. Ask them to increase demand to 10 trips/hour and explain why candidate B becomes infeasible under the necessary bound. This tests the students' grasp of semantics and sensitivity, not their ability to narrate a polished picture.
+
+### Practice with answer
+
+**Exercise.** A review board insists that the model is “90% complete” because nearly all elements are linked. What is the correct response? **Worked answer:** Link completeness is a repository metric, not a release criterion. The project has specific uncovered claims about telemetry freshness and duplicate dispatch; their severity and intended use determine the gate. Establish explicit evidence acceptance and defect disposition, not a percentage of populated attributes. Then identify an independent reviewer responsible for approving any equivalence argument and record the model baseline and tool versions used to make the decision.
+
+This model is illustrative and does not constitute a verified SysML v2 implementation or a real shuttle release. The [case index](../case/INDEX.html) includes all declared limitations so the reviewer can follow the evidence trail without relying on external material.

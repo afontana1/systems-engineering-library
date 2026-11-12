@@ -1,0 +1,119 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Model-based systems engineering: baselines, constraints, and evidence currency · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/model-baselines-and-evidence.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Model-based systems engineering: baselines, constraints, and evidence currency</h1>
+<p><em>Technical reference · Phase 4 · Typed links, change-impact analysis, SysML v2 context, and executable consistency rules</em></p>
+<p><strong>The engineering question.</strong> What must a model contain so that a change in a requirement, component, or software build identifies the associated analysis and verification results that may no longer be applicable? This guide constructs a small, inspectable digital-thread model, checks it with Python, and explains where the model stops short of actual SysML v2 language conformance or real-world assurance.</p>
+<p><strong>Prerequisites:</strong> <a href="../encyclopedia/traceability-graph.html">Traceability graph</a>, <a href="../encyclopedia/model-language-method-tool.html">model language versus method versus tool</a>, <a href="../encyclopedia/configuration-assurance-and-change-control.html">configuration assurance</a>, and <a href="mbse-semantic-modeling-handbook.html">MBSE semantics</a>.</p>
+<h2>1. What belongs in an engineering model?</h2>
+<p>A systems model is a representation with explicit <em>types, relationships, semantics, and constraints</em> suited to specified purposes. A diagram with labeled rectangles may be understandable but still leave important questions unresolved: Does a line mean <em>depends on</em>, <em>verifies</em>, <em>implements</em>, or <em>was derived from</em>? Which configuration does the statement describe? What happens if its target changes?</p>
+<p>For the fictional Campus Mobility release, use node types <strong>Need</strong>, <strong>Requirement</strong>, <strong>Component</strong>, <strong>Hazard</strong>, <strong>Control</strong>, <strong>Evidence</strong>, and <strong>Baseline</strong>. The graph includes typed edges:</p>
+<p>\[
+\mathrm{Need}\xrightarrow{derived\ into}\mathrm{Requirement}
+\xrightarrow{allocated\ to}\mathrm{Component},
+\]
+\[
+\mathrm{Requirement}\xrightarrow{addresses}\mathrm{Hazard},\qquad
+\mathrm{Requirement}\xrightarrow{verified\ by}\mathrm{Evidence},
+\]
+\[
+\mathrm{Hazard}\xrightarrow{mitigated\ by}\mathrm{Control}
+\xrightarrow{supported\ by}\mathrm{Evidence}.
+\]</p>
+<p>The graph is <em>typed</em>: an evidence record is not a substitute for a component; a control is not proof of an effect. Each edge must be interpreted in an engineering ontology, not simply as an undirected hyperlink. A requirement can be structurally linked to a test that is irrelevant or inadequately performed. Traceability checks are necessary but not sufficient for validity.</p>
+<h2>2. Specify invariants rather than counting links</h2>
+<p>The case has two requirements: REQ-DOOR is allocated to the door controller and traces to hazard H-DOOR; REQ-ACK is allocated to dispatch service and traces to H-DISPATCH. Each requirement has one declared piece of supporting evidence. Define structural rules before writing a script:</p>
+<ol>
+<li>IDs are unique and references resolve to the expected node type.</li>
+<li>Each requirement identifies a source need, component allocation, applicable hazard and control, and at least one evidence record.</li>
+<li>Each hazard names existing controls and each control has a responsible component and traceable evidence.</li>
+<li>Evidence links back to the requirement it purports to verify and records a result, baseline and build.</li>
+<li>The evidence baseline/build must match the configuration under review before a <em>current-evidence</em> claim is made.</li>
+</ol>
+<p>Formally, if \(R\) is the set of requirements and \(E(r)\) the evidence records linked to requirement \(r\), the <strong>link-completeness</strong> predicate is</p>
+<p>\[
+\forall r\in R:\quad
+\mathrm{need}(r)\neq\varnothing\;\land\;
+\mathrm{component}(r)\in C\;\land\;E(r)\neq\varnothing.
+\]</p>
+<p>The stronger but still limited <strong>configuration-currency</strong> predicate is</p>
+<p>\[
+\forall e\in E_{\mathrm{release}}:\quad
+\mathrm{baseline}(e)=\mathrm{baseline}_{\mathrm{release}}
+\;\land\;\mathrm{build}(e)=\mathrm{build}_{\mathrm{release}}.
+\]</p>
+<p>Matching strings establish neither record integrity nor genuine build provenance. An authoritative digital thread additionally needs immutable artifact identifiers, versioned relations, controlled authoring and reviews, a trustworthy configuration registry, and defensible evidence applicability rules.</p>
+<h2>3. A reproducible configuration change</h2>
+<p>Open the JSON fixture <a href="data/campus-mobility-release.json">Campus Mobility release CM-B2</a>. The record names build <code>controller-2.4.1</code> and evidence EV-DOOR and EV-ACK tagged with exactly that build and baseline. The <a href="code/model_thread_audit.py">auditor</a> uses only Python's standard library and reports two requirements, two hazards and two evidence records with no <em>structural</em> errors. It also emits warnings about unresolved verification and model limitations.</p>
+<pre><code class="language-sh">python3 SE/K/methods/code/model_thread_audit.py
+</code></pre>
+<p>Next open the <a href="data/campus-mobility-stale-evidence.json">changed baseline CM-B3</a>. Here only the release record has changed to <code>controller-2.4.2</code> while the two old results are still attached. The auditor correctly reports four issues: two stale model-baseline references and two stale build references.</p>
+<pre><code class="language-sh">python3 SE/K/methods/code/model_thread_audit.py SE/K/methods/data/campus-mobility-stale-evidence.json
+</code></pre>
+<p>That command intentionally exits with a nonzero status. A stale flag must prompt a <em>technical decision</em>: which evidence must be repeated, what analytical argument could permit reuse, and what changes to the model, operating conditions or test equipment invalidate comparability? It would be incorrect to silently edit the old evidence labels to match the new build.</p>
+<p>The script tests declared graph invariants and simple timing limits. It does not parse SysML, inspect an actual controller binary, verify a cryptographic build hash, evaluate safety risk, or confirm that the evidence was produced by the claimed build. In particular, its positive result is not a safety-release approval.</p>
+<h2>4. Relating the exercise to SysML v2 and KerML</h2>
+<p>OMG's <a href="https://www.omg.org/spec/SysML/2.0">SysML v2 specification</a> describes a language with graphical/textual notations and a semantic foundation in <a href="https://www.omg.org/spec/KerML/1.0">KerML</a>. Its separate <a href="https://www.omg.org/spec/SystemsModelingAPI/1.0">Systems Modeling API and Services specification</a> supports model integration. These are distinct from an engineering <em>method</em> and from a specific executable modeling <em>tool</em>.</p>
+<p>The case's JSON is a deliberately small educational <strong>interchange-like representation</strong>, <strong>not valid SysML v2 textual syntax or an OMG-conformant API payload</strong>. A serious SysML v2 implementation would model parts, requirements, connections, actions and verification cases using the language's actual declared semantics. It would bind model element identifiers to versioned evidence, export or query with a supported implementation, and run a real tool's parser and semantic validation. Do not relabel a JSON consistency audit as a “formal SysML v2 proof.”</p>
+<p>A practical migration path is:</p>
+<table>
+<thead>
+<tr>
+  <th>Educational model element</th>
+  <th>SysML v2 modeling concern</th>
+  <th>Additional review needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>components</code></td>
+  <td>Part/structure definitions and usages</td>
+  <td>Owner/port/typing semantics and multiplicity</td>
+</tr>
+<tr>
+  <td><code>requirements</code></td>
+  <td>Requirement definitions/usages, constraints</td>
+  <td>Stakeholder context, satisfy/verify relationships and units</td>
+</tr>
+<tr>
+  <td><code>hazards</code> and <code>controls</code></td>
+  <td>Dedicated engineering profile/metadata and trace links</td>
+  <td>Safety ontology, causal completeness and owners</td>
+</tr>
+<tr>
+  <td><code>evidence</code></td>
+  <td>Verification cases, artifacts and configuration metadata</td>
+  <td>Test applicability, result provenance and reuse policy</td>
+</tr>
+<tr>
+  <td><code>baseline</code>/<code>build</code></td>
+  <td>Version-managed model/project and configuration data</td>
+  <td>Change control, immutable IDs and actual artifact hashes</td>
+</tr>
+</tbody>
+</table>
+<p>To make a future <em>tool-validated</em> example, add an actual <code>.sysml</code> source based on normative language rules, run a compatible parser/validator in CI, capture tool version and diagnostics, and test representative queries. That step <strong>has not been performed in this release</strong>; it should not be inferred from the passing Python audit.</p>
+<h2>5. Change impact is more than link traversal</h2>
+<p>Suppose a braking sensor is replaced. The first-order affected set comprises requirements that use it, controls relying on its readings, verification steps using it, interface contracts, and parameterized analyses that assume its accuracy or latency. The transitive impact follows typed dependencies. But edge existence alone does not say <em>which</em> results are invalid: for example, one changed display label may not affect a validated timing analysis, whereas a sensor sampling interval change may alter fault detection time.</p>
+<p>Use an impact record with <strong>changed property, relevant behavior, affected claims, evidence assumptions, decision on reuse, reviewer, and effective baseline</strong>. A change in a requirement threshold can invalidate evidence even when the tested binary is unchanged. A hardware change can invalidate a software integration test even if software has not been rebuilt. Two records with the same revision label can still differ in content unless integrity is verified.</p>
+<p>For consequential engineering, track relation-level and artifact-level provenance: source revision, author, approval, timestamps, calibration, external dependency versions, parameter/units, tool version, code commit, and test article identity. Keep the data minimal where possible, but never omit attributes needed to judge whether a claim applies to the configuration of interest.</p>
+<h2>6. Four ways an apparently complete graph can mislead</h2>
+<p><strong>Coverage without relevance.</strong> One <code>PASS</code> record is linked to a door requirement but tests only the green dashboard indicator. Structural coverage is 100%; verification relevance is nearly zero.</p>
+<p><strong>Current labels, stale assumptions.</strong> Evidence tags are updated to CM-B3 without rerunning the test or evaluating changed conditions. The checker passes, but the evidence is misrepresented.</p>
+<p><strong>Incorrect risk abstraction.</strong> A common-cause fault is absent from the model because component diagrams emphasize independence. No traceability completeness rule discovers an omitted hazard automatically.</p>
+<p><strong>Semantic ambiguity.</strong> Two teams use <code>verifies</code> to mean different things: a test is planned versus passed. Define link properties such as <code>planned</code>, <code>executed</code>, <code>accepted</code>, with criteria, result and scope.</p>
+<p>These are reasons to augment model validation with engineering review and evidence challenge, not reasons to abandon traceability.</p>
+<h2>7. Exercises and worked checks</h2>
+<p><strong>A. Baseline mismatch:</strong> Explain why CM-B3 fails exactly four currency checks. <em>Answer:</em> Both EV-DOOR and EV-ACK cite CM-B2 and build 2.4.1, so each has a mismatched baseline and build; the other declared links still resolve.</p>
+<p><strong>B. Missing allocation:</strong> In a copy of the fixture, rename <code>dispatch-service</code> in the <code>components</code> list but leave REQ-ACK unchanged. The audit must report a missing allocation for REQ-ACK and an unknown owner for CTRL-TIME. Identify the additional functional or interface tests required after a real architectural reallocation.</p>
+<p><strong>C. Misleading pass:</strong> Replace EV-DOOR with a passing test for an irrelevant user-interface function. Why would the script fail to detect this? Propose a precise evidence-coverage predicate (stimulus, expected observable behavior, operating mode, fault conditions, and requirement acceptance criteria) and the data fields it needs.</p>
+<p><strong>D. SysML tool selection:</strong> Compare a SysML v2 textual model, a model interchange API representation, and the executable JSON exercise. For each, specify its standards conformance requirements and which actual tool diagnostics would substantiate that claim.</p>
+<h2>8. Where this belongs in the curriculum</h2>
+<ul>
+<li>EN.645.631 and EN.645.632: model semantics, change-impact queries, verification cases and machine-checkable constraints.</li>
+<li>EN.645.768: trace safety controls into physical/logical architecture and interface responsibilities.</li>
+<li>EN.645.769: check evidence applicability and build-specific release claims.</li>
+<li><a href="../B3/chapters/11-model-quality-queries-reports-change-impact-g.html">Book 3 ch 11</a> and <a href="../B9/chapters/11-extend-the-modeling-language-and-automate-queries-validation-rules-m.html">Book 9 ch 11</a> provide the course-aligned methods.</li>
+<li>Continue to the <a href="safety-fault-trees-and-assurance.html">safety/fault-tree reference</a> and the <a href="campus-mobility-engineering-case.html">connected case study</a>.</li>
+</ul>
+<p><strong>Primary references:</strong> <a href="https://www.omg.org/spec/SysML/2.0">OMG SysML v2 specification</a>, <a href="https://www.omg.org/spec/SystemsModelingAPI/1.0">OMG Systems Modeling API and Services specification</a>, <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a>.</p>
+<footer class="reference-note"><a href="model-baselines-and-evidence.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

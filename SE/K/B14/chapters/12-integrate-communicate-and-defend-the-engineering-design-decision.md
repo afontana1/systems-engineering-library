@@ -121,3 +121,23 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [11 — Previous chapter](11-analyze-uncertainty-sensitivity-robustness-regret-and-value-of-infor.md) · End of the book · [Book index](../README.md)
+
+## Step 03 integrated NS-DA14.1 decision-analysis laboratory: Chapter 12
+
+### Combine the selection and design investigations without collapsing their authority boundaries
+
+The final **Campus Mobility Scalable Service Design Decision Record** should give the decision authority an evidence chain rather than a single “best” spreadsheet row. Project 1 asks which predetermined **pilot** can be conditionally preferred; with hypothetical gates, C and D remain, D's value score exceeds C's by 0.01595 under the illustrated weights, and a modest swing-weight transfer reverses that result. Project 2 asks what *new long-term configuration* is worth further development; the 1440-element controlled subspace yields 10 nominally feasible tuples and five nondominated points. These findings concern **different decisions**, so D does not automatically become the architecture or fleet composition chosen by Project 2.
+
+### Decision record with explicit stages and owners
+
+**Stage 1: selection analysis accepted for instructional review.** Preserve six candidate data rows, fixed constraints, candidate rejections, dominance proof, score decomposition, sensitivity and accessibility dissent. The authority must approve weights and the correct cost horizon. **Stage 2: candidate design screening only.** The sampled nominal frontier includes a human-operated priority-dispatch hybrid at 18 vehicles, 8 chargers, 10% reserve, four zones and 18 mph with a synthetic 14.0136-minute p90 wait. Under high-demand stress this same candidate exceeds the 15-minute target, and charger-loss stress also violates availability; therefore do not procure or qualify the configuration on this result. **Stage 3: credibility work before deployment.** Obtain real ridership/accessibility measurements, charging and route data, vendor and workforce constraints, and independent review of queueing, thermal and system-dynamics assumptions.
+
+An audit-ready record includes: `authority`, `decision_date`, `decision_scope`, `candidate_baseline`, `measure_dictionary`, `threshold_owner`, `preference_elicitation`, `source_observation_provenance`, `uncertainty_structure`, `rejected_options`, `code_commit`, `model_and_surrogate_validation`, `risk_and_accessibility_review`, `minority_dissent`, `release_conditions`, and `reopen_trigger`. The [evidence register](../case/evidence-register.csv) supplies example evidence owners/status. A code test passing means the stated algorithm ran against its stated controlled inputs; it does not mean the assumed campus response equations are scientifically true.
+
+### Oral defense: change the decision rather than merely describe it
+
+**Worked challenge.** A stakeholder changes preferences by moving 0.10 weight from wait to accessible coverage. State the Project 1 consequence *without modifying physical performance*. **Solution:** D minus C changes from +0.015952 to approximately −0.006048, so conditional preference shifts to C. A different stakeholder changes the Project 2 high-demand case; the 18-vehicle nominal design fails the wait gate under the given stress independently of weights. The former is a **preference reversal**; the latter is a **feasibility failure**. They cannot be repaired in the same way.
+
+**Second challenge.** An analyst claims a surrogate's 0.047-minute holdout MAE proves a 15-minute mobility guarantee. **Solution:** The holdout comes from the same synthetic response generator; it tests surrogate emulation but not real service, legal accessibility or peak wait. Books 11 and 12 supplied distinct queue and vehicle-physics examples with their own unresolved validation limitations. Cross-model disagreement should trigger an evidence campaign, not selective quotation of the most favorable model.
+
+**Release position.** **HOLD for operational selection, procurement and qualification.** The case is an instructional release with computationally reproducible screening, optimization and information-value arithmetic. Independent source-to-claim, fairness, governance, optimization and model validation remain outstanding; the expanded chapters are a coordinated first pass, not an authoritative final edition.

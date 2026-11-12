@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS-MS11.1 Mobility Simulation · Systems Engineering Library</title><link rel="stylesheet" href="../../_assets/learning-shell-v55.css"><style>body{margin:0;background:#f4f8f9;color:#173645;font:16px/1.72 system-ui,sans-serif}header{padding:16px max(18px,calc((100vw - 1050px)/2));background:#173f52}header a{color:#c6f5ee}main{max-width:1050px;margin:24px auto;padding:clamp(18px,4vw,42px);border:1px solid #d6e3e5;border-radius:12px;background:white}a{color:#0b6b70}h1{line-height:1.2}h2{margin-top:1.8rem}p,li{max-width:100ch}table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}td,th{padding:9px;border:1px solid #dae3e6;vertical-align:top}th{background:#edf5f4}code{overflow-wrap:anywhere}pre{overflow:auto;padding:12px;background:#ecf3f5}img{max-width:100%;height:auto}@media(max-width:700px){main{margin:0;padding:18px;border:0;border-radius:0}}</style><script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B11/case/INDEX.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script></head><body><header><a href="../README.html">← Book 11</a> · <a href="../OPEN-BOOK.html">Textbook</a></header><main><h1>NS-MS11.1 — Campus mobility fleet decision and simulation credibility dossier</h1>
+<p><em>EN.645.757 · Book 11 · fictional Northstar teaching baseline · initial coordinated Step 03 edition</em></p>
+<h2>Decision and status</h2>
+<p>The decision owner is considering a <strong>Phase 2 campus mobility pilot</strong>. The original course guide defines 06:00–18:00 demand, four initial fleet candidates, accessible service, charging, and performance criteria. Our case extends those <em>course-specified synthetic inputs</em> with explicit, deliberately simplified hypotheses. No real campus measurements have been used. The case supports <strong>early option screening only</strong>.</p>
+<p><strong>Decision: HOLD</strong> on operational pilot readiness under the present model: none of the tested fleets (8, 10, 12 or 14) meets <em>all</em> three modeled targets—standard-trip daily p90 ≤12 minutes, accessible-trip daily p90 ≤15 minutes, and fraction awaiting pickup at 18:00 strictly below 1%. The model omits ride pooling, staffing, physical route/charger locations and field validation. A model failure here <strong>does not prove that a real fleet would fail</strong>. It indicates that the existing simplifications and candidate space cannot support an approval claim.</p>
+<h2>Controlled evidence chain</h2>
+<p><a href="simulation-evidence-chain.svg">Editable process diagram</a> · <a href="model-assumptions.json">Assumptions and units</a> · <a href="requirements.csv">Requirement trace</a> · <a href="credibility-register.csv">Credibility and gap register</a> · <a href="replication-output.csv">Replication-level measurements</a> · <a href="summary.json">Machine-readable summary</a> · <a href="../tools/step03_book11_mobility.py">Standard-library executable source</a>.</p>
+<p>The chapter sequence uses one problem at different levels: purpose, conceptual process, input distributions, baseline, discrete-event implementation, verification, alternatives, replication inference, designed experiments, integration/T&amp;E, VV&amp;A and sustainment. The original twelve labs remain authoritative course preparation; the new materials supplement rather than overwrite them.</p>
+<h2>Repeatable analysis: interpretation</h2>
+<p>Run from repository root:</p>
+<pre><code class="language-sh">python SE/K/B11/tools/step03_book11_mobility.py
+python scripts/check_step03_book11.py
+</code></pre>
+<p>The first command uses Python's standard library only, regenerating both CSV and JSON. Seed sets 1000–1029 create independent synthetic days; identical exogenous requests are replayed across fleets within a given day. A daily standard p90 is calculated from standard-trip waits by the nearest-rank rule. The uncertainty interval estimates the <strong>mean of daily p90 statistics</strong>, not a pooled-request percentile, actual operational p90, or validation accuracy. All waits include late pickup if a request remains queued at close, while <em>not picked up by close</em> is a separate 18:00 snapshot. After-close events are processed to avoid dropping waits. A trip is assumed to occupy one vehicle exclusively, regardless of its physical passenger capacity.</p>
+<table>
+<thead>
+<tr>
+  <th style="text-align:right">Fleet</th>
+  <th style="text-align:right">Baseline standard daily-p90 mean</th>
+  <th style="text-align:right">Baseline accessible daily-p90 mean</th>
+  <th style="text-align:right">Mean fraction awaiting pickup at close</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:right">8</td>
+  <td style="text-align:right">about 349.1 min</td>
+  <td style="text-align:right">about 362.5 min</td>
+  <td style="text-align:right">about 36.0%</td>
+</tr>
+<tr>
+  <td style="text-align:right">10</td>
+  <td style="text-align:right">about 161.9 min</td>
+  <td style="text-align:right">about 168.4 min</td>
+  <td style="text-align:right">about 21.5%</td>
+</tr>
+<tr>
+  <td style="text-align:right">12</td>
+  <td style="text-align:right">about 69.1 min</td>
+  <td style="text-align:right">about 80.2 min</td>
+  <td style="text-align:right">about 10.3%</td>
+</tr>
+<tr>
+  <td style="text-align:right">14</td>
+  <td style="text-align:right">about 36.4 min</td>
+  <td style="text-align:right">about 45.4 min</td>
+  <td style="text-align:right">about 6.0%</td>
+</tr>
+</tbody>
+</table>
+<p>Values above come from the model as shipped; <code>summary.json</code> is the exact machine-readable source. They describe simulated service under intentionally restrictive <strong>single-request</strong> vehicle service, not a realistic optimized route or pooled-shuttle design. Stress experiments increase arrival rates by 20% and travel times by 30% simultaneously; there is no estimated real-world stress probability.</p>
+<h2>Model boundary and evidence priorities</h2>
+<ul>
+<li><strong>Specified, tested in software:</strong> event times, charger capacity and queue progression, seed control, input validation and structural publishing checks. Internal correctness evidence is narrower than operational validation.</li>
+<li><strong>Assumed:</strong> Poisson demand, lognormal accessible boarding, triangular service/charge, nominal accessible-fleet fraction and battery depletion; all need independent data and plausible limits.</li>
+<li><strong>Not represented:</strong> multi-party ride pooling, actual eight-passenger/two-device occupancy, route travel network, people and driver shifts, breakdowns, physical charger access, wheelchair-equipment fitting, weather distributions and regulatory compliance.</li>
+<li><strong>Needed before a real pilot decision:</strong> independent observed demand/tail distributions, reproducible model-to-referent validation under representative conditions, alternatives with realistic staffing/dispatch/pooling, physical integrated tests, accessibility stakeholder review, and approval by the appropriate decision authority.</li>
+</ul>
+<p>The software verifies numerical operations and publishing alignment, not NASA/DoD standards conformance. No accreditation has been requested or granted. The 12-week outcome crosswalk is stored at <code>audit/book11-weekly-outcomes-step03.csv</code> in the complete authoring repository (not in the published <code>SE/</code> tree).</p>
+</main></body></html>

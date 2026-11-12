@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Architecture reviews: prove readiness for the next engineering commitment · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/encyclopedia/architecture-review-and-evidence.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical explanation</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Architecture reviews: prove readiness for the next engineering commitment</h1>
+<p><strong>Reference entry · Concept design, system integration and assurance · Worked technical treatment</strong></p>
+<h2>Reviews are structured decisions, not presentations</h2>
+<p>A <strong>technical architecture review</strong> examines whether an engineering baseline and its supporting evidence justify a specific next commitment: continued concept exploration, detailed design, integration, qualification, production or operation. Review labels such as SRR, PDR or CDR may have formal meanings within a program or agency. They are not interchangeable, and a collection of completed slides is not itself an engineering readiness argument.</p>
+<p>Start by naming the decision: <em>May the team commit to detailed design of this interface and architecture under the declared operating envelope?</em> State the applicable requirements, approved concept and architecture baseline, major risks and uncertainties, decision authorities, dissenting findings and conditions for advancement. Separate “evidence exists” from “the evidence is strong enough for this decision.”</p>
+<h2>A reviewable evidence thread</h2>
+<p>For a hypothetical Campus Mobility door interlock, a review packet could include:</p>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Evidence item</th>
+<th>What it does <strong>not</strong> prove</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Door opening is inhibited above declared speed</td>
+<td>Configuration-labeled fault-injection tests</td>
+<td>Reliability under all sensor common-cause failures</td>
+</tr>
+<tr>
+<td>Signal freshness is defined at the boundary</td>
+<td>ICD signal table with clock and timeout</td>
+<td>Correctness of every deployed network timing path</td>
+</tr>
+<tr>
+<td>Controller and requirement are linked</td>
+<td>Typed allocation and test records</td>
+<td>That the requirement captures every safety need</td>
+</tr>
+<tr>
+<td>Architecture supports degraded mode</td>
+<td>Mode-transition model and counterexamples</td>
+<td>Field-operational validity of the abstract model</td>
+</tr>
+</tbody>
+</table>
+<p>These are <strong>illustrative</strong> artifacts and limitations. A review would have to confirm the exact hardware, software, environment, method, calibration and test scope before accepting the packet as applicable.</p>
+<h2>Technical review flow</h2>
+<ol>
+<li><strong>Freeze the question and baseline:</strong> version of architecture, requirements, ICDs, assumptions, hazards and alternatives.</li>
+<li><strong>Show feasibility:</strong> physical interfaces, budget equations, margins, technology readiness and integration constraints.</li>
+<li><strong>Show design integrity:</strong> consistent functions, allocations, behavior models, variant choices and verification approaches.</li>
+<li><strong>Challenge the argument:</strong> negative tests, independent review, unresolved anomalies and credible counterexamples.</li>
+<li><strong>Record decisions:</strong> accepted, conditional, deferred or rejected, with owners, evidence due dates and expiry conditions.</li>
+<li><strong>Reopen on change:</strong> changed requirements, new hazard mechanisms or configuration drift invalidate assumptions supporting an earlier decision.</li>
+</ol>
+<p>A conditional exit should identify concrete closure criteria. “Risk to be watched” is not an acceptable substitute for a responsible owner, target evidence and review trigger.</p>
+<h2>Quantifying margins without pretending away uncertainty</h2>
+<p>Suppose a model predicts power demand of 3.0 kW against a 3.2 kW architectural limit. Nominal margin is \(M=3.2-3.0=0.2\,\mathrm{kW}\), or \(6.25\%\) of the limit. If the predicted demand has meaningful uncertainty, the 0.2 kW difference cannot automatically be called an acceptable margin. Review the <a href="parametric-models-and-units.html">parametric model</a>, the uncertainty model and the acceptance decision rule. Margin definitions should use a documented denominator and avoid conflating design allowance, contingency and stochastic confidence.</p>
+<h2>What the review should leave behind</h2>
+<p>A disciplined review yields a decision record, artifact index, controlled findings, residual risk register, change triggers and next-phase evidence plan. The purpose is to make later teams understand <strong>why</strong> a design was advanced, under which assumptions, and what must be revisited if the assumptions change.</p>
+<h2>Pitfalls, exercise and references</h2>
+<p>Typical problems are demonstration-driven optimism, missing stakeholders, unversioned slides, green status without data, reviews that postpone critical interface decisions, and treating a conditional finding as automatically closed. For an architecture change from CM-B2 to CM-B3, classify each evidence row as transferable, conditionally transferable, invalid or unknown; explain the decision and required retest.</p>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — technical reviews, baselines and risk-based engineering decisions.</li>
+<li><a href="https://standards.nasa.gov/node/3111">NASA Systems Modeling Handbook</a> — model-backed engineering products and review views.</li>
+<li>Related: <a href="design-risk-retirement.html">design risk retirement</a>; <a href="assurance-cases-and-evidence.html">assurance cases</a>; <a href="configuration-assurance-and-change-control.html">configuration assurance</a>; <a href="../methods/campus-mobility-engineering-artifacts.html">Campus Mobility artifacts</a>.</li>
+</ul>
+<p><em>Scope:</em> The example is a teaching review framework, not an official program review checklist or release authorization.</p>
+<h2>Step 02 deeper treatment: a numerical margin can change the release decision</h2>
+<p><strong>Worked example:</strong> A controller must respond within 150 ms. The design review reports a measured 139 ms response and a declared one-sided 12 ms allowance for measurement, variation and decision conservatism. If the program's approved rule is “upper acceptance bound no greater than the limit,” then \(139+12=151\) ms <strong>fails</strong> the gate, even though the observed central value is below 150 ms. An architect cannot close the finding by rounding 139 down or by asking for more tests without a revised sampling plan. Options include improving the architecture, clarifying the guard-band model, or obtaining approval for a different risk-based rule <em>before</em> new data are interpreted.</p>
+<p>A useful architecture review therefore couples a claim to numerical evidence, requirement configuration, accepted rule, responsible owner and corrective action. It records which negative or extreme environmental conditions were exercised, what simulations were calibrated, and what downstream interfaces will change if the finding requires redesign. The review outputs a <strong>decision log</strong> rather than a generic maturity score.</p>
+<p><strong>Practice:</strong> If the measured response is 134 ms using the same declared 12 ms allowance, the computed upper bound is 146 ms and passes this illustrative rule only for the tested configuration and modes. List three conditions—software build, power level, network load, temperature—that could invalidate a broader claim. See <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA's Systems Engineering Handbook</a> for review and technical assessment context.</p>
+</article><nav class="standalone-actions"><a href="metrics-hierarchy.html">Read concept</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="metrics-hierarchy.md">Editable Markdown</a></nav></main></body></html>

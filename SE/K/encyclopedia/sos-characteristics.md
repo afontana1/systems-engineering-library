@@ -70,6 +70,15 @@ These sources establish authoritative terminology or methods in their own publis
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 - [SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)](https://sebokwiki.org/wiki/Main_Page) — Community-maintained secondary guide; use its references for further research.
 
+
+## Step 02 review exercise: constituent autonomy changes what can be verified
+
+A regional emergency access network coordinates three independently governed service providers. The overall service objective requires at least two providers to exchange status within five minutes. The coordinating authority cannot simply command every provider to install the same software or schedule tests on demand. A **system of systems** integration plan therefore needs participant agreements, versioned interface contracts, evidence rights, degraded-mode behavior and escalation paths; top-down component test coverage is not enough.
+
+For an illustrative snapshot, providers A and B meet the exchange contract while C does not. The objective 'at least two connected' is met for that snapshot, but this does not establish robustness: a common gateway outage could disable both A and B, and a third party might have a different eligibility or security rule. The acceptance claim must define the operational scenario, time window, failure conditions, population and governance authority.
+
+**Exercise (answer).** If A fails and C remains nonconforming, only B is connected and the two-provider condition fails. A defensible operational V&V campaign should include the failed-provider scenario, data-semantic conflicts, recovery procedures and evidence accessibility across organizations—not merely verify normal messages from every participant.
+
 ## Follow the knowledge
 
 **Related concepts**

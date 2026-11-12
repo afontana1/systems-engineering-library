@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Authority, governance, and coordination · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Authority, governance, and coordination · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
 <link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
 <script data-se-mode="standard" data-se-page="K/encyclopedia/authority-and-governance.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
 </head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Authority, governance, and coordination</h1>
@@ -32,7 +32,11 @@
 <li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
 <li><a href="https://csrc.nist.gov/pubs/sp/800/37/r2/final">NIST · SP 800-37 Rev. 2, Risk Management Framework (2018)</a> — Risk governance and continuous monitoring in the system life cycle.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section id="step03-concept-study"><h2>Step 02 review studio — who can accept which risk?</h2>
+<p>A campus steering committee approves project budget, an operations manager owns passenger-service procedures, a design authority controls interfaces, and a safety authority may separately assess hazards. None of those roles is automatically entitled to substitute a high weighted trade-score for a mandatory safety control. A good governance model declares both decision rights and escalation paths.</p>
+<p><strong>Solved exercise:</strong> an architecture board prefers option A because it scores 82 versus 79, but A violates a mandatory accessible-boarding constraint. Can the board approve A by increasing the affordability weight? <strong>No.</strong> A mandatory constraint is noncompensable under the stated decision rules. Approval requires correcting the design, changing the authorized constraint through an appropriate process, or rejecting the option—not hiding noncompliance in the scoring model.</p>
+<p><strong>Failure test:</strong> trace one change through proposer, evidence owner, reviewer, approver, implementation owner, and verifier of closure. If two actors can independently approve contradictory baselines, the authority model contains a race condition. The remedy is a uniquely controlled decision record with configuration identity and a documented dispute-resolution route, not more meeting participants.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="sos-characteristics.html">Systems of systems: constituent autonomy and emergent mission performance</a></li>

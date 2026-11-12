@@ -84,6 +84,10 @@ A correct computed result is not automatically a system acceptance result; expla
 
 </details>
 
+## Phase 3 technical reference: Specify the joint distribution and its physical mechanism
+
+A pair of normally distributed inputs is not fully specified by two marginal means and standard deviations. For illustrative correlation \(\rho\), form \(D=120+6Z_1\) and \(V=12+1.2(\rho Z_1+\sqrt{1-\rho^2}Z_2)\) from independent standard normals. Then \(\operatorname{Cov}(D,V)=\rho(6)(1.2)\), and \(T=D/V\) is nonlinear and may have an asymmetric tail. The [derivation and synthetic results](../../methods/correlated-uncertainty-propagation.md) reveal why the mean of the ratio exceeds the nominal ratio, and why negative correlation pushes the 95th percentile above the independent-input estimate. A normal speed with theoretical nonpositive tail is physically unrealistic and must be assessed or replaced before operational use.
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -121,3 +125,23 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [01 — Previous chapter](01-define-the-lifecycle-technical-measurement-strategy-and-decision-cha.md) · [03 — Next chapter](03-establish-data-provenance-sampling-validity-exploratory-analysis-and.md) · [Book index](../README.md)
+
+## Step 03 integrated quantitative case: distributions, mixtures, and tails
+
+The [NS-QA10.1 dossier](../case/INDEX.html) tests command latency under both **mild/cold** operating conditions and **baseline/optimized** controllers. The 24 rows in [factorial-trials.csv](../case/factorial-trials.csv) are balanced experimental illustrations, not an operational population survey.
+
+### Why averages do not define the engineering risk
+
+For a random latency \(T\), a percentile is \(q_p=\inf\{t:F_T(t)\ge p\}\). The 95th percentile is a statement about a cumulative distribution within a defined conditioning set. A two-regime mixture is \(F_T(t)=\pi F_{\rm cold}(t)+(1-\pi)F_{\rm mild}(t)\); **the mixture percentile is generally not the average of the two regime percentiles**. Changing the fraction of cold operations can alter fleet-wide tail behavior even if the conditional distributions remain unchanged.
+
+The synthetic cell means are 440 and 390 ms in mild weather, and 520 and 490 ms in cold weather for baseline and optimized control respectively. These values describe central tendency *within the designed experiment*. They cannot demonstrate `QA-01` because the cold peak sample size is six and the factorial test does not reproduce all field stressors.
+
+### Dependence is part of the model, not an optional embellishment
+
+Route distance and heating hours may share a cold-weather cause. If energy use is linear in those inputs, its variance contains a covariance term: \(\operatorname{Var}(aD+bH)=a^2\sigma_D^2+b^2\sigma_H^2+2ab\rho\sigma_D\sigma_H\). Omitting that term is equivalent to *asserting zero correlation*, not being conservative. In Chapter 9, this changes the modeled energy p95 from 28.29 to 29.13 kWh, across a 29 kWh limit.
+
+### A rare-event calculation
+
+If individual peak-condition exceedances were independent with probability 1%, the probability of zero exceedances in six trials would be \((.99)^6\approx94.15\%\). Observing none would therefore be unsurprising even if the underlying exceedance rate were precisely at the limit. To establish a small risk with confidence, one needs a much larger or differently structured demonstration and careful scrutiny of independence.
+
+**Exercise and answer.** Why should one not pool all 24 factorial runs to estimate the cold optimized p95? Because 18 runs are drawn from *different conditional populations*. The p95 requirement is conditional on cold peak operations, so pooling changes the estimand. State the population, estimand, and sampling assumptions before calculating a percentile.

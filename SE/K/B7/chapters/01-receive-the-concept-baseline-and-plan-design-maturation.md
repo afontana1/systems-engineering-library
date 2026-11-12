@@ -96,3 +96,27 @@ The transition is successful when the receiving team can state which claims are 
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 1: Receiving concept assumptions](../labs/lab-01-receive-the-concept-baseline-and-plan-design-maturation.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 1 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-DI7.1 — controlled concept handoff
+
+### From a preferred concept to a design obligation
+
+A *concept recommendation* is not a component design specification. Book 6 preferred a hybrid mobility concept under an invented operating envelope, but left degraded response, accessibility evidence, and failure behavior open. Book 7 begins by receiving those conditions as **obligations**, not silently converting them into resolved facts. The editable [NS-DI7.1 design case](../case/INDEX.html) records its inheritance from NS-CD6.1; the [model baseline](../case/model-baseline.json) is an explicitly new design baseline, not a claim that an actual system has been built.
+
+The controlled case defines a peak-service requirement of 46.2 trips/hour and a model capacity of 52.8 trips/hour. Their difference, 6.6 trips/hour, is **nominal modeled headroom**, not a statistically established probability of meeting demand. Capacity depends on duty cycle, disruptions, accessible pickup requirements, and fleet availability. A reviewer should ask whether the calculation covers the same demand population and shift as the requirement.
+
+A transfer register should assign a decision to every inherited condition. For instance, "degraded dispatch timing" becomes requirement DI7-R02, allocated to the gateway, broker, dispatch and vehicle controller; "accessibility trial incomplete" becomes DI7-R07 and remains **planned**, not passed. The [requirements](../case/requirements.csv), [allocation matrix](../case/allocation.csv) and [evidence register](../case/evidence-register.csv) show the differences. Controlled identifiers matter because a reviewer must trace a change in a function to an interface, a test procedure, and a release decision.
+
+### Test the handoff for completeness
+
+A useful transfer is a directed graph: stakeholder claim → system requirement → assigned function → owned physical element → verification method → configuration-specific evidence. A missing edge is not evidence of failure, but it is evidence that the claim has not been fully justified. The corresponding audit must also check that a test assigned to NS-DI7.0 is **not** accepted for NS-DI7.1 without an applicability argument.
+
+Treat these distinctions as separate axes: design feasibility (a calculation), model integrity (a linked and typed claim), and demonstrated performance (executed evidence). The first two do not imply the third. Concept reviews also hand forward retained alternatives and termination criteria so a risky design is not allowed to become inevitable merely because work has begun.
+
+**Exercise.** A design team sees 52.8 trips/hour against a 46.2-trip/hour need and labels DI7-R01 "verified." Identify the invalid inference and the smallest legitimate next step.
+
+<details><summary>Worked resolution</summary>
+
+The numerical headroom is 6.6 trips/hour (about 14.3% of the requirement) *under the modeled assumptions*. It does not establish performance at a stated confidence or across the required service population. Record MODEL_ONLY and design a representative controlled fleet-load trial with measured throughput and explicit exclusion rules. Keep the concept decision conditional.
+
+</details>

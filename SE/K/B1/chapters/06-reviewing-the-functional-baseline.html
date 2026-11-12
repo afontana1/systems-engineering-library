@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Chapter 6 — A Review Is a Decision, Not a Presentation · Systems Engineering Library</title><style>
 :root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
-<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
-<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B1/chapters/06-reviewing-the-functional-baseline.html" data-se-mode="standard"></script>
+<link href="../../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/B1/chapters/06-reviewing-the-functional-baseline.html" data-se-root="../../../" defer="" src="../../_assets/learning-shell-v55.js"></script>
 </head><body><header><div class="crumb"><a href="../../../../index.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="chapter-6--a-review-is-a-decision-not-a-presentation">Chapter 6 — A Review Is a Decision, Not a Presentation</h1>
 <p><em>EN.645.662 · Week 6. This chapter builds on the functional baseline in <a href="05-functions-and-behavior.html">Chapter 5</a> and prepares <a href="../labs/lab-06-functional-review-board.html">Hypothetical Lab 6</a>.</em></p>
 <h2 id="the-beautiful-slide-deck-that-could-not-be-approved">The beautiful slide deck that could not be approved</h2>
@@ -52,8 +53,51 @@
 <h3 id="a-baseline-is-a-reproducible-snapshot">A baseline is a reproducible snapshot</h3>
 <p>A review package should identify the requirement version, system boundary, model revision, interfaces, open anomalies, accepted assumptions, and approval authority. A dependency chain such as <code>need → requirement → function → behavior → verification method</code> allows reviewers to find contradictions across artifacts. The chain is not necessarily one-to-one: a safety requirement may constrain several functions, and a function may serve several needs. Traceability establishes coverage and change impact; it does not, by itself, establish semantic correctness.</p>
 <p>Consider a hypothetical service whose model shows cancellation after assignment but whose stakeholder scenario permits cancellation while boarding. The discrepancy may be caught by checking the behavioral contract against the scenario, not by counting completed diagrams. The board should request a corrected model and tests of the disputed transition. This example illustrates how assurance, configuration control, and governance interact: the value of the gate lies in a decision whose assumptions can still be interrogated months later.</p>
-
 <h2 id="read-rehearse-produce">Read, rehearse, produce</h2>
 <p>Conduct <a href="../labs/lab-06-functional-review-board.html">Hypothetical Lab 6</a> as a simulated board hearing. Then prepare the original course's <code>662_W06_FBR_Package_v1.0</code>, including the review criteria, indexed evidence, recorded findings, closure actions, and defensible decision. Your course guide's actual gate is authoritative; the lab supplies only a rehearsal.</p>
 <p><strong>Next:</strong> <a href="07-allocating-architecture-and-interfaces.html">Chapter 7 — Architecture and interfaces</a>.</p>
-</main></body></html>
+<section id="step03-book-studio"><h2>Step 03 technical studio — conduct an evidence-based functional review</h2>
+<p>A baseline review should close a <em>question</em>, not celebrate delivery of a document. Consider Northstar at the end of functional definition. The board is asked to approve functional requirements, behavior, allocations in principle, and an interface risk-retirement plan for configuration <strong>NS-B1</strong>.</p>
+<h3>Minimum review logic</h3>
+<table>
+<thead>
+<tr>
+<th>Claim under review</th>
+<th>Required evidence</th>
+<th>Defeater or open finding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All stakeholder needs have functional paths</td>
+<td>Need→requirement→function matrix</td>
+<td>No documented behavior for stale status</td>
+</tr>
+<tr>
+<td>Abnormal behavior is controlled</td>
+<td>State-machine exception traces</td>
+<td>Duplicate allocation after retry</td>
+</tr>
+<tr>
+<td>Timing budgets are plausible</td>
+<td>End-to-end allocation totaling 1.65 s</td>
+<td>Network 0.70 s allowance lacks load test</td>
+</tr>
+<tr>
+<td>Requirements are testable</td>
+<td>NS-T identifiers and acceptance methods</td>
+<td>Missing definition of peak workload</td>
+</tr>
+</tbody>
+</table>
+<p>Use <em>coverage</em> and <em>evidence quality</em> as distinct measures. A matrix with four of four rows linked is <strong>100% structurally covered</strong>, but one link may point to stale or irrelevant evidence. A board should report (1) structural links, (2) configuration applicability, (3) method validity, and (4) independently unresolved risk rather than collapse these into a single completeness percentage.</p>
+<h3>A practical decision record</h3>
+<p>The board can decide to <em>proceed with conditions</em>: architecture trades may continue, but operational deployment is not authorized. Record the exact baseline NS-B1, the conditions (test retry semantics; define peak-load acceptance; validate the network latency bound), accountable owners, deadlines, and what evidence will prove closure. The decision should expire or be reconsidered when the baseline or operating domain changes.</p>
+<h3>Solved review-board question</h3>
+<p>All requirement IDs are populated and the team has 100% trace links, but NS-R-04's verification report is for NS-B0 while the current design is NS-B1. Can the board say verification is complete? <strong>No.</strong> The evidence record exists, but its <em>applicability</em> is unproven. Either justify equivalence with a controlled impact analysis or repeat the relevant test. See the <a href="../case/traceability.csv">case traceability matrix</a>, which deliberately includes one such stale row.</p>
+</section><section class="step03-deeper-reading" id="step03-book1-deepening-r2"><h2>Step 03 reference deepening — make review closure testable</h2>
+<p>A functional baseline review should inspect whether every critical operational thread has a declared response to both normal and exceptional events. Build a review matrix with rows such as <em>rider request</em>, <em>duplicate request</em>, <em>status message timeout</em>, <em>communication recovery</em>, and <em>operator override</em>. For each, record required initiating condition, state changes, responsible function, interface, expected output and verification evidence. An empty error-handling cell is a technical omission, not a formatting problem.</p>
+<p>For the NS-B1 timing thread, the four allocated nominal stages total \(0.35+0.25+0.70+0.35=1.65\) seconds against a 2.50-second system budget, leaving <strong>0.85 seconds nominal allocation margin</strong>. A committee should ask whether the allocations correspond to disjoint stages, whether there is hidden buffering, and whether the 0.70-second network allowance describes worst case, percentile, or an illustrative budget. The arithmetic alone is not measured end-to-end performance.</p>
+<p>Define review finding <strong>FR-07</strong>: “The baseline lacks an explicit stale-status display and test on network recovery.” Close it only when (1) functional behavior is updated, (2) interface messages include age/freshness metadata, (3) the procedure tests late and reordered messages, and (4) signed evidence applies to NS-B1. “Team agrees to fix” is a corrective-action plan, not closure. Technical authorities should refuse to accept a complete baseline solely because every diagram has an approval stamp.</p>
+<p><strong>Practice:</strong> A board sees 100% of functional boxes linked to requirements but no loss-of-network scenario. <strong>Answer:</strong> review completeness by scenarios and transitions, not only by link count; log the missing thread, owner, closure evidence and effect on the gate decision.</p>
+</section></main></body></html>

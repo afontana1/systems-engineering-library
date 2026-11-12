@@ -1,0 +1,171 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Statistical inference and design of engineering experiments · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/statistical-inference-and-experiments.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Statistical inference and design of engineering experiments</h1>
+<p><em>Technical method guide · Estimation, inference, factorial experiments, interactions, and confirmation · Phase 2 expansion</em></p>
+<p><strong>What this guide enables.</strong> Formulate a population claim, choose and interpret an interval or test, construct a small factorial experiment, calculate main and interaction effects, and evaluate whether the study can support a system-level decision. The examples are synthetic, not observations from an operating system.</p>
+<p><strong>Before starting:</strong> <a href="../encyclopedia/probability-and-dependence.html">Probability and dependence</a>, <a href="../encyclopedia/statistical-acceptance-and-confidence.html">statistical acceptance</a>, <a href="../encyclopedia/design-of-experiments.html">design of experiments</a>, and <a href="../encyclopedia/measurement-traceability-and-calibration.html">measurement traceability</a>.</p>
+<h2>1. Define the estimand before collecting numbers</h2>
+<p>Suppose the Northstar dispatch team is evaluating two settings: <strong>A</strong> is a revised queue scheduler and <strong>B</strong> is a replicated dispatch worker. The team wants to reduce <em>mean processing latency in milliseconds for eligible requests during a predeclared load profile</em>. That italicized phrase is the <strong>estimand</strong>: the target quantity in a specific population and condition. It is different from the maximum observed latency, 99th percentile, service-availability probability, or causal effect of the scheduler in other traffic conditions.</p>
+<p>A statistical question needs a six-part declaration: population, response and units, factor settings, sampling or randomization unit, uncertainty source, and decision threshold. A traceable request identifier is an observation identifier, but it does not automatically define an independent experimental unit. If thousands of requests share one deployment and one outage, treating all requests as independent treatment replications creates pseudoreplication.</p>
+<p>Measurements also have instrument and sampling errors. Clock drift can shift all observed times, while random request variation makes individual observations fluctuate. An interval derived from request variation does not automatically include clock-calibration uncertainty. Keep an uncertainty budget for each mechanism, and avoid describing an interval for the <em>mean</em> as an interval for <em>individual future requests</em>.</p>
+<h2>2. Confidence intervals, tests, and effect sizes answer different questions</h2>
+<p>Let independent observations be \(Y_1,\ldots,Y_n\), with sample mean \(\bar Y\) and sample standard deviation \(s\). For an approximately normal independent sample with unknown variance, a two-sided \(100(1-\alpha)\%\) confidence interval for the population mean is</p>
+<p>\[
+\bar Y\;\pm\;t_{1-\alpha/2,n-1}\,\frac{s}{\sqrt n}.
+\]</p>
+<p>The \(t\) multiplier is a quantile of Student's distribution, and \(s/\sqrt n\) estimates the standard deviation of the <strong>sample mean</strong>, not of a future individual event. The coverage interpretation concerns repeated applications of the procedure under its assumptions. It is not a posterior probability for an already fixed parameter.</p>
+<p>For example, four hypothetical independent latency observations of 9, 10, 11, and 10 milliseconds have \(\bar Y=10\), sample variance \(s^2=2/3\), and standard error \(0.40825\) ms. With \(t_{0.975,3}=3.18245\), the 95% confidence interval is approximately \([8.70,11.30]\) ms. It is extremely wide for a performance acceptance claim. Larger, independent, representative samples and a model appropriate to the required percentile would be needed for tail-service requirements.</p>
+<p>A test of \(H_0:\mu=\mu_0\) evaluates compatibility of observations with a specified null model. It does <strong>not</strong> measure the probability that \(H_0\) is true, and a large p-value is not proof of equivalence. If the engineering question is whether two implementations are sufficiently similar, establish a practical equivalence margin \(\Delta\) <em>before</em> looking at the result and use an appropriate equivalence interval/test. Always report the effect estimate and uncertainty, not only a significance flag.</p>
+<p>For binary outcomes with \(k\) successes among \(n\) independent Bernoulli trials, an illustrative alternative to the naive \(\hat p\pm z\sqrt{\hat p(1-\hat p)/n}\) interval is the <strong>Wilson score interval</strong>, which remains well behaved at \(k=0\) and \(k=n\):</p>
+<p>\[
+\frac{\hat p+\frac{z^2}{2n}\pm z\sqrt{\frac{\hat p(1-\hat p)}{n}+\frac{z^2}{4n^2}}}{1+\frac{z^2}{n}}.
+\]</p>
+<p>This is a two-sided <em>approximate confidence interval</em>, not an acceptance rule or a substitute for the one-sided exact binomial bounds described in the <a href="requirements-verification-handbook.html">verification handbook</a>. The <a href="code/factorial_doe.py">example calculator</a> computes Wilson bounds for independent attribute data as a separate demonstration.</p>
+<h2>3. Why a factorial experiment is more informative than one-factor-at-a-time trials</h2>
+<p>In a \(2^2\) full factorial, the scheduler setting \(A\in\{-1,+1\}\) and replication setting \(B\in\{-1,+1\}\) are crossed. Every combination is run, allowing estimation of the main effects <em>and</em> their interaction. In contrast, changing one factor while freezing the other can miss a scheduler whose benefit depends on replication.</p>
+<p>A common coded model is</p>
+<p>\[
+Y=\beta_0+\beta_A A+\beta_B B+\beta_{AB}AB+\varepsilon.
+\]</p>
+<p>For balanced observations, \(\beta_A\) is <strong>half</strong> the difference between the mean response at \(A=+1\) and at \(A=-1\); likewise for \(B\). The interaction effect is the difference between the mean of the two same-sign treatment combinations and the mean of the opposite-sign combinations. Thus the coded interaction coefficient is one-half the interaction effect:</p>
+<p>\[
+E_{AB}=\frac{\bar Y_{--}+\bar Y_{++}}2-\frac{\bar Y_{+-}+\bar Y_{-+}}2,\qquad \beta_{AB}=E_{AB}/2.
+\]</p>
+<p>Using four <em>synthetic</em> independent runs at each combination, the experiment records:</p>
+<table>
+<thead>
+<tr>
+  <th>A: scheduler</th>
+  <th>B: replication</th>
+  <th>Four latency runs (ms)</th>
+  <th style="text-align:right">Cell mean (ms)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>−1</td>
+  <td>−1</td>
+  <td>10.5, 10.8, 10.3, 10.6</td>
+  <td style="text-align:right">10.55</td>
+</tr>
+<tr>
+  <td>+1</td>
+  <td>−1</td>
+  <td>8.9, 9.0, 9.2, 8.8</td>
+  <td style="text-align:right">8.975</td>
+</tr>
+<tr>
+  <td>−1</td>
+  <td>+1</td>
+  <td>7.9, 8.1, 8.0, 7.8</td>
+  <td style="text-align:right">7.95</td>
+</tr>
+<tr>
+  <td>+1</td>
+  <td>+1</td>
+  <td>6.8, 6.7, 6.9, 6.6</td>
+  <td style="text-align:right">6.75</td>
+</tr>
+</tbody>
+</table>
+<p>The estimated scheduler main effect is</p>
+<p>\[
+E_A=\frac{8.975+6.75}{2}-\frac{10.55+7.95}{2}=\boxed{-1.3875\;\mathrm{ms}}.
+\]</p>
+<p>Likewise, \(E_B=-2.4125\) ms and \(E_{AB}=+0.1875\) ms. In this setting, either modification reduces the mean latency; a small positive interaction means their combined improvement is slightly <em>less</em> than the sum of separate improvements on the chosen effect scale. This is not evidence that future large deployments behave similarly.</p>
+<p>A difference of 2.4 ms might be statistically discernible but operationally irrelevant if the actual service objective concerns a four-second tail. Conversely, a small change in a low-probability tail can be crucial. The <strong>measure of effectiveness</strong> must motivate the response variable; the analysis cannot repair a poorly chosen measure.</p>
+<h2>4. Quantifying experimental uncertainty honestly</h2>
+<p>Under independent normal residuals with common variance across the four cells, the pooled within-cell mean-square error is</p>
+<p>\[
+MSE=\frac{\sum_{a,b}\sum_{j=1}^{r}(Y_{abj}-\bar Y_{ab})^2}{4(r-1)}.
+\]</p>
+<p>For \(r=4\), there are 12 residual degrees of freedom. Each main effect contrasts two groups of eight observations, so</p>
+<p>\[
+SE(E_A)=SE(E_B)=SE(E_{AB})=\sqrt{MSE/4}.
+\]</p>
+<p>A nominal 95% effect interval uses \(t_{0.975,12}\approx2.1788\). In small experiments, normality, independence, constant variance, and honest randomization matter. Check residual patterns and treatment order; a drift in demand over the test period can masquerade as a treatment effect. This example has only four independent replicates per combination. It illustrates analysis, not a general-purpose power guarantee.</p>
+<p><strong>Randomization:</strong> choose treatment order independently of time-of-day changes. <strong>Blocking:</strong> if the study necessarily spans mornings and evenings, include each treatment in each block and model the block. <strong>Replication:</strong> repeat the <em>whole treatment under independently reset or independent conditions</em>—not four measurements from one uninterrupted run misrepresented as four independent experiments. <strong>Confirmation:</strong> freeze the chosen settings and conduct a new representative run whose data did not influence model selection.</p>
+<p>The <a href="data/dispatch-factorial.csv">data file</a> contains synthetic test values with a nominal randomized run order, and <a href="code/factorial_doe.py">the standard-library analyzer</a> calculates cell means, effects, pooled residual uncertainty, and a normal-equation effect report. It does not produce a causal claim unless its experimental-unit and randomization assumptions are established.</p>
+<h2>5. Power, stopping rules, and the distinction between inference and acceptance</h2>
+<p>The sensitivity of a test depends on actual effect size, residual variability, \(\alpha\), and sample size. A common planning error is to assume that a positive result can be guaranteed by choosing a small enough significance threshold; that makes detection <em>harder</em>. Predeclare a minimally important reduction \(\delta\), plausible residual standard deviation \(\sigma\), false-positive risk, desired power, and the model that converts them into run counts. For a simple two-group approximate planning formula with equal group sizes,</p>
+<p>\[
+n_{\text{per group}}\approx \frac{2\sigma^2(z_{1-\alpha/2}+z_{1-\beta})^2}{\delta^2}.
+\]</p>
+<p>This does not automatically apply to blocked, sequential, clustered, factorial, non-normal, or adaptive studies. For the actual analysis use the appropriate design matrix and variance structure. Do not peek at an ordinary fixed-sample p-value after every few observations and stop as soon as it looks favorable without an approved sequential design. Distinguish <strong>inference</strong> about an effect from <strong>acceptance</strong> of a system claim: a measured improvement does not itself demonstrate satisfaction of a system-level limit.</p>
+<h2>6. Engineering interpretation and review checklist</h2>
+<p>A reviewer should be able to answer: Was the factor order randomized? Were test runs independent? Is the observed effect large enough to matter? Does the model predict an engineering-relevant measure? Are noise, environmental changes, missing observations, and response transformations documented? Was a hold-out confirmation run made? Does the conclusion hold only for the tested load and configuration?</p>
+<p><strong>Typical failure patterns:</strong> mistaking repeated measurements for independent samples; confusing confidence with probability of compliance; assuming non-significance means equivalence; ignoring interactions; selecting factors after reading results; unreported exclusions; declaring the best cell without a confirmation trial; extrapolating outside the tested factor range.</p>
+<h2>7. Contrast three kinds of uncertainty interval</h2>
+<p>It is easy to use a mathematically correct interval for the wrong question. A <strong>confidence interval for a mean</strong> asks what range of mean values is compatible with the observed sample under a model. A <strong>prediction interval</strong> asks what values a <em>future observation</em> could take and must include both uncertainty in the mean and the intrinsic observation-to-observation variation. Under independent normal observations, one new observation has an illustrative two-sided prediction interval</p>
+<p>\[
+\bar Y\pm t_{1-\alpha/2,n-1}s\sqrt{1+\frac1n}.
+\]</p>
+<p>A <strong>statistical tolerance interval</strong> instead seeks bounds that cover at least a specified proportion of the <em>population</em> with a specified confidence level. Its construction is different from both formulas above and generally needs a tolerance factor that depends on sample size, coverage proportion and confidence. In systems engineering this matters because a requirement such as “99% of requests within four seconds” concerns a population tail. A narrow confidence interval for the <em>mean</em> is not evidence of sufficient tail coverage.</p>
+<p>With the illustrative observations 9, 10, 11 and 10 ms, the confidence interval for the mean is \([8.70,11.30]\) ms. The prediction interval for one independent future reading is much wider:</p>
+<p>\[
+10\pm3.18245\sqrt{\tfrac23}\sqrt{1+\tfrac14}
+\approx [7.095,12.905]\;\mathrm{ms}.
+\]</p>
+<p>Neither is a 99%-population-content tolerance bound. The exercise is not to memorize three names, but to identify which uncertainty statement matches the decision-maker's actual claim.</p>
+<h2>8. Interactions, aliasing, and experimental extrapolation</h2>
+<p>Full factorials become expensive as factors multiply: \(2^k\) treatment combinations for \(k\) two-level factors, before replication. A <strong>fractional factorial</strong> samples fewer combinations by introducing a declared <em>alias structure</em>. For example, with a generator \(C=AB\), the observed factor-C column equals the AB interaction column, so the experiment cannot distinguish a genuine C main effect from an AB interaction. Calling one of those effects “significant” does not establish which physical mechanism caused it.</p>
+<p>A screening study may intentionally accept such confounding when higher-order interactions are judged unlikely; that assumption should be documented and challenged in follow-up experiments. Once influential factors are identified, a response-surface design may add center points and intermediate values to investigate curvature and locate a useful operating region. A two-level linear model cannot justify optimum behavior outside the observed range, nor can it detect all nonlinearities.</p>
+<p>An experiment's hierarchy of explanations is therefore <strong>mechanism → planned contrast → observations → uncertainty model → independent confirmation</strong>. The causal inference comes from randomization and controlled conditions, not from the apparent precision of a regression output. If a deployment changes software, hardware and demand simultaneously, a statistical comparison cannot uniquely attribute the effect to one engineering change without further design or assumptions.</p>
+<h2>9. An uncertainty-aware decision worksheet</h2>
+<p>Before publishing a result, complete the following record, then keep the underlying data and code with the test configuration:</p>
+<table>
+<thead>
+<tr>
+  <th>Question</th>
+  <th>Example answer for the synthetic factorial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Target population</td>
+  <td>Eligible requests during the fixed simulated load profile</td>
+</tr>
+<tr>
+  <td>Response and unit</td>
+  <td>Processing latency in milliseconds; a mean, not a percentile</td>
+</tr>
+<tr>
+  <td>Independent unit</td>
+  <td>One separately initialized and run experimental trial</td>
+</tr>
+<tr>
+  <td>Factor contrasts</td>
+  <td>Scheduler A and replication B, each at two declared settings</td>
+</tr>
+<tr>
+  <td>Blocking/randomization</td>
+  <td>Run order recorded; actual real-world order would need independent randomization and block control</td>
+</tr>
+<tr>
+  <td>Reported effect</td>
+  <td>\(E_A=-1.3875\) ms; \(E_B=-2.4125\) ms; \(E_{AB}=0.1875\) ms</td>
+</tr>
+<tr>
+  <td>Uncertainty model</td>
+  <td>Equal residual variance, normal independent errors; four replications per cell</td>
+</tr>
+<tr>
+  <td>Unsupported extrapolation</td>
+  <td>99th-percentile response, unseen peak-load profiles, lifecycle energy and outage behavior</td>
+</tr>
+<tr>
+  <td>Confirmation</td>
+  <td>New randomized runs under a frozen treatment decision and a prespecified acceptance rule</td>
+</tr>
+</tbody>
+</table>
+<p>A review should reject a claim whose study target changes after seeing the data. If the team genuinely needs percentile performance, redesign the measurement campaign for tail inference and representative traffic conditions rather than stretching the mean-latency confidence interval.</p>
+<h3>Sources and curriculum connections</h3>
+<ul>
+<li><a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook</a>: engineering-oriented inference, measurement, and experimental design.</li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/pri/pri.htm">NIST e-Handbook, Process/Product Improvement</a>: factorial and response-surface methods, assumptions, and study organization.</li>
+<li><a href="../B10/chapters/04-use-estimation-confidence-intervals-hypothesis-equivalence-and-engin.html">Book 10, Chapter 4 — Estimation and inference</a>, <a href="../B10/chapters/05-design-efficient-experiments-with-factors-responses-noise-power-rand.html">Chapters 5–6 — Experimental design and interactions</a>, <a href="../B8/chapters/04-apply-measurement-science-statistics-doe-and-sample-rat.html">Book 8, Chapter 4 — Test statistics and DOE</a>.</li>
+<li><strong>Curriculum:</strong> EN.645.756 (weeks 3–7), EN.645.769 (statistical evidence design), EN.645.757 (simulation experiments). Reproduce the factorial analysis, then explain why the experiment does not alone support a 99th-percentile acceptance claim.</li>
+</ul>
+<p><strong>Exercise:</strong> change the final \(A=+1,B=+1\) observation from 6.6 to 8.6 ms; recompute the interaction estimate and pooled variance. Explain why the mean changes and why an unusually variable cell calls the common-variance model into question.</p>
+<footer class="reference-note"><a href="statistical-inference-and-experiments.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

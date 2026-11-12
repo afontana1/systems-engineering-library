@@ -54,4 +54,35 @@
 <p><a href="../labs/01-probability.html">Open the lab for this chapter</a> · <a href="../labs/01-probability.md">Download editable Markdown lab</a> · <a download href="../notebooks/01-probability.ipynb">Open the associated notebook</a> · <a download href="../code/engineering_math.py">Download the calculation source</a></p>
 <p><strong>Authoritative follow-up reading:</strong> <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a>, <a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook</a>, and <a href="https://www.incose.org/resources-publications/technical-publications/systems-engineering-body-of-knowledge/">Systems Engineering Body of Knowledge</a>. These are independent references, not endorsements of the fictional cases.</p>
 <p><a href="../INDEX.html">Return to the quantitative textbook collection</a></p>
+
+<!-- STEP04-QUANTITATIVE-START -->
+<section class="qse-integrated" aria-label="Integrated quantitative methods case">
+<h2>Step 04 integrated case — NS-QSE4.1: uncertainty is conditional on a mechanism</h2>
+<p>The <strong>Northstar Emergency Dispatch Quantitative Laboratory (NS-QSE4.1)</strong> joins all eight advanced chapters. The controlled input is <a href="../data/ns-qse4-case.json"><code>ns-qse4-case.json</code></a>, and the calculations are implemented in <a href="../code/ns_qse_case.py"><code>ns_qse_case.py</code></a>. Every arrival count is invented for teaching, not collected from the Northstar program. Each count represents one hour; there are twelve <em>clear</em> and twelve <em>storm</em> windows. The scenarios are separated deliberately, because a single fitted hourly rate hides the change in operating regime.</p>
+<h3>Derive the difference between a Poisson count and a Poisson mixture</h3>
+<p>The clear windows contain 120 requests over 12 hours; storm windows contain 216 requests over 12 hours. The conditional maximum-likelihood rates are therefore \(\widehat\lambda_c=10\) and \(\widehat\lambda_s=18\) requests/hour. Let \(Z\in\{c,s\}\) be the regime and let an illustrative mixture assign \(P(Z=c)=P(Z=s)=0.5\). For a one-hour count, \(N\mid Z=z\sim\operatorname{Poisson}(\lambda_z)\). Applying total expectation and variance gives</p>
+<p>\[
+E[N]=E[\lambda_Z],\qquad
+\operatorname{Var}(N)=E[\lambda_Z]+\operatorname{Var}(\lambda_Z).
+\]</p>
+<p>Using the unregularized rates gives \(E[N]=14\) requests/hour and \(\operatorname{Var}(N)=14+\tfrac12(10-14)^2+\tfrac12(18-14)^2=30\) requests\(^2\) per one-hour observation. A single homogeneous Poisson model with mean 14 predicts variance 14 instead. This difference is <strong>overdispersion caused by a changing latent regime</strong>, not a proof that any one-hour record is independent or Poisson. The executable case instead uses posterior means of 10.000 and 17.869 requests/hour, giving a mixture variance of approximately <strong>29.414</strong>.</p>
+<h3>Propagate parameter uncertainty without confusing it with demand variation</h3>
+<p>With a shape–rate Gamma prior \(\lambda\sim\operatorname{Gamma}(\alpha=2,\beta=0.2\ \mathrm h)\), and \(n\) Poisson requests during \(T\) hours, the likelihood contributes \(\lambda^n e^{-\lambda T}\). Multiplication by the prior density yields \(\lambda\mid n,T\sim\operatorname{Gamma}(2+n,0.2+T)\). Thus the clear posterior is Gamma(122,12.2 h), with mean <strong>10.000/hour</strong>; the storm posterior is Gamma(218,12.2 h), mean <strong>17.869/hour</strong>. The seeded Monte Carlo approximation gives central conditional 95% intervals of about <strong>[8.32, 11.90]</strong> and <strong>[15.59, 20.25]</strong> requests/hour, respectively. A posterior interval describes uncertain <em>parameters under a model and prior</em>; the future hourly count has additional aleatory dispersion.</p>
+<p>A common-cause warning follows directly. Weather can both raise arrival counts and reduce road capacity. Sampling an increased arrival rate independently from a road-failure indicator would understate joint stress. The controlled <strong>compound</strong> scenario deliberately combines both: its demand count is the ceiling of 1.2 times each storm count and its per-request service duration is multiplied by 1.1. These factors are scenario assumptions, not fitted probabilities.</p>
+<h3>Reproduce and challenge the claim</h3>
+<p>Run <code>python3 SE/K/Q/code/ns_qse_case.py</code> from the repository root. The JSON report contains <code>posterior</code>, <code>conditional_mixture</code>, and an input SHA-256. Modify a <strong>copy</strong> of the storm counts and repeat. Raising storm counts changes the posterior mean and the queue simulation; increasing Monte Carlo draws without changing the input cannot cure an incorrect observation process. Before interpreting any result, request arrival-time timestamps, missing-record counts, accessible-service classification, and weather-stratified evidence.</p>
+<details><summary>Worked exercises and interpretation</summary>
+
+<ol>
+<li><strong>Equal-weight mixture.</strong> Replace the storm rate by 20/hour while keeping clear at 10/hour. Then \(E[N]=15\) and \(\operatorname{Var}(N)=15+25=40\). The variance-to-mean ratio rises to \(40/15\approx2.67\); assuming one Poisson process would suppress tail uncertainty.</li>
+<li><strong>Unequal-weight mixture.</strong> If clear has weight 0.8 and storm weight 0.2, \(E[N]=0.8(10)+0.2(18)=11.6\); \(\operatorname{Var}(\lambda_Z)=0.8(10-11.6)^2+0.2(18-11.6)^2=10.24\), so count variance is 21.84. These weights are a thought experiment, not measured exposure frequencies.</li>
+<li><strong>Adverse case.</strong> Why is a 95% Gamma credible interval not a 95% guarantee that next-hour demand will be within it? It describes the uncertain Poisson <em>rate</em>, whereas the future realized <em>count</em> is random even at a fixed rate.</li>
+</ol>
+</details>
+
+<p><strong>Transfer:</strong> This same decomposition applies to Book 10 metrics, Book 11 simulation, and Book 18 interdependent constituent demand. It does not authorize extrapolation to real emergencies.</p>
+
+</section>
+<style>@media(max-width:700px){article{max-width:100%;overflow-x:auto}article :is(p,li):has(mjx-container){max-width:100%;overflow-x:auto}}</style>
+<!-- STEP04-QUANTITATIVE-END -->
 </article></main></body></html>

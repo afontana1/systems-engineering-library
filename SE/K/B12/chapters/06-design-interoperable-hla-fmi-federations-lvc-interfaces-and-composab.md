@@ -127,3 +127,54 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [05 — Previous chapter](05-link-mbse-xml-metadata-collaborative-environments-and-reusable-m-s-a.md) · [07 — Next chapter](07-integrate-the-model-baseline-and-design-advanced-simulation-experime.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-CPS12.1 case: co-simulation contracts and synchronization
+
+### Why correct components can compose into a wrong system
+
+A vehicle dynamics component, motor model, pack model and fleet dispatcher may be tested individually and still fail together if their boundary variables, signs, clocks or event ownership disagree. High Level Architecture (HLA) concerns federate participation, data publication/subscription and time management at a distributed simulation level; the Functional Mock-up Interface (FMI) governs portable model interfaces and execution modes for FMUs. They are not interchangeable and an illustrative JSON contract is **not** a conforming HLA FOM or FMI XML model description. A simulation architecture must say which model is authoritative for every state and who resolves conflicting commands.
+
+The NS-CPS12.1 [diagram](../case/multidomain-evidence.svg) separates the speed regulator, plant and electrical-thermal model. The actual Python script executes them sequentially in one process. It **does not** implement an HLA federation, export an FMU or simulate network latency. The following design is a contract exercise, not a claim that interoperability tests ran.
+
+### A minimal power-port and time contract
+
+| Signal | Publisher → subscriber | Unit/sign | Update/effect |
+|---|---|---|---|
+| `wheel_speed` | plant → controller | m/s, nonnegative | sampled at controller instant |
+| `wheel_force_command` | controller → plant | N, signed (negative braking) | held until next controller sample |
+| `wheel_power` | plant → battery | W, positive traction demand | calculated from physical speed |
+| `pack_soc` | battery → supervisor | fraction 0–1 | output after plant state update |
+| `pack_temp` | thermal → supervisor | °C, state estimate | updated on thermal clock |
+| `coolant_flow` | supervisor → thermal | kg/s | constrained by pump hardware |
+
+The signed power direction is easy to get wrong. If a negative regenerative \(P_w\) is interpreted as positive consumption by a second component, energy will be deleted twice. Likewise, if two federates independently integrate the same energy state, no global conservation law survives. One owner should update each state; other models exchange inputs and readouts.
+
+### Explicit co-simulation error analysis
+
+Consider two coupled scalar models
+
+\[
+\dot x=-ax+by,\qquad \dot y=cx-dy.
+\]
+
+If the orchestrator uses explicit one-step exchange and no iteration, the discrete update is \(z_{n+1}=(I+hA)z_n\) with \(A=\begin{bmatrix}-a&b\\c&-d\end{bmatrix}\). Numerical stability demands \(\rho(I+hA)<1\), where \(\rho\) is spectral radius, even when the continuous physical system is stable. Set \(a=d=2\,s^{-1}\) and \(b=c=1\,s^{-1}\). The continuous eigenvalues are −1 and −3 s⁻¹. An exchange step \(h=0.8\) s yields amplification eigenvalues 0.2 and −1.4: one mode grows numerically. With \(h=0.2\) s, they become 0.8 and 0.4: stable. The instability is caused by coupling step size, not changed physics.
+
+A true partitioned execution with delayed partner output, different step rates, interpolation and zero-crossing events can introduce **additional** error. A valid federation test should compare a monolithic reference with successively refined exchange intervals, characterize missed events and specify what happens if the partner is late. Algebraic feedback loops may require iteration, rollback support or a solver that treats the coupled equations together.
+
+### Compose physical and operational models without category errors
+
+Book 11's model allocates one request per vehicle and tests queue outcomes. Book 12 resolves one shuttle's power and thermal trajectory on a repeated route. A future joint model could pass a *validated* conditional distribution of trip times and charger needs from Book 12 into Book 11, while Book 11 supplies weather, occupancy and scheduling events. But the present Book 12 trip times have **no boarding, traffic interference or charge pauses**; they cannot replace Book 11's trip-time input without separately modeling those missing terms. The coupling itself would require scenario alignment and common exogenous conditions to prevent false precision.
+
+### Practical handshake and fault handling
+
+Before an exchange, agree on common epoch, frame, time units, declared sample intervals, acceptable latency, external-event timestamping, and state reset. On packet loss or missing FMU output: fail closed or hold last value only for a bounded, justified duration. On mismatched versions or unsupported units: reject connection. On HIL, timestamp skew and deadline misses become failure modes, not merely performance bugs.
+
+### Exercises with solutions
+
+**A.** For the scalar example above, is \(h=0.8\) s safe? **Solution.** No: \(|1+h(-3)|=|-1.4|>1\). At \(h=0.2\), both amplification magnitudes are below one. Stability alone does not guarantee acceptable accuracy.
+
+**B.** Plant sends a 25 kW load, battery expects W. What numerical value must it consume? **Solution.** 25,000 W. If it takes 25, the load shrinks by 1000; an interface test must inject an explicit unit-conversion vector.
+
+**C.** If two models each integrate 10 kWh consumption, what is the failure? **Solution.** Double ownership can subtract 20 kWh for a 10 kWh transfer. Define one energy-state integrator and monitor aggregate conservation.
+
+**Deliverable:** a versioned interface table, causal diagram, temporal handshake protocol and conformance-test *plan* for an external HLA/FMI tool. Do not claim standard conformance without running an appropriate implementation and tool-specific tests.

@@ -1,0 +1,159 @@
+{
+  "model_id": "NS-FB13.1",
+  "purpose": "synthetic structural feedback and policy screening",
+  "calibrated": false,
+  "policy_results_nominal": {
+    "status_quo": {
+      "policy": "status_quo",
+      "sensitivity": "nominal",
+      "completion_fraction": 0.927362,
+      "standard_abandon_fraction": 0.072777,
+      "accessible_abandon_fraction": 0.072806,
+      "mean_active_vehicles": 11.994981,
+      "mean_trust_index": 69.777932,
+      "ending_backlog_requests": 245.259808,
+      "ending_unavailable_vehicles": 2.012832,
+      "surge_vehicle_days": 201.186785,
+      "repair_cost_index": 360.0,
+      "max_backlog_requests": 310,
+      "conservation_error_requests": -0.0,
+      "fleet_conservation_error_vehicles": 0.0
+    },
+    "surge_only": {
+      "policy": "surge_only",
+      "sensitivity": "nominal",
+      "completion_fraction": 0.949747,
+      "standard_abandon_fraction": 0.050541,
+      "accessible_abandon_fraction": 0.050564,
+      "mean_active_vehicles": 11.868835,
+      "mean_trust_index": 72.487233,
+      "ending_backlog_requests": 176.501544,
+      "ending_unavailable_vehicles": 2.148767,
+      "surge_vehicle_days": 401.103208,
+      "repair_cost_index": 360.0,
+      "max_backlog_requests": 310,
+      "conservation_error_requests": 0.0,
+      "fleet_conservation_error_vehicles": 0.0
+    },
+    "maintenance_first": {
+      "policy": "maintenance_first",
+      "sensitivity": "nominal",
+      "completion_fraction": 0.957254,
+      "standard_abandon_fraction": 0.04309,
+      "accessible_abandon_fraction": 0.043119,
+      "mean_active_vehicles": 12.709275,
+      "mean_trust_index": 73.711801,
+      "ending_backlog_requests": 149.759173,
+      "ending_unavailable_vehicles": 1.267481,
+      "surge_vehicle_days": 155.210149,
+      "repair_cost_index": 594.0,
+      "max_backlog_requests": 310,
+      "conservation_error_requests": 0.0,
+      "fleet_conservation_error_vehicles": 0.0
+    },
+    "access_first": {
+      "policy": "access_first",
+      "sensitivity": "nominal",
+      "completion_fraction": 0.925668,
+      "standard_abandon_fraction": 0.086559,
+      "accessible_abandon_fraction": 0.000136,
+      "mean_active_vehicles": 11.993202,
+      "mean_trust_index": 70.427854,
+      "ending_backlog_requests": 252.136362,
+      "ending_unavailable_vehicles": 2.0151,
+      "surge_vehicle_days": 204.035373,
+      "repair_cost_index": 360.0,
+      "max_backlog_requests": 310,
+      "conservation_error_requests": 0.0,
+      "fleet_conservation_error_vehicles": 0.0
+    },
+    "combined": {
+      "policy": "combined",
+      "sensitivity": "nominal",
+      "completion_fraction": 0.956309,
+      "standard_abandon_fraction": 0.051177,
+      "accessible_abandon_fraction": 0.000134,
+      "mean_active_vehicles": 12.708322,
+      "mean_trust_index": 74.111845,
+      "ending_backlog_requests": 153.587239,
+      "ending_unavailable_vehicles": 1.268688,
+      "surge_vehicle_days": 157.536213,
+      "repair_cost_index": 594.0,
+      "max_backlog_requests": 310,
+      "conservation_error_requests": 0.0,
+      "fleet_conservation_error_vehicles": 0.0
+    }
+  },
+  "range_by_policy": {
+    "status_quo": {
+      "completion_fraction": [
+        0.887126,
+        0.970439
+      ],
+      "accessible_abandon_fraction": [
+        0.030067,
+        0.112728
+      ],
+      "ending_backlog_requests": [
+        102.568331,
+        391.159256
+      ]
+    },
+    "surge_only": {
+      "completion_fraction": [
+        0.917713,
+        0.980316
+      ],
+      "accessible_abandon_fraction": [
+        0.020257,
+        0.082342
+      ],
+      "ending_backlog_requests": [
+        70.534384,
+        294.523488
+      ]
+    },
+    "maintenance_first": {
+      "completion_fraction": [
+        0.918439,
+        0.995401
+      ],
+      "accessible_abandon_fraction": [
+        0.00529,
+        0.081629
+      ],
+      "ending_backlog_requests": [
+        20.977359,
+        288.011872
+      ]
+    },
+    "access_first": {
+      "completion_fraction": [
+        0.884326,
+        0.969822
+      ],
+      "accessible_abandon_fraction": [
+        0.000129,
+        0.000145
+      ],
+      "ending_backlog_requests": [
+        105.016217,
+        403.353361
+      ]
+    },
+    "combined": {
+      "completion_fraction": [
+        0.916456,
+        0.995311
+      ],
+      "accessible_abandon_fraction": [
+        0.000127,
+        0.000144
+      ],
+      "ending_backlog_requests": [
+        21.405676,
+        296.499358
+      ]
+    }
+  }
+}

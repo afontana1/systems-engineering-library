@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Mission threads and capability analysis · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Mission threads and capability analysis · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
 <link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
 <script data-se-mode="standard" data-se-page="K/encyclopedia/mission-engineering.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
 </head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Mission threads and capability analysis</h1>
@@ -32,7 +32,11 @@
 <li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
 <li><a href="https://sebokwiki.org/wiki/Main_Page">SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)</a> — Community-maintained secondary guide; use its references for further research.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section id="step03-concept-study"><h2>Step 02 review studio — reconstruct a mission thread across owners</h2>
+<p>A mission thread for Northstar's emergency indication is: detect a transition → timestamp it → publish status → transport it → display to an operator → interpret and respond. Some steps are implemented by software, some rely on networks, and some involve humans. The mission succeeds only if the <strong>entire chain</strong> achieves a meaningful operational outcome.</p>
+<p><strong>Solved exercise:</strong> component timing budgets are 0.35, 0.25, 0.70, and 0.35 seconds. Their sum is <strong>1.65 s</strong>; against a 2.50-s deterministic allocation, margin is <strong>0.85 s</strong>. Does this verify an operator can intervene within 2.50 s? <strong>No.</strong> Human recognition and action are outside the four measured stages. The mission outcome requires those stages and corresponding scenario evidence or a separately controlled operational-response requirement.</p>
+<p><strong>Cross-constituent test:</strong> ask who detects missing status, who has authority to suspend service, what happens when the network is unavailable, and how recovery is verified. A mission thread is stronger than a sequence of green component tests because it exposes missing responsibilities at the boundaries between constituent systems and organizations.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="sos-characteristics.html">Systems of systems: constituent autonomy and emergent mission performance</a></li>

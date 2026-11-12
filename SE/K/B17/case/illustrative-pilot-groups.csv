@@ -1,0 +1,5 @@
+group,period,mean_days,n
+intervention,before,38.0,30
+intervention,after,25.0,30
+comparison,before,36.0,30
+comparison,after,33.0,30

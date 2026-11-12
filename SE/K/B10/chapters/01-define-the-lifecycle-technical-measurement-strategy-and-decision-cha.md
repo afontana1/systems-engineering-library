@@ -122,3 +122,29 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 Start of the book · [02 — Next chapter](02-characterize-probability-distributions-tails-dependence-and-stochast.md) · [Book index](../README.md)
+
+## Step 03 integrated quantitative case: NS-QA10.1 — decide what to measure
+
+The controlled [NS-QA10.1 quantitative dossier](../case/INDEX.html) examines a fictional winter shuttle-control system. This book deliberately extends the earlier design and model-based courses into **quantitative claims about populations**, not just deterministic engineering checks. The baseline `QA-B10` defines five requirements in [requirements.csv](../case/requirements.csv). These numbers are teaching assumptions; they are not observations of a real fleet.
+
+### Start with the decision and the estimand
+
+Consider `QA-01`: the 95th percentile of *cold-mode command latency* must not exceed 500 ms. A good operational definition specifies the start and stop event, clock precision, latency exclusions, cold-mode definition, peak-load population, software build, and treatment of timeouts. “Mean latency” cannot be silently substituted. In mathematical terms, the target is a population functional, \(q_{.95}(T\mid\text{cold, peak, QA-B10})\), not merely a dashboard average. A regulator or release authority might additionally require an uncertainty bound on that percentile; the uncertainty requirement is distinct from its numerical limit.
+
+A candidate measurement chain is **stakeholder response need → latency MOE → command-response MOP → controller latency TPM → timestamped request log → stratified tail estimate → release gate**. At each arrow ask whether the link is empirically justified. Faster commands may not improve total passenger wait if dispatch capacity is the real bottleneck.
+
+| Controlled measure | Data or representation | Decision use | Known gap |
+|---|---|---|---|
+| `QA-01` latency p95 | [24 synthetic experimental trials](../case/factorial-trials.csv) | Controller evaluation | Not a production peak-tail sample |
+| `QA-02` energy p95 | Dependent-input uncertainty model | Winter energy allocation | Joint distribution unvalidated |
+| `QA-03` 50-hour reliability | [Right-censored life data](../case/reliability-life.csv) | Module redesign | Eight synthetic assets |
+| `QA-04` baseline | [Evidence register](../case/evidence-register.csv) | Configuration audit | One stale record |
+| `QA-05` subgroup coverage | Accessibility sampling plan | Fair-service evidence | No completed subgroup test |
+
+### Worked measurement-budget example
+
+A clock with 2 ms per-endpoint bounded timestamp error can introduce at most 4 ms worst-case error in the difference if the endpoint errors oppose one another. A reported 498 ms duration could therefore correspond to 502 ms before adding other effects. Worst-case addition is conservative; a root-sum-of-squares combination is appropriate only after a *defensible stochastic uncertainty model*. The measurement uncertainty must appear in the acceptance rule rather than being hidden in instrument metadata.
+
+**Exercise and answer.** A team reports a 470 ms mean for cold mode and wants to approve a 500 ms p95 target. Explain the error. The mean is not the specified quantile, a finite sample has estimator uncertainty, the target population may differ from the test distribution, and timestamp uncertainty affects near-threshold events. Request a cold-peak sampling and acceptance plan before approving.
+
+**Editorial boundary:** the quantitative workbook creates analyzable engineering evidence, but model fit, population representativeness, and decision authority are additional conditions. Run the [case checker](../tools/step03_book10_quantitative_check.py) to reproduce the controlled numbers; no output of this script is field qualification evidence.

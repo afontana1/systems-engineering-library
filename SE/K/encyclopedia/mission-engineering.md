@@ -46,6 +46,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)](https://sebokwiki.org/wiki/Main_Page) — Community-maintained secondary guide; use its references for further research.
 
+
+
+## Step 02 review studio — reconstruct a mission thread across owners
+
+A mission thread for Northstar's emergency indication is: detect a transition → timestamp it → publish status → transport it → display to an operator → interpret and respond. Some steps are implemented by software, some rely on networks, and some involve humans. The mission succeeds only if the **entire chain** achieves a meaningful operational outcome.
+
+**Solved exercise:** component timing budgets are 0.35, 0.25, 0.70, and 0.35 seconds. Their sum is **1.65 s**; against a 2.50-s deterministic allocation, margin is **0.85 s**. Does this verify an operator can intervene within 2.50 s? **No.** Human recognition and action are outside the four measured stages. The mission outcome requires those stages and corresponding scenario evidence or a separately controlled operational-response requirement.
+
+**Cross-constituent test:** ask who detects missing status, who has authority to suspend service, what happens when the network is unavailable, and how recovery is verified. A mission thread is stronger than a sequence of green component tests because it exposes missing responsibilities at the boundaries between constituent systems and organizations.
+
 ## Follow the knowledge
 
 **Related concepts**

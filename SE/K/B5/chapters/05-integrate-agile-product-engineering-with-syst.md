@@ -81,3 +81,24 @@ In [Lab 5: Iteration must still produce system evidence](../labs/lab-05-integrat
 ## Continuity
 
 This chapter builds from [previous chapter](04-frame-the-software-architecture-within-the-sy.md) and leads toward [next chapter](06-design-and-evaluate-architecture-with-quality.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-764-w05.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+
+## Step 03 integrated reference: iterative delivery with intact assurance
+
+### Separate increments of code from increments of knowledge
+
+Agile iterations create value when they turn uncertainties into evidence. The NS-SW5.1 backlog has several distinct risks: capacity at peak workload, duplicate allocation after uncertain commit, operator fallback, and outdated build provenance. Implementing more UI screens does not retire these risks. Each increment should identify a testable hypothesis and an *evidence artifact* with configuration, environment, data and decision threshold.
+
+A risk-reduction story might say: “When IF-02's reply is lost after a successful commit, retrying the same idempotency token must return the original reservation without creating a second active slot.” Its acceptance evidence is not a screenshot; it is a concurrent transaction scenario and audit log showing no duplicate assignment. Conversely, a benchmark from a single process on a laptop cannot validate deployment behavior across a partitioned service.
+
+### Design an experiment with a real stopping rule
+
+Suppose a proposed canary might add nine minutes of downtime. The 30-day 99.9% time-based availability allowance is 43.2 minutes. The [incident log](../case/incident-log.csv) already totals 36 minutes, leaving only 7.2. Under this teaching policy, a canary predicted to cost nine minutes is **not authorized**, even if the sprint review labels the feature complete. Planning a smaller exposure would require its own failure model, capacity and rollback evidence; it is not a license to ignore the objective.
+
+Continuous integration is useful when its tests actually constrain the change. Maintain at least two lines of evidence for a significant iteration: reproducible functional/model checks and operational-quality probes at a representative boundary. The first asks whether software fulfills its designed logic; the second asks whether the intended service can operate under the proposed environment and workload. Changes affecting safety-related interfaces should also involve explicit system-level assurance review.
+
+### Keep decision authority visible
+
+A product owner may prioritize user needs; a service owner may approve routine operations; an independent safety authority may control hazard-related releases. These are different responsibilities. The common failure is to treat a sprint demo as the only gate and silently move acceptance authority into delivery planning. Record unresolved concerns as decisions with owners, deadlines, and evidence requirements, not as ambiguous “tech debt.”
+
+**Exercise.** An iteration passes 100 unit tests but its only recovery drill is listed as `PLANNED`. Is release readiness satisfied? **Answer.** No. A test plan is not executed recovery evidence. The independent obligation SWS-07 remains open even if development velocity is high. Run the drill in the declared environment or obtain a documented, authorized exception based on an explicit risk evaluation.

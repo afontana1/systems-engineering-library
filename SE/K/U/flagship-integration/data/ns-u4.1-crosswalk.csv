@@ -1,0 +1,22 @@
+reading,kind,method,source,executable,result,teaching_limit
+01-from-need-to-verification,derivation,D01 extension · A conservative acceptance predicate,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+02-weighted-trades-and-reversal,derivation,D02 extension · Feasible-first preference and a reversal equation,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+03-bayesian-test-and-information,derivation,D03 extension · Evidence update with an explicitly conditional independence assumption,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+04-binomial-confidence-and-test-coverage,derivation,D04 extension · Wilson bound and the acceptance fallacy,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+05-factorial-interaction,derivation,"D05 extension · Two-factor contrast as an interaction, not a causal proof",data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+06-queue-utilization,derivation,D06 extension · A discrete conservation check and queue boundary,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+07-reliability-dependence,derivation,D07 extension · The common-cause gate changes the conclusion,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+08-stocks-flow-numerics,derivation,D08 extension · Discrete stability and the nonnegative-state warning,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+09-critical-path-earned-value,derivation,D09 extension · Schedule-path calculation and earned-value independence,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+10-causal-evaluation,derivation,"D10 extension · A difference-in-differences result, with its missing assumption",data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+11-state-machines-contracts,derivation,"D11 extension · Identity, ordering and revision as separate invariants",data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+12-digital-provenance-and-assurance,derivation,"D12 extension · Evidence status is a typed relation, not a green link",data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+F01-requirements-to-assurance,flagship,F01 extension · Claim-to-measurement chain and conservative time evidence,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+F02-decisions-and-architecture,flagship,F02 extension · Scenario feasibility before architecture preference,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+F03-statistical-assurance,flagship,"F03 extension · Sampling precision, subgroup performance, and diagnostic evidence",data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+F04-dynamics-and-resilience,flagship,F04 extension · Backlog conservation and numerical stability,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+F05-software-intensive-architecture,flagship,F05 extension · Stateful command contracts and replay safety,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+F06-optimization-and-control,flagship,"F06 extension · Hard constraints, robustness, and bounded controllers",data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+F07-human-factors-and-safety,flagship,F07 extension · Safety control is not a favorable risk score,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+F08-simulation-uncertainty,flagship,F08 extension · Paired experiments and the boundary of a confidence interval,data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification
+F09-enterprise-systems-of-systems,flagship,"F09 extension · Joint availability, distributed authority, and change impact",data/ns-u4.1-case.json,code/ns_u_case.py,outputs/ns-u4.1-results.json,synthetic; no field qualification

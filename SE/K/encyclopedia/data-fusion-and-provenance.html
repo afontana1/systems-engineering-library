@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Data fusion: weighting evidence without losing provenance · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/encyclopedia/data-fusion-and-provenance.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical explanation</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Data fusion: weighting evidence without losing provenance</h1>
+<p><strong>Reference entry · Systems of systems and quantitative assurance · Worked technical treatment</strong></p>
+<h2>Fusion begins before the arithmetic</h2>
+<p><strong>Data fusion</strong> combines observations from multiple sources to estimate a state, infer an event, or support a decision. Sources can disagree because they measure different quantities, sample different populations, have time skew, share calibration error, or fail under the same conditions. Averaging first and asking about provenance afterward is unsafe. Each input needs an identity, timestamp, unit, coordinate/frame convention, uncertainty, calibration history, processing version and admissibility criteria.</p>
+<p>Different fusion tasks require different models. Associating radar tracks is not the same problem as combining two temperature measurements; classifying an event is not equivalent to estimating a continuous quantity. Do not apply a Gaussian weighted-mean formula to category probabilities or data with unknown association errors.</p>
+<h2>Worked independent-measurement fusion</h2>
+<p>Suppose two hypothetical sensors observe the same scalar state \(x\), with unbiased, independent normal errors: \(x_1=10\), standard uncertainty \(u_1=2\); \(x_2=14\), \(u_2=1\). The inverse-variance estimator is</p>
+<p>\[
+\widehat x=\frac{x_1/u_1^2+x_2/u_2^2}{1/u_1^2+1/u_2^2}
+=\frac{10/4+14/1}{1/4+1}=13.2.
+\]</p>
+<p>Its standard uncertainty under those assumptions is</p>
+<p>\[
+u_{\widehat x}=\sqrt{\frac{1}{1/u_1^2+1/u_2^2}}=\sqrt{0.8}\approx0.8944.
+\]</p>
+<p>The more precise second observation receives greater weight. This <em>conditional</em> uncertainty is not valid if both sensors share a calibration bias or the two measurements are of different states. The individual readings disagree by four units; that discrepancy merits a consistency check before automatically trusting the weighted estimate.</p>
+<h2>Correlation changes the answer</h2>
+<p>For a vector of observations \(y=\mathbf{1}x+\epsilon\) with known covariance \(\Sigma\), the generalized least-squares estimate is</p>
+<p>\[
+\widehat x=(\mathbf{1}^{\mathsf T}\Sigma^{-1}\mathbf{1})^{-1}\mathbf{1}^{\mathsf T}\Sigma^{-1}y,
+\qquad
+\operatorname{Var}(\widehat x)=(\mathbf{1}^{\mathsf T}\Sigma^{-1}\mathbf{1})^{-1}.
+\]</p>
+<p>This formulation assumes a correctly specified, invertible covariance matrix, a common measurand, and a valid linear observation model. More observations with common-mode error do not necessarily reduce uncertainty as fast as independent observations. A fusion system should surface disagreement, conflicts and bad-source status instead of always returning a single confident-looking number.</p>
+<h2>Time, identity, and operational decisions</h2>
+<p>In a distributed emergency-response network, two position reports may refer to different objects or to the same object at different times. Even an exact weighted mean would then be operationally meaningless. First perform identification, synchronization, units conversion and quality gating; then apply an estimator matched to the data and decision. Store a lineage record: source IDs, transform versions, synchronization windows, fusion algorithm, threshold rules, output timestamp and downstream users.</p>
+<p>When a source is excluded, preserve the reason rather than deleting it from history. Assess sensitivity by repeating the decision without each major source and under plausible shared-bias scenarios.</p>
+<h2>Exercise and pitfalls</h2>
+<p>Reproduce the estimate 13.2 and uncertainty 0.8944. Next suppose a common sensor bias could be as large as 1.5 units. Explain why the original 0.8944 alone is not an adequate uncertainty statement. Add a stale timestamp to one record: should it remain eligible? Decide using a documented freshness rule, not intuition.</p>
+<h2>Technical references and related concepts</h2>
+<ul>
+<li><a href="https://www.nist.gov/metrology/metrological-traceability">NIST metrological traceability</a> — traceability, measurement result and calibration context.</li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/">NIST/SEMATECH Engineering Statistics Handbook</a> — statistical modeling and uncertainty.</li>
+<li>Related: <a href="technical-data-governance-and-lineage.html">technical data lineage</a>; <a href="measurement-traceability-and-calibration.html">measurement uncertainty</a>; <a href="probability-and-dependence.html">probability and dependence</a>; <a href="model-vv-and-credibility.html">model evidence</a>.</li>
+</ul>
+<p><em>Scope:</em> Numerical values are original, synthetic teaching examples; this does not validate a real sensor fusion stack.</p>
+<p><strong>Reproducible companion:</strong> <a href="examples/step02_examples.py">Step 02 worked examples (standard-library Python)</a>. Run <code>python3 step02_examples.py --case all</code> from the downloaded examples folder; the program prints the declared synthetic inputs and computed results.</p>
+<h2>Step 02 deeper treatment: dependent sensors change optimal fusion</h2>
+<p>The familiar inverse-variance rule assumes unbiased estimates with independent errors. For two sensors with variances \(\sigma_1^2,\sigma_2^2\) and covariance \(c\), a linear unbiased estimator \(\hat x=w y_1+(1-w)y_2\) has variance</p>
+<p>\[
+V(w)=w^2\sigma_1^2+(1-w)^2\sigma_2^2+2w(1-w)c.
+\]</p>
+<p>Setting its derivative to zero yields \(w=(\sigma_2^2-c)/(\sigma_1^2+\sigma_2^2-2c)\), provided the covariance is valid and the denominator is positive. For two hypothetical sensors with \(\sigma_1^2=4\), \(\sigma_2^2=9\) and \(c=3\), the weight on sensor 1 is \((9-3)/(4+9-6)=6/7\approx0.857\). Under a false independence assumption it would instead be \(9/(4+9)\approx0.692\). The resulting uncertainty claim changes as well. If errors share calibration or environment, independent-sensor mathematics overstates the evidence gained by combining them.</p>
+<p><strong>Exercise:</strong> calculate the fused estimate for sensor observations 10 and 12 using \(w=6/7\). The result is \(10.2857\), not an automatic indication that either sensor is correct. Document timestamps, calibration, common reference, correlation provenance and the measurement quantity. If covariance is unknown, report a sensitivity range rather than silently setting \(c=0\). See the <a href="https://www.itl.nist.gov/div898/handbook/">NIST measurement and uncertainty guidance</a>; this example illustrates covariance effects, not a validated calibration procedure.</p>
+</article><nav class="standalone-actions"><a href="metrics-hierarchy.html">Read concept</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="metrics-hierarchy.md">Editable Markdown</a></nav></main></body></html>

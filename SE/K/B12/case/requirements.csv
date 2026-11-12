@@ -1,0 +1,8 @@
+id,requirement,unit,threshold,metric,implementation,verification,validation_status,owner
+R-RESERVE,End of 24-loop synthetic mission reserve,fraction,>=0.20,ending_soc,run() state E,negative-input and numerical reconciliation,synthetic only; no battery age or field cycle,energy engineering
+R-THERM,Lumped pack peak under synthetic weather,degC,<=48,max_battery_temp_c,run() state temperature,thermal first-law residual and flow comparison,no measured spatial pack temperatures,thermal engineering
+R-TIME,Modeled mean per-loop driving time,min,<=9,mean_trip_time_min,run() route speed regulator,step convergence and source route checks,no actual stops traffic or passengers,operations engineering
+R-ENERGY,Electrical energy bookkeeping residual,kWh,abs<=0.00001,energy_balance_error_kwh,run() power integrals,invariant regression,mathematical bookkeeping only,verification engineering
+R-MECH,Mechanical work bookkeeping residual,kWh,abs<=0.001,mechanical_balance_error_kwh,run() power/grade/drag integrals,invariant with step refinement,contact/friction and grade topology unvalidated,mechanical engineering
+R-HIL,Controller real-time deadline,ms,<=10,WCET plus IO plus synchronization plus margin,not implemented,none,NOT READY; no hardware or timing benchmark,controls engineering
+R-FED,Interoperability conformance,standard,FMI/HLA conforming,external standards conformance,not implemented,none,NOT DEMONSTRATED; only explanatory contract,simulation integration

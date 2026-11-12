@@ -1,0 +1,5 @@
+requirement,component,verification,test_baseline,evidence_note
+NS-R-01,rider-app,NS-T-01,NS-B1,Synthetic controlled workload timing report; no field inference
+NS-R-02,status-gateway,NS-T-02,NS-B1,Component-budget analysis; does not establish end-to-end percentile
+NS-R-03,allocation-database,NS-T-03,NS-B1,Concurrent transaction test; limited to one database boundary
+NS-R-04,supervisor-console,NS-T-04,NS-B0,Deliberately stale baseline; must be repeated after interface change

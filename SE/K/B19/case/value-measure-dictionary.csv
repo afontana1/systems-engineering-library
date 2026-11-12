@@ -1,0 +1,7 @@
+outcome,numerator,denominator_or_unit,time_window,owner,disaggregation,limitation
+Accessible trip fulfillment,Accessible trips served,Accessible requests per 4-hour event,Emergency event,Service coalition,Disability access needs and region,Service rate is not lived experience
+Standard trip fulfillment,Standard trips served,Standard requests per 4-hour event,Emergency event,Transit operators,Neighborhood and operator,Does not measure journey completion
+Coordination closure,Cases closed,Opening plus incoming cases,26-week synthetic test,Review council,Agency and cause,Excludes case quality and safety
+Open case age,Elapsed weeks since arrival,Weeks,At each weekly close,Cross-agency office,Case origin and class,Censored open cases require explicit reporting
+Public legitimacy,Participatory review actions accepted,"Qualitative, not automated",Gate reviews,Community review panel,Affected population,Cannot infer consent from model
+Affordability,Incremental portfolio cost,USD million over program horizon,5-year authorization,Appropriations body,Actor bearing cost,Ignores discount rate and operating escalation

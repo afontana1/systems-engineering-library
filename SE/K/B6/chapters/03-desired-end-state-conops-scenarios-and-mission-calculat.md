@@ -101,3 +101,28 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 3: ConOps and mission measures](../labs/lab-03-desired-end-state-conops-scenarios-and-mission-calculat.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 3 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+
+## Step 03 integrated reference: NS-CD6.1 — a measurable ConOps and capacity envelope
+
+A concept of operations should make a **testable prediction** about how different people complete a mission under nominal, surge, degraded and outage conditions. For NS-CD6.1, a useful event-day mission thread is: request mobility support → assess accessible offer → reserve capacity → dispatch → travel → record outcome and recovery. An actor and clock should accompany every transition; otherwise the diagram hides performance assumptions.
+
+### Convert a story into quantitative conditions
+
+For a scheduled loop with 36-minute cycle time, four vehicles and 10 usable seats per dispatch, the gross seating opportunity is \(4\times10\times60/36=66.67\) seats/h. A stipulated 80% effective-use factor gives
+
+\[C_A=\frac{4(10)(60)}{36}(0.80)=53.33\ \text{effective trips/h}.\]
+
+This expression assumes the cycle time remains stable, a completed seat can serve one effective trip, and the utilization factor already represents boarding, alighting and practical occupancy losses. Multiplying another unexplained efficiency factor would double-discount capacity. With four evenly spaced vehicles the nominal headway is 9 minutes, *not* the 12-minute wait figure in the case table. That 10.8-minute 90th-percentile wait estimate belongs to a separately assumed end-to-end pickup model: do not infer it directly from headway.
+
+For the hybrid concept C, two trunk vehicles with 24-minute cycles contribute \(2\times10\times60/24\times0.8=40\) effective trips/h. Two feeders contribute \(2\times8\times0.8=12.8\). The nominal sum is 52.8 trips/h. **Adding capacities is only justified if demand is routable between branches and transfers do not create an unmodeled bottleneck.** A common dispatch service or physical pickup point may constrain the combined throughput below that sum.
+
+### Scenario-dependent claims
+
+Write four scenario records, each with input profile and stopping rule: routine operation, 42-trip/h event surge, loss of digital booking, and degraded network timing. The model predicts capacity and assumed wait in the first two; the evidence register shows that accessible fallback and degraded timing are unresolved. A ConOps is not finished when the nominal sequence looks plausible—its failure behavior is where many architecture decisions become irreversible.
+
+### Practice and answer
+
+**Exercise:** The team claims C has 52.8 trips/h and therefore meets a 48-trip/h **demand plus 10% reserve** scenario. Is that defensible? **Answer:** No; the requirement is 52.8 effective trips/h exactly, leaving zero numerical model margin and no protection against error in the utilization estimates. A feasibility statement at equality must be labeled *boundary case*. Validate the physical interchange capacity and stress the operating profile. See [controlled model](../case/model-baseline.json) and [diagram](../case/architecture.svg).
+
+**Boundary:** An aggregate capacity equation cannot by itself establish pickup percentiles, network resilience, wheelchair routing, or service quality. Those require operations-level observation or simulation with explicit arrival and allocation mechanisms.

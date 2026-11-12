@@ -1,0 +1,6 @@
+id,producer,consumer,message_or_service,units,latency_degraded_ms,failure_behavior
+IF-GW,Edge gateway,Broker,authenticated dispatch command,ms,85,fail closed on stale authentication
+IF-BR,Broker,Dispatch,reservation intent,ms,120,idempotent retry by request ID
+IF-DS,Dispatch,Vehicle controller,allocation decision,ms,140,reject conflicting allocations
+IF-VC,Vehicle controller,Fleet,command acknowledgement,ms,110,safe degraded hold on link loss
+IF-TR,Transport,Operator console,delivery network segment,ms,35,time-out to dispatch supervisor

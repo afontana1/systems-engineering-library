@@ -121,3 +121,29 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [09 — Previous chapter](09-apply-simulation-in-design-and-development-using-selection-ranking-a.md) · [11 — Next chapter](11-plan-and-evaluate-verification-validation-credibility-and-accreditat.md) · [Book index](../README.md)
+
+## Step 03 integrated mobility simulation case: integration and test decisions
+
+### Translate simulation outputs into a verification matrix
+
+A simulation's own reported service outcomes are **model outputs**. They are not independent evidence of system requirement compliance. The [requirements file](../case/requirements.csv) assigns `MS11-R01` to standard p90, `MS11-R02` to accessible p90, `MS11-R03` to the end-of-day nonpickup measure, and `MS11-R04–R06` to staffing, referent demand and charging validation gaps. The calculation status of R01–R03 is **modeled only**. R04–R06 have not been demonstrated by this code. An integration engineer should distinguish the claim's *entity* (software model versus real operation), *test level*, *acceptance criteria*, *configuration* and *authority*.
+
+A credible test/evaluation plan might use three columns of evidence: (1) analytic or simulation evidence for early sizing, (2) test-rig evidence for physical vehicle and charging constraints, and (3) pilot operations for actual demand, human boarding/dispatch, accessible service and degraded events. The pilot cannot be replaced by more seeds from an unvalidated model. Evidence must match the configuration that will operate; previous Book 7–10 conceptual assumptions and unresolved evidence may be inherited, not silently declared closed.
+
+### Quantify the model-versus-system gap
+
+Let \(\hat y_M\) be the simulation's mean daily p90 and \(y_R\) an independently measured operational response. A conceptual discrepancy decomposition is
+
+\[\hat y_M-y_R=\underbrace{\varepsilon_{MC}}_{\text{Monte Carlo}}+\underbrace{\varepsilon_{input}}_{\text{input estimate}}+\underbrace{\delta_{model}}_{\text{structural discrepancy}}+\underbrace{\varepsilon_{measure}}_{\text{referent measurement}}.\]
+
+These terms are **not automatically independent**, so their uncertainties cannot be indiscriminately combined by root-sum-squares. A narrow simulation CI only bounds the first term under the specified stochastic generator. If the route-time and demand referent are missing, the other terms may dominate. A field test must be designed with timestamp definitions, stratification by accessible need, time of day, weather and a transparent sample/quantile estimator.
+
+### Design an informative field comparison
+
+For a pilot, freeze the configuration and ask whether observed request arrivals and service-time distributions agree with the hypothesized inputs. Compare peak-hour counts; check whether the empirical variance exceeds the Poisson prediction; measure accessible boarding p90 and route occupancy; record charger access, delays and failures. Use a held-out day set to evaluate predicted p90 coverage and bias. A model can agree on an overall mean while failing on the accessible tail or high-demand event days. Any test supporting a safety- or equity-critical claim requires qualified oversight and domain-appropriate standards.
+
+For each simulated integration question, define a physical confirmation: *vehicle states* can be checked against telemetry; *charger concurrency* against station logs; *boarding duration* against observed timestamps; *accessible capacity* against seating/equipment configuration and rider experience. If a value has no plausible referent, it should appear in the unresolved limitation register rather than a successful V&V count.
+
+**Exercise and answer.** A team obtains a modeled mean daily accessible p90 of 45 minutes in the 14-vehicle baseline, compared with the 15-minute requirement. May the team write “Requirement failed in the field”? **Answer:** no. It may write “the **specified synthetic model** fails the design screen,” with units, assumptions and version. A field compliance determination requires an independent test using an actual acceptance plan. The adverse model result is still useful: it justifies withholding a pilot readiness claim and investigating alternative dispatch and fleet concepts.
+
+[Credibility and requirements](../case/INDEX.html) · [Chapter 11](11-plan-and-evaluate-verification-validation-credibility-and-accreditat.md).

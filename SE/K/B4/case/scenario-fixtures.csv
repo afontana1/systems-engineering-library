@@ -1,0 +1,8 @@
+scenario,token,accessibility,vehicle,slot,telemetry_age_s,expected_result,explanation
+F-01,idem-a,false,V-01,AM-01,4,ACCEPT,first normal reservation
+F-02,idem-a,false,V-01,AM-01,4,SAME_RESERVATION,retry must not create a duplicate
+F-03,idem-b,true,V-01,AM-02,4,REJECT_ACCESSIBILITY,ineligible vehicle
+F-04,idem-c,true,V-02,AM-02,6,ACCEPT,eligible vehicle and fresh telemetry
+F-05,idem-d,false,V-01,AM-01,4,REJECT_CONFLICT,vehicle slot already reserved
+F-06,idem-e,true,V-03,AM-03,22,REJECT_STALE,telemetry older than 15 seconds
+F-07,idem-f,false,V-01,AM-04,4,ACCEPT,cancelled later to demonstrate release

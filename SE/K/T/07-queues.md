@@ -55,3 +55,18 @@ Show why the M/M/1 steady-state result cannot be used when arrival rate is at or
 ## Next connections
 
 Use the related books above to see how this concept becomes a course assignment. The lab provides a small, deliberately incomplete practice setting; it does not replace verification against real operational data.
+
+
+<!-- STEP04-T1-START -->
+
+## Step 04 T1 — Evidence-driven correction and worked transfer
+
+### T1 audit finding: reconcile service and queue statistics before interpreting speed
+
+For the finite NS-T4.1 observation window, the required accounting identity is \(N_{arrivals}=N_{served}+N_{rejected}+N_{pending}\). Inserting the fixture yields \(40=32+5+3\). An event log that records an extra completion without a matching request identifier violates this identity, even if its estimated average wait decreases. Requests rejected immediately and requests pending at closing must not quietly disappear from the outcome denominator.
+
+Compare this finite-case ledger with an **independent idealized M/M/1 analytical benchmark**: \(\lambda=8\) requests/hour, \(\mu=10\) services/hour, and \(\rho=0.8\). Mean time **in the entire system** is \(W=1/(\mu-\lambda)=0.5\) hour (30 minutes). Mean queue *waiting* time excludes service: \(W_q=W-1/\mu=0.4\) hour (24 minutes). Little's Law gives \(L=\lambda W=4\) requests in system and \(L_q=\lambda W_q=3.2\) waiting. These are steady-state expectations, **not** measurements from the forty requests.
+
+**Practice and explained solution.** If a candidate reports 33 served, five rejected, and three pending from forty arrivals, the sum is 41: identify a duplicate or a faulty state transition before calculating performance. In the ideal M/M/1 benchmark, increasing arrival rate to nine/hour raises \(W\) to 60 minutes; it does not imply a particular finite-shift completion fraction. [Reproduce the distinction](labs/T1-INTEGRATED-CASE.md).
+
+<!-- STEP04-T1-END -->

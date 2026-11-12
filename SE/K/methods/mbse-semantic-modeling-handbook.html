@@ -1,0 +1,165 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Model-based systems engineering: semantics, constraints, and executable checks · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/mbse-semantic-modeling-handbook.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Model-based systems engineering: semantics, constraints, and executable checks</h1>
+<p><em>Technical method guide · MBSE, system architecture, traceability, and parametric analysis · Phase 1 expansion</em></p>
+<p><strong>What this chapter enables.</strong> Construct a small but meaningful system model, specify the meaning of its relationships, evaluate parametric constraints, find stale evidence, and distinguish a consistent model from an acceptable real system. The examples are notation-independent so they can be applied in SysML v1, SysML v2, or a carefully governed tabular repository.</p>
+<p><strong>Prerequisites:</strong> <a href="../encyclopedia/model-language-method-tool.html">Model versus method versus tool</a>, <a href="../encyclopedia/traceability-graph.html">traceability</a>, and <a href="../encyclopedia/functional-vs-physical.html">functional versus physical architecture</a>.</p>
+<h2>1. What is the model meant to decide?</h2>
+<p>The fictional Northstar Campus Shuttle team is deciding whether a dispatch release and battery configuration can satisfy two claims: acknowledge requests on time and complete a representative route while preserving a usable-energy reserve. A schematic diagram is insufficient for both questions. The team needs information that can be queried, computed, checked for dimensional correctness, and tied to configuration-specific evidence.</p>
+<p>Start with a <strong>modeling question</strong>: “For release <code>NS-2.3</code>, which in-scope requirements have applicable, accepted evidence, and under which operating assumptions does the proposed energy allocation remain feasible?” That question determines the minimum model elements and checks. Modeling for visual attractiveness without a query or decision produces expensive but weak artifacts.</p>
+<h2>2. Build a typed engineering graph</h2>
+<p>Represent the repository as a directed typed graph</p>
+<p>\[
+G=(V,E,\tau_V,\tau_E),
+\]</p>
+<p>where \(\tau_V\) maps each node to an artifact type (need, requirement, function, element, interface, verification case, test result), and \(\tau_E\) maps each relationship to a defined kind (derives-from, allocated-to, verifies, result-of, supports). Types alone are not proof: their allowed endpoints, direction, and meaning must be documented.</p>
+<table>
+<thead>
+<tr>
+  <th>Statement</th>
+  <th>Example edge</th>
+  <th>What it does <strong>not</strong> prove</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>R-ACK derives from N-RIDE</td>
+  <td><code>R-ACK → derivesFrom → N-RIDE</code></td>
+  <td>That R-ACK fully captures every aspect of N-RIDE</td>
+</tr>
+<tr>
+  <td>R-ACK is allocated to C-DISP</td>
+  <td><code>R-ACK → allocatedTo → C-DISP</code></td>
+  <td>That C-DISP actually meets the requirement</td>
+</tr>
+<tr>
+  <td>T-ACK targets R-ACK</td>
+  <td><code>T-ACK → verifies → R-ACK</code></td>
+  <td>That the test has run or passed</td>
+</tr>
+<tr>
+  <td>E-ACK came from T-ACK</td>
+  <td><code>E-ACK → resultOf → T-ACK</code></td>
+  <td>That the result is applicable to the current build</td>
+</tr>
+<tr>
+  <td>E-ACK supports R-ACK</td>
+  <td><code>E-ACK → supports → R-ACK</code></td>
+  <td>That an approving authority has accepted sufficient evidence</td>
+</tr>
+</tbody>
+</table>
+<p>The first and last arrows look similar on paper, but one justifies a lower-level requirement while the other makes a configuration-specific evidentiary claim. Do not infer one by traversing an arbitrary chain of arrows.</p>
+<h3>Minimal metamodel rules</h3>
+<ol>
+<li>Every governed node has a stable identifier, type, and revision or configuration identity.</li>
+<li>Every edge has a recognized relationship type and valid endpoint types.</li>
+<li>Every in-scope requirement has a legitimate rationale or a documented justified exception.</li>
+<li>Every claimed verification has an applicable test result, an approved method and decision rule, and a matching configuration.</li>
+<li>Unit-bearing properties declare dimensions and applicable operating conditions.</li>
+<li>A model baseline retains the test/evidence provenance used for decisions.</li>
+</ol>
+<p>These are <strong>engineering quality rules</strong>, not an assertion that a particular SysML version mandates this exact schema.</p>
+<h2>3. Requirements, tests, and evidence must not collapse into one status</h2>
+<p>Consider model baseline <code>NS-2.3</code>. The repository contains test case T-ACK that targets requirement R-ACK. The <em>recorded result</em> E-ACK is marked passed but was measured on release <code>NS-2.2</code>. A simplistic dashboard counts one verification link and shows “covered.” A semantic quality check instead says <strong>stale evidence for NS-2.3</strong>.</p>
+<p>The correct rule is more specific:</p>
+<p>\[
+\operatorname{CurrentEvidence}(r,b) = \exists e,t:\;\operatorname{targets}(t,r)\land\operatorname{producedBy}(e,t)\land\operatorname{accepted}(e)\land\operatorname{build}(e)=b\land\operatorname{scenarioApplicable}(e,r).
+\]</p>
+<p>The equality test is deliberately conservative: an authorized configuration-equivalence argument may allow reuse across builds, but the model must explicitly record that review; it must not silently assume equivalence. The <a href="code/model_trace_audit.py">trace audit program</a> checks these conditions on a small JSON repository and distinguishes <strong>covered</strong>, <strong>missing</strong>, and <strong>stale</strong> evidence. Compare the <a href="data/model-stale.json">stale baseline</a> and <a href="data/model-corrected.json">corrected baseline</a>.</p>
+<p>Notice the epistemic boundary: this query checks evidence <em>governance</em>. It cannot know whether the underlying experimental method was scientifically appropriate, whether a hazard was overlooked, or whether an accepted requirement addresses the user need. It is a useful filter for review, not automatic certification.</p>
+<h2>4. Model behavior, not only static structure</h2>
+<p>A dispatcher can have a valid component structure and still create duplicate assignments under repeated messages. Represent the booking lifecycle with controlled states such as <code>NEW</code>, <code>VALIDATED</code>, <code>OFFERED</code>, <code>ACCEPTED</code>, <code>REJECTED</code>, and <code>CLOSED</code>. Define transitions with guards and effects, for example:</p>
+<table>
+<thead>
+<tr>
+  <th>Transition</th>
+  <th>Guard</th>
+  <th>Required effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>NEW → VALIDATED</code></td>
+  <td>Syntax, authorization and service-domain checks succeed</td>
+  <td>Record validation event with request ID</td>
+</tr>
+<tr>
+  <td><code>VALIDATED → OFFERED</code></td>
+  <td>A viable dispatch candidate exists</td>
+  <td>Reserve candidate with expiring offer ID</td>
+</tr>
+<tr>
+  <td><code>OFFERED → ACCEPTED</code></td>
+  <td>User response is on time and offer remains valid</td>
+  <td>Commit at most one active assignment</td>
+</tr>
+<tr>
+  <td><code>OFFERED → CLOSED</code></td>
+  <td>Offer expires</td>
+  <td>Release resource reservation</td>
+</tr>
+<tr>
+  <td><code>NEW → REJECTED</code></td>
+  <td>Request fails defined check</td>
+  <td>Return governed error reason</td>
+</tr>
+</tbody>
+</table>
+<p>An invariant such as “every accepted request has at most one current committed assignment” can be expressed in notation-neutral mathematics:</p>
+<p>\[
+\forall r\in\mathcal R:\quad \operatorname{status}(r)=\mathrm{ACCEPTED}\implies\left|\operatorname{activeAssignments}(r)\right|\leq1.
+\]</p>
+<p>A model checker can explore state transitions under stated bounds; an integration test can observe actual software behavior. Neither alone proves that every relevant operational failure has been modeled. Always distinguish <strong>formal proof about a model</strong>, <strong>test of an implementation</strong>, and <strong>validation in use</strong>.</p>
+<h2>5. Parametrics: make a constraint executable and dimensional</h2>
+<p>Model route energy consumption as traction energy plus auxiliary energy:</p>
+<p>\[
+E_{\mathrm{req}}=e_dD+P_{\mathrm{aux}}T.
+\]</p>
+<p>Here \(e_d\) has units kWh/km, route distance \(D\) is km, auxiliary load \(P_{\mathrm{aux}}\) is kW, and operating time \(T\) is hours. Both terms yield kWh. This dimensional check catches the common error of adding kW directly to kWh.</p>
+<p>Suppose \(e_d=0.24\) kWh/km, \(D=180\) km, \(P_{\mathrm{aux}}=2\) kW and \(T=10\) h. Then</p>
+<p>\[
+E_{\mathrm{req}}=0.24(180)+2(10)=43.2+20=63.2\ \mathrm{kWh}.
+\]</p>
+<p>With <strong>70 kWh available usable energy under the declared configuration and conditions</strong>, the illustrative reserve margin is \(70-63.2=6.8\) kWh, or approximately \(9.7\%\) of usable energy. If cold weather increases \(e_d\) to 0.29 kWh/km with the other assumptions unchanged, required energy becomes \(0.29(180)+20=72.2\) kWh, and margin becomes <strong>−2.2 kWh</strong>. The model fails the constraint even though the component diagram is unchanged.</p>
+<p>A necessary constraint is</p>
+<p>\[
+E_{\mathrm{req}}\leq E_{\mathrm{usable}}.
+\]</p>
+<p>It is not automatically sufficient: range uncertainty, charging contention, pack degradation, route disturbances, reserve-policy obligations and performance limitations may require additional equations. A model's apparent precision must not be confused with predictive credibility.</p>
+<h2>6. Make models inspectable through questions and queries</h2>
+<p>A useful repository produces answers to concrete questions:</p>
+<ul>
+<li>Which approved requirements have no responsible system element?</li>
+<li>Which required interfaces lack units, direction, protocol, timing or error behavior?</li>
+<li>Which test cases exist without executed results?</li>
+<li>Which accepted results were collected against an older baseline?</li>
+<li>Which constraints have unbound parameters or inconsistent dimensions?</li>
+<li>Which requirements changed since the last accepted evidence package?</li>
+<li>Which derived requirements have no parent rationale?</li>
+</ul>
+<p>Write these questions <strong>before</strong> building dashboards. Each query should state what its output measures and what it does not imply. For example, “coverage = 100%” needs a denominator (all current applicable requirements) and a definition of “covered” (accepted relevant evidence), not just a nonempty test link.</p>
+<h2>7. SysML v1, SysML v2, and the underlying engineering method</h2>
+<p>SysML v1 and v2 support systems modeling but differ in language architecture and representation. SysML v2 is based on KerML and includes textual as well as graphical syntax, with a standardized model API ecosystem. OMG's <a href="https://www.omg.org/spec/SysML/2.0">SysML v2 specification</a> and <a href="https://www.omg.org/sysml/SysML-2.htm">SysML v2 overview</a> are the proper sources for <strong>actual language syntax, semantics and conformance requirements</strong>. This chapter intentionally does not present unverified pseudo-SysML as code readers can paste into a conformant tool.</p>
+<p>A stable engineering practice should specify the <strong>modeling purpose, viewpoint, metamodel, invariants, evidence rules and review workflow</strong> before choosing which graphical view or tool feature to use. Where a tool generates diagrams from model elements, keep the underlying identities and relation types authoritative. A correct rendering is not, by itself, a correct engineering model.</p>
+<h3>Safe migration checklist</h3>
+<p>Before transforming a SysML v1 model to a SysML v2 representation, inventory your stereotypes, profiles, custom relationship semantics, IDs, quantity definitions, opaque constraints, external links, and generated reports. Define semantic equivalence tests for key queries and calculations. Preserve the old baseline for comparison. Migration should be treated like a data and behavior transformation with validation evidence, not merely a graphics conversion.</p>
+<h2>8. Fully guided repository exercise</h2>
+<p><strong>Task.</strong> Inspect <a href="data/model-stale.json">model-stale.json</a>. The audit should find accepted result E-ACK bound to obsolete software, and requirement R-ENERGY with no completed evidence. Neither is automatically verified. In <a href="data/model-corrected.json">model-corrected.json</a>, the result is tied to the current build and a test result for R-ENERGY is added. This makes the sample structurally covered under the stated policy.</p>
+<p><strong>Run:</strong></p>
+<pre><code class="language-bash">python3 code/model_trace_audit.py data/model-stale.json
+python3 code/model_trace_audit.py data/model-corrected.json
+</code></pre>
+<p><strong>Expected interpretation.</strong> The first command reports at least one <strong>STALE</strong> and one <strong>MISSING</strong> requirement. The second reports both <strong>COVERED</strong>. A structural pass does <strong>not</strong> prove an instrument was calibrated, a load profile was representative, or an energy model is trustworthy. Those are independent reviews.</p>
+<p><strong>Extension.</strong> Add a new requirement R-NETWORK with an allocation and a test plan but no result. What does the coverage report say? Then change the evidence build to <code>NS-2.4</code> without changing the requirement baseline. Explain why a simple link count remains unchanged but the engineering conclusion does not.</p>
+<h2>9. Review criteria and sources</h2>
+<p>A model review should inspect intended decisions; definition of scope and system boundary; typed relationship glossary; stakeholder/requirement justification; architecture/interface allocation; units and parameter provenance; behavioral exception cases; consistency and coverage query results; configuration identities; test and evidence applicability; and independent challenge of important assumptions.</p>
+<ul>
+<li><a href="https://www.omg.org/spec/SysML/2.0">OMG SysML 2.0 specification</a> — normative language and transformations.</li>
+<li><a href="https://www.omg.org/sysml/SysML-2.htm">OMG SysML v2 introduction</a> — KerML foundation, textual notation, and API overview.</li>
+<li><a href="https://standards.nasa.gov/node/3111">NASA Systems Modeling Handbook</a> — model planning, organization, and generation of engineering artifacts.</li>
+<li><a href="../B3/chapters/04-requirements-modeling-relationship-semantics-.html">Book 3, Chapter 4</a>, <a href="../B3/chapters/08-values-units-measures-constraints-parametrics.html">Book 3, Chapter 8</a>, <a href="../../C/P1/EN645631.html">EN.645.631 course</a>.</li>
+<li><a href="../encyclopedia/model-language-method-tool.html">Model-language-method-tool reference</a>, <a href="../encyclopedia/traceability-graph.html">traceability reference</a>.</li>
+</ul>
+<p><strong>Scope note:</strong> The schema, examples, state names and audit policies here are original educational examples, not a normative interpretation of SysML or a vendor-conformant model. The JSON audit is intended to expose reasoning and provenance, not replace a qualified MBSE environment.</p>
+<footer class="reference-note"><a href="mbse-semantic-modeling-handbook.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

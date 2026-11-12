@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Complexity, emergence, and adaptation · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Complexity, emergence, and adaptation · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
 <link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
 <script data-se-mode="standard" data-se-page="K/encyclopedia/complexity-emergence.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
 </head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Complexity, emergence, and adaptation</h1>
@@ -32,7 +32,11 @@
 <li><a href="https://sebokwiki.org/wiki/Main_Page">SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)</a> — Community-maintained secondary guide; use its references for further research.</li>
 <li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section id="step03-concept-study"><h2>Step 02 review studio — a locally rational rule that creates a global failure</h2>
+<p>Imagine every shuttle controller independently selects the shortest route to minimize its own dispatch delay. If many vehicles make that decision simultaneously, a narrow campus corridor can become overloaded; each local controller behaves as specified while the system-level travel time degrades. Such an outcome is <em>emergent</em> in the engineering sense when interactions generate behavior that cannot be inferred from each isolated component's test result alone.</p>
+<p><strong>Solved exercise:</strong> two corridors can carry at most 6 and 4 vehicles per interval without congestion, respectively. A dispatcher allocates all 10 vehicles to the nominally shorter 6-capacity corridor. Is the component-local “choose shortest path” rule sufficient for system performance? <strong>No.</strong> The aggregate assignment exceeds a known capacity. A coordination policy, capacity-aware routing, or demand constraint must be evaluated at the system level.</p>
+<p><strong>Evidence strategy:</strong> test multiple scales, realistic interaction patterns, boundary conditions, and adaptation over time. Do not label every unexpected bug “emergence”; first rule out an omitted requirement, an incorrect interface assumption, or a conventional implementation defect.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="stocks-flows-feedback.html">Stocks, flows, and feedback loops</a></li>

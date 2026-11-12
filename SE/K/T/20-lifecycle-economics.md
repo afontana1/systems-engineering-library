@@ -73,3 +73,18 @@ A costs approximately $1,544.65; B approximately $1,499.56 at the declared real 
 ## Guided laboratory
 
 [Open the corresponding case-based lab](labs/20-lifecycle-economics-workshop.md)
+
+
+<!-- STEP04-T1-START -->
+
+## Step 04 T1 — Evidence-driven correction and worked transfer
+
+### T1 audit finding: preserve the financial convention and the hard gates
+
+For three annual **year-end** costs, the real discount factor at 5% is \(F=\sum_{t=1}^3(1.05)^{-t}=2.723248\). The worked options have \(PV_A=1000+200F\approx1544.65\) cost units and \(PV_B=1200+110F\approx1499.56\). The higher initial cost of B is offset by its 90-unit annual operating saving. B breaks even if its saving is at least \((1200-1000)/F\approx73.44\) cost units per year. Calling this a probability of B's affordability would be a category error.
+
+Now connect the cost rank to T1's fleet feasibility. A nominally least-cost architecture remains inadmissible if its stressed service falls below ten requests/hour or its hourly energy budget violates a requirement. Also distinguish the public agency's cash-flow ledger from societal or subgroup costs: a saving created by leaving accessible requests pending is not automatically a net social benefit.
+
+**Practice and explained solution.** If B's annual operating cost increases from 110 to 135, its saving relative to A falls from 90 to 65, below the 73.44-unit break-even threshold. Then \(PV_B=1200+135F\approx1567.64\), greater than \(PV_A\). Show this sensitivity before offering an investment recommendation. [Reproduce the cost calculation](labs/T1-INTEGRATED-CASE.md).
+
+<!-- STEP04-T1-END -->

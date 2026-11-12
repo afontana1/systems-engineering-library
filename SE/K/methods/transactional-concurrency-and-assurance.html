@@ -1,0 +1,136 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Transactional concurrency and software architecture assurance · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/transactional-concurrency-and-assurance.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Transactional concurrency and software architecture assurance</h1>
+<h2>1. Why an invariant is not yet an implementation</h2>
+<p>An object model can say “a worker may be allocated to at most one active reservation” and still deploy software that double-allocates under concurrent requests. This chapter extends <a href="uml-ocl-software-contracts.html">UML/OCL software contracts</a> from <strong>single-state assertions</strong> to <strong>interleavings and persistence mechanisms</strong>. It uses a fictional dispatch allocation service in the Campus Mobility case.</p>
+<p>The safety-relevant invariant is</p>
+<p>\[
+\forall w,\quad \sum_{r\in R}\mathbf1(r.\mathrm{worker}=w
+\land r.\mathrm{status}=\mathrm{active})\le 1.
+\]</p>
+<p>This does not require “all requests eventually get a worker”; that is a separate <em>liveness</em> or service objective. Stating both is important: a system that rejects every reservation can satisfy the exclusion invariant but completely fail its mission.</p>
+<p><strong>Prerequisites:</strong> <a href="mbse-behavioral-contracts.html">behavioral contracts and state-space checking</a>, <a href="model-baselines-and-evidence.html">model and evidence baselines</a>, and <a href="campus-mobility-engineering-case.html">the Campus Mobility case</a>.</p>
+<h2>2. A sequentially correct design with a race</h2>
+<p>Consider application code that first reads <code>count(active reservations for W1)</code> and inserts a new active row if the count is zero. Under isolated sequential use, it appears correct:</p>
+<pre><code class="language-text">A: count(W1) → 0
+A: insert(R1, W1, active)
+B: count(W1) → 1; reject
+</code></pre>
+<p>A possible concurrent ordering is:</p>
+<pre><code class="language-text">A: count(W1) → 0
+B: count(W1) → 0
+A: insert(R1, W1, active); commit
+B: insert(R2, W1, active); commit
+</code></pre>
+<p>The final state violates the invariant. A prior application-level check is insufficient unless it is protected by an isolation/locking/constraint mechanism that actually prevents the conflicting commit. Such a race is a <strong>time-of-check to time-of-use</strong> failure; it is not detected by running a snapshot audit after every individual development unit test unless that interleaving is tested.</p>
+<h2>3. Protect the invariant at a shared serialization point</h2>
+<p>For this local SQLite illustration, a <strong>partial unique index</strong> is a database-level enforcement mechanism:</p>
+<pre><code class="language-sql">CREATE TABLE reservations (
+  request_id TEXT PRIMARY KEY,
+  worker TEXT NOT NULL,
+  status TEXT NOT NULL
+);
+CREATE UNIQUE INDEX one_active_worker
+  ON reservations(worker) WHERE status='active';
+</code></pre>
+<p>Even if both clients read zero before either inserts, the database rejects the second conflicting active row. The <a href="code/transaction_exclusivity.py">self-contained Python demonstration</a> reproduces the two orders without relying on fragile thread timing:</p>
+<table>
+<thead>
+<tr>
+  <th>Deliberate interleaving</th>
+  <th>Without unique index</th>
+  <th>With unique index</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>A and B both inspect an empty allocation</td>
+  <td>Both see zero</td>
+  <td>Both see zero</td>
+</tr>
+<tr>
+  <td>A inserts active <code>R1</code></td>
+  <td>Accepted</td>
+  <td>Accepted</td>
+</tr>
+<tr>
+  <td>B inserts active <code>R2</code> for same worker</td>
+  <td>Accepted: <strong>invalid state</strong></td>
+  <td>Rejected with constraint error</td>
+</tr>
+<tr>
+  <td>Resulting active rows for <code>W1</code></td>
+  <td>2</td>
+  <td>1</td>
+</tr>
+</tbody>
+</table>
+<p>This demonstration uses two SQLite connections and a deterministic interleaving of reads and commits; it <strong>does not</strong> prove that all possible schedule, retry and crash interleavings are correct. The uniqueness condition also needs domain review: “one active reservation per worker” only holds if status changes and historical rows are correctly modeled. Retiring a reservation must update it atomically; otherwise a later valid request might be blocked or a premature status change might release a worker still in use.</p>
+<h2>4. Model the transaction boundary, not just a table</h2>
+<p>A real assignment operation may need to atomically coordinate multiple facts: reservation status, capacity accounting, a resource lease, a request idempotency key, and an outgoing command. A success response cannot be sent before durable commit if the client is supposed to rely on it. Where the database is the shared serialization point, a conceptual transaction is:</p>
+<ol>
+<li>Verify the request ID's prior disposition (deduplication).</li>
+<li>Validate worker eligibility and the current lease/state.</li>
+<li>Insert or update the allocation with a constraint enforced by the database.</li>
+<li>Record a durable event or outbox record in the same transaction if downstream work is needed.</li>
+<li>Commit. Only then acknowledge success to the caller.</li>
+</ol>
+<p>A transaction may fail because of a uniqueness violation, deadlock, serialization failure or timeout. The caller needs a bounded retry rule and an idempotent way to distinguish “the first attempt committed but its response was lost” from “the first attempt never committed.” Retrying blindly with a new request identity can create duplicate <em>logical</em> work despite preserving a particular table's uniqueness rule.</p>
+<h3>The CAP slogan is not a concurrency design</h3>
+<p>Distributed allocation brings additional failure modes: partitions, leader changes, duplicate messages, delayed acknowledgements and incompatible replicas. A local uniqueness index cannot enforce a global invariant across independent writable databases without an appropriate coordinating protocol or restrictive architecture. Claiming “exactly once” for arbitrary distributed effects is especially hazardous; more defensible systems specify an idempotent business operation, stable request identity, deduplicated effects and compensation where atomicity cannot span boundaries.</p>
+<h2>5. Preconditions, invariants and linearizability</h2>
+<p>Write an operation as a state transition \(s\xrightarrow{\mathrm{allocate}(r,w)}s'\). Its preconditions may include <code>request is accepted</code>, <code>worker eligible</code>, <code>worker unallocated</code>, and <code>request not already fulfilled</code>. The postconditions should specify the durable new allocation and no conflicting active assignment. An operation is <strong>linearizable</strong> if concurrent histories can be understood as though each operation took effect at one point between its invocation and response, while respecting real-time precedence. It is stronger than merely ending each test with the correct count.</p>
+<p>A database uniqueness constraint gives one important safety property. It does not alone establish a correct end-to-end reservation history, causal ordering of notifications, complete failure recovery, fairness or bounded response time. Event histories and retry semantics must be tested separately.</p>
+<h2>6. Test the right claims</h2>
+<p>A verification plan for the allocation service should include:</p>
+<table>
+<thead>
+<tr>
+  <th>Claim</th>
+  <th>Focused test</th>
+  <th>Remaining limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Two active allocations never share a worker</td>
+  <td>Commit-conflict test with distinct request IDs</td>
+  <td>Does not prove distributed global exclusion</td>
+</tr>
+<tr>
+  <td>Duplicate request does not make duplicate work</td>
+  <td>Retry same request after lost response</td>
+  <td>Does not prove remote side effect is idempotent</td>
+</tr>
+<tr>
+  <td>Cancel frees worker once</td>
+  <td>Crash/rollback tests around status transition</td>
+  <td>Late external commands may still execute</td>
+</tr>
+<tr>
+  <td>Accepted command is traceable</td>
+  <td>Outbox record and consumer idempotency checks</td>
+  <td>Does not prove physical dispatch acted correctly</td>
+</tr>
+<tr>
+  <td>Response satisfies timing requirement</td>
+  <td>Measured end-to-end latency under bounded load</td>
+  <td>Percentile claims need sampling and uncertainty analysis</td>
+</tr>
+</tbody>
+</table>
+<p>Configuration matters: log schema version, database engine, isolation setting, migration history, service software build, test workload and production topology. The synthetic results in this guide are <strong>not</strong> evidence about the Campus Mobility field system. See <a href="data/campus-verification-matrix.csv">the project verification matrix</a> for controlled example formatting.</p>
+<h2>7. Reproduce and falsify</h2>
+<p>From the repository root:</p>
+<pre><code class="language-sh">python3 SE/K/methods/code/transaction_exclusivity.py
+</code></pre>
+<p>The run creates temporary databases with and without the unique index, checks the same interleaving and destroys the temporary files. Expected output shows two rows without enforcement and one row with enforcement. Both cases use <code>request_id</code> as a primary key, so a repeated attempt to insert <code>R1</code> is rejected; note that this <strong>database duplicate-key rejection is not automatically a complete user-facing idempotency protocol</strong>.</p>
+<p><strong>Exercises:</strong> (1) Explain how a check-then-act race can pass all purely sequential tests. (2) If a reservation can be temporarily <code>held</code>, propose whether the partial index should protect <code>held</code> as well as <code>active</code>; state the system-specific rule. (3) Describe a failure after commit but before acknowledgement; show how a stable request key allows a safe response on retry. (4) Design a two-service failure scenario where a local database constraint cannot enforce global exclusivity. (5) Write a test that prevents a “cancel” event from applying to an allocation generation newer than the event's observed generation.</p>
+<h2>8. Further technical sources and curriculum</h2>
+<ul>
+<li><a href="https://www.sqlite.org/partialindex.html">SQLite partial indexes</a> and <a href="https://www.sqlite.org/lang_transaction.html">SQLite transaction semantics</a> — actual mechanisms used in the executable example. Other database products have different features and isolation behaviors.</li>
+<li><a href="https://www.postgresql.org/docs/current/transaction-iso.html">PostgreSQL documentation: transaction isolation</a> — practical differences among isolation levels, serialization and retry handling.</li>
+<li><a href="../B3/chapters/05-behavior-modeling-use-cases-activities-action.html">Book 3, chapter 5</a>; <a href="../B9/chapters/11-extend-the-modeling-language-and-automate-queries-validation-rules-m.html">Book 9, chapter 11</a>; courses EN.605.704, EN.645.631, and EN.645.764.</li>
+</ul>
+<p><strong>Scope:</strong> one controlled local persistence experiment. Not a verified distributed protocol, physical safety control, or blanket guarantee of concurrent correctness.</p>
+<footer class="reference-note"><a href="transactional-concurrency-and-assurance.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

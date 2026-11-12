@@ -17,6 +17,10 @@ EN.645-768 · Phase 2 · Twelve connected chapters and twelve fictional labs
 - **Week 2:** [Chapter — Close the system specification](chapters/02-close-the-system-specification.md) · [Lab](labs/lab-02-close-the-system-specification.md)
 - **Week 1:** [Chapter — Receive the concept baseline and plan design maturation](chapters/01-receive-the-concept-baseline-and-plan-design-maturation.md) · [Lab](labs/lab-01-receive-the-concept-baseline-and-plan-design-maturation.md)
 
+## NS-DI7.1 integrated design-and-integration case
+
+All twelve chapters use [one controlled design case](case/INDEX.html) with [requirements](case/requirements.csv), [functional allocations](case/allocation.csv), [interface contracts](case/interfaces.csv), [architecture](case/architecture.svg), [synthetic factorial experiment](case/doe-synthetic.csv), [evidence register](case/evidence-register.csv), and [Python calculation and consistency checker](tools/step03_book7_design_check.py). The example separates modeled timing feasibility from failed mission reliability, availability shortfalls, and stale/unexecuted evidence. **Operational release remains on HOLD.**
+
 ## Applied resources
 
 - [`datasets/`](datasets/) contains toy input and evidence sheets.

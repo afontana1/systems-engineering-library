@@ -1,0 +1,64 @@
+{
+  "case_id": "NS-DME16.1",
+  "decision": "HOLD_OPERATIONAL_QUALIFICATION",
+  "intended_use": "course-screening",
+  "mission_summary": [
+    {
+      "expected_fraction_accessible": 0.9015714286,
+      "expected_fraction_critical": 0.9784,
+      "expected_fraction_standard": 0.89804,
+      "incremental_cost_usd": 0,
+      "passes_coverage_screen": false,
+      "policy": "P0-status-quo",
+      "scenario_coverage": 0.62
+    },
+    {
+      "expected_fraction_accessible": 0.9748571429,
+      "expected_fraction_critical": 0.9784,
+      "expected_fraction_standard": 0.94438,
+      "incremental_cost_usd": 1500000,
+      "passes_coverage_screen": false,
+      "policy": "P1-fleet-only",
+      "scenario_coverage": 0.62
+    },
+    {
+      "expected_fraction_accessible": 0.9637142857,
+      "expected_fraction_critical": 1.0,
+      "expected_fraction_standard": 0.95726,
+      "incremental_cost_usd": 650000,
+      "passes_coverage_screen": false,
+      "policy": "P2-continuity",
+      "scenario_coverage": 0.8
+    },
+    {
+      "expected_fraction_accessible": 0.9977142857,
+      "expected_fraction_critical": 1.0,
+      "expected_fraction_standard": 0.97684,
+      "incremental_cost_usd": 2150000,
+      "passes_coverage_screen": false,
+      "policy": "P3-combined",
+      "scenario_coverage": 0.92
+    }
+  ],
+  "reasons": [
+    "No policy reaches the illustrative joint-scenario threshold",
+    "Synthetic evidence does not qualify an operational system",
+    "Supplier interface change requires affected evidence to be regenerated"
+  ],
+  "revision": "r1",
+  "trace_summary": {
+    "current_screening_evidence": 5,
+    "operationally_qualified": 0,
+    "requirements": 5
+  },
+  "twin_result": {
+    "age_minutes": 4,
+    "bias_corrected_observation": 0.63,
+    "kalman_gain": 0.3076923076923077,
+    "naive_uncorrected_soc": 0.6523076923076924,
+    "posterior_sigma": 0.016641005886756873,
+    "posterior_soc": 0.6646153846153846,
+    "status": "FRESH_BOUNDED_ESTIMATE",
+    "threshold_assessment": "ABOVE_ILLUSTRATIVE_THRESHOLD"
+  }
+}

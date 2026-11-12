@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="360" viewBox="0 0 1040 360" role="img" aria-labelledby="t d">
+<title id="t">Northstar NS-QA10.1 quantitative evidence chain</title><desc id="d">Requirement and decision on the left, controlled data and models in the middle, review outcomes and hold decision on the right. Each requires configuration and uncertainty checks.</desc>
+<rect width="1040" height="360" rx="12" fill="#f4f8f9"/>
+<g font-family="Arial,sans-serif" text-anchor="middle" font-size="17" fill="#153744">
+<rect x="20" y="102" width="202" height="148" rx="12" fill="#e4f0f2" stroke="#699da4" stroke-width="2"/><text x="121" y="148" font-weight="bold">Requirements</text><text x="121" y="179" font-size="14">Latency · energy</text><text x="121" y="202" font-size="14">reliability · evidence</text>
+<rect x="278" y="46" width="218" height="114" rx="12" fill="#ebf3fa" stroke="#799bbd" stroke-width="2"/><text x="387" y="89" font-weight="bold">Observed data</text><text x="387" y="117" font-size="14">DOE · censored life</text>
+<rect x="278" y="199" width="218" height="114" rx="12" fill="#ebf3fa" stroke="#799bbd" stroke-width="2"/><text x="387" y="242" font-weight="bold">Assumed models</text><text x="387" y="269" font-size="14">Covariance · scenario costs</text>
+<rect x="566" y="102" width="204" height="148" rx="12" fill="#e6f4ee" stroke="#6da58a" stroke-width="2"/><text x="668" y="150" font-weight="bold">Evidence audit</text><text x="668" y="180" font-size="14">Estimand · uncertainty</text><text x="668" y="203" font-size="14">baseline · applicability</text>
+<rect x="836" y="102" width="182" height="148" rx="12" fill="#fff0e7" stroke="#bb8160" stroke-width="2"/><text x="927" y="150" font-weight="bold">HOLD</text><text x="927" y="180" font-size="14">Unmet modeled limits</text><text x="927" y="203" font-size="14">Unexecuted evidence</text>
+</g><g stroke="#527e91" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M222 174 H258 V103 H278"/><path d="M222 174 H258 V256 H278"/><path d="M496 103 H528 V174 H566"/><path d="M496 256 H528 V174 H566"/><path d="M770 174 H836"/></g><g fill="#527e91"><path d="M278 103 l-10 -7 v14 z"/><path d="M278 256 l-10 -7 v14 z"/><path d="M566 174 l-10 -7 v14 z"/><path d="M836 174 l-10 -7 v14 z"/></g>
+<text x="520" y="340" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#42616f">A reproducible calculation is not sufficient evidence of operational compliance.</text>
+</svg>

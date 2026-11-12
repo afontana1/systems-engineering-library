@@ -119,3 +119,43 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [06 — Previous chapter](06-design-interoperable-hla-fmi-federations-lvc-interfaces-and-composab.md) · [08 — Next chapter](08-model-natural-and-man-made-environments-as-dynamic-correlated-scenar.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-CPS12.1 case: parameter experiments and defensible inference
+
+### An experiment is a mapping, not an attractive plot
+
+The independent variables are input settings (coolant flow, ambient, mass, rolling resistance and grade multiplier); dependent outcomes include energy used, end-of-duty state of charge, thermal maximum and trip time. The governing functions are held fixed per run. Experimental questions must identify *a comparison*, its scenario scope, and uncertainty source before data collection. The [experiment-results.csv](../case/experiment-results.csv) contains 16 synthetic parameter draws crossed with five controlled scenarios: 80 records, with the **same draw index** across scenarios to support paired comparisons. The [source](../tools/step03_book12_coupled_vehicle.py) uses Python's local seeded PRNG; a draw is a hypothetical engineering parameter sample, not a replication of field observations.
+
+Let \(Y_{i,H}\) and \(Y_{i,L}\) be energy use for hot high-flow and hot low-flow under the same synthetic parameter draw \(i\). The paired contrast is \(D_i=Y_{i,H}-Y_{i,L}\); its estimate \(\bar D=n^{-1}\sum_iD_i\) removes shared between-draw variation. In the controlled output the mean contrast is about **+0.98 kWh** (more pumping energy) while the mean maximum-temperature contrast is about **−0.90°C**. A negative thermal contrast and positive energy contrast reveal a genuine **trade-off within the specified model**, not an unqualified preference for one strategy. For a formal confidence interval over an actual sampled population, validate the sampling model and independence assumptions first.
+
+### Distinguish parameter screening from probabilistic reliability
+
+Samples are independent uniform draws of nominally bounded engineering quantities: \(m_c\pm120\) kg, \(C_dA\pm0.2\) m², and \(C_{rr}\sim U(0.008,0.016)\). These are **elicited teaching ranges**, not calibrated probability distributions. If all 16 samples pass the synthetic reserve screen, saying “100% reliable” is invalid. Under a hypothetical Bernoulli model, zero failures in 16 independent trials would still have one-sided 95% upper failure probability \(1-0.05^{1/16}\approx17.1\%\), and the independent-trial assumption is itself unverified for this constructed sample. The logical statement is *16/16 of the bounded synthetic draws passed the screen*, no more.
+
+### Model experiment design and causal identification
+
+A basic factorial test changes both cooling flow (low/high) and ambient (mild/hot). The two-factor interaction is
+
+\[
+\Delta_{AB}=[Y(A_+,B_+)-Y(A_-,B_+)]-[Y(A_+,B_-)-Y(A_-,B_-)],
+\]
+
+which asks whether the effect of cooling depends on weather. Our published design includes mild high-flow but not mild low-flow; therefore it **cannot** estimate the complete low/high-by-mild/hot interaction from existing rows. Add a mild low-flow scenario, rerun and label the new design revision. Do not infer interaction from three points as if the missing fourth existed. More sophisticated methods (Latin hypercube, quasi-Monte Carlo, variance-based Sobol indices, metamodels) require independently evaluated design validity and a larger/fitter sample than 16 toy draws.
+
+### Reproduction protocol
+
+The controlled execution is `python SE/K/B12/tools/step03_book12_coupled_vehicle.py --write`. Before running, record the JSON revision, program revision, Python version, platform and whether input CSV files have been modified. Regenerating the experiment yields the same row order and numeric precision under this environment. Compute a checksum or compare bytewise with the pinned outputs as a regression. A repeated deterministic result verifies **reproducibility**, not calibration, validation or causation.
+
+### An integrated causal challenge
+
+The mild scenario starts at the same 31°C pack temperature as the hot scenario; a realistic hot-soak distribution could change peak temperatures. Scenario grade is applied to a periodic road profile with net uphill elevation every lap. In reality a round-trip campus route must return to its initial elevation, so this simplified periodic profile is not a topographically closed circuit. That is a **structural limitation**: the exercise studies force and parameter sensitivity, not realistic battery range on a geographical loop. A corrected route with zero net elevation would change absolute energy use even if the code still conserved energy numerically.
+
+### Exercises and answers
+
+**A.** In 16 synthetic samples, every reserve indicator is 1. State the supported claim. **Answer.** All 16 *configured, model-generated* outcomes meet the algebraic reserve threshold; no statement about real-world failure probability or all unmodeled operating conditions is warranted.
+
+**B.** Why pair the 16 high/low cooling results by sample ID? **Answer.** The same mass, drag and rolling parameters cancel in within-pair contrasts, reducing nuisance variation. If each setting had a different sampled population, the contrast would confound cooling with parameter mix.
+
+**C.** What would make the screening result invalid despite exact repeatability? **Answer.** Incorrect grade topology, wrong battery resistance, omitted hot soak, or a shifted vehicle mission all threaten applicability. Replication cannot fix a wrong abstraction.
+
+**Deliverable:** a preregistered comparison statement, paired-difference calculation, negative scenario, explicit missing factorial cell, and bounded decision claim with an uncertainty classification.

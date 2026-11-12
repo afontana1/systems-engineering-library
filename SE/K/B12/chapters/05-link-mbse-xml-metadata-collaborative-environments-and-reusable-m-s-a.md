@@ -113,3 +113,54 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [04 — Previous chapter](04-couple-electrical-electromechanical-thermal-and-fluid-domains.md) · [06 — Next chapter](06-design-interoperable-hla-fmi-federations-lvc-interfaces-and-composab.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-CPS12.1 case: governed MBSE and simulation assets
+
+### Separate engineering meaning, file syntax and execution semantics
+
+Model-based systems engineering (MBSE) can express stakeholder needs, architecture blocks, allocation and interface requirements; a numerical simulation specifies state derivatives and step semantics. Exchanging XML or JSON **syntax** between tools does not prove those models share the same **meaning**. The shuttle's `battery_usable_kwh=145` might denote beginning-of-life usable capacity, aged usable capacity or nominal rating. A receiving model that interprets it as joules, or as total nameplate capacity, can produce plausible-looking but incorrect results. A model-asset record must therefore declare at least identifier, version, author/owner, intended use, source provenance, variable definition, unit, validity range, execution assumptions, review status and dependencies.
+
+The controlled [case model JSON](../case/model-inputs.json) is deliberately small enough for a human reviewer to inspect. It fixes the route, physical assumptions, controller gains, sampling ranges and synthetic requirements. The implementation refuses a nonpositive capacity, duplicate route segment identifier, invalid efficiency, impossible scenario flow or out-of-range integration step. **Schema/semantic validation** catches some incorrect inputs before an expensive run; it does not replace calibrated data or an independent model review.
+
+### A workable versioned asset contract
+
+For each source item assign an immutable logical identifier and a concrete revision:
+
+| Asset | Controlled identifier | Consumer | Required invariant |
+|---|---|---|---|
+| Shuttle plant parameters | `NS-CPS12.1/plant/1.0` | Python integration | SI units, declared ranges, known initialization |
+| Route scenario | `NS-CPS12.1/route/1.0` | force/power model | sequence length positive; grade as fraction |
+| Requirement `R-THERM` | `NS-CPS12.1/req/thermal/1.0` | result evaluator | maximum °C and declared time horizon |
+| Result set | `NS-CPS12.1/results/1.0` | reviewer | input revision, seed, code revision, units |
+
+A revision to `cooling_ua_per_flow_w_per_k_per_kgps` changes model physics and *must* invalidate derived experiment CSV and any previously issued case decision. This is a dependency graph, not merely a filename convention. The source JSON is readable by humans, but real projects should additionally record content hashes and tool/container versions. The [credibility register](../case/credibility-register.csv) records the validity status of each important dependency.
+
+### Derive a reproducible digital thread
+
+Suppose a thermal engineer revises \(UA(\dot m)=35+900\dot m\) to \(UA(\dot m)=35+650\dot m\) W/K. At 0.30 kg/s the modeled transfer coefficient changes from 305 to 230 W/K, **24.6% lower**, so all hot-flow temperature claims are potentially stale. A correct change process identifies the parameter ID, affected equations, requirement R-THERM, test evidence, generated results and decision memo; it then regenerates those results. Merely changing a diagram label while leaving the CSV untouched breaks the evidence chain.
+
+The controlled tool can reconstruct experiment results deterministically with `python SE/K/B12/tools/step03_book12_coupled_vehicle.py --write`. Its use of a fixed pseudorandom seed is sufficient for a **teaching reproduction** on the declared Python runtime. Full formal provenance additionally needs a source commit ID, hashes, platform/solver build, test run and signed review. A notebook screenshot and a model simulation export are not independently reproducible evidence unless the original data and run controls remain available.
+
+### From structured metadata to collaborative review
+
+A minimal interface record can be represented in JSON (or translated to XML), for example:
+
+```json
+{"name":"pack_temp","type":"Float64","unit":"degC","causality":"output",
+ "source":"thermal_plant","sample_period_s":0.5,"validity":[-20,55],
+ "owner":"thermal_model_owner","version":"1.0"}
+```
+
+This is *illustrative metadata*, not FMI `modelDescription.xml`, a SysML v2 repository format or a conforming XML schema. The essential properties are **unit, causal ownership, timing and range**; using the word “standard” without conforming to its schema would create a dangerous interoperability claim.
+
+Collaborative teams need a review rule: authors may propose parameter changes; domain owners check physical meaning; integrators check execution and test breakage; decision owners accept intended use. Do not share a mutable “latest-model.json” without a revision record, because readers cannot tell which results belong to which assumptions.
+
+### Exercise and worked answer
+
+**A.** A dataset reports battery capacity as `145000` with no unit. Can it be accepted? **Solution.** No: 145,000 Wh would be 145 kWh, whereas 145,000 kWh is three orders of magnitude different; both are syntactically valid numbers. An automated parser must reject missing units or require a controlled conversion, and a reviewer must confirm “usable” versus “nominal” semantics.
+
+**B.** A researcher changes the warning threshold from 44 to 46°C but not the physical limit. Which downstream artifacts change? **Solution.** Any warning event/alert outputs, requirements trace, potential control-mode transition tests, and final risk memo. If the current code only reports max temperature, its absence of a warning-control implementation must remain explicit; do not imply a controller update occurred.
+
+**C.** A file imports successfully into another tool. Is reuse verified? **Solution.** File parse success checks representation compatibility only; check time semantics, units, physical conservation, supported input range and benchmark outputs at controlled reference points before claiming equivalence.
+
+**Deliverable:** a model-asset catalog with owners/versions and a requirement-to-equation-to-test trace. Include a deliberately malformed parameter file and show that validation rejects it; attach the [reference simulator](../tools/step03_book12_coupled_vehicle.py).

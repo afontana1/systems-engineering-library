@@ -86,3 +86,24 @@ This chapter builds from [previous chapter](07-engineer-cloud-service-distribute
 - [Deep workshop — Performance Budgets, Queueing Tails, and Quality Attributes](../practice/slo.md)
 - [Corresponding independent laboratory](../practice/lab-slo.md)
 - [Interactive workbench](../practice/WORKBENCH.html)
+
+
+## Step 03 integrated reference: performance and security share an end-to-end budget
+
+### Use an explicit critical path
+
+Request latency encompasses network, authentication, allocation and acknowledgment. In this case the fixed 70 + 45 + 55 ms assumption leaves only 330 ms for variable dispatch time under the SWS-01 500 ms threshold. Encryption, authentication checks, logging and database commit are not free add-ons. Their cost must be measured under representative load, but skipping them to meet an artificially narrow benchmark would invalidate the security claim.
+
+A simple capacity model illustrates a structural conflict: increasing request arrival rate from 8/s to 10/s with unchanged 18/s service capacity increases the queueing p95 proxy from approximately 299.57 ms to 374.47 ms *before* the fixed 170 ms overhead. End-to-end proxies therefore shift from 469.57 ms to 544.47 ms, crossing the requirement boundary. The correct response is to revisit capacity, admission control and workload assumptions—not to report the favorable nominal-load result as “peak compliant.”
+
+### Threat models are obligation models
+
+For `CreateReservation`, distinguish an authenticated operator from a request possessing an old bearer token, a replayed idempotency key, and a malicious caller creating many unique tokens. Token reuse must not let a caller read another principal's reservation result. The server binds the token to requester identity and command parameters, rejects incompatible reuse, and enforces expiration without admitting duplicates. Rate limits must account for trusted operating modes and safety-critical fallback. Logging should record a correlation ID and decision reason without leaking unnecessary passenger data.
+
+Instrumentation across services should preserve request identity, service name and error category with versioned naming conventions. OpenTelemetry offers a useful vocabulary, but instrumentation that changes during an experiment can change latency and event denominators. A trace can show where time was spent; it does not prove missing spans never occurred. An outside-in service-level indicator is still needed.
+
+### Compare two security architectures
+
+Option A calls a centralized authorization service for every action; B validates short-lived delegated authorization locally with a revocation strategy. A may simplify policy updates but add network dependency; B may reduce latency but introduce stale policy and key-rotation obligations. The choice is a trade under a declared threat model. Neither option is inherently “secure” without key management, misuse tests, recovery procedures and operational measures.
+
+**Exercise.** A load test bypasses authorization to measure a 420 ms p95 and claims compliance. **Answer.** The test does not represent the production path; restore security controls, report the test boundary and rerun. Quantify performance only for the implementation that actually makes the intended safety and security decisions.

@@ -58,3 +58,11 @@ These sources establish authoritative terminology or methods in their own publis
 - [Guide to the Systems Engineering Body of Knowledge](https://sebokwiki.org/wiki/Main_Page) — Broad terminology and disciplinary context.
 
 **Editorial scope:** Examples and numerical values are illustrative. This is a reconstructed teaching reference, not a peer-reviewed compliance finding. Verify primary-source requirements and current publication versions before use on a regulated or high-consequence project.
+
+## Step 02 deeper treatment: separate process changes from common-cause variation
+
+A faster average is not necessarily an improved, stable process. Start by choosing the unit of analysis, a sampling interval and an operationally meaningful response measure. To illustrate, suppose a hypothetical review service measures ten consecutive weekly closure counts: 8, 11, 9, 12, 10, 9, 11, 10, 10 and 10. Their mean is 10 cases/week, but that number does not describe arrival rate, work size, reopened defects or queued inventory. A management dashboard showing “10 completed” cannot justify a conclusion that the backlog is stable unless arrivals and departures share the same boundary and time window.
+
+A naive before/after comparison is vulnerable to regression to the mean and changing case mix. Prefer a documented intervention date, predeclared response measure, run-chart or suitable statistical process-control method, and evidence about special causes. Control limits are estimated from process data according to chart assumptions; they are **not** management targets or requirement limits. An experiment might split standardized work into smaller batches, then compare blocked time, defect escapes, and accepted throughput rather than only counting tickets.
+
+**Exercise:** If 12 new cases arrive each week while 10 are accepted, calculate the six-week backlog increase: \((12-10)6=12\) cases, assuming no cancellations or rework. Identify a possible unintended consequence if the team maximizes closure count by skipping independent review. See [NIST/SEMATECH engineering statistics](https://www.itl.nist.gov/div898/handbook/) for design and statistical process techniques.

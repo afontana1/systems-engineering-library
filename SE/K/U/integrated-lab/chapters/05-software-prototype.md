@@ -36,3 +36,15 @@ No. A digest detects differences only when a trusted comparison value exists. It
 </details>
 
 **Gate evidence:** passing unit tests, an invariant argument, a negative test that detects a defect, and a written limitation register.
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Verify the scheduler beyond the favorable fixture.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+A passing fixed fixture is a test of the actual scheduling implementation, but it should be accompanied by adversarial properties. For each modeled vehicle, completed jobs must occupy disjoint intervals; a completed trip must start no earlier than the request arrival and finish no later than the time horizon. The bridge independently scans the saved assignment ledger rather than trusting the runner's `nonoverlap` flag.
+
+**Worked counterexample:** Two assignments on `V01` occupying `[0,12)` and `[8,20)` overlap over `[8,12)`. The second assignment cannot be accepted as a valid single-resource schedule. The U2 tests inject precisely such a contradiction and expect the independent audit to fail.
+
+**Exercise and solution:** If the scheduler silently drops a request to preserve nonoverlap, is the system “safe”? No: absence of overlap is necessary under this toy scheduler rule but is not sufficient for service completeness or transportation safety. Report completed, unserved, duplicate, and lost totals together, and separately test for starvation, fairness, invalid trips, and race conditions omitted by the prototype.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

@@ -127,3 +127,19 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [09 — Previous chapter](09-propagate-uncertainty-with-analytic-monte-carlo-simulation-and-sensi.md) · [11 — Next chapter](11-update-lifecycle-evidence-and-decide-among-upgrade-replacement-retir.md) · [Book index](../README.md)
+
+## Step 03 integrated quantitative case: requirements and technical margin under uncertainty
+
+A technical margin is defined relative to a **specified statistic and condition**, not simply any observed number that happens to look favorable. The [QA-B10 requirements](../case/requirements.csv) include latency p95, energy p95, and 50-hour module reliability. Each needs its own estimator, uncertainty assessment, population boundary, and evidence rule.
+
+### Compare like with like
+
+For energy, the correlated normal model predicts a 95th-percentile value of 29.1299 kWh. With a 29 kWh limit, modeled tail margin is \(29-29.1299=-0.1299\) kWh. Its nominal mean-based “margin” would be \(29-25=4\) kWh, but the mean is the **wrong requirement statistic**. These are not contradictory calculations; they answer different questions. Likewise, the optimized-cold controller has a 490 ms sample mean against a 500 ms **p95** limit. Calling that 10 ms of certified margin substitutes a mean for the requirement.
+
+A margin allocation must distinguish measurement uncertainty, parameter uncertainty, model discrepancy, degradation, and true reserve. Suppose a 500 ms end-to-end deadline allocates 400 ms to controller processing and 100 ms to network and actuator delay. A 390 ms controller mean does not prove the whole chain fits; the components may have correlated peaks and different operating modes. Worst-case summation or a joint probability model must be chosen based on the required claim.
+
+### Quantify evidence sufficiency and design actions
+
+A deterministic failed margin can justify redesign or constrained operations, but it does not by itself supply a confidence bound. Conversely, a positive modeled margin may have wide parameter uncertainty. `QA-03` also fails at the exponential life-test point estimate 0.93966 against 0.95, with large sampling uncertainty. A responsible decision records: currently modeled status, confidence/precision limitations, configuration of evidence, and the next test needed to reduce uncertainty.
+
+**Exercise and answer.** Why might the team prefer a cold-only operational limit to a component redesign? If a defined cold operating envelope can be enforced and validated, constrained operations may reduce risk sooner and more cheaply. But it changes the service claim and requires stakeholder authorization; it cannot quietly be described as unrestricted compliance.

@@ -32,3 +32,15 @@ Not when the completion threshold is truly a hard feasibility constraint. Score 
 </details>
 
 **Gate evidence:** completed trade sheet, sensitivity plot or table, feasibility logic, and an independently reviewable recommendation.
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Trade studies with noninterchangeable scenarios.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+The v11 degradation uses **one modeled vehicle for the entire horizon**; v12 `OUTAGE` uses two configured vehicles but blocks vehicle V01 through minute 70. They happen to complete **six of twelve** requests in the current fixture, yet their causal mechanisms differ. Matching output counts does not validate equivalence of configurations or physical policies.
+
+**Analysis:** The nominal completion fraction is `12/12 = 1.00`. Both tested degraded scenarios yield `6/12 = 0.50`; the absolute change is `−0.50`, a **50 percentage-point reduction**, not a 50% confidence interval. Their timing curves, fault windows, and resources must be compared independently before using one as a surrogate for the other.
+
+**Exercise and solution:** A manager claims a spare vehicle restores outage robustness because “two vehicles” appears in the v12 configuration. Reject the argument: one vehicle is unavailable for nearly the entire 80-minute horizon. Recompute *effective capacity*, not configured fleet count, and add an explicit operator escalation and permission gate before any proposed dispatch policy.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

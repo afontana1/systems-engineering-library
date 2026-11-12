@@ -37,6 +37,22 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 
+## Dominance is not a final preference ordering
+
+For three minimization objectives—cost, energy, and worst-case delay—design \(x\) dominates \(y\) only if \(f_j(x)\le f_j(y)\) for **every** objective and strictly improves at least one. A hypothetical design B costs $135k, uses 58 kWh, and has worst delay 7.5 s; design F costs $155k, uses 60 kWh, and has worst delay 8.1 s. B dominates F: F can be excluded *under these objectives*. But A with lower cost and higher energy is not necessarily dominated.
+
+The Pareto set is a shortlist of *nondominated observed candidates*, not an automatic winner. Engineering constraints, uncertainty, stakeholder weights, missing objectives, and decision authority remain. The [six-design Pareto and robustness example](../methods/pareto-and-robust-design.md) calculates the full frontier and demonstrates what happens when a worst-delay constraint removes otherwise attractive alternatives.
+
+
+
+## Step 02 review studio — avoid inventing a universal “best” alternative
+
+Consider three feasible designs with (cost units, mean delay minutes): A=(100,5), B=(110,4), and C=(120,6). With lower cost and lower delay preferred, C is Pareto-dominated by A: C is both more expensive and slower. A and B are nondominated; the choice between them depends on how the decision maker values one minute of delay versus ten cost units.
+
+**Solved exercise:** suppose the decision maker will pay at most 8 cost units to reduce delay by one minute, all else equal. Does B's one-minute improvement justify its 10-unit premium? **No under that linear, bounded willingness-to-pay rule.** A is preferred. If the value of time is 12 units per minute, B becomes preferable, assuming other constraints and uncertainties are equal.
+
+**Limitation:** Pareto filtering requires comparable consequence definitions and monotonic preferences. It removes demonstrably inferior options, but does not choose among nondominated alternatives or justify ignoring safety gates, unmodeled attributes, and decision uncertainty.
+
 ## Follow the knowledge
 
 **Related concepts**

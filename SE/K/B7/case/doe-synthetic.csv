@@ -1,0 +1,13 @@
+gateway,dispatch,replicate,response_ms
+standard,serial,1,487
+standard,serial,2,489
+standard,serial,3,488
+fast,serial,1,470
+fast,serial,2,472
+fast,serial,3,474
+standard,parallel,1,450
+standard,parallel,2,451
+standard,parallel,3,452
+fast,parallel,1,426
+fast,parallel,2,428
+fast,parallel,3,430

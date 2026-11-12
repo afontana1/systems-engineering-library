@@ -46,6 +46,24 @@ These sources establish authoritative terminology or methods in their own publis
 - [NIST · SP 800-160 Vol. 1 Rev. 1, Engineering Trustworthy Secure Systems (2022)](https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final) — System-level security and trustworthiness engineering.
 - [NASA · Distinctions between product verification and validation](https://www.nasa.gov/reference/2-4-distinctions-between-product-verification-and-product-validation/) — Separate conformity to specifications from fitness for intended use.
 
+## Phase 3 technical reference: From a design rule to independent delivery evidence
+
+“No two active reservations share a worker” is a testable engineering claim. A useful evidence chain includes a named invariant, an implementation mechanism such as an atomic unique allocation, a negative test fixture, a concurrency test, and recorded software/configuration revisions. A passing Python audit of one snapshot proves only that the **represented state** satisfied those rules at that instant; it does not establish race freedom, event-order correctness or fault recovery. See [the OCL and executable-contract example](../methods/uml-ocl-software-contracts.md) for deliberately broken data and the distinction between logical policy and deployed enforcement.
+
+## Phase 5 technical reading: Turn software contracts into failure-aware tests
+
+A static UML/OCL-style uniqueness rule is only a specification unless the deployment enforces it under the intended concurrency and persistence conditions. In a two-client interleaving both clients observe an unallocated worker; without atomic enforcement both can insert active reservations. With a partial unique index one insert is rejected, though retry, acknowledgement loss and remote side effects still require explicit design. The [concurrency and assurance guide](../methods/transactional-concurrency-and-assurance.md) provides executable contradictory and corrected cases plus a test matrix for idempotency, failure recovery and versioned evidence.
+
+
+
+## Step 02 review studio — a passing pipeline with stale evidence
+
+Continuous integration certifies that a particular pipeline ran a particular set of checks against a particular artifact. It does not automatically establish that requirements were appropriate, the software is safe, or tests represented the target deployment. An evidence chain should identify source revision, dependency versions, build configuration, test data, environment, approval, and deployed artifact digest.
+
+**Solved exercise:** the build for NS-B2 passes 1,000 unit tests, but the interface contract test suite ran only on NS-B1. Can the team claim interface conformance for NS-B2? **No.** The test results are tied to an older configuration. A documented equivalence argument may justify reuse if the changed elements are demonstrably irrelevant, but the passing unit-test count does not resolve applicability by itself.
+
+**Design response:** gate a release on versioned contract tests, configuration-specific verification, SBOM/dependency checks where relevant, and independent review for high-consequence behavior. Deployment and rollback mechanisms also require testing: “can roll back” is not a guarantee that state migrations are reversible. Preserve negative findings and exceptions instead of rewriting a clean report after a failure.
+
 ## Follow the knowledge
 
 **Related concepts**

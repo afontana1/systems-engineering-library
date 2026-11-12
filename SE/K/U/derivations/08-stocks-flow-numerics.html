@@ -19,4 +19,13 @@
 <p>No. The convergence comparison addresses a numerical approximation to the chosen differential equation. Whether the equation captures actual arrivals, closures and feedback must be established separately through data and model validation.</p>
 <p>&lt;/details&gt;</p>
 <p><strong>Transfer artifact:</strong> Stock units, flow equations, source of each rate, conservation checks, step-size study and comparison to held-out time series. See <a href="../../encyclopedia/stocks-flows-feedback.html">stocks, flows and feedback</a>.</p>
+
+<!-- STEP04-FLAGSHIP-U1-START -->
+<section class="ns-u4-extension" aria-label="NS-U4.1 flagship technical extension"><h3>D08 extension · Discrete stability and the nonnegative-state warning</h3>
+<p>For $\dot B=u-kB$ with $u=4$ requests/min and $k=.4$ per minute, equilibrium is $B^*=10$ requests. Explicit Euler at step $h$ gives $B_{n+1}=B_n+h(u-kB_n)$, so error $e_{n+1}=(1-hk)e_n$. Numerical stability requires $|1-hk|&lt;1$, hence $0&lt;h&lt;5$ min. Starting at $B_0=20$, $h=2$ gives $B_1=12$, $B_2=10.4$; $h=6$ gives $B_1=-4$, an impossible backlog due solely to poor numerical discretization.</p>
+<p><strong>Exercise and solution.</strong> At $h=2.5$ minutes, the multiplier is zero and this linear model lands at equilibrium in one step. That numerical property does not imply a physical queue can instantaneously eliminate its backlog. <a href="../flagship-integration/code/ns_u_case.py">Model</a>.</p>
+</section>
+<script id="ns-u4-inline-math">window.MathJax=window.MathJax||{};window.MathJax.tex=window.MathJax.tex||{};window.MathJax.tex.inlineMath=[["$","$"]];</script>
+<style id="ns-u4-responsive">main{min-width:0;max-width:100%;overflow-wrap:break-word}main :is(table,pre){max-width:100%;overflow-x:auto}main :is(p,li):has(mjx-container){overflow-x:auto}main mjx-container{max-width:100%;overflow-x:auto}.ns-u4-extension{min-width:0;max-width:100%;border-top:2px solid #9acac9;margin-top:38px;padding-top:16px}.ns-u4-extension a{overflow-wrap:anywhere}</style>
+<!-- STEP04-FLAGSHIP-U1-END -->
 </main></body></html>

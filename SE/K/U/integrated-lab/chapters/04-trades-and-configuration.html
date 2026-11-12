@@ -23,4 +23,11 @@
 <p>Not when the completion threshold is truly a hard feasibility constraint. Score aggregation cannot override a declared hard constraint. A different solution would require changing the requirement with authority and documentation, not quietly raising its cost weight.</p>
 <p>&lt;/details&gt;</p>
 <p><strong>Gate evidence:</strong> completed trade sheet, sensitivity plot or table, feasibility logic, and an independently reviewable recommendation.</p>
+<section class="u2-extension" id="u2-cross-lab"><h2>U2 cross-lab credibility challenge — NS-U2.1</h2>
+<p><strong>Focus: Trade studies with noninterchangeable scenarios.</strong> This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.</p>
+<p>The v11 degradation uses <strong>one modeled vehicle for the entire horizon</strong>; v12 <code>OUTAGE</code> uses two configured vehicles but blocks vehicle V01 through minute 70. They happen to complete <strong>six of twelve</strong> requests in the current fixture, yet their causal mechanisms differ. Matching output counts does not validate equivalence of configurations or physical policies.</p>
+<p><strong>Analysis:</strong> The nominal completion fraction is <code>12/12 = 1.00</code>. Both tested degraded scenarios yield <code>6/12 = 0.50</code>; the absolute change is <code>−0.50</code>, a <strong>50 percentage-point reduction</strong>, not a 50% confidence interval. Their timing curves, fault windows, and resources must be compared independently before using one as a surrogate for the other.</p>
+<p><strong>Exercise and solution:</strong> A manager claims a spare vehicle restores outage robustness because “two vehicles” appears in the v12 configuration. Reject the argument: one vehicle is unavailable for nearly the entire 80-minute horizon. Recompute <em>effective capacity</em>, not configured fleet count, and add an explicit operator escalation and permission gate before any proposed dispatch policy.</p>
+<p><strong>Reproduce:</strong> <a href="../../lab-credibility-u2/README.md">Cross-lab lab guide</a> · <a href="../../lab-credibility-u2/data/gates.json">Evidence gates</a> · <a href="../../lab-credibility-u2/outputs/u2-cross-lab-results.json">Computed results</a>.</p>
+</section>
 </main></body></html>

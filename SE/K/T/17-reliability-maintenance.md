@@ -65,3 +65,18 @@ See [Safety engineering](13-safety-constraints.md), [statistical evidence](06-in
 ## Guided laboratory
 
 [Open the corresponding case-based lab](labs/17-reliability-maintenance-workshop.md)
+
+
+<!-- STEP04-T1-START -->
+
+## Step 04 T1 — Evidence-driven correction and worked transfer
+
+### T1 audit finding: a redundant channel is not a maintainable mission
+
+The T1 case's common-cause-adjusted success probability, 96.41315%, concerns one fixed synthetic mission. It is not the same quantity as steady-state availability \(A=\mathrm{MTBF}/(\mathrm{MTBF}+\mathrm{MTTR})\) under a simple alternating-up/down repair model. For an illustrative component with MTBF 500 hours and MTTR 5 hours, \(A=500/505\approx0.990099\). Its ten-hour exponential **survival reliability** is \(R(10)=e^{-10/500}\approx0.980199\), assuming constant hazard and no repair during that mission.
+
+The three numbers answer different questions: probability of no mission failure, fraction of time available when repair is possible, and success of a mission with shared dependencies. A repair policy can improve availability while leaving a correlated firmware failure untouched. To evaluate an emergency fleet, model technician bottlenecks, spares, depot-wide power loss, and authorized restart separately.
+
+**Practice and explained solution.** Halving MTTR from five to 2.5 hours raises simple stationary availability to \(500/502.5\approx0.995025\); it does not change the original exponential ten-hour no-failure reliability under its constant-failure-rate assumption. Do not substitute the first figure for the second. [Compare methods in the T1 lab](labs/T1-INTEGRATED-CASE.md).
+
+<!-- STEP04-T1-END -->

@@ -1,0 +1,5 @@
+scenario,policy,input_count,released,held,reworked_cases,rework_loops,false_alarms,lead_mean_all_days,lead_median_all_days,lead_p90_all_days,lead_mean_released_days,queue_time_total_days,time_last_case_day,critical_released_without_evidence
+compressed-arrivals-65pct,baseline,96,92,4,29,39,2,208.0803,195.4122,371.3281,199.5595,18447.4636,478.4773,0
+compressed-arrivals-65pct,reviewer-only,96,94,2,24,31,1,109.7789,101.0684,210.3327,106.9326,9034.6518,306.1795,0
+compressed-arrivals-65pct,evidence-readiness,96,96,0,13,14,10,35.2614,34.9628,52.2651,35.2614,2117.7755,154.7297,0
+compressed-arrivals-65pct,combined-guardrails,96,96,0,14,15,3,21.2886,20.7252,29.6042,21.2886,772.1188,133.1532,0

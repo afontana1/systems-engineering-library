@@ -162,3 +162,25 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [02 — Previous chapter](02-define-dynamic-behavior-with-reference-modes-evidence-and-time-horiz.md) · [04 — Next chapter](04-use-archetypes-and-mental-models-to-generate-competing-intervention-.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-FB13.1 case: feedback, conservation, and policy learning — Week 3
+
+*Integrated chapter: Chapter 03 — Build causal-loop diagrams as testable feedback hypotheses. Northstar NS-FB13.1 is a transparent teaching baseline; the following methods are not field-validated.*
+
+### Causal links require signed, time-indexed claims
+
+Write a causal-loop diagram with variable names that can vary, not vague nouns such as “problem” or “success.” A positive arrow means *if the source increases, the destination tends to increase relative to the other inputs, after any lag*; a negative arrow means the destination tends to decrease. It does not mean a morally good or bad relationship. For the hypothetical demand loop: `trust (+) → requests (+) → backlog (+) → abandonment (−) → trust`. One negative link makes this a **balancing loop**: falling trust can suppress demand and improve the measured queue even while public service is worse. Calling that improvement “efficiency” hides a distributional loss.
+
+A second balancing structure is `backlog (+) → perceived backlog (+) → surge (+) → daily capacity (−) → backlog`. A plausible *reinforcing side effect* has two negative arrows: `surge (+) → breakdowns (+) → unavailable vehicles (−) → active vehicles (+) → capacity (−) → backlog (+) → perceived backlog (+) → surge`. Under the assumed equations, overtime may suppress backlogs at first while damaging later availability. This does **not** prove real vehicles behave that way; it identifies a wear hypothesis that deserves a fleet-data review. Sign arithmetic for a closed loop counts the number of negative links: even means reinforcing, odd means balancing. Delay annotations are separate from polarity.
+
+### From a picture to a falsifiable statement
+
+The Python model makes the proposed arrow `unavailable → available capacity` structural: \(A=14-U\), and \(C=A\times93\times(1+\mathrm{surge})\) requests/day. Holding surge constant, \(\partial C/\partial U=-93(1+\mathrm{surge})\) requests/(vehicle·day), a mathematically **negative** causal derivative. This derivative is a property of the formula, not independently observed causation. The diagram also includes `abandonment → trust`, but trust is an invented smoothed response; data must establish whether trust is measured, whether a time lag exists, and whether other communications determine it.
+
+**Worked exercise.** Consider `backlog → surge` positive, `surge → breakdown rate` positive, `breakdown rate → unavailable fleet` positive, `unavailable fleet → active capacity` negative, and `active capacity → backlog` negative. Determine the loop sign. **Solution:** two negative arrows yield an even sign product, so the pathway is reinforcing. This conclusion describes the *hypothesized topology*; a zero breakdown sensitivity would disable the pathway even though its diagram still displays positive arrows. A diagram with no causal tests cannot determine its strength.
+
+**Practice extension:** Redraw the trust-demand-backlog loop with an explicit rejected-request stock; explain whether a smaller reported backlog could coexist with reduced equitable access.
+
+### Reproduce the evidence and challenge the result
+
+The [NS-FB13.1 case dossier](../case/INDEX.html) publishes its [controlled inputs](../case/model-inputs.json), [Python calculation model](../tools/step03_book13_feedback.py), [policy-by-condition evidence](../case/experiment-results.csv), [equation and unit crosswalk for Vensim](../case/vensim-equation-crosswalk.md), and [claim limitations](../case/credibility-register.csv). Reproduce results with `python3 SE/K/B13/tools/step03_book13_feedback.py --write` from the repository root. This is a **synthetic teaching simulation**: correctly conserving its stocks and reproducing its output does **not** calibrate the causal structure or authorize real mobility policy. The Book 11 event simulator and Book 12 physical vehicle model answer other questions and are not dynamically coupled.

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Verification cross-reference matrices and test design · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Verification cross-reference matrices and test design · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
 <link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
 <script data-se-mode="standard" data-se-page="K/encyclopedia/verification-matrix.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
 </head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed reference</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Verification cross-reference matrices and test design</h1>
@@ -19,6 +19,18 @@
 <h2>Technical analysis: a closed row needs a defensible claim boundary</h2>
 <p>A verification matrix row should identify a single versioned claim, its verification method, planned acceptance rule, data source, test configuration, result, discrepancy status, and reviewer authority. Suppose the requirement is “battery temperature shall stay below 60°C at continuous 2 kW output for 30 minutes in a 40°C ambient.” A test performed at 25°C ambient that records 55°C <strong>does not close</strong> that requirement, regardless of a green “pass” field. The result may support a partial argument, but the tested environment does not cover the stated environment.</p>
 <p>For a measurement of <code>59.5°C</code> with expanded uncertainty <code>±1.2°C</code> at a specified coverage, an acceptance rule that requires the <em>upper uncertainty limit</em> below <code>60°C</code> does not pass; <span class="se-equation">\(59.5+1.2=60.7^{\circ}C\)</span>. Some projects may use other contractually approved decision rules, but they must be stated <strong>before</strong> observing results. Record whether test uncertainty, manufacturing variation, and configuration equivalence have actually been considered. A matrix counts evidence relationships; it cannot automatically judge whether they are sufficient.</p>
+<section class="phase1-expansion" id="worked-method">
+<h2>In-depth method: evaluating what a verification row really establishes</h2>
+<p>A VCRM is a control surface for an argument, not a tally of green hyperlinks. The <a href="../methods/requirements-verification-handbook.html">requirements-to-evidence guide</a> includes a complete fictional test plan, raw rehearsal data, a statistical confidence calculation, and a cross-reference matrix that distinguishes planned evidence from accepted evidence.</p>
+<h3>Represent each test result as a scoped proposition</h3>
+<p>A result should be read as: “Procedure T at revision P, applied to configured item B in scenario S, observed measurement M with instrument uncertainty U, and the approved rule produced disposition D.” If B or S does not match the current requirement, the result may still be useful background, but is not automatically closing evidence. A representative row needs at least <strong>requirement ID/revision, method and procedure, test configuration, applicable conditions, objective criterion, result, discrepancies, reviewer, and disposition</strong>.</p>
+<p>A useful statistical boundary for a zero-failure demonstration with \(n\) independent binary trials is</p>
+<p>\[
+p_{f,U}=1-\alpha^{1/n}.
+\]</p>
+<p>At 95% one-sided confidence, 300 zero-failure observations yield a failure-probability upper bound of roughly 0.994%. That conclusion depends on the sampling model; 300 repeated requests in the same quiet minute may offer poor evidence for peak-load operation. Coverage reporting should therefore separate <strong>requirement linkage</strong>, <strong>procedural completion</strong>, <strong>evidence applicability</strong>, <strong>statistical adequacy</strong>, and <strong>acceptance authority</strong>.</p>
+<p><strong>Review challenge.</strong> A requirement says that 99% of peak-load requests shall finish within four seconds. One hundred idle-load requests all finish in under a second. The matrix has a passing test link. Which requirement has been verified? The answer is <em>not the stated peak-load population claim</em> unless the idle-load result has a formally justified relation to that claim.</p>
+</section>
 <h2>Verified source pointers</h2>
 <p>These sources establish authoritative terminology or methods in their own published scope. They have <strong>not</strong> reviewed or endorsed this entry.</p>
 <ul>
@@ -26,7 +38,15 @@
 <li><a href="https://www.nasa.gov/reference/2-4-distinctions-between-product-verification-and-product-validation/">NASA · Distinctions between product verification and validation</a> — Separate conformity to specifications from fitness for intended use.</li>
 <li><a href="https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-7-reporting-uncertainty">NIST · Technical Note 1297, Reporting Measurement Uncertainty (1993)</a> — Standard and expanded uncertainty, coverage factors, and reporting conditions.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section class="phase5-expansion">
+<h2>Phase 5 technical reading: Design a verification matrix that does not overclaim</h2>
+<p>The project's controlled VCRM maps <code>REQ-ACK</code> to synthetic <code>TEST-ACK-01</code>/<code>EV-ACK</code> and states the 2.0 s acceptance bound, recorded maximum 1.74 s, CM-B2 build and limited test load. A passing maximum observation does not establish a deadline-tail probability, and an injected command-gate test does not cover every hazard pathway. The <a href="../methods/campus-mobility-engineering-artifacts.html">complete VCRM, ICD, hazard and change-impact package</a> demonstrates test provenance, accepted scope and explicit residual limitations. Version IDs allow independent configuration-currency checks instead of counting all green status labels as adequate evidence.</p>
+</section>
+<section id="step03-concept-study"><h2>Step 02 review studio — distinguish a populated matrix from a closed claim</h2>
+<p>A verification matrix should state requirement, method, configuration, procedure, measured result, acceptance rule, evidence location, review status and open findings. A check mark is the <em>conclusion</em> of a documented reasoning chain, not the evidence itself.</p>
+<p><strong>Solved exercise:</strong> in the fictional Northstar baseline, all four requirements have a linked verification procedure. Three reference current NS-B1 evidence; NS-R-04 refers to NS-B0. The trace matrix is <strong>100% populated</strong>, but only <strong>75% has current-configuration evidence on its face</strong>. Does that mean exactly 75% of the requirements are verified? <strong>Not necessarily.</strong> The other three procedures may be invalid or incomplete, and the fourth may be reusable if a formal impact analysis establishes equivalence. Treat 75% as a superficial currency indicator, not an assurance score.</p>
+<p><strong>Next action:</strong> document the evidence currency question, assign an owner, resolve by equivalence analysis or repeat test, and retain the original report and disposition. A controlled matrix preserves negative and inconclusive evidence rather than deleting rows to make progress look better.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="good-requirements.html">Requirements: precise obligations, not persuasive sentences</a></li>

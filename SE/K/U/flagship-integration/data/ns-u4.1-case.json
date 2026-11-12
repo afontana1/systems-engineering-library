@@ -1,0 +1,243 @@
+{
+  "id": "NS-U4.1",
+  "description": "Synthetic multi-agency accessible emergency-dispatch example; not operational data",
+  "requirements": {
+    "timely_fraction": 0.9,
+    "accessible_timely_fraction": 0.85,
+    "dispatch_latency_seconds": 8.0,
+    "clock_uncertainty_seconds": 0.25,
+    "mission_availability": 0.99,
+    "scenario_coverage": 0.95
+  },
+  "demand": {
+    "standard": [
+      16,
+      20,
+      23,
+      25,
+      22,
+      17
+    ],
+    "accessible": [
+      4,
+      5,
+      6,
+      7,
+      6,
+      4
+    ]
+  },
+  "policies": {
+    "baseline": {
+      "standard_capacity": 18,
+      "accessible_capacity": 4,
+      "added_cost_million": 0
+    },
+    "capacity_only": {
+      "standard_capacity": 24,
+      "accessible_capacity": 4,
+      "added_cost_million": 0.8
+    },
+    "guardrails": {
+      "standard_capacity": 20,
+      "accessible_capacity": 7,
+      "added_cost_million": 1.2
+    },
+    "integrated": {
+      "standard_capacity": 24,
+      "accessible_capacity": 7,
+      "added_cost_million": 2.1
+    }
+  },
+  "scenarios": {
+    "normal": {
+      "weight": 0.45,
+      "demand_factor": 1,
+      "capacity_factor": 1
+    },
+    "surge": {
+      "weight": 0.25,
+      "demand_factor": 1.25,
+      "capacity_factor": 1
+    },
+    "grid": {
+      "weight": 0.2,
+      "demand_factor": 1,
+      "capacity_factor": 0.75
+    },
+    "compound": {
+      "weight": 0.1,
+      "demand_factor": 1.3,
+      "capacity_factor": 0.6
+    }
+  },
+  "diagnostic": {
+    "prior_blocked": 0.15,
+    "sensitivity": 0.8,
+    "false_positive": 0.1
+  },
+  "reliability": {
+    "component_availability": 0.985,
+    "common_cause_failure": 0.03
+  },
+  "paired_wait_min": {
+    "baseline": [
+      18,
+      21,
+      19,
+      24,
+      17,
+      23,
+      20,
+      26,
+      22,
+      19,
+      25,
+      21
+    ],
+    "integrated": [
+      13,
+      14,
+      13,
+      17,
+      13,
+      16,
+      15,
+      18,
+      15,
+      14,
+      18,
+      15
+    ]
+  },
+  "factorial_wait_min": {
+    "00": 18,
+    "10": 15,
+    "01": 14,
+    "11": 8
+  },
+  "project": {
+    "path_abc": [
+      3,
+      4,
+      2
+    ],
+    "path_adc": [
+      3,
+      5,
+      2
+    ],
+    "planned_value": 120,
+    "earned_value": 100,
+    "actual_cost": 130
+  },
+  "difference_in_differences": {
+    "treatment_pre": 22,
+    "treatment_post": 13,
+    "comparison_pre": 20,
+    "comparison_post": 18
+  },
+  "feedback": {
+    "decay_per_min": 0.4,
+    "input_per_min": 4.0,
+    "initial_backlog": 20
+  },
+  "required_interface_revision": "2.0",
+  "claims": [
+    {
+      "id": "C1",
+      "evidence_revision": "2.0",
+      "scope": "normal",
+      "required_scope": "normal",
+      "reviewed": true,
+      "approved": true
+    },
+    {
+      "id": "C2",
+      "evidence_revision": "1.0",
+      "scope": "normal",
+      "required_scope": "normal",
+      "reviewed": true,
+      "approved": true
+    },
+    {
+      "id": "C3",
+      "evidence_revision": "2.0",
+      "scope": "dry",
+      "required_scope": "flood",
+      "reviewed": true,
+      "approved": true
+    },
+    {
+      "id": "C4",
+      "evidence_revision": "2.0",
+      "scope": "normal",
+      "required_scope": "normal",
+      "reviewed": true,
+      "approved": false
+    },
+    {
+      "id": "C5",
+      "evidence_revision": null,
+      "scope": "normal",
+      "required_scope": "normal",
+      "reviewed": false,
+      "approved": false
+    }
+  ],
+  "interface_events": [
+    {
+      "event_id": "E1",
+      "request_id": "R1",
+      "type": "COMMIT",
+      "sequence": 1,
+      "revision": "2.0",
+      "digest": "aa"
+    },
+    {
+      "event_id": "E2",
+      "request_id": "R1",
+      "type": "ACK",
+      "sequence": 2,
+      "revision": "2.0",
+      "digest": "bb"
+    },
+    {
+      "event_id": "E2",
+      "request_id": "R1",
+      "type": "ACK",
+      "sequence": 2,
+      "revision": "2.0",
+      "digest": "bb"
+    },
+    {
+      "event_id": "E3",
+      "request_id": "R2",
+      "type": "ACK",
+      "sequence": 1,
+      "revision": "2.0",
+      "digest": "cc"
+    },
+    {
+      "event_id": "E1",
+      "request_id": "R1",
+      "type": "COMMIT",
+      "sequence": 1,
+      "revision": "2.0",
+      "digest": "xx"
+    },
+    {
+      "event_id": "E4",
+      "request_id": "R3",
+      "type": "COMMIT",
+      "sequence": 1,
+      "revision": "1.0",
+      "digest": "dd"
+    }
+  ],
+  "institutional_authorizations": {
+    "road_authority": false,
+    "labor_consent": false,
+    "privacy_review": false
+  }
+}

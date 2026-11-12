@@ -148,3 +148,32 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 4: Physical architecture and contracts](../labs/lab-04-mature-the-physical-architecture-interfaces-and-perform.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 4 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-DI7.1 — physical architecture and margin accounting
+
+### From a five-stage path to a design alternative
+
+Physical design couples computing hardware, software scheduling, transport and vehicle actuation. The initial degraded command model consumes 490 of an allowed 500 ms. An absolute ten-millisecond allowance is **2% of the deadline**, not the required 10% design reserve. The design review compares two changes: a faster gateway saves 15 ms and parallelized dispatch computation saves 35 ms. Under the stated additive model, the alternatives are:
+
+| Configuration | Degraded model (ms) | Margin to 500 ms | At least 50 ms reserve? |
+|---|---:|---:|---|
+| Original | 490 | 10 | No |
+| Faster gateway only | 475 | 25 | No |
+| Parallel dispatch only | 455 | 45 | No |
+| Both changes | 440 | 60 | Yes |
+
+A more detailed implementation could introduce overhead, synchronization and correlated delay that negate an assumed saving. Thus the combined redesign is a candidate to prototype, **not** evidence that a percentile deadline has been met. The earlier [synthetic factorial experiment](../case/doe-synthetic.csv) provides a separate measurement illustration; the results should not be substituted for a production timing test.
+
+### Coupled energy and reliability budgets
+
+The energy model sums 22.4 kWh traction, 2.1 kWh heating and 1.8 kWh communications to obtain 26.3 kWh. Its remaining allowance is 3.7 kWh against a 30-kWh per-shift budget. Extra compute work must be allocated against that allowance as well as the latency reserve. The power, timing and thermal owners should all sign off on a gateway change; otherwise apparent timing progress can conceal a higher-level budget violation.
+
+Margins should be declared consistently: \(M_{\rm abs}=L-\hat x\), while \(M_{\rm fraction}=(L-\hat x)/L\) for an upper-bound limit \(L\). Do not express a 60-ms allowance as a measured reliability or claim safety merely because an arithmetic margin is positive.
+
+**Exercise.** A safety-security review adds 18 ms of validation to the combined design. Decide whether the result passes the deadline and reserve policies.
+
+<details><summary>Worked resolution</summary>
+
+The model becomes 458 ms. It passes the 500-ms absolute deadline by 42 ms but fails the separate 50-ms minimum reserve. Either recover at least 8 ms elsewhere, change the controlled reserve rule with authority, or record the nonconformance for review. No measured p99 result is implied.
+
+</details>

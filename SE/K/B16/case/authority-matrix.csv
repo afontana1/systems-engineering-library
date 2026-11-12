@@ -1,0 +1,7 @@
+asset,source_owner,content_class,authoritative_use,authorized_illustrative_role,explicit_limit
+IF-DISPATCH,supplier,restricted,course-screening,assurance,Revision-1.0 educational contract only; not public release
+E-COMMS,assurance,internal,course-screening,engineer,Applicable only to interface revision 1.0
+R-CRITICAL,emergency-command,restricted,course-screening,assurance,No approved actual emergency outcome criterion
+Mission scenario weights,mission-command,internal,course-screening,engineer,Invented disjoint scenario probabilities
+SOC observation,energy-lead,internal,course-screening,engineer,Invented measurement and known bias
+Operational authorization,joint-review-board,restricted,none,assurance,No authority to deploy or qualify is represented

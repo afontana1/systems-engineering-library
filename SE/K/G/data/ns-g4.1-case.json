@@ -1,0 +1,30 @@
+{
+  "case_id": "NS-G4.1",
+  "revision": "1.0",
+  "data_kind": "synthetic instructional assumptions, NOT operational observations",
+  "safety": {"freshness_limit_seconds":30,"decision_clock_seconds":126,"observed_clock_seconds":100,"execution_window_seconds":5,"skew_bound_seconds":3,"valid_signature":true,"expected_route_revision":"R2"},
+  "service": {"alarm_arrival_per_hour":8.4,"case_prevalence":0.03,"alarm_sensitivity":0.9,"max_queue_wait_minutes":15,"min_alarm_ppv":0.35,"external_events_per_second":80,"retry_probability":0.25,"software_service_per_second":112},
+  "reliability": {"route_authority_availability":0.998,"dispatch_availability":0.996,"min_joint_availability":0.985},
+  "sos": {"source":"Request","sink":"Care","min_accessible_slots":55,"arcs":[{"from":"Request","to":"Dispatch","capacity":70},{"from":"Dispatch","to":"Rail","capacity":44},{"from":"Dispatch","to":"Paratransit","capacity":26},{"from":"Rail","to":"Care","capacity":43},{"from":"Paratransit","to":"Care","capacity":25}]},
+  "enterprise": {"max_added_cost_million":1.8,"require_permissions":["regional_sponsor","road_authority","accessible_service_owner","labor_representative","privacy_officer"],"permissions_granted":{"regional_sponsor":true,"road_authority":false,"accessible_service_owner":true,"labor_representative":false,"privacy_officer":false},"max_group_wait_gap_minutes":12,"treated_pre_pre_minutes":[28,26],"comparison_pre_pre_minutes":[25,23],"treated_pre_minutes":26,"treated_post_minutes":17,"comparison_pre_minutes":23,"comparison_post_minutes":19},
+  "policies": [
+    {"id":"baseline","added_cost_million":0,"observed_clock_seconds":100,"route_revision":"R1","operator_service_per_hour":9.6,"alarm_false_positive_rate":0.10,"local_node_availability":0.988,"common_outage_probability":0.012,"rail_capacity_delta":0,"paratransit_capacity_delta":0,"urban_mean_wait_minutes":12,"accessible_mean_wait_minutes":34},
+    {"id":"technical_redundancy","added_cost_million":0.8,"observed_clock_seconds":100,"route_revision":"R2","operator_service_per_hour":9.6,"alarm_false_positive_rate":0.10,"local_node_availability":0.992,"common_outage_probability":0.005,"rail_capacity_delta":8,"paratransit_capacity_delta":7,"urban_mean_wait_minutes":11,"accessible_mean_wait_minutes":28},
+    {"id":"coordinated_guardrails","added_cost_million":1.65,"observed_clock_seconds":110,"route_revision":"R2","operator_service_per_hour":12.2,"alarm_false_positive_rate":0.04,"local_node_availability":0.992,"common_outage_probability":0.003,"rail_capacity_delta":8,"paratransit_capacity_delta":7,"urban_mean_wait_minutes":10,"accessible_mean_wait_minutes":19}
+  ],
+  "scenarios": [
+    {"id":"nominal","weight":0.55,"clock_skew_extra_seconds":0,"disabled_constituents":[],"capacity_loss":0,"demand_multiplier":1,"common_outage_add":0,"revision_override":null},
+    {"id":"demand_surge","weight":0.20,"clock_skew_extra_seconds":0,"disabled_constituents":[],"capacity_loss":0,"demand_multiplier":1.17,"common_outage_add":0,"revision_override":null},
+    {"id":"rail_outage","weight":0.10,"clock_skew_extra_seconds":0,"disabled_constituents":["Rail"],"capacity_loss":0,"demand_multiplier":1,"common_outage_add":0,"revision_override":null},
+    {"id":"compound_grid_flood","weight":0.10,"clock_skew_extra_seconds":5,"disabled_constituents":[],"capacity_loss":12,"demand_multiplier":1.13,"common_outage_add":0.035,"revision_override":null},
+    {"id":"interface_drift","weight":0.05,"clock_skew_extra_seconds":0,"disabled_constituents":[],"capacity_loss":0,"demand_multiplier":1,"common_outage_add":0,"revision_override":"R3"}
+  ],
+  "sample_events": [
+    {"event_id":"E1","key":"REQ-17","seq":1,"type":"RESERVE","payload_hash":"a7"},
+    {"event_id":"E2","key":"REQ-17","seq":2,"type":"COMMIT","payload_hash":"a7"},
+    {"event_id":"E3","key":"REQ-17","seq":3,"type":"ACK","payload_hash":"a7"},
+    {"event_id":"E4","key":"REQ-17","seq":3,"type":"ACK","payload_hash":"a7"},
+    {"event_id":"E5","key":"REQ-19","seq":1,"type":"ACK","payload_hash":"b2"},
+    {"event_id":"E6","key":"REQ-17","seq":4,"type":"COMMIT","payload_hash":"different"}
+  ]
+}

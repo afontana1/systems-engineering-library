@@ -1,0 +1,4 @@
+id,sender,receiver,data,units,update_period_ms,max_age_ms,invalid_input_action,owner
+IF-SPEED,speed-sensor,door-controller,measured_speed,m/s,50,150,deny_open,door-controller
+IF-BRAKE,brake-status,door-controller,parking_brake_engaged,boolean,50,150,deny_open,door-controller
+IF-ACK,dispatch-service,operator-console,acknowledgement_latency,s,request_driven,not_applicable,flag_timeout,dispatch-service

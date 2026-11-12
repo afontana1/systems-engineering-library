@@ -1,0 +1,129 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS-DME16.1 digital mission evidence laboratory</title><style>body{margin:0;background:#f4f8f8;color:#1a3845;font:16px/1.75 system-ui,sans-serif}header{padding:16px max(20px,calc((100vw - 1080px)/2));background:#173f52}header a{color:#c6f5ee}main{max-width:1080px;margin:24px auto;padding:clamp(18px,4vw,42px);border:1px solid #d5e3e6;border-radius:12px;background:white}a{color:#116970}h1{line-height:1.2}h2{margin-top:1.8rem}table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}th,td{padding:9px;border:1px solid #d9e4e7;text-align:left}th{background:#edf5f4}pre{overflow:auto;background:#edf4f5;padding:15px}code{overflow-wrap:anywhere}img{max-width:100%}mjx-container{max-width:100%;overflow-x:auto}@media(max-width:700px){main{margin:0;border:0;border-radius:0;padding:18px}}</style><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script></head><body><header><a href="../README.html">← Book 16</a> · <a href="../OPEN-BOOK.html">Textbook reader</a></header><main><h1>NS-DME16.1 — Digital Mission Evidence and Resilience Laboratory</h1>
+<p><strong>Course:</strong> EN.645.782, Foundations of Digital and Mission Engineering, Book 16. This is a <strong>fictional, synthetic, unclassified</strong> instructional case linked to the pre-existing Northstar Resilient Mobility Mission. It is not a validated real-campus, public-safety, military or vehicle decision model.</p>
+<p><a href="../README.html">Book 16 chapters</a> · <a href="../OPEN-BOOK.html">Embedded textbook</a> · <a href="controlled-inputs.json">Controlled inputs</a> · <a href="../tools/step03_book16_mission.py">Executable model</a> · CLO crosswalk</p>
+<h2>Decision and scope</h2>
+<p>The joint resilience review board must compare fleet investments with continuity policies and decide what evidence would support an eventual public-safety mobility deployment. The engineering use of the case is <strong>course-screening only</strong>. The source course retains its separate graded assignments, mission-architecture rubric and approved architecture/tool choices. Nothing here asserts that JSON dictionaries conform to SysML, that a Python role check enforces enterprise security, or that the scenario model is calibrated.</p>
+<p>Book 16 inherits the <em>themes</em> of operational queueing from Book 11, physical energy/thermal modeling from Book 12, feedback policies from Book 13, alternative selection from Book 14, and technical-change governance from Book 15. It deliberately <strong>does not reuse their numeric baselines</strong>: those cases have different boundaries, configurations, and assumptions. Only explicitly reconciled, versioned evidence can be combined in a real mission argument.</p>
+<h2>Files, provenance, and reproduction</h2>
+<table>
+<thead>
+<tr>
+  <th>File</th>
+  <th>Purpose</th>
+  <th>Authority / limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><a href="controlled-inputs.json">controlled-inputs.json</a></td>
+  <td>Graph with typed relations, five requirement claims, four disruptions, four policies, and synthetic SOC observation</td>
+  <td>Fictional source; no operational authority</td>
+</tr>
+<tr>
+  <td><a href="../tools/step03_book16_mission.py">step03_book16_mission.py</a></td>
+  <td>Pure Python standard-library validator, trace query, impact query, scenario screen, and scalar twin update</td>
+  <td>Teaching model, not SysML, UAF, enterprise IAM, or physical twin</td>
+</tr>
+<tr>
+  <td><a href="trace-quality.csv">trace-quality.csv</a></td>
+  <td>Five requirement path checks with explicit nonqualification fields</td>
+  <td>Structural/configuration completeness only</td>
+</tr>
+<tr>
+  <td><a href="supplier-impact.json">supplier-impact.json</a></td>
+  <td>Test/requirement/decision impact from interface 1.0→2.0</td>
+  <td>Only explicitly modeled dependencies</td>
+</tr>
+<tr>
+  <td><a href="mission-scenarios.csv">mission-scenarios.csv</a></td>
+  <td>4 policies × 4 scenarios, per-group served counts and fractions</td>
+  <td>Capacities not calibrated; mutually exclusive synthetic scenarios</td>
+</tr>
+<tr>
+  <td><a href="mission-summary.csv">mission-summary.csv</a></td>
+  <td>Joint scenario coverage, expected service fractions, incremental cost</td>
+  <td>Weights are hypotheses, not frequencies or reliability estimates</td>
+</tr>
+<tr>
+  <td><a href="model-results.json">model-results.json</a></td>
+  <td>Structured decision summary and bounded SOC update</td>
+  <td>No deployment authorization</td>
+</tr>
+<tr>
+  <td><a href="authority-matrix.csv">authority-matrix.csv</a></td>
+  <td>Case information custody, roles, and allowed intended uses</td>
+  <td>Illustrative policy; actual security requires external controls</td>
+</tr>
+<tr>
+  <td><a href="evidence-register.csv">evidence-register.csv</a></td>
+  <td>Claim-to-evidence status, falsifiers, and missing qualification evidence</td>
+  <td>Administrative teaching record</td>
+</tr>
+<tr>
+  <td><a href="decision-log.csv">decision-log.csv</a></td>
+  <td>Dissent, unresolved gaps, gate and review disposition</td>
+  <td>No sign-off from an actual review board</td>
+</tr>
+</tbody>
+</table>
+<p>From the repository root (no network and no third-party Python packages required):</p>
+<pre><code class="language-bash">python3 SE/K/B16/tools/step03_book16_mission.py
+python3 scripts/check_step03_book16.py
+python3 scripts/sync_step03_book16.py
+python3 scripts/check_textbook_readers.py
+python3 scripts/check_links.py
+</code></pre>
+<p>To experiment without overwriting the published CSV/JSON, import <code>step03_book16_mission</code> and modify a deep copy of <code>inputs()</code> in memory, or run the CLI with <code>--out /path/to/scratch</code> for a separate output location. The supplied script intentionally regenerates the published data deterministically, allowing a byte comparison during release.</p>
+<h2>Method one — evidence graphs and change impact</h2>
+<p>A graph node carries an ID, type, revision, owner, sensitivity label, and authority-for-purpose list. Allowed relations include <code>allocated_to</code>, <code>realized_by</code>, <code>checked_by</code>, <code>produced</code>, <code>uses_interface</code>, <code>depends_on</code> and <code>informs</code>. Five requirement paths are structurally and configuration current at the <strong>course-screening</strong> baseline: <code>R-STD</code>, <code>R-ACCESS</code>, <code>R-CRITICAL</code>, <code>R-COMMS</code>, and <code>R-ENERGY</code>. Every row explicitly sets <code>operationally_qualified = false</code>.</p>
+<p>The controlled Week 8 change to supplier dispatch interface <code>IF-DISPATCH</code> revision 2.0 invalidates evidence <code>E-COMMS</code> that was witnessed only on 1.0. The executable impact query identifies <code>T-COMMS</code>, <code>E-COMMS</code>, <code>R-COMMS</code>, and <code>DEC-MISSION-16</code>. Thus configuration-current screen paths fall <strong>5/5 → 4/5</strong>. This is stale-evidence detection, not evidence of a field failure. Recovery requires a controlled interface comparison, new tests, independently reviewed evidence and a decision update.</p>
+<p>A role-check illustration rejects reader access to restricted supplier artifacts. It does not protect these example files from an individual with filesystem access; it is a teaching demonstration of use-specific authority versus access rights.</p>
+<h2>Method two — mission policy and common disruptions</h2>
+<p>There are three service groups: standard (160 daily requests), accessible (28), critical (12). Their productivity assumptions are 14, 10, and 8 trips per assigned vehicle-day, respectively, without resource sharing or queue dynamics. Four scenario categories—normal, grid outage, communications loss, road closure—have synthetic weights 0.62, 0.18, 0.12 and 0.08 (sum one). Each scenario sets group-specific capacity derating. Backup power, offline dispatch and mutual aid add assumed restoration fractions capped at 100% productivity.</p>
+<p>For group \(g\), policy \(p\), scenario \(s\), the service fraction is</p>
+<p>\[
+q_{gps}=\min\left[1,\frac{n_{gp}r_g\min(1,f_{gs}+u_{gps})}{d_g}\right].
+\]</p>
+<p>A scenario passes only when <strong>all</strong> groups meet the illustrative floors: standard at least 95%, accessible at least 95%, and critical 100%. The joint coverage measure is the weighted sum of passing scenarios, not the product of marginal service rates or the mean of three served fractions.</p>
+<table>
+<thead>
+<tr>
+  <th>Policy</th>
+  <th style="text-align:right">Estimated additional cost</th>
+  <th style="text-align:right">Joint scenario coverage</th>
+  <th>Screening disposition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>P0 status quo</td>
+  <td style="text-align:right">$0</td>
+  <td style="text-align:right">0.62</td>
+  <td>FAIL versus 0.95</td>
+</tr>
+<tr>
+  <td>P1 vehicles only</td>
+  <td style="text-align:right">$1.50 million</td>
+  <td style="text-align:right">0.62</td>
+  <td>FAIL versus 0.95</td>
+</tr>
+<tr>
+  <td>P2 continuity</td>
+  <td style="text-align:right">$0.65 million</td>
+  <td style="text-align:right">0.80</td>
+  <td>FAIL versus 0.95</td>
+</tr>
+<tr>
+  <td>P3 combined</td>
+  <td style="text-align:right">$2.15 million</td>
+  <td style="text-align:right">0.92</td>
+  <td>FAIL versus 0.95</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Critical limitation:</strong> This is an enumeration of assumed discrete regimes, not a probability estimate from sampled operations. It has no observations, calibration, parameter uncertainty, route geography, vehicle interactions, differential travel times, shift resources, charging, safety, hazard-model integration, or socio-technical failure interactions. The 0.92 is only an illustrative expected <em>scenario coverage weight</em> conditional on the specified hypothetical inputs.</p>
+<h2>Method three — bounded state estimate from synthetic telemetry</h2>
+<p>The SOC demonstration begins with prior 0.68 ± 0.02 (one standard deviation), measurement 0.59 ± 0.03, known illustrative bias −0.04, and age 4 minutes. Bias correction gives observation 0.63; scalar Gaussian gain is 0.307692; posterior SOC is <strong>0.664615</strong> and posterior sigma is approximately <strong>0.016641</strong>. Omitting the assumed known bias gives 0.652308. If the packet is 16 minutes old under a 10-minute age limit, the checker rejects the update and returns no posterior. Real battery twin operation requires a full state-space model, error covariance characterization, validation, handling of sensor fault and missing data, fail-safe controls, cybersecurity and independent review.</p>
+<h2>Decision gate and engineering limits</h2>
+<p>The educational decision is <strong>HOLD FOR OPERATIONAL QUALIFICATION</strong>, even with five original configuration-current paths and the best policy covering 0.92 of the toy scenario weight. The next evidence must include physically witnessed interface and fallback tests; validated demand, service and scenario distributions; hazard analyses; accessible-service trials; telemetry bias assessment; independent security/data-rights review; and configuration approval. The case supports critical study and cross-repository query practice, not procurement or safety certification.</p>
+</main></body></html>

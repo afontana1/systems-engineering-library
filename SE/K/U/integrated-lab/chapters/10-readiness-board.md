@@ -38,3 +38,15 @@ Do not approve real-world deployment from this package alone. A teaching prototy
 </details>
 
 **Gate evidence:** complete board packet, documented decision and limitations, an assigned open-findings register, and specific evidence needed to revisit the decision.
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: A review decision is a set of scoped gates.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+A release decision should separate the **software-fixture gate**, **degraded-scenario gate**, **model-credibility gate**, **stakeholder-evidence gate**, and **authorization gate**. In U2, the fixed-fixture gate passes, but both tested degraded scenarios complete only 50% against an illustrative 95% screen. The accessibility evidence field is absent, and all four modeled field approvals are explicitly missing.
+
+**Boolean formulation:** `deployment_authorized = numerical_screen ∧ credible_field_evidence ∧ required_authority`. A failed conjunct cannot be compensated by adding a favorable score elsewhere. The supplied `assess_claim` exercise rejects a stale record, an out-of-scope record, and an omitted approval; those are deliberate negative cases rather than operational endorsement.
+
+**Exercise and solution:** The board sees perfect repeat-run reproducibility and 100% nominal service. Should it approve field dispatch? **No.** It may authorize a bounded synthetic-model learning exercise, but must record failed stress evidence, a plan to validate omitted mechanisms, affected-population review, authority owners, and conditions for reopening the decision.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

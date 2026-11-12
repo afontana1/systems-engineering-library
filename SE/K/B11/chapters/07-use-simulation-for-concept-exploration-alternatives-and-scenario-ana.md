@@ -121,3 +121,29 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [06 — Previous chapter](06-model-detailed-operations-and-complete-computational-verification.md) · [08 — Next chapter](08-analyze-transient-and-steady-state-output-with-defensible-run-contro.md) · [Book index](../README.md)
+
+## Step 03 integrated mobility simulation case: alternative screening and adverse scenarios
+
+### Define alternatives before simulating outcomes
+
+The [NS-MS11.1 case](../case/INDEX.html) compares fleets of 8, 10, 12 and 14 vehicles, holding the four-charger baseline and the stated dispatch policy fixed. The intervention is fleet size; all simulated days use the same seed-indexed stream of passenger requests, boarding durations, travel times and per-trip energy. This is a *paired* comparison. It does not prove that field deployment would keep driver staffing, route mix or demand unchanged when the fleet changes. Each alternative must also be assessed against service requirements, not merely ranked by a mean.
+
+The [replication CSV](../case/replication-output.csv) contains 30 baseline replications for each fleet size and 30 more under the stress scenario. The baseline request intensity corresponds to an expected 352/day. The adverse case multiplies **every hour's arrival rate by 1.2** and **travel durations by 1.3**: its expected request count is \(1.2(352)=422.4\)/day. We deliberately couple these two changes to avoid the misleading claim that event-day demand and delay are operationally independent. In the current model the coupling is deterministic at the scenario level rather than a calibrated correlated random process.
+
+### Interpret a real sensitivity, not just a ranking
+
+With the standard-library checker, the 14-vehicle baseline produces mean daily standard-trip p90 about **36.4 minutes** versus about **69.1** for 12 vehicles. The 14-vehicle stress result is about **220.1 minutes**; neither scenario reaches the 12-minute service threshold. Accessible-trip p90 and end-of-day backlog also miss the nominal thresholds. These illustrative outputs argue that the screened configurations should **not** be promoted to pilot readiness based on this first-pass model.
+
+A useful design question is: *Would larger fleets, better accessible allocation, time-dependent charging, pooling or staggered driver shifts change the answer?* This release does **not** simulate those interventions. The appropriate conclusion is that new alternatives and better observations are needed, not that a particular unsimulated solution will work. Note the original course makes **staffing** a decision variable. The current model does not model staffing. A combined fleet-and-shift optimization claim would therefore be unsupported.
+
+### Distinguish uncertainty dimensions
+
+**Aleatory variability** comes from synthetic arrivals and service draws across days; more replications estimate this model's response distribution more precisely. **Epistemic uncertainty** includes the unobserved routes, true peak-arrival process, actual charger positions and achievable accessibility dispatch. Additional replications do not reduce epistemic error. **Scenario uncertainty** concerns which operating regime applies; a baseline-versus-stress comparison does not give the probability of either scenario. Do not compute a single expected cost or success rate without an explicitly supported scenario probability.
+
+### Worked design experiment and exercise
+
+Consider a two-factor preliminary experiment with fleet count \(F\in\{12,14\}\) and environment \(E\in\{\mathrm{baseline},\mathrm{stress}\}\). Let the response be the mean across independent replications of the per-day standard p90. The *effect of fleet* within a given environment is \(\Delta_F(E)=\bar Q_{14,E}-\bar Q_{12,E}\), and an interaction contrast is \(\Delta_F(\mathrm{stress})-\Delta_F(\mathrm{baseline})\). This difference-in-differences quantifies whether adding vehicles has the same modeled benefit under the two environments. It is **not** a statistical proof of a field interaction until the randomization and inferential assumptions are reviewed.
+
+**Exercise and worked answer.** Does adding two vehicles meet the fictional 12-minute p90 requirement if it reduces simulated p90 from 69.1 to 36.4? **Answer:** no. The modeled improvement is \(69.1-36.4=32.7\) minutes, but \(36.4>12\). An alternative can be relatively better and absolutely unacceptable. The right decision statement is: *the 14-vehicle synthetic baseline is better on this response but fails the defined screen*, pending model validation and a different design hypothesis.
+
+[Alternative data and assumptions](../case/INDEX.html) · [Chapter 8](08-analyze-transient-and-steady-state-output-with-defensible-run-contro.md).

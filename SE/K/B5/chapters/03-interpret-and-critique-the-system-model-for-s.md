@@ -83,3 +83,24 @@ In [Lab 3: Read system models critically](../labs/lab-03-interpret-and-critique-
 ## Continuity
 
 This chapter builds from [previous chapter](02-model-software-allocations-interfaces-and-the.md) and leads toward [next chapter](04-frame-the-software-architecture-within-the-sy.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-764-w03.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+
+## Step 03 integrated reference: critique the model by trying to falsify it
+
+### Why an apparently complete model can still be misleading
+
+The [architecture](../case/architecture.svg) identifies reservation API, telemetry ingestion, allocation store, operator interface, platform, and release pipeline. It exposes ownership and communication, but it does **not** establish whether messages are delivered, transactions are atomic, clocks are synchronized, or an operator follows a safe manual process. These omissions are expected in a structural view. The engineering error is to *infer* those properties from the view without additional contracts or evidence.
+
+For each modeled edge, write at least three questions: what can fail, which party detects the failure, and which party remains responsible for the result? For **IF-03**, stale telemetry may result from sensor failure, network delay or replay. A simple data-flow diagram might show only that a location is available. The required behavior is stronger: the reservation API must reject observations older than five seconds, including apparently plausible but old samples.
+
+### Turn model claims into falsifiable checks
+
+A typed model-checking query can establish that every requirement has a declared owner and every interface endpoint is a known component. The [Python audit](../tools/step03_book5_system_check.py) performs this check against the controlled JSON and CSV. A positive result only establishes structural consistency of those records, not correctness of the system. The checker also verifies that each requirement has an evidence *entry*; Chapter 10 asks whether the evidence is adequate and current.
+
+Apply three distinct tests to SWS-03: structural—does the allocation-store own the no-overlap obligation?; design—does the database schema enforce uniqueness of `(vehicle, slot)` for active reservations?; behavioral—do concurrent requests and retries preserve that property in realistic deployment conditions? This separation prevents a successful JSON audit from being mistaken for a proof of concurrent database behavior.
+
+### Boundary critique and counterexample
+
+Imagine both the application and its synthetic monitor run on the same failed cloud instance. The model contains a monitor component and reports no errors while the host is down because no measurements arrive. An “absence of errors” dashboard then falsely implies availability. This is a missing-measurement problem, not merely a missing component. To correct the model, specify the external observation boundary, lost-probe accounting and outage denominator.
+
+**Exercise.** Add an interface whose `from` component is `mobile-client`, which is absent from the baseline. Run the structural checker. **Expected result.** It flags an unknown endpoint. Now add the component and rerun. **Interpretation.** The structure passes, but delivery semantics, authorization and real mobile-device tests remain unverified. The model checker is useful because it makes missing references visible; its limitations are just as important.

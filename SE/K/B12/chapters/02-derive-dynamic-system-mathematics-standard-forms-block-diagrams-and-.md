@@ -153,3 +153,54 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [01 — Previous chapter](01-frame-the-advanced-m-s-decision-intended-use-architecture-and-credib.md) · [03 — Next chapter](03-model-translational-and-rotational-mechanical-dynamics-with-realisti.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-CPS12.1 case: dynamic equations, state and solver evidence
+
+### Build a state vector from storage mechanisms
+
+A genuine dynamic model must state *what can retain memory*. For the coupled shuttle let \(x=(s,v,E,T_b)\) be route distance in metres, vehicle speed in m/s, remaining usable battery energy in joules, and lumped pack temperature in kelvin (differences numerically equal °C differences). Inputs \(u\) include reference speed, road grade, ambient temperature and coolant flow; algebraic outputs are wheel power, battery current and losses. The continuous plant is a set of ODEs, while the route-segment and cooling-mode selectors are discrete guards. With \(F_t\) traction force and \(F_r\) total road load,
+
+\[
+\dot s=v,\quad \dot v=\frac{F_t-F_r}{m},\quad
+\dot E=-P_\mathrm{battery},\quad
+C_b\dot T_b=Q_\mathrm{gen}-UA(T_b-T_a).
+\]
+
+Writing \(E\) in joules produces the clean derivative \(-P\) in watts; the downloadable program reports kWh and explicitly divides joules by 3,600,000. Avoid the common silent error of integrating watts over seconds and labeling the result kWh. A block diagram is a computational arrangement, whereas the ODEs supply the physical meaning and the traceable assumptions. A transfer function is valid only for an appropriate *linear time-invariant* subsystem around a stated operating point; route guards and saturation prevent a global LTI transfer function for the full shuttle.
+
+### Derive and verify an analytical reference before trusting a time-step result
+
+For constant applied force \(F_0\), lumped linear resistance \(kv\), and constant mass, the test equation \(m\dot v=F_0-kv\) has
+
+\[
+v(t)=\frac{F_0}{k}\bigl(1-e^{-kt/m}\bigr),\quad v(0)=0,
+\qquad \tau=m/k.
+\]
+
+Choose \(m=3100\,\mathrm{kg}\), \(k=100\,\mathrm{N\,s/m}\), \(F_0=900\,\mathrm N\). The steady speed is 9 m/s and \(\tau=31\) s. At 10 s the exact speed is \(9(1-e^{-10/31})\approx2.48\) m/s. Forward Euler updates \(v_{n+1}=v_n+h(F_0-kv_n)/m\); with \(h=2\) s and five updates it gives approximately 2.55 m/s. Reproduce at 1 s and 0.5 s; an error decreasing with step size provides evidence of solver implementation but not physical validation.
+
+For a scalar decay \(\dot y=-\lambda y\), Euler's amplification is \(g=1-h\lambda\). Stability requires \(|g|<1\), or \(0<h\lambda<2\); low numerical error generally requires a much smaller step. At a discontinuous grade or control-mode switch, verify event ordering and shorten the step even if the smooth system is stable. A step size inherited from a 10 ms controller is **not** proof that the complete multi-domain model satisfies real-time constraints.
+
+### Derive the coupled energy and thermal states explicitly
+
+The code takes motor wheel power \(P_w=F_tv\) and uses efficiencies \(\eta_m=0.91\), \(\eta_r=0.69\): battery traction power is \(P_w/\eta_m\) during propulsion and \(\eta_rP_w\) during regeneration (negative charging sign). Auxiliary power \(P_a\) and internal ohmic loss \(I^2R\), with the simplified current proxy \(I=(P_\mathrm{traction}+P_a)/650\), are added to battery energy depletion. Internal heat is \(I^2R+0.22P_a\). The model records electrical, mechanical and thermal balance residuals; those residuals should be near zero *within the model equations*, but they cannot prove the assumed efficiency/heat model is correct.
+
+### Reproduce a numerical convergence and invariance experiment
+
+Run `python SE/K/B12/tools/step03_book12_coupled_vehicle.py --laps 1 --dt 1` and compare `--dt 0.5` and `--dt 0.25`. Define relative metric change \(\delta(h)=|M(h)-M(h/2)|/\max(|M(h/2)|,\epsilon)\). Report the actual \(M\) and \(\delta\), not just “stable.” For an energy accounting check use
+
+\[
+\epsilon_E=E_\mathrm{used}-\frac{W_\mathrm{traction,batt}+W_\mathrm{aux}+Q_\mathrm{ohmic}}{3.6\times10^6}\quad [\mathrm{kWh}].
+\]
+
+The report's \(\epsilon_E\) is algebraically tiny by construction. Separately test the *mechanical* balance against change in kinetic and potential energy plus road dissipation; it is more sensitive to the numerical step and grade boundary. The implementation is an explicit-Euler educational demonstration; it does not solve DAEs, stiff electrochemical states or HIL transport timing.
+
+### Exercises with explained answers
+
+**A.** Which state disappears if battery temperature is assumed fixed? **Answer.** \(T_b\) becomes a parameter, and the thermal first-order differential equation and its initial-condition dependence disappear; a fixed-temperature electrical efficiency result can no longer support a thermal-limit claim.
+
+**B.** At the above LTI reference point, estimate how long a speed step takes to reach 63.2% of steady velocity. **Answer.** \(\tau=31\) s, because \(1-e^{-1}\approx0.632\). This is not the shuttle's actual acceleration time: actuator force, grade, aerodynamic drag and mode changes have been suppressed.
+
+**C.** A solver returns a nearly zero energy residual yet incorrect travel times. Explain. **Answer.** Consistent power accounting can coexist with an incorrect controller gain, speed target, event guard or tire force; invariants test internal consistency, not external truth. Record solver refinement, analytic benchmark and independent measurement as separate evidence classes.
+
+**Deliverable:** analytical benchmark, step-size table, balance-residual table and a claim-by-claim numerical verification memo linked to [source and inputs](../case/INDEX.html).

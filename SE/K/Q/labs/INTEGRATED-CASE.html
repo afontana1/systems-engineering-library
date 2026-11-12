@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Integrated quantitative case laboratory · Systems Engineering Library</title><style>*{box-sizing:border-box}body{margin:0;background:#eff5f6;color:#173748;font:16px/1.75 system-ui,Segoe UI,sans-serif}header{background:#183e50;color:white;padding:22px max(18px,calc((100vw - 1050px)/2))}header a{color:#dcf5f0}main{max-width:1050px;margin:24px auto 80px;background:white;padding:30px clamp(18px,5vw,55px);border:1px solid #d5e4e6;border-radius:13px}a{color:#08747b}h1{line-height:1.2}h2{margin-top:2em}table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse}td,th{border:1px solid #d5e4e6;padding:8px}pre{overflow-x:auto;background:#153145;color:white;padding:14px;border-radius:7px}code{overflow-wrap:anywhere}mjx-container[jax=SVG]{max-width:100%;overflow-x:auto}p,li{overflow-wrap:anywhere}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:20px 16px}}</style><script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script><link rel="stylesheet" href="../../_assets/learning-shell-v55.css"><script defer src="../../_assets/learning-shell-v55.js" data-se-mode="standard" data-se-root="../../" data-se-page="K/Q/labs/INTEGRATED-CASE.html"></script></head><body><header><a href="../INDEX.html">← Quantitative Systems Engineering</a></header><main><article><h1>Integrated quantitative laboratory — NS-QSE4.1</h1>
+<p><strong>Collection:</strong> Quantitative Systems Engineering, Chapters 1–8. <strong>Input status:</strong> synthetic classroom data only. <strong>Intended use:</strong> reproducible engineering-method demonstration; not qualified dispatch, safety, or vehicle control.</p>
+<h2>Research question and predeclared evidence boundary</h2>
+<p>Can a coordinated improvement in parallel dispatch capacity and fixed service time reduce simulated queue delay without concealing performance in compound disrupted conditions? How much uncertainty comes from the demand regime, the finite paired sample, the numerical solver, and the inadequacy of model assumptions? Which further evidence is required before approving any intervention?</p>
+<p>The source of record is <a href="../data/ns-qse4-case.json"><code>../data/ns-qse4-case.json</code></a>. This file declares observation units, all 24 synthetic count observations, Gamma-prior parameters, service design, compound stress multipliers, price/value assumptions, thermal parameters, scenario weights, synthetic discrepancy data, and explicit (false) approval gates. Its SHA-256 is embedded in generated results; edits must trigger fresh results.</p>
+<h2>Reproduce the controlled calculation</h2>
+<p>From the <strong>repository root</strong> with Python 3.10+:</p>
+<pre><code class="language-bash">python3 SE/K/Q/code/ns_qse_case.py
+python3 -m unittest discover -s SE/K/Q/code -p 'test_*.py'
+python3 scripts/check_step04_quantitative.py
+</code></pre>
+<p>Generated results are <a href="../outputs/ns-qse4-results.json"><code>../outputs/ns-qse4-results.json</code></a> and <a href="../outputs/ns-qse4-policy-days.csv"><code>../outputs/ns-qse4-policy-days.csv</code></a>. The run uses Python's standard library and fixed seeds; generated output depends on the Python pseudorandom algorithm as implemented in that interpreter. Use the same interpreter version for byte-for-byte reproduction, or use numerical tolerances for independent implementations.</p>
+<h2>Eight-workstream traceability crosswalk</h2>
+<table>
+<thead>
+<tr>
+  <th>Chapter</th>
+  <th>Engineering deliverable</th>
+  <th>Expected numerical or diagnostic result</th>
+  <th>Primary weakness to challenge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>01 — probability</td>
+  <td>Regime-conditioned rate model and mixture moments</td>
+  <td>10.000 and 17.869 requests/hour; mixture variance 29.414</td>
+  <td>Unmeasured regime dependence and missing counts</td>
+</tr>
+<tr>
+  <td>02 — estimation</td>
+  <td>Gamma posterior and day-paired bootstrap</td>
+  <td>Baseline minus combined 14.533 min, interval ~[10.86, 18.01]</td>
+  <td>Synthetic replications are not field samples</td>
+</tr>
+<tr>
+  <td>03 — experiments</td>
+  <td>Two-factor blocked factorial contrasts</td>
+  <td>Capacity effect −9.598 min; interaction contrast +3.826 min</td>
+  <td>Model-only causality, scale dependence</td>
+</tr>
+<tr>
+  <td>04 — discrete events</td>
+  <td>Event-calendar trace and conservation</td>
+  <td>Compound combined timely 82.95%, overtime 26.89%</td>
+  <td>No route, priority, staffing or carry-over queue</td>
+</tr>
+<tr>
+  <td>05 — continuous model</td>
+  <td>Thermal balance and solver comparison</td>
+  <td>Exact 37.6444°C at 2 h; Euler h=1 gives 38.56°C</td>
+  <td>Thermal parameters not calibrated</td>
+</tr>
+<tr>
+  <td>06 — feedback</td>
+  <td>Sampled recursion stability condition</td>
+  <td>Multiplier 0.5 at h=0.25 h, −1 at h=1 h</td>
+  <td>No real actuator or delay validation</td>
+</tr>
+<tr>
+  <td>07 — decisions</td>
+  <td>Weighted disutility and hard screen</td>
+  <td>Combined cost-plus-wait ~ $552.68; all policies fail compound screen</td>
+  <td>Value weights and costs are hypothetical</td>
+</tr>
+<tr>
+  <td>08 — credibility</td>
+  <td>Provenance and adverse approval screen</td>
+  <td>Synthetic discrepancy RMSE ~1.904 min; permission gates false</td>
+  <td>No independent real-world validation</td>
+</tr>
+</tbody>
+</table>
+<h2>Challenge experiments</h2>
+<ol>
+<li><strong>Demand stress:</strong> In a <em>copy</em> of the JSON, increase every storm count by 30%. Recompute the posterior rate, the policy comparison, and the hard feasibility check. Identify which differences follow from changing the demand generator and which reflect a changed value judgment.</li>
+<li><strong>Preference reversal:</strong> Increase the cost of the combined policy to $1,000 per window and recompute the minimum illustrative disutility. Even if the preferred numeric alternative changes, the compound service screen still applies.</li>
+<li><strong>Incorrect assumptions:</strong> Request a queue with zero servers, negative service time, unsorted arrivals, a nonfinite arrival, invalid Gamma prior, and scenario weights that do not sum to one. The model must reject these instead of generating plausible-looking outputs.</li>
+<li><strong>Numerical instability:</strong> Derive the discrete multiplier for Euler feedback at a step size above the stability boundary. Compare the numerical linear recursion with the stable continuous plant. Do not substitute an unstable Euler result for measured physical instability.</li>
+<li><strong>Governance failure:</strong> Set numeric targets to a trivially easy value, leaving permission gates false. The operational disposition must remain <strong>HOLD</strong>. Approval cannot be inferred from a successful optimization.</li>
+</ol>
+<h2>Acceptance and independent review</h2>
+<p>The exercise passes computational verification when the generated results agree with declared inputs and reference checks, all requests are conserved in the queue, and invalid datasets raise a clear error. It does <strong>not</strong> pass field validation, independent safety assurance, equitable-access review, or operator authorization. Reviewers should inspect the source, rerun the model, register discrepancies with units and tolerances, assess the independence assumptions, and request real dispatch, weather and accessible-service traces before operational interpretation.</p>
+<p><strong>Required learner submission:</strong> a revised configuration JSON, a diff against the baseline, generated outputs, two manually verified equations, one deliberately failing test, a one-page limitations/evidence register, and a decision labeled <strong>HOLD / conditional instructional use</strong> unless independently substantiated permissions and validation are supplied.</p>
+<p><a href="../INDEX.html">Return to the Quantitative collection</a></p>
+</article></main></body></html>

@@ -1,0 +1,67 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS-SOS18.1 regional emergency access</title><style>body{margin:0;background:#f4f8f8;color:#1a3845;font:16px/1.75 system-ui,sans-serif}header{padding:16px max(20px,calc((100vw - 1080px)/2));background:#173f52}header a{color:#c6f5ee}main{max-width:1080px;margin:24px auto;padding:clamp(18px,4vw,42px);border:1px solid #d5e3e6;border-radius:12px;background:white}a{color:#116970}h1{line-height:1.2}h2{margin-top:1.8rem}table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}th,td{padding:9px;border:1px solid #d9e4e7;text-align:left}th{background:#edf5f4}pre{overflow:auto;background:#edf4f5;padding:15px}code{overflow-wrap:anywhere}img{max-width:100%}mjx-container{max-width:100%;overflow-x:auto}@media(max-width:700px){main{margin:0;border:0;border-radius:0;padding:18px}}</style><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script></head><body><header><a href="../README.html">← Book 18</a> · <a href="../OPEN-BOOK.html">Textbook reader</a></header><main><h1>NS-SOS18.1 — Regional emergency access: controlled SoS engineering case</h1>
+<p><strong>Status:</strong> fictional instructional exercise; source scenario probabilities, availability factors, costs and trip demands are <em>invented</em> for this release. They are not reconstructed from an agency or the previous textbooks. All capacities are <strong>trip slots available over four hours</strong>, not hourly trips, emergency patients, simulated trajectories or externally measured data. The case complements rather than replaces the existing Northstar Regional Emergency Access case in Book 18.</p>
+<h2>Decision and constituent independence</h2>
+<p>The regional council asks whether a combination of battery backup, data interoperability and alternative routing can deliver <strong>62 accessible trips</strong> and <strong>186 standard trips</strong> within four hours while dispatch information is at most <strong>5 minutes</strong> old. Rail, paratransit, hospital intake, bus and campus shuttle owners retain separate authority, independent missions, and update clocks; the council cannot compel conformance by assigning a box in a drawing.</p>
+<p>The controlled <a href="controlled-inputs.json">input file</a> and <a href="../tools/step03_book18_sos.py">standard-library model</a> describe six independently owned operational resources plus an accessible receiving interface. The <a href="authority-registry.csv">authority registry</a>, <a href="mission-thread.csv">mission thread</a>, <a href="interface-contracts.csv">interface contracts</a>, <a href="vnv-distributed-matrix.csv">distributed evidence matrix</a>, <a href="assurance-register.csv">assurance register</a>, and <a href="decision-record.csv">decision record</a> make <em>authority, data, timing, assumptions and failed evidence</em> inspectable.</p>
+<h2>Architecture and calculation</h2>
+<p>Two independently offered <strong>accessible</strong> routes (shuttle and paratransit) feed a common accessible receiving interface. Bus and rail provide independent <strong>standard</strong> paths. The shared dispatcher and hospital are not free capacity: they constrain both demand classes. The allocation policy <strong>reserves accessible slots first</strong>; standard users receive remaining common slots. If resource capacities are \(c_i\) and event-specific effectiveness factors are \(f_i\), let:</p>
+<p>\[
+A_{path}=\min(c_{sh}f_{sh}+c_{para}f_{para},\;c_{access}f_{access}),\quad
+S_{path}=c_{bus}f_{bus}+c_{rail}f_{rail},\quad
+C=\min(c_{dispatch}f_{dispatch},\;c_{hospital}f_{hospital}).
+\]
+\[
+A=\min(D_A,A_{path},C),\qquad S=\min(D_S,S_{path},\max(0,C-A)).
+\]</p>
+<p>A mission screen passes only if \(A\geq62\), \(S\geq186\), timestamp age \(\leq5\) min, and the contract revision and associated evidence are current. This is a deterministic capacity <strong>screen</strong>, not a traffic assignment solver. The accessible-first rule is a policy choice with equity implications; the model neither optimizes fairness nor accounts for patient acuity, passenger travel time, crowding, routing, staff, charging, privacy agreements or evacuation feasibility.</p>
+<p>In <strong>normal</strong> service, accessible path capacity is min(50+35,70)=70, standard path capacity is 150+110=260, and common slots=min(270,280)=270. Allocating 62 accessible leaves 208 common slots; 186 standard are therefore possible on the synthetic inputs. Under a <strong>grid</strong> disruption without mitigation, accessible path is 50(0.60)+35(0.85)=59.75 and common slots=min(270(0.90),280(0.90))=243. Accessible capacity fails the 62-trip target despite individually operating constituents.</p>
+<h2>Reproduction and conditional results</h2>
+<p>From the repository root:</p>
+<pre><code class="language-bash">python SE/K/B18/tools/step03_book18_sos.py
+python SE/K/B18/tools/step03_book18_sos.py --check
+python scripts/check_step03_book18.py
+</code></pre>
+<p>Output includes <a href="policy-coverage.csv">coverage by policy</a>, all <a href="scenario-screens.csv">policy-scenario screens</a> and <a href="computed-evidence.json">worked Bayesian, live-change and compound-stress evidence</a>. Hypothetical scenario weights are normal .55, grid .20, flood .15, comms .10; the <strong>compound</strong> stress is intentionally outside the nominal probability ensemble and does not have a defensible probability estimate.</p>
+<table>
+<thead>
+<tr>
+  <th>Policy</th>
+  <th style="text-align:right">Added synthetic cost (million USD)</th>
+  <th style="text-align:right">Weighted joint scenario pass</th>
+  <th>Compound stress</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Status quo</td>
+  <td style="text-align:right">0.00</td>
+  <td style="text-align:right">55%</td>
+  <td>Fail</td>
+</tr>
+<tr>
+  <td>Backup power</td>
+  <td style="text-align:right">0.70</td>
+  <td style="text-align:right">75%</td>
+  <td>Fail</td>
+</tr>
+<tr>
+  <td>Data federation</td>
+  <td style="text-align:right">0.50</td>
+  <td style="text-align:right">65%</td>
+  <td>Fail</td>
+</tr>
+<tr>
+  <td>Integrated</td>
+  <td style="text-align:right">1.65</td>
+  <td style="text-align:right">100%</td>
+  <td>Fail</td>
+</tr>
+</tbody>
+</table>
+<p>The 95% <em>scenario-coverage</em> screen can be passed by the integrated option, but <strong>coverage over four constructed scenarios is not 95% observed mission reliability</strong>. Cost figures are assumed incremental costs, not approved estimates. The scenario factors are stipulated mitigation effects, not measurements. The integrated policy is unsuitable for operational qualification because the compound case fails, authority and clinical validation are missing, and a new rail interface revision makes the evidence status stale.</p>
+<h2>Information fusion and critical uncertainty</h2>
+<p>Let \(B\) mean a blocked route. The fictional prior is \(P(B)=0.15\), and an alarm has sensitivity .85 and false-alarm probability .10. For a positive alarm, Bayes' theorem gives \(P(B\mid +)=.15(.85)/[.15(.85)+.85(.10)]=.60\). If a second conditionally independent confirmation has sensitivity .80 and false-positive probability .15, \(P(B\mid +,+)=.60(.80)/[.60(.80)+.40(.15)]=.8888889\). Correlated feeds, shared clocks, stale messages and unmeasured calibration invalidate the conditional-independence simplification. Confidence cannot override invalid operational authority or an expired data timestamp.</p>
+<h2>Live constituent change and engineering board</h2>
+<p>An independent rail owner changes <code>dispatch-v1</code> from revision <strong>1.0 to 2.0</strong>, without refreshed evidence. The model's numerical throughput can still pass in nominal conditions, but <code>interface_current=false</code>, so the <strong>joint screen fails</strong>. The correct response is not to silently continue from a prior version: issue an impact record, negotiate a compatible contract or safe fallback, perform cross-owner integration tests, revise the mission and risk baseline, and obtain the agreed use authorization.</p>
+<p><strong>Review disposition: HOLD for operational deployment.</strong> A limited pilot proposal might be considered only after current owner commitments, accessibility and privacy review, source calibration, compound-hazard testing, route/clinical realism, independent validation, and an accountable board decision. A mathematically appealing capacity allocation does not discharge distributed verification, public legitimacy or operational safety obligations.</p>
+</main></body></html>

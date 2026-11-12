@@ -35,3 +35,7 @@ The runner writes `outputs/scenario-results.json`, `outputs/scenario-summary.csv
 This code is deliberately small enough to inspect. It has no real vehicles, dispatch APIs, medical or emergency-response functions, security hardening, concurrency control, route model, field calibration, or human safety assurance. Its confidence interval describes **Monte Carlo sampling precision inside the synthetic model**, not an estimate of real-world safety or validity. A local review decision may approve only learning and further model development.
 
 Continue from the [v11 Northstar lab](../integrated-lab/README.md), or return to the [unified encyclopedia](../OPEN-ENCYCLOPEDIA.html).
+
+## Release U2 cross-laboratory evidence exercise
+
+The [U2 cross-lab credibility lab](../lab-credibility-u2/README.md) replays this source without rewriting its baseline data or tests. The U2 sections now teach fault, provenance and authorization checks.

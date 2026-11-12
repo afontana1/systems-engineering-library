@@ -1,0 +1,138 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS-MB3 Model-Based Engineering Case · Systems Engineering Library</title><link rel="stylesheet" href="../../_assets/learning-shell-v55.css"><style>body{font:16px/1.72 system-ui,sans-serif;margin:0;background:#f4f7f8;color:#1b3440}main{max-width:1100px;margin:28px auto;padding:clamp(20px,4vw,52px);background:white;border-radius:12px;border:1px solid #d6e3e5}header{background:#173f52;padding:18px max(20px,calc((100vw - 1100px)/2))}header a{color:#c6f5ee}a{color:#086873}h1{line-height:1.18}h2{margin-top:2rem}p,li{max-width:95ch}img{max-width:100%;height:auto}table{display:block;overflow-x:auto;border-collapse:collapse;margin:1.3rem 0}td,th{border:1px solid #d9e3e6;padding:10px;vertical-align:top}th{background:#eff6f6}pre{background:#edf2f5;padding:16px;overflow:auto}code{background:#edf2f5;padding:2px 4px}@media(max-width:700px){main{margin:0;border:0;border-radius:0;padding:22px}}</style><script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B3/case/INDEX.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script></head><body><header><a href="../README.html">← Book 3</a> · <a href="../OPEN-BOOK.html">Open textbook</a></header><main><h1>Northstar NS-MB3 — Model-based engineering study case</h1>
+<p><em>Book III: Introduction to Model-Based Systems Engineering (EN.645.631).</em> This is one <strong>fictional</strong> dispatch and monitoring system analyzed consistently across twelve chapters. The model describes an engineering decision, not a certified SysML v2 model or a real-world operating system.</p>
+<p><a href="../OPEN-BOOK.html">Open Book 3</a> · <a href="../README.html">Book 3 contents</a> · <a href="model-baseline.json">Editable JSON</a> · <a href="evidence-register.csv">Evidence register</a> · <a href="../tools/step03_book3_model_check.py">Python checker</a></p>
+<h2>The review question</h2>
+<p>Can a campus-shuttle design support eight scheduled trips in the ideal peak hour while maintaining an authorization gate, a telemetry-freshness limit, nominal command timing, energy reserve, and duplicate-token protection? What additional evidence would be needed for a credible deployment decision?</p>
+<p>The controlled baseline <code>NS-MB3.1</code> has <strong>four stakeholder needs, six technical requirements, five allocated functions, five components, two illustrative interfaces, and six test records</strong>. Data are chosen to expose missing evidence, not to emulate real certification. No field data, conforming SysML parser output or operational approval is included.</p>
+<p><img src="../diagrams/mb3-semantic-chain.svg" alt="Semantic model and evidence chain" /></p>
+<h2>Core quantitative results</h2>
+<table>
+<thead>
+<tr>
+  <th>Model claim</th>
+  <th>Stated inputs</th>
+  <th>Result</th>
+  <th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Candidate A ideal capacity</td>
+  <td>2 vehicles × 3 trips/h</td>
+  <td>6 trips/h</td>
+  <td>Fails eight-trip necessary bound</td>
+</tr>
+<tr>
+  <td>Candidate B ideal capacity</td>
+  <td>3 × 3</td>
+  <td>9 trips/h</td>
+  <td>Passes necessary bound; not realized throughput</td>
+</tr>
+<tr>
+  <td>Candidate C ideal capacity</td>
+  <td>4 × 3</td>
+  <td>12 trips/h</td>
+  <td>Greater model headroom, higher cost</td>
+</tr>
+<tr>
+  <td>Nominal serial-path delay</td>
+  <td>90 + 110 + 80 + 45 ms</td>
+  <td>325 ms</td>
+  <td>75 ms below nominal 400-ms limit</td>
+</tr>
+<tr>
+  <td>Degraded serial-path delay</td>
+  <td>120 + 140 + 120 + 80 ms</td>
+  <td>460 ms</td>
+  <td>60 ms above nominal number; requires scoped degraded rule</td>
+</tr>
+<tr>
+  <td>Shift energy</td>
+  <td>24 × (1.8 km × 0.36 kWh/km + 0.20 kWh)</td>
+  <td>20.352 kWh</td>
+  <td>9.648 kWh below illustrative 30-kWh limit</td>
+</tr>
+</tbody>
+</table>
+<p><img src="../diagrams/mb3-capacity.svg" alt="Candidate architecture decision space" /></p>
+<h2>Controlled verification example</h2>
+<p><code>TEST-03</code> says PASS for <code>REQ-03@1</code>, but <code>REQ-03</code> is now at revision 2. Its evidence is <strong>stale</strong>. <code>TEST-06</code> is <strong>PLANNED</strong>, so there is no passing execution for the duplicate-token requirement. Four other requirements have a current linked <em>teaching fixture</em>, not physical verification. A correct reviewer must not count all six as successfully verified.</p>
+<p>Run from the repository root:</p>
+<pre><code class="language-sh">python3 SE/K/B3/tools/step03_book3_model_check.py
+</code></pre>
+<p>The checker validates <strong>only this JSON teaching schema</strong> (identities, allocations, interfaces, test revision labels, and arithmetic). It does not parse SysML v1 or v2, prove safety or perform real-world measurement. Consult the <a href="https://www.omg.org/spec/SysML/2.0">official OMG SysML v2 language specification</a> for normative language semantics and the <a href="https://www.iso.org/standard/74393.html">ISO/IEC/IEEE 42010:2022 overview</a> for architecture descriptions.</p>
+<h2>Chapter-by-chapter use</h2>
+<table>
+<thead>
+<tr>
+  <th>Chapter</th>
+  <th>Engineering question</th>
+  <th>Artifact or test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>Why pay for a model?</td>
+  <td>Hypothetical break-even analysis and capacity contradiction</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>What is controlled, in which tool?</td>
+  <td>Baseline schema, stable IDs and model-change transaction</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>What do stakeholders actually need?</td>
+  <td>Needs, scenarios and system context</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>What do model relations mean?</td>
+  <td>Allocations, test links and evidence currency</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>Which behaviors are forbidden?</td>
+  <td>Dispatch-token safety invariant and concurrency counterexample</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>What constitutes an interface?</td>
+  <td>Position age and serial command latency budgets</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>Can logical functions be allocated safely?</td>
+  <td>Function-to-component mapping and fault boundary</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>Are quantitative constraints physically possible?</td>
+  <td>Energy conservation and sensitivity</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>Which physical candidate is defensible?</td>
+  <td>Feasibility filter and cost/capacity trade</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>What counts as verification evidence?</td>
+  <td>Synthetic test register and revision predicate</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td>Can errors be queried automatically?</td>
+  <td>Typed references and negative fixtures</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td>What can be approved?</td>
+  <td>Conditional review decision and evidence gaps</td>
+</tr>
+</tbody>
+</table>
+<h2>Review boundary and exercises</h2>
+<p>The strongest conclusion supported by this baseline is <strong>continue detailed design and evidence collection for candidate B, withholding operational authorization</strong>. Alter a copy of the JSON to remove a component, change a test revision, or raise demand; rerun the checker and explain which diagnostics are structural, which are numerical, and which remain matters for expert judgment. Do not modify the original fixture to conceal open requirements.</p>
+</main></body></html>

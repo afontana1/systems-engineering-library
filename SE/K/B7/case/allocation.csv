@@ -1,0 +1,6 @@
+function,component,requirement_ids,interface_ids,verification_obligation
+receive_and_authenticate,gateway,DI7-R02;DI7-R06,IF-GW,stale-token rejection and timestamping
+reserve_request,broker,DI7-R01;DI7-R02,IF-BR,idempotency under retry
+resolve_assignment,dispatch,DI7-R01;DI7-R02;DI7-R07,IF-DS,double-allocation rejection
+execute_command,vehicle controller,DI7-R02;DI7-R04;DI7-R06,IF-VC,safe timeout transition
+maintain_service,fleet support,DI7-R04;DI7-R05,IF-TR,repair and spares evidence

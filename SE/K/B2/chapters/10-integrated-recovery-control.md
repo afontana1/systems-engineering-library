@@ -85,3 +85,45 @@ Rebaselining is legitimate when scope, authority, or assumptions change with inf
 ## Put this into practice
 
 Work through [Lab 10: The Month Five Recovery Cell](../labs/lab-10-integrated-recovery-control.md), then write a short paragraph on how the laboratory simplifies the real-world management problem. Use the [existing short Week 10 primer](../../P0-text/lessons/645-667-w10.md) for a second explanation. The assessed deliverable is defined in the original course guide, not by the hypothetical lab.
+
+## Step 03 integrated reference — compare recovery strategies against a frozen baseline
+
+Recovery is not the same as adjusting the baseline so the variance disappears. Start from the NS-M1 month-five checkpoint: \(BAC=7.2\), \(EV=2.4\), \(AC=2.7\) million, and historical \(CPI=0.8889\). Under that sustained efficiency assumption, \(EAC\approx8.1\). The management question is which change in the **remaining work mechanism** could improve that forecast without losing technical acceptance or changing what “done” means.
+
+### Calculate the efficiency the recovery plan requires
+
+Suppose a recovery proposal asserts a revised \(EAC\) of $7.65M. Remaining earned work is \(BAC-EV=4.8\) million; future cost allowance is \(7.65-2.7=4.95\) million. Therefore
+
+\[
+TCPI_{7.65}=\frac{4.8}{4.95}\approx0.9697.
+\]
+
+The proposal requires **about 0.970** cost efficiency for all remaining work, better than the historical 0.889. That improvement is not impossible, but must be justified by a changed production mechanism: defects retired, automation proven, rework prevented, or a supplier correction delivered. A promise to “drive efficiency” is not supporting evidence. The proposal also needs a logic-backed finish forecast; dollar efficiency does not by itself repair missing schedule float.
+
+### Evaluate three interventions
+
+| Intervention | Possible benefit | New exposure to check |
+|---|---|---|
+| Add a second qualified integration crew | Shorter resource-constrained queue | Training, quality dilution, fixture limits |
+| Test interface behavior earlier with emulation | Earlier defect discovery | Fidelity limits, model-to-product mismatch |
+| Defer a nonessential feature through approved change | Less immediate work | Requirements impact, contractual acceptance, later rework |
+
+A purely numerical control action—raising a completion percentage or changing the PV curve retroactively—does not reduce engineering work. The program should keep a baseline/forecast/change ledger: approved baseline \(BAC\), current reported actuals, independently prepared \(EAC\), approved scope modifications, and the dated decision record.
+
+### A simple decision guardrail
+
+If acceleration adds an unavoidable $0.12M in extra resources, the recovery analysis must show at least $0.12M of expected avoidable cost elsewhere to break even **on cost alone**, or a quantified schedule/safety benefit justifying the spend. Count the avoided rework only once. Any accepted schedule change should also explain its effect on the 13-week teaching network or the full program schedule, whichever it actually modifies; they are different models.
+
+### Decide whether an improvement is sufficient
+
+The approved plan asks for a $7.65M EAC and therefore needs a future CPI of approximately 0.9697. Suppose a pilot mitigation demonstrates a plausible future CPI of only 0.95. The projected EAC becomes
+
+\[
+2.7+\frac{4.8}{0.95}\approx\$7.753\text{ million},
+\]
+
+approximately $0.103M above the recovery target. The mitigation may still be worthwhile relative to the $8.10M sustained-CPI forecast, but it is **insufficient for the stated target** without further improvements or an authorized change. This is why a recovery proposal must include (i) a measurable productivity mechanism, (ii) a forecast on the same scope, (iii) a schedule effect, (iv) a fresh risk/evidence review, and (v) a decision authority. A revised EAC and an approved performance baseline are different artifacts.
+
+**Practice with answer.** A report says a 5% reduction in EAC is achieved by allocating the last two verification milestones full earned credit before testing. **Answer:** this is measurement distortion, not recovery. Preserve authorized earned-value criteria, reopen the forecast based on actual test completion and audit the status of evidence by configuration.
+
+**Reference:** DOE [Integrated Project Management Using Earned Value Management](https://www.energy.gov/documents/integrated-project-management-using-earned-value-management-system) distinguishes independent EAC formulas from a manager's reasoned estimate at completion.

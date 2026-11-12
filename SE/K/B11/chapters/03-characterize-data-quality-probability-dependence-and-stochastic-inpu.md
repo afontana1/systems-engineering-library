@@ -94,6 +94,10 @@ A correct computed result is not automatically a system acceptance result; expla
 
 </details>
 
+## Phase 3 technical reference: Dependence is an input-model design decision
+
+Suppose a segment's travel time is \(T=D/V\), and long routes also have slow effective speeds. With \(\sigma_D=6\) m, \(\sigma_V=1.2\) m/s, \(\mu_D=120\) m, \(\mu_V=12\) m/s and \(\rho=-0.6\), linear propagation gives \(u_T=\sqrt{1.85}\approx1.360\) s, whereas an independent-input calculation gives 1.118 s. The true correlation is not established by this teaching assumption. A credible input-model report should include joint-data provenance, sensitivity to the correlation model, empirical tail fit, and separation of measurement error from operational variation. Reproduce the [complete correlated-input Monte Carlo study](../../methods/correlated-uncertainty-propagation.md) before accepting a reported tail probability.
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -131,3 +135,31 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [02 — Previous chapter](02-develop-the-m-s-plan-and-conceptual-model-before-implementation.md) · [04 — Next chapter](04-use-m-s-for-needs-opportunity-current-state-and-baseline-analysis.md) · [Book index](../README.md)
+
+## Step 03 integrated mobility simulation case: stochastic inputs and provenance
+
+### Translate demand and service data into stochastic hypotheses
+
+The course gives seven arrival-rate blocks: \(18,32,48,22,42,50,30\) requests/hour, with the 22/hour block lasting six hours. Our [controlled assumptions file](../case/model-assumptions.json) makes arrivals piecewise independent Poisson processes. Within a block with hourly rate \(\lambda_h\), sample interarrivals \(\Delta t\sim\mathrm{Exponential}(\lambda_h/60)\), measured in minutes. If a sampled arrival passes a segment boundary, discard that draw and restart at the next block; the memoryless property makes this construction consistent for the specified piecewise-constant intensity.
+
+For a triangular distribution \(X\sim\mathrm{Triangular}(a,m,b)\), the mean is \(E[X]=(a+m+b)/3\), *not* the modal value. For standard boarding, \(a=0.6,m=1.0,b=2.2\) minutes, so \(E[X]=3.8/3\approx1.267\) minutes. Charging uses \((24,32,50)\) minutes, giving mean \(106/3\approx35.333\) minutes. The program uses `random.triangular` with `low, high, mode` **argument semantics**: the explicitly ordered JSON triples `(low,mode,high)` are converted into the correct call order in the executable; blindly expanding the triple as positional parameters would be a serious modeling bug. [See the implementation.](../tools/step03_book11_mobility.py)
+
+Accessible boarding is lognormal with median 2.6 minutes and p90 5.0 minutes. If \(\log X\sim N(\mu,\sigma^2)\), then \(\mu=\log(2.6)\) and
+
+\[\sigma=\frac{\log(5.0)-\log(2.6)}{\Phi^{-1}(0.9)}\approx\frac{0.6539}{1.28155}\approx0.510.\]
+
+Thus \(E[X]=\exp(\mu+\sigma^2/2)\approx2.96\) minutes; **median and mean differ**. This is a distribution fitted to *given teaching quantiles*, not evidence that a lognormal tail is correct in service. Lognormal sampling can produce implausibly large values; any operational model needs measurement-based truncation or a clinically/operationally defensible bound, not silent clipping.
+
+### Independent streams, correlation and model-form error
+
+Each replication seed generates one fixed request stream, including boarding, travel and trip energy, and reuses it for all four fleet sizes. That is the **common random numbers** design: a 14-versus-12 difference is not obscured by comparing unrelated days. Charging durations have their own deterministic seed (shifted by an explicit constant) and are endogenous to fleet scheduling; fleet outcomes are therefore **partially** rather than perfectly paired. We do *not* infer independence of actual weather, demand and travel from the independent baseline generator. The separate stress scenario jointly increases arrival intensity by 20% and travel durations by 30%, demonstrating the significance of a shared adverse condition, but does not constitute a calibrated joint distribution.
+
+Store the role, units, version and evidence status of every input. The [credibility register](../case/credibility-register.csv) exposes assumed route travel time and missing accessible-tail validation. An apparently precise p90 may be dominated by these choices, not Monte Carlo noise. Random seed reproducibility can reproduce a *model error* perfectly.
+
+### Worked diagnostic
+
+In a 60-minute period at 48 requests/hour, the synthetic Poisson model predicts \(E[N]=48\), \(\operatorname{SD}(N)=\sqrt{48}\approx6.93\), and \(\operatorname{Var}(N)/E[N]=1\). If field hourly variance is 120 at the same mean, this input model is underdispersed (variance-to-mean ratio 2.5); estimating a more precise \(\lambda\) will not repair the missing clustering. Consider a negative-binomial count process, event-conditioned rates or a hierarchical model and validate on held-out shifts. The simple 48±6.93 is not a reliable p90 or range bound.
+
+**Exercise and solution.** For charging Triangular(24,32,50), a student reports a mean of 32 minutes because the mode is 32. **Solution:** \(106/3=35.333\) minutes. The undercount is 3.333 minutes per charge. If 30 charges/day share four chargers, nominal aggregate charger occupation is \(30(35.333)=1060\) charger-minutes, or \(1060/(4\times720)\approx36.8\%\) of available charger-minutes; that average utilization still cannot bound peaks or spatial conflicts.
+
+**Scope:** preserve the distinction among source-guide values, deliberately introduced synthetic parameters, and unobserved empirical referents. [Case dossier](../case/INDEX.html) · [Chapter 4](04-use-m-s-for-needs-opportunity-current-state-and-baseline-analysis.md).

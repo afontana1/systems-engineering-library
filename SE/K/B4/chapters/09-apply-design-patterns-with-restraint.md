@@ -83,3 +83,30 @@ In [Lab 9: Patterns are named tradeoffs](../labs/lab-09-apply-design-patterns-wi
 ## Continuity
 
 This chapter builds from [previous chapter](08-realize-use-cases-with-dynamic-design-models.md) and leads toward [next chapter](10-express-precise-constraints-with-ocl-and-exec.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/605-704-w09.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: when patterns improve the design—and when they do not
+
+### 9.1 Apply patterns to a documented change or failure pressure
+
+The case uses a *policy/strategy* boundary for vehicle eligibility. A future wheelchair-capacity rule can be implemented behind `AssignmentPolicy` without rewriting the reservation lifecycle. A *repository* port isolates the application contract from SQLite. A *transactional outbox* may become appropriate when audit or notification must cross a process boundary, but the current single-database case does not need it simply for fashion.
+
+A pattern is useful when its consequences are better than the simpler alternative. Before choosing one, write a change scenario and a failure scenario. Example: “Different campuses require independently versioned eligibility rules” motivates strategy selection; “the audit service can be unavailable during commit” motivates a durable delivery mechanism rather than a synchronous dual write.
+
+### 9.2 Compare alternatives with explicit decision criteria
+
+| Design alternative | Modularity | Commit consistency | New operational burden |
+|---|---|---|---|
+| Policy and repository in one process | Moderate, testable ports | One local transaction | Low |
+| Separate eligibility microservice | Independently deployable | Remote result may become stale | Network and contract management |
+| Separate audit broker, direct publish | Independent consumer | Dual-write gap without mitigation | Failure recovery and duplication |
+| Transactional outbox plus broker | Independent consumers with stored intent | Atomic local write plus eventual delivery | Worker, retention, deduplication |
+
+There is no universal winner. If policy must remain synchronously authoritative, remote service availability becomes a hard dependency. If audit events can be eventually delivered but must not be lost, outbox semantics may help, at the cost of duplicate delivery and eventual-consistency handling. These are architecture choices, not diagram decorations.
+
+### 9.3 An anti-pattern example
+
+A `SingletonReservationManager` with mutable global state may pass single-threaded unit tests while failing concurrent requests and complicating isolation. Replacing it with a `Repository` abstraction is not enough if both implementations still rely on read-before-write checks. The invariant needs a storage-level constraint or a justified concurrency-control protocol. A pattern changes software structure; it does not waive the need to prove domain rules.
+
+**Solved checkpoint.** The team suggests an `Observer` pattern to update the audit log after booking. If the observer callback runs after the database commit and fails, the log can be missing. For `SW-07`, an in-transaction audit write better meets the stated teaching contract. If an asynchronous observer is needed, introduce durable event intent and idempotent consumption.
+
+**Exercise.** Propose a versioned selection strategy for two campuses with different accessibility policies. Define the strategy interface, configuration provenance, and a test that detects the wrong strategy being deployed.

@@ -46,6 +46,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)](https://sebokwiki.org/wiki/Main_Page) — Community-maintained secondary guide; use its references for further research.
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 
+
+
+## Step 02 review studio — a locally rational rule that creates a global failure
+
+Imagine every shuttle controller independently selects the shortest route to minimize its own dispatch delay. If many vehicles make that decision simultaneously, a narrow campus corridor can become overloaded; each local controller behaves as specified while the system-level travel time degrades. Such an outcome is *emergent* in the engineering sense when interactions generate behavior that cannot be inferred from each isolated component's test result alone.
+
+**Solved exercise:** two corridors can carry at most 6 and 4 vehicles per interval without congestion, respectively. A dispatcher allocates all 10 vehicles to the nominally shorter 6-capacity corridor. Is the component-local “choose shortest path” rule sufficient for system performance? **No.** The aggregate assignment exceeds a known capacity. A coordination policy, capacity-aware routing, or demand constraint must be evaluated at the system level.
+
+**Evidence strategy:** test multiple scales, realistic interaction patterns, boundary conditions, and adaptation over time. Do not label every unexpected bug “emergence”; first rule out an omitted requirement, an incorrect interface assumption, or a conventional implementation defect.
+
 ## Follow the knowledge
 
 **Related concepts**

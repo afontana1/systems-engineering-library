@@ -127,3 +127,31 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [06 — Previous chapter](06-specify-interfaces-exchanges-allocations-ownership-and-model-based-c.md) · [08 — Next chapter](08-build-executable-parametric-models-with-units-provenance-constraints.md) · [Book index](../README.md)
+
+## Step 03 integrated technical reference: NS-MBA9.1 — derived requirements and typed trace queries
+
+### A requirement is a supported claim, not a graph node count
+
+The case separates six verifiable obligations from four source needs. `R01` derives a numerical throughput threshold from `N01`; `R03` specifies a population fraction for accessible pickups from `N02`; `R05` is a charging-recovery inequality from `N03`. The [requirements file](../case/requirements.csv) records identifiers, measurands, thresholds and intended test routes, while [model.json](../case/model.json) holds typed `derives` and `allocatedTo` relations. These relations are machine-checkable only because their endpoint types are defined.
+
+In this small model, an accepted `derives` edge must be **need → requirement**, and an `allocatedTo` edge must be **requirement → function**. The checker rejects an unknown target, incorrect semantic edge, duplicate identifier or missing allocation. A generic undirected graph that counts every link alike cannot tell whether a requirement is sourced from a legitimate need or merely referenced by a test plan.
+
+### Trace coverage is not evidence sufficiency
+
+Define structural derivation coverage as
+
+\[
+C_D=\frac{\#\{r:\exists n,\ n\overset{derives}{\longrightarrow}r\}}{\#\{r\}},
+\]
+
+and a separate operationally applicable evidence count for a declared baseline. A planned test is not a completed result; a model output may support design analysis but not a physical acceptance claim. The evidence register marks `E03` **PLANNED** and `E06` **STALE**. The latter belongs to baseline `NS-MBA9.0`, not current `NS-MBA9.1`.
+
+A sound trace query must also report what is **absent**: no approved winter-accessibility sampling data for `R03`, no current HIL concurrency demonstration for `R06`, and no operational sampling distribution for the model-based `R02` latency estimate. Absence is a legitimate outcome and should drive an action owner.
+
+**Exercise.** You find six of six requirements linked to intended tests, but one test is unexecuted and one was performed on an old build. What are the two coverage percentages?
+
+<details><summary>Worked answer</summary>
+
+Test-plan linking is 100%. If the other four tests had suitable executed current-baseline results, the maximum current executed coverage would be 4/6 = 66.7%. In this actual synthetic register, four items are *modeled*, not executed qualifications, so the current executed qualification count is **0/6**. State the denominator and evidence criterion explicitly.
+
+</details>

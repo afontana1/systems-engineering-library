@@ -33,6 +33,21 @@ For review, require a versioned bill of materials, operating profile, maintenanc
 - **L1 · Definitions and scope of life-cycle planning:** [NASA Systems Engineering Handbook, life-cycle cost and product support/operations](https://www.nasa.gov/reference/systems-engineering-handbook/). Definitions and scope of life-cycle planning; not the example cash flows.
 - **L2 · Life-cycle transitions and operations consideration:** [NASA Systems Engineering Handbook, 3.0 Program/Project Life Cycle](https://www.nasa.gov/reference/systems-engineering-handbook/). Life-cycle transitions and operations consideration; project applicability varies.
 
+
+## Step 02 review exercise: avoid comparing purchase price with lifecycle cost
+
+Two synthetic service machines meet the same requirement. Option A costs $100,000 initially and $24,000 per year in support; B costs $135,000 initially and $17,000 annually. For a **five-year**, end-of-year cash-flow horizon at a **5% annual discount rate**, the annuity present-value factor is
+
+\[
+P=\frac{1-(1.05)^{-5}}{0.05}\approx 4.32948.
+\]
+
+Thus \(LCC_A=100000+24000P\approx\$203,907\) and \(LCC_B=135000+17000P\approx\$208,601\). A is cheaper by about **$4,694** under these deliberately simplified assumptions even though B has lower yearly costs. If B also avoids a verified $2,000/year of downtime loss, its adjusted cost becomes about **$199,942**, changing the decision. Do not count the same downtime avoided in both annual support and benefit terms.
+
+The real comparison must distinguish preventive and corrective maintenance, spares, end-of-life disposal, operator workload, availability and uncertain failure rates. Discounted expected costs are not sufficient to waive safety or required service floors.
+
+**Exercise (answer).** At zero discount, five-year costs are A = $220,000 and B = $220,000. The apparent preference disappears. Report sensitivity to horizon, failure distributions and uncertain annual support estimates rather than one unqualified lifecycle number.
+
 ## Follow the knowledge
 
 - **Prerequisites:** [Work breakdown structures and technical baselines](wbs-and-baselines.md), [Reliability, availability, and maintainability: three different promises](reliability-availability-maintainability.md).

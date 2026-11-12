@@ -1,0 +1,9 @@
+requirement,run,baseline,status,kind,details
+SWS-01,LT-51,NS-SW5.1,PASS,synthetic,candidate queueing proxy; not a measured service percentile
+SWS-02,MON-51,NS-SW5.1,AT_RISK,synthetic,36 of 43.2 allowance minutes used; proposed 9-minute canary exceeds 7.2 remaining. No measured SLO breach to date.
+SWS-03,TX-51,NS-SW5.1,PASS,synthetic,SQLite fixture; not distributed deployment proof
+SWS-04,TEL-51,NS-SW5.1,PASS,synthetic,five-second boundary fixtures
+SWS-05,AUD-51,NS-SW5.1,PASS,synthetic,transaction rollback fixture
+SWS-06,BLD-50,NS-SW5.0,PASS,synthetic,intentionally stale build attestation
+SWS-07,DRILL-51,NS-SW5.1,PLANNED,synthetic,drill not yet executed
+SWS-08,OPS-51,NS-SW5.1,PASS,synthetic,scripted operator fallback exercise

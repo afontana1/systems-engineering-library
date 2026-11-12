@@ -1,0 +1,23 @@
+{
+  "case_id": "NS-SOS18.1",
+  "intended_use": "synthetic instructional architecture screening only",
+  "time_horizon_hours": 4,
+  "targets": {"accessible_trips": 62, "standard_trips": 186, "max_data_age_min": 5, "joint_coverage": 0.95},
+  "resources": {"shuttle": 50, "paratransit": 35, "bus": 150, "rail": 110, "dispatch": 270, "hospital": 280, "accessible_intake": 70},
+  "governance": {"dispatch_owner": "regional-coordinator", "hospital_owner": "hospital-network", "paratransit_owner": "paratransit-provider", "rail_owner": "rail-operator", "interface_expected_revision": "1.0", "interface_current_revision": "1.0", "evidence_current": true},
+  "scenarios": [
+    {"id": "normal", "probability": 0.55, "factors": {"shuttle": 1, "paratransit": 1, "bus": 1, "rail": 1, "dispatch": 1, "hospital": 1, "accessible_intake": 1}, "data_age_min": 2},
+    {"id": "grid", "probability": 0.20, "factors": {"shuttle": 0.60, "paratransit": 0.85, "bus": 0.80, "rail": 0.70, "dispatch": 0.90, "hospital": 0.90, "accessible_intake": 0.90}, "data_age_min": 3},
+    {"id": "flood", "probability": 0.15, "factors": {"shuttle": 0.80, "paratransit": 0.80, "bus": 0.55, "rail": 0.50, "dispatch": 0.90, "hospital": 0.85, "accessible_intake": 0.95}, "data_age_min": 4},
+    {"id": "comms", "probability": 0.10, "factors": {"shuttle": 0.90, "paratransit": 0.90, "bus": 0.95, "rail": 0.95, "dispatch": 0.66, "hospital": 1, "accessible_intake": 1}, "data_age_min": 12}
+  ],
+  "stress_scenario": {"id": "compound_grid_flood", "factors": {"shuttle": 0.55, "paratransit": 0.55, "bus": 0.38, "rail": 0.30, "dispatch": 0.65, "hospital": 0.70, "accessible_intake": 0.70}, "data_age_min": 9},
+  "policies": [
+    {"id": "status-quo", "added_cost_musd": 0, "overrides": {}},
+    {"id": "backup-power", "added_cost_musd": 0.7, "overrides": {"grid": {"factors": {"shuttle": 0.96, "bus": 0.95, "rail": 0.85, "dispatch": 0.98, "hospital": 1.0, "accessible_intake": 1.0}}}},
+    {"id": "data-federation", "added_cost_musd": 0.5, "overrides": {"comms": {"factors": {"dispatch": 0.98}, "data_age_min": 2}, "flood": {"factors": {"bus": 0.70, "rail": 0.75}}}},
+    {"id": "integrated", "added_cost_musd": 1.65, "overrides": {"grid": {"factors": {"shuttle": 0.96, "bus": 0.95, "rail": 0.85, "dispatch": 0.98, "hospital": 1.0, "accessible_intake": 1.0}}, "comms": {"factors": {"dispatch": 0.98}, "data_age_min": 2}, "flood": {"factors": {"bus": 0.80, "rail": 0.84, "dispatch": 0.98, "hospital": 0.98}}}}
+  ],
+  "bayes": {"prior_block": 0.15, "initial_alarm_sensitivity": 0.85, "initial_alarm_false_positive": 0.10, "independent_confirm_sensitivity": 0.80, "independent_confirm_false_positive": 0.15},
+  "assumptions": ["All capacities are invented trip slots over four hours, not passengers per hour", "Accessible trips receive allocation priority; standard trips receive remaining shared slots", "Scenario probabilities are hypothetical and sum to one; compound stress is excluded", "Mitigation performance is stipulated, not validated", "Independence is only asserted for the second Bayesian signal conditional on route blockage", "A changed or stale constituent interface blocks evidence readiness even if numerical capacity suffices"]
+}

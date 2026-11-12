@@ -41,3 +41,15 @@ Consider a message arriving 12 minutes late. Its `arrival_min` is the demand tim
 <details><summary>Worked answer</summary>Launch multiple workers with the same idempotency key, synchronize their write attempts, and assert exactly one durable request and one effect. Use a transaction or unique constraint; a sequential in-memory dictionary is insufficient evidence.</details>
 
 **Submit:** a versioned request-contract document, transition table with invalid transitions, and two negative tests. Related: [software prototype in v11](../../integrated-lab/chapters/05-software-prototype.md).
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: State transitions and truthful fault observability.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+An *event truth ledger* and the information available to an operating agent are different things. v12's `LOSS` scenario classifies four of twelve unique requests as `unobserved_message_loss`; the simulator knows this because the fault injector holds the source list. A receiver that never receives the event cannot automatically distinguish it from an event that never occurred.
+
+**State accounting:** `12 = 8 completed + 4 injected lost + 0 capacity unserved`. The independent U2 checker reconciles every scenario's ledger and injects a falsified record status to ensure the audit detects it. The 8 completed requests yield a reported `8/12 = 66.67%`, not `8/8 = 100%`.
+
+**Exercise and explained solution:** How could a deployed message system detect missing requests? Use sender-generated monotonic identities, durable sender receipts, an acknowledgment contract, bounded retry semantics and reconciliation. None of these are established by counting the simulator's injected drop events; they require separate tests and authority to process real events.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

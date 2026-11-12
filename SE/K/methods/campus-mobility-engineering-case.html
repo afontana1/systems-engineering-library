@@ -1,0 +1,171 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Connected engineering case: Campus Mobility release CM-B2 · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/campus-mobility-engineering-case.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Connected engineering case: Campus Mobility release CM-B2</h1>
+<p><em>Longitudinal case study · Phase 4 · From stakeholder need to architecture, trade, hazard control, evidence, and release decision</em></p>
+<p>The library's subjects are usually taught through separate courses. A systems engineer, however, must make their assumptions and results agree <strong>across those boundaries</strong>. This case gives one deliberately small, internally connected example. It provides source data, explicit relationships, calculations, a controlled model change, review questions, and an honest unresolved-issues register. It is a <strong>fictional teaching case</strong>, not a project design approval.</p>
+<h2>1. Mission context and stakeholder needs</h2>
+<p>The Campus Mobility program considers a small supervised, low-speed shuttle on a fenced test route. Its participants include riders, attendants, fleet dispatchers, maintainers, safety reviewers, and the local operational authority. The immediate experiment is limited to dry-surface demonstrations under supervision. Future public operation is outside the stated intended use.</p>
+<p>Two stakeholder needs are intentionally different:</p>
+<ul>
+<li><strong>NEED-ACCESS:</strong> riders should be able to board and alight without exposure to a moving vehicle.</li>
+<li><strong>NEED-RELIABLE-SERVICE:</strong> attendants should receive timely acknowledgement when a supervised dispatch request is accepted.</li>
+</ul>
+<p>These needs become requirements only after the team states conditions, boundaries, observable measures, authority and acceptance methods. “Safe boarding” and “fast dispatch” are not by themselves measurable design requirements.</p>
+<h2>2. Derive operational requirements and acceptance conditions</h2>
+<table>
+<thead>
+<tr>
+  <th>ID</th>
+  <th>Verifiable statement for the pilot</th>
+  <th>Allocated owner</th>
+  <th>Evidence type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>REQ-DOOR</td>
+  <td>Inhibit open-door authorization unless indicated speed is at most 0.5 m/s <strong>and</strong> the parking brake is engaged</td>
+  <td>Door controller</td>
+  <td>Fault-injection functional test plus safety review</td>
+</tr>
+<tr>
+  <td>REQ-ACK</td>
+  <td>Acknowledge an accepted supervised dispatch request within 2.0 s under a specified test load</td>
+  <td>Dispatch service</td>
+  <td>Time-stamped integration test</td>
+</tr>
+</tbody>
+</table>
+<p>The requirements require clarification before real implementation. REQ-DOOR must specify sensor validity and age, speed measurement uncertainty, brake status trust, command/actuator delay, emergency egress and degraded modes. REQ-ACK must specify clock synchronization, load distribution, network conditions, definition of an accepted request and percentile or per-request pass criterion. In the synthetic fixture, EV-ACK reports a maximum observed time of 1.74 s, but no field or statistical guarantee is claimed.</p>
+<p>Link each requirement to its originating need, owner, hazard, safety/control mechanism, test procedure, evidence record and configuration. The <a href="data/campus-mobility-release.json">traceability fixture</a> implements these specific cross-links.</p>
+<h2>3. Logical architecture and interfaces</h2>
+<p>The minimal logical architecture has four components:</p>
+<ol>
+<li><strong>Dispatch service</strong> receives supervised route requests, validates preconditions and returns acknowledgements.</li>
+<li><strong>Door controller</strong> issues bounded door authorization commands.</li>
+<li><strong>Speed sensor</strong> reports measured vehicle speed with accuracy, timestamp and health status.</li>
+<li><strong>Brake-status interface</strong> reports whether the parking brake is engaged and the reading is trustworthy.</li>
+</ol>
+<p>The door controller's safety-relevant decision depends on more than two boolean flags. A realistic interface contract would specify units (m/s), timing, sampling interval, age limits, plausible range, fallback on lost communication, calibration, watchdog behavior, and ownership of the interlock. If the measurements are stale, a conservative controller may inhibit opening, but that policy must be designed alongside emergency-exit needs and the actual hazard context.</p>
+<p>A minimal decision predicate for authorized normal opening is</p>
+<p>\[
+\mathrm{allowOpen} = (v_{\mathrm{measured}}\le0.5\,\mathrm{m/s})
+\land\mathrm{brakeEngaged}\land\mathrm{speedValid}\land\mathrm{brakeValid}.
+\]</p>
+<p>The given JSON fixture describes requirements and links; it does not claim to execute or verify this actual vehicle control logic. Formal state models would need transitions for moving, stopping, stopped, emergency and faulted modes, plus temporal properties over sensing and actuation.</p>
+<h2>4. Compare candidate architectures before freezing a design</h2>
+<p>Consider alternative A, a single speed channel with a brake-status gate; alternative B, duplicated speed sensing but shared power and software; alternative C, independent sensor and power designs with diverse fault handling. These are architectural descriptions, <strong>not</strong> evaluated candidates with measured failure rates. The expected safety benefit of B depends on common causes: duplicate sensors on the same power and processing path may provide far less independence than the diagrams suggest.</p>
+<p>A trade study should record candidate constraints, whole-life cost, interface complexity, response latency, maintenance burden, hazard controls, evidence and uncertainty. It is incorrect to select C solely because it sounds safer: specify the decision criteria and derive consequences for the actual mission profile. The existing <a href="pareto-and-robust-design.html">Pareto/robust-design guide</a> supplies a reproducible numerical trade method; the <a href="bayesian-decision-handbook.html">Bayesian decision guide</a> explains when information gathering is worth the cost.</p>
+<h2>5. Hazard analysis and a quantitative counterexample</h2>
+<p>The hazard H-DOOR is defined as a door release while the vehicle is moving. A fault tree for the much narrower <em>unsafe-open command</em> uses a common-cause bypass event \(C\), an erroneous command \(A\), and an interlock failure \(B\):</p>
+<p>\[
+T=C\lor(A\land B).
+\]</p>
+<p>Assign the hypothetical per-demand event probabilities \(p_C=0.003\), \(p_A=0.02\), and \(p_B=0.01\), with independence assumptions. Then</p>
+<p>\[
+P(T)=0.003+(1-0.003)(0.02)(0.01)=0.0031994.
+\]</p>
+<p>Ignoring the common cause would yield 0.0002, about sixteen times smaller. This is <strong>not</strong> the operational probability of a physical injury, real door release or even the complete H-DOOR hazard. It is a sensitivity demonstration for one assumed causal pathway. The <a href="safety-fault-trees-and-assurance.html">fault-tree chapter</a> derives the logic, cut sets, sensitivities and assurance limitations; the <a href="code/fault_tree_assurance.py">code</a> reproduces it.</p>
+<p>The key lesson is not the result's decimal precision. It is how an unvalidated assumption about dependence can dominate an apparent safety margin. A legitimate release claim requires identifying excluded pathways and defending inputs with evidence.</p>
+<h2>6. Verification plan and what the observations prove</h2>
+<table>
+<thead>
+<tr>
+  <th>Claim</th>
+  <th>Proposed verification</th>
+  <th>What it cannot establish alone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>REQ-DOOR command gating</td>
+  <td>Inject moving/stopped conditions and sensor faults; capture authorized outputs and timestamps</td>
+  <td>Every mechanical release path, shared sensor defects, untested override mode</td>
+</tr>
+<tr>
+  <td>REQ-ACK timing</td>
+  <td>Instrument accepted requests, measure response under named load and network conditions</td>
+  <td>Behavior at greater field load, tail reliability, clock validity without calibration</td>
+</tr>
+<tr>
+  <td>Safety controls remain applicable</td>
+  <td>Link evidence to a specific baseline, software build and relevant interfaces</td>
+  <td>Hazard inventory completeness, total system safety</td>
+</tr>
+</tbody>
+</table>
+<p>Suppose, separately, a binary response-time objective says no more than 1% of requests may fail under an independent identically distributed test demand model. With <strong>300 failures-free trials</strong>, the exact one-sided 95% Clopper–Pearson upper bound on failure probability is</p>
+<p>\[
+p_U=1-0.05^{1/300}\approx0.009936.
+\]</p>
+<p>This is just below 1% <em>under that binomial sampling model</em>. The current fixture's solitary maximum timing observation of 1.74 s is <strong>not</strong> a 300-trial data set; do not claim this statistical conclusion from the fixture. Repeated requests can be correlated by environment, software state, shift, network load or operator, requiring a different sampling design or conservative interpretation. See <a href="requirements-verification-handbook.html">requirements and verification evidence</a>.</p>
+<h2>7. Construct the safety and release evidence argument</h2>
+<p>The top-level qualified claim might read: <em>In the stated supervised dry-route conditions, CM-B2 incorporates specified door-release controls, and the enumerated test results support the checked aspects of those controls.</em> This is intentionally narrower than “the shuttle is safe.” Its supporting argument identifies requirements, control allocations, covered failure conditions, test provenance, limitations, unsatisfied assumptions and decision authority.</p>
+<p><code>EV-DOOR</code> is a <strong>fictional passing observation</strong> with the explicit limitation “Only injected cases; no common-cause fault demonstration.” <code>EV-ACK</code> is a <strong>fictional timing rehearsal</strong> with the limitation that a tail reliability rate has not been established. The JSON schema also includes unresolved questions about the common-cause rate, sensor freshness and operating environment. A release board should retain those open points and decide which require more evidence or operational restrictions. A structural model checker cannot provide that judgment.</p>
+<h2>8. Change CM-B2 into CM-B3 and expose stale evidence</h2>
+<p>Run the <a href="code/model_thread_audit.py">model audit</a> against the two fixtures:</p>
+<pre><code class="language-sh">python3 SE/K/methods/code/model_thread_audit.py SE/K/methods/data/campus-mobility-release.json
+python3 SE/K/methods/code/model_thread_audit.py SE/K/methods/data/campus-mobility-stale-evidence.json
+</code></pre>
+<p>The first command finds no defined structural errors, but emits warnings. The second intentionally fails: the release baseline/build has changed to CM-B3 / <code>controller-2.4.2</code>, while EV-DOOR and EV-ACK still cite CM-B2 / <code>controller-2.4.1</code>. The four errors are the two stale baselines and two stale builds. Changing evidence labels to make the checks pass would be data corruption, not configuration assurance.</p>
+<p>Engineering response: compare the changed components, re-evaluate affected requirement and hazard claims, decide whether an existing procedure still tests the right behavior, collect current evidence as necessary, and document the review/approval basis. <strong>Model consistency is not field verification or safety acceptance.</strong></p>
+<h2>9. Course-by-course learning route through one case</h2>
+<table>
+<thead>
+<tr>
+  <th>Course family</th>
+  <th>Study task</th>
+  <th>Deliverable to build</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Foundations, EN.645.662</td>
+  <td>Turn needs into verifiable conditions</td>
+  <td>Requirement rationale, ConOps, acceptance criteria</td>
+</tr>
+<tr>
+  <td>Architecture, EN.645.768</td>
+  <td>Allocate controls and identify interface contracts</td>
+  <td>Context, logical/physical alternatives, interface specification</td>
+</tr>
+<tr>
+  <td>MBSE, EN.645.631 / EN.645.632</td>
+  <td>Encode typed relationships, invariants and change effects</td>
+  <td>Model trace graph and reproducible consistency queries</td>
+</tr>
+<tr>
+  <td>Trade/quantitative, EN.645.784 / EN.645.756</td>
+  <td>Compare candidate architectures under dependent risk</td>
+  <td>Decision model, uncertainty and sensitivity argument</td>
+</tr>
+<tr>
+  <td>Test &amp; evaluation, EN.645.769</td>
+  <td>Justify measurements, test design and evidence sufficiency</td>
+  <td>Controlled verification matrix and discrepancy/limitations record</td>
+</tr>
+<tr>
+  <td>Assurance/resilience, EN.645.764 / EN.645.771</td>
+  <td>Challenge hazard controls and common-cause pathways</td>
+  <td>Hazard log, assurance argument, accepted-risk disposition</td>
+</tr>
+</tbody>
+</table>
+<p>Each row corresponds to existing instructional topics in the course-aligned textbooks. The result is a cumulative technical baseline, not a disconnected exercise invented afresh in each subject.</p>
+<h2>10. Capstone exercises and answer checks</h2>
+<p><strong>Exercise 1 — Requirement critique.</strong> Rewrite REQ-DOOR to define valid/stale sensor behavior and a response-time limit. Distinguish the <em>safety constraint</em> from the <em>normal-operation requirement</em>. An adequate answer states measurable inputs, faults, observables, operating modes and how test evidence can show compliance.</p>
+<p><strong>Exercise 2 — Fault-tree calculation.</strong> Change the common-cause probability to 0.001 with A and B unchanged. The resulting assumed per-demand top-event probability is \(0.0011998\). Explain what additional measured evidence would justify using the new parameter.</p>
+<p><strong>Exercise 3 — Statistical inference.</strong> Prove the upper bound \(1-0.05^{1/300}\) by solving \((1-p_U)^{300}=0.05\). Explain why it is <em>not</em> a valid inference from a single synthetic maximum of 1.74 s.</p>
+<p><strong>Exercise 4 — Model-change audit.</strong> Predict the four errors in CM-B3, run the checker and identify at least two other changes (sensor timing, requirement limit, environment) that could invalidate evidence <em>even without</em> changing a build string.</p>
+<p><strong>Exercise 5 — Assurance review.</strong> Write a claim–argument–evidence tree with at least two explicit defeaters, a restricted intended use, an unresolved hazard item, and a separate reviewer/acceptance authority. A good answer does not issue a blanket “safe” or “certified” verdict.</p>
+<h2>Next step: inspect the controlled engineering artifacts</h2>
+<p>The <a href="campus-mobility-engineering-artifacts.html">Campus Mobility engineering artifact package</a> provides editable requirements, an interface-control extract, a verification matrix, a hazard register and a configuration-change impact record. These are tied to the same synthetic CM-B2 release and are suitable for cross-course critique. The package deliberately preserves the open evidence gaps rather than asserting a fictional release approval.</p>
+<h2>11. Materials and source references</h2>
+<ul>
+<li><a href="data/campus-mobility-release.json">Case baseline JSON</a> and <a href="data/campus-mobility-stale-evidence.json">changed baseline</a>.</li>
+<li><a href="code/fault_tree_assurance.py">Fault-tree analysis code</a> and <a href="code/model_thread_audit.py">model trace audit code</a>.</li>
+<li><a href="safety-fault-trees-and-assurance.html">Safety/fault-tree technical reference</a>, <a href="model-baselines-and-evidence.html">model baseline and evidence reference</a>, <a href="reliability-and-censored-evidence.html">reliability</a>, <a href="pareto-and-robust-design.html">robust trades</a> and <a href="requirements-verification-handbook.html">verification/acceptance</a>.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a>; <a href="https://standards.nasa.gov/sites/default/files/standards/NASA/C-Change-2/0/nasa-std-871913c_with_change_2_0.pdf">NASA-STD-8719.13C with Change 2</a>; <a href="https://www.omg.org/spec/SysML/2.0">OMG SysML v2</a>.</li>
+</ul>
+<p><em>Use boundary:</em> This is educational fiction. No numbers describe a real vehicle, safety case, conformity assessment, certified model, or operational release.</p>
+<footer class="reference-note"><a href="campus-mobility-engineering-case.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

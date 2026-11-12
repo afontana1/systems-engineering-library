@@ -39,6 +39,24 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)](https://standards.nasa.gov/node/263) — Credibility practices for modeling and simulation used in decisions.
 - [NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)](https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods) — Statistical methods, experiments, reliability, and process assessment.
 
+## Phase 3 technical reference: Interpreting simulation output, not just generating it
+
+A stationary queue's theoretical mean and a finite run's reported mean answer different questions. For an idealized stable M/M/1 model, \(E[W]=1/(\mu-\lambda)\), so nine arrivals and twelve services per hour imply **20 minutes mean total system time**. A simulated customer trace can check an implementation, but one long run yields *autocorrelated* waiting times. Pooling every customer as an independent observation understates uncertainty. Instead, use independent replications and estimate a mean from replication averages, or use carefully designed and diagnosed batch means. A deliberately short warm-up can bias a long-run estimate; deleting early time from a genuine finite shift changes the target estimand. The [complete simulation-output and credibility chapter](../methods/simulation-output-and-credibility.md) gives 40 reproducible independent replications, a paired upgrade comparison, t intervals and an explicit evidence table.
+
+## Phase 5 technical reading: Calibrated inputs and rare-event precision are different issues
+
+A queueing simulation can reproduce analytic transient/steady-state benchmarks yet still misrepresent real arrival bursts. With independent Poisson count observations of 39 and 51 over two synthetic five-hour periods, the maximum-likelihood rate is \(\hat\lambda=(39+51)/(5+5)=9\) arrivals/hour. An approximate profile-likelihood interval is [7.2664, 10.9896]/hour, much wider than a fixed-parameter Monte Carlo error bar. Separately, a direct 50,000-run estimate of \(P(Z>4)\) expects only 1.58 events; correct importance sampling yields a much more precise estimate under the assumed Gaussian model. The [calibration and rare-event guide](../methods/simulation-calibration-and-rare-events.md) derives both estimators, tests a withheld synthetic count and explains why neither calculation validates a physical system.
+
+
+
+## Step 02 review studio — check a simulator against an analytic limiting case
+
+Use an M/M/1 queue only where its assumptions are declared: independent Poisson arrivals, exponential service, one server, stationary rates, stable system, and appropriate buffer behavior. With an illustrative arrival rate of 6 jobs/hour and service rate 10 jobs/hour, utilization is `ρ=6/10=0.60` and mean time in system is `W=1/(10−6) h = 15 minutes`.
+
+**Solved exercise:** what happens if arrivals rise to 9 jobs/hour with service fixed at 10? The analytic mean becomes `W=1/(10−9)=1 hour`. This sharp growth illustrates why capacity margins matter near saturation; it does not imply that the real shuttle service satisfies an M/M/1 model. A simulator should recover the analytical benchmark within Monte Carlo uncertainty *when the corresponding assumptions are enforced*.
+
+**Validation boundary:** correct event scheduling and random-number handling verify implementation; representative demand, service-time, cancellation, routing, and nonstationary effects are separate external-validation issues. Report warm-up, replication count, seed policy, and uncertainty instead of a single impressive point estimate.
+
 ## Follow the knowledge
 
 **Related concepts**

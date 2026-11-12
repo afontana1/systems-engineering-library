@@ -82,3 +82,31 @@ A useful model artifact contains the selected architecture, rejected alternative
 ## Continuity
 
 This chapter builds from [previous chapter](08-values-units-measures-constraints-parametrics.md) and leads toward [next chapter](10-verification-and-validation-modeling-configur.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-631-w09.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: compare candidate architectures with hard constraints
+
+### Separate feasibility from preference
+
+A trade study cannot rescue an infeasible design by giving it enough points for low cost. First specify hard constraints, then compare attributes among the survivors. Northstar's illustrative peak requirement is eight trips per hour and the ideal modeled service rate is three trips per vehicle per hour. Three fictional candidates are considered:
+
+| Candidate | Vehicles | Ideal trips/hour | Cost (fictional $M) | Meets ideal peak bound? |
+|---|---:|---:|---:|---|
+| A | 2 | 6 | 1.60 | No |
+| B | 3 | 9 | 2.20 | Yes |
+| C | 4 | 12 | 2.50 | Yes |
+
+Candidate A is cheapest and yet structurally infeasible under the stated requirement; it should not appear on a feasible frontier unless there is a documented waiver, demand-shedding design, or change in mission. Between B and C, lower cost favors B while additional capacity margin favors C. Neither dominates the other on these two attributes. The model must state *which* decision rule resolves that conflict. “The model chose B” is never enough.
+
+### Calculate margins and test alternative objectives
+
+The minimum capacity ratio is \(Q/n_{\mathrm{need}}\). Candidate B has \(9/8=1.125\), or 12.5% ideal headroom relative to the peak requirement. Candidate C has \(12/8=1.5\), or 50%. Cost per ideal capacity is \(2.2/9\approx0.244\) fictional million dollars per trip/hour for B, compared with \(2.5/12\approx0.208\) for C. This metric could be useful if the organization expects growth, but it does not justify a selection on its own. It mixes acquisition cost and idealized throughput while omitting maintenance, charging, availability, schedule and safety.
+
+If the primary objective is *minimum acquisition cost subject to ideal capacity ≥ 8*, B wins. If resilience requires at least four trips/hour of headroom, C wins. This is a legitimate choice change because the decision rule changed, not because the model is inconsistent. Robust architecture reviews should vary demand and service-rate assumptions, record dominance, test nonnegotiable constraints before scoring, and identify the boundary at which the preferred candidate switches.
+
+### Avoid false precision from a scorecard
+
+A weighted score such as \(S=w_1\cdot\text{cost score}+w_2\cdot\text{capacity score}\) silently assumes score scales are comparable and weights have meaningful elicitation. Changing units or normalizations can change ranks. A stronger method begins with hard feasibility, then shows transparent costs, performance distributions and regret across defensible scenarios. If none of the candidates satisfies safety or interface constraints, the outcome is *redesign*, not choosing the least bad of three.
+
+**Exercise with answer.** Demand rises to 10 ideal trips/hour while the per-vehicle ideal rate remains 3. Which candidates pass the necessary bound? A has 6, B has 9 and C has 12. Only C passes. This still does not prove C can deliver 10 actual completed trips under realistic variability; a subsequent simulation or operational trial must examine that claim.
+
+See the [architecture trade reasoning guide](../../methods/pareto-and-robust-design.md) for the deeper quantitative decision methods; this chapter's figures are intentionally small enough to inspect by hand.

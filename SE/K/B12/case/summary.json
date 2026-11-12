@@ -1,0 +1,134 @@
+{
+  "case_id": "NS-CPS12.1",
+  "version": "1.0",
+  "inference": "Synthetic parameter screening; not probability of real system compliance",
+  "sampling": "Fixed-seed uniform range samples are not calibrated operational probabilities",
+  "number_of_samples": 16,
+  "by_scenario": {
+    "mild_highflow": {
+      "battery_energy_used_kwh": {
+        "mean": 28.158271,
+        "min": 24.75047,
+        "max": 31.11358
+      },
+      "ending_soc": {
+        "mean": 0.685805,
+        "min": 0.6654236,
+        "max": 0.7093071
+      },
+      "max_battery_temp_c": {
+        "mean": 31.0,
+        "min": 31.0,
+        "max": 31.0
+      },
+      "mean_trip_time_min": {
+        "mean": 6.4646,
+        "min": 6.4646,
+        "max": 6.4646
+      },
+      "reserve_pass_count": 16,
+      "trip_time_pass_count": 16,
+      "thermal_pass_count": 16
+    },
+    "hot_lowflow": {
+      "battery_energy_used_kwh": {
+        "mean": 32.383594,
+        "min": 28.9728,
+        "max": 35.34149
+      },
+      "ending_soc": {
+        "mean": 0.656665,
+        "min": 0.6362656,
+        "max": 0.6801876
+      },
+      "max_battery_temp_c": {
+        "mean": 41.881051,
+        "min": 41.79595,
+        "max": 41.96151
+      },
+      "mean_trip_time_min": {
+        "mean": 6.4646,
+        "min": 6.4646,
+        "max": 6.4646
+      },
+      "reserve_pass_count": 16,
+      "trip_time_pass_count": 16,
+      "thermal_pass_count": 16
+    },
+    "hot_highflow": {
+      "battery_energy_used_kwh": {
+        "mean": 33.363202,
+        "min": 29.95172,
+        "max": 36.3217
+      },
+      "ending_soc": {
+        "mean": 0.649909,
+        "min": 0.6295055,
+        "max": 0.6734364
+      },
+      "max_battery_temp_c": {
+        "mean": 40.983152,
+        "min": 40.94578,
+        "max": 41.01843
+      },
+      "mean_trip_time_min": {
+        "mean": 6.4646,
+        "min": 6.4646,
+        "max": 6.4646
+      },
+      "reserve_pass_count": 16,
+      "trip_time_pass_count": 16,
+      "thermal_pass_count": 16
+    },
+    "cold_highflow": {
+      "battery_energy_used_kwh": {
+        "mean": 36.488862,
+        "min": 33.07517,
+        "max": 39.44927
+      },
+      "ending_soc": {
+        "mean": 0.628353,
+        "min": 0.607936,
+        "max": 0.6518954
+      },
+      "max_battery_temp_c": {
+        "mean": 31.0,
+        "min": 31.0,
+        "max": 31.0
+      },
+      "mean_trip_time_min": {
+        "mean": 6.4646,
+        "min": 6.4646,
+        "max": 6.4646
+      },
+      "reserve_pass_count": 16,
+      "trip_time_pass_count": 16,
+      "thermal_pass_count": 16
+    },
+    "hot_grade_stress": {
+      "battery_energy_used_kwh": {
+        "mean": 35.138143,
+        "min": 31.66397,
+        "max": 38.16776
+      },
+      "ending_soc": {
+        "mean": 0.637668,
+        "min": 0.6167741,
+        "max": 0.6616278
+      },
+      "max_battery_temp_c": {
+        "mean": 42.074927,
+        "min": 41.97505,
+        "max": 42.17023
+      },
+      "mean_trip_time_min": {
+        "mean": 6.4646,
+        "min": 6.4646,
+        "max": 6.4646
+      },
+      "reserve_pass_count": 16,
+      "trip_time_pass_count": 16,
+      "thermal_pass_count": 16
+    }
+  }
+}

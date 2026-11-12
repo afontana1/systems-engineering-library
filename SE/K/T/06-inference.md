@@ -55,3 +55,18 @@ The answer must calculate conditional confidence bounds, explain the assumptions
 ## Next connections
 
 Use the related books above to see how this concept becomes a course assignment. The lab provides a small, deliberately incomplete practice setting; it does not replace verification against real operational data.
+
+
+<!-- STEP04-T1-START -->
+
+## Step 04 T1 — Evidence-driven correction and worked transfer
+
+### T1 audit finding: the denominator and the inference are different claims
+
+The NS-T4.1 fixture has 40 requests, of which 32 were served, five rejected, and three remain pending. Every served request satisfies the nominal eight-second timing limit, but only 26 of **all 40** are timely after adding the declared 0.8-second clock-uncertainty allowance. Thus the guarded all-request fraction is \(26/40=0.65\), not \(32/32=1\). The accessible subgroup contains eight requests, of which six meet that guard: \(6/8=0.75\). Neither denominator can be inferred from a conditional sample of completed trips.
+
+For *a different experiment* consisting of 300 independent Bernoulli trials and **zero** failures, the exact one-sided 95% upper failure-probability bound is \(1-0.05^{1/300}=0.0099361\), about 0.994%. Do **not** apply that bound to the forty-request fixture: it has unsuccessful outcomes, different observation conditions, and potential within-day dependence. Counting 300 messages from one outage as 300 independent proof trials would be an invalid sampling contract.
+
+**Practice and explained solution.** Recompute the guarded all-request rate with one additional rejected request, holding the number of timely completions at 26: it becomes \(26/41\approx0.6341\). Explain why reporting only completed requests would conceal deterioration. In a real study, define the population, sampling unit, missingness rules, and intended operational configuration *before* applying an interval method. [Run the T1 integrated laboratory](labs/T1-INTEGRATED-CASE.md).
+
+<!-- STEP04-T1-END -->

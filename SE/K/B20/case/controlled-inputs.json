@@ -1,0 +1,31 @@
+{
+  "case_id": "NS-CPLX20.1",
+  "baseline_source": "Synthetic Book 19 nominal four-hour illustrative slots, not historical operations",
+  "observation_weeks": 26,
+  "initial_trust_proxy": 0.5,
+  "base_accessible_requests": 62,
+  "base_standard_requests": 186,
+  "abandonment_fraction": 0.12,
+  "adaptation_demand_sensitivity": 0.12,
+  "trust_gain": 0.05,
+  "trust_loss_from_unmet": 0.09,
+  "illustrative_service_floor": 0.90,
+  "stop_floor": 0.80,
+  "stop_consecutive_weeks": 3,
+  "policies": {
+    "status_quo": {"accessible_capacity": 55, "standard_capacity": 178, "additional_cost_m": 0.0, "governance": "Existing arrangement; no assertion of verified legal status"},
+    "routing_only": {"accessible_capacity": 52, "standard_capacity": 201, "additional_cost_m": 0.45, "governance": "Contested: proposed automated routing lacks disability-led review"},
+    "co_design": {"accessible_capacity": 65, "standard_capacity": 183, "additional_cost_m": 0.7, "governance": "Proposed consultations and protections; agreements not executed"},
+    "adaptive_guardrails": {"accessible_capacity": 68, "standard_capacity": 195, "additional_cost_m": 1.25, "governance": "Proposed co-governance and explicit stop rights; no deployed authorization"}
+  },
+  "scenarios": [
+    {"id": "nominal", "weight": 0.35, "accessible_supply_factor": 1, "standard_supply_factor": 1, "accessible_demand_factor": 1, "standard_demand_factor": 1},
+    {"id": "heat", "weight": 0.20, "accessible_supply_factor": 0.93, "standard_supply_factor": 0.95, "accessible_demand_factor": 1.08, "standard_demand_factor": 1.04},
+    {"id": "grid", "weight": 0.14, "accessible_supply_factor": 0.82, "standard_supply_factor": 0.89, "accessible_demand_factor": 1.02, "standard_demand_factor": 1.01},
+    {"id": "cyber", "weight": 0.10, "accessible_supply_factor": 0.94, "standard_supply_factor": 0.82, "accessible_demand_factor": 1, "standard_demand_factor": 1.03},
+    {"id": "labor", "weight": 0.10, "accessible_supply_factor": 0.80, "standard_supply_factor": 0.85, "accessible_demand_factor": 1, "standard_demand_factor": 1},
+    {"id": "compound", "weight": 0.11, "accessible_supply_factor": 0.64, "standard_supply_factor": 0.67, "accessible_demand_factor": 1.16, "standard_demand_factor": 1.12}
+  ],
+  "approval_evidence": {"affected_group_consent": false, "independent_safety_review": false, "labor_agreement": false, "privacy_authority": false, "sponsor_authorization": false},
+  "source_warning": "All new response functions, scenario weights, demand feedback and burden constraints are invented teaching assumptions. Social legitimacy is not quantifiable by this simulator."
+}

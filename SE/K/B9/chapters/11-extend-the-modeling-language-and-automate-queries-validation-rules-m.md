@@ -78,6 +78,10 @@ Validation rules can make two different errors. A **false negative** misses a ge
 
 The graduate-level objective is **semantic assurance by automation**, not automation for its own sake. A reusable query is powerful because it encodes a carefully reviewed question and can be rerun as the system changes. Its authority comes from a defensible metamodel and evidence interpretation—not the sophistication of the query language or the attractiveness of its generated charts.
 
+## Phase 3 technical reference: A constraint must have defined semantics and an enforcement boundary
+
+An engineering modeling language needs typed entities, a declared population of objects, null semantics, and the meaning of each constraint. The illustrative OCL invariant `Reservation.allInstances()->isUnique(r | r.id)` checks identifier uniqueness over the currently evaluated model population—not necessarily across remote databases. An operation contract restricting activation to a pending reservation cannot by itself prevent concurrent races. The [full OCL and persistence treatment](../../methods/uml-ocl-software-contracts.md) provides invariants, preconditions, postconditions, JSON counterexamples and explicit limits of a simple Python audit. Use it to justify the validation-rule scope before claiming automated model quality.
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -115,3 +119,33 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [10 — Previous chapter](10-specify-physical-architectures-variants-configurations-instances-and.md) · [12 — Next chapter](12-verify-and-validate-the-model-assess-the-design-respond-to-change-an.md) · [Book index](../README.md)
+
+## Phase 4 technical reading: Ground custom relations in typed semantics
+
+A custom «risk-bearing interface» stereotype or evidence extension is useful only if its invariants are explicit: required hazard links, owner, configuration, verification observation, and applicability limits. The Campus Mobility JSON exercise defines a small type inventory and tests those relations against a release baseline. It catches mismatched results after a version change; it does **not** demonstrate compliance with OMG's SysML v2 grammar or KerML semantics. The [reference guide](../../methods/model-baselines-and-evidence.md) separates model-language conformance, semantic queries, configuration review and operational validation, and specifies what a real tool-validated `.sysml` exercise would require.
+
+## Phase 5 technical reading: Split language conformance from project validation
+
+An automated query should state what it establishes. A parser checks language syntax; a semantic modeler resolves definitions/usages and valid relations; a project checker can inspect allocation IDs and evidence configurations; tests support empirical behavior; authorities disposition residual risk. The Campus Mobility case's cross-document checker discovers mismatched owners and stale configuration labels but does not recognize SysML v2 abstract syntax. The [four-layer validation plan](../../methods/sysml-v2-modeling-and-traceability.md) gives specific outputs and negative tests for each layer, avoiding false claims of formal proof from a JSON snapshot.
+
+## Step 03 integrated technical reference: NS-MBA9.1 — governed queries, validation rules and model exchange
+
+### Make a query library that fails loudly
+
+The Python checker implements a small **domain-specific typed graph**, not a conforming SysML parser. It accepts `need → requirement` only for `derives`, and `requirement → function` only for `allocatedTo`. It rejects duplicate identifiers, unknown dependencies, invalid interface units, missing allocations and evidence that pretends an old baseline is current. The [executable source](../tools/step03_book9_model_check.py) can be inspected and edited without proprietary tooling.
+
+Each query should have a purpose, expected field types, unit definitions, controlled version and negative-case test. A query returning zero orphan requirements does not validate that requirements are true; a query returning every required interface name does not prove that messages can be exchanged safely. Separate **syntactic validation**, **structural/model-semantic validation**, **equation regression**, **engineering interpretation**, and **acceptance authority**.
+
+### Change impact is a directed graph problem
+
+For each model analysis, the dossier records upstream dependencies and downstream requirements. The impact function uses graph reachability to report everything explicitly connected to a changed element. When `I02` changes, the query returns `I02, M05, R05, E05`. Algorithmically, a breadth-first traversal explores each reachable node once; for a finite adjacency graph the time complexity is \(O(V+E)\). This is useful even with thousands of model elements, but only if important dependencies have been modeled. Run an adversarial test by deleting the `I02 → M05` relation: the impact report becomes incomplete without necessarily raising a syntax error. That is a missing-semantics defect, not a software exception.
+
+A formal SysML v2 language/conformance check must use an appropriate implementation of the [OMG specification](https://www.omg.org/spec/SysML/2.0) and pinned libraries. SysML v2 is grounded in KerML and includes normative semantics; a JSON object that happens to contain words such as `requirement` and `part` does not inherit that conformance. For an actual tool interoperability exercise, separately check import/export identity, versioned API responses, and semantic round-trip equivalence.
+
+**Exercise.** A generated report includes every requirement ID but omits which test configuration produced its compliance status. What validation rule is missing?
+
+<details><summary>Worked answer</summary>
+
+An evidence-applicability rule linking each result to a valid test, exact baseline, measurement method and source record. Presence of a requirement ID is only syntactic coverage. Negative-test the generator with a deliberately stale evidence row and ensure the report does not silently show green.
+
+</details>

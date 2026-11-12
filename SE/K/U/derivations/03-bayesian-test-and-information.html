@@ -23,4 +23,13 @@
 <p>If each possible result leaves the same action optimal—or if no authorized decision can change—there is no improvement in expected decision value. Information is useful for action only through its effect on the decision policy.</p>
 <p>&lt;/details&gt;</p>
 <p><strong>Transfer artifact:</strong> State/action/loss matrix, signal likelihoods, prior/posterior table, EVSI and break-even test cost. See <a href="../../encyclopedia/bayesian-value-of-information.html">Bayesian value of information</a>.</p>
+
+<!-- STEP04-FLAGSHIP-U1-START -->
+<section class="ns-u4-extension" aria-label="NS-U4.1 flagship technical extension"><h3>D03 extension · Evidence update with an explicitly conditional independence assumption</h3>
+<p>Using $P(B)=.15$, sensitivity $P(+|B)=.80$ and false-positive probability $P(+|\neg B)=.10$, compute $P(+)=.80(.15)+.10(.85)=.205$. Therefore $P(B|+)=.12/.205\approx.58537$. Under an <strong>additional</strong>, unverified conditional-independence assumption a second positive produces $[.80(.58537)]/[.80(.58537)+.10(.41463)]\approx.91866$. If the alarms share one camera or weather sensor, using the update twice would double-count information. Posterior probability describes belief under the stated likelihood model; it does not authorize an unsafe route.</p>
+<p><strong>Exercise and solution.</strong> With false positive .20 instead, $P(B|+)=.12/(.12+.17)=.41379$. A lower-specificity alarm is weaker evidence. <a href="../flagship-integration/code/ns_u_case.py">Run</a>.</p>
+</section>
+<script id="ns-u4-inline-math">window.MathJax=window.MathJax||{};window.MathJax.tex=window.MathJax.tex||{};window.MathJax.tex.inlineMath=[["$","$"]];</script>
+<style id="ns-u4-responsive">main{min-width:0;max-width:100%;overflow-wrap:break-word}main :is(table,pre){max-width:100%;overflow-x:auto}main :is(p,li):has(mjx-container){overflow-x:auto}main mjx-container{max-width:100%;overflow-x:auto}.ns-u4-extension{min-width:0;max-width:100%;border-top:2px solid #9acac9;margin-top:38px;padding-top:16px}.ns-u4-extension a{overflow-wrap:anywhere}</style>
+<!-- STEP04-FLAGSHIP-U1-END -->
 </main></body></html>

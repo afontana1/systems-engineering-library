@@ -18,4 +18,11 @@
 <p><strong>Exercise 2.</strong> Does a fixed downtime interval demonstrate resilience to repair uncertainty?</p>
 <p>&lt;details&gt;&lt;summary&gt;Worked answer&lt;/summary&gt;No. It tests one stipulated interval. Add distributions or a repair state model, justify them with evidence, and test sensitivity; without empirical data, results remain hypothetical.&lt;/details&gt;</p>
 <p><strong>Submit:</strong> fault-injection matrix, before/after service metrics, detection assumptions, and one revised hazard. Related: <a href="../../integrated-lab/chapters/08-human-factors-safety.html">v11 human factors and safety</a>.</p>
+<section class="u2-extension" id="u2-cross-lab"><h2>U2 cross-lab credibility challenge — NS-U2.1</h2>
+<p><strong>Focus: Fault injection, common modes and degraded policy.</strong> This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.</p>
+<p>The six provided v12 scenarios target distinct causes: capacity reduction, vehicle outage, dropped input messages, communications delay, telemetry blocking and nominal operation. A <strong>failure taxonomy</strong> is needed because a single completion percentage can mask fundamentally different safety and recovery obligations.</p>
+<p><strong>Worked comparison:</strong> Under the original fixture, BASE completes 12/12, OUTAGE 6/12, LOSS 8/12 (four lost messages), and TELEMETRY 4/12. These are independent synthetic <em>interventions</em> rather than a reliability estimate. Treat the differences as causal outcomes <strong>inside this deterministic/specified fault model</strong>, not measured real incidence or severity.</p>
+<p><strong>Exercise and solution:</strong> If LOSS yields lower mean waiting time among completed requests, is it an improvement? No: removing requests from the served population can artificially improve wait statistics. Include all unique arrivals in the denominator and display unknown/lost status rather than silently discarding the most harmful observations.</p>
+<p><strong>Reproduce:</strong> <a href="../../lab-credibility-u2/README.md">Cross-lab lab guide</a> · <a href="../../lab-credibility-u2/data/gates.json">Evidence gates</a> · <a href="../../lab-credibility-u2/outputs/u2-cross-lab-results.json">Computed results</a>.</p>
+</section>
 </main></body></html>

@@ -1,0 +1,3 @@
+requirement,method,procedure,configuration,evidence,status,covered_claim,open_limitation
+REQ-DOOR,test,TEST-DOOR-01,CM-B2 / controller-2.4.1,EV-DOOR,illustrative_PASS,command gating for injected speed and brake cases,no independent common cause or mechanical release demonstration
+REQ-ACK,test,TEST-ACK-01,CM-B2 / controller-2.4.1,EV-ACK,illustrative_PASS,maximum recorded synthetic latency of 1.74 s on named test load,no tail reliability or broader field-load inference

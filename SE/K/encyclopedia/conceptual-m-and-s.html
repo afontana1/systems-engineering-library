@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Conceptual modeling and intended use · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Conceptual modeling and intended use · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
 <link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
 <script data-se-mode="standard" data-se-page="K/encyclopedia/conceptual-m-and-s.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
 </head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Conceptual modeling and intended use</h1>
@@ -32,7 +32,15 @@
 <li><a href="https://standards.nasa.gov/node/263">NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)</a> — Credibility practices for modeling and simulation used in decisions.</li>
 <li><a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009">NASA · NASA-HDBK-7009B, Models and Simulations Implementation Guide (2026)</a> — Companion implementation guidance; not a substitute for project-specific requirements.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section id="step03-concept-study"><h2>Step 02 review studio — model credibility depends on intended use</h2>
+<p>A queueing simulation may credibly estimate <strong>relative waiting time</strong> under two schedules without being credible for predicting <strong>safety-critical emergency-response latency</strong>. Credibility is claim-specific: define the intended decision, domain, outputs, input evidence, validation comparators, and consequences of model error before selecting model fidelity.</p>
+<p><strong>Solved exercise:</strong> a simple M/M/1 model uses arrival rate 6 jobs/h and service rate 10 jobs/h. Under Poisson arrival, exponential service, single-server, infinite-buffer and stability assumptions, mean time in system is</p>
+<p>\[
+W=\frac{1}{\mu-\lambda}=\frac{1}{10-6}\;\mathrm{h}=0.25\;\mathrm{h}=15\;\mathrm{min}.
+\]</p>
+<p>If arrival rate approaches service capacity, the analytic mean grows without bound. The 15-minute result is therefore <strong>not</strong> a general shuttle waiting-time forecast. Verify the simulation against an analytical benchmark where valid, then validate the arrival/service distributions and operating scenarios with data appropriate to the stated decision.</p>
+<p><strong>Credibility boundary:</strong> a correct implementation can model the wrong system. Record conceptual assumptions and excluded mechanisms; test sensitivity to them rather than equating a narrow code pass with external validity.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="discrete-event-simulation.html">Discrete-event simulation and queues</a></li>

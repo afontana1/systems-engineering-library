@@ -1,0 +1,13 @@
+digraph Claims {
+  graph [rankdir=LR, bgcolor="transparent", pad="0.3", nodesep=0.42, ranksep=0.58];
+  node [shape=box, fontname="DejaVu Sans", fontsize=10, style="rounded,filled", fillcolor="#e4f3f1", color="#236f72", fontcolor="#193e4a", margin="0.13,0.10"];
+  edge [color="#607985",penwidth=1.4, arrowsize=0.7];
+  need [label="Stakeholder need\nNS-N-02"];
+  req [label="Technical requirement\nNS-R-02 / NS-B1"];
+  product [label="Interfaces / components"];
+  wp [label="Work + authorization\nCA-02 and CA-04"];
+  time [label="Schedule + budget\nNS-M1"];
+  evidence [label="Configuration-current\ntest evidence"];
+  decision [label="Gate decision\nwith conditions",fillcolor="#fff2ce",color="#ad925c"];
+  need->req->product->wp->time->evidence->decision;
+}

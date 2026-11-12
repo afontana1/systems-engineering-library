@@ -35,3 +35,15 @@ The baseline completes 12/12 and has p90 = 20 minutes. The message-loss case has
 <details><summary>Worked answer</summary>Service duration is constant and no location, road network, pickup/deadhead travel, demand geography, or capacity coupling is represented. A physical design decision would need these mechanisms and empirical calibration.</details>
 
 **Submit:** your modified scenario file, a short algorithm walkthrough, and a table reporting all scenarios' completion, loss and conditional wait metrics with caveats. Related: [v11 simulation stage](../../integrated-lab/chapters/06-models-and-uncertainty.md).
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Discrete-event evidence and scheduling invariants.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+A discrete-event simulator advances through arrivals and completion events, not necessarily uniform wall-clock steps. Its outputs require independent checks: a completed job must have `arrival ≤ receipt ≤ start < finish ≤ horizon`, and intervals on one resource must not overlap. A resource outage introduces a second constraint: no scheduled work may intersect the blocked window.
+
+**Worked fault:** In the unchanged OUTAGE scenario, vehicle V01 is unavailable from minute 0 through minute 70, while the overall horizon is 80. The six reported completions reflect the available vehicle's capacity under synthetic 12-minute trips. U2 deliberately alters a completed record to put V01 into its forbidden interval; its independent ledger checker must reject that fabricated output.
+
+**Exercise and explained solution:** Can a nonoverlap assertion alone prove physical feasibility? No. Travel geography, turnaround, wheelchair boarding, human duty limits, timing uncertainties and vehicle-health constraints are absent. Extend the conceptual model and validate each omitted constraint before expanding the claim.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

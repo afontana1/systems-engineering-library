@@ -63,6 +63,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)](https://standards.nasa.gov/node/263) — Credibility practices for modeling and simulation used in decisions.
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 
+
+
+## Step 02 review studio — a digital thread is a graph with versioned evidence
+
+A model and a dashboard do not become a digital twin merely because they are connected. A defensible digital-thread claim should identify which configuration and time each artifact describes, where data came from, and which engineering decision uses it. A digital twin needs a specified physical referent, update relationship, intended use, and model credibility evidence.
+
+**Solved exercise:** a simulated status delay is calibrated on NS-B1, but a status gateway update creates NS-B2. A visualization continues to display the original calibration with no version label. May the dashboard be treated as evidence of NS-B2 performance? **No.** It may remain a useful hypothesis or prior estimate, but configuration applicability must be argued and relevant measurements repeated. Tag model revision, calibration dataset, software schema, clock assumptions, and evidence timestamp.
+
+**Audit:** trace a critical requirement through need, model element, code/configuration, verification report, and measured observation. If a link is missing, stale, or ambiguous, the digital thread supports less than the dashboard appearance suggests. Not every connected graph is an assurance argument.
+
 ## Follow the knowledge
 
 **Related concepts**

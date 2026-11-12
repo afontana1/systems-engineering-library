@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Model queries and automated validation: questions that a model can answer · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/encyclopedia/model-queries-and-validation.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical explanation</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Model queries and automated validation: questions that a model can answer</h1>
+<p><strong>Reference entry · MBSE and digital thread · Worked technical treatment</strong></p>
+<h2>Query, validation rule, and evidence are different</h2>
+<p>A <strong>model query</strong> retrieves model facts under a stated selection criterion. A <strong>validation rule</strong> evaluates an invariant over those facts. An <strong>engineering evidence claim</strong> additionally requires that the rule is appropriate, the model represents the intended system, and the checking tool and configuration are credible. A dashboard reporting “100% allocated” can pass while every requirement is allocated to the wrong subsystem.</p>
+<p>The analysis pipeline is: declare purpose -&gt; define model schema and relationship types -&gt; select scope and version -&gt; evaluate the query -&gt; inspect exceptions -&gt; document model limitations -&gt; decide whether independent physical or analytical evidence is still needed. Preserve a model-diagnostic report even when a query returns zero exceptions.</p>
+<h2>A miniature typed graph</h2>
+<p>Consider requirements \(R=\{r_1,r_2,r_3,r_4\}\), logical elements \(L=\{d,b\}\) (dispatcher and brake controller), and allocation edges \(A=\{(r_1,d),(r_2,d),(r_3,b)\}\). The missing-allocation query is</p>
+<p>\[
+Q_{\text{missing}}=\{r\in R\mid\nexists\ell\in L:(r,\ell)\in A\}=\{r_4\}.
+\]</p>
+<p>Allocation coverage is \(3/4=75\%\), but it would be misleading to announce “75% of the engineering work complete.” The metric only assesses the existence of allocations within this declared requirement set. It says nothing about the validity, completeness or adequacy of the requirements, or about unmodeled stakeholder needs.</p>
+<p>Add a relation <code>verifiedBy</code>, a typed test record, and a declared configuration <code>CM-B2</code>. A more meaningful rule is: <em>every safety-significant allocated requirement must have applicable verification evidence for the same approved configuration</em>. This rule needs at least four predicates: applicable safety scope; valid allocation type; test purpose consistent with the requirement; matching evidence baseline. A test for <code>CM-B1</code> is not automatically valid for <code>CM-B2</code>.</p>
+<h2>Automated checks worth building</h2>
+<ol>
+<li><strong>Referential integrity:</strong> all referenced identifiers exist, are unique where required, and have legal types.</li>
+<li><strong>Completeness against a declared set:</strong> each in-scope requirement has an owning element and disposition; do not quietly exclude “unknown” scope.</li>
+<li><strong>Semantic consistency:</strong> units, state names and interface roles agree across relationships.</li>
+<li><strong>Change impact:</strong> traverse dependents of a modified requirement or component, capturing transitive affected tests and safety claims.</li>
+<li><strong>Evidence currency:</strong> test versions and configurations are applicable; outdated evidence is reported as such, not silently accepted.</li>
+<li><strong>Counterexample diagnostics:</strong> a failure report identifies the precise nodes, links, assumptions, and rule violated.</li>
+</ol>
+<p>A query can be written in SQL, graph query languages, a model-tool API, or a local Python data checker. The syntax is secondary to specifying the semantics and testable failure cases.</p>
+<h2>A reproducible negative test</h2>
+<p>For the four-requirement example, an expected unit test is <code>missing == {'r4'}</code>. Next introduce a dangling allocation <code>(r5,d)</code>: a complete referential-integrity rule must flag <code>r5</code>, even though it would not change the denominator of the original coverage query. Finally, relabel a verification record to a stale baseline and check that evidence currency fails. This is a small but important principle: <strong>test the checker with deliberately malformed inputs</strong>, not only a valid demonstration model.</p>
+<h2>Tool validation is separate from language conformance</h2>
+<p>A project-specific CSV/JSON checker can detect broken links but cannot claim that SysML v2 textual source conforms to OMG grammar or that its semantic model is consistent. A language parser, a semantic model tool, a project-specific constraint checker, and product V&amp;V serve different roles. Record tool version, query version, input baseline and diagnostics so another person can reproduce the result.</p>
+<h2>Failure modes, applications and reading</h2>
+<p>Common failure modes include counting labels instead of typed links; circular relations presented as independent evidence; stale snapshots; silently excluded data; ambiguous requirement identity; and rule changes without baselined test cases. Particularly useful applications are design-review readiness, impact analysis, configuration control, and assurance-case evidence review.</p>
+<ul>
+<li><a href="https://standards.nasa.gov/node/3111">NASA Systems Modeling Handbook</a> — generating SE work products from structured models.</li>
+<li><a href="https://www.omg.org/spec/SysML/2.0">OMG SysML v2</a> — language and API specifications.</li>
+<li>Related: <a href="traceability-graph.html">requirements traceability</a>; <a href="../methods/model-baselines-and-evidence.html">model baselines and evidence</a>; <a href="../methods/campus-mobility-engineering-artifacts.html">controlled Campus Mobility artifacts</a>.</li>
+</ul>
+<p><em>Scope:</em> The graph example is a teaching abstraction; no claim of formal proof or SysML parser conformance is made.</p>
+<p><strong>Reproducible companion:</strong> <a href="examples/step02_examples.py">Step 02 worked examples (standard-library Python)</a>. Run <code>python3 step02_examples.py --case all</code> from the downloaded examples folder; the program prints the declared synthetic inputs and computed results.</p>
+</article><nav class="standalone-actions"><a href="metrics-hierarchy.html">Read concept</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="metrics-hierarchy.md">Editable Markdown</a></nav></main></body></html>

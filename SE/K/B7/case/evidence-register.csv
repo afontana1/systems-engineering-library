@@ -1,0 +1,9 @@
+requirement_id,evidence_id,status,evidence_baseline,evidence_type,interpretation
+DI7-R01,EV-CAP-1,MODEL_ONLY,NS-DI7.1,analysis,"model capacity, no real load trial"
+DI7-R02,EV-LAT-1,STALE,NS-DI7.0,synthetic test,test predates gateway and dispatcher redesign
+DI7-R03,EV-ENE-1,CURRENT_LAB_TEST,NS-DI7.1,synthetic bench,"instrumented illustrative energy record, not field test"
+DI7-R04,EV-REL-1,MODEL_ONLY,NS-DI7.1,analysis,shared-failure exposure violates illustrative target
+DI7-R05,EV-AVL-1,MODEL_ONLY,NS-DI7.1,analysis,logistics-adjusted availability below target
+DI7-R06,EV-SAF-1,MODEL_ONLY,NS-DI7.1,fault tree,common cause probability unvalidated
+DI7-R07,EV-ACC-1,PLANNED,NS-DI7.1,test plan,accessible trial not executed
+DI7-R08,EV-CON-1,MISSING,NS-DI7.1,review,critical evidence not reconciled

@@ -82,6 +82,36 @@ A correct computed result is not automatically a system acceptance result; expla
 
 </details>
 
+## Derivation clinic: from scenario assumptions to an actionable decision
+
+The earlier illustration compares two designs with approximately 24% and 5% chances of violating an accessible-wait target. Those percentages should **never be presented as measured results without their underlying model**. Here is a fully disclosed *hypothetical* reconstruction, which readers can reproduce in the [Bayesian and decision-analysis method guide](../../methods/bayesian-decision-handbook.md).
+
+Assume peak demand with probability 0.30. Under peak demand, design H violates the target with conditional probability 0.60, while design M violates with probability 0.12. Outside peak demand (probability 0.70), the respective conditional rates are 0.08 and 0.02. By the law of total probability,
+
+\[
+P(V\mid H)=0.30(0.60)+0.70(0.08)=0.236\approx23.6\%,
+\]
+
+\[
+P(V\mid M)=0.30(0.12)+0.70(0.02)=0.050=5.0\%.
+\]
+
+This calculation gives students an auditable mathematical basis for the comparison. It is **not a verified claim about any actual mobility system**. The input probabilities would need operational evidence, justified conditioning assumptions, sensitivity analysis, and a calibrated model before a deployment decision.
+
+### Price an imperfect observation before choosing the architecture
+
+A different decision concerns whether to buy diagnostic information about a hidden controller fault. Assume a 20% prior fault probability; a faulty ship decision causes a 100 k$ loss; redesign costs 15 k$ and eliminates the modeled fault. Without testing, expected ship loss is 20 k$, so redesign is chosen. A test with 90% sensitivity and 95% specificity produces
+
+\[
+P(+)=0.9(0.2)+0.05(0.8)=0.22;\quad
+P(F\mid +)=0.8182;\quad P(F\mid -)=0.02564.
+\]
+
+Since redesign is preferable when posterior fault probability exceeds 0.15, redesign after a positive and ship after a negative. The expected post-test policy loss before fee is \(0.22(15)+0.02(100)=5.3\) k$; thus EVSI is 9.7 k$, whereas EVPI is 12 k$. A 5 k$ test has **4.7 k$ net expected benefit** if there is no schedule penalty and assumptions hold. All amounts are in thousands of dollars.
+
+The [calculator](../../methods/code/decision_test_value.py) reproduces these values and allows sensitivity changes. The key professional skill is to **recompute the optimal policy at each new parameter setting**, not simply differentiate an expected-loss formula while holding the old actions fixed.
+
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -119,3 +149,25 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [10 — Previous chapter](10-build-validate-and-use-surrogate-models-without-hiding-approximation.md) · [12 — Next chapter](12-integrate-communicate-and-defend-the-engineering-design-decision.md) · [Book index](../README.md)
+
+## Phase 4 technical reading: Safety controls are decision constraints, not just attributes
+
+When comparing redundant sensing architectures, a design that scores best in cost/latency can still be infeasible because it fails a mandatory safety constraint. The Campus Mobility case deliberately does not give fabricated reliability estimates for alternatives A, B and C. Instead it shows how shared causes affect a toy fault tree and requires the engineer to justify probabilities before optimizing against them. A robust decision process first identifies hard controls and excluded pathways, then evaluates trade-off criteria, uncertainty, and evidence needs. Work the [connected case](../../methods/campus-mobility-engineering-case.md) and the [safety derivation](../../methods/safety-fault-trees-and-assurance.md) before reporting a preferred architecture.
+
+## Step 03 integrated NS-DA14.1 decision-analysis laboratory: Chapter 11
+
+### Robustness, regret and information value address different uncertainties
+
+A finite-grid Pareto candidate can be feasible at nominal conditions and fail a structured stress. For the 18-vehicle/8-charger/hybrid/priority candidate, the nominal predicted wait is **14.0136 minutes** and availability **0.9544**. In an explicitly scripted high-demand stress, wait rises to **17.7360** minutes, above the 15-minute illustrative gate. In a `charger_loss` stress, wait rises to **15.9576** and availability drops to **0.9424**, failing both thresholds. Winter stress raises modeled energy-related annual emissions from **126.6** to **146.856 tCO2e**, though it remains within the defined *other* nominal gates. These are policy scenarios and response transformations, not a probability distribution or field predictions. The robust decision is **HOLD** pending better evidence, not “add a preference weight until it passes.”
+
+### Derive EVPI, EVSI and a conditional policy
+
+For a separate **C/D pilot information-value exercise**, assume state probabilities \(P(normal)=0.70\) and \(P(adverse)=0.30\). Conditional utilities are \(U(C,normal)=74\), \(U(C,adverse)=67\), \(U(D,normal)=80\), \(U(D,adverse)=57\). Without testing, \(E[U(C)]=0.7(74)+0.3(67)=71.9\) and \(E[U(D)]=0.7(80)+0.3(57)=73.1\), so D is preferred. With perfect information, take D in normal and C in adverse: \(0.7(80)+0.3(67)=76.1\) and \(EVPI=76.1-73.1=\mathbf{3.0}\) synthetic utility points. EVPI limits the gross value of information under these assumed probabilities and payoffs; it is not automatically a dollar budget.
+
+For an imperfect diagnostic, sensitivity is 0.80 and specificity is 0.85. A positive result has probability 0.345 and posterior adverse probability \(0.24/0.345\approx0.69565\); the conditional best action is **C**. A negative result has probability 0.655 and posterior adverse probability \(0.06/0.655\approx0.09160\); the conditional best action is **D**. The probability-weighted conditional payoff is \(23.85+51.02=74.87\), yielding \(EVSI=74.87-73.1=\mathbf{1.77}\) points. With illustrative test burden 0.50 point, net value is **1.27 points**. The exact computation is reproduced in [summary.json](../case/summary.json).
+
+### Worked regret and break-even exercise
+
+**Exercise.** If diagnostic cost rises to 1.8 utility points, should this hypothetical test be purchased solely to improve the C/D choice? **Solution:** Net gain is \(1.77-1.8=-0.03\) points: no under the declared expected-utility assumptions. The maximum *total decision value* justifiable for this diagnostic is **1.77 points**, not EVPI 3.0. To convert to money requires a documented elicitation scale and a separate financial analysis. Moreover if the authority can defer and run a pilot to learn, the available decision strategies and payoff model change.
+
+**Uncertainty discipline.** The 0.30 adverse probability is an elicited example, not derived from pilot integration-risk category. Do not double-count the category as a second probability modifier. For real use, audit correlation among demand, power loss, maintenance and accessible-trip failures, and account for preference disagreement and model-form uncertainty.

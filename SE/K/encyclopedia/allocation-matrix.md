@@ -46,6 +46,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 
+
+
+## Step 02 review studio — coverage can conceal responsibility gaps
+
+A requirement-to-component matrix is useful only when its relationship types are explicit. *Allocated to* is not the same as *verified by*, *depends on*, or *owned by*. Multiple allocations can be legitimate: an end-to-end performance claim may be decomposed into stage budgets, but a single system-level owner must remain accountable for integration.
+
+**Solved exercise:** NS-R-02 has four latency allocations of 0.35, 0.25, 0.70 and 0.35 s. The sum is 1.65 s, leaving a nominal 0.85 s against the system-level 2.50 s budget. Does the matrix establish verification coverage? **No.** It shows architectural and arithmetic allocation coverage. A separate verification relation must identify an end-to-end procedure, applicable configuration, evidence, and acceptance rule. Missing any one of these can leave a superficially complete matrix with an unverified claim.
+
+**Matrix audit:** review every high-consequence requirement for a primary owner, decomposed responsibility, interface boundaries, verification mechanism, and change-impact path. Detect orphan functions as well as orphan requirements; both can signal mistaken scope or unreviewed design assumptions.
+
 ## Follow the knowledge
 
 **Related concepts**

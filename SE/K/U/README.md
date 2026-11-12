@@ -2,7 +2,7 @@
 
 Use the [interactive encyclopedia](OPEN-ENCYCLOPEDIA.html) to ask an engineering question, compare methods, read assumptions and worked examples, and open deeper textbook and laboratory resources.
 
-The encyclopedia indexes **1,076 resources**, including **56 canonical concept references** and the library's **240 textbook chapters**.
+The encyclopedia indexes **1,100 resources**, including **80 canonical concept references** and the library's **240 textbook chapters**.
 
 - [Browse concepts alphabetically](../CONCEPT-ENCYCLOPEDIA.html).
 - [Explore guided learning routes](../LEARNING-PATHWAYS.html).
@@ -10,4 +10,4 @@ The encyclopedia indexes **1,076 resources**, including **56 canonical concept r
 - [Return to the library homepage](../../../index.html).
 - [Open the concept directory](../CONCEPTS.html).
 
-Reading history is stored in the browser when local storage is permitted; it is not synchronized across devices. Content can be read without an account. Internal editorial checks are not independent academic peer review.
+The library does not create reading-history or completion records. Use ordinary browser bookmarks if you wish to return to a page. No account is required. Internal editorial checks are not independent academic peer review.

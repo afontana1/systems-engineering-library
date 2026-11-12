@@ -123,3 +123,46 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [02 — Previous chapter](02-derive-dynamic-system-mathematics-standard-forms-block-diagrams-and-.md) · [04 — Next chapter](04-couple-electrical-electromechanical-thermal-and-fluid-domains.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-CPS12.1 case: force, torque, work and mechanical limits
+
+### From generalized coordinates to wheel tractive effort
+
+Treat the shuttle as a point mass moving longitudinally on a prescribed route, with wheel radius \(r=0.39\) m. At road speed \(v\), a rolling wheel rotates at \(\omega=v/r\) under a **no-slip assumption**. Let the route grade be the small slope fraction \(g_r\), rather than angle radians. For moderate grades, \(\sin\theta\approx g_r\) and \(\cos\theta\approx1\). The required motor contact force for longitudinal acceleration \(a\) is
+
+\[
+F_t=ma+mgC_{rr}+mg g_r+\tfrac12\rho C_dA v^2,
+\qquad P_w=F_tv,\quad \tau_\mathrm{wheel}=F_tr.
+\]
+
+These terms have different physical origins: mass times acceleration is change in kinetic energy; rolling losses dissipate energy; grade moves gravitational potential; aerodynamic drag grows quadratically with speed. They must not be merged into a generic “efficiency factor” when studying hill duty cycles. The motor shaft torque is not identical to wheel torque unless gear ratio and transmission losses have been accounted for; the toy model uses only contact wheel force.
+
+### Numerical calculation on the controlled route
+
+With the controlled curb mass \(m_c=2850\) kg and synthetic passenger payload of 300 kg, the modeled moving mass is **3150 kg**. The route uses the source guide's curb-mass baseline while taking payload as one declared operating scenario; a full study would vary payload by stop and verify axle loads.
+
+At \(v=10\) m/s, \(C_{rr}=0.010\), \(g_r=0.06\), \(\rho=1.225\) kg/m³ and \(C_dA=1.9\) m², the baseline road forces are **309.02 N** rolling, **1854.09 N** grade and **116.38 N** drag. The constant-speed contact force is **2279.48 N**, with wheel power **22.79 kW**. Contact torque is approximately **889 N·m** and wheel speed \(\omega=25.64\) rad/s. The motoring battery traction requirement at 91% assumed efficiency is **25.05 kW** before cabin load, pump and ohmic losses. A 1000 m 6% climb requires approximately \(m g \Delta h=3150(9.81)(60)=1.85\) MJ of elevation energy even without drag or rolling resistance.
+
+### Conservation checks that expose hidden defects
+
+Integrated force balance is \(\Delta K=\int(F_t-F_r)v\,dt\), with \(K=mv^2/2\). If grade is separated from dissipative resistance, \(\int P_w dt=\Delta K+\Delta U_g+W_{rr}+W_d\). The case tool records a mechanical residual. When comparing exact continuous force balance with discretized positions, error should diminish under step refinement. Negative wheel power is regenerative in the toy model only up to a specified 65 kW; actual electric vehicles also have pack charging, traction-control, temperature and slip constraints which are omitted.
+
+Abrupt speed targets at route boundaries are idealizations. Real stops need jerk and adhesion limits; wheel spin, lock-up, steering and road curvature invalidate the longitudinal no-slip assumption. A model that exactly closes its energy balance can still be **unsafe** if its stopping distance is not represented.
+
+### Constrained power and feasibility
+
+The controller requests \(a_\mathrm{req}=\mathrm{clip}(k_v(v_\mathrm{ref}-v),-1.25,0.9)\) m/s² with \(k_v=0.45\,s^{-1}\). The required force is constrained by \(|P_w|\le180\) kW in propulsion and \(P_w\ge-65\) kW in regeneration, implemented with a low-speed force proxy. When the requested force exceeds the available limit, actual \(a=(F_t-F_r)/m\) departs from target. The controller is a heuristic, not a motor/inverter torque-speed map. Label results as *regulated traction proxy* rather than controller qualification.
+
+### Guided calculation and sensitivity
+
+Suppose the grade of the 900 m second segment is doubled from 6% to 12% (outside the case's declared validated input band; the code disallows grades above 10% in its source route). Ignoring motor saturation, additional climb energy is \(mg(0.06)(900)=1.67\) MJ, or 0.464 kWh at the wheel; at 91% efficiency it is roughly 0.509 kWh extra electrical draw. The numerical experiment instead permits a bounded **grade multiplier up to 1.5**, not arbitrary data outside its validator. This is why an extrapolated analytic calculation and a configured simulator output serve different purposes.
+
+### Exercises and worked solutions
+
+**A.** If wheel radius is increased 1.5% while required contact force is fixed, what happens to contact torque? **Answer.** \(\tau=Fr\) increases by 1.5%. At equal road speed the wheel angular rate decreases by about \(1/1.015-1=-1.48\%\); wheel power \(Fv\) stays constant in this ideal no-slip representation. Real drivetrain gearing may change efficiency.
+
+**B.** At 10 m/s, change aerodynamic drag area from 1.9 to 2.2 m². Find incremental drag force. **Answer.** \(\Delta F=0.5(1.225)(0.3)(100)=18.375\) N; additional wheel power is 183.75 W. At higher speed the \(v^3\) power dependence makes the same area change much more consequential.
+
+**C.** Why is a downhill segment not guaranteed to replenish all climbing energy? **Answer.** Rolling and aerodynamic losses dissipate work, the regenerative efficiency is below unity, battery charging may be restricted, and terminal kinetic energy matters. An idealized symmetric elevation profile is not energy-neutral.
+
+**Deliverable:** a dimensioned free-body diagram, a force/work audit for a route segment, and an adverse friction or power-limit test against the [baseline model](../case/INDEX.html).

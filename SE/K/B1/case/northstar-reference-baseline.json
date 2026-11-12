@@ -1,0 +1,24 @@
+{
+  "baseline": "NS-B1",
+  "case_scope": "Fictional supervised campus shuttle dispatch demonstrator. Not a real safety case or field test.",
+  "operating_domain": "Four designated stops, staffed oversight, limited test periods; all inputs synthetic.",
+  "stakeholder_needs": [
+    {"id":"NS-N-01", "text":"Riders must receive understandable booking confirmation and cancellation information."},
+    {"id":"NS-N-02", "text":"Dispatch staff must receive timely emergency-status indications."},
+    {"id":"NS-N-03", "text":"Operators must be able to reconstruct which vehicle owns a reservation."}
+  ],
+  "requirements": [
+    {"id":"NS-R-01", "need":"NS-N-01", "claim":"Booking confirmation delivered within 8 seconds under the specified test workload", "metric":"elapsed seconds", "threshold":8},
+    {"id":"NS-R-02", "need":"NS-N-02", "claim":"Status indication end-to-end allocated deterministic timing budget not exceeding 2.5 seconds", "metric":"budget seconds", "threshold":2.5},
+    {"id":"NS-R-03", "need":"NS-N-03", "claim":"No reservation allocated to more than one active vehicle in the specified single-database test", "metric":"number of conflicting assignments", "threshold":0},
+    {"id":"NS-R-04", "need":"NS-N-02", "claim":"Supervisor can identify stale status messages", "metric":"staleness indicator correctly shown", "threshold":1}
+  ],
+  "components": ["rider-app", "dispatch-service", "status-gateway", "supervisor-console", "allocation-database"],
+  "latency_budget_seconds": {"detect":0.35, "gateway":0.25, "network":0.70, "display":0.35},
+  "decision_scores": {
+    "turnkey":{"resilience":60,"affordability":90,"maintainability":65},
+    "federated":{"resilience":85,"affordability":60,"maintainability":70},
+    "demonstrator":{"resilience":70,"affordability":75,"maintainability":80}
+  },
+  "hazard_model": {"shared_cause_probability":0.003, "channel_a_probability":0.01, "channel_b_probability":0.02, "assumption":"Independent channel failures conditional on no common cause; synthetic probabilities per demand."}
+}

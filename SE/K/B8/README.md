@@ -17,6 +17,10 @@ EN.645-769 · Phase 2 · Twelve connected chapters and twelve fictional labs
 - **Week 2:** [Chapter — Trace requirements and stakeholder expectations to objectives, methods, and critical test parameters](chapters/02-trace-requirements-and-stakeholder-expectations-to-obje.md) · [Lab](labs/lab-02-trace-requirements-and-stakeholder-expectations-to-obje.md)
 - **Week 1:** [Chapter — Receive the design baseline and create the integrated T&E strategy](chapters/01-receive-the-design-baseline-and-create-the-integrated-t.md) · [Lab](labs/lab-01-receive-the-design-baseline-and-create-the-integrated-t.md)
 
+## NS-TE8.1 integrated evaluation campaign
+
+All twelve chapters use [one controlled test-and-evaluation case](case/INDEX.html) with [requirements](case/requirements.csv), [procedure matrix](case/test-plan.csv), [synthetic latency data](case/latency-synthetic.csv), [evidence register](case/evidence-register.csv), [discrepancy log](case/discrepancies.csv), and a [reproducible standard-library checker](tools/step03_book8_te_check.py). The inherited NS-DI7.1 baseline has open reliability, availability and recovery shortfalls; **operational readiness remains on HOLD**. This material is fictional, not product qualification.
+
 ## Applied resources
 
 - [`datasets/`](datasets/) contains toy input and evidence sheets.

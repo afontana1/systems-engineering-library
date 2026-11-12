@@ -96,6 +96,12 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 
 </details>
 
+## Experimental design is part of test credibility
+
+Consider two engineering settings crossed at \((-1,+1)\), with four randomized independent replications at each of the four settings. The synthetic 2×2 design yields scheduler effect \(-1.3875\) ms, replication effect \(-2.4125\) ms and interaction \(+0.1875\) ms. A test campaign that runs the old scheduler in the morning and the new scheduler only in the evening confounds treatment with demand/time-of-day and cannot attribute the change.
+
+Specify the experimental unit, input variability, randomization, blocking, response metric and measurement uncertainty **before** executing the campaign. The [DOE and inference guide](../../methods/statistical-inference-and-experiments.md) explains why mean-latency effect estimates do not prove a 99th-percentile service requirement, and supplies a reproducible [factorial analyzer](../../methods/code/factorial_doe.py).
+
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 4: Measurement and statistical confidence](../labs/lab-04-apply-measurement-science-statistics-doe-and-sample-rat.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 4 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
@@ -104,3 +110,35 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Extended worked problems and lab
 
 Study the [worked problem workshop on zero-failure confidence and test design](../practice/confidence.md), then complete the [extended laboratory](../practice/lab-confidence.md). The exercises are separate from the original assessed coursework.
+
+## Step 03 integrated technical reference: NS-TE8.1 — uncertainty, guard bands, and rare-event confidence
+
+### A small clean dataset does not establish a population tail
+
+The [40-row synthetic latency dataset](../case/latency-synthetic.csv) ranges from 436 to 474 ms, with **zero observations above 500 ms**. The empirical maximum passes the threshold; the p99 requirement does **not** automatically pass. Under *independent, identically distributed Bernoulli exceedance* assumptions, the exact one-sided 95% upper confidence bound on the exceedance probability after zero failures is
+
+\[
+p_U=1-\alpha^{1/n},\qquad \alpha=0.05.
+\]
+
+For \(n=40\), \(p_U=0.07216\), permitting an exceedance fraction over 7%. To establish \(p<0.01\) under these idealized assumptions with zero failures, solve
+
+\[
+n > \frac{\log(0.05)}{\log(0.99)} \approx298.07,
+\]
+
+which requires **299** independent, representative zero-exceedance trials. This is a binomial demonstration calculation, **not** a blanket approved sample plan: correlated request bursts, drift, stratified operating modes and changing baselines invalidate the simplistic inference. Large sample size cannot compensate for sampling the wrong scenarios.
+
+### Measurement decisions have their own error risk
+
+Suppose an independent boundary check reports 493 ms against 500 ms and the test authority has **predeclared an illustrative 12-ms upper-limit guard band**. The resulting acceptance zone ends at 488 ms, so 493 ms is *not accepted under that rule* even though its displayed value is under the specification limit. The test should not simply label the system physically failed; it should retain the measured result, expanded uncertainty basis and explicit decision status. The guard band must derive from a justified uncertainty model and accepted risk policy, not be chosen retrospectively.
+
+A confidence interval for a sample **mean** does not show a 99th-percentile limit has been met. A confidence bound for a binomial exceedance probability addresses a different and more relevant question, but requires carefully defined independence and coverage assumptions. The [Python audit](../tools/step03_book8_te_check.py) reproduces the calculation.
+
+**Exercise.** With zero exceedances in 100 independent trials, compute the one-sided 95% upper exceedance probability and assess the p99 claim.
+
+<details><summary>Worked answer</summary>
+
+\(1-0.05^{1/100}\approx0.02951\), about 2.95%, so the assumed p99 criterion is **not** demonstrated at this confidence. A lower empirical maximum is insufficient by itself.
+
+</details>

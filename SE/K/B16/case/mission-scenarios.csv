@@ -1,0 +1,17 @@
+policy,scenario,probability,served_standard,served_accessible,served_critical,fraction_standard,fraction_accessible,fraction_critical,all_groups_meet_floor
+P0-status-quo,normal,0.62,160,28,12,1.0,1.0,1.0,True
+P0-status-quo,grid_outage,0.18,127.68,23.4,11.52,0.798,0.835714,0.96,False
+P0-status-quo,comms_loss,0.12,114.24,18.6,10.56,0.714,0.664286,0.88,False
+P0-status-quo,road_closure,0.08,97.44,18.0,12,0.609,0.642857,1.0,False
+P1-fleet-only,normal,0.62,160,28,12,1.0,1.0,1.0,True
+P1-fleet-only,grid_outage,0.18,148.96,28,11.52,0.931,1.0,0.96,False
+P1-fleet-only,comms_loss,0.12,133.28,24.8,10.56,0.833,0.885714,0.88,False
+P1-fleet-only,road_closure,0.08,113.68,24.0,12,0.7105,0.857143,1.0,False
+P2-continuity,normal,0.62,160,28,12,1.0,1.0,1.0,True
+P2-continuity,grid_outage,0.18,157.92,28,12,0.987,1.0,1.0,True
+P2-continuity,comms_loss,0.12,147.84,24.6,12,0.924,0.878571,1.0,False
+P2-continuity,road_closure,0.08,97.44,20.4,12,0.609,0.728571,1.0,False
+P3-combined,normal,0.62,160,28,12,1.0,1.0,1.0,True
+P3-combined,grid_outage,0.18,160,28,12,1.0,1.0,1.0,True
+P3-combined,comms_loss,0.12,160,28,12,1.0,1.0,1.0,True
+P3-combined,road_closure,0.08,113.68,27.2,12,0.7105,0.971429,1.0,False

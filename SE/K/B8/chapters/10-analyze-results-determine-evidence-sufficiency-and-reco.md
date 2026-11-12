@@ -100,3 +100,45 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Extended worked problems and lab
 
 Study the [worked problem workshop on test evidence and readiness](../practice/readiness.md), then complete the [extended laboratory](../practice/lab-readiness.md). The exercises are separate from the original assessed coursework.
+
+## Worked statistical evidence review: can zero failures close the claim?
+
+Suppose the system requirement states that at least 99% of eligible requests in a declared peak-load population must be acknowledged within four seconds. The verification team observes zero late acknowledgements among \(n=300\) apparently independent eligible requests.
+
+The maximum-likelihood estimate of failure probability is zero, but reporting **0% failure** as the population truth would be unjustified. For a predeclared one-sided 95% exact frequentist bound, the probability of observing zero failures at failure rate \(p_f\) is \((1-p_f)^n\). Solving \((1-p_{f,U})^n=0.05\) gives
+
+\[
+p_{f,U}=1-0.05^{1/300}\approx0.00994.
+\]
+
+Under the binomial sampling assumptions, the bound falls below the 1% maximum failure rate. However, the verification decision still requires evidence that the generator represented the specified peak demand, events were not correlated by an unmodeled shared outage, clocks were accurate, exclusions were pre-approved, and the deployed build and interfaces match the configuration under review.
+
+The [full requirements-to-evidence guide](../../methods/requirements-verification-handbook.md) includes a 12-request rehearsal with one timeout, an exact binomial calculator, measurement uncertainty examples, and a matrix separating planned tests from accepted evidence.
+
+**Reader challenge.** What if all 300 requests come from the same device within one minute? What if 20 were silently excluded after data collection? What if a 3.93-second measurement has ±0.12-second expanded uncertainty under a conservative guard-banded acceptance rule? Explain why each case changes the evidentiary argument without changing the nominal requirement wording.
+
+## Phase 5 technical reading: Evidence sufficiency is claim- and configuration-specific
+
+The Campus Mobility verification matrix labels synthetic door-command and dispatch-ack tests as illustrative passes but retains important limitations. An observed 1.74 s maximum under one load does not establish a 99.9% deadline success rate, and injection of selected sensor faults does not demonstrate every common-cause or mechanical hazard path. The [controlled requirements, interface, VCRM, hazard and change artifacts](../../methods/campus-mobility-engineering-artifacts.md) preserve tested configurations and explicit open issues. When the fictional controller build changes, evidence applicability must be independently reviewed rather than silently relabeled.
+
+## Step 03 integrated technical reference: NS-TE8.1 — evidence sufficiency and decision statistics
+
+### Count claims, not green cells
+
+A requirement can be structurally traced and still unproven. In the NS-TE8.1 [evidence register](../case/evidence-register.csv), TE8-E01 has forty synthetic degraded timing values below 500 ms. That is a valid description of *these observations*, but the one-sided confidence bound permits a population exceedance probability of about **7.22%** under ideal Bernoulli assumptions. It does not establish the 1% exceedance ceiling implicit in a p99 claim. For a simple zero-failure demonstration at 95% confidence, 299 independent representative trials would be the mathematical minimum; operational coverage requirements may demand much more complex experimental design.
+
+Evidence sufficiency depends on the question. A passed mean-energy calculation is not a measured shift energy distribution. A single 14-minute recovery trial is a concrete failure of the specified test, whereas an old HIL record is an applicability problem. These categories should be reported separately: **compliant with evidence**, **noncompliant**, **unresolved because of insufficient data**, **unresolved because of stale baseline**, and **not evaluated**. Never calculate a percent complete by counting these statuses as equivalent 'closed' links.
+
+### Make the decision robust to uncertainty
+
+A risk-informed evaluation considers false acceptance and false rejection. For measured upper limits, the chosen guard band trades these errors rather than magically eliminating uncertainty. The [case guide](../case/INDEX.html) gives a deliberately simple rule: 493 ms measured against a 500-ms limit with an assumed 12-ms guard band does **not** meet the 488-ms acceptance boundary. This is a decision under a specified rule, not proof that actual physical latency exceeds 500 ms. As NIST emphasizes, the uncertainty model and conformity decision rule have different roles.
+
+Before a release recommendation, compare two actions: accept now versus require corrective development and retesting. For Northstar the choice is not close: mission reliability and logistics-adjusted availability fall below their targets in the receiving models, the recovery drill fails, and replay-defense testing is missing. Even a favorable latency dataset cannot compensate for those open outcomes without an authorized system-level rationale.
+
+**Exercise.** The team says '7 of 9 evidence rows contain numbers, so T&E is 78% complete.' Explain the flaw.
+
+<details><summary>Worked answer</summary>
+
+Some numbers are model-only, some contradict requirements, one record is stale, and some tests are absent. Completeness requires an approved method, applicable configuration, sufficient uncertainty control, and correct acceptance logic for *each* governing claim. Numeric-row counts have no validity as an assurance metric.
+
+</details>

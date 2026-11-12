@@ -33,3 +33,15 @@ If adding a reserve vehicle improves completion under OUTAGE, estimate increment
 <details><summary>Worked answer</summary>Revised requirements, architecture and hazards; updated traces, experiment configuration hashes, sensitivity analysis, validation plan and independent review. The approval claim must remain bounded to the synthetic model.</details>
 
 **Submit:** a versioned engineering change package with model diff, code diff, updated tests, before/after results, evidence manifest and independent review memo. Related: [v11 change and digital thread](../../integrated-lab/chapters/09-change-and-digital-thread.md).
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Capstone: decide by evidence and legitimate authority.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+The final challenge is a release decision across **v11 nominal**, **v12 faulted**, **statistical precision**, **provenance**, **coverage** and **authority** gates. The fixed service screen passes at 100%; both selected degraded screens fail at 50%. Neither input fixture includes a valid accessibility subgroup, and the U2 controlled gate file records four missing field permissions.
+
+**Logical condition:** \(A = S\land V\land E\land P\) where `S` is the approved screening result, `V` independent contextual validation, `E` applicable reviewed evidence, and `P` the responsible authority's permission. `A` is false if any one input is false. The code's mechanically true path is tested for logic only; it is not a mechanism for granting permission.
+
+**Exercise and solution:** A review team suggests lowering the resilience target to make the deployment gate green. A requirements change is a governance action, not an engineering proof. Record the stakeholder purpose, residual harm and affected population, obtain legitimate review, and run fresh independent validation before reassessing; until then the correct decision remains **HOLD**.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

@@ -1,0 +1,12 @@
+{
+  "case": "NS-U2.1",
+  "purpose": "Cross-check v11 and v12 synthetic laboratory claims without merging unlike semantics",
+  "screening": {"fixed_completion_fraction_min": 0.95, "fault_completion_fraction_min": 0.95, "minimum_accessible_sample_size": 1},
+  "field_permissions": {"mission_owner": false, "accessibility_representative": false, "safety_authority": false, "data_steward": false},
+  "evidence": [
+    {"id":"E-FIXTURE", "scope":"synthetic_software", "current":true, "independently_reviewed":false},
+    {"id":"E-FAULT", "scope":"synthetic_software", "current":true, "independently_reviewed":false},
+    {"id":"E-ACCESS", "scope":"field_accessibility", "current":false, "independently_reviewed":false},
+    {"id":"E-TELEMETRY", "scope":"field_telemetry", "current":false, "independently_reviewed":false}
+  ]
+}

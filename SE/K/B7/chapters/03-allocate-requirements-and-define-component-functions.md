@@ -96,3 +96,31 @@ An allocation review asks what happens when each child fails, exceeds its budget
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 3: Allocation and derived requirements](../labs/lab-03-allocate-requirements-and-define-component-functions.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 3 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-DI7.1 — functional allocation as a proof obligation
+
+### Allocate responsibilities, not just labels
+
+In the [allocation matrix](../case/allocation.csv), authentication belongs to the gateway, reservation state to the broker, assignment resolution to dispatch, and command execution to the vehicle controller. These associations must be accompanied by interface contracts: who owns an identifier, what duplicate delivery means, which clock supplies timestamps, and which element must reject an unsafe command. A model with every function assigned can still be incomplete when no element owns a cross-boundary invariant.
+
+Consider the reservation invariant \(\sum_v x_{v,r}\leq 1\): at most one active vehicle \(v\) may be assigned to the same request \(r\). The broker may create an intent, but if it cannot atomically constrain the dispatcher’s final write, concurrent requests can violate the invariant. This is an *integration* obligation, even if broker and dispatch each pass unit tests. Define a versioned idempotency key and an authoritative allocator, then verify duplicate messages, delayed acknowledgments and retries.
+
+### Derive allocation budgets
+
+For a strictly serial command path, a useful initial envelope is
+
+\[
+T_{\mathrm{path}}=T_{\mathrm{gateway}}+T_{\mathrm{broker}}+T_{\mathrm{dispatch}}+T_{\mathrm{vehicle}}+T_{\mathrm{transport}}.
+\]
+
+The controlled degraded budgets \(85+120+140+110+35\) total 490 ms. This sum is an assumed operating-point allocation; it does **not** imply that the p99 of each stage adds to the end-to-end p99. Waiting times may be correlated, and parallel branches are governed by maxima rather than simple sums. Timing tests need joint trace data at a defined load.
+
+An allocation also changes energy, thermal design, maintenance workload and attack surface. A faster gateway implementation cannot be reviewed only against timing; it must be checked against key management, compute power and supply availability. The [editable architecture diagram](../case/architecture.svg) is a navigation aid to those contracts, not an executable systems model.
+
+**Exercise.** A duplicate request reaches the broker after its first acknowledgment is lost. The broker accepts it twice; dispatch independently validates both messages. Which invariant is endangered and where must its enforcement live?
+
+<details><summary>Worked resolution</summary>
+
+The unique active allocation invariant is endangered. Put the final uniqueness check at the authoritative reservation transaction boundary, with an idempotency key derived from the original request, and test retries across timeout and restart. A UI-level check or an independent "already seen" lookup cannot reliably eliminate the race.
+
+</details>

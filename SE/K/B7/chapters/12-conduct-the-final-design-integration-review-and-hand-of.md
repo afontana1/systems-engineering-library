@@ -95,3 +95,27 @@ The handoff should include negative information: discarded alternatives, fragile
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 12: Design baseline handoff](../labs/lab-12-conduct-the-final-design-integration-review-and-hand-of.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 12 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-DI7.1 — final design review and defensible handoff
+
+### Produce a decision package, not a green dashboard
+
+The NS-DI7.1 case closes with a conditional design decision. The combined gateway/dispatch alternative has a modeled 440-ms degraded command path and 60-ms absolute reserve, satisfying the **modeled** 10% reserve allocation. Per-shift energy is 26.3 kWh against 30 kWh. However, modeled eight-hour mission reliability including the shared hazard is 0.97863 against 0.98; logistics-adjusted availability is 0.98644 against 0.99. The accessibility test is unexecuted, the revised degraded-latency test is stale, and the baseline-level evidence reconciliation is missing. The proper operational conclusion is **HOLD**.
+
+Separate the final decision into three outputs: **design maturation approved conditionally**, **integration authorized only with named controls**, and **operational release not approved**. None is automatically implied by the others. An acceptance authority may decide which residual risks are tolerable, but a course exercise must not forge that authority by changing a field in a spreadsheet.
+
+### A defensible handoff includes dissent and falsifiers
+
+Transmit the controlled [requirement register](../case/requirements.csv), [interface definitions](../case/interfaces.csv), [allocation matrix](../case/allocation.csv), [analysis baseline](../case/model-baseline.json), [test evidence](../case/evidence-register.csv), [experiment results](../case/doe-synthetic.csv), and unresolved risks. Include exact model versions and scripts, not merely printed headline results. The [reproducible checker](../tools/step03_book7_design_check.py) calculates numerical consequences and identifies structural mismatches, but it is not a certified integration tool or a qualification test.
+
+Record clear *reversal criteria*: the mission failure model must meet the 0.98 target under credible shared-cause assumptions; downtime logistics must be redesigned or supported by different qualified evidence; degraded p99 timing must be remeasured on NS-DI7.1; accessible trials must include the intended user population. If any test overturns a favorable model, update the design and its dependent claims before restarting the gate.
+
+A high-quality final technical review distinguishes **what is calculated**, **what is observed**, **what has been validated with stakeholders**, and **what remains a hypothesis**. This habit carries forward into test and evaluation, operations, and eventual change control.
+
+**Exercise.** A sponsor asks for the earliest route to operational approval. Write a minimum closure list without erasing the present design failure.
+
+<details><summary>Worked resolution</summary>
+
+Require (1) an acceptable mitigation and retest/justified model for shared mission failures, (2) a support-chain plan and evidence addressing the 0.99 availability target, (3) controlled degraded p99 timing trials on the revised hardware/software baseline, (4) accessible-service trials, and (5) a complete, reviewed baseline-linked evidence register. A new review then determines readiness; none of these tasks alone constitutes release authorization.
+
+</details>

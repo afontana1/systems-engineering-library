@@ -121,3 +121,35 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 Start of the book · [02 — Next chapter](02-develop-the-m-s-plan-and-conceptual-model-before-implementation.md) · [Book index](../README.md)
+
+## Step 03 integrated mobility simulation case: decision and intended use
+
+### A decision claim is narrower than a model's capabilities
+
+The original course's campus-mobility problem asks whether a **Phase 2 mobility service** can meet peak, accessible-trip and degraded-service expectations with a defensible fleet and staff plan. We adopt the fictional **NS-MS11.1** baseline, [case assumptions](../case/model-assumptions.json), and [requirements](../case/requirements.csv). The decision owner is the campus mobility sponsor; the analyst is not the deployment approver. The specific **intended use** of this first-pass model is **screening candidate vehicle counts 8, 10, 12 and 14** under explicitly synthetic demand and service assumptions. It is *not* a field-calibrated pilot-qualification model.
+
+Separate the *referent* (an actual campus service, which has not been measured here), the *conceptual model* (requests, vehicles, eligibility, charging and events), the *computational model* (the [executable event scheduler](../tools/step03_book11_mobility.py)), and the *experiment* (paired replications across candidate fleets). These levels can disagree. Successful execution establishes neither fidelity to the conceptual model nor validation against the referent.
+
+### Derive the decision-level capacity sanity check
+
+From the course guide, the hourly expected request totals are 18, 32, 48, then six hours at 22, followed by 42, 50 and 30. Under a nonhomogeneous Poisson arrival approximation, the *expected* daily count is
+
+\[E[N]=18+32+48+6(22)+42+50+30=352\ \text{requests/day}.\]
+
+For any interval of length \(\Delta t\) minutes and rate \(\lambda_h\) per hour, \(E[N_{\Delta t}]=\lambda_h\Delta t/60\), and \(\operatorname{Var}(N_{\Delta t})=E[N_{\Delta t}]\) under the Poisson assumption. This is a *model choice*, not measured dispersion; campus event arrivals may be clustered. The implied accessible-trip expectation is \(0.14(352)=49.28\) requests/day, but a fractional expected count is **not** a passenger or a promise of observed frequency.
+
+The simplest upper-level feasibility screen compares \(352\) jobs/day with \(F(720)/s\), where \(s\) is average minutes of one-vehicle service occupancy and \(F\) is fleet size. If \(s=20\) minutes and charging, staffing and traffic are ignored, fourteen vehicles offer at most \(14(720)/20=504\) single-request service slots/day. This does **not** guarantee that a 50/hour peak, accessible compatibility, or charge queue can be handled. In fact, the average-capacity calculation intentionally hides the bottleneck the event model must expose.
+
+### Model-method trade, cost of error, and necessary evidence
+
+A spreadsheet with time buckets is valuable for independent balance and staffing sensitivity; an M/M/1 queue is useful only as a limiting analytic benchmark, not as a capacity-eight, multi-vehicle, charging-enabled representation. A discrete-event simulation (DES) is the appropriate *next* model for asynchronous arrivals, vehicle occupations, resource contention and charge completion. Agent-based pedestrian interactions, network routing and full physical battery dynamics would add cost and unverified parameters without improving this first screening decision. Escalate model fidelity only when the result is sensitive to a missing mechanism.
+
+The [case credibility register](../case/credibility-register.csv) names unresolved input/validation claims. Hard constraints—accessible service and service reliability—must be screened before optimizing capital cost. Even if an alternative is cheapest, no analyst may infer regulatory accessibility compliance from this toy model.
+
+**Worked screening result.** Execute `python SE/K/B11/tools/step03_book11_mobility.py` at repository root. In the controlled first release, the 14-vehicle baseline averages approximately **36.4 min** for the *daily standard-trip p90* across 30 seeds and **45.4 min** for the *daily accessible p90*; its mean fraction not picked up at the 18:00 close is about **6.0%**. The fictional limits are 12, 15 minutes and strictly below 1%, respectively. These numbers support **HOLD / no qualifying candidate in the screened set**, not a declaration that the actual campus system would fail. See the [full replication outputs](../case/replication-output.csv); results depend on the declared one-request-per-vehicle abstraction.
+
+### Exercise with explained solution
+
+**Question.** A manager claims the 504 theoretical service slots prove 14 vehicles suffice because there are only 352 expected requests. Identify three independent invalid steps. **Solution.** (1) An expectation is not a maximum; Poisson arrivals vary. (2) Average daily capacity is not peak/hourly capacity; requests queue when arrival bursts exceed instant service. (3) Charging, accessible vehicle compatibility and the distribution of service times remove resources from the simple capacity pool. A responsible recommendation must report failure modes, uncertainty and further observations rather than certify feasibility.
+
+**Boundary:** retain this model's [configuration](../case/model-assumptions.json), governing course targets, and review authority whenever the simulation is reused. [Case dossier](../case/INDEX.html) · [Chapter 2](02-develop-the-m-s-plan-and-conceptual-model-before-implementation.md).

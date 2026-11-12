@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="235" viewBox="0 0 920 235" role="img" aria-labelledby="title desc">
+<title id="title">Northstar NS-MB3 semantic trace chain</title>
+<desc id="desc">Stakeholder need leads to controlled requirement, allocated component and verification case, whose result must match a requirement revision and a system baseline.</desc>
+<rect width="920" height="235" rx="14" fill="#f2f7f8"/>
+<g font-family="system-ui,Arial,sans-serif" text-anchor="middle">
+<g fill="#e2f0f0" stroke="#0b686c" stroke-width="2"><rect x="20" y="52" width="158" height="68" rx="9"/><rect x="202" y="52" width="158" height="68" rx="9"/><rect x="384" y="52" width="158" height="68" rx="9"/><rect x="566" y="52" width="158" height="68" rx="9"/><rect x="748" y="52" width="152" height="68" rx="9"/></g>
+<g fill="#173a4a" font-size="15" font-weight="600"><text x="99" y="81">Stakeholder</text><text x="99" y="102">need</text><text x="281" y="81">Controlled</text><text x="281" y="102">requirement</text><text x="463" y="81">Allocated</text><text x="463" y="102">component</text><text x="645" y="81">Verification</text><text x="645" y="102">case</text><text x="824" y="81">Execution</text><text x="824" y="102">result</text></g>
+<g stroke="#0b686c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M180 86 H200 l-9 -5 m9 5 -9 5"/><path d="M362 86 H382 l-9 -5 m9 5 -9 5"/><path d="M544 86 H564 l-9 -5 m9 5 -9 5"/><path d="M726 86 H746 l-9 -5 m9 5 -9 5"/></g>
+<g font-size="13" fill="#476474"><text x="190" y="37">derives</text><text x="372" y="37">allocated to</text><text x="554" y="37">tested by</text><text x="737" y="37">executed as</text></g>
+<rect x="145" y="151" width="630" height="56" rx="10" fill="#fff2da" stroke="#b07b1c"/><text x="460" y="175" fill="#614b23" font-size="15" font-weight="600">A PASS label alone is not current evidence</text><text x="460" y="195" fill="#614b23" font-size="13">Check requirement revision + system baseline + procedure + scenario + actual execution</text>
+</g></svg>

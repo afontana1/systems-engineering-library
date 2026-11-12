@@ -1,0 +1,5 @@
+policy,cost_musd,joint_coverage,target,nominal_screen_pass,compound_stress_pass
+status-quo,0,0.55,0.95,False,False
+backup-power,0.7,0.75,0.95,False,False
+data-federation,0.5,0.65,0.95,False,False
+integrated,1.65,1.0,0.95,True,False

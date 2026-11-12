@@ -27,6 +27,10 @@ The chapter explains why a method is appropriate, the lab rehearses a fictional 
 ## How this volume connects to the other two
 SoS architecture identifies constituent dependencies; enterprise analysis identifies the institutions and incentives shaping them; critical systems practice tests boundaries, power and competing purposes. A strong final answer can combine them without treating a model as authority.
 
+## NS-CPLX20.1 complex intervention and learning case
+
+The twelve chapters are supplemented by a [self-contained controlled case](case/INDEX.html), [constructed assumptions](case/controlled-inputs.json), [reproducible 26-window model](tools/step03_book20_complexity.py), [numerical results](case/policy-screen.csv), [actor and authority record](case/actor-rights-register.csv), [method critique matrix](case/method-claims-matrix.csv), and [safe-to-learn intervention register](case/intervention-and-stop-rules.csv). All assumptions are synthetic. The book distinguishes an internal numerical screen from legitimacy, consent, operational qualification and public permission. The original twelve chapters, laboratories and advanced readings remain intact.
+
 ## Calculation and model lab
 Shared self-contained Python demonstrations and synthetic datasets: [`K/P5-LAB/`](../P5-LAB/).
 

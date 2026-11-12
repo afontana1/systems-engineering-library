@@ -1,0 +1,47 @@
+{
+  "case_id": "NS-MB3", "baseline": "NS-MB3.1", "scenario": "fictional_peak_hour",
+  "scope": "Fictional campus shuttle dispatch and monitoring, excluding vehicle motion control",
+  "needs": [
+    {"id":"NEED-01","text":"Only authorized shuttle departures"},
+    {"id":"NEED-02","text":"Serve at least eight scheduled trips in the design peak hour"},
+    {"id":"NEED-03","text":"Keep dispatch decisions timely and observable"},
+    {"id":"NEED-04","text":"Respect battery reserve and reject duplicates"}
+  ],
+  "requirements": [
+    {"id":"REQ-01","revision":1,"need":"NEED-01","statement":"Every dispatch requires a valid authorization","allocated_to":"GATE","test":"TEST-01"},
+    {"id":"REQ-02","revision":1,"need":"NEED-02","statement":"Complete at least eight trips in a design peak hour","allocated_to":"FLEET","test":"TEST-02"},
+    {"id":"REQ-03","revision":2,"need":"NEED-03","statement":"Position used for dispatch shall be no more than 200 ms old","allocated_to":"TELEMETRY","test":"TEST-03"},
+    {"id":"REQ-04","revision":1,"need":"NEED-03","statement":"Nominal dispatch-command processing latency shall not exceed 400 ms","allocated_to":"DISPATCH","test":"TEST-04"},
+    {"id":"REQ-05","revision":1,"need":"NEED-04","statement":"Illustrative 24-trip shift energy demand shall be within 75 percent of 40 kWh battery capacity","allocated_to":"FLEET","test":"TEST-05"},
+    {"id":"REQ-06","revision":1,"need":"NEED-04","statement":"The system shall reject repeated command tokens for one departure","allocated_to":"GATE","test":"TEST-06"}
+  ],
+  "components": ["GATE","FLEET","TELEMETRY","DISPATCH","VEHICLE"],
+  "functions": [
+    {"id":"AUTHORIZE","component":"GATE"}, {"id":"PLAN","component":"FLEET"},
+    {"id":"REPORT_POSITION","component":"TELEMETRY"}, {"id":"ISSUE_COMMAND","component":"DISPATCH"},
+    {"id":"ACTUATE","component":"VEHICLE"}
+  ],
+  "interfaces": [
+    {"id":"IF-01","source":"TELEMETRY","target":"DISPATCH","field":"position_age","unit":"ms","max_age_ms":200},
+    {"id":"IF-02","source":"DISPATCH","target":"GATE","field":"dispatch_token","unit":"opaque_id","max_age_ms":400}
+  ],
+  "tests": [
+    {"id":"TEST-01","requirement":"REQ-01","req_revision":1,"baseline":"NS-MB3.1","result":"PASS","method":"inspection_fixture"},
+    {"id":"TEST-02","requirement":"REQ-02","req_revision":1,"baseline":"NS-MB3.1","result":"PASS","method":"capacity_arithmetic"},
+    {"id":"TEST-03","requirement":"REQ-03","req_revision":1,"baseline":"NS-MB3.1","result":"PASS","method":"synthetic_timing_fixture"},
+    {"id":"TEST-04","requirement":"REQ-04","req_revision":1,"baseline":"NS-MB3.1","result":"PASS","method":"nominal_path_budget"},
+    {"id":"TEST-05","requirement":"REQ-05","req_revision":1,"baseline":"NS-MB3.1","result":"PASS","method":"energy_arithmetic"},
+    {"id":"TEST-06","requirement":"REQ-06","req_revision":1,"baseline":"NS-MB3.1","result":"PLANNED","method":"duplicate_token_test"}
+  ],
+  "assumptions": {
+    "scheduled_peak_trips_per_hour":8,"trips_per_vehicle_per_hour":3,"fleet_A_vehicles":2,
+    "fleet_B_vehicles":3,"fleet_C_vehicles":4,"battery_kwh":40,"reserve_fraction":0.25,
+    "shift_trips":24,"route_km":1.8,"traction_kwh_per_km":0.36,"aux_kwh_per_trip":0.20,
+    "nominal_latency_ms":[90,110,80,45],"degraded_latency_ms":[120,140,120,80]
+  },
+  "candidates": [
+    {"id":"A","vehicles":2,"cost_million_usd":1.6},
+    {"id":"B","vehicles":3,"cost_million_usd":2.2},
+    {"id":"C","vehicles":4,"cost_million_usd":2.5}
+  ]
+}

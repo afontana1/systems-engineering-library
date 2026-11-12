@@ -1,0 +1,8 @@
+id,claim_or_requirement,threshold_or_use,evidence,status,remaining_work
+FB13-R1,Physical fleet conserved,active+unavailable=14 vehicles per time step,Python numerical balance test,verified_for_code,Validate real fleet acquisition retirement and repair semantics
+FB13-R2,Passenger stock accounted,initial backlog+arrivals-completions-abandonment=ending backlog,Python numerical balance test,verified_for_code,Measure accepted rejected deferred and completed request timestamps
+FB13-R3,Service equity reported,accessible abandonment separately from general abandonment,Controlled five-policy experiment,illustrative_only,Stakeholder-approved fairness measures and field-calibrated allocation rules
+FB13-R4,Feedback policy trade-off studied,at least four policies and four demand/reliability conditions,Paired 20-run experiment grid,verified_for_code,Independent causal-structure review and calibration
+FB13-R5,Reference modes explained,all original eight synthetic quarters retained,course-quarter-observations.csv,synthetic_reference,Recover empirical uncertainty and distinguish association from causality
+FB13-R6,Vensim model ready for review,stock-flow equations and unit crosswalk documented,vensim-equation-crosswalk.md,not_validated_in_vensim,Implement and test an actual Vensim PLE model; Python is not a Vensim parser
+FB13-R7,Operational policy deployment authorized,field evidence and equity governance required,credibility-register.csv,HOLD,Data governance real operating trials uncertainty and independent assurance

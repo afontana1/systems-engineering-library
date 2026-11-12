@@ -73,6 +73,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 
+
+
+## Step 02 review studio — detect a stakeholder hidden by an average
+
+A service project measures only average trip duration. In a hypothetical 1,000-ride sample, 900 riders improve from 12 to 10 minutes, while 100 riders needing accessible boarding worsen from 15 to 25. The mean falls from 12.3 to 11.5 minutes, yet accessible service deteriorates sharply. Aggregate success is therefore an inadequate representation of the underlying stakeholder need.
+
+**Solved exercise:** what additional stakeholder-derived criteria should be carried to requirements and validation? **At minimum:** accessible trip completion, refusal or unmet-demand rate, availability of boarding assistance, reliable confirmation, and operator response under disruption. Report distributions and population definitions, not only averages. Representatives from affected groups must be involved in evaluating whether the criteria reflect legitimate needs.
+
+**Evidence boundary:** synthetic subgroup arithmetic does not establish that a real service discriminates; it demonstrates why sampling and stakeholder coverage matter. Stakeholder statements should be traceable to operational scenarios and an identified authority for resolving conflicts, not simply copied into a requirements spreadsheet.
+
 ## Follow the knowledge
 
 **Related concepts**

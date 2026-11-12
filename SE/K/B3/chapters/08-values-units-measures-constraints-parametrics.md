@@ -103,3 +103,62 @@ This chapter builds from [previous chapter](07-logical-architecture-functional-a
 ## Extended worked problems and lab
 
 Study the [worked problem workshop on energy budget parametrics](../practice/energy.md), then complete the [extended laboratory](../practice/lab-energy.md). The exercises are separate from the original assessed coursework.
+
+## Worked parametric constraint and uncertainty check
+
+The [MBSE semantic-modeling method guide](../../methods/mbse-semantic-modeling-handbook.md) extends this chapter with executable trace rules, a guarded booking-state invariant, and an energy-margin example. The critical point is that a **parametric constraint makes an engineering assumption testable**; it does not make that assumption correct.
+
+For a serial mission segment, approximate required electrical energy by
+
+\[
+E_{\mathrm{req}}=e_dD+P_{\mathrm{aux}}T,
+\]
+
+where traction energy intensity \(e_d\) is kWh/km, route length \(D\) is km, auxiliary power \(P_{\mathrm{aux}}\) is kW, and mission duration \(T\) is h. For 0.24 kWh/km, 180 km, 2 kW and 10 h, the demand is \(43.2+20=63.2\) kWh. If usable battery energy is 70 kWh under those conditions, margin is 6.8 kWh. Under a cold-weather intensity of 0.29 kWh/km with all else unchanged, demand rises to 72.2 kWh and margin becomes **−2.2 kWh**.
+
+The statement \(E_{\mathrm{req}}\leq E_{\mathrm{usable}}\) is a feasibility constraint; the example does not establish how likely it is to be violated. A credible engineering model should carry values, dimensions, conditions, source data, configuration, and credible parameter intervals. A model revision that updates 0.24 to 0.29 without triggering an impact query on the energy-margin claim is a **model-governance failure** even if every diagram renders correctly.
+
+**Practice:** Derive the maximum route distance permitted under both traction-intensity assumptions, retaining the 20-kWh auxiliary load and 70-kWh usable energy. Solutions: \(D_{\max}=(70-20)/0.24\approx208.3\) km nominal and \(D_{\max}=50/0.29\approx172.4\) km cold. The assumed 180-km route is therefore feasible in the nominal case and infeasible in the cold case. Real battery reserves, cell limits and contingencies must be specified separately.
+
+## Step 03 integrated reference: quantitative constraints and uncertainty
+
+### Use quantities with units and declared scope
+
+A parametric relation becomes an engineering model when its variables have defined units, valid ranges, boundary conditions, and an identifiable decision. NS-MB3 uses a simplified energy model for a 24-trip shift. The per-trip traction energy is route distance multiplied by energy per kilometer; auxiliary energy adds a fixed quantity per trip:
+
+\[
+E_{\mathrm{shift}}=N(d e+E_{\mathrm{aux}}).
+\]
+
+For \(N=24\) trips, \(d=1.8\ \mathrm{km/trip}\), \(e=0.36\ \mathrm{kWh/km}\), and \(E_{\mathrm{aux}}=0.20\ \mathrm{kWh/trip}\), demand is
+
+\[
+E_{\mathrm{shift}}=24(1.8\times 0.36+0.20)=20.352\ \mathrm{kWh}.
+\]
+
+The synthetic battery has 40 kWh nameplate capacity and a 25% reserved fraction, giving an illustrative usable limit of \(40(1-0.25)=30\ \mathrm{kWh}\) and a margin of \(9.648\ \mathrm{kWh}\). The units agree: kilometers cancel in \(d e\). Comparing the result with a power limit in kilowatts would be a dimensional error.
+
+### Derive sensitivity, don't only recalculate the base case
+
+A first-order sensitivity to the energy rate is
+
+\[
+\frac{\partial E_{\mathrm{shift}}}{\partial e}=Nd
+=43.2\ \mathrm{km}.
+\]
+
+If the traction rate rises by \(0.05\ \mathrm{kWh/km}\), the first-order increase is \(43.2\times0.05=2.16\ \mathrm{kWh}\), leaving \(7.488\ \mathrm{kWh}\) of model margin. The equality is exact for this linear model. It does not include temperature, route elevation, vehicle loading, battery age, auxiliary transients or charging losses. An engineering decision needs parameter bounds, measured calibration data and a scenario-specific reserve policy.
+
+The ideal fleet capacity check is another constraint: \(n\times 3\ge8\). Candidate A (two vehicles) fails the bound; B (three) and C (four) satisfy it. Energy and throughput are therefore distinct feasibility filters. A vehicle count alone does not prove shift-range sufficiency, and a battery margin alone does not prove peak-hour service.
+
+### When uncertainty matters
+
+For small uncertainty about inputs, a first-order propagation formula is
+
+\[
+\operatorname{Var}(E)\approx\nabla E^{\mathsf T}\Sigma\nabla E,
+\]
+
+where \(\Sigma\) includes cross-covariances. Treating route length, energy rate and auxiliary demand as independent is an assumption, not a default fact. For highly nonlinear or bounded quantities, use scenario propagation or Monte Carlo with a justified joint distribution, then validate the model against observed shift data. A mean that fits does not establish the upper tail needed for reserve assurance.
+
+**Exercise with answer.** If the traction rate becomes \(0.41\ \mathrm{kWh/km}\), what is the new demand? \(E=24(1.8\times0.41+0.20)=22.512\ \mathrm{kWh}\), leaving \(7.488\ \mathrm{kWh}\). This result is a conditional model calculation, not a battery certification.

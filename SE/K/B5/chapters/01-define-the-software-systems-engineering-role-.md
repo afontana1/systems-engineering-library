@@ -78,3 +78,26 @@ The software systems engineer's distinctive contribution is maintaining a cohere
 ## Continuity
 
 This chapter builds from the earlier Foundation books and leads toward [next chapter](02-model-software-allocations-interfaces-and-the.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-764-w01.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+
+## Step 03 integrated reference: from system intent to software release obligations
+
+### A software boundary is a contract, not a repository boundary
+
+In the NS-SW5.1 case, software operates a campus-shuttle reservation service; the separately engineered vehicle controller remains responsible for safe motion. Reserving a vehicle is not equivalent to issuing a traction command. Treat that distinction as an engineering boundary: requirements **SWS-01** through **SWS-08** constrain what the software must do, while vehicle-control hazards require evidence outside this release. A feature list would hide this separation. An operational scenario makes it visible: when the reservation service loses network contact, an operator must receive an explicit *unavailable* indication, not a fabricated confirmation.
+
+The baseline is a collection of controlled obligations, owners, interfaces and test claims in [NS-SW5.1 case records](../case/INDEX.html). These obligations divide into three classes. Functional contracts such as **SWS-03** demand exclusive vehicle-slot allocation. Quality contracts such as **SWS-01** bind latency to a workload and measured population. Assurance contracts such as **SWS-06** bind a deployable artifact to its provenance. All three are necessary; none substitutes for the others. The case names owners so that failures can be assigned to design responsibilities rather than to vague team boundaries.
+
+### Derive a complete release claim
+
+A usable release claim has the form: **for configuration C, in environment E, under workload W, evidence set V supports obligation R within limitation L**. For SWS-04, define the state observation timestamp \(t_s\) and the accepting service's time \(t_a\). The age check is \(0\leq t_a-t_s\leq5\) seconds, under an explicit synchronized-clock assumption. If the observation has a timestamp seven seconds earlier, it must be rejected; whether the last known physical position is safe is a separate system decision.
+
+This seemingly small equation exposes failure cases: clocks may disagree; a timestamp may be untrusted; updates may arrive out of order; or an observation may be fresh but inaccurate. The software-level check assures *freshness according to the chosen timestamps*, not location accuracy or safe motion. To make it credible, verification must test the boundary at exactly five seconds, just beyond five seconds, clock skew, replay, and unavailable telemetry.
+
+### Work through the release register
+
+In [the evidence register](../case/evidence-register.csv), five synthetic checks currently pass, one synthetic availability risk warning appears, one build attestation belongs to the prior NS-SW5.0 revision, and the recovery drill is only planned. A green unit-test suite cannot erase these gaps. The final release decision is therefore **NO-GO** pending evidence renewal and an authorized operational decision. This is a teaching decision, not approval of a real safety-related system.
+
+**Exercise.** A new feature moves availability monitoring from an external probe to the same host as the application. Does a higher observed uptime now imply improvement? **Answer.** Not necessarily: a failed host can stop both service and monitor; the observation boundary has changed. Re-establish what the SLO counts and revalidate the measuring system before comparing results.
+
+**Use next:** Chapter 2 makes these obligations traceable to interfaces; Chapter 12 tests whether the evidence survives the proposed deployment.

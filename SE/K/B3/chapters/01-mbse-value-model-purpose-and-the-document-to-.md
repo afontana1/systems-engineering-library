@@ -83,3 +83,37 @@ In [Lab 1: A model has to earn its existence](../labs/lab-01-mbse-value-model-pu
 ## Continuity
 
 This chapter builds from the earlier Foundation books and leads toward [next chapter](02-modeling-plan-methodology-language-tool-and-r.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-631-w01.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: model value as a falsifiable investment
+
+### Decide what the model must make cheaper, safer, or more reliable
+
+Model-based systems engineering begins with a decision that is expensive to make badly. A repository of diagrams is not inherently superior to a collection of documents. Its advantage is that an element has an identity, relationships carry defined meanings, and a change can be propagated into questions that can be checked. Choose the smallest model whose *queries* justify its maintenance. In the [NS-MB3 case](../case/INDEX.html), the initial question is whether an architecture can support eight shuttle trips in the design peak hour while enforcing authorization, timeliness, and an energy reserve. A model that cannot expose the shortage in candidate A has little decision value, regardless of its number of diagrams.
+
+The initial candidate has two vehicles, each assumed to complete three trips per hour. Its ideal throughput is
+
+\[
+Q_A = n_A r = 2(3)=6\ \mathrm{trips/h}.
+\]
+
+The requirement is eight; the analytical shortfall is two trips per hour. This is a necessary feasibility check, **not** a simulated demonstration of real operating capacity. A stochastic service model would additionally require dwell-time variation, failures, dispatch conflicts and charging constraints. The model is worthwhile here because the contradiction can be found before committing to a detailed physical design.
+
+### Construct a model-purpose contract
+
+Write down four items before choosing a modeling language: (1) the decision and its date, (2) stakeholders and the questions their viewpoints must answer, (3) element and relationship types needed to answer those questions, and (4) what observation would falsify the model's prediction. For NS-MB3, the model must answer: Which candidate meets the ideal capacity bound? Which requirements have allocated components? Which tests target the current requirement revisions? Does the timing budget hold in degraded operation? A drawing-only model can communicate the answer to one question, but cannot reliably answer all four without manually rediscovering identity and version metadata.
+
+A useful accounting model for adoption is
+
+\[
+V = N\Delta h - H_{\mathrm{build}} - H_{\mathrm{maint}} - H_{\mathrm{review}},
+\]
+
+where \(N\) is the number of decisions or changes the model supports, \(\Delta h\) is hours saved per decision *relative to a specified baseline practice*, and the remaining terms measure building, upkeep and review. Suppose a pilot consumes 80 hours up front and 40 hours of updates and review, but saves an estimated 4 hours for each of 30 changes. Then \(V=30(4)-80-40=0\) hours: the project is at a break-even estimate, not an established success. The threshold is 30 changes, conditional on savings being real and measured. If a manual workflow already has versioned identifiers and scripts, the incremental benefit may be smaller. Cost or schedule benefits should be measured across comparable change requests, not inferred from diagram quality.
+
+### Practice with answer
+
+**Exercise.** A revised model costs 100 hours to build and 20 hours to maintain. An observed pilot suggests a mean saving of 5 hours per change. How many changes are needed to break even, and what could invalidate this estimate?
+
+**Worked answer.** \(N=(100+20)/5=24\). If the pilot measured easy changes only, or if common model queries require manual cleanup after imports, the five-hour saving is biased. Run a representative pilot with both simple and cross-disciplinary changes; record observed effort and erroneous decisions, not only the time to edit diagrams.
+
+**Boundary of this chapter.** Formal language conformance, model fidelity, and operational validation are separate from the economic justification. The independent teaching audit in [the case checker](../tools/step03_book3_model_check.py) validates a small JSON schema, **not** a SysML implementation.

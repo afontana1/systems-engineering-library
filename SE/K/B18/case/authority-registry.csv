@@ -1,0 +1,7 @@
+constituent,independent_mission,decision_owner,sos_obligation,interface,change_lead_time_days,unresolved_assurance
+rail,regional passenger transport,rail-operator,offer rail surge slots,dispatch-routing-v1,21,emergency priority agreement
+paratransit,accessible scheduled mobility,paratransit-provider,reserve wheelchair-capable slots,access-booking-v1,14,accessible service conflict
+campus-shuttle,campus circulation,campus-operator,offer surge shuttle capacity,shuttle-avail-v1,7,charging and operator staffing
+bus,municipal mobility,transit-authority,divert spare capacity,bus-routing-v1,10,route approval and labor
+dispatch,regional coordination,regional-coordinator,manage multiagency routing,dispatch-v1,3,time quality and cyber evidence
+hospital-intake,patient and visitor intake,hospital-network,confirm emergency receiving capacity,intake-v1,5,clinical workflow validation

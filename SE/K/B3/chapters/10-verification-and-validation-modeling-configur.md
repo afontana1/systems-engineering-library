@@ -83,3 +83,40 @@ In [Lab 10: Verification planning and evidence are different objects](../labs/la
 ## Continuity
 
 This chapter builds from [previous chapter](09-candidate-physical-architectures-model-based-.md) and leads toward [next chapter](11-model-quality-queries-reports-change-impact-g.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-631-w10.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: model verification cases and evidence separately
+
+### Five objects that should not be conflated
+
+A requirement specifies an obligation; a verification case specifies how it might be assessed; a procedure gives the repeatable execution; an execution record documents what was observed; and an acceptance decision interprets the result for a particular release. A link between requirement and verification case establishes planned coverage, **not** successful verification. Model repositories need types for each object and a revision context that keeps the records from becoming an undifferentiated list of PASS labels.
+
+Use the NS-MB3 synthetic evidence register as an example:
+
+| Requirement | Recorded status | Correct interpretation |
+|---|---|---|
+| `REQ-01`, authorization | Current PASS fixture | Linked illustrative support; physical behavior not demonstrated |
+| `REQ-02`, ideal capacity | Current PASS arithmetic | Analytical necessary bound only |
+| `REQ-03`, telemetry freshness | PASS for revision 1; requirement at revision 2 | **Stale**: current requirement unsupported |
+| `REQ-04`, nominal latency | Current PASS budget | Nominal serial-path calculation; degraded case not covered |
+| `REQ-05`, shift energy | Current PASS arithmetic | Simplified energy conservation; uncertain inputs |
+| `REQ-06`, duplicate-token rejection | Planned only | No observed passing result |
+
+The checker identifies four current passing *fixtures*, one stale test and one without a passing result. It does not claim that any field tests have occurred. Even if all six were labeled PASS, the source and method metadata would matter: an analytical bound cannot be relabeled as a qualification test, and an inspected software artifact does not prove real-time control behavior.
+
+### Make release applicability an explicit predicate
+
+For a test execution \(e\) and requirement \(r\), define a basic currency predicate
+
+\[
+C(e,r,b)=\bigl[e.\mathrm{requirementID}=r.\mathrm{id}\bigr]
+\land\bigl[e.\mathrm{requirementRev}=r.\mathrm{rev}\bigr]
+\land\bigl[e.\mathrm{baseline}=b\bigr].
+\]
+
+Evidence is potentially relevant only if the predicate holds. It still needs a credible procedure, relevant operating scenario, measurement quality, passed acceptance criteria, and independent authorization where required. Applying `C` to the case excludes `TEST-03` from current support. It also makes it clear why retaining the historical test is useful: auditability is not the same as current applicability.
+
+### Practical review of gaps
+
+For each uncovered requirement, choose a disposition: new test, justified reuse by equivalence, change to the requirement, documented waiver with authority, or release hold. A method should be chosen from analysis, inspection, demonstration and test according to the nature of the claim, without treating a method name as proof of adequacy. For the duplicate-command claim, a concurrent-retry test and evidence of atomic enforcement are more persuasive than screenshots of a nominal sequence diagram.
+
+**Exercise with answer.** A team moves a PASS record for `REQ-03@1` into the folder for baseline `NS-MB3.1` and changes its filename. Does this fix the gap? No. The record still documents an earlier requirement revision. A controlled equivalence rationale, with reviewer sign-off, or a new validated execution is required. Filesystem location cannot change what was tested.

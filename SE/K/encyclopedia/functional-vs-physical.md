@@ -68,6 +68,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 
+
+
+## Step 02 review studio — trace one function across a changed implementation
+
+The function **validate booking eligibility** may initially run in a single dispatch server and later move to a separate service. Its responsibility and correctness conditions do not disappear when the physical/software allocation changes. A functional model describes *what transformation is required*; a physical model records *which components embody it*.
+
+**Solved exercise:** the system splits eligibility and allocation services. Previously, an atomic database transaction checked rider eligibility and committed a vehicle assignment. Now the services exchange asynchronous events. Which engineering claim requires renewed attention? **The end-to-end consistency obligation**: eligibility may change before allocation commits, and retries may duplicate work. The team needs explicit event ordering, version and idempotency contracts, plus new integration evidence. Updating the component diagram alone is not enough.
+
+**Review test:** every critical function should have inputs, outputs, failure transitions, a primary owner, allocated components, and verification evidence. Component tests show local behavior; functional mission threads expose missing cross-component responsibilities.
+
 ## Follow the knowledge
 
 **Related concepts**

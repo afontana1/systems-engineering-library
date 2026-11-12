@@ -86,6 +86,12 @@ A correct computed result is not automatically a system acceptance result; expla
 
 </details>
 
+## Optimization must declare its uncertainty set
+
+A robust formulation \(\min_x\max_{u\in\mathcal U}L(x,u)\) requires a justified uncertainty set \(\mathcal U\). Treating a three-scenario table as all possible operating conditions is a modeling choice, not a guarantee about field performance. Likewise, a chance constraint \(P(g(x,U)\le0)\ge0.99\) is unsupported unless a credible joint probability model is supplied.
+
+In the [worked Pareto and regret study](../../methods/pareto-and-robust-design.md), all-scenario feasibility (worst delay at most 8 seconds) reduces a six-design set to B, C and E. Its executable search is **exhaustive only over the six supplied designs**. To extend to a continuous search, define parameter bounds, solver settings, convergence checks, surrogate-validation data, and an independent re-evaluation of selected designs. Record the units and normalization of every objective before assigning weights.
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -123,3 +129,19 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [07 — Previous chapter](07-reframe-the-engineering-design-problem-and-generate-alternatives-thr.md) · [09 — Next chapter](09-design-computational-experiments-to-learn-efficiently-from-the-desig.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-DA14.1 decision-analysis laboratory: Chapter 08
+
+### Mathematical formulation and bounded enumeration
+
+Let a design vector be \(x=(a,n,c,r,d,u,z,s)\) with service architecture \(a\), fleet \(n\), chargers \(c\), reserve fraction \(r\), dispatch \(d\), automation \(u\), service zones \(z\), and speed limit \(s\). Define four loss objectives \(f(x)=(C(x),W(x),E(x),1-Q(x))\) for five-year cost, 90th-percentile wait, annual emissions and accessible-coverage gap. Eligibility additionally requires availability at least 0.95 and no more than three vehicles per charger, plus cost at most $14.5M, wait no greater than 15 minutes, accessible coverage at least 0.95 and risk category no greater than 3. The hard constraints and response formulas are **new deliberately synthetic assumptions** in the [Python source](../tools/step03_book14_decision.py), not established campus requirements.
+
+The illustrative operating fleet is \(n_{active}=n(1-r)\), and under the defined analytic response \(W=27-n_{active}+2.8n_{active}/(c+1)+0.015(n_{active}-13)^2+\cdots\), where additional terms represent architecture, dispatch, zones and speed. No queueing theory or real passenger arrival process generated these coefficients. They merely supply a transparent *test oracle* so students can verify search and sensitivity algorithms. Their units are chosen to yield minutes, but dimensional form is not physical calibration. For cost, \(C=3.25+0.39n+0.26c+0.11(z-4)+0.12nr+\cdots\) in $M, again explicitly fictional.
+
+### Feasible-set and Pareto construction
+
+Enumerating all **1440** declared tuples produces **10** nominally feasible designs; applying four-objective coordinate dominance yields **5** nondominated designs. The [complete candidate CSV](../case/design-candidates.csv) preserves excluded designs with failed reasons, while [efficient designs](../case/efficient-designs.csv) retains full parameters and outcomes. There is no random optimizer to declare prematurely converged: exhaustive enumeration establishes the finite-grid frontier but not the global frontier of the continuous or full-morphology problem.
+
+**Worked vector.** Hybrid service, 18 vehicles, 8 chargers, 10% reserve, priority dispatch, human operation, four zones and 18 mph yields \(n_{active}=16.2\), cost **$13.156M**, modeled wait **14.0136 min**, coverage **0.998**, availability **0.9544** and emissions **126.6 tCO2e/year**. The charging ratio is \(18/8=2.25\) vehicles/charger. It passes the stated nominal gates and lies on the *sampled* nondominated frontier. It does not establish that an 18-vehicle fleet can meet measured campus wait requirements. In particular Book 11's separate discrete-event model reported serious unqualified delays, so the response surrogate must not override those results.
+
+**Exercise and explanation.** If the example loses one charger, does it automatically violate the charger-ratio constraint? **Solution:** \(18/7\approx2.571\le3\), so **not this gate**. However, the separately coded `charger_loss` stress raises predicted wait to 15.9576 minutes and lowers availability to 0.9424, failing *two different* gates. Screening only the physical charger count would overlook important modeled service consequences. For qualification, obtain real failure/recovery distributions and operational analysis.

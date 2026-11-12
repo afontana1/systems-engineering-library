@@ -44,3 +44,15 @@ Should the intake service acknowledge a received request before or after it is p
 <details><summary>Worked answer</summary>Add it to the components array, define producer/consumer interfaces with failure behavior, allocate any new requirements, update hazards, and review human authority. Validate the graph, then add behavior tests; a passing graph is not a demonstration of human usability.</details>
 
 **Submit:** a revised model, a one-page model assurance argument, and one deliberately malformed model with its diagnostic output. Related: [v11 architecture stage](../../integrated-lab/chapters/03-architecture-interfaces.md), [architecture flagship](../../flagships/F01-requirements-to-assurance.md).
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Architecture scope and model correspondence.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+The v12 architecture graph can pass endpoint, uniqueness and declared-trace checks while representing a false real-world architecture. A JSON relationship from `Dispatcher` to `FleetModel` means that the model *declares* the interface; it does not test a real network or physical interface protocol.
+
+**Cross-lab method:** Compare U2's two source/input digest inventories. v11 and v12 share a 12-request fixture, but the advanced model has additional fault parameters and may use different scheduling semantics. The bridge tests agreement only on the nominal completed count and refuses to infer protocol or vehicle equivalence from it.
+
+**Exercise and solution:** Suppose an interface is renamed while every numeric output stays identical. What must be updated? Architecture interface versions, producer/consumer contracts, trace links, test configuration and evidence freshness. Source hash agreement is necessary for reproducing the original computation, never proof of conforming architecture.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

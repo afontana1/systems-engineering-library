@@ -53,7 +53,11 @@
 <li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
 <li><a href="https://sebokwiki.org/wiki/Main_Page">SEBoK · Guide to the Systems Engineering Body of Knowledge, v2.14 (2026)</a> — Community-maintained secondary guide; use its references for further research.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section id="step03-concept-study"><h2>Step 02 review studio — the system boundary changes the test you owe</h2>
+<p>A team declares the rider phone app to be its system of interest. That boundary is appropriate for testing app UI behavior; it is inadequate for concluding that a rider can reliably secure a shuttle. The full service includes dispatch, allocations, vehicle availability, operator procedures, notification networks, and external actors. The boundary chosen must match the claim made.</p>
+<p><strong>Solved exercise:</strong> the app passes 100% of its confirmation-screen tests, but some confirmations refer to reservations that were rolled back by the allocation database. Is the service-level booking claim satisfied? <strong>No.</strong> The app's display can be correct relative to its input and wrong relative to the underlying committed service state. Add end-to-end tests reconciling client state with a committed allocation and exercise retry/timeout conditions.</p>
+<p><strong>Diagnostic:</strong> identify the system's mission, owners, external exchanges, physical/operational domain, assumptions, failure modes, and authorized decisions. Explicit boundaries improve engineering reasoning; artificially narrow boundaries can transfer unowned risks rather than eliminate them.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="boundaries-and-interfaces.html">Boundaries, environment, and interfaces</a></li>

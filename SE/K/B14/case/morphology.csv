@@ -1,0 +1,13 @@
+dimension,course_options,computed_subset,excluded_or_deferred_reason,required_evidence_owner
+service_architecture,fixed-route|demand-responsive|hybrid|regional integration,demand-responsive|hybrid,Other architectures remain valid course alternatives but not in this constrained experiment,architect
+vehicle_mix,shuttle only|van only|mixed|staged transition,implicit mixed or demand-responsive,Explicit mix constraints require capacity and accessibility model,operations analyst
+automation,human-operated|supervised autonomy|bounded autonomy,human-operated|supervised autonomy,Bounded autonomy qualification absent,safety lead
+dispatch,schedule|nearest-vehicle|zone-based|priority-aware,schedule|priority-aware,Other strategies require validated fleet-event logic,simulation lead
+accessibility,fixed capacity|reservable capacity|dedicated reserve,single aggregate coverage response,Class-specific trip denial and reserve allocation not modeled,accessibility office
+energy,depot charging|distributed charging|opportunity charging,aggregated charger count only,Charging-site topology and actual energy constraints absent,energy lead
+supervision,centralized|distributed|vendor-managed|mixed,unmodeled,Staffing and regulatory responsibility not modeled,operations executive
+fleet_size,8 through 20,10|12|14|16|18,Grid subset of numeric range,analytics reviewer
+chargers,3 through 10,4|6|8,Grid subset of numeric range,energy lead
+reserve_ratio,0 through 0.25,0.10|0.15|0.20,Grid subset of numeric range,operations analyst
+service_zones,2 through 8,4|6,Grid subset of numeric range,analytics reviewer
+speed_mph,12 through 25,18|24,Speed is not a license for autonomy or public road use,safety lead

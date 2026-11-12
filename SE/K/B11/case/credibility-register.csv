@@ -1,0 +1,7 @@
+id,claim,kind,status,configuration,evidence_needed,owner
+MS11-E01,arrival schedule matches guide,source trace,documented,NS-MS11.1-v1,measure real peak arrivals,course sponsor
+MS11-E02,event scheduling and invariants,computation,unit tested,NS-MS11.1-v1,independent implementation or trace review,model developer
+MS11-E03,stochastic trip time distribution,input,assumed,NS-MS11.1-v1,representative route observations,model developer
+MS11-E04,accessible wait under rare disruptions,validation,missing,NS-MS11.1-v1,observed accessible demand and operating tail,accessibility lead
+MS11-E05,charger locations and effects,validation,missing,NS-MS11.1-v1,geospatial and charging logistics study,fleet engineering
+MS11-E06,accredit for pilot commitment,authorization,not requested,NS-MS11.1-v1,decision authority independent credibility review,sponsor

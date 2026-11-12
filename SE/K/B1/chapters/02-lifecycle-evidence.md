@@ -139,3 +139,40 @@ Notice the explicit **claim, configuration, evidence, exceptions, and boundary**
 Run [Hypothetical Lab 2: The Design-Gate Debate](../labs/lab-02-design-gate.md). Produce the original guide's Week 2 lifecycle-tailoring memo and review plan. If you cannot identify what evidence is needed *before* a commitment, your lifecycle is still just a calendar.
 
 **Previous:** [Chapter 1](01-what-is-the-system.md). **Next:** [Chapter 3 — Needs become operational stories](03-needs-and-conops.md).
+
+
+## Step 03 technical studio — choose a review gate by expected learning value
+
+A gate is useful when new information can change an expensive decision. Consider a **synthetic** component choice: a proven interface costs 120 budget units. A novel interface costs 90 units if it works, and adds 100 units of rework if it fails. Suppose the probability of failure is 0.30. Its current expected cost is
+
+\[
+E[C_{\mathrm{novel}}]=90+0.30(100)=120.
+\]
+
+The expected-cost comparison is tied, but the outcomes differ sharply: 90 if successful versus 190 if unsuccessful. A deterministic “select the cheaper bid” rule ignores this uncertainty. An early integration experiment is warranted when its information can influence the choice *before* hardware or interface contracts become costly to reverse.
+
+Suppose a perfectly informative inspection costing 4 units predicts success or failure without changing either outcome. Under this strong assumption the team would pick the novel alternative in the success state and the proven alternative in the failure state. Expected cost *after information, before inspection cost*, is
+
+\[
+E[C\mid\text{perfect information}]=0.70(90)+0.30(120)=99.
+\]
+
+The **expected value of perfect information** is therefore 120 − 99 = **21 units**, and the net benefit of the hypothetical perfect inspection is 17 units. A real test is seldom perfectly informative: false results, schedule delay, and the cost of prototypes must be modeled. This 21-unit calculation is an **upper bound** on what information alone can be worth under the stated loss model.
+
+### Evidence-gated lifecycle decision
+
+A defensible preliminary gate would request (a) an interface test specification, (b) an operational-domain and safety constraint statement, (c) a record of the tested configuration, (d) a decision rule describing acceptable evidence, and (e) a list of changes that require the gate to be revisited. Gate outcomes include *continue*, *continue with conditions*, *repeat a test*, and *reject or change architecture*. None is equivalent to counting completed slides.
+
+### Solved exercise
+
+If the perfect inspection instead costs 25 units, should the team pay for it purely to reduce expected cost? **No**: 25 exceeds the upper bound of 21, so net expected value is −4. A test could still have safety or regulatory purposes not included in this simplified cost objective. **Do not** turn a monetary expectation into authority to bypass mandatory assurance gates.
+
+## Step 03 reference deepening — quantify the value of a review experiment
+
+Treat a review or prototype as an experiment whose purpose is to change a decision. Suppose a fictional design has a 20% chance of a defect that would cause $100,000 in loss if released. Delaying to remediate costs a certain $12,000. Without additional information, releasing has expected loss $20,000, so remediation is preferred at $12,000.
+
+A diagnostic test has 80% sensitivity and 90% specificity. A positive result has probability \(0.2(0.8)+0.8(0.1)=0.24\). Bayes' rule gives a post-test defect probability of \(0.16/0.24=2/3\) after a positive result. A negative result has probability 0.76 and leaves probability \(0.04/0.76\approx0.05263\) of a defect. The optimal contingent rule is **remediate after positive; release after negative** (under the simple loss assumptions).
+
+Expected loss with test information, before test cost, is \(0.24(12{,}000)+0.76(0.05263\times100{,}000)=\$6{,}880\). The expected value of sample information is $12,000 − $6,880 = **$5,120**; at $1,000 test cost the net expected gain is $4,120. This calculation depends on the prior, test characteristics, decision alternatives, and loss model. A lifecycle gate is valuable only when its evidence is relevant enough to alter a technically authorized action.
+
+**Practice:** If false-negative consequences are more severe than this simple cost loss, would the same test justify release? **Answer:** not necessarily; apply the actual noncompensable safety requirements and loss structure rather than using a cost-only expectation to authorize deployment.

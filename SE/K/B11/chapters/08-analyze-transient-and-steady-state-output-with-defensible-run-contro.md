@@ -94,6 +94,10 @@ A correct computed result is not automatically a system acceptance result; expla
 
 </details>
 
+## Phase 3 technical reference: Independent replication means and a paired queue comparison
+
+For an M/M/1 queue with nine arrivals and twelve services per hour, stationary mean total time is \(60/(12-9)=20\) minutes. A simulation starting empty has transient behavior, so steady-state estimation must justify warm-up and observation length. The reproducible companion executes **40 independent runs**, removes 2,000 customers as a declared initial transient, and averages the following 6,000 per run. Let \(Y_r\) be each replication mean. The estimate is \(\bar Y\pm t_{.975,39}s_Y/\sqrt{40}\), producing approximately **20.347 ± 0.599 minutes**, not a naive standard error over 240,000 correlated customer observations. A service upgrade to 13/hour produces approximately 15.198 ± 0.357 minutes; paired differences on common random streams estimate −5.149 ± 0.262 minutes. Interpret these intervals as sampling error *conditional on the queue assumptions*, not as physical field evidence. The [complete output-analysis method](../../methods/simulation-output-and-credibility.md) derives the formulas, warm-up caveats and experiment design.
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -131,3 +135,37 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [07 — Previous chapter](07-use-simulation-for-concept-exploration-alternatives-and-scenario-ana.md) · [09 — Next chapter](09-apply-simulation-in-design-and-development-using-selection-ranking-a.md) · [Book index](../README.md)
+
+## Phase 5 technical reading: Why run length cannot solve uncertain inputs
+
+A calibrated stationary Poisson arrival rate from synthetic counts is \(\hat\lambda=N/T=90/10=9\) arrivals/hour. The approximate 95% profile-LR interval [7.2664, 10.9896]/hour concerns parameter uncertainty before simulation. Increasing replication count reduces sampling variability of a queue statistic conditional on a fixed rate, but not the uncertainty of the rate itself. For rare conditions, brute-force Monte Carlo may observe zero failures even when the true model probability is nonzero. The [calibration and importance-sampling guide](../../methods/simulation-calibration-and-rare-events.md) derives likelihood estimation, a held-out count diagnostic, an unbiased weighted estimator and independent error checks.
+
+## Step 03 integrated mobility simulation case: output inference and replication discipline
+
+### Choose a terminating-system estimand
+
+The modeled campus day starts at 06:00 and ends at 18:00, with time-dependent rates. It is a **terminating** system. The initial condition (vehicles fully charged and initially idle) is part of the claimed experiment, not startup bias to discard. A warm-up deletion would erase genuine morning peak behavior. In a separate *nonterminating* station or continuous-horizon model, one might diagnose steady state and remove initialization effects, but no automatic rule transfers across these cases.
+
+There are two distinct percentile quantities. First compute a day-specific p90 \(Q_{0.9,r}\) across standard requests in replication \(r\), then estimate \(E[Q_{0.9,r}]\) by averaging across independent days. Alternatively pool requests across all replications to estimate a request-weighted p90. These have different weights and answer different questions when daily counts vary. The release reports the **mean of per-day nearest-rank p90 values**, plus a confidence interval across day replications. It must not be mislabeled as a 95% confidence interval for the real system's pooled 90th percentile.
+
+### Derive uncertainty intervals for the mean daily p90
+
+For \(R\) independent replications with daily percentile results \(q_1,\ldots,q_R\), calculate
+
+\[\bar q=\frac1R\sum_{r=1}^{R}q_r,\qquad s_q^2=\frac1{R-1}\sum_{r=1}^R(q_r-\bar q)^2,\quad SE(\bar q)=\frac{s_q}{\sqrt R}.\]
+
+A nominal two-sided 95% Student interval for the **mean** replication-level percentile is
+
+\[\bar q\pm t_{0.975,R-1}\frac{s_q}{\sqrt R}.\]
+
+For 30 replications, \(t_{0.975,29}\approx2.04523\). The [calculation code](../tools/step03_book11_mobility.py) uses this critical value for 30 seeds; for other replication counts its simplified demonstration uses a normal critical value and requires a more careful analyst review. The 14-vehicle baseline standard-trip p90 mean is about **36.4 min**; inspect [summary.json](../case/summary.json) for the exact computed interval. An interval for simulation noise cannot certify tail accuracy of an uncalibrated input distribution.
+
+### Paired comparisons exploit common random numbers
+
+For each seed \(r\), compute \(d_r=q_{14,r}-q_{12,r}\), then form \(\bar d\pm t_{0.975,29}s_d/\sqrt{30}\). This construction preserves useful within-day covariance. The controlled run yields approximately **-32.67 min** difference in mean daily standard p90, with a model-based 95% interval **[-36.05, -29.29] min** for 14 versus 12. An *unpaired* interval would fail to use that covariance and may give a different precision. The paired method still assumes independent replication seeds, a stable estimator, and interpretable shared exogenous streams; the endogenous charging draws are not strictly identical after policy divergence.
+
+Check more than the interval: plot replication-level results by seed, inspect unusually long queues, observe whether accessible request samples are small, and test a larger replication count. The daily percentage not picked up by close is a finite-day ratio, and its mean across days differs from a pooled requests-weighted ratio. At least one adverse scenario and extreme sample trace should accompany a report. Do not stop replications opportunistically when a favorable confidence interval first appears; predeclare a precision or resource rule.
+
+**Exercise and worked answer.** Given daily p90 values 10, 14 and 24 minutes, find their mean and sample variance. **Solution:** \(\bar q=(10+14+24)/3=16\); squared deviations are 36, 4 and 64, so \(s_q^2=(36+4+64)/(3-1)=52\ \mathrm{min}^2\). The standard error is \(\sqrt{52/3}\approx4.16\) minutes. With only three days, a normal 1.96 multiplier is not defensible; the Student critical value with two degrees of freedom is much larger, and data representativeness remains unresolved.
+
+[Replications and summary](../case/INDEX.html) · [Chapter 9](09-apply-simulation-in-design-and-development-using-selection-ranking-a.md).

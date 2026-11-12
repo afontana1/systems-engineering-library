@@ -96,3 +96,28 @@ When deriving lower-level requirements, preserve parent intent and avoid over-co
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 4: Concept-neutral requirements and gap experiments](../labs/lab-04-conceptual-requirements-use-cases-gaps-and-experiment-p.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 4 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+
+## Step 03 integrated reference: NS-CD6.1 — derive concept-neutral and testable requirements
+
+A requirement is useful when different candidate designs can be judged against the *same* obligation. “Deploy seven autonomous pods” is a design selection, not a concept-neutral stakeholder need. The [eight controlled requirements](../case/requirements.csv) state operational capacity, pickup wait, accessible offer coverage, cost, timing, fallback and evidence currency separately. Each names a measurement, units, scenario and proposed verification technique.
+
+### Separate thresholds from evidence and assumptions
+
+The capacity requirement CD6-R01 is written against the **effective** service envelope \(C\ge46.2\) trips/h. It is a constraint derived from 42 trips/h peak demand and a 10% planning margin; the utilization factors used to estimate \(C\) are not themselves requirements. CD6-R02 concerns the 90th percentile *of actual pickup waits in the event-day eligible request population*; it cannot be verified by computing the mean waiting time of already served riders.
+
+CD6-R03 introduces another denominator: eligible locations and requested service conditions. The assumed 98% coverage of concept C is a model entry, not a verified population estimate. CD6-R06 distinguishes nominal timing (under 500 ms) from degraded behavior, which requires an explicit safe fallback. Bundling those into one vague “responsive system” statement would hide the fact that nominal analysis passes while a degraded chain fails.
+
+### Build a traceability chain with independent failure modes
+
+A useful trace is `stakeholder need → measurable requirement → scenario → function → concept allocation → predicted measure → verification method → evidence → decision`. Repeated IDs are not sufficient: the evidence must be applicable to the declared baseline, measurement conditions and population. The [evidence register](../case/evidence-register.csv) has an intentionally outdated CD6-R08 record from NS-CD6.0; it also leaves CD6-R02 planned rather than executed. This is a teaching counterexample to treating a green spreadsheet cell as a verified engineering claim.
+
+### Design a risk-retirement experiment
+
+For CD6-R01, a useful pilot controls event-day demand and records observed throughput, refusal rate, stops and accessible requests. The pass criterion must specify a window and confidence treatment; the simple design-estimate calculation does not determine those parameters. For CD6-R07, perform a moderated outage scenario with participants who require accessible booking and record successful trip offers, manual recovery time and reasons for failure. The experimental result should be able to alter the concept recommendation—not merely decorate the final presentation.
+
+### Practice and explained answer
+
+**Exercise:** Rewrite “The shuttle will pick everyone up quickly” into two separate measurable requirements. **Answer:** State (i) a defined population, time window, and p90 pickup-wait threshold, such as CD6-R02, and (ii) a defined eligible origin/time coverage threshold, such as CD6-R03. Attach measurement instrumentation and a refusal denominator. Do not substitute “dispatch command latency” for rider pickup wait: subsystem timing and mission outcome are different measures.
+
+**Boundary:** Thresholds in this synthetic package are study assumptions. Real requirements must be negotiated with stakeholders and reconciled to regulations, accessibility obligations, operating constraints and resources.

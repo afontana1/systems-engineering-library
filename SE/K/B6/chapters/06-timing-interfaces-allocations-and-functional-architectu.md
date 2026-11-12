@@ -102,3 +102,28 @@ Margins must state both sign and uncertainty. If a deadline is 500 milliseconds 
 - [Deep workshop — Concept Feasibility Before Scoring Alternatives](../practice/feasibility.md)
 - [Corresponding independent laboratory](../practice/lab-feasibility.md)
 - [Interactive workbench](../practice/WORKBENCH.html)
+
+
+## Step 03 integrated reference: NS-CD6.1 — timing contracts and interface margin
+
+An interface allocation becomes credible when it states not only a producer and consumer but also timing, freshness, units, failure handling and a responsible owner. For the NS-CD6.1 hybrid dispatch chain, the nominal component budgets are 90 ms for dispatch logic, 110 ms communication, 180 ms actuation/interface handling and 40 ms integration allowance.
+
+### Derive the bound, then critique it
+
+Under an intentionally simple additive, deterministic approximation,
+
+\[T_{\mathrm{nominal}}=90+110+180+40=420\ \mathrm{ms},\qquad M=500-420=80\ \mathrm{ms}.\]
+
+The margin is 16% of the 500 ms requirement, or about 19% of the predicted nominal total. Those are different denominators; use the first when stating margin relative to the requirement. In a degraded scenario the declared contributions become 110+150+220+80=560 ms, which exceeds the 500 ms reference by 60 ms. This is an **open design case**, not an occasion to quietly rewrite the threshold.
+
+If the segments are random, a sum of individual p95 latencies is *not generally equal* to the p95 of the total. Dependence, retries, timeout censoring and heavy tails can change the end-to-end percentile. If an interface is asynchronous, delayed messages can alter state even after a timeout. A defensible contract must specify correlation assumptions, timestamp source and quality, bounded retries, the action on stale state, and whether the 500 ms number is an absolute bound or a percentile.
+
+### Failure propagation and allocation decisions
+
+Map the path from booking to dispatch to vehicle acceptance; distinguish “command acknowledged” from “ride actually provided.” For a degraded network, investigate a bounded local fallback, safe rejection, and operator-assisted service. The correct concept-level answer may be a requirement for a fallback experiment rather than a detailed controller design. The [evidence table](../case/evidence-register.csv) deliberately records CD6-R06 as a failed *model case*. It does not establish that any real vehicle is unsafe, but it prevents an unjustified green review.
+
+### Practice and worked answer
+
+**Exercise:** An engineer claims a 20 ms improvement in the communication segment resolves degraded timing. **Answer:** Revised degraded total is 540 ms, still 40 ms above the reference. A 60 ms reduction merely reaches equality; an additional margin is needed for model error and time variation. Propose a specific architectural change and a hardware-in-the-loop measurement under declared loads before clearing the finding.
+
+**Boundary:** Budget arithmetic is not probabilistic end-to-end verification and not a safety certification. The source of the threshold and relevant physical safety authority must be established independently.

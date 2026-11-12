@@ -72,3 +72,32 @@ The tool decision also carries lifecycle risk. Proprietary features, poorly spec
 ## Continuity
 
 This chapter builds from [previous chapter](01-mbse-value-model-purpose-and-the-document-to-.md) and leads toward [next chapter](03-stakeholders-concerns-needs-context-conops-an.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-631-w02.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: designing a governed model repository
+
+### Separate the modeling method from its representation
+
+A *method* defines the questions, products, order of work, and review rules. A *language* defines legal constructs and their semantics. A *tool* stores, edits, queries, transforms, and validates instances of that language. Confusing these leads to plans such as “use SysML and create diagrams” that never say what results must be trusted. The NS-MB3 model plan starts with stakeholder needs, identifies typed requirements, allocates each to a responsible component, registers verification procedures, and records evidence by both requirement revision and system baseline. A successful tool import is not an architecture review.
+
+Organize the model as a small number of accountable packages: `Mission`, `Requirements`, `Behavior`, `LogicalArchitecture`, `Interfaces`, `Measures`, `Alternatives`, and `Verification`. Each element must have a stable ID, owner, definition, revision, and allowed outgoing relations. The model-plan specification should state whether multiple owners are permissible, how duplicated IDs are rejected, and what baseline identifier makes a report reproducible. For example, `REQ-03@2` is intentionally different from `REQ-03@1`; a passing fixture for the latter is not evidence for the former.
+
+### Choose queries before views
+
+| Model question | Necessary information | Check | Reviewer interpretation |
+|---|---|---|---|
+| Which needs have no requirement? | need IDs and `derives` relations | anti-join | Coverage omission, not proof that requirements are valid |
+| Which requirements have no allocation? | requirement and component identities | missing-edge query | Investigate feasibility and responsibility |
+| Which tests use older requirements? | revisions and baseline labels | equality test | Evidence currency is unsupported |
+| Where can a command bypass authorization? | control-flow guards and modes | state reachability | Potential safety violation in the abstraction |
+
+An executable model query is valuable only when its result has an interpretation. A list of all requirements is useful documentation, but it is not an assurance argument. A list of requirements whose **only** test is stale, on the other hand, can identify a concrete release gate.
+
+### Establish a controlled change transaction
+
+Consider an engineering change: position freshness decreases from 300 ms to 200 ms. The transaction consists of a proposed requirement revision, downstream dependency impact analysis, affected interface and state-model revisions, test redesign, new evidence collection, review, and acceptance or rejection of the updated baseline. The change must not silently mutate historical results. In [NS-MB3](../case/model-baseline.json), `REQ-03` is revision 2 while `TEST-03` still identifies revision 1. The repository is structurally connected but contains stale evidence. Both facts are true; a query must report the latter.
+
+A repository may have many valid graphical views of one underlying model. Viewpoint design should follow the concerns and questions described by the architecture description discipline, not the menus available in a product. See [ISO/IEC/IEEE 42010:2022](https://www.iso.org/standard/74393.html) for the architecture-description standard; that standard does **not** prescribe a particular SysML workflow. For actual SysML v2 language definitions, use the [OMG specification](https://www.omg.org/spec/SysML/2.0). The case uses a notation-neutral training schema; do not interpret its JSON property names as standardized SysML constructs.
+
+### Practice with answer
+
+**Exercise.** A supplier imports a component `FLEET` into a new package, preserving its display name but creating a different ID. A requirement still allocates to the old ID. Is the model valid? **Answer:** A graph validator should flag a dangling reference or resolve it through an explicit, reviewed ID mapping. Matching display names is insufficient. The correct remedy is a controlled identity transformation and re-execution of dependent queries—not simply redrawing the same line.

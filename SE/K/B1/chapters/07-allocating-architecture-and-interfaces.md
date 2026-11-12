@@ -116,3 +116,32 @@ Take a fictional service with intermittent connectivity. Architecture C uses a c
 Complete [Hypothetical Lab 7](../labs/lab-07-interface-contracts.md), then return to the original Week 7 `662_W07_ArchitectureInterfaces_v1.0` deliverable. Its required architecture views, product breakdown, allocation matrix and interface sheets are more extensive than this fictional rehearsal.
 
 **Next:** [Chapter 8 — Decisions under uncertainty](08-trade-studies-and-sensitivity.md).
+
+
+## Step 03 technical studio — an interface contract is more than a connector
+
+Northstar assigns **NS-R-02** across the detection logic, status gateway, network transport, and supervisor console. This is an architectural allocation: each owner must agree to an observable timing and information contract, and the system owner remains responsible for the end-to-end claim.
+
+### Versioned status-message contract
+
+Consider an event with fields `event_id`, `source_id`, `source_revision`, `event_time_utc`, `state`, and `schema_version`. Define which values are mandatory, allowed state transitions, timezone and clock assumptions, duplicate-message behavior, stale-message thresholds, authentication, and expected acknowledgment semantics. A syntactically valid message can still be semantically dangerous if `state` is interpreted differently by two services or the timestamp uses an unsynchronized clock.
+
+For a deterministic budget the initial allocations sum to 1.65 s, leaving 0.85 s against a 2.50-s claim. This **arithmetic margin** is not physical reliability margin. Under queueing load or packet loss, network delay may dominate. Verification should include interface-contract tests and representative end-to-end load tests; validation should establish whether the operator can act on the indication in time.
+
+### Failure propagation across the boundary
+
+A gateway restart can replay previously published events. If the console orders them by arrival time instead of a trustworthy event revision, a recovered old `healthy` message may conceal a newer emergency state. Contract tests should therefore inject out-of-order events, duplicates, missing fields, schema-version mismatches, authentication failures, and stale data. Document expected responses for each, not merely “system handles errors.”
+
+### Solved interface exercise
+
+Component A publishes `time_ms=1000`; component B assumes seconds and records 1000 s. Both pass their unit tests but the integrated system fails. The correction requires explicit units and versioned schema validation at the interface, plus a negative integration test. This is a **semantic interface defect**, not a communication transport defect. A well-designed ICD specifies physical, logical, informational, temporal, and failure contracts together.
+
+## Step 03 reference deepening — compose interfaces and uncertainty
+
+The status indication's nominal latency budget is 0.35 seconds for detection, 0.25 for gateway handling, 0.70 for communication and 0.35 for display. Sum: 1.65 seconds, leaving 0.85 against the 2.5-second allocation requirement. But a diagram of serial blocks does not prove this bound. An actual end-to-end upper bound requires that the component bounds apply under compatible operating conditions, no omitted queuing or retry intervals exist, and every serialization or clock-translation delay is included.
+
+If each stage can add another 0.10 seconds beyond its nominal allocation under the chosen scenario, the combined bound becomes \(1.65+4(0.10)=2.05\) seconds with 0.45 seconds remaining. The resulting sum is meaningful only if each added allowance is a true bound; adding four 99th-percentile latencies does **not** give a 99th-percentile total without a dependence model.
+
+An interface contract should include identifier semantics, units, time bases, message ordering, stale-data policy, retries, and version ownership. For example, `status_age_ms` is not interpretable unless its timestamp is generated at an agreed event and clock synchronization is characterized. A receiver must specify what happens when age cannot be trusted; otherwise a missing clock becomes a misleading green indicator.
+
+**Practice:** The gateway timestamps messages at dispatch rather than at sensing. **Answer:** the measured transport latency omits sensing-to-dispatch delay; update the interface definition and timing analysis. A margin calculated on the wrong clock boundary is not a legitimate verification argument.

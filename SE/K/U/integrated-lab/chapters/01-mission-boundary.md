@@ -38,3 +38,15 @@ Suppose the case states “serve at least 95% of rider requests.” If the scope
 </details>
 
 **Gate evidence:** a one-page ConOps, a context diagram, three stakeholder measures, and a limitations list with at least five substantive exclusions. A reviewer should be able to identify the SOI without asking who drives the vehicles.
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: The mission boundary becomes an evidence boundary.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+The **denominator** of a service claim is part of its meaning. For both original fixed datasets, the evidence supports 12 completed requests out of 12 distinct synthetic requests; it does not support equitable access to real vehicles. Eleven of twelve would be only 91.67%, below the illustrative 95% threshold. The correct denominator excludes the exact duplicate delivery but must retain dropped messages and unfinished requests.
+
+**Reproducible decision:** In `NS-U2.1`, both original runners finish 12 of 12 fixed requests. The bridge independently replays each runner, checks accounting, and reports that neither request CSV contains a rider accessibility field. An equity acceptance gate cannot be computed by declaring each simulated request accessible. The effect would be denominator substitution, not evidence.
+
+**Exercise and solution:** A review board receives `12/12 completed` and asks whether all populations are adequately served. Which claim is defensible? **Only** “all twelve unique requests in this deliberately constructed fixture completed under the documented toy rules.” Answering an accessibility question requires stratified observations, agreed eligibility and service definitions, representative scenarios, and review by affected stakeholders.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

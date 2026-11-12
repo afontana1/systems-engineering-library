@@ -84,6 +84,12 @@ A correct computed result is not automatically a system acceptance result; expla
 
 </details>
 
+## A formal dominance check and a feasibility test
+
+Suppose candidate B has three minimization objectives \((\$135\mathrm{k},58\mathrm{kWh},7.5\mathrm{s})\) and F has \((\$155\mathrm{k},60\mathrm{kWh},8.1\mathrm{s})\), where the delay is the worst modeled scenario. Since B is strictly better on **all three** objectives, B dominates F. In contrast, a cheaper design that consumes more energy may be nondominated and must not be discarded because a single manager prefers a higher-cost option.
+
+Before reporting the Pareto set, apply firm feasibility requirements. A worst-scenario delay no greater than 8 s excludes several candidates even if they would otherwise be efficient. The [six-design worked analysis](../../methods/pareto-and-robust-design.md) includes a dominance enumeration and an explicit warning: a nondominated *evaluated* candidate is not guaranteed globally optimal over unsearched configurations.
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -121,3 +127,21 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [03 — Previous chapter](03-model-decisions-uncertainties-evidence-constraints-and-alternatives.md) · [05 — Next chapter](05-converge-on-a-preferred-selection-using-transparent-value-and-decisi.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-DA14.1 decision-analysis laboratory: Chapter 04
+
+### Feasibility is not the same as Pareto efficiency
+
+Define candidate \(a\) as **feasible** only if it satisfies every noncompensatory screening rule. For the instructional example use five-year cost at most $10.4M, deployment at most 12 months, accessible-trip coverage at least 0.95, availability at least 0.95, and ordinal integration-risk category at most 3. These are new teaching thresholds, not universal campus requirements; a separate operational accessibility and safety review remains mandatory. The [screening CSV](../case/pilot-screening.csv) preserves every alternative and every failed gate.
+
+Under these illustrative rules, **C and D survive**. A fails coverage (0.93); B fails cost, time, coverage, availability and risk; E fails coverage and availability; F fails coverage and availability. Both C and D meet all five screening values. We do not assign numerical distances to ordinal integration-risk levels, and we exclude risk from a continuous Pareto distance calculation. A candidate with an unacceptable safety condition cannot become acceptable by a high monetary score.
+
+### Componentwise dominance and objective orientation
+
+Let \(g_i(a)\) be the oriented loss for objective \(i\): cost, wait, deployment and emissions appear directly; beneficial coverage and availability enter as their negatives. Alternative \(a\) dominates \(b\) if \(g_i(a)\le g_i(b)\) for every component and \(g_j(a)<g_j(b)\) for at least one. For C versus D, C is less expensive ($9.4M versus $10.1M), deploys sooner (7 versus 11 months) and covers a slightly higher proportion of accessible trips (0.99 versus 0.98). But D improves wait (8.9 versus 11.2 minutes), availability (0.960 versus 0.952) and emissions (104 versus 142 tCO2e/year). Therefore neither dominates the other; the **feasible Pareto set is {C, D}**, not a claim that both must be procured.
+
+Dominance is coordinate-wise; do not calculate the Euclidean distance between a million dollars and a fraction without deliberate dimensionless scaling. A Pareto frontier changes when objectives or feasible boundaries change. A cost measured over five years might reverse a ranking produced by purchase price alone. Dominance also cannot detect correlated errors in both candidate predictions. A difference smaller than measurement resolution deserves an uncertainty-qualified comparison, not false precision.
+
+**Worked exercise.** Suppose D's estimated wait increases to 12 minutes, with every other stated attribute fixed. Does C dominate D? **Solution:** No. C then improves wait (11.2 versus 12), cost, deployment and accessible coverage, but D still has better availability (0.960 versus 0.952) and lower emissions (104 versus 142), so dominance is not established. If an analyst silently drops those two measures, the definition of the decision has changed and must be recorded. To remove D legitimately requires another declared gate, evidence of infeasibility or revised stakeholder objectives.
+
+**Engineering counterexample.** A candidate meeting modeled coverage 0.95 may still exclude a particular campus district or operating hour. A scalar population-level measure cannot stand in for the legal or operational definition of accessible transportation. Document coverage denominator, time window, uncertainty and signoff owner before treating a simulated Pareto alternative as feasible in reality.

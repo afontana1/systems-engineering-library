@@ -121,3 +121,25 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [11 — Previous chapter](11-update-lifecycle-evidence-and-decide-among-upgrade-replacement-retir.md) · End of the book · [Book index](../README.md)
+
+## Step 03 integrated quantitative case: reproduce, challenge, defend
+
+The [NS-QA10.1 dossier](../case/INDEX.html) provides a controlled, synthetic quantitative package. The book-level review must distinguish (i) arithmetic reproduction, (ii) statistical inference conditional on a data-generating process, (iii) evidence of field relevance, and (iv) authority to make a lifecycle decision. These are separate claims, even when packaged in one polished report.
+
+### Reproduce the central evidence chain
+
+1. The 2×2 experiment has cell means of 440, 390, 520 and 490 ms. The optimization's benefit decreases in cold mode: the interaction contrast is \(+20\) ms with a controlled-data interval of approximately [0.88, 39.12] ms under the assumed error model.
+2. Right-censored life data contain 3 failures over 2410 module-hours. Under a constant hazard, the 50-hour reliability point estimate is \(e^{-50(3/2410)}=0.93966\), below the provisional 0.95 limit.
+3. Correlated normal input assumptions produce modeled energy p95 of 29.13 kWh against a 29 kWh limit. Ignoring input correlation produces 28.29 kWh and reverses that screen.
+4. Alternative A has lower expected scenario cost at disruption probability .2, but B becomes preferred above probability \(1/3\). This comparison is subordinate to hard compliance gates.
+5. The [evidence register](../case/evidence-register.csv) contains a stale `QA-B9` configuration record and an unexecuted accessibility study.
+
+### Formal decision position
+
+**HOLD.** The synthetic models already flag energy-tail and module-reliability problems, while latency-tail and accessibility claims are not demonstrated by the available evidence. Do not label the controlled factorial data an operational p95 qualification, or a mathematical model check a validation of the field environment. The hold can be lifted only through approved design changes or authorized operating restrictions, followed by relevant tests and current configuration-controlled evidence.
+
+### Adversarial review checklist
+
+A reviewer should be able to recompute every figure using [the executable script](../tools/step03_book10_quantitative_check.py), trace every source row to its baseline, reproduce the energy covariance calculation, explain the small-sample and censoring assumptions, and show a sensitivity that changes the decision. The review should explicitly inspect whether the outcome is invariant to plausible alternate distributions, correlations, failure mechanisms and subgroup sampling practices.
+
+**Exercise and answer.** Prepare a one-page approval recommendation using only a high-performing warm-weather controller mean. Is approval warranted? No: the target population is cold peak mode, other hard requirements fail modeled screens, and the remaining evidence is incomplete. A defensible review makes the unmet claims visible and names owners and next tests rather than presenting favorable isolated figures.

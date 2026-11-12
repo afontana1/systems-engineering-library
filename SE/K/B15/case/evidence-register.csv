@@ -1,0 +1,9 @@
+id,claim,evidence,provenance,limitation,disposition
+B15-E01,Controlled arrival schedule,controlled-inputs.json,Synthetic values authored for course,No measured change-demand population,Instruction only
+B15-E02,Stage flow balances,step03_book15_flow.py; daily-flow.csv,Deterministic finite-horizon simulation,No field-calibrated service distributions,Programmatic check
+B15-E03,Gate association,step03_book15_flow.py; item-evidence.csv,Explicit Boolean and configuration-key predicate,Not independent safety or cybersecurity test,Logical assertion only
+B15-E04,Assured policy releases 47 items,scenario-summary.csv; model-results.json,Same model code and input schema,Multiple co-changing policies; censoring,Comparative illustration
+B15-E05,Supplier disruption releases 31 items,scenario-summary.csv; daily-flow.csv,Supplier delay increased in controlled input,Not empirically measured supplier behavior,Stress counterexample
+B15-E06,Bayesian diagnostic,model-results.json; step03_book15_flow.py,Declared synthetic prior/test sensitivity/specificity,No real test calibration or defect prevalence,Conditional probability demonstration
+B15-E07,Scope of release authorization,Course EN645780; chapter 9; chapter 10,Independent review and controlled baseline framing,No live safety authority or hardware qualification,HOLD deployment
+B15-E08,CEO operating model economics,Chapter 12; controlled-inputs.json,Ten-week separate hypothetical accounting example,Not evaluated program costs or benefits,Investment hypothesis only

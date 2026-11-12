@@ -60,4 +60,13 @@
 <p>Recognize the identical logical operation via its stable idempotency key and return or reconstruct the existing outcome rather than creating a second reservation. Still verify the underlying storage transaction and timeout-reconciliation rules.</p>
 <p>&lt;/details&gt;</p>
 <p><strong>Transfer artifact:</strong> State-transition table, invariant list, negative tests and duplicate/reorder fault-injection scenarios. See <a href="../../encyclopedia/object-responsibilities.html">object responsibilities</a> and <a href="../../encyclopedia/interface-control.html">interface control</a>.</p>
+
+<!-- STEP04-FLAGSHIP-U1-START -->
+<section class="ns-u4-extension" aria-label="NS-U4.1 flagship technical extension"><h3>D11 extension · Identity, ordering and revision as separate invariants</h3>
+<p>A minimal per-request protocol has states $NEW\to COMMITTED\to ACKNOWLEDGED$. An <code>ACK</code> must reference an already committed request; immutable event identifiers must not be replayed with changed payloads; and message revision must match the approved contract. In NS-U4.1, <code>E2</code> is an exact duplicate, counted once; <code>E3</code> acknowledges <code>R2</code> before commit; a later <code>E1</code> replay changes its digest; <code>E4</code> uses obsolete revision 1.0. The three latter conditions are violations independent of throughput. A Python state-machine checker samples declared properties but does not prove correctness under arbitrary concurrency.</p>
+<p><strong>Exercise and solution.</strong> A new revision-2.0 <code>COMMIT</code> for <code>R2</code> arriving <em>after</em> its premature <code>ACK</code> cannot retroactively make the earlier history conforming. Reject and review the exception rather than rewriting the order. <a href="../flagship-integration/data/ns-u4.1-case.json">Event trace</a>.</p>
+</section>
+<script id="ns-u4-inline-math">window.MathJax=window.MathJax||{};window.MathJax.tex=window.MathJax.tex||{};window.MathJax.tex.inlineMath=[["$","$"]];</script>
+<style id="ns-u4-responsive">main{min-width:0;max-width:100%;overflow-wrap:break-word}main :is(table,pre){max-width:100%;overflow-x:auto}main :is(p,li):has(mjx-container){overflow-x:auto}main mjx-container{max-width:100%;overflow-x:auto}.ns-u4-extension{min-width:0;max-width:100%;border-top:2px solid #9acac9;margin-top:38px;padding-top:16px}.ns-u4-extension a{overflow-wrap:anywhere}</style>
+<!-- STEP04-FLAGSHIP-U1-END -->
 </main></body></html>

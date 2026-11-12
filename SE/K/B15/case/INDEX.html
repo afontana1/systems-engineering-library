@@ -1,0 +1,133 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS-ASE15.1 technical management laboratory</title><style>body{margin:0;background:#f5f8f9;color:#1a3845;font:16px/1.75 system-ui,sans-serif}header{padding:16px max(20px,calc((100vw - 1050px)/2));background:#173f52}header a{color:#c6f5ee}main{max-width:1050px;margin:24px auto;padding:clamp(18px,4vw,42px);border:1px solid #d5e3e6;border-radius:12px;background:white}a{color:#116970}h1{line-height:1.2}h2{margin-top:1.8rem}table{border-collapse:collapse;display:block;overflow-x:auto}th,td{padding:9px;border:1px solid #d9e4e7;text-align:left}th{background:#edf5f4}pre{overflow:auto;background:#edf4f5;padding:15px}code{overflow-wrap:anywhere}img{max-width:100%}@media(max-width:700px){main{margin:0;border:0;border-radius:0;padding:18px}}</style><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script></head><body><header><a href="../README.html">← Book 15</a> · <a href="../OPEN-BOOK.html">Textbook reader</a></header><main><h1>NS-ASE15.1 — Northstar Agile Systems Engineering operating-model laboratory</h1>
+<p><strong>Status:</strong> controlled synthetic educational case. <strong>Decision:</strong> GO only for a bounded, independently reviewed measurement-and-integration experiment; HOLD any inference of operational release suitability, safety acceptance, or enterprise-wide benefit.</p>
+<p><a href="../OPEN-BOOK.html">Book 15 reader</a> · <a href="../../../C/P4/EN645780.html">Course guide</a> · <a href="../README.html">Source chapters</a></p>
+<h2>Intended use and relationship to previous books</h2>
+<p>This is a synthetic transformation experiment for Northstar Mobility Systems' campus mobility program. It continues the fictional evidence-centered Northstar cases in Books 7–14 but does <strong>not</strong> assume that Book 11's operational fleet or Book 12's physical vehicle have been qualified. It is deliberately a model of <strong>engineering work and evidence flow</strong>, not a dynamic model of real vehicle behavior or stakeholder benefits.</p>
+<p>The authoritative model inputs are <a href="controlled-inputs.json">controlled-inputs.json</a>; the <a href="../tools/step03_book15_flow.py">standard-library Python implementation</a> uses finite daily stage capacities, fixed service durations, a reproducible arrival sequence, a deterministic supplier-delay rule and a deterministic rework rule. No empirical arrival distribution, cost estimate, human behavior model or physical assurance claim has been validated. A green simulated release means that <strong>the model's limited Boolean predicate</strong> was satisfied, not that a deployment is authorized.</p>
+<h2>Reproducibility and outputs</h2>
+<p>Run from the repository root:</p>
+<pre><code class="language-sh">python3 SE/K/B15/tools/step03_book15_flow.py
+python3 scripts/check_step03_book15.py
+</code></pre>
+<p>The first command recreates all machine-generated outputs (no external Python libraries):</p>
+<ul>
+<li><a href="scenario-summary.csv">Scenario summary</a> — 100-business-day counts, observed lead times, critical backlog and screening status.</li>
+<li><a href="daily-flow.csv">Daily flow</a> — arrivals, completed items, admitted WIP, waiting backlog, rework counts, with conservation of changes at every day.</li>
+<li><a href="item-evidence.csv">Per-change evidence ledger</a> — 48 items × four scenarios, with configuration, class, gate and release information.</li>
+<li><a href="model-results.json">Result manifest</a> — structured summary and conditional probability diagnostic.</li>
+<li><a href="decision-log.csv">Engineering decisions</a> — human-authored interpretations and outstanding evidence.</li>
+<li><a href="evidence-register.csv">Evidence register</a> — scope, provenance, assumptions, missing independent proof, credibility.</li>
+</ul>
+<h2>Controlled flow model</h2>
+<table>
+<thead>
+<tr>
+  <th>Parameter</th>
+  <th>Synthetic rule</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Demand</td>
+  <td>48 changes arriving over synthetic days 0–43, with specified burst duplicates</td>
+</tr>
+<tr>
+  <td>Horizon</td>
+  <td>100 business days; unreleased changes are <strong>censored</strong>, not counted as completed</td>
+</tr>
+<tr>
+  <td>Stages</td>
+  <td>Engineering → independent review → integration → assurance → release</td>
+</tr>
+<tr>
+  <td>Nominal service days</td>
+  <td>2, 2, 3, 2, 1; day-end completion is available to the next stage the following day</td>
+</tr>
+<tr>
+  <td>Critical changes</td>
+  <td>Every seventh sequence ID, solely for repeatable case construction</td>
+</tr>
+<tr>
+  <td>Supplier dependency</td>
+  <td>Every fifth sequence ID incurs scenario-specific extra integration delay</td>
+</tr>
+<tr>
+  <td>Rework</td>
+  <td>Every ninth change in baseline/flow-only or every sixteenth change in assured/stress re-enters review once, invalidating previous review/integration/assurance gates</td>
+</tr>
+<tr>
+  <td>WIP</td>
+  <td>Cap applies to <strong>admitted</strong> changes; unadmitted demand remains visible in the backlog</td>
+</tr>
+<tr>
+  <td>Release</td>
+  <td>All applicable review, integration, assurance, safety, security and version-key checks must pass</td>
+</tr>
+</tbody>
+</table>
+<h2>Output and interpretation</h2>
+<table>
+<thead>
+<tr>
+  <th>Scenario</th>
+  <th style="text-align:right">Releases / 48</th>
+  <th style="text-align:right">Mean total lead days among releases</th>
+  <th style="text-align:right">Nearest-rank p90 days</th>
+  <th style="text-align:right">Unreleased critical items</th>
+  <th>Educational screening</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Status quo</td>
+  <td style="text-align:right">21</td>
+  <td style="text-align:right">44.76</td>
+  <td style="text-align:right">76</td>
+  <td style="text-align:right">3</td>
+  <td>Fails</td>
+</tr>
+<tr>
+  <td>Flow only</td>
+  <td style="text-align:right">42</td>
+  <td style="text-align:right">36.57</td>
+  <td style="text-align:right">58</td>
+  <td style="text-align:right">0</td>
+  <td>Fails mean-latency screen</td>
+</tr>
+<tr>
+  <td>Assured learning</td>
+  <td style="text-align:right">47</td>
+  <td style="text-align:right">31.87</td>
+  <td style="text-align:right">50</td>
+  <td style="text-align:right">0</td>
+  <td>Passes synthetic screen</td>
+</tr>
+<tr>
+  <td>Supplier disruption</td>
+  <td style="text-align:right">31</td>
+  <td style="text-align:right">39.06</td>
+  <td style="text-align:right">67</td>
+  <td style="text-align:right">2</td>
+  <td>Fails</td>
+</tr>
+</tbody>
+</table>
+<p>The &quot;passes&quot; entry refers <strong>only</strong> to the provided hypothetical rule of at least 75% accepted releases within the fixed horizon, mean total lead no more than 35 business days <em>among observed releases</em>, and zero unresolved critical items. This rule is <strong>not</strong> a satisfactory operational safety or quality criterion. Mean lead times among released items are affected by right censoring; they are not the mean for all demands and should not be compared causally without a suitable event-history analysis and consistent cohort definitions. Multiple model parameters change at once, so the scenario comparison is not a controlled estimate of one intervention's effect.</p>
+<p><strong>Model limitations:</strong> deterministic arrivals and service times, no vacations or outages except simplified supplier delay, no true time-varying risk, no resource skill network, no defect severity distribution, no real safety testing, no calibrated failure probabilities, no repair/rollout operations and no validated demand-value connection. A second independent implementation and real operational observations would be required before any forecast. The economics example in Chapter 12 intentionally uses a <em>separate, same-window</em> 10-week hypothetical count; do not use the 100-day simulation count with the 10-week budget.</p>
+<h2>Connection to Book 15's twelve-week outcomes</h2>
+<ol>
+<li>Specify change-response time with a configuration-bound evidence endpoint.</li>
+<li>Tailor low-consequence, reversible changes separately from safety-critical/physical paths.</li>
+<li>Measure total and admitted lead time, backlog, throughput, WIP and horizon censoring.</li>
+<li>Allocate decisions to teams, interface authorities and independent safety reviewers.</li>
+<li>Plan a learning interval with a falsifiable gate and diagnostic belief update.</li>
+<li>Construct stakeholder value models without trading away hard assurance constraints.</li>
+<li>Compare interface/adapter change costs and option value.</li>
+<li>Query configuration-specific evidence and fail closed on stale results.</li>
+<li>Carry quality, cybersecurity and safety evidence into every increment.</li>
+<li>Rehearse an invalidated integration result and qualified recovery.</li>
+<li>Analyze supplier dependencies and system-level critical paths.</li>
+<li>Defend the CEO investment proposal, unknowns, comparison design and stop conditions.</li>
+</ol>
+<p>These additions supplement rather than replace the <a href="../../../C/P4/EN645780.html">original EN.645.780 course outcomes</a>, assessment criteria, existing chapters and labs. They are part of a coordinated first-pass textbook expansion, not a substitute for independent peer review.</p>
+</main></body></html>

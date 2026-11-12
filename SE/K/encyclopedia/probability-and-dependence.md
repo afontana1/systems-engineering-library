@@ -65,6 +65,24 @@ These sources establish authoritative terminology or methods in their own publis
 - [NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)](https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods) — Statistical methods, experiments, reliability, and process assessment.
 - [NIST · Technical Note 1297, Reporting Measurement Uncertainty (1993)](https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-7-reporting-uncertainty) — Standard and expanded uncertainty, coverage factors, and reporting conditions.
 
+## Phase 3 technical reference: A covariance term can change a deadline decision
+
+For uncertain travel time \(T=D/V\), mean \(D=120\) m, \(V=12\) m/s, standard deviations 6 m and 1.2 m/s, and assumed correlation \(\rho=-0.6\), the delta-method propagation yields
+\[
+u_T^2\approx (6/12)^2+(120\cdot1.2/12^2)^2-2(120/12^3)\operatorname{Cov}(D,V)=1.85\;\mathrm{s}^2.
+\]
+Dropping covariance would give only \(1.25\;\mathrm{s}^2\), a 32% smaller variance, and could conceal mission risk. In the worked synthetic Monte Carlo model, \(P(D/V>12\text{ s})\) is about 9.7% with negative correlation versus 6.2% under an uncorrelated assumption. These are conditional model predictions, not field estimates. The [full propagation guide](../methods/correlated-uncertainty-propagation.md) derives the gradient, input construction and separation of simulation error from input/model uncertainty.
+
+
+
+## Step 02 review studio — quantify dependence before multiplying risks
+
+Let `A` represent loss of a status feed with probability 0.10 and `B` loss of a second feed with probability 0.20. Suppose observed or defensibly modeled joint probability is `P(A∩B)=0.08`. Independence would instead imply `0.10×0.20=0.02`, a fourfold underestimate of the **joint** event. The probability of at least one loss is `P(A∪B)=0.10+0.20−0.08=0.22`, not the independent-assumption value 0.28.
+
+**Solved exercise:** can we conclude that one feed causes the other to fail? **No.** Dependence may arise from a shared power supply, environmental stress, correlated operation, or selection bias; association alone does not identify the mechanism. To predict the benefit of redundancy, investigate common causes and conditional dependence rather than multiply marginal failure rates automatically.
+
+**Engineering boundary:** distinguish per-demand events, time-indexed availability, and hazard exposure populations. Their probabilities have different units and sampling assumptions; a plausible-looking number cannot be ported between them without a model.
+
 ## Follow the knowledge
 
 **Related concepts**

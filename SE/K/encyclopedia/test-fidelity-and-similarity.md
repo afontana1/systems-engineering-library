@@ -33,6 +33,15 @@ An effective review asks: What mechanism do we think causes failure? Which parts
 - **F1 · Model verification, validation, uncertainty and credibility for intended use.:** [NASA-STD-7009B, Standard for Models and Simulations](https://standards.nasa.gov/standard/nasa/nasa-std-7009). Model verification, validation, uncertainty and credibility for intended use.
 - **F2 · Flight-like configuration and operationally representative verification philosophy.:** [NASA GSFC GOLD Rules, Test as You Fly (rule 1.09)](https://standards.nasa.gov/system/files/tmp/GSFC-STD-1000RevI_Approved_0.pdf). Flight-like configuration and operationally representative verification philosophy.
 
+
+## Step 02 review exercise: evidence transfer under a changed configuration
+
+**Decision.** A bench rig demonstrates a controller responds within 120 ms when sensor packets arrive at 20 Hz. In operation, sensor packets may arrive at 8 Hz and have up to 40 ms of timestamp skew. The pass result does not by itself transfer: the rig has not represented the operational arrival process or the clock boundary. At 20 Hz, the nominal interarrival interval is \(1/20=0.05\) s. At 8 Hz it is \(1/8=0.125\) s, a **75 ms** increase. If the controller only evaluates new data on arrival, the possible sampling contribution already exceeds the rig's by up to 75 ms even before accounting for skew or execution time.
+
+**Method.** Define the target claim (maximum age of information at the point of control), the test's sampling and clock assumptions, then build a discrepancy budget. Use \(A_{\rm op}\leq A_{\rm bench}+\Delta_{\rm sample}+\Delta_{\rm skew}+\Delta_{\rm other}\) only if the increments are justified as worst-case bounds *for the same age definition*. Here a hypothetical 120 + 75 + 40 = **235 ms** conservative budget would fail a 180 ms target. Do not add the quantities as though they were independent random errors unless the probability model warrants it. The remedy may be higher sampling frequency, bounded interpolation or an operational hardware-in-the-loop test.
+
+**Exercise (solution included).** If the target is 250 ms and another 25 ms of bounded transport delay is established, is the 235 ms estimate sufficient? **No:** the conservative total becomes 260 ms. Also check that all component bounds can legitimately occur together. A different test population, software baseline, sensor accuracy or failed-case sampling can invalidate the transfer regardless of the timing arithmetic.
+
 ## Follow the knowledge
 
 - **Prerequisites:** [Verification, validation, and acceptance: the three different decisions](v-and-v.md), [Simulation verification, validation, and credibility](model-vv-and-credibility.md).

@@ -95,3 +95,25 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 12: Readiness recommendations and dissent](../labs/lab-12-conduct-the-final-evidence-review-and-make-the-operatio.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 12 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-TE8.1 — final readiness decision and evidence handoff
+
+### The conclusion must be traceable and falsifiable
+
+A final T&E recommendation begins with an explicit versioned subject: **NS-DI7.1 evaluated under campaign NS-TE8.1**. Summarize each requirement as a claim, evidence item, uncertainty and disposition. The [case dossier](../case/INDEX.html) and [discrepancy register](../case/discrepancies.csv) show why the operational recommendation is **HOLD**, not an unqualified pass: modeled mission reliability 0.97863 is below 0.98; logistics-adjusted availability 0.98644 is below 0.99; the recorded recovery demonstration took 14 minutes against 12; forty successful latency trials do not close the population p99 claim; replay-defense test evidence is absent; and the HIL record applies to a prior baseline.
+
+The decision memo should acknowledge favorable results without promoting them. The energy budget of 26.3 kWh against 30 kWh is a useful modeled margin, but operational energy verification is still open. The 40 favorable degraded timing observations are preliminary performance evidence, not sufficient statistical qualification. The team must not conceal open defects in an overall average 'score.' Every accepted exception must identify a competent authority and a bounded risk; a course exercise cannot confer that authority.
+
+### Design the next decision, not merely the next task
+
+A strong release recommendation pairs each hold reason with an evidence-closure experiment and the change that would reverse the recommendation. Reliability: revise common-cause mitigations and independently estimate relevant hazards. Availability: change logistics/repair design and collect representative uptime/downtime evidence. Recovery: diagnose the 14-minute failure and rerun an authorized drill after corrective action. Cyber: execute isolated replay and stale-command tests on the exact product build. Timing: establish a representative uncertainty-aware plan for p99 compliance and complete the required tests. Accessibility: define a valid population and lower-confidence-bound procedure rather than relying on 19/20.
+
+A conditional authorization for *restricted engineering tests* may be appropriate under approved safeguards. It is **not** the same as operational qualification. The case exemplifies the difference between *testability*, *test readiness*, *model evidence*, and *deployment approval*. The final report should preserve unresolved dissent where domain experts reach different conclusions, with sources and assumptions for each position.
+
+**Exercise.** Draft a one-sentence recommendation and list three independent changes needed before a new vote.
+
+<details><summary>Worked answer</summary>
+
+**HOLD operational release of NS-DI7.1.** Before reconsideration, demonstrate compliance after a reliability/supportability redesign, repeat and pass the recovery test on the controlled build, and close the stale and missing HIL/cyber evidence; additionally resolve latency-tail sampling and accessibility uncertainty. A management sign-off does not alter these technical conclusions.
+
+</details>

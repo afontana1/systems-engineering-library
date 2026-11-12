@@ -46,6 +46,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 - [NIST · SP 800-37 Rev. 2, Risk Management Framework (2018)](https://csrc.nist.gov/pubs/sp/800/37/r2/final) — Risk governance and continuous monitoring in the system life cycle.
 
+
+
+## Step 02 review studio — who can accept which risk?
+
+A campus steering committee approves project budget, an operations manager owns passenger-service procedures, a design authority controls interfaces, and a safety authority may separately assess hazards. None of those roles is automatically entitled to substitute a high weighted trade-score for a mandatory safety control. A good governance model declares both decision rights and escalation paths.
+
+**Solved exercise:** an architecture board prefers option A because it scores 82 versus 79, but A violates a mandatory accessible-boarding constraint. Can the board approve A by increasing the affordability weight? **No.** A mandatory constraint is noncompensable under the stated decision rules. Approval requires correcting the design, changing the authorized constraint through an appropriate process, or rejecting the option—not hiding noncompliance in the scoring model.
+
+**Failure test:** trace one change through proposer, evidence owner, reviewer, approver, implementation owner, and verifier of closure. If two actors can independently approve contradictory baselines, the authority model contains a race condition. The remedy is a uniquely controlled decision record with configuration identity and a documented dispute-resolution route, not more meeting participants.
+
 ## Follow the knowledge
 
 **Related concepts**

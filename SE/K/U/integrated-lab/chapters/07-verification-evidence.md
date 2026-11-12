@@ -32,3 +32,15 @@ A test passes if its configured observation satisfies its stated oracle. An oper
 </details>
 
 **Gate evidence:** executable test report, traceability audit, a discrepancy report, an evidence index, and an honest confidence/limitations statement.
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Verification artifacts and cryptographic fingerprints.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+A digest binds bytes to a named configuration; it does not verify the truth of the assumptions in those bytes. The v11 runner records hashes of selected inputs, while v12 records a larger input-and-implementation manifest plus output digests. U2 creates an additional **cross-lab input/code digest** and replays both programs twice with outputs directed to temporary directories.
+
+**Worked check:** If `data/requests.csv` changes by one byte, its SHA-256 changes with overwhelming probability. Existing reports based on the old hash are stale, even if a percentage displayed in the UI happens to remain the same. The bridge compares its two replay outputs byte for byte, including the CSV and JSON reports, to catch nondeterministic publication or unversioned output changes.
+
+**Exercise and solution:** Can a reviewer declare a field-ready design because source hashes match? **No.** Hash matching establishes identity relative to the recorded bytes, not independent test quality, sensor calibration, stakeholder consent, or operating authority. Require exact configuration IDs, signed evidence review, scenarios and explicit unresolved actions.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

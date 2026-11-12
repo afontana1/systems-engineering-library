@@ -92,3 +92,46 @@ The realization gate should consequently ask which mission outcomes are supporte
 In [Hypothetical Lab 11](../labs/lab-11-verification-board.md), inspect a mixed evidence packet and decide what is actually verified. Then prepare original Week 11 `662_W11_ConceptReview_v1.0`, with integration, V&V, validation, transition, review findings and closure evidence. The assessment gate belongs to the original course, not the fictional review board.
 
 **Next:** [Chapter 12 — Synthesis and defense](12-synthesis-and-defense.md).
+
+## Phase 4 technical reading: From a successful test to a bounded acceptance claim
+
+A passing test establishes only its declared observation under a particular setup. In the Campus Mobility case, REQ-ACK has a fictional measured maximum acknowledgement of 1.74 s against a 2.0 s limit, but that one record cannot demonstrate 99% compliance under field load. Separately, zero failures in 300 independent binomial trials would yield a one-sided 95% upper failure-probability bound \(1-0.05^{1/300}\approx0.009936\); these 300 observations **are not part of the case dataset**. A review must preserve that distinction, record calibration, representativeness, configuration applicability and residual open questions. Work the entire [requirements-to-release case](../../methods/campus-mobility-engineering-case.md) and audit its evidence labels using [the configuration checker](../../methods/model-baselines-and-evidence.md).
+
+
+
+## Step 03 technical studio — distinguish a test count from a demonstrated claim
+
+Suppose a fictitious NS-B1 experiment executes 300 independent, identically distributed trials with **zero observed failures**. If every trial represents the same Bernoulli failure probability `p`, then the probability of this outcome is `(1-p)^300`. The one-sided, exact upper bound at confidence level 95% solves
+
+\[
+(1-p_{\mathrm{upper}})^{300}=0.05,
+\qquad
+p_{\mathrm{upper}}=1-0.05^{1/300}\approx0.009936.
+\]
+
+Under those assumptions, the data are compatible with failure probabilities as large as about **0.994% per trial** at that coverage level. This is not a claim that 99.006% of all future trips are proven safe. The event definition, representativeness of trials, dependence, environment, configuration, and untested failure modes determine what the bound can legitimately say.
+
+### Evidence applicability matrix
+
+| Test claim | Procedure | Configuration | Interpretation |
+|---|---|---|---|
+| NS-R-01 booking timing | NS-T-01 | NS-B1 | Workload-specific latency claim |
+| NS-R-02 status timing | NS-T-02 | NS-B1 | Budget analysis and controlled timing only |
+| NS-R-03 exclusive allocation | NS-T-03 | NS-B1 | One-database transaction boundary |
+| NS-R-04 stale status | NS-T-04 | NS-B0 | **Stale:** needs impact rationale or retest |
+
+A matrix can be structurally complete yet epistemically incomplete. Do not claim the fourth row is satisfied just because an evidence identifier exists. Record open findings and distinguish *test performed*, *test passed*, *test method adequate*, and *evidence applicable to current baseline*.
+
+### Solved verification exercise
+
+A team replaces the database implementation but retains NS-T-03's old passing report. Can it close NS-R-03? **Not on the old result alone.** It must analyze whether concurrency/transaction guarantees remain equivalent and, where necessary, repeat the interleaving tests. Verification answers whether the particular implementation meets an explicit claim; validation asks whether the claim is appropriate for the actual stakeholder and operating environment.
+
+## Step 03 reference deepening — separate a test result from its acceptance inference
+
+A verification record comprises configuration, requirement, procedure, test conditions, instruments, result, deviation treatment and a qualified decision rule. It is not enough to report a passing value. In a synthetic requirement-demonstration example, 300 independent representative trials with zero failures give an exact one-sided 95% upper failure-probability bound of \(1-0.05^{1/300}\approx0.009936\). This supports a limited statistical statement conditional on Bernoulli independence and the trial population. It does not show that a complex shuttle is safe, nor that all fault modes have been exercised.
+
+Three different uncertainties can invalidate an overconfident interpretation. **Sampling uncertainty:** a finite sample cannot establish a zero population failure probability. **Measurement uncertainty:** the latency instrument may be biased or imprecise. **Model or scenario uncertainty:** the exercised workload may miss network congestion, device aging or operator transitions. These are not interchangeable; collecting more samples does not fix an incorrect calibration or a missing scenario.
+
+A final evidence disposition should answer: what exact requirement is supported; on which NS-B1 hardware/software build; under what loads and environmental conditions; with what uncertainty; and what remains outside the claim? An exception record may be acceptable for continued laboratory work while remaining unacceptable for operational release. Record that bounded decision rather than turning every amber finding into a green checkbox.
+
+**Practice:** A test passes under a simulated network with no retries. **Answer:** it supports the defined simulated operating conditions, not necessarily an end-to-end operational requirement under loss/recovery; add scenario evidence or restrict the claim accordingly.

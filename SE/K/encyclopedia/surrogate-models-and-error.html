@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Surrogate models: approximation, validation, and decision risk · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/encyclopedia/surrogate-models-and-error.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical explanation</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Surrogate models: approximation, validation, and decision risk</h1>
+<p><strong>Reference entry · Quantitative design and optimization · Worked technical treatment</strong></p>
+<h2>What a surrogate is for</h2>
+<p>A <strong>surrogate model</strong> approximates a costly simulation, experiment, or mathematical evaluation with a cheaper predictor. It can accelerate design exploration, optimization, uncertainty propagation and sensitivity analysis. Its prediction error is a separate engineering uncertainty. A smooth plot, low training error, or impressive interpolation is not proof that the surrogate is trustworthy for a design decision.</p>
+<p>Choose the intended-use domain first: inputs, ranges, constraints, outputs, operating modes, model version and decisions that will rely on predictions. Select training points and an independent validation design to expose behavior in regions that matter, including boundaries and likely optimization targets. Avoid choosing a train/test split that leaks near-duplicate data from the same simulation run or physical test.</p>
+<h2>Fully worked interpolation trap</h2>
+<p>Suppose a hypothetical response is sampled at input values \(x=0,2,4\) and yields \(y=8,4,8\). A quadratic interpolant is</p>
+<p>\[
+\widehat f(x)=x^2-4x+8=(x-2)^2+4.
+\]</p>
+<p>It fits all three training points <strong>exactly</strong>. But imagine the reference model actually contains an omitted interaction:</p>
+<p>\[
+f(x)=(x-2)^2+4+0.05x(x-2)(x-4).
+\]</p>
+<p>The extra term vanishes at all three training points, so training error remains zero. At a held-out \(x=3\), however, \(\widehat f(3)=5.00\) while \(f(3)=4.85\), an error of \(+0.15\). At \(x=6\), outside the training domain, \(\widehat f(6)=20.0\) but \(f(6)=22.4\), an error of \(-2.4\). This constructed example is designed to show why interpolation quality does not establish extrapolation quality.</p>
+<h2>Validation needs a decision metric</h2>
+<p>Define signed residual \(e_i=\widehat y_i-y_i\). Root-mean-square error is \(\mathrm{RMSE}=\sqrt{n^{-1}\sum e_i^2}\); maximum absolute error can be more important when a limit or threshold is at stake. Residual plots against each input help reveal bias, heteroscedasticity and missing regimes. The error model should represent numerical simulation error, physical measurement error, and surrogate approximation separately where possible.</p>
+<p>Suppose a safety limit is \(y\leq5.0\) at \(x=3\). The surrogate gives \(5.00\), with no margin; the constructed reference gives \(4.85\). Neither justifies declaring the system safe without a validated error envelope and relevant physical evidence. Optimization is particularly dangerous because the optimizer actively seeks regions where model error may be most favorable.</p>
+<h2>Training, validation and adaptive refinement</h2>
+<p>A practical workflow is to: (1) specify input ranges and feasible combinations; (2) choose a space-filling design and record random seeds; (3) fit a model appropriate to the anticipated smoothness and interactions; (4) test independent points including boundaries; (5) quantify prediction uncertainty or conservative error bounds; (6) verify candidate optima using the high-fidelity model; and (7) retrain when the physical architecture or model version changes. Nested cross-validation may help tune a family of candidate models, but its assumptions must match the source of data dependence.</p>
+<p>Surrogates are particularly useful for multiobjective trade studies, but a surrogate Pareto front is provisional until enough reference evaluations confirm candidate dominance and feasibility.</p>
+<h2>Exercise and cautions</h2>
+<p>Reproduce the training fit, calculate the two held-out residuals, and propose four additional samples that would reveal the cubic deviation. Would a random 80/20 split of exactly three samples be defensible? Explain why not. Distinguish interpolation from extrapolation, validation-domain evidence from system validation, and a predictive distribution from a guarantee of correctness.</p>
+<h2>References and links</h2>
+<ul>
+<li><a href="https://www.itl.nist.gov/div898/handbook/">NIST/SEMATECH Engineering Statistics Handbook</a> — regression diagnostics, experiment design and statistical model assessment.</li>
+<li><a href="https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009">NASA Models and Simulations Implementation Guide</a> — intended use and credibility context.</li>
+<li>Related: <a href="design-of-experiments.html">design of experiments</a>; <a href="robust-optimization-and-margins.html">robust optimization</a>; <a href="model-vv-and-credibility.html">model V&amp;V and credibility</a>.</li>
+</ul>
+<p><em>Scope:</em> The cubic perturbation and numerical results are intentionally synthetic; no physical system is represented.</p>
+<p><strong>Reproducible companion:</strong> <a href="examples/step02_examples.py">Step 02 worked examples (standard-library Python)</a>. Run <code>python3 step02_examples.py --case all</code> from the downloaded examples folder; the program prints the declared synthetic inputs and computed results.</p>
+</article><nav class="standalone-actions"><a href="metrics-hierarchy.html">Read concept</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="metrics-hierarchy.md">Editable Markdown</a></nav></main></body></html>

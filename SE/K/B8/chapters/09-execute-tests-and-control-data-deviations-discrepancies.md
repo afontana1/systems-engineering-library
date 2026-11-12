@@ -101,3 +101,25 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 9: Executing and controlling discrepancies](../labs/lab-09-execute-tests-and-control-data-deviations-discrepancies.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 9 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-TE8.1 — test execution, discrepancies and data integrity
+
+### A discrepancy is part of the evidence, not an inconvenience
+
+Execute against a frozen plan and preserve raw observations. The [discrepancy register](../case/discrepancies.csv) intentionally contains different issue classes: a statistically insufficient latency demonstration (DR-01), model-predicted reliability and availability shortfalls (DR-02 and DR-03), a stale HIL result (DR-04), a recovery test failure (DR-05) and a missing cyber test (DR-06). Treating all six as generic 'open actions' obscures whether the remedy is design change, more data, instrument correction, model revision or an authorized waiver.
+
+An audit trail should log who ran the test, which article was used, environment and instrument versions, input hash, raw result, deviation authorization and any post-processing script version. A rerun after a failed test is a *new* observation, not a retroactive correction to the previous row. If a sensor fails mid-run, preserve the gap and apply the predeclared missing-data rule: excluding adverse periods post hoc biases the result. When a test produces an unexpectedly favorable number, test the instrumentation and denominators before celebrating.
+
+### Separate failures from invalid tests
+
+Consider three cases. (1) A representative recovery drill takes 14 minutes against a 12-minute limit: the *observed test outcome fails*. (2) The timestamp source loses sync during a latency run: the result is *invalid or uncertain* until bounded by an approved method. (3) A HIL result uses older firmware: the test may have been competently conducted, but the evidence is *not applicable* to the current baseline. These lead to different corrective actions and review authorities.
+
+The controlled [test plan](../case/test-plan.csv) is the routing map for reruns. Every corrective action should specify the causal hypothesis, the changed design or procedure, a recurrence-prevention check, and a closure criterion. Only the authority assigned to the discrepancy may close it. New passing evidence does not erase the chronology of earlier failures.
+
+**Exercise.** An analyst drops three 'unusually slow' latency rows because they distort the p99 estimate. What must be proven before their exclusion?
+
+<details><summary>Worked answer</summary>
+
+Show an independently documented instrument or procedure defect that triggers an **approved, predeclared exclusion rule**, preserve the excluded rows and rationale, and assess the sensitivity to inclusion. Real extreme events are precisely what a tail requirement is designed to capture.
+
+</details>

@@ -33,3 +33,7 @@ Under the reference 2-vehicle, 12-minute trip, 80-minute-horizon fixture, 13 eve
 A learner must submit the ten stage deliverables, executable evidence with versioned input hashes, one change-impact analysis, a model-credibility assessment, an honest limitations and risk register, and a board decision supported by both favorable and unfavorable evidence. A perfect unit-test run alone is insufficient.
 
 The case intentionally stops at **prototype study**. It contains no operational security hardening, no validated human-factors design, no real traffic or fleet data, and no independent expert assurance. All references to field assessment are *proposed future activities*.
+
+## Release U2 cross-laboratory evidence exercise
+
+The [U2 cross-lab credibility lab](../lab-credibility-u2/README.md) replays this source without rewriting its baseline data or tests. The U2 sections now teach fault, provenance and authorization checks.

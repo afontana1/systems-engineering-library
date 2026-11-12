@@ -1,0 +1,110 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS-QA10.1 Quantitative Evidence · Systems Engineering Library</title><link rel="stylesheet" href="../../_assets/learning-shell-v55.css"><style>body{margin:0;background:#f4f8f9;color:#173645;font:16px/1.72 system-ui,sans-serif}header{padding:16px max(18px,calc((100vw - 1050px)/2));background:#173f52}header a{color:#c6f5ee}main{max-width:1050px;margin:24px auto;padding:clamp(18px,4vw,42px);border:1px solid #d6e3e5;border-radius:12px;background:white}a{color:#0b6b70}h1{line-height:1.2}h2{margin-top:1.8rem}p,li{max-width:100ch}table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}td,th{padding:9px;border:1px solid #dae3e6;vertical-align:top}th{background:#edf5f4}code{overflow-wrap:anywhere}pre{overflow:auto;padding:12px;background:#ecf3f5}img{max-width:100%;height:auto}@media(max-width:700px){main{margin:0;padding:18px;border:0;border-radius:0}}</style><script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B10/case/INDEX.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script></head><body><header><a href="../README.html">← Book 10</a> · <a href="../OPEN-BOOK.html">Textbook</a></header><main><h1>NS-QA10.1 — Winter Operations Quantitative Evidence Dossier</h1>
+<p><strong>Book 10 · EN.645.756 · Controlled baseline QA-B10 · fictional instructional scenario</strong></p>
+<p>This case connects all twelve chapters of <em>Metrics, Modeling and Simulation for Systems Engineering</em>. The modeled shuttle controller is under winter operations review. Its quantitative analysis intentionally leads to a <strong>HOLD</strong>, not to an automatically approved release. Every row and probability assumption is synthetic; do not mistake the examples for empirical qualification.</p>
+<p><img src="analytics-evidence-chain.svg" alt="Quantitative evidence chain" /></p>
+<h2>Controlled artifacts</h2>
+<table>
+<thead>
+<tr>
+  <th>File</th>
+  <th>What it provides</th>
+  <th>Important limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><a href="requirements.csv">requirements.csv</a></td>
+  <td>Five named technical and evidence requirements</td>
+  <td>Teaching thresholds, not actual system acceptance criteria</td>
+</tr>
+<tr>
+  <td><a href="factorial-trials.csv">factorial-trials.csv</a></td>
+  <td>24 response-time observations in a balanced 2×2 experiment</td>
+  <td>Designed data, not production-tail data</td>
+</tr>
+<tr>
+  <td><a href="reliability-life.csv">reliability-life.csv</a></td>
+  <td>Eight life-test modules; three failures, five right-censored</td>
+  <td>Constant-hazard model requires independent validation</td>
+</tr>
+<tr>
+  <td><a href="model-assumptions.json">model-assumptions.json</a></td>
+  <td>Units, dependent energy inputs, lifecycle decision costs</td>
+  <td>Assumed input distribution and scenario likelihood</td>
+</tr>
+<tr>
+  <td><a href="evidence-register.csv">evidence-register.csv</a></td>
+  <td>Executed, stale and planned records</td>
+  <td>Test records are synthetic; links do not imply sufficiency</td>
+</tr>
+<tr>
+  <td><a href="../tools/step03_book10_quantitative_check.py">step03_book10_quantitative_check.py</a></td>
+  <td>Standard-library, reproducible calculations</td>
+  <td>Checks arithmetic and data shape, not field model validity</td>
+</tr>
+</tbody>
+</table>
+<p>Run from the repository root with:</p>
+<pre><code class="language-bash">python3 SE/K/B10/tools/step03_book10_quantitative_check.py
+</code></pre>
+<h2>Decision-related results</h2>
+<table>
+<thead>
+<tr>
+  <th>Question</th>
+  <th>Modeled calculation</th>
+  <th>Implication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Controller improvement</td>
+  <td>Mild effect −50 ms; cold effect −30 ms; interaction +20 ms</td>
+  <td>Environment changes optimization benefit</td>
+</tr>
+<tr>
+  <td>Cold p95 latency ≤500 ms</td>
+  <td>Cold optimized <strong>mean</strong> 490 ms; six trials</td>
+  <td>The p95 compliance claim is <strong>not demonstrated</strong></td>
+</tr>
+<tr>
+  <td>Fifty-hour module reliability ≥0.95</td>
+  <td>\(\hat\lambda=3/2410\) /hour, \(\hat R(50)=0.93966\)</td>
+  <td>Conditional point estimate below target</td>
+</tr>
+<tr>
+  <td>Winter energy p95 ≤29 kWh</td>
+  <td>Correlated-normal p95 29.13 kWh</td>
+  <td>Conditional model violates the limit; validate covariance model</td>
+</tr>
+<tr>
+  <td>Incremental lifecycle cost</td>
+  <td>A: $68k; B: $78k at p=0.2</td>
+  <td>A wins expected-cost screen only if feasible</td>
+</tr>
+<tr>
+  <td>Evidence currency</td>
+  <td>One record <code>QA-B9</code>; one planned study</td>
+  <td>Release package incomplete</td>
+</tr>
+</tbody>
+</table>
+<h2>How the chapters use this dossier</h2>
+<ol>
+<li><strong>Measurement strategy:</strong> define estimands and actions before collecting data.</li>
+<li><strong>Distribution:</strong> distinguish conditional tails from pooled averages.</li>
+<li><strong>Provenance:</strong> document sampling, clocks, baselines, and missingness.</li>
+<li><strong>Inference:</strong> distinguish a mean interval from tail compliance.</li>
+<li><strong>DOE design:</strong> randomize independent shifts or runs and define blocking.</li>
+<li><strong>DOE analysis:</strong> calculate the controller–environment interaction.</li>
+<li><strong>Performance models:</strong> fit a saturated model, then test out-of-sample.</li>
+<li><strong>Reliability:</strong> write the censored exponential likelihood.</li>
+<li><strong>Uncertainty:</strong> propagate correlated energy inputs and compare tails.</li>
+<li><strong>Requirements:</strong> calculate margin for the actual required statistic.</li>
+<li><strong>Lifecycle choice:</strong> find the cost-switch threshold and information value.</li>
+<li><strong>Technical review:</strong> reproduce the calculations, challenge assumptions, and justify HOLD.</li>
+</ol>
+<h2>Reproduction and challenge</h2>
+<p>The model intentionally combines several kinds of evidence. A functioning program establishes reproducible arithmetic, not a valid stochastic representation of a shuttle fleet. Reviewers should substitute alternative correlation assumptions, introduce a long-tail latency observation, correct the stale configuration, and rerun the checker. Each change must be accompanied by an explanation of whether it affects <strong>computation</strong>, <strong>statistical inference</strong>, <strong>model credibility</strong>, or <strong>decision authority</strong>.</p>
+<p><a href="../README.html">Return to Book 10</a> · <a href="../OPEN-BOOK.html">Read the book</a> · <a href="../../../C/P3/EN645756.html">Course guide</a></p>
+</main></body></html>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 300" role="img" aria-labelledby="title desc">
+<title id="title">NS-MS11.1 mobility simulation evidence path</title>
+<desc id="desc">Five-stage flow from decision and criteria to conceptual model and data, event-model implementation, replicated outputs, and bounded credibility review. An unresolved evidence arrow points back from the review to model and data.</desc>
+<style>text{font:15px system-ui,sans-serif;fill:#173645}.head{font-weight:700;font-size:15px}.sub{font-size:12px}.node{fill:#e9f5f4;stroke:#246f74;stroke-width:2}.arrow{stroke:#246f74;stroke-width:2;fill:none;marker-end:url(#a)}.review{fill:#f9efe2;stroke:#aa713f}</style>
+<defs><marker id="a" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0 L8 3 L0 6 Z" fill="#246f74"/></marker></defs>
+<rect x="14" y="38" width="182" height="94" rx="9" class="node"/><text x="105" y="68" text-anchor="middle" class="head">Decision and</text><text x="105" y="88" text-anchor="middle" class="head">requirements</text><text x="105" y="111" text-anchor="middle" class="sub">R01–R06, intended use</text>
+<path d="M196 85H226" class="arrow"/>
+<rect x="230" y="38" width="187" height="94" rx="9" class="node"/><text x="323" y="68" text-anchor="middle" class="head">Model and input</text><text x="323" y="88" text-anchor="middle" class="head">hypotheses</text><text x="323" y="111" text-anchor="middle" class="sub">schedule, compatibility, SOC</text>
+<path d="M417 85H448" class="arrow"/>
+<rect x="452" y="38" width="191" height="94" rx="9" class="node"/><text x="547" y="68" text-anchor="middle" class="head">Verified event</text><text x="547" y="88" text-anchor="middle" class="head">implementation</text><text x="547" y="111" text-anchor="middle" class="sub">traces, invariants, tests</text>
+<path d="M643 85H672" class="arrow"/>
+<rect x="676" y="38" width="179" height="94" rx="9" class="node"/><text x="766" y="68" text-anchor="middle" class="head">Paired stochastic</text><text x="766" y="88" text-anchor="middle" class="head">replications</text><text x="766" y="111" text-anchor="middle" class="sub">p90, backlog, intervals</text>
+<path d="M855 85H883" class="arrow"/>
+<rect x="887" y="38" width="196" height="94" rx="9" class="review"/><text x="985" y="67" text-anchor="middle" class="head">Credibility and</text><text x="985" y="87" text-anchor="middle" class="head">bounded decision</text><text x="985" y="110" text-anchor="middle" class="sub">HOLD: field evidence missing</text>
+<path d="M987 132V210H322V135" class="arrow"/><text x="660" y="201" text-anchor="middle" class="sub">New referent observations, conceptual review, controlled versioning</text>
+<text x="15" y="275" class="sub">Illustrative model evidence never substitutes for real qualification or decision-authority acceptance.</text>
+</svg>

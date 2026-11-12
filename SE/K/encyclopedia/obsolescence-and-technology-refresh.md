@@ -38,3 +38,17 @@ Common mistakes include buying a lifetime quantity without accounting for shelf 
 - **Prerequisites:** [Life-cycle sustainment economics: cost after delivery is a design variable](lifecycle-sustainment-economics.md), [Supply-chain assurance: provenance, substitutions, and hidden dependencies](supply-chain-assurance-and-provenance.md).
 - **Related concepts:** [Configuration assurance: proving that the tested design is the delivered design](configuration-assurance-and-change-control.md), [Reliability, availability, and maintainability: three different promises](reliability-availability-maintainability.md), [Risk, issue, uncertainty, and opportunity](risk-vs-issue.md).
 - **Go deeper:** [Book 7 · Chapter 9: Supportability and life-cycle costs](../B7/chapters/09-design-for-supportability-producibility-supply-sustaina.md), [Book 12 · Chapter 09 — Integrate technical performance with lifecycle cost, resources, maintenance, and affordability](../B12/chapters/09-integrate-technical-performance-with-lifecycle-cost-resources-mainte.md), [Book 11 · Chapter 12 — Apply M&S to production and sustainment, survey advanced methods, and defend the final baseline](../B11/chapters/12-apply-m-s-to-production-and-sustainment-survey-advanced-methods-and-.md).
+
+## Step 02 deeper treatment: when a nominally cheap refresh is costly
+
+**Worked example:** An obsolete sensor can be replaced by an inexpensive unit at $30k, with $8k of new verification, or a compatible modular retrofit at $45k with $2k of verification. The initial totals are $38k and $47k. If the cheaper sensor is expected to require $5k/year of additional calibration and special tooling for four years, at 4% annual discount its additional present cost is
+
+\[
+5{,}000\frac{1-(1.04)^{-4}}{0.04}\approx\$18{,}149.
+\]
+
+The initial-cheaper option's comparable modeled lifecycle cost becomes $56,149, exceeding the modular option's $47,000 before other differences. Those figures assume year-end spending, fixed costs and no risk adjustment. A different disposal obligation, critical failure mode or supplier dependency can reverse the decision regardless of financial comparison.
+
+A technology roadmap should associate each candidate with interface requalification, tooling and workforce readiness, cyber/software support horizon, spare-parts supply, evidence carryover and an adoption trigger. Avoid declaring “form-fit-function equivalent” without documenting which qualification claims genuinely transfer.
+
+**Exercise:** Recompute the four-year annuity at a 0% discount rate: added cost becomes $20,000, making the cheaper-sensor lifecycle total $58,000. State one source of correlated supplier risk neither cost formula models. See [NASA's systems engineering handbook](https://www.nasa.gov/reference/systems-engineering-handbook/) for lifecycle and enabling-system obligations.

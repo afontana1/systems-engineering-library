@@ -58,6 +58,12 @@ Let the request state be one of `{CREATED, ACCEPTED, ASSIGNED, CANCELLED, COMPLE
 
 When a sequence view shows a second successful assignment while the state machine forbids it, the correct response is a discrepancy, not two independently “correct” diagrams. Trace the conflict to the responsible requirement and owner.
 
+## An operational thread becomes a state contract
+
+A reservation state machine specifies legal events, not just a picture. Let a request be CREATED, VALIDATED, ASSIGNED, CANCELLED or COMPLETED, and define a guard so `ASSIGN` may allocate a seat only when the request is VALIDATED and capacity remains. The invariant \(0\le\mathrm{allocated}\le1\) should remain true after **every** transition; a duplicate `ASSIGN` must not allocate again. This is stronger than checking one happy-path sequence.
+
+The [bounded state-space checker](../../methods/code/state_space_checker.py) enumerates all reachable states for two requests and one capacity unit, and finds a shortest violation trace in a deliberately broken version. [Read the full behavior-contract derivation](../../methods/mbse-behavioral-contracts.md). Its sequential abstraction does not prove an implementation with two concurrent writers has an atomic check-and-commit mechanism.
+
 ## What can go wrong—and why
 
 An activity diagram can describe processing order while accidentally allowing impossible state transitions; cross-view consistency must be checked.
@@ -79,3 +85,33 @@ In [Lab 5: Behavior is a family of complementary projections](../labs/lab-05-beh
 ## Continuity
 
 This chapter builds from [previous chapter](04-requirements-modeling-relationship-semantics-.md) and leads toward [next chapter](06-structure-interfaces-ports-connections-and-th.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-631-w05.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Phase 5 technical reading: From state invariants to adversarial interleavings
+
+The allocation invariant \(\sum_r 1(r.\mathrm{worker}=w\land r.\mathrm{active})\le1\) is violated when two request handlers both check that a worker is free before either commits an assignment. A local state diagram can be correct under sequential execution and still permit this history. The [transactional concurrency exercise](../../methods/transactional-concurrency-and-assurance.md) exposes the interleaving, then uses an atomic database uniqueness constraint to reject the second insert. Distinguish an invariant proof for a bounded abstract model from evidence about implementation isolation, retries, durable responses and cross-service effects.
+
+## Step 03 integrated reference: executable behavioral contracts
+
+### Distinguish a use case, an interaction and a state constraint
+
+A use case names a user-observable goal; an interaction records exchanged messages; an activity organizes action flow; a state machine limits which transitions are legal. These views overlap but do not substitute for each other. Northstar's departure use case ends with a rider informed of a confirmed authorization. The safety property is narrower and more precise: a vehicle must not accept a second dispatch token for a departure that already has an accepted token. A sequence diagram that displays one normal confirmation will never reveal the defect unless its abnormal paths are modeled.
+
+An illustrative departure machine has states `Idle`, `Reserved`, `Authorized`, `Dispatched`, and `Cancelled`. The transition `Reserved → Authorized` requires a valid gate decision and fresh telemetry. `Authorized → Dispatched` consumes a unique departure token atomically. A duplicate token must not cause another transition; a timeout may return to a controlled state after its ownership has been resolved. The invariant can be expressed independently of a diagram notation as
+
+\[
+\forall d,\quad \operatorname{acceptedTokens}(d)\le 1.
+\]
+
+This formula represents a *safety* property: nothing bad happens. The property “every accepted reservation eventually receives a response” is a *liveness* property and requires assumptions about fairness, availability, and deadlines. Neither is demonstrated by counting activity boxes.
+
+### Walk through a failing trace
+
+Consider two requests carrying the same departure identifier `D17`. A faulty implementation checks for the identifier, sees it as absent, and then records a token. Under concurrency, both writers can observe “absent” before either commits. A trace is `check-A → check-B → insert-A → insert-B`; the postcondition violates the uniqueness invariant. A model that treats the check and insert as one indivisible transition rules out this trace **by assumption**. The implementation must enforce the same atomicity with a uniqueness constraint or serializable transaction; otherwise the model has abstracted away the very behavior it should detect.
+
+The state view therefore needs explicit *atomicity boundaries*, guards, timeouts, ownership of authorization, and recovery behavior. A model checker can explore reachable states in a finite abstraction and report a counterexample; it does not automatically validate every possible network schedule or physical controller failure. Conformance between model and implementation needs a separate evidence plan.
+
+### Practice with answer
+
+**Exercise.** A reviewer asks whether a nominal `Reserved → Authorized → Dispatched` trace proves that duplicate dispatch is impossible. **Answer:** No. The trace proves at most that one accepted behavior is represented. Construct a second-token event while the system is `Dispatched`, then require a rejection transition and demonstrate preservation of the invariant. Test the implementation under concurrent retries, not only a sequential unit test. For a related executable example see the [bounded behavioral contract guide](../../methods/mbse-behavioral-contracts.md).
+
+**Modeling caveat.** The invariant is a notation-neutral mathematical claim. Producing a formally checked SysML v2 state model would require actual language-specific syntax, a conforming tool, and recorded tool diagnostics; the supplied JSON case is not such a model.

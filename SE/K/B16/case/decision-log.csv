@@ -1,0 +1,5 @@
+decision,requesting_authority,alternatives,screening_criterion,observed_toy_result,status,required_next_evidence
+DME16-D1,joint-review-board,P0/P1/P2/P3,All group floors met in >=0.95 of assumed scenario weight,P3=0.92 max,HOLD,Validated demand and outage scenarios plus witnessed operational tests
+DME16-D2,configuration-control-board,Retain IF-1.0 / adopt IF-2.0,Corresponding test and evidence revision current,IF-2.0 invalidates E-COMMS,HOLD,Revised contract and witnessed regression evidence
+DME16-D3,mission-energy-lead,Use SOC state estimate / reject,Observation age <=10 min plus validated bias and estimator,4-min synthetic estimate allowed; 16-min rejected,RESTRICTED-TEACHING,Sensor calibration estimator validation and safe-fallback approval
+DME16-D4,security-data-rights-lead,Export/restrict interface,Approved role and permitted use,Restricted interface denied to reader-role in sample function,PROTOTYPE-ONLY,Authenticated policy enforcement and proprietary data agreement

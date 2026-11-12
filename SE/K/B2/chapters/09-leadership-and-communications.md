@@ -81,3 +81,25 @@ For Northstar, a high-quality escalation might state that an intermittent dispat
 ## Put this into practice
 
 Work through [Lab 9: The Supplier–Safety Negotiation](../labs/lab-09-leadership-and-communications.md), then write a short paragraph on how the laboratory simplifies the real-world management problem. Use the [existing short Week 9 primer](../../P0-text/lessons/645-667-w09.md) for a second explanation. The assessed deliverable is defined in the original course guide, not by the hypothetical lab.
+
+## Step 03 integrated reference — communication as a control-loop design
+
+Communication failures can be modeled as failures of feedback and authority, not merely as interpersonal misunderstandings. A supplier knows an interface will arrive late; the integrator's schedule still assumes the old date; the safety lead has test evidence tied to the prior configuration. Each group may be locally rational yet collectively wrong. A usable communication protocol states **what observation triggers notification, to whom, with what evidence, and within what response time**.
+
+### Design a project status message with a decision payload
+
+A helpful report is not “Amber: integration.” It says: *NS-B1 gateway test record references the previous interface revision; technical status is not accepted; acceptance test is blocked; proposed retest requires six fixture-days; owner is CA-04; review decision requested by a specified date.* That message connects the observed condition to its consequence and to an authorized next action. It remains intelligible to engineers, finance and operations without falsely declaring a completed safety argument.
+
+An escalation protocol should include (1) objective trigger, (2) source revision, (3) confidence/uncertainty, (4) decision deadline, (5) reversible and irreversible options, and (6) explicit receipt/acknowledgment. A delivery receipt is not agreement or comprehension. For safety-critical messages, independent confirmation or closed-loop readback may be necessary. Project meeting attendance likewise is not evidence of an approved technical change.
+
+### Quantify an escalation window
+
+Suppose a stalled fixture costs an illustrative $18,000 per week and the right escalation route shortens a decision queue from five weeks to three. Avoided holding exposure is \((5-3)\times\$18{,}000=\$36{,}000\). It does not follow that an underinformed, faster decision is beneficial; an incorrect release can cost far more. Measure **decision cycle time** alongside **decision quality and corrective rework**, not instead of them.
+
+### Avoid an optimistic common narrative
+
+Three reports may agree because they all copy the same supplier status, not because they independently corroborate it. Separate facts (dated test records), interpretations (likely schedule effect), forecasts (probability of additional delay), and authorization (approved scope change). If safety and program leadership disagree, preserve both positions and the applicable decision authority rather than editing one record until apparent consensus is achieved.
+
+**Practice with answer.** Management says “the schedule is green because the supplier confirmed delivery,” while the acceptance procedure requires an untested interface. **Answer:** distinguish supplier delivery status from verification acceptance; publish the evidence configuration and the blocked gate explicitly, with owner and time-bounded next decision. Reaching agreement on a slide color is not technical closure.
+
+**Reference context:** [NASA Systems Engineering Handbook](https://www.nasa.gov/reference/systems-engineering-handbook/) addresses technical reviews and decision analysis; adapt communication frequency and escalation authority to the project's actual risk and governance.

@@ -207,3 +207,40 @@ Try these before opening the solutions.
 Complete [Hypothetical Lab 1: The Boundary Hearing](../labs/lab-01-boundary-hearing.md). Then use the original [Week 1 assignment and rubric](../../../C/P0/EN645662.md) to produce `662_W01_SystemFraming_v1.0`. The hypothetical lab is **practice**, not a substitute for the course deliverable.
 
 **Continue with:** [Chapter 2 — Life cycles are evidence strategies](02-lifecycle-evidence.md). **Related advanced reference:** [Mission to assurance](../../U/flagships/F01-requirements-to-assurance.md).
+
+
+## Step 03 technical studio — specify the system before you optimize it
+
+The Northstar shuttle is not just a vehicle. For the controlled example in [`northstar-reference-baseline.json`](../case/northstar-reference-baseline.json), the **system of interest** is a supervised campus mobility *service* supporting riders, dispatch, vehicle allocations, operator response, and passenger communications inside a restricted four-stop operating domain. The nearby public road network, mobile network, campus accessibility policy, and emergency responders are influential external systems, not necessarily components owned by the project. A boundary is an engineering decision about **responsibility and evidence**, not a declaration that the outside world is irrelevant.
+
+### Boundary test: who owes the result?
+
+Compare three statements: “the app displays confirmation,” “a rider receives confirmation,” and “the rider reaches the correct stop.” They refer to successively larger behaviors. The first can be verified with an app-level interface test. The second requires end-to-end notification evidence including network interruptions and user-interface states. The third requires operational services, signage, and human-factors evidence. A system boundary appropriate for one claim may be insufficient for another.
+
+| Claim | Owned element | External dependency | Evidence needed |
+|---|---|---|---|
+| Booking acknowledgment | Rider app and dispatch service | Rider connectivity | Timestamped end-to-end transaction |
+| Timely emergency status | Gateway and supervisor console | Network transport | Controlled timing and stale-message injection |
+| Correct allocation | Dispatch and allocation database | Vehicle reporting | Conflicting-request and restart tests |
+
+The **context diagram** should identify each external actor, exchanged material or information, failure-handling obligation, and authority. The **system decomposition** should explain which owned component is responsible for each requirement; a context boundary and an internal physical breakdown are different models.
+
+### Solved boundary exercise
+
+A team claims “all emergency statuses are delivered within 2.5 seconds,” having tested only the gateway's transmission time. Is the claim supported? **No.** Gateway transmission is only one segment of an end-to-end path; detection, network delivery, display, clock synchronization, lost-message behavior, and actual user recognition may change the observed result. A gateway-only result may support a *component claim*, but the system-level claim needs an end-to-end verification design with a stated workload and failure assumptions.
+
+**Evidence boundary:** the Northstar case is entirely fictional. The boundary diagram and responsibility ledger make obligations testable; they do not by themselves show that the design performs as required.
+
+## Step 03 reference deepening — a boundary changes the reliability claim
+
+Choosing a system boundary determines which causes of failure the engineering team can investigate or control. Suppose a fictional reservation service needs three serial functions: the rider application is available with probability 0.995, the dispatch service with 0.990, and the communication link with 0.980 on a randomly selected request. **If** these events are independent over the observation interval, end-to-end availability for a request is
+
+\[
+P(\text{all available})=0.995(0.990)(0.980)=0.965349.
+\]
+
+A boundary drawn only around the dispatch service invites a claim of 99% availability, while the integrated service provides only about 96.5% under these assumptions. The difference is not a defect in multiplication: the claims refer to different systems of interest. If app, dispatch and network failures share a power or identity provider, independence is doubtful and the product is not justified.
+
+**What to record:** stakeholder-visible outcome, entry/exit events, external actors, ownership of each interface, assumed common causes, and the acceptance observations needed to measure the full service. **Counterexample:** an external dispatch subcontractor falls outside organizational control but inside the rider's experienced service. Responsibility boundaries do not erase technical dependencies. A boundary decision record should distinguish system-of-interest scope from supplier accountability.
+
+**Check your reasoning.** If the network improves to 0.995 while the other factors remain fixed and independent, request availability becomes \(0.995^2(0.990)\approx0.9801\), not 0.995. Evaluate the effect of moving or redesigning the boundary versus actually improving service behavior.

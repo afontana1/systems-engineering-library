@@ -1,0 +1,16 @@
+digraph CD6 {
+  graph [rankdir=LR, bgcolor="transparent", pad="0.24"];
+  node [shape=box, style="rounded,filled", fillcolor="#eaf4f2", color="#206874", fontname="Arial", fontsize=11];
+  need [label="Accessible mobility need
+CD6-R02, R03, R07"];
+  plan [label="Offer and capacity model
+F01–F03"];
+  service [label="Hybrid trunk + feeder
+Concept C — conditional"];
+  monitor [label="Recovery and evidence
+F04–F05"];
+  gate [label="Concept review
+Experiments required", fillcolor="#fff1df", color="#a96b1f"];
+  need -> plan -> service -> monitor -> gate;
+  need -> gate [style=dashed, label=" Validate value", fontcolor="#206874"];
+}

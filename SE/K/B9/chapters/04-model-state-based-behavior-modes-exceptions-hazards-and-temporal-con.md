@@ -121,3 +121,25 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [03 — Previous chapter](03-develop-and-analyze-the-functional-architecture-from-black-box-behav.md) · [05 — Next chapter](05-specify-and-evaluate-the-logical-architecture-and-its-responsibiliti.md) · [Book index](../README.md)
+
+## Step 03 integrated technical reference: NS-MBA9.1 — state semantics and temporal assertions
+
+### Represent safety as a property over transitions
+
+A dispatch workflow can have states `Available`, `Offered`, `Reserved`, `Active`, and `Released`. A reservation can be accepted only if the vehicle is available, its authorization lease is current, and an atomic transition prevents a second reservation from claiming the same resource. `R06` expresses the **invariant**: at every reachable state, a vehicle has at most one accepted owner. It is not a requirement that can be demonstrated solely by drawing a state machine.
+
+For a small transition system, a checker can explore all states within a bounded scope and find a violating sequence. For the real distributed implementation, the boundary includes transaction isolation, idempotent retries, delayed messages, clock skew, and crashes. The earlier [software concurrency reading](../../methods/transactional-concurrency-and-assurance.html) provides complementary implementation detail. A counterexample proves a design is wrong within the modeled scope; absence of counterexamples in a bounded model does **not** prove the production system correct.
+
+### Time bases are part of the architecture
+
+The command interface `I01` declares a `200 ms` freshness budget. If message creation, transit, queuing and decision execution together exceed that limit, a controller should reject the command or obtain a fresh one; it must not silently reinterpret an aged command as current. The model also uses a 500-ms command-response threshold and a 50-ms reserve. The redesigned illustrative 440-ms path has \(500-440=60\) ms nominal reserve, but `440 ms` is only an assumed model output. It does not establish a latency percentile under peak load.
+
+When writing temporal constraints, define whether a clock is monotonic, what system emits timestamps, how synchronization error is bounded, and what happens during a disconnection. A two-clock timestamp subtraction is not meaningful without a common time basis and an uncertainty budget.
+
+**Exercise.** A dispatcher retransmits an assignment command after a timeout, and the gateway receives the original after the retransmission. What model condition prevents two accepted reservations?
+
+<details><summary>Worked answer</summary>
+
+Use an idempotent command identifier and atomic reservation invariant at the authoritative transaction boundary, rather than two independent read-then-write checks. Model loss, duplication, reordering and replay as separate transitions; test the invariant against each. The diagram alone is not execution evidence.
+
+</details>

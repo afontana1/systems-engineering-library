@@ -1,0 +1,179 @@
+{
+  "baseline": "NS-SW5.1",
+  "scenario": "Fictional campus shuttle reservation and dispatch service",
+  "assumptions": {
+    "days": 30,
+    "availability_slo": 0.999,
+    "arrival_rps_nominal": 8,
+    "arrival_rps_peak": 10,
+    "service_rps_baseline": 18,
+    "service_rps_candidate": 20,
+    "network_ms": 70,
+    "auth_ms": 45,
+    "db_commit_ms": 55,
+    "p95_limit_ms": 500,
+    "telemetry_freshness_limit_s": 5,
+    "recovery_limit_min": 15
+  },
+  "requirements": [
+    {
+      "id": "SWS-01",
+      "name": "Peak dispatch acknowledgment",
+      "owner": "reservation-api",
+      "method": "load-test",
+      "acceptance": "p95 < 500 ms at 10/s peak; denominator includes accepted and rejected requests"
+    },
+    {
+      "id": "SWS-02",
+      "name": "Service availability",
+      "owner": "platform",
+      "method": "service-monitor",
+      "acceptance": ">=99.9% over declared 30-day window"
+    },
+    {
+      "id": "SWS-03",
+      "name": "No duplicate vehicle assignment",
+      "owner": "allocation-store",
+      "method": "transaction-test",
+      "acceptance": "zero overlapping accepted reservations per vehicle slot"
+    },
+    {
+      "id": "SWS-04",
+      "name": "Fresh location evidence",
+      "owner": "telemetry-ingest",
+      "method": "boundary-test",
+      "acceptance": "reject location older than five seconds"
+    },
+    {
+      "id": "SWS-05",
+      "name": "Atomic business and audit events",
+      "owner": "reservation-api",
+      "method": "transaction-test",
+      "acceptance": "accepted reservation and audit event commit or roll back together"
+    },
+    {
+      "id": "SWS-06",
+      "name": "Build provenance",
+      "owner": "release-pipeline",
+      "method": "artifact-inspection",
+      "acceptance": "deploy digest must match signed or independently trusted approval manifest"
+    },
+    {
+      "id": "SWS-07",
+      "name": "Recover service",
+      "owner": "platform",
+      "method": "recovery-drill",
+      "acceptance": "restore service within 15 minutes in tested fault scenarios"
+    },
+    {
+      "id": "SWS-08",
+      "name": "Safe loss-of-service handling",
+      "owner": "operator-interface",
+      "method": "operator-drill",
+      "acceptance": "operator receives explicit unavailable status and escalates to approved manual procedure"
+    }
+  ],
+  "components": [
+    "reservation-api",
+    "allocation-store",
+    "telemetry-ingest",
+    "operator-interface",
+    "platform",
+    "release-pipeline"
+  ],
+  "interfaces": [
+    {
+      "id": "IF-01",
+      "from": "operator-interface",
+      "to": "reservation-api",
+      "operation": "CreateReservation",
+      "timeout_ms": 500,
+      "retry": "same idempotency key, bounded attempts",
+      "fail_mode": "explicit failure; do not claim reservation"
+    },
+    {
+      "id": "IF-02",
+      "from": "reservation-api",
+      "to": "allocation-store",
+      "operation": "CommitAssignment",
+      "timeout_ms": 160,
+      "retry": "reconcile by token after uncertain response",
+      "fail_mode": "no duplicate slot via atomic unique constraint"
+    },
+    {
+      "id": "IF-03",
+      "from": "telemetry-ingest",
+      "to": "reservation-api",
+      "operation": "LatestVehicleState",
+      "timeout_ms": 100,
+      "retry": "none for stale sample",
+      "fail_mode": "deny dispatch when observation age >5 s"
+    }
+  ],
+  "evidence": [
+    {
+      "requirement": "SWS-01",
+      "run": "LT-51",
+      "baseline": "NS-SW5.1",
+      "status": "PASS",
+      "kind": "synthetic",
+      "details": "candidate queueing proxy; not a measured service percentile"
+    },
+    {
+      "requirement": "SWS-02",
+      "run": "MON-51",
+      "baseline": "NS-SW5.1",
+      "status": "AT_RISK",
+      "kind": "synthetic",
+      "details": "36 of 43.2 allowance minutes used; proposed 9-minute canary exceeds 7.2 remaining. No measured SLO breach to date."
+    },
+    {
+      "requirement": "SWS-03",
+      "run": "TX-51",
+      "baseline": "NS-SW5.1",
+      "status": "PASS",
+      "kind": "synthetic",
+      "details": "SQLite fixture; not distributed deployment proof"
+    },
+    {
+      "requirement": "SWS-04",
+      "run": "TEL-51",
+      "baseline": "NS-SW5.1",
+      "status": "PASS",
+      "kind": "synthetic",
+      "details": "five-second boundary fixtures"
+    },
+    {
+      "requirement": "SWS-05",
+      "run": "AUD-51",
+      "baseline": "NS-SW5.1",
+      "status": "PASS",
+      "kind": "synthetic",
+      "details": "transaction rollback fixture"
+    },
+    {
+      "requirement": "SWS-06",
+      "run": "BLD-50",
+      "baseline": "NS-SW5.0",
+      "status": "PASS",
+      "kind": "synthetic",
+      "details": "intentionally stale build attestation"
+    },
+    {
+      "requirement": "SWS-07",
+      "run": "DRILL-51",
+      "baseline": "NS-SW5.1",
+      "status": "PLANNED",
+      "kind": "synthetic",
+      "details": "drill not yet executed"
+    },
+    {
+      "requirement": "SWS-08",
+      "run": "OPS-51",
+      "baseline": "NS-SW5.1",
+      "status": "PASS",
+      "kind": "synthetic",
+      "details": "scripted operator fallback exercise"
+    }
+  ]
+}

@@ -37,6 +37,15 @@ These sources establish authoritative terminology or methods in their own publis
 - [NIST · SP 800-160 Vol. 1 Rev. 1, Engineering Trustworthy Secure Systems (2022)](https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final) — System-level security and trustworthiness engineering.
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 
+
+## Step 02 review exercise: degraded service rather than nominal availability
+
+Consider a fictitious information service with two identical providers. Each independently fails on a demand with probability \(p=0.02\). Under independence, both failing has probability \(p^2=0.0004\), so the modeled success probability is **99.96%**. If a shared power or identity service fails on a demand with probability \(q=0.01\) and always disables both providers, while independent failures apply only when the shared service works, total failure is \(q+(1-q)p^2=0.010396\). The nominal redundant design's success falls to **98.9604%**. The difference comes from the dependency assumption, not from a change in the individual provider failure estimate.
+
+**Resilience** also requires defining *what survives* a disruption, how long degraded function persists, and what constitutes acceptable recovery. An alternate channel may preserve emergency messages but not normal routing. State the service floor, allowed outage duration, restoration priority, manual fallback, reconstitution evidence, and distinct controls for common-cause hazards.
+
+**Exercise (answer).** If q falls to 0.002 while p stays 0.02, shared-plus-independent failure is \(0.002+0.998(0.0004)=0.0023992\), or **0.23992%**. Do not infer recovery-time or mission outcomes from these one-demand probabilities; resilience needs temporal and operational evidence.
+
 ## Follow the knowledge
 
 **Related concepts**

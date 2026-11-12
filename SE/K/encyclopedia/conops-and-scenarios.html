@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Concept of operations and scenarios · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Concept of operations and scenarios · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
 <link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
 <script data-se-mode="standard" data-se-page="K/encyclopedia/conops-and-scenarios.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
 </head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Concept of operations and scenarios</h1>
@@ -32,7 +32,11 @@
 <li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
 <li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA · Systems Engineering Handbook appendix (requirements and verification matrices)</a> — Requirements review criteria and verification planning context.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section id="step03-concept-study"><h2>Step 02 review studio — the silent retry scenario</h2>
+<p>A rider requests a shuttle. The reservation commits, but the confirmation message is lost. The rider retries. The ConOps must identify which actors can see the first reservation, whether the retry is recognized as the same operation, whether the operator can recover the ambiguity, and which outcome the rider receives. Merely writing “dispatch confirms booking” hides the most important cross-boundary behavior.</p>
+<p><strong>Solved exercise:</strong> A sequence diagram shows <code>request → reserve → reply</code> and a timeout after <code>reserve</code>. What additional branches are required? <strong>At least</strong> <code>retry with same idempotency key → return existing allocation</code>, <code>cancel/expire → release resource</code>, and <code>reconciliation after uncertain delivery</code>. Include an exception where the original reservation is cancelled before a delayed confirmation arrives, then specify the revision-ordering rule that prevents resurrection of cancelled state.</p>
+<p><strong>Acceptance distinction:</strong> a software test may verify that duplicate requests do not create two allocations, but only representative rider/operator scenarios can validate whether the resulting messages and recovery procedure are understandable. Scenario completeness includes adverse and unexpected interactions, not only nominal success.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="system-of-interest.html">System of interest: purpose, boundary, and evidence</a></li>

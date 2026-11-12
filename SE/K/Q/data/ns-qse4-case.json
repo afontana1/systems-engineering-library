@@ -1,0 +1,18 @@
+{
+  "case_id": "NS-QSE4.1", "version": "1.0", "status": "synthetic teaching inputs; not field measurements",
+  "purpose": "Compare conditional dispatch-queue performance and numerical credibility under clear, storm, and compound demand. Not a deployment assessment.",
+  "observation_unit": "one synthetic one-hour dispatch intake window",
+  "counts": {
+    "clear": [8, 9, 12, 10, 11, 8, 12, 10, 9, 11, 10, 10],
+    "storm": [14, 22, 13, 20, 17, 23, 18, 16, 21, 15, 19, 18]
+  },
+  "gamma_prior": {"shape": 2.0, "rate_hours": 0.2},
+  "service_design": {"slow_minutes": 10.0, "fast_minutes": 8.0, "small_servers": 2, "large_servers": 3, "timely_limit_minutes": 12.0},
+  "scenario_weights": {"clear": 0.55, "storm": 0.30, "compound": 0.15},
+  "compound_design": {"demand_multiplier": 1.2, "service_multiplier": 1.1},
+  "policies": {"status_quo": {"servers": 2, "service_minutes": 10, "daily_added_cost_usd": 0}, "capacity": {"servers": 3, "service_minutes": 10, "daily_added_cost_usd": 90}, "process": {"servers": 2, "service_minutes": 8, "daily_added_cost_usd": 45}, "combined": {"servers": 3, "service_minutes": 8, "daily_added_cost_usd": 130}},
+  "decision": {"wait_cost_usd_per_request_min": 12.0, "all_scenarios_timely_fraction_floor": 0.90},
+  "thermal": {"initial_deg_c": 32.0, "ambient_deg_c": 36.0, "conductance_per_hour": 0.4, "heat_deg_c_per_hour": 4.0, "cooling_deg_c_per_hour": 1.5, "duration_hours": 2.0},
+  "synthetic_credibility_comparison": {"model_minutes": [9, 10, 8, 13, 11, 15, 12, 14], "withheld_generator_minutes": [10, 12, 8, 14, 13, 18, 11, 17]},
+  "permissions": {"operator": false, "accessible_stakeholder_review": false, "safety": false, "data_governance": false}
+}

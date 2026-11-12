@@ -1,0 +1,93 @@
+{
+  "accessible_count": 8,
+  "accessible_guarded": 6,
+  "accessible_guarded_fraction": 0.75,
+  "actionable_evidence": 2,
+  "authorization": {
+    "all_granted": false,
+    "granted_permissions": [
+      "road authority"
+    ],
+    "required_permissions": [
+      "road authority",
+      "labor",
+      "privacy"
+    ]
+  },
+  "candidates": [
+    {
+      "energy_kwh_per_hour": 12,
+      "nominal_capacity_per_hour": 6,
+      "nominal_feasible": false,
+      "robust_feasible": false,
+      "stress_capacity_per_hour": 4,
+      "vehicles": 1
+    },
+    {
+      "energy_kwh_per_hour": 24,
+      "nominal_capacity_per_hour": 12,
+      "nominal_feasible": true,
+      "robust_feasible": false,
+      "stress_capacity_per_hour": 8,
+      "vehicles": 2
+    },
+    {
+      "energy_kwh_per_hour": 36,
+      "nominal_capacity_per_hour": 18,
+      "nominal_feasible": false,
+      "robust_feasible": false,
+      "stress_capacity_per_hour": 12,
+      "vehicles": 3
+    }
+  ],
+  "deployment_screen": {
+    "passes": false,
+    "scope": "synthetic classroom screening only; passing does not authorize deployment"
+  },
+  "euler": {
+    "coarse": {
+      "estimate": 0.30000000000000004,
+      "exact": 0.4965853037914095,
+      "factor": 0.30000000000000004,
+      "nonnegative": true,
+      "stable": true
+    },
+    "refined": {
+      "estimate": 0.4632503906249999,
+      "exact": 0.4965853037914095,
+      "factor": 0.825,
+      "nonnegative": true,
+      "stable": true
+    },
+    "unstable_factor": -1.0999999999999996
+  },
+  "evidence_total": 5,
+  "finance": {
+    "A_pv": 1544.6496058740956,
+    "B_pv": 1499.5572832307525,
+    "required_saving_per_year": 73.44171292624901
+  },
+  "mm1": {
+    "L": 4.0,
+    "Lq": 3.2,
+    "mean_in_system_min": 30.0,
+    "mean_wait_queue_min": 24.0,
+    "rho": 0.8
+  },
+  "paired_effect_min": -3.5,
+  "paired_se_min": 0.5627314338711378,
+  "reliability": {
+    "common_cause_adjusted": 0.9641314999999999,
+    "independent_parallel": 0.9991
+  },
+  "request_accounting": {
+    "arrivals": 40,
+    "pending": 3,
+    "rejected": 5,
+    "served": 32
+  },
+  "timely_guarded": 26,
+  "timely_guarded_all_fraction": 0.65,
+  "timely_nominal": 32,
+  "zero_failure_upper_95_300": 0.009936081944457708
+}

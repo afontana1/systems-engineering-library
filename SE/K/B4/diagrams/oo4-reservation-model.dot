@@ -1,0 +1,16 @@
+digraph NorthstarOOAD {
+  graph [rankdir=LR, bgcolor="transparent", pad="0.2", nodesep="0.45"];
+  node [shape=box, style="rounded,filled", fillcolor="#e8f5f2", color="#317b78", fontname="Arial"];
+  edge [color="#42666b", fontname="Arial", fontsize=10];
+  Rider [label="Rider\n(external actor)", shape=ellipse, fillcolor="#f4f7f9"];
+  ReservationService [label="ReservationService\n(command boundary)"];
+  AssignmentPolicy [label="AssignmentPolicy\n(eligibility + constraints)"];
+  Repository [label="ReservationRepository\n(transactional adapter)"];
+  DB [label="SQLite / persistent store\nUNIQUE(vehicle, slot)\nWHERE ACTIVE", shape=cylinder, fillcolor="#edf2fb"];
+  Audit [label="AuditEvent\n(committed in transaction)"];
+  Rider -> ReservationService [label="submit/cancel"];
+  ReservationService -> AssignmentPolicy [label="check eligible"];
+  ReservationService -> Repository [label="atomic command"];
+  Repository -> DB [label="commit or rollback"];
+  Repository -> Audit [label="persist event"];
+}

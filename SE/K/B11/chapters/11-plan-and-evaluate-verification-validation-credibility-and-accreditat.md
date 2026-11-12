@@ -82,6 +82,10 @@ A correct computed result is not automatically a system acceptance result; expla
 
 </details>
 
+## Phase 3 technical reference: Build a scoped credibility case
+
+Use a queue benchmark to distinguish credibility claims. The exact formula \(E[W]=1/(\mu-\lambda)\) is a verification oracle **only for the idealized M/M/1 conceptual model**; reproducing 20 minutes at \(\lambda=9,\mu=12\) cannot validate real-world arrivals, priorities, abandonments, or service-time dependence. A model credibility argument should list: intended decision and consequence; operating envelope; code and solution verification; input provenance; independent validation data; uncertainty partition; structural discrepancies; and accountable acceptance authority. A 95% Monte Carlo confidence interval measures sampling precision, not a blanket 95% probability of actual mission correctness. Study the [full worked credibility matrix](../../methods/simulation-output-and-credibility.md) and identify which real Northstar measurements could challenge the model.
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -119,3 +123,36 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [10 — Previous chapter](10-use-m-s-to-support-integration-verification-validation-and-test-deci.md) · [12 — Next chapter](12-apply-m-s-to-production-and-sustainment-survey-advanced-methods-and-.md) · [Book index](../README.md)
+
+## Phase 5 technical reading: Credibility in high-consequence tail predictions
+
+For a normal toy exceedance \(P(Z>4)\approx3.167\times10^{-5}\), 50,000 direct draws yield only 1.58 expected events. Shifting the sampling distribution and applying the correct density ratio can reduce numerical error without changing the target; it does not validate the Gaussian model or assign a real-world failure probability. A credibility argument must address calibration data, held-out scenarios, model-form discrepancies, proposal diagnostics, error decomposition and operating envelope. The [worked simulation calibration and rare-event method](../../methods/simulation-calibration-and-rare-events.md) provides testable computations and explicit limits on their decision relevance.
+
+## Step 03 integrated mobility simulation case: VV&A credibility argument
+
+### Four distinct judgments
+
+* **Verification:** does the code correctly implement the specified event logic (including queue, energy and charger invariants)?
+* **Validation:** do the model and its outputs adequately represent the *real* campus for the stated intended use and operating conditions?
+* **Credibility:** is the total evidence, with limitations and independent review, trustworthy enough relative to the decision's consequence?
+* **Accreditation/acceptance for use:** has an authorized decision body approved a bounded use? A student, developer or test runner cannot grant this merely by reporting an internal pass.
+
+The [NS-MS11.1 credibility register](../case/credibility-register.csv) documents computational tests as a **tested** software claim, but input distribution validity as assumed and accessible-tail/charger-location validation as missing. There is **no** accreditation request or approval in the synthetic case. The course's NASA/DoD references motivate role-based evidence discipline; this teaching checker is **not** a standards-conformance tool or a substitute for authoritative requirements interpretation.
+
+### Construct a claim–evidence–limitation argument
+
+**Claim C1:** The implementation consistently schedules requests, trips and chargers for declared synthetic scenarios. *Evidence:* deterministic queue trace, mass-conservation/resource checks, controlled seeds and negative tests. *Defeater:* code changes, untested tie conditions, or incorrect triangular parameter ordering. **Claim C2:** The model's 14-vehicle baseline fails the fictional wait-time thresholds. *Evidence:* versioned assumptions, 30 independent replications and per-day p90 output with modeled confidence interval. *Defeater:* model-form error, omitted ride pooling, changed demand or unrepresentative tail assumptions. **Claim C3:** Fourteen vehicles cannot meet real operational needs. *Not supported.* No independent real-world referent or full dispatch and staffing model exists. Distinguishing C2 from C3 is the central professional obligation.
+
+### Use a proportional credibility scorecard carefully
+
+Rather than reducing credibility to one arbitrary score, classify evidence by source, regime, independence and consequence. A simple worksheet can show each claim's intended use, configuration, uncertainty budget, available tests, independent reviewer, expiration trigger and owner. It must expose *disqualifying gaps*, not average them away. A credible model for **initial option screening** can be unacceptable for public statements, final procurement or operational certification. The credibility register is a starting artifact, not an accreditation decision record.
+
+An example *expiration condition* is material variation in the accessible-trip fraction from 0.14, introduction of ride pooling, a new charger site, changed dispatch priority, or demand spikes outside the tested scenarios. Such changes require configuration review, new tests and potentially a new validation program. “Passed 30 seeds” is not a timeless property of the model.
+
+### Worked decision and exercise
+
+Suppose two independent teams obtain the same sample mean daily p90 of 36.4 minutes using identical assumptions. One team labels the result “operationally verified.” The other labels it “synthetic screening evidence, no field qualification.” Which statement is defensible? **Solution:** only the second. Agreement may improve computational reproducibility, but both teams may share the same incorrect referent and model structure. The decision authority needs an assessment of validation evidence, intended-use boundaries, risks and consequences before accepting a use.
+
+**Red-team exercise.** Change accessible share from 0.14 to 0.22 and rerun the fixed input generator. Does any computed difference prove discrimination in a real dispatch system? **Answer:** no; it tests sensitivity of the *modeled policy*, which may itself allocate accessible vehicles poorly. The discrepancy identifies the need for user-centered review and an alternative dispatch policy; field data and stakeholder input are still needed.
+
+[Evidence register](../case/credibility-register.csv) · [Chapter 12](12-apply-m-s-to-production-and-sustainment-survey-advanced-methods-and-.md).

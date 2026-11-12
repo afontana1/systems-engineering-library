@@ -1,0 +1,5 @@
+### D01 extension · A conservative acceptance predicate
+
+A mission need must be decomposed into *measured outcome*, *measurement guarantee*, and *authority*. For a clock-reported time $\hat t$, unknown true latency satisfies $t\in[\hat t-u,\hat t+u]$ when clock error is bounded by $u$. Thus a guaranteed success at threshold $T$ requires $\hat t+u\le T$; a merely possible success requires $\hat t-u\le T$. Conflating these inequalities silently converts uncertainty into proof. NS-U4.1 gives 72 nominal successes out of 80, but only 67 conservative successes with $T=8$ s and $u=0.25$ s. Both counts are observations from a synthetic fixture, not operational qualification. The requirement-to-result graph should include instrument method, uncertainty source, configuration revision, subgroup and operating domain.
+
+**Exercise and solution.** Is a 7.9 s reading guaranteed if $u=0.25$ s? No, because $7.9+0.25=8.15>8$. At $u=0.05$ s it is guaranteed. The change improves timing classification, not authorization. [Check model](../flagship-integration/code/ns_u_case.py).

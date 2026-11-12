@@ -1,0 +1,18 @@
+{
+  "model_id": "NS-DA14.1",
+  "source": "EN.645.784 section 7 six fictional pilot choices; all further thresholds/preferences and model formulas are new illustrative assumptions",
+  "pilot_alternatives": [
+    {"id":"A","description":"Fixed-route electric shuttle","cost_musd":8.8,"wait_p90_min":15.5,"accessible_coverage":0.93,"deployment_months":9,"availability":0.965,"emissions_tco2e_annual":118,"integration_risk":2},
+    {"id":"B","description":"Autonomous pod fleet","cost_musd":10.6,"wait_p90_min":9.8,"accessible_coverage":0.88,"deployment_months":16,"availability":0.94,"emissions_tco2e_annual":86,"integration_risk":5},
+    {"id":"C","description":"Demand-responsive accessible vans","cost_musd":9.4,"wait_p90_min":11.2,"accessible_coverage":0.99,"deployment_months":7,"availability":0.952,"emissions_tco2e_annual":142,"integration_risk":2},
+    {"id":"D","description":"Mixed shuttle-and-van fleet","cost_musd":10.1,"wait_p90_min":8.9,"accessible_coverage":0.98,"deployment_months":11,"availability":0.96,"emissions_tco2e_annual":104,"integration_risk":3},
+    {"id":"E","description":"Regional transit partnership","cost_musd":7.6,"wait_p90_min":18.4,"accessible_coverage":0.90,"deployment_months":6,"availability":0.935,"emissions_tco2e_annual":126,"integration_risk":3},
+    {"id":"F","description":"Refurbished incumbent buses","cost_musd":6.9,"wait_p90_min":20.1,"accessible_coverage":0.86,"deployment_months":5,"availability":0.91,"emissions_tco2e_annual":215,"integration_risk":2}
+  ],
+  "illustrative_pilot_constraints": {"max_cost_musd":10.4,"max_deployment_months":12,"min_accessible_coverage":0.95,"min_availability":0.95,"max_integration_risk":3},
+  "value_model": {"weights":{"cost_musd":0.18,"wait_p90_min":0.30,"accessible_coverage":0.28,"deployment_months":0.08,"availability":0.06,"emissions_tco2e_annual":0.10},"anchors":{"cost_musd":[6.0,12.0],"wait_p90_min":[7.0,22.0],"accessible_coverage":[0.85,1.0],"deployment_months":[4.0,18.0],"availability":[0.90,0.99],"emissions_tco2e_annual":[80.0,220.0]},"higher_is_better":["accessible_coverage","availability"]},
+  "design_grid": {"architecture":["hybrid","demand"],"fleet":[10,12,14,16,18],"chargers":[4,6,8],"reserve":[0.10,0.15,0.20],"dispatch":["schedule","priority"],"automation":["human","supervised"],"zones":[4,6],"speed_mph":[18,24]},
+  "design_constraints": {"max_cost_musd":14.5,"max_wait_p90_min":15.0,"min_accessible_coverage":0.95,"max_vehicles_per_charger":3.0,"min_availability":0.95,"max_integration_risk":3},
+  "states":{"normal":{"probability":0.7,"payoffs":{"C":74.0,"D":80.0}},"adverse":{"probability":0.3,"payoffs":{"C":67.0,"D":57.0}}},
+  "diagnostic":{"sensitivity_adverse":0.80,"specificity_normal":0.85,"total_cost_value_points":0.50}
+}

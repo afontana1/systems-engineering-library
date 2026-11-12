@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Risk, issue, uncertainty, and opportunity · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Risk, issue, uncertainty, and opportunity · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
 <link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
 <script data-se-mode="standard" data-se-page="K/encyclopedia/risk-vs-issue.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
 </head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Risk, issue, uncertainty, and opportunity</h1>
@@ -32,7 +32,11 @@
 <li><a href="https://csrc.nist.gov/pubs/sp/800/37/r2/final">NIST · SP 800-37 Rev. 2, Risk Management Framework (2018)</a> — Risk governance and continuous monitoring in the system life cycle.</li>
 <li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section id="step03-concept-study"><h2>Step 02 review studio — quantify an uncertainty without concealing the decision</h2>
+<p>A hypothetical integration risk has a 30% probability of triggering 100 cost units of rework. Its expected loss is 30 units, but expected value is not the worst case, not a budget guarantee, and not a substitute for consequence-based controls. An <strong>issue</strong> is an already-realized deviation, such as a failed compatibility test; its probability is not 30% after the failure is observed. An <strong>opportunity</strong> may be a beneficial uncertain outcome, but should still be evaluated using credible evidence and explicit resource tradeoffs.</p>
+<p><strong>Solved exercise:</strong> a targeted prototype costs 8 units and is expected (under a justified model) to reduce the risk probability from 0.30 to 0.10 without affecting impact. Original expected loss is <code>0.30×100=30</code>; combined post-prototype expected expenditure is <code>8+0.10×100=18</code>. The net modeled expected benefit is <strong>12 units</strong>. However, if the test does not actually change risk probability and merely provides information, these arithmetic assumptions are invalid; analyze information value instead.</p>
+<p><strong>Decision record:</strong> owner, trigger, consequence domain, evidence for probability, mitigation mechanism, residual risk, and contingency action. A red/yellow/green matrix is a prioritization convenience, not a risk measurement instrument.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="probability-and-dependence.html">Probability, dependence, and technical uncertainty</a></li>

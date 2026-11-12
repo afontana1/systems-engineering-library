@@ -1,0 +1,9 @@
+id,claim,threshold,owner,verification_method
+DI7-R01,nominal peak service capacity,>=46.2 trips/hour,Fleet Integration,load trial on controlled fleet
+DI7-R02,degraded command response p99,<=500 ms,Interface Control,degraded load test with trace timestamps
+DI7-R03,shift energy consumption,<=30 kWh,Power and Thermal,instrumented duty-cycle test
+DI7-R04,8-hour mission reliability,>=0.98,Reliability Engineering,mission failure exposure and analysis
+DI7-R05,operational availability,>=0.99,Support Engineering,field downtime and logistics accounting
+DI7-R06,safety top-event probability per demand,<=0.005,Safety Engineering,hazard argument plus qualified evidence
+DI7-R07,accessible boarding coverage,>=95% of defined population,Human Factors,representative accessible-service trials
+DI7-R08,released design evidence currency,all critical evidence current,Configuration Control,baseline-linked evidence audit

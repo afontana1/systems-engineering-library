@@ -1,0 +1,8 @@
+requirement,use_case,design_owner,evidence,verdict
+SW-01,UC-01,ReservationService,T-01,current synthetic pass
+SW-02,UC-02,AssignmentPolicy,T-02,current synthetic pass
+SW-03,UC-01,ReservationService,T-03,current synthetic pass
+SW-04,UC-03,ReservationService,T-04,current synthetic pass
+SW-05,UC-01,AssignmentPolicy,T-05,current synthetic pass
+SW-06,UC-02,AssignmentPolicy,T-06,stale after revision 2
+SW-07,UC-03,AuditWriter,T-07,planned no observed result

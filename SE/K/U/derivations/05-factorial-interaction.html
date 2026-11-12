@@ -51,4 +51,13 @@
 <p>No. The −3.5 minute main effect is an average over the two selected demand levels. The policy effect is −2 minutes under low demand and −5 under high demand in the illustrative table, demonstrating interaction.</p>
 <p>&lt;/details&gt;</p>
 <p><strong>Transfer artifact:</strong> Design matrix, randomization plan, raw replicate dataset, model with interaction, residual diagnostic, and scenario-limited conclusion. See <a href="../../encyclopedia/design-of-experiments.html">design of experiments</a>.</p>
+
+<!-- STEP04-FLAGSHIP-U1-START -->
+<section class="ns-u4-extension" aria-label="NS-U4.1 flagship technical extension"><h3>D05 extension · Two-factor contrast as an interaction, not a causal proof</h3>
+<p>Consider a balanced synthetic $2\times2$ table of mean waits (minutes): base $y_{00}=18$, capacity-only $y_{10}=15$, process-only $y_{01}=14$, both $y_{11}=8$. The interaction on the raw response scale is $I=y_{11}-y_{10}-y_{01}+y_{00}=8-15-14+18=-3$ minutes. The joint intervention saves 3 more minutes than the sum of separately estimated reductions predicts. An interaction depends on the response scale and design; repeated randomization, controlled scenario blocks and a standard error are required before inferring a population effect.</p>
+<p><strong>Exercise and solution.</strong> If $y_{11}$ were 11 instead of 8, $I=0$ and the table would be additive on this scale. A single noiseless synthetic table cannot certify additivity outside its assumed domain. <a href="../flagship-integration/data/ns-u4.1-case.json">Case data</a>.</p>
+</section>
+<script id="ns-u4-inline-math">window.MathJax=window.MathJax||{};window.MathJax.tex=window.MathJax.tex||{};window.MathJax.tex.inlineMath=[["$","$"]];</script>
+<style id="ns-u4-responsive">main{min-width:0;max-width:100%;overflow-wrap:break-word}main :is(table,pre){max-width:100%;overflow-x:auto}main :is(p,li):has(mjx-container){overflow-x:auto}main mjx-container{max-width:100%;overflow-x:auto}.ns-u4-extension{min-width:0;max-width:100%;border-top:2px solid #9acac9;margin-top:38px;padding-top:16px}.ns-u4-extension a{overflow-wrap:anywhere}</style>
+<!-- STEP04-FLAGSHIP-U1-END -->
 </main></body></html>

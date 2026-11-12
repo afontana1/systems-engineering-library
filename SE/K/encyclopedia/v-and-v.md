@@ -66,6 +66,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)](https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods) — Statistical methods, experiments, reliability, and process assessment.
 
+
+
+## Step 02 review studio — a verified wrong requirement is still a failure
+
+**Verification** asks whether the engineered system conforms to specified requirements for a defined configuration and test domain. **Validation** asks whether the system satisfies its intended use and stakeholder needs. A requirement saying “the app shall show an acknowledgment within 8 seconds” may be verified while the service delivers phantom reservations or unusable pickup instructions.
+
+**Solved exercise:** NS-R-01 passes a synthetic 8-second response test, but in representative user trials riders confuse “request received” with “vehicle reserved.” Has the stakeholder need for dependable booking been validated? **No.** The test may support a timing verification claim; it does not establish correct semantic confirmation or user understanding. Revise the ConOps and requirement hierarchy, then test the actual rider outcome.
+
+**Evidence rule:** state the intended use, configuration, population and acceptance method. Testing a component in a simulator may provide valid lower-level evidence while leaving operational use unvalidated. Do not substitute the words verification and validation for each other in safety or release decisions.
+
 ## Follow the knowledge
 
 **Related concepts**

@@ -129,3 +129,19 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [09 — Previous chapter](09-design-computational-experiments-to-learn-efficiently-from-the-desig.md) · [11 — Next chapter](11-analyze-uncertainty-sensitivity-robustness-regret-and-value-of-infor.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-DA14.1 decision-analysis laboratory: Chapter 10
+
+### A surrogate's test error is bounded by where it was tested
+
+To teach computational acceleration without importing opaque libraries, NS-DA14.1 fits a quadratic surrogate by linear least squares with a small regularizer. Inputs are centered and scaled: \(u=(n-14)/4\), \(v=(c-6)/2\), \(q=(r-0.15)/0.05\). The feature vector is \(\phi=[1,u,v,q,u^2,v^2,q^2,uv,uq,vq]\). Coefficients solve \((X^TX+10^{-8}I)\hat\beta=X^Ty\) with pivoted Gaussian elimination, allowing reproduction using Python's standard library. This implementation is intentionally not a high-reliability linear-algebra library; ill-conditioning, solver choice and precision deserve independent checking on larger datasets.
+
+**Training/holdout discipline.** The [surrogate code](../tools/step03_book14_decision.py) trains on 36 configurations (fleets 10/12/16/18, chargers 4/6/8, reserve .10/.15/.20) for a *single* fixed service architecture and policy, then evaluates 16 separately held-out combinations (fleets 11/13/15/17, chargers 5/7, reserve .125/.175). Neither training outcomes nor held-out rows are drawn from actual operations; they come from the *same analytic toy oracle*. On that in-domain test, wait mean absolute error is approximately **0.04743 min**, with maximum absolute error **0.10745 min**. Cost MAE is near arithmetic noise because the chosen cost function is within this quadratic feature family.
+
+### Adequacy relative to a decision boundary
+
+For each holdout \(i\), compute residual \(e_i=\hat y_i-y_i\), mean absolute error \(\mathrm{MAE}=N^{-1}\sum_i|e_i|\), and maximum absolute error \(\max_i|e_i|\). Even a 0.107-minute maximum error may be unacceptable if a hard 15-minute wait gate is separated by only 0.05 minute from an approximate prediction. A candidate at predicted 14.97 minutes should be **re-evaluated with the original function**; a surrogate's pass is not a feasibility certificate. Residual diagnostics should be reported by location in the design space, including high-demand and low-charger regions. Predictions for a different architecture, a bounded-autonomy configuration or an unobserved speed regime are extrapolations outside this fitted model.
+
+**Exercise with explained solution.** A surrogate returns \(\hat W=14.96\) min for a design and has a 0.10745-minute maximum observed holdout error. Can the analyst certify \(W\le15\)? **Solution:** No. The holdout maximum is not a guaranteed uncertainty bound, but even using it as a screening margin gives an upper value \(14.96+0.10745=15.06745\) minutes, above the gate. The original oracle should be rerun and the model-form error/validation gap retained. In a real simulation case, propagate stochastic numerical uncertainty and metamodel approximation separately.
+
+**Boundary warning.** Excellent agreement with the same synthetic response generator establishes surrogate *emulation fidelity only*. It says nothing about whether actual passengers, battery thermal behavior or vehicle dispatch follow that generator. Never label this surrogate physically validated.

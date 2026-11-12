@@ -95,3 +95,26 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 12: Concept baseline and handoff](../labs/lab-12-final-concept-baseline-oral-defense-and-handoff.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 12 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+
+## Step 03 integrated reference: NS-CD6.1 — concept baseline, traceability and responsible handoff
+
+The final product of conceptual design is **a controlled argument and a set of design freedoms**, not just a selected vehicle type. NS-CD6.1 records a conditional preference for hybrid concept C while retaining B as an alternative if transfer assumptions, feeder reliability or accessibility evidence overturn the initial result. The purpose of the handoff to System Design & Integration is to make the next team's decisions reversible where they can be, and explicit where they cannot.
+
+### Construct a handoff that can be audited
+
+The case package contains [requirements](../case/requirements.csv), [functional inputs/outputs](../case/functions.csv), [concepts and assumptions](../case/model-baseline.json), [trade inputs](../case/concepts.csv), [synthetic experiment responses](../case/doe-synthetic.csv), [architecture diagram](../case/architecture.svg), and [configuration-aware evidence](../case/evidence-register.csv). A defensible design baseline distinguishes: (a) stakeholder constraints that must be protected, (b) selected architectural hypotheses, (c) uncertain parameters requiring measurement, and (d) unresolved review conditions. Keep each artifact's identifier, owner, revision, source, units and applicability scenario stable.
+
+A simple readiness classification makes the limits visible. CD6-R01, R03, R04 and R05 have **provisional modeled support**, CD6-R02 and R07 lack executed field evidence, CD6-R06 contains a failed degraded model scenario, and CD6-R08 references an outdated NS-CD6.0 record. Even a complete-looking traceability graph cannot turn those statuses into demonstrated system compliance. The controlled [Python audit](../tools/step03_book6_concept_check.py) reports `operational_release: HOLD` on purpose.
+
+### State a decision with explicit conditions
+
+The concept team may recommend “proceed to a tightly bounded C pilot design” conditioned on (1) validating transfer-aware capacity and wait-time cohorts; (2) independently checking accessible offer coverage and non-user exclusions; (3) resolving degraded timing and operator fallback; (4) obtaining credible supplier estimates and lifecycle support assumptions; and (5) gathering current test evidence against the declared baseline. A review chair should reject vague conditions such as “improve reliability later” because they are not verifiable.
+
+A stable handoff includes the expected artifact of each experiment, an acceptance or stopping threshold, the decision owner, and the retained alternative triggered by failure. It also records **negative results**—for example, the modeled 560 ms degraded chain—because deleting an unfavorable calculation would erase the rationale for the architecture's next change.
+
+### Capstone exercise and explained answer
+
+**Exercise:** A successor project updates only the verification spreadsheet to NS-CD6.1 but performs no new test after an interface change. Is the package current? **Answer:** No. Updating a label does not make old evidence applicable. The new configuration needs either a justified equivalence analysis demonstrating unchanged relevant behavior or new measurements under the changed architecture. The handoff should identify who can approve that equivalence and which safety or accessibility claims cannot be waived by the concept team.
+
+**Boundary and review source:** This is a synthetic education package, not an engineering approval or regulated-system safety case. NASA's [system-design guidance](https://www.nasa.gov/reference/4-0-system-design-processes/) emphasizes consistency among ConOps, requirements, design solutions and validation; downstream design must revisit the assumptions rather than treating the concept report as proof of realization.

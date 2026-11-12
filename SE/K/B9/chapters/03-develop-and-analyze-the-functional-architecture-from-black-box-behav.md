@@ -131,3 +131,31 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [02 — Previous chapter](02-analyze-stakeholders-mission-scenarios-outcomes-and-measures-in-the-.md) · [04 — Next chapter](04-model-state-based-behavior-modes-exceptions-hazards-and-temporal-con.md) · [Book index](../README.md)
+
+## Step 03 integrated technical reference: NS-MBA9.1 — behavioral decomposition and allocation
+
+### Preserve a solution-neutral behavioral description
+
+Begin with the black-box result: *receive a legitimate request and return a safe, serviceable assignment or a documented refusal*. A white-box decomposition may then introduce request validation, vehicle candidate selection, accessibility suitability, authorization, and availability updating. The [model](../case/model.json) allocates `F01` to Dispatch, `F02` to Dispatch, `F03` to Depot and `F04` to SafetyGateway. Those are design decisions to be reviewed, not intrinsic properties of the mission.
+
+Functional decomposition is not complete merely because every function has a parent. A legitimate parent must be explainable as the combined outcomes of its children, including exceptional outputs. If a dispatcher consumes capacity while a controller independently holds an assignment lease, the *allocation* must explicitly identify which authority owns the state transition and what happens when their representations disagree.
+
+### Analyze performance with a deliberately small model
+
+At a fixed average 48-minute service cycle, twelve vehicles provide an **ideal nominal capacity proxy**
+
+\[
+\mu=\frac{12(60)}{48}=15\ \mathrm{trips/hour}.
+\]
+
+That is above `R01`'s 14-trip/hour screen. The calculation assumes a steady cycle, full availability, one service unit per completed trip, and no bottleneck outside the vehicles. A single accessible vehicle out of service or a burst of simultaneous arrivals may invalidate the inference for actual waiting times. Do not substitute `15` as the service rate in a stochastic queuing model without testing the cycle-time and dispatch assumptions.
+
+A disciplined model should distinguish the causal link *resources → served capacity* from the administrative link *requirement → verifying test*. The first supports a conditional quantitative prediction; the second organizes future evidence. The two cannot be conflated to claim compliance.
+
+**Exercise.** A proposed function split reduces the nominal cycle from 48 to 44 minutes with the same twelve vehicles. Compute the revised ideal capacity, then identify one omitted effect.
+
+<details><summary>Worked answer</summary>
+
+\(\mu=720/44\approx16.36\) trips/hour. The improvement is conditional on the cycle assumption. Charging downtime, boarding variability or dispatch contention may dominate the real service rate; instrumented trials or an explicitly validated discrete-event model would be needed to generalize.
+
+</details>

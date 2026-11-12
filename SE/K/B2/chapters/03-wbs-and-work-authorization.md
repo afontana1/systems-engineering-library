@@ -84,3 +84,32 @@ An attractive decomposition can still fail if “done” is defined by elapsed e
 ## Put this into practice
 
 Work through [Lab 3: The Missing Work Package](../labs/lab-03-wbs-and-work-authorization.md), then write a short paragraph on how the laboratory simplifies the real-world management problem. Use the [existing short Week 3 primer](../../P0-text/lessons/645-667-w03.md) for a second explanation. The assessed deliverable is defined in the original course guide, not by the hypothetical lab.
+
+## Step 03 integrated reference — connect scope, accounts, and evidence of completion
+
+The **100% rule** means that the work breakdown structure covers every in-scope deliverable and no work outside the approved scope; it does not mean that the team has made the perfect decomposition. Begin with the acceptance boundary and product tree, then identify service and enabling products such as test fixtures, trained operators, interface control records, and evidence packages. If verification work is omitted merely because it is “supporting work,” a seemingly cheap architecture will lack the means to prove itself.
+
+### Reconcile the controlled accounts
+
+The [editable control-account table](../case/control-accounts.csv) contains five synthetic deliverable-oriented accounts:
+
+| Account | Budget ($M) | Product-oriented scope |
+|---|---:|---|
+| CA-01 | 1.2 | Architecture and configuration |
+| CA-02 | 2.0 | Vehicle/gateway integration |
+| CA-03 | 1.6 | Dispatch software and interfaces |
+| CA-04 | 1.4 | Verification and evidence |
+| CA-05 | 1.0 | Deployment preparation and training |
+| **Total** | **7.2** | NS-M1 performance measurement baseline |
+
+Each account needs a **dictionary**: included deliverables, excluded scope, acceptance test, responsible manager, start/finish logic, budget basis, and change authority. Without that dictionary, an integration team may claim a sensor calibration procedure belongs to verification, while the verification team claims it belongs to integration. Both may mark their tasks complete while nobody owns the instrument calibration.
+
+### Work authorization and earned-credit rules
+
+Distinguish (1) budget authorized, (2) costs incurred and (3) measured accomplishment. An invoice for a half-complete gateway is cost, not proof of earned value. A milestone-based earned-value technique could award 30% for an approved interface specification, 40% for integrated demonstration and 30% for accepted evidence, **if** these gates reflect substantial work and are documented before execution. A manager should not choose 95% complete by intuition. Where work is genuinely level-of-effort, explain why that measurement technique does not independently demonstrate technical progress.
+
+**Worked reconciliation.** CA-04 has a $1.4M budget but only $0.15M earned by the fictional month-five checkpoint, against $0.18M spent. Its account-level CPI is \(0.15/0.18\approx0.833\). That ratio does not show the technical verification quality; inspect which procedures and signed evidence contributed to the $0.15M earned credit.
+
+**Practice with answer.** A supplier delivers an untested controller, and the team marks both “controller delivered” and “controller accepted” complete because the shipping manifest exists. **Answer:** shipping can close a logistics milestone but not a verification/acceptance milestone; the dictionary and work authorization must separate them to avoid double-counting progress.
+
+**Reference:** PMI's [Practice Standard for Work Breakdown Structures](https://www.pmi.org/standards/work-breakdown-structures-third-edition) describes product-oriented coverage, decomposition and control relationships.

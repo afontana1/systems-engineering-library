@@ -46,6 +46,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [NASA · Systems Engineering Handbook appendix (requirements and verification matrices)](https://www.nasa.gov/reference/system-engineering-handbook-appendix/) — Requirements review criteria and verification planning context.
 
+
+
+## Step 02 review studio — the silent retry scenario
+
+A rider requests a shuttle. The reservation commits, but the confirmation message is lost. The rider retries. The ConOps must identify which actors can see the first reservation, whether the retry is recognized as the same operation, whether the operator can recover the ambiguity, and which outcome the rider receives. Merely writing “dispatch confirms booking” hides the most important cross-boundary behavior.
+
+**Solved exercise:** A sequence diagram shows `request → reserve → reply` and a timeout after `reserve`. What additional branches are required? **At least** `retry with same idempotency key → return existing allocation`, `cancel/expire → release resource`, and `reconciliation after uncertain delivery`. Include an exception where the original reservation is cancelled before a delayed confirmation arrives, then specify the revision-ordering rule that prevents resurrection of cancelled state.
+
+**Acceptance distinction:** a software test may verify that duplicate requests do not create two allocations, but only representative rider/operator scenarios can validate whether the resulting messages and recovery procedure are understandable. Scenario completeness includes adverse and unexpected interactions, not only nominal success.
+
 ## Follow the knowledge
 
 **Related concepts**

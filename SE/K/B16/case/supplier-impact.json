@@ -1,0 +1,62 @@
+{
+  "after": [
+    {
+      "configuration_screen_complete": true,
+      "evidence_ids": "E-ACCESS",
+      "evidence_status": "CURRENT",
+      "linked": true,
+      "operationally_qualified": false,
+      "requirement": "R-ACCESS"
+    },
+    {
+      "configuration_screen_complete": false,
+      "evidence_ids": "E-COMMS",
+      "evidence_status": "STALE_INTERFACE_EVIDENCE",
+      "linked": true,
+      "operationally_qualified": false,
+      "requirement": "R-COMMS"
+    },
+    {
+      "configuration_screen_complete": true,
+      "evidence_ids": "E-CRITICAL",
+      "evidence_status": "CURRENT",
+      "linked": true,
+      "operationally_qualified": false,
+      "requirement": "R-CRITICAL"
+    },
+    {
+      "configuration_screen_complete": true,
+      "evidence_ids": "E-ENERGY",
+      "evidence_status": "CURRENT",
+      "linked": true,
+      "operationally_qualified": false,
+      "requirement": "R-ENERGY"
+    },
+    {
+      "configuration_screen_complete": true,
+      "evidence_ids": "E-STD",
+      "evidence_status": "CURRENT",
+      "linked": true,
+      "operationally_qualified": false,
+      "requirement": "R-STD"
+    }
+  ],
+  "after_current": 4,
+  "before_current": 5,
+  "change": "Supplier dispatch interface changed from 1.0 to 2.0 without retest",
+  "impact": {
+    "affected_decisions": [
+      "DEC-MISSION-16"
+    ],
+    "affected_evidence": [
+      "E-COMMS"
+    ],
+    "affected_requirements": [
+      "R-COMMS"
+    ],
+    "affected_tests": [
+      "T-COMMS"
+    ],
+    "changed": "IF-DISPATCH"
+  }
+}

@@ -1,0 +1,109 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reliability analysis with censored failure evidence · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/reliability-and-censored-evidence.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Reliability analysis with censored failure evidence</h1>
+<p><em>Technical method guide · Survival, hazard, repair, field exposure, and uncertainty · Phase 2 expansion</em></p>
+<p><strong>What this guide enables.</strong> Distinguish mission reliability from operational availability, organize censored life-test observations, calculate an exponential failure-rate estimate, construct a Kaplan–Meier product-limit curve, and identify where architecture dependence invalidates a naïve reliability prediction. All numerical observations are hypothetical.</p>
+<p><strong>Prerequisites:</strong> <a href="../encyclopedia/reliability-availability-maintainability.html">Reliability, availability and maintainability</a>; <a href="../encyclopedia/probability-and-dependence.html">probability and dependence</a>; <a href="../encyclopedia/statistical-acceptance-and-confidence.html">statistical acceptance</a>.</p>
+<h2>1. Reliability claims must specify a function and time horizon</h2>
+<p>For a nonrepairable item, let the random variable \(T\) be time to a specified failure under a specified set of conditions. Its survival or reliability function is \(R(t)=P(T&gt;t)\). The cumulative distribution is \(F(t)=1-R(t)\), and the hazard rate is</p>
+<p>\[
+h(t)=\lim_{\Delta t\downarrow0}\frac{P(t\le T&lt;t+\Delta t\mid T\ge t)}{\Delta t}=\frac{f(t)}{R(t)}.
+\]</p>
+<p>For a constant hazard \(\lambda\), solve \(dR/dt=-\lambda R\) with \(R(0)=1\):</p>
+<p>\[
+R(t)=e^{-\lambda t},\qquad E[T]=\frac1\lambda.
+\]</p>
+<p>The exponential model is a hypothesis, not a universal physical law. Wear-out mechanisms can produce increasing hazards; defective early units may produce decreasing hazards. A Weibull model with shape \(\beta\) and scale \(\eta\) has \(R(t)=\exp[-(t/\eta)^\beta]\). Here \(\beta=1\) reduces to exponential, \(\beta&gt;1\) has increasing hazard, and \(\beta&lt;1\) decreasing hazard. Do not choose a distribution merely because it gives a comfortable mission-success estimate.</p>
+<p><strong>Repairable-system availability is different.</strong> In a simplified alternating up/down process, the long-run intrinsic availability can be \(A\approx MTBF/(MTBF+MTTR)\) under the stated steady operating assumptions. Delays for logistics, support personnel, planned maintenance, and shared infrastructure require additional modeling. An availability estimate cannot replace the probability of surviving an uninterrupted 50-hour mission.</p>
+<h2>2. Right censoring is observed information, not a discarded unit</h2>
+<p>Suppose eight independent prototype power modules are observed for at most 100 operating hours. Three fail at <strong>20, 50, and 80 hours</strong>; five are still working at 100 hours. A right-censored unit contributes the information <strong>&quot;survived at least 100 hours&quot;</strong> even though its exact failure time is unknown. Dropping these five would bias a failure-rate estimate dramatically upward. Treating them as failures at 100 hours would instead fabricate events.</p>
+<p>The corresponding <a href="data/module-life-test.csv">synthetic CSV</a> has one row per module with <code>hours</code> and <code>failed</code> (1 for a failure, 0 for right censoring). Its units have not been repaired or returned for repeated exposure. The assumptions are independent units, accurately recorded failure/censor times, and <em>noninformative censoring</em>: the censoring mechanism does not itself disclose extra information about failure propensity beyond what the model includes.</p>
+<table>
+<thead>
+<tr>
+  <th>Unit group</th>
+  <th style="text-align:right">Recorded time (h)</th>
+  <th>Observation</th>
+  <th style="text-align:right">Contribution to total observed exposure (h)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Three failed modules</td>
+  <td style="text-align:right">20, 50, 80</td>
+  <td>Observed failure</td>
+  <td style="text-align:right">150</td>
+</tr>
+<tr>
+  <td>Five surviving modules</td>
+  <td style="text-align:right">100 each</td>
+  <td>Right censored</td>
+  <td style="text-align:right">500</td>
+</tr>
+<tr>
+  <td><strong>Combined</strong></td>
+  <td style="text-align:right"></td>
+  <td><strong>3 failures; 5 censors</strong></td>
+  <td style="text-align:right"><strong>650</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>3. Derive the exponential maximum-likelihood estimate</h2>
+<p>For a constant-hazard exponential model, the contribution of a failure at time \(t_i\) to the likelihood is the density \(f(t_i)=\lambda e^{-\lambda t_i}\); the contribution of a censored observation is the survival function \(R(t_i)=e^{-\lambda t_i}\). Using event indicator \(d_i\in\{0,1\}\),</p>
+<p>\[
+L(\lambda)=\prod_i[\lambda e^{-\lambda t_i}]^{d_i}[e^{-\lambda t_i}]^{1-d_i}
+=\lambda^d\exp\!\left(-\lambda\sum_i t_i\right),\quad d=\sum_i d_i.
+\]</p>
+<p>Thus \(\ell(\lambda)=d\ln\lambda-\lambda T_\mathrm{exposure}\). Differentiating and setting the score to zero gives</p>
+<p>\[
+\widehat\lambda=\frac{d}{T_\mathrm{exposure}}=\frac{3}{650}=0.00461538\;\mathrm{h}^{-1}.
+\]</p>
+<p>For the specified exponential model, the estimated mission survival at 50 hours is</p>
+<p>\[
+\widehat R(50)=\exp(-50\times3/650)\approx0.7939.
+\]</p>
+<p>The estimate \(1/\widehat\lambda\approx216.7\) hours is a model-based mean lifetime, not a measured mean of the eight final failure times. With only three observed failures, the uncertainty about the hazard shape and rate is substantial. A point estimate alone should not justify a high-consequence acceptance decision.</p>
+<p>The <a href="code/censored_reliability.py">standard-library reliability analyzer</a> reads the CSV, validates event flags, computes exposure and the exponential estimate, and constructs a nonparametric Kaplan–Meier curve. It explicitly refuses to estimate an exponential rate when no failures have occurred, rather than pretending that a rate of zero is established.</p>
+<h2>4. A Kaplan–Meier curve makes fewer distributional commitments</h2>
+<p>At each unique observed failure time \(t_j\), with \(n_j\) units at risk immediately beforehand and \(d_j\) failures, the product-limit estimate is</p>
+<p>\[
+\widehat S(t)=\prod_{t_j\le t}\left(1-\frac{d_j}{n_j}\right).
+\]</p>
+<p>For the example there are initially eight units at risk. The survival estimate falls to \(7/8=0.875\) at 20 hours, \((7/8)(6/7)=0.75\) at 50 hours, and \((7/8)(6/7)(5/6)=0.625\) at 80 hours. The five units censored at 100 hours are removed from the risk set <strong>after</strong> the last failure but do not themselves cause another survival drop. The resulting \(\widehat S(50)=0.75\) differs from the exponential model's 0.7939: this is informative, not a contradiction.</p>
+<p>The nonparametric curve still assumes appropriate censoring and independent observations. It cannot identify survival beyond the last informative observation. With only eight units, it is a demonstration of mechanics, not a dependable reliability assurance bound. A large test population with many censors may also require a formal interval estimate and a review of censor patterns.</p>
+<h2>5. Series systems, redundancy, and dependence</h2>
+<p>For two components that must <em>both</em> survive a mission, independent component lifetimes imply \(R_\mathrm{series}(t)=R_1(t)R_2(t)\). For a one-out-of-two parallel structure with independent failures, \(R_\mathrm{parallel}(t)=1-[1-R_1(t)][1-R_2(t)]\). These formulas fail as written for components that share a power supply, cooling, controller, manufacturing defect, or triggering hazard.</p>
+<p>Example: two channels each have a nominal 0.90 mission survival. Independence would suggest \(R_\mathrm{parallel}=0.99\). Suppose instead that a <strong>common-cause shock</strong> occurs with probability 0.05 and disables both channels, while the independent 0.90 survival assumptions apply <em>conditional on no shock</em>. Then</p>
+<p>\[
+R_\mathrm{parallel,CC}=(1-0.05)[1-(1-0.90)^2]=0.9405.
+\]</p>
+<p>The change from 0.99 to 0.9405 is material. This hypothetical mixture model is intentionally simple; realistic common-cause analysis needs mechanism-specific evidence and can require explicit fault trees or dependency models. The inference is not that redundancy is useless, but that its value cannot be calculated without modeling shared causes.</p>
+<p><strong>Degradation</strong> creates another failure of a binary operational model. Capacity can decay continuously before the threshold is crossed. Monitoring a wear measure, calibration drift, or battery health requires measurement/process models tied to the definition of unacceptable performance. A mission may be degraded even if no component reports a terminal failure.</p>
+<h2>6. From life-test evidence to a governed decision</h2>
+<p>A defensible analysis record contains the item population and selection method; failure definition; start/stop and censor rules; exposure units; environmental profile; repairs, replacements and software changes; data exclusions; assumed lifetime family; diagnostic checks; point and interval estimates; common-cause mechanisms; intended service time; and the authority responsible for accepting residual risk.</p>
+<p>Do not interpret censoring as missing-at-random automatically: modules can be withdrawn for overheating or suspicious deterioration, making censoring <em>informative</em>. Do not use a pooled failure rate when prototypes have significantly different stresses or versions unless the model justifies it. A constant failure rate over 100-hour laboratory exposures does not establish wear-out performance over years. Under repeated field repairs, distinguish first-failure lifetime from a repairable recurrent-event process.</p>
+<h2>7. Uncertainty is especially consequential when few failures are observed</h2>
+<p>For the exponential likelihood, it is tempting to report only \(\widehat\lambda=3/650\) and \(\widehat R(50)\approx0.794\). The estimate does not tell the reviewer how much the inferred rate could move. A useful <em>approximate</em> likelihood-ratio construction compares each candidate \(\lambda\) with the maximum:</p>
+<p>\[
+D(\lambda)=2[\ell(\widehat\lambda)-\ell(\lambda)]
+=2\left[d\ln\left(\frac{\widehat\lambda}{\lambda}\right)
++T(\lambda-\widehat\lambda)\right].
+\]</p>
+<p>An asymptotic 95% <strong>profile-likelihood</strong> interval uses candidates with \(D(\lambda)\le\chi^2_{1,0.95}\approx3.84146\). The <a href="code/censored_reliability.py">reliability analyzer</a> solves the two endpoints numerically by bisection and then transforms them to a corresponding range of mission-survival values. Here the approximate rate endpoints are about \(0.001148\) and \(0.011968\;\mathrm{h}^{-1}\), corresponding to model-based survival at 50 hours ranging roughly from \(0.550\) to \(0.944\). That is a <em>model-conditional approximate interval</em>, <strong>not an exact 95% finite-sample guarantee</strong>, especially with only three failures. A formal acceptance demonstration may need a different interval construction or a validated reliability plan. If censoring is informative, if failure mechanisms differ, or if the exponential hazard model is wrong, neither the point estimate nor this interval is trustworthy.</p>
+<p>Confidence bounds should be treated as part of the interpretation, not a decorative statistic. In particular, a small number of failures may fit more than one failure mechanism. Compare exponential, Weibull and physical degradation explanations where the data and sample size support that work. With only three failures here, a free two-parameter Weibull fit would likely be too unstable for a strong decision. The sensible conclusion may be <strong>obtain longer or more varied exposure</strong> rather than force a precise wear-out estimate.</p>
+<h2>8. Repairable data require a different sample space</h2>
+<p>If a field module fails, is repaired, and returns to service, its next failure may involve a changed component, human intervention or accumulated degradation. A dataset of <em>time to first failure</em> is no longer a complete description of repeated events. A <strong>repairable-system recurrent-event analysis</strong> uses a timeline of failures, repair actions, exposure, operating conditions and potentially changing intensity. In a homogeneous Poisson-process approximation, the expected number of events over cumulative exposure \(t\) is \(\lambda t\); a trend in event intensity would contradict that stationary assumption.</p>
+<p>A practical data dictionary should distinguish <code>asset_id</code>, <code>hardware_rev</code>, <code>software_build</code>, <code>failure_code</code>, <code>event_start</code>, <code>event_end</code>, <code>active_runtime</code>, <code>repair_action</code>, <code>parts_wait</code>, <code>sensor_quality</code>, and the censoring/end-of-observation reason. Maintenance-induced configuration changes are new covariates, not innocuous annotations.</p>
+<p>This distinction matters for reliability <strong>growth</strong>. A falling observed failure rate might reflect genuinely improved design, reduced load, reporting changes, or selective replacement of bad units. An analysis that discards retired or unobserved units can make reliability look better even when field risk has not improved. Trace the fleet population and exposure source before crediting an intervention.</p>
+<h2>9. Derive a mechanism-based verification question</h2>
+<p>Suppose engineering proposes the common-cause shock probability of 5%. The illustrative redundant-system calculation gives 0.9405 mission survival, but the number 5% needs a physical basis. Ask which mechanisms—power outage, common firmware deadlock, environmental flooding, erroneous operator command—can disable both channels. Develop an independent fault-tree or stress/incident model, then connect each quantitative assumption to actual failure evidence and mitigation. If common causes are not adequately bounded, the architecture may not justify redundancy credit.</p>
+<p>A strong reliability argument combines mechanism, architecture, test exposure, uncertainty and configuration. Its conclusion should state <em>the mission duration, expected environment and precisely which failure definition it supports</em>. It must not label 0.9405 as a verified field success rate based on eight artificial modules and an invented shock probability.</p>
+<h3>Sources and curriculum connections</h3>
+<ul>
+<li><a href="https://www.nist.gov/publications/nistsematech-engineering-statistics-handbook-chapter-8-reliability">NIST/SEMATECH Engineering Statistics Handbook, Chapter 8 — Reliability</a> explains survival, lifetime distributions, test design and censoring.</li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/apr/section4/apr41.htm">NIST, estimation from censored data</a> discusses model fitting and its limitations.</li>
+<li><a href="../B10/chapters/08-analyze-reliability-availability-maintainability-degradation-and-cen.html">Book 10, Chapter 8 — Reliability evidence</a>, <a href="../B7/chapters/07-design-for-reliability-availability-and-maintainability.html">Book 7, Chapter 7 — RAM design</a>, <a href="../B8/chapters/08-plan-environmental-quality-reliability-maintainability-.html">Book 8, Chapter 8 — Reliability testing</a>.</li>
+<li><strong>Curriculum:</strong> EN.645.756, week 8; EN.645.768, reliability-informed design; EN.645.769, evidence sufficiency; EN.645.757, stochastic-model assumptions.</li>
+</ul>
+<p><strong>Exercise:</strong> recompute the estimate if one formerly censored unit fails at 90 hours. Update both \(d\) and total exposure, calculate \(R(50)\), and state which distributional and censor assumptions remain untested.</p>
+<footer class="reference-note"><a href="reliability-and-censored-evidence.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

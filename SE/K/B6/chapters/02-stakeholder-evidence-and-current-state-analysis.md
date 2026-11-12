@@ -99,3 +99,28 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 2: Evidence-based stakeholder needs](../labs/lab-02-stakeholder-evidence-and-current-state-analysis.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 2 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+
+## Step 03 integrated reference: NS-CD6.1 — stakeholder evidence and selection bias
+
+Stakeholder evidence is not simply a ranked feature wish list. The population consulted, the sampling mechanism, the context of use, and the treatment of missing voices all influence the apparent need. The [NS-CD6.1 case](../case/INDEX.html) distinguishes **current riders**, who can describe existing service, from **non-riders**, whose absence may be caused by the very access barrier under investigation.
+
+### From observation to defensible need
+
+Suppose a convenience interview of 40 current riders finds that 24 report difficulty getting a timely event pickup: \(\hat p=24/40=0.60\). If these observations had instead been a simple independent random sample from a defined population, an approximate 95% Wilson interval would be
+
+\[\frac{\hat p+z^2/(2n)}{1+z^2/n}\ \pm\ \frac{z\sqrt{\hat p(1-\hat p)/n+z^2/(4n^2)}}{1+z^2/n}\approx0.591\pm0.145,\]
+
+where \(n=40\) and \(z=1.96\). That is roughly 45%–74%. **But the assumption of representative random sampling fails in a convenience interview**, so the interval is only a demonstration of sampling uncertainty and must not be reported as a confidence statement about all potential campus travelers. A precise interval cannot repair selection bias.
+
+The evidence register should separately label firsthand observation, administrative service data, uncorroborated perception, and design-team inference. For accessibility, do not infer that accessible coverage is adequate because only a few current customers complained: people unable to use the service may never become customers. Add structured interviews with non-users, mobility-impaired people, frontline staff, event organizers, support staff, and maintainers; record both divergent accounts and the conditions in which they apply.
+
+### Identify causal alternatives before setting requirements
+
+An observed 25-minute pickup can arise from inadequate capacity, a spatial mismatch, a booking failure, delayed dispatch, or an accessibility-specific routing constraint. These mechanisms suggest different experiments. A location/time audit discriminates coverage from scheduling; a timestamped event trace distinguishes dispatch from physical travel; a moderated accessibility walkthrough identifies barriers invisible in service telemetry. Avoid converting the complaint directly into “buy six vehicles.” The **need** concerns a reliably completed journey; the fleet count is a possible implementation decision.
+
+### Practice and explanation
+
+**Exercise:** A proposed pilot surveys only users who successfully booked a ride. Can the resulting 90th-percentile wait establish coverage under CD6-R03? **Answer:** No. The wait denominator excludes failed offers and people unable to initiate booking. The evaluation must record requested and unserved eligible origin/time combinations; report wait conditional on service separately from offer coverage. See [requirement definitions](../case/requirements.csv). A useful evidence package contains the sampling frame, recruitment method, exclusions, question wording, raw counts, and decision impact—not just a single percentage.
+
+**Boundary:** This chapter teaches methods for evaluating synthetic evidence; it does not claim that any real campus population was surveyed. Use privacy-preserving methods and review accessibility and human-subject requirements before conducting field studies.

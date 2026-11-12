@@ -1,0 +1,189 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS-OO4.1 OOAD Study Case · Systems Engineering Library</title><link rel="stylesheet" href="../../_assets/learning-shell-v55.css"><style>body{font:16px/1.7 system-ui,sans-serif;margin:0;background:#f4f7f8;color:#183645}header{background:#173f52;padding:17px max(20px,calc((100vw - 1080px)/2))}header a{color:#d2f8f0}main{margin:26px auto;max-width:1080px;padding:clamp(18px,4vw,45px);border-radius:12px;border:1px solid #d6e3e5;background:white}h1{line-height:1.2}h2{margin-top:2rem}a{color:#0b6b70}p,li{max-width:100ch}table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1.2rem 0}td,th{padding:9px;vertical-align:top;border:1px solid #d9e3e6}th{background:#eaf4f3}pre{padding:14px;background:#edf2f5;overflow:auto}img{max-width:100%;height:auto}code{overflow-wrap:anywhere}@media(max-width:700px){main{margin:0;border:0;border-radius:0;padding:19px}}</style><script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B4/case/INDEX.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script></head><body><header><a href="../README.html">← Book 4</a> · <a href="../OPEN-BOOK.html">Open textbook</a></header><main><h1>Northstar NS-OO4.1 — Object-Oriented Analysis and Design case</h1>
+<p><em>Book IV · EN.605.704 · controlled fictional teaching baseline.</em> This case develops one reservation service from problem-domain analysis to class design, state behavior, transactional persistence, and a qualified design-readiness decision. It does <strong>not</strong> represent live passenger data, an independently audited safety case, a conforming UML model, or formally executed OCL constraints.</p>
+<p><a href="../README.html">Book 4 overview</a> · <a href="../OPEN-BOOK.html">Open Book 4</a> · <a href="model-baseline.json">Controlled JSON</a> · <a href="scenario-fixtures.csv">Scenario fixtures</a> · <a href="traceability.csv">Traceability</a> · <a href="design-decisions.csv">Design decisions</a> · <a href="../diagrams/oo4-reservation-model.dot">Editable diagram</a> · <a href="../tools/step03_book4_contract_check.py">Python/SQLite checker</a></p>
+<h2>System boundary and design question</h2>
+<p>The fictional Northstar Campus Shuttle accepts trip reservations, chooses an eligible vehicle for a service slot, supports cancellation, and records why each committed change occurred. The software must distinguish a rider's intent from a duplicate network request. Its eligibility decision depends on vehicle accessibility and telemetry freshness. The central architecture question is: <strong>can the proposed object responsibilities and persistence transaction maintain reservation invariants when requests fail, repeat, or compete?</strong></p>
+<p>The controlled baseline is <code>NS-OO4.1</code>. It defines seven requirements (<code>SW-01</code>–<code>SW-07</code>), three actor-centered use cases (<code>UC-01</code>–<code>UC-03</code>), five lifecycle states, six allowed state transitions, three components with accountable responsibilities, three example vehicles, seven executable scenarios, and seven evidence entries. Values are hypothetical. Later revisions should increment the baseline and explicitly review every dependent test.</p>
+<p><img src="../diagrams/oo4-reservation-model.svg" alt="Reservation service responsibility diagram" /></p>
+<h2>The domain model and invariants</h2>
+<p>A <strong>Reservation</strong> is a durable request identity and lifecycle; an <strong>Assignment</strong> links a reservation to a vehicle and service slot; a <strong>Vehicle</strong> has eligibility characteristics; a <strong>LocationReading</strong> is a timestamped value, not an actor; an <strong>AuditEvent</strong> records a committed change. The <code>ReservationService</code> coordinates commands, <code>AssignmentPolicy</code> decides eligibility, and a repository implements the transaction boundary. The same domain vocabulary can be realized in another programming language or database if its invariants survive.</p>
+<p>For each vehicle \(v\) and slot \(s\), the active-assignment set is</p>
+<p>\[
+A(v,s)=\{a:\ a.vehicle=v\land a.slot=s\land a.state=ACTIVE\},\quad |A(v,s)|\leq 1.
+\]</p>
+<p>That is the business invariant, not the SQL schema. The example implementation uses a partial unique index to preserve it for the <strong>discrete-slot</strong> model. Real overlapping trip intervals demand different enforcement. Other required rules: identical tokens plus identical payloads return the same reservation; changed payload under the same token is rejected; accessibility-required requests cannot use ineligible vehicles; observations older than 15 seconds cannot authorize assignment; and cancellation releases the assignment within the same commit.</p>
+<h2>Use cases and behavior</h2>
+<table>
+<thead>
+<tr>
+  <th>Use case</th>
+  <th>Actor and success postcondition</th>
+  <th>Required negative scenarios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>UC-01: Submit reservation</td>
+  <td>Rider receives durable reservation ID</td>
+  <td>Duplicate token; changed payload; inaccessible vehicle</td>
+</tr>
+<tr>
+  <td>UC-02: Assign vehicle</td>
+  <td>Dispatcher commits one eligible active assignment</td>
+  <td>Occupied slot; stale telemetry; concurrent competing request</td>
+</tr>
+<tr>
+  <td>UC-03: Cancel reservation</td>
+  <td>Rider changes terminal state and releases the slot</td>
+  <td>Repeated cancel; failure during audit or release</td>
+</tr>
+</tbody>
+</table>
+<p>Allowed lifecycle transitions are <code>REQUESTED→OFFERED→ASSIGNED→COMPLETED</code>, with cancellation from <code>REQUESTED</code>, <code>OFFERED</code>, or <code>ASSIGNED</code>. A transition table is a partial function: <code>complete(CANCELLED)</code> is invalid. The database demo simplifies the persisted lifecycle to assigned/cancelled for transaction testing; this separation is intentional. <strong>Do not mistake a limited persistence example for implementation of the entire conceptual state machine.</strong></p>
+<h2>Worked transaction sequence</h2>
+<ol>
+<li>The request enters with a validated token, payload, actor identity, and selected service slot.</li>
+<li>If the token is already committed, return its original result <strong>only if</strong> immutable payload fields agree. Otherwise reject token reuse.</li>
+<li>Check that the selected vehicle exists, meets accessibility needs, and has telemetry no older than 15 seconds at the decision time.</li>
+<li>In one transaction, insert reservation, active assignment and audit event. A database uniqueness constraint protects the active vehicle/slot combination.</li>
+<li>If the assignment conflicts, roll back the transaction; do not leave a reservation without its intended assignment. Return an explicit conflict.</li>
+<li>If the server commits but the response is lost, a retry with the same token must identify the already committed reservation.</li>
+</ol>
+<p>This describes the single-store teaching implementation. It does not demonstrate distributed exactly-once delivery, production authentication, acceptable user-data retention, or real-time scheduling safety.</p>
+<h2>Calculation: latency budget versus observed performance</h2>
+<p>The illustrative synchronous service path has three serial elements: authentication \(120\) ms, policy evaluation \(80\) ms, commit and audit event \(150\) ms. Its computed budget is</p>
+<p>\[
+L_{model}=120+80+150=350\ \mathrm{ms}, \qquad 500-350=150\ \mathrm{ms}.
+\]</p>
+<p>A positive arithmetic margin is <strong>not</strong> a 500-ms response-time verification result. It omits contention, network delay, burst demand, failures and latency distributions. An acceptable performance test would state representative workload and percentile, instrument the entry and exit events, repeat under declared configuration, and report an uncertainty interval. Do not label the model numbers as field measurements.</p>
+<h2>Inspect the negative scenarios</h2>
+<p>Read <a href="scenario-fixtures.csv"><code>scenario-fixtures.csv</code></a>. The sequence includes first booking, identical retry, ineligible accessibility request, eligible booking, duplicate vehicle-slot attempt, stale observation, and a booking later cancelled. The <a href="../tools/step03_book4_contract_check.py">checker</a> runs them against an in-memory SQLite database and also tests conflicting token reuse, cancellation and rebooking, and direct database enforcement under an attempted duplicate insert.</p>
+<p>Run from the repository root:</p>
+<pre><code class="language-sh">python3 SE/K/B4/tools/step03_book4_contract_check.py
+</code></pre>
+<p>Its expected high-level output is seven scenario results, a 350-ms budget and 150-ms margin, plus evidence status <strong>5 current synthetic PASS, 1 stale and 1 planned</strong>. Deliberately alter a copy of the case JSON by deleting an owner, changing a test revision, or adding an invalid transition; explain which checks reject the change and why. Keep the baseline fixture unmodified when comparing results.</p>
+<h2>Evidence and configuration control</h2>
+<p><code>T-06</code> reports PASS against revision 1 of requirement <code>SW-06</code>, but the declared baseline requirement is revision 2. It is <strong>stale</strong>. <code>T-07</code> is only PLANNED and cannot be counted as an observed pass. The five remaining PASS records are <strong>synthetic checks</strong> with matching IDs and versions, not independent demonstration of an operational fleet. A release review that counts seven verified requirements merely because seven evidence IDs exist is unsound.</p>
+<table>
+<thead>
+<tr>
+  <th>Review topic</th>
+  <th>Disposition</th>
+  <th>Required follow-up</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Structural ownership of SW-01…SW-07</td>
+  <td>Covered by controlled model and schema checker</td>
+  <td>Independent domain/design review</td>
+</tr>
+<tr>
+  <td>Duplicate booking protection</td>
+  <td>Demonstrated for fixed-slot SQLite fixture</td>
+  <td>Concurrent integration and interval-overlap tests</td>
+</tr>
+<tr>
+  <td>Telemetry freshness SW-06</td>
+  <td>Stale evidence after revision change</td>
+  <td>Rerun against revision 2 acceptance criteria</td>
+</tr>
+<tr>
+  <td>Audit lineage SW-07</td>
+  <td>Planned, not observed</td>
+  <td>Execute transaction and provenance tests</td>
+</tr>
+<tr>
+  <td>Performance and human safety</td>
+  <td>Model-only budget; no operational results</td>
+  <td>Representative load, hazards, security and assurance analysis</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Defensible disposition:</strong> approve continuation of detailed software design and targeted integration testing; <strong>do not approve operational deployment or claim formal verification.</strong> The readiness decision is intentionally limited to the evidence provided.</p>
+<h2>Chapter crosswalk</h2>
+<table>
+<thead>
+<tr>
+  <th>Chapter</th>
+  <th>Guiding question</th>
+  <th>Controlled artifact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>What belongs to the domain?</td>
+  <td>Classes, invariant statements, system boundary</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>How do we make requirements testable?</td>
+  <td>SW-01…SW-07 acceptance and negative scenarios</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>What outcome does each actor need?</td>
+  <td>UC-01…UC-03 and scenario fixtures</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>What do identity and multiplicity mean?</td>
+  <td>Model diagram and entity/value distinctions</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>How are responsibilities coordinated?</td>
+  <td>Command and transaction sequence</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>What transitions are lawful?</td>
+  <td>State and transition records</td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>Who owns a rule?</td>
+  <td>Three component ownership declarations</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>What happens under retries and failures?</td>
+  <td>Atomic transaction and token replay</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>Which design pattern is justified?</td>
+  <td>Decision log and alternative architecture analysis</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td>What can a formal constraint express?</td>
+  <td>Illustrative OCL and negative fixtures</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td>What guarantees does the store actually give?</td>
+  <td>Partial unique index, rollback, cancellation</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td>What can we approve on current evidence?</td>
+  <td>Traceability and revision-aware test register</td>
+</tr>
+</tbody>
+</table>
+<h2>Exercises with falsifiable results</h2>
+<p><strong>Exercise A — interval scheduling.</strong> Replace equality of slot labels with overlap of \([start,end)\) intervals. State which current SQL index no longer proves the invariant and design an explicit transaction or exclusion test. <strong>Evidence standard:</strong> a deliberate two-client race must not produce overlapping active assignments for one vehicle.</p>
+<p><strong>Exercise B — stale policy.</strong> Change the maximum telemetry age to 8 seconds, bump <code>SW-06</code>, and identify the fixture, component, acceptance test and evidence whose applicability must be reassessed. An old green test record must not silently remain current.</p>
+<p><strong>Exercise C — inconsistent retries.</strong> Reuse <code>idem-a</code> with a different vehicle and show that the checker rejects payload mismatch rather than returning the first reservation as if the requests were equivalent.</p>
+<p><strong>Exercise D — readiness.</strong> Write a one-page design review citing the controlled artifacts. Separate structural evidence, synthetic test outcomes, measurements not yet made, and operational concerns beyond this teaching case.</p>
+<h2>Sources and interpretive boundaries</h2>
+<ul>
+<li><a href="https://www.omg.org/spec/UML/2.5.1">Object Management Group, UML 2.5.1 specification</a> — normative UML language definitions, not evidence that this diagram has been validated by a UML tool.</li>
+<li><a href="https://www.omg.org/spec/OCL/2.4">Object Management Group, OCL 2.4 specification</a> — normative semantics for OCL constraints; the chapter's fragment is illustrative, not parser-validated.</li>
+<li><a href="https://www.sqlite.org/partialindex.html">SQLite documentation: partial indexes</a> — implementation mechanism for the fixed-slot database invariant.</li>
+<li><a href="https://www.sqlite.org/lang_transaction.html">SQLite documentation: transactions</a> — the local commit/rollback scope, not distributed transaction guarantees.</li>
+</ul>
+<p>The <code>.dot</code> diagram is a domain-responsibility aid and should not be misrepresented as a standards-conformant UML interchange artifact. The Python checker is a narrowly scoped teaching regression suite and should not be described as a general OCL interpreter or software safety verification tool.</p>
+</main></body></html>

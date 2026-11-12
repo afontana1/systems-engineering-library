@@ -121,3 +121,31 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [08 — Previous chapter](08-build-executable-parametric-models-with-units-provenance-constraints.md) · [10 — Next chapter](10-specify-physical-architectures-variants-configurations-instances-and.md) · [Book index](../README.md)
+
+## Step 03 integrated technical reference: NS-MBA9.1 — trade space, uncertainty and noncompensatory constraints
+
+### Separate candidate feasibility from preference
+
+The model's alternatives have different costs and physical capacity. Their nominal, deterministic screens are reproducible from [model.json](../case/model.json): A provides 13.33 trips/hour and fails the 14-trip/hour threshold; B provides 15 and uses 240 kWh/day, passing the capacity and 260-kWh demand limits; C provides 16.8 but consumes 280 kWh/day, failing the energy constraint. **Do not let a high preference score compensate for a mandatory feasibility failure.** Only B passes these specific nominal screens before the supplier change.
+
+The model leaves substantial unquantified uncertainty: cycle-time variance, weather-related auxiliary load, charger outages, passenger demand clusters, accessible-vehicle availability and queue buildup. An alternative can pass mean-based equations and still fail a percentile-based service commitment. The appropriate next analyses are stochastic scheduling and energy distributions with calibrated inputs, not a declaration that the ideal proxy is adequate.
+
+### Derive a switching boundary
+
+Suppose the cycle time of B rises under winter operations while fleet count remains twelve. The capacity constraint is \(720/T_c\ge 14\), or
+
+\[
+T_c\le\frac{720}{14}\approx51.43\ \mathrm{min}.
+\]
+
+At its current assumed 48-minute cycle, B has a 3.43-minute cycle-time allowance before failing the simple capacity criterion. If cold conditions increase the cycle to 54 minutes, its ideal capacity falls to \(720/54=13.33\) trips/hour. The design recommendation must change or the model must identify an approved intervention. This one-factor threshold is a **sensitivity result**, not a probability of compliance.
+
+Uncertainty propagation should consider correlated inputs: snow may increase both route time and heater energy consumption. Independently sampling those changes could understate joint risk. A review-ready decision record should state the alternatives excluded, the variables perturbed, correlation assumptions, reversals found, and the additional observation most likely to affect selection.
+
+**Exercise.** A decision-maker insists that lower cost makes variant A preferable. What is the correct analytic sequence?
+
+<details><summary>Worked answer</summary>
+
+Verify that the 14-trip/hour threshold is indeed mandatory under the same population and scope; then evaluate feasible architectures. If the constraint is formally revised, document authorization and redo the trade. Do not alter the weight on cost to hide the failed capacity constraint.
+
+</details>

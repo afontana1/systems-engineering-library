@@ -1,0 +1,10 @@
+procedure,requirement,environment,article,measurement,acceptance_basis,gate
+TE8-P-01,TE8-R01,Instrumented degraded fleet / HIL,NS-DI7.1,end-to-end timestamp pairs,500 ms p99 with declared confidence and clock uncertainty,NOT_CLOSED
+TE8-P-02,TE8-R02,Representative route with power metering,NS-DI7.1,kWh per defined shift,<=30 kWh with uncertainty rule,NOT_CLOSED
+TE8-P-03,TE8-R03,Mission profile and failure evidence,NS-DI7.1,mission success survival,>=0.98 with supported common cause,FAILED_MODEL
+TE8-P-04,TE8-R04,Fleet and logistics trial,NS-DI7.1,"uptime, repair and delivery delays",>=0.99 logistics adjusted,FAILED_MODEL
+TE8-P-05,TE8-R05,Representatively sampled accessibility field routes,NS-DI7.1,eligible pickup-to-arrival minutes,>=0.95 within 12 min with stated confidence,NOT_CLOSED
+TE8-P-06,TE8-R06,Hardware-in-loop integration,NS-DI7.1,conflicting active allocations,zero double-assignment with applicable build,STALE
+TE8-P-07,TE8-R08,Cyber test bench,NS-DI7.1,accepted replay commands,no execution on stale/replay message,NOT_RUN
+TE8-P-08,TE8-R07,Operations restore drill,NS-DI7.1,minutes to restored dispatch,<=12 min,FAILED_TEST
+TE8-P-09,TE8-R06,Software integration transaction test,NS-DI7.1,active duplicates,none under constructed interleavings,MODEL_ONLY

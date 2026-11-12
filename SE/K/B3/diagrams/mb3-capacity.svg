@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="300" viewBox="0 0 820 300" role="img" aria-labelledby="title desc">
+<title id="title">Northstar candidate ideal capacities</title>
+<desc id="desc">Required design peak eight trips per hour. Candidate A provides six ideal trips, B nine and C twelve; A fails the necessary limit.</desc>
+<rect width="820" height="300" rx="14" fill="#f2f7f8"/>
+<g font-family="system-ui,Arial,sans-serif" fill="#264858" font-size="17"><text x="38" y="48" font-weight="700">Ideal capacity (trips/hour)</text><text x="47" y="110">A</text><text x="47" y="176">B</text><text x="47" y="242">C</text></g>
+<g stroke="#aac5ca" stroke-width="1"><line x1="110" y1="70" x2="110" y2="264"/><line x1="276" y1="70" x2="276" y2="264"/><line x1="442" y1="70" x2="442" y2="264"/><line x1="608" y1="70" x2="608" y2="264"/><line x1="774" y1="70" x2="774" y2="264"/></g>
+<g font-family="system-ui" fill="#516b77" text-anchor="middle" font-size="13"><text x="110" y="283">0</text><text x="276" y="283">3</text><text x="442" y="283">6</text><text x="608" y="283">9</text><text x="774" y="283">12</text></g>
+<rect x="110" y="90" width="332" height="34" rx="4" fill="#b46b47"/><rect x="110" y="156" width="498" height="34" rx="4" fill="#117b79"/><rect x="110" y="222" width="664" height="34" rx="4" fill="#117b79"/>
+<line x1="553" x2="553" y1="64" y2="261" stroke="#a06a15" stroke-width="3" stroke-dasharray="6 6"/><text x="565" y="65" fill="#78520f" font-size="13" font-family="system-ui">Required 8/h</text>
+<g fill="white" text-anchor="end" font-family="system-ui" font-weight="700" font-size="15"><text x="427" y="113">6</text><text x="593" y="179">9</text><text x="759" y="245">12</text></g>
+</svg>

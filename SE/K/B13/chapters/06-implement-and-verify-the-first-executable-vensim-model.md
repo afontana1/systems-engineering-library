@@ -119,3 +119,27 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [05 — Previous chapter](05-translate-feedback-hypotheses-into-stocks-flows-units-and-accumulati.md) · [07 — Next chapter](07-explain-delays-nonlinearities-oscillation-overshoot-and-changing-loo.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-FB13.1 case: feedback, conservation, and policy learning — Week 6
+
+*Integrated chapter: Chapter 06 — Implement and verify the first executable Vensim model. Northstar NS-FB13.1 is a transparent teaching baseline; the following methods are not field-validated.*
+
+### Build a verifiable executable baseline rather than an animated story
+
+A system-dynamics implementation requires a variable dictionary, structural equations, initial values, units, a computational update rule, time controls, output definitions, and versioned evidence. The [Vensim equation crosswalk](../case/vensim-equation-crosswalk.md) gives five stock definitions and the main rate relationships. It **is not** an executable `.mdl` and was not verified with Vensim PLE. Implementing and dimension-checking an actual Vensim diagram remains part of the original course assessment. Python supplies a transparent, independently testable comparison model; its approval must not be transferred to an unexecuted Vensim file.
+
+The Euler rule is \(x(t+\Delta t)=x(t)+\Delta t\,f(x(t),u(t))\). It uses the **current** stock and decision rates, not the next step's fitted answer. The integration horizon is 360 days with baseline step 0.5 day; every flow is rate-limited so stock conservation can be checked. Run with `--write` only after changing the controlled JSON, and version both the resulting experiment grid and parameters. A screenshot of a Vensim chart is not enough to reproduce an analysis—record the equation file, parameter inputs, solver settings and comparison outputs.
+
+### Numerical step refinement is a test, not proof of truth
+
+Using the same status-quo nominal inputs at three steps gives cumulative completion fractions of approximately **0.927357** (1 day), **0.927362** (0.5 day), and **0.927364** (0.25 day). Final total backlog is approximately 245.259853, 245.259808 and 245.259783 requests. The finer results move toward each other, a useful indicator that step error is modest for this particular example. They do not show that the causal relationships are empirically correct. In a model with stepwise policy thresholds or discrete events, convergence can be less smooth and should be tested near every guard.
+
+The fleet invariant is \(U+A=14\), and the request balance is \(B_0+\int a\,dt-\int c\,dt-\int r\,dt=B_{end}\), computed separately for the two rider groups. These identities should hold to arithmetic tolerance for every scenario. Also test impossible inputs such as negative repair time, accessibility share greater than one, duplicate scenario identifiers and a time step larger than the agreed limit. Rejecting invalid inputs *before* simulation is part of engineering verification.
+
+**Worked exercise.** Compare the last two step results: what is the 0.5-versus-0.25-day difference in completion fraction, and what conclusion follows? **Solution:** about \(0.000002\) in absolute fraction (roughly 0.0002 percentage point). The narrow difference is evidence of *numerical stability for this output over this bounded case*, not proof of model validation. It says nothing about the accuracy of the assumed trust response or the real repair lead time.
+
+**Practice extension:** Re-implement the five stocks in Vensim PLE, export one baseline trace, and explain any divergence from the Python solver before calling the versions equivalent.
+
+### Reproduce the evidence and challenge the result
+
+The [NS-FB13.1 case dossier](../case/INDEX.html) publishes its [controlled inputs](../case/model-inputs.json), [Python calculation model](../tools/step03_book13_feedback.py), [policy-by-condition evidence](../case/experiment-results.csv), [equation and unit crosswalk for Vensim](../case/vensim-equation-crosswalk.md), and [claim limitations](../case/credibility-register.csv). Reproduce results with `python3 SE/K/B13/tools/step03_book13_feedback.py --write` from the repository root. This is a **synthetic teaching simulation**: correctly conserving its stocks and reproducing its output does **not** calibrate the causal structure or authorize real mobility policy. The Book 11 event simulator and Book 12 physical vehicle model answer other questions and are not dynamically coupled.

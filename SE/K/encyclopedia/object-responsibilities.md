@@ -46,6 +46,15 @@ These sources establish authoritative terminology or methods in their own publis
 - [NIST · SP 800-160 Vol. 1 Rev. 1, Engineering Trustworthy Secure Systems (2022)](https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final) — System-level security and trustworthiness engineering.
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 
+
+## Step 02 review exercise: put invariants where they can be enforced
+
+In a fictional reservation service, a `Dispatcher` requests an assignment, a `Reservation` stores lifecycle state, and a `WorkerPool` owns the allocation constraint. The invariant **one active reservation per worker** should not depend on each user-interface client performing a `search-before-create` check. Two clients can both observe an available worker and then both insert. At the persistence boundary, use an atomic transaction and a database uniqueness constraint scoped to active reservations; retry behavior must distinguish a safe duplicate request from a new conflicting request.
+
+Responsibilities follow invariants and information ownership. A presentation class should not become the sole authority on allocation when background jobs and APIs can bypass it. Separate stable domain identities from serialization format, distinguish commands from events, and document who transitions each state. Pattern names do not automatically improve design quality.
+
+**Exercise (answer).** If two concurrent requests both read `active_count = 0`, a subsequent pair of inserts can violate the invariant. A partial unique index on `(worker_id)` for active records rejects one insert. The application must then return a controlled conflict or retry using a different worker, without accidentally repeating external side effects.
+
 ## Follow the knowledge
 
 **Related concepts**

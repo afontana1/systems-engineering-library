@@ -125,3 +125,31 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [04 — Previous chapter](04-model-state-based-behavior-modes-exceptions-hazards-and-temporal-con.md) · [06 — Next chapter](06-specify-interfaces-exchanges-allocations-ownership-and-model-based-c.md) · [Book index](../README.md)
+
+## Step 03 integrated technical reference: NS-MBA9.1 — logical architecture is a hypothesis
+
+### Partition responsibilities without hiding coupling
+
+A logical architecture allocates behavior to coherent responsibilities independent of specific vendor hardware. In NS-MBA9.1, Dispatch handles request intake and assignment, SafetyGateway governs exclusive authorization, and Depot manages charging constraints. This separation creates a potential safety benefit but also introduces an interface whose freshness and ownership must be controlled. The [model's `I01` and `I02` definitions](../case/model.json) make those commitments inspectable.
+
+A review of cohesion asks whether a component's responsibilities change for common reasons. A review of coupling asks which data types, timing constraints and failure modes cross boundaries. Counting connectors is insufficient: one stale authorization message may be more consequential than ten display updates. A high-risk interface deserves an exact owner, typed payload, unit convention, timing policy, failure response, and change authority.
+
+### Compare architectures after hard feasibility screening
+
+The [three candidates](../case/INDEX.html) have different fleet sizes and cycle estimates. Screening under the declared equations gives:
+
+| Variant | Vehicles | Cycle (min) | Ideal trips/h | Daily energy (kWh) | Screening result |
+|---|---:|---:|---:|---:|---|
+| A | 10 | 45 | 13.33 | 200 | Capacity below 14 |
+| B | 12 | 48 | 15.00 | 240 | Meets capacity and 260-kWh energy screens |
+| C | 14 | 50 | 16.80 | 280 | Energy exceeds 260 |
+
+Variant B survives the two displayed screens. It is therefore a **candidate for more analysis**, not an approved architecture. Accessibility evidence, charger feasibility, command latency distribution, and safety test currency are additional constraints. Hard feasibility limits should precede weighting preferences; otherwise a cheaper unsafe design can win a compensatory scoring formula.
+
+**Exercise.** A reviewer proposes choosing variant A because it is $0.3 million cheaper than B. What change to the model or decision process could make that defensible?
+
+<details><summary>Worked answer</summary>
+
+First demonstrate an authorized change in requirements or a credible alternative capacity model that satisfies the same requirement under a stated operating envelope. Otherwise A remains infeasible regardless of cost. An explicit waiver by the responsible authority is a governance decision, not a mathematical proof of compliance.
+
+</details>

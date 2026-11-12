@@ -26,6 +26,17 @@
 </ol>
 <h2>Weak points and false assurance</h2>
 <p>Automated link suggestions are useful triage, not proof of a relationship. Dense graphs can conceal an absence of meaningful evidence. A verification test attached to the wrong configuration is not current proof. Reverse traceability must expose <strong>unjustified features</strong> as well as unmet needs; otherwise expensive functionality can accumulate without a mission rationale.</p>
+<section class="phase1-expansion" id="worked-method">
+<h2>In-depth method: typed links, impact, and current evidence</h2>
+<p>Traceability should expose which engineering claims remain supported after change. In the <a href="../methods/mbse-semantic-modeling-handbook.html">MBSE semantic-modeling guide</a>, a small repository distinguishes five relation types: requirement <strong>derives from</strong> need, requirement <strong>allocates to</strong> element, test <strong>verifies</strong> requirement, evidence <strong>results from</strong> a test, and evidence <strong>supports</strong> a requirement. Those links are not interchangeable and generally cannot be composed without further premises.</p>
+<h3>Example: a configuration change invalidates a green link</h3>
+<p>Suppose a passing dispatch test produced record E-ACK for software build <code>NS-2.2</code>. The system baseline becomes <code>NS-2.3</code> after an interface change. The test-to-requirement link is still present, but the evidence record is not tied to the new build. The useful query does not ask merely <code>hasTest(R-ACK)</code>; it asks whether there exists <strong>accepted, applicable, configuration-compatible evidence</strong> for the current requirement:</p>
+<p>\[
+\exists e,t:\operatorname{verifies}(t,r)\land\operatorname{resultOf}(e,t)\land\operatorname{accepted}(e)\land\operatorname{build}(e)=b.
+\]</p>
+<p>The <a href="../methods/code/model_trace_audit.py">bundled trace audit</a> demonstrates the difference between <code>MISSING</code>, <code>STALE</code> and <code>COVERED</code> on two small JSON baselines. In a real project, formally reviewed equivalence analysis may allow evidence reuse across configurations, but that rationale must be modeled explicitly.</p>
+<p><strong>Discussion.</strong> A graph check can detect orphan requirements and obsolete results, but cannot know whether a stakeholder need was translated correctly or whether the test sampled the relevant operational failures. Report structural completeness and substantive evidence credibility as different findings.</p>
+</section>
 <h2>Connections</h2>
 <p>Traceability ties together requirements, architecture allocations, safety arguments, test plans, change control, digital-thread semantics, software release identity, and enterprise governance. It provides navigable evidence, not automatic truth.</p>
 <h2>Reference shelf retained from the earlier primer</h2>
@@ -50,7 +61,19 @@
 <li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA · Systems Engineering Handbook appendix (requirements and verification matrices)</a> — Requirements review criteria and verification planning context.</li>
 <li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section class="phase4-expansion">
+<h2>Phase 4 technical reading: Configuration-aware typed traceability</h2>
+<p>Consider typed nodes for Need, Requirement, Component, Hazard, Control, Evidence, and Baseline. Validity requires more than a link count: requirement REQ-DOOR must identify a source need, owner, hazard H-DOOR, control CTRL-DOOR and linked evidence; the evidence must also cite a suitable build and test environment. If CM-B2 is promoted to CM-B3 without new test evidence, four current-evidence checks fail across two synthetic records (two baseline mismatches and two build mismatches). Relabeling records would only hide the discrepancy. The <a href="../methods/model-baselines-and-evidence.html">model and provenance reference</a> derives structural and currency invariants, provides executable JSON fixtures, and distinguishes their checks from real SysML v2 validation.</p>
+</section>
+<section class="phase5-expansion">
+<h2>Phase 5 technical reading: Make traceability a testable, typed relationship</h2>
+<p>A complete count of links is not proof of an adequate engineering model. In the Campus Mobility baseline, <code>REQ-DOOR</code> is allocated to <code>door-controller</code> and connected to hazard <code>H-DOOR</code> and evidence <code>EV-DOOR</code>. Validity requires consistent types, build labels, test intent and assumptions; a controller change can invalidate an otherwise intact graph. A <a href="../methods/sysml-v2-modeling-and-traceability.html">cross-document model audit</a> demonstrates typed relation checks against a versioned requirements set, interface contract, verification matrix and hazard register. A tool must separately parse actual SysML v2 and resolve semantic references; these project-level Python checks do not assert normative language conformance.</p>
+</section>
+<section id="step03-concept-study"><h2>Step 02 review studio — a complete graph can still contain unusable evidence</h2>
+<p>Treat the engineering trace as typed relations: need→requirement, requirement→function, function→component, requirement→verification procedure, and procedure→evidence record. Every edge should carry semantics and, where applicable, a configuration/version. A count of graph links is not a count of proven requirements.</p>
+<p><strong>Solved exercise:</strong> four of four requirements have an evidence record, but NS-R-04's test report was produced for baseline NS-B0 while the controlled design is NS-B1. Structural coverage is <code>4/4=100%</code>; evidence applicability is at most <code>3/4=75%</code> pending an approved equivalence argument or retest. Should the team label the project “fully verified”? <strong>No.</strong> A complete graph can make the defect more visible, but cannot repair it.</p>
+<p><strong>Change-impact practice:</strong> when the status-message schema changes, traverse dependency edges to affected producers, consumers, tests, and previously accepted results. Distinguish <em>possible impact</em> from <em>proved invalidity</em>: a graph flags where analysis is required; only technical reasoning and evidence can justify reuse of previous results.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="good-requirements.html">Requirements and acceptance criteria</a></li>

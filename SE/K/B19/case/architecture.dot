@@ -1,0 +1,20 @@
+digraph Enterprise {
+  rankdir=LR; graph [label="NS-ENT19.1 — enterprise transformation evidence (synthetic)",labelloc=t,fontname="Arial"];
+  node [shape=box,style="rounded,filled",fillcolor="#ecf4f5",fontname="Arial"];
+  Value [label="Accessible + standard\nregional access outcomes"];
+  Rights [label="Independent funding, privacy,\nworkforce and community rights"];
+  Investment [label="Investment portfolio\nG D A W R C"];
+  Adoption [label="Negotiated adoption\n0..1 state"];
+  Queue [label="26-week coordination\nrequest cohorts"];
+  Capacity [label="Four-hour trip slots\nunder disruption"];
+  Evidence [label="Process/physical screen\n+ stakeholder review"];
+  Rights -> Investment [label="authorize/veto"];
+  Rights -> Adoption [label="incentives"];
+  Investment -> Adoption;
+  Adoption -> Queue [label="effective throughput"];
+  Investment -> Capacity;
+  Queue -> Evidence;
+  Capacity -> Evidence;
+  Evidence -> Value [label="use-specific claims"];
+  Value -> Rights [label="legitimacy feedback"];
+}

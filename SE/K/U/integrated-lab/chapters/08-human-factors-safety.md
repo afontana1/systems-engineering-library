@@ -32,3 +32,15 @@ Only within this single-threaded simulated allocator. A deployed service would n
 </details>
 
 **Gate evidence:** preliminary control structure, causal hazard analysis, proposed accessible user study, and residual-risk statement with decision authority identified.
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Human factors and missing subgroup data.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+Both baseline request CSVs contain request IDs, arrivals, stops, passengers and delivery keys—but **no rider category, boarding assistance, accessibility equipment, dispatch workload or human response time**. Consequently, no defensible accessible-service denominator can be computed from either simulation. Treat this as an explicit *data limitation*, not as a zero-wait or zero-harm result.
+
+**Engineering method:** A future validation protocol would record subgroup membership only with appropriate privacy constraints, define a clear eligibility window, and measure service-specific wait and abandonment. The simple difference `E[W_accessible] − E[W_other]` cannot be computed from the current case because neither conditional mean is observable. Fabricating categories after the run would leak assumptions into evidence.
+
+**Exercise and solution:** The nominal simulator reports p90 wait 20 minutes for its served population. Does that meet an accessibility-specific target? **Not established.** Define separately the population, time interval, denominator including unserved requests, pre-specified service criteria and independent human-factors review. A system may pass a global average while failing an excluded minority population.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

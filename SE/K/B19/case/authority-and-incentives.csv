@@ -1,0 +1,8 @@
+actor,right_or_veto,incentive,potential_burden,status,required_evidence
+Municipal appropriations body,Approve multi-year funding,Budget predictability,Other service cuts,Not approved,Appropriation vote and audit
+Transit operators,Allocate fleet and service levels,Reliable operations,Reassigned operations budget,Not approved,Operator baseline and agreement
+Hospital and EMS partners,Approve patient and surge intake protocols,Continuity of care,Uncompensated surge staffing,Not approved,Clinical/safety review
+Privacy and data owners,Authorize dispatch data access,Useful verified information,Disclosure and misuse risk,Not approved,Data-use and retention agreement
+Labor/workforce representatives,Negotiate new responsibilities and training,Fair staffing and safety,Workload and deskilling,Not approved,Bargaining/consultation record
+Accessible-mobility community,Review service harms and fairness,Reliable equitable access,Displacement and inaccessible channels,Review pending,Participatory design record
+Vendor/supplier consortium,Maintain compatible interfaces,Predictable procurement,Lock-in and integration burden,Not approved,Contract/version conformance

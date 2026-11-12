@@ -121,3 +121,32 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [05 — Previous chapter](05-implement-discrete-event-processes-resources-queues-priorities-and-s.md) · [07 — Next chapter](07-use-simulation-for-concept-exploration-alternatives-and-scenario-ana.md) · [Book index](../README.md)
+
+## Step 03 integrated mobility simulation case: implementation and computational verification
+
+### Distinguish conceptual adequacy from code correctness
+
+Computational verification asks whether the **implemented** model accurately executes its *specified* events, states and mathematics. Validation asks whether those specifications represent relevant aspects of the *real* service. Both are separate from the sponsor's permission to rely on results. A passing Monte Carlo run is not a computational-verification test: many bugs yield plausible histograms.
+
+The [mobility code](../tools/step03_book11_mobility.py) loads a versioned [JSON configuration](../case/model-assumptions.json), validates ranges and segment continuity, creates demand from independent random streams, schedules arrivals/completions in a priority queue, and exports all replication-level output. It uses only Python's standard library. Users may change a declared scenario **without editing event transition logic**; source control should capture each change. The generated [replication CSV](../case/replication-output.csv) contains all seeds, fleet sizes, request counts, standard and accessible p90, charger usage and end-of-day backlog.
+
+### A four-layer test argument
+
+1. **Parameter tests:** reject probabilities outside [0,1], noncontiguous demand windows, negative rates, impossible charging distributions, and invalid fleet sizes. These are preconditions, not empirical validation.
+2. **Unit tests:** exercise `nearest_rank([0,4],0.9) == 4` and a two-request deterministic queue. Test accessible vehicle eligibility separately; never infer it from the overall percentile.
+3. **Invariant tests:** assert \(I+T+Q+C=F\), \(C\le c\), SOC in [0,1], and request flow conservation; run with unusually stressed inputs and after-close events.
+4. **Metamorphic tests:** keep the same request stream while varying a *single* factor. Increasing vehicle count should generally help service on average but is **not guaranteed** to monotonically improve every realized result when route/charging assignments change. The appropriate check is a conditional distribution comparison and explanation of any counterexample, not an invalid blanket assertion of monotonicity.
+
+### Work through an implementation error before it reaches the evidence report
+
+A code reviewer sees a JSON triangular triple `[24,32,50]` intended as minimum, mode and maximum. Python `random.triangular(low, high, mode)` takes a *different* argument order: `triangular(24,32,50)` would place the mode above its apparent maximum and silently distort the generator. The correct call is `triangular(24,50,32)`. The same issue affects standard boarding and travel. The model's configuration contract deliberately uses `(low,mode,high)` and must explicitly map it to the library call, validated by a distribution moment/quantile check.
+
+If charge durations were all exactly 35.33 minutes, one could hand-check total charge resource time; with a triangular generator, a seeded replicate is only **reproducible** under the program/library version and control of random-draw order. Reproducibility establishes repeatable data processing, not valid underlying distributions. Differences between desktop and server runtimes should be investigated rather than treated as benign.
+
+### Change control and test ownership
+
+For this illustrative release, the controlled requirement IDs are `MS11-R01` through `MS11-R06`; the [credibility register](../case/credibility-register.csv) distinguishes *documented*, *tested*, *assumed* and *missing* work. Every claim must link to the source assumption, test case or independent observation. An independent reviewer should challenge event tie behavior, accessible dispatch, charging threshold crossings, randomness, after-close policy and sampling interpretations; the current automated suite does not fully prove correctness for all possible schedules.
+
+**Exercise and solution.** A developer verifies that the same seed produces the same p90 twice. Is computational verification complete? **Solution:** no; a deterministic wrong algorithm is also repeatable. Add a known-trace reference, invariants, invalid input checks, independent analytic bounds, and reviews of units and event priorities. Field validation must additionally use real operating evidence.
+
+[Case dossier](../case/INDEX.html) · [Chapter 7](07-use-simulation-for-concept-exploration-alternatives-and-scenario-ana.md).

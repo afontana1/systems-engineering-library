@@ -122,3 +122,27 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 Start of the book · [02 — Next chapter](02-analyze-stakeholders-mission-scenarios-outcomes-and-measures-in-the-.md) · [Book index](../README.md)
+
+## Step 03 integrated technical reference: NS-MBA9.1 — a model with a defined decision purpose
+
+### The modeling contract precedes the modeling language
+
+Book 9 reuses the Northstar campus-mobility engineering problem, but **NS-MBA9.1** is an independent *applied-analytics study baseline*, not a claim that the previous Books 7–8 design was qualified. The immediate decision is **which winter/accessibility expansion variant warrants further study**. [Open the controlled model dossier](../case/INDEX.html), the [machine-readable model](../case/model.json), and its [evidence register](../case/evidence-register.csv). None of these invented artifacts represents measured transport operations.
+
+Write an intended-use statement as a tuple: decision owner, alternatives, operating envelope, outputs, acceptance rule, consequences of error, sources of uncertainty, and model limitations. For example, the nominal throughput screen compares fleet/cycle combinations at declared conditions; it cannot claim that 95% of passengers will wait less than a specified time. That would require demand distributions, queues, accessibility availability, dispatch policies, and representative observations. Treating the two decisions as interchangeable is a **model-use error** even if the equations are correct.
+
+The baseline contains four needs (`N01`–`N04`), six requirements (`R01`–`R06`), four functions (`F01`–`F04`), two owned interfaces (`I01`, `I02`), three variant definitions and six analysis objects. An authoritative model is not a large diagram: it has unambiguous identifiers, source/owner, declared relationship semantics, configuration, external analytic interfaces, and identifiable review decisions. Its content map is shown in the [evidence-flow diagram](../case/model-evidence-flow.svg).
+
+### Quantify completeness without confusing it with adequacy
+
+Suppose six requirements have valid source-need relations, six have functional allocations, but only four have current model-based computations, one has a planned field test, and one has a stale older-build demonstration. Structural need-to-allocation coverage is `6/6 = 100%`. **Current executed qualification-evidence coverage is 0/6**, because a model run is not an accepted operational test. Those indicators answer different questions. The [Python audit](../tools/step03_book9_model_check.py) makes the status distinction executable, but it does not decide test suitability.
+
+The modeling plan should define ownership, baseline naming, review snapshots, requirements semantics, variant configuration, unit policy, query-library versions, and what must be reexecuted after an interface change. NASA-HDBK-1009A describes model planning as an engineering process; its guidance is useful precisely because selecting a particular tool is not itself a modeling method. See [NASA-HDBK-1009A](https://standards.nasa.gov/node/3111).
+
+**Exercise.** A sponsor asks whether NS-MBA9.1 can authorize winter operations because all six requirements appear in a traceability matrix. What claim can be made?
+
+<details><summary>Worked answer</summary>
+
+Only that the controlled requirements are structurally represented and, after validation, trace to intended analyses. The operational claim needs representative accessible-service statistics, current concurrency evidence, measured performance as necessary, and explicit acceptance authority. Keep the decision at *conditional comparative study*, not operational approval.
+
+</details>

@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Northstar NS-M1 — Management Case · Systems Engineering Library</title><link rel="stylesheet" href="../../_assets/learning-shell-v55.css"><script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B2/case/INDEX.html" data-se-mode="standard"></script><style>body{margin:0;background:#f4f8f9;color:#1b3440;font:16px/1.75 system-ui,sans-serif}main{max-width:1020px;margin:2rem auto;padding:2.5rem;background:white;border:1px solid #dae6e9;border-radius:12px}a{color:#086873}header{padding:1rem max(20px,calc((100vw - 1020px)/2));background:#173f52}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,4vw,2.5rem)}h2{margin-top:2rem}img{max-width:100%}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto}td,th{border:1px solid #d8e5e8;padding:.5rem .8rem}th{background:#edf5f5}code{background:#ecf3f5}@media(max-width:700px){main{padding:1.3rem;margin:0;border:0;border-radius:0}}</style></head><body><header><a href="../README.html">← Book 2</a> · <a href="../OPEN-BOOK.html">Open the textbook</a></header><main><h1>Northstar NS-M1 — a controlled project management case</h1>
+<p>This <strong>fictional</strong> case provides one reproducible set of quantities across all twelve chapters of the Management of Systems Projects companion (EN.645.667). It is intentionally linked to the technical <strong>NS-B1</strong> case in Book 1, but the management and technical baseline identifiers are different.</p>
+<h2>Three distinct kinds of controlled facts</h2>
+<ul>
+<li><strong>Technical baseline NS-B1:</strong> requirement IDs, hazard assumptions, interface allocation and test-evidence configuration. <a href="../../B1/case/INDEX.html">Book 1 case</a>.</li>
+<li><strong>Management baseline NS-M1:</strong> five cost accounts totaling <strong>$7.2M</strong>, plus separately defined <strong>$0.6M management reserve</strong> and <strong>$0.6M illustrative fee</strong> for a teaching offer of <strong>$8.4M</strong>.</li>
+<li><strong>Illustrative status at month five:</strong> <strong>PV $3.0M, EV $2.4M, AC $2.7M</strong>. The earned-value formulas produce <strong>CPI 0.8889</strong>, <strong>SPI 0.8000</strong> and a sustained-CPI <strong>EAC $8.1M</strong>. These are synthetic reporting quantities, not real performance observations.</li>
+</ul>
+<p>The 13-week five-activity network is a <em>small network demonstration</em>, not the whole program schedule or a forecast to complete the entire shuttle project. Its result is 13 weeks, with one week of float on activity C. Changing C from 3 to 5 weeks moves the finish to 14 weeks.</p>
+<p><img src="../figures/ns-m1-schedule.svg" alt="Northstar project schedule network" /></p>
+<h2>Inspect and reproduce</h2>
+<ul>
+<li><a href="northstar-management-baseline.json">Controlled management assumptions (JSON)</a></li>
+<li><a href="control-accounts.csv">Editable control accounts (CSV)</a></li>
+<li><a href="decision-register.csv">Decision register with intentionally open decisions (CSV)</a></li>
+<li><a href="../figures/ns-m1-schedule.dot">Schedule network source (DOT)</a> and <a href="../figures/ns-m1-schedule.svg">diagram (SVG)</a></li>
+<li><a href="../figures/ns-m1-claim-chain.svg">Cross-baseline claim chain (SVG)</a></li>
+<li><a href="../tools/step03_book2_project_check.py">Python arithmetic and consistency checker</a></li>
+</ul>
+<p>Run <code>python3 SE/K/B2/tools/step03_book2_project_check.py</code> from the repository root. It checks the agreement between the CSV and JSON inputs, financial totals, EV measures, schedule logic and risk arithmetic. A green result <strong>does not establish actual supplier delivery, estimate accuracy, safety, or contractual authorization</strong>.</p>
+<h2>Investigations</h2>
+<ol>
+<li>Reduce CA-02 earned value to $0.50M without changing actual spending. Recalculate aggregate CPI, EAC and the variance at completion. Why is this not merely a reporting correction?</li>
+<li>Increase activity C to six weeks. Recompute the early dates and explain the changed controlling path.</li>
+<li>If an unbudgeted test fixture requires $150,000, decide whether the issue is omitted in-scope work, changed scope or a risk realization. Show how each interpretation would alter the authorized control process.</li>
+<li>Attempt to change NS-B1 to a new technical revision without updating the evidence in the decision register. Explain which proposed readiness claim can no longer be supported.</li>
+</ol>
+<p><strong>Editorial note:</strong> These materials are original synthetic teaching examples. No proprietary standards are reproduced. For source-specific cost, schedule and EVM methods consult <a href="https://www.gao.gov/products/gao-20-195g">GAO Cost Guide</a>, <a href="https://www.gao.gov/products/gao-16-89g">GAO Schedule Guide</a>, the <a href="https://www.energy.gov/documents/integrated-project-management-using-earned-value-management-system">DOE EVM guidance</a>, and the <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a>.</p>
+</main></body></html>

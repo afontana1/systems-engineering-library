@@ -87,3 +87,33 @@ In [Lab 3: Use cases describe externally valuable behavior](../labs/lab-03-captu
 ## Continuity
 
 This chapter builds from [previous chapter](02-elicit-and-structure-software-requirements.md) and leads toward [next chapter](04-discover-candidate-classes-and-build-the-stat.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/605-704-w03.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: use cases and measurable scenarios
+
+### 3.1 Use cases state the actor's goal
+
+`UC-01` is “Submit accessible reservation.” The **primary actor** is a rider, whose goal is to obtain a durable booking decision. The main success scenario is not a list of UI clicks. It is a sequence of observable business interactions: validate identity and request; establish an idempotency key; identify an eligible vehicle; persist the reservation and active assignment; return the reservation ID. The postcondition is a committed, nonconflicting reservation—or an explicit rejection with no partial active assignment.
+
+A robust use case has a scope, triggering event, preconditions, main flow, alternative flows, error paths, and business-rule references. Add these to the case's [use-case inventory](../case/model-baseline.json) before sketching sequence diagrams. If an actor's goal cannot be stated without naming a technology, the team may be describing a UI procedure rather than a stable use case.
+
+### 3.2 Alternative paths are part of the specification
+
+| Scenario | Flow deviation | Required observable result |
+|---|---|---|
+| F-02 | Client resends `idem-a` | Same reservation identifier; no second active assignment |
+| F-03 | Accessible request asks for V-01 | Rejection because V-01 is not eligible |
+| F-05 | Second token targets occupied V-01 / AM-01 | Conflict with no committed duplicate |
+| F-06 | Telemetry for V-03 is 22 s old | Freshness rejection |
+| Token mismatch | Same token, different payload | Explicit mismatch error, not a new booking |
+
+The [scenario fixtures](../case/scenario-fixtures.csv) are executable inputs to the reference implementation. They create a useful bridge between a natural-language scenario and a test oracle: `F-05` is a **negative acceptance test**, not an “unhappy exception” that can be deferred. No user-facing journey is complete if it hides what happens when the requested service cannot be delivered.
+
+### 3.3 Derive test coverage as a mapping
+
+Let \(U\) be the set of use cases and \(R\) the requirement IDs. Define a relation \(T\subseteq U\times R\), where \((u,r)\in T\) means use case \(u\) operationalizes requirement \(r\). `UC-01` links to `SW-01`, `SW-03`, and `SW-05`; `UC-02` links to `SW-02`, `SW-05`, and `SW-06`; `UC-03` links to `SW-04` and `SW-07`. Mapping existence supports *coverage review*, but it is not evidence of execution or correctness.
+
+Design one scenario for each requirement, then add at least one abnormal scenario for every state-changing command. Ask whether a requirement could pass all written tests and still fail in a likely system condition; if so, add a discriminating test, not merely another traceability link.
+
+**Solved checkpoint.** The `cancel` use case specifies “return success.” A stronger postcondition is that the reservation is marked cancelled, its active assignment is released in the same committed transaction, and the audit event records the transition. A second cancellation must not invent a second transition. These conditions are independently observable.
+
+**Exercise.** Extend `UC-02` to cover two simultaneous dispatch requests. Identify the linearization point at which one request must win and describe the losing request's permitted response. A sequential diagram without a concurrency scenario is not sufficient.

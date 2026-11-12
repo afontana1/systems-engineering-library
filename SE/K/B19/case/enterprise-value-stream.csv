@@ -1,0 +1,4 @@
+stream,entry_trigger,cross_owner_handoffs,bottleneck_hypothesis,exit_evidence,degraded_path
+Accessible emergency trip,Emergency access request,Call center -> eligibility -> provider -> dispatch -> hospital,Fleet access and disclosure permissions,Trip delivered and accepted,Offline dispatch with human interpreter
+Standard transit continuity,Service loss event,Municipal operator -> rail -> dispatch -> shelter,Shared rail/dispatch information,Arrival and handoff confirmed,Manual route coordination
+Funding-to-adoption,Strategic investment proposal,Community -> operator -> labor -> procurement -> council,Consent and appropriation lead times,Signed authority and deployed work,Pilot with reversible scope

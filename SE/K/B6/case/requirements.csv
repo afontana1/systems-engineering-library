@@ -1,0 +1,9 @@
+id,statement,measure,threshold,scenario,verification,owner
+CD6-R01,Service shall support at least 46.2 effective trips/hour at the declared 42 trip/hour surge plus 10% reserve,effective hourly trip capacity,>=46.2 trips/hour,peak-event scenario,Capacity model then load test,operations
+CD6-R02,90th percentile rider pickup wait shall not exceed 12 minutes in the event-day scenario,p90 pickup wait,<=12 min,"event day, rider arrival cohort",Instrumented representative pilot,service team
+CD6-R03,At least 95% of defined eligible request locations shall receive an accessible feasible trip offer,geographic and temporal accessible offer coverage,>=95%,defined service geography and peak day,Accessible trip and exclusion audit,accessibility lead
+CD6-R04,Annual operating expenditure estimate shall be no more than 1.20 million USD at baseline scope,annual operating expenditure,<=1.20 M USD/year,"250 service days, 8h/day",Cost estimate and supplier quotes,finance
+CD6-R05,Concept acquisition cost estimate shall be no more than 3.0 million USD,acquisition capital cost,<=3.0 M USD,concept scope before contingency,Supplier quotes and independent estimate,finance
+CD6-R06,Nominal dispatch command chain shall meet 500ms end-to-end timing; degraded timing requires a documented fallback,end-to-end command timing,<=500 ms nominal,declared nominal and degraded profiles,Hardware-in-loop timing and fault injection,architecture lead
+CD6-R07,"When digital booking fails, an alternate booking path shall serve accessible users",alternate booking accessibility,demonstrated accessible fallback,service outage and impaired-device scenario,Moderated service-fallback test,service team
+CD6-R08,A concept readiness claim shall cite evidence current for the declared configuration,evidence configuration currency,all approval evidence current,NS-CD6.1,Baseline audit and review,configuration manager

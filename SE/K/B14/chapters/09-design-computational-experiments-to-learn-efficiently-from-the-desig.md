@@ -127,3 +127,19 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [08 — Previous chapter](08-formulate-parametric-design-and-conduct-multiobjective-search.md) · [10 — Next chapter](10-build-validate-and-use-surrogate-models-without-hiding-approximation.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-DA14.1 decision-analysis laboratory: Chapter 09
+
+### Factorial experiments separate effects and interactions
+
+A design of experiments (DOE) should target a question, not merely populate a CSV. For a transparent initial study fix hybrid architecture, priority dispatch, human operation, four zones and 18 mph, then evaluate a full \(2^3\) factorial over fleet \(n\in\{12,18\}\), chargers \(c\in\{4,8\}\) and reserve \(r\in\{0.10,0.20\}\). The resulting [eight-run matrix](../case/factorial-doe.csv) uses the same deterministic synthetic response function as the design enumeration. It has no Monte Carlo replications or stochastic confidence bounds, because the oracle is deterministic.
+
+### Derive main effects correctly
+
+Code factors \(x_n,x_c,x_r\in\{-1,+1\}\). For observed response \(y\), the two-level *effect* for chargers is \(\bar y_{x_c=+1}-\bar y_{x_c=-1}\); the associated regression coefficient is half of that effect. Interactions are not nuisance noise: \(\hat\beta_{nc}=\frac{1}{8}\sum_j x_{n,j}x_{c,j}y_j\). For example, at fleet 12 and reserve 0.10, going from four to eight chargers reduces modeled wait from **20.3406** to **17.6526** minutes, an effect of **−2.6880 min**. At fleet 18 with 10% reserve it falls from **18.0456** to **14.0136**, an effect of **−4.0320 min**. These differ because the response formula includes \(n_{active}/(c+1)\); report charger-by-fleet interaction instead of claiming a universal benefit of four more chargers.
+
+### Sequential campaign and model diagnostics
+
+The factorial's two reserve levels cannot identify an interior curvature effect. A next round could add reserve 0.15, charger count 6 and fleet 14, or select points near the wait and cost eligibility boundaries. Reserve levels are inputs, not empirical probabilities. Define failure handling: a model error should be recorded as a failed run with the exact config, never imputed as an attractive outcome. Randomize the **execution order** when experiment noise or drift is possible; here deterministic runs still get stable run IDs for traceability. If a real discrete-event simulator replaces the oracle, allocate replication seeds and compute uncertainty in each outcome before constructing effects.
+
+**Exercise and solution.** From the two stated fleet-12 results at reserve 0.10, compute the mean wait reduction per added charger, assuming an average slope across that interval. **Solution:** \((17.6526-20.3406)/(8-4)=\mathbf{-0.6720}\) minute per charger. This is a *secant*, not the derivative or a validated estimate beyond chargers 4–8. Because the formula is nonlinear in chargers, extrapolating it to ten chargers without checking the oracle is unjustified. A recommendation needs cost, reliability, reserve and emissions consequences as well as wait change.

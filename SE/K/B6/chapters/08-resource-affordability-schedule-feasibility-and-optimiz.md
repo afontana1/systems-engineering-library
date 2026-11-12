@@ -89,3 +89,26 @@ Sensitivity analysis changes one or more assumptions to see whether the preferre
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 8: Resources and optimization](../labs/lab-08-resource-affordability-schedule-feasibility-and-optimiz.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 8 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+
+## Step 03 integrated reference: NS-CD6.1 — affordability, schedule and constraint-first optimization
+
+Concept evaluation often fails when a cheap alternative is assigned a large weighted value despite violating nonnegotiable requirements. The NS-CD6.1 screen uses peak capacity at least 46.2 effective trips/h, p90 wait no more than 12 minutes, access coverage at least 95%, capital no more than $3.0M and annual operations no more than $1.2M. All five checks are required before computing a preference ranking. The [machine-readable baseline](../case/model-baseline.json) makes those rules executable.
+
+### Nominal cost is not lifecycle affordability
+
+Assume one acquisition payment at time zero, identical real end-of-year operating expense in each of five years, and a real discount rate of 5%. The present-value annuity factor is
+
+\[F_5=\sum_{t=1}^{5}(1.05)^{-t}\approx4.32948,\qquad LCC=CAPEX+F_5(OPEX).\]
+
+For the hybrid C, \(LCC_C=2.25+4.32948(0.98)=\$6.493\) million. For pooled B, \(LCC_B=2.70+4.32948(1.12)=\$7.549\) million. D's simpler acquisition produces a lower nominal five-year cost (approximately $5.812M) but **does not satisfy the declared service and affordability screens**. This comparison is intentionally limited: it excludes replacement cycles, taxes, inflation, salvage, externalities and quantified risk. A realistic cost model requires those terms and an uncertainty range.
+
+### Schedule as a dependency network
+
+The concept pilot has tasks A framing (2 weeks); B supplier engagement (3 weeks after A); C simulation and accessible-service design (4 weeks after A); D integrated review (2 weeks after B and C); and E pilot preparation (3 weeks after D). Earliest finishes are A=2, B=5, C=6, D=8, E=11 weeks. The critical path is A→C→D→E, totaling **11 weeks**. A one-week delay in B does not initially move E if B still finishes by week 6. A one-week delay in C directly moves E to week 12, absent recovery. This is deterministic precedence analysis; duration variability needs separate treatment.
+
+### Exercise and solution
+
+**Exercise:** Finance proposes dropping C in favor of D because D costs less over five years. What is the correct answer? **Answer:** D is infeasible under current hard requirements: 45 < 46.2 trips/h, 12.4 > 12 minutes p90 wait, and $1.25M > $1.20M annual OPEX. A weighted or discounted cost advantage cannot erase failed constraints. Instead request a revised supplier proposal or documented requirements change with stakeholder authority. Use [the concept table](../case/concepts.csv) to make every violation explicit.
+
+**Boundary:** These are point-estimate financial and scheduling exercises. Procurement, stakeholder acceptance, cost contingency and schedule confidence require independently sourced inputs before any investment approval.

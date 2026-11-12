@@ -47,4 +47,32 @@
 <p><a href="../labs/02-estimation.html">Open the lab for this chapter</a> · <a href="../labs/02-estimation.md">Download editable Markdown lab</a> · <a download href="../notebooks/02-estimation.ipynb">Open the associated notebook</a> · <a download href="../code/engineering_math.py">Download the calculation source</a></p>
 <p><strong>Authoritative follow-up reading:</strong> <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a>, <a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook</a>, and <a href="https://www.incose.org/resources-publications/technical-publications/systems-engineering-body-of-knowledge/">Systems Engineering Body of Knowledge</a>. These are independent references, not endorsements of the fictional cases.</p>
 <p><a href="../INDEX.html">Return to the quantitative textbook collection</a></p>
+
+<!-- STEP04-QUANTITATIVE-START -->
+<section class="qse-integrated" aria-label="Integrated quantitative methods case">
+<h2>Step 04 integrated case — estimation, pairing, and absence-of-failure claims</h2>
+<p>In NS-QSE4.1, the estimand must be stated before computing any confidence interval. Three different targets appear: the <strong>mean conditional arrival rate</strong>, the <strong>difference in per-day mean wait between two policies</strong>, and the <strong>chance of an unacceptable event</strong>. A large number of synthetic requests cannot make these targets interchangeable. The observation units in the demand file are 24 one-hour windows, not independent per-request samples.</p>
+<h3>A hierarchical-rate estimate</h3>
+<p>The controlled Gamma–Poisson calculation produces posterior means \(122/12.2=10\) requests/hour in clear conditions and \(218/12.2\approx17.869\) in storm conditions. Its sampled 95% interval assumes the prior family, constant conditional rate, complete counts, and independent increments. If thunderstorms share a latent demand driver across successive hours, treating twelve storm windows as conditionally independent overstates the information in those observations. Longer time-series records and residual checks would be needed before assigning operational confidence.</p>
+<h3>A paired interval for comparing dispatch configurations</h3>
+<p>The simulator reuses the <strong>same generated arrival stream</strong> for each policy and each synthetic day. On storm days, the baseline policy has two servers, each requiring 10 minutes/request; the combined design has three servers at 8 minutes/request. Their sample mean of <em>daily mean waits</em> is approximately <strong>16.880</strong> versus <strong>2.346 minutes</strong>. The paired change is therefore about <strong>14.533 minutes/day</strong>, baseline minus combined. For paired day \(i\), define \(D_i=\bar W_{i,\mathrm{baseline}}-\bar W_{i,\mathrm{combined}}\). A nonparametric paired bootstrap resamples the twelve \(D_i\) values as whole blocks, not separate individual requests. With the controlled seed and 2,500 resamples, the percentile interval is approximately <strong>[10.86, 18.01] minutes</strong>.</p>
+<p>This is a <em>synthetic conditional bootstrap interval</em>. It quantifies across-day variability under the chosen generator and small set of invented cases; it is not a confidence interval for genuine emergency operations. Reusing arrival streams is helpful because random variability from separate streams does not mask the policy contrast. But it does not remove structural bias, omitted staff breaks, dispatch priority, or weather-correlated travel time.</p>
+<h3>A zero-event sample is not proof of zero risk</h3>
+<p>If zero failures are observed in \(n\) independent Bernoulli trials with constant failure probability \(p\), then \(P(0\mid p)=(1-p)^n\). Equating this probability with \(\alpha=0.05\) yields the one-sided 95% upper bound \(p_U=1-0.05^{1/n}\). For 20 independent zero-failure trials, \(p_U\approx0.1391\); for 100, \(p_U\approx0.0295\). This calculation cannot be applied naïvely to 100 trips sharing one grid supply: common-cause failure breaks the independent-trial assumption. Nor does it license a safety claim from the <em>absence of recorded</em> incidents when incident detection is incomplete.</p>
+<h3>Reproducible engineering record</h3>
+<p>The report records the actual bootstrap method, policy definitions, number of paired days, and input hash. Report the request-weighted mean wait separately from the equal-day mean; heavy-demand days receive larger weight in the former. A review must identify missing data, censoring at the observation-window boundary, whether over-time completions count, and whether the target population is the same as the sample.</p>
+<details><summary>Worked exercises and interpretation</summary>
+
+<ol>
+<li><strong>One-sided upper bound.</strong> Compute the upper failure bound for \(n=20\): \(1-0.05^{1/20}\approx0.1391\). Explain that <em>zero observed</em> and <em>zero possible</em> failures are not equivalent.</li>
+<li><strong>Pairing.</strong> For synthetic daily mean waits baseline [12, 18, 15] and improved [6, 10, 8], paired differences are [6, 8, 7], mean <strong>7 minutes</strong>. Independently resampling baseline and improved lists destroys the shared-day covariance and changes the estimand's uncertainty.</li>
+<li><strong>Missingness.</strong> If four high-demand storm windows are unrecorded, what fails? An interval based on the remaining hours can be narrow yet biased, because missingness is associated with the operating condition being estimated.</li>
+</ol>
+</details>
+
+<p><strong>Boundary:</strong> Statistical precision is not model validation. Book 8's assurance logic and the advanced Architecture collection still require credible operational measurements and configuration-specific evidence.</p>
+
+</section>
+<style>@media(max-width:700px){article{max-width:100%;overflow-x:auto}article :is(p,li):has(mjx-container){max-width:100%;overflow-x:auto}}</style>
+<!-- STEP04-QUANTITATIVE-END -->
 </article></main></body></html>

@@ -35,4 +35,10 @@
 </details>
 <h2>Next connections</h2>
 <p>Use the related books above to see how this concept becomes a course assignment. The lab provides a small, deliberately incomplete practice setting; it does not replace verification against real operational data.</p>
-<div class="related"><a href="INDEX.html">Core Concepts</a><a href="../../../index.html">All courses</a></div></main></body></html>
+<!-- STEP04-T1-START --><section id="step04-t1-method" aria-label="Step 04 T1 technical extension">
+<h2>Step 04 T1 — Evidence-driven correction and worked transfer</h2>
+<h3>T1 audit finding: stability is not the same as accurate integration</h3>
+<p>Use the scalar error-recovery model \(\dot x=-0.7x\) per hour with \(x(0)=1\). The exact one-hour value is \(e^{-0.7}\approx0.496585\). One forward-Euler step of one hour gives \(x_1=1(1-0.7)=0.3\), an error of about 0.196585. Four 0.25-hour steps give \((1-0.7\times0.25)^4=0.463250\), error about 0.033335. Refinement improves this smooth example even though both steps are <em>linearly stable</em>. A three-hour step produces multiplier \(1-0.7\times3=-1.1\), which is unstable and creates alternating-sign errors.</p>
+<p>Even inside the numerical-stability range \(0\lt k\Delta t\lt2\), \(1-k\Delta t\lt0\) can cause a nonnegative physical stock to alternate sign. When a state represents people, energy, or available vehicles, additionally enforce a physically justified state boundary and explain how lost or rejected flow is counted. Projection to zero is not automatically a conservative physical solution if it violates conservation.</p>
+<p><strong>Practice and explained solution.</strong> Calculate the positivity condition for explicit Euler: \(1-k\Delta t\geq0\), hence \(\Delta t\leq1/k\approx1.429\) hours here. Compare this stricter condition with stability \(\Delta t\lt2/k\approx2.857\) hours. A stable negative intermediate quantity can be physically invalid. <a href="labs/T1-INTEGRATED-CASE.html">Run the refinement check</a>.</p>
+</section><!-- STEP04-T1-END --><div class="related"><a href="INDEX.html">Core Concepts</a><a href="../../../index.html">All courses</a></div></main></body></html>

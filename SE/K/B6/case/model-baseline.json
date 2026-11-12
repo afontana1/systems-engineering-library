@@ -1,0 +1,165 @@
+{
+  "baseline": "NS-CD6.1",
+  "title": "Northstar concept design comparison \u2014 illustrative",
+  "demand": {
+    "peak_trips_per_hour": 42,
+    "reserve_fraction": 0.1,
+    "annual_operating_days": 250,
+    "daily_hours": 8
+  },
+  "thresholds": {
+    "peak_capacity_min": 46.2,
+    "p90_wait_max_min": 12,
+    "accessible_coverage_min_pct": 95,
+    "capex_max_musd": 3.0,
+    "opex_max_musd_per_year": 1.2
+  },
+  "value": {
+    "weights": {
+      "wait": 0.4,
+      "coverage": 0.3,
+      "opex": 0.3
+    },
+    "anchors": {
+      "wait_min": [
+        8,
+        14
+      ],
+      "coverage_pct": [
+        90,
+        100
+      ],
+      "opex_musd": [
+        0.8,
+        1.3
+      ]
+    }
+  },
+  "concepts": [
+    {
+      "id": "A",
+      "name": "Fixed loop",
+      "vehicles": 4,
+      "seats": 10,
+      "roundtrip_min": 36,
+      "utilization": 0.8,
+      "pods": 0,
+      "pod_trips_h": 0,
+      "pod_utilization": 0,
+      "contract_trips_h": 0,
+      "contract_factor": 0,
+      "p90_wait_min": 10.8,
+      "accessible_coverage_pct": 92,
+      "capex_musd": 2.4,
+      "opex_musd_per_year": 0.86
+    },
+    {
+      "id": "B",
+      "name": "Pooled on-demand",
+      "vehicles": 0,
+      "seats": 0,
+      "roundtrip_min": 0,
+      "utilization": 0,
+      "pods": 7,
+      "pod_trips_h": 8,
+      "pod_utilization": 0.85,
+      "contract_trips_h": 0,
+      "contract_factor": 0,
+      "p90_wait_min": 8.5,
+      "accessible_coverage_pct": 97,
+      "capex_musd": 2.7,
+      "opex_musd_per_year": 1.12
+    },
+    {
+      "id": "C",
+      "name": "Hybrid trunk + feeders",
+      "vehicles": 2,
+      "seats": 10,
+      "roundtrip_min": 24,
+      "utilization": 0.8,
+      "pods": 2,
+      "pod_trips_h": 8,
+      "pod_utilization": 0.8,
+      "contract_trips_h": 0,
+      "contract_factor": 0,
+      "p90_wait_min": 9.5,
+      "accessible_coverage_pct": 98,
+      "capex_musd": 2.25,
+      "opex_musd_per_year": 0.98
+    },
+    {
+      "id": "D",
+      "name": "Brokered partner fleet",
+      "vehicles": 0,
+      "seats": 0,
+      "roundtrip_min": 0,
+      "utilization": 0,
+      "pods": 0,
+      "pod_trips_h": 0,
+      "pod_utilization": 0,
+      "contract_trips_h": 50,
+      "contract_factor": 0.9,
+      "p90_wait_min": 12.4,
+      "accessible_coverage_pct": 96,
+      "capex_musd": 0.4,
+      "opex_musd_per_year": 1.25
+    }
+  ],
+  "timing": {
+    "nominal_ms": [
+      90,
+      110,
+      180,
+      40
+    ],
+    "degraded_ms": [
+      110,
+      150,
+      220,
+      80
+    ],
+    "budget_ms": 500
+  },
+  "cost": {
+    "years": 5,
+    "discount_rate": 0.05
+  },
+  "schedule": {
+    "tasks": [
+      {
+        "id": "A",
+        "duration_weeks": 2,
+        "predecessors": []
+      },
+      {
+        "id": "B",
+        "duration_weeks": 3,
+        "predecessors": [
+          "A"
+        ]
+      },
+      {
+        "id": "C",
+        "duration_weeks": 4,
+        "predecessors": [
+          "A"
+        ]
+      },
+      {
+        "id": "D",
+        "duration_weeks": 2,
+        "predecessors": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "id": "E",
+        "duration_weeks": 3,
+        "predecessors": [
+          "D"
+        ]
+      }
+    ]
+  }
+}

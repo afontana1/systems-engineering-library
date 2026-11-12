@@ -150,3 +150,71 @@ Complete [Hypothetical Lab 4: The Requirements Clinic](../labs/lab-04-requiremen
 ## Extended worked problems and lab
 
 Study the [worked problem workshop on evidence applicability and requirements](../practice/trace.md), then complete the [extended laboratory](../practice/lab-trace.md). The exercises are separate from the original assessed coursework.
+
+## Full worked method: design the verification before approving a requirement
+
+The requirement is not simply a grammatical exercise. A proposed system-level claim must be feasible, assignable, measurable, and tied to the outcome it intends to serve. The [complete technical method guide](../../methods/requirements-verification-handbook.md) illustrates this with an acknowledgement-time requirement, a timing budget, a binomial evidence rule and a controlled result package. The example below shows the essential reasoning in compact form.
+
+**Need:** riders should know promptly whether their shuttle request was accepted. **Candidate system obligation:** for the declared morning peak-load scenario, at least 99% of eligible requests receive a definitive acceptance or rejection within 4.0 seconds. **Engineering translation:** the request-start and response-end boundaries, eligible population, request load, connectivity condition, build identity and timer accuracy must all be fixed before testing.
+
+The architecture team allocates 0.15 s parsing, 0.35 s gateway, 0.55 s queueing, 1.15 s scheduling, 0.60 s outbound response and 0.70 s contingency. For a serial bounded-path abstraction, the total is 3.50 s and the headroom is 0.50 s. The analysis says only that the **budget is numerically compatible**; it does not prove the latency distribution or that the queue can meet the bound at peak utilization.
+
+For \(n\) independent identical pass/fail observations and **zero observed timeouts**, a one-sided \(95\%\) upper confidence limit on the failure probability is
+
+\[
+p_{f,U}=1-0.05^{1/n}.
+\]
+
+With 300 zero-failure observations the upper bound is approximately 0.00994, narrowly meeting a 0.01 failure target under that model. If observed events are dependent, or the run is carried out at idle load, the statistical calculation is not appropriate evidence for the stated peak-load claim. The [reproducible calculator and example CSV](../../methods/code/verification_confidence.py) let readers change the sample and see how the conclusion changes.
+
+**Assignment extension.** Draft a one-row verification matrix with requirement revision, scenario, acceptance rule, procedure and evidence baseline. Then write a separate operational validation question: how does the acceptance/rejection latency affect actual rider wait and access? A correct verification result cannot silently answer that different question.
+
+## Phase 5 technical reading: From a shall statement to a complete verified interface
+
+A testable door-authorization requirement should state authorized operating modes, the speed threshold (0.5 m/s in this invented design), the parking-brake condition, invalid sensor behavior, input freshness, observable command output and controlled environment. The 150 ms maximum sensor age in the [Campus Mobility ICD and requirements package](../../methods/campus-mobility-engineering-artifacts.md) illustrates why `speed < threshold` without a validity condition can be dangerously underspecified. Trace each requirement to a hazard/control allocation and a test with named inputs; preserve what the passing evidence cannot establish.
+
+
+
+## Step 03 technical studio — verify an allocated claim without overclaiming
+
+The Northstar **NS-R-02** design allocates a **deterministic** emergency-status latency budget across four stages. These are engineering allocations, not measured percentiles or guarantees about production networks.
+
+| Stage | Allowed time (s) | Responsible component |
+|---|---:|---|
+| Detect and timestamp | 0.35 | Vehicle/status logic |
+| Gateway encode and publish | 0.25 | Status gateway |
+| Transport | 0.70 | Controlled network interface |
+| Supervisor display | 0.35 | Console |
+| **Allocated total** | **1.65** | **End-to-end path** |
+
+For the system budget of 2.50 s, the nominal unallocated margin is
+
+\[
+M=2.50-(0.35+0.25+0.70+0.35)=0.85\ \mathrm{s}.
+\]
+
+This is an allocation consistency check. It does **not** demonstrate that a path will always complete in 1.65 s; it assumes upper bounds hold simultaneously, and it cannot establish a 95th-percentile requirement by simply summing individual 95th percentiles. A probabilistic acceptance criterion needs a specified population of transactions, sampling method, failure treatment, uncertainty statement, and acceptance rule.
+
+### Requirements-to-test design
+
+Write four separate fields for NS-R-02: **condition** (controlled network workload and configuration NS-B1), **stimulus** (timestamped status transition), **measure** (difference between trusted timestamp domains at detection and rendered display), and **decision rule** (the stated sample or worst-case rule). A passing gateway test verifies a subordinate allocation but cannot close the system-level item. Assign test NS-T-02 to the complete timing claim and keep the component evidence as supporting material.
+
+### Solved requirements clinic
+
+Original: “System shall notify supervisors quickly.” Revised draft: “In configuration NS-B1, upon a recognized emergency-state transition, the supervisor console shall display a corresponding status within 2.50 seconds under the specified network-load and clock-synchronization conditions.” The revised text is more testable, but its **conditions and statistical semantics** still require agreement. If the sponsor expects operation under network loss, that need cannot be silently omitted from the acceptance domain.
+
+Consult the [requirements and verification method guide](../../methods/requirements-verification-handbook.md) for uncertainty, evidence applicability, and statistical acceptance examples.
+
+## Step 03 reference deepening — distinguish a specification from a statistical assertion
+
+NS-R-01 describes an eight-second booking-confirmation threshold under a specified workload. A deterministic requirement such as “all requests complete within eight seconds” is not interchangeable with a claim that at least 99% do so. The latter needs a declared probability model, operational population and acceptable confidence. If \(n\) representative independent trials produce zero observed failures, an exact one-sided 95% upper confidence bound on the failure probability is
+
+\[
+p_U=1-0.05^{1/n}.
+\]
+
+At \(n=300\), \(p_U\approx0.009936\). This supports a limited statement about the modeled per-trial failure probability, not a proof of zero failures in operation. Correlated faults, selective workload, an unrepresentative simulator or a changed system revision invalidate the simple interpretation.
+
+**Timing acceptance also requires measurement uncertainty.** A measured latency of 7.95 seconds with an instrument uncertainty of ±0.15 seconds cannot automatically be reported as conclusive compliance with an 8-second limit. Establish the specified decision rule before testing (guard band, statistical treatment or additional evidence) and report the observed quantity, uncertainty, calibration and revision. An engineering requirement should therefore include who measures, what event starts/stops the clock, workload, required sample scheme and allowable inference.
+
+**Practice:** An engineer proposes changing the requirement to “usually fast.” **Answer:** reject it as unverifiable. A better revision would specify a measurable percentage, a latency threshold, relevant service conditions, exclusion rules, and evidence/decision confidence; then validate that those properties still express the stakeholder need.

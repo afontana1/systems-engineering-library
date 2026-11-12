@@ -1,0 +1,7 @@
+claim_id,claim,associated_check,evidence_file,owner,decision_status,unresolved_evidence
+G-SAFE-01,Route departure evidence current and matched,route_authorized,outputs/ns-g4.1-results.json,road authority,HOLD,clock verification and R2-R3 signoff absent
+G-HUM-02,Operator workload and alarm triage tolerable,human_queue and alarm_quality,outputs/ns-g4.1-results.json,dispatch operations,HOLD,real workload study and demand distribution absent
+G-SW-03,Reservation effects safe under retries,trace_audit and retry_stable,outputs/ns-g4.1-results.json,software release owner,HOLD,persistence and concurrency implementation not validated
+G-RES-04,Mission dependencies resilient,joint_availability,outputs/ns-g4.1-results.json,system reliability owner,HOLD,common cause and recovery evidence not calibrated
+G-SOS-05,Accessible mission thread operates under faults,accessible_flow,outputs/ns-g4.1-results.json,rail and paratransit owners,HOLD,capacity model and interface consent not operationally verified
+G-ENT-06,Intervention legitimate and benefits are defensible,permissions and wait disparity,outputs/ns-g4.1-results.json,regional enterprise board,HOLD,road labor privacy permissions missing and causal study unvalidated

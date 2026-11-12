@@ -96,3 +96,28 @@ A disciplined framing exercise for Northstar might compare three hypotheses: ins
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 1: Framing before solutions](../labs/lab-01-reopen-the-problem-and-audit-the-incumbent-baseline.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 1 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+
+## Step 03 integrated reference: NS-CD6.1 — distinguish the mission from the incumbent
+
+The controlled [NS-CD6.1 concept study](../case/INDEX.html) begins before there is a preferred vehicle design. The decision question is: *Which service concept could provide reliable, accessible campus mobility within a bounded cost and operational envelope?* It is deliberately **not** “How do we deploy an autonomous shuttle?” Autonomy is a candidate means; access and completed journeys are the outcome. This distinction protects later analyses from validating a design merely because it resembles the incumbent.
+
+### Construct a decision frame rather than a solution brief
+
+Define (1) the beneficiaries and excluded groups; (2) the operational scenario; (3) the success metrics and their denominators; (4) nonnegotiable constraints; (5) the decision being authorized; and (6) the evidence that might overturn the preferred concept. For the case, the specified event surge is 42 requested trips per hour, and a 10% planning reserve raises the capacity screen to
+
+\[C_{\min}=42(1+0.10)=46.2\ \text{effective trips/h}.\]
+
+This is an **assumed study demand**, not a measured arrival distribution. A point estimate of capacity above 46.2 is necessary for screening, not proof of acceptable waits, wheelchair access, or recovery during faults. Keep three types of statement separate: stakeholder outcome (“eligible people can reach events”), performance requirement (“accessible-offer coverage at least 95%”), and implementation (“four fixed-route vehicles”). Only the third picks an architecture.
+
+### Examine the incumbent without inheriting it
+
+Four concept families remain open: fixed-loop A, pooled on-demand B, hybrid trunk-and-feeder C, and contracted broker D. The model yields effective peak capacities of 53.33, 47.60, 52.80, and 45.00 trips/h. If the team evaluated capacity alone, A would look strongest. Yet A's assumed accessible-offer coverage is only 92%, below the 95% requirement. Its apparent capacity advantage cannot compensate for a failed hard constraint. Conversely D's attractive capital estimate does not make its insufficient reserve capacity acceptable.
+
+This is a **counterexample to premature optimization**: maximizing fleet throughput before defining who needs service can produce an apparently efficient design that systematically excludes intended users. Log every inherited assumption with an owner and a test; keep a competing explanation alive. For instance, a long pickup delay might result from scheduling, incomplete accessible-service coverage, or event surges—not necessarily insufficient automation.
+
+### Reproducible inquiry and answer
+
+Open [the controlled alternative table](../case/concepts.csv) and [checker](../tools/step03_book6_concept_check.py). **Exercise:** If the peak request estimate rises to 48 trips/h while the reserve requirement stays 10%, which concepts retain nominal capacity? **Answer:** The new threshold is \(48(1.10)=52.8\) effective trips/h. A (53.33) and C (52.80) reach that threshold under unchanged utilization, while B (47.60) and D (45.00) do not. But A still fails accessible coverage. Equal capacity at a single assumed operating point does not establish robust feasibility, so the next decision remains an experiment, not procurement.
+
+**Boundary:** All figures in this example are synthetic. Before a real concept review, use observational demand data stratified by peak periods and accessibility needs, and make the uncertainty range explicit. NASA's [system-design guidance](https://www.nasa.gov/reference/4-0-system-design-processes/) treats stakeholder expectations, operational concepts, requirements, alternatives, and validation as an iterative loop rather than one-way architecture selection.

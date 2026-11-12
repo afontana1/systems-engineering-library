@@ -41,6 +41,16 @@ An HSI review should ask which functions depend on humans, under what conditions
 - **H2 · Human-centered design process and integration:** [NASA Systems Engineering Processes, Volume 2 — HSI and HCD guidance](https://www.nasa.gov/reference/3-0-systems-engineering-processes-vol-2/).
 - **H3 · Design data and rationale for human spaceflight:** [NASA Human Integration Design Handbook — scope and companion guidance](https://www.nasa.gov/organizations/ochmo/human-integration-design-handbook/). Spaceflight-specific design data are not universal thresholds for all domains.
 
+## Step 02 deeper treatment: workload, allocation and testable human interfaces
+
+Treat a human operator as a participant with information, response latency, cognitive limits, training, accessibility constraints and authority—not as a deterministic component with a nominal reaction time. Task allocation should be justified by actual job conditions: visibility, fatigue, workload, automation reliability, environmental stressors and consequences of incorrect intervention.
+
+**Worked workload example.** In a hypothetical monitoring task, each alert requires an average of 12 seconds of focused processing, with 20 alerts per hour under nominal conditions. The naive utilization estimate is \(\rho=(20\times12)/3600\approx0.0667\), or 6.7% of the hour. This does **not** show the operator is lightly loaded: it excludes search, context switching, simultaneous alerts, communication, standing tasks, response variability and the consequences of one rare high-urgency event. Treat the ratio as a preliminary arithmetic check, not as a measure of cognitive workload or a defensible staffing decision.
+
+**Design and verify a human-in-the-loop claim.** Specify the scenario, task, display state, alarm quality, operator qualification, decision authority and criterion. Instrument actual false alarm, missed alert, situation awareness and response-time outcomes. Include degraded communications, contradictory indications and an automation handback case. Compare results across representative users rather than assuming all operators have identical sensory, physical or cognitive capabilities. Accessibility needs are not optional edge cases if they are within the declared user population.
+
+A useful trace links a stakeholder outcome to task model, interface allocation, alert specification, usability test protocol, deployment environment and residual risk. Failure modes include measuring clicks rather than task success, averaging away unsafe tails, testing only expert users, and modeling operator intervention as instantaneous. Related: [stakeholder needs](stakeholders-and-needs.md), [concept of operations](conops-and-scenarios.md), and [critical systems thinking](critical-systems-thinking.md).
+
 ## Follow the knowledge
 
 - **Prerequisites:** [Stakeholder needs](stakeholders-and-needs.md), [Operational scenarios](conops-and-scenarios.md).

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Object-oriented analysis: class discovery and responsibilities · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/encyclopedia/object-analysis-and-class-discovery.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical explanation</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Object-oriented analysis: class discovery and responsibilities</h1>
+<p><strong>Reference entry · Object-oriented systems analysis, UML and software design</strong></p>
+<h2>Start with behavior and domain language</h2>
+<p>Object-oriented analysis begins with stakeholder scenarios, invariants, boundaries and a domain vocabulary—not with drawing rectangles for every noun in a requirements paragraph. A <strong>class</strong> represents a cohesive concept with stable identity, state, behavior and meaningful rules. A role may be better expressed as an interface, a value as an immutable value object, and a changing fact as an event. A database table is not automatically a domain class; persistence concerns and domain behavior may have different boundaries.</p>
+<p>For a Campus Mobility reservation service, a candidate glossary includes <code>Reservation</code>, <code>Passenger</code>, <code>Vehicle</code>, <code>Assignment</code> and <code>AvailabilityReport</code>. Ask what must remain true across events: one active assignment per reservation; one active reservation per worker at a time; assignments point to existing reservations and workers; historical reservations need not retain a live allocation. These invariants are more useful than a diagram that merely joins <code>Reservation</code> and <code>Vehicle</code> with a line.</p>
+<h2>Worked realization of a request</h2>
+<p>Scenario: “A passenger requests a pickup, the dispatch policy chooses an available vehicle, and the service confirms or declines the request.” A plausible sequence is:</p>
+<ol>
+<li>An application/controller receives a uniquely identified request and validates its authorization and input.</li>
+<li><code>ReservationService</code> reads an admissible, versioned availability snapshot.</li>
+<li><code>DispatchPolicy</code> evaluates feasible candidate vehicles; policy selection must not itself mutate reservation state.</li>
+<li>A transactional repository attempts a reservation-and-assignment write, checking a uniqueness invariant at the storage boundary.</li>
+<li>The response returns confirmation or a specific rejection, and an event log records the accepted transition.</li>
+</ol>
+<p>The roles deliberately separate orchestration, domain policy and durable concurrency enforcement. A retry must not make a second assignment for an already accepted request. The analysis model should describe invariants and events before selecting ORM annotations, storage schema or framework-specific classes. See <a href="uml-realization-and-design-patterns.html">UML realization</a> and <a href="../methods/transactional-concurrency-and-assurance.html">transactional concurrency</a>.</p>
+<h2>Candidate-class triage</h2>
+<p>Use <strong>CRC cards</strong> (class, responsibilities, collaborators) or a role-responsibility table. A proposed <code>DispatchSystem</code> class responsible for every workflow is likely a “god object” with incompatible responsibilities. A <code>Timestamp</code> may be a value object rather than a full aggregate. Domain boundaries need explicit ownership of invariants: <code>Assignment</code> creation can be coordinated by a service but uniqueness must survive concurrent writes. Record candidate multiplicities (one-to-many, optional) and the cases that would falsify them.</p>
+<h2>Tests from the model</h2>
+<p>Write executable acceptance examples independent of implementation: two requests racing for the same vehicle; duplicate delivery of one request; cancellation followed by reuse; stale availability; unauthorized assignment. Formalize the key state constraint as</p>
+<p>\[
+\forall w:\quad\bigl|\{a\mid a.\text{worker}=w\land a.\text{active}\}\bigr|\le1.
+\]</p>
+<p>This expression says <strong>at most one active assignment per worker</strong>, not “one assignment ever.” Confirm the domain assumptions: if pooled ride-sharing is supported, the constraint must be reframed around capacity rather than uniqueness.</p>
+<h2>Exercise and check</h2>
+<p>A novice class diagram contains <code>Passenger</code>, <code>Vehicle</code>, <code>Location</code>, <code>Reservation</code>, <code>Trip</code>, and <code>AvailabilityReport</code>, all with public setters and no behavior. Choose a responsibility for each, identify which are values or entities, add the active-assignment invariant, and design two negative acceptance scenarios. A defensible answer explains <em>who</em> can authorize transitions, how stale reports are rejected and how transactionality preserves the invariant—not simply where arrows go.</p>
+<h2>Caveats and references</h2>
+<ul>
+<li><a href="https://www.omg.org/spec/UML/2.5.1">OMG UML specification</a> — UML notation and semantics.</li>
+<li><a href="https://www.omg.org/spec/OCL/2.4">OMG OCL specification</a> — constraint-expression language.</li>
+</ul>
+<p>Related: <a href="object-responsibilities.html">object responsibilities</a>, <a href="good-requirements.html">requirements</a>, <a href="software-quality-attributes.html">software attributes</a>. This is a language-independent analysis method; it does not demonstrate conformance to a particular UML/OCL toolchain.</p>
+</article><nav class="standalone-actions"><a href="metrics-hierarchy.html">Read concept</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="metrics-hierarchy.md">Editable Markdown</a></nav></main></body></html>

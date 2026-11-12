@@ -109,3 +109,30 @@ Useful architecture records preserve the decision, alternatives considered, assu
 ## Continuity
 
 This chapter builds from [previous chapter](03-interpret-and-critique-the-system-model-for-s.md) and leads toward [next chapter](05-integrate-agile-product-engineering-with-syst.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-764-w04.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+
+## Step 03 integrated reference: choose architecture against measured obligations
+
+### Identify the decisions that are expensive to reverse
+
+NS-SW5.1 proposes six ownership boundaries, but only some need deployable process boundaries. The important decisions are where reservation state is authoritative, how uncertain replies are reconciled, which dependencies are allowed to block an acknowledgment, and how the operator learns the system cannot serve a request. Turning every component into a network microservice would add fault modes without automatically improving these obligations. A modular service with a transactional store may be simpler than a fully distributed orchestration, provided its scaling and isolation limits are understood.
+
+In [the interface contract](../case/interfaces.csv), IF-02's uncertain outcome is fundamental. A robust design assigns each requested reservation an idempotency token, records the accepted outcome atomically with the slot assignment, and returns the same outcome on a bounded repeat. The database protects uniqueness while the API protects the request semantics; neither alone guarantees exactly-once network delivery.
+
+### Compare dependencies quantitatively
+
+A simplistic two-service serial dependency with independent interval availabilities of 0.9995 each yields
+
+\[A_{\mathrm{series}}=0.9995^2=0.99900025\approx99.9000\%.\]
+
+If a separately modeled common-cause condition disables the path with probability 0.001 in the same interval, an illustrative expression is
+
+\[A_{\mathrm{shared}}=(1-0.001)\,A_{\mathrm{series}}\approx99.8001\%.\]
+
+These are interval probabilities under strong assumptions, **not** derived monthly uptime or safety performance. Their purpose is to show how shared dependencies can cancel a redundancy benefit. The [checker](../tools/step03_book5_system_check.py) calculates both values so students can vary the shared-cause assumption.
+
+### Architecture decision record
+
+For a change to a distributed reservation service, document the issue, alternatives, quality scenarios, constraints, supporting evidence, limitations and revisit trigger. Alternative A may keep a single transaction boundary; B may split inventory and policy services; C may replicate read state but serialize writes. A decision that favors B for team independence must still explain what happens when policy succeeds and inventory times out. Reject any proposed architecture whose failure semantics cannot be explained under load and partial failure.
+
+**Exercise.** An architect claims that adding an independent cache makes no-overlap correctness more reliable because it eliminates database reads. **Answer.** A cache might reduce normal read latency, but stale cached availability cannot enforce authoritative unique allocation. The decision must preserve the atomic write constraint and specify invalidation and reconciliation. The architecture is a collection of justified failure-boundary choices, not a component-count competition.

@@ -1,0 +1,86 @@
+{
+  "case_id": "NS-DME16.1",
+  "revision": "r1",
+  "pedigree": "Fictional Northstar public-safety mobility teaching example; no observed operational performance",
+  "decision_id": "DEC-MISSION-16",
+  "intended_use": "course-screening",
+  "mission": {
+    "daily_demand": {"standard": 160, "accessible": 28, "critical": 12},
+    "vehicle_productivity_per_day": {"standard": 14, "accessible": 10, "critical": 8},
+    "scenario_probability": {"normal": 0.62, "grid_outage": 0.18, "comms_loss": 0.12, "road_closure": 0.08},
+    "scenario_capacity_factors": {
+      "normal": {"standard": 1.0, "accessible": 1.0, "critical": 1.0},
+      "grid_outage": {"standard": 0.76, "accessible": 0.78, "critical": 0.72},
+      "comms_loss": {"standard": 0.68, "accessible": 0.62, "critical": 0.66},
+      "road_closure": {"standard": 0.58, "accessible": 0.60, "critical": 0.75}
+    },
+    "continuity_uplifts": {
+      "backup_power": {"grid_outage": {"standard": 0.18, "accessible": 0.18, "critical": 0.18}},
+      "offline_dispatch": {"comms_loss": {"standard": 0.20, "accessible": 0.20, "critical": 0.20}},
+      "mutual_aid": {"road_closure": {"standard": 0.00, "accessible": 0.08, "critical": 0.20}}
+    },
+    "service_floors": {"standard": 0.95, "accessible": 0.95, "critical": 1.0},
+    "minimum_scenario_coverage": 0.95,
+    "policies": [
+      {"id": "P0-status-quo", "standard_vehicles": 12, "accessible_vehicles": 3, "critical_vehicles": 2, "interventions": [], "incremental_cost_usd": 0},
+      {"id": "P1-fleet-only", "standard_vehicles": 14, "accessible_vehicles": 4, "critical_vehicles": 2, "interventions": [], "incremental_cost_usd": 1500000},
+      {"id": "P2-continuity", "standard_vehicles": 12, "accessible_vehicles": 3, "critical_vehicles": 2, "interventions": ["backup_power", "offline_dispatch", "mutual_aid"], "incremental_cost_usd": 650000},
+      {"id": "P3-combined", "standard_vehicles": 14, "accessible_vehicles": 4, "critical_vehicles": 2, "interventions": ["backup_power", "offline_dispatch", "mutual_aid"], "incremental_cost_usd": 2150000}
+    ]
+  },
+  "twin": {
+    "predicted_soc": 0.68,
+    "prediction_sigma": 0.02,
+    "observed_soc": 0.59,
+    "observation_sigma": 0.03,
+    "sensor_bias": -0.04,
+    "observation_age_minutes": 4,
+    "maximum_age_minutes": 10,
+    "investigate_below_soc": 0.66
+  },
+  "graph": {
+    "nodes": [
+      {"id":"R-STD","kind":"requirement","revision":"r1","owner":"mission-ops","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"R-ACCESS","kind":"requirement","revision":"r1","owner":"access-lead","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"R-CRITICAL","kind":"requirement","revision":"r1","owner":"emergency-command","sensitivity":"restricted","authority_for":["course-screening"]},
+      {"id":"R-COMMS","kind":"requirement","revision":"r1","owner":"systems-architect","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"R-ENERGY","kind":"requirement","revision":"r1","owner":"energy-lead","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"F-STD","kind":"function","revision":"r1","owner":"operations","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"F-ACCESS","kind":"function","revision":"r1","owner":"operations","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"F-CRITICAL","kind":"function","revision":"r1","owner":"emergency-command","sensitivity":"restricted","authority_for":["course-screening"]},
+      {"id":"F-COMMS","kind":"function","revision":"r1","owner":"dispatch","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"F-ENERGY","kind":"function","revision":"r1","owner":"energy-lead","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"C-STD","kind":"component","revision":"r1","owner":"fleet","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"C-ACCESS","kind":"component","revision":"r1","owner":"fleet","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"C-CRITICAL","kind":"component","revision":"r1","owner":"mutual-aid","sensitivity":"restricted","authority_for":["course-screening"]},
+      {"id":"C-COMMS","kind":"component","revision":"r1","owner":"supplier","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"C-ENERGY","kind":"component","revision":"r1","owner":"utility","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"IF-DISPATCH","kind":"interface","revision":"1.0","owner":"supplier","sensitivity":"restricted","authority_for":["course-screening"]},
+      {"id":"T-STD","kind":"test","revision":"r1","owner":"independent-test","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"T-ACCESS","kind":"test","revision":"r1","owner":"independent-test","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"T-CRITICAL","kind":"test","revision":"r1","owner":"independent-test","sensitivity":"restricted","authority_for":["course-screening"]},
+      {"id":"T-COMMS","kind":"test","revision":"r1","owner":"independent-test","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"T-ENERGY","kind":"test","revision":"r1","owner":"independent-test","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"E-STD","kind":"evidence","revision":"r1","owner":"assurance","sensitivity":"internal","authority_for":["course-screening"],"result":"pass","test_revision":"r1"},
+      {"id":"E-ACCESS","kind":"evidence","revision":"r1","owner":"assurance","sensitivity":"internal","authority_for":["course-screening"],"result":"pass","test_revision":"r1"},
+      {"id":"E-CRITICAL","kind":"evidence","revision":"r1","owner":"assurance","sensitivity":"restricted","authority_for":["course-screening"],"result":"pass","test_revision":"r1"},
+      {"id":"E-COMMS","kind":"evidence","revision":"r1","owner":"assurance","sensitivity":"internal","authority_for":["course-screening"],"result":"pass","test_revision":"r1","interface_revision":"1.0"},
+      {"id":"E-ENERGY","kind":"evidence","revision":"r1","owner":"assurance","sensitivity":"internal","authority_for":["course-screening"],"result":"pass","test_revision":"r1"},
+      {"id":"M-ROUTE","kind":"activity","revision":"r1","owner":"mission-command","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"M-ACCESS","kind":"activity","revision":"r1","owner":"mission-command","sensitivity":"internal","authority_for":["course-screening"]},
+      {"id":"M-RESCUE","kind":"activity","revision":"r1","owner":"mission-command","sensitivity":"restricted","authority_for":["course-screening"]},
+      {"id":"DEC-MISSION-16","kind":"decision","revision":"r1","owner":"joint-review-board","sensitivity":"restricted","authority_for":["course-screening"]}
+    ],
+    "links": [
+      {"from":"R-STD","relation":"allocated_to","to":"F-STD"},{"from":"F-STD","relation":"realized_by","to":"C-STD"},{"from":"R-STD","relation":"checked_by","to":"T-STD"},{"from":"T-STD","relation":"produced","to":"E-STD"},
+      {"from":"R-ACCESS","relation":"allocated_to","to":"F-ACCESS"},{"from":"F-ACCESS","relation":"realized_by","to":"C-ACCESS"},{"from":"R-ACCESS","relation":"checked_by","to":"T-ACCESS"},{"from":"T-ACCESS","relation":"produced","to":"E-ACCESS"},
+      {"from":"R-CRITICAL","relation":"allocated_to","to":"F-CRITICAL"},{"from":"F-CRITICAL","relation":"realized_by","to":"C-CRITICAL"},{"from":"R-CRITICAL","relation":"checked_by","to":"T-CRITICAL"},{"from":"T-CRITICAL","relation":"produced","to":"E-CRITICAL"},
+      {"from":"R-COMMS","relation":"allocated_to","to":"F-COMMS"},{"from":"F-COMMS","relation":"realized_by","to":"C-COMMS"},{"from":"R-COMMS","relation":"checked_by","to":"T-COMMS"},{"from":"T-COMMS","relation":"produced","to":"E-COMMS"},{"from":"T-COMMS","relation":"uses_interface","to":"IF-DISPATCH"},
+      {"from":"R-ENERGY","relation":"allocated_to","to":"F-ENERGY"},{"from":"F-ENERGY","relation":"realized_by","to":"C-ENERGY"},{"from":"R-ENERGY","relation":"checked_by","to":"T-ENERGY"},{"from":"T-ENERGY","relation":"produced","to":"E-ENERGY"},
+      {"from":"M-ROUTE","relation":"depends_on","to":"F-STD"},{"from":"M-ROUTE","relation":"depends_on","to":"F-COMMS"},
+      {"from":"M-ACCESS","relation":"depends_on","to":"F-ACCESS"},{"from":"M-ACCESS","relation":"depends_on","to":"F-COMMS"},
+      {"from":"M-RESCUE","relation":"depends_on","to":"F-CRITICAL"},{"from":"M-RESCUE","relation":"depends_on","to":"F-ENERGY"},
+      {"from":"R-STD","relation":"informs","to":"DEC-MISSION-16"},{"from":"R-ACCESS","relation":"informs","to":"DEC-MISSION-16"},{"from":"R-CRITICAL","relation":"informs","to":"DEC-MISSION-16"},{"from":"R-COMMS","relation":"informs","to":"DEC-MISSION-16"},{"from":"R-ENERGY","relation":"informs","to":"DEC-MISSION-16"}
+    ]
+  }
+}

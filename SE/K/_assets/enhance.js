@@ -40,7 +40,7 @@
      const n=walker.currentNode,p=n.parentElement;
      if(!p||p.closest(skip+',a,.se-equation,.se-inline-math,.math-display,.math-inline')||!p.closest('p,li,td'))continue;
      const source=n.nodeValue;
-     if(!source||!/[=≈≤≥]/.test(source)||source.includes('\\(')||source.length>3000)continue;
+     if(!source||!/[=≈≤≥]/.test(source)||/[\\][()\[\]]|\$/.test(source)||source.length>3000)continue;
      const matches=[...source.matchAll(equationPattern)].filter(m=>m[1].length>=5&&m[1].length<110);
      if(matches.length)edits.push([n,source,matches]);
    }

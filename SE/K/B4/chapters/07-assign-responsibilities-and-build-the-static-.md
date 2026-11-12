@@ -78,3 +78,27 @@ For a Northstar design review, choose a critical invariant and walk through at l
 ## Continuity
 
 This chapter builds from [previous chapter](06-model-state-dependent-behavior-and-conduct-th.md) and leads toward [next chapter](08-realize-use-cases-with-dynamic-design-models.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/605-704-w07.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: responsibility assignment and dependency inversion
+
+### 7.1 Design around invariants rather than CRUD verbs
+
+If the application has one `DatabaseManager` or `ShuttleController` that receives every operation, responsibilities are not being distributed; they are being hidden. The goal is not to maximize classes. Assign each invariant to a design boundary that has the information and authority to enforce it.
+
+The [model baseline](../case/model-baseline.json) identifies `ReservationService` as owner of identity, retry and cancellation orchestration (`SW-01`, `SW-03`, `SW-04`), `AssignmentPolicy` as owner of selection rules (`SW-02`, `SW-05`, `SW-06`), and `AuditWriter` as owner of provenance (`SW-07`). The database still enforces the uniqueness constraint in the commit boundary. “Owner” here means accountable design responsibility, **not** exclusive runtime enforcement.
+
+### 7.2 Use ports to express dependency direction
+
+The domain/application core may define a `ReservationRepository` port with operations such as `findByToken`, `commitReservation`, and `cancelAssignment`. A SQLite adapter implements that port. The core does not import SQL schema classes, and a test can provide an in-memory fake with deliberately injected errors. This preserves the domain vocabulary when persistence changes, though it can introduce abstraction cost in very small applications.
+
+The policy object should receive eligible vehicle state as a parameter or through a clearly named data-access port. It should not query a global singleton or read the wall clock implicitly: both make deterministic tests harder. A time-provider interface allows tests to use a fixed decision instant and observation timestamp, avoiding flaky freshness checks.
+
+### 7.3 Cohesion and change propagation
+
+One rough design measure is *fan-out*, the number of unrelated dependency boundaries an operation directly invokes. Moving notification, persistence, telemetry, UI presentation, and eligibility into one method raises its fan-out and increases the number of reasons to change. But splitting every one-line function into a separate service can worsen latency and deployment risk. Evaluate abstraction against expected independent change and failure isolation, not ideological purity.
+
+The [architecture diagram](../diagrams/oo4-reservation-model.svg) represents an intentionally compact design. It is an example of a useful boundary that can be reviewed and tested, not an assertion that three services must be separately deployed. They may be classes in one process and one transaction.
+
+**Solved checkpoint.** A developer puts `isVehicleEligible()` in a UI component because the UI has the dropdown. This lets a script bypass the check. Move the rule to `AssignmentPolicy` inside the application boundary and repeat it at the server-side command path. The UI may still filter choices for convenience, but client filtering is not authoritative enforcement.
+
+**Exercise.** Introduce a fleet-service outage. Choose which component should classify the stale observation, which should decide whether allocation is permitted, and which returns the result to the rider. Explain how you would unit-test each boundary without network access.

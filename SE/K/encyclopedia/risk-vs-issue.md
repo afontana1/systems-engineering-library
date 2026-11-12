@@ -46,6 +46,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [NIST · SP 800-37 Rev. 2, Risk Management Framework (2018)](https://csrc.nist.gov/pubs/sp/800/37/r2/final) — Risk governance and continuous monitoring in the system life cycle.
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 
+
+
+## Step 02 review studio — quantify an uncertainty without concealing the decision
+
+A hypothetical integration risk has a 30% probability of triggering 100 cost units of rework. Its expected loss is 30 units, but expected value is not the worst case, not a budget guarantee, and not a substitute for consequence-based controls. An **issue** is an already-realized deviation, such as a failed compatibility test; its probability is not 30% after the failure is observed. An **opportunity** may be a beneficial uncertain outcome, but should still be evaluated using credible evidence and explicit resource tradeoffs.
+
+**Solved exercise:** a targeted prototype costs 8 units and is expected (under a justified model) to reduce the risk probability from 0.30 to 0.10 without affecting impact. Original expected loss is `0.30×100=30`; combined post-prototype expected expenditure is `8+0.10×100=18`. The net modeled expected benefit is **12 units**. However, if the test does not actually change risk probability and merely provides information, these arithmetic assumptions are invalid; analyze information value instead.
+
+**Decision record:** owner, trigger, consequence domain, evidence for probability, mitigation mechanism, residual risk, and contingency action. A red/yellow/green matrix is a prioritization convenience, not a risk measurement instrument.
+
 ## Follow the knowledge
 
 **Related concepts**

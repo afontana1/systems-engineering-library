@@ -66,3 +66,18 @@ Event ordering is implementation verification; an unrepresentative distribution 
 ## Guided laboratory
 
 [Open the corresponding case-based lab](labs/19-simulation-credibility-workshop.md)
+
+
+<!-- STEP04-T1-START -->
+
+## Step 04 T1 — Evidence-driven correction and worked transfer
+
+### T1 audit finding: identical numerical output is only one credibility check
+
+The T1 program deterministically replays forty synthetic request records. It checks identifier uniqueness, exhaustive terminal/pending states, nonnegative finite latency, and stable configuration-specific evidence rules. A malformed duplicate ID is rejected. Such results support **implementation verification** of these particular assertions, not model validation against real dispatch observations.
+
+The difference between 32 nominal timely served trips and 26 uncertainty-guarded timely trips is a *measurement-rule sensitivity*. The difference between ideal 99.91% redundant-channel success and 96.41% after a common-cause model is a *structural-assumption sensitivity*. Neither can be reduced by rerunning the same forty-row fixture more times. Additional Monte Carlo draws would reduce sampling noise only if the underlying generative distribution were itself warranted.
+
+**Practice and explained solution.** Alter an evidence revision from `route-2` to `route-3` while leaving its status `draft`, then rerun. The actionable evidence count should not change. If it does, the program is checking only string linkage, not the full declared contract. Write a permitted-use statement limiting this tool to classroom accounting, analytical comparisons, and evidence-gate demonstrations; field reliability and authorization claims must remain out of scope. [Run the negative cases](labs/T1-INTEGRATED-CASE.md).
+
+<!-- STEP04-T1-END -->

@@ -37,3 +37,15 @@ Vary mean interarrival time between 2, 4 and 8 minutes, and vary trip duration b
 <details><summary>Worked answer</summary>No. Holding the standard deviation fixed, width scales as `1/sqrt(n)`, so it becomes approximately `1/sqrt(2)≈0.707` times as wide.</details>
 
 **Submit:** a written estimand, seed policy, experimental matrix, confidence calculation, and a model-credibility table. Related: [v11 uncertainty chapter](../../integrated-lab/chapters/06-models-and-uncertainty.md).
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Paired Monte Carlo: precision is not credibility.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+The existing v12 experiment evaluates the same independently generated demand stream under BASE and OUTAGE for each replication. For replication `i`, define \(D_i=S_{outage,i}-S_{base,i}\), where `S` is a completion fraction. The paired sample mean is \(\bar D=\sum_i D_i/n\) and a normal-approximation interval is \(\bar D\pm 1.96s_D/\sqrt{n}\).
+
+**Reproducible result:** The preserved v12 archive contains a **20-replication** saved output (paired difference **−0.375**, approximate interval **[−0.428651, −0.321349]**). Its 20-replication replay is byte-identical. U2 deliberately runs **120** seeded streams and reports paired difference **−0.423611** and normal interval **[−0.439265, −0.407957]**. Changing replication count changes the experimental configuration, so these are not contradictory reports. This interval quantifies sampling precision *within the toy demand generator*. It does not describe model error, real-world outage frequency, or trustworthiness of synthetic assumptions.
+
+**Exercise and solution:** A manager requests ten times as many replications to make the physical model credible. More replications reduce an eligible Monte Carlo standard error by about \(\sqrt{10}\), but not bias caused by incorrect arrivals, constant travel time or missing user categories. Document separate input-validation and field-calibration plans.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

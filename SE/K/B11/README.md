@@ -21,6 +21,10 @@ This book supplies long-form explanatory chapters, example reasoning, reproducib
 - **Week 11:** [Plan and evaluate verification, validation, credibility, and accreditation for intended use](chapters/11-plan-and-evaluate-verification-validation-credibility-and-accreditat.md) → [Hypothetical lab](labs/lab-11-plan-and-evaluate-verification-validation-credibility-and-accreditat.md)
 - **Week 12:** [Apply M&S to production and sustainment, survey advanced methods, and defend the final baseline](chapters/12-apply-m-s-to-production-and-sustainment-survey-advanced-methods-and-.md) → [Hypothetical lab](labs/lab-12-apply-m-s-to-production-and-sustainment-survey-advanced-methods-and-.md)
 
+## NS-MS11.1 integrated campus mobility case
+
+All twelve chapters follow the [NS-MS11.1 decision and credibility dossier](case/INDEX.html), which includes controlled [model assumptions](case/model-assumptions.json), [requirements](case/requirements.csv), a [credibility register](case/credibility-register.csv), [simulation outputs](case/replication-output.csv), a [machine-readable summary](case/summary.json), a [process diagram](case/simulation-evidence-chain.svg) and a [reproducible Python simulator](tools/step03_book11_mobility.py). Using the course's synthetic 06:00–18:00 campus data, the current **single-request** mobility model supports a **HOLD**, not field or pilot qualification. Staffing, pooling, route travel and real-world validation are not established.
+
 ## Engineering evidence discipline
 
 Follow a traceable chain of **question → representation → assumption/data → computation or explanation → sensitivity → supported claim → owner and next evidence**. Validate mathematical examples for their assumptions, not simply arithmetic. Do not treat a hypothetical result as operational validation.

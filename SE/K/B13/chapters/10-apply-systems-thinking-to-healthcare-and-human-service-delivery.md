@@ -1,5 +1,7 @@
 # Chapter 10 — Apply systems thinking to healthcare and human-service delivery
 
+**Technical concept reading:** [Reference method: healthcare and human-service systems](../../encyclopedia/healthcare-and-human-service-systems.md). This reference includes assumptions, worked results, limits and a solved exercise.
+
 *Book 13 · EN.645.781 · Systems Thinking and Systems Dynamics · Week 10 of 12*
 
 **Study sequence:** Read this chapter → complete [Hypothetical Lab 10](../labs/lab-10-apply-systems-thinking-to-healthcare-and-human-service-delivery.md) → attempt the [original Week 10 assessment](../../../C/P3/EN645781.md) using its complete rubric. The [earlier concise companion lesson](../../P3-text/lessons/645-781-w10.md) remains available for a quick recap.
@@ -118,3 +120,27 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [09 — Previous chapter](09-apply-feedback-modeling-to-supply-management-and-inventory-dynamics.md) · [11 — Next chapter](11-design-robust-policy-portfolios-and-identify-leverage-resistance-and.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-FB13.1 case: feedback, conservation, and policy learning — Week 10
+
+*Integrated chapter: Chapter 10 — Apply systems thinking to healthcare and human-service delivery. Northstar NS-FB13.1 is a transparent teaching baseline; the following methods are not field-validated.*
+
+### Human-service systems have stocks, delays and unmeasured consequences
+
+A bed/care-capacity example can be represented with occupied beds \(C\), waiting clients \(W\), admission rate \(a\) and discharge rate \(d\), all in consistent people and people/day units. The accounting law is \(dC/dt=a-d\) while \(dW/dt=\lambda-a\) when all waiting clients remain eligible and do not abandon. This is a teaching simplification only: real hospitals require illness severity, acuity, discharge placement, care pathways, staffing, safety, exclusion criteria, mortality, privacy and equity. A model of bed flow does not justify clinical prioritization.
+
+The [worked human-service transfer](../case/human-service.csv) uses 18 beds with 15 initially occupied, demand 3.5 clients/day and a six-day mean stay represented by \(d=C/6\) discharges/day. At initial census 15, the first day's modeled discharge is \(15/6=2.5\), and admitting 3.5 leaves 16 occupied. When all 18 beds fill, daily modeled discharges approach 3.0, which is less than 3.5 incoming clients/day; the difference accumulates in the waitlist. By day 30, the model records approximately **13.11** waiting clients. This backlog is not a patient harm estimate; no outcomes or urgent exceptions are modeled.
+
+### Feedback questions that a static throughput metric misses
+
+One proposed real feedback channel is `occupancy ↑ → staff workload ↑ → turnover/absence ↑ → available beds or discharge capability ↓ → occupancy pressure ↑`. Another is delayed discharge support: increasing discharge-support capacity may reduce stay length but require upstream coordination and can shift costs to other services. The toy model includes neither workforce stocks nor heterogeneous stay times; presenting this causal loop as a numerical model outcome would be unjustified. It identifies what additional validation is needed.
+
+Policy evaluation should separate protected patient outcomes from convenience measures. A solution that reduces the queue by rejecting more referrals is not equivalent to a real capacity improvement; the same boundary warning applies to the Northstar mobility abandonment flow. For healthcare use, include independent clinical governance and operational evidence before any real-world application.
+
+**Worked exercise.** Holding 18 beds fixed, what mean stay supports 3.5 discharges/day at full occupancy under this homogeneous formula? **Solution:** solve \(18/L=3.5\), giving \(L=18/3.5\approx5.14\) days. Reducing average stay from six to about 5.14 days would make modeled full-occupancy discharge capacity equal arrivals in this *steady-state approximation*. It does **not** prove a safe or feasible discharge policy; case mix, care outcomes and day-to-day variation are absent.
+
+**Practice extension:** Add a waiting-client abandonment/referral-out stock and discuss ethical reasons for keeping it visible rather than labeling all completed discharges “success.”
+
+### Reproduce the evidence and challenge the result
+
+The [NS-FB13.1 case dossier](../case/INDEX.html) publishes its [controlled inputs](../case/model-inputs.json), [Python calculation model](../tools/step03_book13_feedback.py), [policy-by-condition evidence](../case/experiment-results.csv), [equation and unit crosswalk for Vensim](../case/vensim-equation-crosswalk.md), and [claim limitations](../case/credibility-register.csv). Reproduce results with `python3 SE/K/B13/tools/step03_book13_feedback.py --write` from the repository root. This is a **synthetic teaching simulation**: correctly conserving its stocks and reproducing its output does **not** calibrate the causal structure or authorize real mobility policy. The Book 11 event simulator and Book 12 physical vehicle model answer other questions and are not dynamically coupled.

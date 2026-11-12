@@ -85,3 +85,42 @@ Quoting a point estimate to three significant figures without a maturity stateme
 ## Put this into practice
 
 Work through [Lab 4: The Estimate Challenge](../labs/lab-04-estimating-and-reserves.md), then write a short paragraph on how the laboratory simplifies the real-world management problem. Use the [existing short Week 4 primer](../../P0-text/lessons/645-667-w04.md) for a second explanation. The assessed deliverable is defined in the original course guide, not by the hypothetical lab.
+
+## Step 03 integrated reference — reconcile a probabilistic estimate with the baseline
+
+An estimate should be traceable to a technical quantity, a unit rate, and a rule for how uncertainty changes either one. For a work package with effort \(H\), loaded rate \(r\), and purchased products \(P\), the direct estimate is
+
+\[
+C=Hr+P.
+\]
+
+The original example uses 1,800 hours, $140/hour and $90,000 in purchases, giving $342,000. The marginal sensitivities are \(\partial C/\partial H=r\) and \(\partial C/\partial r=H\): an additional 100 hours costs $14,000, while a $10/hour rate increase costs $18,000. When *both* change, the cross-product matters, so do not add independent percentage uplifts to a rounded total and call that a joint forecast.
+
+### Difference between an uncertainty distribution and a reserve decision
+
+Suppose this package has a hypothetical three-point range of $300k, $340k and $500k. The PERT-style weighted figure is \((300+4(340)+500)/6=\$360k\). The formula alone does **not** make this a defensible expected cost: one must justify the distribution, tail, scope, dependence and who elicited the values. If supplier delay and retest both occur after a common interface problem, summing independent allowances can understate the upper tail.
+
+The NS-M1 package has a $7.2M performance measurement baseline and separately controlled $0.6M management reserve. The sum $7.8M is not automatically “the cost at P80.” A probability percentile would require a cost-risk distribution that includes modeled uncertainty and dependence. The control-account budgets represent authorized work, not probability guarantees. The [case baseline](../case/northstar-management-baseline.json) explicitly keeps those categories separate.
+
+### Risk-event exposure without double counting
+
+For illustration, one synthetic supplier rework event has probability 0.25 and incremental cost $0.4M, while interface rework has probability 0.20 and cost $0.3M. The **sum of expected incremental costs** is $0.16M by linearity of expectation, even if the events are dependent, *provided the cost impacts are truly additive*. However, their **tail probabilities** and the likelihood of simultaneous losses depend on joint occurrence. If both impacts describe the same remediation, summing them at all would double count. A risk register is therefore a causal model, not merely a table of products \(p\times c\).
+
+### Complete, discrete cost-risk distribution
+
+A numerical percentile must follow an explicitly specified *joint model*, not a collection of unrelated three-point ranges. Consider two binary risk events: supplier rework adds $0.4M with marginal probability 0.25; interface rework adds $0.3M with marginal probability 0.20. **For this calculation only**, assume independence and that the impacts are additive with no overlap:
+
+| Supplier event | Interface event | Probability | Incremental cost ($M) |
+|---|---|---:|---:|
+| No | No | \(0.75(0.80)=0.60\) | 0.0 |
+| No | Yes | \(0.75(0.20)=0.15\) | 0.3 |
+| Yes | No | \(0.25(0.80)=0.20\) | 0.4 |
+| Yes | Yes | \(0.25(0.20)=0.05\) | 0.7 |
+
+The expected incremental cost is \(0.15(0.3)+0.20(0.4)+0.05(0.7)=0.16\) million, consistent with linearity of expectation. The cumulative probability reaches 0.75 at $0.3M and 0.95 at $0.4M; therefore the lower 80th and 90th percentiles both equal $0.4M in this discrete model. Calling the $0.16M expected value a “P80 reserve” would be wrong.
+
+Now impose an extreme **positive dependence** scenario in which the interface event always coincides with the supplier event. The same marginals give 0.75 probability of neither, 0.05 of supplier only ($0.4M), and 0.20 of both ($0.7M). Expected incremental cost remains $0.16M, but the 90th percentile becomes **$0.7M**. This isolates the difference between expected value and tail exposure. Neither joint model has been measured: a real program needs evidence for common causes and loss overlap, plus the appropriate scope and reserve policy.
+
+**Practice with answer.** A mitigation costs $0.03M and reduces the supplier-event probability from 0.25 to 0.10 without changing severity. Gross expected avoided cost is \((0.25-0.10)(0.4)=\$0.06M\); net expected gain is $0.03M. The mitigation might nevertheless fail a schedule, safety, or feasibility constraint, so the arithmetic is a first screen rather than automatic authorization.
+
+**Source for estimate credibility:** [GAO Cost Estimating and Assessment Guide](https://www.gao.gov/products/gao-20-195g), especially its emphasis on scope, assumptions, cross-checks, sensitivity, risk and updating estimates against actuals.

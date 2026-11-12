@@ -1,0 +1,124 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Uncertainty propagation with dependent inputs · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/correlated-uncertainty-propagation.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Uncertainty propagation with dependent inputs</h1>
+<p><em>Engineering method guide · Measurement models, covariance, Monte Carlo, tail probabilities and evidence limitations · Phase 3</em></p>
+<p><strong>Learning outcome.</strong> Given a derived engineering quantity, write the model, propagate dependent input uncertainty analytically, compare the approximation to a Monte Carlo distribution, report sampling error separately from input-model uncertainty, and explain why correlation can reverse an engineering conclusion. All inputs and outcomes here are <strong>synthetic</strong>.</p>
+<p><strong>Prerequisites:</strong> <a href="../encyclopedia/probability-and-dependence.html">Probability and dependence</a>, <a href="../encyclopedia/measurement-traceability-and-calibration.html">measurement traceability</a>, <a href="statistical-inference-and-experiments.html">statistical inference</a>, and <a href="pareto-and-robust-design.html">robust design</a>.</p>
+<h2>1. Start from the measurement or prediction model</h2>
+<p>Suppose an engineered shuttle must travel a known segment, but its actual distance \(D\) and effective speed \(V\) vary under a declared operating regime. The time in seconds is</p>
+<p>\[
+T=f(D,V)=\frac{D}{V}.
+\]</p>
+<p>The equation alone is not a stochastic model. We must specify what observations or uncertainties \(D\) and \(V\) represent, their units, their joint distribution, and the relevant population. Here set \(E[D]=120\) m, \(\sigma_D=6\) m, \(E[V]=12\) m/s, \(\sigma_V=1.2\) m/s, and \(\rho_{DV}=-0.6\). This negative correlation is an intentionally assumed teaching mechanism: conditions that lengthen the effective path also tend to slow the vehicle. It is not field evidence.</p>
+<p>Random input variation, calibration uncertainty, and uncertainty about the correct relationship \(T=f(D,V)\) are different categories. Sampling uncertain inputs through a flawed physical model does not account for model-form error. Document epistemic uncertainty in correlation and distribution choice separately from aleatory variation among operating cases.</p>
+<h2>2. Derive the first-order uncertainty result</h2>
+<p>For differentiable \(f\), linearize around the mean vector \(\boldsymbol\mu\). With gradient \(g=\nabla f(\boldsymbol\mu)\) and input covariance matrix \(\Sigma\), the first-order output variance is</p>
+<p>\[
+\operatorname{Var}(T)\approx g^\mathsf{T}\Sigma g.
+\]</p>
+<p>For the travel-time ratio,</p>
+<p>\[
+\frac{\partial T}{\partial D}=\frac{1}{\mu_V}, \qquad
+\frac{\partial T}{\partial V}=-\frac{\mu_D}{\mu_V^2}.
+\]</p>
+<p>Therefore, writing \(c=\operatorname{Cov}(D,V)=\rho\sigma_D\sigma_V\),</p>
+<p>\[
+\begin{aligned}
+u_T^2 &amp;\approx \left(\frac{\sigma_D}{\mu_V}\right)^2
+ +\left(\frac{\mu_D\sigma_V}{\mu_V^2}\right)^2
+ -2\frac{\mu_D}{\mu_V^3}\,c.\\
+ &amp;= 0.25+1.00+0.60=1.85\ \mathrm{s}^2,\\
+ u_T&amp;\approx\sqrt{1.85}=1.360\ \mathrm{s}.
+\end{aligned}
+\]</p>
+<p>The covariance is \(c=-0.6(6)(1.2)=-4.32\;\mathrm{m^2/s}\). Its term <strong>increases</strong> uncertainty because longer distance is associated with reduced speed. If an analyst incorrectly assumes independence, that term vanishes and the approximate standard deviation falls to \(\sqrt{1.25}=1.118\) seconds. A zero covariance <em>assumption</em> is not evidence that the system is independent.</p>
+<p>The nominal output \(120/12=10\) seconds is <strong>not necessarily</strong> \(E[D/V]\) for nonlinear \(f\). The delta method is a local approximation: its neglected higher-order terms matter when uncertainties are large, input distributions skew, or the denominator approaches zero.</p>
+<h2>3. Propagate the joint distribution, not two unrelated marginals</h2>
+<p>The worked Monte Carlo model constructs correlated standard normals:</p>
+<p>\[
+Z_1,Z_2\stackrel{\text{iid}}{\sim}N(0,1),\qquad
+D=120+6Z_1,\quad
+V=12+1.2\bigl(\rho Z_1+\sqrt{1-\rho^2}Z_2\bigr).
+\]</p>
+<p>This construction has the stipulated marginal means and standard deviations and correlation \(\rho\). It is a <strong>joint-input model</strong>; independently sampling the two marginal distributions would implement a different physical hypothesis. Normally distributed speed can be nonpositive, which is physically impossible. The demonstration explicitly rejects nonphysical draws and counts them; with the given parameter values this tail is extremely remote, but a safety-critical model should use a properly justified bounded input distribution and re-evaluate its dependence structure.</p>
+<p>Download or run the <a href="code/correlated_uncertainty.py">standard-library Monte Carlo example</a>. The fixed-seed results with 100,000 valid trials are:</p>
+<table>
+<thead>
+<tr>
+  <th>Result</th>
+  <th style="text-align:right">\(\rho=-0.6\) assumed dependent inputs</th>
+  <th style="text-align:right">\(\rho=0\) assumed uncorrelated inputs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>First-order \(u_T\)</td>
+  <td style="text-align:right">1.360 s</td>
+  <td style="text-align:right">1.118 s</td>
+</tr>
+<tr>
+  <td>Monte Carlo mean \(T\)</td>
+  <td style="text-align:right">10.133 s</td>
+  <td style="text-align:right">10.104 s</td>
+</tr>
+<tr>
+  <td>Monte Carlo standard deviation</td>
+  <td style="text-align:right">1.411 s</td>
+  <td style="text-align:right">1.160 s</td>
+</tr>
+<tr>
+  <td>Empirical 95th percentile</td>
+  <td style="text-align:right">12.632 s</td>
+  <td style="text-align:right">12.161 s</td>
+</tr>
+<tr>
+  <td>\(\widehat P(T&gt;12\ \mathrm{s})\)</td>
+  <td style="text-align:right">9.694%</td>
+  <td style="text-align:right">6.171%</td>
+</tr>
+<tr>
+  <td>Bernoulli Monte Carlo SE for the probability</td>
+  <td style="text-align:right">0.0936 percentage points</td>
+  <td style="text-align:right">0.0761 percentage points</td>
+</tr>
+</tbody>
+</table>
+<p>The Monte Carlo standard error quantifies <strong>finite sampling precision conditional on this input model</strong>. It does not quantify uncertainty in \(\rho\), measurement calibration, model form, nor whether Gaussian marginals hold. The large difference in estimated deadline exceedance is caused primarily by a changed dependency assumption, not Monte Carlo noise.</p>
+<p>For an event indicator \(I_i=\mathbf{1}(T_i&gt;12)\), conditional on independent Monte Carlo trials,</p>
+<p>\[
+\hat p=\frac{1}{N}\sum I_i,\qquad
+SE_{MC}(\hat p)\approx\sqrt{\frac{\hat p(1-\hat p)}{N}}.
+\]</p>
+<p>The displayed standard error is <em>not</em> a credible interval for the real system's service-failure probability. Tail uncertainty should be challenged with alternative plausible joint distributions, stress conditions, and independent measurements.</p>
+<h2>4. Separate input uncertainty, stochastic noise, and model discrepancy</h2>
+<p>An uncertainty budget should identify at least five distinguishable layers:</p>
+<ol>
+<li><strong>Natural variability:</strong> different traffic, routes, loads and ambient conditions for future missions.</li>
+<li><strong>Parameter estimation:</strong> limited data supporting \(\mu_D,\mu_V,\sigma_D,\sigma_V,\rho\).</li>
+<li><strong>Measurement error:</strong> distance calibration, timing alignment, and sensor bias (possibly shared across observations).</li>
+<li><strong>Model discrepancy:</strong> the approximation \(D/V\) omits starts, stops, turns and driver behavior.</li>
+<li><strong>Numerical/Monte Carlo error:</strong> finite sampling and arithmetic approximation.</li>
+</ol>
+<p>Adding Monte Carlo trials reduces mainly the last item. It does not transform unvalidated input correlations into accurate ones. If two sensors share a calibration offset, their measurement errors may correlate even when physical distances and speeds do not. Combining multiple uncertainty sources by root-sum-of-squares is justified for suitably modeled <strong>uncorrelated standard uncertainties</strong>, not as a universal rule.</p>
+<p>The JCGM 101:2008 GUM supplement describes propagating probability distributions through a measurement model using Monte Carlo. It is a reference method, not a claim that every stochastic engineering model is automatically metrologically qualified.</p>
+<h2>5. From uncertainty to a technical margin decision</h2>
+<p>Suppose an engineering design permits a 12-second travel segment. An analyst might calculate nominal margin \(M=12-10=2\) s and report “pass.” That ignores the uncertain tail: the hypothetical correlated-input model assigns nearly one in ten runs above the limit. Whether this is tolerable depends on the <strong>requirement type</strong>: a hard bound on all operations, a specified percentile, a per-mission probability target, or only a planning average. An inferred percentile cannot substitute for an absolute bound; a sample-proportion confidence interval cannot establish a rare failure limit from too little evidence.</p>
+<p>A decision-ready report provides an exceedance probability <em>under stated input assumptions</em>, sensitivity to correlation and tail shape, parameter confidence, operational envelope, and required test or instrumentation. If uncertainty prevents a decisive recommendation, identify which field measurement has the greatest potential value of information rather than report extra digits.</p>
+<h2>6. Replication and sensitivity exercises</h2>
+<ol>
+<li>Derive the gradient of \(D/V\) and reproduce the 1.85 \(\mathrm{s}^2\) variance expression by hand, tracking units.</li>
+<li>Run the code under \(\rho=-0.6\), \(0\), and \(+0.6\). Plot or tabulate the exceedance probabilities; explain how the physical story changes.</li>
+<li>Tighten the time requirement from 12 s to 11 s. Compare the change in \(\hat p\) with the change in its Monte Carlo standard error.</li>
+<li>Change only the random seed; show that simulation precision changes but the input-model hypothesis does not.</li>
+<li>List operational observations needed to estimate correlation <strong>without</strong> treating autocorrelated data points as independent replications.</li>
+<li>Write a one-page uncertainty budget distinguishing aleatory, epistemic, measurement and numerical sources.</li>
+</ol>
+<p><strong>Curriculum crosswalk:</strong> <a href="../../C/P3/EN645756.html">EN.645.756</a>, <a href="../../C/P3/EN645758.html">EN.645.758</a>, <a href="../B10/chapters/09-propagate-uncertainty-with-analytic-monte-carlo-simulation-and-sensi.html">Book 10 ch 9</a>, <a href="../B12/chapters/08-model-natural-and-man-made-environments-as-dynamic-correlated-scenar.html">Book 12 ch 8</a>, and <a href="../B11/chapters/03-characterize-data-quality-probability-dependence-and-stochastic-inpu.html">Book 11 ch 3</a>.</p>
+<h2>Primary technical references</h2>
+<ul>
+<li><a href="https://www.bipm.org/en/doi/10.59161/jcgm101-2008">BIPM / JCGM 101:2008, Propagation of distributions using a Monte Carlo method</a>. Method for propagating distributional uncertainty through a measurement model.</li>
+<li><a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH e-Handbook of Statistical Methods</a>. Measurement, interval and statistical-model reasoning.</li>
+<li><a href="https://standards.nasa.gov/node/263">NASA-STD-7009B, Standard for Models and Simulations</a>. Intended-use credibility of model-supported decisions.</li>
+</ul>
+<p><em>All numerical scenarios in this guide are instructional; field verification, model validation and decision authority remain separate.</em></p>
+<footer class="reference-note"><a href="correlated-uncertainty-propagation.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

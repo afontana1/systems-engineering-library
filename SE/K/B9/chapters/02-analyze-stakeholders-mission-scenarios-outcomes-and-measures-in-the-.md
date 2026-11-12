@@ -121,3 +121,25 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [01 — Previous chapter](01-receive-the-baseline-define-intended-use-and-tailor-the-mbse-method-.md) · [03 — Next chapter](03-develop-and-analyze-the-functional-architecture-from-black-box-behav.md) · [Book index](../README.md)
+
+## Step 03 integrated technical reference: NS-MBA9.1 — stakeholder outcomes are not diagram labels
+
+### Translate an outcome into a defensible measure
+
+The winter expansion has conflicting stakeholder perspectives: passengers need reasonable trip access, accessible users need reliable accommodation, operators need dispatch and energy margins, and the safety authority needs nonconflicting allocations. The [requirement register](../case/requirements.csv) derives `R01` and `R02` from service need `N01`, `R03` from accessibility need `N02`, `R04` and `R05` from energy need `N03`, and `R06` from safety need `N04`. Every derivation should identify the stakeholder, source, scenario and logical reason—not only the endpoints of an arrow.
+
+A useful measure includes **quantity, unit, population, operating state, baseline, statistic, and decision threshold**. For `R03`, *at least 95% of eligible accessible pickups within 12 minutes* is not equivalent to mean pickup time ≤12 minutes. Nor is the observed fraction from a convenient sample a guarantee about all winter operation. Consider 18 timely requests out of 20 observed: the raw sample fraction is `0.90`, which fails the stated point estimate. Even 20/20 would not independently establish the population guarantee at 95% confidence; the exact lower one-sided binomial bound would be approximately \(0.05^{1/20}\approx0.861\) under idealized independent sampling.
+
+### Build scenarios that try to invalidate the model
+
+A nominal ride workflow may omit a wheelchair boarding interval, a failed connection, charger unavailability, or two passengers requesting the same vehicle. In the model each scenario should specify its actors, preconditions, trigger, abnormal branches and observable outcome. An accessible boarding path is not satisfied merely because the logical function `F02` has a name. Its state transitions and physical capacities must be represented and eventually compared against actual operations.
+
+Traceability should run from need to requirement and then through assigned function, relevant interface/analysis and verification design. An **orphan-need** query can reveal an ignored stakeholder; it cannot determine whether that stakeholder's testimony was representative. A *stakeholder-validation* review and an *internal-model-completeness* review are related but separate activities.
+
+**Exercise.** A pilot reports a mean pickup delay of 8 minutes for 20 riders, but 4 riders waited 16 minutes. Does this meet a 95% within-12-minute requirement?
+
+<details><summary>Worked answer</summary>
+
+No, under this sample's eligibility and timing definitions: at most 16 of 20 were within 12 minutes, yielding 80%. The mean does not reveal tail-service compliance. The evidence still lacks a defined population and representative design; it is an observed sample result, not an accepted population demonstration.
+
+</details>

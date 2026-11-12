@@ -8,6 +8,8 @@
 <h1 id="companion-map-en645631--introduction-to-model-based-systems-engineering">Companion map: EN.645.631 — Introduction to Model Based Systems Engineering</h1>
 <p><strong>Phase:</strong> 1 — MBSE and software-intensive systems<br/>
 <strong>Original learning guide:</strong> <a href="../../C/P1/EN645631.html">phase-1/en-645-631-introduction-to-model-based-systems-engineering.md</a></p>
+<aside class="phase1-map" aria-label="Expanded worked methods"><strong>Expanded worked method coverage:</strong> <p><strong>Weeks 4, 8, and 10–11 — expanded technical reading:</strong> <a href="../methods/mbse-semantic-modeling-handbook.html">MBSE semantics, constraints and executable checks</a> teaches typed relation semantics, configuration-aware queries, behavioral invariants and dimensional parametrics. Use with <a href="../B3/chapters/04-requirements-modeling-relationship-semantics-.html">Book 3, Chapters 4 and 8</a>.</p>
+</aside>
 <h2 id="knowledge-lenses-for-this-course">Knowledge lenses for this course</h2>
 <ul>
 <li><a href="../encyclopedia/model-language-method-tool.html">Model, method, language, tool, and repository</a> — A model is a purposeful representation of a system for answering questions.</li>
@@ -17,6 +19,28 @@
 <li><a href="../encyclopedia/functional-vs-physical.html">Functional, logical, and physical architectures</a> — Functional architecture describes what transformations and behaviors must occur, independent of which hardware or software will perform them.</li>
 <li><a href="../encyclopedia/verification-matrix.html">Verification cross-reference matrices and test design</a> — A verification cross-reference matrix (VCRM) links each controlled requirement to verification method, level, procedure, success criterion, configuration and evidence.</li>
 </ul>
+
+<section class="phase2-expansion" id="phase2-technical-reading">
+<h2>Direct behavior and model-query method</h2>
+<p>Use <a href="../methods/mbse-behavioral-contracts.html">state contracts, invariants, and bounded model checking</a> for behavioral modeling and model-quality analysis. Students can reproduce the duplicate-assignment counterexample without a commercial modeler. Connect the result to <a href="../methods/mbse-semantic-modeling-handbook.html">typed requirements/evidence semantics</a> and to the approved model baseline; no SysML conformance is asserted by the Python teaching checker.</p>
+
+</section>
+
+<section class="phase3-expansion" id="phase3-method-reading">
+<h2>Phase 3 technical reference: Direct model constraints and executable checks</h2>
+<p>Use the <a href="../methods/uml-ocl-software-contracts.html">software-model invariant and OCL example</a> for automated cross-object consistency checks alongside the existing finite-state behavioral modeling guide. Explain what each formalism actually expresses and what its checking tool does not establish.</p>
+
+</section>
+<section class="phase4-expansion">
+<h2>Phase 4 technical reading: Validated links are not validated behavior</h2>
+<p>For weeks 10–12, the <a href="../methods/model-baselines-and-evidence.html">model audit and semantic constraints guide</a> gives a typed requirements–components–controls–evidence graph and runs an executable configuration check. It detects four stale references when fictional CM-B2 changes to CM-B3. Students must distinguish this JSON educational checker from a conformant SysML v2 parser and from full evidence adequacy.</p>
+
+</section>
+<section class="phase5-expansion">
+<h2>Phase 5 technical reading: A normative model requires normative tool checks</h2>
+<p>For the modeling-plan and structure weeks, the <a href="../methods/sysml-v2-modeling-and-traceability.html">SysML v2 textual guide</a> demonstrates <code>part def</code> versus typed usage and a separate CSV-to-baseline trace auditor. An actual conforming implementation must parse, resolve and version the model before its syntax can be treated as validated; the teaching Python code is not that implementation.</p>
+
+</section>
 <h2 id="twelve-week-topic-map">Twelve-week topic map</h2>
 <p>Read these alongside the <em>actual week headings</em> in the original guide.</p>
 <table>
@@ -36,7 +60,7 @@
 <tr>
 <td style="text-align:right">2</td>
 <td>Modeling plan, methodology, language, tool, and repository architecture</td>
-<td><a href="../encyclopedia/model-language-method-tool.html">Model, method, language, tool, and repository</a>; <a href="../encyclopedia/views-and-viewpoints.html">Architecture views, viewpoints, and consistency</a></td>
+<td><a href="../encyclopedia/model-language-method-tool.html">Model, method, language, tool, and repository</a>; <a href="../encyclopedia/views-and-viewpoints.html">Architecture views, viewpoints, and consistency</a>; <a href="../methods/sysml-v2-modeling-and-traceability.html">SysML v2 modeling and tool validation</a></td>
 </tr>
 <tr>
 <td style="text-align:right">3</td>
@@ -56,7 +80,7 @@
 <tr>
 <td style="text-align:right">6</td>
 <td>Structure, interfaces, ports, connections, and the midcourse model review</td>
-<td><a href="../encyclopedia/views-and-viewpoints.html">Architecture views, viewpoints, and consistency</a></td>
+<td><a href="../encyclopedia/views-and-viewpoints.html">Architecture views, viewpoints, and consistency</a>; <a href="../methods/sysml-v2-modeling-and-traceability.html">Structured SysML v2 usages and interface contracts</a></td>
 </tr>
 <tr>
 <td style="text-align:right">7</td>
@@ -76,17 +100,17 @@
 <tr>
 <td style="text-align:right">10</td>
 <td>Verification and validation modeling, configurations, events, and coverage</td>
-<td><a href="../encyclopedia/traceability-graph.html">Requirements traceability and impact analysis</a></td>
+<td><a href="../encyclopedia/traceability-graph.html">Requirements traceability and impact analysis</a>; <a href="../methods/model-baselines-and-evidence.html">Configuration-aware verification model</a></td>
 </tr>
 <tr>
 <td style="text-align:right">11</td>
 <td>Model quality, queries, reports, change impact, governance, and SysML transition</td>
-<td><a href="../encyclopedia/views-and-viewpoints.html">Architecture views, viewpoints, and consistency</a>; <a href="../encyclopedia/traceability-graph.html">Requirements traceability and impact analysis</a>; <a href="../encyclopedia/model-language-method-tool.html">Model, method, language, tool, and repository</a></td>
+<td><a href="../encyclopedia/views-and-viewpoints.html">Architecture views, viewpoints, and consistency</a>; <a href="../encyclopedia/traceability-graph.html">Requirements traceability and impact analysis</a>; <a href="../encyclopedia/model-language-method-tool.html">Model, method, language, tool, and repository</a>; <a href="../methods/uml-ocl-software-contracts.html">OCL model quality and consistency checks</a>; <a href="../methods/model-baselines-and-evidence.html">Typed model and currency audit</a>; <a href="../methods/sysml-v2-modeling-and-traceability.html">Language conformance versus semantic audit</a></td>
 </tr>
 <tr>
 <td style="text-align:right">12</td>
 <td>Integrated model baseline, capstone review, oral defense, and lessons learned</td>
-<td>Not yet directly covered — use knowledge lenses above</td>
+<td><a href="../methods/campus-mobility-engineering-case.html">Integrated MBSE release case</a></td>
 </tr>
 </tbody>
 </table>

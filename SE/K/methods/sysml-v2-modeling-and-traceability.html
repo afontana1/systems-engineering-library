@@ -1,0 +1,131 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SysML v2 modeling: language, architecture, traceability, and evidence · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/sysml-v2-modeling-and-traceability.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>SysML v2 modeling: language, architecture, traceability, and evidence</h1>
+<h2>1. Engineering question and intended use</h2>
+<p>How can a systems team turn a requirement, interface and design into <strong>one inspectable, versioned model</strong> without confusing diagram completeness with engineering correctness? This guide uses the fictional Campus Mobility shuttle baseline CM-B2 to separate four different propositions:</p>
+<ol>
+<li>A model <em>parses</em> according to a language grammar.</li>
+<li>Its elements and references <em>resolve</em> to a well-formed model under the language's semantics.</li>
+<li>Project-specific engineering constraints <em>hold</em> for a given configuration.</li>
+<li>Real measurements and controlled reviews <em>support</em> an engineering claim about the built system.</li>
+</ol>
+<p>These propositions are not interchangeable. A valid SysML document can describe an unsafe architecture. A verified JSON trace graph may be structurally sound without being SysML at all. A simulation that fits data does not prove a design is fit for service.</p>
+<p><strong>Prerequisites:</strong> <a href="mbse-semantic-modeling-handbook.html">model semantics</a>, <a href="model-baselines-and-evidence.html">evidence configuration</a>, <a href="mbse-behavioral-contracts.html">behavioral contracts</a>, and <a href="campus-mobility-engineering-case.html">the complete Campus Mobility case</a>.</p>
+<h2>2. What SysML v2 adds—and what it does not</h2>
+<p>OMG formally adopted <strong>SysML 2.0</strong> and its <strong>KerML 1.0</strong> foundation in 2025. SysML v2 provides textual and graphical expression for modeling structure, behavior, requirements and analysis. KerML supplies foundational semantic machinery; the separate Systems Modeling API and Services specification provides standardized access and interchange semantics. That does <strong>not</strong> make every JSON file a SysML model or ensure that two tools interpret every implementation-specific extension identically.</p>
+<p>A useful information architecture distinguishes:</p>
+<table>
+<thead>
+<tr>
+  <th>Layer</th>
+  <th>Responsible artifact</th>
+  <th>What a reviewer checks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Normative language</td>
+  <td>SysML v2 + KerML specification</td>
+  <td>Syntax, abstract syntax, semantics, language version</td>
+</tr>
+<tr>
+  <td>Model source</td>
+  <td><code>models/campus-mobility.sysml</code></td>
+  <td>Names, definitions, usage typing, resolvable references</td>
+</tr>
+<tr>
+  <td>Engineering rules</td>
+  <td>Requirement set, interface constraints and evidence links</td>
+  <td>Coverage, units, multiplicities, version applicability</td>
+</tr>
+<tr>
+  <td>Physical/empirical evidence</td>
+  <td>Test records and independent observations</td>
+  <td>Intended-use conditions, controls, provenance and uncertainty</td>
+</tr>
+<tr>
+  <td>Decision authority</td>
+  <td>Controlled review and risk disposition</td>
+  <td>Which claim is accepted, conditions, remaining defects</td>
+</tr>
+</tbody>
+</table>
+<p>The language constrains <em>representation</em>. Engineering methodology supplies <em>process</em>. Modeling tools implement parts of the language and provide diagnostics. Evidence establishes the empirical basis for claims. None should be silently substituted for another.</p>
+<h2>3. From definitions to usages</h2>
+<p>Consider an abstract shuttle as a composition of a speed sensor, brake sensor, door controller and dispatch service. In SysML v2, <code>part def</code> introduces a reusable <strong>definition</strong>; <code>part name : Type</code> introduces a <strong>usage</strong> typed by a definition. They have different identities and should not be confused with a casual grouping of diagram boxes.</p>
+<p>The <a href="models/campus-mobility.sysml">downloadable textual model</a> contains the following deliberately limited structural slice:</p>
+<pre><code class="language-sysml">package CampusMobility {
+    part def SpeedSensor;
+    part def BrakeSensor;
+    part def DoorController;
+    part def DispatchService;
+    part def Shuttle {
+        part speedSensor : SpeedSensor;
+        part brakeSensor : BrakeSensor;
+        part doorController : DoorController;
+        part dispatch : DispatchService;
+    }
+    part campusShuttle : Shuttle;
+}
+</code></pre>
+<p>This is <strong>instructional source</strong>, not a statement of conformant parsing or a complete requirements model. Formal constraints, port/item definitions, state machines, requirement satisfaction, measurements and behavior are deliberately not asserted in this skeletal example. The <code>.sysml</code> file has <strong>not</strong> been passed through an official SysML parser in this release; do that before using it as a valid-language reference.</p>
+<h3>A reproducible tool-validation procedure</h3>
+<ol>
+<li>Obtain the <a href="https://github.com/Systems-Modeling/SysML-v2-Release/releases">official OMG Systems Modeling community SysML v2 release</a>, recording the exact release and applicable language specification version (the release stream is updated regularly).</li>
+<li>Open/import <code>campus-mobility.sysml</code> in its supplied pilot textual-notation implementation. Save diagnostics, the tool version and the model file hash. <strong>If import fails, fix the source and document the difference—do not bypass diagnostics.</strong></li>
+<li>Inspect the model's semantic element listing. Confirm that <code>campusShuttle</code> is a usage of <code>Shuttle</code> and that each contained usage resolves to its intended definition. A screenshot of a diagram is not a reference-resolution test.</li>
+<li>Extend the model <strong>inside the actual implementation</strong> with the project's requirements, attributes, units, interface items and behavioral rules, using examples bundled with that implementation. Re-run parsing and semantic validations. Do not invent textual syntax from a drawing or from an unconstrained Python object graph.</li>
+<li>Export the model through a versioned supported representation/API, then explicitly map project identifiers such as <code>REQ-DOOR</code> and <code>EV-DOOR</code> to canonical stable identifiers; test the export-import round trip and differences. Keep unrecognized constructs in a discrepancy log.</li>
+</ol>
+<p><strong>Why this matters:</strong> a repository can enforce CSV linkage invariants without ever validating the grammar or semantic typing of the <code>.sysml</code> source. The <a href="code/sysml_trace_crosswalk.py">crosswalk audit</a> intentionally performs only the former.</p>
+<h2>4. A concrete end-to-end trace</h2>
+<p>The safety scenario is <em>door release during vehicle motion</em>. The stated stakeholder need <code>NEED-ACCESS</code> leads to <code>REQ-DOOR</code>; its allocated owner is <code>door-controller</code>; its related hazard is <code>H-DOOR</code>; the linked design control is <code>CTRL-DOOR</code>; and the test evidence is <code>EV-DOOR</code>. These names must remain stable across the <a href="data/campus-requirements.csv">requirements</a>, <a href="data/campus-interfaces.csv">interfaces</a>, <a href="data/campus-verification-matrix.csv">verification matrix</a>, and <a href="data/campus-mobility-release.json">model baseline</a>.</p>
+<p>A conceptual typed chain is</p>
+<p>\[
+\text{Need} \xrightarrow{\mathrm{derivedInto}} \text{Requirement}
+\xrightarrow{\mathrm{allocatedTo}} \text{Component}
+\xrightarrow{\mathrm{testedBy}} \text{Procedure}
+\xrightarrow{\mathrm{resultsIn}} \text{Evidence}.
+\]</p>
+<p>Its project rules should include:</p>
+<ul>
+<li>Every controlled requirement has a valid need, an identified allocation, a verification strategy and accountable owner.</li>
+<li>An evidence record names the <strong>tested</strong> requirement, environment, baseline, build, acceptance criterion, limitations and result. A <code>verifies</code> link alone does not assert that the test passed.</li>
+<li>Changes to allocated components or relevant interfaces trigger applicability review of associated requirements and evidence; matching link IDs are not sufficient.</li>
+<li>Safety controls use explicit state/input-validity preconditions, not merely boolean nominal threshold checks.</li>
+</ul>
+<p>For the door controller, an illustrative property is</p>
+<p>\[
+\mathrm{permitOpen} \Rightarrow
+(\mathrm{speedValid}\land\mathrm{brakeValid}
+\land v\le 0.5\;\mathrm{m/s}
+\land\mathrm{parkingBrakeEngaged}).
+\]</p>
+<p>This is an <strong>engineering invariant</strong>, <em>not</em> executable SysML v2 grammar; use an implementation-specific supported modeling construction when encoding it. The converse is not required: satisfaction of those inputs does not force the controller to open the door, because other interlocks may be active.</p>
+<h2>5. Executable trace crosswalk (and its honest boundary)</h2>
+<p>The standard-library program <a href="code/sysml_trace_crosswalk.py">sysml_trace_crosswalk.py</a> checks several concrete, reviewable rules. From the repository root:</p>
+<pre><code class="language-sh">python3 SE/K/methods/code/sysml_trace_crosswalk.py
+python3 SE/K/methods/code/model_thread_audit.py SE/K/methods/data/campus-mobility-release.json
+</code></pre>
+<p>The first checks IDs and allocations across the CSV artifact set, confirms evidence and build labels, and detects unclosed hazards. The second checks typed graph links and evidence currency. A passing result means the <strong>specified local checks passed on those particular files</strong>, not that SysML v2 was parsed or that a physical shuttle is safe. Edit a copied requirement row to change <code>allocation</code> to a nonexistent component and run the crosswalk again: it should fail. Restore the file before building the website.</p>
+<h2>6. Semantic and physical counterexamples</h2>
+<p><strong>Misleading “full coverage”:</strong> all requirements have attached evidence, but <code>EV-DOOR</code> was collected with simulated sensor inputs and does not exercise a mechanical override. Links are complete; the safety claim is not.</p>
+<p><strong>Misleading “passes parser”:</strong> a grammar-valid model assigns a controller type to an instance but neglects a freshness requirement for the incoming speed sample. Conformance is not requirement adequacy.</p>
+<p><strong>Misleading “same graph”:</strong> a controller upgrade from CM-B2 to CM-B3 leaves identical requirement IDs but changes implementation behavior. Old tests must be assessed for applicability and re-executed when necessary; re-labeling old evidence is inappropriate.</p>
+<p><strong>Misleading “same units”:</strong> a model combines 150 milliseconds with 0.5 seconds as bare floating-point numbers. Consistent data types and physical quantities with conversion rules are required for meaningful comparison.</p>
+<h2>7. Practice problems and answer tests</h2>
+<ol>
+<li>Draw the distinction between definition, typed usage, requirement, verification case and measured evidence in the example. Explain why an untyped diagram edge is insufficient to audit a relation.</li>
+<li>Suppose the speed sample age is 180 ms, and the interface contract requires no more than 150 ms. Even if the measured speed is 0.3 m/s and the brake is engaged, should the controller authorize opening? <strong>No:</strong> <code>speedValid</code> is false; the interlock remains inhibited.</li>
+<li>Change a local <em>copy</em> of the requirements CSV so <code>REQ-DOOR</code> allocates to <code>dispatch-service</code>. Predict which cross-document check will fail, then execute it.</li>
+<li>Design a parser-conformance test record containing tool version, language version, source hash, diagnostics, semantic identity checks and a review signature. Explain why none of those fields replaces operational evidence.</li>
+</ol>
+<h2>8. Sources, scope and curriculum paths</h2>
+<ul>
+<li><a href="https://www.omg.org/spec/SysML/2.0">OMG SysML 2.0 specification</a> and <a href="https://www.omg.org/spec/SysML/About-SysML/">OMG formal specification history</a> — official language scope and versions.</li>
+<li><a href="https://github.com/Systems-Modeling/SysML-v2-Release/releases">Official SysML v2 Release repository</a> — pilot implementation, language documentation, examples and updated releases; version-lock any tool-generated evidence.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — system decomposition, requirements and V&amp;V context; does not certify this illustrative model.</li>
+<li><a href="../B3/chapters/04-requirements-modeling-relationship-semantics-.html">Book 3, chapter 4</a>, <a href="../B3/chapters/06-structure-interfaces-ports-connections-and-th.html">Book 3, chapter 6</a>, <a href="../B9/chapters/11-extend-the-modeling-language-and-automate-queries-validation-rules-m.html">Book 9, chapter 11</a>; courses EN.645.631, EN.645.632 and EN.645.768.</li>
+</ul>
+<p><strong>Scope:</strong> educational design/crosswalk demonstration. No normative SysML v2 language-conformance result is claimed. A separate tool-run evidence package is required before any such claim.</p>
+<footer class="reference-note"><a href="sysml-v2-modeling-and-traceability.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

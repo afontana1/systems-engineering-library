@@ -48,4 +48,67 @@
 <p><a href="../labs/08-credibility.html">Open the lab for this chapter</a> · <a href="../labs/08-credibility.md">Download editable Markdown lab</a> · <a download href="../notebooks/08-credibility.ipynb">Open the associated notebook</a> · <a download href="../code/engineering_math.py">Download the calculation source</a></p>
 <p><strong>Authoritative follow-up reading:</strong> <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a>, <a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook</a>, and <a href="https://www.incose.org/resources-publications/technical-publications/systems-engineering-body-of-knowledge/">Systems Engineering Body of Knowledge</a>. These are independent references, not endorsements of the fictional cases.</p>
 <p><a href="../INDEX.html">Return to the quantitative textbook collection</a></p>
+
+<!-- STEP04-QUANTITATIVE-START -->
+<section class="qse-integrated" aria-label="Integrated quantitative methods case">
+<h2>Step 04 integrated case — an auditable quantitative argument, not a qualification claim</h2>
+<p>The NS-QSE4.1 release closes an eight-chapter chain: declared observations and conditioning assumptions → parameter inference → paired experiments → verified event scheduling → numerical ODE benchmarking → feedback stability analysis → constrained choice → a bounded evidence decision. It is a model-based argument whose conclusions are <strong>conditional on explicitly synthetic inputs</strong>. It does not constitute evidence that an actual regional transportation or battery system is safe or fit for use.</p>
+<h3>Distinguish three credibility questions</h3>
+<p><strong>Code verification:</strong> Does the implemented model solve its specified mathematical problem? The queue tests verify nonnegative ordered waits and service conservation. The thermal solver is compared against an analytical solution: the exact two-hour value is <strong>37.6444°C</strong>, Euler at one-hour step gives <strong>38.5600°C</strong>, and at quarter-hour steps gives <strong>37.8377°C</strong>. Convergence in this benchmark demonstrates the expected numerical behavior for this case, not the correctness of thermal physics.</p>
+<p><strong>Model validation:</strong> Is the model adequate for an explicit intended use? No independent regional dispatch measurements, validated arrival process, observed service-time distribution, route disruptions, accessibility-priority mechanisms, calibrated heat generation, or actual actuator data were supplied. A deliberately withheld <strong>synthetic generator</strong> comparison has mean error (model minus synthetic reference) <strong>−1.375 minutes</strong> and root-mean-square error \(\sqrt{\sum_{i=1}^8 e_i^2/8}\approx1.904\) minutes. This exercises discrepancy calculations but <strong>cannot be labeled field validation</strong>. It comes from an invented comparator, not independent observed behavior.</p>
+<p><strong>Decision authorization:</strong> Even a verified and validated model does not grant permission to deploy. The controlled configuration records <code>false</code> for operator, accessible-stakeholder, safety and data-governance approval. The case therefore returns <strong>HOLD</strong>, irrespective of the lowest illustrative cost score. Numeric optimization cannot set those Boolean approvals to true.</p>
+<h3>Credibility arguments must cite configurations and claims</h3>
+<p>A source-specific evidence register should record claim ID, intended operational context, input revision or SHA-256, formula or software revision, test method, expected range, observed discrepancy, reviewer, and expiry/refresh conditions. The JSON output embeds a SHA-256 hash of its precise input file. Editing the input and rerunning yields new output and a new hash; editing the input without recomputing must be treated as stale evidence. This proves <em>provenance continuity for the local file</em>, not authenticity of real measurements or external approvals.</p>
+<table>
+<thead>
+<tr>
+  <th>Claim</th>
+  <th>Evidence presently available</th>
+  <th>Boundary / missing evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Demand uncertainty is regime-dependent</td>
+  <td>Gamma–Poisson worked estimates and mixture identity</td>
+  <td>No operational sampling frame or missingness study</td>
+</tr>
+<tr>
+  <td>Queue implementation conserves requests</td>
+  <td>Deterministic trace tests and per-day counts</td>
+  <td>No shared fleet-state or real dispatch trace</td>
+</tr>
+<tr>
+  <td>Combined policy reduces synthetic storm waits</td>
+  <td>Paired common-stream comparison and bootstrap</td>
+  <td>Conditional model effects; no field causal identification</td>
+</tr>
+<tr>
+  <td>Thermal integration solves the chosen ODE</td>
+  <td>Analytic benchmark, step-size comparison</td>
+  <td>No experimentally calibrated thermal constants</td>
+</tr>
+<tr>
+  <td>Combined policy is deployable</td>
+  <td><strong>No qualifying evidence</strong></td>
+  <td>Compound timely fraction below 90% and approvals absent</td>
+</tr>
+</tbody>
+</table>
+<h3>Independent-review protocol</h3>
+<p>A reviewer should: (1) check the declared units and observation definitions; (2) regenerate <a href="../outputs/ns-qse4-results.json"><code>ns-qse4-results.json</code></a> and the daily CSV from the source; (3) run <code>python3 -m unittest discover -s SE/K/Q/code -p 'test_*.py'</code>; (4) perturb inputs using valid and intentionally invalid files; (5) verify the eight linked chapters and unchanged original labs; and (6) independently test claims against an agreed real-world reference if authorized. Sensitivity results and passing code checks are necessary but insufficient for a strong external credibility claim.</p>
+<details><summary>Worked exercises and engineering interpretation</summary>
+
+<ol>
+<li><strong>Quantitative discrepancy.</strong> For model values [9, 10] minutes and synthetic comparator [10, 12], the signed errors are [−1, −2], bias is −1.5 minutes and RMSE is \(\sqrt{(1+4)/2}=\sqrt{2.5}\approx1.581\) minutes. This remains a toy consistency check.</li>
+<li><strong>Stale evidence.</strong> The input JSON is edited to increase compound demand, but the results file is not regenerated. The prior output hash no longer matches the controlled input; previous screening claims must be marked stale.</li>
+<li><strong>Approval gate.</strong> A revised simulation meets 90% timely requests in every synthetic scenario. Can it be deployed? <strong>No.</strong> It has not established operational model validation, safety case acceptance, stakeholder rights or data authority.</li>
+</ol>
+</details>
+
+<p><strong>Review verdict:</strong> NS-QSE4.1 is suitable for a bounded teaching demonstration and independent computational examination. It is <strong>not</strong> calibrated, validated or authorized for dispatch, fleet procurement, safety certification or battery management. Further Step 05 editorial and source-to-claim review remains required.</p>
+
+</section>
+<style>@media(max-width:700px){article{max-width:100%;overflow-x:auto}article :is(p,li):has(mjx-container){max-width:100%;overflow-x:auto}}</style>
+<!-- STEP04-QUANTITATIVE-END -->
 </article></main></body></html>

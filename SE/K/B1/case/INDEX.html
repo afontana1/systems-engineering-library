@@ -1,0 +1,94 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Northstar NS-B1 — Integrated Book 1 case · Systems Engineering Library</title><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><script>window.MathJax={tex:{processEscapes:true,inlineMath:[["\(","\)"]],displayMath:[["\[","\]"]]},svg:{fontCache:"local"}};</script><script defer src="../../_assets/mathjax-svg.js"></script><link rel="stylesheet" href="../../_assets/learning-shell-v55.css"><script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B1/case/INDEX.html" data-se-mode="standard"></script></head><body><header><a href="../README.html">← Book 1</a> · <a href="../../OPEN-BOOKS.html">Textbooks</a></header><main><h1>Northstar NS-B1 — Book 1 integrated engineering case</h1>
+<p><strong>Purpose.</strong> This is a single, controlled <em>fictional</em> reference case used across all 12 chapters of <strong>Book 1 — Introduction to Systems Engineering</strong>. The case is not field data, a transport design approval, a safety certification, or a real campus operating proposal. Its small numbers are selected for transparent calculations and review discussions.</p>
+<h2>Operating concept and boundary</h2>
+<p>The system of interest is a supervised four-stop campus shuttle <strong>service</strong>, not a vehicle alone. The owned engineering scope includes the rider application, dispatch service, status gateway, supervisor console, and allocation database. Vehicle behavior, cellular infrastructure, accessible boarding operations, and emergency response must still be represented as interacting external systems or separately controlled constituents. The purpose of the exercise is to show what becomes invisible when boundaries, assumptions, and evidence are not stated.</p>
+<p>The editable <a href="northstar-reference-baseline.json">NS-B1 baseline</a> contains three stakeholder needs, four candidate requirements, component responsibilities, a deterministic emergency-status timing allocation, a sample trade study, and a synthetic common-cause hazard model. The <a href="traceability.csv">traceability CSV</a> ties each requirement to a component and verification procedure. One evidence row is <strong>deliberately stale</strong> (<code>NS-R-04</code>, test baseline NS-B0) so that a coverage audit must find a real objection instead of giving a perfect score.</p>
+<h2>Thread through the book</h2>
+<table>
+<thead>
+<tr>
+  <th style="text-align:right">Week</th>
+  <th>Learning question</th>
+  <th>Inspect or reproduce</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td style="text-align:right">1</td>
+  <td>What lies inside the system boundary?</td>
+  <td><a href="../chapters/01-what-is-the-system.html">Chapter 1</a>: need and responsibility ledger</td>
+</tr>
+<tr>
+  <td style="text-align:right">2</td>
+  <td>Which uncertainty should we test before commitment?</td>
+  <td><a href="../chapters/02-lifecycle-evidence.html">Chapter 2</a>: expected cost and perfect-information bound</td>
+</tr>
+<tr>
+  <td style="text-align:right">3</td>
+  <td>How do normal and degraded operations differ?</td>
+  <td><a href="../chapters/03-needs-and-conops.html">Chapter 3</a>: retry, cancellation, human response scenarios</td>
+</tr>
+<tr>
+  <td style="text-align:right">4</td>
+  <td>Is a requirement testable without overclaiming?</td>
+  <td><a href="../chapters/04-requirements.html">Chapter 4</a>: timing allocation with 0.85-s nominal margin</td>
+</tr>
+<tr>
+  <td style="text-align:right">5</td>
+  <td>Does the behavioral model preserve an invariant?</td>
+  <td><a href="../chapters/05-functions-and-behavior.html">Chapter 5</a>: one active allocation per reservation</td>
+</tr>
+<tr>
+  <td style="text-align:right">6</td>
+  <td>Can a review board rely on every piece of evidence?</td>
+  <td><a href="../chapters/06-reviewing-the-functional-baseline.html">Chapter 6</a>: deliberately stale NS-R-04 evidence</td>
+</tr>
+<tr>
+  <td style="text-align:right">7</td>
+  <td>Where do interface semantics become part of architecture?</td>
+  <td><a href="../chapters/07-allocating-architecture-and-interfaces.html">Chapter 7</a>: status-message schema and clock assumptions</td>
+</tr>
+<tr>
+  <td style="text-align:right">8</td>
+  <td>When does a trade-study preference reverse?</td>
+  <td><a href="../chapters/08-trade-studies-and-sensitivity.html">Chapter 8</a>: score recomputation and a third-option counterexample</td>
+</tr>
+<tr>
+  <td style="text-align:right">9</td>
+  <td>How does a change affect cost, scope, and test validity?</td>
+  <td><a href="../chapters/09-managing-the-technical-baseline.html">Chapter 9</a>: CPI, SPI, evidence currency</td>
+</tr>
+<tr>
+  <td style="text-align:right">10</td>
+  <td>Why can nominal redundancy fail?</td>
+  <td><a href="../chapters/10-failures-and-controls.html">Chapter 10</a>: conditional common-cause top event</td>
+</tr>
+<tr>
+  <td style="text-align:right">11</td>
+  <td>What does zero observed failures demonstrate?</td>
+  <td><a href="../chapters/11-realization-and-evidence.html">Chapter 11</a>: independent Bernoulli confidence bound</td>
+</tr>
+<tr>
+  <td style="text-align:right">12</td>
+  <td>What decision is evidence actually sufficient to support?</td>
+  <td><a href="../chapters/12-synthesis-and-defense.html">Chapter 12</a>: restricted laboratory integration versus operational release</td>
+</tr>
+</tbody>
+</table>
+<h2>Reproduce numerical examples</h2>
+<p>The examples require only Python's standard library:</p>
+<pre><code class="language-bash">python3 SE/K/B1/tools/step03_case_check.py
+</code></pre>
+<p>Expected values, under the declared assumptions: allocation <strong>1.65 s</strong>, nominal timing margin <strong>0.85 s</strong>, scores <strong>70.0 / 74.5 / 73.5</strong>, pairwise switch at resilience weight <strong>0.418182</strong>, shared-cause top event <strong>0.0031994 per demand</strong>, and one-sided 95% bound after 300 independent zero-failure trials approximately <strong>0.009936</strong>. The script asserts the requirements/traceability structure and detects the single intentionally stale test row.</p>
+<h2>What cannot be inferred from these checks</h2>
+<ul>
+<li>The 1.65-s allocation is not a measured end-to-end percentile or a field latency guarantee.</li>
+<li>The score ranking expresses declared values and fictional performance judgments; a real design must first satisfy noncompensable constraints.</li>
+<li>Fault-tree numbers are <em>assumed event probabilities</em> and do not establish operational safety or risk acceptance.</li>
+<li>A zero-failure binomial bound is conditional on identical, independent, representative trials and a well-defined failure event.</li>
+<li>Structural trace links cannot establish correctness, model conformance, human usability, or evidence applicability.</li>
+</ul>
+<p>For teaching references, see <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> and the connected methods under <a href="../../CONCEPTS.html">Concepts</a>. Verify edition-specific obligations, applicability, and interpretations with primary sources before using a method on a real program.</p>
+</main></body></html>

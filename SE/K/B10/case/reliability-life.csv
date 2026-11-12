@@ -1,0 +1,9 @@
+asset,exposure_hours,outcome,baseline
+MOD-01,120,failure,QA-B10
+MOD-02,190,failure,QA-B10
+MOD-03,300,failure,QA-B10
+MOD-04,360,right_censored,QA-B10
+MOD-05,360,right_censored,QA-B10
+MOD-06,360,right_censored,QA-B10
+MOD-07,360,right_censored,QA-B10
+MOD-08,360,right_censored,QA-B10

@@ -121,3 +121,25 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [06 — Previous chapter](06-analyze-factorial-experiments-interactions-diagnostics-and-confirmat.md) · [08 — Next chapter](08-analyze-reliability-availability-maintainability-degradation-and-cen.md) · [Book index](../README.md)
+
+## Step 03 integrated quantitative case: performance response models and validation
+
+The four mean latencies can be expressed as a saturated coded-factor model. Let \(x_A=-1\) for baseline and \(+1\) for optimized; \(x_B=-1\) for mild and \(+1\) for cold. Then
+
+\[
+\hat T=460-20x_A+45x_B+5x_Ax_B\quad\text{ms}.
+\]
+
+Check the four corners: mild/baseline gives 440 ms, mild/optimized 390, cold/baseline 520, and cold/optimized 490. The coefficient 5 ms corresponds to an interaction contrast of \(4\times5=20\) ms. This model fits the four *cell means* exactly because it has four coefficients for four means; that fact says nothing about predictive ability between or beyond those conditions.
+
+### Fit and validation must use different evidence
+
+An in-sample fit can report an excellent \(R^2\) while the response surface fails when demand changes. To validate a performance response model, hold out independently collected shifts or environmental conditions, evaluate mean and tail errors, and compare the model against a simple benchmark. If the regression is used to predict a p95 or service-failure risk, modeling only the conditional mean is insufficient: the residual distribution, variance changes, and clustering must also be modeled.
+
+A cold, optimized point estimate of 490 ms is only 10 ms below the 500 ms limit. Even within the constructed dataset the six optimized-cold observations include 505 ms. A model with a mean below a deadline can therefore still have violations, and engineering reserve should be assessed against the correct tail, not against the mean alone.
+
+### Applicability domain
+
+The coded \(x_A,x_B\) values are categories, not a continuous thermometer: substituting \(x_B=3\) to predict some extreme cold day is meaningless. To extrapolate temperature, replace the categorical representation with a measured continuous variable, model its physics or empirical response, and validate over the intended range. Trace to [QA-01](../case/requirements.csv), baseline `QA-B10`, and the [evidence register](../case/evidence-register.csv).
+
+**Exercise and answer.** A student reports that the exact fit to the four cell means proves predictive accuracy. Explain why not. A saturated model has no independent degrees of freedom to assess lack of fit at the mean level; it needs separate validation data, residual checks, and a defined operating envelope.

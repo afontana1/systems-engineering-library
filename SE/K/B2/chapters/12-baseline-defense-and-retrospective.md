@@ -80,3 +80,33 @@ The phrase “baseline approved” does not establish technical or operational s
 ## Put this into practice
 
 Work through [Lab 12: The Final Management Review Board](../labs/lab-12-baseline-defense-and-retrospective.md), then write a short paragraph on how the laboratory simplifies the real-world management problem. Use the [existing short Week 12 primer](../../P0-text/lessons/645-667-w12.md) for a second explanation. The assessed deliverable is defined in the original course guide, not by the hypothetical lab.
+
+## Step 03 integrated reference — defend a conditional, evidence-bounded decision
+
+The capstone should use the same controlled facts as the preceding chapters. The technical baseline is NS-B1 and the management baseline is NS-M1. The management package comprises five work accounts totaling $7.2M; a separate fictional reserve of $0.6M and fee of $0.6M yield an $8.4M illustrative offer. At month five, \(PV=3.0\), \(EV=2.4\), and \(AC=2.7\) million imply \(CPI\approx0.889\) and \(SPI=0.8\). A simple sustained-CPI forecast yields \(EAC=8.1\), $0.9M above the performance measurement baseline.
+
+### Structure the final argument
+
+1. **Mission and acceptance boundary:** what service is being promised, and which conditions remain outside demonstration scope?
+2. **Configuration and technical evidence:** exactly which requirement and system revisions are supported by accepted records?
+3. **Time and cost forecast:** what the authorized baseline was, what has actually happened, and how the forecast was computed.
+4. **Competing recovery options:** what each would change physically, financially and evidentially.
+5. **Authority and residual uncertainty:** who may approve the proposed action, what remains unverified, and when the board will reconsider.
+
+A verdict such as “proceed with supervised integration testing but do not authorize operational deployment” is legitimate if it is tied to exact unresolved findings and decision authority. It is not equivalent to declaring the entire system ready. Similarly, a board may approve a cost-control investigation without accepting the CPI-based EAC as a new contractual price.
+
+### Reconstruct the evidence chain
+
+The source package includes a [controlled JSON baseline](../case/northstar-management-baseline.json), [account data](../case/control-accounts.csv), a [decision register](../case/decision-register.csv), and a [reproducibility checker](../tools/step03_book2_project_check.py). The script verifies arithmetic consistency. It cannot establish the truth of supplier estimates, safety assumptions, actual percentage-complete measures, or deployment readiness. A defensible management review distinguishes this **internal correctness** from **external validity**.
+
+### A quantitative oral-defense question
+
+A reviewer asks why the program cannot simply use its $0.6M management reserve to make the $0.9M EAC variance disappear. **Answer:** management reserve is a separately governed budget category, not earned work or an automatic revision to BAC. Depending on the contract, authorized drawdowns may move budget to specific control accounts, but the costs remain forecast costs; a $0.9M deviation also exceeds the illustrative reserve by $0.3M and may indicate inefficiency not eligible for a reserve release. The decision must reconcile actual technical scope, risk, finance and authority.
+
+### Retrospective with calibration, not hindsight blame
+
+Compare the **ex ante** estimate, events known at approval, subsequent outcomes and root-cause categories. Note if milestone earned-credit rules rewarded incomplete artifacts, if supplier uncertainty was understated, or if a near-critical path was ignored. Update estimating reference classes and decision rules for future programs. Do not rewrite the original forecast to look prescient; preserve it so estimation quality can be evaluated.
+
+**Practice with answer.** Formulate a three-sentence release decision with one positive finding, one blocking condition, and one dated next action. An adequate response might permit controlled bench integration because component interfaces are documented; withhold operational release because NS-R-04 lacks configuration-current evidence; direct a joint technical/cost review of the retest plan before the next gate. The specific wording is an example, not an authorization.
+
+**Reference:** [GAO Cost Estimating and Assessment Guide](https://www.gao.gov/products/gao-20-195g) and [NASA Systems Engineering Handbook](https://www.nasa.gov/reference/systems-engineering-handbook/) provide relevant estimating and technical-evidence practices.

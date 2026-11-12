@@ -121,3 +121,27 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [10 — Previous chapter](10-apply-systems-thinking-to-healthcare-and-human-service-delivery.md) · [12 — Next chapter](12-defend-the-integrated-systems-insight-model-use-and-learning-strateg.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-FB13.1 case: feedback, conservation, and policy learning — Week 11
+
+*Integrated chapter: Chapter 11 — Design robust policy portfolios and identify leverage, resistance, and unintended consequences. Northstar NS-FB13.1 is a transparent teaching baseline; the following methods are not field-validated.*
+
+### Policy portfolios require more than a single attractive baseline
+
+The declared policies change three independent levers: maximum surge fraction, repair-capacity multiplier, and reserved accessible-trip capacity fraction. A comparison that holds only one lever constant may conceal an interaction; a portfolio that improves a mean can create additional wear, transfer burden between groups, or exceed budgets. We therefore report paired experiments with the same initial stocks and four structured conditions. The policy owner must predeclare trade-off priorities and unacceptable harms; a model cannot choose equitable outcomes autonomously.
+
+Under nominal assumptions, **maintenance-first** achieves about 95.73% total completion with about 4.31% accessible abandonment; **combined maintenance + access priority** achieves about 95.63% total completion with roughly 0.013% accessible abandonment. Combined's slightly lower overall completion is not numerical noise to be dismissed: allocation can reserve trips for an accessible subgroup even when standard demand is high. Meanwhile, nominal standard-group abandonment in the access-first policy rises to about 8.66% versus 7.28% status quo. All outcomes are determined by a deliberately simple capacity-reservation rule and do not estimate real rider fairness.
+
+For adverse demand (+8%), the combined policy's overall completion falls to about **91.6%** and maintenance-first to **91.8%**. A policy that passes a nominal target but fails under plausible loads may not be robust. Conversely, no monetary budget was modeled: the repair index increases from 360 to 594 for maintenance and combined, which is a relative effort surrogate only. A cost-benefit conclusion requires actual dollar estimates, procurement and staffing lead times and stakeholder-valued benefits. The original guide's improvement budget is a quarterly \$k figure and cannot be directly compared to this dimensionless index.
+
+### A transparent decision and sensitivity record
+
+Define outcomes: group-specific abandonment, completion-to-arrivals ratio, daily/peak backlog, active fleet, wear exposure and implementation burden. First reject variants violating non-negotiable access or safety constraints; then compare robust performance against variations in demand, failures, trust feedback and observation delay. The current experiment ranges are **not** probabilistic uncertainty distributions and contain no Monte Carlo sampling. Trace each recommendation to one or more model output fields and a named unverified assumption.
+
+**Worked exercise.** Which policy is “best” from the nominal totals alone? **Solution:** it is underdetermined. Maintenance-first has a marginally higher completion fraction than combined, but combined strongly improves the modeled accessible outcome at increased standard abandonment and equal repair-effort index. Without an approved equity constraint, budget valuation, evidence about demand and external legal obligations, no single utility ranking is defensible. A review can state conditional dominance under an explicit chosen objective, not universal preference.
+
+**Practice extension:** Construct a Pareto chart of completion, accessible abandonment and repair index, and report whether the status-quo policy is dominated under those *declared* metrics without claiming applicability outside the synthetic model.
+
+### Reproduce the evidence and challenge the result
+
+The [NS-FB13.1 case dossier](../case/INDEX.html) publishes its [controlled inputs](../case/model-inputs.json), [Python calculation model](../tools/step03_book13_feedback.py), [policy-by-condition evidence](../case/experiment-results.csv), [equation and unit crosswalk for Vensim](../case/vensim-equation-crosswalk.md), and [claim limitations](../case/credibility-register.csv). Reproduce results with `python3 SE/K/B13/tools/step03_book13_feedback.py --write` from the repository root. This is a **synthetic teaching simulation**: correctly conserving its stocks and reproducing its output does **not** calibrate the causal structure or authorize real mobility policy. The Book 11 event simulator and Book 12 physical vehicle model answer other questions and are not dynamically coupled.

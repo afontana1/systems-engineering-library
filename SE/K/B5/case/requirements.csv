@@ -1,0 +1,9 @@
+id,name,owner,method,acceptance
+SWS-01,Peak dispatch acknowledgment,reservation-api,load-test,p95 < 500 ms at 10/s peak; denominator includes accepted and rejected requests
+SWS-02,Service availability,platform,service-monitor,>=99.9% over declared 30-day window
+SWS-03,No duplicate vehicle assignment,allocation-store,transaction-test,zero overlapping accepted reservations per vehicle slot
+SWS-04,Fresh location evidence,telemetry-ingest,boundary-test,reject location older than five seconds
+SWS-05,Atomic business and audit events,reservation-api,transaction-test,accepted reservation and audit event commit or roll back together
+SWS-06,Build provenance,release-pipeline,artifact-inspection,deploy digest must match signed or independently trusted approval manifest
+SWS-07,Recover service,platform,recovery-drill,restore service within 15 minutes in tested fault scenarios
+SWS-08,Safe loss-of-service handling,operator-interface,operator-drill,operator receives explicit unavailable status and escalates to approved manual procedure

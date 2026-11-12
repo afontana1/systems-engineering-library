@@ -1,0 +1,97 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Engineering method guides · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/INDEX.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Engineering method guides</h1>
+<p>These guides give a full technical explanation of methods needed in the curriculum: the underlying model, assumptions, a worked engineering calculation or executable state model, interpretation, limitations, and a path to the course and textbook material. They supplement the canonical concept articles and course-aligned textbooks without displacing them.</p>
+<h2>Foundations: first set</h2>
+<ol>
+<li><a href="requirements-verification-handbook.html">Requirements engineering and verification evidence</a> — requirement formulation, timing budgets, test design, statistical acceptance, and evidence sufficiency.</li>
+<li><a href="bayesian-decision-handbook.html">Bayesian decisions and value of information</a> — posterior actions, EVPI/EVSI, sensitivity, and uncertainty.</li>
+<li><a href="mbse-semantic-modeling-handbook.html">MBSE semantics and executable checks</a> — typed graph semantics, parametric feasibility, and evidence configuration.</li>
+</ol>
+<h2>Expanded methods: second set</h2>
+<ol start="4">
+<li><a href="statistical-inference-and-experiments.html">Statistical inference and design of experiments</a> — estimands, confidence intervals, factorial effects, interactions, and reproducible experiment analysis.</li>
+<li><a href="reliability-and-censored-evidence.html">Reliability analysis with censored failure evidence</a> — hazard, exponential lifetime MLE, Kaplan–Meier, dependence, and repair-versus-survival interpretation.</li>
+<li><a href="pareto-and-robust-design.html">Pareto search, scenario regret, and robust design</a> — dominance, constraints, scenario probabilities, regret, robust feasibility, and engineering preference models.</li>
+<li><a href="mbse-behavioral-contracts.html">MBSE behavioral contracts and bounded checking</a> — transition relations, state invariants, idempotence, counterexample traces, and finite-model limitations.</li>
+</ol>
+<h2>Simulation, uncertainty, and software contracts: third set</h2>
+<ol start="8">
+<li><a href="simulation-output-and-credibility.html">Simulation output analysis and model credibility</a> — warm-up, independent replications, paired common random numbers, uncertainty intervals, verification versus validation, and NASA-style intended-use statements.</li>
+<li><a href="correlated-uncertainty-propagation.html">Uncertainty propagation with dependent inputs</a> — covariance propagation, delta method, correlated Gaussian inputs, Monte Carlo tail estimates, and input-model limitations.</li>
+<li><a href="uml-ocl-software-contracts.html">UML and OCL software contracts</a> — class-model invariants, preconditions and postconditions, snapshot counterexamples, and persistence/concurrency enforcement boundaries.</li>
+</ol>
+<h2>Safety, evidence, and one connected engineering case: fourth set</h2>
+<ol start="11">
+<li><a href="safety-fault-trees-and-assurance.html">Safety engineering, fault trees and assurance</a> — hazard/control distinction, minimal cut sets, common-cause dependencies, numeric sensitivity, and claim–evidence review.</li>
+<li><a href="model-baselines-and-evidence.html">MBSE baselines and evidence currency</a> — typed graph constraints, stale evidence, change-impact queries, and precise limits on JSON versus actual SysML v2 validation.</li>
+<li><a href="campus-mobility-engineering-case.html">Campus Mobility: integrated engineering case</a> — one synthetic case through needs, requirements, interfaces, architecture, hazard analysis, alternatives, acceptance evidence and release decision.</li>
+</ol>
+<h2>Language validation, advanced simulation, transactional correctness and case artifacts: fifth set</h2>
+<ol start="14">
+<li><a href="sysml-v2-modeling-and-traceability.html">SysML v2 modeling and traceability</a> — typed definitions and usages, trace semantics, explicit OMG pilot-parser validation procedure, and cross-document audit; the included illustration is <em>not</em> claimed as parser-validated SysML.</li>
+<li><a href="simulation-calibration-and-rare-events.html">Simulation calibration and rare-event analysis</a> — Poisson likelihood and profile interval, withheld count challenge, normal-tail importance sampling and the distinction between numerical precision and physical credibility.</li>
+<li><a href="transactional-concurrency-and-assurance.html">Transactional concurrency and assurance</a> — a reproducible check-then-act race, partial unique index, retries, local invariants and distributed boundaries.</li>
+<li><a href="campus-mobility-engineering-artifacts.html">Campus Mobility controlled artifact package</a> — editable requirement set, interface control extract, VCRM, hazard/assurance register, baseline change-impact record and auditable cross-document identities.</li>
+</ol>
+<p>Each guide has an editable Markdown source and a corresponding <code>.html</code> reader; the site uses its <strong>local MathJax</strong>, with no online math service. The reproducible programs use the Python standard library; Phases 4–5 add fault-tree, baseline-audit, document-crosswalk, calibration and transactional-concurrency programs with a controlled and a deliberately stale JSON fixture. All values are synthetic teaching examples and are not field measurements or guarantees.</p>
+<h2>Course and textbook crosswalk</h2>
+<table>
+<thead>
+<tr>
+  <th>Guide</th>
+  <th>Curriculum entry points</th>
+  <th>Core textbook starting points</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Requirements and verification</td>
+  <td>EN.645.662; EN.645.769</td>
+  <td><a href="../B1/chapters/04-requirements.html">Book 1 ch 4</a>, <a href="../B8/chapters/10-analyze-results-determine-evidence-sufficiency-and-reco.html">Book 8 ch 10</a></td>
+</tr>
+<tr>
+  <td>Bayesian decision analysis</td>
+  <td>EN.645.784</td>
+  <td><a href="../B14/chapters/11-analyze-uncertainty-sensitivity-robustness-regret-and-value-of-infor.html">Book 14 ch 11</a></td>
+</tr>
+<tr>
+  <td>MBSE semantics</td>
+  <td>EN.645.631</td>
+  <td><a href="../B3/chapters/04-requirements-modeling-relationship-semantics-.html">Book 3 ch 4</a>, <a href="../B3/chapters/08-values-units-measures-constraints-parametrics.html">ch 8</a></td>
+</tr>
+<tr>
+  <td>Statistical inference and DOE</td>
+  <td>EN.645.756; EN.645.769; EN.645.757</td>
+  <td><a href="../B10/chapters/04-use-estimation-confidence-intervals-hypothesis-equivalence-and-engin.html">Book 10 ch 4</a>, <a href="../B10/chapters/05-design-efficient-experiments-with-factors-responses-noise-power-rand.html">ch 5</a>, <a href="../B10/chapters/06-analyze-factorial-experiments-interactions-diagnostics-and-confirmat.html">ch 6</a>, <a href="../B8/chapters/04-apply-measurement-science-statistics-doe-and-sample-rat.html">Book 8 ch 4</a></td>
+</tr>
+<tr>
+  <td>Reliability and censoring</td>
+  <td>EN.645.756; EN.645.769; EN.645.768</td>
+  <td><a href="../B10/chapters/08-analyze-reliability-availability-maintainability-degradation-and-cen.html">Book 10 ch 8</a>, <a href="../B7/chapters/07-design-for-reliability-availability-and-maintainability.html">Book 7 ch 7</a></td>
+</tr>
+<tr>
+  <td>Pareto and robust trades</td>
+  <td>EN.645.784; EN.645.767</td>
+  <td><a href="../B14/chapters/04-apply-constraints-dominance-and-pareto-analysis-to-the-selection-pro.html">Book 14 ch 4</a>, <a href="../B14/chapters/08-formulate-parametric-design-and-conduct-multiobjective-search.html">ch 8</a></td>
+</tr>
+<tr>
+  <td>MBSE behavior and model checking</td>
+  <td>EN.645.631; EN.645.632; EN.605.704</td>
+  <td><a href="../B3/chapters/05-behavior-modeling-use-cases-activities-action.html">Book 3 ch 5</a>, <a href="../B3/chapters/11-model-quality-queries-reports-change-impact-g.html">ch 11</a></td>
+</tr>
+</tbody>
+</table>
+<p>| Simulation output and credibility | EN.645.757; EN.645.758 | <a href="../B11/chapters/08-analyze-transient-and-steady-state-output-with-defensible-run-contro.html">Book 11 ch 8</a>, <a href="../B11/chapters/11-plan-and-evaluate-verification-validation-credibility-and-accreditat.html">ch 11</a> |
+| Correlated uncertainty propagation | EN.645.756; EN.645.758 | <a href="../B10/chapters/09-propagate-uncertainty-with-analytic-monte-carlo-simulation-and-sensi.html">Book 10 ch 9</a>, <a href="../B12/chapters/08-model-natural-and-man-made-environments-as-dynamic-correlated-scenar.html">Book 12 ch 8</a> |
+| UML/OCL software model contracts | EN.605.704; EN.645.631 | <a href="../B3/chapters/11-model-quality-queries-reports-change-impact-g.html">Book 3 ch 11</a>, <a href="../B9/chapters/11-extend-the-modeling-language-and-automate-queries-validation-rules-m.html">Book 9 ch 11</a> |</p>
+<p>| Safety, fault trees and assurance | EN.645.764; EN.645.768; EN.645.769; EN.645.771 | <a href="../B1/chapters/10-failures-and-controls.html">Book 1 ch 10</a>, <a href="../B7/chapters/07-design-for-reliability-availability-and-maintainability.html">Book 7 ch 7</a> |
+| Model baselines and evidence currency | EN.645.631; EN.645.768; EN.645.769 | <a href="../B3/chapters/11-model-quality-queries-reports-change-impact-g.html">Book 3 ch 11</a>, <a href="../B9/chapters/11-extend-the-modeling-language-and-automate-queries-validation-rules-m.html">Book 9 ch 11</a> |
+| Campus Mobility connected case | EN.645.662; EN.645.631; EN.645.768; EN.645.769; EN.645.784 | <a href="../B1/chapters/11-realization-and-evidence.html">Book 1 ch 11</a>, <a href="../B8/chapters/08-plan-environmental-quality-reliability-maintainability-.html">Book 8 ch 8</a> |</p>
+<p>| SysML v2 language and traceability | EN.645.631; EN.645.632; EN.645.768 | <a href="../B3/chapters/04-requirements-modeling-relationship-semantics-.html">Book 3 ch 4</a>, <a href="../B9/chapters/11-extend-the-modeling-language-and-automate-queries-validation-rules-m.html">Book 9 ch 11</a> |
+| Simulation calibration and rare events | EN.645.757; EN.645.758; EN.645.756 | <a href="../B11/chapters/08-analyze-transient-and-steady-state-output-with-defensible-run-contro.html">Book 11 ch 8</a>, <a href="../B11/chapters/11-plan-and-evaluate-verification-validation-credibility-and-accreditat.html">ch 11</a> |
+| Concurrency and transactional assurance | EN.605.704; EN.645.764; EN.645.631 | <a href="../B3/chapters/05-behavior-modeling-use-cases-activities-action.html">Book 3 ch 5</a>, <a href="../B9/chapters/11-extend-the-modeling-language-and-automate-queries-validation-rules-m.html">Book 9 ch 11</a> |
+| Campus Mobility controlled artifacts | EN.645.662; EN.645.768; EN.645.769; EN.645.764 | <a href="../B1/chapters/04-requirements.html">Book 1 ch 4</a>, <a href="../B8/chapters/10-analyze-results-determine-evidence-sufficiency-and-reco.html">Book 8 ch 10</a> |</p>
+<h2>How to study a method</h2>
+<p>Start with the problem and assumptions, work the example by hand, reproduce the executable results, change one assumption and predict how the conclusion will change, then return to the course assessment. A project decision still requires validation of the relevant data, operating context, and decision authority. These guides are reference instruction, not automatic verification or certification.</p>
+<footer class="reference-note"><a href="README.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

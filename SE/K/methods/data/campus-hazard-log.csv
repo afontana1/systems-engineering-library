@@ -1,0 +1,3 @@
+id,loss,hazard,safety_constraint,controls,causal_gaps,disposition
+H-DOOR,occupant injury,door opens while moving,inhibit authorization unless sensors fresh and motion/brake conditions permit,CTRL-DOOR,common-cause input validity unvalidated; mechanical bypass not covered,OPEN
+H-DISPATCH,missed service commitment,request not acknowledged by deadline,acknowledge accepted request within 2 s at declared load,CTRL-TIME,load envelope and queue tail unknown,OPEN

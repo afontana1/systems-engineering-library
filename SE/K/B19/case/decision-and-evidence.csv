@@ -1,0 +1,5 @@
+claim,evidence_file,computed_finding,disposition,missing_independent_evidence
+Capacity-first portfolio,portfolio-screen.csv,0.85 joint scenario weight under invented probabilities,HOLD,"Consent, validation, stress and affordability review"
+Demand stress,computed-evidence.json,65 arrivals/week closure fraction below 0.95,HOLD,Observed arrival distributions and staffing
+Integrated option,portfolio-screen.csv,1.00 scenario coverage but $4.90M and 12 FTE,REJECT as bounded option,Funding and staff authorization
+Live change,scenario-screen.csv,Flood scenario breaks every affordable evaluated example,REVISE,Independent compound hazard and owner acceptance

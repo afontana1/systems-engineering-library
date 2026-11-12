@@ -1,0 +1,95 @@
+{
+  "case_id": "NS-SOS18.1",
+  "model_kind": "illustrative deterministic bottleneck screening, not field calibration",
+  "bayes": {
+    "prior_block": 0.15,
+    "first_positive_posterior": 0.6,
+    "second_independent_positive_posterior": 0.8888888888888888
+  },
+  "scenario_assumptions": [
+    "All capacities are invented trip slots over four hours, not passengers per hour",
+    "Accessible trips receive allocation priority; standard trips receive remaining shared slots",
+    "Scenario probabilities are hypothetical and sum to one; compound stress is excluded",
+    "Mitigation performance is stipulated, not validated",
+    "Independence is only asserted for the second Bayesian signal conditional on route blockage",
+    "A changed or stale constituent interface blocks evidence readiness even if numerical capacity suffices"
+  ],
+  "stress_all_policies": {
+    "status-quo": {
+      "policy": "status-quo",
+      "scenario": "compound_grid_flood",
+      "probability": null,
+      "access_path_capacity": 46.75,
+      "standard_path_capacity": 90.0,
+      "shared_capacity": 175.5,
+      "accessible_delivered": 46.75,
+      "standard_delivered": 90.0,
+      "data_age_min": 9,
+      "flow_ok": false,
+      "data_ok": false,
+      "interface_current": true,
+      "joint_screen_pass": false
+    },
+    "backup-power": {
+      "policy": "backup-power",
+      "scenario": "compound_grid_flood",
+      "probability": null,
+      "access_path_capacity": 46.75,
+      "standard_path_capacity": 90.0,
+      "shared_capacity": 175.5,
+      "accessible_delivered": 46.75,
+      "standard_delivered": 90.0,
+      "data_age_min": 9,
+      "flow_ok": false,
+      "data_ok": false,
+      "interface_current": true,
+      "joint_screen_pass": false
+    },
+    "data-federation": {
+      "policy": "data-federation",
+      "scenario": "compound_grid_flood",
+      "probability": null,
+      "access_path_capacity": 46.75,
+      "standard_path_capacity": 90.0,
+      "shared_capacity": 175.5,
+      "accessible_delivered": 46.75,
+      "standard_delivered": 90.0,
+      "data_age_min": 9,
+      "flow_ok": false,
+      "data_ok": false,
+      "interface_current": true,
+      "joint_screen_pass": false
+    },
+    "integrated": {
+      "policy": "integrated",
+      "scenario": "compound_grid_flood",
+      "probability": null,
+      "access_path_capacity": 46.75,
+      "standard_path_capacity": 90.0,
+      "shared_capacity": 175.5,
+      "accessible_delivered": 46.75,
+      "standard_delivered": 90.0,
+      "data_age_min": 9,
+      "flow_ok": false,
+      "data_ok": false,
+      "interface_current": true,
+      "joint_screen_pass": false
+    }
+  },
+  "live_constituent_change": {
+    "policy": "integrated",
+    "scenario": "normal",
+    "probability": 0.55,
+    "access_path_capacity": 70,
+    "standard_path_capacity": 260,
+    "shared_capacity": 270,
+    "accessible_delivered": 62,
+    "standard_delivered": 186,
+    "data_age_min": 2,
+    "flow_ok": true,
+    "data_ok": true,
+    "interface_current": false,
+    "joint_screen_pass": false
+  },
+  "decision": "HOLD pending real constituent agreements, performance data, interface tests, hazard review, and authorizing review"
+}

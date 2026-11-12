@@ -119,3 +119,53 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [11 — Previous chapter](11-assess-continuous-discrete-hybrid-fixed-step-real-time-hil-and-final.md) · End of the book · [Book index](../README.md)
+
+## Step 03 integrated NS-CPS12.1 case: final credibility argument and challenge defense
+
+### A claim is only as strong as its weakest relevant evidence link
+
+The final project must answer *which decision, on which model, with which evidence*. Use an assurance-style claim structure rather than presenting attractive graphs. Top-level screening claim: “NS-CPS12.1 can be independently rerun and exposes plausible energy/thermal trends for a bounded synthetic vehicle configuration.” Supporting evidence includes the controlled [inputs](../case/model-inputs.json), reference [program](../tools/step03_book12_coupled_vehicle.py), [per-sample outputs](../case/experiment-results.csv), [summary](../case/summary.json), unit/negative-input checks, conservation residuals and [credibility register](../case/credibility-register.csv). It does **not** follow that the model is validated against real vehicles, conformant with FMI/HLA, thermally safe at the cell level, or appropriate for procurement and operational deployment.
+
+### Three error classes deserve three different reviews
+
+1. **Conceptual/model-form error:** the periodic route has net elevation change, heat transfer is lumped, battery current uses a fixed-bus-voltage proxy, and real boarding, charger sharing and faults are absent. Better integration arithmetic will not cure incorrect abstractions.
+2. **Numerical/implementation error:** explicit-Euler step size, grade guard timing, force saturation, unit conversions, parameter parsing and bookkeeping require analytic benchmarks and regression tests. Conservation closure is valuable but not sufficient.
+3. **Input/evidence error:** mass/drag bounds and synthetic ambient cases are not statistically calibrated or field-validated; the 16 ranges are design probes, not real-world reliability probabilities.
+
+A defense should separate all three, specify which decision claims each threatens, and propose discriminating measurements. For example, instrumented road dynamometer measurements could assess traction power; a thermal chamber with pack thermocouples could assess gradients and \(UA\); an actual charger session could assess power taper; route topography and time stamps could close the elevation and duty-cycle gaps.
+
+### Reconstruct the important results, then challenge them
+
+The published 24-route-repetition duty cycle covers **84 km** in approximately **155.15 min** in this simplified speed-target model. Across 16 fixed-seed parameter combinations, the mean hot/low-flow battery use is **32.38 kWh**, hot/high-flow **33.36 kWh**, and the mean peak lumped temperatures approximately **41.88°C** and **40.98°C**. All configured synthetic samples meet the model's algebraic reserve, mean route time and lumped thermal screens. However, the route has nonzero net climb per repetition; its 24 repeats are *not* a true closed campus loop. The initial battery temperature is fixed, the example does not model charger sessions, and a deterministic sample pass rate is not a measured probability of system compliance. Therefore **screening calculations reproduced; design qualification HOLD** is the bounded final position.
+
+The most revealing challenge changes structure, not just numbers. Ask: *what happens if the trip returns to the same elevation; the pack starts at 43°C; coolant flow is lost; a braking event occurs on a wet grade; the vehicle is delayed at stops; controller sampling must be 10 ms?* Current results cannot answer many of those questions. That limitation is not a technicality; it is a rationale for a prioritized validation program and additional model states.
+
+### Decision argument table
+
+| Claim | Present evidence | Remaining gap | Responsible next action |
+|---|---|---|---|
+| Simulated parameter set is repeatable | seed, JSON, CSV, checked code | cross-platform tool-version lock | configuration owner records revision hashes |
+| Algebraic electrical/heat bookkeeping is consistent | computed residuals and regression | independent physical circuit/thermal model | electrical/thermal owner builds benchmark |
+| Synthetic temperature threshold not exceeded | 16 model draws per scenario | sensor hotspots, hot soak, cooling failures | thermal engineer plans instrumented tests |
+| Route trip time meets algebraic screen | model speed integration | boarding, traffic, stop dwell, vehicle interactions | operations engineer measures actual duty cycle |
+| Ready for real-time/HIL use | no evidence | WCET, jitter, signal scaling and fail-safe response | controls lead rejects HIL use pending bench tests |
+
+### Independent reproducibility procedure
+
+1. Verify [case model](../case/model-inputs.json) has version `1.0` and is not silently edited.
+2. Re-run `python SE/K/B12/tools/step03_book12_coupled_vehicle.py --write` with Python 3; compare deterministic scenario rows and machine-readable summary.
+3. Execute `python scripts/check_step03_book12.py` to exercise numerical invariants, negative inputs, all twelve publication representations and provenance checks.
+4. Review the full editorial audit and outcome crosswalk. Browser rendering and external FMI/HLA conformance are separate, documented test categories.
+5. Write the residual uncertainty, decision boundary, dissenting challenge and condition for reopening the HOLD.
+
+The above is a workflow students can follow; the published scripts must be rerun on the intended local environment rather than assumed successful in every future context.
+
+### Exercises with fully explained solutions
+
+**A.** A presenter claims 80 successful scenario runs prove an operational 100% thermal compliance rate. **Answer.** The 80 runs are deterministic combinations of five synthetic scenarios and 16 bounded parameter draws. They do not sample real deployment exposure, pack hot spots or component faults, and the route is not physical. The correct statement is 80/80 model results satisfy this *one represented lumped-temperature threshold*.
+
+**B.** An independent review reproduces the summary CSV, but field measurements show a 6°C hotspot above the modeled lumped temperature. Pass or HOLD? **Answer.** HOLD for physical qualification. Reproducibility does not override contradictory validation evidence; add spatial thermal states or a defensible hotspot margin, calibrate and rerun tests before re-evaluating.
+
+**C.** Would a conformant FMU alone justify using this model to select a battery supplier? **Answer.** No. FMI conformance establishes interface/execution requirements, not model-form adequacy, empirical calibration or acquisition fitness. The procurement decision needs controlled representative testing, requirements coverage, risk assessment and acceptance authority.
+
+**Final deliverable:** a reproducible evidence package, a worked derivation for each physical domain, sensitivity and adverse-case results, a 12-outcome evidence map, a challenged decision memo and signed review of what evidence would allow the HOLD to be reconsidered. The earlier chapters remain available as independent teaching sources, but the final decision must integrate their limits rather than stack independent “passes.”

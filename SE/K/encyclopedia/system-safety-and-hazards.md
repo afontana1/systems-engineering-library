@@ -40,6 +40,24 @@ For a design review, require the hazard-to-control-to-evidence chain, unresolved
 - **S1 · System-level and life-cycle hazard reasoning:** [NASA Office of Safety and Mission Assurance, System Safety — definition and methods](https://sma.nasa.gov/sma-disciplines/system-safety). Supports the systems-safety framing, not the illustrative stop probabilities.
 - **S2 · Safety activities in software assurance:** [NASA-STD-8739.8B, Software Assurance and Software Safety Standard — document scope](https://standards.nasa.gov/standard/nasa/nasa-std-87398). Supports systematic assurance and IV&V across software life cycle; NASA applicability is project-specific.
 
+## Phase 4 technical reading: A complete hazard-to-control calculation
+
+For a fictional shuttle's unauthorized door-open command, distinguish the loss (rider exposed to motion), hazard (door released while moving), safety constraint (speed and parking-brake conditions), and implementation control. A deliberately small fault tree defines \(T=C\lor(A\land B)\), where \(C\) is a shared-state bypass, \(A\) an incorrect command, and \(B\) an interlock failure. Assuming independent events with per-demand probabilities \(0.003\), \(0.02\), and \(0.01\), respectively, gives \(P(T)=0.003+(1-0.003)(0.02)(0.01)=0.0031994\). Omitting the common cause yields only 0.0002 and materially misstates the conditional model. These invented inputs are not a measured safety probability; the tree covers just one command pathway, not the complete physical hazard. [Work through the fault tree, FMEA distinction, dependencies and evidence claim](../methods/safety-fault-trees-and-assurance.md) and compare the same controlled baseline in the [cross-course case](../methods/campus-mobility-engineering-case.md).
+
+
+
+## Step 02 review studio — calculate a shared-cause counterexample
+
+Assume **fictional** per-demand probabilities: common-cause loss of status `0.003`, channel A failure `0.01`, channel B failure `0.02`, with conditional independence of A and B when the common cause is absent. The top event is a common cause OR simultaneous channel failures when no common cause occurred. Its probability is
+
+\[
+P(T)=0.003+(1-0.003)(0.01)(0.02)=0.0031994.
+\]
+
+A calculation treating the channels as fully independent would return `0.0002`, missing most of the modeled probability. **Solved exercise:** if only channel A improves to 0.005, the new result is `0.003+0.997(0.005)(0.02)=0.0030997`. The improvement is just `0.0000997`, demonstrating why common-cause controls may be more important than polishing an already redundant component.
+
+**Limits:** a fault-tree result is conditional on event definitions, per-demand versus time-based units, dependence assumptions, mission profile, and completeness of the hazard model. Neither illustrative probability is an operational safety target or an authorization. Evidence of control effectiveness and independent acceptance remain separate questions.
+
 ## Follow the knowledge
 
 - **Prerequisites:** [Risk versus issue](risk-vs-issue.md), [Probability and dependence](probability-and-dependence.md).

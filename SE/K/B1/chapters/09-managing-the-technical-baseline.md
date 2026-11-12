@@ -99,3 +99,36 @@ Northstar receives `CR-017`: reduce the allowable freshness age from ten seconds
 In [Hypothetical Lab 9](../labs/lab-09-technical-management.md), audit a conflicting set of change records and technical measures. Then complete the Week 9 original `662_W09_TechnicalManagement_v1.0` deliverable: SEMP, PBS/WBS crosswalk, risk and CM records, data plan, and TPMs. Do not claim baseline coherence based only on file count.
 
 **Next:** [Chapter 10 — Systemic failure and red teaming](10-failures-and-controls.md).
+
+
+## Step 03 technical studio — link cost/schedule signals to controlled product evidence
+
+A project baseline combines approved scope, versions, interfaces, planned work, resources, and verification obligations. Earned-value metrics answer questions about **performance against an agreed plan**; they do not by themselves tell you whether the intended system works.
+
+Consider an illustrative review: planned value `PV=$400k`, earned value `EV=$320k`, actual cost `AC=$360k`. Then
+
+\[
+CPI=\frac{EV}{AC}=0.889,\qquad SPI=\frac{EV}{PV}=0.80.
+\]
+
+The project has earned less budgeted work than the spending and plan imply, but neither number measures the probability of a vehicle collision or the sufficiency of a verification report. Calling a test “complete” to improve earned value when its evidence is not applicable to the current configuration is a governance failure.
+
+### Change-impact graph
+
+Suppose NS-B1 changes the status-message schema and becomes NS-B2. At least four connections deserve review: the publisher's implementation, the console's interpretation, the interface tests, and the verification evidence for NS-R-02 and NS-R-04. The [case traceability matrix](../case/traceability.csv) demonstrates a stale item even **before** that change. An impact analysis follows typed links, not a blanket assumption that a previously green test remains valid.
+
+### Solved management exercise
+
+A team proposes removing NS-R-04 from the baseline because its test is stale and re-running the test delays a milestone. Would this be a legitimate schedule recovery action? **Only if** the requirement is formally reassessed against stakeholder needs and authorized by the appropriate decision authority. Deleting a requirement simply to improve an indicator changes the product claim. The original hazard and operational need still exist even if the dashboard displays fewer failed tests.
+
+For every significant change, record the *before and after configuration*, changed obligations, affected evidence, owner, authority, and retest or justified nonimpact. This provides an auditable technical management record rather than a version label alone.
+
+## Step 03 reference deepening — a baseline is a graph of claims with dates
+
+A traceability row is not just a link from requirement to test; it asserts that a particular observation **supports a particular version** of a claim under specified assumptions. Consider the fictional NS-B1 case: a test record labelled NS-B0 may establish a property of the previous software and interface configuration. It does not automatically transfer to NS-B1. A proper change-impact review traverses requirement → allocated component → interface and configuration → procedure → evidence → acceptance decision.
+
+A minimal record therefore needs requirement revision, owner, allocated element revision, procedure version, evidence location, measured result, validity interval and disposition. Failure cases include a missing reference, a current file with an old software build, an accepted test whose instrumentation calibration expired, and a signed decision that applies only to supervised use. A checker can find structural mismatches, but engineering judgment must evaluate actual representativeness and claim sufficiency.
+
+Financial progress is related but distinct. Earned value can show more budgeted work completed while a technical baseline contains stale evidence. Conversely, a necessary safety test can be technically successful and still require a forecast revision after unplanned fixture use. Do not permit one progress indicator to overwrite the other; present cost/schedule and evidence readiness side by side at the review gate.
+
+**Practice:** If every requirement has one evidence link but half the links point to NS-B0, what is the coverage? **Answer:** syntactic trace-link coverage may be 100%, but current acceptable evidence coverage can be much lower. Report both and preserve the change history rather than retroactively relabeling old records.

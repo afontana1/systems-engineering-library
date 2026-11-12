@@ -89,3 +89,29 @@ A defensible qualification package identifies the physical configuration, calibr
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 8: Environmental and specialty qualification](../labs/lab-08-plan-environmental-quality-reliability-maintainability-.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 8 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Phase 4 technical reading: Safety evidence must cover mechanisms and modes
+
+A failure-count ratio is not a probability of system safety. A safety verification plan starts with hazards and unsafe control actions, then selects fault-injection, environmental, timing, human-factors and integration tests that challenge the controls. For the synthetic door-controller event \(C\lor(A\land B)\), one test may confirm an interlock blocks an erroneous command while still missing a shared speed-sensor fault. A trace matrix should state which cut sets and operational modes a test exercises, what configuration it covers, and what remains untested. The [safety analysis guide](../../methods/safety-fault-trees-and-assurance.md) provides the complete causal example; the [Campus Mobility case](../../methods/campus-mobility-engineering-case.md) shows a qualified evidence claim with explicit unresolved issues.
+
+## Step 03 integrated technical reference: NS-TE8.1 — reliability, environment, maintainability and acceptance
+
+### Qualification cannot be inferred from a single mean
+
+Book 7's eight-hour mission-survival calculation included an independent hazard rate and a shared failure mechanism, yielding **0.97863** against the illustrative target **0.98**. That is a *modeled failure under stated assumptions*. An evaluator must not present it as a measured fleet reliability estimate, nor erase it because a short acceptance test had no problems. Common-cause mechanisms require appropriate fault injection, design controls or representative reliability evidence; multiplying component reliabilities assumes independence that may not exist.
+
+A meaningful environmental test plan identifies the design loads: temperature, moisture, vibration, power interruptions and radio interference, with justified combined-condition sequences. Qualification tests may expose design margin; acceptance tests may screen workmanship on individual units; neither alone guarantees lifetime reliability. For test articles subjected to destructive or accelerated stresses, record whether the same article can later support operational claims and how stress history affects representativeness.
+
+### Repair logistics are system performance
+
+Availability and reliability differ. With simplified constant failure rate \(\lambda\) and repair rate \(\mu\), inherent availability is \(A_i=\mu/(\lambda+\mu)=\mathrm{MTBF}/(\mathrm{MTBF}+\mathrm{MTTR})\), but operational availability includes delays for diagnosis, spares, transport and approvals. Book 7's logistics-adjusted proxy was **0.98644**, below **0.99** even though its inherent-availability model was more favorable. A valid test program records the actual downtime clock and exclusions: a team cannot improve availability merely by stopping the stopwatch while waiting for a spare.
+
+The case's single synthetic recovery drill required **14 minutes**, violating the **12-minute** threshold. One failure is important evidence of nonconformance in the particular scenario, but cannot precisely estimate the full recovery-time distribution. Plan follow-up tests after corrective action; never delete the failing observation from the configuration's record.
+
+**Exercise.** A team passes a 30-minute functional acceptance check and declares the 0.99 operational availability requirement verified. What is wrong?
+
+<details><summary>Worked answer</summary>
+
+A successful short functional test cannot characterize repair/logistics delays or long-term uptime fraction. Record acceptance scope separately, collect duration and failure data under representative support conditions, and justify an availability estimate with uncertainty and relevant common-cause assumptions.
+
+</details>

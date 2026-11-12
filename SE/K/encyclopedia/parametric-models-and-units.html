@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Parametric models: constraints, dimensions, and defensible calculations · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/encyclopedia/parametric-models-and-units.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical explanation</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Parametric models: constraints, dimensions, and defensible calculations</h1>
+<p><strong>Reference entry · MBSE and quantitative engineering · Worked technical treatment</strong></p>
+<h2>What a parametric model asserts</h2>
+<p>A <strong>parametric model</strong> connects measured, assumed, or designed quantities through equations and inequalities. Unlike a labeled block diagram, it makes a testable quantitative claim: if the declared parameters and model assumptions hold, the calculated relation should hold. In an MBSE environment the constraint may be attached to parts, interfaces, allocations, and verification results, but a diagram by itself does not execute, calibrate, or validate the equation.</p>
+<p>A useful constraint record includes: identifier; input and output quantities with units; expression; admissible domain; parameter source; configuration or version; uncertainty; solver assumptions; and a test that could falsify the claim. Distinguish a <em>definition</em> (such as power being energy per time), a <em>physical approximation</em> (constant efficiency), and a <em>requirement</em> (power shall not exceed an electrical limit).</p>
+<h2>Dimensions are part of the semantics</h2>
+<p>For propulsion, idealized mechanical power is force times speed, \(P_m=Fv\); electrical input power under a constant efficiency assumption is</p>
+<p>\[
+P_e=\frac{Fv}{\eta},\qquad 0&lt;\eta\leq1.
+\]</p>
+<p>Here \(F\) is measured in newtons, \(v\) in metres per second, \(\eta\) is dimensionless, and \(P_e\) is watts. The expression is <strong>not</strong> a general battery model: it omits startup transients, regeneration, temperature effects, auxiliary loads, conversion losses, and duty-cycle dependence. Every omitted mechanism is a model-form limitation, not merely a missing decimal place.</p>
+<p>Suppose a hypothetical Campus Mobility shuttle requires \(F=1{,}200\,\mathrm N\) at \(v=2.0\,\mathrm{m/s}\), with \(\eta=0.80\). Then \(P_m=2{,}400\,\mathrm W\) and \(P_e=3{,}000\,\mathrm W\). For ten minutes at those assumed constants,</p>
+<p>\[
+E=P_e t=3\,\mathrm{kW}\times\frac{10}{60}\,\mathrm h=0.50\,\mathrm{kWh}.
+\]</p>
+<p>The number is an illustrative energy increment, <strong>not</strong> a real vehicle energy or range estimate. Confusing watts, watt-hours, kilowatts, and kilowatt-hours is a dimensional error; multiplying kW by seconds without converting time is a numerical error.</p>
+<h2>Link the model to architecture and requirements</h2>
+<p>An executable trace might be: <code>REQ-POWER</code> -&gt; <code>batterySubsystem.maxDischargePower</code> -&gt; <code>tractionController</code> -&gt; <code>PARAM-POWER-01</code> -&gt; <code>TEST-POWER-02</code>. This is not verified merely because every identifier exists. The relation also needs compatible quantity types, consistent assumptions, and evidence valid for the system version. If a motor controller changes from a nominal 80% efficiency model to a measured efficiency surface, the input relation and its uncertainty need review.</p>
+<p>Require \(P_e\leq3.2\,\mathrm{kW}\) under the specified scenario. The calculated 3.0 kW is only a <strong>model-predicted margin</strong> of 0.2 kW. A system test with sensor uncertainty may produce a different acceptance decision; see <a href="measurement-traceability-and-calibration.html">measurement uncertainty and guard bands</a>.</p>
+<h2>Sensitivity and uncertainty</h2>
+<p>Under the stated equation, local sensitivities are \(\partial P_e/\partial F=v/\eta\), \(\partial P_e/\partial v=F/\eta\), and \(\partial P_e/\partial\eta=-Fv/\eta^2\). These derivatives reveal why uncertain efficiency can have asymmetric consequences, especially near small \(\eta\). When input estimates are correlated, use covariance propagation or a justified Monte Carlo model rather than summing isolated error bars. A plausible-looking parametric diagram cannot compensate for an uncalibrated efficiency assumption.</p>
+<h2>Practical audit and exercise</h2>
+<p>For every quantitative constraint: (1) list quantities and dimensions; (2) state feasible input ranges; (3) check limiting cases; (4) reproduce one result independently; (5) apply a negative test such as \(\eta=0\) or inconsistent units; (6) record the model and evidence versions. Recalculate the example for \(\eta=0.70\): does the same 3.2 kW limit still hold? It does not: \(P_e=3.4286\,\mathrm{kW}\), under otherwise unchanged assumptions. Explain why the boundary is about the assumed operating point, not guaranteed lifetime compliance.</p>
+<h2>References and connections</h2>
+<ul>
+<li><a href="https://standards.nasa.gov/node/3111">NASA Systems Modeling Handbook for Systems Engineering, NASA-HDBK-1009</a> — model elements and engineering work products.</li>
+<li><a href="https://www.omg.org/spec/SysML/2.0">OMG SysML v2 specification</a> — language semantics; a language-conformant parser must validate any purported SysML text independently.</li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/">NIST/SEMATECH Engineering Statistics Handbook</a> — uncertainty, modeling and experimental validation.</li>
+<li>Related: <a href="model-language-method-tool.html">model, method, language and tool</a>; <a href="model-queries-and-validation.html">model queries and validation rules</a>; <a href="../methods/correlated-uncertainty-propagation.html">correlated input uncertainty</a>.</li>
+</ul>
+<p><em>Scope:</em> All numbers are hypothetical teaching values. The constraints are explanatory mathematical expressions, not a certified SysML v2 model or safety justification.</p>
+<p><strong>Reproducible companion:</strong> <a href="examples/step02_examples.py">Step 02 worked examples (standard-library Python)</a>. Run <code>python3 step02_examples.py --case all</code> from the downloaded examples folder; the program prints the declared synthetic inputs and computed results.</p>
+</article><nav class="standalone-actions"><a href="metrics-hierarchy.html">Read concept</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="metrics-hierarchy.md">Editable Markdown</a></nav></main></body></html>

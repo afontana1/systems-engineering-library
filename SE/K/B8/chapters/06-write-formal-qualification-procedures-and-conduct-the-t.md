@@ -96,3 +96,25 @@ For Northstar, consider a braking test whose result depends on commanded speed, 
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 6: Qualification procedures and readiness](../labs/lab-06-write-formal-qualification-procedures-and-conduct-the-t.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 6 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-TE8.1 — procedures and an evidence-aware Test Readiness Review
+
+### Make the test repeatable enough to be challenged
+
+A qualified procedure identifies purpose, requirement, article and instrument identifiers, calibration status, prerequisites, hazards, stimuli, operator steps, data collection, expected result, stop conditions, deviations and signatures. For TE8-R01 the procedure must define the *start event* and *end event* for every latency datum. It must also specify how lost, truncated or duplicated responses count: silently removing a timeout from the denominator biases a tail-performance result in the favorable direction.
+
+The [test-plan extract](../case/test-plan.csv) is a concise control register, not a substitute for a fully approved procedural package. The [evidence register](../case/evidence-register.csv) must join the procedure version and article baseline to each result. A readiness review also examines test personnel, equipment and software dependencies, test safety, schedule, data integrity, contingency actions, and the authority to stop on unexpected behavior.
+
+### Distinguish readiness to test from readiness to deploy
+
+A readiness review may authorize a **bounded diagnostic experiment** while forbidding unrestricted field operation. For example, TE8-R03 reliability and TE8-R04 availability have **failed model assessments**, but controlled tests could still legitimately gather missing failure-rate and logistics data, with hazard mitigations. Likewise, TE8-R08 replay-defense testing is still **planned**. It may be suitable for a segregated cyber test bench but not live autonomous dispatch.
+
+Define a disposition table: READY (environment and safety controls satisfied), READY WITH RESTRICTIONS (specified safe envelope), and NOT READY (uncontrolled hazard or invalid instruments). This status concerns the upcoming *test*, not the underlying requirement. Explicit distinction prevents 'TRR passed' from being reported as 'product qualified.'
+
+**Exercise.** A team wants to run TE8-P-07 replay injection on an operating fleet because it can gather realistic logs. What review question blocks immediate approval?
+
+<details><summary>Worked answer</summary>
+
+A deliberately invalid command could actuate an unsafe controller. Require a segregated or appropriately safeguarded environment, declared stop conditions, independent authorization, and a controlled baseline before test start. Realism does not override test safety.
+
+</details>

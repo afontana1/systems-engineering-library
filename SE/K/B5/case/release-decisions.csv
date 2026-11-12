@@ -1,0 +1,6 @@
+decision,candidate,datum,threshold,disposition
+DEC-01,NS-SW5.1,peak p95 model proxy 469.57 ms,<500 ms,PASS MODEL ONLY
+DEC-02,NS-SW5.1,"36 observed minutes, 7.2 remaining",43.2 allowed minutes,AT RISK
+DEC-03,NS-SW5.1,9 additional hypothetical canary outage minutes,remaining budget 7.2 min,DO NOT DEPLOY
+DEC-04,NS-SW5.1,build attestation NS-SW5.0,must equal NS-SW5.1,BLOCK
+DEC-05,NS-SW5.1,recovery drill not executed,<15 min observed,BLOCK

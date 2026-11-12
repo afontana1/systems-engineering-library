@@ -40,6 +40,15 @@ A security case should state authorized outcomes, credible threats, countermeasu
 - **C1 · Security integrated in systems engineering and protection needs:** [NIST SP 800-160 Volume 1 Revision 1, Engineering Trustworthy Secure Systems — abstract and scope](https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final).
 - **C2 · Resilience against adverse cyber conditions:** [NIST SP 800-160 Volume 2 Revision 1, Developing Cyber-Resilient Systems — abstract](https://csrc.nist.gov/pubs/sp/800/160/v2/r1/final).
 
+
+## Step 02 review exercise: freshness, clock skew and replay
+
+A signed authorization message is not necessarily current. Suppose a controller rejects commands when their measured age exceeds **30 seconds** and its clock may run up to **4 seconds ahead** of the sender's verified timestamp. A command truly **29 seconds old** can appear **33 seconds old**, producing a false rejection. Conversely, a controller up to four seconds *behind* may accept a command truly **33 seconds old** as 29 seconds old. If acceptance must guarantee true age no greater than 30 seconds under those assumptions, the measured-age threshold must be at most **26 seconds** (30 − 4), and legitimate messages may be rejected more often. This illustrates why timing tolerance is part of the safety/security architecture.
+
+The check also requires authenticated time origin, sequence-number replay defense, bounded communication latency, and correct authorization for the **current operating mode**. A device that lacks reliable time should not blindly accept stale commands simply because signatures verify. Specify a safe degraded behavior and test clock reset, key rotation, offline recovery and duplicate messages.
+
+**Exercise (answer).** If the allowed true age is 20 s and maximum clock error is ±3 s, the conservative measured threshold is **17 s**. An acceptance threshold alone does not prove replay resistance; an attacker could replay a still-fresh authorized command unless ordering or nonce requirements prevent it.
+
 ## Follow the knowledge
 
 - **Prerequisites:** [System boundaries](system-of-interest.md), [Risk and issue distinction](risk-vs-issue.md).

@@ -74,3 +74,31 @@ Proposal evidence must survive the transition to project execution. The work bre
 ## Put this into practice
 
 Work through [Lab 2: The Bid/No-Bid Table](../labs/lab-02-rfp-and-proposal-strategy.md), then write a short paragraph on how the laboratory simplifies the real-world management problem. Use the [existing short Week 2 primer](../../P0-text/lessons/645-667-w02.md) for a second explanation. The assessed deliverable is defined in the original course guide, not by the hypothetical lab.
+
+## Step 03 integrated reference — a compliance argument before a price
+
+A response to a request for proposals is a controlled claim about what the team will deliver, under what assumptions, at what price and by what date. Begin by decomposing each solicitation statement into **mandatory qualification**, **technical performance**, **management response**, **evaluation evidence** and **commercial qualification**. A statement such as “demonstrate current verification records for all emergency-message requirements” is not satisfied by describing a future intent to test. It needs an exact artifact, configuration, and an evidence status.
+
+### A miniature compliance crosswalk
+
+| Solicitation obligation | Northstar response | Evidence status | Proposal consequence |
+|---|---|---|---|
+| Controlled technical baseline | NS-B1 specification | Available | Cite baseline revision |
+| Emergency status latency | NS-R-02, 2.5-second allocation | Budget analysis only | Promise verification campaign, do not claim measured compliance |
+| Evidence currency | Current test for NS-R-04 | Missing/currentness unresolved | List exception or no-bid if mandatory at submission |
+| Price ceiling $8.5M | NS-M1 illustrative offer $8.4M | Arithmetic checked | $0.1M nominal price headroom, not risk reserve |
+
+Under the **fictional pricing convention** in the [NS-M1 source data](../case/northstar-management-baseline.json), $7.2M PMB plus $0.6M management reserve plus $0.6M fee gives an $8.4M offer. That identity is not universal for procurement. Distinguish the project budget, fee, estimated cost, target price and any contractual incentive structure before comparing bids. A price below the ceiling does not establish technical readiness or cost realism.
+
+### Bid/no-bid as constrained choice
+
+Model proposal selection as a feasible-set problem. Let \(b\in\{0,1\}\) denote bidding and \(h_j\in\{0,1\}\) denote satisfaction of each **non-waivable** obligation. If submission requires all mandatory conditions, then
+
+\[
+b\le h_j\quad\text{for each mandatory }j.\]
+
+A strong expected profit cannot compensate for a missing mandatory authorization. For feasible bids, estimate delivery cost, risk exposure, opportunity cost, and probability of award separately. Suppose a synthetic response costs $90,000, the gross contribution if awarded is $350,000, and the probability of award is 0.25. Its expected net contribution is \(0.25(350{,}000)-90{,}000=-\$2{,}500\), *before* delivery-tail risk. Expected value is not the only criterion: portfolio strategy, capability learning, and mission fit may matter, but should be recorded explicitly rather than smuggled into a probability.
+
+**Practice with answer.** Recompute the threshold award probability at which the above contribution becomes nonnegative. **Answer:** \(p=90{,}000/350{,}000\approx0.2571\). This is conditional on the assumed contribution, cost, risk definition and that no hard solicitation constraint fails.
+
+**Source for proposal/cost-estimate discipline:** [GAO Cost Estimating and Assessment Guide](https://www.gao.gov/products/gao-20-195g). Its documented ground rules, estimate purpose, technical baseline and independent review are especially important when commitments depend on immature designs.

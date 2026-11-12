@@ -75,6 +75,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [NIST · SP 800-160 Vol. 1 Rev. 1, Engineering Trustworthy Secure Systems (2022)](https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final) — System-level security and trustworthiness engineering.
 
+
+
+## Step 02 review studio — an external dependency is still an engineering obligation
+
+A dispatch team declares that the cellular network is “outside the system boundary” and therefore not its problem. Ownership and influence are different: the project may not control the carrier, but it must define acceptable latency/loss assumptions, degraded operations, and verification conditions for the interface. Boundary exclusion does not erase **dependency management**.
+
+**Solved exercise:** a status budget allocates 0.35 s detection, 0.25 s gateway, 0.70 s network, and 0.35 s display, totaling 1.65 s. With a 2.5-s system target, margin is 0.85 s. If a peak-load transport test measures 1.8 s, the original stage assumptions no longer fit: total becomes 2.75 s. The remedy is not to reclassify the network as external; it is to revise the design, operating domain, or defensible system claim and retest.
+
+**Boundary review:** list every crossing by exchanged information/energy/material, responsible organization, interface units, failure responses, and evidence source. A component diagram can be complete while an end-to-end mission thread remains broken.
+
 ## Follow the knowledge
 
 **Related concepts**

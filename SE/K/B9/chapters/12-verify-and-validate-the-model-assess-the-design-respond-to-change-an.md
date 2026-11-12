@@ -121,3 +121,29 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [11 — Previous chapter](11-extend-the-modeling-language-and-automate-queries-validation-rules-m.md) · End of the book · [Book index](../README.md)
+
+## Step 03 integrated technical reference: NS-MBA9.1 — defend a conditional decision
+
+### Build a review argument from reproducible claims
+
+The final product is not twelve isolated diagrams; it is a **controlled, revisable chain of assumptions, relations, calculations and evidence**. For NS-MBA9.1, the declared deterministic screen supports choosing variant B for further analysis: its 15 trips/hour ideal capacity exceeds 14, its assumed 240-kWh daily energy is below 260, and its nominal charging recovery of 270 kWh exceeds demand by 30 kWh. But `R03` has only a planned accessible-service test, `R06` has only an earlier-baseline concurrency test, and `R02` has a point-model latency result rather than an operational percentile demonstration. The disposition must therefore be **CONDITIONAL STUDY ONLY**.
+
+When supplier request CR-42 changes charger power and efficiency, the reexecution reduces B's modeled recharge from 270 to 221.4 kWh and reverses its charging feasibility screen. The dependency query identifies `I02 → M05 → R05 → E05`. A fifth charger restores an idealized 36.75-kWh recovery margin, but still needs procurement, installation, fire/safety, electrical-load and operating-envelope checks. Never let proposed remediation overwrite the original failure or erase the change history.
+
+### Verification, validation and decision authority have distinct roles
+
+*Model verification* covers consistency against intended representation: typed links, units, calculated results, schemas and query behavior. *Model validation* asks whether the abstraction fits its decision context and whether inputs/behavior resemble representative operations. *System verification* assesses actual obligations on an identified test article. *Decision authorization* accepts residual risks with accountable governance. Passing any one does not imply the others.
+
+Prepare a defense by attempting to invalidate your strongest claim: raise cycle time above the 51.43-minute threshold, perturb charge efficiency, remove an essential trace relationship, insert a stale test record, and test a duplicated resource allocation. The [case checker](../tools/step03_book9_model_check.py) will detect certain structural and numerical problems; it **cannot** discover every omitted real-world risk or prove SysML language conformance.
+
+### Review deliverables and unresolved evidence
+
+Provide a model baseline manifest, requirement source rationale, scenario coverage, typed trace matrix, functioning analyses and unit policy, variant comparison, change-impact report, reviewed evidence statuses, and explicit decision conditions. Record who can approve a waiver, who owns each remaining test, what operating envelope will be sampled, and which baselines are permitted for the next study. Preserve all counterexamples as part of the review record.
+
+**Exercise.** A review board sees four `MODELED` items, one `PLANNED` item and one `STALE` item. The four modeled calculations all pass their screens. May the board declare `6/6 requirements verified`?
+
+<details><summary>Worked answer</summary>
+
+No. Four model-based estimates are conditional analysis, not automatically executed system verification. One field experiment is unexecuted, and the other demonstration belongs to a different configuration. The correct decision is a documented **conditional study recommendation**, with owner-assigned evidence actions and no operational approval. If future trials contradict the model, update the claims rather than defending the original recommendation by rhetorical certainty.
+
+</details>

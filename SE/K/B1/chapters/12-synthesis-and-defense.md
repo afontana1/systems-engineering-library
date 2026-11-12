@@ -118,3 +118,38 @@ A final baseline can be represented conceptually as `B = (configuration, require
 Complete [Hypothetical Lab 12](../labs/lab-12-final-defense.md), then assemble the **original Week 12 controlled final package and oral defense**. Use its own final assessment rubric and critical mastery gates. Your fictional Northstar lab is a stepping stone; the course requires your independent synthesis, transparent assumptions, reproducible claims, and a professional roadmap.
 
 **Review:** [Chapter 1 — System boundary](01-what-is-the-system.md) · [Chapter 4 — Requirements](04-requirements.md) · [Chapter 8 — Trade study](08-trade-studies-and-sensitivity.md).
+
+
+## Step 03 technical studio — defend a conditional engineering decision
+
+At the final concept review, Northstar proposes a **restricted supervised demonstrator**, not unrestricted service. Its evidence package combines the [NS-B1 requirements and allocations](../case/northstar-reference-baseline.json), the [traceability matrix](../case/traceability.csv), interface timing budgets, trade-study sensitivity, hazard reasoning, and configuration-aware verification records. The purpose of synthesis is to show how these **different kinds of claim** fit together—not to average their confidence scores.
+
+### The argument structure
+
+1. **Need and purpose:** describe the rider and operator outcomes sought, including accessibility and controlled service limits.
+2. **Design claim:** explain which architecture and contracts are proposed, with mandatory constraints and competing alternatives.
+3. **Evidence claim:** specify observed data, analysis, test method, configuration, and residual uncertainty for each high-consequence requirement.
+4. **Counterargument:** record independent concerns such as common-cause failure, stale test applicability, and unvalidated passenger experience.
+5. **Decision request:** state the precise authorization sought and what remains prohibited.
+
+Consider the quantitative evidence together: the latency allocation totals 1.65 s against a 2.50 s budget, the federated concept scores 74.5 against 73.5 for the demonstrator under one weight vector, and an illustrative common-cause hazard model yields 0.0031994 per demand. These numbers are **not interchangeable**. The first is an allocation, the second a modeled preference, and the third an assumed-event probability. None by itself establishes operational safety or validates the operating concept.
+
+### Solved final-defense exercise
+
+The review board is shown four of four requirement rows, one old report for NS-R-04, and no representative human-systems evaluation. Is “full operational approval” justified? **No.** A reasonable concept-stage decision may allow *limited laboratory integration with conditions* while withholding live-operation authorization pending evidence currency, end-to-end testing, safety review, and stakeholder validation. A board should define the allowed next experiment rather than infer deployment authority from an attractive scorecard.
+
+### Source and reproducibility standard
+
+The case calculations can be recomputed with `python3 SE/K/B1/tools/step03_case_check.py` from the repository root. General lifecycle and assurance terminology should be cross-checked with the [NASA Systems Engineering Handbook](https://www.nasa.gov/reference/systems-engineering-handbook/) and the relevant course requirements. All example probabilities, costs, scores, and operational conditions here are invented; they establish learning procedures, not project acceptance.
+
+## Step 03 reference deepening — build a defensible final claim graph
+
+The capstone should make the logical form of its assertions visible. For example: **claim:** NS-B1 supports a supervised dispatch demonstration within a defined test envelope; **argument:** the architecture allocates requirements, interfaces meet defined budgets in verified scenarios, hazard controls are traced and test records apply to the controlled configuration; **evidence:** specifications, timing tests, model audits, risk reviews and signed restrictions. Any missing or stale evidence weakens the corresponding branch; a large pile of unrelated documents cannot fill it.
+
+For the fictional interface latency, the 1.65-second allocated sum has 0.85-second nominal margin against the 2.5-second budget. For the fictional common-cause fault tree, the model yields 0.0031994 per demand under stated assumed probabilities. The first is **budget arithmetic**, the second is **conditional risk-model output**. Neither is a verified production latency or approved operational safety probability. A defensible review separates these evidence categories on the front page rather than presenting both as equally established measurements.
+
+![A bounded acceptance argument linking need, technical allocation, configuration-specific test and decision](../figures/ns-b1-assurance-chain.svg)
+
+Create a final board table with claim ID, evidence revision, contradictory evidence, assumption, uncertainty, authority and allowed next action. If NS-R-04 remains supported only by NS-B0 evidence, a responsible decision might authorize more controlled bench testing but withhold release pending a current configuration-specific test. A project-management forecast belongs beside the technical decision but does not substitute for it.
+
+**Practice:** The final packet shows 100% trace links, a favorable demonstration video and a missing current safety-relevant test. **Answer:** deny blanket readiness; describe which claim is unsupported, commission the exact missing evidence, and preserve the decision record and dissent. The job is to explain the boundary of what has been established, not to defend the attractiveness of the presentation.

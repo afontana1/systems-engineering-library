@@ -1,0 +1,313 @@
+{
+  "case_id": "NS-T4.1",
+  "provenance": "entirely synthetic; no operational observations",
+  "intended_use": "classroom capacity screening",
+  "expected_revision": "route-3",
+  "latency_limit_s": 8.0,
+  "clock_uncertainty_s": 0.8,
+  "requests": [
+    {
+      "id": "T001",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 5.7
+    },
+    {
+      "id": "T002",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 6.0
+    },
+    {
+      "id": "T003",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 6.3
+    },
+    {
+      "id": "T004",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 6.6
+    },
+    {
+      "id": "T005",
+      "status": "served",
+      "accessible": true,
+      "latency_s": 6.9
+    },
+    {
+      "id": "T006",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 7.2
+    },
+    {
+      "id": "T007",
+      "status": "rejected",
+      "accessible": false,
+      "latency_s": null
+    },
+    {
+      "id": "T008",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 7.8
+    },
+    {
+      "id": "T009",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 5.4
+    },
+    {
+      "id": "T010",
+      "status": "served",
+      "accessible": true,
+      "latency_s": 5.7
+    },
+    {
+      "id": "T011",
+      "status": "pending",
+      "accessible": false,
+      "latency_s": null
+    },
+    {
+      "id": "T012",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 6.3
+    },
+    {
+      "id": "T013",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 6.6
+    },
+    {
+      "id": "T014",
+      "status": "rejected",
+      "accessible": false,
+      "latency_s": null
+    },
+    {
+      "id": "T015",
+      "status": "served",
+      "accessible": true,
+      "latency_s": 7.2
+    },
+    {
+      "id": "T016",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 7.5
+    },
+    {
+      "id": "T017",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 7.8
+    },
+    {
+      "id": "T018",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 5.4
+    },
+    {
+      "id": "T019",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 5.7
+    },
+    {
+      "id": "T020",
+      "status": "served",
+      "accessible": true,
+      "latency_s": 6.0
+    },
+    {
+      "id": "T021",
+      "status": "rejected",
+      "accessible": false,
+      "latency_s": null
+    },
+    {
+      "id": "T022",
+      "status": "pending",
+      "accessible": false,
+      "latency_s": null
+    },
+    {
+      "id": "T023",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 6.9
+    },
+    {
+      "id": "T024",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 7.2
+    },
+    {
+      "id": "T025",
+      "status": "served",
+      "accessible": true,
+      "latency_s": 7.5
+    },
+    {
+      "id": "T026",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 7.8
+    },
+    {
+      "id": "T027",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 5.4
+    },
+    {
+      "id": "T028",
+      "status": "rejected",
+      "accessible": false,
+      "latency_s": null
+    },
+    {
+      "id": "T029",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 6.0
+    },
+    {
+      "id": "T030",
+      "status": "served",
+      "accessible": true,
+      "latency_s": 6.3
+    },
+    {
+      "id": "T031",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 6.6
+    },
+    {
+      "id": "T032",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 6.9
+    },
+    {
+      "id": "T033",
+      "status": "pending",
+      "accessible": false,
+      "latency_s": null
+    },
+    {
+      "id": "T034",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 7.5
+    },
+    {
+      "id": "T035",
+      "status": "rejected",
+      "accessible": true,
+      "latency_s": null
+    },
+    {
+      "id": "T036",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 5.4
+    },
+    {
+      "id": "T037",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 5.7
+    },
+    {
+      "id": "T038",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 6.0
+    },
+    {
+      "id": "T039",
+      "status": "served",
+      "accessible": false,
+      "latency_s": 6.3
+    },
+    {
+      "id": "T040",
+      "status": "served",
+      "accessible": true,
+      "latency_s": 6.6
+    }
+  ],
+  "channel_reliability": 0.97,
+  "common_cause_probability": 0.035,
+  "nominal_capacity_per_vehicle": 6,
+  "stressed_capacity_per_vehicle": 4,
+  "energy_kwh_per_hour_per_vehicle": 12,
+  "required_service_per_hour": 10,
+  "energy_cap_kwh_per_hour": 30,
+  "evidence": [
+    {
+      "requirement": "R-1",
+      "revision": "route-3",
+      "status": "verified",
+      "intended_use": "classroom capacity screening"
+    },
+    {
+      "requirement": "R-2",
+      "revision": "route-3",
+      "status": "verified",
+      "intended_use": "classroom capacity screening"
+    },
+    {
+      "requirement": "R-3",
+      "revision": "route-3",
+      "status": "draft",
+      "intended_use": "training demonstration"
+    },
+    {
+      "requirement": "R-4",
+      "revision": "route-2",
+      "status": "verified",
+      "intended_use": "classroom capacity screening"
+    },
+    {
+      "requirement": "R-5",
+      "revision": "route-2",
+      "status": "draft",
+      "intended_use": "classroom capacity screening"
+    }
+  ],
+  "paired_baseline_wait_min": [
+    25,
+    28,
+    22,
+    31,
+    26,
+    24
+  ],
+  "paired_candidate_wait_min": [
+    20,
+    24,
+    20,
+    26,
+    23,
+    22
+  ],
+  "required_permissions": [
+    "road authority",
+    "labor",
+    "privacy"
+  ],
+  "granted_permissions": [
+    "road authority"
+  ]
+}

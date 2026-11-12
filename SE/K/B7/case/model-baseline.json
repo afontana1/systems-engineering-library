@@ -1,0 +1,104 @@
+{
+  "baseline": "NS-DI7.1",
+  "source_concept": "NS-CD6.1: Hybrid C, concept pilot preference only",
+  "decision": "Design review; NOT operational acceptance",
+  "peak_required_trips_per_hour": 46.2,
+  "modeled_nominal_capacity_trips_per_hour": 52.8,
+  "timing": {
+    "deadline_ms": 500,
+    "minimum_design_reserve_fraction": 0.1,
+    "nominal_ms": {
+      "gateway": 65,
+      "broker": 85,
+      "dispatch": 110,
+      "vehicle": 100,
+      "transport": 20
+    },
+    "degraded_ms": {
+      "gateway": 85,
+      "broker": 120,
+      "dispatch": 140,
+      "vehicle": 110,
+      "transport": 35
+    },
+    "redesign_savings_ms": {
+      "gateway_fast": 15,
+      "dispatch_parallel": 35
+    }
+  },
+  "energy": {
+    "budget_kwh_per_shift": 30,
+    "traction": 22.4,
+    "heating": 2.1,
+    "communications": 1.8
+  },
+  "reliability": {
+    "mission_h": 8,
+    "independent_failure_rate_per_h": 0.0015,
+    "shared_failure_rate_per_h": 0.0012,
+    "mtbf_h": 400,
+    "mttr_h": 2.5,
+    "mean_logistics_delay_h": 3.0
+  },
+  "safety": {
+    "brake_failure_per_demand": 0.007,
+    "interlock_failure_per_demand": 0.01,
+    "common_cause_per_demand": 0.002
+  },
+  "support": {
+    "initial_musd": 2.8,
+    "annual_operation_musd": 0.42,
+    "annual_support_musd": 0.11,
+    "decommission_musd": 0.2,
+    "years": 5,
+    "discount_rate": 0.05,
+    "spares_fill_probability": 0.9,
+    "local_restore_h": 2,
+    "shortage_restore_h": 8
+  },
+  "schedule": {
+    "tasks": [
+      {
+        "id": "A",
+        "duration_w": 1,
+        "predecessors": []
+      },
+      {
+        "id": "B",
+        "duration_w": 2,
+        "predecessors": [
+          "A"
+        ]
+      },
+      {
+        "id": "C",
+        "duration_w": 3,
+        "predecessors": [
+          "A"
+        ]
+      },
+      {
+        "id": "D",
+        "duration_w": 2,
+        "predecessors": [
+          "B",
+          "C"
+        ]
+      },
+      {
+        "id": "E",
+        "duration_w": 2,
+        "predecessors": [
+          "D"
+        ]
+      },
+      {
+        "id": "F",
+        "duration_w": 1,
+        "predecessors": [
+          "E"
+        ]
+      }
+    ]
+  }
+}

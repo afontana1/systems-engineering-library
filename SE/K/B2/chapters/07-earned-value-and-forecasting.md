@@ -90,3 +90,60 @@ Do not label SPI=0.85 as “the project is 15% late in calendar time.” Nor sho
 ## Put this into practice
 
 Work through [Lab 7: The Month Five Control Room](../labs/lab-07-earned-value-and-forecasting.md), then write a short paragraph on how the laboratory simplifies the real-world management problem. Use the [existing short Week 7 primer](../../P0-text/lessons/645-667-w07.md) for a second explanation. The assessed deliverable is defined in the original course guide, not by the hypothetical lab.
+
+## Step 03 integrated reference — reproduce the earned-value diagnosis
+
+Earned value combines a *budgeted measure of accepted work* with costs and planned phasing. It does not infer quality from spending. In NS-M1 the month-five checkpoint uses **millions of fictional dollars**: planned value \(PV=3.0\), earned value \(EV=2.4\), actual cost \(AC=2.7\), and budget at completion \(BAC=7.2\). These are totals of the controlled [account-level records](../case/control-accounts.csv), not independent editorial assumptions.
+
+\[
+CV=EV-AC=-0.3,\qquad SV=EV-PV=-0.6.
+\]
+\[
+CPI=\frac{EV}{AC}=0.8889,\qquad SPI=\frac{EV}{PV}=0.8000.
+\]
+
+The unfavorable cost variance is $0.3M, and work worth $0.6M is behind the amount planned at this checkpoint. **Schedule variance is in budget units, not weeks**; it does not tell the reader how many calendar weeks the project is late. SPI likewise does not replace a network forecast or a review of the technical deliverables that earned credit.
+
+### Forecasts are conditional hypotheses
+
+If the cumulative cost performance repeats, a common independent estimate at completion is
+
+\[
+EAC_{CPI}=AC+\frac{BAC-EV}{CPI}=2.7+\frac{4.8}{0.8889}\approx 8.10\text{ million}.
+\]
+
+Thus the illustrative variance at completion is \(VAC=BAC-EAC=-0.90\) million. This **is not an authorized overrun or new baseline**. The separately held management reserve is $0.6M; its existence does not automatically reclassify the $0.9M forecast or improve CPI. A different engineering forecast may be justified if particular past causes will not recur; the program must document why that change in performance is plausible.
+
+The **to-complete performance index** makes the remaining demand visible:
+
+\[
+TCPI_{BAC}=\frac{BAC-EV}{BAC-AC}=\frac{4.8}{4.5}\approx1.0667,
+\quad
+TCPI_{EAC}=\frac{4.8}{8.1-2.7}=0.8889.
+\]
+
+To complete within the original BAC, remaining work would need a CPI about 1.067, far better than the 0.889 cumulative history; to meet the CPI-driven EAC, remaining performance can resemble the historical rate. Neither value is a command to inflate accomplishment credit.
+
+### Diagnose before prescribing recovery
+
+Break down the account-level variances. CA-02 earns $0.65M with $0.80M spent (cost variance −$0.15M), while CA-05 earns $0.10M with $0.09M spent (+$0.01M). Cost trends may reflect procurement terms, genuine productivity or distorted progress rules. Investigate configuration-current delivery evidence before drawing conclusions from the aggregate.
+
+### A three-scenario forecast, not one magic EAC
+
+The denominator of the EAC forecast embodies a *hypothesis* about future production. Let \(CPI_f\) be the efficiency expected for remaining budgeted work. Then
+
+\[
+EAC(CPI_f)=AC+\frac{BAC-EV}{CPI_f}.
+\]
+
+| Future CPI assumed | Estimated final cost ($M) | Explanation |
+|---|---:|---|
+| 0.8889 (cumulative) | 8.10 | Historical inefficiency persists |
+| 0.95 | 7.75 | Demonstrable improvement in remaining work |
+| 1.00 | 7.50 | Future work proceeds at planned efficiency |
+
+If management claims 0.95 is likely, name the technical mechanism, not just the numerical preference. Has a supplier defect been eliminated? Have test tools been qualified? Has staff capacity changed without creating rework? Every forecast must preserve actual cost to date; no scenario can make the existing $2.7M disappear. Also keep the CPI-based forecast separate from management reserve decisions and recognized contractual changes.
+
+**Practice with answer.** What would \(EAC\) be if all remaining work could be completed at unit CPI 1.0 without further rework? **Answer:** \(AC+(BAC-EV)=2.7+4.8=\$7.5M\). Explain why this is optimistic relative to the observed 0.889 CPI, and specify what technical recovery evidence would justify the improvement.
+
+**Reference:** The [U.S. Department of Energy EVM Gold Card](https://www.energy.gov/sites/default/files/2022-06/CAG%202.0%20FINAL_220601.pdf) provides formula conventions; real programs must follow their contract's applicable earned-value rules.

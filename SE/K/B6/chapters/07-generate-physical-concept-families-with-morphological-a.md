@@ -95,3 +95,28 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 7: Morphological and set-based concepts](../labs/lab-07-generate-physical-concept-families-with-morphological-a.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 7 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+
+## Step 03 integrated reference: NS-CD6.1 — morphological search and preserving alternatives
+
+A morphological analysis explores combinations of independent design decisions before committing to a favorite architecture. Suppose the team varies dispatch policy (scheduled, pooled, hybrid), capacity source (owned or contracted), and booking channel (app-only or app plus staffed fallback). The naive space contains \(3\times2\times2=12\) combinations. But feasibility and compatibility rules can eliminate cells: an app-only service may violate the accessible-fallback requirement, and a contracted fleet without surge reserve may fail capacity. Enumeration is not the same as evidence of feasibility.
+
+### Choose genuinely different concept families
+
+The [four controlled concepts](../case/concepts.csv) are not simply alternate paint colors. A uses a 4-vehicle fixed loop; B uses 7 pooled on-demand pods; C combines a trunk with feeders; D brokers service from a partner fleet. Their sources of capacity, control, operations and failure risk differ. Distinguish **common functions** from **different allocation choices**, and preserve enough diversity that one bad assumption does not disqualify the entire design portfolio.
+
+Compute capacity from specific architectural quantities. For concept B,
+
+\[C_B=7(8\ \mathrm{trips/h/pod})(0.85)=47.6\ \mathrm{trips/h}.\]
+
+The 46.2 requirement leaves only 1.4 trips/h of modeled slack. C's model gives 52.8 and therefore 6.6 trips/h slack. But nominal slack is not all robustness: under a 15% relative throughput loss C drops to 44.88 and fails. This is a reason to run an experiment, not to falsely eliminate all uncertainty with a high-precision spreadsheet.
+
+### Set-based decision logic
+
+A and D fail one or more of the declared hard screens. Keep their *design insights* (e.g., A's predictable trunk schedule, D's outsourcing option) but do not treat their value score as permission to select them under the current requirements. B and C stay in the feasible **model** set, with differing operating strategies. A retained alternative should have an explicit trigger: “Reassess B if the uncertainty in feeder transfer demand invalidates C's combined capacity estimate.” Without a trigger, “retain” merely postpones a decision without preserving useful option value.
+
+### Practice and answer
+
+**Exercise:** If concept D's supplier raises effective surge capacity from 45 to 48 trips/h, does D become feasible? **Answer:** Not automatically. The case also assigns p90 pickup wait of 12.4 minutes against a 12-minute threshold and annual operations of $1.25M against a $1.20M limit. All hard screens must be revisited independently, together with supplier assurance and access coverage. Update the controlled candidate and rerun the [checker](../tools/step03_book6_concept_check.py); never edit just the score.
+
+**Boundary:** Morphological tables reveal combinations, not physical manufacturability, deployability or certification readiness. Real feasibility depends on supplier, maintenance, infrastructure, regulation and human-operation evidence.

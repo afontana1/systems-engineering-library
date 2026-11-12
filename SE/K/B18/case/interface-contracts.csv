@@ -1,0 +1,4 @@
+interface,sender,receiver,schema_revision,units,max_age_min,security_rule,degraded_rule,open_issue
+dispatch-v1,rail-operator,regional-coordinator,1.0,trip-slots/4h,5,signed agency acknowledgement,do not infer capacity from stale message,revision 2.0 not verified
+access-booking-v1,paratransit-provider,regional-coordinator,1.0,accessible trip-slots/4h,5,role-limited passenger data,voice fallback with operator approval,private data constraints
+intake-v1,hospital-network,regional-coordinator,1.0,receiving trip-slots/4h,5,minimum necessary health context,human confirmation,clinical validation

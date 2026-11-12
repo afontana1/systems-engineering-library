@@ -1,0 +1,30 @@
+{
+  "scenario": "Fictional Campus Mobility pilot / controlled station departure",
+  "baseline": "CM-B2",
+  "build": "controller-2.4.1",
+  "environment": "fenced test course, dry surface, supervised demonstrations",
+  "intended_use": "teaching example for traceability and release review, not operational approval",
+  "hazards": [
+    {"id":"H-DOOR","description":"Door release while the vehicle is moving","controls":["CTRL-DOOR"],"severity":"high"},
+    {"id":"H-DISPATCH","description":"Dispatch acknowledgement too late","controls":["CTRL-TIME"],"severity":"medium"}
+  ],
+  "components": ["door-controller", "speed-sensor", "brake-status", "dispatch-service"],
+  "requirements": [
+    {"id":"REQ-DOOR","need":"NEED-ACCESS","statement":"An open-door authorization shall be inhibited unless measured speed is at most 0.5 m/s and the parking brake is engaged.","component":"door-controller","hazard":"H-DOOR","control":"CTRL-DOOR","evidence":["EV-DOOR"]},
+    {"id":"REQ-ACK","need":"NEED-RELIABLE-SERVICE","statement":"Dispatch shall acknowledge an accepted supervised pilot request within 2.0 s under the stated test load.","component":"dispatch-service","hazard":"H-DISPATCH","control":"CTRL-TIME","evidence":["EV-ACK"]}
+  ],
+  "controls": [
+    {"id":"CTRL-DOOR","owner":"door-controller","assumption":"Brake and speed inputs represent independent, fresh, plausible measurements","evidence":["EV-DOOR"]},
+    {"id":"CTRL-TIME","owner":"dispatch-service","assumption":"Test load and network conditions bound the intended pilot use","evidence":["EV-ACK"]}
+  ],
+  "evidence": [
+    {"id":"EV-DOOR","requirement":"REQ-DOOR","kind":"injected-fault functional test","baseline":"CM-B2","build":"controller-2.4.1","result":"PASS","limitations":"Only injected cases; no common-cause fault demonstration"},
+    {"id":"EV-ACK","requirement":"REQ-ACK","kind":"synthetic timing rehearsal","baseline":"CM-B2","build":"controller-2.4.1","result":"PASS","observed_max_s":1.74,"limit_s":2.0,"limitations":"Does not establish a tail reliability rate or behavior at field load"}
+  ],
+  "fault_tree": {
+    "meaning":"Simplified event probabilities per one door-open demand; all basic events treated as independent",
+    "events":{"common_cause":0.003,"command_error":0.02,"interlock_failure":0.01},
+    "top":{"or":["common_cause",{"and":["command_error","interlock_failure"]}]}
+  },
+  "open_questions":["Common cause p=0.003 is assumed, not measured", "Sensor freshness not yet independently validated", "Operational environment is broader than test envelope"]
+}

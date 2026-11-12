@@ -137,3 +137,27 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [06 — Previous chapter](06-implement-and-verify-the-first-executable-vensim-model.md) · [08 — Next chapter](08-test-structure-and-behavior-use-data-responsibly-and-make-a-credibil.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-FB13.1 case: feedback, conservation, and policy learning — Week 7
+
+*Integrated chapter: Chapter 07 — Explain delays, nonlinearities, oscillation, overshoot, and changing loop dominance. Northstar NS-FB13.1 is a transparent teaching baseline; the following methods are not field-validated.*
+
+### Perception delay and nonlinear response form a behavioral mechanism
+
+The operations team does not respond directly to true requests in the system; its staffing/dispatch response depends on perceived backlog \(P\), an informational accumulation with \(dP/dt=(B-P)/\tau_P\) and \(\tau_P=18\) days. Under a fixed true backlog step from 0 to 100 requests, this first-order stock responds as \(P(t)=100(1-e^{-t/18})\). After 18 days, perception has reached only 63.2% of the new level; after \(18\ln 2\approx12.48\) days, it is halfway there. This lag is not a literal 18-day transportation delay and should not be implemented as such without evidence.
+
+The dispatch surge rule saturates with information: \(s(P)=s_{max}P/(P+380)\), dimensionless, so for \(s_{max}=0.12\), at perceived backlog 380 requests, the surge is 0.06 and cannot exceed 0.12. Its slope \(ds/dP=s_{max}\cdot380/(P+380)^2\) decreases with increasing backlog. This nonlinearity prevents unlimited overtime in the toy model and creates a changing feedback gain. Wear increases breakdown hazard by \(1+1.8s\), so a corrective response has a delayed adverse side channel through unavailable vehicles. Whether the actual system oscillates depends on feedback strengths and timing; an 18-day smoothing stock alone does not establish oscillation or instability.
+
+### Worked delay and sensitivity examples
+
+At \(P=310\) requests, \(s=0.053913\); at \(P=690\) requests, \(s=0.07738\). Doubling perceived backlog from 310 does not double surge because the function saturates. If 12 active vehicles each deliver 93 potential trips/day, the change in surge from 0.0539 to 0.0774 changes instantaneous capacity by only \(12\times93\times(0.0774-0.0539)\approx26.2\) trips/day, before considering wear, fairness and demand feedback. This is a partial derivative demonstration, not an actual predicted policy outcome.
+
+The model's status-quo nominal mean active fleet (11.995) differs from the surge-only mean (11.869), even while surge-only increases completion. The two variables move differently because overtime changes both capacity and failure hazard; the decision maker should not focus on output alone. Sensitivity cases with a 20% higher breakdown hazard test whether the ranking survives an adverse maintenance environment.
+
+**Worked exercise.** A student claims that increasing \(\tau_P\) from 18 to 36 days doubles the final backlog. **Solution:** that claim does not follow from the delay equation. It changes the temporal response to backlog, and feedback with capacity and wear can affect the long-run trajectory nonlinearly. One must rerun the coupled equations, compare time histories and inspect possible instability rather than assume a proportional effect.
+
+**Practice extension:** Sketch the true-backlog and perceived-backlog curves after a step change, annotate half-times, and distinguish immediate surge effects from deferred failure effects.
+
+### Reproduce the evidence and challenge the result
+
+The [NS-FB13.1 case dossier](../case/INDEX.html) publishes its [controlled inputs](../case/model-inputs.json), [Python calculation model](../tools/step03_book13_feedback.py), [policy-by-condition evidence](../case/experiment-results.csv), [equation and unit crosswalk for Vensim](../case/vensim-equation-crosswalk.md), and [claim limitations](../case/credibility-register.csv). Reproduce results with `python3 SE/K/B13/tools/step03_book13_feedback.py --write` from the repository root. This is a **synthetic teaching simulation**: correctly conserving its stocks and reproducing its output does **not** calibrate the causal structure or authorize real mobility policy. The Book 11 event simulator and Book 12 physical vehicle model answer other questions and are not dynamically coupled.

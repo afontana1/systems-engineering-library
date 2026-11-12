@@ -1,0 +1,5 @@
+scenario,arrivals,released,unreleased,backlog_at_horizon,open_critical,release_fraction,mean_total_lead_days,p90_total_lead_days,mean_admitted_lead_days,rework_count,maximum_wip,horizon_days,screening_pass
+status_quo,48,21,27,0,3,0.4375,44.76190476190476,76,44.76190476190476,2,40,100,False
+flow_only,48,42,6,0,0,0.875,36.57142857142857,58,23.452380952380953,4,12,100,False
+assured_learning,48,47,1,0,0,0.9791666666666666,31.872340425531913,50,20.51063829787234,3,12,100,True
+supplier_disruption,48,31,17,6,2,0.6458333333333334,39.064516129032256,67,29.451612903225808,2,12,100,False

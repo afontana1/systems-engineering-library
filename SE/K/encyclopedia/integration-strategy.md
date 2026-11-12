@@ -46,6 +46,15 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [NASA · Distinctions between product verification and validation](https://www.nasa.gov/reference/2-4-distinctions-between-product-verification-and-product-validation/) — Separate conformity to specifications from fitness for intended use.
 
+
+## Step 02 review exercise: ordering by interface risk, not organizational chart
+
+Suppose modules A (dispatch), B (gateway) and C (vehicle) must interoperate. A–B exchanges an authenticated authorization, B–C has a 100 ms freshness constraint, and A–C shares a fail-safe state rule. A staged integration strategy verifies the contracts with representative doubles before full integration, then exercises negative cases (stale messages, dropped updates, mismatched versions), then runs end-to-end timing and hazard tests. Integrating in department order can hide a safety-critical edge until the final demonstration.
+
+The timing budget might allocate 30 ms to A, 20 ms to B, 30 ms to C and 20 ms to transport, totaling **100 ms**. This is a bookkeeping budget, not proof that worst-case delays add exactly as estimated; include measurement uncertainty, clock skew and scheduling interference. If 15 ms of unbudgeted retry delay is discovered, the path can take **115 ms** and the architecture must either change or renegotiate an authorized requirement—not silently report the previous 100 ms.
+
+**Exercise (answer).** If transport can be limited to 12 ms and retry to 5 ms, the revised path upper budget is \(30+20+30+12+5=97\) ms. The claim still requires evidence that all five assumed bounds hold in the same target configuration and environment.
+
 ## Follow the knowledge
 
 **Related concepts**

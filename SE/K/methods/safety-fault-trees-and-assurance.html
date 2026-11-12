@@ -1,0 +1,153 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Safety engineering: fault trees, common causes, and assurance arguments · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/safety-fault-trees-and-assurance.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Safety engineering: fault trees, common causes, and assurance arguments</h1>
+<p><em>Technical reference · Phase 4 · Failure logic, assumptions, control evidence, and release claims</em></p>
+<p><strong>The engineering question.</strong> A design has redundant safeguards and passing component tests. Can its system-level safety claim be defended? This chapter shows why identifying hazards, modeling causal combinations, checking dependencies, and building an evidence argument are different—and mutually necessary—activities. It develops a complete numerical example using a fictional Campus Mobility door controller. All event probabilities are <strong>invented teaching assumptions</strong>, not observed rates or a safety certification.</p>
+<p><strong>Prerequisites:</strong> <a href="../encyclopedia/system-safety-and-hazards.html">System safety and hazards</a>, <a href="../encyclopedia/reliability-availability-maintainability.html">reliability and maintainability</a>, <a href="../encyclopedia/assurance-cases-and-evidence.html">assurance cases</a>, <a href="../encyclopedia/probability-and-dependence.html">probability and dependence</a>.</p>
+<h2>1. Start with loss, hazard, and safety constraint</h2>
+<p>A <em>loss</em> is an unacceptable consequence such as injury. A <em>hazard</em> is a system condition which, with a particular environment, can contribute to a loss. A <em>failure mode</em> is one way a component or function fails to perform as intended. These are not interchangeable. A component fault can be harmless in one mode, while an unsafe control action can create a hazard without a traditional component failure.</p>
+<p>For a supervised shuttle pilot, define loss <strong>L-01</strong> as a person being exposed to vehicle motion during boarding. Define hazard <strong>H-DOOR</strong> as a door being released while the vehicle is moving. Derive the safety constraint <strong>SC-01:</strong> the door controller shall inhibit open-door authorization unless measured speed is at most 0.5 m/s <strong>and</strong> the parking brake is engaged. Record assumptions about sensor freshness, response latency, brake status, command authorization, and whether an emergency egress exception is required. The numerical threshold is a fictional training choice; a real safety case would justify it through hazard and human-factors analysis.</p>
+<p>This sequence is <em>loss → hazardous condition → necessary control constraint → allocated design behavior → verification evidence</em>. Beginning only with a list of failing components misses interactions and normal actions issued in an unsafe context.</p>
+<table>
+<thead>
+<tr>
+  <th>Artifact</th>
+  <th>Fictional example</th>
+  <th>Why it is distinct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Loss</td>
+  <td>L-01: exposure to moving vehicle at a doorway</td>
+  <td>An outcome unacceptable to stakeholders</td>
+</tr>
+<tr>
+  <td>Hazard</td>
+  <td>H-DOOR: door released during motion</td>
+  <td>A system-level condition contributing to the loss</td>
+</tr>
+<tr>
+  <td>Safety constraint</td>
+  <td>SC-01: speed and brake conditions must hold</td>
+  <td>A boundary on permissible behavior</td>
+</tr>
+<tr>
+  <td>Control</td>
+  <td>CTRL-DOOR: inhibit unsafe authorizations</td>
+  <td>An allocated design mechanism</td>
+</tr>
+<tr>
+  <td>Verification claim</td>
+  <td>Door authorization is withheld under injected motion-state faults</td>
+  <td>An observable property of one baseline and test environment</td>
+</tr>
+</tbody>
+</table>
+<p>A good hazard log also records operating mode, causal scenario, severity, exposure, controls, verification status, owners, open assumptions, and authority for residual-risk decisions. A high-severity hazard must not disappear into an averaged risk score.</p>
+<h2>2. FMEA and fault trees answer different questions</h2>
+<p><strong>Failure Modes and Effects Analysis (FMEA)</strong> works from items or functions toward local and higher-level effects: <em>if this input is stuck high, what changes?</em> It is helpful for systematic failure discovery and design actions, but it can omit unsafe interactions where no item has failed. <strong>Fault Tree Analysis (FTA)</strong> begins with a defined top event and decomposes combinations sufficient to cause it: <em>what events could produce unauthorized opening?</em></p>
+<p>A simplified illustrative fault tree for the <strong>unsafe-open command</strong> is</p>
+<p>\[
+T = C \lor (A \land B),
+\]</p>
+<p>where \(C\) is a shared state/common-cause fault that bypasses the intended safeguards, \(A\) is an erroneous open command, and \(B\) is failure of the independent interlock to block it. This tree models a <em>command-path event</em> per door-open demand; it does <strong>not</strong> model every physical pathway to a door opening while moving. Mechanical release, maintenance bypass, emergency override, stale-speed indication and malicious action would need separately justified branches or exclusions.</p>
+<p>The two <strong>minimal cut sets</strong> are \(\{C\}\) and \(\{A,B\}\). A minimal cut set is a smallest combination of basic events that suffices for the top event in the proposed logic. It is not automatically the most likely cause, nor does its discovery prove that the tree is complete.</p>
+<h2>3. Derive the top-event probability without hiding assumptions</h2>
+<p>Assume event probabilities <strong>per demand</strong> of \(P(C)=0.003\), \(P(A)=0.02\), and \(P(B)=0.01\). Further assume the three basic events are statistically independent, their definitions are unambiguous, and each demand is a comparable opportunity. Then</p>
+<p>\[
+\begin{aligned}
+P(T)&amp;=P(C)+P(A\cap B\cap\neg C)\\
+&amp;=p_C+(1-p_C)p_Ap_B\\
+&amp;=0.003+(0.997)(0.02)(0.01)=0.0031994.
+\end{aligned}
+\]</p>
+<p>This is <strong>0.31994% per modeled demand</strong>, <em>conditional on the invented event probabilities and exact tree</em>. If one omits the common-cause branch, the result is \(0.02\times0.01=0.0002\), or 0.02% per demand: an underestimate by a factor of about 16. A value such as 0.31994% must not be presented as the real-world probability of an injury or released door. It refers only to the tree's top event under assumed inputs.</p>
+<p>The <a href="code/fault_tree_assurance.py">executable fault-tree calculator</a> reads the <a href="data/campus-mobility-release.json">case baseline</a>, enumerates mutually exclusive basic-event states, computes the union probability, and reports minimal cut sets. Unlike the shortcut of multiplying each gate's output as independent, assignment enumeration handles reuse of a basic event at several places in a small fault tree. It scales exponentially and is intentionally limited to 16 basic events. It does <strong>not</strong> infer rates from field data.</p>
+<p>Run from the repository root:</p>
+<pre><code class="language-sh">python3 SE/K/methods/code/fault_tree_assurance.py
+</code></pre>
+<p>Expected top-event probability: <code>0.0031994</code>; cut sets: <code>['common_cause']</code>, <code>['command_error','interlock_failure']</code>.</p>
+<h2>4. Why redundancy is not the same as independence</h2>
+<p>Two channels with independent failure probabilities \(q_1,q_2\) may have a joint unavailability \(q_1q_2\) under the correct <em>independent joint-failure</em> model. The calculation fails if they rely on the same software build, speed source, power supply, calibration procedure, operator, or environmental protection. A shared sensor may make two ostensibly separate control channels fail together.</p>
+<p>An engineering review should therefore construct a <em>dependency inventory</em>: common sensors, power, communications, timing sources, human actions, update procedures, maintenance tooling, and shared requirements errors. It should ask whether the assumed joint distribution is substantiated by tests, physics-of-failure analysis, operational observations, or justified conservative bounds. <strong>Fault-tree logic alone does not establish input independence.</strong></p>
+<p>Sensitivity identifies where assumption work is worth investing. In the specific tree,</p>
+<p>\[
+\frac{\partial P(T)}{\partial p_C}=1-p_Ap_B=0.9998,
+\quad
+\frac{\partial P(T)}{\partial p_A}=(1-p_C)p_B=0.00997,
+\quad
+\frac{\partial P(T)}{\partial p_B}=(1-p_C)p_A=0.01994.
+\]</p>
+<p>Around these <em>illustrative</em> values, the modeled risk is much more sensitive to a one-unit change in the common-cause probability than to an equal absolute change in either individual-channel failure probability. Reducing the assumed common-cause probability tenfold to 0.0003, without modifying the other inputs, gives \(0.0003+0.9997(0.0002)=0.00049994\). That change is a <em>scenario analysis</em>, not a measured safety improvement.</p>
+<h2>5. Quantitative and qualitative safety arguments complement each other</h2>
+<p>Quantification is useful only when both the event logic and the probabilities have defensible interpretations. In systems with adaptive software, novel interactions or little operational exposure, an unjustified decimal probability can create false confidence. Consider alongside the fault tree: an FMEA; scenarios of unsafe control actions; timing and transition analysis; misuse or degraded-mode cases; interface and human-factors reviews; and fault-injection evidence. System-Theoretic Process Analysis (STPA) is a different causal-constraint method, not a numeric variant of FTA.</p>
+<p>For a controller, a fault injection that proves a specific stuck-at-speed signal is detected establishes a bounded finding. It does not establish that the controller handles stale data, counter overflow, software timing races, all human override paths, or combinations with a simultaneous brake-sensor failure. Create an explicit <em>assurance gap register</em> instead of silently filling these gaps with optimistic interpretations.</p>
+<h2>6. Build a claim–argument–evidence chain</h2>
+<p>A structured assurance argument is more than a passing test register:</p>
+<table>
+<thead>
+<tr>
+  <th>Element</th>
+  <th>Example for Campus Mobility</th>
+  <th>Potential defeater</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Claim</td>
+  <td>In pilot baseline CM-B2, unsafe door release is controlled in defined modes</td>
+  <td>A mode or override path is missing</td>
+</tr>
+<tr>
+  <td>Subclaim</td>
+  <td>Door command is gated by speed and brake status</td>
+  <td>Inputs become stale or disagree</td>
+</tr>
+<tr>
+  <td>Strategy</td>
+  <td>Evaluate hazard paths, implement interlock, test faults, review residual gaps</td>
+  <td>Shared implementation fault invalidates independence</td>
+</tr>
+<tr>
+  <td>Evidence</td>
+  <td>EV-DOOR functional fault-injection result, linked to REQ-DOOR and build</td>
+  <td>Limited cases; no common-cause demonstration</td>
+</tr>
+<tr>
+  <td>Evidence context</td>
+  <td>Specific firmware, test harness, sensor models and dry-course use</td>
+  <td>Different vehicle build or environment</td>
+</tr>
+<tr>
+  <td>Disposition</td>
+  <td>Review open questions and restrict release until adequately resolved</td>
+  <td>Unresolved high-severity risk accepted without authority</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="code/model_thread_audit.py">model-thread auditor</a> checks whether the links and evidence belong to the named configuration. Its passing result says <strong>only</strong> that declared structural rules passed; it cannot evaluate whether a test is physically representative, a hazard inventory is complete, or a risk is acceptable.</p>
+<p>The assigned organization—not the calculator—must decide whether evidence suffices and whether a planned use is authorized. A formal assurance review would require documented responsibilities, hazard severity criteria, safety analyses, independent challenges appropriate to the consequences, and an approved residual-risk disposition.</p>
+<h2>7. Counterexamples and common mistakes</h2>
+<ul>
+<li><strong>Common cause omitted.</strong> The independence-only shortcut undercounts the modeled top event dramatically in this example.</li>
+<li><strong>Wrong unit of probability.</strong> A per-demand event probability is not a per-hour failure rate; converting demands into a mission probability requires a defensible demand model and dependence assumptions.</li>
+<li><strong>Reliability substituted for safety.</strong> A reliable actuator may consistently issue an unsafe command; high availability does not guarantee safe behavior.</li>
+<li><strong>High RPN treated as mathematically precise.</strong> Severity × occurrence × detection scores are generally ordinal screening aids, not probabilities or cardinal measures of harm.</li>
+<li><strong>Test coverage treated as assurance.</strong> A passed test does not demonstrate untested operating modes, configuration currency, or independence of evidence sources.</li>
+<li><strong>No change analysis.</strong> A software update or new speed sensor may invalidate an otherwise well-constructed argument and its prior tests.</li>
+</ul>
+<h2>8. Exercises with checkable answers</h2>
+<p><strong>A. Recompute the fault tree.</strong> Change \(p_C\) from 0.003 to 0.001 while keeping \(p_A=0.02\), \(p_B=0.01\). Predict the new modeled event probability before editing the JSON fixture. Answer: \(0.001+0.999(0.0002)=0.0011998\).</p>
+<p><strong>B. Explain a failure of the model.</strong> Suppose both the command source and the interlock share one speed sensor whose output can freeze. Show why the asserted event independence is no longer justified; propose a new basic event or causal dependency and specify the evidence needed to estimate it.</p>
+<p><strong>C. Review evidence.</strong> The functional test passes for build 2.4.1 but the release configuration is changed to build 2.4.2. Identify which claim depends on retesting, what engineering analysis might justify carrying evidence forward, and what the model auditor reports if the evidence record remains stale.</p>
+<p><strong>D. Challenge causal completeness.</strong> List three ways a physical door might release despite no unauthorized <em>software</em> open command. Identify the fault tree branches or independent analyses needed before making a physical-door hazard claim.</p>
+<h2>9. Connections to books, curriculum, and sources</h2>
+<ul>
+<li><strong>Read in sequence:</strong> <a href="reliability-and-censored-evidence.html">Reliability evidence and common-cause calculations</a> → this safety chapter → <a href="requirements-verification-handbook.html">verification and acceptance</a> → <a href="model-baselines-and-evidence.html">traceable configuration audit</a> → <a href="campus-mobility-engineering-case.html">connected Campus Mobility case</a>.</li>
+<li><strong>Course connections:</strong> EN.645.764 (systems security and assurance), EN.645.768 (architecture and controls), EN.645.769 (test evidence), EN.645.771 (resilience and governance).</li>
+<li><strong>Textbook connections:</strong> <a href="../B1/chapters/10-failures-and-controls.html">Book 1 ch 10</a>, <a href="../B8/chapters/08-plan-environmental-quality-reliability-maintainability-.html">Book 8 ch 8</a>, <a href="../B7/chapters/07-design-for-reliability-availability-and-maintainability.html">Book 7 ch 7</a>.</li>
+<li><strong>Primary references:</strong> <a href="https://standards.nasa.gov/sites/default/files/standards/NASA/C-Change-2/0/nasa-std-871913c_with_change_2_0.pdf">NASA-STD-8719.13C with Change 2</a> (system/software safety analysis considerations); <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> (technical lifecycle and assurance context); <a href="https://standards.nasa.gov/sites/default/files/standards/NASA/Baseline/0/nasa-gb-871913.pdf">NASA Software Safety Guidebook</a> (illustrative top-down fault tree and bottom-up failure modes analysis).</li>
+</ul>
+<p><em>Editorial scope:</em> These numerical values, diagrams, and release artifacts are teaching models. An actual safety analysis requires a justified system boundary, detailed physical hazard mechanisms, measured or bounded inputs, competent domain review, and appropriate authorization.</p>
+<footer class="reference-note"><a href="safety-fault-trees-and-assurance.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

@@ -39,6 +39,15 @@ These sources establish authoritative terminology or methods in their own publis
 - [NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)](https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods) — Statistical methods, experiments, reliability, and process assessment.
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 
+
+## Step 02 review exercise: when Little's law is valid
+
+A stable verification shop completes an average of **18 cases/week**, and a case spends an average of **2.5 weeks** within the same measured arrival-to-closure boundary. Under the steady-state accounting assumptions of Little's law, \(L=\lambda W=18(2.5)=45\) cases in the system on average. This includes waiting **and** work in service; excluding rework in one measure but not another invalidates the relationship.
+
+Contrast a nonsteady shop receiving 22 cases/week and closing 18 cases/week. Absent cancellations, the backlog rises **4 cases/week** and **24 cases in six weeks**; it is inappropriate to treat this growing system as if its average wait and work in system had stabilized. More utilization does not automatically mean more output: near saturation, variability and batching often inflate delays. Test arrival bursts, prioritization and return-to-work loops rather than optimizing utilization alone.
+
+**Exercise (answer).** If a stable team wants the same throughput of 18/week but an average in-system inventory of 27, the implied target mean time is \(W=L/\lambda=27/18=1.5\) weeks. The equality does **not** identify the improvement intervention or prove quality will hold when processing is accelerated.
+
 ## Follow the knowledge
 
 **Related concepts**

@@ -44,4 +44,34 @@
 <p><a href="../labs/07-decisions.html">Open the lab for this chapter</a> · <a href="../labs/07-decisions.md">Download editable Markdown lab</a> · <a download href="../notebooks/07-decisions.ipynb">Open the associated notebook</a> · <a download href="../code/engineering_math.py">Download the calculation source</a></p>
 <p><strong>Authoritative follow-up reading:</strong> <a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a>, <a href="https://www.nist.gov/programs-projects/nistsematech-engineering-statistics-handbook">NIST/SEMATECH Engineering Statistics Handbook</a>, and <a href="https://www.incose.org/resources-publications/technical-publications/systems-engineering-body-of-knowledge/">Systems Engineering Body of Knowledge</a>. These are independent references, not endorsements of the fictional cases.</p>
 <p><a href="../INDEX.html">Return to the quantitative textbook collection</a></p>
+
+<!-- STEP04-QUANTITATIVE-START -->
+<section class="qse-integrated" aria-label="Integrated quantitative methods case">
+<h2>Step 04 integrated case — constrained preferences are not feasibility evidence</h2>
+<p>The NS-QSE4.1 dispatch decisions compare four policies using conditional queue outputs and <strong>declared hypothetical costs</strong>. Status quo has two servers and a ten-minute service time; capacity adds a server for $90/day; process reduces service duration to eight minutes for $45/day; combined does both for $130/day. These costs do not represent procurement quotes or operational budgets. The case assigns scenario weights of 0.55 clear, 0.30 storm, and 0.15 compound. They are <strong>decision weights chosen for an illustrative expected-value calculation</strong>, not estimated scenario frequencies.</p>
+<h3>Derive an expected disutility rather than hide a value judgment</h3>
+<p>For policy \(a\) in scenario \(s\), let \(\bar W_{as}\) be <strong>request-weighted mean queue wait in minutes</strong>, \(\bar N_s\) the mean number of requests per intake window, and \(c=\$12/(\text{request}\cdot\text{minute})\) an illustrative delay penalty. Let \(C_a\) be the synthetic added daily policy cost. The chosen score is</p>
+<p>\[
+J(a)=C_a+\sum_{s\in\{c,s,x\}}p_s\,c\,\bar N_s\,\bar W_{as}.
+\]</p>
+<p>This formula keeps units in dollars per compared window, but translating a daily cost into a single-window comparison assumes one such window per day. It also ignores displacement, service quality, access, working conditions, and tail-risk externalities; a low score cannot erase those omissions. The reproducible values are approximately <strong>$2,631.23</strong> status quo, <strong>$988.19</strong> capacity, <strong>$1,638.63</strong> process, and <strong>$552.68</strong> combined. Thus combined minimizes <strong>this</strong> synthetic expected score.</p>
+<h3>Apply hard constraints <em>before</em> recommending a design</h3>
+<p>The controlled case separately requires at least <strong>90% of requests to wait no more than 12 minutes in every scenario</strong>. Under compound stress, timely fractions are approximately 23.48% status quo, 56.82% capacity, 37.50% process, and <strong>82.95% combined</strong>. None clears the rule. Therefore the lowest expected-cost score yields <strong>no eligible deployment option</strong>. The correct output is an infeasibility or HOLD decision with a revised design/evidence plan, not automatic adoption of the numerical winner.</p>
+<p>A Pareto analysis would retain alternatives not dominated on relevant dimensions such as added cost, wait, overtime, accessible completion, and operator workload. The current example has no modeled accessibility discipline or labor-quality measure, so a formal Pareto frontier over those real objectives cannot be claimed. Optimizing solely against \(J\) would imply unapproved trade-offs; stakeholder acceptance, privacy, safety and operational authority are explicit evidence gates.</p>
+<h3>Uncertainty and value of information</h3>
+<p>Before valuing new measurements, identify decisions that could change when a parameter is updated. The storm-weight assumption is a strong candidate: a change in scenario prevalence changes the expected disutility, but the hard compound-screen failure remains. Value of information is upper-bounded by the difference between the best expected decision with perfect scenario knowledge and the current best expected decision <strong>within the same feasible alternative set</strong>. Here the operational feasible set is empty, so a numerical perfect-information computation over the unconstrained four-policy set would not solve the actual readiness problem. Investment in missing field evidence, accessible-service design and safety approval may be more valuable than refining the queue mean.</p>
+<details><summary>Worked exercises and interpretation</summary>
+
+<ol>
+<li><strong>Feasibility.</strong> Combined has an approximately 82.95% timely fraction under compound stress; the target is 90%. The shortfall is <strong>7.05 percentage points</strong>, not 7.05% relative, and a good weighted score cannot cancel it.</li>
+<li><strong>Simple value calculation.</strong> For two hypothetical options, A costs $100 and incurs 20 request-minutes at $12 each; B costs $180 and incurs 10 request-minutes. Then \(J_A=100+240=\$340\) and \(J_B=180+120=\$300\), so B wins <em>if</em> those are the only objectives and both are eligible.</li>
+<li><strong>Sensitivity.</strong> Increasing the compound scenario weight without renormalizing the remaining weights is invalid. Reallocate weight and recompute the score. Hard screening still rejects a policy that misses the compound threshold, regardless of the assigned weight.</li>
+</ol>
+</details>
+
+<p><strong>Decision memorandum rule:</strong> State the objective, units, weights, hard constraints, missing stakeholder values, alternative configurations, and whether evidence authorizes the selected use. The release's disposition is <strong>HOLD</strong>, not procurement guidance.</p>
+
+</section>
+<style>@media(max-width:700px){article{max-width:100%;overflow-x:auto}article :is(p,li):has(mjx-container){max-width:100%;overflow-x:auto}}</style>
+<!-- STEP04-QUANTITATIVE-END -->
 </article></main></body></html>

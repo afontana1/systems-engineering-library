@@ -83,3 +83,39 @@ A hard-constrained milestone can hide negative float or make an unrealistic fini
 ## Put this into practice
 
 Work through [Lab 5: The Thirteen-Week Network](../labs/lab-05-schedule-networks-and-float.md), then write a short paragraph on how the laboratory simplifies the real-world management problem. Use the [existing short Week 5 primer](../../P0-text/lessons/645-667-w05.md) for a second explanation. The assessed deliverable is defined in the original course guide, not by the hypothetical lab.
+
+## Step 03 integrated reference — forward and backward passes with a controlled network
+
+A critical path is not a visually highlighted bar but the longest necessary chain through a **directed acyclic dependency network** under specified duration/calendar assumptions. The NS-M1 [five-activity network](../case/northstar-management-baseline.json) deliberately uses a 13-week teaching subset, **not** the full program's longer project schedule. Its finish-to-start constraints are A (2 weeks), B (4 after A), C (3 after A), D (5 after both B and C), and E (2 after D).
+
+For activity \(i\) with duration \(d_i\), let the early start be the maximum predecessor early finish:
+
+\[
+ES_i=\max_{j\in P(i)}EF_j,\qquad EF_i=ES_i+d_i.
+\]
+
+![NS-M1 precedence-network diagram, with one week of float on activity C](../figures/ns-m1-schedule.svg)
+
+The forward pass produces A [0,2], B [2,6], C [2,5], D [6,11], and E [11,13]. Next reverse the network using the project finish at 13: for a terminal activity set \(LF_i=13\); otherwise \(LF_i=\min_{k\in S(i)}LS_k\), then \(LS_i=LF_i-d_i\). For C, \(LF_C=6\) and \(LS_C=3\), so total float is \(LS_C-ES_C=3-2=1\) week. A–B–D–E is critical in the stated network.
+
+### Different disruptions cause different controlling chains
+
+Increase B from four to six weeks: D cannot start until week eight; completion becomes week 15. Increase C instead from three to five: D starts at week seven; completion becomes week 14, and C rather than B now controls the start of D. These calculations assume unlimited resources and no additional rework. A specialist required simultaneously by B and C invalidates the presumed parallel schedule; add the real resource constraint rather than simply declaring more float.
+
+A **schedule risk assessment** goes beyond a PERT point estimate. Sample defensible durations and any shared risk drivers, recompute the network each simulation, and report a completion-time distribution. Do not report a P80 date without specifying whether correlations, calendars, supplier lead times and recovery loops were included. A path may be near-critical under the baseline and dominate the tail under uncertainty.
+
+### Exact schedule-risk calculation before Monte Carlo
+
+To demonstrate what a probabilistic schedule actually means, suppose the *duration* of B is four weeks with probability 0.80 or six with probability 0.20, while C is three weeks with probability 0.90 or six with probability 0.10. For this small numerical example only, assume the two durations are independent; A, D and E have fixed durations. Project duration is then
+
+\[
+T=2+\max(B,C)+5+2=9+\max(B,C).
+\]
+
+The project finishes at week 13 only if \(B=4\) **and** \(C=3\), with probability \(0.80(0.90)=0.72\). Otherwise one path takes six weeks and the project finishes in week 15, probability 0.28. Thus \(P(T\le13)=0.72\), and the model's minimum week satisfying an 80% completion probability is **week 15**. The expected finish is \(0.72(13)+0.28(15)=13.56\) weeks, but the mean is not a promise that the project can finish in fractional weeks.
+
+This exact enumeration is available because the model has only four scenarios. For a large activity network, Monte Carlo can evaluate the same logic under richer distributions. A supposedly precise simulation cannot fix absent resource constraints or a false independence assumption. If common supplier disruption delays both B and C, their joint probability changes; so may the finish-date distribution even if marginal durations are unchanged.
+
+**Practice with answer.** If C takes six weeks while B remains four, completion is \(\max(2+4,2+6)+5+2=15\) weeks. Both the date and critical-path identity change. A manager cannot erase the delay by replacing the network finish with a hard target milestone.
+
+**Reference:** [GAO Schedule Assessment Guide](https://www.gao.gov/products/gao-16-89g) addresses logical completeness, realistic durations, resource loading and schedule-risk analysis.

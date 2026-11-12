@@ -99,3 +99,25 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 2: Requirements to critical test parameters](../labs/lab-02-trace-requirements-and-stakeholder-expectations-to-obje.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 2 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-TE8.1 — from requirements to measurable test objectives
+
+### Write a testable tuple, not a convenient proxy
+
+A test objective can be represented as \(o=(r,q,e,s,b,\delta,a)\): requirement \(r\), measurand \(q\), environment \(e\), sampling rule \(s\), controlled baseline \(b\), decision rule \(\delta\), and responsible acceptance authority \(a\). Missing any field invites ambiguity. For TE8-R05, 'accessible service is good' is not a measurable obligation. The case specifies at least **95% of eligible accessible pickups within 12 minutes**, requiring a denominator of *all eligible requests* and an explicit treatment of cancellations, no-shows and service refusals. Denominators can change the policy outcome even when raw travel times do not.
+
+The [test-plan matrix](../case/test-plan.csv) preserves the method and environment beside each requirement. TE8-R01 needs end-to-end timing under degraded fleet load; TE8-R03 needs reliability evidence that recognizes correlated loss mechanisms; TE8-R06 needs a concurrent allocation attempt in a controlled build. Don't treat a passing unit test as proof of the full operational claim. A SIL test can establish model/software behavior within an emulator; a HIL test adds physical interfaces but still might not reproduce fleet radio congestion or real users.
+
+### Trace completeness includes negative scenarios
+
+For an exclusive-allocation requirement, successful sequential bookings are not the critical case. The refuting scenario is two near-simultaneous reservations claiming the same vehicle. For replay rejection, the test must *submit a stale or duplicated command* and show no actuation while the system remains otherwise functional. A safety validation scenario must include loss of network or an inaccessible pickup, not merely normal-rate dispatch.
+
+The evidence chain is illustrated in the [case diagram](../case/evidence-flow.svg). Its arrows also impose a conservation rule: each result must cite exactly which procedure version, article configuration, test condition and data file produced it. Cross-referencing a requirement without those links is *traceability bookkeeping*, not proof. Reviewers should maintain a discrepancy when data collection or result interpretation changes after the fact.
+
+**Exercise.** Twenty accessibility trials contain 19 timely pickups and one late pickup. The observed fraction is 19/20=0.95. Is TE8-R05 demonstrated at a claimed 95% population service rate?
+
+<details><summary>Worked answer</summary>
+
+No. The point estimate equals the threshold but has substantial sampling uncertainty, and the convenience sample may not reflect demand conditions. Define an approved lower-confidence-bound or acceptance-sampling rule, make the eligibility denominator auditable, then collect representative observations. Recording '19/20 observed' is correct; calling it a population guarantee is not.
+
+</details>

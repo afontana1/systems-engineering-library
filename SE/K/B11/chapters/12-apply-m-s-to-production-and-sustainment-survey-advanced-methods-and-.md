@@ -121,3 +121,29 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [11 — Previous chapter](11-plan-and-evaluate-verification-validation-credibility-and-accreditat.md) · End of the book · [Book index](../README.md)
+
+## Step 03 integrated mobility simulation case: sustainment, governance and final defense
+
+### A model is a configuration-controlled operational hypothesis
+
+If a mobility service eventually enters production, its demand, battery behavior, staffing, chargers and accessibility policy will change. An early-fleet sizing model must therefore have an **expiration and recalibration plan**. The [assumptions file](../case/model-assumptions.json) declares synthetic day demand, service and charge distributions. The [credibility record](../case/credibility-register.csv) specifies what needs independent measurement. In sustainment, use controlled telemetry with privacy-respecting aggregation and appropriate authorization; avoid retaining rider identities simply to make simulation easier.
+
+A monitoring design should record by day and scenario: total requests, accessible share, standard and accessible pickup p90, not picked up at close, charger contention, breakdowns, staffing mismatch, demand shift and exceptional events. Statistical process monitoring can detect distribution drift, but a single automated threshold cannot diagnose whether the change comes from data, implementation, operating conditions or real deterioration. Every update should carry a new baseline identifier and re-run the deterministic verification suite; major structural changes require renewed validation, not just new random seeds.
+
+### Reconcile capacity and risk over the lifecycle
+
+A design may have adequate nominal daily throughput yet produce unacceptable tail waits under peaks. A production system introduces new coupled hazards: charger unavailability, maintenance scheduling, pedestrian interactions, operator fatigue, route disruptions and accessibility equipment failures. A defensible lifecycle model connects these variables to decisions about spare fleet, service policies, preventive maintenance and staffing, while keeping unmodeled dependencies visible. A digital twin or live data feed is not automatically more credible; instrumentation and configuration synchronization can introduce new errors and cyber/privacy risks. Advanced approaches—agent-based passenger behavior, network simulation, stochastic optimization or hybrid continuous-discrete energy dynamics—need independent justification proportional to the particular decision.
+
+### Final case finding and reproducibility protocol
+
+The [30-seed baseline and stress results](../case/replication-output.csv) screen the four course candidate fleets. Under the current single-request model, no tested fleet reaches all three synthetic operational targets: 12-minute standard p90, 15-minute accessible p90, and less than 1% awaiting pickup at close. The **best screened candidate is not the same as an acceptable candidate**. The integrated recommendation is **HOLD for pilot readiness; revise the conceptual model, gather referent measurements and explore new feasible configurations**. The result neither rejects the actual Phase 2 concept nor certifies the real fleet.
+
+To reproduce the study from a repository checkout, run `python SE/K/B11/tools/step03_book11_mobility.py`. The command validates JSON assumptions, reconstructs 30 baseline and 30 stress days for each of four fleets with seeds 1000–1029, and writes [the full output CSV](../case/replication-output.csv) and [machine-readable summary](../case/summary.json). Then run `python scripts/check_step03_book11.py` to exercise numerical, negative and publication checks. All inputs and results are fictional; the suite is not a field accreditation parser or standards assessment.
+
+### Defense scenario and worked solution
+
+**Question.** The sponsor says: “Fourteen vehicles are better than twelve, and the 95% interval for their *difference* excludes zero. Approve the procurement.” Provide an engineering response. **Solution.** The paired comparison indicates a repeatable modeled improvement conditional on synthetic demand and the event rules; the 14-vehicle scenario still misses the explicit modeled service constraints and lacks staff, pooled-rides and field validation. Therefore a statistically nonzero *relative improvement* does not establish absolute requirement satisfaction, operational readiness, affordability, accessibility compliance or authority to approve. Propose a controlled alternatives study and pilot evidence plan with explicit owners and gated decisions.
+
+The [course guide](../../../C/P3/EN645757.md) remains the assessment authority; this expanded material supplies worked theory, code and challenge exercises rather than replacing rubrics or independent engineering review.
+
+[Case dossier](../case/INDEX.html) · [Book index](../README.md).

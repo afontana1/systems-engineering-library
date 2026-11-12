@@ -39,4 +39,69 @@
 <p>Digital twins introduce a further obligation: freshness and representativeness. The twin's state is an estimate of a physical asset, not the physical asset itself. Document time synchronization, sensor uncertainty, update delay, state-estimation assumptions, and control authority. A current timestamp does not prove that the sampled sensor measures the property needed for the decision. A digital thread should also retain <em>negative evidence</em>: failed tests, anomalies, and overturned decisions—not only passing results.</p>
 <h2>5.8 Governance and cyber trust</h2>
 <p>Evidence is an organizational asset. Define who may originate a requirement, approve a test, sign an evidence record, change a baseline, and release a configuration. Separate duties where safety or financial consequences justify independent review. Digital signatures, access control, immutable logging, and secure build pipelines can support this governance, but none can determine whether an architecture concept is suitable. Treat the assurance argument as a combination of technical proof obligations and human accountability.</p>
-<div class="downloads"><a href="../labs/05-provenance.html">Practice laboratory</a><a href="../notebooks/05-provenance.ipynb" download>Jupyter notebook</a><a href="../code/graduate_models.py" download>Python model</a><a href="../data/provenance.csv" download>Example dataset</a><a href="../figures/evidence.dot" download>Editable diagram</a><a href="05-provenance.md" download>Editable Markdown</a></div></article></main></body></html>
+<div class="downloads"><a href="../labs/05-provenance.html">Practice laboratory</a><a href="../notebooks/05-provenance.ipynb" download>Jupyter notebook</a><a href="../code/graduate_models.py" download>Python model</a><a href="../data/provenance.csv" download>Example dataset</a><a href="../figures/evidence.dot" download>Editable diagram</a><a href="05-provenance.md" download>Editable Markdown</a></div>
+<!-- STEP04-CONNECTED-EVIDENCE-START -->
+<section class="connected-evidence-case" aria-label="NS-CE4.1 integrated evidence case">
+<h2>Step 04 integrated case — NS-CE4.1: structured paths are not current evidence</h2>
+<p>A digital thread is valuable because it can reveal missing, stale, or contradictory arguments. It is dangerous when a link's mere existence is treated as proof. The synthetic NS-CE4.1 ledger has five connected <strong>claim → requirement → artifact</strong> paths. All five exist structurally; only one is currently actionable under a narrow, stated set of checks.</p>
+<h3>Model an evidence path as a typed assertion</h3>
+<p>An actionable path needs more than a claim identifier. Let $e$ be an evidence record and let $r_b$ be the current release revision. A simple necessary screen is</p>
+<p>$$A(e)=I[h(e)=h_{\rm recorded}],I[r_e=r_b],I[s_e=s_{\rm required}],I[\mathrm{status}(e)=\mathrm{PASS}],$$</p>
+<p>where $h$ is a SHA-256 content digest over the example's <strong>declared payload string</strong>, $r_e$ is evidence revision, and $s_e$ is the tested scope. Each indicator is necessary for the local screen; their conjunction is <strong>not</strong> an accreditation of the test method, authenticity of signatures, or independence of reviewers. Real evidence systems also require immutable artifact storage, key management, credentialed review, meaningful semantic change control, and trust boundaries.</p>
+<p>The controlled ledger reports:</p>
+<table>
+<thead>
+<tr>
+  <th>Claim</th>
+  <th>Artifact</th>
+  <th>Recorded problem</th>
+  <th>Actionable?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>CL-CAP</td>
+  <td>EV-CAP</td>
+  <td>Tested nominal scope, but storm scope required</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>CL-WAIT</td>
+  <td>EV-WAIT</td>
+  <td>Revision 2.0, while build is 2.1</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>CL-ACCESS</td>
+  <td>EV-ACCESS</td>
+  <td>Current revision, but recorded FAIL</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>CL-INT</td>
+  <td>EV-INT</td>
+  <td>Interface contract evidence revision 2.0</td>
+  <td>No</td>
+</tr>
+<tr>
+  <td>CL-ENT</td>
+  <td>EV-ENT</td>
+  <td>Current, matching scope, PASS status</td>
+  <td>Yes for <strong>narrow local path screen</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Hence structural coverage is $5/5=100%$ but actionable local coverage is $1/5=20%$. The fifth path is <strong>not</strong> a validated causal enterprise claim; it only passes the explicitly simplified metadata checks. None of the required <code>safety_approval</code>, <code>accessibility_consultation</code>, <code>data_governance_approval</code>, and <code>operations_authorization</code> flags is granted in the case JSON. These omissions are separately disqualifying and cannot be made good by adding more evidence links.</p>
+<h3>Change impact and provenance attack examples</h3>
+<p>Suppose an analyst copies <code>EV-WAIT</code> from release 2.0 into a 2.1 readiness dashboard. The link target exists, the status remains PASS, and the recorded content digest still matches. Yet the evidence is <strong>stale</strong> for 2.1 until a reviewed impact assessment or new verification establishes its applicability. Conversely, if an artifact's payload changes without updating the recorded digest, a digest check detects the mutation; updating both payload and digest can still conceal an unauthorized rewrite. A digest verifies content consistency relative to a trusted baseline, not authorship or professional approval.</p>
+<p>To run the adversarial exercise, copy the JSON, alter an evidence payload without changing <code>sha256</code>, and rerun the checker in a temporary Python process. The affected path must gain <code>digest_mismatch</code>. If instead you update the revision string alone, it must still retain any unresolved status or scope failures. A real digital thread would also distinguish evidence generated for the same model from independent bench measurement; two paths based on one unverified simulation do not create two independent proofs.</p>
+<h3>Granular assurance and defeaters</h3>
+<p>A defensible assurance argument states a bounded claim: 'The specified dispatch interface satisfied requirement REQ-INT under the listed test environment, revision, timestamp policy, and input class.' The <em>warrant</em> links a test result to that claim, and a <em>defeater</em> identifies conditions under which the warrant fails (such as clock drift, unseen demand regimes, or a producer schema revision). The path is re-evaluated when a defeater becomes plausible. A verified model trace and a signed operational release are distinct evidence types, with distinct authorized decision makers.</p>
+<p><strong>Worked exercise 1 — coverage.</strong> A dashboard reports 100% coverage because every requirement links to an artifact. Calculate actionability. <strong>Solution:</strong> One of five paths passes the local metadata screen, so actionable coverage = 20%. Even 100% actionability would not override missing authorizations.</p>
+<p><strong>Worked exercise 2 — repaired revision.</strong> Change <code>EV-WAIT</code> revision from 2.0 to 2.1 without changing its payload and without new validation. Does the record become credible? <strong>Solution:</strong> The toy checker may mark it actionable if all local fields match; this demonstrates the <em>limit</em> of the checker. Authentic release evidence requires a legitimate revision record, justified model applicability, and independent verification—not a string edit.</p>
+<p><strong>Adverse case.</strong> Duplicate a claim row in the ledger. The model must reject ambiguity rather than silently overwrite one evidence source. The six chapters' joint example deliberately ends with HOLD; the release decision remains outside the programmatic checker.</p>
+
+</section>
+<style>article{min-width:0;max-width:100%}article table{display:block;max-width:100%;width:100%;overflow-x:auto}article pre{max-width:100%;overflow-x:auto}article :is(p,li):has(mjx-container){overflow-x:auto;max-width:100%}article mjx-container{max-width:100%;overflow-x:auto}</style>
+<!-- STEP04-CONNECTED-EVIDENCE-END -->
+</article></main></body></html>

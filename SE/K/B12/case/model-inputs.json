@@ -1,0 +1,118 @@
+{
+  "case_id": "NS-CPS12.1",
+  "version": "1.0",
+  "status": "synthetic teaching baseline; not a validated vehicle model",
+  "description": "Simplified single-vehicle longitudinal, battery-electric and lumped thermal model. No brake dynamics, road curvature, elevation recovery, passengers boarding or vehicle network co-simulation.",
+  "mass_kg": 2850,
+  "payload_kg": 300.0,
+  "battery_usable_kwh": 145.0,
+  "initial_soc": 0.88,
+  "initial_battery_temp_c": 31.0,
+  "battery_warning_c": 44.0,
+  "battery_limit_c": 48.0,
+  "nominal_bus_v": 650.0,
+  "battery_resistance_ohm": 0.115,
+  "battery_heat_capacity_j_per_k": 860000.0,
+  "motor_power_limit_kw": 180.0,
+  "regen_power_limit_kw": 65.0,
+  "motoring_efficiency": 0.91,
+  "regen_efficiency": 0.69,
+  "wheel_radius_m": 0.39,
+  "rolling_coefficient": 0.01,
+  "drag_area_m2": 1.9,
+  "air_density_kg_per_m3": 1.225,
+  "gravity_m_per_s2": 9.81,
+  "acceleration_limit_mps2": 0.9,
+  "braking_limit_mps2": 1.25,
+  "speed_control_gain_per_s": 0.45,
+  "charger_kw": 100.0,
+  "charger_efficiency": 0.93,
+  "coolant_flow_kg_per_s": 0.18,
+  "cooling_ua_base_w_per_k": 35.0,
+  "cooling_ua_per_flow_w_per_k_per_kgps": 900.0,
+  "pump_power_base_w": 100.0,
+  "pump_power_flow_gain_w_per_kgps_cubed": 14000.0,
+  "aux_heat_fraction": 0.22,
+  "cold_cabin_power_kw": 5.0,
+  "hot_cabin_power_kw": 3.8,
+  "mild_cabin_power_kw": 1.8,
+  "drive_repetitions": 24,
+  "dt_s": 0.5,
+  "route": [
+    {
+      "id": "A",
+      "length_m": 600.0,
+      "grade": 0.02,
+      "target_speed_mps": 8.0
+    },
+    {
+      "id": "B",
+      "length_m": 900.0,
+      "grade": 0.06,
+      "target_speed_mps": 11.0
+    },
+    {
+      "id": "C",
+      "length_m": 950.0,
+      "grade": -0.04,
+      "target_speed_mps": 10.0
+    },
+    {
+      "id": "D",
+      "length_m": 500.0,
+      "grade": 0.01,
+      "target_speed_mps": 7.0
+    },
+    {
+      "id": "E",
+      "length_m": 550.0,
+      "grade": 0.0,
+      "target_speed_mps": 8.5
+    }
+  ],
+  "requirements": {
+    "reserve_soc_min": 0.2,
+    "trip_time_max_min": 9.0,
+    "battery_temperature_limit_c": 48.0
+  },
+  "scenarios": [
+    {
+      "id": "mild_highflow",
+      "ambient_c": 22.0,
+      "coolant_flow_kg_per_s": 0.3,
+      "grade_multiplier": 1.0
+    },
+    {
+      "id": "hot_lowflow",
+      "ambient_c": 38.0,
+      "coolant_flow_kg_per_s": 0.05,
+      "grade_multiplier": 1.0
+    },
+    {
+      "id": "hot_highflow",
+      "ambient_c": 38.0,
+      "coolant_flow_kg_per_s": 0.3,
+      "grade_multiplier": 1.0
+    },
+    {
+      "id": "cold_highflow",
+      "ambient_c": -15.0,
+      "coolant_flow_kg_per_s": 0.3,
+      "grade_multiplier": 1.0
+    },
+    {
+      "id": "hot_grade_stress",
+      "ambient_c": 38.0,
+      "coolant_flow_kg_per_s": 0.05,
+      "grade_multiplier": 1.25
+    }
+  ],
+  "sample_count": 16,
+  "sample_seed": 12580,
+  "uncertainty": {
+    "mass_delta_kg": 120.0,
+    "drag_area_delta_m2": 0.2,
+    "rolling_coefficient_min": 0.008,
+    "rolling_coefficient_max": 0.016
+  }
+}

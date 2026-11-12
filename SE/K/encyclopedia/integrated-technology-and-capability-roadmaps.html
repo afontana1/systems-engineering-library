@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Integrated technology and capability roadmaps · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/encyclopedia/integrated-technology-and-capability-roadmaps.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical explanation</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Integrated technology and capability roadmaps</h1>
+<p><strong>Canonical reference · Enterprise &amp; complexity · Technical method and worked example</strong></p>
+<h2>Engineering question and scope</h2>
+<p>An <strong>integrated capability roadmap</strong> is a time-phased, evidence-backed argument that an enterprise can deliver and sustain a desired outcome. It connects <em>capability demand</em> to the technologies, standards, information assets, suppliers, workforce, operations, funding, and authorizations required to realize it. A technology-release timeline is only one input. A standards adoption plan without conformance testing, or a procurement plan without the staff needed to support it, is not yet an enterprise roadmap.</p>
+<p>The central question is: <strong>Which enabling elements must become usable together, what depends on what, and what decision will we make if one element is delayed?</strong> A credible roadmap states the target operational capability, its use conditions and measures of success before listing products or release dates. It shows the transition state explicitly; a future architecture that cannot be reached safely from today's configuration is not a feasible recommendation.</p>
+<h2>Decompose the capability without confusing readiness scores</h2>
+<p>For each needed capability, record: (1) stakeholder outcome and operational scenario; (2) technology and interface maturity; (3) governing information semantics, quality and stewardship; (4) standards and demonstrated conformance; (5) qualified suppliers and exit provisions; (6) workforce roles, competencies and training capacity; (7) facilities and operational procedures; (8) legal/privacy or safety approvals; and (9) acceptance evidence. Add an accountable owner and versioned source for each item.</p>
+<p>Technology readiness level, organizational maturity and operational acceptance are not interchangeable numbers. A prototype may work in a laboratory but have no qualified production supplier, documented maintenance process, conforming interface or accountable data steward. Treat these as separate gates. If using a scorecard, define the scale and <em>the evidence for each score</em>; do not average ordinal grades and then call the result a probability of success.</p>
+<h3>Dependency graph and critical path</h3>
+<p>Represent the roadmap as a directed acyclic graph for <strong>mandatory precedence constraints</strong>. For activity \(i\) of duration \(d_i\) months and predecessor set \(P_i\), its earliest completion is</p>
+<p>\[
+F_i=d_i+\max_{j\in P_i}F_j,\qquad \max\varnothing=0.
+\]</p>
+<p>This is a deterministic planning model, not a prediction. Durations can be uncertain, activities can compete for resources, and contracts or approvals can introduce calendar constraints. A credible schedule therefore includes ranges, critical assumptions, dependency owners and contingency options. Conditional dependencies should be made explicit: two suppliers may offer alternatives, rather than both being required.</p>
+<h2>Worked case: regional service interoperability</h2>
+<p>Northstar's fictional service coalition wants to exchange dispatch availability data between agencies without changing each agency's legal authority. A public-facing launch is proposed for month 7. The engineering team constructs the following <strong>illustrative</strong> plan; durations are not empirical forecasts.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Required enabling activity</th>
+<th style="text-align:right">Duration (months)</th>
+<th>Immediate predecessors</th>
+<th>Evidence at completion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S</td>
+<td>Agree exchange semantics and data stewardship</td>
+<td style="text-align:right">3</td>
+<td>—</td>
+<td>Versioned schema, use/retention authority</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>Qualify gateway supplier and interface</td>
+<td style="text-align:right">6</td>
+<td>S</td>
+<td>Conformance results, contractual exit/export rights</td>
+</tr>
+<tr>
+<td>W</td>
+<td>Train frontline and support staff</td>
+<td style="text-align:right">4</td>
+<td>—</td>
+<td>Competency demonstration, accessible fallback procedure</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Run parallel operations and reconcile records</td>
+<td style="text-align:right">2</td>
+<td>Q, W</td>
+<td>Exception log, integrity checks, rollback rehearsal</td>
+</tr>
+<tr>
+<td>G</td>
+<td>Authorize public cutover</td>
+<td style="text-align:right">1</td>
+<td>D</td>
+<td>Signed acceptance and residual-risk decision</td>
+</tr>
+</tbody>
+</table>
+<p>Compute the earliest completion: \(F_S=3\), \(F_Q=6+3=9\), \(F_W=4\), \(F_D=2+\max(9,4)=11\), and \(F_G=12\). The feasible launch is <strong>month 12</strong>, not month 7, before schedule uncertainty or scarce-resource conflicts are considered. The critical chain is S → Q → D → G. Buying a faster gateway does not cure an unapproved data definition or a late supplier qualification.</p>
+<p>Suppose the supplier activity can be shortened from six to three months but costs an extra $90,000, and delayed launch causes an <em>assumed</em> $15,000/month in avoidable opportunity cost. A three-month reduction avoids \(3(15,000)=\$45,000\), less than the premium: accelerated qualification is not justified on this simplified monetary model. Recalculate if a safety mandate, contractual deadline, or discounted multi-year benefit changes the decision. Neither figure is a real Northstar estimate.</p>
+<h2>Standards, information and supplier contracts</h2>
+<p>A standard is a specification; interoperability is a <strong>tested relationship between versions and implementations</strong>. Record the exact edition/version, supported profiles, data types, units, reference frames, timestamps, character encodings and error semantics. Check conformance using negative cases, not only successful message exchange. For example, an incoming field named <code>arrival_time</code> could mean a forecast time at one agency and a confirmed stop time at another; syntactic JSON compatibility is insufficient.</p>
+<p>For each supplier and data asset, record the party with rights to access, modify, export and retain it. Inspect proprietary adapters, licensing restrictions, incident-notification obligations, support horizons, workforce dependence and second-source feasibility. A transition may require dual operation, record reconciliation and retained legacy access; include these as funded roadmap activities, not footnotes. The highest-value gate may be a <strong>reversible pilot</strong> that validates semantics and training before an irreversible procurement commitment.</p>
+<h2>Workforce and organizational adoption</h2>
+<p>Competence is a deliverable with acceptance evidence, not simply a count of staff attending training. Identify critical tasks, qualifications, duty coverage, accommodations, supervision and certification intervals. A plan for 12 operators needing 24 hours each requires 288 trainee-hours. If the training capacity is only 12 trainee-hours per week, it requires at least 24 weeks <em>unless</em> capacity or working assumptions change; this lower bound ignores absences, shifts and retesting. The schedule graph above assumes the four-month training estimate is feasible; a resource calculation that contradicts it forces the roadmap to be revised.</p>
+<p>For workforce rollout, verify competency through scenario performance, error handling and safe recovery, not attendance alone. Include those who maintain the capability after initial deployment. Knowledge concentration can be as dangerous as technical single sourcing.</p>
+<h2>Decision gates, scenarios and reversal criteria</h2>
+<p>Use decision gates tied to observations: (a) approving shared semantics; (b) accepting supplier conformance; (c) completing parallel-operation evidence; (d) authorizing migration and retirement. Each gate states the responsible decision-maker, released configuration, acceptance threshold, failed-case handling and fallback. Evaluate at least two scenarios—for example, supplier delay and a change in data-sharing authority—and recompute the dependency graph. If a required element fails, identify whether the enterprise should <strong>pause, substitute, restrict scope, or reverse</strong>. A single committed date without alternatives is not a robust roadmap.</p>
+<h3>Exercise and solution</h3>
+<p><strong>Exercise.</strong> In the table, gateway qualification Q takes <strong>eight</strong> rather than six months, while all else is unchanged. When can G finish? What happens if W instead takes ten months while Q remains six?</p>
+<p><strong>Solution.</strong> With Q = 8, \(F_Q=3+8=11\), \(F_D=2+\max(11,4)=13\), and \(F_G=14\). With W = 10 and Q = 6, \(F_D=2+\max(9,10)=12\) and \(F_G=13\). In the second case, the critical predecessor for D changes to W. This is why readiness decisions require a cross-domain dependency graph rather than separate technology and people slides.</p>
+<h2>Limitations and evidence boundaries</h2>
+<p>A dependency schedule cannot prove political acceptance, supplier solvency, information legitimacy, safety or real-world adoption. Assign dates only after obtaining evidence from responsible owners. Enumerate what would invalidate the plan: standards changes, supplier insolvency, workforce attrition, inaccessible service pathways, emergency demand and data-governance objections. Maintain a versioned record of decisions and measure actual operational outcomes after rollout. Use the roadmap as a controlled hypothesis, not as a forecast of guaranteed success.</p>
+<h2>Source-to-method references</h2>
+<ul>
+<li><a href="https://www.nist.gov/publications/roadmap-strengthen-us-manufacturing-supply-chain-digital-thread-technology">NIST, <em>Roadmap to Strengthen the U.S. Manufacturing Supply Chain via Digital Thread Technology</em> (2024)</a> — Example of explicitly connecting digital-thread technology, standards and workforce enablers; this article's roadmap schedule is original and hypothetical.</li>
+<li><a href="https://www.nist.gov/ctl/ctl-roadmaps">NIST Communications Technology Laboratory roadmapping framework (updated 2026)</a> — Roadmapping process, stakeholder research and technical priorities.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — Lifecycle baselines, requirements, interfaces and technical management.</li>
+</ul>
+<h2>Follow the knowledge</h2>
+<p><strong>Related concepts:</strong> <a href="enterprise-portfolio-decisions.html">Enterprise portfolio decisions</a>; <a href="supportability-and-end-of-life.html">Supportability and end-of-life</a>; <a href="technical-data-governance-and-lineage.html">Technical data governance and lineage</a>; <a href="supply-chain-assurance-and-provenance.html">Supply-chain assurance</a>; <a href="engineering-decision-rights-and-learning.html">Engineering decision rights</a>.</p>
+<p><strong>Curriculum:</strong> <a href="../../C/P5/EN645753.html">EN.645.753 week 8</a>; <a href="../B19/chapters/08.html">Book 19 chapter 08</a>.</p>
+<p><strong>Editorial note:</strong> All named Northstar examples, dates and dollar values are invented for instruction. Standards and contract requirements must be checked against the editions and jurisdictions actually governing an engineering project.</p>
+</article><nav class="standalone-actions"><a href="metrics-hierarchy.html">Read concept</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="metrics-hierarchy.md">Editable Markdown</a></nav></main></body></html>

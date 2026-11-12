@@ -1,0 +1,141 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>UML and OCL contracts for software model consistency · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/uml-ocl-software-contracts.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>UML and OCL contracts for software model consistency</h1>
+<p><em>Engineering method guide · Class models, invariants, preconditions, postconditions, invalid states, and executable checks · Phase 3</em></p>
+<p><strong>Learning outcome.</strong> Interpret a UML-like domain model, write representative Object Constraint Language (OCL) invariants and operation conditions, create equivalent small-scale executable checks, exhibit counterexamples, and distinguish static-model consistency from implementation correctness. This chapter illustrates the standard's concepts and uses <strong>hand-authored OCL</strong>, not a certified OCL toolchain.</p>
+<p><strong>Prerequisites:</strong> <a href="../encyclopedia/model-language-method-tool.html">Model, language, method and tool semantics</a>, <a href="../encyclopedia/software-lifecycle-evidence.html">software lifecycle evidence</a>, <a href="mbse-behavioral-contracts.html">MBSE behavioral contracts</a>, and <a href="../encyclopedia/software-quality-attributes.html">software quality attributes</a>.</p>
+<h2>1. Why a diagram alone is not a specification</h2>
+<p>A UML class diagram may show <code>Reservation</code> with <code>id : String</code>, <code>status : Status</code>, and an optional <code>worker : Worker[0..1]</code>. Multiplicity limits what <em>one</em> reservation may reference, but it does not ensure uniqueness of IDs across objects, forbid a worker being allocated to two active reservations, or say when an assignment is legal. These are <strong>cross-object and lifecycle constraints</strong>. A student should distinguish:</p>
+<ul>
+<li><strong>Structure:</strong> classes, attributes, type relationships and multiplicities.</li>
+<li><strong>Invariants:</strong> statements intended to hold in every valid system state.</li>
+<li><strong>Operation contracts:</strong> permitted inputs, preconditions, and required postconditions.</li>
+<li><strong>Behavior:</strong> state transitions and event ordering; temporal progress or liveness may require a different formalism.</li>
+<li><strong>Persistence constraints:</strong> guarantees that must remain enforced across transactions, restarts, concurrent requests and the data store.</li>
+</ul>
+<p>OCL provides a declarative language for expressions over typed object models. An OCL constraint is not, by itself, an automatic database constraint, concurrency lock, executable state-machine guard, or formal proof that the deployed system meets a requirement. Its exact typing and null semantics depend on the modeled metamodel and a conforming OCL tool.</p>
+<h2>2. Define a minimal typed domain and its assumptions</h2>
+<p>Consider a fictional dispatch allocation domain:</p>
+<table>
+<thead>
+<tr>
+  <th>Element</th>
+  <th>Meaning</th>
+  <th>Stated assumption</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>Reservation.id : String</code></td>
+  <td>Stable identifier</td>
+  <td>Nonempty and unique in the observed repository scope</td>
+</tr>
+<tr>
+  <td><code>Reservation.status : Status</code></td>
+  <td><code>Pending</code>, <code>Active</code>, <code>Closed</code></td>
+  <td>Exactly one enumeration value</td>
+</tr>
+<tr>
+  <td><code>Reservation.worker : Worker[0..1]</code></td>
+  <td>Optional allocated worker</td>
+  <td>Present <strong>only</strong> for <code>Active</code> reservations</td>
+</tr>
+<tr>
+  <td><code>Worker.id : String</code></td>
+  <td>Stable worker identity</td>
+  <td>Unique worker objects are identified consistently across stores</td>
+</tr>
+<tr>
+  <td><code>DispatchService.activate(r,w)</code></td>
+  <td>Activate a pending request</td>
+  <td>Does not change unrelated reservations</td>
+</tr>
+</tbody>
+</table>
+<p>This model intentionally makes a simplified policy choice: a <code>Closed</code> reservation releases its worker immediately. Real operations may require transitional states, soft holds, audit history and delayed releases. That would require extending the model instead of silently weakening its invariants.</p>
+<h2>3. Express the invariants in readable OCL</h2>
+<p>The following expressions are <strong>illustrative OCL 2.4-style syntax</strong> to validate in a conforming environment with the <code>Reservation</code>, <code>Worker</code>, and <code>Status</code> classifier definitions above. They are not interpreted by the Python program below.</p>
+<pre><code class="language-ocl">context Reservation inv UniqueIdentifier:
+    Reservation.allInstances()-&gt;isUnique(r | r.id)
+
+context Reservation inv ActiveNeedsWorker:
+    self.status = Status::Active implies
+        not self.worker.oclIsUndefined()
+
+context Reservation inv NonActiveHasNoWorker:
+    self.status &lt;&gt; Status::Active implies
+        self.worker.oclIsUndefined()
+
+context Reservation inv WorkerAllocatedAtMostOnce:
+    Reservation.allInstances()
+        -&gt;select(r | r.status = Status::Active)
+        -&gt;isUnique(r | r.worker)
+</code></pre>
+<p>Here <code>allInstances()</code> is interpreted over the population of objects in the model under evaluation, <strong>not</strong> automatically every object ever stored in every distributed database. If that population is incomplete, an apparently satisfied uniqueness expression may provide false assurance. Null and invalid OCL values must also be handled according to the language's evaluation rules; ordinary two-valued programming-logic intuition can be misleading.</p>
+<p>An additional identifier rule can be expressed as an invariant with explicit type expectations: <code>self.id.size() &gt; 0</code>, subject to the model declaring the <code>String</code> attribute mandatory and non-null. Identifiers should usually be normalized according to a defined policy if <code>&quot;R-1&quot;</code> and <code>&quot; r-1 &quot;</code> are intended to collide. A text-based identifier alone is not a concurrency mechanism.</p>
+<h2>4. Preconditions and postconditions specify an operation's obligation</h2>
+<p>An operation can be described as an OCL-style contract on a <code>Reservation</code> method (assuming a typed <code>Worker</code> parameter and appropriate object population):</p>
+<pre><code class="language-ocl">context Reservation::activate(w : Worker)
+pre PendingAndWorkerFree:
+    self.status = Status::Pending and
+    Reservation.allInstances()-&gt;forAll(r | r.worker &lt;&gt; w)
+post BecomesActive:
+    self.status = Status::Active and self.worker = w
+</code></pre>
+<p>The precondition specifies when the caller may invoke the operation; the postcondition defines an obligation on the resulting state. It does <strong>not</strong> automatically enforce atomicity. Under two simultaneous requests, each thread could evaluate “worker free” before either commits and both might activate using the same worker. An implementation needs an actual transaction/unique constraint or another concurrency-safe allocation design. The OCL should be evaluated and refined using a modeling tool and the precise metamodel in a real project.</p>
+<p>A better engineering question than “Does the diagram look reasonable?” is: <em>Which unacceptable states are representable, and what prevents the system from reaching them under concurrency, retries and partial failures?</em></p>
+<h2>5. Make a concrete counterexample, then repair it</h2>
+<p>The <a href="code/ocl_contract_audit.py">Python contract-audit example</a> checks JSON snapshots equivalent to <strong>four simple policy statements</strong>: IDs are nonempty and unique; <code>Active</code> reservations have workers; nonactive reservations have none; allocated workers are not duplicated. It also demonstrates a pure <code>activate</code> operation with explicit preconditions and poststate assertions. This is a pedagogical analogue of constraints, <strong>not an OCL parser</strong>.</p>
+<table>
+<thead>
+<tr>
+  <th>Input fixture</th>
+  <th>Expected finding</th>
+  <th>Engineering significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><a href="data/reservation-valid.json">Valid snapshot</a></td>
+  <td>No invariant violations</td>
+  <td>A necessary, not sufficient, check</td>
+</tr>
+<tr>
+  <td><a href="data/reservation-duplicate-worker.json">Duplicate worker</a></td>
+  <td>Same worker allocated twice</td>
+  <td>Resource exclusivity invariant broken</td>
+</tr>
+<tr>
+  <td><a href="data/reservation-missing-worker.json">Missing worker</a></td>
+  <td>Active request has no worker</td>
+  <td>Lifecycle/association invariant broken</td>
+</tr>
+</tbody>
+</table>
+<p>The valid fixture has one active reservation <code>R-1</code> on worker <code>W-3</code>, one pending <code>R-2</code>, and one closed <code>R-3</code>. Activating <code>R-2</code> with free worker <code>W-8</code> yields two active reservations with distinct workers; the active count increases exactly once. An attempted second allocation of <code>W-3</code> is rejected before a new snapshot is committed. Run:</p>
+<pre><code class="language-sh">python3 SE/K/methods/code/ocl_contract_audit.py
+</code></pre>
+<p>The checker intentionally <strong>cannot</strong> prove absence of races, lock-order defects, unbounded event sequences, database transaction anomalies, or all possible state-machine behaviors. It only audits the represented finite snapshot and one explicit operation's transition. To test concurrency, combine contracts with transaction-level integration tests and the bounded state exploration described in <a href="mbse-behavioral-contracts.html">MBSE behavioral contracts</a>.</p>
+<h2>6. Connecting constraints to persistence</h2>
+<p>A student implementing this in a relational datastore should consider a schema with a non-null primary key on <code>reservation.id</code>, a constrained status enumeration, a nullable worker foreign key, and a database-level uniqueness/partial-index design that prevents two <strong>Active</strong> records from allocating the same worker. An application-only pre-insert <code>SELECT</code> is not adequate for concurrent allocations. The precise index syntax differs among database engines; do not assume all engines handle <code>NULL</code>, partial indexes or transaction isolation identically.</p>
+<p>A more sophisticated distributed service must additionally address retries and idempotency, state-machine versioning, stale reads, and event delivery. The source of truth, consistency model and error behavior determine which assumptions the OCL-level specification captures. When UML terminology, API contracts and database semantics disagree, assign one authoritative system rule and document the refinements and exceptions.</p>
+<p>For model-based engineering, trace each constraint to a stakeholder obligation (for example “A worker cannot execute two reservations simultaneously”), a design enforcement mechanism, an automated check, and evidence of correctness under an appropriate workload. A constraint without a tested enforcement point is a documented intention, not assurance.</p>
+<h2>7. Counterexamples, tests, and a student exercise</h2>
+<ol>
+<li>Draw the classes and association multiplicities implied by the domain table. Explain why <code>Worker[0..1]</code> alone does not guarantee exclusivity across reservations.</li>
+<li>Write an invariant that forbids empty IDs, then decide how to normalize whitespace and casing.</li>
+<li>Predict the output of the JSON audit for the two invalid fixtures before running the code.</li>
+<li>Add an illegal <code>Closed</code> reservation with a worker to a new fixture; verify the tool catches it and explain the business-rule assumption.</li>
+<li>Modify <code>activate</code> so it performs assignment without checking other workers; show the exact violation the snapshot audit exposes.</li>
+<li>Design a concurrency test where two simultaneous activations target the same worker. Explain the datastore guarantee necessary to rule out the outcome.</li>
+<li>Describe how to express a temporal rule (“every accepted request eventually completes or times out”) and why this is not merely a static invariant.</li>
+</ol>
+<p><strong>Curriculum crosswalk:</strong> <a href="../../C/P1/EN605704.html">EN.605.704</a>, <a href="../../C/P1/EN645631.html">EN.645.631</a>, <a href="../B3/chapters/11-model-quality-queries-reports-change-impact-g.html">Book 3 ch 11</a>, <a href="../B9/chapters/11-extend-the-modeling-language-and-automate-queries-validation-rules-m.html">Book 9 ch 11</a>, and <a href="../B3/chapters/05-behavior-modeling-use-cases-activities-action.html">Book 3 ch 5</a>.</p>
+<h2>Primary technical references</h2>
+<ul>
+<li><a href="https://www.omg.org/spec/OCL/2.4">OMG Object Constraint Language (OCL) v2.4</a>. Normative language definition and separate typing/evaluation semantics.</li>
+<li><a href="https://www.omg.org/spec/UML/2.5.1">OMG UML specification</a>. Modeling notation and metamodel context.</li>
+<li><a href="https://standards.nasa.gov/node/263">NASA-STD-7009B</a>. Model V&amp;V and intended-use credibility principles applicable by analogy; not an endorsement of software models.</li>
+</ul>
+<p><em>These are original synthetic examples, not certified UML/OCL implementations or operational requirements.</em></p>
+<footer class="reference-note"><a href="uml-ocl-software-contracts.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

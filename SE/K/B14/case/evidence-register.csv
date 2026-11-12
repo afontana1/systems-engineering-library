@@ -1,0 +1,13 @@
+evidence_id,claim_or_item,classification,status,gate_or_gap,owner
+DA14-E01,Six alternatives and numerical pilot attributes,course-supplied fictional baseline,reproduced,Five-year costs not 18-month pilot authorization,course editor
+DA14-E02,Pilot feasibility thresholds,analyst-assumed policy,unapproved,Decision authority must approve and verify every hard gate,decision authority
+DA14-E03,Additive values and swing weights,analyst-assumed preference,unelicited,Independence compensability anchors and stakeholder dissent,value reviewer
+DA14-E04,Pilot screening and Pareto results,derived deterministic arithmetic,tested,Dependent on E01 E02 and selected attributes,analytics reviewer
+DA14-E05,Finite sampled design frontier,derived from synthetic formulas,tested,Out-of-subset architecture and model-form gaps,design authority
+DA14-E06,Design objective and feasibility response functions,invented teaching surrogate,unvalidated,Actual fleet events charging safety and equity absent,simulation lead
+DA14-E07,Factorial DOE and fitted surrogate,numerically derived teaching example,tested,Holdout from same oracle no field model validation,analytics reviewer
+DA14-E08,Adverse state probabilities and test likelihoods,illustrative elicitation,unobserved,No supplier performance base rate or measured test accuracy,risk lead
+DA14-E09,EVPI EVSI and conditional recommendation,derived utility arithmetic,tested,Utility point conversion and evidence learning value require elicitation,decision analyst
+DA14-E10,Accessible coverage guarantee,operational and legal claim,not supported,Trip class geography hours rights and failure consequences need audit,accessibility office
+DA14-E11,Procurement and deployment recommendation,governance claim,HOLD,Independent validation safety affordability supplier and ethics reviews,executive authority
+DA14-E12,Book 11 to Book 14 consistency,cross-model interface,unverified,Resolve differing queue and physical-system baselines,independent model reviewer

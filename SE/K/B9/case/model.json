@@ -1,0 +1,268 @@
+{
+  "model_id": "NS-MBA9.1",
+  "intended_use": "screen winter-accessibility architecture; not operational qualification",
+  "configuration": "NS-MBA9.1",
+  "needs": [
+    {
+      "id": "N01",
+      "statement": "Reliable peak travel and timely dispatch",
+      "source": "source-interview-01"
+    },
+    {
+      "id": "N02",
+      "statement": "Accessible transport on equal terms",
+      "source": "source-accessibility-02"
+    },
+    {
+      "id": "N03",
+      "statement": "Energy and depot operations affordable in winter",
+      "source": "source-energy-03"
+    },
+    {
+      "id": "N04",
+      "statement": "No conflicting assignments",
+      "source": "source-safety-04"
+    }
+  ],
+  "functions": [
+    {
+      "id": "F01",
+      "name": "Offer and assign mobility request",
+      "owner": "Dispatch"
+    },
+    {
+      "id": "F02",
+      "name": "Confirm accessible service",
+      "owner": "Dispatch"
+    },
+    {
+      "id": "F03",
+      "name": "Coordinate energy and charging",
+      "owner": "Depot"
+    },
+    {
+      "id": "F04",
+      "name": "Prevent conflicting assignments",
+      "owner": "SafetyGateway"
+    }
+  ],
+  "interfaces": [
+    {
+      "id": "I01",
+      "producer": "Dispatch",
+      "consumer": "SafetyGateway",
+      "value_type": "AssignmentCommand",
+      "unit": "none",
+      "freshness_ms": 200,
+      "owner": "Dispatch"
+    },
+    {
+      "id": "I02",
+      "producer": "Depot",
+      "consumer": "Dispatch",
+      "value_type": "BatteryEnergy",
+      "unit": "kWh",
+      "freshness_ms": 1000,
+      "owner": "Depot"
+    }
+  ],
+  "architecture": [
+    {
+      "id": "A",
+      "vehicles": 10,
+      "cycle_minutes": 45,
+      "energy_per_vehicle_kwh": 20,
+      "chargers": 4,
+      "charger_power_kw": 30,
+      "charging_window_h": 2.5,
+      "efficiency": 0.9,
+      "candidate_cost_million_usd": 1.6
+    },
+    {
+      "id": "B",
+      "vehicles": 12,
+      "cycle_minutes": 48,
+      "energy_per_vehicle_kwh": 20,
+      "chargers": 4,
+      "charger_power_kw": 30,
+      "charging_window_h": 2.5,
+      "efficiency": 0.9,
+      "candidate_cost_million_usd": 1.9
+    },
+    {
+      "id": "C",
+      "vehicles": 14,
+      "cycle_minutes": 50,
+      "energy_per_vehicle_kwh": 20,
+      "chargers": 5,
+      "charger_power_kw": 30,
+      "charging_window_h": 2.5,
+      "efficiency": 0.9,
+      "candidate_cost_million_usd": 2.1
+    }
+  ],
+  "analyses": [
+    {
+      "id": "M01",
+      "kind": "capacity",
+      "depends_on": [
+        "A",
+        "B",
+        "C"
+      ],
+      "unit": "trips/hour",
+      "requirements": [
+        "R01"
+      ]
+    },
+    {
+      "id": "M02",
+      "kind": "command_latency",
+      "depends_on": [
+        "I01",
+        "F01"
+      ],
+      "unit": "ms",
+      "requirements": [
+        "R02"
+      ]
+    },
+    {
+      "id": "M03",
+      "kind": "accessibility_sampling",
+      "depends_on": [
+        "F02",
+        "I01"
+      ],
+      "unit": "fraction",
+      "requirements": [
+        "R03"
+      ]
+    },
+    {
+      "id": "M04",
+      "kind": "energy_demand",
+      "depends_on": [
+        "A",
+        "B",
+        "C",
+        "F03"
+      ],
+      "unit": "kWh/day",
+      "requirements": [
+        "R04"
+      ]
+    },
+    {
+      "id": "M05",
+      "kind": "charging_recovery",
+      "depends_on": [
+        "A",
+        "B",
+        "C",
+        "I02"
+      ],
+      "unit": "kWh",
+      "requirements": [
+        "R05"
+      ]
+    },
+    {
+      "id": "M06",
+      "kind": "assignment_safety",
+      "depends_on": [
+        "F04",
+        "I01"
+      ],
+      "unit": "boolean",
+      "requirements": [
+        "R06"
+      ]
+    }
+  ],
+  "trace": [
+    {
+      "id": "L01",
+      "from": "N01",
+      "to": "R01",
+      "kind": "derives"
+    },
+    {
+      "id": "L02",
+      "from": "N01",
+      "to": "R02",
+      "kind": "derives"
+    },
+    {
+      "id": "L03",
+      "from": "N02",
+      "to": "R03",
+      "kind": "derives"
+    },
+    {
+      "id": "L04",
+      "from": "N03",
+      "to": "R04",
+      "kind": "derives"
+    },
+    {
+      "id": "L05",
+      "from": "N03",
+      "to": "R05",
+      "kind": "derives"
+    },
+    {
+      "id": "L06",
+      "from": "N04",
+      "to": "R06",
+      "kind": "derives"
+    },
+    {
+      "id": "L07",
+      "from": "R01",
+      "to": "F01",
+      "kind": "allocatedTo"
+    },
+    {
+      "id": "L08",
+      "from": "R02",
+      "to": "F01",
+      "kind": "allocatedTo"
+    },
+    {
+      "id": "L09",
+      "from": "R03",
+      "to": "F02",
+      "kind": "allocatedTo"
+    },
+    {
+      "id": "L10",
+      "from": "R04",
+      "to": "F03",
+      "kind": "allocatedTo"
+    },
+    {
+      "id": "L11",
+      "from": "R05",
+      "to": "F03",
+      "kind": "allocatedTo"
+    },
+    {
+      "id": "L12",
+      "from": "R06",
+      "to": "F04",
+      "kind": "allocatedTo"
+    }
+  ],
+  "baseline_info": {
+    "author": "teaching-team",
+    "source_revision": "NS-MBA9.1",
+    "decision_authority": "program-review-board",
+    "analysis_run": "M9-RUN-001"
+  },
+  "synthetic_latencies_ms": {
+    "nominal": 325,
+    "degraded_before_redesign": 460,
+    "degraded_after_redesign": 440
+  }
+}

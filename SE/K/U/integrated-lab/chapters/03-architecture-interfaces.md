@@ -38,3 +38,15 @@ The ledger shows idempotent treatment of exact repeated messages in one in-memor
 </details>
 
 **Gate evidence:** component responsibility table, interface-control document, state/invariant diagram, and a change-impact list with at least three new tests.
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Interface semantics under degraded messages.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+A message interface has an identity rule, payload rule, arrival clock, and failure classification. Both teaching fixtures contain **13 delivered rows with 12 unique requests**, because one payload is a legitimate exact replay. The v12 simulator also distinguishes conflicting reuse of an identifier or delivery key from an exact duplicate: a conflict is a rejected event, not a successfully serviced request.
+
+**Formal invariant:** `raw_events = unique_requests + exact_replays + conflicting_events` for a single ingest classification. In the unchanged fixture, `13 = 12 + 1 + 0`. The bridge checks both row accounting and the distinct v12 status ledger. For v12 `LOSS`, `12 = 8 completed + 4 lost + 0 unserved_capacity`.
+
+**Counterexample and solution:** If a network drops four requests before a receiver sees them, an in-simulator fault injector can label all four as lost. That does not imply the receiving real application can observe those messages. Students must propose an independent sender-side ledger and explicit receipt protocol, including a bounded stale-message timeout; the observable status is a **separate requirement** from internal simulation truth.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

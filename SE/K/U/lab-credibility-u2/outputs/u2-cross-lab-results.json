@@ -1,0 +1,131 @@
+{
+  "baseline_unchanged": true,
+  "case": "NS-U2.1",
+  "checks": {
+    "accessibility_evidence_available": false,
+    "all_required_permissions": false,
+    "degraded_scenario_screen": false,
+    "in_scope_independently_reviewed_field_evidence": false,
+    "independent_ledger_audit": true,
+    "independent_replay": true,
+    "nominal_fixed_screen": true,
+    "original_runner_files_unchanged": true,
+    "original_v12_20_replication_snapshot_verified": true
+  },
+  "controlled_gate_sha256": "e6cb87888f734d733d158003bd7e76c2d072accf97ab5c7bda6e46e35f0900ea",
+  "errors": [],
+  "fixed_fixture_wilson_lower_demonstration": 0.757499,
+  "input_digests": {
+    "v11": {
+      "data/config.json": "30aeaefd44e8dbb34373d8987bb87aa2959c291de6e9f7c98f1f8e23aad6b933",
+      "data/hazards.csv": "bcd137475bf9d46fe5f238a8853a499dbea6aad78d9c9b3b724a1d70a3aa40b9",
+      "data/requests.csv": "1b16b62e5e21c0b060c7e3a7de1c08512f374d7ba15b8595042feb1a99d55a34",
+      "data/requirements.csv": "61a183a30a06cbea4f9054e56be1186389fdb7fc98d7aa3f7fce6b1e577a51f0",
+      "data/verification-matrix.csv": "16fb6a9d1283991598e8aae9f20042671b986831743873dcd620d100fab861bb",
+      "src/assurance.py": "5571ae60824384868055c289fec888fe64113ad3d989da960a290688f6b14e52",
+      "src/northstar.py": "3be5479762068dbd1501bcb809bd0eca3c18a85eb1a2c07b3a1cb38292b7dd38",
+      "src/run_lab.py": "4168265698ee703074c8c728d1e8a7ca98c1b132a6227727712a69b50ac2026c"
+    },
+    "v12": {
+      "data/requests.csv": "1b16b62e5e21c0b060c7e3a7de1c08512f374d7ba15b8595042feb1a99d55a34",
+      "data/requirements-v12.csv": "89ab5f75e8670cb3383b0e01eb0434474ce73629d5f038326481350f8bfdedfa",
+      "data/scenarios.json": "2c6a5889802325582ffecb1edb9a9835968ff558fb046300b5125b05f88bf805",
+      "data/verification-plan.csv": "5bf5a9f64d4cf9f6c01beb3c9a87f56801fd6a00df0e94572cf98d5009422ce4",
+      "models/architecture.json": "e8c2c50fa8e4edc8486bfef608930f3ad0789f2ab26a1cb95790769a88cf1382",
+      "src/architecture.py": "4d7dfbe3466dfc23627d21b9f3b1dd3f7b6f47dd178d3255e94af16e5dd1f46b",
+      "src/event_sim.py": "592882b244cc59615fb59b10270db945a7e6f61605aabdddaef7af790504b34c",
+      "src/evidence.py": "2c9b64092f8ba4ab54d931b9f5b4798e0fc59405053a798018342688d5cfdc01",
+      "src/run_advanced.py": "d7e4550b0a4d42750fb44dc5c4f7b65fdcde1a25bf5521498f049c40c3559cf8"
+    }
+  },
+  "interpretation": "v11 single vehicle and v12 faulted vehicle are not the same intervention. Toy event-ledger losses are visible to the simulator, not demonstrably observed by a real intake system. Synthetic software verification is not field validation.",
+  "paired_experiment": {
+    "approximate_normal_95pct_interval": [
+      -0.439265,
+      -0.407957
+    ],
+    "caveat": "Normal approximation for Monte Carlo precision of a synthetic model, NOT confidence in field effects or validity",
+    "independent_arrival_streams": 120,
+    "mean_baseline": 0.908333,
+    "mean_faulted": 0.484722,
+    "mean_gap_min": 4.0,
+    "n": 12,
+    "paired_mean_difference": -0.423611,
+    "replications": 120,
+    "seed": 911
+  },
+  "preserved_v12_snapshot": {
+    "original_95pct_interval": [
+      -0.428651,
+      -0.321349
+    ],
+    "original_output_byte_identical_to_20_replication_replay": true,
+    "original_paired_difference": -0.375,
+    "original_replications": 20
+  },
+  "repeat_replay_byte_stable": true,
+  "source_output_sha256": {
+    "v11": {
+      "dispatch-assignments.csv": "288c821d8c0450755d0eb792e4c4105d9292bb9bbfc147aeeff62f2baae19d44",
+      "input-hashes.json": "1606b3ad7a61b395b477510312996721b6fd4c7d154939e11cde273c8ea13729",
+      "results.json": "d9040b655899a427e13de18a3f6c312b1bea30f33b7b618d8d97a3195dd39429"
+    },
+    "v12": {
+      "provenance.json": "1a4729bd82fde36494a6748e9ad698171d9dec767e0fcc96026dbb5ee39c3e64",
+      "scenario-results.json": "5bbf5e6d0e1ed9f075a5e2c71fefecaaee92d34d9d7f7a2c8b0fd2a869bf9197",
+      "scenario-summary.csv": "28a2cf542b21ee03fb2a093af89e67d8b2c93ac0deef19a7aacdbc515f7bc194"
+    }
+  },
+  "statistics_caveat": "Wilson calculation assumes independent Bernoulli trials; fixed hand-designed requests do not satisfy this sampling interpretation",
+  "status": "HOLD for field deployment",
+  "v11": {
+    "degraded_completed": 6,
+    "fixed_completed": 12,
+    "p90_wait_min": 20.0,
+    "unique": 12
+  },
+  "v12": {
+    "BASE": {
+      "completed": 12,
+      "lost_messages": 0,
+      "p90_wait_min": 20.0,
+      "unique": 12,
+      "unserved_capacity": 0
+    },
+    "DELAY": {
+      "completed": 10,
+      "lost_messages": 0,
+      "p90_wait_min": 28.0,
+      "unique": 12,
+      "unserved_capacity": 2
+    },
+    "LOSS": {
+      "completed": 8,
+      "lost_messages": 4,
+      "p90_wait_min": 8.0,
+      "unique": 12,
+      "unserved_capacity": 0
+    },
+    "LOW-CAPACITY": {
+      "completed": 6,
+      "lost_messages": 0,
+      "p90_wait_min": 40.0,
+      "unique": 12,
+      "unserved_capacity": 6
+    },
+    "OUTAGE": {
+      "completed": 6,
+      "lost_messages": 0,
+      "p90_wait_min": 40.0,
+      "unique": 12,
+      "unserved_capacity": 6
+    },
+    "TELEMETRY": {
+      "completed": 4,
+      "lost_messages": 0,
+      "p90_wait_min": 49.0,
+      "unique": 12,
+      "unserved_capacity": 8
+    }
+  }
+}

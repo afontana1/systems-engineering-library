@@ -19,6 +19,10 @@
 - **Week 11:** [Chapter: Scale agile systems engineering across teams, suppliers, governance, and long-lead dependencies](chapters/11.md) · [Practice lab](labs/11.md)
 - **Week 12:** [Chapter: Present, challenge, revise, and defend the Agile Systems Engineering operating model](chapters/12.md) · [Practice lab](labs/12.md)
 
+## NS-ASE15.1 integrated agile systems engineering experiment
+
+All twelve chapters extend the [controlled Northstar technical-management laboratory](case/INDEX.html): [versioned input assumptions](case/controlled-inputs.json), a [standard-library simulator](tools/step03_book15_flow.py), [scenario outcomes](case/scenario-summary.csv), [daily flow](case/daily-flow.csv), [48-change scenario evidence ledger](case/item-evidence.csv), [machine-readable results](case/model-results.json), [evidence register](case/evidence-register.csv) and [decision log](case/decision-log.csv). The course's original self-study chapters, 12 labs, and CEO-recommendation requirements remain in place. The apparent gains are synthetic and **do not authorize physical deployment**.
+
 ## Practical computation
 
 See `../P4-LAB/` for the shared Python calculation tools, three executable notebooks, and illustrative CSV datasets. The tools are for education and do not certify any operational system.

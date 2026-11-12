@@ -1,0 +1,7 @@
+id,metric,threshold,scope,evidence_status,owner
+MS11-R01,standard request pickup wait p90,<=12 min,synthetic operating day,modeled only,campus operations
+MS11-R02,accessible request pickup wait p90,<=15 min,synthetic operating day,modeled only,accessibility lead
+MS11-R03,not picked up by close,<1 percent,06:00-18:00,modeled only,campus operations
+MS11-R04,driver and staff availability,document and validate,all operating shifts,not represented,operations management
+MS11-R05,referent demand and route travel,independent field study,peak and degraded conditions,missing,pilot program
+MS11-R06,charging compatibility and location,physical and operational evidence,all scenarios,not represented,fleet engineering

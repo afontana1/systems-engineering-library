@@ -1,0 +1,7 @@
+discrepancy,requirement,trigger,classification,owner,closure_evidence,state
+DR-01,TE8-R01,40 tests have inadequate p99 confidence,EVIDENCE_GAP,Test lead,Approved sequential/stratified plan and sufficient independent tail trials,OPEN
+DR-02,TE8-R03,Shared hazard reliability model below target,DESIGN_SHORTFALL,Reliability engineer,Revised architecture plus justified parameter evidence,OPEN
+DR-03,TE8-R04,Logistics availability model below target,DESIGN_SHORTFALL,Supportability engineer,Field/repair evidence and updated logistics model,OPEN
+DR-04,TE8-R06,HIL evidence applies only to prior build,STALE_BASELINE,Configuration manager,Retest on NS-DI7.1 or approved applicability demonstration,OPEN
+DR-05,TE8-R07,Recovery demonstration took 14 min,TEST_FAILURE,Operations lead,Corrective change and authorized rerun <=12 min,OPEN
+DR-06,TE8-R08,Replay control test not executed,MISSING_TEST,Security lead,Signed replay and freshness test report,OPEN

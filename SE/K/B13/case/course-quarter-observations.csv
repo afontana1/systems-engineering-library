@@ -1,0 +1,9 @@
+quarter,trip_requests_per_day,completed_trips_per_day,p90_wait_min,active_fleet,maintenance_backlog_vehicle_days,trust_index,accessible_fulfillment,improvement_budget_kusd_per_quarter
+1,920,805,18.0,11.8,24,63,0.86,310
+2,1010,900,15.5,12.7,29,67,0.89,330
+3,1160,1015,14.2,13.4,38,71,0.91,345
+4,1290,1090,16.8,13.1,52,68,0.88,325
+5,1370,1110,21.4,12.3,71,61,0.82,285
+6,1310,1085,23.1,11.9,79,56,0.79,250
+7,1240,1070,20.6,12.6,67,58,0.81,255
+8,1285,1135,17.9,13.2,55,62,0.85,275

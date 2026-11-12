@@ -48,7 +48,15 @@ A change to vehicle telemetry freshness may affect requirement R-21, interface I
 
 To turn the example into engineering evidence, record a stable identifier for every requirement or model element you invoke; identify the baseline configuration and scenario; write the decision rule before you compute or inspect the outcome; and state what would falsify the conclusion. A successful demonstration in this artificial shuttle case is an illustration of the method, never a claim about a real transportation service.
 
+## Model-quality queries should test meaning, not just completion
 
+A report that every requirement has a link to a model element says little about whether the model constrains harmful behavior. For a one-seat reservation service, an executable query should search for a reachable state with \(\mathrm{allocated}>1\). The [finite-state explorer](../../methods/code/state_space_checker.py) also checks consistency of the capacity ledger with ASSIGNED request statuses and returns a concrete event trace for any violation.
+
+Such a check has a limited scope: two requests, sequential transitions, no network failures, no locks or transaction races. Maintain a trace from the governed requirement to the state invariant, model baseline, checker version, counterexample (if any), corrected model, and separate implementation-level verification evidence. See [the model semantics guide](../../methods/mbse-behavioral-contracts.md) for the distinction between a checked abstraction and a verified deployed configuration.
+
+## Phase 3 technical reference: A model query should test a named invariant
+
+Consider active dispatch reservations. An optional `worker` association says one reservation can have at most one worker, but does not prohibit **two reservations sharing one worker**. An OCL-style invariant can use `Reservation.allInstances()->select(r | r.status = Status::Active)->isUnique(r | r.worker)`. Model queries should also detect a missing worker on an active reservation and a worker assigned to a nonactive reservation. The [complete UML/OCL guide](../../methods/uml-ocl-software-contracts.md) includes counterexample snapshots and a Python checker to illustrate the intended logic, but the teaching program is **not** a conforming OCL interpreter. Trace the invariant to an actual transactional enforcement mechanism and verification evidence.
 
 ## What can go wrong—and why
 
@@ -71,3 +79,41 @@ In [Lab 11: Quality queries are executable arguments](../labs/lab-11-model-quali
 ## Continuity
 
 This chapter builds from [previous chapter](10-verification-and-validation-modeling-configur.md) and leads toward [next chapter](12-integrated-model-baseline-capstone-review-ora.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-631-w11.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Phase 4 technical reading: An executable release-evidence query
+
+A structural coverage count such as “100% requirements have tests” is insufficient. Define typed need, requirement, component, hazard, control, evidence and baseline entities, then check both graph integrity and configuration currency. In the [model audit](../../methods/model-baselines-and-evidence.md), fictional CM-B2 has two requirement chains and no declared structural failures; the CM-B3 fixture intentionally changes the release baseline and software build without updating the evidence, causing four stale-evidence errors. This demonstrates change-impact checking but not requirements correctness, evidence quality, or formal SysML v2 syntax validation. The [full case](../../methods/campus-mobility-engineering-case.md) gives a technical context for each edge.
+
+## Step 03 integrated reference: automated model-quality queries
+
+### Turn review questions into invariants with meaningful failure messages
+
+Model quality includes syntax, identity, relationship semantics, dimensions, behavior, and configuration-specific evidence. Each category requires a different query. A tool may report “all objects resolved” while the design violates an operational requirement. The NS-MB3 checker is deliberately modest: it checks that referenced needs and components exist, that test links are present, that revisions and baselines agree, and that elementary capacity, latency and energy constraints reproduce their inputs. It does not prove the requirements themselves are correct.
+
+A robust query has a stated precondition, a predicate, a diagnostic and a response policy. For example: **input** = controlled requirement and test executions; **predicate** = revision and baseline match; **failure message** = `REQ-03: STALE_EVIDENCE`; **response** = request new evidence or controlled applicability assessment. Another query tests dimension and bound consistency at interfaces. Merely generating a report without assigning a disposition and owner is not governance.
+
+### Negative fixtures demonstrate what a checker can catch
+
+Suppose a new model edit assigns `AUTHORIZE` to a nonexistent component `UNKNOWN_GATE`. The graph should reject the reference because `UNKNOWN_GATE` is not in the component set. Likewise, if a test claims `REQ-03` but its result is labeled with requirement revision 1 rather than the current revision 2, the currency query should report a stale result. The [standard-library checker](../tools/step03_book3_model_check.py) exposes the diagnostics for controlled input in [the model data](../case/model-baseline.json). A useful regression test introduces exactly one known defect and verifies that the intended rule catches it. This distinguishes a functioning checker from a script that always prints success.
+
+The integrity rules include
+
+\[
+\forall f\in F,\quad \operatorname{allocatedTo}(f)\in C
+\]
+
+and
+
+\[
+\forall r\in R,\quad \operatorname{need}(r)\in N,
+\]
+
+where \(F,C,R,N\) are modeled functions, components, requirements and needs. These are typing and referential-integrity checks; they do not establish correct function allocation. A perfectly well-typed but unsafe design is still possible.
+
+### Check impact under change without assuming complete propagation
+
+When `REQ-03` changes, a dependency query should identify its verifying test, allocated component, interface, and relevant measures. That dependency frontier is a *starting set* for impact review. Hidden dependencies—operational procedures, clock synchronization, software fallback, and human interpretation—may not be represented in the graph. A rigorous change process therefore combines automated graph traversal with expert inspection, test selection and recorded residual uncertainty.
+
+**Exercise with answer.** A model validator reports zero broken references, but a degraded command path totals 460 ms against a 400-ms nominal budget. Is there a contradiction? The degraded result is a performance concern, not a direct logical falsification of a requirement explicitly scoped to nominal operation. The next action is to specify degraded-mode acceptance and safety behavior, verify the path assumptions, and possibly add a requirement. A checker that reports only ID consistency should not make a performance-compliance claim.
+
+For official modeling-language syntax and tool-conformance rules, consult the [OMG SysML 2.0 specification](https://www.omg.org/spec/SysML/2.0); the JSON checker is **notation-neutral teaching infrastructure**, not a SysML parser.

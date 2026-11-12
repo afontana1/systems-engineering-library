@@ -19,6 +19,10 @@
 - **Week 11:** [Chapter: Mission analysis, alternatives, gaps, and interventions](chapters/11.md) · [Practice lab](labs/11.md)
 - **Week 12:** [Chapter: Integrated digital engineering for mission decisions](chapters/12.md) · [Practice lab](labs/12.md)
 
+## NS-DME16.1 integrated digital-mission evidence laboratory
+
+All twelve chapters connect to the [Northstar digital mission evidence case](case/INDEX.html), its [controlled JSON inputs](case/controlled-inputs.json), [standard-library executable graph/mission/twin model](tools/step03_book16_mission.py), [mission policy results](case/mission-summary.csv), [supplier change-impact query](case/supplier-impact.json), [evidence register](case/evidence-register.csv) and [review-board decision log](case/decision-log.csv). These are explicitly synthetic screening materials and not operational qualification. Original course objectives, 12 chapters and 12 labs remain in place.
+
 ## Practical computation
 
 See `../P4-LAB/` for the shared Python calculation tools, three executable notebooks, and illustrative CSV datasets. The tools are for education and do not certify any operational system.

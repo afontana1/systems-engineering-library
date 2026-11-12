@@ -1,0 +1,6 @@
+claim_id,claim,case_evidence,configuration,what_is_demonstrated,defeater_or_gap,review_status
+DME16-C1,All five requirement paths are configured and typed,trace-quality.csv,r1/IF-DISPATCH-1.0,Toy typed graph queries and evidence revision matching,Independent test adequacy and full requirements coverage absent,BOUNDED-SCREEN
+DME16-C2,Supplier change propagates to decision,supplier-impact.json,r1/IF-DISPATCH-2.0,Four of five paths remain current when one interface is changed,Unmodeled links and supplier semantics can escape impact discovery,IMPACT-GAP-OPEN
+DME16-C3,Four mission policies can be numerically compared,mission-scenarios.csv,r1/scenario-inputs,Deterministic algebra and weighted enumeration,Scenario weights capacities and actual routes not validated,BOUNDED-SCREEN
+DME16-C4,Synthetic SOC update handles bias and staleness,model-results.json,r1/telemetry-input,Scalar Gaussian update and stale-input rejection,Sensor calibration and physical battery dynamics missing,BOUNDED-SCREEN
+DME16-C5,Combined policy is fit for public-safety deployment,none,r1/unqualified,None,Best policy below 0.95 toy gate and no field qualification,HOLD

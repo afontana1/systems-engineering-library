@@ -1,0 +1,5 @@
+id,gate,decision,evidence,authority,condition,status
+D-01,Proposal,"Bid only with a documented requirement exception list",Solicitation crosswalk,Proposal manager,"No unacceptable unmet mandatory terms",conditional
+D-02,Baseline,"Adopt NS-M1 only if CA sum and risk model reconcile",Control accounts and risk register,Program manager,"Independent estimate review",conditional
+D-03,Integration,"Advance if NS-B1 traceability and interface checks are current",NS-B1 traceability and test records,Technical authority,"Stale evidence resolved or explicitly restricted",open
+D-04,Recovery,"Reforecast cost and schedule after supplier recovery test",Month-five earned-value data,Program manager,"No unauthorized rebaseline",open

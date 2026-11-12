@@ -1,0 +1,6 @@
+id,decision,reason,alternative,revisit_trigger
+D-01,Reservation owns lifecycle,keeps state transition invariant localized,dispatcher owns all state,cross-service cancellation needs atomicity
+D-02,AssignmentPolicy is pure policy with repository port,isolated eligibility testing,embed SQL in UI,new allocation rule or vehicle category
+D-03,Database unique index is final duplicate-assignment guard,races bypass preflight checks,application read-before-write alone,slot definition changes
+D-04,Request idempotency key is durable,network retries can repeat commands,volatile in-memory cache,token retention policy changes
+D-05,Audit event is committed with state transition,no silent success without trace,asynchronous best-effort log,regulated evidence scope changes

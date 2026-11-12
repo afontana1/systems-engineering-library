@@ -119,3 +119,48 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [08 — Previous chapter](08-model-natural-and-man-made-environments-as-dynamic-correlated-scenar.md) · [10 — Next chapter](10-extend-the-model-to-population-or-biological-dynamics-and-communicat.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-CPS12.1 case: performance, charging, resources and cost
+
+### Design decisions need constraints as well as favorable metrics
+
+A physical model says how much energy an illustrative vehicle uses under an assumed route; a fleet design must ask whether depots, chargers, maintenance, drivers, accessibility service, tariffs and capital spending support the mission. If an energy-saving configuration misses passenger schedules or thermal margins, it is not a valid “optimum.” Constrain feasibility before ranking alternatives. Book 11's queue simulation models a distinct operational problem; a future coupling should use verified charging arrivals and charger occupancy, not transplant this plant's convenient average trip time directly into a demand model.
+
+The shuttle course source suggests 100 kW nominal charging, with delivered range 85–105 kW. The teaching JSON holds `charger_kw=100` and charger efficiency 0.93, but **does not** simulate charging events or charger contention. A separate engineering arithmetic estimate for replacing consumed energy \(E\) is
+
+\[
+t_\mathrm{grid}=\frac{E}{\eta_\mathrm{charger}P_\mathrm{charger}},\quad
+E_\mathrm{grid}=\frac{E}{\eta_\mathrm{charger}},
+\]
+
+assuming constant power, no taper, no pack temperature restrictions, and a charger that can deliver the stated power continuously. At 32.38 kWh of modeled battery energy use in the hot low-flow duty cycle, replacing that energy at 100 kW and 93% efficiency takes \(32.38/(0.93\times100)=0.348\) hours or **20.9 minutes**. If delivered power is 85 kW, the estimate becomes about **24.6 minutes**. Neither value proves a station can achieve that turnaround: plug-in dwell, overlapping arrivals, load sharing and SOC taper are excluded.
+
+### Tie technical states to cost consequences
+
+For an energy-only illustration, let tariff \(p_e\) be currency per kWh, and annual cycles \(N\). The annual electrical purchase cost is
+
+\[
+C_e=N\,E_\mathrm{battery}/\eta_c\,p_e.
+\]
+
+Suppose, solely for a worked example, \(N=250\) duty cycles/year, \(p_e=\$0.20/\mathrm{kWh}\), and \(E_\mathrm{battery}=32.38\) kWh. Annual grid energy is approximately \(250(32.38)/0.93=8704\) kWh and the illustrative bill is **$1,741/year**. This excludes demand charges, peak tariffs, charging infrastructure, insurance, labor, maintenance, cell aging, uptime and embodied capital costs. None of these unit prices or annual repetitions are field-sourced; use a real cost basis before a procurement decision.
+
+A levelized cost model should separate purchase/installation, fixed operating expense, variable energy, battery replacement, maintenance, downtime and retirement. For discount rate \(r\), years \(t=1\ldots T\) and annual net cost \(C_t\), present value is \(PV=C_0+\sum_t C_t/(1+r)^t\). Economic comparison should incorporate the probability and consequence of failing service requirements, not just the mean dollar figure.
+
+### Coupled reliability and maintainability
+
+Charging availability and vehicle serviceability introduce discrete transitions. For an idealized repairable component with exponential failure rate \(\lambda\) and repair rate \(\mu\), steady availability is \(A=\mu/(\lambda+\mu)=MTBF/(MTBF+MTTR)\). At an assumed 200-hour MTBF and 5-hour MTTR, \(A=200/205\approx97.56\%\). If a critical station is unavailable 2.44% of the time, a single-charger schedule can fail even when energy calculations look adequate. These are hypothetical reliability parameters; exponential models are frequently inappropriate for wear, repair queues and correlated common causes.
+
+### Explain the energy-temperature-economic frontier
+
+The current paired hot comparison shows high coolant flow lowers modeled peak pack temperature from about **41.88°C to 40.98°C** but increases battery energy use from about **32.38 to 33.36 kWh**. A simple operating cost preference for low flow would ignore degradation, cell hotspot uncertainty, thermal fault risk and future ambient exposure. Conversely a preference for high flow based only on the 0.90°C reduction ignores pump wear and energy. State a constrained objective, for example minimize \(C_e\) subject to validated thermal, reserve and passenger-service requirements, and explicitly mark which of those constraints are not yet represented.
+
+### Exercises with solutions
+
+**A.** For 35 kWh delivered to the pack, 93% charger efficiency and 85 kW constant delivered grid-side power, calculate ideal charging time. **Solution.** \(35/(0.93\times85)=0.443\) h, or **26.6 min**. Confirm whether “85 kW” denotes grid input or DC output; the formula above assumes AC/grid input and therefore applies efficiency once. If it denotes net DC delivered, use \(35/85\) h instead.
+
+**B.** A proposal has $0.30 lower daily electricity expense but requires $10,000 more cooling hardware. Can it be selected on energy cost alone? **Solution.** No; compare capital present value, maintenance, degradation, reliability and validated constraint margins over the lifecycle. Without decision horizon and uncertainty the economics are indeterminate.
+
+**C.** Why is simulated average energy per route not a fleet charger-capacity claim? **Solution.** Fleet demand has arrival-time clustering, service downtime, shared power and charge-session duration distributions; a single-vehicle plant estimate does not resolve those queue mechanics.
+
+**Deliverable:** a feasible-design constraint table, example energy/charge calculation with power convention, cost ledger separating synthetic prices, and an interface request for Book 11 fleet integration.

@@ -19,4 +19,13 @@
 <p>None of A, B, C, D or E has positive total float in this example. Both chains are length 10. If a new independent noncritical activity were added, its float could be calculated against the project finish.</p>
 <p>&lt;/details&gt;</p>
 <p><strong>Transfer artifact:</strong> Dependency graph, forward/backward passes, baseline, objective completion rules and separate technical maturity indicators. See <a href="../../encyclopedia/wbs-and-baselines.html">WBS and baselines</a>.</p>
+
+<!-- STEP04-FLAGSHIP-U1-START -->
+<section class="ns-u4-extension" aria-label="NS-U4.1 flagship technical extension"><h3>D09 extension · Schedule-path calculation and earned-value independence</h3>
+<p>Suppose work can flow through either A–B–C with durations 3+4+2=9 days or A–D–C with durations 3+5+2=10 days. In this fixed deterministic network, the second path is critical at 10 days; a one-day delay in D increases finish time unless schedule logic or concurrency changes. Separately, earned value $EV=100$, actual cost $AC=130$, and planned value $PV=120$ (same monetary units), giving $CPI=EV/AC=.76923$, $CV=-30$ and $SV=EV-PV=-20$. Neither CPI nor SV gives an exact forecast of critical-path completion.</p>
+<p><strong>Exercise and solution.</strong> Shortening D by two days yields A–D–C=8 while A–B–C stays 9; the critical path switches. CPI remains .76923 if no cost/evidence records change. <a href="../flagship-integration/data/ns-u4.1-case.json">Input model</a>.</p>
+</section>
+<script id="ns-u4-inline-math">window.MathJax=window.MathJax||{};window.MathJax.tex=window.MathJax.tex||{};window.MathJax.tex.inlineMath=[["$","$"]];</script>
+<style id="ns-u4-responsive">main{min-width:0;max-width:100%;overflow-wrap:break-word}main :is(table,pre){max-width:100%;overflow-x:auto}main :is(p,li):has(mjx-container){overflow-x:auto}main mjx-container{max-width:100%;overflow-x:auto}.ns-u4-extension{min-width:0;max-width:100%;border-top:2px solid #9acac9;margin-top:38px;padding-top:16px}.ns-u4-extension a{overflow-wrap:anywhere}</style>
+<!-- STEP04-FLAGSHIP-U1-END -->
 </main></body></html>

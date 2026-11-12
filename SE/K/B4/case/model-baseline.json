@@ -1,0 +1,47 @@
+{
+  "baseline": "NS-OO4.1",
+  "purpose": "Synthetic Northstar reservation service for OOAD teaching, not live dispatch software",
+  "requirements": [
+    {"id":"SW-01","revision":1,"claim":"Each accepted request has one durable reservation identifier"},
+    {"id":"SW-02","revision":1,"claim":"A vehicle has at most one ACTIVE assignment in a service slot"},
+    {"id":"SW-03","revision":1,"claim":"Identical retry tokens with identical payload produce the same reservation"},
+    {"id":"SW-04","revision":1,"claim":"Cancellation releases its active assignment atomically"},
+    {"id":"SW-05","revision":1,"claim":"Accessible requests are allocated to eligible vehicles"},
+    {"id":"SW-06","revision":2,"claim":"An assignment may use only telemetry no older than 15 seconds"},
+    {"id":"SW-07","revision":1,"claim":"Each committed transition records its actor, cause, and version"}
+  ],
+  "components": [
+    {"id":"ReservationService","owns":["SW-01","SW-03","SW-04"]},
+    {"id":"AssignmentPolicy","owns":["SW-02","SW-05","SW-06"]},
+    {"id":"AuditWriter","owns":["SW-07"]}
+  ],
+  "use_cases": [
+    {"id":"UC-01","name":"Submit accessible reservation","primary_actor":"Rider","requirements":["SW-01","SW-03","SW-05"]},
+    {"id":"UC-02","name":"Assign vehicle","primary_actor":"Dispatcher","requirements":["SW-02","SW-05","SW-06"]},
+    {"id":"UC-03","name":"Cancel reservation","primary_actor":"Rider","requirements":["SW-04","SW-07"]}
+  ],
+  "states": ["REQUESTED","OFFERED","ASSIGNED","COMPLETED","CANCELLED"],
+  "transitions": [
+    {"from":"REQUESTED","event":"offer","to":"OFFERED"},
+    {"from":"OFFERED","event":"assign","to":"ASSIGNED"},
+    {"from":"ASSIGNED","event":"complete","to":"COMPLETED"},
+    {"from":"REQUESTED","event":"cancel","to":"CANCELLED"},
+    {"from":"OFFERED","event":"cancel","to":"CANCELLED"},
+    {"from":"ASSIGNED","event":"cancel","to":"CANCELLED"}
+  ],
+  "vehicles": [
+    {"id":"V-01","accessible":false,"telemetry_age_s":4},
+    {"id":"V-02","accessible":true,"telemetry_age_s":6},
+    {"id":"V-03","accessible":true,"telemetry_age_s":22}
+  ],
+  "timing_ms":{"authentication":120,"policy_check":80,"commit_and_event":150,"requirement_max":500},
+  "evidence": [
+    {"id":"T-01","requirement":"SW-01","revision":1,"status":"PASS","baseline":"NS-OO4.1"},
+    {"id":"T-02","requirement":"SW-02","revision":1,"status":"PASS","baseline":"NS-OO4.1"},
+    {"id":"T-03","requirement":"SW-03","revision":1,"status":"PASS","baseline":"NS-OO4.1"},
+    {"id":"T-04","requirement":"SW-04","revision":1,"status":"PASS","baseline":"NS-OO4.1"},
+    {"id":"T-05","requirement":"SW-05","revision":1,"status":"PASS","baseline":"NS-OO4.1"},
+    {"id":"T-06","requirement":"SW-06","revision":1,"status":"PASS","baseline":"NS-OO4.1"},
+    {"id":"T-07","requirement":"SW-07","revision":1,"status":"PLANNED","baseline":"NS-OO4.1"}
+  ]
+}

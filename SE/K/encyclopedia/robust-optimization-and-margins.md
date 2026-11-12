@@ -47,6 +47,22 @@ Document objectives, decision rights, scenario rationale, uncertainty provenance
 - **O1 · Multidisciplinary technical trades and sensitivity:** [NASA Systems Engineering Handbook, section 4.0 — design solution definition and trade context](https://www.nasa.gov/reference/4-0-system-design-processes/).
 - **O2 · Model/data credibility limits and technical evidence:** [NASA Systems Engineering Handbook, section 2.0 — systems engineering fundamentals](https://www.nasa.gov/reference/2-0-fundamentals-of-systems-engineering/). These are methodological anchors, not an endorsement of the original cost matrix.
 
+## Expected loss, regret and robust feasibility can disagree
+
+An expected-value policy minimizes \(\sum_s p_s L(x,s)\), while minimax regret minimizes \(\max_s[L(x,s)-\min_y L(y,s)]\). In a hypothetical three-scenario comparison, design D has losses \([173,189,217]\) thousand-equivalent units and A has \([175,190,210]\). With scenario probabilities \([0.6,0.3,0.1]\), D has lower expected loss (182.2 versus 183.0), but its worst regret is 7, compared with A's 2. **The disagreement is substantive**, not a rounding problem: the decision rules express different preferences about uncertainty.
+
+An all-scenario delay constraint of 8 seconds would reject both A and D. This illustrates why hard feasibility requirements must be checked before a weighted optimization claims a preferred design. See [the full scenario and Pareto derivation](../methods/pareto-and-robust-design.md) for the input dataset, dominance checks, and sensitivity questions.
+
+
+
+## Step 02 review studio — a nominal winner can be a fragile choice
+
+Suppose architecture A has expected total cost 100 with worst plausible cost 160, while architecture B has expected cost 108 with worst plausible cost 120. A risk-neutral expected-cost choice selects A; a strict worst-case minimization selects B. Neither is automatically right. Specify what uncertainty set, risk appetite, and feasibility constraints the decision authority adopted.
+
+**Solved exercise:** suppose a mandatory budget ceiling is 130 units under **all** approved scenarios. Which is feasible for a robust decision? **Only B**, assuming the scenario bounds are defensible. Reducing A's expected cost cannot compensate for violating a hard robust constraint. If a chance constraint is allowed instead, the probability model and acceptance probability must be justified; a “95% safe” phrase without a specified population is not a mathematical requirement.
+
+**Margin check:** if a timing allocation is 1.65 s against a 2.50-s deterministic target, unused budget is 0.85 s. That is **time margin**, not a probability of meeting the target. Real uncertainty about queueing or clock synchronization must be modeled or tested. Distinguish engineering design margin, measurement uncertainty, model-form uncertainty, and economic contingency; they serve different purposes.
+
 ## Follow the knowledge
 
 - **Prerequisites:** [Engineering trades](engineering-trades.md), [Probability and dependence](probability-and-dependence.md).

@@ -46,6 +46,16 @@ These sources establish authoritative terminology or methods in their own publis
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 
+
+
+## Step 02 review studio — tailor evidence without deleting its purpose
+
+A two-week supervised dispatch prototype and a deployed passenger service do not need identical document volume. Both, however, require a declared operating domain and control of high-consequence interfaces. Tailoring should reduce *unnecessary process overhead* while preserving the information needed for the next decision.
+
+**Solved exercise:** a team proposes replacing a formal interface review with automated contract tests at each increment. When is that reasonable? **Only when** the contract tests cover approved interface semantics, error behavior, version compatibility, configuration identity, and accountable review of exceptions. A successful automated run may satisfy part of a review's **evidence function**, but it does not automatically supply approval authority, stakeholder validation, or risk acceptance. Preserve a concise record of what was tailored, why, and which failure would trigger reinstatement of a more formal control.
+
+**Counterexample:** a rapid-release team changes emergency-message units but only unit tests the producer and consumer separately. Fast iteration makes the defect repeatable, not acceptable. Agile practices and assurance are compatible when the delivery cadence also produces current, system-relevant evidence.
+
 ## Follow the knowledge
 
 **Related concepts**

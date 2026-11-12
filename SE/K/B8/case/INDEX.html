@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS-TE8.1 System Test and Evaluation · Systems Engineering Library</title><link rel="stylesheet" href="../../_assets/learning-shell-v55.css"><style>body{margin:0;background:#f4f7f8;color:#183645;font:16px/1.7 system-ui,sans-serif}header{padding:16px max(18px,calc((100vw - 1040px)/2));background:#173f52}header a{color:#c6f5ee}main{max-width:1040px;margin:24px auto;padding:clamp(18px,4vw,40px);border:1px solid #d6e3e5;border-radius:12px;background:white}a{color:#0b6b70}h1{line-height:1.2}h2{margin-top:1.8rem}p,li{max-width:100ch}table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}td,th{padding:9px;border:1px solid #dae3e6;vertical-align:top}th{background:#edf5f4}code{overflow-wrap:anywhere}pre{overflow:auto;padding:12px;background:#ecf3f5}img{max-width:100%;height:auto}@media(max-width:700px){main{margin:0;padding:18px;border:0;border-radius:0}}</style><script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B8/case/INDEX.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script></head><body><header><a href="../README.html">← Book 8</a> · <a href="../OPEN-BOOK.html">Textbook</a></header><main><h1>NS-TE8.1 — System Test and Evaluation case</h1>
+<p><strong>Fictional engineering study.</strong> This package receives the unresolved NS-DI7.1 design baseline from Book 7. <em>NS-TE8.1</em> names the evaluation campaign, <strong>not a new qualified product configuration</strong>. All measurements, decisions and datasets in this package are invented to teach engineering reasoning. Nothing constitutes operational certification.</p>
+<h2>Trace the evidence chain</h2>
+<p><img src="evidence-flow.svg" alt="Requirement, test and decision chain" /></p>
+<p>The <a href="requirements.csv">requirements</a>, <a href="test-plan.csv">test plan</a>, <a href="latency-synthetic.csv">synthetic 40-trial timing dataset</a>, <a href="evidence-register.csv">evidence register</a> and <a href="discrepancies.csv">discrepancy register</a> are editable. Run the <a href="../tools/step03_book8_te_check.py">standard-library Python audit</a> to reproduce the numerical examples and to identify stale, missing and failed evidence. Read the full treatment in <a href="../OPEN-BOOK.html">Book 8</a>. The inherited design assumptions are developed in <a href="../../B7/case/INDEX.html">Book 7</a>.</p>
+<h2>Sampling is not the same as qualification</h2>
+<p>The controlled synthetic degraded latency set has 40 trials and <strong>zero values above 500 ms</strong>. With independent, identically distributed Bernoulli exceedance indicators and no failures, the exact one-sided 95% upper confidence bound for exceedance probability is</p>
+<p>\[
+p_U=1-0.05^{1/40}\approx0.07216.
+\]</p>
+<p>This is far above the 0.01 exceedance fraction associated with a p99 requirement. Under the same optimistic assumptions, <strong>299 independent zero-exceedance trials</strong> are needed for the one-sided 95% upper bound to fall below 0.01. Those assumptions can fail for correlated requests or an unrepresentative test environment. Even 299 favorable tests cannot establish extrapolation to untested operating conditions.</p>
+<p>A separate boundary measurement of 493 ms can satisfy a raw 500-ms threshold but fail a <em>predeclared illustrative 12-ms guard band</em>: an upper-limit acceptance rule requiring measured time no greater than 488 ms. The 12 ms is assumed expanded uncertainty for teaching, not an estimate from the dataset. No single guard-band rule fits every contractual or risk context.</p>
+<h2>Inherited engineering defects stay open</h2>
+<ul>
+<li>Eight-hour modeled reliability with shared hazards: <strong>0.97863</strong>, below <strong>0.98</strong>.</li>
+<li>Logistics-adjusted modeled availability: <strong>0.98644</strong>, below <strong>0.99</strong>.</li>
+<li>Accessibility trials: <strong>19/20</strong> observed within the fictional limit, without sufficient confidence to establish a 95% population fraction.</li>
+<li>Recovery drill: <strong>14 min</strong>, failing the <strong>12 min</strong> requirement.</li>
+<li>One HIL record applies to <strong>NS-DI7.0</strong>, not the received <strong>NS-DI7.1</strong> baseline; the cyber replay test remains planned.</li>
+</ul>
+<p><strong>Readiness recommendation: HOLD</strong>, pending disposition of the design shortfalls, execution of missing tests, applicable baselines, and a defensible sampling and uncertainty plan. Passing a subset of laboratory checks cannot convert a failing model or stale evidence into compliance.</p>
+<h2>Practitioner references</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/system-engineering-handbook-appendix/">NASA Systems Engineering Handbook V&amp;V implementation outline</a>: verification/validation flow, test articles, test environments and qualification.</li>
+<li><a href="https://www.nist.gov/pml/nist-technical-note-1297">NIST Technical Note 1297</a>: combined and expanded measurement uncertainty.</li>
+<li><a href="https://www.nist.gov/publications/assessment-conformity-decision-rules-and-risk-analysis">NIST conformity decision rules</a>: acceptance risk and guard bands.</li>
+</ul>
+<p>These references guide method selection; the actual fictional test rules and assumptions are defined in the case artifacts, not claimed to come from any standard.</p>
+</main></body></html>

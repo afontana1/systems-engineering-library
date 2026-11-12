@@ -1,0 +1,5 @@
+policy,incremental_cost_usd,scenario_coverage,expected_fraction_standard,expected_fraction_accessible,expected_fraction_critical,passes_coverage_screen
+P0-status-quo,0,0.62,0.89804,0.9015714286,0.9784,False
+P1-fleet-only,1500000,0.62,0.94438,0.9748571429,0.9784,False
+P2-continuity,650000,0.8,0.95726,0.9637142857,1.0,False
+P3-combined,2150000,0.92,0.97684,0.9977142857,1.0,False

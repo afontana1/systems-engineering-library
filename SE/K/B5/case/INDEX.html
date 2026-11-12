@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS-SW5.1 Software Release Case · Systems Engineering Library</title><link rel="stylesheet" href="../../_assets/learning-shell-v55.css"><style>body{margin:0;background:#f4f7f8;color:#183645;font:16px/1.7 system-ui,sans-serif}header{padding:17px max(18px,calc((100vw - 1000px)/2));background:#173f52}header a{color:#c6f5ee}main{max-width:1000px;margin:24px auto;padding:clamp(18px,4vw,40px);border:1px solid #d6e3e5;border-radius:12px;background:white}a{color:#0b6b70}h1{line-height:1.2}h2{margin-top:1.8rem}p,li{max-width:100ch}table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}td,th{padding:9px;border:1px solid #dae3e6;vertical-align:top}th{background:#edf5f4}code{overflow-wrap:anywhere}pre{overflow:auto;padding:12px;background:#ecf3f5}img{max-width:100%;height:auto}@media(max-width:700px){main{margin:0;padding:18px;border:0;border-radius:0}}</style><script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B5/case/INDEX.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script></head><body><header><a href="../README.html">← Book 5</a> · <a href="../OPEN-BOOK.html">Open textbook</a></header><main><h1>NS-SW5.1 — Software systems engineering case</h1>
+<p><strong>Teaching example only.</strong> All requirements, metrics, incidents, interfaces and records are fictional. The case is connected to Books 1–4 by the campus-mobility setting, but the NS-SW5.1 identifier is an independent software configuration and must not be treated as interchangeable with earlier baselines.</p>
+<h2>Read the engineering records</h2>
+<ul>
+<li><a href="requirements.csv">Requirements</a> — eight testable obligations, owners, and acceptance criteria.</li>
+<li><a href="interfaces.csv">Interface contracts</a> — timeouts, duplicate handling, explicit failure modes.</li>
+<li><a href="architecture.dot">Architecture diagram source</a> and <a href="architecture.svg">rendered diagram</a>.</li>
+<li><a href="evidence-register.csv">Evidence register</a> — five current synthetic passes, one SLO-risk warning, one stale pass, and one planned check.</li>
+<li><a href="incident-log.csv">Incident log</a> — 36 synthetic downtime minutes in a 30-day window.</li>
+<li><a href="release-decisions.csv">Release decisions</a> — an example of blocking a deploy despite favorable partial evidence.</li>
+<li><a href="model-baseline.json">Machine-readable model</a> — the shared assumptions and cross-reference keys.</li>
+<li><a href="../tools/step03_book5_system_check.py">Reproducibility checker</a> — command: <code>python3 SE/K/B5/tools/step03_book5_system_check.py</code> from the repository root.</li>
+</ul>
+<h2>System boundary and safety responsibility</h2>
+<p>The software accepts or rejects shuttle reservations, obtains bounded-age telemetry and creates an atomic reservation/audit event. It does <strong>not</strong> command physical vehicle motion without a separate controller and operator-approved safety architecture. Loss of the reservation service must not be confused with safe control of a physical vehicle. Safety-acceptance decisions are not modeled here.</p>
+<h2>Canonical synthetic calculations</h2>
+<p>For a 30-day time-based 99.9% availability objective, the allowable unavailable minutes are</p>
+<p>\[B=(1-0.999)\times 30\times 24\times 60=43.2\text{ min}.\]</p>
+<p>Four incident records total 36 minutes; 7.2 minutes remain. A proposed nine-minute canary disruption would exceed that remaining budget by 1.8 minutes. The release should not proceed without a new risk decision and valid recovery evidence. These are illustrative time-based metrics; a request-based service-level indicator needs its own denominator and observed request data.</p>
+<p>For an illustrative M/M/1 dispatch server, let request arrival rate be \(\lambda=10\) per second and candidate service rate \(\mu=20\) per second. The 95th percentile of <em>time in this ideal queueing system</em> is</p>
+<p>\[t_{0.95}=\frac{-\ln(0.05)}{\mu-\lambda}=0.29957\text{ s}.\]</p>
+<p>Adding <strong>assumed deterministic</strong> 70 ms of networking, 45 ms of authorization and 55 ms of commit overhead yields 469.57 ms. This is an optimistic analytical proxy, not a measured percentile or a proof that the user-facing SWS-01 requirement is met. At the original rate \(\mu=18\), the proxy is 544.47 ms and fails the 500 ms threshold.</p>
+<h2>Investigation tasks</h2>
+<ol>
+<li>Explain why a matching requirements/evidence link does not prove release readiness if the evidence was collected against NS-SW5.0.</li>
+<li>Recompute the time budget for a 28-day measurement window. Would the 36 minutes fit? Explain why changing the window after observing incidents is methodologically suspect.</li>
+<li>Propose a test that validates the p95 analytical proxy at the declared peak arrival profile, including sample size, confidence treatment and percentile estimator.</li>
+<li>Explain how a database uniqueness constraint and a bounded idempotent retry policy address different failure mechanisms.</li>
+<li>Prepare an evidence-based release decision, explicitly distinguishing operational risk, modeled performance, and missing recovery tests.</li>
+</ol>
+<h2>References (for further validation, not substitutes for the explanations)</h2>
+<ul>
+<li><a href="https://csrc.nist.gov/pubs/sp/800/218/final">NIST SP 800-218 SSDF v1.1</a> — secure development practices; consult publication status before asserting compliance.</li>
+<li><a href="https://sre.google/workbook/error-budget-policy/">Google SRE Workbook: Error Budget Policy</a> — service-specific balancing of reliability and changes.</li>
+<li><a href="https://opentelemetry.io/docs/specs/otel/semantic-conventions/">OpenTelemetry Semantic Conventions</a> — consistent observability fields; the specification evolves and does not validate this exercise's synthetic traces.</li>
+</ul>
+</main></body></html>

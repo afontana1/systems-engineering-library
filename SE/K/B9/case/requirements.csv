@@ -1,0 +1,7 @@
+id,need,statement,measure,threshold,test
+R01,N01,Peak dispatch design shall have modeled nominal capacity >= 14 completed trips per hour under declared cycle-time assumptions.,trip/hour,14,T01
+R02,N01,Degraded dispatch path shall have a modeled command latency <= 500 ms with 50 ms engineering reserve at review.,ms,500,T02
+R03,N02,At least 95% of eligible accessibility pickup requests shall be served within 12 min under the approved operational sampling plan.,fraction,0.95,T03
+R04,N03,Modeled total traction-plus-cold auxiliary energy shall not exceed 260 kWh per operating day.,kWh/day,260,T04
+R05,N03,Nominal energy recovered during the 2.5-hour overnight charge window shall cover modeled daily energy demand.,kWh,0,T05
+R06,N04,A vehicle shall never be simultaneously allocated to two accepted reservations.,invariant,1,T06

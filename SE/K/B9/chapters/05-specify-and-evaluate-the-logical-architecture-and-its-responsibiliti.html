@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Chapter 05 — Specify and evaluate the logical architecture and its responsibilities · Systems Engineering Library</title><style>
 :root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
-<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
-<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B9/chapters/05-specify-and-evaluate-the-logical-architecture-and-its-responsibiliti.html" data-se-mode="standard"></script>
+<link href="../../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/B9/chapters/05-specify-and-evaluate-the-logical-architecture-and-its-responsibiliti.html" data-se-root="../../../" defer="" src="../../_assets/learning-shell-v55.js"></script>
 </head><body><header><div class="crumb"><a href="../../../../index.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="chapter-05--specify-and-evaluate-the-logical-architecture-and-its-responsibilities">Chapter 05 — Specify and evaluate the logical architecture and its responsibilities</h1>
 <p><em>Book 9 · EN.645.632 · Applied Analytics for Model-Based Systems Engineering · Week 5 of 12</em></p>
 <p><strong>Study sequence:</strong> Read this chapter → complete <a href="../labs/lab-05-specify-and-evaluate-the-logical-architecture-and-its-responsibiliti.html">Hypothetical Lab 5</a> → attempt the <a href="../../../C/P3/EN645632.html">original Week 5 assessment</a> using its complete rubric. The <a href="../../P3-text/lessons/645-632-w05.html">earlier concise companion lesson</a> remains available for a quick recap.</p>
@@ -18,7 +19,6 @@
 <h3 id="what-to-keep-separate">What to keep separate</h3>
 <p>A parameter is a model input or characteristic; an <em>observation</em> is data recorded with a defined process; a <em>claim</em> is an assertion to be tested; an <em>inference</em> extrapolates under assumptions; and a <em>decision</em> includes consequences and responsibility. These cannot be interchanged. For this topic, start from the named engineering question, write a minimally sufficient representation, state units and operating range, then identify a counterexample that could change the result. A model may be fully verified as software while still failing to represent its intended real-world use.</p>
 <p>The prior connection is <strong>Model state-based behavior, modes, exceptions, hazards, and temporal consistency</strong>. That prior work constrains the current boundary and data definitions; changing it silently breaks comparisons. The subsequent connection is <strong>Specify interfaces, exchanges, allocations, ownership, and model-based change exposure</strong>. Carry forward source identifiers, units, uncertainty and model versions rather than exporting a single attractive result.</p>
-
 <p>The most useful logical boundaries align with invariants and rates of change. Functions that must coordinate atomically may belong together, while those with different safety, security, or scaling needs may be intentionally separated. Yet separation introduces communication delays and potential partial failure. Logical decomposition is therefore not a purely aesthetic exercise in tidy boxes; it is a provisional hypothesis about where coupling is necessary and where independence has value. Interface contracts turn that hypothesis into testable design obligations.</p>
 <p>A logical component is a responsibility boundary, not necessarily a deployed processor, organization, or software service. Logical architecture answers what functions and information must be grouped coherently to satisfy the mission. Physical architecture later answers where those responsibilities will reside and how they communicate. If this distinction is lost, early modeling choices become accidental procurement decisions before alternatives have been considered.</p>
 <h3>Logical architecture allocates obligation without freezing technology</h3><h2>Deeper theory: logical architecture as a map of responsibilities and invariants</h2>
@@ -36,7 +36,6 @@
 <h3>Model completeness is contextual</h3>
 <p>No logical architecture is complete for all questions. A model adequate for functional coverage may be insufficient for cyber trust boundaries or human supervisory authority. A model meant to support resource estimates may omit detailed state transitions. Maturity should be judged by whether the model contains the relationships necessary for its declared engineering decisions. Adding irrelevant detail can actually reduce reviewability while leaving essential assumptions hidden.</p>
 <p>The core architectural question is: <strong>who is responsible for each system promise, what information and authority do they require, and what happens when their assumptions fail?</strong> A logical architecture that answers those questions is far more valuable than one that merely matches a preferred diagramming style.</p>
-
 <h2 id="worked-engineering-example-from-the-course">Worked engineering example from the course</h2>
 <p>Two logical alternatives are modeled. Alternative L1 uses one Campus Mobility Orchestrator for request intake, dispatch, charging coordination, and incident response. Alternative L2 separates Service Policy, Dispatch Optimization, Energy Coordination, and Incident Management. L1 has fewer interfaces but creates a safety and availability concentration. L2 has clearer ownership and containment but more contracts and synchronization. The model query shows that 68% of critical functions depend on L1’s single performer; the selected hybrid retains common policy but separates safety-critical vehicle authorization and charging isolation.</p>
 <p>The result above is best understood as a conditional argument: if the observations, configuration, model structure and decision thresholds are as stated, then the reported conclusion follows. <strong>Never treat a worked teaching assumption as a field measurement.</strong> Write a second interpretation in which at least one assumption fails and identify what additional measurement would discriminate the interpretations.</p>
@@ -75,4 +74,53 @@
 <p>Using a controlled Northstar scenario, prepare a two-page analysis explaining (1) the stakeholder decision; (2) the representation and its boundaries; (3) source data and assumptions; (4) a reconstructable example or diagram; (5) an adverse scenario; and (6) what new evidence would alter the recommendation. Then use the fictional <a href="../labs/lab-05-specify-and-evaluate-the-logical-architecture-and-its-responsibiliti.html">Lab 5</a> to rehearse the technique and complete the original course's more demanding weekly deliverable.</p>
 <p>The <strong>course guide remains authoritative for assessment</strong>. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.</p>
 <p><a href="04-model-state-based-behavior-modes-exceptions-hazards-and-temporal-con.html">04 — Previous chapter</a> · <a href="06-specify-interfaces-exchanges-allocations-ownership-and-model-based-c.html">06 — Next chapter</a> · <a href="../README.html">Book index</a></p>
-</main></body></html>
+<section class="step03-deeper-reading" id="step03-book9-integrated-r1"><h2>Step 03 integrated technical reference: NS-MBA9.1 — logical architecture is a hypothesis</h2>
+<h3>Partition responsibilities without hiding coupling</h3>
+<p>A logical architecture allocates behavior to coherent responsibilities independent of specific vendor hardware. In NS-MBA9.1, Dispatch handles request intake and assignment, SafetyGateway governs exclusive authorization, and Depot manages charging constraints. This separation creates a potential safety benefit but also introduces an interface whose freshness and ownership must be controlled. The <a href="../case/model.json">model's <code>I01</code> and <code>I02</code> definitions</a> make those commitments inspectable.</p>
+<p>A review of cohesion asks whether a component's responsibilities change for common reasons. A review of coupling asks which data types, timing constraints and failure modes cross boundaries. Counting connectors is insufficient: one stale authorization message may be more consequential than ten display updates. A high-risk interface deserves an exact owner, typed payload, unit convention, timing policy, failure response, and change authority.</p>
+<h3>Compare architectures after hard feasibility screening</h3>
+<p>The <a href="../case/INDEX.html">three candidates</a> have different fleet sizes and cycle estimates. Screening under the declared equations gives:</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th style="text-align:right">Vehicles</th>
+<th style="text-align:right">Cycle (min)</th>
+<th style="text-align:right">Ideal trips/h</th>
+<th style="text-align:right">Daily energy (kWh)</th>
+<th>Screening result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">45</td>
+<td style="text-align:right">13.33</td>
+<td style="text-align:right">200</td>
+<td>Capacity below 14</td>
+</tr>
+<tr>
+<td>B</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">48</td>
+<td style="text-align:right">15.00</td>
+<td style="text-align:right">240</td>
+<td>Meets capacity and 260-kWh energy screens</td>
+</tr>
+<tr>
+<td>C</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">50</td>
+<td style="text-align:right">16.80</td>
+<td style="text-align:right">280</td>
+<td>Energy exceeds 260</td>
+</tr>
+</tbody>
+</table>
+<p>Variant B survives the two displayed screens. It is therefore a <strong>candidate for more analysis</strong>, not an approved architecture. Accessibility evidence, charger feasibility, command latency distribution, and safety test currency are additional constraints. Hard feasibility limits should precede weighting preferences; otherwise a cheaper unsafe design can win a compensatory scoring formula.</p>
+<p><strong>Exercise.</strong> A reviewer proposes choosing variant A because it is $0.3 million cheaper than B. What change to the model or decision process could make that defensible?</p>
+<details><summary>Worked answer</summary>
+<p>First demonstrate an authorized change in requirements or a credible alternative capacity model that satisfies the same requirement under a stated operating envelope. Otherwise A remains infeasible regardless of cost. An explicit waiver by the responsible authority is a governance decision, not a mathematical proof of compliance.</p>
+</details>
+</section></main></body></html>

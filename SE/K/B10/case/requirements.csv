@@ -1,0 +1,6 @@
+requirement_id,measure,limit,population,confidence_or_model,baseline
+QA-01,cold-mode p95 command latency,500 ms,production-like cold peak,95% evidence required for tail claim,QA-B10
+QA-02,shift energy p95,29 kWh,winter shift,model conditional; validate input joint distribution,QA-B10
+QA-03,50-hour module reliability,0.95,representative fleet modules,life test with censoring,QA-B10
+QA-04,current evidence baseline,QA-B10,all approval records,configuration match,QA-B10
+QA-05,accessibility subgroup coverage,fully stratified,accessible trips,subgroup sample and coverage design,QA-B10

@@ -1,0 +1,6 @@
+evidence_id,requirement_id,status,configuration,limitation
+EV-DOE-10,QA-01,executed,QA-B10,24 synthetic trials; cannot substantiate p95 compliance
+EV-ENE-10,QA-02,executed,QA-B10,"analytical normal tail, joint input distribution unvalidated"
+EV-LIF-10,QA-03,executed,QA-B10,3 failures; 5 censored; conditional exponential model
+EV-CONF-10,QA-04,executed,QA-B9,older model baseline not accepted
+EV-ACC-10,QA-05,planned,QA-B10,accessibility stratification not conducted

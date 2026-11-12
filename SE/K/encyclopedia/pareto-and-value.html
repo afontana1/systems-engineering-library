@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Pareto frontiers and multiobjective decisions · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Pareto frontiers and multiobjective decisions · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
 <link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
 <script data-se-mode="standard" data-se-page="K/encyclopedia/pareto-and-value.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
 </head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed reference</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Pareto frontiers and multiobjective decisions</h1>
@@ -25,7 +25,16 @@
 <li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
 <li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section class="phase2-expansion" id="phase2-technical-reading">
+<h2>Dominance is not a final preference ordering</h2>
+<p>For three minimization objectives—cost, energy, and worst-case delay—design \(x\) dominates \(y\) only if \(f_j(x)\le f_j(y)\) for <strong>every</strong> objective and strictly improves at least one. A hypothetical design B costs $135k, uses 58 kWh, and has worst delay 7.5 s; design F costs $155k, uses 60 kWh, and has worst delay 8.1 s. B dominates F: F can be excluded <em>under these objectives</em>. But A with lower cost and higher energy is not necessarily dominated.</p>
+<p>The Pareto set is a shortlist of <em>nondominated observed candidates</em>, not an automatic winner. Engineering constraints, uncertainty, stakeholder weights, missing objectives, and decision authority remain. The <a href="../methods/pareto-and-robust-design.html">six-design Pareto and robustness example</a> calculates the full frontier and demonstrates what happens when a worst-delay constraint removes otherwise attractive alternatives.</p>
+</section>
+<section id="step03-concept-study"><h2>Step 02 review studio — avoid inventing a universal “best” alternative</h2>
+<p>Consider three feasible designs with (cost units, mean delay minutes): A=(100,5), B=(110,4), and C=(120,6). With lower cost and lower delay preferred, C is Pareto-dominated by A: C is both more expensive and slower. A and B are nondominated; the choice between them depends on how the decision maker values one minute of delay versus ten cost units.</p>
+<p><strong>Solved exercise:</strong> suppose the decision maker will pay at most 8 cost units to reduce delay by one minute, all else equal. Does B's one-minute improvement justify its 10-unit premium? <strong>No under that linear, bounded willingness-to-pay rule.</strong> A is preferred. If the value of time is 12 units per minute, B becomes preferable, assuming other constraints and uncertainties are equal.</p>
+<p><strong>Limitation:</strong> Pareto filtering requires comparable consequence definitions and monotonic preferences. It removes demonstrably inferior options, but does not choose among nondominated alternatives or justify ignoring safety gates, unmodeled attributes, and decision uncertainty.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="engineering-trades.html">Engineering trade studies: making preferences and uncertainty inspectable</a></li>

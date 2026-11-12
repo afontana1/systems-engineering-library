@@ -1,0 +1,28 @@
+{
+  "model_id": "NS-QA10.1",
+  "baseline": "QA-B10",
+  "description": "Fictional shuttle-control telemetry analytics study",
+  "cold_p95_limit_ms": 500,
+  "shift_energy_p95_limit_kwh": 29,
+  "mission_hours": 50,
+  "minimum_mission_reliability": 0.95,
+  "correlated_energy": {
+    "mean_kwh": 25,
+    "sd_route_distance_km": 4,
+    "sd_heating_hours": 1.5,
+    "energy_per_route_km": 0.4,
+    "energy_per_heating_hour": 0.8,
+    "rho": 0.6
+  },
+  "lifecycle_cost_scenarios_kusd": {
+    "A": [
+      50,
+      140
+    ],
+    "B": [
+      75,
+      90
+    ]
+  },
+  "source": "all data deliberately synthetic; not field measurements"
+}

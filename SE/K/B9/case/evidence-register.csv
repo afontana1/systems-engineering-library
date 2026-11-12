@@ -1,0 +1,7 @@
+evidence_id,requirement_id,test_id,baseline,status,source,notes
+E01,R01,T01,NS-MBA9.1,MODELED,M9-RUN-001,Deterministic throughput proxy; not measured service capacity
+E02,R02,T02,NS-MBA9.1,MODELED,M9-RUN-001,440 ms proxy including assumed redesign; no percentile evidence
+E03,R03,T03,NS-MBA9.1,PLANNED,none,No representative winter accessibility samples
+E04,R04,T04,NS-MBA9.1,MODELED,M9-RUN-001,Synthetic daily-energy equation
+E05,R05,T05,NS-MBA9.1,MODELED,M9-RUN-001,Synthetic nominal charging recovery
+E06,R06,T06,NS-MBA9.0,STALE,HIL-OLD-014,Earlier-baseline concurrency demonstration; retest required

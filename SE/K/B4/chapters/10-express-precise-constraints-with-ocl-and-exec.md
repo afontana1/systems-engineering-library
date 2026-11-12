@@ -81,3 +81,40 @@ In [Lab 10: Constraints turn informal rules into testable predicates](../labs/la
 ## Continuity
 
 This chapter builds from [previous chapter](09-apply-design-patterns-with-restraint.md) and leads toward [next chapter](11-design-persistence-and-conduct-the-design-rea.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/605-704-w10.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: formal constraints and operational enforcement
+
+### 10.1 Translate statements into predicates
+
+The Object Constraint Language (OCL) is a declarative notation associated with UML models; its expressions do not mutate the model. The fragment below is **illustrative OCL 2.x-style syntax** whose class and enumeration names assume an explicitly declared model. It has not been executed by an OCL-conforming tool.
+
+```ocl
+context Reservation
+inv AccessibilityEligibility:
+  self.assignment->notEmpty() implies
+    (not self.accessibilityRequired or
+      self.assignment.vehicle.accessible)
+
+context Assignment
+inv UniqueActiveVehicleSlot:
+  Assignment.allInstances()->select(a |
+    a.state = AssignmentState::ACTIVE and
+    a.vehicle = self.vehicle and a.slot = self.slot
+  )->size() <= 1
+```
+
+The first invariant requires that an assigned accessibility-requesting rider use an eligible vehicle. The second counts active assignments at the same vehicle and slot. In a richer time model the slot comparison must be replaced with an interval-overlap relation. `allInstances()` also has tool- and scope-dependent interpretation; a model snapshot is not necessarily a complete operational store.
+
+### 10.2 What the model constraint does not guarantee
+
+OCL expresses a rule for review and model validation. It is **not** a concurrent transaction protocol. Even if two request objects each satisfy the rule when checked, overlapping commits can violate it without a serialization mechanism. The [reference implementation](../tools/step03_book4_contract_check.py) therefore enforces the active-slot rule with a partial SQLite `UNIQUE` index and records the resulting conflict. Domain predicate, model checker, integration test, and database constraint play complementary roles.
+
+For cancellation, a postcondition can state that after a successful call the reservation is terminal and it has no active assignment. A method contract must also specify what remains unchanged and what happens on repeated calls. A system-level audit rule may extend beyond the object graph into event and configuration provenance.
+
+### 10.3 Positive and negative constraint tests
+
+Use the [fixture table](../case/scenario-fixtures.csv) as a small executable contract suite. `F-03` must reject an inaccessible vehicle; `F-05` must reject a competing active assignment; `F-06` must reject stale telemetry. A passing test on a purposely narrow fixture does not establish completeness: especially important are overlapping slots, eligibility changes after reservation, and distributed races.
+
+**Solved checkpoint.** A reviewer proposes `self.vehicle.accessible = true` for *every* reservation. That would incorrectly reject ordinary bookings on nonaccessible vehicles. The correct condition is an implication restricted to reservations requiring accessibility, and only where an assignment exists.
+
+**Exercise.** Rewrite the uniqueness rule using interval overlap instead of fixed slots. State which data must be available to evaluate it and whether the result could be enforced using a simple composite unique index. Consult the [OMG OCL specification](https://www.omg.org/spec/OCL/2.4) for normative semantics rather than treating these examples as parser certification.

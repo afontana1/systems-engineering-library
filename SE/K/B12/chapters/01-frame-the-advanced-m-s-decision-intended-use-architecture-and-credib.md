@@ -82,6 +82,10 @@ A correct computed result is not automatically a system acceptance result; expla
 
 </details>
 
+## Phase 3 technical reference: A model credibility envelope begins with a decision
+
+A 20-minute M/M/1 analytic mean is a good software benchmark only for stationary Poisson arrivals, exponential service, one server, and no abandonment. If the intended decision concerns peak-hour transportation dispatch, those assumptions require empirical challenge; model output precision does not certify model adequacy. State the target metric, scenario, accepted decision risk, calibration and validation split, and a counterfactual condition under which the model would be misleading. The [simulation-output and credibility analysis](../../methods/simulation-output-and-credibility.md) shows how 40 independent replications and a paired upgrade experiment support a limited stochastic comparison without claiming to measure the real system.
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -119,3 +123,45 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 Start of the book · [02 — Next chapter](02-derive-dynamic-system-mathematics-standard-forms-block-diagrams-and-.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-CPS12.1 case: intended use and decision authority
+
+### A physical subsystem of a larger fleet is a different question
+
+The [NS-CPS12.1 controlled engineering dossier](../case/INDEX.html) examines **one** battery-electric campus shuttle. Book 11's [NS-MS11.1](../../B11/case/INDEX.html) sampled fleet wait times and charging queues. Neither its discrete-event vehicle count nor its nominal charging time demonstrates that an individual traction, energy, and thermal design works on a route. Here the decision is narrower: *is a simplified coupled plant credible enough to prioritize physical tests and compare design sensitivities?* The answer can be yes for screening while no for procurement or safety qualification. Do not feed the Book 12 trip duration into Book 11 as if it were measured service time: they have different representations and operational scopes.
+
+For this chapter write the intended-use tuple \(I=(D,P,S,M,E)\): **D**ecision (which architecture to investigate), **P**opulation (a synthetic single shuttle), **S**cenarios (controlled route/weather), **M**etrics (energy, temperature, time), and required **E**vidence (source, tests, calibration, review). The tool explicitly omits passenger pickups, route-network conflicts, braking hydraulics, regenerative limits at high state of charge, detailed pack heat flow, hardware scheduling, battery aging, and field-calibrated uncertainty. Those omissions are part of its applicability domain, not implementation footnotes.
+
+### Convert stakeholder questions into measurable, falsifiable requirements
+
+A requirement is not a plot title. For synthetic case \(k\), let \(E_0=145(0.88)=127.60\,\mathrm{kWh}\), \(E_f\) be remaining usable energy, \(T_{\max}\) the maximum modeled pack temperature, and \(t_j\) the mean time per route repetition. The demonstrator's **screening** requirements are
+
+\[
+R_1:\frac{E_f}{145\,\mathrm{kWh}}\ge0.20,\qquad
+R_2:\ T_{\max}\le48^\circ\mathrm C,\qquad
+R_3:\ \bar t_j\le9\,\mathrm{min}.
+\]
+
+The 44°C warning is distinct from the 48°C physical-screen limit; a warning should produce a control action or test plan even when the limit is not crossed. `R_1` is an end-of-duty-cycle reserve, not a cell-level overdischarge certificate. `R_2` is a single lumped sensor proxy, not an internal-hotspot limit. `R_3` excludes boarding/dwell and therefore cannot establish fleet schedule compliance. Name the measurand, boundary, governing configuration, statistical treatment and evidence owner for every claim. The editable [requirements trace](../case/requirements.csv) and [credibility register](../case/credibility-register.csv) distinguish calculations from missing validation.
+
+### Architecture and traceability at two levels
+
+Functional architecture: **route target → speed regulator → wheel force → vehicle motion → battery electrical load → pack heat → cooling pump → auxiliary load → battery electrical load**. That last feedback closes an energy loop; independently optimizing the pump without measuring its electrical demand can be misleading. Physical architecture adds motor, inverter, battery, liquid-loop heat exchanger, controller, speed sensor and charging station. At this stage, the model has a *controller concept* but no verified controller implementation. Draw the [energy/evidence flow](../case/multidomain-evidence.svg) and identify each boundary variable and unit.
+
+Trace the testable proposition `R-THERM`: source scenario `hot_lowflow` (38°C; 0.05 kg/s), code `run()`, output `max_battery_temp_c`, verification of the heat balance, and missing cell-gradient measurements. The record must **not** say “validated.” A static link from requirement to code is traceability, not proof that the code is correct. A model can be fully reproducible yet represent the wrong physical mechanism.
+
+### Worked intended-use decision
+
+The [synthetic experiment](../case/experiment-results.csv) compares 16 fixed-seed draws for each of five defined scenarios. In the nominal hot/low-flow scenario, mean maximum modeled pack temperature is approximately **41.88°C**, below the 48°C demonstrator threshold. The controlled result supports the limited proposition “the toy lumped model does not exceed this threshold over these 16 synthetic parameter combinations.” It does **not** support a field-temperature safety claim: thermal capacitance, heat-transfer coefficients, cooling control, ambient dependence, and pack topology have not been calibrated. The complete [summary](../case/summary.json) and [source code](../tools/step03_book12_coupled_vehicle.py) allow an independent reader to reproduce or contest the figure.
+
+### Counterexample and sensitivity
+
+If real cells have local gradients, a single modeled \(T\) of 42°C can coexist with an unmodeled hotspot over 48°C. If a 100 kW charging station has only 85 kW available, an assumed turnaround time derived from 100 kW is too optimistic. If passenger loading increases 300 kg, both longitudinal energy and stopping distance may change. None of these alternatives is resolved by increasing Monte Carlo sample count under the existing equations.
+
+### Exercise, solution, and review artifact
+
+**Exercise A.** A reviewer proposes the claim “84 km of modeled duty-cycle driving shows the shuttle is safe.” Identify three unsupported inferential steps. **Solution.** The 84 km is 24 repetitions of a 3.5 km synthetic periodic route without passenger service; the reported temperature is a single lumped state without calibrated spatial gradients; reserve/speed screens omit braking, faults, and representative exposure. Replace the claim with a bounded screening observation and request field-duty-cycle and pack-thermocouple evidence.
+
+**Exercise B.** Calculate the initial stored usable energy and the minimum acceptable final energy. **Solution.** Initial energy \(145\times0.88=127.60\) kWh; minimum final energy \(145\times0.20=29.00\) kWh; this model permits at most 98.60 kWh before violating the reserve screen, assuming all 145 kWh usable and unchanged. For a degraded 132 kWh pack the values must be recomputed, not silently recycled.
+
+**Deliverable:** a signed one-page model-purpose sheet with excluded uses, a 3-claim trace to [case artifacts](../case/INDEX.html), and an owner for each missing validation action. Proceed to Chapter 2 only after the intended use is frozen; otherwise numerical precision will be mistaken for decision credibility.

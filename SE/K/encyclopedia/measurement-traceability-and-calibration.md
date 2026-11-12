@@ -31,6 +31,18 @@ Report the measurand, result, units, uncertainty and coverage rationale, instrum
 - **M1 · Measurement-result traceability, uncertainty and fitness-for-purpose distinction.:** [NIST metrological traceability policy and FAQ](https://www.nist.gov/metrology/metrological-traceability). Measurement-result traceability, uncertainty and fitness-for-purpose distinction.
 - **M2 · Calibration, repeatability, reproducibility and stability of measurement processes.:** [NIST/SEMATECH Engineering Statistics Handbook, Measurement Process Characterization](https://www.nist.gov/publications/nistsematech-engineering-statistics-handbook-chapter-2-measurement-process). Calibration, repeatability, reproducibility and stability of measurement processes.
 
+## Phase 3 technical reference: Measurement uncertainty must be attached to a model
+
+A traceable timing measurement is not automatically a traceable *prediction* of \(T=D/V\). If \(D\) and \(V\) share calibration, weather or observation conditions, standard uncertainties must be propagated using covariance: \(u_T^2\approx g^\mathsf T\Sigma g\), not only \(\sum_i(g_i u_i)^2\). A shared systematic error does not disappear by collecting more correlated observations. The [worked dependence and Monte Carlo method](../methods/correlated-uncertainty-propagation.md) distinguishes physical variability, parameter uncertainty, measurement bias, structural model error and finite Monte Carlo noise, and explains when the first-order propagation formula becomes unreliable.
+
+## Step 02 deeper treatment: correlated sensors and evidence integrity
+
+Consider two observations of one scalar measurand \(x\): \(x_1=10\pm2\) and \(x_2=14\pm1\) in compatible units, where the \(\pm\) values are *standard uncertainties* and errors are assumed unbiased and independent. An inverse-variance combination yields \(\hat x=13.2\) and combined standard uncertainty \(\sqrt{0.8}=0.8944\) units. That reduction is conditional on **independence** and common measurand. A shared reference-standard offset, environmental drift or calibration procedure can introduce correlation that invalidates the simple result.
+
+Before fusing or comparing results, audit the chain of measurement: reference ID, instrument/version, environment, sample timing, units, transformation software, uncertainty budget, exclusions and decision rule. Two numerically close readings can be mutually biased; two distant readings can be taken at different times and both correct for their own time slices. The ability to combine them must be justified *before* calculating a precision-weighted average.
+
+For an upper engineering limit of 10.0 units, an instrument report of 9.6 with expanded uncertainty 0.72 does not automatically prove conformity. Under an explicit conservative guard band `accept only when result + U ≤ limit`, the candidate is not accepted because 10.32 exceeds 10.0. Other decision rules are possible but should specify false-accept and false-reject risks. A pass/fail flag without the underlying uncertainty and applicability context is incomplete evidence. The [worked data-fusion explanation](data-fusion-and-provenance.md) develops the estimator and its limitations.
+
 ## Follow the knowledge
 
 - **Prerequisites:** [Probability, dependence, and technical uncertainty](probability-and-dependence.md), [Measures of effectiveness and performance](metrics-hierarchy.md).

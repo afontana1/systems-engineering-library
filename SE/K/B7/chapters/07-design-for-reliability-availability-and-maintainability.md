@@ -117,6 +117,54 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 
 </details>
 
+## Architecture assurance: common causes erase naïve redundancy gains
+
+If two independent channels each survive a mission with probability 0.9, a one-out-of-two success architecture has model survival \(1-(1-0.9)^2=0.99\). Now assume an additional independent common-cause shock occurs with probability 0.05 and disables both. Conditional channel survival remains 0.9 when no shock occurs, so the combined estimate is \((1-0.05)[1-(1-0.9)^2]=0.9405\). This is a 4.95 percentage-point reduction from the naïve independent result.
+
+A design review must identify shared power, coolant, software, calibration, suppliers and maintenance mechanisms before claiming independent failure paths. Study [reliability evidence and common-cause assumptions](../../methods/reliability-and-censored-evidence.md) and translate the shared mechanism into a hazard or fault-tree obligation with a validation plan.
+
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 7: Reliability and maintainability](../labs/lab-07-design-for-reliability-availability-and-maintainability.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 7 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Phase 4 technical reading: Shared causes can dominate redundant architectures
+
+For two independent barrier failures with probabilities 0.02 and 0.01, the modeled joint probability is 0.0002 per demand. Add a shared-state common-cause bypass with independent probability 0.003 and the union becomes \(0.003+0.997(0.0002)=0.0031994\). An identical redundancy diagram can support radically different predictions if sensor, power, firmware or maintenance dependencies are ignored. These are scenario parameters, not field estimates. Compare both models, identify the two minimal cut sets, and specify evidence for or against the common-cause assumption in the [fault-tree and assurance reference](../../methods/safety-fault-trees-and-assurance.md).
+
+## Step 03 integrated technical reference: NS-DI7.1 — reliability and availability under shared failures
+
+### Quantify the mission, not the component label
+
+Under a constant-hazard exponential model, an eight-hour mission with independent failure rate \(\lambda_i=0.0015\,\mathrm{h}^{-1}\) has survival
+
+\[
+R_i(8)=e^{-0.0015(8)}\approx0.98807.
+\]
+
+If the design also faces a shared failure mechanism modeled as an additional independent Poisson hazard of \(\lambda_s=0.0012\,\mathrm{h}^{-1}\), survival becomes
+
+\[
+R_{i+s}(8)=e^{-(0.0015+0.0012)8}\approx0.97863.
+\]
+
+This fails DI7-R04's 0.98 mission target even though the independent-only calculation passes. The additional-hazard approximation is not universally appropriate: shared mechanisms may be demand-dependent, nonstationary or coupled. The main lesson is to expose a common cause rather than silently multiply component reliabilities as though every failure were independent.
+
+### Repair affects availability but not a no-failure mission
+
+With mean time between failures of 400 h and mean hands-on repair of 2.5 h, the elementary two-state inherent availability proxy is
+
+\[
+A_i=\frac{400}{400+2.5}=0.99379.
+\]
+
+Including a three-hour mean logistics delay produces an operational availability proxy of \(400/(400+2.5+3)=0.98644\), below DI7-R05's 0.99 target. This ratio presumes stationary renewal behavior and consistently defined downtime. It ignores correlated outages, maintenance windows and spares queuing; a credible program would model these separately and collect actual restoration distributions.
+
+Reliability and availability answer different questions: a rapid repair can recover availability without retroactively preserving an interrupted eight-hour mission. The design must demonstrate both when both are requirements.
+
+**Exercise.** What maximum additional delay, beyond the 2.5-h hands-on repair, would preserve 99% availability under the 400-h MTBF proxy?
+
+<details><summary>Worked resolution</summary>
+
+Solve \(400/(400+2.5+d)\geq0.99\). This gives \(d\leq400(1/0.99-1)-2.5\approx1.54\) h. The assumed 3-h logistics delay exceeds that allowance. A faster mechanic alone cannot solve the full support-chain problem.
+
+</details>

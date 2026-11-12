@@ -1,0 +1,5 @@
+### D12 extension · Evidence status is a typed relation, not a green link
+
+A claim-to-evidence relation is actionable only when the evidence exists, matches the claim's configuration revision, applies to its operating scope, has passed review, and has the required approval. Formally, $A(c,e)=exists(e)\land match\_revision(c,e)\land covers\_scope(c,e)\land reviewed(e)\land approved(e)$. The NS-U4.1 synthetic register has five claims and one actionable match. C2 is stale, C3 has the wrong scope, C4 lacks approval and C5 has no evidence. A checksum protects file integrity, not measurement correctness or legal authority.
+
+**Exercise and solution.** Re-signing stale evidence C2 without re-running the revision-2.0 interface test does not repair the revision mismatch; $A(C2,e)$ remains false. A live mission release also requires permissions from road authority, labor and privacy stakeholders, all unrecorded in this fixture. [Evidence result](../flagship-integration/outputs/ns-u4.1-results.json).

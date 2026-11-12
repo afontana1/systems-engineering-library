@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Chapter 7 — Reliability and maintainability · Systems Engineering Library</title><style>
 :root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
-<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
-<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B7/chapters/07-design-for-reliability-availability-and-maintainability.html" data-se-mode="standard"></script>
+<link href="../../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/B7/chapters/07-design-for-reliability-availability-and-maintainability.html" data-se-root="../../../" defer="" src="../../_assets/learning-shell-v55.js"></script>
 </head><body><header><div class="crumb"><a href="../../../../index.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="chapter-7--reliability-and-maintainability">Chapter 7 — Reliability and maintainability</h1>
 <p><em>Book 7: System Design and Integration · Week 7 — Design for reliability, availability, and maintainability</em></p>
 <blockquote>
@@ -45,7 +46,6 @@ A=\frac{\mathrm{MTBF}}{\mathrm{MTBF}+\mathrm{MTTR}}.
 <h3>Design for maintainability is an architectural intervention</h3>
 <p>Repair time is partly designed, not merely measured after deployment. Modular replacement, diagnostic observability, accessible equipment, interchangeable parts, trained support staff and clear configuration records change the restoration process. A component can be highly reliable yet difficult to diagnose, producing long fleet outages after rare failures. Conversely, a design that isolates faults and permits safe degraded operation may deliver stronger service continuity without materially improving individual component failure rates.</p>
 <p>This creates an economic and operational trade: extra diagnostics and spare capacity have costs, but they can reduce downtime and preserve mission performance under stress. The defensible design question is not “Can we make MTBF larger?” but “Which failure and restoration mechanisms dominate stakeholder loss under realistic demand, and which architectural change reduces that loss?” That question links RAM engineering to logistics, human factors, safety and systems-of-systems resilience.</p>
-
 <h2 id="worked-engineering-case">Worked engineering case</h2>
 <p>For exponentially distributed independent up and repair intervals, intrinsic availability A≈MTBF/(MTBF+MTTR). With 100 h and 5 h, A≈0.9524. Logistic delays can reduce achieved availability further.</p>
 <p><strong>Reason through the case in this order:</strong></p>
@@ -71,6 +71,37 @@ A=\frac{\mathrm{MTBF}}{\mathrm{MTBF}+\mathrm{MTTR}}.
 <p>For <strong>B</strong>, evaluate the question against the actual mission, not just the subsystem metric. An answer must name the stakeholder affected and a plausible mechanism by which the current interpretation could fail.</p>
 <p>For <strong>C</strong>, use a controlled artifact and a predeclared decision rule. A measured result can support only the specified configuration, environment and sampling conditions. Where that evidence does not yet exist, mark the claim <em>open</em> and assign a closure action rather than marking it <em>pass</em>.</p>
 <p>&lt;/details&gt;</p>
+<section class="phase2-expansion" id="phase2-technical-reading">
+<h2>Architecture assurance: common causes erase naïve redundancy gains</h2>
+<p>If two independent channels each survive a mission with probability 0.9, a one-out-of-two success architecture has model survival \(1-(1-0.9)^2=0.99\). Now assume an additional independent common-cause shock occurs with probability 0.05 and disables both. Conditional channel survival remains 0.9 when no shock occurs, so the combined estimate is \((1-0.05)[1-(1-0.9)^2]=0.9405\). This is a 4.95 percentage-point reduction from the naïve independent result.</p>
+<p>A design review must identify shared power, coolant, software, calibration, suppliers and maintenance mechanisms before claiming independent failure paths. Study <a href="../../methods/reliability-and-censored-evidence.html">reliability evidence and common-cause assumptions</a> and translate the shared mechanism into a hazard or fault-tree obligation with a validation plan.</p>
+</section>
 <h2 id="practice-before-the-assessed-course-work">Practice before the assessed course work</h2>
 <p><a href="../labs/lab-07-design-for-reliability-availability-and-maintainability.html">Hypothetical Laboratory 7: Reliability and maintainability</a> provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 7 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.</p>
-</main></body></html>
+<section class="phase4-expansion">
+<h2>Phase 4 technical reading: Shared causes can dominate redundant architectures</h2>
+<p>For two independent barrier failures with probabilities 0.02 and 0.01, the modeled joint probability is 0.0002 per demand. Add a shared-state common-cause bypass with independent probability 0.003 and the union becomes \(0.003+0.997(0.0002)=0.0031994\). An identical redundancy diagram can support radically different predictions if sensor, power, firmware or maintenance dependencies are ignored. These are scenario parameters, not field estimates. Compare both models, identify the two minimal cut sets, and specify evidence for or against the common-cause assumption in the <a href="../../methods/safety-fault-trees-and-assurance.html">fault-tree and assurance reference</a>.</p>
+</section>
+<section class="step03-deeper-reading" id="step03-book7-integrated-r1"><h2>Step 03 integrated technical reference: NS-DI7.1 — reliability and availability under shared failures</h2>
+<h3>Quantify the mission, not the component label</h3>
+<p>Under a constant-hazard exponential model, an eight-hour mission with independent failure rate \(\lambda_i=0.0015\,\mathrm{h}^{-1}\) has survival</p>
+<p>\[
+R_i(8)=e^{-0.0015(8)}\approx0.98807.
+\]</p>
+<p>If the design also faces a shared failure mechanism modeled as an additional independent Poisson hazard of \(\lambda_s=0.0012\,\mathrm{h}^{-1}\), survival becomes</p>
+<p>\[
+R_{i+s}(8)=e^{-(0.0015+0.0012)8}\approx0.97863.
+\]</p>
+<p>This fails DI7-R04's 0.98 mission target even though the independent-only calculation passes. The additional-hazard approximation is not universally appropriate: shared mechanisms may be demand-dependent, nonstationary or coupled. The main lesson is to expose a common cause rather than silently multiply component reliabilities as though every failure were independent.</p>
+<h3>Repair affects availability but not a no-failure mission</h3>
+<p>With mean time between failures of 400 h and mean hands-on repair of 2.5 h, the elementary two-state inherent availability proxy is</p>
+<p>\[
+A_i=\frac{400}{400+2.5}=0.99379.
+\]</p>
+<p>Including a three-hour mean logistics delay produces an operational availability proxy of \(400/(400+2.5+3)=0.98644\), below DI7-R05's 0.99 target. This ratio presumes stationary renewal behavior and consistently defined downtime. It ignores correlated outages, maintenance windows and spares queuing; a credible program would model these separately and collect actual restoration distributions.</p>
+<p>Reliability and availability answer different questions: a rapid repair can recover availability without retroactively preserving an interrupted eight-hour mission. The design must demonstrate both when both are requirements.</p>
+<p><strong>Exercise.</strong> What maximum additional delay, beyond the 2.5-h hands-on repair, would preserve 99% availability under the 400-h MTBF proxy?</p>
+<details><summary>Worked resolution</summary>
+<p>Solve \(400/(400+2.5+d)\geq0.99\). This gives \(d\leq400(1/0.99-1)-2.5\approx1.54\) h. The assumed 3-h logistics delay exceeds that allowance. A faster mechanic alone cannot solve the full support-chain problem.</p>
+</details>
+</section></main></body></html>

@@ -123,3 +123,19 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [06 — Previous chapter](06-visualize-communicate-and-defend-the-pilot-selection-decision.md) · [08 — Next chapter](08-formulate-parametric-design-and-conduct-multiobjective-search.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-DA14.1 decision-analysis laboratory: Chapter 07
+
+### Project 2 restarts with solution freedom, not an inherited favorite
+
+The pilot-selection problem does not determine the optimal long-term architecture. A morphology considers service architecture (fixed route, demand-responsive, hybrid, regional integration), vehicle mix (shuttle, van, mixed, staged), automation (human, supervised or bounded), dispatch (schedule, nearest vehicle, zone-based or priority-aware), accessibility configuration, energy infrastructure, and supervision. The course's full nominal categorical cross-product has \(4\cdot4\cdot3\cdot4\cdot3\cdot3\cdot4=\mathbf{6912}\) combinations before fleet, charger, reserve, zone and speed parameter choices. This number is a teaching count for those seven specified option-set cardinalities; it neither proves each combination is meaningful nor includes the continuous variables.
+
+A **compatibility matrix** is a first-principles engineering artifact. For example, “regional integration plus entirely vendor-managed control” may demand an unprovided service agreement; “bounded autonomy plus unsupervised operation” may violate a governance rule; a dedicated accessible reserve may require different vehicle capacity than a fixed-capacity shuttle. Mark such pairs `excluded`, `requires analysis` or `supported`; provide evidence rather than coding personal preferences as incompatibility. Never delete a class because it performs poorly in an initial score. The editable [morphology register](../case/morphology.csv) preserves options and constraints.
+
+### Declared computational subset versus full design space
+
+The executable NS-DA14.1 experiment does **not** claim to search all 6912 morphology combinations. It deliberately restricts architecture to hybrid/demand-responsive, dispatch to schedule/priority, automation to human/supervised, zones to four/six, speed to 18/24 mph, and five fleet, three charger, three reserve levels. The finite grid therefore has \(2\cdot5\cdot3\cdot3\cdot2\cdot2\cdot2\cdot2=\mathbf{1440}\) combinations, all enumerated reproducibly. It omits fully autonomous designs, the fixed-route-only family, other energy and supervision variants, and continuous values between sampled grid points. Neither a good frontier nor an empty feasible set in this subset settles those omitted regions.
+
+**Worked exercise.** A review committee proposes adding three more reserve-ratio levels without changing any other choices. How large is the expanded controlled grid? **Solution:** Reserve has six rather than three levels, so it doubles to \(1440\cdot(6/3)=2880\) configurations. An algorithm cannot repair an incomplete architecture set by sampling an existing numeric factor more densely. For every omitted morphology branch, carry a reason (`not yet modeled`, `incompatible with documented rule`, or `intentionally deferred`) and a follow-up owner.
+
+**Engineering limitations.** The parametric response equations are fictional and operate on averaged measures. They cannot evaluate real fleet deadheading, legal speed limits, safety qualification, or negotiated service agreements. Project 2 should reuse Book 11 simulated queues only after translating scenarios and validation boundaries, and Book 12 charging physics only after reconciling its route assumptions.

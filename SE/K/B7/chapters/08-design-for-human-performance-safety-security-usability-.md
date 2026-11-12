@@ -89,3 +89,29 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 8: Humans, safety and security](../labs/lab-08-design-for-human-performance-safety-security-usability-.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 8 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-DI7.1 — safety, security and human control
+
+### Common causes defeat apparently redundant controls
+
+A fault tree can make the safety argument falsifiable. Suppose brake-actuator failure on demand is assigned probability 0.007 and the independent safety interlock fails with probability 0.010. If these were the only pathways and independence were justified, the coincident probability would be \(0.007\times0.010=0.00007\) per demand. The case also assigns an illustrative common-cause pathway \(p_c=0.002\). If the other failures are conditionally independent when the common cause is absent, then
+
+\[
+P(\mathrm{top})=p_c+(1-p_c)(0.007)(0.010)=0.00206986.
+\]
+
+That is beneath the illustrative 0.005-per-demand allocation but **not a demonstrated safety claim**: none of these rates has a verified basis, and the conditional independence model needs argument. Double-counting a common cause in both terms would also be an error. The [evidence register](../case/evidence-register.csv) explicitly marks safety evidence as MODEL_ONLY.
+
+### The operator is part of the control loop
+
+A safe degraded state must account for operator workload, authority and response time. On communication loss, an autonomous dispatch system should not silently accept stale allocation data or assume an operator is instantly available. Define alert meaning, acknowledgment deadline, fallback state, accessibility implications and procedure training. Cybersecurity choices such as token lifetime or extra authentication can also change command latency and safe-mode behavior. Safety, security and human-systems integration therefore share interface requirements, not just review meetings.
+
+The accessibility claim (DI7-R07) requires representative participation and measurable coverage, not a successful demonstration on one convenient route. Its test is planned but not executed. A defensible review identifies people and operating conditions that would be excluded by the sample, then tests the actual population of concern.
+
+**Exercise.** A reviewer sees the calculated top-event probability below the target and declares the design safe. Identify the missing evidence chain.
+
+<details><summary>Worked resolution</summary>
+
+The probability model must be tied to a defined hazard and demand population, sources for its basic-event frequencies and dependence assumptions, controlled implementation of the safety interlock, verification of safe degraded behavior, and a justified acceptance authority. Until then this is a conditional allocation model, not demonstrated safety.
+
+</details>

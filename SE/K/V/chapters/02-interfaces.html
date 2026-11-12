@@ -41,4 +41,63 @@
 <p>A useful review table lists each state transition and its preconditions, postconditions, allowed errors, side effects, and audit events. The table becomes a basis for model-based test generation. Aim to test forbidden transitions as deliberately as permitted transitions, including the moments just before and after timeouts, restarts, and revision changes.</p>
 <h2>2.7 Backpressure is a cross-layer design choice</h2>
 <p>When requests arrive faster than a service can process them, unlimited queues convert overload into increasing latency and memory consumption. Admission control and bounded queues make the system more predictable, but they introduce rejection. This moves the problem from a purely technical performance concern into a service-policy decision: which demands receive priority, what must a rejected requester be told, and how is equity monitored? Queue capacity, resource utilization, and emergency override must be designed together. An interface contract is therefore a bridge between software correctness and stakeholder outcomes.</p>
-<div class="downloads"><a href="../labs/02-interfaces.html">Practice laboratory</a><a href="../notebooks/02-interfaces.ipynb" download>Jupyter notebook</a><a href="../code/graduate_models.py" download>Python model</a><a href="../data/interfaces.csv" download>Example dataset</a><a href="../figures/interfaces.dot" download>Editable diagram</a><a href="02-interfaces.md" download>Editable Markdown</a></div></article></main></body></html>
+<div class="downloads"><a href="../labs/02-interfaces.html">Practice laboratory</a><a href="../notebooks/02-interfaces.ipynb" download>Jupyter notebook</a><a href="../code/graduate_models.py" download>Python model</a><a href="../data/interfaces.csv" download>Example dataset</a><a href="../figures/interfaces.dot" download>Editable diagram</a><a href="02-interfaces.md" download>Editable Markdown</a></div>
+<!-- STEP04-CONNECTED-EVIDENCE-START -->
+<section class="connected-evidence-case" aria-label="NS-CE4.1 integrated evidence case">
+<h2>Step 04 integrated case — NS-CE4.1: executable interface obligations</h2>
+<p>The resilient concept's finite-scenario capacity screen is favorable, but downstream dispatch messages can still violate the integrated service. Here the <strong>provider</strong> publishes sequenced dispatch events and the <strong>consumer</strong> must either process contiguous, fresh messages for the agreed revision or stop and request recovery. A packet's syntactic validity is not sufficient to establish a correct state transition.</p>
+<h3>Contract and temporal obligations</h3>
+<p>Let $s_k$ be the sequence number of accepted message $k$, $t_k$ its embedded event timestamp, and $r_k$ the local observation time, all in seconds on a common assumed clock. A simple safety contract is</p>
+<p>$$s_{k+1}=s_k+1,\qquad 0\le r_k-t_k\le2,\qquad v_{\rm contract}=v_{\rm observed}.$$</p>
+<p>The age test is meaningful only if both timestamp sources share a sufficiently synchronized clock, and the two-second threshold is an <em>assumed contract</em>, not a derived safety limit. If receive order is not guaranteed, reordering requires explicit bounded buffering and a timeout state. A consumer must not silently treat a missing sequence as an empty/no-op command. The corresponding liveness property would require eventual delivery, recovery, or safe abort under an explicit fairness/retry assumption; the finite trace alone cannot prove liveness.</p>
+<p>The controlled four-message trace is:</p>
+<table>
+<thead>
+<tr>
+  <th>Arrival</th>
+  <th style="text-align:right">Sequence</th>
+  <th>Event / observed (s)</th>
+  <th>Violation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td style="text-align:right">1</td>
+  <td>0.0 / 0.4</td>
+  <td>None</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td style="text-align:right">2</td>
+  <td>0.5 / 0.8</td>
+  <td>None</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td style="text-align:right">4</td>
+  <td>1.0 / 1.4</td>
+  <td>Missing sequence 3</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td style="text-align:right">2</td>
+  <td>0.5 / 4.0</td>
+  <td>Repeated/reordered; age 3.5 s</td>
+</tr>
+</tbody>
+</table>
+<p>The provider announces revision <strong>2.1</strong> but the consumer's verified contract is <strong>2.0</strong>. The <a href="../code/ns_evidence_case.py">executable interface checker</a> reports four independently identifiable defects: <code>gap</code>, <code>duplicate_or_reordered</code>, <code>stale</code>, and <code>revision_mismatch</code>. The checker compares event integers and bounded ages; it is <strong>not</strong> a conforming formal-language parser, a distributed protocol implementation, or a timing proof.</p>
+<h3>Why checking the entire composition matters</h3>
+<p>A dispatch command may pass schema validation while its semantics are unsafe because it refers to an event skipped during synchronization. For example, if sequence 3 revoked a route, processing sequence 4 as if 3 did not exist can apply an obsolete authorization. The precondition for applying sequence 4 is therefore a verified predecessor state. A useful assume-guarantee statement is: <em>given a synchronized clock, authenticated sender, and consecutive revision-compatible events, the consumer never transitions on a message older than its freshness bound</em>. The contract says nothing about what happens if the assumptions fail unless that failure response is separately specified.</p>
+<p>A real deployment would need protocol semantics for idempotent replay, exactly-once or at-least-once delivery, monotonic sequence scopes, clock resets, partition handling, access control, and emergency fallback. Revision strings alone do not establish semantic compatibility. Pair a machine-readable change notice with explicit impact analysis and rerun tests against the current producer and consumer builds.</p>
+<h3>Calculation and counterexample</h3>
+<p>For message 4, $r_4-t_4=4.0-0.5=3.5$ seconds; lateness above the bound is $1.5$ seconds. Merely discarding message 4 does not restore correctness: sequence 3 remains missing, so the consumer still lacks the acknowledged state transition between 2 and 4. To repair the chain, provide event 3 or a verified state snapshot with declared semantics, replay valid later events, and establish current 2.1 interface acceptance evidence. Increasing <code>max_age_seconds</code> to 4 would suppress the stale-age flag but not repair the gap, duplicate, or revision mismatch.</p>
+<p><strong>Worked exercise 1 — trace repair.</strong> An engineer reorders arrival 4 before arrival 3 to make sequence 2 precede 4. Is the contract satisfied? <strong>Solution:</strong> No. The event with sequence 2 already appeared at arrival 2, and sequence 3 is still absent; the stream contains a duplicate and a gap. Sequence reordering does not synthesize a missing validated state transition.</p>
+<p><strong>Worked exercise 2 — version change.</strong> The provider changes from 2.0 to 2.1 without altering the JSON field names. May the consumer reuse its 2.0 verification evidence? <strong>Solution:</strong> Not automatically. Unchanged syntax does not establish identical retry, ordering, or safety semantics. A reviewed compatibility argument and regression evidence are required.</p>
+<p><strong>Adverse case.</strong> In a copy of the controlled JSON, set <code>observed_at_seconds</code> earlier than <code>timestamp_seconds</code>. Input validation must reject the impossible age rather than interpret negative age as unusually fresh. Test unvalidated timestamps and missing authentication as separate required security evidence. An interface trace test is a necessary <em>counterexample finder</em>, not an operational qualification of the complete distributed system.</p>
+
+</section>
+<style>article{min-width:0;max-width:100%}article table{display:block;max-width:100%;width:100%;overflow-x:auto}article pre{max-width:100%;overflow-x:auto}article :is(p,li):has(mjx-container){overflow-x:auto;max-width:100%}article mjx-container{max-width:100%;overflow-x:auto}</style>
+<!-- STEP04-CONNECTED-EVIDENCE-END -->
+</article></main></body></html>

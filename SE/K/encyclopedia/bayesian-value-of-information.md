@@ -39,6 +39,34 @@ These sources establish authoritative terminology or methods in their own publis
 - [NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)](https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods) — Statistical methods, experiments, reliability, and process assessment.
 - [NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)](https://standards.nasa.gov/node/263) — Credibility practices for modeling and simulation used in decisions.
 
+## In-depth method: a complete Bayesian test-purchase decision
+
+The [Bayesian decision and value-of-information guide](../methods/bayesian-decision-handbook.md) develops the test-purchase example from prior beliefs to optimal actions, imperfect evidence, sensitivity, and the value ceiling for buying a test. Its [Python calculator](../methods/code/decision_test_value.py) reproduces the calculations without external packages.
+
+For a component with a 20% prior fault probability, shipping produces an assumed loss of 100 k$ if faulty and 0 k$ otherwise. Redesign costs 15 k$ and is assumed to eliminate that fault. The no-test expected losses are 20 k$ to ship and 15 k$ to redesign, so redesign is the risk-neutral baseline decision.
+
+Suppose test sensitivity is 90% and specificity is 95%. A positive test occurs with probability \(0.9(0.2)+0.05(0.8)=0.22\). The posterior fault probabilities are
+
+\[
+P(F\mid +)=\frac{0.18}{0.22}\approx0.8182,\qquad
+P(F\mid -)=\frac{0.02}{0.78}\approx0.02564.
+\]
+
+Shipping is preferable only if fault probability is below the redesign-versus-shipping break-even value \(15/100=0.15\). Consequently, the optimal test-conditioned policy is **redesign after positive; ship after negative**. The loss before test fee is \(0.22(15)+0.02(100)=5.3\) k$; EVSI is \(15-5.3=9.7\) k$. Perfect information would cost \(0.2(15)+0.8(0)=3\) k$, so EVPI is \(15-3=12\) k$. A 5 k$ test yields 4.7 k$ expected net benefit *if* its test accuracy, cost, timing and modeled consequences are credible.
+
+A critical qualification is that no one can interpret those numbers as real defect risk without data supporting the prior, conditional test performance, redesign effectiveness and loss estimates. The mathematics is exact *under the invented model*. Decision quality still depends on the model's connection to reality.
+
+
+
+
+## Step 02 review studio — an imperfect test can still change a decision
+
+Suppose a synthetic subsystem has prior failure probability `P(F)=0.20`. A perfect mitigation costs 25 units and eliminates this modeled loss; an unmitigated failure costs 100 units. Without a test, expected failure loss is 20, so **do not mitigate** under a risk-neutral cost rule. Now add an imperfect test with sensitivity `P(+|F)=0.80` and false-positive rate `P(+|not F)=0.10`.
+
+The positive probability is `P(+)=0.8(0.2)+0.1(0.8)=0.24`; posterior failure probability after a positive is `0.16/0.24=2/3`. After a negative it is `0.04/0.76≈0.05263`. Choose mitigation if posterior failure cost exceeds 25: mitigate after positive, do not mitigate after negative. Expected cost **after test, before test fee** is `0.24(25)+0.76(0.05263×100)=6+4=10`. Thus sample information is worth `20−10=10` units before costs, under the simplified model. A test fee of 6 leaves net value 4.
+
+**Solved challenge:** if the fee rises to 12, does the test remain worthwhile for cost minimization? **No:** net value is −2. This example assumes the mitigation eliminates the modeled loss, no time penalty, accurate test characteristics, and risk neutrality. Safety obligations may invalidate a pure expected-cost decision.
+
 ## Follow the knowledge
 
 **Related concepts**

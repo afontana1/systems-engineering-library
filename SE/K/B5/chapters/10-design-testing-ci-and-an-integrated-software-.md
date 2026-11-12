@@ -81,3 +81,24 @@ Software supply-chain risks cut across all these layers. A malicious or compromi
 ## Continuity
 
 This chapter builds from [previous chapter](09-build-the-dependability-safety-resilience-and.md) and leads toward [next chapter](11-manage-delivery-operations-maintenance-evolut.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-764-w10.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+
+## Step 03 integrated reference: from CI success to deployable verification evidence
+
+### Distinguish a test result from a release claim
+
+A pipeline status of “green” says some configured checks completed under some environment. It does not say the exact artifact now being deployed was tested, that all required test categories ran, or that nonfunctional obligations were met. A credible release chain links source revision, dependency resolution, build environment, artifact digest, test suite, deployment manifest, and approval decision. The chain must be tamper-evident or independently verifiable where required; simply writing the hash next to a file is not a signature.
+
+The [evidence register](../case/evidence-register.csv) contains a deliberate provenance defect: `BLD-50` passed against NS-SW5.0, while the proposed deployment is NS-SW5.1. That record is `STALE` regardless of the word `PASS`. It also contains a recovery drill that is only planned. Neither can be repaired by displaying a higher test coverage percentage. The exercise's `evidence_status` function checks revision identity and execution state but does not validate signatures or prove test correctness.
+
+### Design the test pyramid around risk, not fashion
+
+Unit tests exercise local logic. Contract tests exercise request/response semantics, including uncertainty and invalid fields. Transaction tests exercise commit and rollback. Load tests measure end-to-end distributions under a stated workload. Fault injection exercises partial failure, recovery and observability. Operator drills exercise responsibility handoffs. Security testing challenges authentication, authorization, dependency integrity and misuse conditions. These are different evidence dimensions; raising the quantity of one type does not substitute for another.
+
+For SWS-01, a suitable performance campaign must define the population, measurement points, workload shape, estimator, uncertainty, environment and failure accounting. This is particularly important with tail quantiles: 95th-percentile estimates from a few dozen observations can be unstable, and sequentially tuning the design against the same dataset invalidates claims of independent validation.
+
+### Secure development responsibilities
+
+The [NIST SSDF](https://csrc.nist.gov/pubs/sp/800/218/final) provides a published vocabulary for secure development activities. This book's case uses risk-focused practices such as controlled builds, change impact, tests and evidence preservation; it does not claim compliance with SSDF or any accreditation regime. Supply-chain review and operational response are continuous obligations, not release-day checkboxes.
+
+**Exercise.** All current synthetic code tests pass, but SWS-06 refers to the previous revision. Can a reviewer waive it because the source diff is “small”? **Answer.** Not silently. The team must produce new provenance/evidence or document an authorized, justified exception with an impact analysis. The size of a diff is not a substitute for configuration identity.

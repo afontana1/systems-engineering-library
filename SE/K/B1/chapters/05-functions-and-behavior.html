@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Chapter 5 — Before the Boxes: Functional Architecture and System Behavior · Systems Engineering Library</title><style>
 :root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
-<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
-<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B1/chapters/05-functions-and-behavior.html" data-se-mode="standard"></script>
+<link href="../../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/B1/chapters/05-functions-and-behavior.html" data-se-root="../../../" defer="" src="../../_assets/learning-shell-v55.js"></script>
 </head><body><header><div class="crumb"><a href="../../../../index.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="chapter-5--before-the-boxes-functional-architecture-and-system-behavior">Chapter 5 — Before the Boxes: Functional Architecture and System Behavior</h1>
 <p><em>EN.645.662 · Week 5. Read after <a href="04-requirements.html">Chapter 4</a>; then perform <a href="../labs/lab-05-functional-architecture.html">Hypothetical Lab 5</a>. This chapter teaches the logic needed for the original course's functional architecture baseline.</em></p>
 <p><img alt="Illustrative functions and information flow" src="../figures/functional-flow.svg"/></p>
@@ -37,7 +38,6 @@ T_{\mathrm{budget}}=0.5+1.0+3.0+1.0+1.0+1.5=8.0\ \mathrm{s}.
 <h2 id="55-trace-both-directions">5.5 Trace both directions</h2>
 <p>Start from each approved operational scenario and show the functions needed to make it succeed. Then start from each critical function and ask which need, hazard control, or requirement justifies its existence. This is a two-way test. A function with no supporting need may be a speculative feature; a need with no supporting function is a potential omission. The exact relationship may be many-to-many: accessible boarding requires several functions, and <code>Notify passenger</code> may serve multiple stakeholder needs.</p>
 <p>A <strong>trace matrix</strong> is not proof of semantic correctness. A row linking <code>Enter minimal-risk condition</code> to a requirement on booking confirmations is technically complete as a database row but conceptually incoherent. Add relation type and rationale, and read a sample of critical traces as an independent reviewer. Also mark unresolved allocations as unresolved; filling blank cells with convenient guesses is not engineering closure.</p>
-
 <p>Functional decomposition is not just breaking a noun into smaller nouns. It is an account of <strong>necessary transformations and their dependencies</strong>. A plausible decomposition must explain where information, material, energy, or authority enters and leaves each function, and how exceptional conditions alter the flows. A diagram that cannot represent refusal, cancellation, stale information, or loss of communication may describe a demonstration but not the required service. Maintaining the distinction between logical necessity and physical choice preserves the ability to compare architectures without silently changing the need.</p>
 <p>A function states a transformation the system must accomplish; behavior describes how the system evolves and reacts over time; physical architecture identifies elements assigned responsibility for realizing those functions and behaviors. Collapsing these layers makes design alternatives seem artificially narrow. For a mobility service, “authorize a trip” is a function; “pending → accepted → dispatched” is part of its behavioral semantics; a cloud service, depot terminal, or embedded controller is an implementation decision. Different implementations may satisfy the same function yet have sharply different failure modes.</p>
 <h3>Function, behavior, and physical implementation answer different questions</h3><h2 id="56-worked-review-the-missing-recovery-path">5.6 Worked review: the missing recovery path</h2>
@@ -61,4 +61,56 @@ T_{\mathrm{budget}}=0.5+1.0+3.0+1.0+1.0+1.5=8.0\ \mathrm{s}.
 <h2 id="read-rehearse-produce">Read, rehearse, produce</h2>
 <p>Use <a href="../labs/lab-05-functional-architecture.html">Hypothetical Lab 5</a> to repair an intentionally incomplete dispatch model. Then return to <strong>Week 5 in the original EN.645.662 guide</strong> and build <code>662_W05_FunctionalArchitecture_v1.0</code> with the full functional hierarchy, three behavioral views, state model, flows, and trace matrices. The lab is practice, not a replacement for the graded artifact.</p>
 <p><strong>Next:</strong> <a href="06-reviewing-the-functional-baseline.html">Chapter 6 — The Functional Baseline Review</a>. <strong>Reference:</strong> <a href="04-requirements.html">Chapter 4 — Requirements</a>.</p>
-</main></body></html>
+<section id="step03-book-studio"><h2>Step 03 technical studio — separate function, state, and physical owner</h2>
+<p>A function expresses a transformation or decision; a state expresses a persistent condition; a component expresses an allocation choice. Conflating them causes requirements to disappear between diagrams. Northstar's <strong>Allocate ride</strong> function consumes a valid request and produces either an exclusive allocation record or an explicit rejection. Its state machine has at least <code>requested</code>, <code>reserved</code>, <code>confirmed</code>, <code>cancelled</code>, and <code>expired</code> states. An implementation may use several software services, but a functional contract should not depend on their names.</p>
+<h3>An invariant across a failed retry</h3>
+<p>For a given reservation <code>r</code>, let <code>Active(r)</code> be the set of distinct vehicles currently assigned to it. A fundamental model invariant is</p>
+<p>\[
+\forall r:\quad |Active(r)|\leq 1.
+\]</p>
+<p>The critical transition is <strong>reserve</strong>. The precondition is that the request is eligible and has no conflicting active allocation; the postcondition is exactly one committed owner or an explicit failure. Imagine a network timeout after the reservation commits. If the client retries and the server inserts a second active allocation, the user-facing operation may appear successful but the invariant fails. Solve it with an atomic allocation transaction and an idempotency key or equivalent design; do not rely on a read-then-write check that can race.</p>
+<h3>Functional decomposition with failure obligations</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Input</th>
+<th>Output</th>
+<th>Failure/exception</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Validate request</td>
+<td>Rider, stop, time</td>
+<td>Eligibility decision</td>
+<td>Denial with reason</td>
+</tr>
+<tr>
+<td>Assign resource</td>
+<td>Validated request, availability</td>
+<td>Exclusive owner</td>
+<td>Conflict/retry</td>
+</tr>
+<tr>
+<td>Publish confirmation</td>
+<td>Committed allocation</td>
+<td>Observable rider message</td>
+<td>Delivery unknown; recover/reconcile</td>
+</tr>
+<tr>
+<td>Supervise status</td>
+<td>Timed status stream</td>
+<td>Operator indication</td>
+<td>Staleness recognized</td>
+</tr>
+</tbody>
+</table>
+<h3>Solved state-model exercise</h3>
+<p>A design permits <code>cancelled → confirmed</code> on any late acknowledgment. Is that necessarily correct? <strong>No.</strong> An acknowledgment sent before cancellation might arrive after it. Without revision or event-order semantics, the late message can resurrect a cancelled request. Require the acknowledgment to reference a current reservation version, and reject obsolete state transitions. The precise solution depends on authority and ordering rules, which should be documented as part of the behavioral contract.</p>
+</section><section class="step03-deeper-reading" id="step03-book1-deepening-r2"><h2>Step 03 reference deepening — specify behaviors as invariants and transitions</h2>
+<p>Functional decomposition answers <strong>what must occur</strong>, but the system's correctness also depends on the order in which actions are allowed. For Northstar reservation ownership, define states <code>unassigned</code>, <code>held(vehicle_id)</code>, and <code>released</code>. An invariant is that each active reservation has at most one active vehicle owner. A create/hold transition must be atomic: checking “no owner” and assigning one later permits competing dispatch requests to pass the same check before either commits.</p>
+<p>A minimal transition contract is: <code>hold(r,v)</code> succeeds only if <code>owner(r)=none</code>; on success the owner becomes <code>v</code>, and on failure it remains unchanged. Repeated identical commands should not produce a second allocation; an idempotency token can distinguish a retry from a new request. To implement the atomic condition in a database, use an appropriate transaction or unique constraint rather than relying solely on a flowchart.</p>
+<p>The consequence is a cross-view check. The functional view must include “reject conflicting allocation”; the interface view must carry a reservation identifier; the physical view must identify the authoritative storage/commit point; and verification must deliberately test simultaneous requests plus retry behavior. A neat decomposition missing any of those links is not yet a credible behavior model.</p>
+<p><strong>Practice with solution:</strong> Two workers both read <code>owner=none</code> then both write different owners. What failed? The <strong>atomicity of the precondition-plus-update</strong>, not the logical statement of the invariant. Add a test that starts concurrent allocations against the same reservation and checks one successful commit, one rejected conflict, and the final single owner.</p>
+</section></main></body></html>

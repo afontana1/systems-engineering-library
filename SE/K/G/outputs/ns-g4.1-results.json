@@ -1,0 +1,377 @@
+{
+  "case_id": "NS-G4.1",
+  "enterprise": {
+    "causal_claim_validated": false,
+    "difference_in_differences_minutes": -5,
+    "missing_permissions": [
+      "road_authority",
+      "labor_representative",
+      "privacy_officer"
+    ],
+    "pretrend_difference_minutes": 0
+  },
+  "input_sha256": "a4d04ab458194577b2cc89866235edd45d7c02b9af461b7de6f85bbb3becacee",
+  "interface_trace_audit": {
+    "accepted_unique_events": 3,
+    "idempotent_duplicates": 1,
+    "state_by_key": {
+      "REQ-17": "acknowledged"
+    },
+    "violations": [
+      "E5:illegal_transition",
+      "E6:payload_conflict"
+    ]
+  },
+  "model_scope": "Synthetic finite-scenario screening; not statistical reliability, signature verification, calibration, or authorization",
+  "overall_disposition": "HOLD: no validated deployment authority, even if a policy clears selected numerical screens",
+  "policies": [
+    {
+      "added_cost_million": 0,
+      "disposition": "HOLD: technical screening does not confer authorization",
+      "enterprise_permission_gate": false,
+      "operational_authorized": false,
+      "policy": "baseline",
+      "resource_and_equity_screen": false,
+      "scenario_technical_coverage_weight": 0,
+      "wait_gap_minutes": 22
+    },
+    {
+      "added_cost_million": 0.8,
+      "disposition": "HOLD: technical screening does not confer authorization",
+      "enterprise_permission_gate": false,
+      "operational_authorized": false,
+      "policy": "technical_redundancy",
+      "resource_and_equity_screen": false,
+      "scenario_technical_coverage_weight": 0,
+      "wait_gap_minutes": 17
+    },
+    {
+      "added_cost_million": 1.65,
+      "disposition": "HOLD: technical screening does not confer authorization",
+      "enterprise_permission_gate": false,
+      "operational_authorized": false,
+      "policy": "coordinated_guardrails",
+      "resource_and_equity_screen": true,
+      "scenario_technical_coverage_weight": 0.55,
+      "wait_gap_minutes": 9
+    }
+  ],
+  "revision": "1.0",
+  "runs": [
+    {
+      "accessible_max_flow_slots": 68.0,
+      "accessible_needed_slots": 55,
+      "alarm_ppv": 0.21774193548387097,
+      "checks": {
+        "accessible_flow": true,
+        "alarm_quality": false,
+        "human_queue": false,
+        "joint_availability": false,
+        "retry_stable": true,
+        "route_authorized": false
+      },
+      "freshness_bound_seconds": 34,
+      "joint_availability": 0.981938484493824,
+      "operator_wait_minutes": 43.75000000000003,
+      "policy": "baseline",
+      "route_revision_matches": false,
+      "scenario": "nominal",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    },
+    {
+      "accessible_max_flow_slots": 68.0,
+      "accessible_needed_slots": 64.35,
+      "alarm_ppv": 0.21774193548387097,
+      "checks": {
+        "accessible_flow": true,
+        "alarm_quality": false,
+        "human_queue": false,
+        "joint_availability": false,
+        "retry_stable": true,
+        "route_authorized": false
+      },
+      "freshness_bound_seconds": 34,
+      "joint_availability": 0.981938484493824,
+      "operator_wait_minutes": null,
+      "policy": "baseline",
+      "route_revision_matches": false,
+      "scenario": "demand_surge",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    },
+    {
+      "accessible_max_flow_slots": 25.0,
+      "accessible_needed_slots": 55,
+      "alarm_ppv": 0.21774193548387097,
+      "checks": {
+        "accessible_flow": false,
+        "alarm_quality": false,
+        "human_queue": false,
+        "joint_availability": false,
+        "retry_stable": true,
+        "route_authorized": false
+      },
+      "freshness_bound_seconds": 34,
+      "joint_availability": 0.981938484493824,
+      "operator_wait_minutes": 43.75000000000003,
+      "policy": "baseline",
+      "route_revision_matches": false,
+      "scenario": "rail_outage",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    },
+    {
+      "accessible_max_flow_slots": 58.0,
+      "accessible_needed_slots": 62.14999999999999,
+      "alarm_ppv": 0.21774193548387097,
+      "checks": {
+        "accessible_flow": false,
+        "alarm_quality": false,
+        "human_queue": false,
+        "joint_availability": false,
+        "retry_stable": true,
+        "route_authorized": false
+      },
+      "freshness_bound_seconds": 39,
+      "joint_availability": 0.9471532142941439,
+      "operator_wait_minutes": 549.3055555555528,
+      "policy": "baseline",
+      "route_revision_matches": false,
+      "scenario": "compound_grid_flood",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    },
+    {
+      "accessible_max_flow_slots": 68.0,
+      "accessible_needed_slots": 55,
+      "alarm_ppv": 0.21774193548387097,
+      "checks": {
+        "accessible_flow": true,
+        "alarm_quality": false,
+        "human_queue": false,
+        "joint_availability": false,
+        "retry_stable": true,
+        "route_authorized": false
+      },
+      "freshness_bound_seconds": 34,
+      "joint_availability": 0.981938484493824,
+      "operator_wait_minutes": 43.75000000000003,
+      "policy": "baseline",
+      "route_revision_matches": false,
+      "scenario": "interface_drift",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    },
+    {
+      "accessible_max_flow_slots": 70.0,
+      "accessible_needed_slots": 55,
+      "alarm_ppv": 0.21774193548387097,
+      "checks": {
+        "accessible_flow": true,
+        "alarm_quality": false,
+        "human_queue": false,
+        "joint_availability": true,
+        "retry_stable": true,
+        "route_authorized": false
+      },
+      "freshness_bound_seconds": 34,
+      "joint_availability": 0.98897466157056,
+      "operator_wait_minutes": 43.75000000000003,
+      "policy": "technical_redundancy",
+      "route_revision_matches": true,
+      "scenario": "nominal",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    },
+    {
+      "accessible_max_flow_slots": 70.0,
+      "accessible_needed_slots": 64.35,
+      "alarm_ppv": 0.21774193548387097,
+      "checks": {
+        "accessible_flow": true,
+        "alarm_quality": false,
+        "human_queue": false,
+        "joint_availability": true,
+        "retry_stable": true,
+        "route_authorized": false
+      },
+      "freshness_bound_seconds": 34,
+      "joint_availability": 0.98897466157056,
+      "operator_wait_minutes": null,
+      "policy": "technical_redundancy",
+      "route_revision_matches": true,
+      "scenario": "demand_surge",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    },
+    {
+      "accessible_max_flow_slots": 32.0,
+      "accessible_needed_slots": 55,
+      "alarm_ppv": 0.21774193548387097,
+      "checks": {
+        "accessible_flow": false,
+        "alarm_quality": false,
+        "human_queue": false,
+        "joint_availability": true,
+        "retry_stable": true,
+        "route_authorized": false
+      },
+      "freshness_bound_seconds": 34,
+      "joint_availability": 0.98897466157056,
+      "operator_wait_minutes": 43.75000000000003,
+      "policy": "technical_redundancy",
+      "route_revision_matches": true,
+      "scenario": "rail_outage",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    },
+    {
+      "accessible_max_flow_slots": 58.0,
+      "accessible_needed_slots": 62.14999999999999,
+      "alarm_ppv": 0.21774193548387097,
+      "checks": {
+        "accessible_flow": false,
+        "alarm_quality": false,
+        "human_queue": false,
+        "joint_availability": false,
+        "retry_stable": true,
+        "route_authorized": false
+      },
+      "freshness_bound_seconds": 39,
+      "joint_availability": 0.95418660814848,
+      "operator_wait_minutes": 549.3055555555528,
+      "policy": "technical_redundancy",
+      "route_revision_matches": true,
+      "scenario": "compound_grid_flood",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    },
+    {
+      "accessible_max_flow_slots": 70.0,
+      "accessible_needed_slots": 55,
+      "alarm_ppv": 0.21774193548387097,
+      "checks": {
+        "accessible_flow": true,
+        "alarm_quality": false,
+        "human_queue": false,
+        "joint_availability": true,
+        "retry_stable": true,
+        "route_authorized": false
+      },
+      "freshness_bound_seconds": 34,
+      "joint_availability": 0.98897466157056,
+      "operator_wait_minutes": 43.75000000000003,
+      "policy": "technical_redundancy",
+      "route_revision_matches": false,
+      "scenario": "interface_drift",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    },
+    {
+      "accessible_max_flow_slots": 70.0,
+      "accessible_needed_slots": 55,
+      "alarm_ppv": 0.4103343465045593,
+      "checks": {
+        "accessible_flow": true,
+        "alarm_quality": true,
+        "human_queue": true,
+        "joint_availability": true,
+        "retry_stable": true,
+        "route_authorized": true
+      },
+      "freshness_bound_seconds": 24,
+      "joint_availability": 0.9909625503375361,
+      "operator_wait_minutes": 10.871440897325284,
+      "policy": "coordinated_guardrails",
+      "route_revision_matches": true,
+      "scenario": "nominal",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": true
+    },
+    {
+      "accessible_max_flow_slots": 70.0,
+      "accessible_needed_slots": 64.35,
+      "alarm_ppv": 0.4103343465045593,
+      "checks": {
+        "accessible_flow": true,
+        "alarm_quality": true,
+        "human_queue": false,
+        "joint_availability": true,
+        "retry_stable": true,
+        "route_authorized": true
+      },
+      "freshness_bound_seconds": 24,
+      "joint_availability": 0.9909625503375361,
+      "operator_wait_minutes": 20.377076825256406,
+      "policy": "coordinated_guardrails",
+      "route_revision_matches": true,
+      "scenario": "demand_surge",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    },
+    {
+      "accessible_max_flow_slots": 32.0,
+      "accessible_needed_slots": 55,
+      "alarm_ppv": 0.4103343465045593,
+      "checks": {
+        "accessible_flow": false,
+        "alarm_quality": true,
+        "human_queue": true,
+        "joint_availability": true,
+        "retry_stable": true,
+        "route_authorized": true
+      },
+      "freshness_bound_seconds": 24,
+      "joint_availability": 0.9909625503375361,
+      "operator_wait_minutes": 10.871440897325284,
+      "policy": "coordinated_guardrails",
+      "route_revision_matches": true,
+      "scenario": "rail_outage",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    },
+    {
+      "accessible_max_flow_slots": 58.0,
+      "accessible_needed_slots": 62.14999999999999,
+      "alarm_ppv": 0.4103343465045593,
+      "checks": {
+        "accessible_flow": false,
+        "alarm_quality": true,
+        "human_queue": false,
+        "joint_availability": false,
+        "retry_stable": true,
+        "route_authorized": true
+      },
+      "freshness_bound_seconds": 29,
+      "joint_availability": 0.9561744969154561,
+      "operator_wait_minutes": 17.23854032980604,
+      "policy": "coordinated_guardrails",
+      "route_revision_matches": true,
+      "scenario": "compound_grid_flood",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    },
+    {
+      "accessible_max_flow_slots": 70.0,
+      "accessible_needed_slots": 55,
+      "alarm_ppv": 0.4103343465045593,
+      "checks": {
+        "accessible_flow": true,
+        "alarm_quality": true,
+        "human_queue": true,
+        "joint_availability": true,
+        "retry_stable": true,
+        "route_authorized": false
+      },
+      "freshness_bound_seconds": 24,
+      "joint_availability": 0.9909625503375361,
+      "operator_wait_minutes": 10.871440897325284,
+      "policy": "coordinated_guardrails",
+      "route_revision_matches": false,
+      "scenario": "interface_drift",
+      "software_retry_offered_per_second": 106.66666666666667,
+      "technical_screen_pass": false
+    }
+  ]
+}

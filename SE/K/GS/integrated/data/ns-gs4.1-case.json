@@ -1,0 +1,231 @@
+{
+  "id": "NS-GS4.1",
+  "description": "Controlled synthetic regional emergency access and energy-constrained service decision; no operational observations.",
+  "status_date": "2026-10-01",
+  "cost_units": "million synthetic USD",
+  "project": {
+    "pv_m": 4,
+    "ev_m": 3.2,
+    "accepted_ev_m": 2.7,
+    "ac_m": 4,
+    "bac_m": 9,
+    "etc_m": 6.3
+  },
+  "energy": {
+    "distance_km": 80,
+    "intensity_kwh_per_km": 0.23,
+    "mission_h": 3,
+    "aux_kw": 1.2,
+    "battery_kwh": 42,
+    "soc": 0.7,
+    "eta": 0.94,
+    "reserve_kwh": 6
+  },
+  "hybrid": {
+    "initial_energy_kwh": 18,
+    "minimum_energy_kwh": 4,
+    "load_kw": 4,
+    "load_slope_kw_per_h": 0.5,
+    "horizon_h": 3,
+    "steps_h": [
+      0.5,
+      0.25,
+      0.125
+    ]
+  },
+  "feedback": {
+    "initial_error": 10,
+    "previous_error": 10,
+    "safe_gain": 0.7,
+    "unstable_gain": 1.2,
+    "steps": 12
+  },
+  "scenarios": [
+    {
+      "id": "clear",
+      "weight": 0.5
+    },
+    {
+      "id": "storm",
+      "weight": 0.3
+    },
+    {
+      "id": "compound",
+      "weight": 0.2
+    }
+  ],
+  "policies": [
+    {
+      "id": "status_quo",
+      "cost_m": 0,
+      "staff": 0,
+      "timely": [
+        0.92,
+        0.74,
+        0.55
+      ],
+      "accessible": [
+        0.83,
+        0.61,
+        0.4
+      ]
+    },
+    {
+      "id": "throughput_push",
+      "cost_m": 0.6,
+      "staff": 2,
+      "timely": [
+        0.96,
+        0.88,
+        0.69
+      ],
+      "accessible": [
+        0.82,
+        0.56,
+        0.32
+      ]
+    },
+    {
+      "id": "assurance_first",
+      "cost_m": 0.75,
+      "staff": 2,
+      "timely": [
+        0.91,
+        0.84,
+        0.76
+      ],
+      "accessible": [
+        0.94,
+        0.86,
+        0.78
+      ]
+    },
+    {
+      "id": "integrated",
+      "cost_m": 1.9,
+      "staff": 5,
+      "timely": [
+        0.97,
+        0.92,
+        0.86
+      ],
+      "accessible": [
+        0.96,
+        0.91,
+        0.82
+      ]
+    }
+  ],
+  "thresholds": {
+    "timely": 0.9,
+    "accessible": 0.9,
+    "budget_m": 2.0,
+    "staff": 5
+  },
+  "flow": {
+    "admitted_wip": 18,
+    "engineering_rate_per_day": 0.75,
+    "accepted_rate_per_day": 0.6
+  },
+  "evidence": {
+    "max_age_days": 20,
+    "requirements": [
+      {
+        "id": "R-ACCESS",
+        "artifact": "EV-ACCESS",
+        "expected_rev": "1.0",
+        "artifact_rev": "1.0",
+        "age_days": 12,
+        "approved": true
+      },
+      {
+        "id": "R-SAFETY",
+        "artifact": "EV-SAFETY",
+        "expected_rev": "1.0",
+        "artifact_rev": "1.0",
+        "age_days": 22,
+        "approved": false
+      },
+      {
+        "id": "R-INTEROP",
+        "artifact": "EV-INTEROP",
+        "expected_rev": "2.0",
+        "artifact_rev": "1.0",
+        "age_days": 8,
+        "approved": true
+      },
+      {
+        "id": "R-PRIVACY",
+        "artifact": "EV-PRIVACY",
+        "expected_rev": "1.0",
+        "artifact_rev": "1.0",
+        "age_days": 5,
+        "approved": false
+      }
+    ]
+  },
+  "pilot": {
+    "treated_pre_min": 22,
+    "treated_post_min": 15,
+    "control_pre_min": 20,
+    "control_post_min": 17
+  },
+  "network": {
+    "primary_a": 0.98,
+    "primary_b": 0.97,
+    "backup": 0.9,
+    "common_cause": 0.04,
+    "dispatch_slots": 66,
+    "constituent_slots": 70,
+    "accessible_demand_slots": 62
+  },
+  "portfolio": {
+    "budget_m": 2.0,
+    "staff_limit": 5,
+    "options": [
+      {
+        "id": "interop",
+        "cost_m": 0.6,
+        "staff": 2,
+        "value": 1.6,
+        "requires": []
+      },
+      {
+        "id": "backup",
+        "cost_m": 1.1,
+        "staff": 3,
+        "value": 2.1,
+        "requires": [
+          "assurance"
+        ]
+      },
+      {
+        "id": "inclusion",
+        "cost_m": 0.75,
+        "staff": 2,
+        "value": 2.3,
+        "requires": []
+      },
+      {
+        "id": "assurance",
+        "cost_m": 0.5,
+        "staff": 2,
+        "value": 1.3,
+        "requires": []
+      }
+    ]
+  },
+  "equity": {
+    "urban_share": 0.75,
+    "urban_before_min": 12,
+    "urban_after_min": 8,
+    "rural_before_min": 24,
+    "rural_after_min": 29,
+    "maximum_group_harm_min": 0
+  },
+  "authority": {
+    "road_authority": false,
+    "labor": false,
+    "privacy": false
+  }
+}

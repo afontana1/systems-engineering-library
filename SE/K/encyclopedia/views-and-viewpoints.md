@@ -46,6 +46,15 @@ These sources establish authoritative terminology or methods in their own publis
 - [INCOSE · Systems Engineering Handbook, 5th ed. (2023)](https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/) — Published practitioner reference; full text may require access.
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 
+
+## Step 02 review exercise: conflicting architecture views
+
+A **viewpoint** defines the questions, stakeholders, modeling conventions and consistency rules for a particular architecture view. Suppose an operational view shows one dispatcher authorizing every vehicle release, while a logical control view allows a local operator to authorize a release after network loss. This is not a cosmetic diagram difference: authority, operating mode and safety constraints disagree. Create one authoritative decision rule—e.g., `local_release_allowed = network_lost AND operator_authenticated AND safe_mode`—and trace both views to it. Then test the rule's effect on dispatch timing and hazards.
+
+The view set should include a viewpoint specification with: addressed concern; represented elements and relations; scope and configuration; source model; update owner; and an executable or reviewable consistency test. The right number of views is determined by the decisions and concerns, not by how many diagram types the tool offers.
+
+**Exercise (answer).** If the operational view assumes fail-stop on network loss but the physical view includes offline operation, a review needs to resolve the actual authority and fallback mode **before** claiming interface verification is complete. An identical label in two diagrams does not establish semantic agreement.
+
 ## Follow the knowledge
 
 **Related concepts**

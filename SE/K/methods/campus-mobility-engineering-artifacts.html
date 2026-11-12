@@ -1,0 +1,132 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Campus Mobility: controlled engineering artifact package · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/campus-mobility-engineering-artifacts.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Campus Mobility: controlled engineering artifact package</h1>
+<h2>1. One case, many engineering disciplines</h2>
+<p>This package develops the fictional Campus Mobility shuttle from the <a href="campus-mobility-engineering-case.html">longitudinal case</a> into an inspectable <strong>requirements–interfaces–hazards–verification–change</strong> baseline. It is a teaching configuration, not a certified vehicle, a completed safety case, or a release authorization.</p>
+<p>Everything is versioned to the <strong>CM-B2</strong> classroom baseline and the synthetic <code>controller-2.4.1</code> build. The subsequent CM-B3 change illustrates why accepting a result for one configuration does not automatically support a later configuration. Source files are open CSV/JSON and can be reviewed without specialized tooling.</p>
+<table>
+<thead>
+<tr>
+  <th>Artifact</th>
+  <th>Editable file</th>
+  <th>Main question it answers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Requirement specification</td>
+  <td><a href="data/campus-requirements.csv">campus-requirements.csv</a></td>
+  <td>What behavior, conditions and observables define success?</td>
+</tr>
+<tr>
+  <td>Interface control extract</td>
+  <td><a href="data/campus-interfaces.csv">campus-interfaces.csv</a></td>
+  <td>Who produces which information, with units and freshness constraints?</td>
+</tr>
+<tr>
+  <td>Verification cross-reference matrix</td>
+  <td><a href="data/campus-verification-matrix.csv">campus-verification-matrix.csv</a></td>
+  <td>Which controlled tests and results support which claims?</td>
+</tr>
+<tr>
+  <td>Hazard and assurance register</td>
+  <td><a href="data/campus-hazard-log.csv">campus-hazard-log.csv</a></td>
+  <td>Which losses and hazardous states remain incompletely controlled?</td>
+</tr>
+<tr>
+  <td>Configuration change impact</td>
+  <td><a href="data/campus-change-impact.csv">campus-change-impact.csv</a></td>
+  <td>Which previous evidence needs re-evaluation after CM-B3?</td>
+</tr>
+<tr>
+  <td>Typed baseline fixture</td>
+  <td><a href="data/campus-mobility-release.json">campus-mobility-release.json</a></td>
+  <td>Which IDs, controls, configuration and evidence connect the documents?</td>
+</tr>
+<tr>
+  <td>Changed baseline fixture</td>
+  <td><a href="data/campus-mobility-stale-evidence.json">campus-mobility-stale-evidence.json</a></td>
+  <td>Can a checker distinguish stale evidence from current evidence?</td>
+</tr>
+<tr>
+  <td>Model illustration</td>
+  <td><a href="models/campus-mobility.sysml">campus-mobility.sysml</a></td>
+  <td>What might the small structural slice look like in SysML textual notation?</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>.sysml</code> file is explicitly <strong>not claimed to be validated by a conforming SysML v2 parser</strong>. The CSV/JSON checker validates limited engineering-document relationships, not the language semantics of that file.</p>
+<h2>2. Requirement specification: observable, qualified claims</h2>
+<p>The original CM-B2 model contains <code>REQ-DOOR</code> and <code>REQ-ACK</code>. The revised requirements extract makes the tested boundary clearer. <code>REQ-DOOR</code> is a positive safety constraint on <em>authorization</em>: if measured speed exceeds 0.5 m/s, parking brake is not engaged, or input validity fails, the system must inhibit door authorization. It does not by itself assert mechanical latching under every possible fault. <code>REQ-ACK</code> concerns accepted supervised requests within 2.0 s at a declared test load; a single passing maximum observation does not establish a rare-event deadline reliability target.</p>
+<p>An important logical distinction is</p>
+<p>\[
+\mathrm{permitOpen}\Rightarrow
+(\mathrm{speedValid}\land\mathrm{brakeValid}\land v\le0.5\;\mathrm{m/s}\land\mathrm{brakeEngaged}),
+\]</p>
+<p>not the false converse that the door <em>must</em> open whenever those conditions hold. This conditional statement must eventually be implemented as an actual controller invariant and supported with adequate evidence. See <a href="requirements-verification-handbook.html">requirements engineering and evidence</a>.</p>
+<h2>3. Interface control: freshness is a technical contract</h2>
+<p>The interface extract states <code>IF-SPEED</code> and <code>IF-BRAKE</code> as 50 ms periodic signals with <strong>150 ms maximum allowable age</strong> in this <em>invented</em> example. The controller's invalid-input action is <code>deny_open</code>. The values are design assumptions, not measured sensor performance, and are not offered as operational standards. The real specification would need message schemas, failure signaling, source identity, message ordering, timestamp basis, reset handling, electrical/network allocation, qualification environmental boundaries and cybersecurity concerns.</p>
+<p>If speed is 0.3 m/s but its timestamp is 180 ms old, <code>IF-SPEED</code> is invalid. The authorization must remain inhibited despite an otherwise nominal speed/brake combination. A stale input is not evidence of a low-speed state. The test procedure should inject freshness violations, clock skew and contradictory sensor states, not only nominal values.</p>
+<h2>4. Verification matrix: pass reports versus evidence sufficiency</h2>
+<p><code>TEST-DOOR-01</code> and <code>TEST-ACK-01</code> are <strong>synthetic named procedures</strong>, with illustrative passing evidence <code>EV-DOOR</code> and <code>EV-ACK</code>. The declared limits are crucial: injected software faults cannot establish all mechanical failure pathways, and one observed maximum of 1.74 s is not a confidence bound on the probability of missing the 2.0 s deadline. The matrix deliberately retains these limitations instead of silently converting <code>PASS</code> into a broad release claim.</p>
+<p>A complete controlled verification record would additionally include instrument calibration, test personnel, timestamp provenance, code/build hashes, input fixtures, deviations, trace to acceptance criteria, raw readings, and independently reviewed disposition. Evidence quality depends on the claim being made, not the number of green status cells.</p>
+<h2>5. Hazard argument: claim, evidence and defeater</h2>
+<p>For <code>H-DOOR</code>, the loss is an injury from door opening while moving. The hazard is the unsafe vehicle state; <code>CTRL-DOOR</code> is one control pathway. A useful qualified claim is:</p>
+<blockquote>
+<p>On CM-B2 under the stated supervised test conditions, the controller's software command gate inhibits opening for the enumerated injected speed/brake test conditions.</p>
+</blockquote>
+<p>Supporting evidence is the synthetic <code>EV-DOOR</code> result, with a configuration label and procedure. <strong>Defeaters</strong> include untested common-cause sensor invalidity, mechanical bypass of the command gate and broader operational environments. The hazard therefore remains <strong>OPEN</strong>. The <a href="safety-fault-trees-and-assurance.html">fault-tree reference</a> explains how an incomplete causal model can understate risk; the <a href="model-baselines-and-evidence.html">model-baseline reference</a> explains why a valid graph does not close that causal gap.</p>
+<p>A decision board should have explicit authority, acceptance criteria, responsibility for open issues, and scope restrictions. The teaching package does not produce a release decision and does not recommend fielding a vehicle.</p>
+<h2>6. Configuration transition: do not relabel evidence</h2>
+<p>The change <code>CHG-01</code> updates the fictitious controller software from <code>controller-2.4.1</code> on CM-B2 to <code>controller-2.4.2</code> on CM-B3. The change-impact CSV identifies both requirement/evidence pairs as needing review because the illustrative baseline uses a shared build label. This does not mean every software change <em>always</em> requires an identical retest, nor that any old evidence is worthless. It means applicability must be established through controlled impact analysis.</p>
+<p>An engineering impact workflow is: identify changed sources and dependencies → assess requirement/control implications → select affected tests and review of earlier evidence → collect new data where justified → resolve anomalies and hazards → obtain independent disposition. The <a href="data/campus-mobility-stale-evidence.json">stale-evidence JSON</a> deliberately triggers errors with the <a href="code/model_thread_audit.py">model audit</a>. Editing the old evidence metadata to a new build without retesting would falsify provenance.</p>
+<h2>7. Run the document consistency checks</h2>
+<p>Use the two different standard-library educational validators from the project root:</p>
+<pre><code class="language-sh">python3 SE/K/methods/code/sysml_trace_crosswalk.py
+python3 SE/K/methods/code/model_thread_audit.py SE/K/methods/data/campus-mobility-release.json
+</code></pre>
+<p>The crosswalk checks identifiers and allocation consistency among CSVs and the CM-B2 JSON, verifies that the reported test versions match the baseline, checks supported interface endpoints and checks that unresolved hazards remain open. It does not evaluate actual timing data or safety-critical sufficiency. The model audit checks graph and evidence-currency rules for the controlled baseline. Neither is a normative SysML validator or a field test.</p>
+<p><strong>Negative test:</strong> change <code>REQ-DOOR</code>'s allocation to <code>dispatch-service</code> in a temporary <em>copy</em> of the requirements CSV and run a modified path of the checker; the allocation mismatch is an error. Never rewrite the original baseline files to simulate a passing result. A program that cannot reject a deliberate mismatch is not a useful validation gate.</p>
+<h2>8. Course-specific extensions</h2>
+<table>
+<thead>
+<tr>
+  <th>Course</th>
+  <th>Further deliverable with acceptance question</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>EN.645.662 requirements</td>
+  <td>Expand conditions into atomic shall statements; can each be verified with named inputs?</td>
+</tr>
+<tr>
+  <td>EN.645.768 architecture</td>
+  <td>Add physical/logical interface ownership and independent hazard control; are common causes addressed?</td>
+</tr>
+<tr>
+  <td>EN.645.631 / EN.645.632 modeling</td>
+  <td>Encode typed usages and relationships in an actual conforming modeling tool; do semantic references resolve?</td>
+</tr>
+<tr>
+  <td>EN.645.769 integration &amp; V&amp;V</td>
+  <td>Design fault-injection, test sampling and traceable procedures; which acceptance claims remain unsupported?</td>
+</tr>
+<tr>
+  <td>EN.645.764 assurance</td>
+  <td>Add causal pathways, defeaters and evidence limitations; what does a missing test leave open?</td>
+</tr>
+<tr>
+  <td>EN.645.784 quantitative decisions</td>
+  <td>Show how a new control changes cost, expected loss and robustness, with actual uncertainty sources.</td>
+</tr>
+</tbody>
+</table>
+<h2>9. Sources and use restrictions</h2>
+<ul>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — system requirements, technical interfaces and V&amp;V processes.</li>
+<li><a href="https://www.omg.org/spec/SysML/2.0">OMG SysML 2.0</a> — normative language for formal models when using a conforming tool.</li>
+<li><a href="../B1/chapters/04-requirements.html">Book 1, chapter 4</a>, <a href="../B8/chapters/10-analyze-results-determine-evidence-sufficiency-and-reco.html">Book 8, chapter 10</a>, <a href="../B3/chapters/11-model-quality-queries-reports-change-impact-g.html">Book 3, chapter 11</a>.</li>
+</ul>
+<p><strong>Use boundary:</strong> all organizations, numbers, test dispositions, hazards and system configurations here are fictional examples. This package is for teaching traceability and critical review, not for authorizing operation or making a real safety determination.</p>
+<footer class="reference-note"><a href="campus-mobility-engineering-artifacts.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

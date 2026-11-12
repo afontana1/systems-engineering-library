@@ -103,3 +103,36 @@ Weights also require an interpretation. A ten-point improvement in one criterion
 ## Extended worked problems and lab
 
 Study the [worked problem workshop on architecture choice and reversal](../practice/trade.md), then complete the [extended laboratory](../practice/lab-trade.md). The exercises are separate from the original assessed coursework.
+
+
+## Step 03 technical studio — a trade study with an explicit decision reversal
+
+The [shared baseline](../case/northstar-reference-baseline.json) specifies three **synthetic** candidate scores for resilience, affordability, and maintainability. With weights (0.50, 0.30, 0.20), computed values are 70.0 for turnkey, 74.5 for federated integration, and 73.5 for a demonstrator. All three are assumed to have passed mandatory constraints; that assumption must be revisited if new accessibility or safety evidence appears.
+
+The decision must be more than “74.5 is largest.” First document the swing ranges used to elicit weights; otherwise a one-point change on one criterion may not represent the same consequence as one point on another. Then ask about **ranking reversals**, not merely score uncertainty. Hold maintainability at 0.20, vary resilience weight `w`, and set affordability to `0.80 − w`. The federated and turnkey options tie at
+
+\[
+62+25w=85-30w\quad\Longrightarrow\quad w=\frac{23}{55}\approx 0.41818.
+\]
+
+For `w` below that value, turnkey outranks federated in the **pairwise** comparison. However, the third alternative can still win overall. For example at `w=0.40`, the demonstrator scores `70(0.40)+75(0.40)+80(0.20)=74`, while turnkey scores 73 and federated 72. The global best is demonstrator, not turnkey. Thus an apparently persuasive pairwise switching threshold is **not** a global decision boundary.
+
+### Solved sensitivity exercise
+
+At `w=0.60`, affordability 0.20, maintainability 0.20: federated scores `85(.6)+60(.2)+70(.2)=77`; turnkey scores `60(.6)+90(.2)+65(.2)=67`; demonstrator scores `70(.6)+75(.2)+80(.2)=73`. Federated wins under these particular preferences. This conclusion still depends on the score evidence and the legitimacy of compensating criteria.
+
+**Decision record:** identify who approved the criteria, what noncompensable constraints were screened, the decision domain, ranges of credible scores and weights, objections, and which experiment might actually reverse the recommendation. A weighted number is an input to a governed decision, not an engineering fact about the world.
+
+## Step 03 reference deepening — derive the entire winning-region envelope
+
+A pairwise tie is not necessarily the point where the **best of three** alternatives changes. Under NS-B1's documented scores, keep maintainability at 0.20; let resilience weight be \(w\) and affordability weight \(0.80-w\). The three scores simplify to
+
+\[
+V_T=85-30w,\qquad V_F=62+25w,\qquad V_D=76-5w.
+\]
+
+Turnkey and demonstrator tie at \(85-30w=76-5w\Rightarrow w=9/25=0.36\). Demonstrator and federated tie at \(76-5w=62+25w\Rightarrow w=14/30\approx0.4667\). The turnkey–federated **pairwise** tie at \(23/55\approx0.4182\) occurs while the demonstrator outperforms both. Therefore, on the feasible interval \(0\le w\le0.8\), the overall winner is turnkey for \(w<0.36\), demonstrator for \(0.36<w<0.4667\), and federated for \(w>0.4667\), with ties at the boundaries.
+
+This is a better decision-sensitivity explanation than citing one crossing. It still presumes all options satisfy mandatory requirements and that the performance scale and swing weights are meaningful. If resilience and maintainability score the same underlying characteristic twice, the model may need restructuring rather than merely precise crossing calculations.
+
+**Practice:** At \(w=0.40\), calculate all three values. **Answer:** turnkey 73, federated 72, demonstrator 74. The pairwise preference between turnkey and federated is not the globally preferred design. Record the full alternatives envelope and the stakeholder's defensible weight range before making a decision.

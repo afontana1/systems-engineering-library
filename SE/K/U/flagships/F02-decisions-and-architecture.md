@@ -252,3 +252,19 @@ Use [Lab 2: architecture decision](../flagship-notebooks/02-trade-decisions.ipyn
 **Deliverable:** an architecture decision record with a feasibility screen, transparent value functions, elicitation rationale, numerical trade results, at least two sensitivity paths, an information-value calculation, and a stated re-review trigger.
 
 **Continuations:** [F03: statistical assurance](F03-statistical-assurance.md) · [F04: dynamics and resilience](F04-dynamics-and-resilience.md). **Further reading:** [SEBoK](https://sebokwiki.org/) and [NASA Systems Engineering Handbook](https://www.nasa.gov/reference/systems-engineering-handbook/).
+
+<!-- STEP04-FLAGSHIP-U1-START -->
+### F02 extension · Scenario feasibility before architecture preference
+
+**Decision frame.** NS-U4.1 compares baseline, capacity-only, guardrails, and integrated options. Four synthetic scenario weights sum to 1: normal 0.45, surge 0.25, grid 0.20 and compound 0.10. These are *teaching weights*, not real probabilities. A candidate passes a scenario only when both the all-rider timely fraction is at least 0.90 and the accessible-rider fraction is at least 0.85. Prices are illustrative added investment in millions of arbitrary currency units.
+
+**Two stages are mandatory.** First construct $F=\{x:g_j(x,s)\le0\ \forall j,s\in S_{required}\}$ for hard scenario constraints; only then score preferences. The integrated option meets the normal scenario with $154/155=99.35\%$ on-time service and 100% accessible on-time service (the runner reports the exact counts). But under surge its all-rider fraction is about 68.7%, under grid 55.5%, and under compound 13.8%. It covers only normal's weight, or **45%**, against the illustrative 95% robust screen. The cheaper capacity-only option improves normal overall timing but still leaves accessible timing at 37.5%. `LOWEST COST` and `FEASIBLE` are not synonyms.
+
+**Why a weighted score is not a bypass.** If a board later uses $V(x)=w_q q(x)-w_c c(x)$, those weights encode stakeholder preferences. Even an enormous $w_q$ does not erase a separately imposed accessibility constraint. For two feasible candidates A and B, the reversal weight can be solved algebraically from $w(q_A-q_B)=(1-w)(c_A-c_B)$; do not calculate a meaningless preferred design while the feasible set is empty.
+
+**Sensitivity and sources of error.** The model rounds demand and capacity to integers within each six-window scenario and uses FIFO service by rider class. It does not allow an unused accessible vehicle to serve a standard request. That is a deliberate *structural assumption*; implementing configurable substitution could change the ranking. Other omitted variables include staffing, geographic distribution, road-network travel, and informed consent.
+
+**Worked exercise with solution.** Raise only the accessible normal-scenario target from 0.85 to 1.00. The integrated option still passes the normal screen because its modeled accessible fraction is 1.00. Raise the all-rider normal target from 0.90 to 1.00: it fails, because $154/155<1$. Neither perturbation repairs surge or grid feasibility. Describe the different consequences for model selection and mission authorization.
+
+**Reproduce:** [scenario policy record](../flagship-integration/outputs/ns-u4.1-results.json), [model](../flagship-integration/code/ns_u_case.py), [D02 trade derivation](../derivations/02-weighted-trades-and-reversal.md).
+<!-- STEP04-FLAGSHIP-U1-END -->

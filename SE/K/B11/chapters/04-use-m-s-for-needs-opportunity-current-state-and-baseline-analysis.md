@@ -121,3 +121,25 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [03 — Previous chapter](03-characterize-data-quality-probability-dependence-and-stochastic-inpu.md) · [05 — Next chapter](05-implement-discrete-event-processes-resources-queues-priorities-and-s.md) · [Book index](../README.md)
+
+## Step 03 integrated mobility simulation case: baseline and opportunity assessment
+
+### Turn needs into observable service measures
+
+The sponsor's problem is not to minimize mean trip time at any cost, but to meet service thresholds during operating conditions. Define standard pickup wait \(W_s=t_{\mathrm{pickup}}-t_{\mathrm{arrival}}\) for each **standard** request and accessible pickup wait \(W_a\) analogously. Compute p90 by the stated *nearest-rank* method \(Q_{0.9}=x_{(\lceil0.9n\rceil)}\); the sample and quantile convention belong in the evidence record. The guide sets maximum 12 minutes for standard p90 and 15 for accessible p90, with **strictly less than 1%** not served in the declared day. Our proxy counts requests still awaiting pickup at 18:00; the study does not simulate denied requests or cancellations. Long waits for trips picked up after close are still reported in p90, and must not be hidden.
+
+An expected arrival-rate calculation provides an independent bound on proposed capacity, not a feasibility proof. Peak demand is 50 requests/hour (16:00–17:00). If fourteen independently available vehicles spend 20 minutes per request, the maximum notional completion rate is \(14(60/20)=42\)/hour, below that local peak even before charging. A fluid queue lower bound accumulates backlog at least \((50-42)(1)=8\) requests over that peak hour, provided no spare capacity carried as idleness and no pooling; on shorter time scales stochastic bursts are worse. But service rates and other hourly patterns need separate assessment, so this bound is explanatory, not a simulation validation result.
+
+### Baseline against a proposed improvement
+
+Our model produces *replication-level estimates*, not measured fleet performance. Run `python SE/K/B11/tools/step03_book11_mobility.py` to regenerate the [paired output](../case/replication-output.csv). Across 30 baseline seeds, the 12-vehicle option has mean daily standard p90 about **69.1 minutes**, compared with about **36.4 minutes** for 14; both miss the 12-minute standard target. The 14-vehicle option likewise misses the accessible p90 and <1% end-of-day nonpickup target (approximately 45.4 minutes and 6.0%, respectively). These results can identify a **model bottleneck and decision to examine**, not prove real fleet inadequacy.
+
+A useful baseline report separates (i) nominal input demand and its provenance, (ii) predicted service per user group, (iii) charging and resource usage, and (iv) *unmodeled* causes: pedestrian routing, ride pooling, traffic networks, special-needs equipment, duty breaks, and maintenance. Do not collapse lack of representation into “zero risk.” The requirements register flags staffing and physical charger validation as missing evidence.
+
+### Counterfactuals and identification
+
+If a model comparison shows less waiting under 14 vehicles, that is a *conditional causal comparison within the fixed model*: only fleet count is manipulated while the same exogenous streams are replayed. It does not establish a causal field estimate unless the operational intervention would preserve dispatch, service times, staffing and other mechanisms. An alternative intervention may be to alter vehicle pooling, driver dispatch, charger placement or work shifts; none has been evaluated in this first release.
+
+**Exercise and solution.** A manager changes the decision criterion from daily mean wait to daily p90 wait. Why might a fleet ranking change? **Solution:** means average all experiences, whereas p90 is sensitive to peak backlog and extended tails. An alternative with more frequent short waits but a few severe queues may have a good mean and unacceptable p90. Report both, and make sure the quantile is computed **within each replication** before forming uncertainty intervals over independent days.
+
+**Next evidence:** measure real demand counts by hour, occupancy/pooling, accessible service and peak-day queue trajectories; compare multiple observed shifts to the model before claiming decision validity. [Case dossier](../case/INDEX.html) · [Chapter 5](05-implement-discrete-event-processes-resources-queues-priorities-and-s.md).

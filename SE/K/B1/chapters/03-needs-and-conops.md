@@ -138,3 +138,44 @@ It is important to keep trace **backward** as well as forward. When a requiremen
 Run [Hypothetical Lab 3: The Stakeholder Hearing](../labs/lab-03-stakeholder-hearing.md) and produce the original guide's Week 3 `662_W03_NeedsConOps_v1.0` artifact, including at least one degraded scenario and a defensible measurement plan. Do not replace real stakeholder validation with fictional dialogue when preparing a real design.
 
 **Previous:** [Chapter 2](02-lifecycle-evidence.md). **Next:** [Chapter 4 — Requirements as testable contracts](04-requirements.md).
+
+
+## Step 03 technical studio — turn a stakeholder conflict into testable scenarios
+
+An operational concept is not a list of stakeholder quotations. It is a model of how an intended capability behaves in particular settings, including failures, human decisions, and interactions across the boundary. For Northstar, use three invented stakeholder needs from the [controlled case](../case/northstar-reference-baseline.json): riders need intelligible booking status, dispatchers need timely emergency indications, and operators need accountable vehicle allocations.
+
+### Scenario with an observable end state
+
+**Normal scenario:** at 09:00 a rider requests a trip from one of four designated stops. The dispatch service checks eligibility and availability, reserves a vehicle, and sends a confirmation. The rider either receives a confirmed pickup instruction or an explicit rejection; silent ambiguity is not an acceptable outcome.
+
+**Degraded scenario:** a network partition occurs after the allocation database commits a reservation but before the rider receives confirmation. The rider retries. The design must specify whether the retry is idempotent, whether an old allocation is retained or cancelled, and what the operator sees. A “successful booking” screen does not prove unique allocation. Record this scenario as a separate verification pathway.
+
+**Human scenario:** an operator must decide whether to suspend service when status messages become stale. A dashboard that correctly renders a stale indicator may still fail its mission if the indicator is not understood or if staffing rules make the response impossible. This requires a representative human-in-the-loop evaluation, not solely a software unit test.
+
+### Trace from need to engineering claim
+
+| Need | Candidate requirement | Scenario and evidence |
+|---|---|---|
+| Understandable booking status | NS-R-01: confirmation within 8 seconds under a *specified workload* | Normal and partition/retry scenarios; end-to-end timestamps |
+| Timely emergency awareness | NS-R-02: allocated maximum path budget of 2.5 seconds | Controlled message timing plus loss/staleness injections |
+| Accountable allocation | NS-R-03: zero duplicate active allocations in a defined database boundary | Concurrent reservation and restart experiment |
+
+A measurable requirement is not automatically a valid need translation. Ask whether 8 seconds is actually acceptable to representative riders, whether the test workload includes peak demand, and whether the failure response preserves accessibility. Those are **validation** questions distinct from verifying the written requirement.
+
+### Solved critique
+
+A ConOps lists only nominal trips and says “the system shall fail safely.” What is missing? At minimum, failure triggers, the responsible operator, degraded states, notification routes, recovery authority, and an explicit accepted operating domain. Without those, “safely” has no operationally observable meaning. The correct revision is not a longer adjective but an executable or walk-through scenario with decision points.
+
+## Step 03 reference deepening — operational measures require denominators
+
+A stated goal such as “reduce waiting time” does not identify which population, observation window or undesirable outcomes matter. In a teaching approximation, an M/M/1 queue with Poisson arrivals at six requests/hour and exponential service at nine requests/hour has traffic intensity \(\rho=\lambda/\mu=2/3\) and expected **total time in system**
+
+\[
+W=\frac{1}{\mu-\lambda}=\frac{1}{3}\text{ hour}=20\text{ minutes}.
+\]
+
+This is not automatically the time a rider waits at a curb. It includes the modeled service time and assumes a stable stationary queue with one server, independent arrivals and service times. At arrival rate 8/hour with unchanged capacity 9/hour, the expected total time rises to 60 minutes, showing why average-load performance alone can mask congestion near capacity.
+
+Define a mission measure with a numerator and denominator: e.g. *the fraction of eligible booking attempts during designated service hours that receive an understandable acceptance or rejection within eight seconds*. Record exclusions, inaccessible channels, canceled requests and missing observations. A mean may hide the tail; add the 95th percentile, coverage by accessibility group, and a clear failure-denominator rule. A ConOps should state where staffing, network outages and emergency override change the operating mode.
+
+**Practice:** Does reporting “95% of successful reservations completed within eight seconds” prove the same outcome? **Answer:** no; it conditions the denominator on successful reservations and may omit failed, timed-out or inaccessible attempts. The definition of success is part of the engineering requirement.

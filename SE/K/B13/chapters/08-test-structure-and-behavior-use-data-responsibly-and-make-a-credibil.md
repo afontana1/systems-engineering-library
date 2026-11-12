@@ -110,3 +110,27 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [07 — Previous chapter](07-explain-delays-nonlinearities-oscillation-overshoot-and-changing-loo.md) · [09 — Next chapter](09-apply-feedback-modeling-to-supply-management-and-inventory-dynamics.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-FB13.1 case: feedback, conservation, and policy learning — Week 8
+
+*Integrated chapter: Chapter 08 — Test structure and behavior, use data responsibly, and make a credibility claim. Northstar NS-FB13.1 is a transparent teaching baseline; the following methods are not field-validated.*
+
+### Code verification, structural validity, and behavior credibility are separate gates
+
+**Numerical verification** asks whether the written equations were implemented and solved consistently: no negative stocks, fleet balance \(A+U=14\), passenger conservation, stable answers under step refinement and repeatable fixed inputs. **Structural validation** asks whether repairs really depend on crew capacity, whether abandonment responds to delays as assumed, whether “trust” can legitimately be represented by one index, and whether passenger classes are meaningful. **Behavior validation** asks whether plausible calibrated parameters reproduce multiple independent reference modes under known uncertainty. Passing the first gate does not imply passing the second or third.
+
+In the original eight-quarter data, maintenance backlog is expressed in **vehicle-days**, while the executable stock is **unavailable vehicles**. These are different quantities. Equating the two and choosing 24 as an initial vehicle count would fail dimensional analysis and exceed the 14-vehicle fleet bound. Likewise, the model's cumulative abandonment fraction is not the course's quarterly accessible-trip fulfillment measurement without defining compatible cohorts, counting rules and measurement processes. No actual calibration was performed; a visually plausible trajectory is not evidence of measured predictive skill.
+
+### Falsification-oriented test matrix
+
+The controlled script runs five policies under four declared sensitivity cases, for 20 paired outcomes. For status quo under nominal demand, 360-day cumulative completion is about **92.74%**; under demand +8% it is about **88.7%**; with failure hazard +20% it is about **91.2%**. A reviewer should examine whether the qualitative ranking is robust to plausible alternative rules—for example, introducing trip cancellation before acceptance or varying perceived backlog delay. The four cases are structured stresses, not quantiles or a confidence distribution.
+
+Extreme tests have stronger diagnostic value than merely checking one attractive baseline. With zero active fleet, service cannot occur; with no initial backlog and no arrivals, both group backlogs must remain zero; with no repairs, unavailable vehicles cannot decrease unless a different outflow is modeled. Equations must not produce more completed trips than eligible arrivals plus outstanding work. For finite time steps, outflows must be capped so stocks cannot turn negative.
+
+**Worked exercise.** An analyst reports a request balance residual of zero across twenty runs and calls the model “validated against observed service.” **Solution:** a conservation residual tests internal bookkeeping. It gives no information about whether observed arrivals and exits were measured, whether the synthetic trust function is defensible, or whether the correct system boundary was modeled. The appropriate claim is **verified conservation in the implemented simplified simulation**; external validation remains pending.
+
+**Practice extension:** Develop a credible validation plan requiring anonymized rider timestamps, sampled failure/repair histories, questionnaire measurement, independent holdout quarters, and stakeholder review of accessibility metrics; state privacy and consent limits.
+
+### Reproduce the evidence and challenge the result
+
+The [NS-FB13.1 case dossier](../case/INDEX.html) publishes its [controlled inputs](../case/model-inputs.json), [Python calculation model](../tools/step03_book13_feedback.py), [policy-by-condition evidence](../case/experiment-results.csv), [equation and unit crosswalk for Vensim](../case/vensim-equation-crosswalk.md), and [claim limitations](../case/credibility-register.csv). Reproduce results with `python3 SE/K/B13/tools/step03_book13_feedback.py --write` from the repository root. This is a **synthetic teaching simulation**: correctly conserving its stocks and reproducing its output does **not** calibrate the causal structure or authorize real mobility policy. The Book 11 event simulator and Book 12 physical vehicle model answer other questions and are not dynamically coupled.

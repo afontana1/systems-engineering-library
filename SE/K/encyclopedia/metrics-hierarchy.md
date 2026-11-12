@@ -46,6 +46,15 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)](https://www.nasa.gov/reference/systems-engineering-handbook/) — Lifecycle engineering, technical management, requirements, verification and validation.
 - [NIST · NIST/SEMATECH e-Handbook of Statistical Methods (2002; online guidance)](https://www.nist.gov/publications/handbook-151-nistsematech-e-handbook-statistical-methods) — Statistical methods, experiments, reliability, and process assessment.
 
+
+## Step 02 review exercise: denominator control and equity
+
+A dispatch service reports 95% on-time arrivals **among completed trips**, but completes only 800 of 1,000 eligible requests. If 760 completed trips were on time, the dashboard's conditional rate is \(760/800=95\%\); the population-based rate is \(760/1000=76\%\). These percentages answer different engineering questions, and only the latter includes unserved eligible demand. A mission MOE should identify the population and consequence of nonservice.
+
+Suppose Group A has 700 eligible requests with 560 on-time (80%) and Group B has 300 eligible requests with 200 on-time (66.7%). The 76% aggregate conceals a **13.3 percentage-point** difference between groups. Check whether this reflects relevant operational conditions, service design, barriers or differing requirements rather than assuming a cause. Technical MOPs such as average dispatch latency may help explain the gap but cannot substitute for affected-population evidence.
+
+**Exercise (answer).** If the operation improves to 820 on-time requests while eligible demand rises to 1,100, the population service rate is \(820/1100\approx74.55\%\), lower despite more absolute successes. Always carry denominators, units, cohort definitions and missing-data rules into acceptance evidence.
+
 ## Follow the knowledge
 
 **Related concepts**

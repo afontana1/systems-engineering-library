@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>System dynamics: stock–flow correctness and intervention experiments · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/encyclopedia/systems-dynamics-model-checks.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
+</head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical explanation</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>System dynamics: stock–flow correctness and intervention experiments</h1>
+<p><strong>Reference entry · Systems thinking, feedback and simulation · Worked technical treatment</strong></p>
+<h2>An influential diagram is not yet an executable model</h2>
+<p>A causal-loop diagram proposes feedback and polarity; a <strong>stock–flow model</strong> specifies quantities with dimensions and explicit rates of change. Stocks accumulate flows, creating memory and delays. When moving from a qualitative diagram to a runnable model, confirm that the flows act on the correct stock, dimensions match, nonnegativity and capacity constraints are respected, and the chosen time step does not create numerical artifacts.</p>
+<p>In a service-backlog example, let \(B(t)\) be outstanding requests (requests), \(a(t)\) new arrivals (requests/hour), and \(c(t)\) completed requests (requests/hour). The continuous accounting equation is</p>
+<p>\[
+\frac{dB}{dt}=a(t)-c(t),\qquad B(t)\geq0.
+\]</p>
+<p>A simplified hourly discrete update is \(B_{k+1}=\max(0,B_k+a_k\Delta t-c_k\Delta t)\), with \(\Delta t=1\,\mathrm h\), <strong>provided</strong> the completion rule does not consume more requests than exist or arrive during the interval. The clipping operation is an accounting safety guard, not a complete behavioral model of an actual queue.</p>
+<h2>Worked baseline and intervention</h2>
+<p>Suppose the backlog starts at \(B_0=30\), arrivals are constant at 10 requests/hour, and service capacity is 12 requests/hour while work is available. The idealized net depletion is two requests/hour, reaching zero after 15 hours. If arrivals increase to 13/hour and capacity stays at 12/hour, the backlog <strong>grows</strong> by one request/hour while capacity is saturated. A policy intended to speed clearance may instead increase demand by improving visibility of service, creating a balancing/reinforcing interaction that the first model omitted.</p>
+<p>The simple arithmetic is useful because it exposes a checkable limiting case. A Vensim or Python implementation that predicts a negative backlog at hour 16 without any empty-queue handling violates the model's state invariant. A numerical solver could still run without warning; the engineering model would be wrong.</p>
+<h2>Validation has multiple layers</h2>
+<ol>
+<li><strong>Dimensional consistency:</strong> stock units equal rate times time; probabilities are dimensionless.</li>
+<li><strong>Structural and boundary checks:</strong> does the diagram include delayed effects, staffing, induced demand and abandonment if they matter to the decision?</li>
+<li><strong>Extreme-conditions tests:</strong> zero arrivals, zero capacity, empty backlog, and very large backlog must behave plausibly.</li>
+<li><strong>Time-step sensitivity:</strong> compare \(\Delta t=1\), 0.5 and 0.1 hours when the model includes fast feedback or nonlinear constraints.</li>
+<li><strong>Historical or held-out data checks:</strong> if field data exist, compare trends and mechanisms without fitting every parameter to the validation set.</li>
+<li><strong>Policy sensitivity:</strong> vary the intervention and assumptions, then distinguish robust direction of effect from point predictions.</li>
+</ol>
+<p>A simulation that passes dimensional checks can still be invalid for policy use if its causal structure excludes an important reinforcing loop. A visually plausible causal diagram can still violate conservation or exceed resource constraints when executed.</p>
+<h2>Feedback archetypes and critique</h2>
+<p>“Fixes that fail” describes a short-term symptomatic improvement that causes a delayed worsening side effect. “Shifting the burden” describes dependence on symptom relief rather than a fundamental remedy. These are diagnostic hypotheses, not universal laws; operational data and a testable structure are required before claiming an archetype explains a real system.</p>
+<p>For Campus Mobility, increasing dispatch automation could lower immediate assignment delay yet draw more demand, saturate a vehicle bottleneck, and lengthen pickup times. Draw both the intended short loop and the delayed unintended loop, then identify observations that would distinguish this hypothesis from an unrelated seasonal demand surge.</p>
+<h2>Exercise and references</h2>
+<p>Start with \(B_0=30\) and compute hourly backlog for four hours under both arrival scenarios. Add an abandonment flow \(q(B)\) with units requests/hour, and test that its rate never exceeds available requests over the time step. State how you would use a historical holdout period to challenge the model rather than simply calibrate it.</p>
+<ul>
+<li><a href="https://ocw.mit.edu/">MIT OpenCourseWare</a> — open systems dynamics learning resources; search its course catalog for course-specific materials.</li>
+<li>John D. Sterman, <em>Business Dynamics</em> (2000) — stocks, feedback, model testing and policy resistance.</li>
+<li>Related: <a href="stocks-flows-feedback.html">stocks and flows</a>; <a href="model-vv-and-credibility.html">simulation credibility</a>; <a href="critical-systems-thinking.html">critical systems thinking</a>.</li>
+</ul>
+<p><em>Scope:</em> The backlog rates are synthetic and omit stochastic variability, priority and queue disciplines.</p>
+<p><strong>Reproducible companion:</strong> <a href="examples/step02_examples.py">Step 02 worked examples (standard-library Python)</a>. Run <code>python3 step02_examples.py --case all</code> from the downloaded examples folder; the program prints the declared synthetic inputs and computed results.</p>
+</article><nav class="standalone-actions"><a href="metrics-hierarchy.html">Read concept</a><a href="../CONCEPT-ENCYCLOPEDIA.html">A–Z index</a><a href="metrics-hierarchy.md">Editable Markdown</a></nav></main></body></html>

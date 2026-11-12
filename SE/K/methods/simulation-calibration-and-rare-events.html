@@ -1,0 +1,168 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Simulation calibration and rare-event analysis · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/simulation-calibration-and-rare-events.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Simulation calibration and rare-event analysis</h1>
+<h2>1. The decisions this method supports</h2>
+<p>When an engineering model predicts a deadline violation, two questions are easy to confuse: <strong>How well have we estimated its inputs from data?</strong> and <strong>How accurately have we simulated a rare outcome conditional on those inputs?</strong> More simulation draws reduce random Monte Carlo error, but cannot remove calibration error, incorrect model structure, biased instrumentation or a shifted operating population.</p>
+<p>This guide adds an end-to-end quantitative example to <a href="simulation-output-and-credibility.html">simulation output and credibility</a>, <a href="correlated-uncertainty-propagation.html">correlated uncertainty</a> and <a href="statistical-inference-and-experiments.html">experimental design</a>. The examples are deliberately separate: a Poisson arrival-rate model illustrates calibration, and an extreme normal-tail event illustrates variance reduction. <strong>They are not observations of a real shuttle or claims about a real system's rare-event rate.</strong></p>
+<h2>2. Define the estimand and separate types of uncertainty</h2>
+<p>Let \(\theta\) denote parameters inferred from operational observations \(D\), \(U\) denote simulation random numbers and \(Y=g(\theta,U)\) denote the reported outcome. At least four uncertainties can matter:</p>
+<ol>
+<li><em>Stochastic variability:</em> different service or weather realizations even with known parameters.</li>
+<li><em>Parameter estimation:</em> different plausible \(\theta\) given finite calibration observations.</li>
+<li><em>Model-form discrepancy:</em> the chosen Poisson, independence or queue discipline assumptions may omit causal mechanisms.</li>
+<li><em>Monte Carlo error:</em> randomness of the numerical estimator conditional on the specified inputs and model.</li>
+</ol>
+<p>The law of total variance clarifies why simulating at only one estimated parameter value is not a full predictive uncertainty analysis:</p>
+<p>\[
+\operatorname{Var}(Y\mid D)
+=\mathbb E_{\theta\mid D}[\operatorname{Var}(Y\mid \theta,D)]
++\operatorname{Var}_{\theta\mid D}\{\mathbb E(Y\mid\theta,D)\}.
+\]</p>
+<p>This expression presumes a parameter uncertainty distribution; a classical interval or likelihood analysis need not assign a posterior. A complete study states its inferential framework rather than treating a confidence interval as a posterior probability.</p>
+<h2>3. Calibrate a rate to observed counts</h2>
+<p>Assume independent arrivals follow a stationary Poisson process with rate \(\lambda\) arrivals/hour. Given exposures \(t_i\) and observed counts \(n_i\), the likelihood up to a parameter-independent constant is</p>
+<p>\[
+L(\lambda)\propto \lambda^{N}e^{-\lambda T},\quad
+\ell(\lambda)=N\ln\lambda-\lambda T+C,
+\quad N=\sum_i n_i,\;T=\sum_i t_i.
+\]</p>
+<p>Setting the derivative \(N/\lambda-T=0\) gives \(\hat\lambda=N/T\). The <a href="data/calibration_counts.csv">synthetic calibration dataset</a> has 39 arrivals in five hours and 51 in another five. Thus \(N=90\), \(T=10\) hours, and</p>
+<p>\[
+\boxed{\hat\lambda=90/10=9\;\mathrm{arrivals/hour}.}
+\]</p>
+<p>The observed counts are not necessarily evidence of a stationary Poisson process; they are an exercise <strong>under that model</strong>. To quantify finite-data uncertainty, define the likelihood-ratio deviance</p>
+<p>\[
+D(\lambda)=2\left[N\ln\left(\frac{\hat\lambda}{\lambda}\right)
+-T(\hat\lambda-\lambda)\right].
+\]</p>
+<p>An approximate 95% profile-likelihood interval consists of positive rates with \(D(\lambda)\le3.84146\), using an asymptotic one-degree-of-freedom chi-squared cutoff. Numerically this is approximately <strong>[7.2664, 10.9896] arrivals/hour</strong>. This is not an exact Poisson confidence interval and can perform poorly for tiny counts or nonstationarity.</p>
+<h3>Hold out data instead of grading calibration on its training set</h3>
+<p>A third <em>synthetic</em>, deliberately withheld one-hour interval recorded 14 arrivals. Under the fitted \(\lambda=9\) process, the probability of at least 14 arrivals is</p>
+<p>\[
+P(N_{1h}\ge14)=1-\sum_{k=0}^{13}e^{-9}\frac{9^k}{k!}\approx 0.0739.
+\]</p>
+<p>One 7.39% tail outcome does not automatically reject the model; it provides a specific discrepancy to inspect. Repeated unusually high counts, daily seasonality, overdispersion, bursts or correlated arrivals would motivate a richer model and held-out validation. Never use the same count observations both to tune parameters and to advertise an independent confirmation of fit.</p>
+<h2>4. Why brute-force Monte Carlo fails for small probabilities</h2>
+<p>Suppose the quantity of interest is \(p=P(Z&gt;4)\) where \(Z\sim N(0,1)\). This is a <strong>toy threshold model</strong> chosen because its exact probability is known:</p>
+<p>\[
+p=\tfrac12\operatorname{erfc}(4/\sqrt2)
+\approx 3.167124\times10^{-5}.
+\]</p>
+<p>A direct estimator with \(n\) independent draws is \(\hat p_{\rm direct}=\frac1n\sum_{i=1}^n\mathbf 1(Z_i&gt;4)\). Its variance is \(p(1-p)/n\). With 50,000 draws the expected number of exceedances is only 1.58. A result of zero, one or two observed events is entirely plausible; the associated relative uncertainty is huge. <strong>Zero exceedances must never be reported as proof that the true event probability is zero.</strong></p>
+<h2>5. Importance sampling derivation</h2>
+<p>Choose a sampling distribution \(q(x)=\phi(x-4)\), a normal density shifted toward the event region, while the target remains \(f(x)=\phi(x)\). Then</p>
+<p>\[
+p=\int\mathbf1(x&gt;4)f(x)\,dx
+=\int\mathbf1(x&gt;4)\frac{f(x)}{q(x)}q(x)\,dx.
+\]</p>
+<p>The likelihood ratio for \(X\sim N(4,1)\) is</p>
+<p>\[
+w(X)=\frac{\phi(X)}{\phi(X-4)}
+=\exp(-4X+8).
+\]</p>
+<p>Consequently, the unbiased importance-sampling estimator, conditional on the specified densities, is</p>
+<p>\[
+\hat p_{IS}=\frac1n\sum_{i=1}^n\mathbf1(X_i&gt;4)\exp(-4X_i+8),
+\quad X_i\sim N(4,1).
+\]</p>
+<p>Its Monte Carlo standard error can be computed from the sample variance of <strong>weighted contributions</strong>, rather than from an unweighted count of threshold exceedances. Shifting a distribution without the likelihood-ratio correction estimates a different probability. If the proposal density is zero where the target event has positive probability, the estimator is invalid.</p>
+<p>The deterministic 50,000-draw <a href="code/calibration_rare_events.py">Python demonstration</a> prints:</p>
+<table>
+<thead>
+<tr>
+  <th>Quantity</th>
+  <th style="text-align:right">Reproducible result</th>
+  <th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Exact mathematical benchmark</td>
+  <td style="text-align:right">0.00003167</td>
+  <td>Under \(N(0,1)\), not field risk</td>
+</tr>
+<tr>
+  <td>Direct MC, one fixed seed</td>
+  <td style="text-align:right">0.00004000 (2 events)</td>
+  <td>Extremely noisy</td>
+</tr>
+<tr>
+  <td>Shifted importance sampling</td>
+  <td style="text-align:right">about 0.00003166</td>
+  <td>Properly weighted estimate</td>
+</tr>
+<tr>
+  <td>Importance-sampling standard error</td>
+  <td style="text-align:right">about 0.00000030</td>
+  <td>Numerical precision conditional on chosen distributions</td>
+</tr>
+</tbody>
+</table>
+<p>The point is not that importance sampling <em>always</em> works better. A poor proposal or heavy-tailed weight distribution can cause enormous variance and unstable estimates. Diagnose weights, proposal support, effective sample size, sensitivity to proposal choice and independent replicate stability. For real engineered rare events, common-cause mechanisms and rare regimes omitted from the model remain invisible even to a numerically precise estimator.</p>
+<h2>6. An end-to-end model credibility plan</h2>
+<p>A responsible engineering study can use this sequence:</p>
+<table>
+<thead>
+<tr>
+  <th>Stage</th>
+  <th>Required output</th>
+  <th>Failure mode to challenge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Define intended use</td>
+  <td>Which design decision, consequence and population</td>
+  <td>Wrong outcome or time scale</td>
+</tr>
+<tr>
+  <td>Define observation process</td>
+  <td>Timestamp origin, missingness, clock calibration, selection</td>
+  <td>Biased or drifting measurements</td>
+</tr>
+<tr>
+  <td>Fit parameters</td>
+  <td>Likelihood, units, training set and uncertainty</td>
+  <td>Hidden pooling across nonstationary regimes</td>
+</tr>
+<tr>
+  <td>Challenge model structure</td>
+  <td>Held-out data, residuals, dependence, high-load scenarios</td>
+  <td>Fit driven by a convenient but false family</td>
+</tr>
+<tr>
+  <td>Verify implementation</td>
+  <td>Analytic limiting cases, deterministic seeds, unit tests</td>
+  <td>Coding or numerical error</td>
+</tr>
+<tr>
+  <td>Estimate rare outcomes</td>
+  <td>Appropriate importance sampling, splitting or other scheme</td>
+  <td>Apparent zero from insufficient direct draws</td>
+</tr>
+<tr>
+  <td>Interpret decision</td>
+  <td>Sensitivity to parameters, proposal and structural alternatives</td>
+  <td>Numerical precision mistaken for assurance</td>
+</tr>
+<tr>
+  <td>Governance</td>
+  <td>Version, reviewer, constraints and revalidation triggers</td>
+  <td>Stale model reused beyond evidence scope</td>
+</tr>
+</tbody>
+</table>
+<p>For the Campus Mobility example, a fitted dispatch arrival rate could inform service-capacity studies, but the independent toy \(P(Z&gt;4)\) tail must <strong>not</strong> be presented as the shuttle's deadline-miss probability. Connecting them would require an explicit causal simulation that maps input arrivals, service resources, buffering, network conditions and software behavior to the chosen missed-deadline event. The end-to-end model would then need calibration and independent challenge data.</p>
+<h2>7. Reproduce and investigate</h2>
+<p>Run from the project root (no packages required):</p>
+<pre><code class="language-sh">python3 SE/K/methods/code/calibration_rare_events.py
+</code></pre>
+<p><strong>Exercises:</strong> (1) Derive \(\hat\lambda=N/T\) from the likelihood. (2) Solve the profile deviance equation numerically and explain why a 95% likelihood-ratio interval is approximate. (3) With 50,000 direct draws, derive the expected count of \(Z&gt;4\) events: \(50,000p\approx1.584\). (4) Change the proposal shift from 4 to 1 or 7; compare standard errors, not only point estimates. (5) Describe an unmodeled queue burst that would invalidate the original Poisson-calibrated system prediction without affecting the normal-tail program's math.</p>
+<h2>8. Sources and course paths</h2>
+<ul>
+<li><a href="https://www.itl.nist.gov/div898/handbook/">NIST/SEMATECH Engineering Statistics Handbook</a> — experimental data analysis, uncertainty and statistical inference.</li>
+<li><a href="https://standards.nasa.gov/node/263">NASA-STD-7009B: Models and Simulations</a> — model credibility processes tied to intended use.</li>
+<li><a href="../B11/chapters/08-analyze-transient-and-steady-state-output-with-defensible-run-contro.html">Book 11, chapter 8</a> and <a href="../B11/chapters/11-plan-and-evaluate-verification-validation-credibility-and-accreditat.html">chapter 11</a>; <a href="../B10/chapters/09-propagate-uncertainty-with-analytic-monte-carlo-simulation-and-sensi.html">Book 10, chapter 9</a>; courses EN.645.757, EN.645.758 and EN.645.756.</li>
+</ul>
+<p><strong>Scope:</strong> Synthetic data and probability models for instruction. No real-world rare failure probability, operational forecast, model accreditation or safety acceptance is implied.</p>
+<footer class="reference-note"><a href="simulation-calibration-and-rare-events.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

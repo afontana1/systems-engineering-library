@@ -11,6 +11,10 @@ The original guide defines the graded engineering work. This volume provides exp
 3. Complete the paired hypothetical lab before opening the reference response.
 4. Use older short primers as optional alternate explanations; complete the original assessed assignment.
 
+## Shared Northstar management case
+
+All twelve chapters now use the controlled [NS-M1 management case](case/INDEX.html) alongside the [NS-B1 technical baseline](../B1/case/INDEX.html). The case includes five control accounts, a schedule network, a decision register and [reproducible arithmetic](tools/step03_book2_project_check.py). The cost, schedule and safety values are fictional and do not imply any real approval.
+
 ## Contents
 
 | Week | Chapter | Hypothetical lab |

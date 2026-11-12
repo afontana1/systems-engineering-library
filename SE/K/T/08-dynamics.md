@@ -16,7 +16,7 @@ Make the loop quantitative. A **stock** accumulates: queued demand, available ba
 ## 2. A feedback policy can oscillate
 Suppose an operator increases fleet supply in proportion to queue error: \(u(t)=k(Q(t)-Q^*)\). Larger gain \(k\) responds faster in a simplified model, but delays, discrete vehicle counts, minimum service times, and actuator constraints can make aggressive control unstable. The correct controller must include realistic saturation and timing; “more responsive” is not automatically “safer.”
 
-In a linear first-order recovery model \(\dot x=-kx\), the exact solution is \(x(t)=x(0)e^{-kt}\) for \(k>0\). Forward Euler gives \(x_{n+1}=(1-k\Delta t)x_n\), which is numerically stable only if \(|1-k\Delta t|<1\), or \(0<k\Delta t<2\). A simulator may appear to oscillate solely because the time step is too large.
+In a linear first-order recovery model \(\dot x=-kx\), the exact solution is \(x(t)=x(0)e^{-kt}\) for \(k>0\). Forward Euler gives \(x_{n+1}=(1-k\Delta t)x_n\), which is numerically stable only if \(|1-k\Delta t|<1\), or \(0\lt k\Delta t\lt2\). A simulator may appear to oscillate solely because the time step is too large.
 
 ## 3. Calibration and validation answer different questions
 Calibration estimates unknown parameters from data; validation asks whether the model predicts the behavior that matters for a specified use. Fitting a training trajectory perfectly does not validate a policy counterfactual. A useful protocol reserves scenarios for out-of-sample assessment and tests extreme but plausible conditions.
@@ -55,3 +55,18 @@ The report distinguishes continuous-system dynamics from numerical artifacts and
 ## Next connections
 
 Use the related books above to see how this concept becomes a course assignment. The lab provides a small, deliberately incomplete practice setting; it does not replace verification against real operational data.
+
+
+<!-- STEP04-T1-START -->
+
+## Step 04 T1 — Evidence-driven correction and worked transfer
+
+### T1 audit finding: stability is not the same as accurate integration
+
+Use the scalar error-recovery model \(\dot x=-0.7x\) per hour with \(x(0)=1\). The exact one-hour value is \(e^{-0.7}\approx0.496585\). One forward-Euler step of one hour gives \(x_1=1(1-0.7)=0.3\), an error of about 0.196585. Four 0.25-hour steps give \((1-0.7\times0.25)^4=0.463250\), error about 0.033335. Refinement improves this smooth example even though both steps are *linearly stable*. A three-hour step produces multiplier \(1-0.7\times3=-1.1\), which is unstable and creates alternating-sign errors.
+
+Even inside the numerical-stability range \(0\lt k\Delta t\lt2\), \(1-k\Delta t\lt0\) can cause a nonnegative physical stock to alternate sign. When a state represents people, energy, or available vehicles, additionally enforce a physically justified state boundary and explain how lost or rejected flow is counted. Projection to zero is not automatically a conservative physical solution if it violates conservation.
+
+**Practice and explained solution.** Calculate the positivity condition for explicit Euler: \(1-k\Delta t\geq0\), hence \(\Delta t\leq1/k\approx1.429\) hours here. Compare this stricter condition with stability \(\Delta t\lt2/k\approx2.857\) hours. A stable negative intermediate quantity can be physically invalid. [Run the refinement check](labs/T1-INTEGRATED-CASE.md).
+
+<!-- STEP04-T1-END -->

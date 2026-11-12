@@ -77,3 +77,27 @@ In [Lab 7: Function allocation is a hypothesis](../labs/lab-07-logical-architect
 ## Continuity
 
 This chapter builds from [previous chapter](06-structure-interfaces-ports-connections-and-th.md) and leads toward [next chapter](08-values-units-measures-constraints-parametrics.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-631-w07.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: logical functions, allocation and fault boundaries
+
+### Function decomposition answers 'what must happen?'
+
+Northstar's essential logical functions are `AUTHORIZE`, `PLAN`, `REPORT_POSITION`, `ISSUE_COMMAND` and `ACTUATE`. The [controlled model](../case/model-baseline.json) allocates them to `GATE`, `FLEET`, `TELEMETRY`, `DISPATCH` and `VEHICLE`, respectively. These labels describe responsibility, not implementation packaging. A logical architecture may be adequate even if an eventual physical component combines two functions, provided its timing, authority, and failure implications are analyzed.
+
+A defensible allocation is a mapping \(f:F\rightarrow C\) from functions to accountable components, with additional constraints on interactions. Assigning the function is necessary but insufficient: it must be possible for data and control to flow between allocated owners, their authority must not conflict, and faults must not create forbidden bypasses. The decomposition may be incomplete if a behavior such as “handle stale telemetry” cannot be assigned anywhere. This is why allocation reviews inspect abnormal scenarios, not only component ownership.
+
+### Allocation changes the failure structure
+
+Compare two architectures. In a centralized implementation, the same service validates authorization and issues commands; its single failure may affect both functions. A split design assigns authorization to a dedicated `GATE`, but adds an interface whose failure could block dispatch. Which is safer cannot be answered from the number of components. A basic independent series-availability approximation for two required elements is
+
+\[
+A_{\mathrm{series}}=A_1 A_2.
+\]
+
+For illustrative values \(A_1=0.995\) and \(A_2=0.990\), this gives \(0.98505\). This is not a reliable field estimate unless independence, repair behavior, service window, and common-mode assumptions hold. If the gate can fail open, high availability may be achieved by forfeiting the safety function; availability and safety must be analyzed as distinct qualities.
+
+### Check model consistency at three levels
+
+First, **syntactic consistency** asks whether every allocated component exists: the JSON checker catches missing IDs. Second, **structural consistency** asks whether essential functions have responsible owners and compatible interfaces. Third, **behavioral adequacy** asks whether the resulting paths preserve safety in every modeled mode. Passing the first two does not establish the third. For example, `ISSUE_COMMAND` may be correctly allocated yet still bypass `AUTHORIZE` when an acknowledgement is lost. A review should deliberately pose this counterexample, identify the missing guard, and produce a testable model change.
+
+**Exercise with answer.** An engineer merges `GATE` into `DISPATCH` because it eliminates one interface. What new evidence is required? At minimum, show that the authorization guard cannot be bypassed by retries or degraded modes, that failure of the shared host cannot produce unauthorized commands, and that the change preserves an independently reviewable safety claim. Fewer interfaces are not proof of lower risk.

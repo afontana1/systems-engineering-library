@@ -95,3 +95,25 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 2: Closing the system specification](../labs/lab-02-close-the-system-specification.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 2 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-DI7.1 — specification closure
+
+### Write obligations that can be contradicted
+
+A system specification is an internally consistent, testable set of obligations. An attractive feature list is not sufficient. For DI7-R02, "fast response" is ambiguous; "degraded end-to-end command response not exceeding 500 milliseconds at the specified 99th percentile" identifies the measured variable, operating regime and decision threshold. Even that wording must still specify timestamp locations, warm-up conditions, request population, and the definition of degraded mode. A percentile requirement concerns a **distribution**; a deterministic component sum is only a feasibility estimate.
+
+Define each requirement as a tuple \(r=(q,\,S,\,L,\,m,\,b)\), where \(q\) is the measured quantity, \(S\) the scenario, \(L\) the threshold, \(m\) the verification method and \(b\) the applicable baseline. If any element is missing, ambiguity can reappear during testing. DI7-R03 similarly fixes energy at no more than 30 kWh **per defined shift**, not per trip. The baseline lists traction 22.4, heating 2.1 and communications 1.8 kWh, giving 26.3 kWh and a modeled 3.7-kWh allowance. That result cannot be exported to a longer or colder duty cycle without recomputation.
+
+### Allocation and consistency checks
+
+Trace each requirement into an owned subsystem and a verification obligation. A link from a requirement to a named component is **coverage**; it is not necessarily a feasible allocation. For example, DI7-R02 is allocated across five serial stages. Their degraded component estimates add to 490 ms, nominally below 500 ms. But the project requires a **10% design reserve**, or 50 ms. Feasible allocation under that policy requires an estimated path of at most 450 ms. Thus the allocation passes the nominal deadline test but fails the design-reserve policy.
+
+The [interface register](../case/interfaces.csv) provides the stages, units, owners and failure behavior. A specification review should reject data drift between this register and the timing model. It should also detect a false completeness claim when verification is planned or refers to the wrong version.
+
+**Exercise.** If an engineer adds a 15-ms cryptographic operation without changing the 500-ms system deadline, assess the original degraded design and the proposed combined redesign.
+
+<details><summary>Worked resolution</summary>
+
+The original path becomes 505 ms: it fails the deadline. The combined redesign is 440 + 15 = 455 ms: it meets the absolute deadline but misses the 450-ms maximum imposed by the 10% reserve policy. The team must adjust implementation, renegotiate the constraint through configuration control, or obtain approved risk acceptance—not simply erase the margin rule.
+
+</details>

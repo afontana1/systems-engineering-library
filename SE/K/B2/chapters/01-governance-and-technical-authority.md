@@ -93,3 +93,28 @@ An escalation path is not effective merely because it appears on an organization
 ## Put this into practice
 
 Work through [Lab 1: The Authority Hearing](../labs/lab-01-governance-and-technical-authority.md), then write a short paragraph on how the laboratory simplifies the real-world management problem. Use the [existing short Week 1 primer](../../P0-text/lessons/645-667-w01.md) for a second explanation. The assessed deliverable is defined in the original course guide, not by the hypothetical lab.
+
+## Step 03 integrated reference — authority, evidence, and decision latency
+
+A project authority chart is useful only if it specifies which decisions can change which controlled objects. In the fictional Northstar management baseline, **NS-M1** governs funding, schedule and work authorization while **NS-B1** governs the technical configuration and requirement evidence. A program manager may authorize additional funding within delegated limits; that does **not** authorize the safety authority to accept a hazard, nor does it allow a configuration custodian to declare a failed requirement verified. The two baselines are related but not interchangeable.
+
+### Build an executable decision-rights matrix
+
+| Controlled decision | Proposes | Technical recommendation | Authorizes | Required evidence |
+|---|---|---|---|---|
+| Change status-message timeout | Interface lead | Safety and V&V leads | Technical change board | Revised ICD, hazard impact, new test |
+| Release management reserve | Control-account manager | Cost and risk leads | Delegated program manager | Causal risk event, updated EAC |
+| Accept operational residual risk | System owner | Safety authority | Designated acceptance official | Hazard closure evidence and operating restrictions |
+| Change project finish baseline | Scheduler | Independent planning review | Program baseline board | Logic, resources, impact, approved change |
+
+A **RACI** chart describes participation but cannot replace a written decision authority and its limitations. For each decision, record an immutable identifier, exact baseline revision, assumptions, dissent, approver, date, effective scope, and conditions. The [NS-M1 decision register](../case/decision-register.csv) illustrates this separation. Its unresolved rows are intentionally *not* green approvals.
+
+### Quantify the cost of a delayed decision
+
+Suppose holding an integration fixture and specialist team costs a fictional $18,000 per week while a technical change is unresolved. If approval takes five weeks instead of two, the avoidable holding exposure is \(3\times\$18{,}000=\$54{,}000\), before any nonlinear knock-on effects. This is not a reason to waive assurance; it is a reason to identify decision prerequisites early and avoid queues caused by incomplete submissions. The number is a **conditional marginal cost**, not the total impact of the change.
+
+A review board may delegate routine interface clarifications while reserving high-hazard changes for senior review, but escalation criteria must reference consequence and authority, not rank alone. Inspect the counterexample: a schedule board approves a two-second emergency-message timeout because it improves delivery; the safety analysis requires 1.5 seconds. Which decision is ineffective? The schedule decision does not overrule the controlled technical constraint. The proper response is a joint change proposal and new evidence, not silent reinterpretation of the acceptance criterion.
+
+**Practice with answer.** A supplier asks to waive a missing NS-R-04 staleness indicator because its dashboard is otherwise complete. Identify (a) the object being changed, (b) the competent decision authority, and (c) the missing evidence. **Answer:** this changes a technical requirement and potentially an operational safety claim; a technical/acceptance authority must assess it, with revised hazard analysis, requirement disposition and verification evidence. A purchasing manager's sign-off is not enough.
+
+**Reference connection:** NASA's [Systems Engineering Handbook](https://www.nasa.gov/reference/systems-engineering-handbook/) distinguishes technical review, decision analysis, and verification/validation activities. Apply the principles within the specific project's delegated authority rules; the table above is instructional, not a universal governance standard.

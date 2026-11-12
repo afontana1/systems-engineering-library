@@ -101,3 +101,28 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 10: DOE and uncertainty-driven down-select](../labs/lab-10-doe-parametric-analysis-uncertainty-sensitivity-and-dow.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 10 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+
+## Step 03 integrated reference: NS-CD6.1 — DOE, sensitivity and the down-select evidence ladder
+
+Experimental design should distinguish the consequences of a **controllable design choice** from the variation caused by demand, human behavior, network impairment and measurement noise. The [synthetic 2×2 response table](../case/doe-synthetic.csv) varies policy (coded -1/+1) and reserve-feeder allocation (-1/+1) with three fabricated replicates per cell. Its cell mean p90 waits are 12.0, 9.2, 10.8 and 7.4 minutes for (-,-), (+,-), (-,+) and (+,+).
+
+### Derive rather than eyeball effects
+
+The main effect of changing policy from - to + is the average of its two conditional differences:
+
+\[\Delta_P=\tfrac12[(9.2-12.0)+(7.4-10.8)]=-3.1\ \mathrm{min}.\]
+
+The main effect of adding reserve capacity is \(\Delta_F=\tfrac12[(10.8-12.0)+(7.4-9.2)]=-1.5\) minutes. The difference in policy effects between high- and low-reserve settings—the **difference of differences**—is \((-3.4)-(-2.8)=-0.6\) minutes. Interaction in a coded two-level regression is parameterized differently: the coefficient on the \(P\times F\) term equals one quarter of this difference, or -0.15 minutes. Confusing these conventions gives errors of twofold or fourfold in effect interpretation.
+
+### Separate design variation from uncertainty
+
+The replicate values are intentionally manufactured around their means. They demonstrate arithmetic and model structure but **cannot justify a statistical significance claim**. An actual DOE would randomize run order, record operational conditions, check residual assumptions, and replicate independently enough to estimate uncertainty. A model calibrated on the same pilot outcomes used to choose the best concept needs a held-out validation plan.
+
+For concept C the nominal capacity is 52.8 trips/h. At 90% of modeled usable throughput it falls to 47.52, still above 46.2; at 85% it falls to 44.88, below requirement. Therefore the capacity estimate tolerates at most \(1-46.2/52.8=12.5\%\) reduction before reaching the threshold. B tolerates only about 2.94%. This **sensitivity bound** is more transparent than a single claim of “robust design.”
+
+### Practice and answer
+
+**Exercise:** A team asserts that the 7.4-minute cell means the real service will achieve p90 wait below 8 minutes. **Answer:** No. The table is a synthetic study of factors, not a field observation or validated simulation output. It may identify a promising experimental configuration; a pilot must then define the rider cohort, arrival process, accessibility strata, sample size, percentile estimator and uncertainty. See the [case data](../case/doe-synthetic.csv) and [reproducible calculation](../tools/step03_book6_concept_check.py).
+
+**Boundary:** Factorial contrasts identify patterns in the supplied responses; they do not establish causality without a valid experimental assignment and adequate measurement design.

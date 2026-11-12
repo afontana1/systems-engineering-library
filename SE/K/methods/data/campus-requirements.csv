@@ -1,0 +1,3 @@
+id,stakeholder_need,condition,observable,pass_criterion,allocation,hazard,version
+REQ-DOOR,NEED-ACCESS,"supervised test; speed sensor fresh and plausible; brake sensor fresh",door authorization bit,"authorization inhibited unless measured speed <= 0.5 m/s AND parking brake engaged; invalid sensors fail inhibited",door-controller,H-DOOR,CM-B2
+REQ-ACK,NEED-RELIABLE-SERVICE,"accepted supervised dispatch requests at declared load",acknowledgement latency seconds,"each sampled accepted request <= 2.0 s; no statistical tail claim",dispatch-service,H-DISPATCH,CM-B2

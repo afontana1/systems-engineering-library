@@ -43,6 +43,16 @@ Formal proofs are powerful *conditional assurance arguments*; they should be ver
 - **F2 · Formal methods and limits of proof-to-implementation correspondence:** [NIST, Formal Methods and Combinatorial Testing — formal-methods section](https://csrc.nist.gov/Projects/automated-combinatorial-testing-for-software/autonomous-systems-assurance/formal-methods).
 - **F3 · NASA executable-semantics example:** [NASA PLEXIL5 Formal Interactive Verification Environment — overview](https://software.nasa.gov/software/LAR-19339-1).
 
+## Step 02 deeper treatment: bounded temporal behavior and counterexamples
+
+A safety property prohibits bad finite prefixes: for example, *the door must never be commanded open while the shuttle is moving above the defined safe limit*. A liveness property says something good will eventually happen under stated fairness assumptions: for example, *an accepted request eventually receives a terminal response*. The distinction matters because checking a finite trace with no collision is different from demonstrating eventual progress.
+
+Let \(m\) mean motion above the safe speed, \(o\) mean door-open command, and \(a\) mean an accepted dispatch request. In linear-time temporal notation, the safety invariant is \(\mathbf G\neg(m\land o)\). A bounded acknowledgement requirement can be written informally as \(\mathbf G(a\Rightarrow\mathbf F_{\le 2\mathrm{s}} r)\), where \(r\) is a terminal response. The latter bounded-time expression is **not** standard LTL syntax as written; it represents an extension with explicit timing, such as metric temporal logic, and needs a tool whose supported semantics match that notation.
+
+**Construct a counterexample.** Model three discrete states: `Stopped`, `Moving`, and `DoorOpen`. Valid transitions include stopped-to-moving only with door closed, and stopped-to-door-open only under a fresh speed and brake confirmation. Introduce an erroneous transition `Moving -> DoorOpen`. A breadth-first checker finds the short path `Stopped -> Moving -> DoorOpen` and violates the invariant. A useful report includes the path, input events, software/model version and assumptions. Remove the defective transition, rerun the negative and positive tests, and test whether any new state is unreachable.
+
+**Scope caution.** Exhaustive exploration of a finite abstraction does not prove distributed implementation correctness or physical safety. Clock drift, message reordering, unmodeled hardware faults and infinite-state timing behavior may lie outside the state graph. Record abstraction boundaries, fairness assumptions, test coverage and links to hardware verification evidence. See [behavioral contracts](../methods/mbse-behavioral-contracts.md), [model queries](model-queries-and-validation.md), and [configuration evidence](../methods/model-baselines-and-evidence.md).
+
 ## Follow the knowledge
 
 - **Prerequisites:** [Good requirements](good-requirements.md), [Object responsibilities](object-responsibilities.md).

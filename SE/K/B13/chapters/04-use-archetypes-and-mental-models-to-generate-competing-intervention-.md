@@ -111,3 +111,27 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [03 — Previous chapter](03-build-causal-loop-diagrams-as-testable-feedback-hypotheses.md) · [05 — Next chapter](05-translate-feedback-hypotheses-into-stocks-flows-units-and-accumulati.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-FB13.1 case: feedback, conservation, and policy learning — Week 4
+
+*Integrated chapter: Chapter 04 — Use archetypes and mental models to generate competing intervention hypotheses. Northstar NS-FB13.1 is a transparent teaching baseline; the following methods are not field-validated.*
+
+### Archetypes as competing structural hypotheses
+
+The **fixes-that-fail** archetype predicts that a short-term capacity response repairs the visible symptom but strengthens a slower mechanism that re-creates the symptom. Candidate Northstar implementation: surge staffing raises daily trip capacity, reduces backlog, adds vehicle stress and over time creates unavailable fleet. An alternative **shifting-the-burden** hypothesis would posit that repeated surge shifts resources or attention away from preventive maintenance, causing repair capability to erode. These are *different* structures: the checked synthetic model includes surge-dependent failure hazard but **does not** include a stock of management attention, organizational learning or staff burnout. It can demonstrate the first, not both.
+
+Every archetype claim must specify what observations would contradict it. If overtime usage increases but the measured breakdown rate stays constant after controlling for vehicle age, usage hours and road conditions, the modeled wear pathway is not supported. If repair staff increases without reducing the fleet unavailable duration, a bottleneck elsewhere may dominate. Draw the competing mechanism before making a policy recommendation; archetype labels by themselves are not evidence.
+
+### A controlled counterfactual comparison
+
+Under identical nominal demand and failure assumptions for 360 days, the *status quo* yields about 92.74% cumulative completion and 11.995 mean active vehicles. The *surge-only* policy raises completion to about 94.97%, while mean active vehicles decline to 11.869 and surge vehicle-days approximately double from 201.2 to 401.1. These paired numbers illustrate the hypothesized side effect: short-term output benefit and a slower wear channel coexist. The more realistic hypothesis could be different—technology or labor rules may prevent this behavior—and the code itself does not prove either archetype applies at a campus.
+
+The *maintenance-first* alternative raises mean active vehicles to about 12.709 while achieving 95.73% completion, but uses an assumed repair-effort index of 594 rather than 360. Because that index is not dollars, one cannot simply compute return on investment. Compare also access loss, variance under stress, staff burden, implementability and budget capacity; a single throughput average is inadequate.
+
+**Worked exercise.** A director calls the surge result evidence that the “shifting the burden” archetype has been confirmed. Diagnose the mistake. **Solution:** the model increased failure hazard with surge; it did not model diversion of repair resources. Fixes-that-fail is consistent with the equations; shifting-the-burden remains a rival hypothesis requiring an endogenous maintenance-investment or skill stock. Both need real observational tests. A structure labels a candidate mechanism rather than proving a named social pattern.
+
+**Practice extension:** Introduce a maintenance capability stock and sketch how it could recover after an investment delay, noting how you would avoid double-counting vehicles.
+
+### Reproduce the evidence and challenge the result
+
+The [NS-FB13.1 case dossier](../case/INDEX.html) publishes its [controlled inputs](../case/model-inputs.json), [Python calculation model](../tools/step03_book13_feedback.py), [policy-by-condition evidence](../case/experiment-results.csv), [equation and unit crosswalk for Vensim](../case/vensim-equation-crosswalk.md), and [claim limitations](../case/credibility-register.csv). Reproduce results with `python3 SE/K/B13/tools/step03_book13_feedback.py --write` from the repository root. This is a **synthetic teaching simulation**: correctly conserving its stocks and reproducing its output does **not** calibrate the causal structure or authorize real mobility policy. The Book 11 event simulator and Book 12 physical vehicle model answer other questions and are not dynamically coupled.

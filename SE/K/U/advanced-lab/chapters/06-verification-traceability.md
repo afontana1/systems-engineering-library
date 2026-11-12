@@ -35,3 +35,15 @@ Similarly, `V12-R04 → V12-T04 → OUTAGE` checks avoidance of a specified bloc
 <details><summary>Worked answer</summary>At minimum scenario outputs, summary metrics, provenance hashes, comparisons, experiment conclusions and any review claim based on them. Regenerate and rerun tests.</details>
 
 **Submit:** an assurance argument for V12-R01–R06 with explicit defeaters, a reviewed trace audit and one intentionally broken trace example. Related: [v11 evidence stage](../../integrated-lab/chapters/07-verification-evidence.md).
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Provenance, version binding and negative assurance.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+U2 generates a cross-lab manifest covering **both** runners' specified inputs and source files, then runs them twice in isolated temporary directories. Byte-for-byte output equality is a stronger reproduction check than viewing a prior screenshot; it does not make the model's claims true. The v12 fixture still has a 100% nominal completion fraction under a fixed synthetic dataset.
+
+**Claim hierarchy:** `hashes match → named files unchanged`; `independent ledger checks pass → recorded invariants hold for this run`; `field validation → not performed`; `authorization → not granted`. Each implication must be justified; the first two do not logically entail the latter two.
+
+**Exercise and solution:** A reviewer supplies a current SHA-256 but no source revision or acceptance owner. Can the associated requirement be closed? Not yet. Obtain source location, configuration, test purpose, exact expectation, observed result, independent review and a qualified decision record. The U2 gated claims treat these as typed conditions.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

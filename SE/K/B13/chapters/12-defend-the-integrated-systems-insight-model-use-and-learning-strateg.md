@@ -119,3 +119,27 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [11 — Previous chapter](11-design-robust-policy-portfolios-and-identify-leverage-resistance-and.md) · End of the book · [Book index](../README.md)
+
+## Step 03 integrated NS-FB13.1 case: feedback, conservation, and policy learning — Week 12
+
+*Integrated chapter: Chapter 12 — Defend the integrated systems insight, model use, and learning strategy. Northstar NS-FB13.1 is a transparent teaching baseline; the following methods are not field-validated.*
+
+### An integrated argument requires an evidence chain and a use decision
+
+A defensible final systems insight states: the original synthetic eight-quarter data reveal a dynamic challenge (request expansion, changing waits, maintenance accumulation and trust changes), while the NS-FB13.1 *proposed* feedback structure shows how unavailable fleet, delayed queue information, overtime stress, abandonment and trust could interact. Its stock equations and reproducible scenarios offer a controlled **learning environment**. They do not uniquely explain the eight historical quarters. The final report must separate (1) observed synthetic reference modes, (2) hypothesized feedback topology, (3) implemented equations and time-step behavior, (4) conditional simulated results, and (5) decisions requiring additional evidence.
+
+The board's example choice is explicitly provisional. A maintenance-first intervention improves modeled completion (about 92.74% → 95.73%) but consumes a larger *unitless* repair effort index (360 → 594); access-first shifts modeled abandonment across rider groups; combined policies are sensitive to the +8% demand stress. These are not real affordability or disability-access findings. The original guide includes p90 rider waits, which **this simulator cannot generate**; claiming improvement on that contractual outcome would improperly transfer evidence from a different representation.
+
+### Model-use argument and red-team oral defense
+
+**Problem owner challenge:** *What decision can this model support?* Answer: prioritization of questions, proposed monitoring, and candidate policy experiments, not fleet procurement or live dispatch rules. **Structure reviewer:** *Why is active fleet not a stock?* Because it is the complement of unavailable vehicles in a fixed 14-vehicle fleet; independently integrating both without consistent failure/repair flows could double-count vehicles. **Evidence reviewer:** *What was calibrated?* No parameters were fitted to quarter observations. Code balances were checked; real trust response, failure hazard and access prioritization remain unsupported. **Ethics reviewer:** *Could the intervention reduce overall backlog while harming a group?* Yes. The model tracks accessible and standard abandonment separately but cannot assert legal or stakeholder acceptability.
+
+An acceptable handoff includes canonical chapter additions, controlled configuration, annotated calculation code, paired stress outputs, tests of both real and negative cases, a unit crosswalk for Vensim, and a credibility register assigning owners to missing data. Freeze the current model version as a *synthetic educational baseline* and invite a second team to reproduce and challenge every use claim. External Vensim validation, stakeholder consent, accessibility review, real operational data and cross-domain interoperability remain open.
+
+**Worked exercise.** A sponsor claims that 20 policy runs and a zero conservation residual establish readiness for implementation. Construct a short corrective decision statement. **Solution:** *Twenty deterministic scenario runs verify selected software outputs under synthetic parameters. Conservation establishes internal bookkeeping, not external causal validity. The model does not generate p90 wait, lacks independent calibration, and has no disability-access governance or cost evidence. Status: HOLD for live policy; approved only as a classroom hypothesis-testing aid.* This statement preserves the actual achievement without overselling it.
+
+**Practice extension:** Prepare a one-page decision record with explicit owner, intended use, bounds, model version, consent and privacy requirements, independent challenges and triggers for reopening the conclusion.
+
+### Reproduce the evidence and challenge the result
+
+The [NS-FB13.1 case dossier](../case/INDEX.html) publishes its [controlled inputs](../case/model-inputs.json), [Python calculation model](../tools/step03_book13_feedback.py), [policy-by-condition evidence](../case/experiment-results.csv), [equation and unit crosswalk for Vensim](../case/vensim-equation-crosswalk.md), and [claim limitations](../case/credibility-register.csv). Reproduce results with `python3 SE/K/B13/tools/step03_book13_feedback.py --write` from the repository root. This is a **synthetic teaching simulation**: correctly conserving its stocks and reproducing its output does **not** calibrate the causal structure or authorize real mobility policy. The Book 11 event simulator and Book 12 physical vehicle model answer other questions and are not dynamically coupled.

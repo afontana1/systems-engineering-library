@@ -84,6 +84,10 @@ A correct computed result is not automatically a system acceptance result; expla
 
 </details>
 
+## Phase 3 technical reference: Derive covariance propagation and verify the tail by simulation
+
+For \(T=D/V\), the gradient at mean \((120,12)\) is \(g=(1/12,-120/12^2)\). Therefore, \(\operatorname{Var}(T)\approx g^\mathsf T\Sigma g\). With input SDs 6 and 1.2 and \(\rho=-0.6\), the distance contribution is 0.25, speed contribution 1.00, and cross term **+0.60 seconds squared**; the resulting \(u_T\approx1.360\) s. Sampling independent marginals would remove the cross term and model a different environment. The [complete Monte Carlo study](../../methods/correlated-uncertainty-propagation.md) draws correlated inputs explicitly and reports \(\hat P(T>12\text{ s})=0.09694\) with Monte Carlo standard error ~0.000936. This numerical SE is not uncertainty about the assumed correlation, distributions, or structural form.
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -121,3 +125,33 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [08 — Previous chapter](08-analyze-reliability-availability-maintainability-degradation-and-cen.md) · [10 — Next chapter](10-quantify-requirement-compliance-technical-margin-allocation-risk-and.md) · [Book index](../README.md)
+
+## Phase 5 technical reading: Separate input uncertainty from the simulation estimator
+
+For a stochastic output \(Y=g(\theta,U)\), the variability conditional on a fixed calibrated parameter \(\theta\) is not the same as the additional uncertainty about \(\theta\) inferred from finite observations. Under a parameter distribution, total variance decomposes into expected conditional variability plus the variability of the conditional mean. A calibration profile interval for \(\lambda=9\) arrivals/hour demonstrates uncertainty that cannot be eliminated by taking more random simulation seeds. A [worked likelihood and importance-sampling extension](../../methods/simulation-calibration-and-rare-events.md) connects these ideas with statistical intervals, rare-event variance and structural sensitivity.
+
+## Step 03 integrated quantitative case: correlated uncertainty and tail risk
+
+The synthetic winter energy model in [model-assumptions.json](../case/model-assumptions.json) is
+
+\[
+E=25+0.4D+0.8H\quad\text{kWh},
+\]
+
+where \(D\) is zero-mean route-distance deviation in km and \(H\) is zero-mean heating-hours deviation in hours. Set \(\sigma_D=4\) km, \(\sigma_H=1.5\) hours and \(\rho(D,H)=0.6\). Units of the slopes are kWh/km and kWh/hour respectively; never add unscaled distance to energy.
+
+### Work the covariance, not merely the nominal value
+
+The distance contribution to standard deviation is \(0.4(4)=1.6\) kWh; heating contributes \(0.8(1.5)=1.2\) kWh. Therefore
+
+\[
+\operatorname{Var}(E)=1.6^2+1.2^2+2(0.6)(1.6)(1.2)=6.304\;\text{kWh}^2.
+\]
+
+The resulting standard deviation is 2.5108 kWh. If the joint input distribution is Gaussian and the linear representation is valid, \(q_{.95}(E)=25+1.64485(2.5108)=29.1299\) kWh, exceeding the `QA-02` cap of 29 kWh. Under a *different assumption* of independent inputs, the standard deviation would be 2.0 kWh and p95 would be 28.2897 kWh. The choice of dependence assumption reverses the model-screen result.
+
+### Monte Carlo cross-check versus model credibility
+
+For a reproducible stochastic check, draw independent standard normal \(Z_1,Z_2\); set \(D=4Z_1\), \(H=1.5(0.6Z_1+0.8Z_2)\), then evaluate \(E\) and compare its empirical p95 with the analytic 29.13 kWh. Report the random seed, number of draws, convergence of the empirical p95, and Monte Carlo sampling error. Agreement between code and algebra checks implementation; it does **not validate the input distribution, its correlation, or physical causation**.
+
+**Exercise and answer.** A team samples \(D\) and \(H\) independently and announces a 0.71 kWh margin to the 29 kWh cap. Explain the flaw. They implicitly fixed correlation to zero. The stated evidence supports positive dependence, making the modeled p95 approximately 0.13 kWh *above* the limit. Quantify correlation sensitivity and gather joint field data before any acceptance claim.

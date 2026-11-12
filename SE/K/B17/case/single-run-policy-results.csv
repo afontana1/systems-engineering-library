@@ -1,0 +1,5 @@
+policy,input_count,released,held,reworked_cases,rework_loops,false_alarms,lead_mean_all_days,lead_median_all_days,lead_p90_all_days,lead_mean_released_days,queue_time_total_days,time_last_case_day,critical_released_without_evidence
+baseline,96,94,2,32,39,2,182.4153,168.7807,338.7099,178.3145,15958.8667,482.4532,0
+reviewer-only,96,93,3,29,38,2,98.1228,86.3113,196.1943,93.8434,7886.6702,324.5703,0
+evidence-readiness,96,96,0,9,10,11,18.4819,17.3367,26.6123,18.4819,521.2487,168.1084,0
+combined-guardrails,96,96,0,15,16,5,15.9362,14.73,24.3184,15.9362,243.4765,177.5536,0

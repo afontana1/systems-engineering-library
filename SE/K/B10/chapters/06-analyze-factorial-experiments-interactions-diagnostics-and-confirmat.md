@@ -92,6 +92,12 @@ A correct computed result is not automatically a system acceptance result; expla
 
 </details>
 
+## Calculate interaction and residual uncertainty
+
+The coded interaction is not the raw difference between two arbitrary cells. For the balanced example \(E_{AB}=(10.55+6.75-8.975-7.95)/2=+0.1875\) ms. Each cell has four independently obtained observations. Within-cell squared deviations sum to \(SSE\), and the pooled residual variance is \(MSE=SSE/[4(4-1)]\) with 12 degrees of freedom. The standard error of a balanced main effect or interaction effect is \(\sqrt{MSE/4}\), which the [analyzer](../../methods/code/factorial_doe.py) computes from the raw [synthetic dataset](../../methods/data/dispatch-factorial.csv).
+
+A residual diagnostic must check whether noise changes across factor settings and over run order. An effect that is statistically distinguishable from zero may still be too small to change the system's decision. Use [the full methods guide](../../methods/statistical-inference-and-experiments.md) to plan a new confirmation run rather than selecting a final architecture from these synthetic numbers alone.
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -134,3 +140,21 @@ The **course guide remains authoritative for assessment**. This book teaches and
 ## Extended worked problems and lab
 
 Study the [worked problem workshop on factorial effects and interactions](../practice/factorial.md), then complete the [extended laboratory](../practice/lab-factorial.md). The exercises are separate from the original assessed coursework.
+
+## Step 03 integrated quantitative case: calculate and diagnose factorial effects
+
+Use [factorial-trials.csv](../case/factorial-trials.csv) and the [standard-library checker](../tools/step03_book10_quantitative_check.py) to reconstruct the four-cell analysis. Every cell contains six observations with deviations of \(-15,-9,-3,+3,+9,+15\) ms from its mean.
+
+### Main effects and interaction are different estimands
+
+Define \(d_M=\bar y_{M,O}-\bar y_{M,B}=-50\) ms and \(d_C=\bar y_{C,O}-\bar y_{C,B}=-30\) ms. The **average controller effect** across these equally weighted test conditions is \((d_M+d_C)/2=-40\) ms. The difference-in-differences interaction is \(I=d_C-d_M=+20\) ms: optimization helps less in cold conditions. It would be misleading to claim an invariant 40 ms improvement across all environments.
+
+The residual sum of squares is \(4\times630=2520\) \(\text{ms}^2\). With \(24-4=20\) residual degrees of freedom, \(MSE=126\) \(\text{ms}^2\). Under the independent, homoscedastic normal errors assumed for this constructed design, \(SE(I)=\sqrt{4MSE/6}=9.165\) ms. Using \(t_{.975,20}\approx2.086\), the 95% interval is approximately \([0.88,39.12]\) ms.
+
+A nonzero interval supports a treatment-by-environment effect **under the constructed experiment**. It does not establish field response times, tails, or generalization to colder weather beyond the design range.
+
+### Diagnostics and confirmation
+
+Plot residuals against fitted means, treatment order, power state, and other operating conditions. A deterministic-looking residual pattern is a prompt to inspect the experimental construction: the data are deliberately synthetic and should not be treated as realistic stochastic evidence. For real trials, investigate unequal variance, serial dependence, missing slow events, and instrument errors before trusting nominal t intervals. Confirm the selected improvement in independently gathered, production-representative cold peak runs.
+
+**Exercise and answer.** If the interaction were ignored, what would be the controller-effect estimate? \(-40\) ms for equal environmental weights. It would overstate the cold benefit by 10 ms and understate the mild benefit by 10 ms, obscuring a decision-relevant environmental limitation.

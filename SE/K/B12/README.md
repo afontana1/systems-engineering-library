@@ -21,6 +21,10 @@ This book supplies long-form explanatory chapters, example reasoning, reproducib
 - **Week 11:** [Assess continuous, discrete, hybrid, fixed-step, real-time, HIL, and final credibility constraints](chapters/11-assess-continuous-discrete-hybrid-fixed-step-real-time-hil-and-final.md) → [Hypothetical lab](labs/lab-11-assess-continuous-discrete-hybrid-fixed-step-real-time-hil-and-final.md)
 - **Week 12:** [Reproduce, challenge, present, and defend the final complex-system simulation study](chapters/12-reproduce-challenge-present-and-defend-the-final-complex-system-simu.md) → [Hypothetical lab](labs/lab-12-reproduce-challenge-present-and-defend-the-final-complex-system-simu.md)
 
+## NS-CPS12.1 integrated multi-domain physical simulation case
+
+All twelve chapters use the [NS-CPS12.1 vehicle modeling and credibility dossier](case/INDEX.html) with [controlled JSON](case/model-inputs.json), [model source](tools/step03_book12_coupled_vehicle.py), [paired experiment CSV](case/experiment-results.csv), [results summary](case/summary.json), [requirements](case/requirements.csv), [credibility status](case/credibility-register.csv), and an [editable evidence diagram](case/multidomain-evidence.svg). This is a synthetic **single-vehicle** model supporting bounded design sensitivities only. It does not establish real route range, thermal qualification, FMI/HLA interoperability, 10 ms control execution or procurement readiness. The Book 11 fleet simulation remains a distinct system-level operational representation.
+
 ## Engineering evidence discipline
 
 Follow a traceable chain of **question → representation → assumption/data → computation or explanation → sensitivity → supported claim → owner and next evidence**. Validate mathematical examples for their assumptions, not simply arithmetic. Do not treat a hypothetical result as operational validation.

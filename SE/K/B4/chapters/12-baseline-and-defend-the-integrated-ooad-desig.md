@@ -77,3 +77,31 @@ In [Lab 12: A defendable design is a consistent set of claims](../labs/lab-12-ba
 ## Continuity
 
 This chapter builds from [previous chapter](11-design-persistence-and-conduct-the-design-rea.md) and leads toward your final course defense. Revisit the corresponding [weekly primer](../../P1-text/lessons/605-704-w12.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: defend the integrated design baseline
+
+### 12.1 Trace requirements through obligations and evidence
+
+A design readiness review should assemble the requirement, operational scenario, domain invariant, component responsibility, persistence enforcement, test record, and applicable baseline as a connected claim. The [traceability sheet](../case/traceability.csv) maps `SW-01` to `SW-07` through their use cases, owners and tests. A link is not itself proof, and “PASS” without matching revision, context and execution is not current evidence.
+
+The [controlled dataset](../case/model-baseline.json) has seven requirements and seven test records: five *current synthetic passes*, `T-06` marked PASS against `SW-06` revision 1 after the requirement moved to revision 2, and `T-07` still PLANNED. The correct evidence count is therefore five current synthetic passes, **one stale claim, and one unexecuted claim**. The case is not ready for unqualified approval even if all the structural links exist.
+
+### 12.2 A defensible review argument
+
+| Review question | Current evidence | Disposition |
+|---|---|---|
+| Does model ownership cover each requirement? | Case checker: each has one declared primary owner | Structurally covered |
+| Can ordinary duplicate requests be handled safely? | Idempotency and uniqueness in SQLite fixtures | Demonstrated for scoped synthetic cases |
+| Are all constraint revisions tested? | SW-06 evidence refers to superseded revision | Open — rerun freshness acceptance |
+| Is audit lineage verified? | SW-07 test exists only as a plan | Open — execute and inspect provenance |
+| Are operations safe at realistic load? | Only illustrative latency budget; no field distribution | Open — conduct measured performance test |
+
+This is a **conditional design-readiness decision**: continue engineering and independent validation, while withholding any claim of deployed safety or complete verification. The review should distinguish architectural consistency, unit or fixture test success, independently observed evidence, and operational authorization.
+
+### 12.3 Change impact is part of the design
+
+Suppose the telemetry-freshness threshold changes from 15 seconds to 8 seconds. Reevaluate the policy, data timestamp assumptions, `SW-06`, `UC-02`, fixture `F-06`, and the test evidence revision; recalculate normal-case eligibility (V-02's 6-second data still meet an 8-second threshold) and edge cases. Simply editing the requirement text while leaving test results unchanged creates a false assurance chain. The same logic applies when slot semantics change to overlapping intervals: class associations, OCL predicates, schema constraints, and concurrency tests all require coordinated updates.
+
+**Solved checkpoint.** A reviewer counts seven verified requirements because seven test IDs exist. The corrected count is five current synthetic PASS entries, one stale revision and one planned test. Even the five current fixtures are not field verification; the result supports targeted design confidence, not final acceptance.
+
+**Capstone exercise.** Use the [traceability CSV](../case/traceability.csv), [design decisions](../case/design-decisions.csv), and [checker](../tools/step03_book4_contract_check.py) to issue a one-page review disposition. Include two evidence gaps, one production risk the fixtures omit, a proposed acceptance test, and what baseline artifacts must change if the service introduces interval-based scheduling.

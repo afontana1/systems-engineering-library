@@ -99,3 +99,43 @@ Finding: “Dispatch accepts telemetry that includes a receipt time but not a tr
 Perform [Hypothetical Lab 10](../labs/lab-10-red-team.md). Then complete the original Week 10 `662_W10_FailureRedTeam_v1.0` with a multi-causal failure analysis, a red-team review from distinct roles, and revisions to at least three artifacts. The fictional exercise is preparatory and is not a substitute for studying the required NASA investigation.
 
 **Next:** [Chapter 11 — Realization and verification](11-realization-and-evidence.md).
+
+## Phase 4 technical reading: Causal paths and common-cause failure
+
+In a release review, define the unacceptable loss first, then the hazardous system state, the unsafe control action, the allocated preventive constraints, and the evidence for those constraints. For a small example, an unsafe-open command occurs when \(C\lor(A\land B)\): an assumed shared bypass event \(C\), or an erroneous command \(A\) together with failed interlock \(B\). Under invented independent event probabilities of 0.003, 0.02 and 0.01, the modeled demand probability is 0.0031994. Treating redundant defenses as independent and omitting the common-cause event yields only 0.0002. The discrepancy is a mechanism to inspect, not an estimate of real accident frequency. The [complete fault-tree and assurance chapter](../../methods/safety-fault-trees-and-assurance.md) derives minimal cut sets, sensitivity, limitations and evidence defeaters; the [integrated case](../../methods/campus-mobility-engineering-case.md) carries the control into an engineering baseline.
+
+
+
+## Step 03 technical studio — why redundancy fails under shared causes
+
+The Northstar reference case includes a **synthetic**, per-demand failure model with a common-cause event `C` and two nominally redundant channels `A` and `B`. Let `P(C)=0.003`, `P(A|not C)=0.01`, and `P(B|not C)=0.02`, and assume the channels are conditionally independent when the common cause is absent. A top-event model is
+
+\[
+T=C\ \cup\ (\neg C\cap A\cap B),
+\qquad
+P(T)=P(C)+[1-P(C)]P(A\mid\neg C)P(B\mid\neg C).
+\]
+
+The numerical result is `0.003 + 0.997(0.01)(0.02) = 0.0031994` per demand. A naive independent-only calculation reports 0.0002, understating the top-event probability by almost a factor of 16 under **this specific assumed model**. Redundancy helps only when its channels do not fail together under the hazards that matter.
+
+### Turn the fault model into a control and verification argument
+
+A fault tree identifies causal combinations but does not show that proposed controls actually work. Candidate controls might include independent power, dissimilar status paths, watchdogs, operational fallback, and operator procedures. For each control, state the **hazard mechanism**, **control claim**, **verification method**, **configuration**, and **residual uncertainty**. A quantitative probability derived from invented inputs is not a safety acceptance argument.
+
+### Solved hazard-review exercise
+
+If a common-cause rate is reduced to 0.001 while conditional channel probabilities stay unchanged, the top event becomes `0.001 + 0.999(0.0002) = 0.0011998`. The top-event reduction is 0.0019996 per demand under the model. Does this demonstrate achieved risk reduction? **No.** The new common-cause parameter requires empirical or justified engineering evidence, and the fault tree may omit dependencies, maintenance errors, or operational contexts. A lower input number is a *scenario*, not a verified control.
+
+## Step 03 reference deepening — sensitivity reveals where assurance effort matters
+
+For a synthetic redundant status path, assume a common-cause failure probability \(q=0.003\) per demand and independent channel failures of \(p_A=0.01\) and \(p_B=0.02\), *conditional on the common cause not occurring*. The top-event probability is
+
+\[
+P(T)=q+(1-q)p_Ap_B=0.003+0.997(0.0002)=0.0031994.
+\]
+
+If the shared cause were ignored, the model would estimate 0.0002, understating the hypothetical probability by almost a factor of 16. The model is a **demonstration of sensitivity**, not an observed field failure probability. Its partial derivatives are \(\partial P/\partial q=1-p_Ap_B=0.9998\) and \(\partial P/\partial p_A=(1-q)p_B=0.01994\). Under these assumed parameter values, reducing the common cause is often a more consequential leverage point than a small improvement to channel A alone.
+
+The causal story matters: both channels may share a power supply, corrupted configuration, timing reference or operator procedure. A review should identify plausible common causes and verify claimed independence before crediting redundancy. Fault-tree probability alone cannot prove adequate hazard control; severity, exposure, operational mode, model structure, and real verification evidence determine the acceptance claim.
+
+**Practice:** If common-cause probability is halved to 0.0015, recompute the top-event probability. **Answer:** \(0.0015+0.9985(0.0002)=0.0016997\). State which real design or evidence change would support the assumption that \(q\) is lower; merely changing the spreadsheet input is not a mitigation.

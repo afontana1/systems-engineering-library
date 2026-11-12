@@ -21,6 +21,10 @@ This book supplies long-form explanatory chapters, example reasoning, reproducib
 - **Week 11:** [Design robust policy portfolios and identify leverage, resistance, and unintended consequences](chapters/11-design-robust-policy-portfolios-and-identify-leverage-resistance-and.md) → [Hypothetical lab](labs/lab-11-design-robust-policy-portfolios-and-identify-leverage-resistance-and.md)
 - **Week 12:** [Defend the integrated systems insight, model use, and learning strategy](chapters/12-defend-the-integrated-systems-insight-model-use-and-learning-strateg.md) → [Hypothetical lab](labs/lab-12-defend-the-integrated-systems-insight-model-use-and-learning-strateg.md)
 
+## NS-FB13.1 campus mobility feedback and policy laboratory
+
+All twelve chapters now share the [NS-FB13.1 integrated feedback case](case/INDEX.html), including the [controlled stock-flow input](case/model-inputs.json), [source code](tools/step03_book13_feedback.py), [paired twenty-run results](case/experiment-results.csv), [quarterly course observations](case/course-quarter-observations.csv), [Vensim unit/equation crosswalk](case/vensim-equation-crosswalk.md), [evidence register](case/credibility-register.csv), and [editable feedback diagram](case/feedback-structure.svg). The synthetic policy-level model has not been calibrated, is not an executed Vensim model, and provides no operational or accessibility approval. Book 11 fleet events and Book 12 vehicle physics remain distinct modeling baselines.
+
 ## Engineering evidence discipline
 
 Follow a traceable chain of **question → representation → assumption/data → computation or explanation → sensitivity → supported claim → owner and next evidence**. Validate mathematical examples for their assumptions, not simply arithmetic. Do not treat a hypothetical result as operational validation.

@@ -1,0 +1,181 @@
+{
+  "id": "NS-AA4.1",
+  "scope": "Synthetic Northstar emergency dispatcher, five hour assessment",
+  "configuration": {
+    "target_revision": "rev2",
+    "route_interface_revision": "2.0"
+  },
+  "acceptance": {
+    "wait_limit_min": 20,
+    "endpoint_clock_bound_min": 0.4,
+    "all_timely_min": 0.9,
+    "accessible_timely_min": 0.85,
+    "reliability_min": 0.97
+  },
+  "latency": {
+    "limit_s": 7,
+    "steps": [
+      {
+        "id": "intake",
+        "nominal_s": 0.8,
+        "uncertainty_s": 0.2
+      },
+      {
+        "id": "authorization",
+        "nominal_s": 0.5,
+        "uncertainty_s": 0.2
+      },
+      {
+        "id": "route query",
+        "nominal_s": 2,
+        "uncertainty_s": 0.5
+      },
+      {
+        "id": "scheduler",
+        "nominal_s": 1.2,
+        "uncertainty_s": 0.2
+      },
+      {
+        "id": "acknowledgement",
+        "nominal_s": 1,
+        "uncertainty_s": 0.1
+      }
+    ]
+  },
+  "reliability": {
+    "channel_r": 0.95,
+    "common_cause_q": 0.03
+  },
+  "model": {
+    "nodes": [
+      {
+        "id": "R-TIME",
+        "type": "Requirement",
+        "criticality": "high"
+      },
+      {
+        "id": "R-ACCESS",
+        "type": "Requirement",
+        "criticality": "high"
+      },
+      {
+        "id": "R-ROUTE",
+        "type": "Requirement",
+        "criticality": "high"
+      },
+      {
+        "id": "C-DISPATCH",
+        "type": "Component"
+      },
+      {
+        "id": "C-ACCESS",
+        "type": "Component"
+      },
+      {
+        "id": "C-ROUTE",
+        "type": "Component"
+      },
+      {
+        "id": "T-TIME",
+        "type": "Test"
+      },
+      {
+        "id": "T-ACCESS",
+        "type": "Test"
+      },
+      {
+        "id": "T-ROUTE",
+        "type": "Test"
+      },
+      {
+        "id": "E-TIME",
+        "type": "Evidence"
+      },
+      {
+        "id": "E-ACCESS",
+        "type": "Evidence"
+      },
+      {
+        "id": "E-ROUTE",
+        "type": "Evidence"
+      }
+    ],
+    "edges": [
+      {
+        "source": "R-TIME",
+        "target": "C-DISPATCH",
+        "type": "allocatedTo"
+      },
+      {
+        "source": "R-TIME",
+        "target": "T-TIME",
+        "type": "verifiedBy"
+      },
+      {
+        "source": "T-TIME",
+        "target": "E-TIME",
+        "type": "produces"
+      },
+      {
+        "source": "R-ACCESS",
+        "target": "C-ACCESS",
+        "type": "allocatedTo"
+      },
+      {
+        "source": "R-ACCESS",
+        "target": "T-ACCESS",
+        "type": "verifiedBy"
+      },
+      {
+        "source": "T-ACCESS",
+        "target": "E-ACCESS",
+        "type": "produces"
+      },
+      {
+        "source": "R-ROUTE",
+        "target": "C-ROUTE",
+        "type": "allocatedTo"
+      },
+      {
+        "source": "R-ROUTE",
+        "target": "T-ROUTE",
+        "type": "verifiedBy"
+      },
+      {
+        "source": "T-ROUTE",
+        "target": "E-ROUTE",
+        "type": "produces"
+      }
+    ]
+  },
+  "requirements": {
+    "R-TIME": "Timely fulfillment of all eligible requests",
+    "R-ACCESS": "Accessible group receives adequate timely service",
+    "R-ROUTE": "Dispatch never relies on stale road status"
+  },
+  "evidence": {
+    "E-TIME": {
+      "revision": "rev2",
+      "status": "PASS",
+      "scenario": "nominal-requests",
+      "note": "Nominal test adjudication ignores clock guard band"
+    },
+    "E-ACCESS": {
+      "revision": "rev2",
+      "status": "PASS",
+      "scenario": "nominal-requests",
+      "note": "Nominal test adjudication ignores clock guard band"
+    },
+    "E-ROUTE": {
+      "revision": "rev1",
+      "status": "PASS",
+      "scenario": "road-open-smoke",
+      "note": "Stale after route interface upgrade"
+    }
+  },
+  "authorizations": {
+    "operator_authority": false,
+    "safety_authority": false,
+    "stakeholder_validation": false
+  }
+}

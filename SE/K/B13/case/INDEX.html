@@ -1,0 +1,80 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS-FB13.1 Feedback Dynamics · Systems Engineering Library</title><link rel="stylesheet" href="../../_assets/learning-shell-v55.css"><style>body{margin:0;background:#f4f8f9;color:#173645;font:16px/1.72 system-ui,sans-serif}header{padding:16px max(18px,calc((100vw - 1050px)/2));background:#173f52}header a{color:#c6f5ee}main{max-width:1050px;margin:24px auto;padding:clamp(18px,4vw,42px);border:1px solid #d6e3e5;border-radius:12px;background:white}a{color:#0b6b70}h1{line-height:1.2}h2{margin-top:1.8rem}p,li{max-width:100ch}table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}td,th{padding:9px;border:1px solid #dae3e6;vertical-align:top}th{background:#edf5f4}code{overflow-wrap:anywhere}pre{overflow:auto;padding:12px;background:#ecf3f5}img{max-width:100%;height:auto}@media(max-width:700px){main{margin:0;padding:18px;border:0;border-radius:0}}</style><script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B13/case/INDEX.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../../_assets/mathjax-svg.js"></script></head><body><header><a href="../README.html">← Book 13</a> · <a href="../OPEN-BOOK.html">Textbook</a></header><main><h1>NS-FB13.1 — Campus mobility feedback and policy laboratory</h1>
+<p><em>Book 13 · EN.645.781 · integrated synthetic policy-learning dossier · coordinated first-pass expansion</em></p>
+<p><strong>Engineering question:</strong> Can a campus mobility operator improve long-run demand fulfillment and accessibility by changing the <strong>structure</strong> of service capacity, maintenance, and access allocation rather than reacting only to today’s queue? The model is a compact demonstrator of stock accumulation, reinforcing and balancing feedback, delayed perception, policy trade-offs, and bounded inference. It is not a calibrated university model or operational approval.</p>
+<p><a href="../OPEN-BOOK.html">Open Book 13</a> · <a href="../../../C/P3/EN645781.html">Original course guide</a> · <a href="model-inputs.json">Controlled configuration</a> · <a href="../tools/step03_book13_feedback.py">Source code</a> · <a href="experiment-results.csv">20 policy/uncertainty results</a> · <a href="status-quo-daily.csv">Daily stock trace</a> · <a href="vensim-equation-crosswalk.html">Vensim equation crosswalk</a> · <a href="credibility-register.csv">Credibility register</a> · <a href="feedback-structure.svg">Editable causal diagram</a></p>
+<p><img src="feedback-structure.svg" alt="Causal hypotheses linking passenger, service, and maintenance states" /></p>
+<h2>Inherited evidence and deliberate separation of models</h2>
+<p>The <a href="course-quarter-observations.csv">original eight-quarter observations</a> reproduce the synthetic baseline in EN.645.781: requests/day rise from 920 in quarter 1 to 1,370 in quarter 5, while 90th-percentile wait changes from 18.0 to 21.4 minutes, maintenance backlog increases from 24 to 71 vehicle-days, and trust changes from 63 to 61. These observations support a <em>dynamic question</em>, <strong>not</strong> a causal estimate or a numerical calibration. A finding about one observed quarter cannot identify the causal direction among demand, staffing, availability, and trust. Do not use the eight-quarter records as if they were time steps from the following daily simulator.</p>
+<p>Book 11 has a separate event/queue model about dispatch and individual waits; Book 12 represents different vehicle physics and thermal assumptions. NS-FB13.1 adds a policy-level feedback <strong>representation</strong> at daily-equivalent resolution. Its 14-vehicle synthetic baseline is independent of, and not derived from, either former model's empirical data. None of the three models is cross-calibrated.</p>
+<h2>State, units, and numerical integration</h2>
+<p>Five stocks are advanced by explicit Euler integration at \(\Delta t=0.5\) <strong>day</strong> for 360 days: unavailable fleet \(U\) (vehicles), standard and accessible request backlogs \(B_s,B_a\) (requests), perceived backlog \(P\) (requests), and trust \(T\) (0–100 index). The total fleet \(N=14\) is fixed and active fleet \(A=N-U\) is derived. Request arrivals, completions, abandonment are measured in requests/day; breakdown and repair rates in vehicles/day.</p>
+<p>\[
+\frac{dB_g}{dt}=a_g-c_g-r_g,\qquad \frac{dU}{dt}=f-m,
+\]</p>
+<p>for each group \(g\in\{s,a\}\), with \(a\) arrivals, \(c\) realizable completions, \(r\) abandonment, \(f\) breakdowns, and \(m\) repairs. At each numerical step completions and abandonment are capped by the count available from prior backlog plus new arrivals; repair and breakdown rates are similarly stock-constrained. The group reserves are <strong>capacity-allocation rules</strong>: unused reserved capacity is transferable to standard requests and remaining unused capacity can serve accessible demand above the reserved share. They are not predictions of disability-access law compliance. The trust update includes invented response coefficients; the lack of surveys, rider segments, cost accounting, and structural calibration prevents behavioral validation.</p>
+<p>The nominal daily demand calculation at time zero is \(1260[0.75+0.25(63/70)]=1,228.5\) requests/day. With \(U=1.9\), active vehicles are \(12.1\), the status-quo surge fraction is \(0.12(310)/(310+380)=0.05391\), and nominal service capacity is \(12.1(93)(1.05391)=1,185.97\) trips/day. The initial accessible reservation is \(0.14(1,185.97)=166.04\) trips/day, less than the \(171.99\) accessible requests/day arriving at the initial trust state. A backlog can thus persist despite many completed rides. These intermediate calculations permit independent checking of the software.</p>
+<h2>Controlled results and policy interpretation</h2>
+<p>The <a href="summary.json">summary JSON</a> is regenerated from <code>model-inputs.json</code> with the checked Python script. These outcomes are a <strong>single 360-day deterministic experiment per policy and condition</strong>, not confidence intervals, forecasts or approval estimates.</p>
+<table>
+<thead>
+<tr>
+  <th>Policy, nominal case</th>
+  <th style="text-align:right">Completion / arrivals</th>
+  <th style="text-align:right">Accessible abandonment / arrivals</th>
+  <th style="text-align:right">Mean active vehicles</th>
+  <th style="text-align:right">Repair cost index</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Current capacity and policies</td>
+  <td style="text-align:right">92.74%</td>
+  <td style="text-align:right">7.28%</td>
+  <td style="text-align:right">11.995</td>
+  <td style="text-align:right">360</td>
+</tr>
+<tr>
+  <td>Surge-only overtime</td>
+  <td style="text-align:right">94.97%</td>
+  <td style="text-align:right">5.06%</td>
+  <td style="text-align:right">11.869</td>
+  <td style="text-align:right">360</td>
+</tr>
+<tr>
+  <td>Maintenance-first</td>
+  <td style="text-align:right">95.73%</td>
+  <td style="text-align:right">4.31%</td>
+  <td style="text-align:right">12.709</td>
+  <td style="text-align:right">594</td>
+</tr>
+<tr>
+  <td>Access-priority reservation</td>
+  <td style="text-align:right">92.57%</td>
+  <td style="text-align:right">0.014%</td>
+  <td style="text-align:right">11.993</td>
+  <td style="text-align:right">360</td>
+</tr>
+<tr>
+  <td>Combined maintenance + priority</td>
+  <td style="text-align:right">95.63%</td>
+  <td style="text-align:right">0.013%</td>
+  <td style="text-align:right">12.708</td>
+  <td style="text-align:right">594</td>
+</tr>
+</tbody>
+</table>
+<p>The arbitrary <strong>repair cost index</strong> is a policy-effort surrogate \(360\times\text{repair multiplier}\), <em>not dollars</em> or an economic evaluation. The access-priority policy reallocates modeled capacity: it nearly eliminates accessible abandonment under nominal assumptions but raises standard-group abandonment from about 7.28% to 8.66%. The combined policy improves the accessible metric while raising modeled repair effort. No policy is established as preferable to stakeholders without accepted trade-offs and credible input data.</p>
+<p>The controlled 20-run experiment grid pairs five policies with four conditions: nominal, demand −8%, demand +8%, and breakdown hazard +20%. <strong>For the status-quo policy</strong>, completion fraction moves from about 97.0% under low demand to <strong>88.7% under high demand</strong>; maintenance-first drops from 95.7% nominal to about 91.8% under high demand. These are structured stresses, not probability distributions. See the <a href="experiment-results.csv">full experiment CSV</a>.</p>
+<h2>Supply and human-service transfer demonstrations</h2>
+<p><a href="inventory-position-aware.csv">Position-aware inventory trace</a> and <a href="inventory-naive.csv">naive inventory trace</a> use the same simplified 35-day demand shock (20 to 28 units/day on day eight) and four-day supply pipeline. The position-aware controller includes outstanding orders when setting its next order; naive ordering ignores that pipeline and overshoots. Max daily orders are 28 vs 100 units in these particular deterministic runs. These traces demonstrate <em>pipeline awareness</em>, not universal bullwhip reduction.</p>
+<p><a href="human-service.csv">Human-service flow trace</a> uses 18 beds, 15 initially occupied, mean modeled stay of six days, and 3.5 arrivals/day. At full occupancy the steady departure capacity is only three clients/day; modeled waiting demand increases to about 13.11 by day 30. Real care systems involve acuity, outcomes, triage, discharge placement, variable stays, service quality and equity; this example is not clinical advice.</p>
+<h2>Reproduction and evidence controls</h2>
+<p>From the repository root, using the Python standard library:</p>
+<pre><code class="language-bash">python3 SE/K/B13/tools/step03_book13_feedback.py --write
+python3 scripts/check_step03_book13.py
+python3 SE/K/B13/tools/step03_book13_feedback.py --dt 0.25 --policy combined --sensitivity high_demand
+</code></pre>
+<p>Changing parameters requires updating <a href="model-inputs.json">inputs</a>, regenerating <a href="summary.json">results</a>, checking tests and recording the reason in the review log. The source, reader, and Encyclopedia synchronization is controlled by <code>scripts/sync_step03_book13.py</code>, and its release checks are in the GitHub Pages workflow.</p>
+<h2>Decision status and key limits</h2>
+<p><strong>HOLD for real policy design, safety, accessibility compliance and procurement.</strong> Invariants and deterministic examples can be numerically verified; feedback structure, measurement processes, social response, intervention feasibility, external validity, human consequences, and Vensim parity are not. A real decision requires reliable observational data, transparent governance for rider groups, field-calibrated service and failure processes, and independently reviewed policy ethics. See <a href="requirements.csv">requirement trace</a>, <a href="credibility-register.csv">credibility record</a>, and <a href="vensim-equation-crosswalk.html">Vensim crosswalk</a>.</p>
+</main></body></html>

@@ -169,3 +169,34 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [04 — Previous chapter](04-use-archetypes-and-mental-models-to-generate-competing-intervention-.md) · [06 — Next chapter](06-implement-and-verify-the-first-executable-vensim-model.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-FB13.1 case: feedback, conservation, and policy learning — Week 5
+
+*Integrated chapter: Chapter 05 — Translate feedback hypotheses into stocks, flows, units, and accumulation equations. Northstar NS-FB13.1 is a transparent teaching baseline; the following methods are not field-validated.*
+
+### Conservation is the first non-negotiable modeling contract
+
+The model has five accumulated states: unavailable fleet \(U\) in vehicles; standard and accessible backlogs \(B_s,B_a\) in requests; perceived backlog \(P\) in requests; trust \(T\) in index points. Active fleet \(A=14-U\) is **derived**, so it is not an independent stock. With \(f,m\) measured in vehicles/day, \(a,c,r\) in requests/day, and \(\Delta t\) in days,
+
+\[
+U_{k+1}=U_k+\Delta t(f_k-m_k),\quad
+B_{g,k+1}=B_{g,k}+\Delta t(a_{g,k}-c_{g,k}-r_{g,k}),\ g\in\{s,a\}.
+\]
+
+A queue can only decrease by a modeled completion, cancellation or other legitimate outflow; numerical clipping is not a substitute for correct flow caps. In the executable code, abandonment is bounded by the outstanding stock per time step; completions are bounded by arrivals plus the remaining stock that can be served in the step. Fleet breakdown and repair flows are bounded by active and unavailable vehicles, respectively. This explicit policy prevents the algebra from creating negative vehicles or unreported passenger work.
+
+The information and social-response stocks add behavioral hypotheses: \(dP/dt=(B_s+B_a-P)/18\) requests/day and \(dT/dt=(T^*-T)/45\) index points/day. The constants 18 and 45 are **days**, not abstract gain factors. \(T^*\) depends on assumed abandonment and queue pressure; its coefficients require compatible conversion units and empirical justification before using Vensim dimensional checks.
+
+### Worked first half-day step, with units
+
+The declared starting point has 12.1 active vehicles, trust 63, and 310 total requests awaiting action. Demand is \(1260(0.75+0.25\cdot63/70)=1228.5\) requests/day. The surge fraction is \(0.12\cdot310/(310+380)=0.053913\); capacity is \(12.1\cdot93(1+0.053913)=1185.968\) trips/day. Standard arrivals are 1056.51/day and accessible arrivals 171.99/day. With 14% reserved access capacity, accessible completions are 166.036/day and standard completions are 1019.933/day. Abandonment rates are \(45/2.6=17.308\) and \(265/2.6=101.923\) requests/day, respectively.
+
+At \(\Delta t=0.5\) day, the next accessible backlog is \(45+0.5(171.99-166.036-17.308)=39.323\) requests; standard backlog is \(265+0.5(1056.51-1019.933-101.923)=232.327\). Total outstanding requests fall to approximately 271.650, but this improvement does **not** imply demand has been met: part of the reduction came from abandonment. The fractional request counts are expected values in a deterministic rate model, not literal half-passengers.
+
+**Worked exercise.** If a student instead writes \(B_{next}=265+1056.51-1019.933-101.923\) for the first half-day, what failed? **Solution:** arrivals and departures are daily *rates* and must be multiplied by 0.5 day. The wrong update gives 199.654 requests, not 232.327; the units are inconsistent. A correct time-step halving check should bring the numerical solution toward a stable limit, not merely halve the displayed flow labels.
+
+**Practice extension:** Add an “unaccepted eligible demand” stock and derive its conservation equation; specify whether it is inside the policy boundary.
+
+### Reproduce the evidence and challenge the result
+
+The [NS-FB13.1 case dossier](../case/INDEX.html) publishes its [controlled inputs](../case/model-inputs.json), [Python calculation model](../tools/step03_book13_feedback.py), [policy-by-condition evidence](../case/experiment-results.csv), [equation and unit crosswalk for Vensim](../case/vensim-equation-crosswalk.md), and [claim limitations](../case/credibility-register.csv). Reproduce results with `python3 SE/K/B13/tools/step03_book13_feedback.py --write` from the repository root. This is a **synthetic teaching simulation**: correctly conserving its stocks and reproducing its output does **not** calibrate the causal structure or authorize real mobility policy. The Book 11 event simulator and Book 12 physical vehicle model answer other questions and are not dynamically coupled.

@@ -63,3 +63,18 @@ Fleet effect $-14$, policy effect $-6$, interaction $+4$ minutes under the state
 ## Guided laboratory
 
 [Open the corresponding case-based lab](labs/16-experimental-design-workshop.md)
+
+
+<!-- STEP04-T1-START -->
+
+## Step 04 T1 — Evidence-driven correction and worked transfer
+
+### T1 audit finding: pair the *replications*, not the passengers
+
+Six independent synthetic demand streams have baseline mean waits \([25,28,22,31,26,24]\) minutes and matched candidate means \([20,24,20,26,23,22]\). Paired candidate-minus-baseline differences are \([-5,-4,-2,-5,-3,-2]\) minutes; the sample mean reduction is **3.5 minutes** and the standard error across six *independent pairs* is approximately **0.5627 minutes**. This does not make the 40 requests in the separate timing fixture six independent replications; it is a different pedagogical dataset.
+
+If normality of paired differences is reasonable, a two-sided 95% Student interval for the mean difference uses \(t_{0.975,5}\approx2.571\) and is approximately \(-3.5\pm1.447\), or \([-4.947,-2.053]\) minutes. These uncertainty numbers only describe variation among the declared independent synthetic streams. Changing the scenario mix or excluding rejected rides could reverse the operational interpretation. The model and measurement process remain unvalidated.
+
+**Practice and explained solution.** Treating the twelve paired scenario means as twelve unpaired independent observations discards pairing and uses the wrong sampling design. State the replication as a demand stream, preserve pair IDs, report the difference distribution, and require an unchanged or improved completion fraction as a separate hard gate. [Recompute paired differences](labs/T1-INTEGRATED-CASE.md).
+
+<!-- STEP04-T1-END -->

@@ -27,6 +27,10 @@ The chapter explains why a method is appropriate, the lab rehearses a fictional 
 ## How this volume connects to the other two
 SoS architecture identifies constituent dependencies; enterprise analysis identifies the institutions and incentives shaping them; critical systems practice tests boundaries, power and competing purposes. A strong final answer can combine them without treating a model as authority.
 
+## NS-ENT19.1 regional enterprise transformation
+
+The twelve chapters now include a [controlled enterprise transformation laboratory](case/INDEX.html), [constructed inputs](case/controlled-inputs.json), a [standard-library portfolio and 26-week coordination simulator](tools/step03_book19_enterprise.py), [portfolio scores](case/portfolio-screen.csv), [scenario outcomes](case/scenario-screen.csv), [authority registry](case/authority-and-incentives.csv), [value dictionary](case/value-measure-dictionary.csv), [capability map](case/capability-and-dependency.csv), and [transformation roadmap](case/transformation-roadmap.csv). All investment prices, scenario probabilities, policy results and approvals in this new case are hypothetical; **no operational authorization or historical estimate** is claimed. The original twelve chapters, labs and two advanced embedded readings remain preserved.
+
 ## Calculation and model lab
 Shared self-contained Python demonstrations and synthetic datasets: [`K/P5-LAB/`](../P5-LAB/).
 

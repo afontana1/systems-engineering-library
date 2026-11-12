@@ -1,0 +1,174 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Model-based behavior: state contracts and executable consistency checks · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/mbse-behavioral-contracts.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Model-based behavior: state contracts and executable consistency checks</h1>
+<p><em>Technical method guide · State machines, trace semantics, invariants, and bounded model checking · Phase 2 expansion</em></p>
+<p><strong>What this guide enables.</strong> Translate an operational thread into states, events, guards, effects, and safety/liveness requirements; check a small model for counterexample traces; relate results to MBSE traceability and configuration management; and distinguish a bounded exploration from a proof about a deployed system.</p>
+<p><strong>Prerequisites:</strong> <a href="mbse-semantic-modeling-handbook.html">MBSE semantics and evidence</a>, <a href="../encyclopedia/model-language-method-tool.html">model, language, method and tool</a>, <a href="../encyclopedia/traceability-graph.html">requirements and traceability</a>, and <a href="../encyclopedia/interface-control.html">interface control</a>.</p>
+<h2>1. A diagram is not yet a behavioral contract</h2>
+<p>The fictional Northstar dispatch service lets passengers request a seat on a capacity-limited vehicle. A use-case description may say “passenger submits a reservation.” A sequence diagram can show request and acknowledgement messages, an activity view can show validation and assignment steps, and a state-machine view can define legal lifecycle transitions. These are useful views but are not automatically consistent: one view might interpret <code>accepted</code> as receipt of bytes, while another interprets it as a durable seat commitment.</p>
+<p>Define a <strong>shared event vocabulary</strong>: <code>VALIDATE</code> means input was checked, <code>ASSIGN</code> means a uniquely identified resource was committed, <code>CANCEL</code> means the reservation was terminated and resources released, and <code>COMPLETE</code> means the service outcome was recorded. Every event should carry an identity, source authority, and timestamp or ordering evidence where relevant. Define what happens when a command is duplicated, arrives out of order, or is interrupted by a failure.</p>
+<p>A transition system is \(M=(S,E,\rightarrow,S_0)\), where \(S\) is a set of states, \(E\) events, \(\rightarrow\subseteq S\times E\times S\) the transition relation, and \(S_0\) the initial states. A <strong>trace</strong> is an allowed sequence \(s_0\xrightarrow{e_1}s_1\xrightarrow{e_2}\cdots\). A diagram is one view or projection of traces; a contractual claim should say which traces are legal and what observable property they must preserve.</p>
+<p>For a single request, use states CREATED, VALIDATED, ASSIGNED, CANCELLED, and COMPLETED. <code>VALIDATE</code> may change CREATED to VALIDATED. <code>ASSIGN</code> may change VALIDATED to ASSIGNED only when a capacity unit is free and route permission remains valid. <code>CANCEL</code> terminates a request and releases a booked unit <strong>once</strong>; <code>COMPLETE</code> requires recorded pickup and drop-off evidence. A duplicate <code>ASSIGN</code> must not book another capacity unit. A <code>CANCELLED→ASSIGNED</code> transition is forbidden unless a new, explicitly defined reopening protocol is present.</p>
+<h2>2. State variables and invariants make assumptions checkable</h2>
+<p>Model two requests competing for a single vehicle capacity unit. State consists of each request's lifecycle status and the number of capacity units allocated. For this <strong>illustrative abstraction</strong>, the reservation counter is the quantity of interest; payment, vehicle position, distributed database consistency, and network loss are intentionally omitted.</p>
+<p>Write the core safety invariant</p>
+<p>\[
+I(s):\quad 0\le\mathrm{allocated}(s)\le\mathrm{capacity}=1.
+\]</p>
+<p>A safety property means something bad never occurs: a finite trace may demonstrate a violation. A liveness property expresses expected future progress, for example “every durably accepted request eventually reaches COMPLETED or CANCELLED.” Liveness needs environmental assumptions: a completely unavailable network, permanent capacity shortage, or scheduler that never runs can defeat progress without violating the capacity safety invariant. Do not claim that the safety check proves liveness.</p>
+<p>A transition has <strong>preconditions</strong>, <strong>effects</strong>, and <strong>frame conditions</strong> (what does <em>not</em> change). For <code>ASSIGN(i)</code>, require request \(i\) in VALIDATED and <code>allocated &lt; capacity</code>; its effect changes the request state to ASSIGNED and increments allocated once; other requests' statuses remain unchanged. Duplicate <code>ASSIGN(i)</code> when already ASSIGNED should be <strong>idempotent</strong>—no further capacity adjustment—or rejected without side effects, depending on the chosen API semantics.</p>
+<p>A guard like <code>allocated &lt; capacity</code> helps prevent overbooking, but when the real system is distributed the guard and increment must be atomic with respect to competing assignments. A state machine that executes one command at a time can hide a race: two clients might each see <code>allocated=0</code> and both commit. The abstraction therefore preserves <em>sequential state semantics</em>, not a proof about distributed concurrency. To claim concurrency safety, model interleavings at the read/check/commit level or use an implementation mechanism with verified atomicity.</p>
+<h2>3. Bounded state exploration and counterexample traces</h2>
+<p>The accompanying <a href="code/state_space_checker.py">state-space explorer</a> enumerates all reachable states and commands for a small, fixed finite model (two requests, capacity one). At every state it checks the capacity invariant and a consistency condition: the counter equals the number of requests in ASSIGNED state. It records the shortest sequence of commands reaching a violation, if any.</p>
+<p>For the corrected model, <code>VALIDATE(0)</code>, <code>ASSIGN(0)</code>, and then <code>ASSIGN(0)</code> does <strong>not</strong> allocate twice. The duplicate is idempotent. For an intentionally defective transition relation that allows a repeated assignment to increment a counter without enforcing capacity or request-state preconditions, the explorer finds a counterexample:</p>
+<p>\[
+\mathrm{VALIDATE}(0)\;\rightarrow\;\mathrm{ASSIGN}(0)\;\rightarrow\;\mathrm{ASSIGN}(0).
+\]</p>
+<p>The final state has <code>allocated = 2</code> despite <code>capacity = 1</code>. It violates both the capacity invariant and the agreement between the counter and request statuses. This is a <strong>constructed defect</strong>, not a discovered issue in real Northstar software.</p>
+<p>The script uses breadth-first search and a fixed finite state model; it does not require a SysML interpreter or SAT/SMT solver. Its usefulness is pedagogical: the model has explicit state meaning and produces a witness trace that can drive a corrective requirement, a test, and a design review.</p>
+<p>A passed finite exploration only supports the statement: “no violation was reachable in the modeled state space under the implemented transition semantics.” It does not prove correctness when the implementation adds retries, partial failures, queues, clocks, authorization rules, or more requests. Record the abstraction assumptions and which properties were checked, not just a green test status.</p>
+<h2>4. Reconcile requirements, behavior, structure, and verification</h2>
+<p>A model-based evidence chain for this case should include:</p>
+<table>
+<thead>
+<tr>
+  <th>Engineering claim</th>
+  <th>Model element</th>
+  <th>Evidence needed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>No capacity overbooking</td>
+  <td>Invariant <code>allocated &lt;= capacity</code></td>
+  <td>Finite model check for abstraction; concurrency stress test and atomicity review for implementation</td>
+</tr>
+<tr>
+  <td>Duplicate assignment is idempotent</td>
+  <td><code>ASSIGN</code> transition, request identity</td>
+  <td>API contract, retry tests, data-store operation review</td>
+</tr>
+<tr>
+  <td>Cancellation returns capacity</td>
+  <td><code>CANCEL</code> transition and effect</td>
+  <td>State-transition tests and reconciliation of capacity ledger</td>
+</tr>
+<tr>
+  <td>Accepted requests terminate under declared assumptions</td>
+  <td>Fairness/liveness requirement</td>
+  <td>Operational failure and retry analysis; scheduler fairness model</td>
+</tr>
+<tr>
+  <td>Evidence applies to the release</td>
+  <td>Model and implementation baseline IDs</td>
+  <td>Configuration linkage, executable version and test-environment records</td>
+</tr>
+</tbody>
+</table>
+<p>A typed traceability relationship such as <code>satisfy</code> or <code>verify</code> does not turn a linked diagram into proof. The relationship needs a declared source, target, rationale, configuration, and reviewed evidence. An invariant checked against a model from release A cannot close a requirement in release B without explaining what changed and why the evidence still applies. See the <a href="mbse-semantic-modeling-handbook.html">typed traceability and baseline audit</a> for a complementary example.</p>
+<h2>5. Connections to SysML and executable formalism</h2>
+<p>SysML v2 provides standardized language facilities for structure, behavior, requirements, analysis and verification, built on KerML semantics, as well as an API/services ecosystem. Its textual and graphical forms are ways of expressing formalized modeling information; the presence of syntactically valid SysML does not guarantee that the engineering semantics are correct or the model is complete.</p>
+<p>The state-space program in this guide is <strong>notation-independent teaching code</strong>, not a claim of SysML v2 conformance, executable SysML interchange, or an OMG certified tool. The proper place to check language syntax, conformance, model interchange and mapping is the <a href="https://www.omg.org/spec/SysML/2.0/">official OMG SysML 2.0 specification</a> and a suitable conforming implementation. A real migration from SysML v1 should inventory semantics that do not automatically map, including stereotypes, allocations, constraints, behaviors, tool extensions and identifiers.</p>
+<p>An executable engineering modeling workflow would: (1) identify the governed requirement and behavior property; (2) express the candidate behavioral model in a declared language/abstraction; (3) run checks; (4) retain witness traces and model build IDs; (5) trace a counterexample to a corrected requirement or architecture decision; and (6) rerun checks and implementation tests after change. The tool is part of an evidence chain, not the owner of design authority.</p>
+<h2>6. Exercises and review gates</h2>
+<p><strong>Exercise A:</strong> add a rule preventing cancellation of a COMPLETED request, then explain whether a late cancellation request should be rejected or processed as a separate refund/complaint event. Update the event vocabulary rather than quietly repurposing <code>CANCEL</code>.</p>
+<p><strong>Exercise B:</strong> change the capacity from 1 to 2 and add a third request. Identify the growth in the reachable state space. Explain where partial-order reduction or compositional modeling would help larger systems.</p>
+<p><strong>Exercise C:</strong> refine <code>ASSIGN</code> into separate <code>CHECK_CAPACITY</code> and <code>COMMIT</code> events. Construct the concurrency interleaving in which two simultaneous requests both pass the check. Propose an atomic commit rule and a verification strategy.</p>
+<p>A sound review identifies which safety properties were actually proven for a finite model, which liveness properties remain unverified, which assumptions are external, which evidence is tied to a particular baseline, and which real-world implementation mechanisms require independent validation. A model that cannot express the failure that matters should be revised before it is used for a safety or acceptance claim.</p>
+<h2>7. Safety versus liveness in temporal reasoning</h2>
+<p>A property over a single state, such as \(\mathrm{allocated}\le1\), becomes a <strong>trace invariant</strong> when it must hold at every reachable step. In temporal-logic shorthand, \(\mathbf{G}(\mathrm{allocated}\le1)\) means “globally, at all points in a trace, capacity is not exceeded.” A progress claim can be written informally as \(\mathbf{G}(\mathrm{ASSIGNED}(i)\Rightarrow\mathbf{F}[\mathrm{COMPLETED}(i)\lor\mathrm{CANCELLED}(i)])\), where \(\mathbf{F}\) means “eventually.” The second property needs fairness and environmental assumptions; otherwise a request might remain assigned forever because no terminal event is processed.</p>
+<p>The small Python explorer checks the two <strong>safety</strong> predicates it implements. It does <strong>not</strong> evaluate temporal logic, fairness, time bounds or liveness. A false liveness claim is not rescued by the absence of a safety counterexample. If completion within five minutes is an actual requirement, clocks and progress assumptions must be explicitly added to the model, and a suitable verification technique chosen.</p>
+<h2>8. Refine an atomic transition to expose a concurrency race</h2>
+<p>The abstract <code>ASSIGN(i)</code> transition checks free capacity and increments the ledger in one step. A naïve distributed implementation may instead use separate operations:</p>
+<table>
+<thead>
+<tr>
+  <th>Step</th>
+  <th>Request 0</th>
+  <th>Request 1</th>
+  <th style="text-align:right">Shared recorded allocation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>Reads capacity 1 and allocated 0</td>
+  <td>—</td>
+  <td style="text-align:right">0</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>—</td>
+  <td>Reads capacity 1 and allocated 0</td>
+  <td style="text-align:right">0</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>Concludes a seat is available</td>
+  <td>—</td>
+  <td style="text-align:right">0</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>—</td>
+  <td>Concludes a seat is available</td>
+  <td style="text-align:right">0</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>Commits booking for request 0</td>
+  <td>—</td>
+  <td style="text-align:right">1</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>—</td>
+  <td>Commits booking for request 1 without rechecking atomically</td>
+  <td style="text-align:right"><strong>2</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Both request-local checks passed, but the global invariant failed. This is a <strong>time-of-check to time-of-use race</strong>. An atomic conditional write, transaction lock, single-writer queue, or compare-and-swap operation can support an implementation contract, depending on failure and persistence requirements. To verify the implementation, test or formally analyze concurrent interleavings and crash recovery, rather than simply re-running the sequential checker.</p>
+<p>A useful design rule is to specify <strong>linearization points</strong>: the operation at which the system has durably made a seat commitment and from which later clients must see its result. If retries are allowed, use a stable idempotency key and define whether a duplicate returns the existing result or a rejection. The term “exactly once” is not a free property of a network; semantics must include message duplication, recovery and persistent identity.</p>
+<h2>9. Manage the abstraction boundary as a controlled artifact</h2>
+<p>A model-checking report is incomplete without a table of preserved and omitted behaviors:</p>
+<table>
+<thead>
+<tr>
+  <th>Present in the small model</th>
+  <th>Deliberately outside the model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Two request identities</td>
+  <td>Arbitrarily many users and vehicles</td>
+</tr>
+<tr>
+  <td>Finite lifecycle states</td>
+  <td>Continuous-time scheduling and deadlines</td>
+</tr>
+<tr>
+  <td>Sequential event transitions</td>
+  <td>Overlapping read/check/commit transactions</td>
+</tr>
+<tr>
+  <td>Capacity counter invariant</td>
+  <td>Database durability, crash recovery and network partitions</td>
+</tr>
+<tr>
+  <td>Duplicate assignment event</td>
+  <td>Retries after ambiguous external acknowledgements</td>
+</tr>
+</tbody>
+</table>
+<p>The document reviewer should use the <strong>omitted</strong> column to decide whether the model is adequate for the intended claim. If the requirement primarily concerns collision-free <em>concurrent</em> seat assignment, a sequential abstract check is only one part of an assurance case. The appropriate next step is a refinement that introduces interleavings, then a real implementation test with bounded faults, load and recovery.</p>
+<p>A well-governed modeling repository should record invariant identifiers, model tool/library version, abstraction assumptions, checker version, input set, counterexamples, correction rationales, and the configuration of the implementation to which the claim is being applied. These are knowledge artifacts, not user-progress records or browser checkpoints.</p>
+<h3>Sources and curriculum connections</h3>
+<ul>
+<li><a href="https://www.omg.org/spec/SysML/2.0/">OMG SysML 2.0 formal specification</a> and <a href="https://www.omg.org/sysml/SysML-2.htm">OMG SysML v2 overview</a> for language scope, semantics and interoperability.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> for requirements, design assurance and lifecycle evidence.</li>
+<li><a href="../B3/chapters/05-behavior-modeling-use-cases-activities-action.html">Book 3, Chapter 5 — Behavior modeling</a>, <a href="../B3/chapters/10-verification-and-validation-modeling-configur.html">Chapter 10 — Model V&amp;V and configuration</a>, <a href="../B3/chapters/11-model-quality-queries-reports-change-impact-g.html">Chapter 11 — Model queries and quality</a>.</li>
+<li><strong>Curriculum:</strong> EN.645.631 (behavioral and model-quality topics), EN.645.632 (analyzable model assumptions), EN.605.704 (object lifecycle and concurrency), EN.645.768 (architecture and interface assurance).</li>
+</ul>
+<footer class="reference-note"><a href="mbse-behavioral-contracts.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

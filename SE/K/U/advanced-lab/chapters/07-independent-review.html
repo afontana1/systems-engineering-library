@@ -23,4 +23,11 @@
 <p><strong>Exercise 2.</strong> What is the strongest defensible release decision for this package?</p>
 <p>&lt;details&gt;&lt;summary&gt;Worked answer&lt;/summary&gt;Approve <strong>continued laboratory learning and controlled synthetic experimentation</strong>; do not approve external dispatch use, safety qualification or mission performance claims.&lt;/details&gt;</p>
 <p><strong>Submit:</strong> a two-page review memo with supporting links, dissenting observations and explicit authorization limits. Related: <a href="../../integrated-lab/review/REVIEW-BOARD.html">v11 review board</a>.</p>
+<section class="u2-extension" id="u2-cross-lab"><h2>U2 cross-lab credibility challenge — NS-U2.1</h2>
+<p><strong>Focus: Independent reviewer: defend against false positives.</strong> This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.</p>
+<p>A review should contain a deliberate <strong>defeater</strong> for every attractive result. Examples: duplicate messages accepted as additional demand, sampled wait computed only over survivors, a stale telemetry event treated as current, or approval attributed to a non-authorized role. U2 runs a battery of mutated-output tests that must fail rather than only testing valid cases.</p>
+<p><strong>Worked counterexample:</strong> Changing a completed trip's resource to V01 during the OUTAGE block makes an apparent on-time schedule physically inconsistent even though the total completed count is unchanged. Likewise, changing a true completed status to <code>unobserved_message_loss</code> without revising aggregate counts should be detected as an inconsistent ledger. The independent U2 audit catches both.</p>
+<p><strong>Exercise and solution:</strong> What does a valid counterexample prove? It shows a <em>particular stated invariant</em> can be violated by a specific altered record and that the checker can detect it; it does not prove all conceivable faults are covered. Assess fault injection diversity, checker independence, and limitations of model fidelity.</p>
+<p><strong>Reproduce:</strong> <a href="../../lab-credibility-u2/README.md">Cross-lab lab guide</a> · <a href="../../lab-credibility-u2/data/gates.json">Evidence gates</a> · <a href="../../lab-credibility-u2/outputs/u2-cross-lab-results.json">Computed results</a>.</p>
+</section>
 </main></body></html>

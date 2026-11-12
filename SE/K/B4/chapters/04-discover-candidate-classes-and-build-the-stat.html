@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Chapter 4 — Class discovery turns language into relationships · Systems Engineering Library</title><style>
 :root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
-<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
-<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B4/chapters/04-discover-candidate-classes-and-build-the-stat.html" data-se-mode="standard"></script>
+<link href="../../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/B4/chapters/04-discover-candidate-classes-and-build-the-stat.html" data-se-root="../../../" defer="" src="../../_assets/learning-shell-v55.js"></script>
 </head><body><header><div class="crumb"><a href="../../../../index.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="chapter-4--class-discovery-turns-language-into-relationships">Chapter 4 — Class discovery turns language into relationships</h1>
 <p><em>Book IV: Object-Oriented Analysis and Design · Week 4 — Discover candidate classes and build the static analysis model</em></p>
 <p><strong>Reading contract:</strong> Work through the explanations, attempt the questions without looking at the answers, and complete <a href="../labs/lab-04-discover-candidate-classes-and-build-the-stat.html">Hypothetical Lab 4</a> before attempting <a href="../../../C/P1/EN605704.html">the assessed Week 4 coursework</a>. For a shorter overview use the <a href="../../P1-text/lessons/605-704-w04.html">earlier Phase 1 primer</a>.</p>
@@ -31,7 +32,6 @@
 <p>Good classes are not necessarily the smallest possible classes. They are units whose internal changes usually preserve external contracts and whose responsibilities form a coherent explanation. Excessive coupling means a change to one concept forces unrelated concepts to change because the design has leaked details across boundaries. Excessive fragmentation can be equally harmful: a business rule is scattered across many thin objects and no object can explain or enforce it. High cohesion is best understood causally—features change together because they serve the same responsibility—rather than as a numerical target.</p>
 <p>A useful counterexample is a single <code>ShuttleManager</code> class that manages bookings, charging, accessibility, personnel and route permissions. It can be coded quickly and may initially pass all tests. Yet it combines state with different owners, rates of change, and assurance concerns. Conversely, creating separate objects for every single verb in a use case can produce a network of calls without clear invariant ownership. Domain-driven boundaries lie between these extremes, guided by responsibility, identity, state, and the costs of enforcing consistency.</p>
 <p>The purpose of class discovery is thus to construct a <strong>conceptual explanation of the domain that remains meaningful as the software evolves</strong>. Programming classes are one possible implementation of that explanation, not the explanation itself.</p>
-
 <h2 id="worked-northstar-example">Worked Northstar example</h2>
 <p>A Rider creates many Requests; each active Request may have zero or one Assignment; a Vehicle can be assigned many trips over time but only one overlapping active movement under this teaching rule. Model the multiplicity and time qualifier instead of accidentally asserting “one vehicle, one trip ever.”</p>
 <p>To turn the example into engineering evidence, record a stable identifier for every requirement or model element you invoke; identify the baseline configuration and scenario; write the decision rule before you compute or inspect the outcome; and state what would falsify the conclusion. A successful demonstration in this artificial shuttle case is an illustration of the method, never a claim about a real transportation service.</p>
@@ -46,4 +46,46 @@
 <p>In <a href="../labs/lab-04-discover-candidate-classes-and-build-the-stat.html">Lab 4: Class discovery turns language into relationships</a>, you will: Construct a seven-class analysis model with at least four associations, multiplicities and two written invariants. Remove one unnecessary class. The lab provides practice rather than a ready-to-submit answer. When you can explain your method, alternative, limits and evidence, return to the real course's Week 4 deliverable and grading rubric.</p>
 <h2 id="continuity">Continuity</h2>
 <p>This chapter builds from <a href="03-capture-functional-requirements-with-use-case.html">previous chapter</a> and leads toward <a href="05-analyze-dynamic-behavior-and-discover-collabo.html">next chapter</a>. Revisit the corresponding <a href="../../P1-text/lessons/605-704-w04.html">weekly primer</a> only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.</p>
-</main></body></html>
+<section class="step03-deeper-reading" id="step03-book4-integrated-r1"><h2>Step 03 integrated reference: class discovery and association semantics</h2>
+<h3>4.1 Derive classes from identity and obligations</h3>
+<p>Class models should identify (a) which objects possess independent identity, (b) which attributes are values, (c) which relationships have lifecycle meaning, and (d) which operations preserve invariants. The case's <code>Reservation</code> and <code>Assignment</code> are separate entities: one reservation may transition through cancellation, but an assignment is bound to a particular vehicle and slot. A <code>LocationReading</code> is a time-stamped value object; its equality may depend on value, timestamp and source rather than a synthetic database ID.</p>
+<table>
+<thead>
+<tr>
+<th>Relationship</th>
+<th>Illustrative multiplicity</th>
+<th>Reasoning obligation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reservation → Assignment</td>
+<td>0..1 active</td>
+<td>A request may be pending, cancelled, or assigned</td>
+</tr>
+<tr>
+<td>Vehicle → Assignment</td>
+<td>0..* historical</td>
+<td>History is many; <strong>active per slot</strong> is at most one</td>
+</tr>
+<tr>
+<td>Reservation → AuditEvent</td>
+<td>0..*</td>
+<td>Multiple state transitions can be recorded</td>
+</tr>
+<tr>
+<td>Vehicle → LocationReading</td>
+<td>0..* historical</td>
+<td>Freshness is evaluated for a selected observation</td>
+</tr>
+</tbody>
+</table>
+<p>Notice that a UML multiplicity alone cannot state “at most one <em>active</em> assignment per vehicle per overlapping slot.” The association might allow many historical assignments and still be correct. Add a predicate over state and time, and identify enforcement in the implementation. Do not distort the diagram's multiplicity just to encode a temporal rule.</p>
+<h3>4.2 Composition versus reference</h3>
+<p>Composition makes a lifetime-ownership claim: a composite is responsible for the parts' existence in the chosen model. It is not synonymous with “one class has a pointer to another.” An audit record may outlive a reservation's active phase under a retention policy, so modeling it as a part destroyed with the reservation would be misleading. Likewise, vehicle information may be owned by a fleet service; the reservation application should use a typed, versioned reference or snapshot rather than assume it controls the vehicle's lifecycle.</p>
+<p>Separate a <em>domain model</em> (business vocabulary) from the <em>deployment model</em> (database tables and services). Later chapters can realize the same domain constraints with a relational schema, while testing whether those constraints survive concurrency and failure.</p>
+<h3>4.3 Inspect the actual design</h3>
+<p>The <a href="../diagrams/oo4-reservation-model.svg">reservation model diagram</a> distinguishes an actor, service, policy, repository, persistent store, and audit event. It is an architecture-level responsibility diagram, not a claim of UML tool validation. The paired <a href="../diagrams/oo4-reservation-model.dot">DOT source</a> is editable. The model baseline declares one primary component owner per requirement so the <a href="../tools/step03_book4_contract_check.py">checker</a> can find missing or duplicated ownership.</p>
+<p><strong>Solved checkpoint.</strong> A diagram shows <code>Vehicle 1 — 1 Assignment</code>. It wrongly implies a vehicle has exactly one assignment forever. Correct this to a historical many-valued relation and attach the scoped rule \(|A(v,s)|\leq 1\). The corrected model supports both historical analysis and current conflict prevention.</p>
+<p><strong>Exercise.</strong> Introduce multi-leg trips. Decide whether <code>TripLeg</code> requires entity identity and whether an assignment belongs to the overall trip or a specific leg. Defend your choice with a cancellation or reassignment scenario.</p>
+</section></main></body></html>

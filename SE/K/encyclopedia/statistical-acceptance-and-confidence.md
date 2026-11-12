@@ -39,6 +39,25 @@ Treat acceptance as a governed decision with documented residual uncertainty; do
 - **T1 · Acceptance sampling is a lot decision, not quality estimation:** [NIST/SEMATECH e-Handbook, 6.2.1 What is Acceptance Sampling?](https://www.itl.nist.gov/div898/handbook/pmc/section2/pmc21.htm).
 - **T2 · Binomial OC curve and producer/consumer risk:** [NIST/SEMATECH e-Handbook, 6.2.3.2 Choosing a Sampling Plan with an OC Curve](https://www.itl.nist.gov/div898/handbook/pmc/section2/pmc232.htm).
 
+## Intervals and acceptance rules serve different decisions
+
+A **confidence interval** describes estimation uncertainty under a sampling model; an **acceptance plan** defines a decision rule with declared error risks. For a sample of four independent observations 9, 10, 11 and 10 milliseconds, \(\bar Y=10\), \(s=\sqrt{2/3}\), and \(SE(\bar Y)=0.40825\) ms. Using \(t_{0.975,3}=3.18245\) gives a mean interval of approximately \([8.70,11.30]\) ms. This interval does **not** bound a future 99th-percentile latency, and a confidence interval is not a posterior probability assigned to a fixed parameter.
+
+For binary outcomes, the Wilson interval behaves more sensibly at zero observed failures than a naive symmetric Wald interval, but it is not a substitute for a controlled exact one-sided binomial acceptance bound. The selection of the *interval type* must follow the type of claim. Study [statistical inference, factorial designs and evidence limitations](../methods/statistical-inference-and-experiments.md), then specify which population property your verification procedure must support.
+
+
+## Step 02 review exercise: interpret zero failures correctly
+
+Suppose \(n\) statistically independent, representative Bernoulli demands produce zero failures. Under the model assumptions, a **one-sided exact 95% upper bound** on failure probability \(p\) is
+
+\[
+p_U=1-0.05^{1/n}.
+\]
+
+For \(n=300\), \(p_U\approx0.009936\), or **0.994%**. This is a confidence procedure about an unknown population failure probability, not a statement that the next test has a 99.4% probability of success, nor a guarantee that failure probability is below 1%. At \(n=100\), the same procedure gives **2.951%**. Nonindependent trials, correlated defects, changing configurations and nonrepresentative operating conditions can undermine this interpretation.
+
+**Exercise (answer).** How many zero-failure independent trials would be required to place a one-sided 95% bound at or below 0.5%? Solve \(1-0.05^{1/n}\leq0.005\), yielding \(n\geq\lceil\ln(0.05)/\ln(0.995)\rceil=598\). Decide whether trials genuinely represent the intended operational population before relying on the computed count for acceptance.
+
 ## Follow the knowledge
 
 - **Prerequisites:** [Probability and dependence](probability-and-dependence.md), [Verification matrix](verification-matrix.md).

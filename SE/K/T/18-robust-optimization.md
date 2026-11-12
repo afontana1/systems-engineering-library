@@ -66,3 +66,18 @@ B alone satisfies both nominal hard constraints. Under stressed service of 4 per
 ## Guided laboratory
 
 [Open the corresponding case-based lab](labs/18-robust-optimization-workshop.md)
+
+
+<!-- STEP04-T1-START -->
+
+## Step 04 T1 — Evidence-driven correction and worked transfer
+
+### T1 audit finding: the correct result can be an empty feasible set
+
+The NS-T4.1 fleet choice has integer vehicle count \(x\in\{1,2,3\}\), nominal service \(6x\) requests/hour, stressed service \(4x\) requests/hour, and an **hourly energy budget** of \(12x\) kWh over each one-hour operating window. The hard constraints are service at least 10 requests/hour and energy at most 30 kWh per hour-long window. At \(x=2\), the nominal values (12 requests/hour, 24 kWh/hour-window) pass, but stressed service is only eight/hour. At \(x=3\), stressed service is twelve/hour but the 36-kWh hourly energy budget exceeds 30. There is **no robust-feasible integer choice**.
+
+Do not confuse energy (kWh per specified time interval) with instantaneous electrical power (kW). A 30-kWh budget for a one-hour window has the same average-power number as 30 kW, but it does not constrain instantaneous charging peaks unless an additional power model is declared. Here both the service rates and energy budget are invented for instructional screening, not actual fleet measurements.
+
+**Practice and explained solution.** If the hour-window energy budget rises to 36 kWh, \(x=3\) becomes feasible for the two declared service scenarios. That does not establish safety, adequate demand coverage for other scenarios, reliable access, or permission to alter the limit. [Enumerate the options](labs/T1-INTEGRATED-CASE.md).
+
+<!-- STEP04-T1-END -->

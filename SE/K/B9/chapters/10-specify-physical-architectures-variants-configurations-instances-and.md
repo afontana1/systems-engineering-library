@@ -121,3 +121,25 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [09 — Previous chapter](09-explore-the-trade-space-with-alternatives-uncertainty-sensitivity-an.md) · [11 — Next chapter](11-extend-the-modeling-language-and-automate-queries-validation-rules-m.md) · [Book index](../README.md)
+
+## Step 03 integrated technical reference: NS-MBA9.1 — variants, configurations and instances
+
+### One family model, different controlled realizations
+
+A modeling *type* describes a reusable definition; a *variant* is a configured selection from available options; an *instance* represents a particular occurrence; and a *baseline* freezes an approved configuration and its associated data. Conflating these levels makes results appear to transfer between products when they do not. The architecture array in [model.json](../case/model.json) declares variants A, B and C with immutable teaching assumptions until an explicit change is approved. It does **not** represent twelve individually controlled vehicles or an operational fleet inventory.
+
+A variant-specific calculation must use that variant's fleet size, cycle, chargers, efficiency, and daily energy assumption. If variant C uses five chargers and 14 vehicles, copying variant B's four-charger recovery output would produce a false result. The [auditor](../tools/step03_book9_model_check.py) recomputes each alternative from its own fields and rejects invalid physical parameter values.
+
+### Configuration baselines govern evidence applicability
+
+The assurance claim concerns a specific configuration and operating environment. Evidence `E06` in [the register](../case/evidence-register.csv) describes an older `NS-MBA9.0` assignment-safety demonstration, while the study uses `NS-MBA9.1`. It is **stale for the new build** unless an approved applicability case explains why relevant parts are unchanged. A newer report from an unrelated vehicle instance is not inherently more applicable than an older controlled report on the correct configuration; pedigree is not a timestamp contest.
+
+For change `CR-42`, the immediate impact graph flags `I02`, `M05`, `R05`, and `E05`. Before migrating to `NS-MBA9.2`, the board must decide if the change affects physical wiring, charger certifications, depot availability and test procedures not represented in this small graph. The model must support a *configuration-controlled review*, not just a choice among pretty variant diagrams.
+
+**Exercise.** Can a passing nominal charger calculation for B be copied as evidence of C's recharge capability?
+
+<details><summary>Worked answer</summary>
+
+No. C has a different fleet energy load and charger count, and its physical integration is not defined by the B analysis. Recompute C under its own configuration and run profile, then independently evaluate evidence applicability.
+
+</details>

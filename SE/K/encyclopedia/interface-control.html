@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Interface control and integration contracts · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\(','\)']],displayMath:[['\[','\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Interface control and integration contracts · Systems Engineering Reference</title><link href="../U/encyclopedia-v48.css" rel="stylesheet"/><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer="" src="../_assets/mathjax-svg.js"></script><script defer="" src="../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
 <link href="../_assets/learning-shell-v55.css" rel="stylesheet"/>
 <script data-se-mode="standard" data-se-page="K/encyclopedia/interface-control.html" data-se-root="../../" defer="" src="../_assets/learning-shell-v55.js"></script>
 </head><body class="standalone"><header class="standalone-head"><a href="../CONCEPTS.html">← All encyclopedia concepts</a><span>REFERENCE / Technical review</span></header><main class="standalone-main"><div class="entry-meta"><span class="tag tag-deep">Technically reviewed</span><span>Concept article · Engineering explanation</span></div><article class="article-body"><h1>Interface control and integration contracts</h1>
@@ -32,7 +32,11 @@
 <li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA · Systems Engineering Handbook, NASA/SP-2016-6105 Rev 2 (2016/2017)</a> — Lifecycle engineering, technical management, requirements, verification and validation.</li>
 <li><a href="https://www.incose.org/resource/incose-systems-engineering-handbook-a-guide-for-system-life-cycle-processes-and-activities-5th-edition/">INCOSE · Systems Engineering Handbook, 5th ed. (2023)</a> — Published practitioner reference; full text may require access.</li>
 </ul>
-<h2>Follow the knowledge</h2>
+<section id="step03-concept-study"><h2>Step 02 review studio — syntax is not semantic compatibility</h2>
+<p>Two components can exchange syntactically valid JSON while disagreeing about units, clock semantics, retries, or stale messages. A proper interface control document describes the physical/logical boundary, information schema, units, timing, version, exception handling, security expectations, and ownership of validation.</p>
+<p><strong>Solved exercise:</strong> producer A emits <code>status_age_ms=900</code>, and consumer B interprets the value as seconds. Both pass isolated serialization tests. What failed? <strong>The information contract</strong>: the producer and consumer share a field name without a common semantic type. Replace the ambiguous value with a versioned schema declaring milliseconds and unit-aware parsing. Add negative integration tests for unit mismatch, old schema versions, missing mandatory fields, duplicate messages, and incorrect ordering.</p>
+<p>For the fictional Northstar system, detection 0.35 s, gateway 0.25 s, transport 0.70 s, and display 0.35 s sum to 1.65 s, leaving 0.85 s against a 2.50 s allocation. This arithmetic check is not a measured latency distribution; a percentage-based acceptance target needs a separate test design and workload definition.</p>
+</section><h2>Follow the knowledge</h2>
 <p><strong>Related concepts</strong></p>
 <ul>
 <li><a href="boundaries-and-interfaces.html">Boundaries and interfaces: where local correctness meets system risk</a></li>

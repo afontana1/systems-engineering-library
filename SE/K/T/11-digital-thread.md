@@ -57,3 +57,18 @@ Differentiate referential integrity from evidence applicability; provide one sce
 ## Next connections
 
 Use the related books above to see how this concept becomes a course assignment. The lab provides a small, deliberately incomplete practice setting; it does not replace verification against real operational data.
+
+
+<!-- STEP04-T1-START -->
+
+## Step 04 T1 — Evidence-driven correction and worked transfer
+
+### T1 audit finding: complete links are not sufficient evidence
+
+The NS-T4.1 evidence register contains five uniquely identified requirement paths. A path is *actionable for the defined use* only if its state is **verified**, its route-interface revision equals the declared `route-3` baseline, and its intended-use field says `classroom capacity screening`. Exactly **two of five** paths meet all three predicates. The other records include stale revisions, unverified artifacts, or a different permitted use. Counting five hyperlinks would report 100% graph connectivity, but only 40% actionable evidence.
+
+A reproducible closed-world query should return the failing paths and reasons, not just a score. Record source identity, revision, method of verification, status, review date, configuration, and authorized purpose. Even if all five records passed this syntactic screen, operational authorization would remain separate: in the fixture, only the road authority has approved; labor and privacy approvals remain absent.
+
+**Practice and explained solution.** Change a `route-2` record to `route-3` without changing its `draft` status. It **still does not** become actionable. Then grant all permissions without changing missing technical evidence: the technical evidence gate still fails. These independent gates help prevent a digital thread from becoming a visual substitute for an assurance argument. [Inspect the JSON and checker](labs/T1-INTEGRATED-CASE.md).
+
+<!-- STEP04-T1-END -->

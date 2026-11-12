@@ -96,3 +96,25 @@ The strategy is revisable as evidence accumulates. An unexpected discrepancy may
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 1: T&E strategy and acceptance authority](../labs/lab-01-receive-the-design-baseline-and-create-the-integrated-t.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 1 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-TE8.1 — receiving the design for independent evaluation
+
+### The receiving decision is not a qualification decision
+
+System Test and Evaluation begins where Book 7's design-and-integration review ended. The design team submitted NS-DI7.1 with a modeled 440-ms degraded command path, 26.3 kWh shift energy, 0.97863 eight-hour mission reliability and 0.98644 logistics-adjusted availability. The first two figures look encouraging under the stated models; the last two miss the receiving specification. **NS-TE8.1** is the name of the evaluation campaign, not an upgrade or reapproval of the product baseline. Open its [controlled evaluation dossier](../case/INDEX.html), especially the [requirements](../case/requirements.csv), [test plan](../case/test-plan.csv) and [evidence register](../case/evidence-register.csv).
+
+A receiving review checks the chain *stakeholder need → requirement → test objective → procedure → measured quantity → configuration-specific evidence → disposition*. Define the article's hardware, software, data, firmware and calibration state before testing. A test that passed on NS-DI7.0 cannot automatically verify NS-DI7.1: it may be useful historical information, but it is **STALE** until a documented applicability argument or retest establishes relevance. Conversely, a failed analytical reliability model is evidence of an open risk, not evidence that an unexecuted test has passed.
+
+### Construct a test strategy that can falsify a claim
+
+For each requirement, specify the adverse outcome that would refute it. For TE8-R01 the claim is that the *99th-percentile* end-to-end degraded response is no more than 500 ms. Define both start and stop timestamps, load population, operating conditions and instrument uncertainty. For TE8-R03 the claim is an eight-hour survival fraction at least 0.98, which needs a mission definition, treatment of repeated exposures and shared hazards. A program test plan that merely lists 'run performance test' or 'check reliability' is not ready.
+
+Distinguish four categories: **verification** against approved requirements, **validation** against actual mission usefulness, **model-based prediction** with explicit assumptions, and **operational evaluation** under representative field conditions. They can support each other, but none is an automatic substitute for the others. Your acquisition and ethical obligations also depend on whose demand is represented: excluding accessible requests could make a fleet appear faster while failing its purpose.
+
+**Exercise.** The receiver finds a signed HIL report identifying NS-DI7.0, while the test campaign lists NS-DI7.1. Can the receiver mark duplicate-vehicle protection verified?
+
+<details><summary>Worked answer</summary>
+
+No. Keep TE8-E06 **STALE**. Identify changed allocation logic and relevant interfaces, request a controlled applicability demonstration or a new HIL test on the exact baseline, and preserve the prior record as historical—not current—evidence. A signature proves provenance, not applicability.
+
+</details>

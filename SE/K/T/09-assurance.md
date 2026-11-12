@@ -57,3 +57,18 @@ Your argument must distinguish fault occurrence, hazard exposure, and actual los
 ## Next connections
 
 Use the related books above to see how this concept becomes a course assignment. The lab provides a small, deliberately incomplete practice setting; it does not replace verification against real operational data.
+
+
+<!-- STEP04-T1-START -->
+
+## Step 04 T1 — Evidence-driven correction and worked transfer
+
+### T1 audit finding: shared failure defeats an apparently strong redundancy claim
+
+In NS-T4.1 each of two modeled dispatch channels succeeds with probability \(r=0.97\), conditional on the absence of a shared outage. If they were independent without other failure paths, the parallel availability-like success probability would be \(1-(1-r)^2=0.9991\). The case also assumes a common-cause loss probability \(c=0.035\). Conditional independence **only when the shared cause is absent** gives \(P(\text{mission success})=(1-c)[1-(1-r)^2]=0.9641315\), or 96.41315%.
+
+The result is a **synthetic one-mission success probability**, not a measured steady-state availability, an exponential life-model reliability, or a safety-loss rate. The event definition, shared-cause parameter, observation horizon, and diagnostic coverage would require independent justification. Simply multiplying nominal component probabilities would miss the dominant failure path.
+
+**Practice and explained solution.** If the shared-cause probability were zero, the result would be 99.91%. If it rose to 0.05, the result would become \(0.95\times0.9991=0.949145\). A component-level test that does not activate the shared power path cannot establish either result. [Review the evidence chain](labs/T1-INTEGRATED-CASE.md).
+
+<!-- STEP04-T1-END -->

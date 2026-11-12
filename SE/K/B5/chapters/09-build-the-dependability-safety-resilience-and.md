@@ -77,3 +77,26 @@ In [Lab 9: Dependability is a claim supported by argument and evidence](../labs/
 ## Continuity
 
 This chapter builds from [previous chapter](08-specify-and-analyze-performance-networking-re.md) and leads toward [next chapter](10-design-testing-ci-and-an-integrated-software-.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/645-764-w09.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+
+## Step 03 integrated reference: safety, availability and common-cause exposure
+
+### Separate the claims before estimating them
+
+Reliability concerns successful operation over an interval; availability concerns service being usable under a defined measurement rule; safety concerns unacceptable loss or harm; resilience concerns behavior during disruption and recovery. NS-SW5.1's availability objective is **not** a claim that vehicle motion is safe. Its SWS-08 operator fallback may help manage a software outage, but any physical-motion safety case needs independent system-level analysis and controls.
+
+In a hypothetical 30-day window there are \(30\times24\times60=43{,}200\) minutes. A 99.9% **time-based** service availability target permits at most
+
+\[B=(1-0.999)\times43{,}200=43.2\text{ unavailable minutes}.\]
+
+The four synthetic [incidents](../case/incident-log.csv) total 5+7+10+14 = **36 minutes**. Remaining allowance is 7.2 minutes. This calculation assumes unavailability is measured as those incident durations, with no overlapping intervals and a fixed accounting policy. A request-based SLI would yield a different numerator and denominator. Never silently mix the two.
+
+### Evaluate redundancy against shared failure
+
+For two essential services whose independent interval availabilities are 0.9995 each, serial composition gives about 99.9000%. If a modeled shared-cause event with probability 0.001 can disable the entire path, the illustrative availability falls to 99.8001%. The point is not the exact synthetic percentage; it is that adding replicas on a shared deployment platform cannot eliminate platform-wide failure. A fault tree needs to represent power, identity, configuration and operator-induced common causes rather than assume every failure is independent.
+
+### Build an assurance argument
+
+Claim: reservation service fails visibly and does not claim success after a timeout. Subclaims: IF-01 returns an explicit failure, IF-02 prevents duplicate slot assignment, IF-03 rejects stale state, and operator fallback is correctly invoked. Supporting evidence includes transaction tests, boundary-condition tests, recovery drills and monitored operations, each bound to a build/configuration. The current recovery drill is `PLANNED`, so the corresponding argument is not closed. A model checker finding consistent IDs is not a safety case.
+
+**Exercise.** An engineer adds a replica in the same region and claims that availability doubles. **Answer.** Availability is a probability or fraction, not an additive quantity. Derive the failure logic, include shared dependencies, and measure the service from the user boundary. Any resilience improvement requires demonstrated behavior under the faults it purports to tolerate.

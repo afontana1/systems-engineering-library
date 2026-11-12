@@ -36,3 +36,17 @@ No. Larger `n` reduces Monte Carlo estimation error for the specified simulation
 </details>
 
 **Gate evidence:** reproducible experiment table, at least one confidence-interval calculation, sensitivity analysis, and an explicit credibility assessment.
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Uncertainty, sampling and the fixed-fixture fallacy.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+A fixed, hand-designed twelve-request dataset is **not a random sample** of the regional demand population. Its `12/12` completion fraction cannot be interpreted as a high-confidence population service estimate. To demonstrate the statistical distinction, compute the nominal 95% Wilson lower bound **as if** these were twelve independent Bernoulli observations:
+
+\[L=\frac{\hat p+z^2/(2n)-z\sqrt{\hat p(1-\hat p)/n+z^2/(4n^2)}}{1+z^2/n},\quad n=12,\quad \hat p=1,\quad z=1.96.\]
+
+The arithmetic yields **approximately 0.7575**, far below 0.95. But even that bound is **not** a credible field interval: its IID sampling premise does not describe the selected fixture. The U2 bridge labels the number as a calculation demonstration only.
+
+**Exercise and solution:** Can 1,200 replications of an invented exponential-arrival simulation establish field validity? **No.** Replication reduces Monte Carlo error conditional on the model; it cannot repair an incorrect arrival law, omitted accessibility needs, or unmodeled human operations.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

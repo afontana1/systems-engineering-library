@@ -95,3 +95,25 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 3: Test architecture and fidelity](../labs/lab-03-design-test-concepts-environments-architecture-and-mode.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 3 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-TE8.1 — test environments and the credibility ladder
+
+### Fidelity is claim-specific
+
+A software-in-the-loop environment can expose dispatcher state logic cheaply, and hardware-in-the-loop can show real controller timing and interfaces. Neither automatically provides a valid estimate of fleet-level accessibility, shared-hazard reliability, or logistics availability. A useful fidelity argument identifies the physical phenomenon, the environmental range, the evidence needed and the proxy's known omissions. The test architect should explicitly list *unrepresented behavior* rather than hide it behind a diagram.
+
+For the Northstar test campaign, arrange increasing investment: model-only timing and energy calculations; SIL fault injection for double allocations and replay handling; HIL timing with controlled gateway clock and device firmware; environmental testing with thermal and radio stress; and representative operations with defined inclusion rules. Each step has a **promotion criterion**: which earlier doubts it can retire, which new confounders it introduces, and what baseline identity must remain controlled. An operator training simulation may offer excellent usability feedback yet little quantified evidence for an 0.99 availability target.
+
+### Validate the test apparatus before believing the response
+
+A digital clock can drift by 2 ms at start and 3 ms at stop. If those timing errors could add in the adverse direction, a conservative interval bound on elapsed-time error is 5 ms; an independent standard-uncertainty treatment would combine standard deviations differently. Choose the model that matches the calibration certificates and correlation, not whichever produces smaller uncertainty. Inject a known reference delay, test time sync loss and confirm logs preserve units and clock domains.
+
+Define *coverage* in terms of operating regions (peak demand, degraded connectivity, inaccessible routes, low battery, cold start). Forty repeated nominal trials are not a substitute for a sparse but carefully designed stress matrix. Also separate test article readiness from evidence acceptance: an HIL rack may be calibrated yet not be representative of production gateway firmware.
+
+**Exercise.** A SIL emulator reports no double-booking across 1,000 sequential requests. What decisive experiment is still missing?
+
+<details><summary>Worked answer</summary>
+
+At minimum, run overlapping allocation requests against the actual transaction boundary, with fault injection and concurrency scheduling that can expose interleavings. Preserve database isolation level, timing, exact build, and assertion logs. Sequential success cannot establish a race-condition invariant.
+
+</details>

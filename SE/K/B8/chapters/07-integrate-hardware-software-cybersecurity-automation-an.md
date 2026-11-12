@@ -95,3 +95,25 @@ Treat the test environment as a configured system with its own dependency graph.
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 7: Hardware, cyber, automation and tools](../labs/lab-07-integrate-hardware-software-cybersecurity-automation-an.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 7 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+## Step 03 integrated technical reference: NS-TE8.1 — cyber, software, and automation evidence
+
+### The interface is part of the security boundary
+
+A cyber-physical requirement concerns behavior after a malicious or malformed event, not just possession of a security control. TE8-R08 requires stale or replayed dispatch commands to be rejected **without actuation**. A test therefore observes both the software acceptance decision and the downstream physical action. The adversarial stimulus must include a duplicated authenticated message, reordered sequence numbers, timestamp changes, clock loss and a retry after an ambiguous acknowledgment. A false reject can also impair service availability: the evaluator records both safety/security outcomes and operational effects.
+
+Software test automation should produce *traceable evidence*: stimulus hash, interface version, device identity, test runner version, expected response, observed response, raw log checksum and qualification of the harness. A green unit-test badge is inadequate if the deployment artifact was built from a different commit or if the emulator silently ignores the actuator path. Automation can repeat a known assertion reliably; it cannot decide whether the assertion expresses the right system-level risk.
+
+### Concurrency and security interact
+
+Imagine a stale command re-enters the queue during recovery, while two brokers each retry a reservation. The transaction invariant 'one vehicle has no more than one active owner' must survive both **interleaving** and **replay**. Countermeasures may combine idempotency keys, uniqueness constraints, sequence windows and durable transaction logs. A test should cause interleavings deliberately, not rely on rare accidental collisions. Use the Book 4–5 software-contract examples for component-level intuition; TE8's task is to evaluate the integrated deployment baseline and its physical interface effects.
+
+The [campaign evidence register](../case/evidence-register.csv) marks TE8-E07 **PLANNED**. The absence of a cyber test is neither a confirmed vulnerability nor a passed control. It is an open evidence item whose disposition depends on mission hazard and release rules.
+
+**Exercise.** An automated test reports 'replay rejected' from a mocked API, but no controller output is recorded. Name the missing end-to-end evidence.
+
+<details><summary>Worked answer</summary>
+
+Instrument the real or representative controller and prove that replayed commands do not cause actuation, including during clock skew, reconnection and service restart. Record build provenance, stimulus and physical output. The API-only assertion is useful unit evidence, but its scope is narrower than TE8-R08.
+
+</details>

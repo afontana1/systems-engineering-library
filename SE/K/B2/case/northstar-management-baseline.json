@@ -1,0 +1,31 @@
+{
+  "case_id": "NS-M1",
+  "technical_baseline": "NS-B1",
+  "management_baseline": "NS-M1",
+  "scope": "Synthetic management case; fictional campus shuttle demonstrator; not a bid, certification or contract.",
+  "currency_unit": "USD millions",
+  "performance_measurement_baseline": 7.2,
+  "management_reserve": 0.6,
+  "illustrative_fee": 0.6,
+  "illustrative_offer": 8.4,
+  "control_accounts": [
+    {"id": "CA-01", "deliverable": "System architecture and configuration", "budget": 1.2, "pv": 1.10, "ev": 1.00, "ac": 1.05},
+    {"id": "CA-02", "deliverable": "Vehicle and gateway integration", "budget": 2.0, "pv": 0.90, "ev": 0.65, "ac": 0.80},
+    {"id": "CA-03", "deliverable": "Dispatch software and interfaces", "budget": 1.6, "pv": 0.70, "ev": 0.50, "ac": 0.58},
+    {"id": "CA-04", "deliverable": "Verification and evidence", "budget": 1.4, "pv": 0.20, "ev": 0.15, "ac": 0.18},
+    {"id": "CA-05", "deliverable": "Deployment preparation and training", "budget": 1.0, "pv": 0.10, "ev": 0.10, "ac": 0.09}
+  ],
+  "checkpoint": "Fictional month-five cost report; intentionally distinct from the 13-week schedule teaching network",
+  "schedule_activities": [
+    {"id":"A","label":"Charter approval","weeks":2,"predecessors":[]},
+    {"id":"B","label":"Vehicle acquisition","weeks":4,"predecessors":["A"]},
+    {"id":"C","label":"Software specification","weeks":3,"predecessors":["A"]},
+    {"id":"D","label":"Integration","weeks":5,"predecessors":["B","C"]},
+    {"id":"E","label":"Acceptance testing","weeks":2,"predecessors":["D"]}
+  ],
+  "risk_scenarios": [
+    {"id":"R-SUP","name":"Supplier delivery rework","probability":0.25,"incremental_cost":0.4},
+    {"id":"R-IF","name":"Interface rework","probability":0.20,"incremental_cost":0.3}
+  ],
+  "provenance": "All values invented for instruction. Do not use to claim actual project cost, schedule, safety or supplier performance."
+}

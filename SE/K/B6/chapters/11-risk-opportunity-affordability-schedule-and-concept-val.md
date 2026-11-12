@@ -89,3 +89,31 @@ For **C**, use a controlled artifact and a predeclared decision rule. A measured
 ## Practice before the assessed course work
 
 [Hypothetical Laboratory 11: Conditional concept validation](../labs/lab-11-risk-opportunity-affordability-schedule-and-concept-val.md) provides a fictional rehearsal distinct from the assessed course project. Complete its decision memo and peer-review checklist first, then return to the actual guide's Week 11 deliverable and mastery gate. The course guide also retains its authoritative reading and source references; the companion does not replace those references or claim to be an independently validated technical standard.
+
+
+## Step 03 integrated reference: NS-CD6.1 — concept validation and the value of an experiment
+
+A Concept Validation Review should ask whether a proposed concept is **worth carrying into detailed design under declared conditions**, not whether the team produced attractive figures. The synthetic NS-CD6.1 model screens B and C as feasible and ranks C higher under the declared weights. That supports **selecting C for a controlled experiment**, but its degraded timing fails the reference and its accessibility and pickup-wait field evidence remains unexecuted.
+
+### Make information worth its cost
+
+Suppose a separate *illustrative loss analysis* represents two uncertain future demand states: ordinary (probability 0.7) and severe stress (0.3). Let downstream loss, in thousands of dollars, be:
+
+| Concept | Ordinary loss | Severe-stress loss |
+|---|---:|---:|
+| B | 135 | 160 |
+| C | 100 | 190 |
+
+Expected loss is \(E[L_B]=0.7(135)+0.3(160)=142.5\) thousand dollars and \(E[L_C]=0.7(100)+0.3(190)=127\) thousand dollars, favoring C. With **perfect foreknowledge** of state, choose C in ordinary conditions and B under severe stress, giving \(0.7(100)+0.3(160)=118\) thousand dollars. The expected value of perfect information is therefore \(EVPI=127-118=9\) thousand dollars. A $12,000 data campaign cannot be justified on **this loss model solely** by perfect information, because even ideal information is worth only $9,000. A $5,000 test might be worthwhile, but its expected *sample* information value still depends on test accuracy and consequences; it cannot simply be set equal to EVPI.
+
+This loss table is a separate illustrative risk example, not a derivation from the weighted value scores or an empirical forecast. If the probabilities or losses are contestable, vary them and disclose the assumptions before suggesting an actual experiment budget.
+
+### Build a condition-based review argument
+
+For C, report: 52.8 nominal effective trips/h versus a 46.2 screen; a model p90 wait of 9.5 minutes versus a 12-minute target; 98% *assumed* accessible coverage versus 95%; capital and annual cost within nominal caps; nominal command timing of 420 ms; **degraded command timing of 560 ms**; and missing pilot and fallback observations. The reviewer should require specific evidence to close CD6-R02, R06, R07 and stale CD6-R08 before any field-use authorization.
+
+### Exercise and answer
+
+**Exercise:** Is “model passed all requirements” a credible C concept-validation conclusion? **Answer:** No. At least one model case fails, several claimed outcomes are estimates rather than observed service results, and one record is from the wrong baseline. A bounded decision is “investigate C in a controlled pilot, with explicit exit criteria and retained alternative B.” It is not “approve C for operation.” Reproduce the distinction with the [evidence register](../case/evidence-register.csv).
+
+**Boundary:** Expected-value calculations reflect a risk-neutral monetary decision model. Nonmonetary harms, equity, safety, and statutory constraints cannot be silently converted into small modeled costs.

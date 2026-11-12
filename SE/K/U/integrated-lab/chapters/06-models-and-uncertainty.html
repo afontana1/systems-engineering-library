@@ -25,4 +25,12 @@
 <p>No. Larger <code>n</code> reduces Monte Carlo estimation error for the specified simulation, but not structural/model-form error, sampling bias, unknown real-world correlations, or mismatch between simulation assumptions and the deployed environment. Validation evidence must come from outside the simulation itself.</p>
 <p>&lt;/details&gt;</p>
 <p><strong>Gate evidence:</strong> reproducible experiment table, at least one confidence-interval calculation, sensitivity analysis, and an explicit credibility assessment.</p>
+<section class="u2-extension" id="u2-cross-lab"><h2>U2 cross-lab credibility challenge — NS-U2.1</h2>
+<p><strong>Focus: Uncertainty, sampling and the fixed-fixture fallacy.</strong> This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.</p>
+<p>A fixed, hand-designed twelve-request dataset is <strong>not a random sample</strong> of the regional demand population. Its <code>12/12</code> completion fraction cannot be interpreted as a high-confidence population service estimate. To demonstrate the statistical distinction, compute the nominal 95% Wilson lower bound <strong>as if</strong> these were twelve independent Bernoulli observations:</p>
+<p>\[L=\frac{\hat p+z^2/(2n)-z\sqrt{\hat p(1-\hat p)/n+z^2/(4n^2)}}{1+z^2/n},\quad n=12,\quad \hat p=1,\quad z=1.96.\]</p>
+<p>The arithmetic yields <strong>approximately 0.7575</strong>, far below 0.95. But even that bound is <strong>not</strong> a credible field interval: its IID sampling premise does not describe the selected fixture. The U2 bridge labels the number as a calculation demonstration only.</p>
+<p><strong>Exercise and solution:</strong> Can 1,200 replications of an invented exponential-arrival simulation establish field validity? <strong>No.</strong> Replication reduces Monte Carlo error conditional on the model; it cannot repair an incorrect arrival law, omitted accessibility needs, or unmodeled human operations.</p>
+<p><strong>Reproduce:</strong> <a href="../../lab-credibility-u2/README.md">Cross-lab lab guide</a> · <a href="../../lab-credibility-u2/data/gates.json">Evidence gates</a> · <a href="../../lab-credibility-u2/outputs/u2-cross-lab-results.json">Computed results</a>.</p>
+</section>
 </main></body></html>

@@ -117,3 +117,41 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [10 — Previous chapter](10-extend-the-model-to-population-or-biological-dynamics-and-communicat.md) · [12 — Next chapter](12-reproduce-challenge-present-and-defend-the-final-complex-system-simu.md) · [Book index](../README.md)
+
+## Step 03 integrated NS-CPS12.1 case: hybrid events, deadlines and HIL readiness
+
+### Four kinds of time that must not be confused
+
+**Physical time** is the model's independent variable. **Controller sample time** defines when control decisions are updated. **Numerical integration step** determines the solver's error/stability behavior. **Wall-clock execution time** determines real-time feasibility. The source guide gives a 10 ms control sample, but the NS-CPS12.1 demonstration updates its proportional speed command on the model's default **0.5 s Euler step**, with no separate 10 ms controller loop. Therefore the script is **not** a sample-rate-accurate controller or a real-time/HIL simulator. It can still teach how to organize the tests that would be needed to make such a claim.
+
+A first-order physical thermal state obeys \(\dot T=[Q-UA(T-T_a)]/C_b\), with thermal time constant \(\tau=C_b/UA\). Since a low-flow configuration yields \(\tau=10750\) s and high-flow about 2820 s, a 0.5 s thermal Euler step is extremely fine relative to this *single* slow state. That observation does not justify 0.5 s for fast motor currents, brake events, impact/contact, inverter switching or a 10 ms controller. The model excludes those fast states; adding them can make the equations stiff and change solver needs.
+
+### Hybrid automaton as an explicit interface contract
+
+Real shuttle supervisory modes might be `Drive`, `Regenerate`, `Charge`, `ThermalWarning`, `Fault` and `Parked`. For each guard define direction, priority, hysteresis and reset map. Example conceptual thermal guard: when \(T_b\ge44^\circ C\), transition from `Drive` to `ThermalWarning`, command enhanced cooling and possibly traction derating; return to `Drive` only when \(T_b\le42^\circ C\) and fault conditions are cleared. This 2°C hysteresis prevents chatter near 44°C. **The current teaching code does not implement this thermal mode switch**; merely listing the state in a diagram is not simulation evidence. A credible extension must add the transition, write tests at both thresholds and verify that two competing guards are resolved deterministically.
+
+Zero-crossing detection matters. If one integration step leaps from 43.9°C to 44.2°C, taking an action only after the step may be too late in a protective controller. Event localization or bounded substepping is required for high-consequence threshold behavior. The correct design might include sensor filtering, measured hysteresis and fail-safe behavior on lost thermal data; none can be inferred from the existing low-order model.
+
+### Scheduling math for real time
+
+For a fixed real-time cycle \(h_c=10\) ms, let worst-case computation \(C\), I/O \(I\), synchronization \(S\) and reserved margin \(M\). A necessary (not sufficient) deadline screen is
+
+\[
+C+I+S+M\le h_c.
+\]
+
+With hypothetical \(C=5.2\), \(I=1.0\), \(S=1.3\), \(M=1.0\) ms, total 8.5 ms leaves **1.5 ms slack**. If an adverse scheduling tail raises \(C\) to 8.0 ms, the total becomes 11.3 ms and misses the 10 ms deadline. Average Python runtime over a file-generation job is **not** a valid substitute for worst-case latency, jitter distribution, deterministic I/O, clock synchronization and fault-injection evidence. Hardware loop closures also introduce power, grounding, actuator and safety-interlock hazards.
+
+### Code-level verification versus HIL validation
+
+The [simulator](../tools/step03_book12_coupled_vehicle.py) has reproducible normal-run checks, rejects out-of-bounds integration steps, and reports internal energy and thermal residuals. This supports software-level regression. It does not establish hardware signal scaling, sensor/actuator delay, deadline misses, HLA/FMI conformance, real-time operating-system behavior or emergency-stop response. Create distinct V&V gates: unit/model checks, integration timing checks, HIL bench safety checks, and mission-specific operational validation. Never collapse those gates into one green checkmark.
+
+### Exercises with worked solutions
+
+**A.** A 10 ms loop consumes computation 8.0 ms, I/O 1.0 ms, synchronization 1.3 ms and margin 1.0 ms. Pass? **Answer.** 11.3 ms total, 1.3 ms over deadline; fail. The model must improve performance, reduce work, redesign sampling or explicitly reject real-time use.
+
+**B.** A thermal event occurs mid-step, but the integrator applies cooling at the next sample. What uncertainty is introduced? **Answer.** Event-time error up to one step (in this simple scheme) and potentially altered peak temperature; converge the event location separately from ODE truncation error.
+
+**C.** A simulation produces the same CSV twice. Does that prove determinism on a real-time target? **Answer.** No: deterministic offline numerical outputs do not measure wall-clock worst-case execution, operating-system scheduling, asynchronous messages or physical I/O timing.
+
+**Deliverable:** a mode-transition table with guard precedence, a numerical step-convergence report, worst-case timing budget and an explicit **NOT HIL-READY** evidence statement until hardware-specific tests exist.

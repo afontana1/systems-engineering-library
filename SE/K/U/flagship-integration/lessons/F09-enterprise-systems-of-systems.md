@@ -1,0 +1,13 @@
+### F09 extension · Joint availability, distributed authority, and change impact
+
+**Shared-cause dependence.** Suppose two redundant communication elements each have 98.5% availability under independent element failures. Parallel availability would be $1-(1-0.985)^2=0.999775$. If a separate common-cause event disables both with probability 0.03, a simple illustrative mixture gives $(1-0.03)(0.999775)=0.96978175$, or 96.978%. That falls below NS-U4.1's 99% mission-availability screening threshold. Independence modeling would incorrectly report a pass. The mixture itself requires validation of the shared-cause definition and event conditioning.
+
+**Capacity is not the whole mission.** The integrated policy's normal throughput is promising; compound disruption reduces weighted overall timely performance to about 13.8% and accessible performance to about 16.7%. This is a system-of-systems coordination problem, not merely a fleet-count optimization: road authority, dispatch network, vehicle service, partner agency information, and accessible operational support have distinct owners.
+
+**Authority gates.** A federated technical configuration is not a federated agreement. The NS-U4.1 evidence register has only one actionable claim out of five, and road authority, labor consent and privacy review are all absent. Do not turn a signed hash into signed permission. A new supplier interface revision makes prior interface tests stale even when the graph remains connected; model change impact must invalidate evidence *by scope and revision*.
+
+**A bounded enterprise intervention.** Begin with a narrowly scoped synthetic rehearsal rather than mission deployment. Name the approving authorities, define accessible outcome measures, establish no-go and rollback criteria, and collect scenario-specific evidence. A pre/post mean decline could reflect weather or staffing; the constructed difference-in-differences example reports −7 minutes only under an unverified parallel-trends assumption. Stakeholder legitimacy cannot be derived from the regression coefficient.
+
+**Worked exercise and solution.** Reduce common-cause probability to 0.005 with unchanged element availability. Joint availability becomes $0.995\times0.999775=0.994776125$, which passes 99%. That numerical change would not restore any missing interface, safety or stakeholder approval. The appropriate next action is evidence collection and assumption validation, not immediate release.
+
+**Reproduce:** [D07](../derivations/07-reliability-dependence.md), [D10](../derivations/10-causal-evaluation.md), [D12](../derivations/12-digital-provenance-and-assurance.md), [integrated lab](../flagship-integration/INTEGRATED-LAB.html).

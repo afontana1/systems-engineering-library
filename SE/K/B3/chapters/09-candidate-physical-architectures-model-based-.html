@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Chapter 9 — A physical architecture is a trade, not a picture · Systems Engineering Library</title><style>
 :root{--ink:#1b3340;--teal:#116f72;--line:#dce6e9;--muted:#607580}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f7f8;color:var(--ink);font:16px/1.75 system-ui,Segoe UI,Arial,sans-serif}a{color:var(--teal);overflow-wrap:anywhere}header{background:#173f52;color:white;padding:24px max(22px,calc((100vw - 1060px)/2))}header a{color:#c6f5ee;text-decoration:none}header .crumb{font-size:.8rem;letter-spacing:.02em}main{max-width:1080px;margin:28px auto 70px;padding:34px clamp(19px,4vw,64px);background:white;border:1px solid var(--line);border-radius:16px}h1{font-size:clamp(1.7rem,4vw,2.3rem);line-height:1.25}h2{font-size:1.45rem;margin-top:2em;border-bottom:1px solid var(--line);padding-bottom:.35em;scroll-margin-top:25px}h3,h4{scroll-margin-top:25px}p,li{max-width:90ch}table{border-collapse:collapse;display:block;max-width:100%;overflow:auto;margin:1.4em 0}th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}th{background:#edf5f5}pre{padding:16px;overflow:auto;background:#edf3f4;border-radius:8px}code{font-size:.9em;overflow-wrap:anywhere}p code,li code{padding:2px 4px;background:#edf3f4;border-radius:4px}blockquote{border-left:4px solid #68afad;margin-left:0;padding:3px 15px;background:#f1f9f7}img,svg{max-width:100%}.course-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 25px}.course-actions a{display:inline-block;background:#e7f4f1;color:#145f61;padding:8px 13px;border-radius:7px;text-decoration:none;font-weight:650}.course-actions a:first-child{background:#12696c;color:white}.muted{color:var(--muted)}@media(max-width:700px){main{margin:0;border:0;border-radius:0}}</style><style id="se-reader-enhancements">mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}mjx-container[display="true"]{margin:1.5em 0!important;text-align:center}mjx-container svg{max-width:100%}pre code[class*="language-"]{white-space:pre;display:block;overflow-x:auto;tab-size:4}pre code .token.keyword{color:#b35f34}pre code .token.string{color:#308052}pre code .token.comment{color:#6b7d86}pre code .token.function{color:#2165a1}.lab-tool-link{display:inline-block;border:1px solid #8cc7c4;border-radius:8px;padding:8px 12px;background:#e5f5f2;color:#11585c!important;text-decoration:none;font-weight:700;margin:10px 8px 10px 0}.source-tools-panel{margin:25px 0;padding:16px;background:#eff8f7;border:1px solid #c7e4e0;border-radius:9px}.source-tools-panel a{font-weight:700}</style><script>window.MathJax={tex:{processEscapes:true},svg:{fontCache:'local'},startup:{typeset:false},options:{skipHtmlTags:['script','style','noscript','textarea','pre','code']}};</script><script defer="" src="../../_assets/mathjax-svg.js"></script><script defer="" src="../../_assets/prism.js"></script><script defer="" src="../../_assets/prism-python.js"></script><script defer="" src="../../_assets/enhance.js"></script><!-- v55 unified offline learning navigation -->
-<link rel="stylesheet" href="../../_assets/learning-shell-v55.css">
-<script defer src="../../_assets/learning-shell-v55.js" data-se-root="../../../" data-se-page="K/B3/chapters/09-candidate-physical-architectures-model-based-.html" data-se-mode="standard"></script>
+<link href="../../_assets/learning-shell-v55.css" rel="stylesheet"/>
+<script data-se-mode="standard" data-se-page="K/B3/chapters/09-candidate-physical-architectures-model-based-.html" data-se-root="../../../" defer="" src="../../_assets/learning-shell-v55.js"></script>
 </head><body><header><div class="crumb"><a href="../../../../index.html">← Course library</a>　 /　 Reference reading</div></header><main><h1 id="chapter-9--a-physical-architecture-is-a-trade-not-a-picture">Chapter 9 — A physical architecture is a trade, not a picture</h1>
 <p><em>Book III: Introduction to Model-Based Systems Engineering · Week 9 — Candidate physical architectures, model-based trades, and alternative evaluation</em></p>
 <p><strong>Reading contract:</strong> Work through the explanations, attempt the questions without looking at the answers, and complete <a href="../labs/lab-09-candidate-physical-architectures-model-based-.html">Hypothetical Lab 9</a> before attempting <a href="../../../C/P1/EN645631.html">the assessed Week 9 coursework</a>. For a shorter overview use the <a href="../../P1-text/lessons/645-631-w09.html">earlier Phase 1 primer</a>.</p>
@@ -45,4 +46,49 @@
 <p>A useful model artifact contains the selected architecture, rejected alternatives, credible conditions under which the decision would reverse, and the specific evidence needed to reduce those uncertainties. This records the <em>decision's robustness</em>. The architecture model is a hypothesis about real behavior and life-cycle burden; only analysis, prototyping, and testing within relevant conditions can progressively substantiate it.</p>
 <h2 id="continuity">Continuity</h2>
 <p>This chapter builds from <a href="08-values-units-measures-constraints-parametrics.html">previous chapter</a> and leads toward <a href="10-verification-and-validation-modeling-configur.html">next chapter</a>. Revisit the corresponding <a href="../../P1-text/lessons/645-631-w09.html">weekly primer</a> only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.</p>
-</main></body></html>
+<section class="step03-deeper-reading" id="step03-book3-integrated-r1"><h2>Step 03 integrated reference: compare candidate architectures with hard constraints</h2>
+<h3>Separate feasibility from preference</h3>
+<p>A trade study cannot rescue an infeasible design by giving it enough points for low cost. First specify hard constraints, then compare attributes among the survivors. Northstar's illustrative peak requirement is eight trips per hour and the ideal modeled service rate is three trips per vehicle per hour. Three fictional candidates are considered:</p>
+<table>
+<thead>
+<tr>
+<th>Candidate</th>
+<th style="text-align:right">Vehicles</th>
+<th style="text-align:right">Ideal trips/hour</th>
+<th style="text-align:right">Cost (fictional $M)</th>
+<th>Meets ideal peak bound?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">1.60</td>
+<td>No</td>
+</tr>
+<tr>
+<td>B</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">9</td>
+<td style="text-align:right">2.20</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>C</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">2.50</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Candidate A is cheapest and yet structurally infeasible under the stated requirement; it should not appear on a feasible frontier unless there is a documented waiver, demand-shedding design, or change in mission. Between B and C, lower cost favors B while additional capacity margin favors C. Neither dominates the other on these two attributes. The model must state <em>which</em> decision rule resolves that conflict. “The model chose B” is never enough.</p>
+<h3>Calculate margins and test alternative objectives</h3>
+<p>The minimum capacity ratio is \(Q/n_{\mathrm{need}}\). Candidate B has \(9/8=1.125\), or 12.5% ideal headroom relative to the peak requirement. Candidate C has \(12/8=1.5\), or 50%. Cost per ideal capacity is \(2.2/9\approx0.244\) fictional million dollars per trip/hour for B, compared with \(2.5/12\approx0.208\) for C. This metric could be useful if the organization expects growth, but it does not justify a selection on its own. It mixes acquisition cost and idealized throughput while omitting maintenance, charging, availability, schedule and safety.</p>
+<p>If the primary objective is <em>minimum acquisition cost subject to ideal capacity ≥ 8</em>, B wins. If resilience requires at least four trips/hour of headroom, C wins. This is a legitimate choice change because the decision rule changed, not because the model is inconsistent. Robust architecture reviews should vary demand and service-rate assumptions, record dominance, test nonnegotiable constraints before scoring, and identify the boundary at which the preferred candidate switches.</p>
+<h3>Avoid false precision from a scorecard</h3>
+<p>A weighted score such as \(S=w_1\cdot\text{cost score}+w_2\cdot\text{capacity score}\) silently assumes score scales are comparable and weights have meaningful elicitation. Changing units or normalizations can change ranks. A stronger method begins with hard feasibility, then shows transparent costs, performance distributions and regret across defensible scenarios. If none of the candidates satisfies safety or interface constraints, the outcome is <em>redesign</em>, not choosing the least bad of three.</p>
+<p><strong>Exercise with answer.</strong> Demand rises to 10 ideal trips/hour while the per-vehicle ideal rate remains 3. Which candidates pass the necessary bound? A has 6, B has 9 and C has 12. Only C passes. This still does not prove C can deliver 10 actual completed trips under realistic variability; a subsequent simulation or operational trial must examine that claim.</p>
+<p>See the <a href="../../methods/pareto-and-robust-design.html">architecture trade reasoning guide</a> for the deeper quantitative decision methods; this chapter's figures are intentionally small enough to inspect by hand.</p>
+</section></main></body></html>

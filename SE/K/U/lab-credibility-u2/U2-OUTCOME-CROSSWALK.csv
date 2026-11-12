@@ -1,0 +1,19 @@
+lab,stage,original_markdown,technical_focus,new_exercise,shared_tool
+v11,1,integrated-lab/chapters/01-mission-boundary.md,The mission boundary becomes an evidence boundary,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v11,2,integrated-lab/chapters/02-requirements-traceability.md,A trace link is not a verified requirement,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v11,3,integrated-lab/chapters/03-architecture-interfaces.md,Interface semantics under degraded messages,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v11,4,integrated-lab/chapters/04-trades-and-configuration.md,Trade studies with noninterchangeable scenarios,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v11,5,integrated-lab/chapters/05-software-prototype.md,Verify the scheduler beyond the favorable fixture,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v11,6,integrated-lab/chapters/06-models-and-uncertainty.md,"Uncertainty, sampling and the fixed-fixture fallacy",Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v11,7,integrated-lab/chapters/07-verification-evidence.md,Verification artifacts and cryptographic fingerprints,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v11,8,integrated-lab/chapters/08-human-factors-safety.md,Human factors and missing subgroup data,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v11,9,integrated-lab/chapters/09-change-and-digital-thread.md,Change impact must cross the versions,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v11,10,integrated-lab/chapters/10-readiness-board.md,A review decision is a set of scoped gates,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v12,1,advanced-lab/chapters/01-model-based-architecture.md,Architecture scope and model correspondence,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v12,2,advanced-lab/chapters/02-state-and-interface-contracts.md,State transitions and truthful fault observability,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v12,3,advanced-lab/chapters/03-discrete-event-experiments.md,Discrete-event evidence and scheduling invariants,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v12,4,advanced-lab/chapters/04-fault-injection-and-resilience.md,"Fault injection, common modes and degraded policy",Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v12,5,advanced-lab/chapters/05-statistical-experiment-design.md,Paired Monte Carlo: precision is not credibility,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v12,6,advanced-lab/chapters/06-verification-traceability.md,"Provenance, version binding and negative assurance",Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v12,7,advanced-lab/chapters/07-independent-review.md,Independent reviewer: defend against false positives,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py
+v12,8,advanced-lab/chapters/08-capstone-change-challenge.md,Capstone: decide by evidence and legitimate authority,Adverse-case and explained solution in U2 section,lab-credibility-u2/code/bridge.py

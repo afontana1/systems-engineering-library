@@ -17,6 +17,10 @@ EN.645-767 · Phase 2 · Twelve connected chapters and twelve fictional labs
 - **Week 2:** [Chapter — Stakeholder evidence and current-state analysis](chapters/02-stakeholder-evidence-and-current-state-analysis.md) · [Lab](labs/lab-02-stakeholder-evidence-and-current-state-analysis.md)
 - **Week 1:** [Chapter — Reopen the problem and audit the incumbent baseline](chapters/01-reopen-the-problem-and-audit-the-incumbent-baseline.md) · [Lab](labs/lab-01-reopen-the-problem-and-audit-the-incumbent-baseline.md)
 
+## NS-CD6.1 integrated conceptual-design case
+
+All twelve chapters use a [controlled four-alternative concept study](case/INDEX.html) with [requirements](case/requirements.csv), [functional architecture](case/functions.csv), [decision inputs](case/concepts.csv), [architecture diagram](case/architecture.svg), [synthetic factorial experiment](case/doe-synthetic.csv), [evidence register](case/evidence-register.csv), and [executable conceptual audit](tools/step03_book6_concept_check.py). The hybrid concept is conditionally preferred for **experimental evaluation**, not approved for operational deployment.
+
 ## Applied resources
 
 - [`datasets/`](datasets/) contains toy input and evidence sheets.

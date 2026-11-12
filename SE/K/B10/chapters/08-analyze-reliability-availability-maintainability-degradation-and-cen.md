@@ -78,6 +78,12 @@ A correct computed result is not automatically a system acceptance result; expla
 
 </details>
 
+## Censoring changes the likelihood, not just the spreadsheet denominator
+
+A power-module life test has eight units: three failures at 20, 50 and 80 h and five units that have not failed by 100 h. Under an independent, noninformative-censoring exponential model, the likelihood is \(L(\lambda)=\lambda^3e^{-650\lambda}\). Its maximum yields \(\widehat\lambda=3/650\,\mathrm{h}^{-1}\) and \(\widehat R(50)=e^{-150/650}\approx0.7939\). The nonparametric Kaplan–Meier estimator instead gives \(\widehat S(50)=0.75\), with observed risk sets eight then seven units.
+
+Those estimates are conditional on the stated model and exposure accounting. Only three failures occurred, so a strong reliability requirement cannot be certified from a narrow point estimate. Replicate the calculations using [the data and censored-survival method](../../methods/reliability-and-censored-evidence.md), and audit whether censoring is related to deteriorating condition.
+
 ## Failure analysis and professional caution
 
 This week's source guide flags the following unacceptable shortcuts. Treat them as adversarial tests of your own work:
@@ -120,3 +126,25 @@ The **course guide remains authoritative for assessment**. This book teaches and
 ## Extended worked problems and lab
 
 Study the [worked problem workshop on common-cause availability](../practice/availability.md), then complete the [extended laboratory](../practice/lab-availability.md). The exercises are separate from the original assessed coursework.
+
+## Step 03 integrated quantitative case: censored reliability and mission time
+
+The [life-test dataset](../case/reliability-life.csv) records eight synthetic modules. Three fail at 120, 190, and 300 operating hours; the other five remain functioning through 360 hours and are **right-censored**, not successful infinite-life observations.
+
+### Derive the constant-hazard likelihood
+
+Under an exponential lifetime model with independent non-informative censoring, a unit with failure time \(t_i\) contributes \(\lambda e^{-\lambda t_i}\), while a unit censored at \(c_j\) contributes \(e^{-\lambda c_j}\). Thus, up to terms not involving \(\lambda\), \(L(\lambda)\propto\lambda^d e^{-\lambda E}\), where \(d\) is the number of failures and \(E\) is total observed exposure. Differentiating \(\ell=d\log\lambda-\lambda E\) gives \(\widehat\lambda=d/E\).
+
+Here \(E=120+190+300+5(360)=2410\) module-hours and \(d=3\). So \(\widehat\lambda=3/2410=0.0012448\) failures/hour. The modeled 50-hour reliability is
+
+\[
+\widehat R(50)=e^{-\widehat\lambda 50}=0.93966.
+\]
+
+This is below the hypothetical 0.95 requirement `QA-03`. It is a point estimate under a constant-hazard assumption, **not a measured population reliability** or a precision-certified failure probability.
+
+### Test the censoring and hazard assumptions
+
+Right-censored units must not be counted as failed at 360 hours, nor treated as proof they survive indefinitely. Examine whether the stopped tests were administrative or related to imminent deterioration. A constant hazard assumes memorylessness; wear-out, early-life failures, and fleet heterogeneity can invalidate it. Before using the model in an approval decision, inspect survival curves, failure mechanisms, competing risks, repair histories, and uncertainty intervals, and collect a larger representative sample.
+
+**Exercise and answer.** A student computes \(3/(8\cdot360)=0.0010417\) failures/hour. Why is this wrong? It includes hours that the three failed units did not survive. Only actual observed time at risk belongs in the exposure denominator. Replacing 2410 with 2880 biases the hazard estimate downward.

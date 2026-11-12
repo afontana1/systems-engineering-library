@@ -8,6 +8,10 @@ Each chapter teaches concepts for the correspondingly numbered course week, and 
 
 Open `OPEN-BOOK.html` for the searchable, self-contained offline reader. Source chapters live in `chapters/`; practice labs in `labs/`. The optional computational notebook is in `notebooks/`.
 
+## Coordinated NS-MB3 reference case
+
+All 12 chapters now develop the controlled [NS-MB3 modeling case](case/INDEX.html), with [requirements and interfaces](case/model-baseline.json), an [evidence register](case/evidence-register.csv), [architecture diagrams](diagrams/mb3-semantic-chain.svg) and a [reproducible audit](tools/step03_book3_model_check.py). Its intentionally stale and planned tests provide review questions; it is **not** a conforming SysML model or a real deployment approval.
+
 ## Book contents
 
 - Week 1: [Chapter](chapters/01-mbse-value-model-purpose-and-the-document-to-.md) → [Hypothetical lab](labs/lab-01-mbse-value-model-purpose-and-the-document-to-.md) — A model has to earn its existence

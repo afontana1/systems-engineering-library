@@ -21,6 +21,10 @@ This book supplies long-form explanatory chapters, example reasoning, reproducib
 - **Week 11:** [Update lifecycle evidence and decide among upgrade, replacement, retirement, or more information](chapters/11-update-lifecycle-evidence-and-decide-among-upgrade-replacement-retir.md) → [Hypothetical lab](labs/lab-11-update-lifecycle-evidence-and-decide-among-upgrade-replacement-retir.md)
 - **Week 12:** [Integrate, reproduce, challenge, and defend the lifecycle analytics decision](chapters/12-integrate-reproduce-challenge-and-defend-the-lifecycle-analytics-dec.md) → [Hypothetical lab](labs/lab-12-integrate-reproduce-challenge-and-defend-the-lifecycle-analytics-dec.md)
 
+## NS-QA10.1 quantitative evidence case
+
+All twelve chapters share [one winter quantitative evidence dossier](case/INDEX.html). It includes a [controlled requirements register](case/requirements.csv), [factorial trial data](case/factorial-trials.csv), [right-censored life data](case/reliability-life.csv), [declared statistical assumptions](case/model-assumptions.json), [verification evidence](case/evidence-register.csv), an [evidence-chain diagram](case/analytics-evidence-chain.svg), and a [reproducible Python checker](tools/step03_book10_quantitative_check.py). Its modeled latency, energy, reliability and lifecycle-cost results support a **HOLD**, not an operational acceptance claim. All data are synthetic.
+
 ## Engineering evidence discipline
 
 Follow a traceable chain of **question → representation → assumption/data → computation or explanation → sensitivity → supported claim → owner and next evidence**. Validate mathematical examples for their assumptions, not simply arithmetic. Do not treat a hypothetical result as operational validation.

@@ -103,3 +103,24 @@ This chapter builds from [previous chapter](06-design-and-evaluate-architecture-
 - [Deep workshop — Distributed Failures, Retry Storms, and Idempotent APIs](../practice/distributed.md)
 - [Corresponding independent laboratory](../practice/lab-distributed.md)
 - [Interactive workbench](../practice/WORKBENCH.html)
+
+
+## Step 03 integrated reference: partial failure and delivery semantics
+
+### A timeout is a statement about observation
+
+Distributed callers often cannot distinguish “the server failed before commit” from “the server committed but the reply was lost.” A timeout means the caller did not observe a response within its limit. It does not provide a transaction outcome. For the [IF-02 allocation contract](../case/interfaces.csv), the client should reconcile via a stable idempotency token before trying to create a *new* assignment.
+
+The invariant for vehicle-slot allocation is that at most one *active* reservation owns a `(vehicle_id, slot_id)` pair. An atomic unique constraint protects this database property; token-scoped response reuse protects client semantics. An application-level “check whether free, then insert” without atomic enforcement admits two concurrent readers observing the same unreserved slot. A replicated store or messaging layer changes what an atomic transaction covers; the design must state the chosen consistency boundary.
+
+### Quantify the retry cost
+
+If each attempt fails independently with probability \(p\), and at most two attempts are allowed, expected attempts per original request equal \(1+p\). At \(p=0.06\), this is **1.06 attempts**; the residual two-attempt failure probability is \(p^2=0.0036\). These computations assume independent and identically distributed failures. Real overloads make failures correlated; simultaneous retries can *increase* the queueing delay that caused them. Unbounded retries therefore damage the system exactly when it is least able to serve them.
+
+Introduce deadlines, bounded backoff with jitter, token reuse, a retry budget, and a clear “unknown outcome” reconciliation path. Duplicate deliveries must not duplicate business effects. Outbox-style publication may help align a database transaction with asynchronous event generation, but event consumers still need idempotent processing and explicit recovery semantics.
+
+### Safe degraded behavior
+
+If location data is older than five seconds, NS-SW5.1 denies the dispatch request. It does **not** reuse stale position because availability is poor. If the entire reservation service is down, the operator interface announces unavailable status and follows its approved fallback workflow; this exercise does not claim that software availability measures guarantee physical vehicle safety.
+
+**Exercise.** Under a persistent outage, all first attempts and retries fail together. Is the computed 0.36% two-attempt failure rate valid? **Answer.** No. The independence assumption is violated, and a perfectly correlated outage can yield an unchanged 6% failure probability instead of 0.36%. State the failure model before promising retry-driven reliability improvements.

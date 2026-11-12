@@ -1,0 +1,151 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bayesian decisions, imperfect tests, and value of information · Systems Engineering Library</title><meta name="description" content="Engineering methods, worked examples, assumptions and reproducible calculations."><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{background:#f5f8fa;color:#1b3340;font:16px/1.76 system-ui,-apple-system,Segoe UI,sans-serif;margin:0}main{max-width:1080px;margin:28px auto 70px;padding:clamp(22px,4vw,58px);background:white;border:1px solid #dce6e9;border-radius:14px}header{background:#173f52;padding:18px max(20px,calc((100vw - 1080px)/2))}header a{color:#c6f5ee}h1{font-size:clamp(1.8rem,3.5vw,2.5rem);line-height:1.15}h2{font-size:1.4rem;margin-top:2.1em;border-bottom:1px solid #dce6e9;padding-bottom:.4em;scroll-margin-top:105px}h3{font-size:1.14rem;margin-top:1.6em}p,li{max-width:95ch}a{color:#086873}a:focus-visible{outline:3px solid #128885;outline-offset:3px}table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto;margin:1.6em 0}th,td{padding:9px 12px;border:1px solid #dce6e9;vertical-align:top}th{background:#edf5f5}pre{background:#ecf2f5;padding:15px;border-radius:8px;overflow:auto}code{font-size:.92em}p code,li code{background:#edf5f5;padding:2px 4px;border-radius:4px}blockquote{border-left:4px solid #8ab7b9;margin:20px 0;padding:6px 18px;background:#f2f8f7}.intro-nav{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 28px}.intro-nav a{border:1px solid #c9dcdf;border-radius:7px;padding:6px 12px;text-decoration:none;font-weight:600}.reference-note{margin-top:42px;color:#526772;border-top:1px solid #dce6e9;padding-top:16px}mjx-container[jax="SVG"]{max-width:100%;overflow-x:auto;overflow-y:hidden}img,svg{max-width:100%}@media(max-width:700px){main{border:0;border-radius:0;margin:0;padding:22px 17px}}
+</style><link rel="stylesheet" href="../_assets/learning-shell-v55.css"><script defer src="../_assets/learning-shell-v55.js" data-se-root="../../" data-se-page="K/methods/bayesian-decision-handbook.html" data-se-mode="standard"></script><script>window.MathJax={tex:{processEscapes:true,inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'local'}};</script><script defer src="../_assets/mathjax-svg.js"></script></head><body><header><a href="../CONCEPTS.html">← Concepts</a> · <a href="INDEX.html">Engineering methods</a></header><main><nav class="intro-nav" aria-label="Related sections"><a href="INDEX.html">All method guides</a><a href="../CONCEPTS.html">Core concepts</a><a href="../OPEN-BOOKS.html">Textbooks</a><a href="../COURSE-MAPS.html">Courses</a></nav><h1>Bayesian decisions, imperfect tests, and value of information</h1>
+<p><em>Technical method guide · Decision science, statistical evidence, and system trades · Phase 1 expansion</em></p>
+<p><strong>What this chapter enables.</strong> Given uncertain technical states, competing actions, a noisy diagnostic test, and an explicit loss model, calculate prior and posterior decisions, expected value of perfect information (EVPI), expected value of sample information (EVSI), net information value, and the assumptions that could reverse the recommendation.</p>
+<p><strong>Prerequisites:</strong> <a href="../encyclopedia/probability-and-dependence.html">Probability and dependence</a>, <a href="../encyclopedia/engineering-trades.html">engineering trades</a>, and <a href="../encyclopedia/risk-vs-issue.html">risk versus issue</a>. The complete numerical calculation is included; external readings are optional references rather than hidden prerequisites.</p>
+<h2>1. Define a decision, not merely a probability</h2>
+<p>In a fictional shuttle vehicle controller, a hidden fault may cause an expensive operational loss after release. A hardware redesign can eliminate this particular modeled fault, but costs money and may delay deployment. A diagnostic bench test may indicate whether the fault exists; it is imperfect and has a price. The engineering choice is whether to <strong>ship</strong>, <strong>redesign</strong>, or <strong>buy information before choosing</strong>.</p>
+<p>A Bayesian <em>inference</em> updates beliefs after observations. A Bayesian <em>decision</em> additionally attaches consequences to the actions available after those observations. Let \(\theta\) be the unknown state, \(a\) an action and \(z\) a possible test observation. For losses \(L(a,\theta)\), the action minimizing posterior expected loss is</p>
+<p>\[
+a^*(z)=\underset{a\in\mathcal A}{\operatorname{arg\,min}}\;\sum_{\theta}L(a,\theta)P(\theta\mid z).
+\]</p>
+<p>The minimum is over <em>feasible</em> actions. A design that violates a non-negotiable safety constraint must not become permissible merely because its expected cost looks attractive.</p>
+<h2>2. Baseline case and units</h2>
+<p>Use the following <strong>illustrative</strong>, mutually exclusive states and losses. Amounts are <strong>thousands of dollars</strong> (k$), not empirical estimates.</p>
+<table>
+<thead>
+<tr>
+  <th>State</th>
+  <th style="text-align:right">Prior</th>
+  <th style="text-align:right">Ship loss</th>
+  <th style="text-align:right">Redesign loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Fault present, \(F\)</td>
+  <td style="text-align:right">0.20</td>
+  <td style="text-align:right">100 k$</td>
+  <td style="text-align:right">15 k$</td>
+</tr>
+<tr>
+  <td>Fault absent, \(\neg F\)</td>
+  <td style="text-align:right">0.80</td>
+  <td style="text-align:right">0 k$</td>
+  <td style="text-align:right">15 k$</td>
+</tr>
+</tbody>
+</table>
+<p>The redesign is assumed to eliminate <em>only this fault</em> completely and to introduce no new risk. Those assumptions are intentionally simplistic and must be challenged in a real trade study.</p>
+<p>Without a test, the expected shipping loss is \(0.20(100)+0.80(0)=20\) k$. The expected redesign loss is \(15\) k$. The rational <strong>risk-neutral</strong> choice under this model is <strong>redesign</strong>, because \(15&lt;20\). This step is an optimization over actions, not a statement that the prior 20% fault probability is accurate.</p>
+<h3>The action threshold</h3>
+<p>If the posterior fault probability is \(q\), shipping costs \(100q\) k$ in expectation while redesign always costs 15 k$. The actions switch when</p>
+<p>\[
+100q=15 \quad\Longrightarrow\quad q_{\mathrm{switch}}=0.15.
+\]</p>
+<p>Below 15% ship; above 15% redesign; at exactly 15%, expected losses tie. This makes the value of the diagnostic test easy to interpret: it is useful if plausible test outcomes move the posterior across that boundary.</p>
+<h2>3. Compute what the proposed diagnostic actually tells us</h2>
+<p>Suppose test sensitivity is \(P(+\mid F)=0.90\), and specificity is \(P(-\mid\neg F)=0.95\). The false-positive rate is 0.05 and the false-negative rate is 0.10. These are assumed conditional probabilities, not asserted performance of any real device.</p>
+<p>A convenient frequency interpretation uses 1,000 hypothetical components:</p>
+<table>
+<thead>
+<tr>
+  <th>True state</th>
+  <th style="text-align:right">Positive</th>
+  <th style="text-align:right">Negative</th>
+  <th style="text-align:right">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Fault present</td>
+  <td style="text-align:right">180</td>
+  <td style="text-align:right">20</td>
+  <td style="text-align:right">200</td>
+</tr>
+<tr>
+  <td>Fault absent</td>
+  <td style="text-align:right">40</td>
+  <td style="text-align:right">760</td>
+  <td style="text-align:right">800</td>
+</tr>
+<tr>
+  <td><strong>Total</strong></td>
+  <td style="text-align:right"><strong>220</strong></td>
+  <td style="text-align:right"><strong>780</strong></td>
+  <td style="text-align:right"><strong>1,000</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Thus</p>
+<p>\[
+P(+)=0.90(0.20)+0.05(0.80)=0.22,\qquad P(-)=0.78.
+\]</p>
+<p>Bayes' theorem produces two different posteriors:</p>
+<p>\[
+P(F\mid +)=\frac{0.90(0.20)}{0.22}=\frac{9}{11}\approx0.81818,
+\]</p>
+<p>\[
+P(F\mid -)=\frac{0.10(0.20)}{0.78}=\frac{1}{39}\approx0.02564.
+\]</p>
+<p>A positive result moves the fault probability above the 15% decision threshold, so <strong>redesign after positive</strong>. A negative result puts it below the threshold, so <strong>ship after negative</strong>. Notice that “a 90% sensitive test” is not the same as “a positive result implies a 90% chance of fault”; the prior and specificity both matter.</p>
+<h2>4. Evaluate the proposed decision policy before buying the test</h2>
+<p>After a positive observation the team redesigns, incurring 15 k$. After a negative observation it ships, risking loss only if the test missed an actual fault. Expected loss before paying the test fee can be calculated two equivalent ways.</p>
+<p><strong>By observation branch:</strong></p>
+<p>\[
+E[L\mid\text{test policy}]=P(+)(15)+P(-)\,P(F\mid-)(100).
+\]</p>
+<p>Substitute the numbers: \(0.22(15)+0.78(0.025641)(100)=3.3+2.0=5.3\) k$.</p>
+<p><strong>By joint event:</strong> positive outcomes always trigger redesign (0.22 × 15), while false negatives incur shipping loss (0.02 × 100). This is again 5.3 k$.</p>
+<p>Without testing the optimal expected loss is 15 k$, so</p>
+<p>\[
+\mathrm{EVSI}=15-5.3=9.7\ \mathrm{k\$}.
+\]</p>
+<p>If the diagnostic costs 5 k$ and creates no other effects, testing yields total expected cost \(5.3+5=10.3\) k$ and a <strong>net expected improvement of 4.7 k$</strong>. The break-even all-in information acquisition cost is 9.7 k$. A 6 k$ direct fee plus a 4 k$ expected delay penalty is therefore <em>not</em> worthwhile, even though the test is scientifically useful.</p>
+<h2>5. Perfect information is an upper bound, not a purchase offer</h2>
+<p>If the true fault state could be known for free, the decision-maker would ship when sound and redesign when faulty, yielding</p>
+<p>\[
+E[L\mid\text{perfect information}]=0.20(15)+0.80(0)=3\ \mathrm{k\$}.
+\]</p>
+<p>The no-test baseline is 15 k$, hence</p>
+<p>\[
+\mathrm{EVPI}=15-3=12\ \mathrm{k\$}.
+\]</p>
+<p>For this consistent fixed action/loss model,</p>
+<p>\[
+0\leq\mathrm{EVSI}=9.7\leq\mathrm{EVPI}=12\ \mathrm{k\$}.
+\]</p>
+<p>If a calculation produces EVSI greater than EVPI, review the probability normalization, whether the available actions changed between calculations, and whether testing costs were deducted in one case but not the other. A test can appear to create new value by enabling an action that was <em>not</em> in the original action set; that is a different decision model and should be stated explicitly.</p>
+<h2>6. Sensitivity: when does the recommendation reverse?</h2>
+<p>A single expected value can conceal deep uncertainty. Test each input for its <em>effect on the optimal action</em>, not merely its effect on one intermediate posterior.</p>
+<p><strong>Prior sensitivity.</strong> The no-test decision is to redesign when \(P(F)&gt;0.15\). If strong new evidence justifies a prior of 0.10, shipping becomes the no-test policy. EVSI must then be recomputed against that <em>new</em> optimal baseline.</p>
+<p><strong>Specificity sensitivity.</strong> Increasing false positives increases the frequency of needless redesigns. At a false-positive rate \(f\), the positive-test probability is \(0.2(0.9)+0.8f\). If the positive branch still triggers redesign and the negative branch still ships, the policy cost is \([0.18+0.8f](15)+0.02(100)\). That expression is valid only while both branch decisions remain optimal. The key lesson is to <strong>check the policy thresholds after changing any input</strong>.</p>
+<p><strong>Consequence sensitivity.</strong> If the actual fault loss is not 100 k$ but an uncertain distribution that includes safety or mission-critical effects, expected monetary loss may be an inappropriate sole objective. Model hard constraints and unacceptable outcomes separately.</p>
+<p><strong>Test-dependence sensitivity.</strong> Repeated diagnostic results may be conditionally dependent because they share an instrument calibration, environmental factor, or underlying failure mechanism. Multiplying likelihoods as though repeated tests were independent can create dangerously overconfident posteriors.</p>
+<h2>7. Link decision analysis to design robustness</h2>
+<p>Value of information asks whether to learn more <strong>before</strong> acting; robustness asks what happens if uncertain inputs shift and the team <strong>must act</strong>. These are complementary questions. An architecture may be attractive on expected loss and fragile to tail outcomes. Specify the risk criterion before ranking options: expected loss, chance constraint, maximum regret, downside quantile, or a non-compensable safety bound.</p>
+<p>For an example of transparent scenario mixing, suppose peak demand occurs with probability 0.30. Design H has conditional unacceptable-wait probability 0.60 in peak demand and 0.08 otherwise. Design M has 0.12 and 0.02 respectively. Then by total probability:</p>
+<p>\[
+P(\text{violation}\mid H)=0.30(0.60)+0.70(0.08)=0.236\approx24\%,
+\]</p>
+<p>\[
+P(\text{violation}\mid M)=0.30(0.12)+0.70(0.02)=0.050=5\%.
+\]</p>
+<p>This reconstructs the <strong>approximately 24% versus 5%</strong> figures discussed in <a href="../B14/chapters/11-analyze-uncertainty-sensitivity-robustness-regret-and-value-of-infor.html">Book 14, Chapter 11</a> as explicit <em>hypothetical inputs</em>, not as observed performance. The scenario probabilities and conditional violation rates need substantiation before using the figures for a real decision. If peak demand correlates with charging faults, a two-state simplification may understate risk.</p>
+<h2>8. Reproduce the results and try adversarial checks</h2>
+<p>The <a href="code/decision_test_value.py">Python decision calculator</a> uses only the Python standard library. It prints the prior choice, posterior branches, EVSI, EVPI, and hypothetical demand-mixture probabilities. Its assertions include the inequalities \(0\leq\mathrm{EVSI}\leq\mathrm{EVPI}\) for the declared case.</p>
+<p><strong>Exercise A.</strong> Recompute EVSI if test specificity drops to 0.80. Do the positive and negative policies remain optimal? State the resulting break-even diagnostic price.</p>
+<p><strong>Exercise B.</strong> Explain why a test with perfect sensitivity might still have low value if it arrives after the redesign decision is irreversible. Which variable in the mathematical decision model encodes the available time to act?</p>
+<p><strong>Exercise C.</strong> The 20% prior comes from a small fleet operating in a different climate. Propose a sensitivity interval, collect evidence for the likelihood model, and explain how you would communicate deep uncertainty rather than presenting 20% as a precise physical truth.</p>
+<h3>Worked answer to Exercise A</h3>
+<p>With specificity 0.80, the false-positive probability is 0.20, so \(P(+)=0.18+0.16=0.34\). The posterior after positive is \(0.18/0.34\approx0.5294\) (redesign), while after negative it is \(0.02/0.66\approx0.0303\) (ship). The expected loss of the policy is \(0.34(15)+0.02(100)=7.1\) k$, and <strong>EVSI = 15−7.1 = 7.9 k$</strong>. At the original 5 k$ test fee, the net expected improvement is 2.9 k$. No physical performance conclusion follows from these made-up likelihoods.</p>
+<h2>9. Evidence and sources</h2>
+<p>A decision record needs state definitions, prior origins, raw likelihood data, action feasibility, cost bounds, consequence units, event timing, source quality, model version, alternative policies, sensitivity analysis, and the authority accepting residual risk. A posterior probability is a conditional mathematical consequence of assumptions; it is not a license to ignore bad inputs.</p>
+<ul>
+<li><a href="https://www.itl.nist.gov/div898/handbook/">NIST/SEMATECH e-Handbook of Statistical Methods</a> — inferential and experimental methods for engineering.</li>
+<li><a href="https://www.nasa.gov/reference/systems-engineering-handbook/">NASA Systems Engineering Handbook</a> — decision making and technical risk in system lifecycles.</li>
+<li><a href="../B14/chapters/11-analyze-uncertainty-sensitivity-robustness-regret-and-value-of-infor.html">Book 14, Chapter 11</a>, <a href="../../C/P3/EN645784.html">EN.645.784 course</a>, <a href="../encyclopedia/bayesian-value-of-information.html">Bayesian concept reference</a>.</li>
+</ul>
+<p><strong>Scope note:</strong> The decision model, probabilities, costs and scenarios are invented teaching examples. Formal authorization, safety assurance and technical risk management require project-specific evidence.</p>
+<footer class="reference-note"><a href="bayesian-decision-handbook.md">Editable Markdown source</a> · The engineering scenarios are illustrative; conclusions require project-specific evidence.</footer></main></body></html>

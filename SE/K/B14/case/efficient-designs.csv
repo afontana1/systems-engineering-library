@@ -1,0 +1,6 @@
+architecture,fleet,chargers,reserve,dispatch,automation,zones,speed_mph,cost_musd,wait_p90_min,accessible_coverage,access_gap,availability,emissions_tco2e_annual,integration_risk,vehicles_per_charger,stress,feasible,excluded_by,design_id
+hybrid,16,8,0.1,priority,human,4,24,12.352,14.769399999999996,0.998,0.0020000000000000018,0.955,134.4,2,2.0,nominal,True,,DA-03201001
+hybrid,18,8,0.1,schedule,human,4,24,13.015999999999998,14.903599999999999,0.998,0.0020000000000000018,0.9544,129.0,2,2.25,nominal,True,,DA-04200001
+hybrid,18,8,0.1,priority,human,4,18,13.155999999999999,14.013599999999999,0.998,0.0020000000000000018,0.9544,126.60000000000001,2,2.25,nominal,True,,DA-04201000
+hybrid,18,8,0.1,priority,human,4,24,13.155999999999999,13.653599999999999,0.998,0.0020000000000000018,0.9544,129.0,2,2.25,nominal,True,,DA-04201001
+demand,18,8,0.1,priority,human,4,24,12.806,14.7036,0.998,0.0020000000000000018,0.9544,133.00000000000003,2,2.25,nominal,True,,DA-14201001

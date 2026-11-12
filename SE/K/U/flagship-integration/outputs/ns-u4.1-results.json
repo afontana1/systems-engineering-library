@@ -1,0 +1,1886 @@
+{
+  "bayesian_alarm": {
+    "one_positive_posterior": 0.5853658536585366,
+    "second_independent_positive_posterior": 0.9186602870813396
+  },
+  "causal": {
+    "difference_in_differences_minutes": -7
+  },
+  "dispatch_acceptance": {
+    "accessible_guarded_fraction": 0.625,
+    "accessible_guarded_timely": 10,
+    "accessible_n": 16,
+    "guarded_fraction": 0.8375,
+    "guarded_timely": 67,
+    "n": 80,
+    "nominal_timely": 72
+  },
+  "dynamic": {
+    "equilibrium_requests": 10.0,
+    "euler_2min_multiplier": 0.19999999999999996,
+    "euler_6min_multiplier": -1.4000000000000004,
+    "euler_stable_step_limit_min": 5.0
+  },
+  "evidence": {
+    "actionable_count": 1,
+    "actionable_ids": [
+      "C1"
+    ],
+    "authorizations": {
+      "labor_consent": false,
+      "privacy_review": false,
+      "road_authority": false
+    },
+    "required_count": 5
+  },
+  "factorial": {
+    "interaction_minutes": -3
+  },
+  "identity": "NS-U4.1",
+  "interface": {
+    "conforming": false,
+    "distinct_event_ids_seen": 3,
+    "exact_duplicates": 1,
+    "violations": [
+      {
+        "index": 4,
+        "type": "ack_before_commit"
+      },
+      {
+        "index": 5,
+        "type": "conflicting_replay"
+      },
+      {
+        "index": 6,
+        "type": "stale_revision"
+      }
+    ]
+  },
+  "model_scope": "synthetic instructional arithmetic, not operational qualification",
+  "paired_experiment": {
+    "differences": [
+      5,
+      7,
+      6,
+      7,
+      4,
+      7,
+      5,
+      8,
+      7,
+      5,
+      7,
+      6
+    ],
+    "mean_improvement_min": 6.166666666666667,
+    "n": 12,
+    "sem": 0.3445096060879416,
+    "student_t_95_interval": [
+      5.408401023667107,
+      6.924932309666227
+    ]
+  },
+  "policies": {
+    "baseline": {
+      "added_cost_million": 0,
+      "all_scenarios_pass": false,
+      "scenario_weight_covered": 0,
+      "scenarios": {
+        "compound": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 42,
+              "served": 12,
+              "timely": 2,
+              "timely_fraction": 0.047619047619047616,
+              "unfinished": 30
+            },
+            "standard": {
+              "arrivals": 161,
+              "served": 66,
+              "timely": 12,
+              "timely_fraction": 0.07453416149068323,
+              "unfinished": 95
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.06896551724137931,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 5,
+                "capacity": 2,
+                "served": 2,
+                "timely": 2,
+                "unfinished": 3
+              },
+              {
+                "arrivals": 7,
+                "capacity": 2,
+                "served": 2,
+                "timely": 0,
+                "unfinished": 8
+              },
+              {
+                "arrivals": 8,
+                "capacity": 2,
+                "served": 2,
+                "timely": 0,
+                "unfinished": 14
+              },
+              {
+                "arrivals": 9,
+                "capacity": 2,
+                "served": 2,
+                "timely": 0,
+                "unfinished": 21
+              },
+              {
+                "arrivals": 8,
+                "capacity": 2,
+                "served": 2,
+                "timely": 0,
+                "unfinished": 27
+              },
+              {
+                "arrivals": 5,
+                "capacity": 2,
+                "served": 2,
+                "timely": 0,
+                "unfinished": 30
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 21,
+                "capacity": 11,
+                "served": 11,
+                "timely": 11,
+                "unfinished": 10
+              },
+              {
+                "arrivals": 26,
+                "capacity": 11,
+                "served": 11,
+                "timely": 1,
+                "unfinished": 25
+              },
+              {
+                "arrivals": 30,
+                "capacity": 11,
+                "served": 11,
+                "timely": 0,
+                "unfinished": 44
+              },
+              {
+                "arrivals": 33,
+                "capacity": 11,
+                "served": 11,
+                "timely": 0,
+                "unfinished": 66
+              },
+              {
+                "arrivals": 29,
+                "capacity": 11,
+                "served": 11,
+                "timely": 0,
+                "unfinished": 84
+              },
+              {
+                "arrivals": 22,
+                "capacity": 11,
+                "served": 11,
+                "timely": 0,
+                "unfinished": 95
+              }
+            ]
+          }
+        },
+        "grid": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 32,
+              "served": 18,
+              "timely": 5,
+              "timely_fraction": 0.15625,
+              "unfinished": 14
+            },
+            "standard": {
+              "arrivals": 123,
+              "served": 84,
+              "timely": 32,
+              "timely_fraction": 0.2601626016260163,
+              "unfinished": 39
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.23870967741935484,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 4,
+                "capacity": 3,
+                "served": 3,
+                "timely": 3,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 5,
+                "capacity": 3,
+                "served": 3,
+                "timely": 2,
+                "unfinished": 3
+              },
+              {
+                "arrivals": 6,
+                "capacity": 3,
+                "served": 3,
+                "timely": 0,
+                "unfinished": 6
+              },
+              {
+                "arrivals": 7,
+                "capacity": 3,
+                "served": 3,
+                "timely": 0,
+                "unfinished": 10
+              },
+              {
+                "arrivals": 6,
+                "capacity": 3,
+                "served": 3,
+                "timely": 0,
+                "unfinished": 13
+              },
+              {
+                "arrivals": 4,
+                "capacity": 3,
+                "served": 3,
+                "timely": 0,
+                "unfinished": 14
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 16,
+                "capacity": 14,
+                "served": 14,
+                "timely": 14,
+                "unfinished": 2
+              },
+              {
+                "arrivals": 20,
+                "capacity": 14,
+                "served": 14,
+                "timely": 12,
+                "unfinished": 8
+              },
+              {
+                "arrivals": 23,
+                "capacity": 14,
+                "served": 14,
+                "timely": 6,
+                "unfinished": 17
+              },
+              {
+                "arrivals": 25,
+                "capacity": 14,
+                "served": 14,
+                "timely": 0,
+                "unfinished": 28
+              },
+              {
+                "arrivals": 22,
+                "capacity": 14,
+                "served": 14,
+                "timely": 0,
+                "unfinished": 36
+              },
+              {
+                "arrivals": 17,
+                "capacity": 14,
+                "served": 14,
+                "timely": 0,
+                "unfinished": 39
+              }
+            ]
+          }
+        },
+        "normal": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 32,
+              "served": 24,
+              "timely": 12,
+              "timely_fraction": 0.375,
+              "unfinished": 8
+            },
+            "standard": {
+              "arrivals": 123,
+              "served": 106,
+              "timely": 65,
+              "timely_fraction": 0.5284552845528455,
+              "unfinished": 17
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.4967741935483871,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 4,
+                "capacity": 4,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 5,
+                "capacity": 4,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 6,
+                "capacity": 4,
+                "served": 4,
+                "timely": 3,
+                "unfinished": 3
+              },
+              {
+                "arrivals": 7,
+                "capacity": 4,
+                "served": 4,
+                "timely": 1,
+                "unfinished": 6
+              },
+              {
+                "arrivals": 6,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 8
+              },
+              {
+                "arrivals": 4,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 8
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 16,
+                "capacity": 18,
+                "served": 16,
+                "timely": 16,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 20,
+                "capacity": 18,
+                "served": 18,
+                "timely": 18,
+                "unfinished": 2
+              },
+              {
+                "arrivals": 23,
+                "capacity": 18,
+                "served": 18,
+                "timely": 16,
+                "unfinished": 7
+              },
+              {
+                "arrivals": 25,
+                "capacity": 18,
+                "served": 18,
+                "timely": 11,
+                "unfinished": 14
+              },
+              {
+                "arrivals": 22,
+                "capacity": 18,
+                "served": 18,
+                "timely": 4,
+                "unfinished": 18
+              },
+              {
+                "arrivals": 17,
+                "capacity": 18,
+                "served": 18,
+                "timely": 0,
+                "unfinished": 17
+              }
+            ]
+          }
+        },
+        "surge": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 41,
+              "served": 24,
+              "timely": 8,
+              "timely_fraction": 0.1951219512195122,
+              "unfinished": 17
+            },
+            "standard": {
+              "arrivals": 154,
+              "served": 108,
+              "timely": 43,
+              "timely_fraction": 0.2792207792207792,
+              "unfinished": 46
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.26153846153846155,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 5,
+                "capacity": 4,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 6,
+                "capacity": 4,
+                "served": 4,
+                "timely": 3,
+                "unfinished": 3
+              },
+              {
+                "arrivals": 8,
+                "capacity": 4,
+                "served": 4,
+                "timely": 1,
+                "unfinished": 7
+              },
+              {
+                "arrivals": 9,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 12
+              },
+              {
+                "arrivals": 8,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 16
+              },
+              {
+                "arrivals": 5,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 17
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 20,
+                "capacity": 18,
+                "served": 18,
+                "timely": 18,
+                "unfinished": 2
+              },
+              {
+                "arrivals": 25,
+                "capacity": 18,
+                "served": 18,
+                "timely": 16,
+                "unfinished": 9
+              },
+              {
+                "arrivals": 29,
+                "capacity": 18,
+                "served": 18,
+                "timely": 9,
+                "unfinished": 20
+              },
+              {
+                "arrivals": 31,
+                "capacity": 18,
+                "served": 18,
+                "timely": 0,
+                "unfinished": 33
+              },
+              {
+                "arrivals": 28,
+                "capacity": 18,
+                "served": 18,
+                "timely": 0,
+                "unfinished": 43
+              },
+              {
+                "arrivals": 21,
+                "capacity": 18,
+                "served": 18,
+                "timely": 0,
+                "unfinished": 46
+              }
+            ]
+          }
+        }
+      }
+    },
+    "capacity_only": {
+      "added_cost_million": 0.8,
+      "all_scenarios_pass": false,
+      "scenario_weight_covered": 0,
+      "scenarios": {
+        "compound": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 42,
+              "served": 12,
+              "timely": 2,
+              "timely_fraction": 0.047619047619047616,
+              "unfinished": 30
+            },
+            "standard": {
+              "arrivals": 161,
+              "served": 84,
+              "timely": 21,
+              "timely_fraction": 0.13043478260869565,
+              "unfinished": 77
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.11330049261083744,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 5,
+                "capacity": 2,
+                "served": 2,
+                "timely": 2,
+                "unfinished": 3
+              },
+              {
+                "arrivals": 7,
+                "capacity": 2,
+                "served": 2,
+                "timely": 0,
+                "unfinished": 8
+              },
+              {
+                "arrivals": 8,
+                "capacity": 2,
+                "served": 2,
+                "timely": 0,
+                "unfinished": 14
+              },
+              {
+                "arrivals": 9,
+                "capacity": 2,
+                "served": 2,
+                "timely": 0,
+                "unfinished": 21
+              },
+              {
+                "arrivals": 8,
+                "capacity": 2,
+                "served": 2,
+                "timely": 0,
+                "unfinished": 27
+              },
+              {
+                "arrivals": 5,
+                "capacity": 2,
+                "served": 2,
+                "timely": 0,
+                "unfinished": 30
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 21,
+                "capacity": 14,
+                "served": 14,
+                "timely": 14,
+                "unfinished": 7
+              },
+              {
+                "arrivals": 26,
+                "capacity": 14,
+                "served": 14,
+                "timely": 7,
+                "unfinished": 19
+              },
+              {
+                "arrivals": 30,
+                "capacity": 14,
+                "served": 14,
+                "timely": 0,
+                "unfinished": 35
+              },
+              {
+                "arrivals": 33,
+                "capacity": 14,
+                "served": 14,
+                "timely": 0,
+                "unfinished": 54
+              },
+              {
+                "arrivals": 29,
+                "capacity": 14,
+                "served": 14,
+                "timely": 0,
+                "unfinished": 69
+              },
+              {
+                "arrivals": 22,
+                "capacity": 14,
+                "served": 14,
+                "timely": 0,
+                "unfinished": 77
+              }
+            ]
+          }
+        },
+        "grid": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 32,
+              "served": 18,
+              "timely": 5,
+              "timely_fraction": 0.15625,
+              "unfinished": 14
+            },
+            "standard": {
+              "arrivals": 123,
+              "served": 106,
+              "timely": 65,
+              "timely_fraction": 0.5284552845528455,
+              "unfinished": 17
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.45161290322580644,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 4,
+                "capacity": 3,
+                "served": 3,
+                "timely": 3,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 5,
+                "capacity": 3,
+                "served": 3,
+                "timely": 2,
+                "unfinished": 3
+              },
+              {
+                "arrivals": 6,
+                "capacity": 3,
+                "served": 3,
+                "timely": 0,
+                "unfinished": 6
+              },
+              {
+                "arrivals": 7,
+                "capacity": 3,
+                "served": 3,
+                "timely": 0,
+                "unfinished": 10
+              },
+              {
+                "arrivals": 6,
+                "capacity": 3,
+                "served": 3,
+                "timely": 0,
+                "unfinished": 13
+              },
+              {
+                "arrivals": 4,
+                "capacity": 3,
+                "served": 3,
+                "timely": 0,
+                "unfinished": 14
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 16,
+                "capacity": 18,
+                "served": 16,
+                "timely": 16,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 20,
+                "capacity": 18,
+                "served": 18,
+                "timely": 18,
+                "unfinished": 2
+              },
+              {
+                "arrivals": 23,
+                "capacity": 18,
+                "served": 18,
+                "timely": 16,
+                "unfinished": 7
+              },
+              {
+                "arrivals": 25,
+                "capacity": 18,
+                "served": 18,
+                "timely": 11,
+                "unfinished": 14
+              },
+              {
+                "arrivals": 22,
+                "capacity": 18,
+                "served": 18,
+                "timely": 4,
+                "unfinished": 18
+              },
+              {
+                "arrivals": 17,
+                "capacity": 18,
+                "served": 18,
+                "timely": 0,
+                "unfinished": 17
+              }
+            ]
+          }
+        },
+        "normal": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 32,
+              "served": 24,
+              "timely": 12,
+              "timely_fraction": 0.375,
+              "unfinished": 8
+            },
+            "standard": {
+              "arrivals": 123,
+              "served": 123,
+              "timely": 122,
+              "timely_fraction": 0.991869918699187,
+              "unfinished": 0
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.864516129032258,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 4,
+                "capacity": 4,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 5,
+                "capacity": 4,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 6,
+                "capacity": 4,
+                "served": 4,
+                "timely": 3,
+                "unfinished": 3
+              },
+              {
+                "arrivals": 7,
+                "capacity": 4,
+                "served": 4,
+                "timely": 1,
+                "unfinished": 6
+              },
+              {
+                "arrivals": 6,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 8
+              },
+              {
+                "arrivals": 4,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 8
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 16,
+                "capacity": 24,
+                "served": 16,
+                "timely": 16,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 20,
+                "capacity": 24,
+                "served": 20,
+                "timely": 20,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 23,
+                "capacity": 24,
+                "served": 23,
+                "timely": 23,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 25,
+                "capacity": 24,
+                "served": 24,
+                "timely": 24,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 22,
+                "capacity": 24,
+                "served": 23,
+                "timely": 22,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 17,
+                "capacity": 24,
+                "served": 17,
+                "timely": 17,
+                "unfinished": 0
+              }
+            ]
+          }
+        },
+        "surge": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 41,
+              "served": 24,
+              "timely": 8,
+              "timely_fraction": 0.1951219512195122,
+              "unfinished": 17
+            },
+            "standard": {
+              "arrivals": 154,
+              "served": 140,
+              "timely": 103,
+              "timely_fraction": 0.6688311688311688,
+              "unfinished": 14
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.5692307692307692,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 5,
+                "capacity": 4,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 6,
+                "capacity": 4,
+                "served": 4,
+                "timely": 3,
+                "unfinished": 3
+              },
+              {
+                "arrivals": 8,
+                "capacity": 4,
+                "served": 4,
+                "timely": 1,
+                "unfinished": 7
+              },
+              {
+                "arrivals": 9,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 12
+              },
+              {
+                "arrivals": 8,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 16
+              },
+              {
+                "arrivals": 5,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 17
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 20,
+                "capacity": 24,
+                "served": 20,
+                "timely": 20,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 25,
+                "capacity": 24,
+                "served": 24,
+                "timely": 24,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 29,
+                "capacity": 24,
+                "served": 24,
+                "timely": 23,
+                "unfinished": 6
+              },
+              {
+                "arrivals": 31,
+                "capacity": 24,
+                "served": 24,
+                "timely": 18,
+                "unfinished": 13
+              },
+              {
+                "arrivals": 28,
+                "capacity": 24,
+                "served": 24,
+                "timely": 11,
+                "unfinished": 17
+              },
+              {
+                "arrivals": 21,
+                "capacity": 24,
+                "served": 24,
+                "timely": 7,
+                "unfinished": 14
+              }
+            ]
+          }
+        }
+      }
+    },
+    "guardrails": {
+      "added_cost_million": 1.2,
+      "all_scenarios_pass": false,
+      "scenario_weight_covered": 0,
+      "scenarios": {
+        "compound": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 42,
+              "served": 24,
+              "timely": 7,
+              "timely_fraction": 0.16666666666666666,
+              "unfinished": 18
+            },
+            "standard": {
+              "arrivals": 161,
+              "served": 72,
+              "timely": 15,
+              "timely_fraction": 0.09316770186335403,
+              "unfinished": 89
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.10837438423645321,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 5,
+                "capacity": 4,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 7,
+                "capacity": 4,
+                "served": 4,
+                "timely": 3,
+                "unfinished": 4
+              },
+              {
+                "arrivals": 8,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 8
+              },
+              {
+                "arrivals": 9,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 13
+              },
+              {
+                "arrivals": 8,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 17
+              },
+              {
+                "arrivals": 5,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 18
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 21,
+                "capacity": 12,
+                "served": 12,
+                "timely": 12,
+                "unfinished": 9
+              },
+              {
+                "arrivals": 26,
+                "capacity": 12,
+                "served": 12,
+                "timely": 3,
+                "unfinished": 23
+              },
+              {
+                "arrivals": 30,
+                "capacity": 12,
+                "served": 12,
+                "timely": 0,
+                "unfinished": 41
+              },
+              {
+                "arrivals": 33,
+                "capacity": 12,
+                "served": 12,
+                "timely": 0,
+                "unfinished": 62
+              },
+              {
+                "arrivals": 29,
+                "capacity": 12,
+                "served": 12,
+                "timely": 0,
+                "unfinished": 79
+              },
+              {
+                "arrivals": 22,
+                "capacity": 12,
+                "served": 12,
+                "timely": 0,
+                "unfinished": 89
+              }
+            ]
+          }
+        },
+        "grid": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 32,
+              "served": 29,
+              "timely": 21,
+              "timely_fraction": 0.65625,
+              "unfinished": 3
+            },
+            "standard": {
+              "arrivals": 123,
+              "served": 90,
+              "timely": 39,
+              "timely_fraction": 0.3170731707317073,
+              "unfinished": 33
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.3870967741935484,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 4,
+                "capacity": 5,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 5,
+                "capacity": 5,
+                "served": 5,
+                "timely": 5,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 6,
+                "capacity": 5,
+                "served": 5,
+                "timely": 5,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 7,
+                "capacity": 5,
+                "served": 5,
+                "timely": 4,
+                "unfinished": 3
+              },
+              {
+                "arrivals": 6,
+                "capacity": 5,
+                "served": 5,
+                "timely": 2,
+                "unfinished": 4
+              },
+              {
+                "arrivals": 4,
+                "capacity": 5,
+                "served": 5,
+                "timely": 1,
+                "unfinished": 3
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 16,
+                "capacity": 15,
+                "served": 15,
+                "timely": 15,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 20,
+                "capacity": 15,
+                "served": 15,
+                "timely": 14,
+                "unfinished": 6
+              },
+              {
+                "arrivals": 23,
+                "capacity": 15,
+                "served": 15,
+                "timely": 9,
+                "unfinished": 14
+              },
+              {
+                "arrivals": 25,
+                "capacity": 15,
+                "served": 15,
+                "timely": 1,
+                "unfinished": 24
+              },
+              {
+                "arrivals": 22,
+                "capacity": 15,
+                "served": 15,
+                "timely": 0,
+                "unfinished": 31
+              },
+              {
+                "arrivals": 17,
+                "capacity": 15,
+                "served": 15,
+                "timely": 0,
+                "unfinished": 33
+              }
+            ]
+          }
+        },
+        "normal": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 32,
+              "served": 32,
+              "timely": 32,
+              "timely_fraction": 1.0,
+              "unfinished": 0
+            },
+            "standard": {
+              "arrivals": 123,
+              "served": 116,
+              "timely": 95,
+              "timely_fraction": 0.7723577235772358,
+              "unfinished": 7
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.8193548387096774,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 4,
+                "capacity": 7,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 5,
+                "capacity": 7,
+                "served": 5,
+                "timely": 5,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 6,
+                "capacity": 7,
+                "served": 6,
+                "timely": 6,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 7,
+                "capacity": 7,
+                "served": 7,
+                "timely": 7,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 6,
+                "capacity": 7,
+                "served": 6,
+                "timely": 6,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 4,
+                "capacity": 7,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 0
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 16,
+                "capacity": 20,
+                "served": 16,
+                "timely": 16,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 20,
+                "capacity": 20,
+                "served": 20,
+                "timely": 20,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 23,
+                "capacity": 20,
+                "served": 20,
+                "timely": 20,
+                "unfinished": 3
+              },
+              {
+                "arrivals": 25,
+                "capacity": 20,
+                "served": 20,
+                "timely": 17,
+                "unfinished": 8
+              },
+              {
+                "arrivals": 22,
+                "capacity": 20,
+                "served": 20,
+                "timely": 12,
+                "unfinished": 10
+              },
+              {
+                "arrivals": 17,
+                "capacity": 20,
+                "served": 20,
+                "timely": 10,
+                "unfinished": 7
+              }
+            ]
+          }
+        },
+        "surge": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 41,
+              "served": 39,
+              "timely": 31,
+              "timely_fraction": 0.7560975609756098,
+              "unfinished": 2
+            },
+            "standard": {
+              "arrivals": 154,
+              "served": 120,
+              "timely": 61,
+              "timely_fraction": 0.3961038961038961,
+              "unfinished": 34
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.4717948717948718,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 5,
+                "capacity": 7,
+                "served": 5,
+                "timely": 5,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 6,
+                "capacity": 7,
+                "served": 6,
+                "timely": 6,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 8,
+                "capacity": 7,
+                "served": 7,
+                "timely": 7,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 9,
+                "capacity": 7,
+                "served": 7,
+                "timely": 6,
+                "unfinished": 3
+              },
+              {
+                "arrivals": 8,
+                "capacity": 7,
+                "served": 7,
+                "timely": 4,
+                "unfinished": 4
+              },
+              {
+                "arrivals": 5,
+                "capacity": 7,
+                "served": 7,
+                "timely": 3,
+                "unfinished": 2
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 20,
+                "capacity": 20,
+                "served": 20,
+                "timely": 20,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 25,
+                "capacity": 20,
+                "served": 20,
+                "timely": 20,
+                "unfinished": 5
+              },
+              {
+                "arrivals": 29,
+                "capacity": 20,
+                "served": 20,
+                "timely": 15,
+                "unfinished": 14
+              },
+              {
+                "arrivals": 31,
+                "capacity": 20,
+                "served": 20,
+                "timely": 6,
+                "unfinished": 25
+              },
+              {
+                "arrivals": 28,
+                "capacity": 20,
+                "served": 20,
+                "timely": 0,
+                "unfinished": 33
+              },
+              {
+                "arrivals": 21,
+                "capacity": 20,
+                "served": 20,
+                "timely": 0,
+                "unfinished": 34
+              }
+            ]
+          }
+        }
+      }
+    },
+    "integrated": {
+      "added_cost_million": 2.1,
+      "all_scenarios_pass": false,
+      "scenario_weight_covered": 0.45,
+      "scenarios": {
+        "compound": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 42,
+              "served": 24,
+              "timely": 7,
+              "timely_fraction": 0.16666666666666666,
+              "unfinished": 18
+            },
+            "standard": {
+              "arrivals": 161,
+              "served": 84,
+              "timely": 21,
+              "timely_fraction": 0.13043478260869565,
+              "unfinished": 77
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.13793103448275862,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 5,
+                "capacity": 4,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 7,
+                "capacity": 4,
+                "served": 4,
+                "timely": 3,
+                "unfinished": 4
+              },
+              {
+                "arrivals": 8,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 8
+              },
+              {
+                "arrivals": 9,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 13
+              },
+              {
+                "arrivals": 8,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 17
+              },
+              {
+                "arrivals": 5,
+                "capacity": 4,
+                "served": 4,
+                "timely": 0,
+                "unfinished": 18
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 21,
+                "capacity": 14,
+                "served": 14,
+                "timely": 14,
+                "unfinished": 7
+              },
+              {
+                "arrivals": 26,
+                "capacity": 14,
+                "served": 14,
+                "timely": 7,
+                "unfinished": 19
+              },
+              {
+                "arrivals": 30,
+                "capacity": 14,
+                "served": 14,
+                "timely": 0,
+                "unfinished": 35
+              },
+              {
+                "arrivals": 33,
+                "capacity": 14,
+                "served": 14,
+                "timely": 0,
+                "unfinished": 54
+              },
+              {
+                "arrivals": 29,
+                "capacity": 14,
+                "served": 14,
+                "timely": 0,
+                "unfinished": 69
+              },
+              {
+                "arrivals": 22,
+                "capacity": 14,
+                "served": 14,
+                "timely": 0,
+                "unfinished": 77
+              }
+            ]
+          }
+        },
+        "grid": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 32,
+              "served": 29,
+              "timely": 21,
+              "timely_fraction": 0.65625,
+              "unfinished": 3
+            },
+            "standard": {
+              "arrivals": 123,
+              "served": 106,
+              "timely": 65,
+              "timely_fraction": 0.5284552845528455,
+              "unfinished": 17
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.5548387096774193,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 4,
+                "capacity": 5,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 5,
+                "capacity": 5,
+                "served": 5,
+                "timely": 5,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 6,
+                "capacity": 5,
+                "served": 5,
+                "timely": 5,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 7,
+                "capacity": 5,
+                "served": 5,
+                "timely": 4,
+                "unfinished": 3
+              },
+              {
+                "arrivals": 6,
+                "capacity": 5,
+                "served": 5,
+                "timely": 2,
+                "unfinished": 4
+              },
+              {
+                "arrivals": 4,
+                "capacity": 5,
+                "served": 5,
+                "timely": 1,
+                "unfinished": 3
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 16,
+                "capacity": 18,
+                "served": 16,
+                "timely": 16,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 20,
+                "capacity": 18,
+                "served": 18,
+                "timely": 18,
+                "unfinished": 2
+              },
+              {
+                "arrivals": 23,
+                "capacity": 18,
+                "served": 18,
+                "timely": 16,
+                "unfinished": 7
+              },
+              {
+                "arrivals": 25,
+                "capacity": 18,
+                "served": 18,
+                "timely": 11,
+                "unfinished": 14
+              },
+              {
+                "arrivals": 22,
+                "capacity": 18,
+                "served": 18,
+                "timely": 4,
+                "unfinished": 18
+              },
+              {
+                "arrivals": 17,
+                "capacity": 18,
+                "served": 18,
+                "timely": 0,
+                "unfinished": 17
+              }
+            ]
+          }
+        },
+        "normal": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 32,
+              "served": 32,
+              "timely": 32,
+              "timely_fraction": 1.0,
+              "unfinished": 0
+            },
+            "standard": {
+              "arrivals": 123,
+              "served": 123,
+              "timely": 122,
+              "timely_fraction": 0.991869918699187,
+              "unfinished": 0
+            }
+          },
+          "passes_screen": true,
+          "timely_fraction": 0.9935483870967742,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 4,
+                "capacity": 7,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 5,
+                "capacity": 7,
+                "served": 5,
+                "timely": 5,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 6,
+                "capacity": 7,
+                "served": 6,
+                "timely": 6,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 7,
+                "capacity": 7,
+                "served": 7,
+                "timely": 7,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 6,
+                "capacity": 7,
+                "served": 6,
+                "timely": 6,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 4,
+                "capacity": 7,
+                "served": 4,
+                "timely": 4,
+                "unfinished": 0
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 16,
+                "capacity": 24,
+                "served": 16,
+                "timely": 16,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 20,
+                "capacity": 24,
+                "served": 20,
+                "timely": 20,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 23,
+                "capacity": 24,
+                "served": 23,
+                "timely": 23,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 25,
+                "capacity": 24,
+                "served": 24,
+                "timely": 24,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 22,
+                "capacity": 24,
+                "served": 23,
+                "timely": 22,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 17,
+                "capacity": 24,
+                "served": 17,
+                "timely": 17,
+                "unfinished": 0
+              }
+            ]
+          }
+        },
+        "surge": {
+          "by_class": {
+            "accessible": {
+              "arrivals": 41,
+              "served": 39,
+              "timely": 31,
+              "timely_fraction": 0.7560975609756098,
+              "unfinished": 2
+            },
+            "standard": {
+              "arrivals": 154,
+              "served": 140,
+              "timely": 103,
+              "timely_fraction": 0.6688311688311688,
+              "unfinished": 14
+            }
+          },
+          "passes_screen": false,
+          "timely_fraction": 0.6871794871794872,
+          "trace": {
+            "accessible": [
+              {
+                "arrivals": 5,
+                "capacity": 7,
+                "served": 5,
+                "timely": 5,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 6,
+                "capacity": 7,
+                "served": 6,
+                "timely": 6,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 8,
+                "capacity": 7,
+                "served": 7,
+                "timely": 7,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 9,
+                "capacity": 7,
+                "served": 7,
+                "timely": 6,
+                "unfinished": 3
+              },
+              {
+                "arrivals": 8,
+                "capacity": 7,
+                "served": 7,
+                "timely": 4,
+                "unfinished": 4
+              },
+              {
+                "arrivals": 5,
+                "capacity": 7,
+                "served": 7,
+                "timely": 3,
+                "unfinished": 2
+              }
+            ],
+            "standard": [
+              {
+                "arrivals": 20,
+                "capacity": 24,
+                "served": 20,
+                "timely": 20,
+                "unfinished": 0
+              },
+              {
+                "arrivals": 25,
+                "capacity": 24,
+                "served": 24,
+                "timely": 24,
+                "unfinished": 1
+              },
+              {
+                "arrivals": 29,
+                "capacity": 24,
+                "served": 24,
+                "timely": 23,
+                "unfinished": 6
+              },
+              {
+                "arrivals": 31,
+                "capacity": 24,
+                "served": 24,
+                "timely": 18,
+                "unfinished": 13
+              },
+              {
+                "arrivals": 28,
+                "capacity": 24,
+                "served": 24,
+                "timely": 11,
+                "unfinished": 17
+              },
+              {
+                "arrivals": 21,
+                "capacity": 24,
+                "served": 24,
+                "timely": 7,
+                "unfinished": 14
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "project": {
+    "cost_performance_index": 0.7692307692307693,
+    "critical_path_duration_days": 10,
+    "schedule_variance": -20
+  },
+  "readiness": {
+    "disposition": "HOLD",
+    "reason": "Synthetic model and missing/stale evidence cannot authorize deployment; REVIEW is only permission to seek review."
+  },
+  "reliability": {
+    "common_cause_joint_availability": 0.96978175,
+    "independent_redundancy": 0.999775
+  }
+}

@@ -32,3 +32,15 @@ No. Test claims are configuration-dependent. The executable code can remain byte
 </details>
 
 **Gate evidence:** before-and-after hash comparison, impact analysis, controlled change proposal, and an evidence-currency table.
+
+## U2 cross-lab credibility challenge — NS-U2.1
+
+**Focus: Change impact must cross the versions.** This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.
+
+An engineering change may alter an interface without changing the reference fixture's results. The correct cross-version check therefore compares configuration fingerprints and requirement meanings, not just observed outputs. U2 replays the original v11 and v12 runners in isolated subprocesses; this avoids accidental imports between their identically named `src` packages.
+
+**Worked example:** Both nominal cases report `12/12` completion and 20-minute nearest-rank p90. The original source code differs, the v12 scenarios introduce message loss, outage and telemetry blocking, and the field assurance requirements differ. Equal nominal outputs are evidence of *limited fixture agreement*, not semantic conformance of all interfaces.
+
+**Exercise and solution:** A scheduler change preserves nominal throughput but alters its duplicate-key rule. Which records need review? At minimum the interface contract, idempotency tests, event-accounting invariant, requirement allocation, trace matrix and previously published evidence digests. A simple unchanged service percentage is not an adequate regression oracle.
+
+**Reproduce:** [Cross-lab lab guide](../../lab-credibility-u2/README.md) · [Evidence gates](../../lab-credibility-u2/data/gates.json) · [Computed results](../../lab-credibility-u2/outputs/u2-cross-lab-results.json).

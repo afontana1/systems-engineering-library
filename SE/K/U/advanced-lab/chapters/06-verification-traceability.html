@@ -24,4 +24,11 @@
 <p><strong>Exercise 2.</strong> What evidence becomes stale after editing <code>scenarios.json</code>?</p>
 <p>&lt;details&gt;&lt;summary&gt;Worked answer&lt;/summary&gt;At minimum scenario outputs, summary metrics, provenance hashes, comparisons, experiment conclusions and any review claim based on them. Regenerate and rerun tests.&lt;/details&gt;</p>
 <p><strong>Submit:</strong> an assurance argument for V12-R01–R06 with explicit defeaters, a reviewed trace audit and one intentionally broken trace example. Related: <a href="../../integrated-lab/chapters/07-verification-evidence.html">v11 evidence stage</a>.</p>
+<section class="u2-extension" id="u2-cross-lab"><h2>U2 cross-lab credibility challenge — NS-U2.1</h2>
+<p><strong>Focus: Provenance, version binding and negative assurance.</strong> This adds a controlled cross-version analysis to the original learning stage, which remains unchanged.</p>
+<p>U2 generates a cross-lab manifest covering <strong>both</strong> runners' specified inputs and source files, then runs them twice in isolated temporary directories. Byte-for-byte output equality is a stronger reproduction check than viewing a prior screenshot; it does not make the model's claims true. The v12 fixture still has a 100% nominal completion fraction under a fixed synthetic dataset.</p>
+<p><strong>Claim hierarchy:</strong> <code>hashes match → named files unchanged</code>; <code>independent ledger checks pass → recorded invariants hold for this run</code>; <code>field validation → not performed</code>; <code>authorization → not granted</code>. Each implication must be justified; the first two do not logically entail the latter two.</p>
+<p><strong>Exercise and solution:</strong> A reviewer supplies a current SHA-256 but no source revision or acceptance owner. Can the associated requirement be closed? Not yet. Obtain source location, configuration, test purpose, exact expectation, observed result, independent review and a qualified decision record. The U2 gated claims treat these as typed conditions.</p>
+<p><strong>Reproduce:</strong> <a href="../../lab-credibility-u2/README.md">Cross-lab lab guide</a> · <a href="../../lab-credibility-u2/data/gates.json">Evidence gates</a> · <a href="../../lab-credibility-u2/outputs/u2-cross-lab-results.json">Computed results</a>.</p>
+</section>
 </main></body></html>

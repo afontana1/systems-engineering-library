@@ -83,3 +83,32 @@ In [Lab 4: Class discovery turns language into relationships](../labs/lab-04-dis
 ## Continuity
 
 This chapter builds from [previous chapter](03-capture-functional-requirements-with-use-case.md) and leads toward [next chapter](05-analyze-dynamic-behavior-and-discover-collabo.md). Revisit the corresponding [weekly primer](../../P1-text/lessons/605-704-w04.md) only if you need a quick overview; use this book chapter for the deeper explanation and the assigned guide for the actual mastery standard.
+
+## Step 03 integrated reference: class discovery and association semantics
+
+### 4.1 Derive classes from identity and obligations
+
+Class models should identify (a) which objects possess independent identity, (b) which attributes are values, (c) which relationships have lifecycle meaning, and (d) which operations preserve invariants. The case's `Reservation` and `Assignment` are separate entities: one reservation may transition through cancellation, but an assignment is bound to a particular vehicle and slot. A `LocationReading` is a time-stamped value object; its equality may depend on value, timestamp and source rather than a synthetic database ID.
+
+| Relationship | Illustrative multiplicity | Reasoning obligation |
+|---|---|---|
+| Reservation → Assignment | 0..1 active | A request may be pending, cancelled, or assigned |
+| Vehicle → Assignment | 0..* historical | History is many; **active per slot** is at most one |
+| Reservation → AuditEvent | 0..* | Multiple state transitions can be recorded |
+| Vehicle → LocationReading | 0..* historical | Freshness is evaluated for a selected observation |
+
+Notice that a UML multiplicity alone cannot state “at most one *active* assignment per vehicle per overlapping slot.” The association might allow many historical assignments and still be correct. Add a predicate over state and time, and identify enforcement in the implementation. Do not distort the diagram's multiplicity just to encode a temporal rule.
+
+### 4.2 Composition versus reference
+
+Composition makes a lifetime-ownership claim: a composite is responsible for the parts' existence in the chosen model. It is not synonymous with “one class has a pointer to another.” An audit record may outlive a reservation's active phase under a retention policy, so modeling it as a part destroyed with the reservation would be misleading. Likewise, vehicle information may be owned by a fleet service; the reservation application should use a typed, versioned reference or snapshot rather than assume it controls the vehicle's lifecycle.
+
+Separate a *domain model* (business vocabulary) from the *deployment model* (database tables and services). Later chapters can realize the same domain constraints with a relational schema, while testing whether those constraints survive concurrency and failure.
+
+### 4.3 Inspect the actual design
+
+The [reservation model diagram](../diagrams/oo4-reservation-model.svg) distinguishes an actor, service, policy, repository, persistent store, and audit event. It is an architecture-level responsibility diagram, not a claim of UML tool validation. The paired [DOT source](../diagrams/oo4-reservation-model.dot) is editable. The model baseline declares one primary component owner per requirement so the [checker](../tools/step03_book4_contract_check.py) can find missing or duplicated ownership.
+
+**Solved checkpoint.** A diagram shows `Vehicle 1 — 1 Assignment`. It wrongly implies a vehicle has exactly one assignment forever. Correct this to a historical many-valued relation and attach the scoped rule \(|A(v,s)|\leq 1\). The corrected model supports both historical analysis and current conflict prevention.
+
+**Exercise.** Introduce multi-leg trips. Decide whether `TripLeg` requires entity identity and whether an assignment belongs to the overall trip or a specific leg. Defend your choice with a cancellation or reassignment scenario.

@@ -46,6 +46,22 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · NASA-STD-7009B, Standard for Models and Simulations (2024)](https://standards.nasa.gov/node/263) — Credibility practices for modeling and simulation used in decisions.
 - [NASA · NASA-HDBK-7009B, Models and Simulations Implementation Guide (2026)](https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009) — Companion implementation guidance; not a substitute for project-specific requirements.
 
+
+
+## Step 02 review studio — model credibility depends on intended use
+
+A queueing simulation may credibly estimate **relative waiting time** under two schedules without being credible for predicting **safety-critical emergency-response latency**. Credibility is claim-specific: define the intended decision, domain, outputs, input evidence, validation comparators, and consequences of model error before selecting model fidelity.
+
+**Solved exercise:** a simple M/M/1 model uses arrival rate 6 jobs/h and service rate 10 jobs/h. Under Poisson arrival, exponential service, single-server, infinite-buffer and stability assumptions, mean time in system is
+
+\[
+W=\frac{1}{\mu-\lambda}=\frac{1}{10-6}\;\mathrm{h}=0.25\;\mathrm{h}=15\;\mathrm{min}.
+\]
+
+If arrival rate approaches service capacity, the analytic mean grows without bound. The 15-minute result is therefore **not** a general shuttle waiting-time forecast. Verify the simulation against an analytical benchmark where valid, then validate the arrival/service distributions and operating scenarios with data appropriate to the stated decision.
+
+**Credibility boundary:** a correct implementation can model the wrong system. Record conceptual assumptions and excluded mechanisms; test sensitivity to them rather than equating a narrow code pass with external validity.
+
 ## Follow the knowledge
 
 **Related concepts**

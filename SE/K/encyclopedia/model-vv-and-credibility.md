@@ -70,6 +70,24 @@ These sources establish authoritative terminology or methods in their own publis
 - [NASA · NASA-HDBK-7009B, Models and Simulations Implementation Guide (2026)](https://standards.nasa.gov/standard/nasa/nasa-hdbk-7009) — Companion implementation guidance; not a substitute for project-specific requirements.
 - [NIST · Technical Note 1297, Reporting Measurement Uncertainty (1993)](https://www.nist.gov/pml/nist-technical-note-1297/nist-tn-1297-7-reporting-uncertainty) — Standard and expanded uncertainty, coverage factors, and reporting conditions.
 
+## Phase 3 technical reference: Credibility requires more than numerical agreement
+
+With \(\lambda=9\)/hour and \(\mu=12\)/hour, a synthetically generated M/M/1 queue's long-run mean should be near 20 minutes. Agreement with \(1/(\mu-\lambda)\) helps **verify** the queue implementation under its idealized assumptions; it does not **validate** those assumptions against observed operations. A 40-replication exercise obtains approximately \(20.347\pm0.599\) minutes using a 95% t interval; this describes simulation sampling error only. A credible-use statement must separately assess input distributions, actual arrival dependence, event priorities, instrumentation, held-out operational evidence, consequences of a bad decision, and model-version applicability. See [the analysis, independent comparison and credibility matrix](../methods/simulation-output-and-credibility.md), based on the principles of NASA-STD-7009B and NASA-HDBK-7009B.
+
+## Phase 5 technical reading: Parameter evidence cannot be replaced by more simulation runs
+
+Suppose a fictional service model is calibrated to 90 arrivals observed in 10 hours. The likelihood-rate estimate is 9/hour, but the profile-likelihood interval [7.2664, 10.9896]/hour shows meaningful parameter uncertainty. Running more replication seeds reduces Monte Carlo noise conditional on each input rate; it does not shrink the uncertainty from those finite observations or correct a missing burst mechanism. Rare-event estimators can reduce numerical variance but will not reveal an omitted common cause. The [full calibration, withheld validation, and importance-sampling treatment](../methods/simulation-calibration-and-rare-events.md) separates epistemic assumptions, stochastic variability, numerical error and operational acceptance.
+
+
+
+## Step 02 review studio — calibrate on one dataset, challenge on another
+
+Suppose a queue model is adjusted so its predicted mean waiting time matches a calibration sample of 10 minutes. On a held-out scenario the observed mean is 14 minutes while the model predicts 11. The absolute prediction error is 3 minutes, or approximately **21.4% relative to the held-out observed mean**. A near-perfect calibration fit has not demonstrated external predictive credibility for the new operating regime.
+
+**Solved exercise:** should the engineering team recalibrate on the held-out sample and then report it as an independent validation success? **No.** Once used for fitting, it is no longer independent validation data. Preserve data partitions, input provenance, operational context, and a predeclared error tolerance. If the model is used only to rank two scheduling policies, assess whether *ranking accuracy* rather than absolute time prediction is the relevant decision criterion.
+
+**V&V distinction:** code verification asks whether the model was implemented as intended; model validation asks whether the model adequately represents reality for a specified use. Both are narrower than operational authorization.
+
 ## Follow the knowledge
 
 **Related concepts**

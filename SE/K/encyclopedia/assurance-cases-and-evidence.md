@@ -43,6 +43,23 @@ Treat the assurance case as a maintained engineering model that evolves with the
 - **A2 · Lifecycle software assurance and IV&V:** [NASA-STD-8739.8B — scope of software assurance and software safety](https://standards.nasa.gov/standard/nasa/nasa-std-87398).
 - **A3 · Trustworthiness requires evidence, including appropriate requirements:** [NIST SP 800-160 Volume 1 Revision 1 — engineering trustworthy secure systems](https://csrc.nist.gov/pubs/sp/800/160/v1/r1/final).
 
+## Phase 4 technical reading: From a fault tree to a defensible assurance claim
+
+An evidence inventory is not an assurance argument. In the Campus Mobility case, a door-control requirement has a passing synthetic functional test EV-DOOR, but the test explicitly does not demonstrate common-cause behavior. A defensible claim must name the release configuration, operational boundary, supported subclaims, test limitations, alternative causal paths, residual open questions and acceptance authority. The fault-tree value 0.0031994 is conditional on invented basic-event probabilities and is not itself an operational safety assessment. A build change from controller-2.4.1 to 2.4.2 makes the old evidence **stale** until applicability is reviewed, even if every requirement still links to a test. See the [safety assurance derivation](../methods/safety-fault-trees-and-assurance.md) and [configuration-currency example](../methods/model-baselines-and-evidence.md) for a worked claim/defeater structure.
+
+## Phase 5 technical reading: A claim must preserve its defeaters
+
+A requirement-to-test link is necessary but not sufficient for a release argument. The controlled Campus Mobility case records `REQ-DOOR` → `TEST-DOOR-01` → `EV-DOOR` on CM-B2 / `controller-2.4.1`, while documenting that injected faults do not exercise mechanical bypass or shared sensor failures. Its hazard `H-DOOR` remains OPEN. The [engineering artifact package](../methods/campus-mobility-engineering-artifacts.md) includes a real-readable requirements extract, interface control table, verification matrix, hazard log and CM-B3 change-impact record. The resulting review makes explicit why changing an evidence label is not a valid substitute for assessing a changed configuration.
+
+
+## Step 02 review exercise: claim, context and defeater
+
+A top-level claim such as **'the campus dispatch release is acceptably safe'** is too broad to be supported by one passing test. Decompose into claims about safe command authorization, hazard controls, timing, configuration and operational procedures, each with context, assumptions, designated evidence and accountable acceptance authority. For example, claim C-TIME may assert that emergency inhibit latency is at most 300 ms in a defined mode/configuration. Evidence E-21 could be a calibrated test report over the specified environmental range; evidence E-22 could be an independent timing budget analysis. A credible argument explains why these support the claim and what failure modes they do not cover.
+
+A **defeater** is a plausible fact that undermines the argument. If E-21 was collected on software S2 but deployment uses S3 with changed retry handling, evidence currency is a defeater until a justified equivalence argument or new test is produced. Passing tests do not automatically establish absence of untested hazards.
+
+**Exercise (answer).** A report shows 300 ms mean inhibit latency across 100 trials but the claim requires **every** operation to be at most 300 ms. The mean does **not** support the maximum-latency claim; examine worst-case design analysis, test resolution, operating conditions and observed tails. A safety argument must not substitute a different statistical quantity for the one in the claim.
+
 ## Follow the knowledge
 
 - **Prerequisites:** [Traceability graph](traceability-graph.md), [Verification and validation](v-and-v.md).

@@ -115,3 +115,26 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [10 — Previous chapter](10-quantify-requirement-compliance-technical-margin-allocation-risk-and.md) · [12 — Next chapter](12-integrate-reproduce-challenge-and-defend-the-lifecycle-analytics-dec.md) · [Book index](../README.md)
+
+## Step 03 integrated quantitative case: update decisions as evidence changes
+
+Consider two fictional lifecycle interventions. Alternative A is a lower-cost controller-only update; B is a higher-cost buffered redesign. The [synthetic scenario model](../case/model-assumptions.json) gives lifecycle incremental costs in thousands of dollars:
+
+| Condition | A | B |
+|---|---:|---:|
+| Normal operation | 50 | 75 |
+| Extreme disruption | 140 | 90 |
+
+Let the probability of disruption be \(p\). Expected costs are \(C_A(p)=50+90p\) and \(C_B(p)=75+15p\). These curves meet when \(75p=25\), or \(p=1/3\). At the provisional \(p=.2\), \(E[C_A]=68\) and \(E[C_B]=78\) thousand dollars, so risk-neutral expected-cost minimization selects A **if both alternatives are otherwise admissible**.
+
+### Separate preference from feasibility and information value
+
+The cost result cannot override a hard safety or reliability requirement. If A cannot satisfy mandatory tail or evidence thresholds, its cost advantage does not make it a feasible selection. If \(p\) is uncertain and may exceed one-third, the decision is sensitive to scenario probabilities. An investigation of extreme-cold frequency or a controlled pilot may have positive value if it changes which admissible intervention should be chosen.
+
+The *expected value of perfect information* compares the best decision given full state knowledge with the best available fixed decision. At \(p=.2\), choosing A without information costs 68. With perfect advance knowledge, choose A when normal (50) and B when disrupted (90), for \(.8(50)+.2(90)=58\). Thus \(EVPI=68-58=10\) thousand dollars. No realistically imperfect test can have expected gross information value above this idealized bound, given the same model and decision alternatives.
+
+### The appropriate lifecycle decision may be “collect more evidence”
+
+The [evidence register](../case/evidence-register.csv) includes a stale baseline record and a planned accessibility study. These are gates to closure, not costs one can average away. A measured pilot can reduce uncertainty about disruption rates, but should be judged against its cost, duration, representativeness and the risks incurred while collecting information.
+
+**Exercise and answer.** At \(p=.4\), compute the cost preference: \(C_A=86\), \(C_B=81\) thousand dollars; B is preferred in expected cost. The switch does not itself validate either option technically.

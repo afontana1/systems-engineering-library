@@ -122,3 +122,23 @@ Using a controlled Northstar scenario, prepare a two-page analysis explaining (1
 The **course guide remains authoritative for assessment**. This book teaches and rehearses the underlying reasoning; it does not substitute its own checklist for that rubric.
 
 [02 — Previous chapter](02-characterize-probability-distributions-tails-dependence-and-stochast.md) · [04 — Next chapter](04-use-estimation-confidence-intervals-hypothesis-equivalence-and-engin.md) · [Book index](../README.md)
+
+## Step 03 integrated quantitative case: provenance and defensible measurements
+
+Open the [experiment data](../case/factorial-trials.csv), [reliability data](../case/reliability-life.csv), and [evidence register](../case/evidence-register.csv). Each row carries an identifier, unit or implied unit, configuration, and observation status. These fields are not administrative decoration: without them a later reviewer cannot determine whether two numbers are comparable.
+
+### Trace every observation through a measurement chain
+
+A measurement result is a function of the measurand, instrument, procedure, environment, operator, and processing. If a measured duration is \(Y=T+b+\epsilon\), systematic clock bias \(b\) and random measurement noise \(\epsilon\) affect different aspects of inference. Averaging repeated readings may reduce independent random noise but does not eliminate systematic offset. Also, calibration traceability describes the chain from an instrument to a reference, not evidence that a test population represents field use.
+
+For the 2×2 experiment, record the environment label, controller build, trial order, clock reference, warming/settling procedure, and whether multiple requests share the same vehicle or test session. If several latency observations come from one physical run, they may be *clustered*. Treating those as independent experimental units artificially reduces estimated uncertainty. The correct replication unit depends on what was randomized.
+
+### Missingness can be informative
+
+A logger that drops packets under load may omit the slowest commands. Filtering those rows as “bad data” biases the estimated tail downward. Count missing records, describe the reason, and run a sensitivity analysis for plausible missing outcomes. For a safety-relevant threshold, labeling timeouts as successful low latencies is indefensible; a timeout may instead be an exceedance or a separate failure mode under a predeclared rule.
+
+**Worked uncertainty budget.** If independent zero-mean timestamp errors at the request and response endpoints each have standard deviation 1.5 ms, the measurement-difference standard deviation is \(\sqrt{1.5^2+1.5^2}=2.121\) ms. This RSS calculation is invalid if the timestamp errors are correlated or have uncorrected bias. A common timebase can induce covariance that must be modeled.
+
+**Exercise and answer.** A dataset contains 2000 requests but only 20 independently randomized shifts. What is the effective experimental sample size for a shift-level intervention? The *independent units* are at most the 20 shifts, not the 2000 requests; a suitable analysis would respect shift clustering, perhaps using shift summaries or a hierarchical model. The exact effective size depends on intraclass correlation and design.
+
+**Data-quality gate:** do not blend `QA-B9` evidence with `QA-B10` simply because both records have the same units. Verify configuration comparability, provenance, processing version, and intended-use population first.
